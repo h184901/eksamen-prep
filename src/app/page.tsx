@@ -22,11 +22,11 @@ const subjects = [
   {
     id: "dat109",
     name: "DAT109 Systemutvikling",
-    description: "Prosjektledelse, testing og smidige metoder",
+    description: "Modellering, OOA/OOD, smidig utvikling og Java fra UML",
     color: "sysdev",
-    href: "#",
-    status: "Kommer" as const,
-    chapters: 0,
+    href: "/dat109",
+    status: "Aktiv" as const,
+    chapters: 6,
   },
 ];
 

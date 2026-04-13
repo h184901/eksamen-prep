@@ -8,6 +8,7 @@ import { useState } from "react";
 const navItems = [
   { href: "/", label: "Hjem" },
   { href: "/ing164", label: "ING164 Fysikk" },
+  { href: "/dat109", label: "DAT109 Systemutvikling" },
 ];
 
 export default function Navigation() {
