@@ -13,11 +13,11 @@ const subjects = [
   {
     id: "dat110",
     name: "DAT110 Nettverksteknologi",
-    description: "Nettverk, protokoller og sikkerhet",
+    description: "Nettverk, protokoller, distribuerte systemer og Chord DHT",
     color: "network",
-    href: "#",
-    status: "Kommer" as const,
-    chapters: 0,
+    href: "/dat110",
+    status: "Aktiv" as const,
+    chapters: 5,
   },
   {
     id: "dat109",
