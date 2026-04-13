@@ -32,6 +32,17 @@ export default function TeoriPage() {
           description="x, y, z er koordinatene i et kartesisk koordinatsystem."
         />
 
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor trenger vi vektorer?</p>
+          <p className="text-sm">
+            Fysikken eksisterer i 2D og 3D — skalarer er ikke nok. Hvis du sier «bilen beveger seg
+            80 km/t», vet du ingenting om <em>kursen</em>. Navigasjon, kast, elektriske felt og krefter
+            har alle en <strong>retning</strong> som er fysisk avgjørende. Vektorer pakker størrelse
+            og retning i én matematisk enhet, og lar oss addere, subtraktere og dekomponere
+            bevegelse langs vilkårlige akser.
+          </p>
+        </div>
+
         <p className="mt-4">
           <strong>Gjennomsnittsfarten</strong> er endringen i posisjonsvektoren delt på tidsintervallet:
         </p>
@@ -48,6 +59,17 @@ export default function TeoriPage() {
           description="Momentanfarten er tangent til banen i hvert punkt."
         />
 
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi — GPS vs. avstand</p>
+          <p className="text-sm">
+            Tenk på GPS-koordinater kontra veikilometeret på dashbordet. Kilometertelleren (skalar)
+            forteller deg <em>hvor langt</em> du har kjørt. GPS-en (vektor) forteller deg
+            <em> nøyaktig hvor du er</em> — retning inkludert. Hvis du kjører 10 km i en sirkel,
+            er den tilbakelagte distansen 10 km, men posisjonsvektoren er null fordi du endte der
+            du startet. Vektoren fanger den informasjonen skalaren mister.
+          </p>
+        </div>
+
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Viktig geometrisk egenskap</p>
           <p>
@@ -57,6 +79,49 @@ export default function TeoriPage() {
           <div className="mt-2">
             <InlineLatex latex="v = |\vec{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2}" />
           </div>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <strong>«Jeg kan addere vektormagnituder direkte»</strong> — NEI. Hvis
+              <InlineLatex latex="\vec{A}" /> har størrelse 3 og <InlineLatex latex="\vec{B}" /> har
+              størrelse 4, er <InlineLatex latex="|\vec{A}+\vec{B}|" /> ikke nødvendigvis 7.
+              Det er 5 bare dersom vektorene er parallelle. Dekomponér alltid til komponenter
+              før du adderer.
+            </li>
+            <li>
+              <strong>«Farten og hastigheten er det samme»</strong> — Hastighet (<InlineLatex latex="\vec{v}" />)
+              er en vektor; fart (<InlineLatex latex="v = |\vec{v}|" />) er en skalar. En bil
+              som kjører 80 km/t nordover og en som kjører 80 km/t sørover har samme fart men
+              motsatt hastighet.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips — vektortrekanten</p>
+          <ul className="space-y-1 text-sm list-disc list-inside">
+            <li>Tegn alltid vektortrekanten før du regner — det avslører geometrien umiddelbart.</li>
+            <li>
+              Velg aksene smart: legg gjerne én akse langs bevegelsesretningen (f.eks. langs
+              skråplanet), da blir én komponent null og ligningene enklere.
+            </li>
+            <li>Sjekk fortegn: definer positiv retning konsistent gjennom hele oppgaven.</li>
+          </ul>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 4–5</p>
+          <p className="text-sm">
+            Krafter er også vektorer (kap. 4–5). Teknikken du lærer her — dekomponere en vektor
+            i <InlineLatex latex="x" />- og <InlineLatex latex="y" />-komponenter og behandle
+            dem uavhengig — er <em>nøyaktig samme teknikk</em> du bruker for å analysere
+            kreftene på et legeme. Newtons 2. lov gjelder komponentvis:
+            <InlineLatex latex="\sum F_x = ma_x" /> og <InlineLatex latex="\sum F_y = ma_y" />.
+            Mestre vektordekomposisjon her, og kap. 4–5 faller på plass.
+          </p>
         </div>
       </TheorySummary>
 
@@ -77,7 +142,7 @@ export default function TeoriPage() {
           description="Komponentvis: aₓ = dvₓ/dt = d²x/dt², aᵧ = dvᵧ/dt = d²y/dt²."
         />
 
-        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Tre årsaker til akselerasjon</p>
           <p className="text-sm">Et legeme har akselerasjon dersom farten endrer:</p>
           <ol className="list-decimal list-inside space-y-1 text-sm mt-2">
@@ -99,12 +164,41 @@ export default function TeoriPage() {
           </li>
         </ul>
 
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi — rattet og gasspedalen</p>
+          <p className="text-sm">
+            I en bil kontrollerer <strong>gasspedalen</strong> den tangentielle akselerasjonen
+            (<InlineLatex latex="a_\parallel" />) — den endrer <em>farten</em>. <strong>Rattet</strong>
+            kontrollerer normalakselerasjonen (<InlineLatex latex="a_\perp" />) — den endrer
+            <em> retningen</em> uten å endre farten. Hvis du kjører i rundkjøring med konstant
+            speedometer-verdi, bruker du bare rattet: <InlineLatex latex="a_\parallel = 0" />,
+            men <InlineLatex latex="a_\perp \neq 0" />. Du akselererer!
+          </p>
+        </div>
+
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Viktig intuisjon</p>
           <ul className="space-y-1 text-sm">
             <li>• Konstant fart langs rett linje: <InlineLatex latex="\vec{a} = 0" /></li>
             <li>• Konstant fart langs kurve: <InlineLatex latex="\vec{a} \perp \vec{v}" /> (kun retningsendring)</li>
             <li>• Økende fart langs kurve: <InlineLatex latex="\vec{a}" /> har komponent fremover + innover</li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <strong>«Konstant fart betyr ingen akselerasjon»</strong> — NEI. Akselerasjon er
+              endring i <em>hastighetsvektoren</em>, ikke i farten (skalaren). Et legeme i
+              sirkulær bevegelse med konstant fart har akselerasjon fordi retningen endres
+              hvert eneste øyeblikk.
+            </li>
+            <li>
+              <strong>«Akselerasjon peker alltid fremover»</strong> — NEI. Akselerasjonen kan
+              peke i hvilken som helst retning avhengig av bevegelsen. Ved bremsemanøver
+              peker den bakover; i en sving peker den innover.
+            </li>
           </ul>
         </div>
       </TheorySummary>
@@ -126,6 +220,19 @@ export default function TeoriPage() {
           (ingen luftmotstand). Nøkkelen er å <strong>dekomponere</strong> bevegelsen i to
           uavhengige retninger:
         </p>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor kan vi splitte i x og y?</p>
+          <p className="text-sm">
+            Tyngdekraften virker <em>utelukkende</em> i y-retningen. Den har ingen horisontal
+            komponent. Newtons 2. lov gjelder uavhengig per akse:
+            <InlineLatex latex="\sum F_x = ma_x" /> gir <InlineLatex latex="a_x = 0" /> (ingen
+            horisontal kraft), og <InlineLatex latex="\sum F_y = -mg" /> gir
+            <InlineLatex latex="a_y = -g" />. Siden de to ligningene ikke kobler x og y til
+            hverandre (de deler bare tidsvariabelen <InlineLatex latex="t" />), kan vi løse dem
+            helt separat. Dette er selve fundamentet for analysen.
+          </p>
+        </div>
 
         <div className="overflow-x-auto my-4">
           <table className="w-full text-sm border-collapse">
@@ -159,6 +266,19 @@ export default function TeoriPage() {
           description="Bruk trigonometri til å finne komponentene av startfarten."
         />
 
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi — ball fra et tog</p>
+          <p className="text-sm">
+            Tenk deg at du slipper en ball rett ned fra et tog i fart. Fra <em>togets</em> perspektiv
+            faller ballen rett ned — du er i ro i forhold til toget, og det ser ut som et vanlig
+            vertikalt fall. For en observatør som <em>står stille</em> på perrongen, kombineres
+            togets horisontale hastighet med ballens vertikale fall: resultatet er en parabel.
+            Begge observatørene er enige om at ballen lander rett under utslippspunktet
+            (i togperspektivet), men den horisontale bevegelsen er usynlig for togreisende
+            nettopp fordi den er <strong>uavhengig</strong> av det vertikale fallet.
+          </p>
+        </div>
+
         <FormulaBox
           latex="y = \frac{v_{0y}}{v_{0x}}\,x - \frac{g}{2v_{0x}^2}\,x^2"
           title="Baneligning (parabel)"
@@ -177,14 +297,64 @@ export default function TeoriPage() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
-          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige feil!</p>
-          <ul className="space-y-1 text-sm">
-            <li>• Glemmer at vₓ er konstant (ingen horisontal akselerasjon!)</li>
-            <li>• Bruker v₀ istedenfor v₀ₓ eller v₀ᵧ — dekomponér alltid først</li>
-            <li>• Glemmer å sette y₀ ≠ 0 når skuddet/kastet er fra en høyde</li>
-            <li>• Blander grader og radianer i trigonometriske funksjoner</li>
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <strong>«Tyngre gjenstander faller raskere»</strong> — NEI. Uten luftmotstand har
+              alle legemer nøyaktig samme akselerasjon <InlineLatex latex="g = 9{,}81\;\text{m/s}^2" />
+              uavhengig av masse. En kula og en fjær sluppet i vakuum treffer gulvet samtidig.
+              (Galileo demonstrerte dette fra Pisatårnet.)
+            </li>
+            <li>
+              <strong>«I toppunktet er hele hastigheten null»</strong> — NEI. Bare
+              <em>den vertikale</em> komponenten er null: <InlineLatex latex="v_y = 0" />.
+              Den horisontale farten <InlineLatex latex="v_x = v_{0x}" /> er konstant gjennom
+              hele banen — aldri null (med mindre kastet var rett opp).
+            </li>
+            <li>
+              <strong>«Jeg kan bruke v₀ direkte i formlene»</strong> — NEI. Dekomponér alltid
+              til <InlineLatex latex="v_{0x}" /> og <InlineLatex latex="v_{0y}" /> før du setter
+              inn. Å blande disse er den vanligste regnefeil i prosjektiloppgaver.
+            </li>
+            <li>
+              Glemmer å sette y₀ ≠ 0 når kastet skjer fra en høyde over bakken.
+            </li>
           </ul>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips — fremgangsmåte</p>
+          <ol className="list-decimal list-inside space-y-1 text-sm">
+            <li>Tegn en figur. Merk av startpunkt, hastighetsvektor og vinkel.</li>
+            <li>Finn <InlineLatex latex="v_{0x}" /> og <InlineLatex latex="v_{0y}" /> med cos/sin.</li>
+            <li>List kjente størrelser separat for x og y — to kolonner på arket.</li>
+            <li>Identifiser hvilken ukjent du søker og i hvilken retning den hører hjemme.</li>
+            <li>Bruk tidsvariabelen <InlineLatex latex="t" /> som bro mellom de to retningene.</li>
+            <li>Sjekk enhet og fortegn i svaret.</li>
+          </ol>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 2</p>
+          <p className="text-sm">
+            Prosjektilbevegelse er ikke nytt stoff — det er kap. 2 brukt to ganger samtidig:
+          </p>
+          <ul className="space-y-1 text-sm mt-2 list-disc list-inside">
+            <li>
+              <strong>x-retning:</strong> kap. 2 med <InlineLatex latex="a = 0" /> — jevn
+              hastighet (likformig bevegelse).
+            </li>
+            <li>
+              <strong>y-retning:</strong> kap. 2 med <InlineLatex latex="a = -g" /> — konstant
+              akselerasjon nedover (fritt fall).
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            Alle formler fra kap. 2 (<InlineLatex latex="v = v_0 + at" />,
+            <InlineLatex latex="x = x_0 + v_0 t + \tfrac{1}{2}at^2" />, osv.) gjelder
+            uendret — bare innsatt riktig komponent og riktig akselerasjon.
+          </p>
         </div>
 
         {/* Inline simulator for prosjektilbevegelse */}
@@ -207,6 +377,20 @@ export default function TeoriPage() {
           har det <strong>alltid akselerasjon</strong> — selv om farten er konstant.
           Akselerasjonen skyldes <em>retningsendringen</em>.
         </p>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor peker akselerasjonen innover?</p>
+          <p className="text-sm">
+            Fartsvektoren er tangent til sirkelen og endrer retning hele veien. Akselerasjon er
+            <em> endring</em> i hastighetsvektoren. Tenk på to tidspunkter rett etter hverandre:
+            <InlineLatex latex="\vec{v}_1" /> peker litt til venstre for oppover, og
+            <InlineLatex latex="\vec{v}_2" /> peker litt mer til venstre. Differansen
+            <InlineLatex latex="\Delta\vec{v} = \vec{v}_2 - \vec{v}_1" /> peker <em>inn mot sentrum</em>
+            av sirkelen — dette er geometrisk uunngåelig uansett hvilke to punkter du velger.
+            Sentripetaakselerasjon er ikke en kraft i seg selv; det er et kinematisk resultat av
+            det å bevege seg langs en sirkel.
+          </p>
+        </div>
 
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Geometrisk utledning</p>
@@ -242,6 +426,43 @@ export default function TeoriPage() {
           />
         </div>
 
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi — bilen i svingen</p>
+          <p className="text-sm">
+            Når en bil tar en sving, <em>føler</em> passasjerene seg presset utover mot
+            bildøren. Dette er ikke en ekte kraft — det er treghetsfølelsen du opplever fordi
+            kroppen din vil fortsette rett frem (Newtons 1. lov). Den <em>reelle</em> kraften
+            er friksjonskraften fra veien som dytter bilen (og deg) <strong>innover</strong> mot
+            kurvesenteret. Uten den frissen ville bilen kjørt rett ut i grøften. Akselerasjonen
+            er sentripetal — mot sentrum — og den kraften som forårsaker den peker samme vei.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <strong>«Sentrifugalkraft eksisterer»</strong> — NEI (i treghetsrammer). Det
+              finnes ingen utoverpekende kraft på legemet i et inertielt referansesystem. Det
+              du kaller sentrifugalkraft er en <em>fiktiv kraft</em> som bare dukker opp i
+              akselererende (ikke-inertielle) referansesystemer, for eksempel inne i den
+              roterende bilen. I fysikkoppgaver på kap. 3–5 jobber vi alltid i inertielle
+              rammer — sentrifugalkraft er forbudt.
+            </li>
+            <li>
+              <strong>«Konstant fart betyr ingen akselerasjon»</strong> — NEI. Som forklart
+              over: fartens størrelse er konstant, men <em>retningen</em> endres kontinuerlig.
+              Hastighetsvektoren endrer seg, og det er definisjonen av akselerasjon.
+            </li>
+            <li>
+              <strong>«Sentripetaakselerasjon og sentripetalkraft er det samme»</strong> — NEI.
+              Akselerasjonen er kinematisk (<InlineLatex latex="a = v^2/R" />). Kraften som
+              gir opphav til den er en reell kraft (friksjon, gravitasjon, normalkraft, snorspenning
+              etc.) — Newtons 2. lov kobler dem: <InlineLatex latex="F = ma = mv^2/R" />.
+            </li>
+          </ul>
+        </div>
+
         <h4 className="font-semibold mt-6 mb-2">Sirkelbevegelse med variabel fart</h4>
         <p>
           Når farten endrer seg langs sirkelbanen, har akselerasjonen <strong>to komponenter</strong>:
@@ -265,6 +486,27 @@ export default function TeoriPage() {
           title="Total akselerasjon"
           variant="blue"
         />
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 5 og kap. 9</p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <strong>Kap. 5 — Dynamikk i sirkelbevegelse:</strong> Her i kap. 3 finner vi
+              akselerasjonen kinematisk (<InlineLatex latex="a = v^2/R" />). I kap. 5 bruker
+              vi Newtons 2. lov til å finne hvilken <em>kraft</em> som gir opphav til denne
+              akselerasjonen: <InlineLatex latex="\sum F = ma = \frac{mv^2}{R}" />. Typiske
+              eksempler: snor, gravitasjon, normalkraft fra en veibane.
+            </li>
+            <li>
+              <strong>Kap. 9 — Rotasjonsbevegelse:</strong> Sirkelbevegelse er starten på
+              rotasjonskinematikk. Vinkelhastigheten <InlineLatex latex="\omega" /> og
+              vinkelakselerasjonen <InlineLatex latex="\alpha" /> i kap. 9 er de rotatoriske
+              analogene til <InlineLatex latex="v" /> og <InlineLatex latex="a" /> her.
+              Sammenhengen er: <InlineLatex latex="v = \omega R" /> og
+              <InlineLatex latex="a_\perp = \omega^2 R" />.
+            </li>
+          </ul>
+        </div>
 
         {/* Inline visualizer for sirkelbevegelse */}
         <CircularMotionVisualizer />

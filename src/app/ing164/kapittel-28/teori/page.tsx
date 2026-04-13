@@ -53,8 +53,19 @@ export default function TeoriPage() {
           magnetismens svar på <InlineLatex latex="\varepsilon_0" /> i elektrostatikk.
         </p>
 
-        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
-          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Analogi: Coulombs lov ↔ magnetfelt fra ladning</p>
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor avtar feltet som 1/r²?</p>
+          <p className="text-sm">
+            Akkurat som Coulombs lov — feltet fra en punktkilde spres utover over en kule med areal{" "}
+            <InlineLatex latex="4\pi r^2" />. Jo lengre unna, jo større kule feltet fordeles på, og
+            jo svakere blir det. Det magnetiske feltet fra en <em>enkelt ladning</em> følger nøyaktig
+            det samme geometriske argumentet. (Merk at dette er annerledes for en lang rett leder —
+            se seksjon 28.3.)
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng: Elektrisk vs. magnetisk felt fra en punktladning</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -81,17 +92,17 @@ export default function TeoriPage() {
           </div>
         </div>
 
-        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Viktige spesialtilfeller</p>
           <ul className="text-sm space-y-1">
             <li>• <strong>φ = 90°</strong> (vinkelrett på v): B er <em>maksimal</em></li>
-            <li>• <strong>φ = 0° eller 180°</strong> (langs v): B = 0, <em>ingen felt foran/bak ladningen</em></li>
+            <li>• <strong>φ = 0° eller 180°</strong> (langs v): B = 0 — <em>ingen felt foran eller bak ladningen</em></li>
             <li>• Feltet avtar som <InlineLatex latex="1/r^2" />, akkurat som Coulombs lov</li>
           </ul>
         </div>
       </TheorySummary>
 
-      {/* 28.2 Magnetfelt fra et strømelement — Biot-Savarts lov */}
+      {/* 28.2 Biot-Savarts lov */}
       <TheorySummary
         title="28.2 Magnetfelt fra et strømelement — Biot-Savarts lov"
         mustKnow={[
@@ -99,6 +110,7 @@ export default function TeoriPage() {
           "Biot-Savarts lov: dB = (μ₀/4π) · I dl sin φ / r²",
           "Totalt felt: integrer (summer) bidragene fra hele lederen",
           "Retning: dl × r̂ (høyrehåndsregelen)",
+          "Biot-Savart gjelder for ENHVER strømfordeling, ikke bare rette ledere",
         ]}
       >
         <p>
@@ -134,7 +146,36 @@ export default function TeoriPage() {
           description="Integrasjonen summerer bidragene fra alle strømelementer langs lederen."
         />
 
-        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: Biot-Savart er magnetismens Coulomb-lov</p>
+          <p className="text-sm">
+            Coulombs lov forteller oss E-feltet fra én enkelt punktladning. Vi kan deretter summere
+            bidragene fra alle ladninger for å finne feltet fra en vilkårlig ladningsfordeling.
+            Biot-Savarts lov gjør nøyaktig det samme for magnetfelt: den gir bidraget fra ett lite
+            strømelement, og vi summerer (integrerer) over hele strømfordelingen for å finne totalt felt.
+            Det er den fundamentale "byggeklossen" for magnetfelt fra strøm.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>Feil:</strong> "B-feltet fra en leder peker utover fra lederen, som E-feltet fra en linjeladning."
+              <br />
+              <strong>Riktig:</strong> B-feltet danner konsentriske <em>sirkler</em> rundt lederen — det peker ikke
+              radialt ut, men tangentielt rundt. Bruk høyrehåndsregelen: tommel langs strøm, fingre krummer i B-retning.
+            </li>
+            <li>
+              <strong>Feil:</strong> "Biot-Savart fungerer bare for rette ledere."
+              <br />
+              <strong>Riktig:</strong> Biot-Savart gjelder for <em>enhver</em> strømfordeling — rette ledere,
+              sirkulære løkker, spoler, vilkårlige former. Det er den generelle loven.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Slik bruker du Biot-Savarts lov</p>
           <ol className="text-sm space-y-1">
             <li>1. Identifiser strømelementet <InlineLatex latex="d\vec{l}" /> og retningen</li>
@@ -146,19 +187,27 @@ export default function TeoriPage() {
         </div>
       </TheorySummary>
 
-      {/* 28.3 Magnetfelt fra en rett strømførende leder */}
+      {/* 28.3 Magnetfelt fra vanlige geometrier */}
       <TheorySummary
-        title="28.3 Magnetfelt fra en rett strømførende leder"
+        title="28.3 Magnetfelt fra vanlige geometrier"
         mustKnow={[
-          "Lang rett leder: B = μ₀I / (2πr)",
-          "Feltet avtar som 1/r (ikke 1/r² som for punktladning!)",
-          "Feltlinjene er konsentriske sirkler rundt lederen",
-          "Retning: Høyrehåndsregelen — tommel langs I, fingrene krummer i B-retning",
+          "Lang rett leder: B = μ₀I / (2πr) — avtar som 1/r",
+          "Senter av sirkulær løkke: B = μ₀I / (2R)",
+          "På aksen til løkke i avstand x: B = μ₀IR² / [2(R²+x²)^(3/2)]",
+          "Feltlinjene rundt rett leder er konsentriske sirkler",
+          "Høyrehåndsregelen gjelder for alle geometrier",
         ]}
       >
         <p>
-          Ved å bruke Biot-Savarts lov på en rett leder med lengde <InlineLatex latex="2a" /> finner vi
-          feltet i avstand <InlineLatex latex="x" /> fra midten:
+          Ved å bruke Biot-Savarts lov på ulike geometrier finner vi en rekke nyttige resultater.
+          Disse må du kunne — enten utlede eller bruke direkte.
+        </p>
+
+        <h3 className="font-semibold mt-4 mb-2">Rett leder</h3>
+
+        <p>
+          For en rett leder med lengde <InlineLatex latex="2a" /> finner vi feltet i avstand{" "}
+          <InlineLatex latex="x" /> fra midten:
         </p>
 
         <FormulaBox
@@ -179,10 +228,21 @@ export default function TeoriPage() {
           description="r = vinkelrett avstand fra lederen. Dette er formelen du bruker mest!"
         />
 
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips: 1/r-avhengighet</p>
+          <p className="text-sm">
+            For den lange rette lederen avtar B som <InlineLatex latex="1/r" />, <em>ikke</em>{" "}
+            <InlineLatex latex="1/r^2" />. Dette er fordi vi summerer bidragene fra <em>uendelig mange</em>{" "}
+            strømelementer langs lederen. Sammenlign med E-feltet fra en uendelig lang linjeladning:{" "}
+            <InlineLatex latex="E = \lambda/(2\pi\varepsilon_0 r)" /> — nøyaktig samme <InlineLatex latex="1/r" />-avhengighet
+            av den geometriske årsaken! Husk dette resultatet — du <em>må</em> kunne det.
+          </p>
+        </div>
+
         {/* Inline visualization: B-felt rundt lang rett leder */}
         <LongWireFieldVisualizer />
 
-        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Høyrehåndsregelen for rett leder</p>
           <ol className="text-sm space-y-1">
             <li>1. Pek <strong>tommelen</strong> i strømretningen I</li>
@@ -191,13 +251,39 @@ export default function TeoriPage() {
           </ol>
         </div>
 
-        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
-          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Merk: 1/r vs. 1/r²</p>
+        <h3 className="font-semibold mt-5 mb-2">Sirkulær strømsløyfe</h3>
+
+        <p>
+          I sentrum av en sirkulær løkke med radius <InlineLatex latex="R" /> og strøm <InlineLatex latex="I" />
+          peker alle strømelementene vinkelrett på radiusvektoren (<InlineLatex latex="\sin\varphi = 1" /> for alle).
+          Alle bidragene peker i samme retning, så feltet i sentrum er:
+        </p>
+
+        <FormulaBox
+          latex="B = \frac{\mu_0 I}{2R}"
+          title="B-felt i sentrum av sirkulær løkke"
+          variant="gold"
+          description="R = radius på løkken. Feltet peker langs aksen til løkken (høyrehåndsregelen)."
+        />
+
+        <p className="mt-3">
+          På aksen til løkken i avstand <InlineLatex latex="x" /> fra sentrum:
+        </p>
+
+        <FormulaBox
+          latex="B = \frac{\mu_0 I R^2}{2(R^2 + x^2)^{3/2}}"
+          title="B-felt på aksen til sirkulær løkke"
+          variant="blue"
+          description="For x = 0 gir dette B = μ₀I/(2R) som forventet. For x ≫ R avtar feltet som 1/x³."
+        />
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips: Retning for løkker</p>
           <p className="text-sm">
-            B-feltet fra en lang rett leder avtar som <InlineLatex latex="1/r" />, ikke{" "}
-            <InlineLatex latex="1/r^2" />. Dette er fordi vi summerer bidragene fra <em>uendelig mange</em>{" "}
-            strømelementer langs lederen. Sammenlign med E-feltet fra en uendelig lang linjeladning:{" "}
-            <InlineLatex latex="E = \lambda/(2\pi\varepsilon_0 r)" /> — samme <InlineLatex latex="1/r" />-avhengighet!
+            For en sirkulær løkke bruker du høyrehåndsregelen slik: la fingrene krumme i retningen strømmen
+            flyter rundt løkken. Da peker tommelen i retningen B-feltet har langs aksen. For en spole med
+            N viklinger multipliserer du bare med N:{" "}
+            <InlineLatex latex="B = \mu_0 N I / (2R)" /> i sentrum.
           </p>
         </div>
       </TheorySummary>
@@ -206,7 +292,7 @@ export default function TeoriPage() {
       <TheorySummary
         title="28.4 Krefter mellom parallelle ledere"
         mustKnow={[
-          "Kraft per lengdeenhet: F/L = μ₀II′ / (2πr)",
+          "Kraft per lengdeenhet: F/L = μ₀II′ / (2πd)",
           "Samme strømretning → tiltrekkende kraft",
           "Motsatt strømretning → frastøtende kraft",
           "Definisjonen av Ampere er basert på denne kraften",
@@ -219,32 +305,229 @@ export default function TeoriPage() {
 
         <p className="mt-3">
           Leder 1 med strøm <InlineLatex latex="I" /> lager et felt{" "}
-          <InlineLatex latex="B = \mu_0 I / (2\pi r)" /> ved leder 2.
+          <InlineLatex latex="B = \mu_0 I / (2\pi d)" /> ved leder 2.
           Kraften på leder 2 (med strøm <InlineLatex latex="I'" /> og lengde <InlineLatex latex="L" />) blir:
         </p>
 
         <FormulaBox
-          latex="\frac{F_m}{L} = \frac{\mu_0 I I'}{2\pi r}"
+          latex="\frac{F_m}{L} = \frac{\mu_0 I I'}{2\pi d}"
           title="Kraft per lengdeenhet mellom parallelle ledere"
           variant="gold"
-          description="r = avstand mellom lederne, I og I' = strømmene. Tiltrekkende for lik strømretning."
+          description="d = avstand mellom lederne, I og I' = strømmene. Tiltrekkende for lik strømretning."
         />
 
-        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
-          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Retning på kraften</p>
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor tiltrekker parallelle strømmer hverandre?</p>
+          <p className="text-sm">
+            Leder 1 skaper et B-felt ved leder 2. Retningen (høyrehåndsregelen) er slik at B-feltet
+            ved leder 2 peker inn mot siden der leder 1 er. Kraften på leder 2 er{" "}
+            <InlineLatex latex="\vec{F} = I' L\hat{l} \times \vec{B}" />, og kryssproduktet gir
+            en kraft som peker <em>mot</em> leder 1 — altså tiltrekning.
+            For motsatt strøm snur B-retningen, og kraften blir frastøtning.
+            Dette er faktisk hvordan <strong>Ampere</strong> opprinnelig ble definert!
+          </p>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: vannslanger</p>
+          <p className="text-sm">
+            Tenk deg to vannslanger som ligger parallelt. Når vann strømmer i <em>samme retning</em> i begge,
+            vil slangene trekkes mot hverandre (akkurat som parallelle strømmer). Hvis vannet strømmer
+            i <em>motsatt retning</em>, skyver slangene hverandre fra hverandre. Det er litt
+            kontraintuitivt, men magnetisk interaksjon bekrefter dette prinsippet.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng: Definisjonen av Ampere</p>
+          <p className="text-sm">
+            To uendelig lange parallelle ledere med 1 meters avstand, som fører lik strøm,
+            definerer <strong>1 Ampere</strong> når den magnetiske kraften per lengdeenhet er
+            nøyaktig <InlineLatex latex="F_m/L = 2 \times 10^{-7}\;\text{N/m}" />.
+            Fra dette følger: <InlineLatex latex="1\;\text{C} = 1\;\text{A} \cdot 1\;\text{s}" />.
+            (Merk: SI-systemet ble revidert i 2019 — Ampere er nå definert via elementærladningen,
+            men prinsippet er det samme.)
+          </p>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Retning på kraften — huskeregel</p>
           <ul className="text-sm space-y-2">
             <li>• <strong>Samme strømretning:</strong> Lederne <span className="text-green-600 dark:text-green-400 font-semibold">tiltrekker</span> hverandre</li>
             <li>• <strong>Motsatt strømretning:</strong> Lederne <span className="text-red-600 dark:text-red-400 font-semibold">frastøter</span> hverandre</li>
+            <li>• Analogt med magneter: "like poler frastøter" — men her er det <em>strøm</em>, og regelen er snudd!</li>
+          </ul>
+        </div>
+      </TheorySummary>
+
+      {/* 28.5 Ampères lov */}
+      <TheorySummary
+        title="28.5 Ampères lov"
+        mustKnow={[
+          "∮ B·dl = μ₀I_enclosed (linjeintegralet av B langs en lukket sløyfe = μ₀ × innesluttet strøm)",
+          "Velg ampèresløyfen der B er konstant og parallell med dl",
+          "Ampères lov gjelder alltid, men er nyttig bare ved høy symmetri",
+          "Brukes til å finne B fra lange rette ledere, koaksialkabler, solenoider",
+        ]}
+      >
+        <p>
+          Ampères lov er det magnetiske motstykket til Gauss&apos; lov — begge utnytter symmetri
+          for å gjøre et komplisert integral trivielt.
+        </p>
+
+        <FormulaBox
+          latex="\oint \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{enclosed}}"
+          title="Ampères lov"
+          variant="gold"
+          description="Linjeintegralet av B rundt en lukket sløyfe (Ampère-sløyfen) er lik μ₀ × strøm gjennom sløyfen."
+        />
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor er Ampères lov nyttig?</p>
+          <p className="text-sm">
+            Den er det magnetiske analoget til Gauss&apos; lov — nyttig når det er <em>høy symmetri</em>.
+            I stedet for å integrere Biot-Savart (som kan være svært vanskelig), velger du en
+            Ampère-sløyfe der <InlineLatex latex="\vec{B}" /> enten er (a) konstant og parallell
+            med <InlineLatex latex="d\vec{l}" />, slik at <InlineLatex latex="\vec{B}\cdot d\vec{l} = B\,dl" />,
+            eller (b) vinkelrett på <InlineLatex latex="d\vec{l}" />, slik at <InlineLatex latex="\vec{B}\cdot d\vec{l} = 0" />.
+            Da kan du trekke B ut av integralet og løse direkte for B.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng: Ampères lov ↔ Gauss&apos; lov (kap 22)</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-[var(--card-border)]">
+                  <th className="text-left py-1 pr-4">Gauss&apos; lov (E-felt)</th>
+                  <th className="text-left py-1">Ampères lov (B-felt)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-1 pr-4"><InlineLatex latex="\oint \vec{E}\cdot d\vec{A} = Q_{\text{enc}}/\varepsilon_0" /></td>
+                  <td className="py-1"><InlineLatex latex="\oint \vec{B}\cdot d\vec{l} = \mu_0 I_{\text{enc}}" /></td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-1 pr-4">Flate-integral av E</td>
+                  <td className="py-1">Linje-integral av B</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-1 pr-4">Kilde: innesluttet ladning Q</td>
+                  <td className="py-1">Kilde: innesluttet strøm I</td>
+                </tr>
+                <tr>
+                  <td className="py-1 pr-4">Gaussisk flate (kule, sylinder)</td>
+                  <td className="py-1">Ampère-sløyfe (sirkel, rektangel)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips: Velg riktig Ampère-sløyfe</p>
+          <ul className="text-sm space-y-1">
+            <li>• <strong>Rett leder:</strong> Velg en sirkel konsentrert rundt lederen. B er konstant og parallell med dl langs sirkelen. Da gir <InlineLatex latex="B \cdot 2\pi r = \mu_0 I" />, altså <InlineLatex latex="B = \mu_0 I/(2\pi r)" /></li>
+            <li>• <strong>Solenoid:</strong> Velg et rektangel med én side inni og én side utenfor. B er null utenfor og parallell med dl inni</li>
+            <li>• <strong>Koaksialkabel:</strong> Velg konentriske sirkler for ulike r-verdier</li>
           </ul>
         </div>
 
-        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
-          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Definisjonen av Ampere</p>
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser om Ampères lov</p>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>Feil:</strong> "B ved et punkt avhenger bare av innesluttet strøm."
+              <br />
+              <strong>Riktig:</strong> B ved et <em>punkt</em> avhenger av <em>alle</em> strømmer i rommet.
+              Men <em>integralet</em> <InlineLatex latex="\oint \vec{B}\cdot d\vec{l}" /> rundt en
+              lukket sløyfe avhenger bare av strøm <em>gjennom</em> sløyfen. Ytre strømmer påvirker B,
+              men bidragene kansellerer i integralet.
+            </li>
+            <li>
+              <strong>Feil:</strong> "Man kan alltid finne B fra Ampères lov."
+              <br />
+              <strong>Riktig:</strong> Ampères lov gjelder alltid, men er <em>nyttig</em> bare
+              når det er nok symmetri til å trekke B ut av integralet. Uten symmetri må du
+              bruke Biot-Savart (som er vanskeligere).
+            </li>
+          </ul>
+        </div>
+      </TheorySummary>
+
+      {/* 28.6 Solenoider og toroider */}
+      <TheorySummary
+        title="28.6 Solenoider og toroider"
+        mustKnow={[
+          "Solenoid: B = μ₀nI inni (n = viklinger per meter), B ≈ 0 utenfor",
+          "n = N/L der N = totalt antall viklinger, L = lengde",
+          "Feltet er uniformt og parallelt med aksen inni en lang solenoid",
+          "Toroid: B = μ₀NI/(2πr) inni, B = 0 utenfor og i hullet",
+        ]}
+      >
+        <p>
+          En solenoid er en tett spolet spiralfjær av ledertråd. Når strøm flyter gjennom den,
+          adderes feltene fra alle viklingene til et sterkt, uniformt felt inni — og nær null utenfor.
+        </p>
+
+        <FormulaBox
+          latex="B = \mu_0 n I"
+          title="B-felt inni solenoid"
+          variant="gold"
+          description="n = N/L = antall viklinger per meter, I = strøm. Enkelt, kraftfullt og uniformt!"
+        />
+
+        <FormulaBox
+          latex="B_{\text{toroid}} = \frac{\mu_0 N I}{2\pi r}"
+          title="B-felt inni toroid"
+          variant="blue"
+          description="N = totalt antall viklinger, r = avstand fra sentrum av toroiden. B = 0 utenfor."
+        />
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor er feltet uniformt inni solenoiden?</p>
           <p className="text-sm">
-            Denne kraften brukes til å definere enheten <strong>Ampere</strong>: To uendelig lange parallelle ledere
-            med 1 meters avstand, som fører lik strøm, definerer 1 Ampere når den magnetiske kraften
-            per lengdeenhet er nøyaktig <InlineLatex latex="F_m/L = 2 \times 10^{-7}\;\text{N/m}" />.
-            Dermed følger også: <InlineLatex latex="1\;\text{C} = 1\;\text{A} \cdot 1\;\text{s}" />.
+            Hver vikle bidrar med litt felt langs aksen. Når viklingene er tett pakket, adderes feltene
+            til et nesten perfekt uniformt felt inni — feltlinjene er "fanget" inne i solenoiden.
+            Utenfor kansellerer bidragene fra motstående sider av lederen hverandre, slik at B nær null.
+            Jo lenger og tettere solenoiden er, jo bedre er tilnærmingen.
+          </p>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: Elektromagnet</p>
+          <p className="text-sm">
+            En solenoid er i praksis en elektromagnet. En stavmagnet og en solenoid har nesten identisk
+            feltmønster på utsiden — men solenoiden kan slås av og på! Industrielle elektromagneter
+            (kranmagneter, MR-maskiner, partikkelakseleratorer) er alle solenoider, gjerne med jernkjerne
+            for å forsterke feltet. MR-maskiner bruker supraledende solenoider med felt opp til 3 T.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng til kap 29 (Induksjon)</p>
+          <p className="text-sm">
+            Solenoider er sentrale komponenter i neste kapittel om elektromagnetisk induksjon.
+            En solenoid med varierende strøm vil indusere spenning i nabokretser (transformatorer).
+            Selvinduktansen til en solenoid er <InlineLatex latex="L = \mu_0 n^2 V" /> der V er
+            volumet — dette kobler direkte til energilagring i magnetfelt.
+          </p>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Utledning med Ampères lov</p>
+          <p className="text-sm">
+            For å finne <InlineLatex latex="B = \mu_0 n I" /> velger vi et rektangulært Ampère-sløyfe
+            med én side (lengde l) parallell med aksen inni solenoiden, og én side utenfor.
+            Siden B er null utenfor og vinkelrett på de korte sidene, gir bare den innsiden bidrag:
+          </p>
+          <p className="text-sm mt-2">
+            <InlineLatex latex="\oint \vec{B}\cdot d\vec{l} = B \cdot l = \mu_0 I_{\text{enc}} = \mu_0 (nl)\,I" />
+          </p>
+          <p className="text-sm mt-1">
+            Løs for B: <InlineLatex latex="B = \mu_0 n I" />. Ferdig!
           </p>
         </div>
       </TheorySummary>
