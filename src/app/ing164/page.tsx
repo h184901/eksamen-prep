@@ -49,6 +49,36 @@ export default function ING164Page() {
         </p>
       </div>
 
+      {/* Verktøy */}
+      <div className="grid sm:grid-cols-2 gap-4 mb-10">
+        <Link
+          href="/ing164/formelark"
+          className="group relative overflow-hidden rounded-xl border-2 border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <div className="text-3xl mb-2">📋</div>
+          <h3 className="font-bold text-lg mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+            Komplett formelark
+          </h3>
+          <p className="text-sm text-[var(--muted)]">
+            Alle formler fra alle kapitler organisert etter tema. Filtrer etter
+            emne og søk raskt opp det du trenger.
+          </p>
+        </Link>
+        <Link
+          href="/ing164/eksamen"
+          className="group relative overflow-hidden rounded-xl border-2 border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <div className="text-3xl mb-2">🎯</div>
+          <h3 className="font-bold text-lg mb-1 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+            Eksamensøving
+          </h3>
+          <p className="text-sm text-[var(--muted)]">
+            Alle oppgaver fra tidligere eksamener med fullstendige løsninger.
+            Tidtaker for øvingseksamen inkludert.
+          </p>
+        </Link>
+      </div>
+
       {/* Chapter groups */}
       <div className="space-y-10">
         {grouped.map(({ category, label, chapters: cats }) => {

@@ -23,7 +23,9 @@
       "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/tidligere_eksamener/**)",
       "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/semesterplan/**)",
       "Bash(npx tsc:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
