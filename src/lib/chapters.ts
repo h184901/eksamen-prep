@@ -48,6 +48,7 @@ export const chapters: Chapter[] = [
     title: "Arbeid og kinetisk energi",
     description: "Arbeid, kinetisk energi og arbeid-energi-teoremet",
     category: "mekanikk",
+    sectionCount: 4,
   },
   {
     id: 7,
@@ -55,6 +56,7 @@ export const chapters: Chapter[] = [
     title: "Potensiell energi og energibevaring",
     description: "Gravitasjonell og elastisk potensiell energi, konservative krefter",
     category: "mekanikk",
+    sectionCount: 4,
   },
   {
     id: 8,
@@ -62,6 +64,7 @@ export const chapters: Chapter[] = [
     title: "Bevegelsesmengde og kollisjoner",
     description: "Impuls, bevegelsesmengde, elastiske og uelastiske kollisjoner",
     category: "mekanikk",
+    sectionCount: 4,
   },
   {
     id: 9,
@@ -69,6 +72,7 @@ export const chapters: Chapter[] = [
     title: "Rotasjon av stive legemer",
     description: "Vinkelhastighet, vinkelakselerasjon og treghetsmoment",
     category: "rotasjon",
+    sectionCount: 4,
   },
   {
     id: 10,
@@ -76,6 +80,7 @@ export const chapters: Chapter[] = [
     title: "Dynamikk i rotasjonsbevegelse",
     description: "Dreiemoment, spinn og rotasjonsenergi",
     category: "rotasjon",
+    sectionCount: 4,
   },
   {
     id: 21,
@@ -91,6 +96,7 @@ export const chapters: Chapter[] = [
     title: "Elektrisk potensial",
     description: "Spenning, potensialenergi og ekvipotensialflater",
     category: "em",
+    sectionCount: 4,
   },
   {
     id: 24,
@@ -98,6 +104,7 @@ export const chapters: Chapter[] = [
     title: "Kapasitans og dielektrika",
     description: "Kondensatorer, kapasitans og energilagring",
     category: "em",
+    sectionCount: 4,
   },
   {
     id: 27,
@@ -105,6 +112,7 @@ export const chapters: Chapter[] = [
     title: "Magnetisk felt og krefter",
     description: "Magnetfelt, Lorentz-kraft og bevegelse i magnetfelt",
     category: "em",
+    sectionCount: 4,
   },
   {
     id: 28,
@@ -112,6 +120,7 @@ export const chapters: Chapter[] = [
     title: "Kilder til magnetfelt",
     description: "Biot-Savarts lov, Ampères lov og solenoider",
     category: "em",
+    sectionCount: 4,
   },
   {
     id: 29,
@@ -119,6 +128,7 @@ export const chapters: Chapter[] = [
     title: "Elektromagnetisk induksjon",
     description: "Faradays lov, Lenz' lov og induktans",
     category: "em",
+    sectionCount: 4,
   },
 ];
 
