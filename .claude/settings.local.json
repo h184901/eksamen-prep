@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(graphify install:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm install:*)",
+      "Bash(sudo npm:*)",
+      "Bash(npx uipro-cli:*)",
+      "Bash(claude mcp:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(find /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164 -name \"page.tsx\" -exec wc -l {} \\\\;)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Bash(npx next:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

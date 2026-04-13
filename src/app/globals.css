@@ -1,0 +1,56 @@
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #171717;
+  --background: #f5f5f5;
+  --card: #ffffff;
+  --card-border: #e5e5e5;
+  --muted: #737373;
+  --accent: #f97316;
+}
+
+.dark {
+  --foreground: #ededed;
+  --background: #0a0a0a;
+  --card: #171717;
+  --card-border: #262626;
+  --muted: #a3a3a3;
+  --accent: #fb923c;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Formula box styles */
+.formula-box-gold {
+  @apply border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-600;
+}
+
+.formula-box-blue {
+  @apply border-2 border-blue-400 bg-blue-50 dark:bg-blue-950/30 dark:border-blue-600;
+}
+
+/* KaTeX overrides for dark mode */
+.dark .katex {
+  color: var(--foreground);
+}
+
+/* Theme transitions — only on elements that need it */
+body,
+.formula-box-gold,
+.formula-box-blue,
+nav,
+a,
+button {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
