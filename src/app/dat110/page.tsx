@@ -6,29 +6,46 @@ const topics = [
   {
     id: "nettverk",
     slug: "nettverk",
-    title: "Nettverkslag og protokoller",
+    title: "Nettverksgrunnlag og protokoller",
     description:
-      "TCP/IP-modellen, HTTP, DNS, UDP, TCP, forsinkelser og gjennomstrømning",
-    weight: "~30%",
+      "TCP/IP-modellen, forsinkelser, gjennomstrømning, HTTP, DNS, TCP, UDP og sockets",
+    weight: "Oppg 3–4",
     icon: "globe",
+    exam: "~20%",
+    cn: "CN 1–3",
   },
   {
     id: "ruting",
     slug: "ruting",
-    title: "IP-ruting og adressering",
+    title: "IP-ruting, adressering og switching",
     description:
-      "IPv4-datagram, fragmentering, CIDR, longest-prefix matching, avstandsvektoralgoritme",
-    weight: "~25%",
+      "IPv4-datagram, fragmentering, CIDR, longest-prefix match, avstandsvektor, ARP, switch og DHCP",
+    weight: "Oppg 5–6",
     icon: "route",
+    exam: "~20%",
+    cn: "CN 4–6",
   },
   {
-    id: "distribuerte",
-    slug: "distribuerte",
-    title: "Distribuerte systemer",
+    id: "kommunikasjon",
+    slug: "kommunikasjon",
+    title: "Kommunikasjon i DS",
     description:
-      "RPC, konsistensmodeller, replikering, feiltoleranse, klokkesett og overlay-nettverk",
-    weight: "~30%",
+      "RPC, MQTT, publish-subscribe, multicast, overlay-nettverk, RDP, prosesser og tråder",
+    weight: "Oppg 7–8",
     icon: "network",
+    exam: "~15%",
+    cn: "DS 3–4",
+  },
+  {
+    id: "konsistens",
+    slug: "konsistens",
+    title: "Koordinering, konsistens og feiltoleranse",
+    description:
+      "Logiske/vektorklokker, konsistensmodeller, replikering, Byzantine-feiltoleranse og RPC-feil",
+    weight: "Oppg 9",
+    icon: "clipboard",
+    exam: "~10%",
+    cn: "DS 5–8",
   },
   {
     id: "chord",
@@ -36,8 +53,10 @@ const topics = [
     title: "DHT og Chord",
     description:
       "Distribuert hash-tabell, fingertabeller, nøkkelansvar og skalerbar søking — O(log n)",
-    weight: "~15%",
+    weight: "Oppg 10",
     icon: "ring",
+    exam: "~15%",
+    cn: "DS 6",
   },
 ];
 
@@ -102,25 +121,28 @@ export default function DAT110Page() {
           10 oppgaver à 10–15% — alltid samme struktur. Oppgave 2 handler alltid om det obligatoriske
           prosjektet. Oppgave 10 (DHT/Chord, 15%) er den tyngste enkeltoppgaven.
         </p>
-        <div className="grid sm:grid-cols-5 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
           {[
-            { label: "Oppg. 1", topic: "Multiple choice", pct: "10%" },
-            { label: "Oppg. 2", topic: "Oblig-prosjekt", pct: "10%" },
-            { label: "Oppg. 3–6", topic: "Nettverkslag", pct: "40%" },
-            { label: "Oppg. 7–9", topic: "Distribuerte sys.", pct: "25%" },
-            { label: "Oppg. 10", topic: "DHT/Chord", pct: "15%" },
+            { label: "Oppg 1", topic: "Flervalg (10 spm)", pct: "10%", detail: "Dekker alt pensum" },
+            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert år" },
+            { label: "Oppg 3–4", topic: "Forsinkelser + protokoll", pct: "20%", detail: "CN: delay, IP/TCP/UDP" },
+            { label: "Oppg 5–6", topic: "Ruting + ARP/switch", pct: "20%", detail: "CN: CIDR, DV, ARP" },
+            { label: "Oppg 7–8", topic: "RPC + overlay/multicast", pct: "15%", detail: "DS: RPC, RDP" },
+            { label: "Oppg 9", topic: "Konsistens + klokker", pct: "10%", detail: "DS: vektorklokker" },
+            { label: "Oppg 10", topic: "DHT/Chord", pct: "15%", detail: "DS: fingertabeller" },
           ].map((item) => (
             <div
               key={item.label}
               className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-network-200 dark:border-network-800/40 p-3 text-center"
             >
-              <p className="text-xs font-medium text-[var(--muted)] mb-1">
+              <p className="text-xs font-medium text-[var(--muted)] mb-0.5">
                 {item.label}
               </p>
               <p className="font-bold text-xs">{item.topic}</p>
-              <p className="text-xs font-bold text-network-600 dark:text-network-400 mt-1">
+              <p className="text-xs font-bold text-network-600 dark:text-network-400 mt-0.5">
                 {item.pct}
               </p>
+              <p className="text-[10px] text-[var(--muted)] mt-0.5">{item.detail}</p>
             </div>
           ))}
         </div>
@@ -145,7 +167,7 @@ export default function DAT110Page() {
 
       {/* Emner */}
       <h2 className="text-xl font-bold mb-4">Emner</h2>
-      <div className="grid sm:grid-cols-2 gap-4 mb-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {topics.map((topic) => (
           <Link
             key={topic.id}
@@ -156,9 +178,12 @@ export default function DAT110Page() {
               <div className="w-10 h-10 rounded-lg bg-network-100 dark:bg-network-900/30 text-network-600 dark:text-network-400 flex items-center justify-center">
                 {iconMap[topic.icon]}
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-                {topic.weight}
-              </span>
+              <div className="text-right">
+                <span className="block text-xs font-bold px-2.5 py-1 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
+                  {topic.weight}
+                </span>
+                <span className="block text-[10px] text-[var(--muted)] mt-1">{topic.cn}</span>
+              </div>
             </div>
             <h3 className="font-bold text-lg mb-1 group-hover:text-network-600 dark:group-hover:text-network-400 transition-colors">
               {topic.title}
