@@ -35,7 +35,9 @@
       "Bash(python3 -c \"import pptx; print\\('pptx available'\\)\")",
       "Bash(pip3 install:*)",
       "Bash(python3:*)",
-      "Bash(file /Users/erlendmoheim/Downloads/Studiet/Semester4/materials/dat109/eksamensoppgaver/*.pdf)"
+      "Bash(file /Users/erlendmoheim/Downloads/Studiet/Semester4/materials/dat109/eksamensoppgaver/*.pdf)",
+      "Bash(\" /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/dat109/modellering/page.tsx | head -20)",
+      "Bash(awk '{s+=$1} END {print \"Total lines: \" s}')"
     ]
   }
 }

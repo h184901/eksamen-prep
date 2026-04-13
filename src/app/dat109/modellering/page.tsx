@@ -2,6 +2,18 @@
 
 import Link from "next/link";
 import TheorySummary from "@/components/TheorySummary";
+import {
+  UseCaseMonopol,
+  UseCaseStigespill,
+  UseCaseEksamen,
+  UseCaseMaxMummelmann,
+  DomainMonopol,
+  DomainMaxMummelmann,
+  DomainEksamen,
+  SequenceMonopol,
+  SequenceStigespill,
+  SequenceMaxMummelmann,
+} from "@/components/dat109/UmlDiagrams";
 
 export default function ModelleringPage() {
   return (
@@ -214,20 +226,8 @@ export default function ModelleringPage() {
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Brukstilfellesdiagram — Monopol</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-sm leading-relaxed">
-            <pre>{`┌─────────────────────────────┐
-│         Monopol             │
-│                             │
-│   ┌──────────┐              │
-│   │   Init   │              │
-│   └──────────┘              │
-│        ▲                    │
-│   <<include>>               │
-│        │                    │
-Observatør ──── ┌──────────┐  │
-│               │   Spill  │  │
-│               └──────────┘  │
-└─────────────────────────────┘`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4">
+            <UseCaseMonopol />
           </div>
           <p className="text-sm mt-3">
             <strong>Bare 2 brukstilfeller!</strong> «Spill» inkluderer «Init». Observatøren starter
@@ -259,14 +259,8 @@ Observatør ──── ┌──────────┐  │
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Brukstilfellesdiagram — Stigespill</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-sm">
-            <pre>{`┌───────────────────────────────┐
-│          Stigespill           │
-│                               │
-│      ┌────────────────┐       │
-Observatør ── │ Spill stigespill │  │
-│      └────────────────┘       │
-└───────────────────────────────┘`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4">
+            <UseCaseStigespill />
           </div>
           <p className="text-sm mt-3">
             <strong>Bare 1 brukstilfelle!</strong> Professorens kommentar: «For et simulert spill
@@ -283,27 +277,8 @@ Observatør ── │ Spill stigespill │  │
           <p className="text-sm mb-3">
             Automatisert system for avvikling av digital multiple-choice eksamen.
           </p>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-sm leading-relaxed">
-            <pre>{`┌──────────────────────────────────────┐
-│        Eksamenssystem                │
-│                                      │
-│  ┌──────────────┐                    │
-Lærer ── │  Lag oppgave  │                    │
-│  └──────────────┘                    │
-│  ┌──────────────────┐                │
-Lærer ── │ Definer eksamen  │                │
-│  └──────────────────┘                │
-│  ┌──────────────────┐                │
-Student ── │ Besvar eksamen │──<<include>>──┐│
-│  └──────────────────┘                ││
-│  ┌──────────────────┐                ││
-│  │ Lever besvarelse  │◄──────────────┘│
-│  └──────────────────┘                │
-Klokke ────────┘(<<actor>>)             │
-│  ┌──────────────────┐                │
-Lærer ── │ Godkjenn karakter│                │
-│  └──────────────────┘                │
-└──────────────────────────────────────┘`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4">
+            <UseCaseEksamen />
           </div>
           <p className="text-sm mt-3">
             Her er det 5 brukstilfeller fordi systemet er mer komplekst enn et spill. «Lever
@@ -318,21 +293,8 @@ Lærer ── │ Godkjenn karakter│                │
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Brukstilfellesdiagram — Max Mümmelmann</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-sm leading-relaxed">
-            <pre>{`┌──────────────────────────────────────┐
-│          Max Mümmelmann              │
-│                                      │
-│  ┌──────────────┐                    │
-│  │  Init spill  │◄──<<include>>──┐   │
-│  └──────────────┘                │   │
-│  ┌──────────────┐                │   │
-Admin ── │  Start spill  │────────────────┘   │
-Spiller ── │              │                    │
-│  └──────────────┘                    │
-│  ┌──────────────┐                    │
-Spiller ── │  Spill tur   │                    │
-│  └──────────────┘                    │
-└──────────────────────────────────────┘`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4">
+            <UseCaseMaxMummelmann />
           </div>
           <div className="mt-3">
             <h4 className="font-semibold text-sm mb-2">Brukstilfellebeskrivelse — «Spill tur»</h4>
@@ -555,31 +517,8 @@ Spiller ── │  Spill tur   │                    │
         <p className="text-sm text-[var(--muted)] mb-3">Fra F05–F06 — utviklet over 3 iterasjoner</p>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`                    Monopol
-                   rundeNr
-                  /    |    \\
-            (1:1)/  (1:2..8) \\(1:1)
-               /       |       \\
-          Brett    Spiller    Kopp
-            |      navn       sum
-        (1:40)     penger    /    \\
-            |        |    (1:2)    \\
-     Rute {abstract} |   Terning
-      navn      Eier(1:1)  verdi
-    /  |  \\  \\       |
-   /   |   \\  \\    Brikke
-  /    |    \\  \\    navn
-StartR VanligR  \\  \\  |
-                 \\  \\ Er på(0..8 : 1)
-        InntektsskattR  \\
-                    SkjøteRute {abstract}
-                      pris
-                     /  |  \\
-                    /   |   \\
-              Eiendom  Jernbane  Offentlig
-
-        SkjøteRute ── Eier(0..1 : *) ── Spiller`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <DomainMonopol />
           </div>
           <div className="mt-3 text-sm space-y-2">
             <p><strong>Klasser:</strong> Monopol, Brett, Spiller, Kopp, Terning, Brikke, Rute (abstrakt) med subklasser StartRute, VanligRute, InntektsskattRute, DeSettesIFengselRute, SkjøteRute (abstrakt) med subklasser EiendomRute, JernbaneRute, OffentligRute.</p>
@@ -598,18 +537,8 @@ StartR VanligR  \\  \\  |
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Professorens domenemodell — fasit</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`MaxMummelmann (1)───(1) Brett (1)───(8) Rute
-     |                                    |
-  (1:2..4)                            (0..* : 1)
-     |                                    |
-  Spiller ─── (0..6) Kort            Brikke (1)
-               nummer
-
-MaxMummelmann (1)───(1) Terning
-                        verdi
-
-MaxMummelmann (1)───(1) Brikke`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <DomainMaxMummelmann />
           </div>
           <div className="mt-3 text-sm">
             <p><strong>Klasser:</strong> MaxMummelmann, Brett, Rute, Spiller, Kort, Terning, Brikke</p>
@@ -623,18 +552,8 @@ MaxMummelmann (1)───(1) Brikke`}</pre>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Professorens domenemodell — fasit</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`Lærer ──(*)── Oppgave ──(*)── Spørsmål ──(*)── Svaralternativ
-  |                                                   riktig:boolsk
-  |──(*)── Eksamen                                        |
-              tid:dato                                 (*)
-              varighet:heltall                           |
-              |                                        Svar
-           (*)                                       kryss:boolsk
-              |                                        |
-           Student ──(*)── Besvarelse ──(*)── Svar
-           brukernavn         karakter
-           passord`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <DomainEksamen />
           </div>
           <div className="mt-3 text-sm">
             <p><strong>8 klasser:</strong> Lærer, Student, Oppgave, Eksamen, Spørsmål, Svaralternativ, Besvarelse, Svar</p>
@@ -827,27 +746,8 @@ MaxMummelmann (1)───(1) Brikke`}</pre>
         <p className="text-sm text-[var(--muted)] mb-3">Fra F04–F05</p>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`:Monopol         :Spiller        :Kopp        :Brett       :Brikke
-    |                |              |             |             |
-    | spill()        |              |             |             |
-    |────┐           |              |             |             |
-    |    | loop [20 ganger]         |             |             |
-    |    |  spillRunde()            |             |             |
-    |    |────┐      |              |             |             |
-    |    |    | loop [for alle spillere]           |             |
-    |    |    |      |              |             |             |
-    |    |    |──────> spillTrekk() |             |             |
-    |    |    |      |──────────────> trill()     |             |
-    |    |    |      |    sum <──── | getSum()    |             |
-    |    |    |      |              |             |             |
-    |    |    |      |──────────────|─────────────> getRute()   |
-    |    |    |      |    rute <────|─────────────| flytt(rute,sum)
-    |    |    |      |              |             |             |
-    |    |    |      |──────────────|─────────────|────────────> setRute(rute)
-    |    |    |      |              |             |             |
-    |    |    | <─ ─ ─ navn, rute, sum            |             |
-    |    |    |      |              |             |             |`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <SequenceMonopol />
           </div>
           <div className="mt-3 text-sm space-y-1">
             <p><strong>Kobling til Java (oppgave 4):</strong></p>
@@ -880,26 +780,8 @@ public void spillTrekk(Kopp kopp, Brett brett) {
         <p className="text-sm text-[var(--muted)] mb-3">Fra F08 — brukt i obligatorisk øvelse</p>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`:Stigespill      :Spiller       :Terning      :Brett       :Brikke
-    |                |              |             |             |
-    | spill()        |              |             |             |
-    |────┐           |              |             |             |
-    |    | loop [ingen vinner]      |             |             |
-    |    |  spillRunde()            |             |             |
-    |    |────┐      |              |             |             |
-    |    |    | loop [for alle spillere]           |             |
-    |    |    |──────> spillTrekk() |             |             |
-    |    |    |      |──────────────> trill()     |             |
-    |    |    |      |  verdi <──── | getVerdi()  |             |
-    |    |    |      |              |             |             |
-    |    |    |      |──────────────|─────────────> getPlass()  |
-    |    |    |      |    rute <────|─────────────|             |
-    |    |    |      |──────────────|─────────────> finnNyRute(rute, verdi)
-    |    |    |      |  nyRute <────|─────────────|             |
-    |    |    |      |              |             |             |
-    |    |    |      |──────────────|─────────────|────────────> setPlass(nyRute)
-    |    |    |      |              |             |             |`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <SequenceStigespill />
           </div>
           <p className="text-sm mt-3">
             Merk: Brettet er <strong>Informasjonsekspert</strong> for å finne ny rute (den
@@ -913,23 +795,8 @@ public void spillTrekk(Kopp kopp, Brett brett) {
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Sekvensdiagram — «Spill tur» (forenklet fra fasit)</h4>
-          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
-            <pre>{`:Spiller    :MaxMummelmann  :Terning   :Brikke    :Brett     :Rute
-   |              |             |          |          |          |
-   |── trill() ──>|             |          |          |          |
-   |              |── trill() ──>          |          |          |
-   |              | verdi <──── |          |          |          |
-   |              |                        |          |          |
-   |              |── flyttBrikke(verdi) ──>          |          |
-   |              |             |          |── flytt(verdi) ───> |
-   |              |             |          |          |          |
-   |              |             |          |          |── kort = visØversteKort()
-   |              |             |          |          |          |
-   | alt [mangler familiemedlem]|          |          |          |
-   |              |── taKort() ─|──────────>          |          |
-   |              |             |          |── taØversteKort() ─>|
-   |              |     kort <──|──────────|          |          |
-   |── leggTilKort(kort)        |          |          |          |`}</pre>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <SequenceMaxMummelmann />
           </div>
           <div className="mt-3 text-sm">
             <p><strong>Kobling til brukstilfellebeskrivelsen:</strong></p>

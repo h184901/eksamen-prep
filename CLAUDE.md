@@ -52,6 +52,78 @@ Skreddersydd eksamensøvingsside.
 2. DAT110 Nettverksteknologi — senere
 3. DAT109 Systemutvikling — PRIORITERT NÅ
 
+DAT110 Nettverksteknologi og distribuerte systemer
+
+Pensum
+
+To bøker:
+
+
+
+
+
+CN — Computer Networking (tidligere versjon, supplér med nyere info der relevant)
+
+
+
+DS — Distributed Systems
+
+Materialer
+
+Alt ligger i ~/Downloads/Studiet/Semester4/materials/dat110/
+
+
+
+
+
+semesterplan/ — VIKTIG: Les denne FØRST for å se alle kapitler fra begge bøker
+
+
+
+pdf_fra_professor/ — Forelesningsnotater (finnes IKKE for alle kapitler)
+
+
+
+exercises/ — Øvingsoppgaver (finnes IKKE for alle kapitler)
+
+
+
+tidligere_eksamener/ — VIKTIGST: Viser eksamensstil og hva som forventes
+
+
+
+Bøker under relevante mapper (CN og DS)
+
+Viktige regler for DAT110
+
+
+
+
+
+Les semesterplanen FØRST for å se nøyaktig hvilke kapitler/seksjoner fra hver bok
+
+
+
+Professorens PDF-er dekker ikke alt — fyll inn med egen kunnskap
+
+
+
+Exercises finnes ikke for alt — lag egne øvingsoppgaver i eksamensstil
+
+
+
+CN-boken er en eldre versjon — supplér med oppdatert info der teknologien har endret seg
+
+
+
+Eksamenene har en TYPISK stil — analyser mønsteret og strukturer innholdet deretter
+
+
+
+Eksamensoppgavene er den viktigste kilden for hva studenten MÅ kunne. oppgave 2 kommer det alltid litt om en oblig, så se gjennom filene under materials/dat110/obliger/ og eksamen for å se andre typiske emner og oppgaver på eksamen.
+
+
+
 DAT109 Systemutvikling
 Eksamenformat
 Skriftlig eksamen med 4 deler:
