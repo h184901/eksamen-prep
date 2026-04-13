@@ -517,32 +517,32 @@ export default function ChapterPage() {
         <FormulaBox
           variant="gold"
           title="Kraftmoment og Newtons 2. lov"
-          latex="\\tau = rF\\sin\\phi \\qquad \\sum\\tau = I\\alpha"
+          latex="\tau = rF\sin\phi \qquad \sum\tau = I\alpha"
         />
 
-        <FormulaBox variant="gold" title="Rulling uten glidning" latex="v_{CM} = R\\omega \\qquad a_{CM} = R\\alpha" />
-        <FormulaBox variant="gold" latex="K_\\text{tot} = \\tfrac{1}{2}mv_{CM}^2 + \\tfrac{1}{2}I\\omega^2" />
+        <FormulaBox variant="gold" title="Rulling uten glidning" latex="v_{CM} = R\omega \qquad a_{CM} = R\alpha" />
+        <FormulaBox variant="gold" latex="K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2" />
 
         <FormulaBox
           variant="gold"
           title="Arbeid og effekt i rotasjon"
-          latex="W = \\tau \\Delta\\theta \\qquad P = \\tau\\omega \\qquad W_\\text{tot} = \\tfrac{1}{2}I\\omega^2 - \\tfrac{1}{2}I\\omega_0^2"
+          latex="W = \tau \Delta\theta \qquad P = \tau\omega \qquad W_\text{tot} = \tfrac{1}{2}I\omega^2 - \tfrac{1}{2}I\omega_0^2"
         />
 
-        <FormulaBox variant="gold" title="Angulært moment — partikkel" latex="\\vec{L} = \\vec{r} \\times m\\vec{v}" />
-        <FormulaBox variant="gold" title="Angulært moment — stivt legeme" latex="L = I\\omega" />
-        <FormulaBox variant="gold" latex="\\sum\\tau = \\frac{dL}{dt}" />
+        <FormulaBox variant="gold" title="Angulært moment — partikkel" latex="\vec{L} = \vec{r} \times m\vec{v}" />
+        <FormulaBox variant="gold" title="Angulært moment — stivt legeme" latex="L = I\omega" />
+        <FormulaBox variant="gold" latex="\sum\tau = \frac{dL}{dt}" />
 
         <FormulaBox
           variant="blue"
           title="Bevaring av angulært moment"
-          latex="\\sum\\tau_\\text{ext} = 0 \\implies I_1\\omega_1 = I_2\\omega_2"
+          latex="\sum\tau_\text{ext} = 0 \implies I_1\omega_1 = I_2\omega_2"
         />
 
         <FormulaBox
           variant="blue"
           title="Disk på skråplan (rulling uten glidning)"
-          latex="a_{CM} = \\frac{2}{3}g\\sin\\beta \\qquad \\mu_s \\geq \\tfrac{1}{3}\\tan\\beta"
+          latex="a_{CM} = \frac{2}{3}g\sin\beta \qquad \mu_s \geq \tfrac{1}{3}\tan\beta"
         />
       </div>
 

@@ -652,7 +652,14 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Prikkprodukt komponent for komponent:</strong></p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li><InlineLatex latex="\vec{F} = 160\hat{\imath} - 40\hat{\jmath}\;\text{N}" /> → <InlineLatex latex="F_x = 160\;\text{N},\; F_y = -40\;\text{N}" /></li>
+                <li><InlineLatex latex="\vec{s} = 14\hat{\imath} + 11\hat{\jmath}\;\text{m}" /> → <InlineLatex latex="s_x = 14\;\text{m},\; s_y = 11\;\text{m}" /></li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Arbeidet W.</p>
+              <p><strong>Strategi:</strong> Når kraft og forflytning er gitt som vektorer, bruker vi <strong>prikkproduktet</strong> for å finne arbeidet. Prikkproduktet summerer produktet av komponentene: <InlineLatex latex="W = F_x s_x + F_y s_y" />. Dette er ekvivalent med <InlineLatex latex="W = Fs\cos\varphi" />, men enklere når vi allerede har komponentene.</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
                 latex="W = \vec{F} \cdot \vec{s} = F_x s_x + F_y s_y = 160 \cdot 14 + (-40) \cdot 11"
                 variant="blue"
@@ -661,7 +668,7 @@ export default function ChapterPage() {
                 latex="W = 2240 - 440 = \underline{\underline{1{,}80\;\text{kJ}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Prikkproduktet beregnes komponent for komponent og summeres. Pass på fortegn!</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Prikkproduktet beregnes komponent for komponent og summeres. Pass på fortegn — en negativ kraftkomponent i en positiv forflytningsretning gir negativt bidrag til arbeidet.</p>
             </div>
           }
         />
@@ -786,17 +793,26 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>a) Fjærkonstant:</strong></p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Komprimering: <InlineLatex latex="x = 0{,}01\;\text{m}" /></li>
+                <li>Vekt: <InlineLatex latex="G = 600\;\text{N}" /></li>
+                <li>Fjæren starter i naturlig lengde: <InlineLatex latex="x_1 = 0" /></li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> a) Fjærkonstanten k. b) Arbeidet W ved komprimeringen.</p>
+              <p><strong>Strategi:</strong> a) I likevekt balanserer fjærkraften vekten: <InlineLatex latex="kx = G" />, løs for k. b) Arbeidet til en fjær er <InlineLatex latex="W = \tfrac{1}{2}kx^2" /> (fra integrasjon av Hookes lov). Vi bruker dette fordi kraften varierer lineært med komprimering — vi kan IKKE bare bruke W = Fx.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>a) Fjærkonstant:</strong></p>
               <FormulaBox
-                latex="k = \frac{F}{x} = \frac{600}{0{,}01} = \underline{\underline{6{,}0 \cdot 10^4\;\text{N/m}}}"
+                latex="k = \frac{G}{x} = \frac{600}{0{,}01} = \underline{\underline{6{,}0 \cdot 10^4\;\text{N/m}}}"
                 variant="gold"
               />
-              <p><strong>b) Arbeid:</strong></p>
+              <p className="text-sm"><strong>b) Arbeid utført ved komprimering:</strong></p>
               <FormulaBox
-                latex="W = \tfrac{1}{2}kx_2^2 - \tfrac{1}{2}kx_1^2 = \tfrac{1}{2} \cdot 6 \cdot 10^4 \cdot (0{,}01)^2 - 0 = \underline{\underline{3{,}0\;\text{J}}}"
+                latex="W = \tfrac{1}{2}kx^2 - \tfrac{1}{2}k \cdot 0^2 = \tfrac{1}{2} \cdot 6{,}0 \cdot 10^4 \cdot (0{,}01)^2 = \underline{\underline{3{,}0\;\text{J}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Fjærkonstanten har enhet N/m og sier hvor stiv fjæren er. Arbeidet vokser med kvadratet av komprimeringen.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Fjærkonstanten k (N/m) sier hvor stiv fjæren er. Arbeidet vokser med <em>kvadratet</em> av komprimeringen — dobbel komprimering krever fire ganger så mye arbeid. Husk: W = Fx gjelder IKKE for fjærer fordi kraften varierer.</p>
             </div>
           }
         />
@@ -890,11 +906,24 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Skyvekraft: <InlineLatex latex="F = 197\,000\;\text{N}" /></li>
+                <li>Konstant fart: <InlineLatex latex="v = 250\;\text{m/s}" /></li>
+                <li>Kraften er parallell med hastigheten (fly i rettlinjet bane)</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Motorens effekt P.</p>
+              <p><strong>Strategi:</strong> Effekt er arbeid per tid: <InlineLatex latex="P = W/t" />. Når kraften er konstant og parallell med hastigheten, får vi den nyttige snarveien <InlineLatex latex="P = Fv" />. Utledning: <InlineLatex latex="P = W/t = Fs/t = Fv" />.</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
-                latex="P = F \cdot v = 197\,000 \cdot 250 = \underline{\underline{4{,}93 \cdot 10^7\;\text{W} \approx 49{,}3\;\text{MW}}}"
+                latex="P = F \cdot v = 197\,000 \cdot 250 = 4{,}93 \cdot 10^7\;\text{W}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="P = \underline{\underline{49{,}3\;\text{MW}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> P = Fv er den raskeste veien til effekt når du kjenner kraft og fart.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> <InlineLatex latex="P = Fv" /> er en snarvei som unngår å beregne arbeid og tid separat. Merk: Konstant fart betyr at skyvekraften balanserer luftmotstanden — nettokraften er null, men motoren gjør likevel arbeid!</p>
             </div>
           }
         />
@@ -922,17 +951,30 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Arbeid (mot tyngden):</strong></p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 50\;\text{kg}" /></li>
+                <li>Høyde: <InlineLatex latex="h = 443\;\text{m}" /></li>
+                <li>Tid: <InlineLatex latex="t = 15\;\text{min} = 900\;\text{s}" /></li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Gjennomsnittlig effekt P.</p>
+              <p><strong>Strategi:</strong> Effekt er arbeid per tid: <InlineLatex latex="P = W/t" />. Arbeidet som kreves for å løfte en masse h meter er <InlineLatex latex="W = mgh" /> (arbeid mot tyngdekraften). Vi bruker gjennomsnittlig effekt fordi farten varierer underveis.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>Steg 1:</strong> Beregn arbeidet (mot tyngden):</p>
               <FormulaBox
-                latex="W = mgh = 50 \cdot 9{,}81 \cdot 443 = 2{,}17 \cdot 10^5\;\text{J}"
+                latex="W = mgh = 50 \cdot 9{,}81 \cdot 443 = 2{,}17 \cdot 10^5\;\text{J} = 217\;\text{kJ}"
                 variant="blue"
               />
-              <p><strong>Gjennomsnittlig effekt:</strong></p>
+              <p className="text-sm"><strong>Steg 2:</strong> Konverter tid og finn effekt:</p>
               <FormulaBox
-                latex="\bar{P} = \frac{W}{t} = \frac{2{,}17 \cdot 10^5}{15 \cdot 60} = \underline{\underline{241\;\text{W}}}"
+                latex="t = 15\;\text{min} = 15 \cdot 60 = 900\;\text{s}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="\bar{P} = \frac{W}{t} = \frac{217\,000}{900} = \underline{\underline{241\;\text{W}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> For bevegelse oppover kan arbeidet beregnes som mgh. Husk å konvertere tid til sekunder.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> For bevegelse oppover kan arbeidet beregnes som mgh — kun den vertikale høyden teller, ikke veien langs trappen. Husk å konvertere tid til sekunder! 241 W tilsvarer omtrent ⅓ hestekraft — imponerende for et menneske over 15 minutter.</p>
             </div>
           }
         />
@@ -1090,24 +1132,41 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>a) Bremselengde:</strong></p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 5{,}0\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 8{,}0\;\text{m/s}" /></li>
+                <li>Sluttfart: <InlineLatex latex="v_2 = 0" /> (stopper)</li>
+                <li>Friksjonstall: <InlineLatex latex="\mu_R = 0{,}30" /></li>
+                <li>Horisontal flate (tyngde og normalkraft gjør null arbeid)</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> a) Bremselengde d. b) Gjennomsnittlig effekt fra friksjon.</p>
+              <p><strong>Strategi:</strong> Friksjon er den eneste kraften som gjør arbeid (horisontal forflytning → tyngde og normalkraft er vinkelrette). Vi bruker arbeid-energi-teoremet: <InlineLatex latex="W_R = \Delta E_K" />. For del b trenger vi tiden, som vi finner via kinematikk.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>a) Bremselengde:</strong></p>
               <FormulaBox
-                latex="W_R = \Delta E_K \;\Rightarrow\; -\mu_R mg d = -\tfrac{1}{2}mv_1^2"
+                latex="W_R = \Delta E_K \;\Rightarrow\; -\mu_R mg d = 0 - \tfrac{1}{2}mv_1^2"
+                variant="blue"
+              />
+              <p className="text-sm">Massen kansellerer:</p>
+              <FormulaBox
+                latex="d = \frac{v_1^2}{2\mu_R g} = \frac{8{,}0^2}{2 \cdot 0{,}30 \cdot 9{,}81} = \frac{64}{5{,}886} = \underline{\underline{10{,}9\;\text{m}}}"
+                variant="gold"
+              />
+              <p className="text-sm"><strong>b) Tid og effekt:</strong></p>
+              <FormulaBox
+                latex="a = -\mu_R g = -0{,}30 \cdot 9{,}81 = -2{,}94\;\text{m/s}^2"
                 variant="blue"
               />
               <FormulaBox
-                latex="d = \frac{v_1^2}{2\mu_R g} = \frac{8{,}0^2}{2 \cdot 0{,}30 \cdot 9{,}81} = \underline{\underline{10{,}9\;\text{m}}}"
-                variant="gold"
-              />
-              <p><strong>b) Tid og effekt:</strong></p>
-              <FormulaBox
-                latex="a = -\mu_R g = -2{,}94\;\text{m/s}^2, \quad t = \frac{v_1}{|a|} = \frac{8{,}0}{2{,}94} = 2{,}72\;\text{s}"
+                latex="t = \frac{v_1}{|a|} = \frac{8{,}0}{2{,}94} = 2{,}72\;\text{s}"
                 variant="blue"
               />
               <FormulaBox
                 latex="\bar{P} = \frac{|W_R|}{t} = \frac{\tfrac{1}{2} \cdot 5{,}0 \cdot 8{,}0^2}{2{,}72} = \frac{160}{2{,}72} = \underline{\underline{58{,}8\;\text{W}}}"
                 variant="gold"
               />
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Bremselengden <InlineLatex latex="d = v^2/(2\mu g)" /> avhenger ikke av massen — en lett og en tung kloss med samme fart og friksjon stopper etter like lang strekning. Denne formelen er nyttig for bremsing generelt.</p>
             </div>
           }
         />
@@ -1139,16 +1198,31 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Fjærarbeid = arbeid mot tyngden:</strong></p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Fjærkonstant: <InlineLatex latex="k = 800\;\text{N/m}" /></li>
+                <li>Komprimering: <InlineLatex latex="x = 0{,}10\;\text{m}" /></li>
+                <li>Masse: <InlineLatex latex="m = 0{,}50\;\text{kg}" /></li>
+                <li>Helning: <InlineLatex latex="\theta = 30°" /></li>
+                <li>Friksjonsfritt. Start og slutt: v = 0.</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Avstand s opp skråplanet.</p>
+              <p><strong>Strategi:</strong> All elastisk potensiell energi i fjæren omgjøres til gravitasjonell potensiell energi. Energibevaring: <InlineLatex latex="\tfrac{1}{2}kx^2 = mgh = mgs\sin\theta" />. Vi bruker energi i stedet for krefter fordi fjærkraften varierer med posisjon.</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
                 latex="\tfrac{1}{2}kx^2 = mgs\sin\theta"
                 variant="blue"
               />
+              <p className="text-sm">Løser for s:</p>
               <FormulaBox
-                latex="s = \frac{kx^2}{2mg\sin\theta} = \frac{800 \cdot 0{,}10^2}{2 \cdot 0{,}50 \cdot 9{,}81 \cdot \sin 30°} = \frac{8{,}0}{4{,}905} = \underline{\underline{1{,}63\;\text{m}}}"
+                latex="s = \frac{kx^2}{2mg\sin\theta} = \frac{800 \cdot 0{,}10^2}{2 \cdot 0{,}50 \cdot 9{,}81 \cdot \sin 30°}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="s = \frac{8{,}0}{4{,}905} = \underline{\underline{1{,}63\;\text{m}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Fjærarbeidet <InlineLatex latex="\tfrac{1}{2}kx^2" /> er som en energipakke som kan omgjøres til kinetisk eller potensiell energi.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Fjærenergi <InlineLatex latex="\tfrac{1}{2}kx^2" /> fungerer som en «energipakke» som kan omgjøres til kinetisk eller potensiell energi. På skråplan er høyden <InlineLatex latex="h = s\sin\theta" /> — husk at det er den vertikale høyden som bestemmer potensiell energi, ikke buelengden.</p>
             </div>
           }
         />
@@ -1201,25 +1275,31 @@ export default function ChapterPage() {
             <div className="space-y-3">
               <p><strong>Hva vet vi?</strong></p>
               <ul className="list-disc list-inside text-sm">
-                <li><InlineLatex latex="m = 1500\;\text{kg}, \; v_0 = 72\;\text{km/h} = 20\;\text{m/s}, \; v = 0, \; s = 50\;\text{m}" /></li>
+                <li>Masse: <InlineLatex latex="m = 1500\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_0 = 72\;\text{km/h} = 20\;\text{m/s}" /></li>
+                <li>Sluttfart: <InlineLatex latex="v = 0" /></li>
+                <li>Bremsestrekning: <InlineLatex latex="s = 50\;\text{m}" /></li>
+                <li>Horisontal vei, motor koblet ut</li>
               </ul>
-
-              <p><strong>a) Via arbeid-energi-teoremet:</strong></p>
+              <p><strong>Hva skal vi finne?</strong> a) Friksjonskraften R. b) Bremsetid t.</p>
+              <p><strong>Strategi:</strong> a) Friksjon er den eneste kraften som gjør arbeid. Arbeid-energi-teoremet gir <InlineLatex latex="W_R = \Delta E_K" />. b) For tid bruker vi kinematikk med gjennomsnittsfart (konstant retardasjon).</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>a) Friksjonskraft via arbeid-energi-teoremet:</strong></p>
               <FormulaBox
-                latex="W_R = \Delta E_K = 0 - \tfrac{1}{2}mv_0^2 = -\tfrac{1}{2} \cdot 1500 \cdot 20^2 = -300\;\text{kJ}"
+                latex="W_R = \Delta E_K = \tfrac{1}{2}mv^2 - \tfrac{1}{2}mv_0^2 = 0 - \tfrac{1}{2} \cdot 1500 \cdot 20^2 = -300\;\text{kJ}"
                 variant="blue"
               />
+              <p className="text-sm">Friksjonens arbeid er også <InlineLatex latex="W_R = -R \cdot s" />, så:</p>
               <FormulaBox
                 latex="R = \frac{|W_R|}{s} = \frac{300\,000}{50} = \underline{\underline{6{,}0\;\text{kN}}}"
                 variant="gold"
               />
-
-              <p><strong>b) Tid:</strong></p>
+              <p className="text-sm"><strong>b) Bremsetid (kinematikk med konstant retardasjon):</strong></p>
               <FormulaBox
-                latex="s = \tfrac{1}{2}(v_0 + v)t \;\Rightarrow\; t = \frac{2s}{v_0} = \frac{2 \cdot 50}{20} = \underline{\underline{5{,}0\;\text{s}}}"
+                latex="s = \tfrac{1}{2}(v_0 + v)t \;\Rightarrow\; t = \frac{2s}{v_0 + v} = \frac{2 \cdot 50}{20 + 0} = \underline{\underline{5{,}0\;\text{s}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Arbeid-energi-teoremet er et alternativ til kinematikk for å finne bremsekraft. Begge metoder gir same svar!</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Arbeid-energi-teoremet gir friksjonskraften uten å trenge akselerasjonen. Begge metoder (kinematikk og energi) gir same svar, men energimetoden er ofte raskere. Husk å konvertere km/h → m/s (del på 3,6)!</p>
             </div>
           }
         />

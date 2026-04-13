@@ -481,16 +481,30 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Energibevaring</strong> (v₂ = 0 ved topp, y₁ = 0):</p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 0{,}145\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 20\;\text{m/s}" /> (oppover)</li>
+                <li>Starthøyde: <InlineLatex latex="y_1 = 0" /></li>
+                <li>Kun tyngden virker (ingen luftmotstand)</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Maksimal høyde <InlineLatex latex="y_2" />.</p>
+              <p><strong>Strategi:</strong> Ved maks høyde er all kinetisk energi omgjort til potensiell energi (<InlineLatex latex="v_2 = 0" />). Vi bruker energibevaring: <InlineLatex latex="E_{K1} + E_{P1} = E_{K2} + E_{P2}" />. Massen kansellerer — maks høyde avhenger kun av startfart!</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
-                latex="\tfrac{1}{2}mv_1^2 + 0 = 0 + mgy_2 \;\Rightarrow\; y_2 = \frac{v_1^2}{2g}"
+                latex="\tfrac{1}{2}mv_1^2 + mgy_1 = \tfrac{1}{2}mv_2^2 + mgy_2"
+                variant="blue"
+              />
+              <p className="text-sm">Med <InlineLatex latex="v_2 = 0" /> og <InlineLatex latex="y_1 = 0" />:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}mv_1^2 = mgy_2 \;\Rightarrow\; y_2 = \frac{v_1^2}{2g}"
                 variant="blue"
               />
               <FormulaBox
-                latex="y_2 = \frac{20^2}{2 \cdot 9{,}81} = \underline{\underline{20{,}4\;\text{m}}}"
+                latex="y_2 = \frac{20^2}{2 \cdot 9{,}81} = \frac{400}{19{,}62} = \underline{\underline{20{,}4\;\text{m}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Massen kansellerer — maks høyde avhenger kun av startfarten! Formelen <InlineLatex latex="h = v^2/(2g)" /> er en nyttig snarvei.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Massen kansellerer — maks høyde avhenger kun av startfarten! Formelen <InlineLatex latex="h = v^2/(2g)" /> er en nyttig snarvei for alle problemer med vertikalt kast. Energibevaring er raskere enn kinematikk her.</p>
             </div>
           }
         />
@@ -580,16 +594,32 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Nøkkelinnsikt:</strong> Ved maks høyde er <InlineLatex latex="v_y = 0" />, men <InlineLatex latex="v_x = v_0\cos 60° = 10\;\text{m/s}" /> er bevart.</p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 0{,}145\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_0 = 20\;\text{m/s}" /></li>
+                <li>Kastvinkel: <InlineLatex latex="\alpha_0 = 60°" /></li>
+                <li>Starthøyde: <InlineLatex latex="y_0 = 0" /></li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Maksimal høyde h.</p>
+              <p><strong>Strategi:</strong> Ved maks høyde er den vertikale hastighetskomponenten null (<InlineLatex latex="v_y = 0" />), men den horisontale er bevart: <InlineLatex latex="v_x = v_0\cos\alpha_0" />. Farten i toppen er altså IKKE null! Vi bruker energibevaring med <InlineLatex latex="v_2 = v_0\cos\alpha_0" />.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>Steg 1:</strong> Fart i toppunktet (kun horisontal komponent):</p>
               <FormulaBox
-                latex="\tfrac{1}{2}mv_0^2 = \tfrac{1}{2}mv_2^2 + mgh"
+                latex="v_2 = v_0\cos 60° = 20 \cdot 0{,}5 = 10\;\text{m/s}"
                 variant="blue"
               />
+              <p className="text-sm"><strong>Steg 2:</strong> Energibevaring:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}mv_0^2 + 0 = \tfrac{1}{2}mv_2^2 + mgh"
+                variant="blue"
+              />
+              <p className="text-sm">Massen kansellerer:</p>
               <FormulaBox
                 latex="h = \frac{v_0^2 - v_2^2}{2g} = \frac{20^2 - 10^2}{2 \cdot 9{,}81} = \frac{300}{19{,}62} = \underline{\underline{15{,}3\;\text{m}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Energimetoden gir maks høyde for prosjektiler UTEN å trenge kinematikk-formler! Husk at farten ved toppen ikke er null — den horisontale komponenten er bevart.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Energimetoden gir maks høyde for prosjektiler UTEN kinematikk-formler! Den kritiske innsikten er at farten ved toppen ikke er null — den horisontale komponenten er bevart. Sammenlign med rakt kast opp (20,4 m): skrått kast når lavere fordi noe av energien «brukes» til horisontal bevegelse.</p>
             </div>
           }
         />
@@ -618,16 +648,30 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Energibevaring:</strong> Normalkraften gjør null arbeid (vinkelrett), så kun tyngden teller.</p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 25{,}0\;\text{kg}" /></li>
+                <li>Radius (= høydeforskjell): <InlineLatex latex="R = 3{,}0\;\text{m}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 0" /> (slippes fra ro)</li>
+                <li>Friksjonsfritt</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Farten <InlineLatex latex="v_2" /> i bunnen av rampen.</p>
+              <p><strong>Strategi:</strong> Normalkraften er alltid vinkelrett på bevegelsen og gjør null arbeid. Uten friksjon er det kun tyngden som gjør arbeid, så vi bruker energibevaring. Høydeforskjellen er R (fra topp til bunn av kvartsirkelen). Merk: formen på banen spiller ingen rolle — kun høydeforskjellen!</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
-                latex="mgR = \tfrac{1}{2}mv_2^2 \;\Rightarrow\; v_2 = \sqrt{2gR}"
+                latex="E_{K1} + E_{P1} = E_{K2} + E_{P2}"
+                variant="blue"
+              />
+              <p className="text-sm">Med <InlineLatex latex="v_1 = 0" />, <InlineLatex latex="y_1 = R" />, <InlineLatex latex="y_2 = 0" />:</p>
+              <FormulaBox
+                latex="0 + mgR = \tfrac{1}{2}mv_2^2 + 0 \;\Rightarrow\; v_2 = \sqrt{2gR}"
                 variant="blue"
               />
               <FormulaBox
-                latex="v_2 = \sqrt{2 \cdot 9{,}81 \cdot 3{,}0} = \underline{\underline{7{,}67\;\text{m/s}}}"
+                latex="v_2 = \sqrt{2 \cdot 9{,}81 \cdot 3{,}0} = \sqrt{58{,}9} = \underline{\underline{7{,}67\;\text{m/s}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Energibevaring langs kurver fungerer fordi normalkraften aldri gjør arbeid. Farten avhenger kun av høydeforskjellen, ikke formen på kurven!</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Energibevaring langs kurver fungerer fordi normalkraften aldri gjør arbeid. Farten avhenger kun av høydeforskjellen, ikke formen på kurven! Formelen <InlineLatex latex="v = \sqrt{2gh}" /> dukker opp igjen og igjen — lær den utenat.</p>
             </div>
           }
         />
@@ -656,21 +700,30 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 25{,}0\;\text{kg}" /></li>
+                <li>Radius: <InlineLatex latex="R = 3{,}0\;\text{m}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 0" /></li>
+                <li>Fart i bunn: <InlineLatex latex="v_2 = 6{,}0\;\text{m/s}" /> (lavere enn 7,67 m/s uten friksjon)</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Arbeidet gjort av friksjon <InlineLatex latex="W_R" />.</p>
+              <p><strong>Strategi:</strong> Vi bruker den utvidede energiligningen som inkluderer arbeid fra ikke-konservative krefter: <InlineLatex latex="E_{K1} + E_{P1} + W_{\text{andre}} = E_{K2} + E_{P2}" />. Friksjon er den eneste «andre» kraften, så <InlineLatex latex="W_{\text{andre}} = W_R" />.</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
                 latex="0 + mgR + W_R = \tfrac{1}{2}mv_2^2 + 0"
                 variant="blue"
               />
+              <p className="text-sm">Løser for <InlineLatex latex="W_R" />:</p>
               <FormulaBox
-                latex="W_R = \tfrac{1}{2}mv_2^2 - mgR = \tfrac{1}{2} \cdot 25 \cdot 6^2 - 25 \cdot 9{,}81 \cdot 3{,}0"
+                latex="W_R = \tfrac{1}{2}mv_2^2 - mgR = \tfrac{1}{2} \cdot 25 \cdot 6{,}0^2 - 25 \cdot 9{,}81 \cdot 3{,}0"
                 variant="blue"
               />
               <FormulaBox
                 latex="W_R = 450 - 735{,}8 = \underline{\underline{-286\;\text{J}}}"
                 variant="gold"
               />
-              <p className="text-sm text-[var(--muted)]">
-                Friksjonen har fjernet 286 J av energien som ellers ville blitt kinetisk energi.
-              </p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Negativt arbeid fra friksjon betyr at energi er fjernet fra systemet (omgjort til varme). Sammenlign: uten friksjon fikk vi 7,67 m/s (kinetisk energi 735 J), med friksjon bare 6,0 m/s (450 J). Differansen 286 J ble til varme.</p>
             </div>
           }
         />
@@ -975,14 +1028,32 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Pendellengde: <InlineLatex latex="L = 2{,}0\;\text{m}" /></li>
+                <li>Startvinkel: <InlineLatex latex="\theta = 40°" /> (med vertikalen)</li>
+                <li>Masse: <InlineLatex latex="m = 0{,}50\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 0" /> (slippes fra ro)</li>
+                <li>Friksjonsfritt</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Farten v i det laveste punktet.</p>
+              <p><strong>Strategi:</strong> Snorkraften er alltid vinkelrett på bevegelsen og gjør null arbeid. Kun tyngden gjør arbeid, så vi bruker energibevaring. Nøkkelen er å finne høydeforskjellen: <InlineLatex latex="h = L - L\cos\theta = L(1 - \cos\theta)" />. Geometrisk betyr dette at pendelmassen faller fra en høyde h over det laveste punktet.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>Steg 1:</strong> Finn høydeforskjellen:</p>
               <FormulaBox
                 latex="h = L(1 - \cos\theta) = 2{,}0(1 - \cos 40°) = 2{,}0 \cdot 0{,}234 = 0{,}468\;\text{m}"
                 variant="blue"
               />
+              <p className="text-sm"><strong>Steg 2:</strong> Energibevaring (<InlineLatex latex="v_1 = 0" />, nullnivå i bunn):</p>
               <FormulaBox
-                latex="v = \sqrt{2gh} = \sqrt{2 \cdot 9{,}81 \cdot 0{,}468} = \underline{\underline{3{,}03\;\text{m/s}}}"
+                latex="mgh = \tfrac{1}{2}mv^2 \;\Rightarrow\; v = \sqrt{2gh}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="v = \sqrt{2 \cdot 9{,}81 \cdot 0{,}468} = \sqrt{9{,}19} = \underline{\underline{3{,}03\;\text{m/s}}}"
                 variant="gold"
               />
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Pendelen er et klassisk energibevaringsproblem. Høydeformelen <InlineLatex latex="h = L(1 - \cos\theta)" /> dukker opp i mange oppgaver — lær den! Merk at massen kansellerer, så farten avhenger kun av L og θ.</p>
             </div>
           }
         />
@@ -1032,20 +1103,35 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
-              <p><strong>Energibevaring</strong> (nullnivå ved kast, y<sub>kurv</sub> = 0,9 m):</p>
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 0{,}600\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_0 = 7{,}0\;\text{m/s}" /></li>
+                <li>Kastvinkel: <InlineLatex latex="50°" /></li>
+                <li>Kasthøyde: <InlineLatex latex="2{,}1\;\text{m}" /></li>
+                <li>Kurven er <InlineLatex latex="0{,}9\;\text{m}" /> høyere enn kasthøyden: <InlineLatex latex="\Delta y = 0{,}9\;\text{m}" /></li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Kinetisk energi <InlineLatex latex="E_K" /> når ballen treffer kurven.</p>
+              <p><strong>Strategi:</strong> Energibevaring! Vi trenger ikke vite banen eller farten — kun høydeforskjellen. Vi setter kasthøyden som nullnivå. All energi er kinetisk ved start, og ved kurven er noe omgjort til potensiell energi.</p>
+              <p><strong>Løsning:</strong></p>
               <FormulaBox
-                latex="E_{K,\text{kurv}} + mgy_{\text{kurv}} = \tfrac{1}{2}mv_0^2 + 0"
+                latex="E_{K,\text{start}} + E_{P,\text{start}} = E_{K,\text{kurv}} + E_{P,\text{kurv}}"
+                variant="blue"
+              />
+              <p className="text-sm">Med nullnivå ved kast (<InlineLatex latex="y_{\text{start}} = 0" />, <InlineLatex latex="y_{\text{kurv}} = 0{,}9\;\text{m}" />):</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}mv_0^2 + 0 = E_{K,\text{kurv}} + mg \cdot 0{,}9"
                 variant="blue"
               />
               <FormulaBox
-                latex="E_{K,\text{kurv}} = \tfrac{1}{2}mv_0^2 - mgy_{\text{kurv}} = \tfrac{1}{2} \cdot 0{,}600 \cdot 7{,}0^2 - 0{,}600 \cdot 9{,}81 \cdot 0{,}9"
+                latex="E_{K,\text{kurv}} = \tfrac{1}{2} \cdot 0{,}600 \cdot 7{,}0^2 - 0{,}600 \cdot 9{,}81 \cdot 0{,}9"
                 variant="blue"
               />
               <FormulaBox
                 latex="E_{K,\text{kurv}} = 14{,}7 - 5{,}3 = \underline{\underline{9{,}4\;\text{J}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Energimetoden gir kinetisk energi uten å trenge kinematikk. Vi trenger ikke vite banen — kun høydeforskjellen!</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Energimetoden gir kinetisk energi uten å trenge kinematikkens baneberegning. Vi trenger ikke vite kastvinkelen eller den horisontale avstanden — kun høydeforskjellen teller! Dette er mye raskere enn å beregne banen med kinematikk.</p>
             </div>
           }
         />
@@ -1137,19 +1223,42 @@ export default function ChapterPage() {
           ]}
           solution={
             <div className="space-y-3">
+              <p><strong>Hva vet vi?</strong></p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Masse: <InlineLatex latex="m = 80{,}0\;\text{kg}" /></li>
+                <li>Bakkelengde: <InlineLatex latex="s = 250\;\text{m}" /></li>
+                <li>Helning: <InlineLatex latex="\theta = 25°" /></li>
+                <li>Startfart: <InlineLatex latex="v_0 = 0" /></li>
+                <li>Faktisk sluttfart: <InlineLatex latex="v = 50\;\text{km/h} = 13{,}9\;\text{m/s}" /></li>
+                <li>Fart uten friksjon ville vært 45,5 m/s</li>
+              </ul>
+              <p><strong>Hva skal vi finne?</strong> Gjennomsnittlig friksjonskraft R langs bakken.</p>
+              <p><strong>Strategi:</strong> Bruk utvidet energiligning: <InlineLatex latex="E_{K1} + E_{P1} + W_R = E_{K2} + E_{P2}" />. Finn <InlineLatex latex="W_R" /> først, deretter <InlineLatex latex="R = |W_R|/s" />. Høyden er <InlineLatex latex="h = s\sin\theta" />.</p>
+              <p><strong>Løsning:</strong></p>
+              <p className="text-sm"><strong>Steg 1:</strong> Konverter og finn høyden:</p>
+              <FormulaBox
+                latex="v = 50\;\text{km/h} = 13{,}9\;\text{m/s}, \quad h = 250\sin 25° = 105{,}7\;\text{m}"
+                variant="blue"
+              />
+              <p className="text-sm"><strong>Steg 2:</strong> Utvidet energiligning (nullnivå i bunn):</p>
               <FormulaBox
                 latex="0 + mgs\sin 25° + W_R = \tfrac{1}{2}mv^2 + 0"
                 variant="blue"
               />
               <FormulaBox
-                latex="W_R = \tfrac{1}{2}mv^2 - mgs\sin 25° = \tfrac{1}{2} \cdot 80 \cdot 13{,}9^2 - 80 \cdot 9{,}81 \cdot 250 \cdot \sin 25° = -75{,}2\;\text{kJ}"
+                latex="W_R = \tfrac{1}{2}mv^2 - mgs\sin 25° = \tfrac{1}{2} \cdot 80 \cdot 13{,}9^2 - 80 \cdot 9{,}81 \cdot 250 \cdot \sin 25°"
                 variant="blue"
               />
+              <FormulaBox
+                latex="W_R = 7\,728 - 82\,929 = -75\,200\;\text{J} = -75{,}2\;\text{kJ}"
+                variant="blue"
+              />
+              <p className="text-sm"><strong>Steg 3:</strong> Finn friksjonskraften:</p>
               <FormulaBox
                 latex="R = \frac{|W_R|}{s} = \frac{75\,200}{250} = \underline{\underline{301\;\text{N}}}"
                 variant="gold"
               />
-              <p className="mt-2"><strong>Hva lærte vi?</strong> Kombinasjon av energibevaring og arbeid-energi. Den store forskjellen mellom 164 km/h (uten friksjon) og 50 km/h (med) viser at friksjon har enormt stor effekt over lange strekninger.</p>
+              <p className="mt-2"><strong>Hva lærte vi?</strong> Kombinasjon av energibevaring og arbeid-energi gir friksjonskraften. Den enorme forskjellen mellom 164 km/h (uten friksjon) og 50 km/h (med) viser at friksjon fjerner mesteparten av energien over lange strekninger. En friksjonskraft på 301 N høres lite ut, men over 250 m gjør den 75 kJ negativt arbeid!</p>
             </div>
           }
         />

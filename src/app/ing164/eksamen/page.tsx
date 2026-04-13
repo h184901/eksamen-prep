@@ -181,7 +181,7 @@ export default function EksamenPage() {
           {show("var2023", "kinematikk") && (
             <ExerciseCard number={1} title="Basketballkast — prosjektilbevegelse" difficulty="vanskelig" source="Vår 2023, Oppgave 1"
               problem={<div>
-                <p className="mb-2">En basketballspiller kaster ballen (m = 600 g) mot kurven med utgangsvinkel <InlineLatex latex="\\theta = 50°" />. Avstander: horisontalt 4 m, vertikalt fra 2,1 m til 3,0 m.</p>
+                <p className="mb-2">En basketballspiller kaster ballen (m = 600 g) mot kurven med utgangsvinkel <InlineLatex latex="\theta = 50°" />. Avstander: horisontalt 4 m, vertikalt fra 2,1 m til 3,0 m.</p>
                 <p className="mb-1">a) Vis at startfarten <InlineLatex latex="v_0 = 7{,}0" /> m/s hvis ballen treffer sentrum av kurven.</p>
                 <p className="mb-1">b) Hva er ballens kinetiske energi når den treffer kurven?</p>
                 <p className="mb-1">c) Hva er ballens maksimale høyde over bakken?</p>
@@ -193,19 +193,19 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Vis v₀ = 7,0 m/s:</p>
-                <p><InlineLatex latex="x = v_0\\cos 50° \\cdot t \\implies t = \\frac{x}{v_0\\cos 50°}" /></p>
-                <p><InlineLatex latex="y = v_0\\sin 50°\\cdot t - \\tfrac{1}{2}gt^2" />. Sett inn <InlineLatex latex="x = 4" /> m, <InlineLatex latex="y = 0{,}9" /> m:</p>
-                <p><InlineLatex latex="y = x\\tan 50° - \\frac{gx^2}{2v_0^2\\cos^2 50°}" /></p>
-                <p><InlineLatex latex="v_0 = \\sqrt{\\frac{-gx^2}{2\\cos^2 50°(y - x\\tan 50°)}} = 7{,}0 \\text{ m/s}" /></p>
+                <p><InlineLatex latex="x = v_0\cos 50° \cdot t \implies t = \frac{x}{v_0\cos 50°}" /></p>
+                <p><InlineLatex latex="y = v_0\sin 50°\cdot t - \tfrac{1}{2}gt^2" />. Sett inn <InlineLatex latex="x = 4" /> m, <InlineLatex latex="y = 0{,}9" /> m:</p>
+                <p><InlineLatex latex="y = x\tan 50° - \frac{gx^2}{2v_0^2\cos^2 50°}" /></p>
+                <p><InlineLatex latex="v_0 = \sqrt{\frac{-gx^2}{2\cos^2 50°(y - x\tan 50°)}} = 7{,}0 \text{ m/s}" /></p>
                 <p className="font-semibold mt-2">b) Kinetisk energi:</p>
-                <p>Energibevaring: <InlineLatex latex="E_K = \\tfrac{1}{2}mv_0^2 + mg(y_0 - y) = \\tfrac{1}{2}(0{,}6)(7{,}0)^2 + 0{,}6(9{,}81)(0 - 0{,}9) = 14{,}7 - 5{,}3 = 9{,}4 \\text{ J}" /></p>
+                <p>Energibevaring: <InlineLatex latex="E_K = \tfrac{1}{2}mv_0^2 + mg(y_0 - y) = \tfrac{1}{2}(0{,}6)(7{,}0)^2 + 0{,}6(9{,}81)(0 - 0{,}9) = 14{,}7 - 5{,}3 = 9{,}4 \text{ J}" /></p>
                 <p className="font-semibold mt-2">c) Maks høyde:</p>
-                <p>Ved maks høyde: <InlineLatex latex="v_y = 0 \\implies t = \\frac{v_0\\sin 50°}{g} = 0{,}547 \\text{ s}" /></p>
-                <p><InlineLatex latex="y_\\text{max} = v_{0y}t - \\tfrac{1}{2}gt^2 = 1{,}47 \\text{ m over utgangsposisjon}" /></p>
-                <p>Over bakken: <InlineLatex latex="1{,}47 + 2{,}1 = 3{,}6 \\text{ m}" /></p>
+                <p>Ved maks høyde: <InlineLatex latex="v_y = 0 \implies t = \frac{v_0\sin 50°}{g} = 0{,}547 \text{ s}" /></p>
+                <p><InlineLatex latex="y_\text{max} = v_{0y}t - \tfrac{1}{2}gt^2 = 1{,}47 \text{ m over utgangsposisjon}" /></p>
+                <p>Over bakken: <InlineLatex latex="1{,}47 + 2{,}1 = 3{,}6 \text{ m}" /></p>
                 <p className="font-semibold mt-2">d) Kraftimpuls:</p>
-                <p><InlineLatex latex="J = m(v_x' - v_{0x}) = 0{,}6(-4{,}0 - 5{,}0) = -5{,}4 \\text{ N·s}" /></p>
-                <p><InlineLatex latex="\\bar{F} = \\frac{J}{\\Delta t} = \\frac{-5{,}4}{0{,}15} = -36 \\text{ N}" /> (retning: mot venstre)</p>
+                <p><InlineLatex latex="J = m(v_x' - v_{0x}) = 0{,}6(-4{,}0 - 5{,}0) = -5{,}4 \text{ N·s}" /></p>
+                <p><InlineLatex latex="\bar{F} = \frac{J}{\Delta t} = \frac{-5{,}4}{0{,}15} = -36 \text{ N}" /> (retning: mot venstre)</p>
               </div>}
             />
           )}
@@ -213,7 +213,7 @@ export default function EksamenPage() {
           {show("var2023", "krefter") && (
             <ExerciseCard number={2} title="Kranbil og container — krefter og arbeid" difficulty="vanskelig" source="Vår 2023, Oppgave 2"
               problem={<div>
-                <p className="mb-2">En kranbil sleeper en container (1000 kg) med konstant fart. <InlineLatex latex="\\mu_k = 0{,}65" />.</p>
+                <p className="mb-2">En kranbil sleeper en container (1000 kg) med konstant fart. <InlineLatex latex="\mu_k = 0{,}65" />.</p>
                 <p className="mb-1">a) Vinkel vaier-bakke = 25°. Finn snordrag og arbeid over 15 m.</p>
                 <p className="mb-1">b) Finn arbeid av kranbil og friksjonskraft over 15 m.</p>
                 <p className="mb-1">c) Hvilken vinkel gir minst snordrag?</p>
@@ -225,18 +225,18 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Snordrag:</p>
-                <p><InlineLatex latex="\\sum F_x = 0: F\\cos 25° - \\mu_k N = 0" />,  <InlineLatex latex="\\sum F_y = 0: N + F\\sin 25° - mg = 0" /></p>
-                <p><InlineLatex latex="N = mg - F\\sin 25°" /></p>
-                <p><InlineLatex latex="F(\\cos 25° + \\mu\\sin 25°) = \\mu mg \\implies F = \\frac{0{,}65 \\times 1000 \\times 9{,}81}{\\cos 25° + 0{,}65\\sin 25°} = 5{,}4 \\text{ kN}" /></p>
+                <p><InlineLatex latex="\sum F_x = 0: F\cos 25° - \mu_k N = 0" />,  <InlineLatex latex="\sum F_y = 0: N + F\sin 25° - mg = 0" /></p>
+                <p><InlineLatex latex="N = mg - F\sin 25°" /></p>
+                <p><InlineLatex latex="F(\cos 25° + \mu\sin 25°) = \mu mg \implies F = \frac{0{,}65 \times 1000 \times 9{,}81}{\cos 25° + 0{,}65\sin 25°} = 5{,}4 \text{ kN}" /></p>
                 <p className="font-semibold mt-2">b) Arbeid:</p>
-                <p><InlineLatex latex="W_F = F \\cdot s \\cdot \\cos 25° = 5400 \\times 15 \\times \\cos 25° = 73 \\text{ kJ}" /></p>
-                <p><InlineLatex latex="R = \\mu(mg - F\\sin 25°) = 4{,}9 \\text{ kN}" />,  <InlineLatex latex="W_R = -R \\cdot s = -73 \\text{ kJ}" /></p>
+                <p><InlineLatex latex="W_F = F \cdot s \cdot \cos 25° = 5400 \times 15 \times \cos 25° = 73 \text{ kJ}" /></p>
+                <p><InlineLatex latex="R = \mu(mg - F\sin 25°) = 4{,}9 \text{ kN}" />,  <InlineLatex latex="W_R = -R \cdot s = -73 \text{ kJ}" /></p>
                 <p className="font-semibold mt-2">c) Optimal vinkel:</p>
-                <p><InlineLatex latex="F = \\frac{\\mu mg}{\\cos\\alpha + \\mu\\sin\\alpha}" />. Minimum F når nevner er maks: <InlineLatex latex="\\frac{d}{d\\alpha}(\\cos\\alpha+\\mu\\sin\\alpha)=0" /></p>
-                <p><InlineLatex latex="\\alpha = \\arctan\\mu = \\arctan(0{,}65) = 33°" /></p>
+                <p><InlineLatex latex="F = \frac{\mu mg}{\cos\alpha + \mu\sin\alpha}" />. Minimum F når nevner er maks: <InlineLatex latex="\frac{d}{d\alpha}(\cos\alpha+\mu\sin\alpha)=0" /></p>
+                <p><InlineLatex latex="\alpha = \arctan\mu = \arctan(0{,}65) = 33°" /></p>
                 <p className="font-semibold mt-2">d) Etter ryking:</p>
-                <p><InlineLatex latex="a = -\\mu g = -0{,}65 \\times 9{,}81 = -6{,}4 \\text{ m/s}^2" /></p>
-                <p><InlineLatex latex="s = \\frac{v^2 - v_0^2}{2a} = \\frac{0 - (2{,}5)^2}{2(-6{,}4)} = 0{,}49 \\text{ m}" /></p>
+                <p><InlineLatex latex="a = -\mu g = -0{,}65 \times 9{,}81 = -6{,}4 \text{ m/s}^2" /></p>
+                <p><InlineLatex latex="s = \frac{v^2 - v_0^2}{2a} = \frac{0 - (2{,}5)^2}{2(-6{,}4)} = 0{,}49 \text{ m}" /></p>
               </div>}
             />
           )}
@@ -256,19 +256,19 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Treghetsmoment:</p>
-                <p>Hvert panel er en stav om enden: <InlineLatex latex="I_1 = \\frac{1}{3}Ma^2 = \\frac{1}{3}(60)(1{,}2)^2 = 28{,}8 \\text{ kg·m}^2" /></p>
-                <p><InlineLatex latex="I_\\text{tot} = 4 \\times 28{,}8 = 115 \\text{ kg·m}^2" /></p>
+                <p>Hvert panel er en stav om enden: <InlineLatex latex="I_1 = \frac{1}{3}Ma^2 = \frac{1}{3}(60)(1{,}2)^2 = 28{,}8 \text{ kg·m}^2" /></p>
+                <p><InlineLatex latex="I_\text{tot} = 4 \times 28{,}8 = 115 \text{ kg·m}^2" /></p>
                 <p className="font-semibold mt-2">b) Vinkelfart:</p>
-                <p><InlineLatex latex="\\tau = F \\cdot r \\cdot \\sin 75° = 90 \\times 0{,}8 \\times \\sin 75° = 69{,}5 \\text{ N·m}" /></p>
-                <p><InlineLatex latex="\\alpha = \\frac{\\tau}{I} = \\frac{69{,}5}{115} = 0{,}604 \\text{ rad/s}^2" /></p>
-                <p><InlineLatex latex="\\omega = \\omega_0 + \\alpha t = 0 + 0{,}604 \\times 3{,}0 = 1{,}81 \\text{ rad/s}" /></p>
+                <p><InlineLatex latex="\tau = F \cdot r \cdot \sin 75° = 90 \times 0{,}8 \times \sin 75° = 69{,}5 \text{ N·m}" /></p>
+                <p><InlineLatex latex="\alpha = \frac{\tau}{I} = \frac{69{,}5}{115} = 0{,}604 \text{ rad/s}^2" /></p>
+                <p><InlineLatex latex="\omega = \omega_0 + \alpha t = 0 + 0{,}604 \times 3{,}0 = 1{,}81 \text{ rad/s}" /></p>
                 <p className="font-semibold mt-2">c) Energi og angulært moment:</p>
-                <p><InlineLatex latex="E_K = \\tfrac{1}{2}I\\omega^2 = \\tfrac{1}{2}(115)(1{,}81)^2 = 189 \\text{ J}" /></p>
-                <p><InlineLatex latex="L = I\\omega = 115 \\times 1{,}81 = 209 \\text{ kg·m}^2\\text{/s}" /></p>
+                <p><InlineLatex latex="E_K = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(115)(1{,}81)^2 = 189 \text{ J}" /></p>
+                <p><InlineLatex latex="L = I\omega = 115 \times 1{,}81 = 209 \text{ kg·m}^2\text{/s}" /></p>
                 <p className="font-semibold mt-2">d) Kule fester seg (L bevart):</p>
-                <p><InlineLatex latex="L_\\text{før} = mv_0 r\\sin 75° = 0{,}010 \\times 300 \\times 0{,}8 \\times \\sin 75° = 2{,}32 \\text{ kg·m}^2\\text{/s}" /></p>
-                <p><InlineLatex latex="L_\\text{etter} = (I + mr^2)\\omega" /></p>
-                <p><InlineLatex latex="\\omega = \\frac{2{,}32}{115 + 0{,}010(0{,}8)^2} \\approx 0{,}020 \\text{ rad/s}" /></p>
+                <p><InlineLatex latex="L_\text{før} = mv_0 r\sin 75° = 0{,}010 \times 300 \times 0{,}8 \times \sin 75° = 2{,}32 \text{ kg·m}^2\text{/s}" /></p>
+                <p><InlineLatex latex="L_\text{etter} = (I + mr^2)\omega" /></p>
+                <p><InlineLatex latex="\omega = \frac{2{,}32}{115 + 0{,}010(0{,}8)^2} \approx 0{,}020 \text{ rad/s}" /></p>
               </div>}
             />
           )}
@@ -302,22 +302,22 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Tid og avstand:</p>
-                <p><InlineLatex latex="v_{0x} = 65\\cos 35° = 53{,}24 \\text{ m/s}, \\quad v_{0y} = 65\\sin 35° = 37{,}28 \\text{ m/s}" /></p>
-                <p><InlineLatex latex="0 = 115 + 37{,}28t - 4{,}905t^2 \\implies t = 9{,}96 \\text{ s}" /></p>
-                <p><InlineLatex latex="X = v_{0x} \\cdot t = 53{,}24 \\times 9{,}96 = 530 \\text{ m}" /></p>
+                <p><InlineLatex latex="v_{0x} = 65\cos 35° = 53{,}24 \text{ m/s}, \quad v_{0y} = 65\sin 35° = 37{,}28 \text{ m/s}" /></p>
+                <p><InlineLatex latex="0 = 115 + 37{,}28t - 4{,}905t^2 \implies t = 9{,}96 \text{ s}" /></p>
+                <p><InlineLatex latex="X = v_{0x} \cdot t = 53{,}24 \times 9{,}96 = 530 \text{ m}" /></p>
                 <p className="font-semibold mt-2">b) Fart ved treff:</p>
-                <p><InlineLatex latex="v_x = 53{,}24 \\text{ m/s}, \\quad v_y = 37{,}28 - 9{,}81(9{,}96) = -60{,}43 \\text{ m/s}" /></p>
-                <p><InlineLatex latex="v = \\sqrt{53{,}24^2 + 60{,}43^2} = 80{,}5 \\text{ m/s}" /></p>
-                <p><InlineLatex latex="\\theta = \\arctan\\frac{|v_y|}{v_x} = 48{,}6°" /> under horisontalen</p>
+                <p><InlineLatex latex="v_x = 53{,}24 \text{ m/s}, \quad v_y = 37{,}28 - 9{,}81(9{,}96) = -60{,}43 \text{ m/s}" /></p>
+                <p><InlineLatex latex="v = \sqrt{53{,}24^2 + 60{,}43^2} = 80{,}5 \text{ m/s}" /></p>
+                <p><InlineLatex latex="\theta = \arctan\frac{|v_y|}{v_x} = 48{,}6°" /> under horisontalen</p>
                 <p className="font-semibold mt-2">c) Maks høyde:</p>
-                <p><InlineLatex latex="t_\\text{topp} = \\frac{v_{0y}}{g} = 3{,}8 \\text{ s}" /></p>
-                <p><InlineLatex latex="h_\\text{max} = 115 + 37{,}28(3{,}8) - \\tfrac{1}{2}(9{,}81)(3{,}8)^2 = 186 \\text{ m}" /></p>
+                <p><InlineLatex latex="t_\text{topp} = \frac{v_{0y}}{g} = 3{,}8 \text{ s}" /></p>
+                <p><InlineLatex latex="h_\text{max} = 115 + 37{,}28(3{,}8) - \tfrac{1}{2}(9{,}81)(3{,}8)^2 = 186 \text{ m}" /></p>
                 <p className="font-semibold mt-2">d) Sprengning i høyeste punkt:</p>
                 <p>I toppen: <InlineLatex latex="v_y = 0" />, kun <InlineLatex latex="v_x = v_{0x}" />. Bevaring av <InlineLatex latex="p" />:</p>
-                <p><InlineLatex latex="m \\cdot v_{0x} = \\frac{m}{2}\\cdot 0 + \\frac{m}{2}\\cdot v_x' \\implies v_x' = 2v_{0x} = 106{,}5 \\text{ m/s}" /></p>
-                <p>Del 2 starter i <InlineLatex latex="h = 186 \\text{ m}" /> med <InlineLatex latex="v_y = 0" />, <InlineLatex latex="v_x = 106{,}5" /> m/s</p>
-                <p>Faller: <InlineLatex latex="t = \\sqrt{\\frac{2 \\times 186}{9{,}81}} = 6{,}16 \\text{ s}" /></p>
-                <p><InlineLatex latex="X = x_0 + v_x t = 202 + 106{,}5 \\times 6{,}16 = 858 \\text{ m}" /> fra klippen</p>
+                <p><InlineLatex latex="m \cdot v_{0x} = \frac{m}{2}\cdot 0 + \frac{m}{2}\cdot v_x' \implies v_x' = 2v_{0x} = 106{,}5 \text{ m/s}" /></p>
+                <p>Del 2 starter i <InlineLatex latex="h = 186 \text{ m}" /> med <InlineLatex latex="v_y = 0" />, <InlineLatex latex="v_x = 106{,}5" /> m/s</p>
+                <p>Faller: <InlineLatex latex="t = \sqrt{\frac{2 \times 186}{9{,}81}} = 6{,}16 \text{ s}" /></p>
+                <p><InlineLatex latex="X = x_0 + v_x t = 202 + 106{,}5 \times 6{,}16 = 858 \text{ m}" /> fra klippen</p>
               </div>}
             />
           )}
@@ -340,17 +340,17 @@ export default function EksamenPage() {
                 <p><strong>Elastisk støt:</strong> Kinetisk energi er bevart. Bevegelsesmengde bevart.</p>
                 <p><strong>Fullkomment uelastisk:</strong> Legemene henger sammen etter støtet. Bevegelsesmengde bevart, K ikke bevart.</p>
                 <p className="font-semibold mt-2">b) Bremsing:</p>
-                <p><InlineLatex latex="v_0 = 72 \\text{ km/h} = 20 \\text{ m/s}" /></p>
-                <p><InlineLatex latex="a = \\frac{v^2-v_0^2}{2s} = \\frac{0-400}{100} = -4{,}0 \\text{ m/s}^2" /></p>
-                <p><InlineLatex latex="f = ma = 1500 \\times 4{,}0 = 6{,}0 \\text{ kN}" /></p>
-                <p><InlineLatex latex="t = \\frac{2s}{v_0} = \\frac{100}{20} = 5{,}0 \\text{ s}" /></p>
+                <p><InlineLatex latex="v_0 = 72 \text{ km/h} = 20 \text{ m/s}" /></p>
+                <p><InlineLatex latex="a = \frac{v^2-v_0^2}{2s} = \frac{0-400}{100} = -4{,}0 \text{ m/s}^2" /></p>
+                <p><InlineLatex latex="f = ma = 1500 \times 4{,}0 = 6{,}0 \text{ kN}" /></p>
+                <p><InlineLatex latex="t = \frac{2s}{v_0} = \frac{100}{20} = 5{,}0 \text{ s}" /></p>
                 <p className="font-semibold mt-2">c) Sjekk 60 km/h:</p>
-                <p><InlineLatex latex="p_\\text{etter} = (1500+900) \\times 27/3{,}6 = 18\\,000 \\text{ kg·m/s}" /></p>
-                <p>Hvis begge = 60 km/h: <InlineLatex latex="p_\\text{før} = 1500(60/3{,}6) - 900(60/3{,}6) = 10\\,000 \\text{ kg·m/s} \\neq 18\\,000" /></p>
+                <p><InlineLatex latex="p_\text{etter} = (1500+900) \times 27/3{,}6 = 18\,000 \text{ kg·m/s}" /></p>
+                <p>Hvis begge = 60 km/h: <InlineLatex latex="p_\text{før} = 1500(60/3{,}6) - 900(60/3{,}6) = 10\,000 \text{ kg·m/s} \neq 18\,000" /></p>
                 <p className="text-red-500">Nei, begge kan ikke ha kjørt 60 km/h — strider mot bevaring av bevegelsesmengde.</p>
                 <p className="font-semibold mt-2">d) Fart til A:</p>
                 <p><InlineLatex latex="m_A v_A - m_B v_B = (m_A+m_B)v_f" /></p>
-                <p><InlineLatex latex="v_A = \\frac{(m_A+m_B)v_f + m_B v_B}{m_A} = \\frac{2400 \\times 7{,}5 + 900 \\times 16{,}67}{1500} = 22{,}0 \\text{ m/s} = 79{,}2 \\text{ km/h}" /></p>
+                <p><InlineLatex latex="v_A = \frac{(m_A+m_B)v_f + m_B v_B}{m_A} = \frac{2400 \times 7{,}5 + 900 \times 16{,}67}{1500} = 22{,}0 \text{ m/s} = 79{,}2 \text{ km/h}" /></p>
               </div>}
             />
           )}
@@ -358,7 +358,7 @@ export default function EksamenPage() {
           {show("host2023", "rotasjon") && (
             <ExerciseCard number={3} title="Bowlingkule — glidning til rulling" difficulty="vanskelig" source="Høst 2023, Oppgave 3"
               problem={<div>
-                <p className="mb-2">Bowlingkule: m = 5,2 kg, R = 10,8 cm, <InlineLatex latex="v_0 = 10{,}2" /> m/s, <InlineLatex latex="\\omega_0 = 0" />, <InlineLatex latex="\\mu_k = 0{,}25" />.</p>
+                <p className="mb-2">Bowlingkule: m = 5,2 kg, R = 10,8 cm, <InlineLatex latex="v_0 = 10{,}2" /> m/s, <InlineLatex latex="\omega_0 = 0" />, <InlineLatex latex="\mu_k = 0{,}25" />.</p>
                 <p className="mb-1">a) Finn akselerasjon og vinkelakselerasjon under glidning.</p>
                 <p className="mb-1">b) Tid til ren rulling, avstand, og fart.</p>
                 <p className="mb-1">c) Kinetisk energi og arbeid av friksjon.</p>
@@ -370,21 +370,21 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Akselerasjoner:</p>
-                <p><InlineLatex latex="a = -\\mu g = -0{,}25 \\times 9{,}81 = -2{,}45 \\text{ m/s}^2" /></p>
-                <p><InlineLatex latex="I = \\tfrac{2}{5}mR^2" />,  <InlineLatex latex="\\alpha = \\frac{\\mu mg R}{\\frac{2}{5}mR^2} = \\frac{5\\mu g}{2R} = \\frac{5(0{,}25)(9{,}81)}{2(0{,}108)} = 56{,}8 \\text{ rad/s}^2" /></p>
+                <p><InlineLatex latex="a = -\mu g = -0{,}25 \times 9{,}81 = -2{,}45 \text{ m/s}^2" /></p>
+                <p><InlineLatex latex="I = \tfrac{2}{5}mR^2" />,  <InlineLatex latex="\alpha = \frac{\mu mg R}{\frac{2}{5}mR^2} = \frac{5\mu g}{2R} = \frac{5(0{,}25)(9{,}81)}{2(0{,}108)} = 56{,}8 \text{ rad/s}^2" /></p>
                 <p className="font-semibold mt-2">b) Tid til rulling:</p>
-                <p><InlineLatex latex="v = v_0 + at, \\quad \\omega = \\alpha t, \\quad v = R\\omega" /></p>
-                <p><InlineLatex latex="v_0 + at = R\\alpha t \\implies t = \\frac{v_0}{R\\alpha - a} = \\frac{10{,}2}{0{,}108(56{,}8)+2{,}45} = 1{,}19 \\text{ s}" /></p>
-                <p><InlineLatex latex="s = v_0 t + \\tfrac{1}{2}at^2 = 10{,}4 \\text{ m}" /></p>
-                <p><InlineLatex latex="v = v_0 + at = 10{,}2 - 2{,}45(1{,}19) = 7{,}3 \\text{ m/s}" /></p>
+                <p><InlineLatex latex="v = v_0 + at, \quad \omega = \alpha t, \quad v = R\omega" /></p>
+                <p><InlineLatex latex="v_0 + at = R\alpha t \implies t = \frac{v_0}{R\alpha - a} = \frac{10{,}2}{0{,}108(56{,}8)+2{,}45} = 1{,}19 \text{ s}" /></p>
+                <p><InlineLatex latex="s = v_0 t + \tfrac{1}{2}at^2 = 10{,}4 \text{ m}" /></p>
+                <p><InlineLatex latex="v = v_0 + at = 10{,}2 - 2{,}45(1{,}19) = 7{,}3 \text{ m/s}" /></p>
                 <p className="font-semibold mt-2">c) Energi:</p>
-                <p><InlineLatex latex="E_K = \\tfrac{7}{10}mv^2 = \\tfrac{7}{10}(5{,}2)(7{,}3)^2 = 194 \\text{ J}" /></p>
-                <p><InlineLatex latex="W_\\text{friksjon} = \\Delta K = 194 - \\tfrac{1}{2}(5{,}2)(10{,}2)^2 = 194 - 270 = -76{,}5 \\text{ J}" /></p>
+                <p><InlineLatex latex="E_K = \tfrac{7}{10}mv^2 = \tfrac{7}{10}(5{,}2)(7{,}3)^2 = 194 \text{ J}" /></p>
+                <p><InlineLatex latex="W_\text{friksjon} = \Delta K = 194 - \tfrac{1}{2}(5{,}2)(10{,}2)^2 = 194 - 270 = -76{,}5 \text{ J}" /></p>
                 <p className="font-semibold mt-2">d) Fritt fall fra kant:</p>
-                <p><InlineLatex latex="t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2(2{,}0)}{9{,}81}} = 0{,}639 \\text{ s}" /></p>
-                <p><InlineLatex latex="x = v \\cdot t = 7{,}3 \\times 0{,}639 = 4{,}66 \\text{ m}" /></p>
-                <p><InlineLatex latex="v_y = gt = 6{,}27 \\text{ m/s}, \\quad v_\\text{tot} = \\sqrt{7{,}3^2+6{,}27^2} = 9{,}62 \\text{ m/s}" /></p>
-                <p><InlineLatex latex="p = mv = 5{,}2 \\times 9{,}62 = 50 \\text{ kg·m/s}" /></p>
+                <p><InlineLatex latex="t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2(2{,}0)}{9{,}81}} = 0{,}639 \text{ s}" /></p>
+                <p><InlineLatex latex="x = v \cdot t = 7{,}3 \times 0{,}639 = 4{,}66 \text{ m}" /></p>
+                <p><InlineLatex latex="v_y = gt = 6{,}27 \text{ m/s}, \quad v_\text{tot} = \sqrt{7{,}3^2+6{,}27^2} = 9{,}62 \text{ m/s}" /></p>
+                <p><InlineLatex latex="p = mv = 5{,}2 \times 9{,}62 = 50 \text{ kg·m/s}" /></p>
               </div>}
             />
           )}
@@ -406,7 +406,7 @@ export default function EksamenPage() {
           {show("var2017", "elektrostatikk") && (
             <ExerciseCard number={3} title="Punktladninger — arbeid og potensial" difficulty="middels" source="Vår 2017, Oppgave 3"
               problem={<div>
-                <p className="mb-2">Ladning <InlineLatex latex="q_A = 2{,}50 \\;\\mu\\text{C}" /> i x = 2,00 cm.</p>
+                <p className="mb-2">Ladning <InlineLatex latex="q_A = 2{,}50 \;\mu\text{C}" /> i x = 2,00 cm.</p>
                 <p className="mb-1">a) Arbeid for å bringe <InlineLatex latex="q_B = q_A" /> fra uendelig til x = 4,00 cm.</p>
                 <p>b) Elektrisk potensial i origo fra begge ladninger.</p>
               </div>}
@@ -415,9 +415,9 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-2 text-sm">
                 <p className="font-semibold">a)</p>
-                <p><InlineLatex latex="U = k\\frac{q_Aq_B}{r} = 8{,}99 \\times 10^9 \\times \\frac{(2{,}50 \\times 10^{-6})^2}{0{,}02} = 2{,}80 \\text{ J}" /></p>
+                <p><InlineLatex latex="U = k\frac{q_Aq_B}{r} = 8{,}99 \times 10^9 \times \frac{(2{,}50 \times 10^{-6})^2}{0{,}02} = 2{,}80 \text{ J}" /></p>
                 <p className="font-semibold mt-2">b)</p>
-                <p><InlineLatex latex="V_0 = k\\left(\\frac{q_A}{r_1} + \\frac{q_B}{r_2}\\right) = 8{,}99 \\times 10^9\\left(\\frac{2{,}5 \\times 10^{-6}}{0{,}02} + \\frac{2{,}5 \\times 10^{-6}}{0{,}04}\\right) = 1{,}3 \\times 10^6 \\text{ V}" /></p>
+                <p><InlineLatex latex="V_0 = k\left(\frac{q_A}{r_1} + \frac{q_B}{r_2}\right) = 8{,}99 \times 10^9\left(\frac{2{,}5 \times 10^{-6}}{0{,}02} + \frac{2{,}5 \times 10^{-6}}{0{,}04}\right) = 1{,}3 \times 10^6 \text{ V}" /></p>
               </div>}
             />
           )}
@@ -434,8 +434,8 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-2 text-sm">
                 <p className="font-semibold">a)</p>
-                <p><InlineLatex latex="F_m = BIL = 0{,}20 \\times 0{,}40 \\times 0{,}10 = 8{,}0 \\text{ mN}" /></p>
-                <p>Ved konstant fart: <InlineLatex latex="F_m = mg \\implies m = \\frac{F_m}{g} = 8{,}15 \\times 10^{-4} \\text{ kg}" /></p>
+                <p><InlineLatex latex="F_m = BIL = 0{,}20 \times 0{,}40 \times 0{,}10 = 8{,}0 \text{ mN}" /></p>
+                <p>Ved konstant fart: <InlineLatex latex="F_m = mg \implies m = \frac{F_m}{g} = 8{,}15 \times 10^{-4} \text{ kg}" /></p>
                 <p className="font-semibold mt-2">b)</p>
                 <p>Lenz&apos; lov: fluks inn i arket minker → indusert strøm danner B inn i arket → strøm med klokka. Magnetkraft på L er oppover.</p>
                 <p>Med S lukket: strøm deles i to sløyfer. Netto strøm i L reduseres → mindre bremsekraft.</p>
@@ -460,7 +460,7 @@ export default function EksamenPage() {
           {show("host2016", "elektrostatikk") && (
             <ExerciseCard number={4} title="Tre punktladninger — potensial og E-felt" difficulty="middels" source="Høst 2016, Oppgave 4"
               problem={<div>
-                <p className="mb-2"><InlineLatex latex="q_1 = 2\\;\\mu\\text{C}" /> i (−3, 0), <InlineLatex latex="q_2 = -3\\;\\mu\\text{C}" /> i (2, 0), <InlineLatex latex="q_3 = 1{,}5\\;\\mu\\text{C}" /> i (0, 4). Koordinater i meter.</p>
+                <p className="mb-2"><InlineLatex latex="q_1 = 2\;\mu\text{C}" /> i (−3, 0), <InlineLatex latex="q_2 = -3\;\mu\text{C}" /> i (2, 0), <InlineLatex latex="q_3 = 1{,}5\;\mu\text{C}" /> i (0, 4). Koordinater i meter.</p>
                 <p className="mb-1">a) Finn elektrisk potensial i origo.</p>
                 <p>b) Finn E-feltets styrke og retning i origo.</p>
               </div>}
@@ -470,14 +470,14 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-2 text-sm">
                 <p className="font-semibold">a) Potensial:</p>
-                <p><InlineLatex latex="r_1 = 3 \\text{ m}, r_2 = 2 \\text{ m}, r_3 = 4 \\text{ m}" /></p>
-                <p><InlineLatex latex="V = k\\left(\\frac{2}{3} + \\frac{-3}{2} + \\frac{1{,}5}{4}\\right)\\times 10^{-6} = -4{,}1 \\text{ kV}" /></p>
+                <p><InlineLatex latex="r_1 = 3 \text{ m}, r_2 = 2 \text{ m}, r_3 = 4 \text{ m}" /></p>
+                <p><InlineLatex latex="V = k\left(\frac{2}{3} + \frac{-3}{2} + \frac{1{,}5}{4}\right)\times 10^{-6} = -4{,}1 \text{ kV}" /></p>
                 <p className="font-semibold mt-2">b) E-felt:</p>
-                <p><InlineLatex latex="E_x = k\\frac{|q_1|}{r_1^2} + k\\frac{|q_2|}{r_2^2} = 8{,}99 \\times 10^9\\left(\\frac{2 \\times 10^{-6}}{9} + \\frac{3 \\times 10^{-6}}{4}\\right) = 8{,}74 \\text{ kV/m}" /></p>
+                <p><InlineLatex latex="E_x = k\frac{|q_1|}{r_1^2} + k\frac{|q_2|}{r_2^2} = 8{,}99 \times 10^9\left(\frac{2 \times 10^{-6}}{9} + \frac{3 \times 10^{-6}}{4}\right) = 8{,}74 \text{ kV/m}" /></p>
                 <p>(Begge peker i +x-retning: q₁ positiv skyver fra venstre, q₂ negativ trekker mot høyre)</p>
-                <p><InlineLatex latex="E_y = -k\\frac{|q_3|}{r_3^2} = -0{,}843 \\text{ kV/m}" /> (q₃ positiv → felt peker vekk, dvs. ned i −y)</p>
-                <p><InlineLatex latex="E = \\sqrt{E_x^2 + E_y^2} = 8{,}78 \\text{ kV/m}" /></p>
-                <p><InlineLatex latex="\\theta = \\arctan\\frac{|E_y|}{E_x} = 5{,}5°" /> under x-aksen</p>
+                <p><InlineLatex latex="E_y = -k\frac{|q_3|}{r_3^2} = -0{,}843 \text{ kV/m}" /> (q₃ positiv → felt peker vekk, dvs. ned i −y)</p>
+                <p><InlineLatex latex="E = \sqrt{E_x^2 + E_y^2} = 8{,}78 \text{ kV/m}" /></p>
+                <p><InlineLatex latex="\theta = \arctan\frac{|E_y|}{E_x} = 5{,}5°" /> under x-aksen</p>
               </div>}
             />
           )}
@@ -494,7 +494,7 @@ export default function EksamenPage() {
               ]}
               solution={<div className="space-y-2 text-sm">
                 <p className="font-semibold">a)</p>
-                <p><InlineLatex latex="|\\mathcal{E}| = N\\frac{|\\Delta\\Phi|}{\\Delta t} = N \\cdot \\pi r^2 \\cdot \\frac{|\\Delta B|}{\\Delta t} = 53 \\times \\pi(0{,}15)^2 \\times \\frac{0{,}25}{0{,}12} = 7{,}8 \\text{ V}" /></p>
+                <p><InlineLatex latex="|\mathcal{E}| = N\frac{|\Delta\Phi|}{\Delta t} = N \cdot \pi r^2 \cdot \frac{|\Delta B|}{\Delta t} = 53 \times \pi(0{,}15)^2 \times \frac{0{,}25}{0{,}12} = 7{,}8 \text{ V}" /></p>
                 <p className="font-semibold mt-2">b)</p>
                 <p>B inn i arket minker → Lenz&apos; lov: strømmen lager B inn i arket → strøm med klokka (sett fra forsiden).</p>
               </div>}
