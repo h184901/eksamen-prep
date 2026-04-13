@@ -4,6 +4,7 @@ export interface Chapter {
   title: string;
   description: string;
   category: "bevegelse" | "mekanikk" | "rotasjon" | "em";
+  sectionCount?: number;
 }
 
 export const SECTIONS_PER_CHAPTER = 7;
@@ -78,6 +79,7 @@ export const chapters: Chapter[] = [
     title: "Elektrisk ladning og felt",
     description: "Coulombs lov, elektrisk felt og feltlinjer",
     category: "em",
+    sectionCount: 4,
   },
   {
     id: 23,

@@ -87,7 +87,10 @@ function useGroupProgress(chapterIds: number[]) {
     setMounted(true);
     const ids = idsKey.split(",").map(Number);
     let totalCompleted = 0;
-    const totalSections = ids.length * SECTIONS_PER_CHAPTER;
+    const totalSections = ids.reduce((sum, id) => {
+      const ch = chapters.find((c) => c.id === id);
+      return sum + (ch?.sectionCount ?? SECTIONS_PER_CHAPTER);
+    }, 0);
 
     for (const id of ids) {
       const stored = localStorage.getItem(`progress-ch${id}`);
@@ -113,13 +116,14 @@ function useGroupProgress(chapterIds: number[]) {
   return { ...progress, percent, mounted: true };
 }
 
-function useChapterProgress(chapterId: number) {
+function useChapterProgress(chapter: Chapter) {
   const [completed, setCompleted] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const total = chapter.sectionCount ?? SECTIONS_PER_CHAPTER;
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem(`progress-ch${chapterId}`);
+    const stored = localStorage.getItem(`progress-ch${chapter.id}`);
     if (stored) {
       try {
         const arr = JSON.parse(stored);
@@ -128,17 +132,17 @@ function useChapterProgress(chapterId: number) {
         // ignore
       }
     }
-  }, [chapterId]);
+  }, [chapter.id]);
 
-  if (!mounted) return { completed: 0, percent: 0, mounted: false };
+  if (!mounted) return { completed: 0, total, percent: 0, mounted: false };
 
-  const percent = Math.round((completed / SECTIONS_PER_CHAPTER) * 100);
-  return { completed, percent, mounted: true };
+  const percent = Math.round((completed / total) * 100);
+  return { completed, total, percent, mounted: true };
 }
 
 function ChapterCard({ chapter }: { chapter: Chapter }) {
   const styles = categoryStyles[chapter.category];
-  const { completed, percent, mounted } = useChapterProgress(chapter.id);
+  const { completed, total, percent, mounted } = useChapterProgress(chapter);
   const hasContent = true; // all chapters have content
 
   return (
@@ -174,7 +178,7 @@ function ChapterCard({ chapter }: { chapter: Chapter }) {
       </div>
       {mounted && (
         <p className="text-[11px] text-[var(--muted)] mt-1">
-          {completed}/{SECTIONS_PER_CHAPTER} seksjoner fullført
+          {completed}/{total} seksjoner fullført
         </p>
       )}
     </Link>
