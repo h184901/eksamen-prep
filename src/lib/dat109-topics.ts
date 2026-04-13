@@ -27,7 +27,7 @@ export const topics: Topic[] = [
       "SOLID-prinsippene og GRASP-mønstrene — gjenkjenn dem i kode og UML",
     weight: "~20%",
     icon: "layers",
-    sectionCount: 4,
+    sectionCount: 3,
   },
   {
     id: "utviklingsmetode",
@@ -37,7 +37,7 @@ export const topics: Topic[] = [
       "Scrum, XP, TDD, CI/CD, AUP og smidig utvikling",
     weight: "~20%",
     icon: "cycle",
-    sectionCount: 4,
+    sectionCount: 10,
   },
   {
     id: "oop",

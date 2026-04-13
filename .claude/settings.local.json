@@ -31,7 +31,11 @@
       "Bash(break)",
       "Bash(ls -lh /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/*.tsx /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/*/page.tsx)",
       "Bash(awk '{print $5, $NF}')",
-      "Bash(du:*)"
+      "Bash(du:*)",
+      "Bash(python3 -c \"import pptx; print\\('pptx available'\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(file /Users/erlendmoheim/Downloads/Studiet/Semester4/materials/dat109/eksamensoppgaver/*.pdf)"
     ]
   }
 }
