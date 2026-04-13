@@ -63,16 +63,16 @@ export default function FormelarkPage() {
           <h2 className="text-2xl font-bold mb-1">Kinematikk</h2>
           <p className="text-sm text-[var(--muted)] mb-4">Kapittel 2 (rettlinjet) og 3 (2D/3D bevegelse)</p>
 
-          <FormulaBox variant="gold" title="Rettlinjet bevegelse — konstant akselerasjon"
-            latex="\\begin{aligned} v &= v_0 + at \\\\ x &= x_0 + v_0 t + \\tfrac{1}{2}at^2 \\\\ v^2 &= v_0^2 + 2a(x-x_0) \\\\ x - x_0 &= \\tfrac{1}{2}(v_0+v)t \\end{aligned}"
-          />
+          <FormulaBox variant="gold" title="Rettlinjet bevegelse — konstant akselerasjon" latex="v = v_0 + at" />
+          <FormulaBox variant="gold" latex="x = x_0 + v_0 t + \\tfrac{1}{2}at^2" />
+          <FormulaBox variant="gold" latex="v^2 = v_0^2 + 2a(x - x_0)" />
+          <FormulaBox variant="gold" latex="x - x_0 = \\tfrac{1}{2}(v_0 + v)t" />
           <FormulaBox variant="gold" title="Fritt fall (a = −g)"
             latex="v_y = v_{0y} - gt \\qquad y = y_0 + v_{0y}t - \\tfrac{1}{2}gt^2 \\qquad v_y^2 = v_{0y}^2 - 2g(y-y_0)"
           />
-          <FormulaBox variant="gold" title="Skrått kast (prosjektilbevegelse)"
-            latex="\\begin{aligned} v_{0x} &= v_0\\cos\\theta &\\quad v_{0y} &= v_0\\sin\\theta \\\\ x &= v_{0x}\\,t &\\quad y &= v_{0y}\\,t - \\tfrac{1}{2}gt^2 \\\\ v_x &= v_{0x} = \\text{konst.} &\\quad v_y &= v_{0y} - gt \\end{aligned}"
-            description="Horisontal: ingen akselerasjon. Vertikal: fritt fall."
-          />
+          <FormulaBox variant="gold" title="Skrått kast (prosjektilbevegelse)" latex="v_{0x} = v_0\\cos\\theta \\qquad v_{0y} = v_0\\sin\\theta" />
+          <FormulaBox variant="gold" latex="x = v_{0x}\\,t \\qquad y = v_{0y}\\,t - \\tfrac{1}{2}gt^2" />
+          <FormulaBox variant="gold" latex="v_x = v_{0x} = \\text{konst.} \\qquad v_y = v_{0y} - gt" description="Horisontal: ingen akselerasjon. Vertikal: fritt fall." />
           <FormulaBox variant="blue" title="Nyttige resultater for skrått kast"
             latex="\\text{Maks høyde: } h = \\frac{v_0^2\\sin^2\\theta}{2g} \\qquad \\text{Rekkevidde: } R = \\frac{v_0^2\\sin 2\\theta}{g}"
             description="Gjelder kun for kast fra og til samme høyde."
@@ -90,17 +90,15 @@ export default function FormelarkPage() {
           <h2 className="text-2xl font-bold mb-1">Newtons lover og krefter</h2>
           <p className="text-sm text-[var(--muted)] mb-4">Kapittel 4–5</p>
 
-          <FormulaBox variant="gold" title="Newtons lover"
-            latex="\\begin{aligned} \\text{1. lov:}&\\quad \\sum\\vec{F} = 0 \\implies \\vec{v} = \\text{konst.} \\\\ \\text{2. lov:}&\\quad \\sum\\vec{F} = m\\vec{a} \\\\ \\text{3. lov:}&\\quad \\vec{F}_{A\\to B} = -\\vec{F}_{B\\to A} \\end{aligned}"
-          />
+          <FormulaBox variant="gold" title="Newtons 1. lov" latex="\\sum\\vec{F} = 0 \\implies \\vec{v} = \\text{konst.}" />
+          <FormulaBox variant="gold" title="Newtons 2. lov" latex="\\sum\\vec{F} = m\\vec{a}" />
+          <FormulaBox variant="gold" title="Newtons 3. lov" latex="\\vec{F}_{A\\to B} = -\\vec{F}_{B\\to A}" />
           <FormulaBox variant="gold" title="Friksjon"
             latex="f_s \\leq \\mu_s N \\qquad f_k = \\mu_k N"
             description="f_s: statisk friksjon (maks verdi), f_k: kinetisk friksjon. N = normalkraft."
           />
-          <FormulaBox variant="blue" title="Skråplan"
-            latex="\\begin{aligned} \\text{Langs planet:}&\\quad mg\\sin\\theta - f = ma \\\\ \\text{Vinkelrett:}&\\quad N = mg\\cos\\theta \\end{aligned}"
-            description="Velg aksesystem langs og vinkelrett på planet."
-          />
+          <FormulaBox variant="blue" title="Skråplan — langs planet" latex="mg\\sin\\theta - f = ma" />
+          <FormulaBox variant="blue" title="Skråplan — vinkelrett" latex="N = mg\\cos\\theta" description="Velg aksesystem langs og vinkelrett på planet." />
           <FormulaBox variant="blue" title="Snordrag og Atwood-maskin"
             latex="a = \\frac{(m_1 - m_2)g}{m_1 + m_2} \\qquad T = \\frac{2m_1 m_2 g}{m_1 + m_2}"
             description="Gjelder for ideelt tau (masseløst, ustrekbart) over friksjonsfri trinse."
@@ -146,10 +144,8 @@ export default function FormelarkPage() {
           <FormulaBox variant="gold" title="Bevaring av bevegelsesmengde"
             latex="\\sum \\vec{F}_\\text{ext} = 0 \\implies \\vec{p}_\\text{tot,før} = \\vec{p}_\\text{tot,etter}"
           />
-          <FormulaBox variant="blue" title="Elastisk støt (1D)"
-            latex="\\begin{aligned} v_1' &= \\frac{m_1-m_2}{m_1+m_2}v_1 + \\frac{2m_2}{m_1+m_2}v_2 \\\\ v_2' &= \\frac{2m_1}{m_1+m_2}v_1 + \\frac{m_2-m_1}{m_1+m_2}v_2 \\end{aligned}"
-            description="Både bevegelsesmengde og kinetisk energi er bevart."
-          />
+          <FormulaBox variant="blue" title="Elastisk støt (1D)" latex="v_1' = \\frac{m_1 - m_2}{m_1 + m_2}v_1 + \\frac{2m_2}{m_1 + m_2}v_2" />
+          <FormulaBox variant="blue" latex="v_2' = \\frac{2m_1}{m_1 + m_2}v_1 + \\frac{m_2 - m_1}{m_1 + m_2}v_2" description="Både bevegelsesmengde og kinetisk energi er bevart." />
           <FormulaBox variant="blue" title="Fullkomment uelastisk støt"
             latex="m_1 v_1 + m_2 v_2 = (m_1+m_2)v_f"
             description="Legemene henger sammen etter støtet. Bevegelsesmengde bevart, K ikke bevart."
@@ -166,9 +162,9 @@ export default function FormelarkPage() {
           <h2 className="text-2xl font-bold mb-1">Rotasjon</h2>
           <p className="text-sm text-[var(--muted)] mb-4">Kapittel 9–10</p>
 
-          <FormulaBox variant="gold" title="Rotasjonskinematikk (konstant α)"
-            latex="\\begin{aligned} \\omega &= \\omega_0 + \\alpha t \\\\ \\theta &= \\theta_0 + \\omega_0 t + \\tfrac{1}{2}\\alpha t^2 \\\\ \\omega^2 &= \\omega_0^2 + 2\\alpha(\\theta-\\theta_0) \\end{aligned}"
-          />
+          <FormulaBox variant="gold" title="Rotasjonskinematikk (konstant α)" latex="\\omega = \\omega_0 + \\alpha t" />
+          <FormulaBox variant="gold" latex="\\theta = \\theta_0 + \\omega_0 t + \\tfrac{1}{2}\\alpha t^2" />
+          <FormulaBox variant="gold" latex="\\omega^2 = \\omega_0^2 + 2\\alpha(\\theta - \\theta_0)" />
           <FormulaBox variant="gold" title="Lineær ↔ vinkelsammenheng"
             latex="v = r\\omega \\qquad a_\\text{tan} = r\\alpha \\qquad a_\\text{rad} = r\\omega^2"
           />
@@ -176,9 +172,9 @@ export default function FormelarkPage() {
             latex="I = \\sum m_i r_i^2 \\qquad I_P = I_{CM} + Md^2"
             description="Parallellakseteoremet: d = avstand fra CM-akse til ny akse."
           />
-          <FormulaBox variant="blue" title="Treghetsmoment — vanlige former"
-            latex="\\begin{aligned} \\text{Disk:}\\; I &= \\tfrac{1}{2}MR^2 \\quad& \\text{Ring:}\\; I &= MR^2 \\\\ \\text{Stav (senter):}\\; I &= \\tfrac{1}{12}ML^2 \\quad& \\text{Stav (ende):}\\; I &= \\tfrac{1}{3}ML^2 \\\\ \\text{Massiv kule:}\\; I &= \\tfrac{2}{5}MR^2 \\quad& \\text{Hul kule:}\\; I &= \\tfrac{2}{3}MR^2 \\end{aligned}"
-          />
+          <FormulaBox variant="blue" title="Treghetsmoment — vanlige former" latex="\\text{Disk: } I = \\tfrac{1}{2}MR^2 \\qquad \\text{Ring: } I = MR^2" />
+          <FormulaBox variant="blue" latex="\\text{Stav (senter): } I = \\tfrac{1}{12}ML^2 \\qquad \\text{Stav (ende): } I = \\tfrac{1}{3}ML^2" />
+          <FormulaBox variant="blue" latex="\\text{Massiv kule: } I = \\tfrac{2}{5}MR^2 \\qquad \\text{Hul kule: } I = \\tfrac{2}{3}MR^2" />
           <FormulaBox variant="gold" title="Kraftmoment og Newtons 2. lov for rotasjon"
             latex="\\tau = rF\\sin\\phi \\qquad \\sum\\tau = I\\alpha"
           />
@@ -206,9 +202,9 @@ export default function FormelarkPage() {
           <FormulaBox variant="gold" title="Elektrisk felt"
             latex="\\vec{E} = \\frac{\\vec{F}}{q_0} \\qquad E = k\\frac{|q|}{r^2} \\;\\text{(punktladning)}"
           />
-          <FormulaBox variant="blue" title="E-felt fra spesielle fordelinger"
-            latex="\\begin{aligned} \\text{Uendelig lang linje:}&\\quad E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r} \\\\ \\text{Uendelig plan:}&\\quad E = \\frac{\\sigma}{2\\varepsilon_0} \\\\ \\text{Kuleflate (r > R):}&\\quad E = \\frac{Q}{4\\pi\\varepsilon_0 r^2} \\end{aligned}"
-          />
+          <FormulaBox variant="blue" title="E-felt — uendelig lang linje" latex="E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}" />
+          <FormulaBox variant="blue" title="E-felt — uendelig plan" latex="E = \\frac{\\sigma}{2\\varepsilon_0}" />
+          <FormulaBox variant="blue" title="E-felt — kuleflate (r > R)" latex="E = \\frac{Q}{4\\pi\\varepsilon_0 r^2}" />
           <FormulaBox variant="gold" title="Elektrisk potensial"
             latex="V = k\\frac{q}{r} \\qquad W_{a\\to b} = q(V_a - V_b) \\qquad \\vec{E} = -\\nabla V"
           />
@@ -247,9 +243,9 @@ export default function FormelarkPage() {
           <FormulaBox variant="gold" title="Biot-Savarts lov"
             latex="dB = \\frac{\\mu_0}{4\\pi}\\frac{I\\,dl\\sin\\phi}{r^2} \\qquad \\mu_0 = 4\\pi\\times 10^{-7}\\;\\text{T·m/A}"
           />
-          <FormulaBox variant="gold" title="B-felt fra vanlige geometrier"
-            latex="\\begin{aligned} \\text{Lang rett leder:}&\\quad B = \\frac{\\mu_0 I}{2\\pi r} \\\\ \\text{Senter av sirkelspole:}&\\quad B = \\frac{\\mu_0 I}{2R} \\\\ \\text{Solenoid:}&\\quad B = \\mu_0 n I \\end{aligned}"
-          />
+          <FormulaBox variant="gold" title="B-felt — lang rett leder" latex="B = \\frac{\\mu_0 I}{2\\pi r}" />
+          <FormulaBox variant="gold" title="B-felt — senter av sirkelspole" latex="B = \\frac{\\mu_0 I}{2R}" />
+          <FormulaBox variant="gold" title="B-felt — solenoid" latex="B = \\mu_0 n I" />
           <FormulaBox variant="blue" title="Kraft mellom parallelle ledere"
             latex="\\frac{F}{L} = \\frac{\\mu_0 I_1 I_2}{2\\pi d}"
             description="Tiltrekning ved samme strømretning, frastøtning ved motsatt."

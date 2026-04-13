@@ -38,6 +38,15 @@ body {
   @apply border-2 border-blue-400 bg-blue-50 dark:bg-blue-950/30 dark:border-blue-600;
 }
 
+/* Hide scrollbar on horizontal nav */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* KaTeX overrides for dark mode */
 .dark .katex {
   color: var(--foreground);

@@ -520,11 +520,8 @@ export default function ChapterPage() {
           latex="\\tau = rF\\sin\\phi \\qquad \\sum\\tau = I\\alpha"
         />
 
-        <FormulaBox
-          variant="gold"
-          title="Rulling uten glidning"
-          latex="\\begin{aligned} v_{CM} &= R\\omega \\qquad a_{CM} = R\\alpha \\\\ K_\\text{tot} &= \\tfrac{1}{2}mv_{CM}^2 + \\tfrac{1}{2}I\\omega^2 \\end{aligned}"
-        />
+        <FormulaBox variant="gold" title="Rulling uten glidning" latex="v_{CM} = R\\omega \\qquad a_{CM} = R\\alpha" />
+        <FormulaBox variant="gold" latex="K_\\text{tot} = \\tfrac{1}{2}mv_{CM}^2 + \\tfrac{1}{2}I\\omega^2" />
 
         <FormulaBox
           variant="gold"
@@ -532,11 +529,9 @@ export default function ChapterPage() {
           latex="W = \\tau \\Delta\\theta \\qquad P = \\tau\\omega \\qquad W_\\text{tot} = \\tfrac{1}{2}I\\omega^2 - \\tfrac{1}{2}I\\omega_0^2"
         />
 
-        <FormulaBox
-          variant="gold"
-          title="Angulært moment"
-          latex="\\begin{aligned} \\vec{L} &= \\vec{r} \\times m\\vec{v} \\quad \\text{(partikkel)} \\\\ L &= I\\omega \\quad \\text{(stivt legeme)} \\\\ \\sum\\tau &= \\frac{dL}{dt} \\end{aligned}"
-        />
+        <FormulaBox variant="gold" title="Angulært moment — partikkel" latex="\\vec{L} = \\vec{r} \\times m\\vec{v}" />
+        <FormulaBox variant="gold" title="Angulært moment — stivt legeme" latex="L = I\\omega" />
+        <FormulaBox variant="gold" latex="\\sum\\tau = \\frac{dL}{dt}" />
 
         <FormulaBox
           variant="blue"

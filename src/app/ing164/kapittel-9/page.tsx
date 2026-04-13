@@ -457,17 +457,14 @@ export default function ChapterPage() {
       <div id="formler" className="mt-10">
         <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
-        <FormulaBox
-          variant="gold"
-          title="Kinematikk ved konstant vinkelakselerasjon"
-          latex="\\begin{aligned} \\omega &= \\omega_0 + \\alpha t \\\\ \\theta &= \\theta_0 + \\omega_0 t + \\tfrac{1}{2}\\alpha t^2 \\\\ \\omega^2 &= \\omega_0^2 + 2\\alpha(\\theta - \\theta_0) \\\\ \\theta - \\theta_0 &= \\tfrac{1}{2}(\\omega_0 + \\omega)t \\end{aligned}"
-        />
+        <FormulaBox variant="gold" title="Kinematikk ved konstant vinkelakselerasjon" latex="\\omega = \\omega_0 + \\alpha t" />
+        <FormulaBox variant="gold" latex="\\theta = \\theta_0 + \\omega_0 t + \\tfrac{1}{2}\\alpha t^2" />
+        <FormulaBox variant="gold" latex="\\omega^2 = \\omega_0^2 + 2\\alpha(\\theta - \\theta_0)" />
+        <FormulaBox variant="gold" latex="\\theta - \\theta_0 = \\tfrac{1}{2}(\\omega_0 + \\omega)t" />
 
-        <FormulaBox
-          variant="gold"
-          title="Lineær ↔ vinkelsammenheng"
-          latex="\\begin{aligned} v &= r\\omega \\\\ a_\\text{tan} &= r\\alpha \\\\ a_\\text{rad} &= \\frac{v^2}{r} = r\\omega^2 \\end{aligned}"
-        />
+        <FormulaBox variant="gold" title="Lineær ↔ vinkelsammenheng" latex="v = r\\omega" />
+        <FormulaBox variant="gold" latex="a_\\text{tan} = r\\alpha" />
+        <FormulaBox variant="gold" latex="a_\\text{rad} = \\frac{v^2}{r} = r\\omega^2" />
 
         <FormulaBox
           variant="gold"
@@ -475,11 +472,9 @@ export default function ChapterPage() {
           latex="I = \\sum_i m_i r_i^2 \\qquad K_\\text{rot} = \\tfrac{1}{2}I\\omega^2"
         />
 
-        <FormulaBox
-          variant="blue"
-          title="Treghetsmoment for vanlige former"
-          latex="\\begin{aligned} \\text{Massiv disk:}\\; I &= \\tfrac{1}{2}MR^2 &\\quad \\text{Ring:}\\; I &= MR^2 \\\\ \\text{Stav (senter):}\\; I &= \\tfrac{1}{12}ML^2 &\\quad \\text{Stav (ende):}\\; I &= \\tfrac{1}{3}ML^2 \\\\ \\text{Massiv kule:}\\; I &= \\tfrac{2}{5}MR^2 &\\quad \\text{Hul kule:}\\; I &= \\tfrac{2}{3}MR^2 \\end{aligned}"
-        />
+        <FormulaBox variant="blue" title="Treghetsmoment for vanlige former" latex="\\text{Massiv disk: } I = \\tfrac{1}{2}MR^2 \\qquad \\text{Ring: } I = MR^2" />
+        <FormulaBox variant="blue" latex="\\text{Stav (senter): } I = \\tfrac{1}{12}ML^2 \\qquad \\text{Stav (ende): } I = \\tfrac{1}{3}ML^2" />
+        <FormulaBox variant="blue" latex="\\text{Massiv kule: } I = \\tfrac{2}{5}MR^2 \\qquad \\text{Hul kule: } I = \\tfrac{2}{3}MR^2" />
 
         <FormulaBox
           variant="gold"

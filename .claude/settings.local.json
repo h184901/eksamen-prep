@@ -28,7 +28,9 @@
       "Bash(git push:*)",
       "Bash(lsof -ti:3000)",
       "Bash(xargs kill:*)",
-      "Bash(break)"
+      "Bash(break)",
+      "Bash(ls -lh /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/*.tsx /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/*/page.tsx)",
+      "Bash(awk '{print $5, $NF}')"
     ]
   }
 }
