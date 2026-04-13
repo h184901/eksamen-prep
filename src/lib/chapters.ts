@@ -16,6 +16,7 @@ export const chapters: Chapter[] = [
     title: "Rettlinjet bevegelse",
     description: "Posisjon, hastighet, akselerasjon og bevegelse i én dimensjon",
     category: "bevegelse",
+    sectionCount: 4,
   },
   {
     id: 3,
@@ -23,6 +24,7 @@ export const chapters: Chapter[] = [
     title: "Bevegelse i 2D og 3D",
     description: "Vektorer, prosjektilbevegelse og sirkelbevegelse",
     category: "bevegelse",
+    sectionCount: 4,
   },
   {
     id: 4,
@@ -30,6 +32,7 @@ export const chapters: Chapter[] = [
     title: "Newtons lover",
     description: "Kraft, masse, tyngdekraft og Newtons tre lover",
     category: "mekanikk",
+    sectionCount: 4,
   },
   {
     id: 5,
@@ -37,6 +40,7 @@ export const chapters: Chapter[] = [
     title: "Anvendelse av Newtons lover",
     description: "Friksjon, skråplan, sirkelbevegelse og drag",
     category: "mekanikk",
+    sectionCount: 4,
   },
   {
     id: 6,
