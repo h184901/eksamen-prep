@@ -21,7 +21,9 @@
       "Bash(npx plugins:*)",
       "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/obliger/**)",
       "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/tidligere_eksamener/**)",
-      "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/semesterplan/**)"
+      "Read(//Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/semesterplan/**)",
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)"
     ]
   }
 }
