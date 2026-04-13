@@ -50,7 +50,37 @@ Skreddersydd eksamensøvingsside.
 ## Fag
 1. **ING164 Fysikk** — PRIORITET NÅ
 2. DAT110 Nettverksteknologi — senere
-3. DAT109 Systemutvikling — senere
+3. DAT109 Systemutvikling — PRIORITERT NÅ
+
+DAT109 Systemutvikling
+Eksamenformat
+Skriftlig eksamen med 4 deler:
+
+Modellering (~40%) — Brukstilfellemodell, domenemodell, sekvensdiagram
+OOA og OOD (~20%) — SOLID-prinsippene, GRASP-mønstrene
+Utviklingsmetode (~20%) — Scrum, XP, TDD, CI/CD, AUP, smidig utvikling
+OOP (~20%) — Java-kode fra UML-diagrammer
+
+Materialer
+Alt ligger i ~/Downloads/Studiet/Semester4/materials/dat109/
+
+pdf_fra_professor/ — Forelesningsslides og notater
+eksamensoppgaver/ — 7 filer med eksamener og fasit
+obliger/ — Obligatoriske innleveringer
+bøker/ — Lærebøker
+semesterplan/ — Fagplan og læringsmål
+tidligereoppsummeringer/ — Tidligere sammendrag
+
+Viktige regler for DAT109
+
+Noen filer er .docx — les dem med passende verktøy
+Professorens PDF-er viser HANS måte å gjøre ting på (kan avvike fra YouTube/nett)
+Eksempler i PDF-ene utvikles iterativt (monopol, stigespill) — tidlige versjoner er ikke fasit
+Sammenlign alltid med eksamens-fasit for å se hva som forventes
+Brukstilfellemodellen skal IKKE være et flytdiagram
+Domenemodellen skal ALDRI inneholde metoder
+Sekvensdiagram skal samsvare med brukstilfellebeskrivelsen
+Prioriter de nyeste eksamenene da de er mest representative
 
 ## Materialer for ING164
 Alt pensum ligger i ~/Downloads/Studiet/Semester4/materials/ing164/

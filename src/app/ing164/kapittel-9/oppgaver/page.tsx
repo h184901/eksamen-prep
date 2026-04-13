@@ -1,6 +1,7 @@
 "use client";
 
 import ExerciseCard from "@/components/ExerciseCard";
+import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 
 export default function OppgaverPage() {
@@ -132,9 +133,58 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "Bruk Δθ = ω₀t + ½αt² for (b), konverter til omdreininger" },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p>(a) <InlineLatex latex="\omega = 0 + 3{,}0 \times 4{,}0 = 12 \text{ rad/s}" /></p>
-            <p>(b) <InlineLatex latex="\Delta\theta = 0 + \tfrac{1}{2}(3{,}0)(4{,}0)^2 = 24 \text{ rad} = \frac{24}{2\pi} = 3{,}8 \text{ omdreininger}" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Startvinkelhastighet: <InlineLatex latex="\omega_0 = 0 \text{ rad/s}" /> (starter fra ro)</li>
+                <li>Vinkelakselerasjon: <InlineLatex latex="\alpha = 3{,}0 \text{ rad/s}^2" /></li>
+                <li>Tid: <InlineLatex latex="t = 4{,}0 \text{ s}" /></li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <ul className="space-y-1">
+                <li>(a) Vinkelhastigheten <InlineLatex latex="\omega" /> etter 4,0 s</li>
+                <li>(b) Antall omdreininger <InlineLatex latex="n" /> i løpet av disse 4,0 s</li>
+              </ul>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p>
+                Konstant vinkelakselerasjon → bruk rotasjonskinematikken direkte analogt med rettlinjet bevegelse.
+                For (a) bruker vi <InlineLatex latex="\omega = \omega_0 + \alpha t" />.
+                For (b) bruker vi <InlineLatex latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2" /> og konverterer radianer til omdreininger ved å dele på <InlineLatex latex="2\pi" />.
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1 (a)</span> — Finn vinkelhastigheten:</p>
+              <FormulaBox variant="blue" latex="\omega = \omega_0 + \alpha t = 0 + 3{,}0 \times 4{,}0 = 12 \text{ rad/s}" />
+              <p className="mb-1"><span className="font-medium">Steg 2 (b)</span> — Finn vinkelforskyvningen:</p>
+              <FormulaBox variant="blue" latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2 = 0 + \tfrac{1}{2}(3{,}0)(4{,}0)^2 = 24 \text{ rad}" />
+              <p className="mb-1"><span className="font-medium">Steg 3</span> — Konverter til omdreininger:</p>
+              <FormulaBox variant="gold" latex="n = \frac{\Delta\theta}{2\pi} = \frac{24}{2\pi} \approx \underline{\underline{3{,}8 \text{ omdreininger}}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="\omega = 12 \text{ rad/s} \quad;\quad n \approx 3{,}8 \text{ omdreininger}" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p>
+                Rotasjonskinematikk ved konstant <InlineLatex latex="\alpha" /> er identisk med rettlinjet kinematikk — bytt ut <InlineLatex latex="x \to \theta" />, <InlineLatex latex="v \to \omega" />, <InlineLatex latex="a \to \alpha" />.
+                Husk alltid å konvertere mellom radianer og omdreininger (<InlineLatex latex="1 \text{ omdr.} = 2\pi \text{ rad}" />).
+              </p>
+            </div>
           </div>
         }
       />
@@ -150,10 +200,61 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "α = (ω − ω₀)/t. For (b) bruk Δθ = ½(ω₀+ω)t" },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p><InlineLatex latex="\omega_0 = 500 \times \frac{2\pi}{60} = 52{,}4 \text{ rad/s}" /></p>
-            <p>(a) <InlineLatex latex="\alpha = \frac{0 - 52{,}4}{30{,}0} = -1{,}75 \text{ rad/s}^2" /></p>
-            <p>(b) <InlineLatex latex="\Delta\theta = \tfrac{1}{2}(52{,}4 + 0)(30{,}0) = 786 \text{ rad} = 125 \text{ omdreininger}" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Startvinkelhastighet: <InlineLatex latex="n_0 = 500 \text{ rpm}" /></li>
+                <li>Sluttvinkelhastighet: <InlineLatex latex="\omega = 0" /> (stillstand)</li>
+                <li>Tid: <InlineLatex latex="t = 30{,}0 \text{ s}" /></li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <ul className="space-y-1">
+                <li>(a) Vinkelakselerasjonen <InlineLatex latex="\alpha" /> (negativ — bremsing)</li>
+                <li>(b) Antall omdreininger under bremsingen</li>
+              </ul>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p>
+                Konverter først rpm til rad/s. Bruk deretter <InlineLatex latex="\alpha = (\omega - \omega_0)/t" /> for (a).
+                For (b) er det enklest å bruke gjennomsnittsformel:
+                {" "}<InlineLatex latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)\,t" /> siden vi kjenner både start- og slutthastighet.
+                Denne formelen er nyttig fordi vi ikke trenger <InlineLatex latex="\alpha" /> eksplisitt.
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1</span> — Konverter startvinkelhastigheten til rad/s:</p>
+              <FormulaBox variant="blue" latex="\omega_0 = 500 \times \frac{2\pi}{60} = 52{,}4 \text{ rad/s}" />
+              <p className="mb-1"><span className="font-medium">Steg 2 (a)</span> — Finn vinkelakselerasjonen:</p>
+              <FormulaBox variant="gold" latex="\alpha = \frac{\omega - \omega_0}{t} = \frac{0 - 52{,}4}{30{,}0} = \underline{\underline{-1{,}75 \text{ rad/s}^2}}" />
+              <p className="mb-1"><span className="font-medium">Steg 3 (b)</span> — Finn total vinkelforskyvning:</p>
+              <FormulaBox variant="blue" latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)\,t = \tfrac{1}{2}(52{,}4 + 0)(30{,}0) = 786 \text{ rad}" />
+              <p className="mb-1"><span className="font-medium">Steg 4</span> — Konverter til omdreininger:</p>
+              <FormulaBox variant="gold" latex="n = \frac{786}{2\pi} \approx \underline{\underline{125 \text{ omdreininger}}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="\alpha = -1{,}75 \text{ rad/s}^2 \quad;\quad n \approx 125 \text{ omdreininger}" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p>
+                Negativ <InlineLatex latex="\alpha" /> betyr bremsing (retarderende rotasjon) — fortegnet er meningsfullt og bør sjekkes.
+                Gjennomsnittsformelen <InlineLatex latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)t" /> er svært nyttig når du kjenner start- og sluttfart og tid.
+              </p>
+            </div>
           </div>
         }
       />
@@ -169,10 +270,58 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "Finn avstand d fra CM til den nye aksen. CM er i midten (0,60 m fra enden), aksen er 0,30 m fra enden → d = 0,30 m" },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p><InlineLatex latex="I_{CM} = \tfrac{1}{12}ML^2 = \tfrac{1}{12}(2{,}0)(1{,}2)^2 = 0{,}24 \text{ kg·m}^2" /></p>
-            <p>Avstand: <InlineLatex latex="d = 0{,}60 - 0{,}30 = 0{,}30 \text{ m}" /></p>
-            <p><InlineLatex latex="I_P = I_{CM} + Md^2 = 0{,}24 + 2{,}0 \times (0{,}30)^2 = 0{,}24 + 0{,}18 = 0{,}42 \text{ kg·m}^2" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Masse: <InlineLatex latex="M = 2{,}0 \text{ kg}" /></li>
+                <li>Lengde: <InlineLatex latex="L = 1{,}2 \text{ m}" /></li>
+                <li>Aksen er <InlineLatex latex="0{,}30 \text{ m}" /> fra ene enden</li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <p>Treghetsmomentet <InlineLatex latex="I_P" /> om aksen 0,30 m fra enden.</p>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p>
+                Aksen går ikke gjennom massesenteret (CM), så vi bruker <strong>parallellakseteoremet</strong>:
+                {" "}<InlineLatex latex="I_P = I_{CM} + Md^2" />.
+                Vi kjenner <InlineLatex latex="I_{CM} = \tfrac{1}{12}ML^2" /> for en tynn stav om midtpunktet.
+                Avstand <InlineLatex latex="d" /> er fra CM til den nye aksen.
+                CM sitter i midten av staven (0,60 m fra enden), den nye aksen er 0,30 m fra enden, så <InlineLatex latex="d = 0{,}60 - 0{,}30 = 0{,}30 \text{ m}" />.
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1</span> — Finn <InlineLatex latex="I_{CM}" /> for staven (akse gjennom midtpunktet):</p>
+              <FormulaBox variant="blue" latex="I_{CM} = \frac{1}{12}ML^2 = \frac{1}{12}(2{,}0)(1{,}2)^2 = 0{,}240 \text{ kg·m}^2" />
+              <p className="mb-1"><span className="font-medium">Steg 2</span> — Finn avstand <InlineLatex latex="d" /> fra CM til den nye aksen:</p>
+              <FormulaBox variant="blue" latex="d = \frac{L}{2} - 0{,}30 = 0{,}60 - 0{,}30 = 0{,}30 \text{ m}" />
+              <p className="mb-1"><span className="font-medium">Steg 3</span> — Bruk parallellakseteoremet:</p>
+              <FormulaBox variant="gold" latex="I_P = I_{CM} + Md^2 = 0{,}240 + 2{,}0 \times (0{,}30)^2 = 0{,}240 + 0{,}180 = \underline{\underline{0{,}42 \text{ kg·m}^2}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="I_P = 0{,}42 \text{ kg·m}^2" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p>
+                Parallellakseteoremet krever at startaksen går gjennom CM — aldri bruk det mellom to vilkårlige akser.
+                Avstand <InlineLatex latex="d" /> er alltid fra CM til den nye aksen.
+                Legg merke til at <InlineLatex latex="I_P &gt; I_{CM}" /> alltid — å flytte aksen bort fra CM øker alltid treghetsmomentet.
+              </p>
+            </div>
           </div>
         }
       />
@@ -188,10 +337,58 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "Konverter til rad/s, bruk K = ½Iω²" },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p><InlineLatex latex="I = \tfrac{1}{2}(40)(0{,}20)^2 = 0{,}80 \text{ kg·m}^2" /></p>
-            <p><InlineLatex latex="\omega = 3000 \times \frac{2\pi}{60} = 314 \text{ rad/s}" /></p>
-            <p><InlineLatex latex="K = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(0{,}80)(314)^2 = 39{,}5 \text{ kJ}" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Masse: <InlineLatex latex="M = 40 \text{ kg}" /></li>
+                <li>Radius: <InlineLatex latex="R = 0{,}20 \text{ m}" /></li>
+                <li>Vinkelhastighet: <InlineLatex latex="n = 3000 \text{ rpm}" /></li>
+                <li>Form: massiv sylinder (disk)</li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <p>Rotasjonskinetisk energi <InlineLatex latex="K_\text{rot}" /> lagret i svinghjulet.</p>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p>
+                Bruk <InlineLatex latex="K_\text{rot} = \tfrac{1}{2}I\omega^2" />.
+                For en massiv sylinder er <InlineLatex latex="I = \tfrac{1}{2}MR^2" />.
+                Vi må konvertere rpm til rad/s: <InlineLatex latex="\omega = n \cdot \frac{2\pi}{60}" />.
+                Merk at energien vokser med <InlineLatex latex="\omega^2" /> — høy turtall gir svært stor energi!
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1</span> — Finn treghetsmomentet for en massiv sylinder:</p>
+              <FormulaBox variant="blue" latex="I = \frac{1}{2}MR^2 = \frac{1}{2}(40)(0{,}20)^2 = 0{,}80 \text{ kg·m}^2" />
+              <p className="mb-1"><span className="font-medium">Steg 2</span> — Konverter vinkelhastigheten til rad/s:</p>
+              <FormulaBox variant="blue" latex="\omega = 3000 \times \frac{2\pi}{60} = 100\pi \approx 314 \text{ rad/s}" />
+              <p className="mb-1"><span className="font-medium">Steg 3</span> — Beregn rotasjonskinetisk energi:</p>
+              <FormulaBox variant="gold" latex="K_\text{rot} = \frac{1}{2}I\omega^2 = \frac{1}{2}(0{,}80)(314)^2 \approx \underline{\underline{39{,}5 \text{ kJ}}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="K_\text{rot} \approx 39{,}5 \text{ kJ}" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p>
+                Energiforrnelen <InlineLatex latex="K = \tfrac{1}{2}I\omega^2" /> er rotasjonsanalogien til <InlineLatex latex="K = \tfrac{1}{2}mv^2" />.
+                Svinghjul er energilagre — 39,5 kJ i et lite hjul viser hvorfor de brukes i industri og sporvogner.
+                Husk: konverter alltid til rad/s før du setter inn i formelen.
+              </p>
+            </div>
           </div>
         }
       />
@@ -207,11 +404,65 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "Bruk τ = Iα der I = ½MR² for å finne α" },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p><InlineLatex latex="I = \tfrac{1}{2}MR^2 = \tfrac{1}{2}(50)(0{,}10)^2 = 0{,}25 \text{ kg·m}^2" /></p>
-            <p>(a) <InlineLatex latex="\tau = FR = 9{,}0 \times 0{,}10 = 0{,}90 \text{ N·m}" /></p>
-            <p><InlineLatex latex="\alpha = \frac{\tau}{I} = \frac{0{,}90}{0{,}25} = 3{,}6 \text{ rad/s}^2" /></p>
-            <p>(b) <InlineLatex latex="\omega = \omega_0 + \alpha t = 0 + 3{,}6 \times 2{,}0 = 7{,}2 \text{ rad/s}" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Masse sylinder: <InlineLatex latex="M = 50 \text{ kg}" /></li>
+                <li>Radius: <InlineLatex latex="R = 0{,}10 \text{ m}" /></li>
+                <li>Kraft på tauet: <InlineLatex latex="F = 9{,}0 \text{ N}" /> (tangentielt)</li>
+                <li>Startvinkelhastighet: <InlineLatex latex="\omega_0 = 0" /> (ro)</li>
+                <li>Tid: <InlineLatex latex="t = 2{,}0 \text{ s}" /></li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <ul className="space-y-1">
+                <li>(a) Vinkelakselerasjonen <InlineLatex latex="\alpha" /></li>
+                <li>(b) Vinkelhastigheten <InlineLatex latex="\omega" /> etter 2,0 s</li>
+              </ul>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p>
+                Bruk Newtons 2. lov for rotasjon: <InlineLatex latex="\sum\tau = I\alpha" />.
+                Kraftmomentet fra tauet er <InlineLatex latex="\tau = FR" /> siden kraften virker tangentielt i avstand <InlineLatex latex="R" /> fra aksen.
+                For en massiv sylinder er <InlineLatex latex="I = \tfrac{1}{2}MR^2" />.
+                Dette er rotasjonsanalogien til <InlineLatex latex="F = ma" />.
+                Etter vi har <InlineLatex latex="\alpha" />, bruker vi kinematikken for (b).
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1</span> — Finn treghetsmomentet:</p>
+              <FormulaBox variant="blue" latex="I = \frac{1}{2}MR^2 = \frac{1}{2}(50)(0{,}10)^2 = 0{,}25 \text{ kg·m}^2" />
+              <p className="mb-1"><span className="font-medium">Steg 2</span> — Finn kraftmomentet fra tauet:</p>
+              <FormulaBox variant="blue" latex="\tau = FR = 9{,}0 \times 0{,}10 = 0{,}90 \text{ N·m}" />
+              <p className="mb-1"><span className="font-medium">Steg 3 (a)</span> — Bruk <InlineLatex latex="\sum\tau = I\alpha" /> for å finne vinkelakselerasjon:</p>
+              <FormulaBox variant="gold" latex="\alpha = \frac{\tau}{I} = \frac{0{,}90}{0{,}25} = \underline{\underline{3{,}6 \text{ rad/s}^2}}" />
+              <p className="mb-1"><span className="font-medium">Steg 4 (b)</span> — Bruk kinematikk for å finne vinkelhastighet:</p>
+              <FormulaBox variant="gold" latex="\omega = \omega_0 + \alpha t = 0 + 3{,}6 \times 2{,}0 = \underline{\underline{7{,}2 \text{ rad/s}}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="\alpha = 3{,}6 \text{ rad/s}^2 \quad;\quad \omega = 7{,}2 \text{ rad/s}" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p>
+                <InlineLatex latex="\sum\tau = I\alpha" /> er rotasjonsanalogien til <InlineLatex latex="\sum F = ma" />.
+                Fremgangsmåten er alltid: finn <InlineLatex latex="\tau" />, finn <InlineLatex latex="I" />, løs for <InlineLatex latex="\alpha" />, bruk kinematikk.
+                Merk at et tau kveilet rundt en sylinder alltid gir <InlineLatex latex="\tau = FR" /> siden kraften er tangentielt i kanten.
+              </p>
+            </div>
           </div>
         }
       />
@@ -241,16 +492,73 @@ export default function OppgaverPage() {
           { label: "Hint 2", content: "Energibevaring: Potensielt tap = rotasjonsenergi. CM av staven faller L/2, kulen faller L." },
         ]}
         solution={
-          <div className="space-y-2 text-sm">
-            <p className="font-semibold">a) Treghetsmoment:</p>
-            <p><InlineLatex latex="I_\text{stav} = \tfrac{1}{3}ML^2 = \tfrac{1}{3}(4{,}0)(1{,}0)^2 = 1{,}33 \text{ kg·m}^2" /></p>
-            <p><InlineLatex latex="I_\text{kule} = mL^2 = 2{,}0 \times (1{,}0)^2 = 2{,}0 \text{ kg·m}^2" /></p>
-            <p><InlineLatex latex="I_\text{tot} = 1{,}33 + 2{,}0 = 3{,}33 \text{ kg·m}^2" /></p>
-            <p className="font-semibold mt-3">b) Energibevaring:</p>
-            <p><InlineLatex latex="Mg\frac{L}{2} + mgL = \tfrac{1}{2}I_\text{tot}\omega^2" /></p>
-            <p><InlineLatex latex="4{,}0 \times 9{,}81 \times 0{,}50 + 2{,}0 \times 9{,}81 \times 1{,}0 = \tfrac{1}{2}(3{,}33)\omega^2" /></p>
-            <p><InlineLatex latex="19{,}62 + 19{,}62 = 1{,}667\omega^2" /></p>
-            <p><InlineLatex latex="\omega = \sqrt{\frac{39{,}24}{1{,}667}} = 4{,}85 \text{ rad/s}" /></p>
+          <div className="space-y-3 text-sm">
+            {/* 1. Hva vet vi */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva vet vi?</p>
+              <ul className="space-y-1">
+                <li>Stav: masse <InlineLatex latex="M = 4{,}0 \text{ kg}" />, lengde <InlineLatex latex="L = 1{,}0 \text{ m}" /></li>
+                <li>Kule: masse <InlineLatex latex="m = 2{,}0 \text{ kg}" />, festet i <InlineLatex latex="L = 1{,}0 \text{ m}" /> fra rotasjonsaksen</li>
+                <li>Rotasjonsaksen er i den frie enden av staven (uten kule)</li>
+                <li>Staven slippes fra horisontal posisjon</li>
+              </ul>
+            </div>
+
+            {/* 2. Hva skal vi finne */}
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-1">Hva skal vi finne?</p>
+              <ul className="space-y-1">
+                <li>(a) Totalt treghetsmoment <InlineLatex latex="I_\text{tot}" /> om rotasjonsaksen</li>
+                <li>(b) Vinkelhastighet <InlineLatex latex="\omega" /> i vertikal posisjon</li>
+              </ul>
+            </div>
+
+            {/* 3. Strategi */}
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold text-green-700 dark:text-green-400 mb-1">Strategi</p>
+              <p className="mb-2">
+                <strong>(a)</strong> Sammensatt legeme: <InlineLatex latex="I_\text{tot} = I_\text{stav} + I_\text{kule}" />.
+                Aksen er i enden av staven, så <InlineLatex latex="I_\text{stav} = \tfrac{1}{3}ML^2" /> (ikke <InlineLatex latex="\tfrac{1}{12}ML^2" /> som er for CM).
+                Kulen behandles som en punktmasse: <InlineLatex latex="I_\text{kule} = mL^2" />.
+              </p>
+              <p>
+                <strong>(b)</strong> Energibevaring: Systemet starter fra ro. Tyngdekraften gjør arbeid idet staven faller til vertikal.
+                CM av staven faller <InlineLatex latex="L/2 = 0{,}50 \text{ m}" />, kulen faller <InlineLatex latex="L = 1{,}0 \text{ m}" />.
+                Sett <InlineLatex latex="\Delta E_\text{pot} = \Delta E_\text{rot}" />.
+              </p>
+            </div>
+
+            {/* 4. Løsning */}
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="mb-1"><span className="font-medium">Steg 1 (a)</span> — Treghetsmoment for staven (akse i enden):</p>
+              <FormulaBox variant="blue" latex="I_\text{stav} = \frac{1}{3}ML^2 = \frac{1}{3}(4{,}0)(1{,}0)^2 = 1{,}33 \text{ kg·m}^2" />
+              <p className="mb-1"><span className="font-medium">Steg 2</span> — Treghetsmoment for kulen (punktmasse i avstand L):</p>
+              <FormulaBox variant="blue" latex="I_\text{kule} = mL^2 = 2{,}0 \times (1{,}0)^2 = 2{,}0 \text{ kg·m}^2" />
+              <p className="mb-1"><span className="font-medium">Steg 3</span> — Totalt treghetsmoment:</p>
+              <FormulaBox variant="gold" latex="I_\text{tot} = I_\text{stav} + I_\text{kule} = 1{,}33 + 2{,}0 = \underline{\underline{3{,}33 \text{ kg·m}^2}}" />
+              <p className="mb-1"><span className="font-medium">Steg 4 (b)</span> — Skriv opp energibevaring (tap i potensiell = gevinst i rotasjonsk.):</p>
+              <FormulaBox variant="blue" latex="Mg\frac{L}{2} + mgL = \frac{1}{2}I_\text{tot}\omega^2" />
+              <p className="mb-1"><span className="font-medium">Steg 5</span> — Sett inn tall:</p>
+              <FormulaBox variant="blue" latex="(4{,}0)(9{,}81)(0{,}50) + (2{,}0)(9{,}81)(1{,}0) = \frac{1}{2}(3{,}33)\omega^2" />
+              <FormulaBox variant="blue" latex="19{,}62 + 19{,}62 = 1{,}665\,\omega^2 \implies \omega^2 = \frac{39{,}24}{1{,}665} = 23{,}57" />
+              <FormulaBox variant="gold" latex="\omega = \sqrt{23{,}57} \approx \underline{\underline{4{,}85 \text{ rad/s}}}" />
+            </div>
+
+            {/* 5. Svar */}
+            <FormulaBox variant="gold" latex="I_\text{tot} = 3{,}33 \text{ kg·m}^2 \quad;\quad \omega \approx 4{,}85 \text{ rad/s}" />
+
+            {/* 6. Hva lærte vi */}
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
+              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
+              <p className="mb-2">
+                For sammensatte legemer adderer vi treghetsmomentene om <em>samme akse</em>.
+                Viktig: <InlineLatex latex="I_\text{stav} = \tfrac{1}{3}ML^2" /> (akse i enden) er dobbelt så stor som <InlineLatex latex="I_\text{stav} = \tfrac{1}{12}ML^2" /> (akse i midten).
+              </p>
+              <p>
+                Energibevaring er svært nyttig for å finne hastigheter uten å integrere bevegelsesligninger — identifiser hvilke masser som faller hvor langt, og sett potensielt energitap lik rotasjonskinetisk energi.
+              </p>
+            </div>
           </div>
         }
       />

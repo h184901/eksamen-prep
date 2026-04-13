@@ -96,21 +96,47 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong> m = 0,40 kg, v₁ = +30 m/s (mot vegg), v₂ = −20 m/s (tilbake), Δt = 0,010 s.</p>
-            <p><strong>Impuls-momentum-teoremet:</strong></p>
-            <FormulaBox
-              latex="J = m(v_2 - v_1) = 0{,}40 \cdot (-20 - 30) = -20\;\text{N·s}"
-              variant="blue"
-            />
-            <p><strong>Gjennomsnittskraft:</strong></p>
-            <FormulaBox
-              latex="\bar{F} = \frac{J}{\Delta t} = \frac{-20}{0{,}010} = \underline{\underline{-2000\;\text{N}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Negativt fortegn = kraften virker mot ballens innkommende retning (bort fra veggen). Størrelsen er 2000 N ≈ 200 ganger tyngdekraften på ballen!
-            </p>
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Husk alltid å ta med retningen. Når noe «spretter tilbake» har v₁ og v₂ motsatte fortegn, og Δp blir stor.</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Masse: <InlineLatex latex="m = 0{,}40\;\text{kg}" /></li>
+                <li>Hastighet mot vegg (positiv retning): <InlineLatex latex="v_1 = +30\;\text{m/s}" /></li>
+                <li>Hastighet tilbake (negativ retning): <InlineLatex latex="v_2 = -20\;\text{m/s}" /></li>
+                <li>Kontakttid: <InlineLatex latex="\Delta t = 0{,}010\;\text{s}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Gjennomsnittlig kraft <InlineLatex latex="\bar{F}" /> fra veggen på ballen</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Vi bruker <strong>impuls-momentumteoremet</strong>: kraftimpulsen <InlineLatex latex="J" /> er lik endringen i bevegelsesmengde. Deretter gir <InlineLatex latex="\bar{F} = J/\Delta t" /> gjennomsnittskraften. Vi velger positiv retning mot veggen og passer på at den tilbakegående farten får negativt fortegn.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Beregn kraftimpulsen:</p>
+              <FormulaBox
+                latex="J = m(v_2 - v_1) = 0{,}40 \cdot (-20 - 30) = 0{,}40 \cdot (-50) = -20\;\text{N·s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Finn gjennomsnittlig kraft:</p>
+              <FormulaBox
+                latex="\bar{F} = \frac{J}{\Delta t} = \frac{-20\;\text{N·s}}{0{,}010\;\text{s}} = \underline{\underline{-2000\;\text{N}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="\bar{F} = -2000\;\text{N}" variant="gold" />
+              <p className="text-sm mt-1">Negativt fortegn betyr kraften virker bort fra veggen (mot spilleren). Størrelsen 2000 N ≈ 200 ganger tyngdekraften på ballen!</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Når en ball spretter tilbake har <InlineLatex latex="v_1" /> og <InlineLatex latex="v_2" /> motsatte fortegn, og endringen i bevegelsesmengde blir dobbelt så stor som om ballen bare hadde stoppet. Velg alltid positiv retning eksplisitt og hold deg konsekvent til den.</p>
+            </div>
           </div>
         }
       />
@@ -143,29 +169,61 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Komponenter etter spark:</strong></p>
-            <FormulaBox
-              latex="v_{2x} = 30\cos 45° = 21{,}2\;\text{m/s}, \quad v_{2y} = 30\sin 45° = 21{,}2\;\text{m/s}"
-              variant="blue"
-            />
-            <p><strong>Kraftimpuls (komponentvis):</strong></p>
-            <FormulaBox
-              latex="J_x = m(v_{2x} - v_{1x}) = 0{,}40(21{,}2 - (-20)) = 0{,}40 \cdot 41{,}2 = 16{,}5\;\text{N·s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="J_y = m(v_{2y} - v_{1y}) = 0{,}40(21{,}2 - 0) = 8{,}5\;\text{N·s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="J = \sqrt{J_x^2 + J_y^2} = \sqrt{16{,}5^2 + 8{,}5^2} = \underline{\underline{18{,}5\;\text{N·s}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="\bar{F} = \frac{J}{\Delta t} = \frac{18{,}5}{0{,}010} = \underline{\underline{1{,}9\;\text{kN}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> I 2D beregner du impulsen komponentvis, deretter størrelsen med Pythagoras.</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Masse: <InlineLatex latex="m = 0{,}40\;\text{kg}" /></li>
+                <li>Startfart: <InlineLatex latex="v_1 = 20\;\text{m/s}" /> mot venstre <InlineLatex latex="(v_{1x} = -20\;\text{m/s},\; v_{1y} = 0)" /></li>
+                <li>Sluttfart: <InlineLatex latex="v_2 = 30\;\text{m/s}" /> i 45° oppover mot høyre</li>
+                <li>Kontakttid: <InlineLatex latex="\Delta t = 0{,}010\;\text{s}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Kraftimpulsens størrelse <InlineLatex latex="|J|" /></li>
+                <li>Gjennomsnittlig kraft <InlineLatex latex="|\bar{F}|" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Fordi ballen beveger seg i 2D bruker vi <strong>komponentvis impuls-momentumteorem</strong>. Vi finner <InlineLatex latex="J_x" /> og <InlineLatex latex="J_y" /> separat, og kombinerer med Pythagoras for å få størrelsen. Positiv x = mot høyre, positiv y = oppover.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Dekomponér sluttfarten:</p>
+              <FormulaBox
+                latex="v_{2x} = 30\cos 45° = 21{,}2\;\text{m/s}, \quad v_{2y} = 30\sin 45° = 21{,}2\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Kraftimpuls i hver retning:</p>
+              <FormulaBox
+                latex="J_x = m(v_{2x} - v_{1x}) = 0{,}40\,(21{,}2 - (-20)) = 0{,}40 \cdot 41{,}2 = 16{,}5\;\text{N·s}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="J_y = m(v_{2y} - v_{1y}) = 0{,}40\,(21{,}2 - 0) = 8{,}5\;\text{N·s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Størrelse med Pythagoras:</p>
+              <FormulaBox
+                latex="J = \sqrt{J_x^2 + J_y^2} = \sqrt{16{,}5^2 + 8{,}5^2} = \underline{\underline{18{,}5\;\text{N·s}}}"
+                variant="gold"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Gjennomsnittlig kraft:</p>
+              <FormulaBox
+                latex="\bar{F} = \frac{J}{\Delta t} = \frac{18{,}5}{0{,}010} = \underline{\underline{1{,}9\;\text{kN}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="J = 18{,}5\;\text{N·s}, \quad \bar{F} = 1{,}9\;\text{kN}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">I 2D behandles impulsen komponentvis — x og y uavhengig. Pythagoras gir oss størrelsen til slutt. Legg merke til at ballens x-impuls er stor fordi den bytter retning (fra −20 til +21 m/s), mens y-impulsen bare akselererer den oppover fra 0.</p>
+            </div>
           </div>
         }
       />
@@ -193,20 +251,47 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Før:</strong> <InlineLatex latex="p_{\text{total}} = 0" /> (alt i ro).</p>
-            <p><strong>Etter:</strong></p>
-            <FormulaBox
-              latex="m_A v_A + m_B v_B = 0 \;\Rightarrow\; v_A = -\frac{m_B}{m_A} v_B"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v_A = -\frac{0{,}005}{3{,}0} \cdot 300 = \underline{\underline{-0{,}50\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Negativt fortegn betyr rifla beveger seg bakover. Liten fart fordi rifla har mye større masse enn kulen.
-            </p>
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Bevegelsesmengde bevares. Liten masse × stor fart = stor masse × liten fart. Derfor er rekylen moderat selv om kulen er rask.</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Riflens masse: <InlineLatex latex="m_A = 3{,}0\;\text{kg}" /></li>
+                <li>Kulens masse: <InlineLatex latex="m_B = 0{,}005\;\text{kg}" /></li>
+                <li>Kulens fart etter skudd: <InlineLatex latex="v_B = +300\;\text{m/s}" /></li>
+                <li>Begge i ro før skuddet: <InlineLatex latex="p_{\text{total,før}} = 0" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Riflens rekylfart <InlineLatex latex="v_A" /> etter skuddet</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Systemet er isolert (ingen ytre horisontal kraft under skuddet), så <strong>bevegelsesmengden er bevart</strong>. Fordi alt er i ro før, er <InlineLatex latex="p_{\text{total}} = 0" /> og etter skuddet må kulen og rifla ha like store, men motsatte bevegelsesmengder.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Bevaring av bevegelsesmengde:</p>
+              <FormulaBox
+                latex="m_A v_A + m_B v_B = 0 \;\Rightarrow\; v_A = -\frac{m_B}{m_A}\,v_B"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Sett inn tallverdier:</p>
+              <FormulaBox
+                latex="v_A = -\frac{0{,}005}{3{,}0} \cdot 300 = \underline{\underline{-0{,}50\;\text{m/s}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v_A = -0{,}50\;\text{m/s}" variant="gold" />
+              <p className="text-sm mt-1">Negativt fortegn betyr rifla beveger seg bakover (rekyl). Liten fart fordi rifla er 600 ganger tyngre enn kulen.</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Bevegelsesmengde er alltid bevart i isolerte systemer. Produktet <InlineLatex latex="mv" /> er likt for begge: liten masse × stor fart = stor masse × liten fart. Det er derfor rekyl-farten er moderat selv om kulen er mye raskere.</p>
+            </div>
           </div>
         }
       />
@@ -234,28 +319,56 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Bevaring av bevegelsesmengde:</strong></p>
-            <FormulaBox
-              latex="v_2 = \frac{m_A v_{A1} + m_B v_{B1}}{m_A + m_B} = \frac{0{,}50 \cdot 2{,}0 + 0{,}30 \cdot (-2{,}0)}{0{,}80} = \frac{0{,}40}{0{,}80} = \underline{\underline{0{,}50\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p><strong>Energi før:</strong></p>
-            <FormulaBox
-              latex="E_{K1} = \tfrac{1}{2} \cdot 0{,}50 \cdot 2^2 + \tfrac{1}{2} \cdot 0{,}30 \cdot 2^2 = 1{,}0 + 0{,}60 = 1{,}60\;\text{J}"
-              variant="blue"
-            />
-            <p><strong>Energi etter:</strong></p>
-            <FormulaBox
-              latex="E_{K2} = \tfrac{1}{2} \cdot 0{,}80 \cdot 0{,}50^2 = 0{,}10\;\text{J}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\Delta E_K = 1{,}60 - 0{,}10 = \underline{\underline{1{,}50\;\text{J (tapt)}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Hele 94% av kinetisk energi er tapt til varme og deformasjon! Bevegelsesmengden er likevel bevart: p<sub>før</sub> = 0,40 = p<sub>etter</sub>.
-            </p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Kloss A: <InlineLatex latex="m_A = 0{,}50\;\text{kg}" />, <InlineLatex latex="v_{A1} = +2{,}0\;\text{m/s}" /></li>
+                <li>Kloss B: <InlineLatex latex="m_B = 0{,}30\;\text{kg}" />, <InlineLatex latex="v_{B1} = -2{,}0\;\text{m/s}" /></li>
+                <li>De henger sammen etter støtet (fullstendig inelastisk)</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Felles hastighet <InlineLatex latex="v_2" /> etter støtet</li>
+                <li>Energitap <InlineLatex latex="\Delta E_K" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Fullstendig inelastisk støt: legemene beveger seg med <strong>felles hastighet</strong> etter kollisjonen. <strong>Bevegelsesmengden er bevart</strong>, men kinetisk energi er ikke bevart. Vi bruker p-bevaring for å finne <InlineLatex latex="v_2" />, deretter beregner vi energitapet eksplisitt.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+                <p className="text-sm mb-1">Steg 1 — Bevaring av bevegelsesmengde:</p>
+              <FormulaBox
+                latex="v_2 = \frac{m_A v_{A1} + m_B v_{B1}}{m_A + m_B} = \frac{0{,}50 \cdot 2{,}0 + 0{,}30 \cdot (-2{,}0)}{0{,}80} = \frac{0{,}40}{0{,}80} = \underline{\underline{0{,}50\;\text{m/s}}}"
+                variant="gold"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Kinetisk energi før støtet:</p>
+              <FormulaBox
+                latex="E_{K1} = \tfrac{1}{2} m_A v_{A1}^2 + \tfrac{1}{2} m_B v_{B1}^2 = \tfrac{1}{2} \cdot 0{,}50 \cdot 4 + \tfrac{1}{2} \cdot 0{,}30 \cdot 4 = 1{,}60\;\text{J}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Kinetisk energi etter støtet:</p>
+              <FormulaBox
+                latex="E_{K2} = \tfrac{1}{2}(m_A+m_B)v_2^2 = \tfrac{1}{2} \cdot 0{,}80 \cdot 0{,}25 = 0{,}10\;\text{J}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Energitap:</p>
+              <FormulaBox
+                latex="\Delta E_K = E_{K1} - E_{K2} = 1{,}60 - 0{,}10 = \underline{\underline{1{,}50\;\text{J (tapt)}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v_2 = 0{,}50\;\text{m/s} \quad (\rightarrow), \quad \Delta E_K = 1{,}50\;\text{J (tapt)}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Hele 94 % av kinetisk energi er tapt til varme og deformasjon i dette støtet. Bevegelsesmengden er likevel alltid bevart: <InlineLatex latex="p_{\text{før}} = 0{,}40 = p_{\text{etter}}" />. Det er dette som skiller p-bevaring fra energibevaring — p-bevaring er absolutt, energibevaring er betinget.</p>
+            </div>
           </div>
         }
       />
@@ -289,26 +402,56 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Steg 1 — Bevaring av bevegelsesmengde (under støtet):</strong></p>
-            <FormulaBox
-              latex="mv_0 = (M+m)V \;\Rightarrow\; V = \frac{m}{M+m}\,v_0"
-              variant="blue"
-            />
-            <p><strong>Steg 2 — Bevaring av mekanisk energi (etter støtet):</strong></p>
-            <FormulaBox
-              latex="\tfrac{1}{2}(M+m)V^2 = (M+m)gy \;\Rightarrow\; V = \sqrt{2gy}"
-              variant="blue"
-            />
-            <p><strong>Kombinerer:</strong></p>
-            <FormulaBox
-              latex="v_0 = \frac{M+m}{m}\sqrt{2gy} = \frac{2{,}005}{0{,}005}\sqrt{2 \cdot 9{,}81 \cdot 0{,}030}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v_0 = 401 \cdot 0{,}767 = \underline{\underline{308\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Du kan IKKE bruke energibevaring under støtet (energi går tapt), og du kan IKKE bruke p-bevaring under svinget (snorkraft er en ytre kraft). Du MÅ bruke riktig prinsipp i riktig steg!</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Kulens masse: <InlineLatex latex="m = 0{,}005\;\text{kg}" /></li>
+                <li>Klossens masse: <InlineLatex latex="M = 2{,}0\;\text{kg}" /></li>
+                <li>Svingehøyde: <InlineLatex latex="y = 0{,}030\;\text{m}" /></li>
+                <li>Kule fester seg i kloss (fullstendig inelastisk)</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Kulens hastighet <InlineLatex latex="v_0" /> like før støtet</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Dette er et <strong>to-stegs problem</strong>. Under støtet bruker vi <strong>p-bevaring</strong> (energi går tapt under støtet). Under svinget bruker vi <strong>mekanisk energibevaring</strong> (ingen friksjon, bare konservative krefter). Vi kombinerer de to ligningene for å eliminere <InlineLatex latex="V" />.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Bevaring av bevegelsesmengde (under støtet):</p>
+              <FormulaBox
+                latex="mv_0 = (M+m)V \;\Rightarrow\; V = \frac{m}{M+m}\,v_0"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Bevaring av mekanisk energi (under svinget):</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}(M+m)V^2 = (M+m)gy \;\Rightarrow\; V = \sqrt{2gy}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Eliminer <InlineLatex latex="V" /> ved å kombinere ligningene:</p>
+              <FormulaBox
+                latex="v_0 = \frac{M+m}{m}\sqrt{2gy} = \frac{2{,}005}{0{,}005}\sqrt{2 \cdot 9{,}81 \cdot 0{,}030}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Regn ut:</p>
+              <FormulaBox
+                latex="v_0 = 401 \cdot 0{,}767 = \underline{\underline{308\;\text{m/s}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v_0 = 308\;\text{m/s}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Du KAN IKKE bruke energibevaring under støtet (energi går tapt til deformasjon og varme), og du KAN IKKE bruke p-bevaring under svinget (snorkraften er en ytre kraft). Det riktige prinsippet i riktig steg er nøkkelen til ballistisk pendel.</p>
+            </div>
           </div>
         }
       />
@@ -337,38 +480,68 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>x-retning (østover):</strong></p>
-            <FormulaBox
-              latex="(m_A+m_B)v_x = m_B v_B \;\Rightarrow\; v_x = \frac{2000 \cdot 10}{3000} = 6{,}67\;\text{m/s}"
-              variant="blue"
-            />
-            <p><strong>y-retning (nordover):</strong></p>
-            <FormulaBox
-              latex="(m_A+m_B)v_y = m_A v_A \;\Rightarrow\; v_y = \frac{1000 \cdot 15}{3000} = 5{,}00\;\text{m/s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v = \sqrt{v_x^2 + v_y^2} = \sqrt{6{,}67^2 + 5{,}00^2} = \underline{\underline{8{,}3\;\text{m/s}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="\alpha = \arctan\!\left(\frac{v_y}{v_x}\right) = \arctan\!\left(\frac{5{,}00}{6{,}67}\right) = \underline{\underline{37°\;\text{nord for øst}}}"
-              variant="gold"
-            />
-            <p><strong>Energitap:</strong></p>
-            <FormulaBox
-              latex="E_{K,\text{før}} = \tfrac{1}{2} \cdot 1000 \cdot 15^2 + \tfrac{1}{2} \cdot 2000 \cdot 10^2 = 212\,500\;\text{J}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_{K,\text{etter}} = \tfrac{1}{2} \cdot 3000 \cdot 8{,}3^2 = 103\,335\;\text{J}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\Delta E_K = 212\,500 - 103\,335 = \underline{\underline{109\;\text{kJ (tapt)}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> I 2D-kollisjoner bruker du p-bevaring komponentvis. Finn vₓ og vy separat, deretter Pythagoras for størrelsen.</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Bil A: <InlineLatex latex="m_A = 1000\;\text{kg}" />, <InlineLatex latex="v_A = 15\;\text{m/s}" /> nordover</li>
+                <li>Bil B: <InlineLatex latex="m_B = 2000\;\text{kg}" />, <InlineLatex latex="v_B = 10\;\text{m/s}" /> østover</li>
+                <li>Fullstendig inelastisk: henger sammen etter kollisjon</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Felles hastighet (størrelse og retning) etter kollisjonen</li>
+                <li>Energitap <InlineLatex latex="\Delta E_K" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">2D fullstendig inelastisk kollisjon. Vi setter opp <strong>p-bevaring komponentvis</strong> — x og y behandles som to uavhengige 1D-problemer. Deretter gir Pythagoras størrelsen og arctangens gir retningen. Energitapet beregnes ved å sammenligne <InlineLatex latex="E_K" /> før og etter.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — P-bevaring i x-retning (østover):</p>
+              <FormulaBox
+                latex="(m_A+m_B)v_x = m_B v_B \;\Rightarrow\; v_x = \frac{2000 \cdot 10}{3000} = 6{,}67\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — P-bevaring i y-retning (nordover):</p>
+              <FormulaBox
+                latex="(m_A+m_B)v_y = m_A v_A \;\Rightarrow\; v_y = \frac{1000 \cdot 15}{3000} = 5{,}00\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Størrelse og retning:</p>
+              <FormulaBox
+                latex="v = \sqrt{v_x^2 + v_y^2} = \sqrt{6{,}67^2 + 5{,}00^2} = \underline{\underline{8{,}3\;\text{m/s}}}"
+                variant="gold"
+              />
+              <FormulaBox
+                latex="\alpha = \arctan\!\left(\frac{v_y}{v_x}\right) = \arctan\!\left(\frac{5{,}00}{6{,}67}\right) = \underline{\underline{37°\;\text{nord for øst}}}"
+                variant="gold"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Energitap:</p>
+              <FormulaBox
+                latex="E_{K,\text{før}} = \tfrac{1}{2} \cdot 1000 \cdot 15^2 + \tfrac{1}{2} \cdot 2000 \cdot 10^2 = 112\,500 + 100\,000 = 212\,500\;\text{J}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="E_{K,\text{etter}} = \tfrac{1}{2} \cdot 3000 \cdot 8{,}3^2 \approx 103\,335\;\text{J}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="\Delta E_K = 212\,500 - 103\,335 = \underline{\underline{109\;\text{kJ (tapt)}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v = 8{,}3\;\text{m/s},\quad 37°\text{ nord for øst},\quad \Delta E_K = 109\;\text{kJ (tapt)}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">I 2D-kollisjoner er bevegelsesmengden bevart i <em>begge</em> retninger uavhengig. Finn <InlineLatex latex="v_x" /> og <InlineLatex latex="v_y" /> separat, bruk Pythagoras for størrelsen og arctangens for retningen. Merk at over halvparten av kinetisk energi gikk tapt i denne kollisjonen!</p>
+            </div>
           </div>
         }
       />
@@ -399,34 +572,60 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Ligning 1 — Bevaring av bevegelsesmengde:</strong></p>
-            <FormulaBox
-              latex="0{,}50 \cdot v_{A2} + 0{,}30 \cdot v_{B2} = 0{,}50 \cdot 2 + 0{,}30 \cdot (-2) = 0{,}40"
-              variant="blue"
-            />
-            <p><strong>Ligning 2 — Bevaring av kinetisk energi:</strong></p>
-            <FormulaBox
-              latex="\tfrac{1}{2} \cdot 0{,}50 \cdot v_{A2}^2 + \tfrac{1}{2} \cdot 0{,}30 \cdot v_{B2}^2 = 1{,}60"
-              variant="blue"
-            />
-            <p><strong>Fra ligning 1:</strong> <InlineLatex latex="v_{A2} = 0{,}80 - 0{,}60\,v_{B2}" /></p>
-            <p>Substituerer inn i ligning 2 og løser andregradsligningen:</p>
-            <FormulaBox
-              latex="v_{B2} = 3{,}0\;\text{m/s} \quad \text{eller} \quad v_{B2} = -2{,}0\;\text{m/s (triviell, forkastes)}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v_{A2} = 0{,}80 - 0{,}60 \cdot 3{,}0 = \underline{\underline{-1{,}0\;\text{m/s}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="v_{B2} = \underline{\underline{3{,}0\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              A snur retning (−1,0 m/s = mot venstre), B spretter ut mot høyre (3,0 m/s). Sjekk: p<sub>etter</sub> = 0,50·(−1) + 0,30·3 = 0,40 ✓ og E<sub>K,etter</sub> = 0,25 + 1,35 = 1,60 J ✓
-            </p>
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Elastisk kollisjon gir et andregradsligningssystem. Forkast alltid den trivielle løsningen (der «ingenting skjer»).</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Kloss A: <InlineLatex latex="m_A = 0{,}50\;\text{kg}" />, <InlineLatex latex="v_{A1} = +2{,}0\;\text{m/s}" /></li>
+                <li>Kloss B: <InlineLatex latex="m_B = 0{,}30\;\text{kg}" />, <InlineLatex latex="v_{B1} = -2{,}0\;\text{m/s}" /></li>
+                <li>Kollisjonen er <strong>elastisk</strong></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Hastighetene <InlineLatex latex="v_{A2}" /> og <InlineLatex latex="v_{B2}" /> etter kollisjonen</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Elastisk kollisjon gir <strong>to bevaringslover</strong>: bevegelsesmengde og kinetisk energi. Dette gir et ligningssystem med to ukjente (<InlineLatex latex="v_{A2}" /> og <InlineLatex latex="v_{B2}" />). Vi uttrykker <InlineLatex latex="v_{A2}" /> fra p-ligningen og substituerer inn i energiligningen. Vi får en andregradslikning med to løsninger — den trivielle (ingenting skjer) forkastes.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Ligning 1: bevaring av bevegelsesmengde:</p>
+              <FormulaBox
+                latex="0{,}50\,v_{A2} + 0{,}30\,v_{B2} = 0{,}50 \cdot 2 + 0{,}30 \cdot (-2) = 0{,}40"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Ligning 2: bevaring av kinetisk energi:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2} \cdot 0{,}50\,v_{A2}^2 + \tfrac{1}{2} \cdot 0{,}30\,v_{B2}^2 = 1{,}60\;\text{J}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Fra ligning 1: <InlineLatex latex="v_{A2} = 0{,}80 - 0{,}60\,v_{B2}" />. Substituer i ligning 2 og løs andregradsligningen:</p>
+              <FormulaBox
+                latex="v_{B2} = 3{,}0\;\text{m/s} \quad \text{eller} \quad v_{B2} = -2{,}0\;\text{m/s (triviell — forkastes!)}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Finn <InlineLatex latex="v_{A2}" />:</p>
+              <FormulaBox
+                latex="v_{A2} = 0{,}80 - 0{,}60 \cdot 3{,}0 = \underline{\underline{-1{,}0\;\text{m/s}}}"
+                variant="gold"
+              />
+              <FormulaBox
+                latex="v_{B2} = \underline{\underline{+3{,}0\;\text{m/s}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v_{A2} = -1{,}0\;\text{m/s}\;(\leftarrow), \quad v_{B2} = +3{,}0\;\text{m/s}\;(\rightarrow)" variant="gold" />
+              <p className="text-sm mt-1">Sjekk: <InlineLatex latex="p_{\text{etter}} = 0{,}50 \cdot (-1) + 0{,}30 \cdot 3 = 0{,}40" /> ✓ og <InlineLatex latex="E_{K,\text{etter}} = 0{,}25 + 1{,}35 = 1{,}60\;\text{J}" /> ✓</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Elastisk kollisjon gir alltid et andregradsligningssystem. Den trivielle løsningen (partiklene passerer gjennom hverandre) er matematisk gyldig men fysisk meningsløs — forkast den alltid. A snur retning, B spretter ut med økt fart fordi A hadde større bevegelsesmengde opprinnelig.</p>
+            </div>
           </div>
         }
       />
@@ -455,25 +654,62 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>x-retning:</strong></p>
-            <FormulaBox
-              latex="v_{B2x} = \frac{m_A v_{A1} - m_A v_{A2}\cos\alpha}{m_B} = \frac{20 \cdot 2 - 20 \cdot 1 \cdot \cos 30°}{12} = 1{,}89\;\text{m/s}"
-              variant="blue"
-            />
-            <p><strong>y-retning:</strong></p>
-            <FormulaBox
-              latex="v_{B2y} = \frac{0 - m_A v_{A2}\sin\alpha}{m_B} = \frac{-20 \cdot 1 \cdot \sin 30°}{12} = -0{,}83\;\text{m/s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v_{B2} = \sqrt{1{,}89^2 + 0{,}83^2} = \underline{\underline{2{,}07\;\text{m/s}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="\beta = \arctan\!\left(\frac{0{,}83}{1{,}89}\right) = \underline{\underline{23{,}7°\;\text{under horisontal}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> I 2D-kollisjoner bevares p<sub>x</sub> og p<sub>y</sub> uavhengig. Bruk komponentmetoden systematisk.</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Stein A: <InlineLatex latex="m_A = 20\;\text{kg}" />, <InlineLatex latex="v_{A1} = 2{,}0\;\text{m/s}" /> mot høyre</li>
+                <li>Stein B: <InlineLatex latex="m_B = 12\;\text{kg}" />, i ro</li>
+                <li>Etter kollisjonen: A har <InlineLatex latex="v_{A2} = 1{,}0\;\text{m/s}" /> i retning <InlineLatex latex="\alpha = 30°" /> over horisontal</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Stein B sin hastighet (størrelse og retning) etter kollisjonen</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">2D-kollisjon. Vi kjenner ikke kollisjonstypen (elastisk/inelastisk), men vi vet at <strong>bevegelsesmengden er bevart</strong> alltid. Vi bruker p-bevaring i x og y for å finne B sine komponenter, deretter Pythagoras og arctangens for størrelse og retning.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — P-bevaring i x-retning:</p>
+              <FormulaBox
+                latex="m_A v_{A1} = m_A v_{A2}\cos\alpha + m_B v_{B2x}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="v_{B2x} = \frac{m_A(v_{A1} - v_{A2}\cos\alpha)}{m_B} = \frac{20(2{,}0 - 1{,}0\cos 30°)}{12} = 1{,}89\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — P-bevaring i y-retning (B var i ro, ingen y-komponent før):</p>
+              <FormulaBox
+                latex="0 = m_A v_{A2}\sin\alpha + m_B v_{B2y}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="v_{B2y} = \frac{-m_A v_{A2}\sin\alpha}{m_B} = \frac{-20 \cdot 1{,}0 \cdot \sin 30°}{12} = -0{,}83\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Størrelse og retning for B:</p>
+              <FormulaBox
+                latex="v_{B2} = \sqrt{v_{B2x}^2 + v_{B2y}^2} = \sqrt{1{,}89^2 + 0{,}83^2} = \underline{\underline{2{,}07\;\text{m/s}}}"
+                variant="gold"
+              />
+              <FormulaBox
+                latex="\beta = \arctan\!\left(\frac{|v_{B2y}|}{v_{B2x}}\right) = \arctan\!\left(\frac{0{,}83}{1{,}89}\right) = \underline{\underline{23{,}7°\;\text{under horisontal}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="v_{B2} = 2{,}07\;\text{m/s},\quad 23{,}7°\text{ under horisontal (til høyre og nedover)}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">I 2D-kollisjoner er bevegelsesmengden bevart i <em>begge</em> retninger uavhengig. Stein B får negativ y-komponent fordi A avbøyes oppover — ved p-bevaring må B gå nedover for å kompensere. Komponentmetoden er alltid veien å gå i 2D.</p>
+            </div>
           </div>
         }
       />
@@ -504,15 +740,45 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Bevaring av bevegelsesmengde (under støtet):</strong></p>
-            <FormulaBox
-              latex="mv_0 = (m + M)V"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="V = \frac{m}{m+M}\,v_0"
-              variant="gold"
-            />
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Kulens masse: <InlineLatex latex="m" />, startfart: <InlineLatex latex="v_0" /></li>
+                <li>Klossens masse: <InlineLatex latex="M" />, i ro</li>
+                <li>Kule fester seg i kloss (fullstendig inelastisk)</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Felleslegemets hastighet <InlineLatex latex="V" /> rett etter støtet</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Under støtet er det ingen ytre horisontale krefter, så <strong>bevegelsesmengden er bevart</strong>. Kule og kloss beveger seg med felles hastighet etter støtet — sett opp p-bevaring og løs for <InlineLatex latex="V" />.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Bevaring av bevegelsesmengde under støtet:</p>
+              <FormulaBox
+                latex="mv_0 = (m + M)V"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Løs for <InlineLatex latex="V" />:</p>
+              <FormulaBox
+                latex="V = \frac{m}{m+M}\,v_0"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="V = \dfrac{m}{m+M}\,v_0" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Dette er det første steget i en ballistisk pendel. <InlineLatex latex="V" /> er alltid mindre enn <InlineLatex latex="v_0" /> fordi totalvekten er større. Jo større klossen er sammenlignet med kulen, desto langsommere blir V — og desto mer energi tapes.</p>
+            </div>
           </div>
         }
       />
@@ -545,24 +811,55 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Energibevaring etter støtet:</strong></p>
-            <FormulaBox
-              latex="\tfrac{1}{2}(m+M)V^2 = (m+M)gL(1-\cos\varphi_{\max})"
-              variant="blue"
-            />
-            <p>Med <InlineLatex latex="V = \frac{m}{m+M}v_0" />:</p>
-            <FormulaBox
-              latex="\tfrac{1}{2}\frac{m^2 v_0^2}{m+M} = (m+M)gL(1-\cos\varphi_{\max})"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="1-\cos\varphi_{\max} = \frac{m^2 v_0^2}{2gL(m+M)^2}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\varphi_{\max} = \arccos\!\left(1 - \frac{m^2 v_0^2}{2gL(m+M)^2}\right) \quad \square"
-              variant="gold"
-            />
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Fra del a): <InlineLatex latex="V = \dfrac{m}{m+M}\,v_0" /></li>
+                <li>Snorlengde: <InlineLatex latex="L" /></li>
+                <li>Høyde ved vinkelutslag: <InlineLatex latex="h = L(1-\cos\varphi)" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Uttrykket for maksimalt vinkelutslag <InlineLatex latex="\varphi_{\max}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Etter støtet er systemet et svingeopplegg uten friksjon — <strong>mekanisk energi er bevart</strong>. Vi setter kinetisk energi rett etter støtet lik potensiell energi ved maksimalt utslag, og løser for <InlineLatex latex="\varphi_{\max}" />.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Energibevaring etter støtet:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}(m+M)V^2 = (m+M)gL(1-\cos\varphi_{\max})"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Sett inn <InlineLatex latex="V = \dfrac{m}{m+M}v_0" />:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}\cdot\frac{m^2 v_0^2}{m+M} = (m+M)gL(1-\cos\varphi_{\max})"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Løs for <InlineLatex latex="1 - \cos\varphi_{\max}" />:</p>
+              <FormulaBox
+                latex="1-\cos\varphi_{\max} = \frac{m^2 v_0^2}{2gL(m+M)^2}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Løs for <InlineLatex latex="\varphi_{\max}" />:</p>
+              <FormulaBox
+                latex="\varphi_{\max} = \arccos\!\left(1 - \frac{m^2 v_0^2}{2gL(m+M)^2}\right) \quad \square"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="\varphi_{\max} = \arccos\!\left(1 - \dfrac{m^2 v_0^2}{2gL(m+M)^2}\right)" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Dette er det andre steget i ballistisk pendel. Vi kombinerer p-bevaring (støtet) og energibevaring (svinget) for å gå fra kulefart til vinkelutslag. Legg merke til at massen <InlineLatex latex="(m+M)" /> kansellerer i energiligningen i steg 1 — men ikke etter vi setter inn <InlineLatex latex="V" />!</p>
+            </div>
           </div>
         }
       />
@@ -589,21 +886,55 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Bevegelsesmengde:</strong> <InlineLatex latex="MV_1 + mV_2 = mv_0 \;\Rightarrow\; 10V_1 + 0{,}005V_2 = 0{,}50" /></p>
-            <p><strong>Energi:</strong> <InlineLatex latex="0{,}0025V_2^2 + 5V_1^2 = 25" /></p>
-            <p>Fra ligning 1: <InlineLatex latex="V_2 = 100 - 2000V_1" /></p>
-            <p>Substituerer og løser:</p>
-            <FormulaBox
-              latex="V_1 = \frac{1000}{10005} \approx \underline{\underline{0{,}10\;\text{m/s}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="V_2 = 100 - 2000 \cdot 0{,}0999 = \underline{\underline{-99{,}9\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Kulen spretter nesten tilbake med samme fart (−99,9 m/s), og klossen får bare 0,10 m/s. Fordi m ≪ M overføres nesten ingen energi.
-            </p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Kulens masse: <InlineLatex latex="m = 0{,}0050\;\text{kg}" /></li>
+                <li>Klossens masse: <InlineLatex latex="M = 10\;\text{kg}" /></li>
+                <li>Kulens startfart: <InlineLatex latex="v_0 = 100\;\text{m/s}" /></li>
+                <li>Kollisjonen er <strong>fullstendig elastisk</strong></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Kulens fart <InlineLatex latex="V_2" /> og klossens fart <InlineLatex latex="V_1" /> etter støtet</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Elastisk kollisjon gir to bevaringslover. Vi kaller klossens sluttfart <InlineLatex latex="V_1" /> og kulens sluttfart <InlineLatex latex="V_2" />. Fra p-bevaring uttrykker vi <InlineLatex latex="V_2" />, substituerer i energiligningen, og løser andregradsligningen. Forkast den trivielle løsningen.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Bevegelsesmengde:</p>
+              <FormulaBox
+                latex="MV_1 + mV_2 = mv_0 \;\Rightarrow\; 10V_1 + 0{,}005V_2 = 0{,}50"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Kinetisk energi:</p>
+              <FormulaBox
+                latex="\tfrac{1}{2}MV_1^2 + \tfrac{1}{2}mV_2^2 = \tfrac{1}{2}mv_0^2 \;\Rightarrow\; 5V_1^2 + 0{,}0025V_2^2 = 25"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Fra ligning 1: <InlineLatex latex="V_2 = 100 - 2000V_1" />. Substituer i energiligningen og løs:</p>
+              <FormulaBox
+                latex="V_1 = \frac{2m\,v_0}{M+m} = \frac{2 \cdot 0{,}005 \cdot 100}{10{,}005} \approx \underline{\underline{0{,}10\;\text{m/s}}}"
+                variant="gold"
+              />
+              <FormulaBox
+                latex="V_2 = \frac{(m-M)v_0}{m+M} = \frac{(0{,}005-10) \cdot 100}{10{,}005} \approx \underline{\underline{-99{,}9\;\text{m/s}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="V_1 \approx 0{,}10\;\text{m/s}\;(\rightarrow), \quad V_2 \approx -99{,}9\;\text{m/s}\;(\leftarrow)" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Når <InlineLatex latex="m \ll M" /> spretter den lette partikkelen nesten tilbake med samme fart, og den tunge overtar nesten ingen bevegelsesmengde. Dette er det fysiske prinsippet bak nøytronmoderasjon i reaktorer: nøytroner bremses best av kjerner med omtrent samme masse (hydrogen).</p>
+            </div>
           </div>
         }
       />
@@ -629,10 +960,46 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <FormulaBox
-              latex="\bar{F} = \frac{MV_1}{\Delta t} = \frac{10 \cdot 0{,}10}{0{,}0050} = \underline{\underline{200\;\text{N}}}"
-              variant="gold"
-            />
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Klossens masse: <InlineLatex latex="M = 10\;\text{kg}" /></li>
+                <li>Klossens sluttfart (fra oppg. 3c): <InlineLatex latex="V_1 = 0{,}10\;\text{m/s}" /></li>
+                <li>Klossen var i ro før støtet</li>
+                <li>Støtets varighet: <InlineLatex latex="\Delta t = 0{,}0050\;\text{s}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Gjennomsnittlig kraft <InlineLatex latex="\bar{F}" /> på klossen under støtet</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Gjennomsnittlig kraft er lik impulsen på klossen delt på kontakttiden. Impulsen på klossen er lik endringen i klossens bevegelsesmengde: <InlineLatex latex="J = \Delta p_{\text{kloss}} = MV_1 - 0" />.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Impuls på klossen:</p>
+              <FormulaBox
+                latex="J = M V_1 = 10 \cdot 0{,}10 = 1{,}0\;\text{N·s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Gjennomsnittlig kraft:</p>
+              <FormulaBox
+                latex="\bar{F} = \frac{J}{\Delta t} = \frac{1{,}0}{0{,}0050} = \underline{\underline{200\;\text{N}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="\bar{F} = 200\;\text{N}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Gjennomsnittskraften finner du alltid via <InlineLatex latex="\bar{F} = \Delta p / \Delta t" />. Her overføres liten bevegelsesmengde (<InlineLatex latex="1{,}0\;\text{N·s}" />) men kraften er likevel 200 N fordi kontakttiden er veldig kort. Jo kortere kollisjon, desto større gjennomsnittskraft!</p>
+            </div>
           </div>
         }
       />
@@ -678,20 +1045,48 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p>Positiv retning: mot platen. Da: <InlineLatex latex="v_1 = +5{,}0\;\text{m/s}" />, <InlineLatex latex="v_2 = -4{,}0\;\text{m/s}" />.</p>
-            <p><strong>a) Kraftimpuls:</strong></p>
-            <FormulaBox
-              latex="J = m(v_2 - v_1) = 0{,}600 \cdot (-4{,}0 - 5{,}0) = \underline{\underline{-5{,}4\;\text{N·s}}}"
-              variant="gold"
-            />
-            <p><strong>b) Gjennomsnittlig kraft:</strong></p>
-            <FormulaBox
-              latex="\bar{F} = \frac{J}{\Delta t} = \frac{-5{,}4}{0{,}15} = \underline{\underline{-36\;\text{N}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Negativt fortegn = kraften virker bort fra platen (mot spilleren). Størrelsen er 36 N.
-            </p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Masse: <InlineLatex latex="m = 0{,}600\;\text{kg}" /></li>
+                <li>Innkommende horisontal fart: <InlineLatex latex="5{,}0\;\text{m/s}" /></li>
+                <li>Utgående horisontal fart: <InlineLatex latex="4{,}0\;\text{m/s}" /> (motsatt retning)</li>
+                <li>Kontakttid: <InlineLatex latex="\Delta t = 0{,}15\;\text{s}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>a) Kraftimpulsen <InlineLatex latex="J" /> på ballen</li>
+                <li>b) Gjennomsnittlig kraft <InlineLatex latex="\bar{F}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Klassisk kraftimpuls-oppgave. Velg positiv retning mot platen: da er <InlineLatex latex="v_1 = +5{,}0\;\text{m/s}" /> og <InlineLatex latex="v_2 = -4{,}0\;\text{m/s}" /> (ballen spretter tilbake). Bruk <InlineLatex latex="J = m\Delta v" /> og <InlineLatex latex="\bar{F} = J/\Delta t" />.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Kraftimpulsen:</p>
+              <FormulaBox
+                latex="J = m(v_2 - v_1) = 0{,}600 \cdot (-4{,}0 - 5{,}0) = 0{,}600 \cdot (-9{,}0) = \underline{\underline{-5{,}4\;\text{N·s}}}"
+                variant="gold"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Gjennomsnittlig kraft:</p>
+              <FormulaBox
+                latex="\bar{F} = \frac{J}{\Delta t} = \frac{-5{,}4}{0{,}15} = \underline{\underline{-36\;\text{N}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="J = -5{,}4\;\text{N·s}, \quad |\bar{F}| = 36\;\text{N}" variant="gold" />
+              <p className="text-sm mt-1">Negativt fortegn = kraften virker bort fra platen (mot spilleren).</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Fortegnene er avgjørende. Ballen bytter retning, så <InlineLatex latex="\Delta v = -4{,}0 - 5{,}0 = -9{,}0\;\text{m/s}" /> — ikke bare 1 m/s. Når du ser «spretter tilbake» i en oppgave: pass på fortegnet og forvent en stor impuls.</p>
+            </div>
           </div>
         }
       />
@@ -717,9 +1112,52 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Elastisk støt:</strong> Kinetisk energi ER bevart i tillegg til bevegelsesmengde. Legemene spretter fra hverandre.</p>
-            <p><strong>Fullstendig inelastisk støt:</strong> Legemene henger sammen etter støtet og beveger seg med felles hastighet. Bevegelsesmengde er bevart, men kinetisk energi er IKKE bevart (størst mulig tap).</p>
-            <p><strong>Felles:</strong> Bevegelsesmengde er bevart i ALLE kollisjoner (når ytre krefter er neglisjerbare).</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>To typer støt: elastisk og fullstendig uelastisk</li>
+                <li>Bevegelsesmengde: alltid bevart ved fravær av ytre krefter</li>
+                <li>Kinetisk energi: betinget bevaring</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Definisjonene på de to støttypene og hvilke bevaringslover som gjelder</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Dette er en teorioppgave. Tenk systematisk: hva skjer med legemene, og hva er bevart. Nøkkelen er å huske at bevegelsesmengde er alltid bevart, mens energibevaring avhenger av støttypen.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1 font-medium">Elastisk støt:</p>
+              <p className="text-sm mb-2">Kinetisk energi er bevart i tillegg til bevegelsesmengde. Legemene spretter fra hverandre — ingen permanent deformasjon. Gjelder nøyaktig for atom- og molekylkollisjoner; tilnærmet for harde baller.</p>
+              <FormulaBox
+                latex="\Delta E_K = 0 \quad\text{og}\quad \Delta p_{\text{total}} = 0"
+                variant="blue"
+              />
+              <p className="text-sm mb-1 mt-2 font-medium">Fullstendig uelastisk støt:</p>
+              <p className="text-sm mb-2">Legemene henger sammen etter støtet og beveger seg med felles hastighet. Størst mulig energitap — men bevegelsesmengden er fremdeles bevart!</p>
+              <FormulaBox
+                latex="\Delta E_K \neq 0 \quad\text{(maks tap)}\quad\text{og}\quad \Delta p_{\text{total}} = 0"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="\textbf{Alltid: bevegelsesmengde er bevart i alle støt (uten ytre krefter)}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <p className="text-sm"><strong>Elastisk:</strong> p og <InlineLatex latex="E_K" /> bevares. Legemene spretter fra hverandre.</p>
+              <p className="text-sm mt-1"><strong>Fullstendig uelastisk:</strong> p bevares, <InlineLatex latex="E_K" /> bevares ikke. Legemene beveger seg med felles hastighet etter støtet.</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Bevegelsesmengde er alltid bevart — det er en grunnleggende naturlov. Energi kan derimot konverteres til varme og lyd. Den største feilen studenter gjør er å anta energibevaring uten å sjekke om støtet er elastisk.</p>
+            </div>
           </div>
         }
       />
@@ -760,46 +1198,70 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>b) Bremsestrekk:</strong></p>
-            <FormulaBox
-              latex="a = \frac{v^2 - v_0^2}{2s} = \frac{0 - 20^2}{2 \cdot 50} = -4{,}0\;\text{m/s}^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="R = ma = 1500 \cdot (-4{,}0) = \underline{\underline{-6{,}0\;\text{kN}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="t = \frac{2s}{v_0} = \frac{100}{20} = \underline{\underline{5{,}0\;\text{s}}}"
-              variant="gold"
-            />
-
-            <p><strong>c) Var 60 km/h sannsynlig for begge?</strong></p>
-            <FormulaBox
-              latex="p_{\text{før}} = 1500 \cdot 60 - 900 \cdot 60 = 36\,000\;\text{kg·km/h}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="p_{\text{etter}} = 2400 \cdot 27 = 64\,800\;\text{kg·km/h}"
-              variant="blue"
-            />
-            <p>
-              <InlineLatex latex="36\,000 \neq 64\,800" /> — <strong>begge KAN IKKE ha kjørt i 60 km/h!</strong> Minst
-              én kjørte fortere.
-            </p>
-
-            <p><strong>d) Finn v<sub>A</sub> når v<sub>B</sub> = 60 km/h:</strong></p>
-            <FormulaBox
-              latex="m_A v_A - m_B v_B = (m_A + m_B) \cdot 27"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v_A = \frac{(m_A+m_B) \cdot 27 + m_B \cdot 60}{m_A} = \frac{2400 \cdot 27 + 900 \cdot 60}{1500} = \underline{\underline{79{,}2\;\text{km/h}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Bil A kjørte nesten 80 km/h — godt over fartsgrensen. Fysikken avslører den skyldige!
-            </p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Bil A: <InlineLatex latex="m_A = 1500\;\text{kg}" /> (ukjent fart)</li>
+                <li>Bil B: <InlineLatex latex="m_B = 900\;\text{kg}" /></li>
+                <li>Etter frontalkollisjonen: felles fart <InlineLatex latex="27\;\text{km/h}" /> i A sin retning</li>
+                <li>Del b): 1500 kg stanser fra 72 km/h = 20 m/s på 50 m</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>b) Friksjonskraft og bremsetid</li>
+                <li>c) Kan begge ha kjørt ≤ 60 km/h?</li>
+                <li>d) Farten til bil A hvis B kjørte 60 km/h</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">b) Bruk kinematikk (<InlineLatex latex="v^2 = v_0^2 + 2as" />) for akselerasjon, <InlineLatex latex="F = ma" /> for kraft, og <InlineLatex latex="t = 2s/v_0" /> for tid. c) Sjekk p-bevaring med 60 km/h for begge — stemmer det med observert sluttfart? d) Sett inn kjent v_B i p-bevaring og løs for v_A.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1 font-medium">b) Bremsing:</p>
+              <FormulaBox
+                latex="a = \frac{v^2 - v_0^2}{2s} = \frac{0 - 20^2}{2 \cdot 50} = -4{,}0\;\text{m/s}^2"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="F = ma = 1500 \cdot 4{,}0 = \underline{\underline{6{,}0\;\text{kN}}}"
+                variant="gold"
+              />
+              <FormulaBox
+                latex="t = \frac{v_0 - v}{|a|} = \frac{20}{4{,}0} = \underline{\underline{5{,}0\;\text{s}}}"
+                variant="gold"
+              />
+              <p className="text-sm mb-1 mt-3 font-medium">c) Sjekk 60 km/h for begge:</p>
+              <FormulaBox
+                latex="p_{\text{før}} = m_A \cdot 60 - m_B \cdot 60 = (1500-900) \cdot 60 = 36\,000\;\text{kg·km/h}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="p_{\text{etter}} = (m_A+m_B) \cdot 27 = 2400 \cdot 27 = 64\,800\;\text{kg·km/h}"
+                variant="blue"
+              />
+              <p className="text-sm mt-1 mb-2"><InlineLatex latex="36\,000 \neq 64\,800" /> — begge KAN IKKE ha kjørt 60 km/h. Minst én kjørte fortere.</p>
+              <p className="text-sm mb-1 font-medium">d) Finn v_A når v_B = 60 km/h (frontal = B er negativ):</p>
+              <FormulaBox
+                latex="m_A v_A - m_B v_B = (m_A+m_B) \cdot 27"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="v_A = \frac{(m_A+m_B) \cdot 27 + m_B \cdot 60}{m_A} = \frac{2400 \cdot 27 + 900 \cdot 60}{1500} = \underline{\underline{79{,}2\;\text{km/h}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="F = 6{,}0\;\text{kN},\; t = 5{,}0\;\text{s};\quad v_A = 79{,}2\;\text{km/h}\;\text{(over fartsgrensen!)}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Bevegelsesmengde bevares — og fysikken lyver ikke. Ved å sammenligne p_<InlineLatex latex="\text{før}" /> med p_<InlineLatex latex="\text{etter}" /> kan man rekonstruere fartsdata fra ulykker. Bil A kjørte nesten 80 km/h — godt over fartsgrensen på 60 km/h.</p>
+            </div>
           </div>
         }
       />
@@ -830,30 +1292,61 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Falltid:</strong></p>
-            <FormulaBox
-              latex="t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \cdot 2{,}0}{9{,}81}} = 0{,}639\;\text{s}"
-              variant="blue"
-            />
-            <p><strong>Horisontal avstand:</strong></p>
-            <FormulaBox
-              latex="x = v_{0x} \cdot t = 7{,}3 \cdot 0{,}639 = \underline{\underline{4{,}66\;\text{m}}}"
-              variant="gold"
-            />
-            <p><strong>Vertikal hastighet ved bakken:</strong></p>
-            <FormulaBox
-              latex="v_y = gt = 9{,}81 \cdot 0{,}639 = 6{,}27\;\text{m/s}"
-              variant="blue"
-            />
-            <p><strong>Total fart og bevegelsesmengde:</strong></p>
-            <FormulaBox
-              latex="v = \sqrt{7{,}3^2 + 6{,}27^2} = 9{,}62\;\text{m/s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="p = mv = 5{,}2 \cdot 9{,}62 = \underline{\underline{50\;\text{kg·m/s}}}"
-              variant="gold"
-            />
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Masse: <InlineLatex latex="m = 5{,}2\;\text{kg}" /></li>
+                <li>Horisontal startfart: <InlineLatex latex="v_{0x} = 7{,}3\;\text{m/s}" /></li>
+                <li>Vertikal startfart: <InlineLatex latex="v_{0y} = 0" /> (ruller horisontalt utfor kanten)</li>
+                <li>Fallhøyde: <InlineLatex latex="h = 2{,}0\;\text{m}" /></li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Horisontal avstand til treffpunkt</li>
+                <li>Bevegelsesmengden <InlineLatex latex="p" /> i det kulen treffer bakken</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Prosjektilbevegelse: horisontal og vertikal bevegelse er uavhengige. Finn falltid fra <InlineLatex latex="h = \frac{1}{2}gt^2" />, bruk t til å finne horisontal avstand og vertikal sluttfart. Bevegelsesmengden finner vi fra totalhastigheten med Pythagoras.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — Falltid:</p>
+              <FormulaBox
+                latex="t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \cdot 2{,}0}{9{,}81}} = 0{,}639\;\text{s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Horisontal avstand:</p>
+              <FormulaBox
+                latex="x = v_{0x} \cdot t = 7{,}3 \cdot 0{,}639 = \underline{\underline{4{,}66\;\text{m}}}"
+                variant="gold"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Vertikal sluttfart:</p>
+              <FormulaBox
+                latex="v_y = g \cdot t = 9{,}81 \cdot 0{,}639 = 6{,}27\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 4 — Totalhastighet og bevegelsesmengde:</p>
+              <FormulaBox
+                latex="v = \sqrt{v_{0x}^2 + v_y^2} = \sqrt{7{,}3^2 + 6{,}27^2} = 9{,}62\;\text{m/s}"
+                variant="blue"
+              />
+              <FormulaBox
+                latex="p = mv = 5{,}2 \cdot 9{,}62 = \underline{\underline{50\;\text{kg·m/s}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="x = 4{,}66\;\text{m},\quad p = 50\;\text{kg·m/s}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Bevegelsesmengden er en vektorstørrelse med retning. Horisontal komponent er uforandret under hele fallet (ingen luftmotstand), men vertikal komponent øker kontinuerlig pga. tyngdekraften. Pythagoras gir totalstørrelsen.</p>
+            </div>
           </div>
         }
       />
@@ -885,22 +1378,51 @@ export default function Kapittel8Oppgaver() {
         ]}
         solution={
           <div className="space-y-3">
-            <p><strong>Bevaring av bevegelsesmengde (horisontalt):</strong></p>
-            <FormulaBox
-              latex="m \cdot v_{0x} = \frac{m}{2} \cdot 0 + \frac{m}{2} \cdot v_x \;\Rightarrow\; v_x = 2 \cdot v_{0x} = 106{,}5\;\text{m/s}"
-              variant="blue"
-            />
-            <p><strong>Falltid fra toppunktet:</strong></p>
-            <FormulaBox
-              latex="t = \sqrt{\frac{2 \cdot 186}{9{,}81}} = 6{,}16\;\text{s}"
-              variant="blue"
-            />
-            <p><strong>Treffpunkt:</strong></p>
-            <FormulaBox
-              latex="x = 202{,}3 + 106{,}5 \cdot 6{,}16 = \underline{\underline{858\;\text{m fra startpunktet}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Ved sprengning bevares p<sub>total</sub>. Når én del mister all horisontal fart, må den andre kompensere — den flyr dobbelt så langt!</p>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva vet vi?</p>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Horisontal fart i toppunktet: <InlineLatex latex="v_{0x} = 53{,}2\;\text{m/s}" /></li>
+                <li>Posisjon i toppunktet: <InlineLatex latex="y_0 = 186\;\text{m}" />, <InlineLatex latex="x_0 = 202{,}3\;\text{m}" /></li>
+                <li>Sprengning: to like store deler (<InlineLatex latex="m/2" /> hver)</li>
+                <li>Del 1 faller loddrett ned (horisontal fart = 0 etter sprengning)</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Hva skal vi finne?</p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Treffpunktet (x-koordinat) til den andre delen</li>
+              </ul>
+            </div>
+            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+              <p className="font-semibold mb-1">Strategi</p>
+              <p className="text-sm">Sprengning er en eksplosjon — intern prosess. Horisontal bevegelsesmengde er bevart (ingen ytre horisontal kraft). Deretter er del 2 i prosjektilbevegelse fra høyde 186 m med horisontal fart funnet fra p-bevaring.</p>
+            </div>
+            <div>
+              <p className="font-semibold mb-2">Løsning</p>
+              <p className="text-sm mb-1">Steg 1 — P-bevaring horisontalt under sprengningen:</p>
+              <FormulaBox
+                latex="m \cdot v_{0x} = \frac{m}{2} \cdot 0 + \frac{m}{2} \cdot v_x \;\Rightarrow\; v_x = 2\,v_{0x} = 2 \cdot 53{,}2 = 106{,}5\;\text{m/s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 2 — Falltid fra toppunktet (<InlineLatex latex="v_{0y} = 0" /> i toppunktet):</p>
+              <FormulaBox
+                latex="t = \sqrt{\frac{2y_0}{g}} = \sqrt{\frac{2 \cdot 186}{9{,}81}} = 6{,}16\;\text{s}"
+                variant="blue"
+              />
+              <p className="text-sm mt-2 mb-1">Steg 3 — Treffpunkt for del 2:</p>
+              <FormulaBox
+                latex="x = x_0 + v_x \cdot t = 202{,}3 + 106{,}5 \cdot 6{,}16 = \underline{\underline{858\;\text{m fra startpunktet}}}"
+                variant="gold"
+              />
+            </div>
+            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+              <p className="font-semibold mb-1">Svar</p>
+              <FormulaBox latex="x = 858\;\text{m fra startpunktet}" variant="gold" />
+            </div>
+            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+              <p className="font-semibold mb-1">Hva lærte vi?</p>
+              <p className="text-sm">Sprengning er en intern prosess — horisontal bevegelsesmengde er bevart. Når én del mister all horisontal fart, må den andre kompensere: den flyr dobbelt så fort horisontalt og lander dobbelt så langt (fra toppunktet) sammenlignet med det usprengde prosjektilet.</p>
+            </div>
           </div>
         }
       />
