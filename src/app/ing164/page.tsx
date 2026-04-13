@@ -81,13 +81,15 @@ const categoryChapterRange: Record<Chapter["category"], string> = {
 function useGroupProgress(chapterIds: number[]) {
   const [progress, setProgress] = useState({ completed: 0, total: 0 });
   const [mounted, setMounted] = useState(false);
+  const idsKey = chapterIds.join(",");
 
   useEffect(() => {
     setMounted(true);
+    const ids = idsKey.split(",").map(Number);
     let totalCompleted = 0;
-    const totalSections = chapterIds.length * SECTIONS_PER_CHAPTER;
+    const totalSections = ids.length * SECTIONS_PER_CHAPTER;
 
-    for (const id of chapterIds) {
+    for (const id of ids) {
       const stored = localStorage.getItem(`progress-ch${id}`);
       if (stored) {
         try {
@@ -100,7 +102,7 @@ function useGroupProgress(chapterIds: number[]) {
     }
 
     setProgress({ completed: totalCompleted, total: totalSections });
-  }, [chapterIds]);
+  }, [idsKey]);
 
   if (!mounted) return { completed: 0, total: 1, percent: 0, mounted: false };
 
@@ -188,7 +190,7 @@ function CollapsibleSection({
   label: string;
   chapters: Chapter[];
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const styles = categoryStyles[category];
   const chapterIds = cats.map((c) => c.id);
   const { percent, completed, total, mounted } = useGroupProgress(chapterIds);

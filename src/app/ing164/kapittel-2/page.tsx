@@ -460,6 +460,37 @@ export default function ChapterPage() {
             er gjennomsnittsfarten lik stigningstallet til den rette linjen (sekanten) som forbinder
             punktene <InlineLatex latex="(t_1, x_1)" /> og <InlineLatex latex="(t_2, x_2)" />.
           </p>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor skille mellom forflytning og distanse?</p>
+            <p className="text-sm">
+              I fysikk bryr vi oss om <strong>nettoendringen i posisjon</strong>, ikke den totale veien.
+              Hvorfor? Fordi Newtons lover handler om krefter og akselerasjon, som endrer <em>hastighet</em> —
+              en vektorstørrelse med retning. Forflytning bevarer retningsinformasjonen; distanse gjør det ikke.
+            </p>
+            <p className="text-sm mt-2">
+              <strong>Visuelt:</strong> Tenk på en jogger som løper 5 km til høyre og 3 km tilbake til venstre.
+              GPS-en viser 8 km (distanse), men hun er bare 2 km fra start (forflytning). I kinematikk
+              er det forflytningen som kobler til fysikkens lover.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              Forflytning er som <strong>heisknappen</strong> — du trykker 5. etasje, og heisen vet at den
+              skal opp 3 etasjer fra 2. etasje. Den bryr seg ikke om du først tok trappen ned til kjelleren.
+              Gjennomsnittsfart er gjennomsnittlig «heishastighet» mellom start- og sluttposisjonen.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«Gjennomsnittsfart = total distanse / tid»</strong> — Det er gjennomsnittlig <em>fart (speed)</em>, ikke gjennomsnittlig <em>hastighet (velocity)</em>. Gjennomsnittsfart (velocity) = forflytning/tid og kan være negativ eller null.</li>
+              <li>• <strong>«Gjennomsnittsfart = gjennomsnittet av startfart og sluttfart»</strong> — Bare sant for konstant akselerasjon! Generelt er det <InlineLatex latex="\bar{v} = \Delta x/\Delta t" />.</li>
+            </ul>
+          </div>
         </TheorySummary>
 
         {/* 2.2 Momentanfart */}
@@ -502,6 +533,38 @@ export default function ChapterPage() {
             <li>Negativ stigning → negativ fart → beveger seg i −x-retning</li>
             <li>Toppunkt/bunnpunkt (horisontal tangent) → <InlineLatex latex="v = 0" /> (vendepunkt)</li>
           </ul>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor den deriverte?</p>
+            <p className="text-sm">
+              Gjennomsnittsfarten forteller deg hva som skjedde «i snitt» over et tidsintervall. Men farten
+              kan variere mye i løpet av intervallet. Momentanfarten er det du leser av på speedometeret
+              akkurat <em>nå</em> — i dette ene øyeblikket.
+            </p>
+            <p className="text-sm mt-2">
+              Matematisk er dette en <strong>grenseverdi</strong>: vi gjør tidsintervallet uendelig lite.
+              Da blir sekanten til tangenten, og gjennomsnittsfart blir momentanfart. Det er nettopp
+              dette den deriverte gjør: <InlineLatex latex="v = dx/dt" />.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              Tenk på farten din på en biltur. Gjennomsnittsfarten for hele turen kan være 60 km/t,
+              men underveis var du kanskje opp i 100 km/t og stod stille i kø. <strong>Speedometeret</strong>
+              viser momentanfarten — farten akkurat nå. I fysikk er <InlineLatex latex="v = dx/dt" /> det
+              matematiske speedometeret.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«v = 0 betyr at legemet står stille for alltid»</strong> — Nei! Det betyr at det er stille <em>akkurat nå</em>. En ball kastet opp har v = 0 i toppunktet, men den akselererer stadig nedover.</li>
+              <li>• <strong>«Negativ fart betyr at legemet bremser»</strong> — Nei! Negativt fortegn betyr at det beveger seg i negativ retning. Om det bremser avhenger av forholdet mellom v og a.</li>
+            </ul>
+          </div>
         </TheorySummary>
 
         {/* 2.3 Akselerasjon */}
@@ -544,6 +607,51 @@ export default function ChapterPage() {
             <p className="mt-2 text-sm font-semibold">
               Når <InlineLatex latex="v" /> og <InlineLatex latex="a" /> har <em>motsatt</em> fortegn → legemet bremser opp.
             </p>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor er akselerasjon så viktig?</p>
+            <p className="text-sm">
+              Akselerasjon er broen mellom <strong>kinematikk</strong> (beskrivelse av bevegelse) og
+              <strong> dynamikk</strong> (årsaken til bevegelse). Newtons 2. lov sier at <InlineLatex latex="F = ma" /> —
+              krefter forårsaker akselerasjon. Derfor er akselerasjon det fysiske bindeleddet mellom
+              krefter og bevegelse.
+            </p>
+            <p className="text-sm mt-2">
+              <strong>Visuelt:</strong> Hvis du ser en x-t-graf og den kurver oppover (konkav opp), er akselerasjonen positiv.
+              Kurver den nedover (konkav ned), er akselerasjonen negativ. En rett linje betyr null akselerasjon.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              I en bil er gasspedalen «positiv akselerasjon» og bremsen er «negativ akselerasjon» (retardasjon).
+              Akselerasjon er hvor hardt du <strong>trykker på pedalen</strong> — ikke hvor fort du kjører.
+              Du kan kjøre 100 km/t med null akselerasjon (konstant fart), eller stå stille med
+              stor akselerasjon (gasspedalen er i bunnen, men du nettopp begynte å kjøre).
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«Positiv akselerasjon betyr at farten øker»</strong> — Bare hvis farten er positiv! Hvis v &lt; 0 og a &gt; 0, bremser legemet. Det er samspillet mellom fortegnene som avgjør.</li>
+              <li>• <strong>«Akselerasjon og fart peker alltid i samme retning»</strong> — Feil! Når du bremser en bil, peker akselerasjonen motsatt av bevegelsesretningen.</li>
+              <li>• <strong>«Null fart betyr null akselerasjon»</strong> — Klassisk feil! En ball i toppunktet av et kast har v = 0 men a = −g. Akselerasjon handler om <em>endring</em> i fart, ikke farten selv.</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Tips: Fortegnsanalyse</p>
+            <p className="text-sm">
+              Lag en tabell som den over. For hver kombinasjon av v og a, spør: <em>Øker eller minker fartens
+              størrelse?</em> Regelen er enkel:
+            </p>
+            <ul className="space-y-1 text-sm mt-2">
+              <li>• <strong>Samme fortegn</strong> på v og a → farten <strong>øker</strong> (legemet akselererer)</li>
+              <li>• <strong>Motsatt fortegn</strong> på v og a → farten <strong>minker</strong> (legemet bremser)</li>
+            </ul>
           </div>
         </TheorySummary>
 
@@ -609,6 +717,52 @@ export default function ChapterPage() {
               Finn ut hvilken størrelse du <em>ikke</em> trenger og <em>ikke</em> kjenner — bruk
               likningen som mangler den størrelsen.
             </p>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor akkurat disse fire likningene?</p>
+            <p className="text-sm">
+              Vi har fem kinematiske størrelser: <InlineLatex latex="x, v, v_0, a, t" />. Hver likning
+              kobler fire av dem — og «mangler» den femte. Det gir oss nettopp fire uavhengige likninger,
+              som er alt vi trenger for å løse ethvert problem med konstant akselerasjon.
+            </p>
+            <p className="text-sm mt-2">
+              <strong>Fysisk intuisjon for likning 2:</strong> <InlineLatex latex="x = x_0 + v_0t + \frac{1}{2}at^2" /> —
+              første ledd er startposisjon, andre ledd er «hva som hadde skjedd uten akselerasjon»,
+              og tredje ledd er «bidraget fra akselerasjonen». <InlineLatex latex="\frac{1}{2}at^2" /> vokser
+              med <InlineLatex latex="t^2" /> fordi akselerasjonen gir <em>mer og mer</em> fart over tid.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              Tenk på en bil som akselererer fra lyskryss. <InlineLatex latex="v = v_0 + at" /> er som:
+              «Farten min nå = farten jeg hadde + det farten har endret seg». <InlineLatex latex="x = x_0 + v_0t + \frac{1}{2}at^2" />
+              er som: «Hvor er jeg nå = hvor jeg stod + det jeg ville kjørt med gammel fart + ekstra avstand
+              fordi farten øker underveis.»
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«Disse likningene gjelder alltid»</strong> — Nei! De gjelder <em>bare</em> for konstant akselerasjon. Varierer a med tid, må du integrere (seksjon 2.6).</li>
+              <li>• <strong>«Jeg kan bruke hvilken som helst likning»</strong> — Du trenger den som inneholder de størrelsene du kjenner og den du søker. Bruk «mangler-metoden».</li>
+              <li>• <strong>«x₀ er alltid null»</strong> — Bare hvis du velger startposisjonen som origo! Les oppgaven nøye.</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Oppskrift: Slik løser du kinematikkoppgaver</p>
+            <ol className="space-y-1.5 text-sm list-decimal list-inside">
+              <li><strong>Tegn figur</strong> — vis bevegelsesretning, velg positiv retning</li>
+              <li><strong>List opp kjente</strong> — skriv opp <InlineLatex latex="x_0, v_0, a, t, v, x" /> med verdier</li>
+              <li><strong>Identifiser ukjent</strong> — hva spør oppgaven etter?</li>
+              <li><strong>Finn «mangler»</strong> — hvilken størrelse verken er kjent eller søkt? Bruk likningen som mangler den.</li>
+              <li><strong>Løs algebraisk</strong> — isolér den ukjente, sett inn tall til slutt</li>
+              <li><strong>Sjekk</strong> — har svaret riktig enhet? Er fortegnet fornuftig? Er størrelsesorden rimelig?</li>
+            </ol>
           </div>
         </TheorySummary>
 
@@ -676,6 +830,52 @@ export default function ChapterPage() {
               <em> endrer seg</em> — nettopp fordi akselerasjonen ikke er null.
             </p>
           </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor faller alt likt?</p>
+            <p className="text-sm">
+              Galileos geniale innsikt (bekreftet av Newton): Tyngdekraften på et legeme er proporsjonal
+              med massen (<InlineLatex latex="F = mg" />), men akselerasjonen krever deling på massen
+              (<InlineLatex latex="a = F/m = mg/m = g" />). Massen kansellerer! Derfor er akselerasjonen
+              den samme for alle legemer, uavhengig av masse.
+            </p>
+            <p className="text-sm mt-2">
+              <strong>Visuelt bilde:</strong> Se for deg at du slipper en bowlingkule og en tennisball
+              fra samme høyde (i vakuum). De treffer bakken samtidig! Bowlingkulen har mer tyngdekraft, men den
+              «trenger også mer kraft for å akselerere» (større treghet). De to effektene kansellerer perfekt.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              Fritt fall er som en <strong>rulletrapp som stadig går raskere nedover</strong>. Uansett om
+              du «startet» med å stå stille (slipp fra ro) eller med å hoppe oppover (kast oppover),
+              trekker rulletrappen deg nedover med konstant akselerasjon. I toppunktet av et kast står du
+              et øyeblikk stille — men rulletrappen stopper aldri.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«I toppunktet er a = 0 fordi v = 0»</strong> — Den vanligste feilen! a = −g <em>hele tiden</em>, også i toppunktet. Farten er null et øyeblikk, men endrer seg umiddelbart.</li>
+              <li>• <strong>«Tyngre ting faller raskere»</strong> — Bare på grunn av luftmotstand. I vakuum faller alt likt. Fjæren og hammeren på månen (Apollo 15) er det berømte eksperimentet.</li>
+              <li>• <strong>«g er negativ»</strong> — Nei! <InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> er alltid <em>positiv</em>. Det er akselerasjonen <InlineLatex latex="a_y = -g" /> som er negativ (med y oppover).</li>
+              <li>• <strong>«Fritt fall betyr at det faller nedover»</strong> — Fritt fall inkluderer også oppover-bevegelse! Et kast rett opp er fritt fall fra det øyeblikket du slipper ballen.</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Tips: Velg koordinatsystem</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>Positiv y oppover</strong> er standard. Da er <InlineLatex latex="a_y = -g = -9{,}81\;\text{m/s}^2" /></li>
+              <li>• <strong>Legg origo</strong> der det er praktisk — vanligvis startpunktet eller bakkenivå</li>
+              <li>• <strong>Kast oppover:</strong> <InlineLatex latex="v_0 > 0" />, <InlineLatex latex="a < 0" />. I toppunktet: <InlineLatex latex="v = 0" /></li>
+              <li>• <strong>Slipp fra ro:</strong> <InlineLatex latex="v_0 = 0" />. Bruk <InlineLatex latex="y = y_0 - \frac{1}{2}gt^2" /> for falltid</li>
+              <li>• <strong>Symmetri ved kast:</strong> Tiden opp = tiden ned (til samme høyde). Farten ved landing = startfarten (i størrelse)</li>
+            </ul>
+          </div>
         </TheorySummary>
 
         {/* 2.6 Integrasjon */}
@@ -721,6 +921,50 @@ export default function ChapterPage() {
               Farten er maksimal (eller minimal) der <InlineLatex latex="\frac{dv}{dt} = a(t) = 0" />.
               Sett akselerasjonsfunksjonen lik null og løs for <InlineLatex latex="t" />.
             </p>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hvorfor integrasjon?</p>
+            <p className="text-sm">
+              Derivasjon og integrasjon er <strong>motsatte operasjoner</strong>. Vi deriverer posisjon for
+              å finne fart (<InlineLatex latex="v = dx/dt" />), og deriverer fart for å finne akselerasjon
+              (<InlineLatex latex="a = dv/dt" />). Integrasjon går den andre veien: fra akselerasjon til
+              fart, og fra fart til posisjon.
+            </p>
+            <p className="text-sm mt-2">
+              <strong>Visuelt:</strong> I en v-t-graf er <strong>arealet under kurven</strong> lik forflytningen.
+              Når farten varierer, kan vi ikke bare gange fart med tid — vi må «summere opp» alle de
+              uendelig små bidragene. Det er nettopp det integralet gjør.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi</p>
+            <p className="text-sm">
+              Tenk på vannforbruk. <strong>Akselerasjon</strong> er hvor raskt du skrur opp kranen (endring i
+              vannstrøm). <strong>Fart</strong> er vannstrømmen (liter per minutt). <strong>Posisjon</strong>
+              er total mengde vann i bøtten. For å finne total mengde vann (posisjon) når strømmen varierer,
+              må du «integrere» strømmen over tid — det tilsvarer arealet under v-t-kurven.
+            </p>
+          </div>
+
+          <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4">
+            <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
+            <ul className="space-y-1.5 text-sm">
+              <li>• <strong>«Jeg kan alltid bruke standardlikningene»</strong> — Nei! <InlineLatex latex="v = v_0 + at" /> etc. gjelder <em>kun</em> for konstant a. Bruk integrasjon for variabel akselerasjon.</li>
+              <li>• <strong>«Glemmer initialbetingelsen»</strong> — Når du integrerer, husk å legge til <InlineLatex latex="v_0" /> eller <InlineLatex latex="x_0" />. Uten dette mister du startpunktet!</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Tips: Integrasjon steg for steg</p>
+            <ol className="space-y-1.5 text-sm list-decimal list-inside">
+              <li>Skriv opp <InlineLatex latex="a(t)" /> og identifiser at den <em>ikke</em> er konstant</li>
+              <li>Integrer: <InlineLatex latex="v(t) = v_0 + \int_0^t a(t')\,dt'" /></li>
+              <li>Integrer igjen: <InlineLatex latex="x(t) = x_0 + \int_0^t v(t')\,dt'" /></li>
+              <li>Sett inn grensene og forenk</li>
+              <li>Bruk initialbetingelsene til å bestemme eventuelle konstanter</li>
+            </ol>
           </div>
         </TheorySummary>
       </section>
