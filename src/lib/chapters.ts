@@ -3,8 +3,10 @@ export interface Chapter {
   slug: string;
   title: string;
   description: string;
-  category: "bevegelse" | "mekanikk" | "em";
+  category: "bevegelse" | "mekanikk" | "rotasjon" | "em";
 }
+
+export const SECTIONS_PER_CHAPTER = 7;
 
 export const chapters: Chapter[] = [
   {
@@ -61,14 +63,14 @@ export const chapters: Chapter[] = [
     slug: "kapittel-9",
     title: "Rotasjon av stive legemer",
     description: "Vinkelhastighet, vinkelakselerasjon og treghetsmoment",
-    category: "mekanikk",
+    category: "rotasjon",
   },
   {
     id: 10,
     slug: "kapittel-10",
     title: "Dynamikk i rotasjonsbevegelse",
     description: "Dreiemoment, spinn og rotasjonsenergi",
-    category: "mekanikk",
+    category: "rotasjon",
   },
   {
     id: 21,
@@ -117,11 +119,23 @@ export const chapters: Chapter[] = [
 export const categoryLabels: Record<Chapter["category"], string> = {
   bevegelse: "Bevegelse",
   mekanikk: "Mekanikk",
+  rotasjon: "Rotasjon",
   em: "Elektrisitet & Magnetisme",
 };
 
 export const categoryColors: Record<Chapter["category"], string> = {
   bevegelse: "physics",
   mekanikk: "physics",
+  rotasjon: "physics",
   em: "network",
+};
+
+export const categoryDescriptions: Record<Chapter["category"], string> = {
+  bevegelse:
+    "Kinematikk i én og flere dimensjoner — posisjon, hastighet, akselerasjon, prosjektilbevegelse og sirkelbevegelse.",
+  mekanikk:
+    "Newtons lover, friksjon, arbeid, energi, bevegelsesmengde og kollisjoner — kreftene som styrer bevegelse.",
+  rotasjon:
+    "Rotasjonskinematikk og -dynamikk — vinkelhastighet, treghetsmoment, dreiemoment og spinn.",
+  em: "Elektriske felt og potensial, kapasitans, magnetisme, Faradays lov og elektromagnetisk induksjon.",
 };

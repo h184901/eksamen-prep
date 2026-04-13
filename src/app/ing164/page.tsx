@@ -1,28 +1,293 @@
-import Link from "next/link";
-import { chapters, categoryLabels, type Chapter } from "@/lib/chapters";
+"use client";
 
-const categoryOrder: Chapter["category"][] = ["bevegelse", "mekanikk", "em"];
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import {
+  chapters,
+  categoryLabels,
+  categoryDescriptions,
+  SECTIONS_PER_CHAPTER,
+  type Chapter,
+} from "@/lib/chapters";
+
+const categoryOrder: Chapter["category"][] = [
+  "bevegelse",
+  "mekanikk",
+  "rotasjon",
+  "em",
+];
 
 const categoryStyles: Record<
   Chapter["category"],
-  { border: string; badge: string; accent: string }
+  {
+    border: string;
+    badge: string;
+    accent: string;
+    progressBar: string;
+    progressBg: string;
+    chevron: string;
+    headerHover: string;
+  }
 > = {
   bevegelse: {
     border: "border-physics-400/30 hover:border-physics-400/60",
-    badge: "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400",
+    badge:
+      "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400",
     accent: "text-physics-600 dark:text-physics-400",
+    progressBar: "bg-physics-500",
+    progressBg: "bg-physics-100 dark:bg-physics-900/30",
+    chevron: "text-physics-500",
+    headerHover: "hover:bg-physics-50/50 dark:hover:bg-physics-950/20",
   },
   mekanikk: {
     border: "border-physics-500/30 hover:border-physics-500/60",
-    badge: "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400",
+    badge:
+      "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400",
     accent: "text-physics-600 dark:text-physics-400",
+    progressBar: "bg-physics-500",
+    progressBg: "bg-physics-100 dark:bg-physics-900/30",
+    chevron: "text-physics-500",
+    headerHover: "hover:bg-physics-50/50 dark:hover:bg-physics-950/20",
+  },
+  rotasjon: {
+    border: "border-physics-500/30 hover:border-physics-500/60",
+    badge:
+      "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400",
+    accent: "text-physics-600 dark:text-physics-400",
+    progressBar: "bg-physics-500",
+    progressBg: "bg-physics-100 dark:bg-physics-900/30",
+    chevron: "text-physics-500",
+    headerHover: "hover:bg-physics-50/50 dark:hover:bg-physics-950/20",
   },
   em: {
     border: "border-network-500/30 hover:border-network-500/60",
-    badge: "bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400",
+    badge:
+      "bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400",
     accent: "text-network-600 dark:text-network-400",
+    progressBar: "bg-network-500",
+    progressBg: "bg-network-100 dark:bg-network-900/30",
+    chevron: "text-network-500",
+    headerHover: "hover:bg-network-50/50 dark:hover:bg-network-950/20",
   },
 };
+
+const categoryChapterRange: Record<Chapter["category"], string> = {
+  bevegelse: "Kap 2–3",
+  mekanikk: "Kap 4–8",
+  rotasjon: "Kap 9–10",
+  em: "Kap 21–29",
+};
+
+function useGroupProgress(chapterIds: number[]) {
+  const [progress, setProgress] = useState({ completed: 0, total: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    let totalCompleted = 0;
+    const totalSections = chapterIds.length * SECTIONS_PER_CHAPTER;
+
+    for (const id of chapterIds) {
+      const stored = localStorage.getItem(`progress-ch${id}`);
+      if (stored) {
+        try {
+          const arr = JSON.parse(stored);
+          totalCompleted += Array.isArray(arr) ? arr.length : 0;
+        } catch {
+          // ignore corrupted data
+        }
+      }
+    }
+
+    setProgress({ completed: totalCompleted, total: totalSections });
+  }, [chapterIds]);
+
+  if (!mounted) return { completed: 0, total: 1, percent: 0, mounted: false };
+
+  const percent =
+    progress.total > 0
+      ? Math.round((progress.completed / progress.total) * 100)
+      : 0;
+  return { ...progress, percent, mounted: true };
+}
+
+function useChapterProgress(chapterId: number) {
+  const [completed, setCompleted] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const stored = localStorage.getItem(`progress-ch${chapterId}`);
+    if (stored) {
+      try {
+        const arr = JSON.parse(stored);
+        setCompleted(Array.isArray(arr) ? arr.length : 0);
+      } catch {
+        // ignore
+      }
+    }
+  }, [chapterId]);
+
+  if (!mounted) return { completed: 0, percent: 0, mounted: false };
+
+  const percent = Math.round((completed / SECTIONS_PER_CHAPTER) * 100);
+  return { completed, percent, mounted: true };
+}
+
+function ChapterCard({ chapter }: { chapter: Chapter }) {
+  const styles = categoryStyles[chapter.category];
+  const { completed, percent, mounted } = useChapterProgress(chapter.id);
+  const hasContent = true; // all chapters have content
+
+  return (
+    <Link
+      href={`/ing164/${chapter.slug}`}
+      className={`group rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 bg-[var(--card)] ${styles.border}`}
+    >
+      <div className="flex items-center justify-between mb-1">
+        <p className={`text-xs font-bold ${styles.accent}`}>
+          Kapittel {chapter.id}
+        </p>
+        {hasContent ? (
+          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+            Innhold
+          </span>
+        ) : (
+          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500">
+            Kommer
+          </span>
+        )}
+      </div>
+      <h3 className="font-semibold mb-1 group-hover:text-[var(--accent)] transition-colors">
+        {chapter.title}
+      </h3>
+      <p className="text-sm text-[var(--muted)] mb-3">{chapter.description}</p>
+
+      {/* Mini progress bar */}
+      <div className="h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+          style={{ width: mounted ? `${percent}%` : "0%" }}
+        />
+      </div>
+      {mounted && (
+        <p className="text-[11px] text-[var(--muted)] mt-1">
+          {completed}/{SECTIONS_PER_CHAPTER} seksjoner fullført
+        </p>
+      )}
+    </Link>
+  );
+}
+
+function CollapsibleSection({
+  category,
+  label,
+  chapters: cats,
+}: {
+  category: Chapter["category"];
+  label: string;
+  chapters: Chapter[];
+}) {
+  const [open, setOpen] = useState(true);
+  const styles = categoryStyles[category];
+  const chapterIds = cats.map((c) => c.id);
+  const { percent, completed, total, mounted } = useGroupProgress(chapterIds);
+
+  return (
+    <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`w-full flex items-center gap-4 p-5 text-left transition-colors ${styles.headerHover}`}
+      >
+        {/* Chevron */}
+        <svg
+          className={`w-5 h-5 shrink-0 transition-transform duration-200 ${styles.chevron} ${
+            open ? "rotate-90" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-1">
+            <h2 className="text-lg font-bold">{label}</h2>
+            <span
+              className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${styles.badge}`}
+            >
+              {categoryChapterRange[category]}
+            </span>
+          </div>
+          <p className="text-sm text-[var(--muted)] line-clamp-1">
+            {categoryDescriptions[category]}
+          </p>
+        </div>
+
+        {/* Group progress */}
+        <div className="shrink-0 w-32 hidden sm:block">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-medium text-[var(--muted)]">
+              {mounted ? `${percent}%` : "—"}
+            </span>
+            <span className="text-[11px] text-[var(--muted)]">
+              {mounted ? `${completed}/${total}` : ""}
+            </span>
+          </div>
+          <div
+            className={`h-2 rounded-full overflow-hidden ${styles.progressBg}`}
+          >
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+              style={{ width: mounted ? `${percent}%` : "0%" }}
+            />
+          </div>
+        </div>
+      </button>
+
+      {/* Collapsible content */}
+      <div
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-5 pb-5 pt-1">
+          {/* Mobile progress (hidden on sm+) */}
+          <div className="sm:hidden mb-4">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs font-medium text-[var(--muted)]">
+                Fremgang
+              </span>
+              <span className="text-xs text-[var(--muted)]">
+                {mounted ? `${completed}/${total} (${percent}%)` : "—"}
+              </span>
+            </div>
+            <div
+              className={`h-2 rounded-full overflow-hidden ${styles.progressBg}`}
+            >
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+                style={{ width: mounted ? `${percent}%` : "0%" }}
+              />
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cats.map((chapter) => (
+              <ChapterCard key={chapter.id} chapter={chapter} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function ING164Page() {
   const grouped = categoryOrder.map((cat) => ({
@@ -79,41 +344,16 @@ export default function ING164Page() {
         </Link>
       </div>
 
-      {/* Chapter groups */}
-      <div className="space-y-10">
-        {grouped.map(({ category, label, chapters: cats }) => {
-          const styles = categoryStyles[category];
-          return (
-            <section key={category}>
-              <h2 className="text-xl font-bold mb-4 flex items-center gap-3">
-                <span
-                  className={`text-xs font-bold px-3 py-1 rounded-full ${styles.badge}`}
-                >
-                  {label}
-                </span>
-              </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {cats.map((chapter) => (
-                  <Link
-                    key={chapter.id}
-                    href={`/ing164/${chapter.slug}`}
-                    className={`group rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 bg-[var(--card)] ${styles.border}`}
-                  >
-                    <p className={`text-xs font-bold mb-1 ${styles.accent}`}>
-                      Kapittel {chapter.id}
-                    </p>
-                    <h3 className="font-semibold mb-1 group-hover:text-[var(--accent)] transition-colors">
-                      {chapter.title}
-                    </h3>
-                    <p className="text-sm text-[var(--muted)]">
-                      {chapter.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+      {/* Collapsible chapter groups */}
+      <div className="space-y-4">
+        {grouped.map(({ category, label, chapters: cats }) => (
+          <CollapsibleSection
+            key={category}
+            category={category}
+            label={label}
+            chapters={cats}
+          />
+        ))}
       </div>
     </div>
   );
