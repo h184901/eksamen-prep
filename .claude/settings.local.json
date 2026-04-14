@@ -53,7 +53,12 @@
       "Bash(find src/app/dat110 -path \"*/oppgaver/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
       "Bash(find src/app/dat110 -path \"*/visualiseringer/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
       "Bash(ls -d /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/kapittel-*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "WebSearch",
+      "WebFetch(domain:www.video-tutor.net)",
+      "WebFetch(domain:glasp.co)",
+      "WebFetch(domain:www.classcentral.com)",
+      "WebFetch(domain:eightify.app)"
     ]
   }
 }
