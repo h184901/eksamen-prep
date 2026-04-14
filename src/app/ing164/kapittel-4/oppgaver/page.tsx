@@ -3,6 +3,8 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
@@ -10,8 +12,7 @@ export default function OppgaverPage() {
       <h2 className="text-2xl font-bold mt-6 mb-6">Oppgaver — Newtons lover</h2>
 
       {/* ── OPPGAVESTRATEGIER ── */}
-      <h3 className="text-xl font-semibold mt-8 mb-4">Oppgavestrategier</h3>
-
+      <CollapsibleSection title="Oppgavestrategier">
       <div className="grid md:grid-cols-2 gap-4">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h4 className="font-semibold text-lg mb-3">Generell oppskrift — Newtons lover</h4>
@@ -80,9 +81,10 @@ export default function OppgaverPage() {
           </div>
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* ── GJENNOMGÅTTE EKSEMPLER ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Gjennomgåtte eksempler</h3>
+      <CollapsibleSection title="Eksempler fra timen">
 
       <ExerciseCard
         number={1}
@@ -415,492 +417,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── ØVINGSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      <ExerciseCard
-        number={1}
-        title="Vogn på skinne — FBD og maks akselerasjon"
-        difficulty="middels"
-        source="Oblig 1, Oppgave 3c–d"
-        problem={
-          <div>
-            <p>
-              Vi bruker et tau til å trekke en vogn med masse 1000 kg. Vogna
-              ruller med neglisjerbar friksjon på en horisontal skinnegang.
-            </p>
-            <p className="mt-2">c) Tegn et fritt-legeme-diagram for vogna og sett navn på alle kreftene. Regn ut verdier du har nok opplysninger til.</p>
-            <p>d) Tauet vil ryke dersom snordraget overskrider 3500 N. Hvilken akselerasjon kan vi maksimalt gi vogna uten at tauet ryker?</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Tre krefter virker på vogna: N (opp), mg (ned), S (horisontalt fra tauet).</p> },
-          { label: "Hint 2", content: <p>Vertikalt likevekt gir N. Horisontalt: ΣF = ma → S = ma.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li><InlineLatex latex="m = 1000\;\text{kg}" /> — vognens masse</li>
-                <li>Neglisjerbar friksjon — ingen friksjonskraft horisontalt</li>
-                <li><InlineLatex latex="S_{\max} = 3500\;\text{N}" /> — maksimalt snordrag før tauet ryker</li>
-                <li>Horisontal skinnegang — bevegelse kun i x-retning</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>c) Fritt-legeme-diagram og verdier vi kan beregne</li>
-                <li>d) Maksimal akselerasjon <InlineLatex latex="a_{\max}" /> uten at tauet ryker</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Strategi</p>
-              <p className="text-sm">
-                Vi starter med FBD og identifiserer alle krefter: normalkraft <InlineLatex latex="N" />, tyngde <InlineLatex latex="mg" />
-                og snordrag <InlineLatex latex="S" />. Vertikalt er det likevekt (<InlineLatex latex="\sum F_y = 0" />), som gir oss <InlineLatex latex="N" />.
-                Horisontalt er eneste kraft snordraget: <InlineLatex latex="S = ma" />, som omformulert gir <InlineLatex latex="a = S/m" />.
-                Maksimal akselerasjon nås når <InlineLatex latex="S = S_{\max}" />.
-              </p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <div>
-              <p className="font-semibold mb-2">Løsning</p>
-              <ol className="space-y-3 list-decimal list-inside text-sm">
-                <li>
-                  <span><strong>c)</strong> FBD-krefter: normalkraft <InlineLatex latex="N" /> (opp), tyngde <InlineLatex latex="mg" /> (ned), snordrag <InlineLatex latex="S" /> (horisontalt). Vertikalt er det likevekt:</span>
-                  <FormulaBox latex="\sum F_y = 0:\quad N - mg = 0 \;\Rightarrow\; N = mg = 1000 \cdot 9{,}81 = \underline{\underline{9810\;\text{N}}}" variant="blue" />
-                </li>
-                <li>
-                  <span>Snordrag <InlineLatex latex="S" /> kan ikke bestemmes uten kjent akselerasjon — vi setter det som ukjent i d).</span>
-                </li>
-                <li>
-                  <span><strong>d)</strong> Horisontalt gir Newtons 2. lov: <InlineLatex latex="S = ma" />. Maksimal akselerasjon skjer når <InlineLatex latex="S = S_{\max}" />:</span>
-                  <FormulaBox latex="\sum F_x = ma:\quad S_{\max} = ma_{\max} \;\Rightarrow\; a_{\max} = \frac{S_{\max}}{m} = \frac{3500\;\text{N}}{1000\;\text{kg}} = \underline{\underline{3{,}5\;\text{m/s}^2}}" variant="gold" />
-                </li>
-              </ol>
-            </div>
-
-            {/* Steg 5: Svar */}
-            <div>
-              <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="N = \underline{\underline{9810\;\text{N}}}, \qquad a_{\max} = \underline{\underline{3{,}5\;\text{m/s}^2}}" variant="gold" />
-            </div>
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hva lærte vi?</p>
-              <p className="text-sm">
-                FBD er ikke bare en tegneøvelse — det tvinger oss til å identifisere nøyaktig hvilke
-                krefter som virker i hvilken retning. Her lar vi N2L fortelle oss hva maksimal akselerasjon
-                er gitt en begrensning på kraften. Merk: snordraget i et masseløst tau er konstant overalt
-                i tauet og lik den påførte trekkraften.
-              </p>
-            </div>
+          <p className="text-xs text-[var(--muted)]">Vår 2023</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Person i heis"
-        difficulty="middels"
-        problem={
-          <div>
-            <p>
-              En person med masse 70 kg står på en vekt i en heis. Heisen akselererer oppover med{" "}
-              <InlineLatex latex="a = 2{,}0\;\text{m/s}^2" />.
-            </p>
-            <p className="mt-2">a) Tegn FBD for personen.</p>
-            <p>b) Hva viser vekten?</p>
-            <p>c) Hva viser vekten når heisen akselererer nedover med 2,0 m/s²?</p>
-            <p>d) Hva viser vekten i fritt fall?</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 1, oppgave 3</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Vekten viser normalkraften N, ikke tyngden mg.</p> },
-          { label: "Hint 2", content: <p>Sett opp ΣFy = may med positiv retning oppover.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li><InlineLatex latex="m = 70\;\text{kg}" /> — personens masse</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> — tyngdeakselerasjon</li>
-                <li>b) <InlineLatex latex="a = +2{,}0\;\text{m/s}^2" /> (oppover, positiv retning)</li>
-                <li>c) <InlineLatex latex="a = -2{,}0\;\text{m/s}^2" /> (nedover)</li>
-                <li>d) <InlineLatex latex="a = -g = -9{,}81\;\text{m/s}^2" /> (fritt fall)</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Normalkraften <InlineLatex latex="N" /> som vekten viser, for hver situasjon</li>
-                <li>a) FBD for personen i heisen</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Strategi</p>
-              <p className="text-sm">
-                Nøkkelinsikt: <strong>vekten måler normalkraften <InlineLatex latex="N" /></strong>, ikke tyngden.
-                Vi bruker Newtons 2. lov vertikalt: <InlineLatex latex="\sum F_y = ma_y" /> der positiv retning er oppover.
-                Dette gir <InlineLatex latex="N - mg = ma" />, og vi løser for <InlineLatex latex="N = m(g + a)" />.
-                Fortegnet på <InlineLatex latex="a" /> avgjør om man føler seg tyngre eller lettere.
-              </p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <div>
-              <p className="font-semibold mb-2">Løsning</p>
-              <ol className="space-y-3 list-decimal list-inside text-sm">
-                <li>
-                  <span><strong>a) FBD:</strong> normalkraft <InlineLatex latex="N" /> (opp fra vektflaten), tyngde <InlineLatex latex="mg" /> (ned). Disse er de eneste to kreftene.</span>
-                </li>
-                <li>
-                  <span><strong>b)</strong> Akselerasjon oppover (<InlineLatex latex="a = +2{,}0\;\text{m/s}^2" />). Newtons 2. lov vertikalt:</span>
-                  <FormulaBox latex="\sum F_y = ma:\quad N - mg = ma \;\Rightarrow\; N = m(g + a) = 70(9{,}81 + 2{,}0) = 70 \cdot 11{,}81 = \underline{\underline{827\;\text{N}}}" variant="blue" />
-                </li>
-                <li>
-                  <span><strong>c)</strong> Akselerasjon nedover (<InlineLatex latex="a = -2{,}0\;\text{m/s}^2" />):</span>
-                  <FormulaBox latex="N = m(g + a) = 70(9{,}81 - 2{,}0) = 70 \cdot 7{,}81 = \underline{\underline{547\;\text{N}}}" variant="blue" />
-                </li>
-                <li>
-                  <span><strong>d)</strong> Fritt fall (<InlineLatex latex="a = -g" />):</span>
-                  <FormulaBox latex="N = m(g + a) = m(g - g) = m \cdot 0 = \underline{\underline{0\;\text{N}}}" variant="gold" />
-                </li>
-              </ol>
-            </div>
-
-            {/* Steg 5: Svar */}
-            <div>
-              <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="N_b = \underline{\underline{827\;\text{N}}},\quad N_c = \underline{\underline{547\;\text{N}}},\quad N_d = \underline{\underline{0\;\text{N}}}" variant="gold" />
-            </div>
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hva lærte vi?</p>
-              <p className="text-sm">
-                Heis-problemet er det klassiske eksemplet på at <strong>opplevd tyngde er normalkraften</strong>, ikke gravitasjonskraften.
-                Formelen <InlineLatex latex="N = m(g + a)" /> er gull: akselerasjon oppover gir <InlineLatex latex="N > mg" /> (du føler deg tyngre),
-                nedover gir <InlineLatex latex="N < mg" /> (lettere), og fritt fall gir <InlineLatex latex="N = 0" /> (vektløshet).
-                Husk å definere positiv retning konsekvent FØR du setter inn tall.
-              </p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="To klosser på friksjonsløst underlag"
-        difficulty="middels"
-        problem={
-          <div>
-            <p>
-              To klosser med masser <InlineLatex latex="m_1 = 4{,}0\;\text{kg}" /> og{" "}
-              <InlineLatex latex="m_2 = 6{,}0\;\text{kg}" /> står inntil hverandre på et friksjonsløst underlag.
-              En kraft <InlineLatex latex="F = 30\;\text{N}" /> dyttes mot <InlineLatex latex="m_1" />.
-            </p>
-            <p className="mt-2">a) Finn akselerasjonen til systemet.</p>
-            <p>b) Finn kontaktkraften mellom klossene.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Begge klossene har samme akselerasjon (beveger seg som ett system).</p> },
-          { label: "Hint 2", content: <p>For å finne kontaktkraften: tegn FBD for m₂ alene.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li><InlineLatex latex="m_1 = 4{,}0\;\text{kg}" /> — masse til kloss 1 (kraften påføres denne)</li>
-                <li><InlineLatex latex="m_2 = 6{,}0\;\text{kg}" /> — masse til kloss 2</li>
-                <li><InlineLatex latex="F = 30\;\text{N}" /> — horisontal kraft på <InlineLatex latex="m_1" /></li>
-                <li>Friksjonsløst underlag — ingen friksjonskraft</li>
-                <li>Klossene er i kontakt — beveger seg med lik akselerasjon</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Systemets akselerasjon <InlineLatex latex="a" /></li>
-                <li>b) Kontaktkraften <InlineLatex latex="K" /> mellom klossene</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Strategi</p>
-              <p className="text-sm">
-                <strong>a)</strong> Behandle hele systemet som ett legeme: <InlineLatex latex="F = (m_1 + m_2)a" />.
-                <strong> b)</strong> For å finne kontaktkraften isolerer vi én kloss. FBD for <InlineLatex latex="m_2" />:
-                eneste horisontale kraft er kontaktkraften <InlineLatex latex="K" /> (fra <InlineLatex latex="m_1" /> via N3L).
-                Siden vi vet <InlineLatex latex="a" /> fra a), gir <InlineLatex latex="K = m_2 a" /> svaret.
-                Vi sjekker med N3L: <InlineLatex latex="m_1" /> opplever <InlineLatex latex="F - K" /> som skal gi <InlineLatex latex="m_1 a" />.
-              </p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <div>
-              <p className="font-semibold mb-2">Løsning</p>
-              <ol className="space-y-3 list-decimal list-inside text-sm">
-                <li>
-                  <span><strong>a)</strong> Behandle systemet som ett legeme med total masse <InlineLatex latex="m_1 + m_2" />:</span>
-                  <FormulaBox latex="\sum F = (m_1 + m_2)a \;\Rightarrow\; a = \frac{F}{m_1 + m_2} = \frac{30\;\text{N}}{4{,}0 + 6{,}0\;\text{kg}} = \frac{30}{10} = \underline{\underline{3{,}0\;\text{m/s}^2}}" variant="blue" />
-                </li>
-                <li>
-                  <span><strong>b)</strong> FBD for <InlineLatex latex="m_2" /> alene: eneste horisontale kraft er kontaktkraften <InlineLatex latex="K" /> fra <InlineLatex latex="m_1" />:</span>
-                  <FormulaBox latex="\sum F_x = m_2 a:\quad K = m_2 a = 6{,}0\;\text{kg} \cdot 3{,}0\;\text{m/s}^2 = \underline{\underline{18\;\text{N}}}" variant="gold" />
-                </li>
-                <li>
-                  <span>Sjekk med N3L for <InlineLatex latex="m_1" /> — netto kraft på <InlineLatex latex="m_1" /> skal gi <InlineLatex latex="m_1 a" />:</span>
-                  <FormulaBox latex="F - K = m_1 a:\quad 30 - 18 = 12\;\text{N} = 4{,}0 \cdot 3{,}0 = 12\;\text{N} \;\checkmark" variant="blue" />
-                </li>
-              </ol>
-            </div>
-
-            {/* Steg 5: Svar */}
-            <div>
-              <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="a = \underline{\underline{3{,}0\;\text{m/s}^2}}, \qquad K = \underline{\underline{18\;\text{N}}}" variant="gold" />
-            </div>
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hva lærte vi?</p>
-              <p className="text-sm">
-                Nøkkelteknikken for sammenkoblede legemer: (1) finn systemets akselerasjon ved å behandle
-                alt som ett legeme, (2) isola ett legeme for å finne indre krefter. Merk at kontaktkraften
-                er proporsjonal med <em>den drevne massens</em> andel av total masse:
-                <InlineLatex latex="K = F \cdot m_2/(m_1+m_2) = 30 \cdot 0{,}6 = 18\;\text{N}" />.
-                Newtons 3. lov bekrefter alltid: <InlineLatex latex="m_2" /> dytter tilbake på <InlineLatex latex="m_1" /> med 18 N.
-              </p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* ── EKSAMENSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Eksamenstips — Kapittel 4</p>
-        <ul className="space-y-1 text-sm">
-          <li>• Newtons lover dukker opp i nesten ALLE mekanikkoppgaver — vær trygg på FBD</li>
-          <li>• Start alltid med FBD og velg koordinatsystem FØR du skriver likninger</li>
-          <li>• Husk: &ldquo;ma&rdquo; er IKKE en kraft — det er resultatet av kraftsummen</li>
-          <li>• Ved sammenkoblede legemer: ett FBD per legeme, koble med N3L</li>
-        </ul>
+          <p className="text-xs text-[var(--muted)]">Kapittel 4</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Bremsende bil — Newtons 2. lov"
-        difficulty="middels"
-        source="Eksamen Høst 2023, Oppgave 2b"
-        problem={
-          <div>
-            <p>
-              En bil med masse 1500 kg kjører med fart 72 km/h når motoren kobles ut.
-              Bilen stopper etter 50 m pga. friksjon.
-            </p>
-            <p className="mt-2">a) Hvor stor er friksjonskraften?</p>
-            <p>b) Hvor lang tid tok nedbremsingen?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Regn ut akselerasjonen fra kinematikk: v² = v₀² + 2as med v = 0.</p> },
-          { label: "Hint 2", content: <p>Bruk deretter ΣF = ma for å finne friksjonskraften.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li><InlineLatex latex="m = 1500\;\text{kg}" /> — bilens masse</li>
-                <li><InlineLatex latex="v_0 = 72\;\text{km/h} = 20\;\text{m/s}" /> — startfart (konverter: 72/3,6 = 20)</li>
-                <li><InlineLatex latex="v = 0\;\text{m/s}" /> — sluttfart (bilen stopper)</li>
-                <li><InlineLatex latex="s = 50\;\text{m}" /> — bremselengde</li>
-                <li>Eneste horisontal kraft er friksjon (motoren koblet ut)</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Friksjonskraften <InlineLatex latex="R" /></li>
-                <li>b) Bremsetiden <InlineLatex latex="t" /></li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Strategi</p>
-              <p className="text-sm">
-                Dette er et to-stegs problem som kombinerer kinematikk (kap. 2) og Newtons 2. lov (kap. 4).
-                <strong> Steg 1:</strong> Finn akselerasjonen fra kinematikk med <InlineLatex latex="v^2 = v_0^2 + 2as" />.
-                <strong> Steg 2:</strong> Bruk <InlineLatex latex="\sum F = ma" /> til å finne friksjonskraften.
-                Tid finner vi fra <InlineLatex latex="v = v_0 + at" />. Kombinasjonen av disse to kapitlene
-                er svært vanlig på eksamen.
-              </p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <div>
-              <p className="font-semibold mb-2">Løsning</p>
-              <ol className="space-y-3 list-decimal list-inside text-sm">
-                <li>
-                  <span>Konverter hastighet: <InlineLatex latex="v_0 = 72\;\text{km/h} \div 3{,}6 = 20\;\text{m/s}" /></span>
-                </li>
-                <li>
-                  <span>Finn akselerasjonen fra kinematikk (<InlineLatex latex="v = 0" /> ved stopp):</span>
-                  <FormulaBox latex="v^2 = v_0^2 + 2as \;\Rightarrow\; 0 = 400 + 2a \cdot 50 \;\Rightarrow\; a = \frac{-400}{100} = -4{,}0\;\text{m/s}^2" variant="blue" />
-                </li>
-                <li>
-                  <span><strong>a)</strong> Bruk Newtons 2. lov — friksjonskraften er eneste horisontale kraft, rettet bakover:</span>
-                  <FormulaBox latex="\sum F_x = ma:\quad -R = ma \;\Rightarrow\; R = m|a| = 1500\;\text{kg} \cdot 4{,}0\;\text{m/s}^2 = \underline{\underline{6000\;\text{N} = 6{,}0\;\text{kN}}}" variant="gold" />
-                </li>
-                <li>
-                  <span><strong>b)</strong> Finn bremsetiden fra kinematikk:</span>
-                  <FormulaBox latex="v = v_0 + at \;\Rightarrow\; 0 = 20 + (-4{,}0)t \;\Rightarrow\; t = \frac{20}{4{,}0} = \underline{\underline{5{,}0\;\text{s}}}" variant="gold" />
-                </li>
-              </ol>
-            </div>
-
-            {/* Steg 5: Svar */}
-            <div>
-              <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="R = \underline{\underline{6{,}0\;\text{kN}}}, \qquad t = \underline{\underline{5{,}0\;\text{s}}}" variant="gold" />
-            </div>
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hva lærte vi?</p>
-              <p className="text-sm">
-                Eksamen kombinerer ofte kinematikk og Newtons lover. Oppskriften: (1) bruk kinematikk
-                til å finne akselerasjonen, (2) bruk N2L til å koble akselerasjon til kraft.
-                Husk å konvertere km/h til m/s FØR du setter inn i formler (<InlineLatex latex="\div 3{,}6" />).
-                Sjekk fortegn: negativ akselerasjon = bremsing = friksjon er rettet mot bevegelsesretningen.
-              </p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Pakke i tau — likevekt"
-        difficulty="middels"
-        source="Eksamensrelevant"
-        problem={
-          <div>
-            <p>
-              En pakke med masse <InlineLatex latex="m = 50\;\text{kg}" /> henger i et masseløst tau
-              fra taket. Under pakken henger et nytt tau ned til en krok i gulvet.
-            </p>
-            <p className="mt-2">a) Finn snordraget i begge tauene.</p>
-            <p>b) Hva hvis det øvre tauet har masse 12 kg? Finn snordraget i topp og bunn av tauet.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>FBD for pakken: S₁ (oppover), G (nedover). Det nedre tauet har null drag (henger fritt).</p> },
-          { label: "Hint 2", content: <p>Når tauet har masse: tegn FBD for tauet og bruk N3L mellom tau og pakke.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li><InlineLatex latex="m = 50\;\text{kg}" /> — pakkens masse</li>
-                <li>a) Øvre tau er masseløst; nedre tau henger med slakk (ikke spent)</li>
-                <li>b) Øvre tau har masse <InlineLatex latex="m_\tau = 12\;\text{kg}" /></li>
-                <li>Systemet er i statisk likevekt — akselerasjon = 0</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Snordrag i øvre tau <InlineLatex latex="S_1" /> og nedre tau <InlineLatex latex="S_2" /></li>
-                <li>b) Snordrag i toppen og bunnen av et massivt øvre tau</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Strategi</p>
-              <p className="text-sm">
-                Likevektsoppgave: <InlineLatex latex="\sum F = 0" /> for hvert legeme.
-                <strong> a)</strong> Nedre tau er ikke spent (ingen krok trekker nedover), så <InlineLatex latex="S_2 = 0" />.
-                FBD for pakken gir <InlineLatex latex="S_1 = mg" />. I et masseløst tau er draget konstant.
-                <strong> b)</strong> Tauet har egen vekt som must bæres av festepunktet øverst.
-                Bunnen av tauet bærer bare pakken; toppen bærer pakken pluss tauets vekt.
-              </p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <div>
-              <p className="font-semibold mb-2">Løsning</p>
-              <ol className="space-y-3 list-decimal list-inside text-sm">
-                <li>
-                  <span><strong>a)</strong> Nedre tau: ingen krok i gulvet trekker ned — tauet er slakt, snordrag <InlineLatex latex="S_2 = 0\;\text{N}" />.</span>
-                </li>
-                <li>
-                  <span>FBD for pakken: <InlineLatex latex="S_1" /> (opp) og <InlineLatex latex="mg" /> (ned). Likevekt gir:</span>
-                  <FormulaBox latex="\sum F_y = 0:\quad S_1 - mg = 0 \;\Rightarrow\; S_1 = mg = 50 \cdot 9{,}81 = \underline{\underline{491\;\text{N}}}" variant="blue" />
-                </li>
-                <li>
-                  <span><strong>b)</strong> Tauet med masse 12 kg. Bunnen av tauet bærer bare pakken (via N3L fra pakken opp mot bunnen av tauet):</span>
-                  <FormulaBox latex="S_{\text{bunn}} = mg = 50 \cdot 9{,}81 = \underline{\underline{491\;\text{N}}}" variant="blue" />
-                </li>
-                <li>
-                  <span>FBD for hele tauet: toppen bærer pakken + tauets vekt:</span>
-                  <FormulaBox latex="S_{\text{topp}} = (m + m_\tau)g = (50 + 12) \cdot 9{,}81 = 62 \cdot 9{,}81 = \underline{\underline{608\;\text{N}}}" variant="gold" />
-                </li>
-              </ol>
-            </div>
-
-            {/* Steg 5: Svar */}
-            <div>
-              <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="\text{a)}\; S_1 = \underline{\underline{491\;\text{N}}},\; S_2 = \underline{\underline{0\;\text{N}}};\quad \text{b)}\; S_{\text{bunn}} = \underline{\underline{491\;\text{N}}},\; S_{\text{topp}} = \underline{\underline{608\;\text{N}}}" variant="gold" />
-            </div>
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Hva lærte vi?</p>
-              <p className="text-sm">
-                I et masseløst tau er snordraget konstant overalt — men i et tau <em>med masse</em> varierer draget
-                langs tauet. Toppen bærer alt (pakke + tau), bunnen bærer bare pakken. Generell regel:
-                <InlineLatex latex="S(y) = g \cdot (\text{total masse nedenfor})" /> — draget øker lineært oppover i tauet.
-                Newtons 3. lov sikrer at pakken trekker ned på tauet med samme kraft som tauet trekker opp på pakken.
-              </p>
-            </div>
-          </div>
-        }
-      />
     </div>
   );
 }

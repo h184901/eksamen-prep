@@ -3,16 +3,14 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
     <div>
-      {/* ══════════════════════════════════════════════
-          OPPGAVESTRATEGIER
-          ══════════════════════════════════════════════ */}
-      <h3 className="text-xl font-bold mt-2 mb-4">Oppgavestrategier</h3>
-
-      <div className="space-y-4 mb-10">
+      <CollapsibleSection title="Oppgavestrategier">
+      <div className="space-y-4">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h3 className="font-semibold text-lg mb-3">Strategi: Energibevaring uten friksjon</h3>
           <ol className="list-decimal list-inside space-y-2 text-sm">
@@ -85,12 +83,9 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
-      {/* ══════════════════════════════════════════════
-          GJENNOMGÅTTE EKSEMPLER
-          ══════════════════════════════════════════════ */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Gjennomgåtte eksempler</h3>
-
+      <CollapsibleSection title="Eksempler fra timen">
       {/* Eksempel 1: Ball kastet rett opp */}
       <ExerciseCard
         number={1}
@@ -436,384 +431,34 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ══════════════════════════════════════════════
-          ØVINGSOPPGAVER
-          ══════════════════════════════════════════════ */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      {/* Oblig: Ballistisk pendel */}
-      <ExerciseCard
-        number={1}
-        title="Ballistisk pendel — Energibevaring + bevegelsesmengde"
-        difficulty="vanskelig"
-        source="Oblig 2"
-        problem={
-          <div>
-            <p>
-              En kloss (masse <InlineLatex latex="M" />) henger i en snor med lengde <InlineLatex latex="L" />.
-              En kule (masse <InlineLatex latex="m" />, fart <InlineLatex latex="v_0" />) treffer klossen
-              og fester seg (uelastisk støt).
-            </p>
-            <p className="mt-2">
-              a) Finn felleslegemets hastighet rett etter støtet.<br />
-              b) Vis at maks vinkelutslag er <InlineLatex latex="\varphi_{\max} = \arccos\!\left(1 - \frac{m^2 v_0^2}{2gL(m+M)^2}\right)" />.
-            </p>
+      {/* ── Relaterte oppgaver ── */}
+
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>a) Støtet: bevaring av bevegelsesmengde (kinetisk energi er IKKE bevart i uelastisk støt).</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>b) ETTER støtet: bruk energibevaring for pendelen. Høyden er <InlineLatex latex="h = L(1 - \cos\varphi)" />.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Bevaring av bevegelsesmengde (støtet):</strong></p>
-            <FormulaBox
-              latex="mv_0 = (m + M)V \;\Rightarrow\; V = \frac{m}{m + M}v_0"
-              variant="gold"
-            />
-
-            <p><strong>b) Energibevaring etter støtet (pendel svinger opp):</strong></p>
-            <FormulaBox
-              latex="\tfrac{1}{2}(m+M)V^2 = (m+M)gL(1 - \cos\varphi_{\max})"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\tfrac{1}{2}V^2 = gL(1 - \cos\varphi_{\max})"
-              variant="blue"
-            />
-            <p className="text-sm">Setter inn V:</p>
-            <FormulaBox
-              latex="\tfrac{1}{2}\left(\frac{m}{m+M}\right)^2 v_0^2 = gL(1 - \cos\varphi_{\max})"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\cos\varphi_{\max} = 1 - \frac{m^2 v_0^2}{2gL(m+M)^2}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\varphi_{\max} = \arccos\!\left(1 - \frac{m^2 v_0^2}{2gL(m+M)^2}\right) \;\;\checkmark"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Ballistisk pendel er en to-stegs oppgave: (1) bevegelsesmengde under støtet, (2) energibevaring etter støtet. Denne typen oppgave kombinerer kap. 7 og 8.</p>
+          <p className="text-xs text-[var(--muted)]">Ikke direkte dekket</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      {/* Oblig: Rullende skive */}
-      <ExerciseCard
-        number={2}
-        title="Rullende skive på skråplan — Energi + rotasjon"
-        difficulty="vanskelig"
-        source="Oblig 2"
-        problem={
-          <div>
-            <p>
-              En sirkulær homogen skive (masse <InlineLatex latex="m" />, radius <InlineLatex latex="R" />) ruller
-              uten å gli med startfart <InlineLatex latex="v_0" /> opp et skråplan med helning <InlineLatex latex="\beta" />.
-            </p>
-            <p className="mt-2">
-              a) Finn kinetisk energi uttrykt ved m og v₀.<br />
-              b) Hvor langt opp skråplanet (s) kommer skiven?
-            </p>
+          <p className="text-xs text-[var(--muted)]">Oblig 2, oppgave 2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>a) Total E<sub>K</sub> = translasjon + rotasjon: <InlineLatex latex="E_K = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2" />. For skive: <InlineLatex latex="I = \tfrac{1}{2}mR^2" />, <InlineLatex latex="\omega = v/R" />.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>b) All kinetisk energi omgjøres til potensiell: <InlineLatex latex="E_K = mgs\sin\beta" />.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Kinetisk energi (translasjon + rotasjon):</strong></p>
-            <FormulaBox
-              latex="E_K = \tfrac{1}{2}mv_0^2 + \tfrac{1}{2}I\omega_0^2 = \tfrac{1}{2}mv_0^2 + \tfrac{1}{2}\!\left(\tfrac{1}{2}mR^2\right)\!\left(\frac{v_0}{R}\right)^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_K = \tfrac{1}{2}mv_0^2 + \tfrac{1}{4}mv_0^2 = \underline{\underline{\tfrac{3}{4}mv_0^2}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Avstand opp skråplanet:</strong></p>
-            <FormulaBox
-              latex="\tfrac{3}{4}mv_0^2 = mgs\sin\beta"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="s = \underline{\underline{\frac{3v_0^2}{4g\sin\beta}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Rullende legemer har MER kinetisk energi enn glidende (¾mv₀² vs ½mv₀²), så de kommer lenger opp. Energibevaring inkluderer rotasjonsenergi.</p>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="Pendel — fart i laveste punkt"
-        difficulty="lett"
-        source="Øving"
-        problem={
-          <div>
-            <p>
-              En pendel med lengde <InlineLatex latex="L = 2{,}0\;\text{m}" /> slippes fra
-              en vinkel <InlineLatex latex="\theta = 40°" /> med vertikalen. Massen
-              er <InlineLatex latex="m = 0{,}50\;\text{kg}" />.
-            </p>
-            <p className="mt-2">Finn farten i det laveste punktet (friksjonsfritt).</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Høydeforskjellen er <InlineLatex latex="h = L - L\cos\theta = L(1 - \cos\theta)" />.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Pendellengde: <InlineLatex latex="L = 2{,}0\;\text{m}" /></li>
-              <li>Startvinkel: <InlineLatex latex="\theta = 40°" /> (med vertikalen)</li>
-              <li>Masse: <InlineLatex latex="m = 0{,}50\;\text{kg}" /></li>
-              <li>Startfart: <InlineLatex latex="v_1 = 0" /> (slippes fra ro)</li>
-              <li>Friksjonsfritt</li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> Farten v i det laveste punktet.</p>
-            <p><strong>Strategi:</strong> Snorkraften er alltid vinkelrett på bevegelsen og gjør null arbeid. Kun tyngden gjør arbeid, så vi bruker energibevaring. Nøkkelen er å finne høydeforskjellen: <InlineLatex latex="h = L - L\cos\theta = L(1 - \cos\theta)" />. Geometrisk betyr dette at pendelmassen faller fra en høyde h over det laveste punktet.</p>
-            <p><strong>Løsning:</strong></p>
-            <p className="text-sm"><strong>Steg 1:</strong> Finn høydeforskjellen:</p>
-            <FormulaBox
-              latex="h = L(1 - \cos\theta) = 2{,}0(1 - \cos 40°) = 2{,}0 \cdot 0{,}234 = 0{,}468\;\text{m}"
-              variant="blue"
-            />
-            <p className="text-sm"><strong>Steg 2:</strong> Energibevaring (<InlineLatex latex="v_1 = 0" />, nullnivå i bunn):</p>
-            <FormulaBox
-              latex="mgh = \tfrac{1}{2}mv^2 \;\Rightarrow\; v = \sqrt{2gh}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="v = \sqrt{2 \cdot 9{,}81 \cdot 0{,}468} = \sqrt{9{,}19} = \underline{\underline{3{,}03\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Pendelen er et klassisk energibevaringsproblem. Høydeformelen <InlineLatex latex="h = L(1 - \cos\theta)" /> dukker opp i mange oppgaver — lær den! Merk at massen kansellerer, så farten avhenger kun av L og θ.</p>
-          </div>
-        }
-      />
-
-      {/* ══════════════════════════════════════════════
-          EKSAMENSOPPGAVER
-          ══════════════════════════════════════════════ */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-4 mb-6">
-        <p className="font-semibold text-red-700 dark:text-red-400 mb-1">Eksamenstips</p>
-        <p className="text-sm">
-          Energibevaring er det kraftigste verktøyet i mekanikken. På eksamen kombineres det
-          ofte med bevegelsesmengde (kap. 8) og rotasjon (kap. 9/10). Velg nullnivå smart,
-          og sjekk alltid om friksjon eller andre krefter gjør arbeid!
-        </p>
+          <p className="text-xs text-[var(--muted)]">Kapittel 7</p>
+        </Link>
       </div>
-
-      {/* Eksamen: Basketball */}
-      <ExerciseCard
-        number={1}
-        title="Basketball — Kinetisk energi ved kurven"
-        difficulty="middels"
-        source="Eksamen V2023"
-        problem={
-          <div>
-            <p>
-              En basketballspiller kaster en ball (<InlineLatex latex="m = 0{,}600\;\text{kg}" />)
-              med fart <InlineLatex latex="v_0 = 7{,}0\;\text{m/s}" /> i vinkel <InlineLatex latex="50°" /> fra
-              høyde <InlineLatex latex="2{,}1\;\text{m}" />. Kurven er 4 m unna horisontalt
-              og <InlineLatex latex="0{,}9\;\text{m}" /> høyere enn kasthøyden.
-            </p>
-            <p className="mt-2">Hva er ballens kinetiske energi når den treffer kurven?</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Bruk energibevaring. Velg kasthøyden som nullnivå, da er y<sub>kurv</sub> = 0,9 m.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p><InlineLatex latex="E_K = \tfrac{1}{2}mv_0^2 - mg\Delta y" /></p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Masse: <InlineLatex latex="m = 0{,}600\;\text{kg}" /></li>
-              <li>Startfart: <InlineLatex latex="v_0 = 7{,}0\;\text{m/s}" /></li>
-              <li>Kastvinkel: <InlineLatex latex="50°" /></li>
-              <li>Kasthøyde: <InlineLatex latex="2{,}1\;\text{m}" /></li>
-              <li>Kurven er <InlineLatex latex="0{,}9\;\text{m}" /> høyere enn kasthøyden: <InlineLatex latex="\Delta y = 0{,}9\;\text{m}" /></li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> Kinetisk energi <InlineLatex latex="E_K" /> når ballen treffer kurven.</p>
-            <p><strong>Strategi:</strong> Energibevaring! Vi trenger ikke vite banen eller farten — kun høydeforskjellen. Vi setter kasthøyden som nullnivå. All energi er kinetisk ved start, og ved kurven er noe omgjort til potensiell energi.</p>
-            <p><strong>Løsning:</strong></p>
-            <FormulaBox
-              latex="E_{K,\text{start}} + E_{P,\text{start}} = E_{K,\text{kurv}} + E_{P,\text{kurv}}"
-              variant="blue"
-            />
-            <p className="text-sm">Med nullnivå ved kast (<InlineLatex latex="y_{\text{start}} = 0" />, <InlineLatex latex="y_{\text{kurv}} = 0{,}9\;\text{m}" />):</p>
-            <FormulaBox
-              latex="\tfrac{1}{2}mv_0^2 + 0 = E_{K,\text{kurv}} + mg \cdot 0{,}9"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_{K,\text{kurv}} = \tfrac{1}{2} \cdot 0{,}600 \cdot 7{,}0^2 - 0{,}600 \cdot 9{,}81 \cdot 0{,}9"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_{K,\text{kurv}} = 14{,}7 - 5{,}3 = \underline{\underline{9{,}4\;\text{J}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Energimetoden gir kinetisk energi uten å trenge kinematikkens baneberegning. Vi trenger ikke vite kastvinkelen eller den horisontale avstanden — kun høydeforskjellen teller! Dette er mye raskere enn å beregne banen med kinematikk.</p>
-          </div>
-        }
-      />
-
-      {/* Eksamen: Bowlingkule */}
-      <ExerciseCard
-        number={2}
-        title="Bowlingkule — Kinetisk energi med rotasjon"
-        difficulty="vanskelig"
-        source="Eksamen H2023"
-        problem={
-          <div>
-            <p>
-              En bowlingkule (<InlineLatex latex="m = 5{,}2\;\text{kg}" />, <InlineLatex latex="r = 10{,}8\;\text{cm}" />)
-              starter med fart <InlineLatex latex="v_0 = 10{,}2\;\text{m/s}" /> og glir
-              (<InlineLatex latex="\mu = 0{,}25" />). Etter en stund ruller den rent
-              med <InlineLatex latex="v = 7{,}3\;\text{m/s}" />.
-            </p>
-            <p className="mt-2">
-              Finn kinetisk energi når den ruller rent, og friksjonens arbeid under glidningen.
-            </p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Når kula ruller rent: <InlineLatex latex="E_K = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2" /> med <InlineLatex latex="I = \tfrac{2}{5}mr^2" /> (kule).</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>Friksjonens arbeid = endring i total kinetisk energi: <InlineLatex latex="W_R = E_{K,\text{slutt}} - E_{K,\text{start}}" /></p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Kinetisk energi ved ren rulling:</strong></p>
-            <FormulaBox
-              latex="E_K = \tfrac{1}{2}mv^2 + \tfrac{1}{2}\!\left(\tfrac{2}{5}mr^2\right)\!\left(\frac{v}{r}\right)^2 = \tfrac{1}{2}mv^2 + \tfrac{1}{5}mv^2 = \tfrac{7}{10}mv^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_K = \tfrac{7}{10} \cdot 5{,}2 \cdot 7{,}3^2 = \underline{\underline{194\;\text{J}}}"
-              variant="gold"
-            />
-
-            <p><strong>Friksjonens arbeid:</strong></p>
-            <FormulaBox
-              latex="W_R = E_{K,\text{slutt}} - E_{K,\text{start}} = \tfrac{7}{10}mv^2 - \tfrac{1}{2}mv_0^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = 194 - \tfrac{1}{2} \cdot 5{,}2 \cdot 10{,}2^2 = 194 - 270{,}5 = \underline{\underline{-76{,}5\;\text{J}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              NB: Startenergien er kun ½mv₀² (ingen rotasjon ved start), men sluttenergien inkluderer rotasjon (⁷⁄₁₀mv²).
-            </p>
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Ved overgang fra glidning til rulling må du huske at startenergi er ren translasjon, mens sluttenergi inkluderer rotasjon.</p>
-          </div>
-        }
-      />
-
-      {/* Eksamen: Skiløper */}
-      <ExerciseCard
-        number={3}
-        title="Skiløper — Energibevaring ned bakke + friksjon"
-        difficulty="middels"
-        source="Oblig 2"
-        problem={
-          <div>
-            <p>
-              En skiløper (<InlineLatex latex="m = 80{,}0\;\text{kg}" />) starter fra toppen
-              av en <InlineLatex latex="250\;\text{m}" /> lang bakke (<InlineLatex latex="25°" />) med v = 0.
-              Uten friksjon ville farten i bunnen vært 45,5 m/s, men den virkelige farten
-              er bare <InlineLatex latex="50\;\text{km/h} = 13{,}9\;\text{m/s}" />.
-            </p>
-            <p className="mt-2">Finn gjennomsnittlig friksjonskraft langs bakken.</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Høyden: <InlineLatex latex="h = 250\sin 25° = 105{,}7\;\text{m}" />. Bruk utvidet energiligning.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>W<sub>R</sub> = −Rs langs bakken. Finn W<sub>R</sub> fra energiligningen, deretter R.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Masse: <InlineLatex latex="m = 80{,}0\;\text{kg}" /></li>
-              <li>Bakkelengde: <InlineLatex latex="s = 250\;\text{m}" /></li>
-              <li>Helning: <InlineLatex latex="\theta = 25°" /></li>
-              <li>Startfart: <InlineLatex latex="v_0 = 0" /></li>
-              <li>Faktisk sluttfart: <InlineLatex latex="v = 50\;\text{km/h} = 13{,}9\;\text{m/s}" /></li>
-              <li>Fart uten friksjon ville vært 45,5 m/s</li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> Gjennomsnittlig friksjonskraft R langs bakken.</p>
-            <p><strong>Strategi:</strong> Bruk utvidet energiligning: <InlineLatex latex="E_{K1} + E_{P1} + W_R = E_{K2} + E_{P2}" />. Finn <InlineLatex latex="W_R" /> først, deretter <InlineLatex latex="R = |W_R|/s" />. Høyden er <InlineLatex latex="h = s\sin\theta" />.</p>
-            <p><strong>Løsning:</strong></p>
-            <p className="text-sm"><strong>Steg 1:</strong> Konverter og finn høyden:</p>
-            <FormulaBox
-              latex="v = 50\;\text{km/h} = 13{,}9\;\text{m/s}, \quad h = 250\sin 25° = 105{,}7\;\text{m}"
-              variant="blue"
-            />
-            <p className="text-sm"><strong>Steg 2:</strong> Utvidet energiligning (nullnivå i bunn):</p>
-            <FormulaBox
-              latex="0 + mgs\sin 25° + W_R = \tfrac{1}{2}mv^2 + 0"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = \tfrac{1}{2}mv^2 - mgs\sin 25° = \tfrac{1}{2} \cdot 80 \cdot 13{,}9^2 - 80 \cdot 9{,}81 \cdot 250 \cdot \sin 25°"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = 7\,728 - 82\,929 = -75\,200\;\text{J} = -75{,}2\;\text{kJ}"
-              variant="blue"
-            />
-            <p className="text-sm"><strong>Steg 3:</strong> Finn friksjonskraften:</p>
-            <FormulaBox
-              latex="R = \frac{|W_R|}{s} = \frac{75\,200}{250} = \underline{\underline{301\;\text{N}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Kombinasjon av energibevaring og arbeid-energi gir friksjonskraften. Den enorme forskjellen mellom 164 km/h (uten friksjon) og 50 km/h (med) viser at friksjon fjerner mesteparten av energien over lange strekninger. En friksjonskraft på 301 N høres lite ut, men over 250 m gjør den 75 kJ negativt arbeid!</p>
-          </div>
-        }
-      />
     </div>
   );
 }

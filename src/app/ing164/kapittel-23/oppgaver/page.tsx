@@ -3,15 +3,15 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Oppgaver — Elektrisk potensial</h2>
 
-      {/* ── Oppgavestrategier ── */}
-      <h3 className="text-xl font-semibold mt-8 mb-4">Oppgavestrategier</h3>
-
+      <CollapsibleSection title="Oppgavestrategier">
       <div className="space-y-6">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h3 className="font-semibold text-lg mb-3">Strategi: Potensial fra punktladninger</h3>
@@ -59,10 +59,9 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
-      {/* ── Gjennomgåtte eksempler ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Gjennomgåtte eksempler</h3>
-
+      <CollapsibleSection title="Eksempler fra timen">
       {/* Eksempel 1: Elektron mellom plater med energibevaring */}
       <ExerciseCard
         number={1}
@@ -281,290 +280,33 @@ export default function OppgaverPage() {
           </div>
         }
       />
+      </CollapsibleSection>
 
-      {/* ── Øvingsoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Øvingsoppgaver</h3>
-
-      <ExerciseCard
-        number={1}
-        title="Potensial og arbeid med tre punktladninger"
-        difficulty="vanskelig"
-        source="Oblig 3, oppg. 3"
-        problem={
-          <div>
-            <p>
-              En punktladning <InlineLatex latex="q_1 = 3\;\mu\text{C}" /> ligger i (3m, 0) og{" "}
-              <InlineLatex latex="q_2 = 6\;\mu\text{C}" /> ligger i (−3m, 0).
-            </p>
-            <p className="mt-2">a) Hva er det elektriske potensialet i origo og i punktet (0, 4m)?</p>
-            <p>b) En tredje punktladning <InlineLatex latex="q_3 = 4\;\mu\text{C}" /> plasseres i origo. Hvor stort arbeid må utføres på q₃ for å flytte den til (0, 4m)?</p>
-            <p>c) Finn størrelsen og retningen på kraften som virker på q₃ fra de to andre ladningene når q₃ er i (0, 4m).</p>
-            <p>d) Beregn størrelse og retning på det elektriske feltet i origo.</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1 (a)",
-            content: (
-              <p>
-                Potensial er en skalar. I origo er avstanden til q₁ = 3 m og til q₂ = 3 m.
-                I (0,4) er avstanden til begge: <InlineLatex latex="r = \sqrt{3^2 + 4^2} = 5\;\text{m}" />.
-              </p>
-            ),
-          },
-          {
-            label: "Hint 2 (b)",
-            content: (
-              <p>
-                Arbeid utført av ytre krefter = endring i potensiell energi:{" "}
-                <InlineLatex latex="W = q_3(V_{\text{slutt}} - V_{\text{start}})" />.
-              </p>
-            ),
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Potensial</strong></p>
-            <p className="text-sm">I origo (r₁ = 3 m, r₂ = 3 m):</p>
-            <FormulaBox
-              latex="V_0 = k\left(\frac{q_1}{r_1} + \frac{q_2}{r_2}\right) = 8{,}99\cdot10^9\left(\frac{3\cdot10^{-6}}{3} + \frac{6\cdot10^{-6}}{3}\right) = \underline{\underline{27\;\text{kV}}}"
-              variant="gold"
-            />
-            <p className="text-sm">I (0, 4m): <InlineLatex latex="r_1 = r_2 = \sqrt{9+16} = 5\;\text{m}" /></p>
-            <FormulaBox
-              latex="V_{(0,4)} = k\left(\frac{3\cdot10^{-6}}{5} + \frac{6\cdot10^{-6}}{5}\right) = \underline{\underline{16{,}2\;\text{kV}}}"
-              variant="gold"
-            />
-
-            <p className="mt-3"><strong>b) Arbeid</strong></p>
-            <FormulaBox
-              latex="W = q_3(V_{\text{slutt}} - V_{\text{start}}) = 4\cdot10^{-6}(16200 - 27000) = \underline{\underline{-0{,}043\;\text{J}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">Negativt arbeid — feltet gjør arbeid for oss, vi trenger ikke tilføre energi.</p>
-
-            <p className="mt-3"><strong>c) Kraft på q₃ i (0, 4m)</strong></p>
-            <p className="text-sm">Avstand fra q₁ og q₂ til (0,4): begge = 5 m. Vinkelen fra x-aksen: θ = tan⁻¹(4/3) = 53,1°.</p>
-            <FormulaBox latex="F_1 = k\frac{|q_1 q_3|}{r^2} = 8{,}99\cdot10^9\cdot\frac{3\cdot10^{-6}\cdot 4\cdot10^{-6}}{25} = 4{,}32\cdot10^{-3}\;\text{N}" variant="blue" />
-            <FormulaBox latex="F_2 = k\frac{|q_2 q_3|}{r^2} = 8{,}99\cdot10^9\cdot\frac{6\cdot10^{-6}\cdot 4\cdot10^{-6}}{25} = 8{,}63\cdot10^{-3}\;\text{N}" variant="blue" />
-            <p className="text-sm">Dekomponér: F₁ peker fra q₁ til q₃ (bort fra positiv), F₂ peker fra q₂ til q₃.</p>
-            <FormulaBox latex="\sum F_x = -F_1\sin\alpha + F_2\sin\alpha = (F_2 - F_1)\sin\alpha" variant="blue" />
-            <p className="text-sm">der α = tan⁻¹(3/4) ≈ 36,9° (vinkel fra y-aksen, dvs. sin α = 3/5 = 0,6).</p>
-            <FormulaBox
-              latex="\sum F_x = (8{,}63 - 4{,}32)\cdot10^{-3}\cdot 0{,}6 = 2{,}59\cdot10^{-3}\;\text{N}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\sum F_y = F_1\cos\alpha + F_2\cos\alpha = (4{,}32 + 8{,}63)\cdot10^{-3}\cdot 0{,}8 = 10{,}36\cdot10^{-3}\;\text{N}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="F = \sqrt{F_x^2 + F_y^2} = \underline{\underline{10{,}7\cdot10^{-3}\;\text{N} = 10{,}7\;\text{mN}}}"
-              variant="gold"
-            />
-
-            <p className="mt-3"><strong>d) E-felt i origo</strong></p>
-            <p className="text-sm">q₁ i (+3,0): E₁ peker i −x (bort fra positiv). q₂ i (−3,0): E₂ peker i +x (bort fra positiv).</p>
-            <FormulaBox latex="E_1 = k\frac{|q_1|}{r_1^2} = 8{,}99\cdot10^9\cdot\frac{3\cdot10^{-6}}{9} = 3000\;\text{V/m} \;\text{(i −x)}" variant="blue" />
-            <FormulaBox latex="E_2 = k\frac{|q_2|}{r_2^2} = 8{,}99\cdot10^9\cdot\frac{6\cdot10^{-6}}{9} = 6000\;\text{V/m} \;\text{(i +x)}" variant="blue" />
-            <FormulaBox
-              latex="E_x = -3000 + 6000 = 3000\;\text{V/m}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E = \underline{\underline{3{,}0\;\text{kV/m i }+x\text{-retning}}}"
-              variant="gold"
-            />
+          <p className="text-xs text-[var(--muted)]">Vår 2017, Høst 2016</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Elektronvolt og energikonvertering"
-        difficulty="lett"
-        problem={
-          <div>
-            <p>
-              Et proton akselereres gjennom en potensialforskjell på 500 V fra ro.
-            </p>
-            <p className="mt-2">a) Hvor stor kinetisk energi får protonet (i joule og i eV)?</p>
-            <p>b) Hva er farten til protonet etter akselerasjonen?</p>
+          <p className="text-xs text-[var(--muted)]">Ikke direkte dekket</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Kinetisk energi = arbeid utført av feltet = qΔV. For proton: q = e.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Kinetisk energi</strong></p>
-            <FormulaBox
-              latex="E_k = e \cdot \Delta V = 1{,}60\cdot10^{-19}\cdot 500 = \underline{\underline{8{,}0\cdot10^{-17}\;\text{J} = 500\;\text{eV}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Fart</strong></p>
-            <FormulaBox
-              latex="v = \sqrt{\frac{2E_k}{m_p}} = \sqrt{\frac{2\cdot 8{,}0\cdot10^{-17}}{1{,}67\cdot10^{-27}}} = \underline{\underline{3{,}1\cdot10^5\;\text{m/s}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Sammenlign med elektronet: protoner har ~1836× mer masse, så de får mye lavere fart for samme spenning.
-            </p>
-          </div>
-        }
-      />
-
-      {/* ── Eksamensoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Eksamenstips for kap. 23</h4>
-        <ul className="text-sm space-y-1">
-          <li>• Potensialoppgaver dukker opp <strong>nesten alltid</strong> sammen med kap. 21-stoff</li>
-          <li>• Typisk: finn V i et punkt, deretter finn arbeid for å flytte en ladning dit</li>
-          <li>• Energibevaring er et mektig verktøy — brukes ofte til å finne fart</li>
-          <li>• Husk: V er skalar (enkel summering), E er vektor (krever dekomponering)</li>
-        </ul>
+          <p className="text-xs text-[var(--muted)]">Kapittel 23</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Arbeid og potensial — to punktladninger"
-        difficulty="vanskelig"
-        source="Eksamen ELE100 V2017"
-        problem={
-          <div>
-            <p>
-              En positiv punktladning <InlineLatex latex="q_A = 2{,}50\;\mu\text{C}" /> plasseres
-              på x-aksen i <InlineLatex latex="x = 2{,}00\;\text{cm}" />.
-            </p>
-            <p className="mt-2">
-              a) Hvor stort arbeid kreves for å bringe en annen punktladning B, med like stor
-              positiv ladning, fra uendelig til punktet <InlineLatex latex="x = 4{,}00\;\text{cm}" />?
-            </p>
-            <p>
-              b) Regn ut det elektriske potensialet i origo satt opp av de to punktladningene.
-            </p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: (
-              <p>
-                a) Arbeid = endring i potensiell energi. Avstanden mellom ladningene
-                blir 4,00 − 2,00 = 2,00 cm = 0,0200 m.
-              </p>
-            ),
-          },
-          {
-            label: "Hint 2",
-            content: (
-              <p>
-                b) Potensialet er summen av bidragene fra qA (avstand 2,00 cm) og
-                qB (avstand 4,00 cm).
-              </p>
-            ),
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Arbeid for å bringe qB fra uendelig</strong></p>
-            <p className="text-sm">
-              Avstanden mellom qA og qB: r = 4,00 − 2,00 = 2,00 cm = 0,0200 m.
-              Ved uendelig: Ep = 0.
-            </p>
-            <FormulaBox
-              latex="E_1 = \frac{1}{4\pi\varepsilon_0}\frac{q_A q_B}{r} = 8{,}99\cdot10^9\cdot\frac{(2{,}50\cdot10^{-6})^2}{0{,}0200}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W = E_1 - E_0 = \underline{\underline{2{,}80\;\text{J}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Positivt arbeid — vi må dytte ladningene sammen (like ladninger frastøter).
-            </p>
-
-            <p className="mt-3"><strong>b) Potensial i origo</strong></p>
-            <p className="text-sm">
-              Avstand fra origo til qA: r₁ = 2,00 cm = 0,0200 m.
-              Avstand fra origo til qB: r₂ = 4,00 cm = 0,0400 m.
-            </p>
-            <FormulaBox
-              latex="V_0 = \frac{1}{4\pi\varepsilon_0}\left(\frac{q_A}{r_1} + \frac{q_B}{r_2}\right) = 8{,}99\cdot10^9\left(\frac{2{,}50\cdot10^{-6}}{0{,}02} + \frac{2{,}50\cdot10^{-6}}{0{,}04}\right)"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="V_0 = 8{,}99\cdot10^9 \cdot (1{,}25\cdot10^{-4} + 6{,}25\cdot10^{-5}) = \underline{\underline{1{,}69\;\text{MV}}}"
-              variant="gold"
-            />
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Uniformt felt — komplett analyse"
-        difficulty="vanskelig"
-        source="Oblig 3, oppg. 2 (tilpasset)"
-        problem={
-          <div>
-            <p>
-              To parallelle metallskiver er plassert med avstand{" "}
-              <InlineLatex latex="d = 0{,}050\;\text{m}" /> og koblet til 500 V.
-              Skivene er sirkulære med radius <InlineLatex latex="r = 0{,}25\;\text{m}" />.
-            </p>
-            <p className="mt-2">a) Hva er E-feltet mellom platene?</p>
-            <p>b) Et elektron slippes fra ro ved den negative plata. Finn farten og tiden til det treffer den positive plata.</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>a) E = V/d for uniformt felt mellom plater.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: (
-              <p>
-                b) Bruk energibevaring for farten: ½mv² = eV.
-                Bruk kinematikk for tiden: d = ½at².
-              </p>
-            ),
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) E-felt</strong></p>
-            <FormulaBox
-              latex="E = \frac{V}{d} = \frac{500}{0{,}050} = \underline{\underline{1{,}0\cdot10^4\;\text{V/m}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Fart (energibevaring)</strong></p>
-            <FormulaBox latex="\tfrac{1}{2}m_e v^2 = eV" variant="blue" />
-            <FormulaBox
-              latex="v = \sqrt{\frac{2eV}{m_e}} = \sqrt{\frac{2\cdot1{,}60\cdot10^{-19}\cdot 500}{9{,}11\cdot10^{-31}}} = \underline{\underline{1{,}33\cdot10^7\;\text{m/s}}}"
-              variant="gold"
-            />
-
-            <p><strong>Tid (kinematikk)</strong></p>
-            <FormulaBox
-              latex="a = \frac{eE}{m_e} = \frac{1{,}60\cdot10^{-19}\cdot10^4}{9{,}11\cdot10^{-31}} = 1{,}76\cdot10^{15}\;\text{m/s}^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="t = \sqrt{\frac{2d}{a}} = \sqrt{\frac{2\cdot0{,}050}{1{,}76\cdot10^{15}}} = \underline{\underline{7{,}5\cdot10^{-9}\;\text{s} \approx 7{,}5\;\text{ns}}}"
-              variant="gold"
-            />
-          </div>
-        }
-      />
     </div>
   );
 }

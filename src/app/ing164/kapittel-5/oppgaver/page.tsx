@@ -3,6 +3,8 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
@@ -10,9 +12,8 @@ export default function OppgaverPage() {
       <h2 className="text-2xl font-bold mt-4 mb-6">Oppgaver</h2>
 
       {/* ── Oppgavestrategier ── */}
-      <h3 className="text-xl font-semibold mb-4">Oppgavestrategier</h3>
-
-      <div className="grid md:grid-cols-2 gap-4 mb-10">
+      <CollapsibleSection title="Oppgavestrategier">
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h4 className="font-semibold text-lg mb-3">Skråplan-oppskrift</h4>
           <ol className="list-decimal list-inside space-y-2 text-sm">
@@ -63,9 +64,10 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* ── Gjennomgåtte eksempler ── */}
-      <h3 className="text-xl font-semibold mb-4">Gjennomgåtte eksempler</h3>
+      <CollapsibleSection title="Eksempler fra timen">
 
       <ExerciseCard
         number={1}
@@ -462,465 +464,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── Øvingsoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      <ExerciseCard
-        number={1}
-        title="Slede ned skråplan med friksjon"
-        difficulty="middels"
-        source="Forelesning"
-        problem={
-          <div>
-            <p>
-              En slede glir nedover et skråplan med vinkel <InlineLatex latex="\alpha" /> og
-              glidefriksjonskoeffisient <InlineLatex latex="\mu_k" />.
-            </p>
-            <p className="mt-2">a) Finn den kritiske vinkelen der sleden glir med konstant fart (uttrykt ved μk).</p>
-            <p>b) Finn akselerasjonen når vinkelen er brattere enn kritisk vinkel.</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Konstant fart: ΣFx = 0 → mg sinα = R = μkN = μk mg cosα.</p> },
-          { label: "Hint 2", content: <p>For del b: ΣFx = ma → mg sinα − μk mg cosα = ma.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Hva vet vi */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Skråplanvinkel: <InlineLatex latex="\alpha" /></li>
-                <li>Glidefriksjonskoeffisient: <InlineLatex latex="\mu_k" /></li>
-                <li>Sleden glir nedover (kinetisk friksjon virker oppover langs planet)</li>
-              </ul>
-            </div>
-
-            {/* Hva skal vi finne */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Den kritiske vinkelen <InlineLatex latex="\alpha_c" /> der sleden glir med konstant fart</li>
-                <li>b) Akselerasjonen <InlineLatex latex="a" /> ved brattere vinkel enn <InlineLatex latex="\alpha_c" /></li>
-              </ul>
-            </div>
-
-            {/* Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold mb-2">Strategi</p>
-              <p className="text-sm">
-                Velg x langs planet (nedover positiv) og y normalt ut. Normallikningen gir <InlineLatex latex="N = mg\cos\alpha" />.
-                Del a): konstant fart betyr <InlineLatex latex="a = 0" />, altså <InlineLatex latex="\sum F_x = 0" /> — sett opp og løs for <InlineLatex latex="\alpha" />.
-                Del b): bruk N2L direkte for å finne <InlineLatex latex="a" />.
-              </p>
-            </div>
-
-            {/* Løsning */}
-            <div>
-              <p className="font-semibold mb-3">Løsning — del a)</p>
-              <p className="text-sm mb-1"><strong>Steg 1:</strong> Normalretningen gir <InlineLatex latex="N" />.</p>
-              <FormulaBox latex="\sum F_y = 0: \quad N = mg\cos\alpha" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 2:</strong> Likevekt langs planet (konstant fart).</p>
-              <FormulaBox latex="\sum F_x = 0: \quad mg\sin\alpha - R = 0, \quad R = \mu_k N = \mu_k mg\cos\alpha" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 3:</strong> Sett likningene lik og forenkle — massen <InlineLatex latex="m" /> og <InlineLatex latex="g" /> forsvinner.</p>
-              <FormulaBox latex="mg\sin\alpha = \mu_k mg\cos\alpha \;\Rightarrow\; \frac{\sin\alpha}{\cos\alpha} = \mu_k" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del b)</p>
-              <p className="text-sm mb-1"><strong>Steg 4:</strong> Bruk N2L langs planet (netto kraft nedover).</p>
-              <FormulaBox latex="\sum F_x = ma: \quad mg\sin\alpha - \mu_k mg\cos\alpha = ma" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 5:</strong> Del på <InlineLatex latex="m" /> — massen forsvinner igjen.</p>
-              <FormulaBox latex="g\sin\alpha - \mu_k g\cos\alpha = a" variant="blue" />
-            </div>
-
-            {/* Svar */}
-            <div>
-              <p className="font-semibold mb-2">Svar</p>
-              <FormulaBox latex="\underline{\underline{\alpha_c = \tan^{-1}(\mu_k)}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{a = g(\sin\alpha - \mu_k\cos\alpha)}}" variant="gold" />
-            </div>
-
-            {/* Hva lærte vi */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Den kritiske vinkelen der et legeme glir med konstant fart er <InlineLatex latex="\alpha_c = \tan^{-1}(\mu_k)" /> — samme formel som optimal dravinkel! Det er fordi begge situasjoner er der friksjons- og bevegelseskraften er i perfekt balanse langs planet. Ved brattere vinkel dominerer tyngdekomponenten og legemet akselererer.</p>
-            </div>
+          <p className="text-xs text-[var(--muted)]">Vår 2023</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Pilot i loop-the-loop"
-        difficulty="middels"
-        source="Oblig 2, Oppgave 1a–b"
-        problem={
-          <div>
-            <p>
-              Et fly beveger seg i en sirkelformet loop med baneradius 500 m. Piloten har masse 80,0 kg.
-              Banefarten er konstant 100 m/s.
-            </p>
-            <p className="mt-2">a) Tegn krefter og beregn normalkraften i topp og bunn av loopen.</p>
-            <p>b) Hvor stor fart har piloten når han mister kontakt med setet i toppunktet?</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 1–2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>I topp: N og G peker begge ned (mot sentrum). I bunn: N opp, G ned.</p> },
-          { label: "Hint 2", content: <p>Mister kontakt: N = 0. Sett inn i toppunkt-likningen.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Hva vet vi */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Baneradius: <InlineLatex latex="r = 500\;\text{m}" /></li>
-                <li>Pilotens masse: <InlineLatex latex="m = 80{,}0\;\text{kg}" /></li>
-                <li>Konstant banefart: <InlineLatex latex="v = 100\;\text{m/s}" /></li>
-              </ul>
-            </div>
-
-            {/* Hva skal vi finne */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Normalkraften <InlineLatex latex="N" /> i topp og bunn av loopen</li>
-                <li>b) Minimumsfart i topp for at piloten mister kontakt med setet (<InlineLatex latex="N = 0" />)</li>
-              </ul>
-            </div>
-
-            {/* Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold mb-2">Strategi</p>
-              <p className="text-sm">
-                Nøkkelen er å velge positiv retning <em>inn mot sentrum av sirkelen</em> hvert sted. I toppunktet peker sentrum <em>nedover</em>, så både <InlineLatex latex="N" /> og <InlineLatex latex="mg" /> bidrar positivt. I bunnpunktet peker sentrum <em>oppover</em>, så <InlineLatex latex="N" /> er positiv og <InlineLatex latex="mg" /> negativ. Sett opp <InlineLatex latex="\sum F = mv^2/r" /> i sentripetalretningen.
-              </p>
-            </div>
-
-            {/* Løsning */}
-            <div>
-              <p className="font-semibold mb-3">Løsning — del a)</p>
-              <p className="text-sm mb-1"><strong>Steg 1:</strong> Beregn sentripetalakselerasjonen.</p>
-              <FormulaBox latex="a_c = \frac{v^2}{r} = \frac{(100)^2}{500} = 20{,}0\;\text{m/s}^2" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 2 (topp):</strong> N og G peker begge nedover (mot sentrum). Positiv retning: ned.</p>
-              <FormulaBox latex="\sum F = m\frac{v^2}{r}: \quad N + mg = m\frac{v^2}{r}" variant="blue" />
-              <FormulaBox latex="N = m\!\left(\frac{v^2}{r} - g\right) = 80{,}0\,(20{,}0 - 9{,}81) = 815\;\text{N}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 3 (bunn):</strong> N peker oppover (mot sentrum), G peker ned. Positiv retning: opp.</p>
-              <FormulaBox latex="\sum F = m\frac{v^2}{r}: \quad N - mg = m\frac{v^2}{r}" variant="blue" />
-              <FormulaBox latex="N = m\!\left(\frac{v^2}{r} + g\right) = 80{,}0\,(20{,}0 + 9{,}81) = 2384\;\text{N} \approx 2{,}38\;\text{kN}" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del b)</p>
-              <p className="text-sm mb-1"><strong>Steg 4:</strong> I toppunktet mister piloten kontakt med setet når <InlineLatex latex="N = 0" />.</p>
-              <FormulaBox latex="mg = m\frac{v^2}{r} \;\Rightarrow\; v = \sqrt{gr} = \sqrt{9{,}81 \cdot 500} = 70{,}0\;\text{m/s}" variant="blue" />
-            </div>
-
-            {/* Svar */}
-            <div>
-              <p className="font-semibold mb-2">Svar</p>
-              <FormulaBox latex="\underline{\underline{N_{\text{topp}} = 815\;\text{N}}}, \quad \underline{\underline{N_{\text{bunn}} = 2{,}38\;\text{kN}}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{v_{\min,\text{topp}} = 70{,}0\;\text{m/s}}}" variant="gold" />
-            </div>
-
-            {/* Hva lærte vi */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold mb-1">Hva lærte vi?</p>
-              <p className="text-sm">I bunn av en loop er normalkraften større enn tyngden (du føler deg tyngre), og i toppen er den mindre (du føler deg lettere). Grenseverdien der du mister kontakt med setet i toppen er <InlineLatex latex="v = \sqrt{gr}" /> — uavhengig av massen. Mange studenter setter feil retning på <InlineLatex latex="N" /> i toppunktet — husk at normalkraften alltid peker <em>bort fra overflaten du sitter på</em>.</p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="Bil i sving — maks fart"
-        difficulty="middels"
-        source="Oblig 2, Oppgave 1c–d"
-        problem={
-          <div>
-            <p>
-              c) En bil svinger mot høyre. En kule i snor henger i vinkel 10,0° fra loddlinjen.
-              Bilens fart er 70,0 km/h. Finn svingens radius.
-            </p>
-            <p className="mt-2">
-              d) Friksjonstallet mellom hjul og asfalt er 0,80. Hva er bilens maks fart gjennom svingen?
-            </p>
-          </div>
-        }
-        solution={
-          <div className="space-y-4">
-            {/* Hva vet vi */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Del c): Snorens vinkel fra loddlinjen: <InlineLatex latex="\alpha = 10{,}0°" /></li>
-                <li>Del c): Bilens fart: <InlineLatex latex="v = 70{,}0\;\text{km/h} = 19{,}44\;\text{m/s}" /></li>
-                <li>Del d): Statisk friksjonskoeffisient: <InlineLatex latex="\mu_s = 0{,}80" /></li>
-                <li>Bilen svinger — sentripetalakselerasjonen er horisontal (innover i svingen)</li>
-              </ul>
-            </div>
-
-            {/* Hva skal vi finne */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>c) Svingens radius <InlineLatex latex="r" /> (fra kulens utslag)</li>
-                <li>d) Bilens maksimale fart <InlineLatex latex="v_{\max}" /> gjennom svingen</li>
-              </ul>
-            </div>
-
-            {/* Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold mb-2">Strategi</p>
-              <p className="text-sm">
-                Del c): En kule i snor i en bil som svinger oppfører seg som et akselerometer — utslaget gir sentripetalakselerasjonen. Bruk <InlineLatex latex="g\tan\alpha = v^2/r" /> (fra FBD av kulependelen: <InlineLatex latex="S\sin\alpha = mv^2/r" /> horisontalt og <InlineLatex latex="S\cos\alpha = mg" /> vertikalt). Del d): Friksjon mellom hjul og asfalt gir sentripetalkraften — massen forsvinner.
-              </p>
-            </div>
-
-            {/* Løsning */}
-            <div>
-              <p className="font-semibold mb-3">Løsning — del c)</p>
-              <p className="text-sm mb-1"><strong>Steg 1:</strong> Konverter farten til SI-enheter.</p>
-              <FormulaBox latex="v = 70{,}0\;\text{km/h} = \frac{70{,}0}{3{,}6} = 19{,}44\;\text{m/s}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 2:</strong> FBD for kulependel: vertikal likning gir snordrag, horisontal gir sentripetalrelasjon.</p>
-              <FormulaBox latex="S\cos\alpha = mg \quad\text{og}\quad S\sin\alpha = m\frac{v^2}{r}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 3:</strong> Del horisontal på vertikal for å eliminere <InlineLatex latex="S" /> og <InlineLatex latex="m" />.</p>
-              <FormulaBox latex="\tan\alpha = \frac{v^2}{gr} \;\Rightarrow\; r = \frac{v^2}{g\tan\alpha} = \frac{(19{,}44)^2}{9{,}81 \cdot \tan 10{,}0°} = \frac{377{,}9}{1{,}731} = 218\;\text{m}" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del d)</p>
-              <p className="text-sm mb-1"><strong>Steg 4:</strong> Friksjonskraften leverer sentripetalkraften. Maks friksjon: <InlineLatex latex="F_f = \mu_s mg" />.</p>
-              <FormulaBox latex="\mu_s mg = m\frac{v^2}{r} \;\Rightarrow\; v = \sqrt{\mu_s g r} = \sqrt{0{,}80 \cdot 9{,}81 \cdot 218} = \sqrt{1709} = 41{,}3\;\text{m/s}" variant="blue" />
-              <FormulaBox latex="v_{\max} = 41{,}3\;\text{m/s} \cdot 3{,}6 = 148{,}8\;\text{km/h}" variant="blue" />
-            </div>
-
-            {/* Svar */}
-            <div>
-              <p className="font-semibold mb-2">Svar</p>
-              <FormulaBox latex="\underline{\underline{r \approx 218\;\text{m}}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{v_{\max} \approx 149\;\text{km/h}}}" variant="gold" />
-            </div>
-
-            {/* Hva lærte vi */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold mb-1">Hva lærte vi?</p>
-              <p className="text-sm">En kulependel i en svingene bil fungerer som et akselerometer — vinkelen avslører sentripetalakselerasjonen. Friksjon mellom hjul og vei er det eneste som hindrer bilen fra å skli ut; massen spiller ingen rolle for maksfarten. Høyere <InlineLatex latex="\mu_s" /> og større kurveradius gir høyere tillatt fart.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* ── Eksamensoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Eksamenstips — Kapittel 5</p>
-        <ul className="space-y-1 text-sm">
-          <li>• FBD med friksjon + skrå kraft er et yndet eksamenstema (se kranbil-oppgaven!)</li>
-          <li>• Husk at normalkraften endres når en kraft trekker i vinkel</li>
-          <li>• &ldquo;Optimal vinkel&rdquo;-oppgaver (derivasjon) kommer ofte — α = tan⁻¹(μ)</li>
-          <li>• Kombiner N2L med kinematikk: finn a fra krefter, bruk deretter v² = v₀² + 2as</li>
-          <li>• Sirkelbevegelse: topp/bunn-analyse av pariserhjul/loop er svært eksamensrelevant</li>
-        </ul>
+          <p className="text-xs text-[var(--muted)]">Kapittel 5</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Kranbil med container — friksjon og skrå kraft"
-        difficulty="vanskelig"
-        source="Eksamen Vår 2023, Oppgave 2"
-        problem={
-          <div>
-            <p>
-              En kranbil flytter en container på 1000 kg ved å slepe den langs bakken (horisontalt)
-              med konstant fart. Glidefriksjonstallet er 0,65.
-            </p>
-            <p className="mt-2">a) Vaieren danner 25° med bakken. Hva er snordraget? Hvor mye arbeid gjør kranbilen over 15 m?</p>
-            <p>b) Hvor mye arbeid gjør friksjonskraften over 15 m?</p>
-            <p>c) Hvilken vinkel mellom vaier og bakken gir minst snordrag?</p>
-            <p>d) Vaieren ryker når containeren har fart 2,5 m/s. Finn akselerasjon og bremselengde.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Konstant fart → likevekt. Vaierens vertikale komponent avlaster normalkraften.</p> },
-          { label: "Hint 2", content: <p>ΣFy: N + F sinα = mg → N = mg − F sinα. ΣFx: F cosα = μkN.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Hva vet vi */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Containermasse: <InlineLatex latex="m = 1000\;\text{kg}" /></li>
-                <li>Glidefriksjonskoeffisient: <InlineLatex latex="\mu_k = 0{,}65" /></li>
-                <li>Del a): vaiervinkel <InlineLatex latex="\alpha = 25°" />, konstant fart, strekning <InlineLatex latex="s = 15\;\text{m}" /></li>
-                <li>Del d): containeren har fart <InlineLatex latex="v_0 = 2{,}5\;\text{m/s}" /> idet vaieren ryker</li>
-              </ul>
-            </div>
-
-            {/* Hva skal vi finne */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Snordrag <InlineLatex latex="F" /> og arbeid <InlineLatex latex="W_F" /> ved <InlineLatex latex="\alpha = 25°" /></li>
-                <li>b) Friksjonskraftens arbeid <InlineLatex latex="W_R" /></li>
-                <li>c) Optimal vaiervinkel <InlineLatex latex="\alpha_{\text{opt}}" /></li>
-                <li>d) Akselerasjon og bremselengde etter vaierbrudd</li>
-              </ul>
-            </div>
-
-            {/* Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold mb-2">Strategi</p>
-              <p className="text-sm">
-                FBD: krefter er <InlineLatex latex="F" /> (vaier, 25° opp), <InlineLatex latex="N" /> (normalt opp), <InlineLatex latex="mg" /> (ned), <InlineLatex latex="R = \mu_k N" /> (horisontalt bakover).
-                Konstant fart → likevekt; vertikal likning gir <InlineLatex latex="N" /> som funksjon av <InlineLatex latex="F" />, horisontal gir <InlineLatex latex="F" />.
-                Arbeid: <InlineLatex latex="W = Fs\cos\theta" />. Optimal vinkel: deriver <InlineLatex latex="F(\alpha)" /> og sett = 0.
-                Etter vaierbrudd: kun friksjon, bruk kinematikk <InlineLatex latex="v^2 = v_0^2 + 2as" />.
-              </p>
-            </div>
-
-            {/* Løsning */}
-            <div>
-              <p className="font-semibold mb-3">Løsning — del a)</p>
-              <p className="text-sm mb-1"><strong>Steg 1:</strong> Likevekt i y-retning.</p>
-              <FormulaBox latex="\sum F_y = 0: \quad N + F\sin 25° - mg = 0 \;\Rightarrow\; N = mg - F\sin 25°" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 2:</strong> Likevekt i x-retning.</p>
-              <FormulaBox latex="\sum F_x = 0: \quad F\cos 25° - \mu_k N = 0 \;\Rightarrow\; F\cos 25° = \mu_k(mg - F\sin 25°)" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 3:</strong> Løs for <InlineLatex latex="F" />.</p>
-              <FormulaBox latex="F(\cos 25° + \mu_k\sin 25°) = \mu_k mg" variant="blue" />
-              <FormulaBox latex="F = \frac{0{,}65 \cdot 1000 \cdot 9{,}81}{0{,}906 + 0{,}65 \cdot 0{,}423} = \frac{6377}{1{,}181} = 5399\;\text{N} \approx 5{,}4\;\text{kN}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 4:</strong> Arbeid utført av vaieren (kraft langs bevegelsesretning).</p>
-              <FormulaBox latex="W_F = F \cdot s \cdot \cos 25° = 5399 \cdot 15 \cdot 0{,}906 = 73{,}4\;\text{kJ}" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del b)</p>
-              <p className="text-sm mb-1"><strong>Steg 5:</strong> Beregn normalkraft og friksjonskraft.</p>
-              <FormulaBox latex="N = mg - F\sin 25° = 9810 - 5399 \cdot 0{,}423 = 7527\;\text{N}" variant="blue" />
-              <FormulaBox latex="R = \mu_k N = 0{,}65 \cdot 7527 = 4893\;\text{N}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 6:</strong> Friksjonens arbeid er negativt (motvirker bevegelsen).</p>
-              <FormulaBox latex="W_R = -R \cdot s = -4893 \cdot 15 = -73{,}4\;\text{kJ}" variant="blue" />
-              <p className="text-sm mt-1">Kontrolls: <InlineLatex latex="W_F + W_R = 0" /> fordi konstant fart betyr <InlineLatex latex="\Delta K = 0" />.</p>
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del c)</p>
-              <p className="text-sm mb-1"><strong>Steg 7:</strong> Minimer <InlineLatex latex="F(\alpha) = \mu_k mg / (\cos\alpha + \mu_k\sin\alpha)" /> — deriver nevner og sett lik null.</p>
-              <FormulaBox latex="\alpha_{\text{opt}} = \tan^{-1}(\mu_k) = \tan^{-1}(0{,}65) = 33{,}0°" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del d)</p>
-              <p className="text-sm mb-1"><strong>Steg 8:</strong> Etter vaierbrudd er eneste kraft friksjon. Nå er <InlineLatex latex="N = mg" /> (ingen vertikal komponent fra vaier).</p>
-              <FormulaBox latex="a = -\mu_k g = -0{,}65 \cdot 9{,}81 = -6{,}4\;\text{m/s}^2" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 9:</strong> Bruk kinematikk for å finne bremselengden.</p>
-              <FormulaBox latex="v^2 = v_0^2 + 2as \;\Rightarrow\; 0 = (2{,}5)^2 + 2(-6{,}4)s" variant="blue" />
-              <FormulaBox latex="s = \frac{(2{,}5)^2}{2 \cdot 6{,}4} = \frac{6{,}25}{12{,}8} = 0{,}488\;\text{m}" variant="blue" />
-            </div>
-
-            {/* Svar */}
-            <div>
-              <p className="font-semibold mb-2">Svar</p>
-              <FormulaBox latex="\underline{\underline{F = 5{,}4\;\text{kN}}}, \quad \underline{\underline{W_F = 73\;\text{kJ}}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{W_R = -73\;\text{kJ}}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{\alpha_{\text{opt}} = 33°}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{a = -6{,}4\;\text{m/s}^2}}, \quad \underline{\underline{s \approx 0{,}49\;\text{m}}}" variant="gold" />
-            </div>
-
-            {/* Hva lærte vi */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Denne oppgaven kombinerer alt fra kapittel 5: FBD med skrå kraft, friksjon der normalkraften avhenger av drakraften, arbeid–energi-kontroll, optimal dravinkel (derivasjon), og kinematikk etter kraftbortfall. En ekte eksamensoppgave som tester om du kan holde mange prinsipper i hodet samtidig.</p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Pariserhjul — normalkraft i topp og bunn"
-        difficulty="middels"
-        source="Forelesning / eksamensrelevant"
-        problem={
-          <div>
-            <p>
-              Et pariserhjul har radius <InlineLatex latex="r = 8\;\text{m}" />. En passasjer har masse 60 kg
-              og farten i laveste punkt er 5 m/s.
-            </p>
-            <p className="mt-2">a) Finn normalkraften på passasjeren i topp og bunn.</p>
-            <p>b) Hva er minimumsfarten i topp for at passasjeren skal miste kontakt med setet?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint", content: <p>I topp: mg − N = mv²/r. I bunn: N − mg = mv²/r.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* Hva vet vi */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva vet vi?</p>
-              <ul className="space-y-1 text-sm">
-                <li>Radius: <InlineLatex latex="r = 8\;\text{m}" /></li>
-                <li>Passasjermasse: <InlineLatex latex="m = 60\;\text{kg}" /></li>
-                <li>Farten i laveste punkt: <InlineLatex latex="v = 5\;\text{m/s}" /> (vi bruker <InlineLatex latex="v^2 = 25\;\text{m}^2/\text{s}^2" />)</li>
-              </ul>
-            </div>
-
-            {/* Hva skal vi finne */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-              <p className="font-semibold mb-2">Hva skal vi finne?</p>
-              <ul className="space-y-1 text-sm">
-                <li>a) Normalkraften <InlineLatex latex="N" /> i toppunkt og bunnpunkt</li>
-                <li>b) Minimumsfart i topp for at passasjeren mister kontakt med setet</li>
-              </ul>
-            </div>
-
-            {/* Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4">
-              <p className="font-semibold mb-2">Strategi</p>
-              <p className="text-sm">
-                Nøkkelen er retningskonvensjonen: velg alltid positiv retning <em>inn mot sentrum</em>.
-                I toppunktet er sentrum nedover: <InlineLatex latex="mg - N = mv^2/r" /> (begge N og G må vurderes).
-                I bunnpunktet er sentrum oppover: <InlineLatex latex="N - mg = mv^2/r" />.
-                Del b): grensebetingelsen er <InlineLatex latex="N = 0" />.
-              </p>
-            </div>
-
-            {/* Løsning */}
-            <div>
-              <p className="font-semibold mb-3">Løsning — del a)</p>
-              <p className="text-sm mb-1"><strong>Steg 1 (toppunkt):</strong> Sentrum er nedover. Positiv retning: ned. <InlineLatex latex="mg" /> peker ned (positiv), <InlineLatex latex="N" /> peker opp (negativ).</p>
-              <FormulaBox latex="\sum F_{\text{inn}} = m\frac{v^2}{r}: \quad mg - N = m\frac{v^2}{r}" variant="blue" />
-              <FormulaBox latex="N = m\!\left(g - \frac{v^2}{r}\right) = 60\!\left(9{,}81 - \frac{25}{8}\right) = 60\,(9{,}81 - 3{,}125) = 60 \cdot 6{,}685 = 401\;\text{N}" variant="blue" />
-
-              <p className="text-sm mb-1 mt-3"><strong>Steg 2 (bunnpunkt):</strong> Sentrum er oppover. Positiv retning: opp. <InlineLatex latex="N" /> peker opp (positiv), <InlineLatex latex="mg" /> peker ned (negativ).</p>
-              <FormulaBox latex="\sum F_{\text{inn}} = m\frac{v^2}{r}: \quad N - mg = m\frac{v^2}{r}" variant="blue" />
-              <FormulaBox latex="N = m\!\left(g + \frac{v^2}{r}\right) = 60\!\left(9{,}81 + \frac{25}{8}\right) = 60\,(9{,}81 + 3{,}125) = 60 \cdot 12{,}935 = 776\;\text{N}" variant="blue" />
-
-              <p className="font-semibold mb-3 mt-4">Løsning — del b)</p>
-              <p className="text-sm mb-1"><strong>Steg 3:</strong> Setter <InlineLatex latex="N = 0" /> i toppunkt-likningen.</p>
-              <FormulaBox latex="mg = m\frac{v^2}{r} \;\Rightarrow\; v = \sqrt{gr} = \sqrt{9{,}81 \cdot 8} = \sqrt{78{,}48} = 8{,}86\;\text{m/s}" variant="blue" />
-            </div>
-
-            {/* Svar */}
-            <div>
-              <p className="font-semibold mb-2">Svar</p>
-              <FormulaBox latex="\underline{\underline{N_{\text{topp}} = 401\;\text{N}}}, \quad \underline{\underline{N_{\text{bunn}} = 776\;\text{N}}}" variant="gold" />
-              <FormulaBox latex="\underline{\underline{v_{\min,\text{topp}} = 8{,}9\;\text{m/s}}}" variant="gold" />
-            </div>
-
-            {/* Hva lærte vi */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4">
-              <p className="font-semibold mb-1">Hva lærte vi?</p>
-              <p className="text-sm">I bunnpunktet er normalkraften større enn tyngden (du føler deg tyngre enn vanlig — ca. <InlineLatex latex="1{,}3g" /> her), og i toppunktet er den mindre (du føler deg lettere). Mister du kontakt med setet i toppen gjelder <InlineLatex latex="v_{\min} = \sqrt{gr}" /> — massen spiller ingen rolle. Over denne farten &ldquo;svever&rdquo; du i toppunktet.</p>
-            </div>
-          </div>
-        }
-      />
     </div>
   );
 }

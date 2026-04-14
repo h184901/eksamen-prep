@@ -3,15 +3,15 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Oppgaver — Kapittel 21</h2>
 
-      {/* ── OPPGAVESTRATEGIER ── */}
-      <h3 className="text-xl font-bold mt-8 mb-4">Oppgavestrategier</h3>
-
+      <CollapsibleSection title="Oppgavestrategier">
       <div className="space-y-6">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h4 className="font-semibold text-lg mb-3">Strategi: Coulombs lov-oppgaver</h4>
@@ -57,10 +57,9 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
-      {/* ── GJENNOMGÅTTE EKSEMPLER ── */}
-      <h3 className="text-xl font-bold mt-12 mb-4">Gjennomgåtte eksempler</h3>
-
+      <CollapsibleSection title="Eksempler fra timen">
       <ExerciseCard
         number={1}
         title="Coulombs lov — to punktladninger"
@@ -349,234 +348,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── ØVINGSOPPGAVER ── */}
-      <h3 className="text-xl font-bold mt-12 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      <ExerciseCard
-        number={1}
-        title="Kraft mellom elektron og proton"
-        difficulty="lett"
-        source="Oblig 3, oppg. 2d"
-        problem={
-          <div>
-            <p>
-              Beregn den elektriske kraften mellom et elektron og et proton med
-              innbyrdes avstand <InlineLatex latex="0{,}529 \cdot 10^{-9}\;\text{m}" /> (Bohrs radius).
-              Hvilken akselerasjon vil elektronet få når det påvirkes av denne kraften?
-            </p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Begge har ladning med størrelse e. Bruk Coulombs lov for kraften, og Newtons 2. lov for akselerasjonen.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Kraft:</strong></p>
-            <FormulaBox
-              latex="F = \frac{1}{4\pi\varepsilon_0}\frac{e^2}{r^2} = 8{,}99\cdot10^9 \cdot \frac{(1{,}60\cdot10^{-19})^2}{(0{,}529\cdot10^{-9})^2} = \underline{\underline{8{,}23 \cdot 10^{-8}\;\text{N}}}"
-              variant="gold"
-            />
-            <p><strong>Akselerasjon på elektronet:</strong></p>
-            <FormulaBox
-              latex="a = \frac{F}{m_e} = \frac{8{,}23\cdot10^{-8}}{9{,}11\cdot10^{-31}} = \underline{\underline{9{,}03 \cdot 10^{22}\;\text{m/s}^2}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Enorm akselerasjon! Men elektronet har også svært liten masse.
-            </p>
+          <p className="text-xs text-[var(--muted)]">Vår 2017, Høst 2016</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Uniformt felt mellom parallelle plater"
-        difficulty="middels"
-        source="Oblig 3, oppg. 2a-b"
-        problem={
-          <div>
-            <p>
-              To plane, parallelle metallskiver er plassert i innbyrdes avstand{" "}
-              <InlineLatex latex="d = 0{,}050\;\text{m}" />. Platene er koplet til en spenningskilde på 500 V.
-            </p>
-            <p className="mt-2">a) Forklar hva vi mener med et uniformt elektrisk felt. Hva blir den elektriske feltstyrken mellom platene?</p>
-            <p>b) Et elektron slippes fra ro ved den negative plata. Hvilken fart har elektronet når det treffer den positive plata? Hvor lang tid bruker det?</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 3, oppgave 2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Uniformt felt: E = V/d. Bruk dette for å finne feltstyrken.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>For del b: Finn akselerasjonen a = eE/m, bruk deretter kinematikk med v₀ = 0.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Uniformt felt</strong> betyr at feltet har <em>samme størrelse og retning overalt</em> mellom platene.</p>
-            <FormulaBox
-              latex="E = \frac{V}{d} = \frac{500}{0{,}050} = \underline{\underline{1{,}0 \cdot 10^4\;\text{V/m}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Fart og tid</strong></p>
-            <FormulaBox latex="a = \frac{eE}{m_e} = \frac{1{,}60\cdot10^{-19}\cdot 1{,}0\cdot10^4}{9{,}11\cdot10^{-31}} = 1{,}76\cdot10^{15}\;\text{m/s}^2" variant="blue" />
-            <FormulaBox latex="v = \sqrt{2ad} = \sqrt{2 \cdot 1{,}76\cdot10^{15}\cdot 0{,}050} = \underline{\underline{1{,}33 \cdot 10^7\;\text{m/s}}}" variant="gold" />
-            <FormulaBox latex="t = \frac{v}{a} = \frac{1{,}33\cdot10^7}{1{,}76\cdot10^{15}} = \underline{\underline{7{,}55 \cdot 10^{-9}\;\text{s}}}" variant="gold" />
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="E-felt fra punktladninger"
-        difficulty="middels"
-        problem={
-          <div>
-            <p>
-              To punktladninger er plassert langs x-aksen:{" "}
-              <InlineLatex latex="q_1 = +4{,}0\;\mu\text{C}" /> i x = 0 og{" "}
-              <InlineLatex latex="q_2 = -6{,}0\;\mu\text{C}" /> i x = 0,30 m.
-            </p>
-            <p className="mt-2">Finn det elektriske feltet i punktet x = 0,15 m (midt mellom ladningene).</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Finn E fra hver ladning separat i midtpunktet. Bestem retningen for hvert bidrag. Avstand fra begge = 0,15 m.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: (
-              <p>
-                E fra positiv ladning peker <em>bort</em> (i +x-retning). E fra negativ ladning peker{" "}
-                <em>mot</em> ladningen (også i +x-retning). De peker altså <strong>samme vei</strong>!
-              </p>
-            ),
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>E fra q₁ i midtpunktet:</strong></p>
-            <FormulaBox
-              latex="E_1 = k\frac{|q_1|}{r^2} = 8{,}99\cdot10^9 \cdot \frac{4{,}0\cdot10^{-6}}{0{,}15^2} = 1{,}60 \cdot 10^6\;\text{N/C} \quad (\text{i }+x)"
-              variant="blue"
-            />
-            <p><strong>E fra q₂ i midtpunktet:</strong></p>
-            <FormulaBox
-              latex="E_2 = k\frac{|q_2|}{r^2} = 8{,}99\cdot10^9 \cdot \frac{6{,}0\cdot10^{-6}}{0{,}15^2} = 2{,}40 \cdot 10^6\;\text{N/C} \quad (\text{i }+x)"
-              variant="blue"
-            />
-            <p className="text-sm">Begge feltbidrag peker i +x-retning (bort fra q₁, mot q₂):</p>
-            <FormulaBox
-              latex="E_{\text{tot}} = E_1 + E_2 = \underline{\underline{4{,}0 \cdot 10^6\;\text{N/C i }+x\text{-retning}}}"
-              variant="gold"
-            />
-          </div>
-        }
-      />
-
-      {/* ── EKSAMENSOPPGAVER ── */}
-      <h3 className="text-xl font-bold mt-12 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Eksamenstips</h4>
-        <p className="text-sm">
-          E&M-oppgaver på eksamen følger typisk et mønster: du får oppgitt ladninger med posisjoner,
-          og skal finne kraft, E-felt, eller potensial. Tegn ALLTID en figur med koordinatsystem,
-          og marker alle ladninger, avstander og vinkler. Husk enhetskonvertering!
-        </p>
+          <p className="text-xs text-[var(--muted)]">Kapittel 21</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Tre punktladninger — potensial og E-felt"
-        difficulty="vanskelig"
-        source="Eksamen ELE100 H2016"
-        problem={
-          <div>
-            <p>
-              Tre elektriske ladninger er plassert i xy-planet:
-            </p>
-            <ul className="list-disc list-inside mt-2 text-sm">
-              <li><InlineLatex latex="q_1 = 2\;\mu\text{C}" /> i punktet (−3, 0)</li>
-              <li><InlineLatex latex="q_2 = -3\;\mu\text{C}" /> i punktet (2, 0)</li>
-              <li><InlineLatex latex="q_3 = 1{,}5\;\mu\text{C}" /> i punktet (0, 4)</li>
-            </ul>
-            <p className="mt-2 text-sm">Alle koordinater i meter.</p>
-            <p className="mt-2">a) Regn ut det elektriske potensialet i origo.</p>
-            <p>b) Finn verdi og retning på den elektriske feltstyrken i origo.</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: (
-              <p>
-                a) Potensialet er en skalar — bare summer bidragene uten å tenke på retning.
-                V = k(q₁/r₁ + q₂/r₂ + q₃/r₃).
-              </p>
-            ),
-          },
-          {
-            label: "Hint 2",
-            content: (
-              <p>
-                b) E-feltet er en vektor. Finn E fra hver ladning, dekomponér i x og y,
-                og summer. Husk: q₁ er på x-aksen (bare x-komponent), q₂ er på x-aksen,
-                q₃ er på y-aksen (bare y-komponent).
-              </p>
-            ),
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Potensial i origo</strong></p>
-            <p className="text-sm">Avstander: r₁ = 3 m, r₂ = 2 m, r₃ = 4 m</p>
-            <FormulaBox
-              latex="V = \frac{1}{4\pi\varepsilon_0}\left(\frac{q_1}{r_1} + \frac{q_2}{r_2} + \frac{q_3}{r_3}\right)"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="V = 8{,}99\cdot10^9\left(\frac{2\cdot10^{-6}}{3} + \frac{-3\cdot10^{-6}}{2} + \frac{1{,}5\cdot10^{-6}}{4}\right) = \underline{\underline{-4{,}1\;\text{kV}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) E-felt i origo</strong></p>
-            <p className="text-sm">
-              q₁ er til venstre for origo → E₁ peker i −x (bort fra positiv ladning).
-              q₂ er til høyre → E₂ peker i +x (mot negativ ladning).
-              q₃ er over → E₃ peker i −y (bort fra positiv ladning? Nei, mot positiv ladning fra origo sin side betyr bort = oppover, men vi vil ha feltet i origo, altså retning fra origo mot q₃ er +y, men feltet fra positiv ladning peker bort = -y).
-            </p>
-            <p className="text-sm mt-2">
-              E₁ peker i +x-retning (fra q₁ mot origo, bort fra positiv ladning).
-              E₂ peker i +x-retning (fra origo mot q₂, mot negativ ladning).
-            </p>
-            <FormulaBox
-              latex="E_x = k\frac{|q_1|}{r_1^2} + k\frac{|q_2|}{r_2^2} = 8{,}99\cdot10^9\left(\frac{2\cdot10^{-6}}{9} + \frac{3\cdot10^{-6}}{4}\right) = \underline{8{,}74\;\text{kV/m}}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E_y = -k\frac{|q_3|}{r_3^2} = -8{,}99\cdot10^9\cdot\frac{1{,}5\cdot10^{-6}}{16} = \underline{-0{,}843\;\text{kV/m}}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="E = \sqrt{E_x^2 + E_y^2} = \sqrt{8{,}74^2 + 0{,}843^2} = \underline{\underline{8{,}78\;\text{kV/m}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="\theta = \tan^{-1}\!\left(\frac{|E_y|}{E_x}\right) = \tan^{-1}(0{,}096) = \underline{\underline{5{,}5°}}\;\text{under }x\text{-aksen}"
-              variant="gold"
-            />
-          </div>
-        }
-      />
     </div>
   );
 }

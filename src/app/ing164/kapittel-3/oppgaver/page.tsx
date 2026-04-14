@@ -3,6 +3,8 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
@@ -10,8 +12,7 @@ export default function OppgaverPage() {
       <h2 className="text-2xl font-bold mb-6">Oppgaver — Bevegelse i 2D og 3D</h2>
 
       {/* ── Oppgavestrategier ── */}
-      <h3 className="text-xl font-semibold mt-2 mb-4">Oppgavestrategier</h3>
-
+      <CollapsibleSection title="Oppgavestrategier">
       <div className="space-y-6">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h3 className="font-semibold text-lg mb-3">Oppskrift: Prosjektilbevegelse</h3>
@@ -67,9 +68,10 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* ── Gjennomgåtte eksempler ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Gjennomgåtte eksempler</h3>
+      <CollapsibleSection title="Eksempler fra timen">
 
       {/* Eksempel 1: Robot på Mars */}
       <ExerciseCard
@@ -475,528 +477,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── Øvingsoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      {/* Oblig 1 Oppg 2 */}
-      <ExerciseCard
-        number={1}
-        title="Stein kastet fra stup"
-        difficulty="middels"
-        source="Oblig 1, Oppgave 2"
-        problem={
-          <div>
-            <p>
-              En stein kastes skrått oppover fra toppen av et bratt stup. Nedenfor er
-              landskapet flatt, 30 m lavere enn toppen. Startfart <InlineLatex latex="v_0 = 25" /> m/s,
-              vinkel <InlineLatex latex="\alpha_0 = 70°" /> med horisontalplanet.
-            </p>
-            <p className="mt-2">a) Hvor høyt over utgangspunktet er steinen i det høyeste punktet?</p>
-            <p>b) Hvor lang tid tar det før steinen treffer bakken? Hvor treffer den?</p>
-            <p>c) Fartens verdi og retning idet den treffer bakken.</p>
-            <p>d) Finnes en annen vinkel med samme v₀ som treffer samme punkt?</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Origo i startpunktet. Bakken er y = −30 m.</p> },
-          { label: "Hint 2", content: <p>For d): bruk baneligningen og løs for α₀. To vinkler gir samme x for gitt y.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="v_0 = 25\;\text{m/s}" /> — startfart</li>
-                <li><InlineLatex latex="\alpha_0 = 70°" /> — startvinkel over horisontal</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> — tyngdeakselerasjon</li>
-                <li>Bakken er 30 m lavere enn startpunktet: <InlineLatex latex="y_{\text{bakke}} = -30\;\text{m}" /></li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) Maksimal høyde over startpunktet</li>
-                <li>b) Tid til landing og horisontal avstand fra stupet</li>
-                <li>c) Fartens størrelse og retning ved landing</li>
-                <li>d) Om det finnes en alternativ startvinkel som gir samme treffpunkt</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Vi plasserer origo i startpunktet. Bakken er da ved <InlineLatex latex="y = -30\;\text{m}" />. Toppunkt: sett <InlineLatex latex="v_y = 0" />. Landing: sett <InlineLatex latex="y = -30" /> m og løs andregradslikning. For d) bruker vi den generelle baneligningen som inneholder <InlineLatex latex="\tan\alpha_0" /> og løser for den alternative vinkelen.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Dekomposisjon av startfart</p>
-            <p className="text-sm">Splitter startfarten i horisontal og vertikal komponent.</p>
-            <FormulaBox latex="v_{0x} = 25\cos 70° = 8{,}55\;\text{m/s}, \quad v_{0y} = 25\sin 70° = 23{,}49\;\text{m/s}" variant="blue" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Høyeste punkt (del a)</p>
-            <p className="text-sm">I toppunktet er <InlineLatex latex="v_y = 0" />, og vi bruker kinematikklikning for y-retning.</p>
-            <FormulaBox latex="t_{\text{topp}} = \frac{v_{0y}}{g} = \frac{23{,}49}{9{,}81} = 2{,}39\;\text{s}" variant="blue" />
-            <FormulaBox latex="y_{\max} = v_{0y}\,t_{\text{topp}} - \tfrac{1}{2}g\,t_{\text{topp}}^2 = 23{,}49(2{,}39) - 4{,}905(2{,}39)^2 = \underline{\underline{28{,}1\;\text{m over startpunktet}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Landingstid og horisontal avstand (del b)</p>
-            <p className="text-sm">Setter <InlineLatex latex="y = -30\;\text{m}" /> og løser andregradslikningen. Den negative roten forkastes.</p>
-            <FormulaBox latex="-30 = 23{,}49\,t - 4{,}905\,t^2 \;\Longrightarrow\; 4{,}905t^2 - 23{,}49t - 30 = 0" variant="blue" />
-            <FormulaBox latex="t = \frac{23{,}49 + \sqrt{(23{,}49)^2 + 4(4{,}905)(30)}}{2(4{,}905)} = \underline{\underline{5{,}84\;\text{s}}}" variant="gold" />
-            <FormulaBox latex="x = v_{0x} \cdot t = 8{,}55 \cdot 5{,}84 = \underline{\underline{49{,}9\;\text{m from stupet}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 4: Fart og retning ved landing (del c)</p>
-            <p className="text-sm">Beregner fartskomponentene ved landingstidspunktet t = 5,84 s.</p>
-            <FormulaBox latex="v_x = v_{0x} = 8{,}55\;\text{m/s}, \quad v_y = v_{0y} - g\,t = 23{,}49 - 9{,}81(5{,}84) = -33{,}8\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="v = \sqrt{(8{,}55)^2 + (33{,}8)^2} = \underline{\underline{34{,}9\;\text{m/s}}}" variant="gold" />
-            <FormulaBox latex="\alpha = \tan^{-1}\!\left(\frac{33{,}8}{8{,}55}\right) = \underline{\underline{75{,}8°\;\text{under horisontal}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 5: Alternativ startvinkel (del d)</p>
-            <p className="text-sm">Baneligningen er en andregradslikning i <InlineLatex latex="\tan\alpha_0" /> — to vinkler kan gi samme treffpunkt.</p>
-            <FormulaBox latex="y = x\tan\alpha_0 - \frac{g x^2}{2v_0^2\cos^2\alpha_0}" variant="blue" />
-            <p className="text-sm">Med x = 49,9 m og y = −30 m gir løsingen to vinkler: <InlineLatex latex="\alpha_0 = 70°" /> (den opprinnelige) og <InlineLatex latex="\alpha_0 \approx -11°" /> (11° under horisontal).</p>
-            <p className="text-sm">Ja — man kan kaste steinen 11° <em>nedover</em> og treffe nøyaktig samme punkt.</p>
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="\text{a) } y_{\max} = \underline{\underline{28{,}1\;\text{m}}} \quad \text{b) } t = 5{,}84\;\text{s},\; x = \underline{\underline{49{,}9\;\text{m}}}" variant="gold" />
-            <FormulaBox latex="\text{c) } v = \underline{\underline{34{,}9\;\text{m/s}}},\; 75{,}8° \text{ under horisontal} \quad \text{d) } \alpha_0 \approx -11°" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Nøkkelteknikk: når startpunkt og landingspunkt er på forskjellig høyde, setter vi y lik den faktiske landingshøyden (her −30 m) — ikke y = 0. Andregradslikningen gir to tidspunkter; forkast alltid det negative. Baneligningen er en andregradslikning i <InlineLatex latex="\tan\alpha_0" />, noe som forklarer at to ulike vinkler kan gi samme treffpunkt.</p>
-            </div>
+          <p className="text-xs text-[var(--muted)]">Vår 2023, Høst 2023</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      {/* Oblig 1 Oppg 3b — Sirkelbevegelse */}
-      <ExerciseCard
-        number={2}
-        title="Sirkelbevegelse med bremseakselerasjon"
-        difficulty="middels"
-        source="Oblig 1, Oppgave 3b"
-        problem={
-          <div>
-            <p>
-              Et legeme beveger seg med urviseren i en sirkelbane med radius{" "}
-              <InlineLatex latex="R = 2{,}0" /> m. Banefarten varierer:
-            </p>
-            <FormulaBox latex="v(t) = 5{,}0 - 0{,}10\,t \;\;\text{[m/s]}" variant="blue" />
-            <p className="mt-2">
-              Regn ut akselerasjonens normalkomponent og parallellkomponent etter 5,0 s.
-            </p>
+          <p className="text-xs text-[var(--muted)]">Oblig 1, oppgave 2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint", content: <p>Finn v(5,0 s), deretter a⊥ = v²/R og a∥ = dv/dt.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="R = 2{,}0\;\text{m}" /> — radius av sirkelbanen</li>
-                <li><InlineLatex latex="v(t) = 5{,}0 - 0{,}10\,t\;\text{m/s}" /> — banefart (avtar lineært med tid)</li>
-                <li><InlineLatex latex="t = 5{,}0\;\text{s}" /> — tidspunktet vi evaluerer ved</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>Normalkomponent <InlineLatex latex="a_\perp" /> (sentripetal akselerasjon) ved t = 5,0 s</li>
-                <li>Parallellkomponent <InlineLatex latex="a_\parallel" /> (tangentiell akselerasjon) ved t = 5,0 s</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Siden farten varierer er det to akselerasjonskomponenter. Normalkomponenten (vinkelrett på banen, mot sentrum) er <InlineLatex latex="a_\perp = v^2/R" /> der vi bruker momentanfarten v(5,0). Parallellkomponenten (langs banen) er <InlineLatex latex="a_\parallel = dv/dt" /> — den forteller om legemet akselererer eller bremser.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Banefart ved t = 5,0 s</p>
-            <p className="text-sm">Setter t = 5,0 s inn i fartsfunksjonen.</p>
-            <FormulaBox latex="v(5{,}0) = 5{,}0 - 0{,}10 \cdot 5{,}0 = 5{,}0 - 0{,}50 = 4{,}5\;\text{m/s}" variant="blue" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Normalkomponent (sentripetal)</p>
-            <p className="text-sm">Normalakselerasjonen er alltid rettet mot sirkelsenter og avhenger av øyeblikksfarten.</p>
-            <FormulaBox latex="a_\perp = \frac{v^2}{R} = \frac{(4{,}5)^2}{2{,}0} = \frac{20{,}25}{2{,}0} = \underline{\underline{10{,}1\;\text{m/s}^2\;\text{(mot sentrum)}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Parallellkomponent (tangentiell)</p>
-            <p className="text-sm">Tangentialakselerasjonen er den tidsderiverte av banefarten. Negativ verdi betyr at legemet bremser.</p>
-            <FormulaBox latex="a_\parallel = \frac{dv}{dt} = \frac{d}{dt}(5{,}0 - 0{,}10\,t) = \underline{\underline{-0{,}10\;\text{m/s}^2\;\text{(bremser)}}}" variant="gold" />
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="a_\perp = \underline{\underline{10{,}1\;\text{m/s}^2}} \quad a_\parallel = \underline{\underline{-0{,}10\;\text{m/s}^2}}" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Negativt fortegn på <InlineLatex latex="a_\parallel" /> betyr at legemet bremser opp — farten minker med 0,10 m/s per sekund. Legg merke til at normalkomponenten (10,1 m/s²) er mye større enn parallellkomponenten (0,10 m/s²) her, noe som er typisk for sirkelbevegelse med moderat fart. Fortegnsvalg for <InlineLatex latex="a_\parallel" /> følger av om farten øker (+) eller minker (−).</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Selvlaget oppgave */}
-      <ExerciseCard
-        number={3}
-        title="Fotball sparkes skrått"
-        difficulty="lett"
-        problem={
-          <div>
-            <p>
-              En fotball sparkes fra bakken med fart 20 m/s i vinkel 30° med horisontalen.
-            </p>
-            <p className="mt-2">a) Finn maks høyde.</p>
-            <p>b) Finn total flytid.</p>
-            <p>c) Finn rekkevidden.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint", content: <p>y₀ = 0. Startfartkomponenter: v₀ₓ = 20 cos 30° ≈ 17,3 m/s, v₀ᵧ = 20 sin 30° = 10 m/s.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="v_0 = 20\;\text{m/s}" /> — startfart</li>
-                <li><InlineLatex latex="\alpha_0 = 30°" /> — startvinkel over horisontal</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> — tyngdeakselerasjon</li>
-                <li>Startes fra og lander i bakkenivå: <InlineLatex latex="y_0 = 0" /></li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) Maksimal høyde <InlineLatex latex="y_{\max}" /></li>
-                <li>b) Total flytid <InlineLatex latex="T" /></li>
-                <li>c) Rekkevidde <InlineLatex latex="R" /> (horisontal avstand til landing)</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Standard prosjektilbevegelse fra bakkenivå. Dekomponér startfarten, finn toppunkt ved <InlineLatex latex="v_y = 0" />, flytid ved <InlineLatex latex="y = 0" /> (symmetri gir <InlineLatex latex="T = 2v_{0y}/g" />), og rekkevidde som <InlineLatex latex="R = v_{0x} \cdot T" />.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Dekomposisjon av startfart</p>
-            <p className="text-sm">Splitter startfarten i horisontal og vertikal komponent med trigonometri.</p>
-            <FormulaBox latex="v_{0x} = v_0\cos 30° = 20 \cdot \tfrac{\sqrt{3}}{2} = 17{,}3\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="v_{0y} = v_0\sin 30° = 20 \cdot \tfrac{1}{2} = 10{,}0\;\text{m/s}" variant="blue" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Maksimal høyde (del a)</p>
-            <p className="text-sm">I toppunktet er <InlineLatex latex="v_y = 0" />. Vi bruker <InlineLatex latex="v_y^2 = v_{0y}^2 - 2g\,y_{\max}" /> løst for <InlineLatex latex="y_{\max}" />.</p>
-            <FormulaBox latex="y_{\max} = \frac{v_{0y}^2}{2g} = \frac{(10{,}0)^2}{2(9{,}81)} = \frac{100}{19{,}62} = \underline{\underline{5{,}10\;\text{m}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Total flytid (del b)</p>
-            <p className="text-sm">Siden start- og landingshøyde er like (y₀ = 0), er flytiden eksakt dobbelt av toppunktstiden.</p>
-            <FormulaBox latex="T = \frac{2\,v_{0y}}{g} = \frac{2 \cdot 10{,}0}{9{,}81} = \underline{\underline{2{,}04\;\text{s}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 4: Rekkevidde (del c)</p>
-            <p className="text-sm">Rekkevidden er horisontal fart ganget med total flytid.</p>
-            <FormulaBox latex="R = v_{0x} \cdot T = 17{,}3 \cdot 2{,}04 = \underline{\underline{35{,}3\;\text{m}}}" variant="gold" />
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="\text{a) } y_{\max} = \underline{\underline{5{,}10\;\text{m}}} \quad \text{b) } T = \underline{\underline{2{,}04\;\text{s}}} \quad \text{c) } R = \underline{\underline{35{,}3\;\text{m}}}" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Dette er grunnoppgaven i prosjektilbevegelse. Nøkkelen er å skille x og y fullstendig: y-retning gir tid (via toppunkt eller landing), x-retning gir horisontal avstand. Formlene <InlineLatex latex="y_{\max} = v_{0y}^2/(2g)" /> og <InlineLatex latex="T = 2v_{0y}/g" /> gjelder kun når start og landing er i samme høyde.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* ── Eksamensoppgaver ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Eksamenstips — Kapittel 3</p>
-        <ul className="space-y-1 text-sm">
-          <li>• <strong>Prosjektilbevegelse er det klart hyppigste temaet</strong> på eksamen — alle eksamener har minst én slik oppgave</li>
-          <li>• Typisk: skråkast fra høyde, finn tid, posisjon, fart, vinkel</li>
-          <li>• Avansert: kombinert med bevegelsesmengde (eksplosjon i toppunkt)</li>
-          <li>• Sirkelbevegelse kan dukke opp som del av kraftoppgaver (kap. 5)</li>
-        </ul>
+          <p className="text-xs text-[var(--muted)]">Kapittel 3</p>
+        </Link>
       </div>
-
-      {/* Eksamen Høst 2023 Oppg 1 */}
-      <ExerciseCard
-        number={1}
-        title="Prosjektil fra klippetopp"
-        difficulty="vanskelig"
-        source="Eksamen Høst 2023"
-        problem={
-          <div>
-            <p>
-              Et prosjektil skytes ut 115 m over bakkenivå med fart{" "}
-              <InlineLatex latex="v_0 = 65{,}0" /> m/s i vinkel 35,0° over horisontalen.
-            </p>
-            <p className="mt-2">a) Hvor lang tid tar det før prosjektilet treffer punkt P på bakkenivå? Bestem lengden X.</p>
-            <p>b) Fartens størrelse og vinkel med bakken idet det treffer P.</p>
-            <p>c) Prosjektilets maksimale høyde over bakkenivå.</p>
-            <p>d) Prosjektilet sprenges i to like deler i toppunktet. Den ene faller loddrett ned. Hvor treffer den andre delen bakken?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Origo i skuddpunktet: y₀ = 0, bakken er ved y = −115 m.</p> },
-          { label: "Hint 2", content: <p>I d): bruk bevaring av bevegelsesmengde i toppunktet. Del 1: vₓ = 0 → del 2: Vₓ = 2v₀ₓ.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="v_0 = 65{,}0\;\text{m/s}" /> — startfart</li>
-                <li><InlineLatex latex="\alpha_0 = 35{,}0°" /> — startvinkel over horisontal</li>
-                <li><InlineLatex latex="h = 115\;\text{m}" /> — høyde over bakkenivå ved avfyring</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> — tyngdeakselerasjon</li>
-                <li>Origo i avfyringspunktet: bakken er ved <InlineLatex latex="y = -115\;\text{m}" /></li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) Tid t til bakken og horisontal avstand X</li>
-                <li>b) Fartens størrelse v og vinkel med bakken ved landing</li>
-                <li>c) Maks høyde over bakkenivå (ikke over avfyringspunktet)</li>
-                <li>d) Landingssted for del 2 etter eksplosjon i toppunktet</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Origo i avfyringspunktet → bakke ved y = −115 m. For d) bruker vi bevaring av bevegelsesmengde i toppunktet: i toppunktet er <InlineLatex latex="v_y = 0" />, så all bevegelsesmengde er horisontal. Del 1 stopper (<InlineLatex latex="v_{x1} = 0" />), og bevegelsesmengde overføres til del 2.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Dekomposisjon av startfart</p>
-            <p className="text-sm">Splitter startfarten i horisontal og vertikal komponent.</p>
-            <FormulaBox latex="v_{0x} = 65{,}0\cos 35{,}0° = 53{,}2\;\text{m/s}, \quad v_{0y} = 65{,}0\sin 35{,}0° = 37{,}3\;\text{m/s}" variant="blue" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Landingstid og rekkevidde (del a)</p>
-            <p className="text-sm">Setter <InlineLatex latex="y = -115\;\text{m}" /> og løser andregradslikningen. Negativ rot forkastes.</p>
-            <FormulaBox latex="-115 = 37{,}3\,t - 4{,}905\,t^2 \;\Longrightarrow\; 4{,}905t^2 - 37{,}3t - 115 = 0" variant="blue" />
-            <FormulaBox latex="t = \frac{37{,}3 + \sqrt{(37{,}3)^2 + 4(4{,}905)(115)}}{2(4{,}905)} = \underline{\underline{9{,}96\;\text{s}}}" variant="gold" />
-            <FormulaBox latex="X = v_{0x} \cdot t = 53{,}2 \cdot 9{,}96 = \underline{\underline{530\;\text{m}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Fart og vinkel ved landing (del b)</p>
-            <p className="text-sm">Beregner fartskomponentene ved t = 9,96 s og finner størrelse og vinkel.</p>
-            <FormulaBox latex="v_x = 53{,}2\;\text{m/s}, \quad v_y = 37{,}3 - 9{,}81(9{,}96) = -60{,}4\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="v = \sqrt{(53{,}2)^2 + (60{,}4)^2} = \underline{\underline{80{,}5\;\text{m/s}}}" variant="gold" />
-            <FormulaBox latex="\theta = \tan^{-1}\!\left(\frac{60{,}4}{53{,}2}\right) = \underline{\underline{48{,}6°\;\text{under horisontal}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 4: Maks høyde over bakkenivå (del c)</p>
-            <p className="text-sm">Toppunktet er der <InlineLatex latex="v_y = 0" />. Maks høyde over bakkenivå = høyde over origo + klippehøyde.</p>
-            <FormulaBox latex="t_{\text{topp}} = \frac{v_{0y}}{g} = \frac{37{,}3}{9{,}81} = 3{,}80\;\text{s}" variant="blue" />
-            <FormulaBox latex="y_{\text{over avfyring}} = 37{,}3(3{,}80) - 4{,}905(3{,}80)^2 = 141{,}7 - 70{,}8 = 70{,}9\;\text{m}" variant="blue" />
-            <FormulaBox latex="h_{\max} = 115 + 70{,}9 = \underline{\underline{186\;\text{m over bakkenivå}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 5: Eksplosjon i toppunktet (del d)</p>
-            <p className="text-sm">I toppunktet er <InlineLatex latex="v_y = 0" />, altså har prosjektilet kun horisontal fart <InlineLatex latex="v_{0x} = 53{,}2\;\text{m/s}" />. Bevaring av bevegelsesmengde (del 1 faller loddrett, dvs. <InlineLatex latex="v_{x1} = 0" />):</p>
-            <FormulaBox latex="m\,v_{0x} = \frac{m}{2}\cdot 0 + \frac{m}{2}\cdot V_{x2} \;\Longrightarrow\; V_{x2} = 2\,v_{0x} = 2(53{,}2) = 106{,}4\;\text{m/s}" variant="blue" />
-            <p className="text-sm">Del 2 starter fra toppunktet (186 m over bakken) med horisontal fart 106,4 m/s og null vertikalfart.</p>
-            <FormulaBox latex="t_{\text{fall}} = \sqrt{\frac{2\,h_{\max}}{g}} = \sqrt{\frac{2(186)}{9{,}81}} = \sqrt{37{,}9} = 6{,}16\;\text{s}" variant="blue" />
-            <p className="text-sm">x-posisjon i toppunktet (fra avfyringsstedet): <InlineLatex latex="x_{\text{topp}} = v_{0x} \cdot t_{\text{topp}} = 53{,}2 \cdot 3{,}80 = 202\;\text{m}" /></p>
-            <FormulaBox latex="x_{\text{del 2}} = x_{\text{topp}} + V_{x2} \cdot t_{\text{fall}} = 202 + 106{,}4 \cdot 6{,}16 = \underline{\underline{858\;\text{m fra klippefoten}}}" variant="gold" />
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="\text{a) } t=9{,}96\;\text{s},\;X=\underline{\underline{530\;\text{m}}} \quad \text{b) } v=\underline{\underline{80{,}5\;\text{m/s}}},\;48{,}6°" variant="gold" />
-            <FormulaBox latex="\text{c) } h_{\max}=\underline{\underline{186\;\text{m}}} \quad \text{d) } x_{\text{del 2}}=\underline{\underline{858\;\text{m}}}" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Dette er en typisk vanskelig eksamensoppgave som kobler prosjektilbevegelse med bevaring av bevegelsesmengde. Nøkkelinsikt for del d): i toppunktet er <InlineLatex latex="v_y = 0" />, så all bevegelsesmengde er horisontal. Når del 1 stopper horisontalt, må del 2 ta dobbel horisontal fart. Etter eksplosjonen er del 2 et nytt prosjektil som starter fra toppunktet.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Eksamen Vår 2023 Oppg 1 */}
-      <ExerciseCard
-        number={2}
-        title="Basketballkast"
-        difficulty="middels"
-        source="Eksamen Vår 2023"
-        problem={
-          <div>
-            <p>
-              En basketballspiller kaster ballen (masse 600 g) mot kurven med vinkel{" "}
-              <InlineLatex latex="\theta = 50°" />. Kurven er 4,0 m horisontalt unna og 0,90 m
-              høyere enn kasthøyden.
-            </p>
-            <p className="mt-2">a) Vis at startfarten <InlineLatex latex="v_0 = 7{,}0" /> m/s.</p>
-            <p>b) Hva er ballens kinetiske energi når den treffer kurven?</p>
-            <p>c) Hva er ballens maksimale høyde over bakken? (Kastes fra 2,1 m.)</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>I a): skriv x- og y-ligningene, eliminer t, og løs for v₀.</p> },
-          { label: "Hint 2", content: <p>I b): bruk energibevaring: E_K = ½mv₀² − mgΔy.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="\theta = 50°" /> — kastvinkel over horisontal</li>
-                <li><InlineLatex latex="m = 0{,}600\;\text{kg}" /> — ballens masse</li>
-                <li><InlineLatex latex="x = 4{,}0\;\text{m}" /> — horisontal avstand til kurven</li>
-                <li><InlineLatex latex="\Delta y = 0{,}90\;\text{m}" /> — kurven er 0,90 m høyere enn kasthøyden</li>
-                <li><InlineLatex latex="h_{\text{kast}} = 2{,}1\;\text{m}" /> — kasthøyde over bakken (for del c)</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /></li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) Bevis at <InlineLatex latex="v_0 = 7{,}0\;\text{m/s}" /> er nødvendig startfart</li>
-                <li>b) Kinetisk energi <InlineLatex latex="E_K" /> ved kurven</li>
-                <li>c) Maksimal høyde over bakken</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">For a): eliminer t fra x-likningen og sett inn i y-likningen → baneligningen. Løs for <InlineLatex latex="v_0" />. For b): energibevaring er mer elegant enn kinematikk — vi trenger ikke finne farten v ved kurven eksplisitt. For c): finn toppunkttid og beregn y-posisjon over bakken.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Bevis v₀ = 7,0 m/s (del a)</p>
-            <p className="text-sm">Fra x-likningen henter vi t, setter inn i y-likningen og løser for v₀.</p>
-            <FormulaBox latex="x = v_0\cos\theta \cdot t \;\Longrightarrow\; t = \frac{x}{v_0\cos\theta}" variant="blue" />
-            <p className="text-sm">Setter inn i y-likningen <InlineLatex latex="y = v_0\sin\theta \cdot t - \tfrac{1}{2}g t^2" />:</p>
-            <FormulaBox latex="y = x\tan\theta - \frac{g\,x^2}{2\,v_0^2\cos^2\theta}" variant="blue" />
-            <p className="text-sm">Løser for <InlineLatex latex="v_0" /> med x = 4,0 m, y = 0,90 m, θ = 50°:</p>
-            <FormulaBox latex="v_0 = \sqrt{\frac{-g\,x^2}{2\cos^2\theta\,(y - x\tan\theta)}} = \sqrt{\frac{-(9{,}81)(4{,}0)^2}{2\cos^2 50°\,(0{,}90 - 4{,}0\tan 50°)}} = \underline{\underline{7{,}0\;\text{m/s}}} \;\checkmark" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Kinetisk energi ved kurven (del b)</p>
-            <p className="text-sm">Vi bruker energibevaring — tyngdekraften er konservativ, og kinetisk energi minus potensiell energiøkning gir kinetisk energi ved kurven.</p>
-            <FormulaBox latex="E_{K,\text{kurve}} = \frac{1}{2}m v_0^2 - mg\Delta y" variant="blue" />
-            <FormulaBox latex="E_{K,\text{kurve}} = \frac{1}{2}(0{,}600)(7{,}0)^2 - (0{,}600)(9{,}81)(0{,}90) = 14{,}7 - 5{,}30 = \underline{\underline{9{,}4\;\text{J}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Maks høyde over bakken (del c)</p>
-            <p className="text-sm">Toppunktet er der <InlineLatex latex="v_y = 0" />. Finn toppunktstid og høyde over kastnivå, legg til kasthøyde.</p>
-            <FormulaBox latex="t_{\text{topp}} = \frac{v_0\sin\theta}{g} = \frac{7{,}0\sin 50°}{9{,}81} = \frac{5{,}36}{9{,}81} = 0{,}547\;\text{s}" variant="blue" />
-            <FormulaBox latex="\Delta y_{\text{topp}} = v_0\sin\theta \cdot t_{\text{topp}} - \tfrac{1}{2}g\,t_{\text{topp}}^2 = 5{,}36(0{,}547) - 4{,}905(0{,}547)^2 = 2{,}93 - 1{,}47 = 1{,}46\;\text{m}" variant="blue" />
-            <FormulaBox latex="h_{\max} = h_{\text{kast}} + \Delta y_{\text{topp}} = 2{,}1 + 1{,}46 = \underline{\underline{3{,}6\;\text{m over bakken}}}" variant="gold" />
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="\text{a) } v_0 = \underline{\underline{7{,}0\;\text{m/s}}} \;\checkmark \quad \text{b) } E_K = \underline{\underline{9{,}4\;\text{J}}} \quad \text{c) } h_{\max} = \underline{\underline{3{,}6\;\text{m}}}" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">«Vis at»-oppgaver krever at du utleder resultatet algebraisk — ikke bare setter inn og regner. Baneligningen er et kraftig verktøy for å finne startfart gitt treffpunkt. Energibevaring er et elegant alternativ til kinematikk for å finne fart på et annet punkt — unngår å løse for tid eksplisitt.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Eksamen Høst 2023 Oppg 3d — Bowlingkule */}
-      <ExerciseCard
-        number={3}
-        title="Bowlingkule i fritt fall fra kant"
-        difficulty="middels"
-        source="Eksamen Høst 2023"
-        problem={
-          <div>
-            <p>
-              En bowlingkule (5,2 kg) ruller utfor en 2,0 m høy kant med horisontal fart 7,3 m/s
-              og er i fritt fall før den lander.
-            </p>
-            <p className="mt-2">a) Hvor langt fra kanten treffer kula bakken?</p>
-            <p>b) Hva er kulas bevegelsesmengde ved landing?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint", content: <p>Horisontal start (v₀ᵧ = 0). Finn falltid fra y₀ = 2,0 m.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            {/* Steg 1: Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="m = 5{,}2\;\text{kg}" /> — kulens masse</li>
-                <li><InlineLatex latex="v_{0x} = 7{,}3\;\text{m/s}" /> — horisontal startfart</li>
-                <li><InlineLatex latex="v_{0y} = 0\;\text{m/s}" /> — ingen vertikal startfart (horisontal avgang)</li>
-                <li><InlineLatex latex="y_0 = 2{,}0\;\text{m}" /> — høyde over bakken ved avgang</li>
-                <li><InlineLatex latex="g = 9{,}81\;\text{m/s}^2" /> — tyngdeakselerasjon</li>
-              </ul>
-            </div>
-
-            {/* Steg 2: Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) Horisontal avstand x fra kanten til landingsstedet</li>
-                <li>b) Bevegelsesmengde <InlineLatex latex="\vec{p} = m\vec{v}" /> ved landing (størrelse)</li>
-              </ul>
-            </div>
-
-            {/* Steg 3: Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Horisontalt skråkast: <InlineLatex latex="v_{0y} = 0" />. Finn falltid fra fri fallbevegelse (<InlineLatex latex="y_0 = \tfrac{1}{2}g t^2" />), bruk t til å finne horisontal avstand. Bevegelsesmengden er <InlineLatex latex="p = mv" /> der v er totalfarten ved landing.</p>
-            </div>
-
-            {/* Steg 4: Løsning */}
-            <p className="font-semibold text-sm">Steg 1: Falltid (del a)</p>
-            <p className="text-sm">Vertikalt: kula faller fra hvile gjennom y₀ = 2,0 m. Vi løser den frie falllikningen for t.</p>
-            <FormulaBox latex="y_0 = \tfrac{1}{2}g\,t^2 \;\Longrightarrow\; t = \sqrt{\frac{2\,y_0}{g}} = \sqrt{\frac{2(2{,}0)}{9{,}81}} = \sqrt{0{,}408} = 0{,}639\;\text{s}" variant="blue" />
-
-            <p className="font-semibold text-sm mt-2">Steg 2: Horisontal avstand</p>
-            <p className="text-sm">Horisontal avstand er lik horisontal fart ganget med falltiden.</p>
-            <FormulaBox latex="x = v_{0x} \cdot t = 7{,}3 \cdot 0{,}639 = \underline{\underline{4{,}7\;\text{m fra kanten}}}" variant="gold" />
-
-            <p className="font-semibold text-sm mt-2">Steg 3: Bevegelsesmengde ved landing (del b)</p>
-            <p className="text-sm">Finn fartskomponentene ved landing, deretter totalfart og bevegelsesmengde.</p>
-            <FormulaBox latex="v_x = 7{,}3\;\text{m/s} \quad v_y = g\,t = 9{,}81 \cdot 0{,}639 = 6{,}27\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="v = \sqrt{v_x^2 + v_y^2} = \sqrt{(7{,}3)^2 + (6{,}27)^2} = \sqrt{53{,}3 + 39{,}3} = \sqrt{92{,}6} = 9{,}62\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="p = mv = 5{,}2 \cdot 9{,}62 = \underline{\underline{50\;\text{kg·m/s}}}" variant="gold" />
-
-            {/* Steg 5: Svar */}
-            <p className="font-semibold text-sm mt-2">Svar</p>
-            <FormulaBox latex="\text{a) } x = \underline{\underline{4{,}7\;\text{m}}} \quad \text{b) } p = \underline{\underline{50\;\text{kg·m/s}}}" variant="gold" />
-
-            {/* Steg 6: Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Det horisontale skråkastet er et vanlig eksamenscenario: legemet forlater en kant/hylle med horisontal fart. Nøkkelsteg: (1) finn falltid fra fri fall, (2) bruk t til horisontal avstand, (3) finn vertikalfart ved landing og bruk Pytagoras for totalfart. Bevegelsesmengden er alltid <InlineLatex latex="p = mv" /> med totalfartens størrelse.</p>
-            </div>
-          </div>
-        }
-      />
     </div>
   );
 }

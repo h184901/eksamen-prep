@@ -59,7 +59,9 @@
       "WebFetch(domain:glasp.co)",
       "WebFetch(domain:www.classcentral.com)",
       "WebFetch(domain:eightify.app)",
-      "Bash(awk '{print $4}')"
+      "Bash(awk '{print $4}')",
+      "Bash(head -575 /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/kapittel-2/oppgaver/page.tsx)",
+      "Read(//tmp/**)"
     ]
   }
 }

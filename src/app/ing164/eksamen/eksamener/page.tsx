@@ -86,16 +86,14 @@ function ExamTimer() {
 }
 
 /* ─── Filter-knapper ─── */
-const examFilters = [
-  { id: "all", label: "Alle eksamener" },
-  { id: "var2023", label: "Vår 2023" },
-  { id: "host2023", label: "Høst 2023" },
-  { id: "var2017", label: "Vår 2017" },
-  { id: "host2016", label: "Høst 2016" },
+const exams = [
+  { id: "var2023", label: "Vår 2023", desc: "Mekanikk — 3 oppgaver", color: "physics" as const },
+  { id: "host2023", label: "Høst 2023", desc: "Mekanikk — 3 oppgaver", color: "physics" as const },
+  { id: "var2017", label: "Vår 2017", desc: "E&M — 2 oppgaver", color: "network" as const },
+  { id: "host2016", label: "Høst 2016", desc: "E&M — 2 oppgaver", color: "network" as const },
 ];
 
 const topicFilters = [
-  { id: "all", label: "Alle temaer" },
   { id: "kinematikk", label: "Kinematikk" },
   { id: "krefter", label: "Krefter & friksjon" },
   { id: "energi", label: "Energi & arbeid" },
@@ -106,12 +104,12 @@ const topicFilters = [
 ];
 
 export default function EksamenPage() {
-  const [examFilter, setExamFilter] = useState("all");
-  const [topicFilter, setTopicFilter] = useState("all");
+  const [examFilter, setExamFilter] = useState<string | null>(null);
+  const [topicFilter, setTopicFilter] = useState<string | null>(null);
 
   const show = (exam: string, topic: string) =>
-    (examFilter === "all" || examFilter === exam) &&
-    (topicFilter === "all" || topicFilter === topic);
+    examFilter === exam &&
+    (topicFilter === null || topicFilter === topic);
 
   return (
     <div>
@@ -148,31 +146,52 @@ export default function EksamenPage() {
         </ul>
       </div>
 
-      {/* Filtre */}
-      <div className="sticky top-16 z-10 bg-[var(--background)] py-3 border-b border-[var(--card-border)] mb-6 space-y-2">
-        <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-[var(--muted)] py-1.5">Eksamen:</span>
-          {examFilters.map((f) => (
-            <button key={f.id} onClick={() => setExamFilter(f.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${examFilter === f.id ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)]"}`}
-            >{f.label}</button>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-[var(--muted)] py-1.5">Tema:</span>
-          {topicFilters.map((f) => (
-            <button key={f.id} onClick={() => setTopicFilter(f.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${topicFilter === f.id ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)]"}`}
-            >{f.label}</button>
-          ))}
-        </div>
+      {/* Velg eksamen */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {exams.map((ex) => (
+          <button key={ex.id} onClick={() => { setExamFilter(examFilter === ex.id ? null : ex.id); setTopicFilter(null); }}
+            className={`text-left rounded-xl border-2 p-5 transition-all ${examFilter === ex.id ? "border-[var(--accent)] bg-[var(--accent)]/5 shadow-md" : "border-[var(--card-border)] bg-[var(--card)] hover:border-[var(--accent)]/50 hover:shadow-sm"}`}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-bold">{ex.label}</span>
+              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${ex.color === "network" ? "bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400" : "bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400"}`}>
+                {ex.color === "network" ? "E&M" : "Mekanikk"}
+              </span>
+            </div>
+            <p className="text-sm text-[var(--muted)]">{ex.desc}</p>
+          </button>
+        ))}
       </div>
+
+      {/* Temafilter — vises bare når en eksamen er valgt */}
+      {examFilter && (
+        <div className="sticky top-16 z-10 bg-[var(--background)] py-3 border-b border-[var(--card-border)] mb-6">
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="text-xs text-[var(--muted)] py-1.5">Filtrer tema:</span>
+            <button onClick={() => setTopicFilter(null)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${topicFilter === null ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)]"}`}
+            >Alle temaer</button>
+            {topicFilters.map((f) => (
+              <button key={f.id} onClick={() => setTopicFilter(topicFilter === f.id ? null : f.id)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${topicFilter === f.id ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)]"}`}
+              >{f.label}</button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Velg-prompt */}
+      {!examFilter && (
+        <div className="rounded-xl border-2 border-dashed border-[var(--card-border)] p-8 text-center">
+          <p className="text-lg font-semibold text-[var(--muted)] mb-1">Velg en eksamen over for å se oppgavene</p>
+          <p className="text-sm text-[var(--muted)]">Klikk på en av eksamenene for å se oppgaver med løsningsforslag.</p>
+        </div>
+      )}
 
       {/* ════════════════════════════════════════════════ */}
       {/* VÅR 2023 */}
       {/* ════════════════════════════════════════════════ */}
 
-      {(examFilter === "all" || examFilter === "var2023") && (
+      {examFilter === "var2023" && (
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-1 flex items-center gap-3">
             Vår 2023
@@ -311,7 +330,7 @@ export default function EksamenPage() {
       {/* HØST 2023 */}
       {/* ════════════════════════════════════════════════ */}
 
-      {(examFilter === "all" || examFilter === "host2023") && (
+      {examFilter === "host2023" && (
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-1 flex items-center gap-3">
             Høst 2023
@@ -453,7 +472,7 @@ export default function EksamenPage() {
       {/* VÅR 2017 (ELE100) */}
       {/* ════════════════════════════════════════════════ */}
 
-      {(examFilter === "all" || examFilter === "var2017") && (
+      {examFilter === "var2017" && (
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-1 flex items-center gap-3">
             Vår 2017
@@ -523,7 +542,7 @@ export default function EksamenPage() {
       {/* HØST 2016 (ELE100) */}
       {/* ════════════════════════════════════════════════ */}
 
-      {(examFilter === "all" || examFilter === "host2016") && (
+      {examFilter === "host2016" && (
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-1 flex items-center gap-3">
             Høst 2016

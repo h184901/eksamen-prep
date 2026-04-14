@@ -3,16 +3,16 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Oppgaver</h2>
 
-      {/* ── OPPGAVESTRATEGIER ── */}
-      <h3 className="text-xl font-semibold mb-4">Oppgavestrategier</h3>
-
-      <div className="space-y-6 mb-12">
+      <CollapsibleSection title="Oppgavestrategier">
+      <div className="space-y-6">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h4 className="font-semibold text-lg mb-3">Strategi: Kondensator-oppgaver</h4>
           <ol className="list-decimal list-inside space-y-2 text-sm">
@@ -56,10 +56,9 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
-      {/* ── GJENNOMGÅTTE EKSEMPLER ── */}
-      <h3 className="text-xl font-semibold mb-4">Gjennomgåtte eksempler</h3>
-
+      <CollapsibleSection title="Eksempler fra timen">
       <ExerciseCard
         number={1}
         title="Platekondensator — kapasitans, ladning og E-felt"
@@ -282,394 +281,33 @@ export default function OppgaverPage() {
           </div>
         }
       />
+      </CollapsibleSection>
 
-      {/* ── ØVINGSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-12 mb-4">Øvingsoppgaver</h3>
-
-      <ExerciseCard
-        number={1}
-        title="Platekondensator med elektron"
-        difficulty="middels"
-        source="Oblig 3, oppg. 2"
-        problem={
-          <div>
-            <p>
-              To plane, parallelle metallskiver er plassert i innbyrdes avstand 0,050 m.
-              Platene er koplet til en spenningskilde på 500 V.
-            </p>
-            <p className="mt-2">a) Forklar hva vi mener med et uniformt elektrisk felt. Hva blir den elektriske feltstyrken mellom platene?</p>
-            <p>b) Et elektron slippes fra ro ved den negative plata. Hvilken fart har elektronet når det treffer den positive plata? Hvor lang tid bruker det?</p>
-            <p>c) Metallskivene er sirkulære med radius 0,25 m. Beregn systemets kapasitans. Hvor mye ladning er samlet på hver plate?</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Uniformt felt: konstant styrke og retning. <InlineLatex latex="E = V/d" />.</p> },
-          { label: "Hint 2", content: <p>Elektronen akselereres: <InlineLatex latex="a = eE/m_e" />. Bruk kinematikk: <InlineLatex latex="v^2 = 2ad" />.</p> },
-          { label: "Hint 3", content: <p>Sirkulært areal: <InlineLatex latex="A = \pi r^2" />. Kapasitans: <InlineLatex latex="C = \varepsilon_0 A/d" />.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva vet vi?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>Plateavstand: <InlineLatex latex="d = 0{,}050\;\text{m}" /></li>
-                <li>Spenning: <InlineLatex latex="V = 500\;\text{V}" /></li>
-                <li>Elektroner masse/ladning: <InlineLatex latex="m_e = 9{,}11 \cdot 10^{-31}\;\text{kg}" />, <InlineLatex latex="e = 1{,}60 \cdot 10^{-19}\;\text{C}" /></li>
-                <li>Plateradius: <InlineLatex latex="r = 0{,}25\;\text{m}" /></li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva skal vi finne?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>a) Forklare uniformt felt + beregne <InlineLatex latex="E" /></li>
-                <li>b) Hastigheten <InlineLatex latex="v" /> og tida <InlineLatex latex="t" /> for elektronet</li>
-                <li>c) Kapasitansen <InlineLatex latex="C" /> og ladningen <InlineLatex latex="Q" /></li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-300 mb-1">Strategi</p>
-              <p className="text-sm">Del a: uniformt felt betyr <InlineLatex latex="E = V/d" /> (lik styrke og retning overalt mellom platene). Del b: elektronen utsettes for kraft <InlineLatex latex="F = eE" />, gir akselerasjon <InlineLatex latex="a = F/m_e" />; med startfart null gir kinematikken <InlineLatex latex="v^2 = 2ad" />. Del c: sirkulær plate gir <InlineLatex latex="A = \pi r^2" />, kapasitans <InlineLatex latex="C = \varepsilon_0 A/d" />.</p>
-            </div>
-
-            <p className="font-semibold">Løsning</p>
-            <p className="text-sm"><strong>1. Uniformt E-felt (del a):</strong></p>
-            <p className="text-sm">Et uniformt elektrisk felt har konstant styrke og retning overalt mellom platene (ideell tilnærming, gjelder langt fra kantene).</p>
-            <FormulaBox latex="E = \frac{V}{d} = \frac{500}{0{,}050} = 10^4\;\text{V/m}" variant="blue" />
-
-            <p className="text-sm"><strong>2. Akselerasjon og fart for elektronet (del b):</strong></p>
-            <FormulaBox latex="a = \frac{eE}{m_e} = \frac{1{,}60 \cdot 10^{-19} \cdot 10^4}{9{,}11 \cdot 10^{-31}} = 1{,}76 \cdot 10^{15}\;\text{m/s}^2" variant="blue" />
-            <FormulaBox latex="v = \sqrt{2ad} = \sqrt{2 \cdot 1{,}76 \cdot 10^{15} \cdot 0{,}050} = 1{,}33 \cdot 10^7\;\text{m/s}" variant="blue" />
-            <FormulaBox latex="t = \frac{v}{a} = \frac{1{,}33 \cdot 10^7}{1{,}76 \cdot 10^{15}} = 7{,}5 \cdot 10^{-9}\;\text{s} \approx 7{,}5\;\text{ns}" variant="blue" />
-
-            <p className="text-sm"><strong>3. Kapasitans og ladning (del c):</strong></p>
-            <FormulaBox latex="A = \pi r^2 = \pi \cdot (0{,}25)^2 = 0{,}196\;\text{m}^2" variant="blue" />
-            <FormulaBox latex="C = \varepsilon_0 \frac{A}{d} = 8{,}854 \cdot 10^{-12} \cdot \frac{0{,}196}{0{,}050} = 3{,}47 \cdot 10^{-11}\;\text{F} \approx 34{,}7\;\text{pF}" variant="blue" />
-            <FormulaBox latex="Q = CV = 3{,}47 \cdot 10^{-11} \cdot 500 = 1{,}74 \cdot 10^{-8}\;\text{C} \approx 17{,}4\;\text{nC}" variant="blue" />
-
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="E = \underline{\underline{10^4\;\text{V/m}}}, \quad v = \underline{\underline{1{,}33 \cdot 10^7\;\text{m/s}}}, \quad t \approx \underline{\underline{7{,}5\;\text{ns}}}, \quad C \approx \underline{\underline{34{,}7\;\text{pF}}}, \quad Q \approx \underline{\underline{17{,}4\;\text{nC}}}" variant="gold" />
-            </div>
-
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Et elektron i et moderat felt (10 kV/m) akselereres til 13 millioner m/s på under 8 ns — det viser at elektriske felt gir enorm akselerasjon på partikler med liten masse. Merk at problemet kombinerer felt, kinematikk <em>og</em> kapasitans — typisk eksamensstil for kap. 24.</p>
-            </div>
+          <p className="text-xs text-[var(--muted)]">Høst 2016</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Sammensatt nettverk"
-        difficulty="vanskelig"
-        source="Forelesning"
-        problem={
-          <div>
-            <p>
-              Betrakt et nettverk med følgende kondensatorer mellom punkt a og b:
-            </p>
-            <ul className="list-disc list-inside text-sm mt-2">
-              <li>Tre i parallell: 3 µF, 11 µF, og en kombinasjon C&apos; (6 µF og 12 µF i serie)</li>
-              <li>Disse er i serie med 9 µF</li>
-            </ul>
-            <p className="mt-2">Finn total kapasitans C_tot.</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 3, oppgave 2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Start med 6 µF og 12 µF i serie: <InlineLatex latex="1/C' = 1/6 + 1/12" /></p> },
-          { label: "Hint 2", content: <p>Legg så C&apos; = 4 µF i parallell med 3 µF og 11 µF. Denne i serie med 9 µF.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva vet vi?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>6 µF og 12 µF i serie (dette er kombinasjonen C&apos;)</li>
-                <li>C&apos; i parallell med 3 µF og 11 µF</li>
-                <li>Hele parallell-gruppen er i serie med 9 µF</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva skal vi finne?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>Total kapasitans <InlineLatex latex="C_\text{tot}" /> mellom punkt a og b</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-300 mb-1">Strategi</p>
-              <p className="text-sm">Jobb innenfra og ut: finn den innerste serie/parallell-gruppen, erstatt med én ekvivalent kondensator, og gjenta. Her: (1) 6 og 12 i serie → C&apos;, (2) C&apos;, 3 og 11 i parallell → C&apos;&apos;, (3) C&apos;&apos; og 9 i serie → C_tot.</p>
-            </div>
-
-            <p className="font-semibold">Løsning</p>
-            <p className="text-sm"><strong>1. 6 µF og 12 µF i serie:</strong></p>
-            <FormulaBox latex="\frac{1}{C'} = \frac{1}{6} + \frac{1}{12} = \frac{2}{12} + \frac{1}{12} = \frac{3}{12} = \frac{1}{4} \quad \Rightarrow \quad C' = 4\;\mu\text{F}" variant="blue" />
-
-            <p className="text-sm"><strong>2. C&apos; (4 µF), 3 µF og 11 µF i parallell:</strong></p>
-            <FormulaBox latex="C'' = C' + 3 + 11 = 4 + 3 + 11 = 18\;\mu\text{F}" variant="blue" />
-
-            <p className="text-sm"><strong>3. C&apos;&apos; (18 µF) i serie med 9 µF:</strong></p>
-            <FormulaBox latex="\frac{1}{C_\text{tot}} = \frac{1}{18} + \frac{1}{9} = \frac{1}{18} + \frac{2}{18} = \frac{3}{18} = \frac{1}{6}" variant="blue" />
-
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="C_\text{tot} = \underline{\underline{6\;\mu\text{F}}}" variant="gold" />
-            </div>
-
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Nøkkelteknikken for sammensatte nettverk er å jobbe <em>innenfra og ut</em> — finn den innerste rene serie- eller parallell-gruppen, erstatt med én ekvivalent, og gjenta til du sitter igjen med én kondensator. Aldri prøv å ta hele nettverket på én gang!</p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="Energitetthet i elektrisk felt"
-        difficulty="middels"
-        source="Forelesning"
-        problem={
-          <div>
-            <p>
-              <InlineLatex latex="E_p = 1{,}00\;\text{J}" /> energi skal lagres i 1 m³ med vakuum i et elektrisk felt.
-            </p>
-            <p className="mt-2">a) Hvor sterkt E-felt behøver vi?</p>
-            <p>b) Hvis E-feltet tidobles, hvor mye energi er da lagret per kubikkmeter?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Bruk <InlineLatex latex="u = \frac{1}{2}\varepsilon_0 E^2" /> og løs for E.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva vet vi?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>Ønsket lagret energi: <InlineLatex latex="E_p = 1{,}00\;\text{J}" /></li>
-                <li>Volum: <InlineLatex latex="\mathcal{V} = 1\;\text{m}^3" /></li>
-                <li>Medium: vakuum (<InlineLatex latex="\varepsilon_0 = 8{,}854 \cdot 10^{-12}\;\text{F/m}" />)</li>
-                <li>Del b: E-feltet tidobles</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva skal vi finne?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>a) Nødvendig feltstyrke <InlineLatex latex="E" /></li>
-                <li>b) Energitetthet <InlineLatex latex="u'" /> når E tidobles</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-300 mb-1">Strategi</p>
-              <p className="text-sm">Energitettheten i et elektrisk felt er <InlineLatex latex="u = \frac{1}{2}\varepsilon_0 E^2" /> (energi per volumenhet). For del a: sett <InlineLatex latex="u = E_p/\mathcal{V}" /> og løs for E. For del b: siden <InlineLatex latex="u \propto E^2" /> gir tidobling av E en faktor <InlineLatex latex="10^2 = 100" /> mer energitetthet.</p>
-            </div>
-
-            <p className="font-semibold">Løsning</p>
-            <p className="text-sm"><strong>1. Energitetthet som trengs (del a):</strong></p>
-            <FormulaBox latex="u = \frac{E_p}{\mathcal{V}} = \frac{1{,}00\;\text{J}}{1\;\text{m}^3} = 1{,}00\;\text{J/m}^3" variant="blue" />
-
-            <p className="text-sm"><strong>2. Løs for E:</strong></p>
-            <FormulaBox latex="u = \frac{1}{2}\varepsilon_0 E^2 \quad \Rightarrow \quad E = \sqrt{\frac{2u}{\varepsilon_0}} = \sqrt{\frac{2 \cdot 1{,}00}{8{,}854 \cdot 10^{-12}}} = 4{,}75 \cdot 10^5\;\text{V/m}" variant="blue" />
-
-            <p className="text-sm"><strong>3. Del b — E tidobles (del b):</strong></p>
-            <FormulaBox latex="E' = 10E = 4{,}75 \cdot 10^6\;\text{V/m}" variant="blue" />
-            <FormulaBox latex="u' = \frac{1}{2}\varepsilon_0 (E')^2 = \frac{1}{2}\varepsilon_0 (10E)^2 = 100 \cdot u = 100 \cdot 1{,}00 = 100\;\text{J/m}^3" variant="blue" />
-
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="E = \underline{\underline{4{,}75 \cdot 10^5\;\text{V/m}}}, \qquad u' = \underline{\underline{100\;\text{J/m}^3}}" variant="gold" />
-            </div>
-
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Energitettheten skalerer med <InlineLatex latex="E^2" />. Det betyr at tidobling av feltstyrken gir 100× mer energi, ikke 10×. Tilsvarende i et dielektrikum: jo høyere dielektrisitetskonstant K, jo mer energi kan lagres per volum ved samme felt. Dette er intuisjonen bak kondensatorer med dielektrikum.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* ── EKSAMENSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-12 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Eksamenstips</h4>
-        <p className="text-sm">
-          Kondensatoroppgaver på eksamen kombinerer ofte kapasitans-beregning med energi og/eller
-          dielektrikum. Vær alltid klar over om kondensatoren er tilkoblet (V konstant) eller
-          frakoblet (Q konstant) spenningskilden — dette er avgjørende for hva som endres ved
-          innsetting av dielektrikum.
-        </p>
+          <p className="text-xs text-[var(--muted)]">Kapittel 24</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Platekondensator med dielektrikum"
-        difficulty="vanskelig"
-        source="Oblig 3, oppg. 4"
-        problem={
-          <div>
-            <p>
-              En platekondensator er ladet slik at feltet mellom platene er <InlineLatex latex="E = 1{,}0 \cdot 10^5\;\text{V/m}" />.
-              Avstanden mellom platene er <InlineLatex latex="d = 1\;\text{mm}" /> og hver plate har areal <InlineLatex latex="A = 1\;\text{cm}^2" />.
-            </p>
-            <p className="mt-2">a) Finn kapasitansen. Hvor stor ladning er lagret? Hvor mye potensiell energi?</p>
-            <p>b) Kondensatoren kobles i parallell med en identisk kondensator. Hva blir kapasitansen?</p>
-            <p>c) Vi ser på kun den første kondensatoren. Den får et dielektrikum med <InlineLatex latex="K = 4" />. Finn permittiviteten og den nye kapasitansen.</p>
-            <p>d) Hvor mye energi er nå lagret i kondensatoren?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Start med <InlineLatex latex="C = \varepsilon_0 A/d" />. Spenning: <InlineLatex latex="V = Ed" />. Ladning: <InlineLatex latex="Q = CV" />.</p> },
-          { label: "Hint 2", content: <p>Parallell: <InlineLatex latex="C_\text{tot} = 2C" />. Med dielektrikum: <InlineLatex latex="C' = KC_0" />. Vær obs — er Q eller V konstant?</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva vet vi?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>E-felt mellom platene: <InlineLatex latex="E = 1{,}0 \cdot 10^5\;\text{V/m}" /></li>
-                <li>Plateavstand: <InlineLatex latex="d = 1\;\text{mm} = 10^{-3}\;\text{m}" /></li>
-                <li>Plateareal: <InlineLatex latex="A = 1\;\text{cm}^2 = 10^{-4}\;\text{m}^2" /></li>
-                <li>Del b: identisk parallell-kondensator kobles på</li>
-                <li>Del c–d: dielektrikum med <InlineLatex latex="K = 4" /> settes inn (spenningskilde frakoblet)</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva skal vi finne?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>a) <InlineLatex latex="C_0" />, <InlineLatex latex="Q_0" />, <InlineLatex latex="E_p" /></li>
-                <li>b) Ny kapasitans ved parallellkobling</li>
-                <li>c) Permittivitet og kapasitans med dielektrikum</li>
-                <li>d) Ny lagret energi med dielektrikum</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-300 mb-1">Strategi</p>
-              <p className="text-sm">Del a: regn V fra E og d, deretter C, Q og energi. Del b: parallell summerer kapasitanser direkte. Del c–d: spenningskilden er fjernet — <strong>Q er konstant</strong>. Dielektrikumet øker C med faktor K, noe som reduserer V med faktor K og energien med faktor K.</p>
-            </div>
-
-            <p className="font-semibold">Løsning</p>
-            <p className="text-sm"><strong>1. Del a — kapasitans, ladning og energi:</strong></p>
-            <FormulaBox latex="V_0 = E \cdot d = 10^5 \cdot 10^{-3} = 100\;\text{V}" variant="blue" />
-            <FormulaBox latex="C_0 = \varepsilon_0 \frac{A}{d} = 8{,}854 \cdot 10^{-12} \cdot \frac{10^{-4}}{10^{-3}} = 8{,}854 \cdot 10^{-13}\;\text{F} \approx 0{,}885\;\text{pF}" variant="blue" />
-            <FormulaBox latex="Q_0 = C_0 V_0 = 8{,}854 \cdot 10^{-13} \cdot 100 = 8{,}854 \cdot 10^{-11}\;\text{C} \approx 88{,}5\;\text{pC}" variant="blue" />
-            <FormulaBox latex="E_p = \frac{1}{2}C_0 V_0^2 = \frac{1}{2} \cdot 8{,}854 \cdot 10^{-13} \cdot (100)^2 = 4{,}43 \cdot 10^{-9}\;\text{J} \approx 4{,}43\;\text{nJ}" variant="blue" />
-
-            <p className="text-sm"><strong>2. Del b — parallellkobling av identisk kondensator:</strong></p>
-            <FormulaBox latex="C_\text{tot} = C_0 + C_0 = 2C_0 = 2 \cdot 0{,}885 = 1{,}77\;\text{pF}" variant="blue" />
-
-            <p className="text-sm"><strong>3. Del c — dielektrikum med K = 4 (Q konstant!):</strong></p>
-            <FormulaBox latex="\varepsilon = K\varepsilon_0 = 4 \cdot 8{,}854 \cdot 10^{-12} = 3{,}54 \cdot 10^{-11}\;\text{C}^2/\text{Nm}^2" variant="blue" />
-            <FormulaBox latex="C = KC_0 = 4 \cdot 0{,}885\;\text{pF} = 3{,}54\;\text{pF}" variant="blue" />
-
-            <p className="text-sm"><strong>4. Del d — ny spenning og energi (Q er konstant, V synker):</strong></p>
-            <FormulaBox latex="V = \frac{Q_0}{C} = \frac{V_0}{K} = \frac{100}{4} = 25\;\text{V}" variant="blue" />
-            <FormulaBox latex="E_p' = \frac{1}{2}CV^2 = \frac{1}{2} \cdot 3{,}54 \cdot 10^{-12} \cdot 25^2 = 1{,}11 \cdot 10^{-9}\;\text{J} \approx 1{,}11\;\text{nJ}" variant="blue" />
-            <p className="text-sm text-[var(--muted)]">Alternativt: <InlineLatex latex="E_p' = E_p/K = 4{,}43\;\text{nJ}/4 = 1{,}11\;\text{nJ}" /> — energien reduseres med faktor K.</p>
-
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="C_0 \approx \underline{\underline{0{,}885\;\text{pF}}}, \quad Q_0 \approx \underline{\underline{88{,}5\;\text{pC}}}, \quad E_p \approx \underline{\underline{4{,}43\;\text{nJ}}}" variant="gold" />
-              <FormulaBox latex="C_\text{parallell} = \underline{\underline{1{,}77\;\text{pF}}}, \quad C_\text{diel} = \underline{\underline{3{,}54\;\text{pF}}}, \quad E_p' \approx \underline{\underline{1{,}11\;\text{nJ}}}" variant="gold" />
-            </div>
-
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Det avgjørende spørsmålet ved dielektrikum-oppgaver: er kondensatoren tilkoblet spenningskilde (V konstant) eller frakoblet (Q konstant)? Her var den frakoblet — Q = konstant, V synker med faktor K, energi reduseres med faktor K. Det «tapte» arbeidet ble utført av E-feltet da dielektrikumet ble sugd inn mellom platene.</p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Dielektrikum — fullstendig analyse"
-        difficulty="vanskelig"
-        source="Forelesning"
-        problem={
-          <div>
-            <p>
-              En platekondensator har <InlineLatex latex="A = 2000\;\text{cm}^2" />, <InlineLatex latex="d = 1\;\text{cm}" />,
-              og lades til <InlineLatex latex="V_0 = 3\;\text{kV}" />. Spenningskilden fjernes. Mellomrommet fylles med plastikk.
-            </p>
-            <p className="mt-2">a) Finn <InlineLatex latex="C_0" /> og <InlineLatex latex="Q_0" />.</p>
-            <p>b) Spenningen endres til V = 1 kV. Finn C og K.</p>
-            <p>c–d) Finn permittiviteten ε, indusert ladning Q_i.</p>
-            <p>e–f) Finn E-felt før og etter dielektrikum.</p>
-            <p>g–h) Finn lagret energi og energitetthet før og etter.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p><InlineLatex latex="C_0 = \varepsilon_0 A/d" />. Etter dielektrikum: Q er konstant, V synker.</p> },
-          { label: "Hint 2", content: <p><InlineLatex latex="C = Q_0/V = Q_0/1000" />. <InlineLatex latex="K = C/C_0 = V_0/V" />.</p> },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva vet vi?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>Plateareal: <InlineLatex latex="A = 2000\;\text{cm}^2 = 0{,}20\;\text{m}^2" /></li>
-                <li>Plateavstand: <InlineLatex latex="d = 1\;\text{cm} = 0{,}01\;\text{m}" /></li>
-                <li>Opprinnelig spenning: <InlineLatex latex="V_0 = 3\;\text{kV} = 3000\;\text{V}" /></li>
-                <li>Spenningskilde fjernes (Q = konstant) før dielektrikum settes inn</li>
-                <li>Ny spenning etter dielektrikum: <InlineLatex latex="V = 1\;\text{kV} = 1000\;\text{V}" /></li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Hva skal vi finne?</p>
-              <ul className="text-sm space-y-0.5">
-                <li>a) <InlineLatex latex="C_0" /> og <InlineLatex latex="Q_0" /></li>
-                <li>b) Ny kapasitans <InlineLatex latex="C" /> og dielektrisitetskonstanten <InlineLatex latex="K" /></li>
-                <li>c) Permittivitet <InlineLatex latex="\varepsilon" /></li>
-                <li>d) Indusert ladning <InlineLatex latex="Q_i" /> på dielektrikumet</li>
-                <li>e–f) E-felt før og etter</li>
-                <li>g–h) Lagret energi og energitetthet før og etter</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-300 mb-1">Strategi</p>
-              <p className="text-sm">Spenningskilden er fjernet — <strong>Q er konstant</strong>. Etter at dielektrikumet settes inn senkes spenningen fra 3000 V til 1000 V, noe som direkte gir oss K = V₀/V = 3. Resten følger av definisjonene: <InlineLatex latex="\varepsilon = K\varepsilon_0" />, indusert ladning <InlineLatex latex="Q_i = Q_0(1-1/K)" />, energier via <InlineLatex latex="\frac{1}{2}CV^2" /> og energitetthet via <InlineLatex latex="u = \frac{1}{2}\varepsilon E^2" />.</p>
-            </div>
-
-            <p className="font-semibold">Løsning</p>
-            <p className="text-sm"><strong>1. Del a — original kapasitans og ladning:</strong></p>
-            <FormulaBox latex="C_0 = \varepsilon_0 \frac{A}{d} = 8{,}854 \cdot 10^{-12} \cdot \frac{0{,}20}{0{,}01} = 177 \cdot 10^{-12}\;\text{F} = 177\;\text{pF}" variant="blue" />
-            <FormulaBox latex="Q_0 = C_0 V_0 = 177 \cdot 10^{-12} \cdot 3000 = 5{,}31 \cdot 10^{-7}\;\text{C} = 0{,}531\;\mu\text{C}" variant="blue" />
-
-            <p className="text-sm"><strong>2. Del b — ny kapasitans og K (Q konstant, V ny = 1000 V):</strong></p>
-            <FormulaBox latex="C = \frac{Q_0}{V} = \frac{5{,}31 \cdot 10^{-7}}{1000} = 531 \cdot 10^{-12}\;\text{F} = 531\;\text{pF}" variant="blue" />
-            <FormulaBox latex="K = \frac{C}{C_0} = \frac{531\;\text{pF}}{177\;\text{pF}} = 3{,}0 \qquad \left(\text{eller: } K = \frac{V_0}{V} = \frac{3000}{1000} = 3{,}0\right)" variant="blue" />
-
-            <p className="text-sm"><strong>3. Del c — permittivitet:</strong></p>
-            <FormulaBox latex="\varepsilon = K\varepsilon_0 = 3{,}0 \cdot 8{,}854 \cdot 10^{-12} = 2{,}66 \cdot 10^{-11}\;\text{C}^2/\text{Nm}^2" variant="blue" />
-
-            <p className="text-sm"><strong>4. Del d — indusert overflateladning på dielektrikumet:</strong></p>
-            <FormulaBox latex="Q_i = Q_0\!\left(1 - \frac{1}{K}\right) = 5{,}31 \cdot 10^{-7} \cdot \left(1 - \frac{1}{3}\right) = 5{,}31 \cdot 10^{-7} \cdot \frac{2}{3} = 3{,}54 \cdot 10^{-7}\;\text{C}" variant="blue" />
-
-            <p className="text-sm"><strong>5. Del e–f — E-felt før og etter:</strong></p>
-            <FormulaBox latex="E_0 = \frac{V_0}{d} = \frac{3000}{0{,}01} = 3{,}0 \cdot 10^5\;\text{V/m}" variant="blue" />
-            <FormulaBox latex="E = \frac{V}{d} = \frac{1000}{0{,}01} = 1{,}0 \cdot 10^5\;\text{V/m} = \frac{E_0}{K}" variant="blue" />
-
-            <p className="text-sm"><strong>6. Del g–h — lagret energi og energitetthet:</strong></p>
-            <FormulaBox latex="U_\text{før} = \frac{1}{2}C_0 V_0^2 = \frac{1}{2} \cdot 177 \cdot 10^{-12} \cdot (3000)^2 = 7{,}97 \cdot 10^{-4}\;\text{J}" variant="blue" />
-            <FormulaBox latex="U_\text{etter} = \frac{1}{2}CV^2 = \frac{1}{2} \cdot 531 \cdot 10^{-12} \cdot (1000)^2 = 2{,}66 \cdot 10^{-4}\;\text{J} = \frac{U_\text{før}}{K}" variant="blue" />
-            <FormulaBox latex="u_\text{før} = \frac{1}{2}\varepsilon_0 E_0^2 = \frac{1}{2} \cdot 8{,}854 \cdot 10^{-12} \cdot (3 \cdot 10^5)^2 = 0{,}398\;\text{J/m}^3" variant="blue" />
-            <FormulaBox latex="u_\text{etter} = \frac{1}{2}\varepsilon E^2 = \frac{1}{2} \cdot 2{,}66 \cdot 10^{-11} \cdot (10^5)^2 = 0{,}133\;\text{J/m}^3" variant="blue" />
-
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="C_0 = \underline{\underline{177\;\text{pF}}}, \quad Q_0 = \underline{\underline{0{,}531\;\mu\text{C}}}, \quad K = \underline{\underline{3{,}0}}, \quad \varepsilon = \underline{\underline{2{,}66 \cdot 10^{-11}\;\text{C}^2/\text{Nm}^2}}" variant="gold" />
-              <FormulaBox latex="Q_i = \underline{\underline{3{,}54 \cdot 10^{-7}\;\text{C}}}, \quad E_0 = \underline{\underline{3{,}0 \cdot 10^5\;\text{V/m}}}, \quad E = \underline{\underline{1{,}0 \cdot 10^5\;\text{V/m}}}" variant="gold" />
-              <FormulaBox latex="U_\text{før} = \underline{\underline{7{,}97 \cdot 10^{-4}\;\text{J}}}, \quad U_\text{etter} = \underline{\underline{2{,}66 \cdot 10^{-4}\;\text{J}}}, \quad u_\text{før} = \underline{\underline{0{,}398\;\text{J/m}^3}}, \quad u_\text{etter} = \underline{\underline{0{,}133\;\text{J/m}^3}}" variant="gold" />
-            </div>
-
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Dette er en «fullstendig analyse» — alle størrelser knyttes til hverandre via K. Nøkkelobservasjon: med Q konstant reduseres V, E og u med faktor K. Det dielektriske materialet «polyserer» seg (dipoldreining) og skaper et motrettet felt som delvis kansellerer ekstern-feltet — derav det svakere E-feltet og lavere energi. Det kjøpte K = 3 til prisen av en faktor 3 energitap.</p>
-            </div>
-          </div>
-        }
-      />
     </div>
   );
 }

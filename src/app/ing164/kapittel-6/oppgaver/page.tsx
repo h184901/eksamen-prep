@@ -3,15 +3,16 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
     <div>
 
       {/* ── OPPGAVESTRATEGIER ── */}
-      <h3 className="text-xl font-bold mt-2 mb-4">Oppgavestrategier</h3>
-
-      <div className="space-y-4 mb-10">
+      <CollapsibleSection title="Oppgavestrategier">
+      <div className="space-y-4">
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h3 className="font-semibold text-lg mb-3">Strategi: Beregne arbeid</h3>
           <ol className="list-decimal list-inside space-y-2 text-sm">
@@ -65,9 +66,10 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* ── GJENNOMGÅTTE EKSEMPLER ── */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Gjennomgåtte eksempler</h3>
+      <CollapsibleSection title="Eksempler fra timen">
 
       {/* Eksempel 1: Bil skyves */}
       <ExerciseCard
@@ -463,408 +465,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── ØVINGSOPPGAVER ── */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      {/* Oblig: Skitrekk */}
-      <ExerciseCard
-        number={1}
-        title="Skitrekk — Arbeid, effekt og energi"
-        difficulty="middels"
-        source="Oblig 2"
-        problem={
-          <div>
-            <p>
-              Et skitrekk drar skiløpere opp en <InlineLatex latex="250\;\text{m}" /> lang bakke
-              med helning <InlineLatex latex="25°" />. Tauet beveger seg med fart <InlineLatex latex="10\;\text{km/h}" />.
-              Vi ser bort fra friksjon.
-            </p>
-            <p className="mt-2">
-              a) Hvor stort arbeid utfører tauet på en skiløper med masse <InlineLatex latex="80{,}0\;\text{kg}" />?<br />
-              b) Motoren må kunne dra 60 skiløpere samtidig. Hvor stor effekt må motoren yte?
-            </p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Taudraget må balansere tyngdekomponenten langs skråplanet: <InlineLatex latex="T = mg\sin 25°" /></p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>Effekt: <InlineLatex latex="P = T \cdot v" />. Husk å konvertere km/h til m/s.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Arbeid fra tauet:</strong></p>
-            <FormulaBox
-              latex="T = mg\sin 25° = 80{,}0 \cdot 9{,}81 \cdot \sin 25° = 331{,}5\;\text{N}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W = T \cdot s = 331{,}5 \cdot 250 = \underline{\underline{82{,}9\;\text{kJ}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Effekt for 60 skiløpere:</strong></p>
-            <FormulaBox
-              latex="v = \frac{10}{3{,}6} = 2{,}78\;\text{m/s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="P = 60 \cdot T \cdot v = 60 \cdot 331{,}5 \cdot 2{,}78 = \underline{\underline{55{,}3\;\text{kW}}}"
-              variant="gold"
-            />
-
-            <p className="mt-2"><strong>Hva lærte vi?</strong> For skråplan uten friksjon er trekkraften mg sin &theta;. P = Fv gir motoreffekten direkte.</p>
+          <p className="text-xs text-[var(--muted)]">Vår 2023</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      {/* Øving: Bremsekloss */}
-      <ExerciseCard
-        number={2}
-        title="Bremsekloss på horisontal flate"
-        difficulty="middels"
-        source="Øving"
-        problem={
-          <div>
-            <p>
-              En kloss med masse <InlineLatex latex="m = 5{,}0\;\text{kg}" /> glir med
-              startfart <InlineLatex latex="v_1 = 8{,}0\;\text{m/s}" /> på en horisontal
-              flate. Friksjonstallet er <InlineLatex latex="\mu_R = 0{,}30" />.
-            </p>
-            <p className="mt-2">a) Hvor langt glir klossen før den stopper? b) Hva er gjennomsnittlig effekt avsatt av friksjon?</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 2, oppgave 2</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Friksjon er eneste kraft som gjør arbeid: <InlineLatex latex="W_R = -\mu_R mg \cdot d" /></p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>Arbeid-energi: <InlineLatex latex="-\mu_R mg d = 0 - \tfrac{1}{2}mv_1^2" />, løs for d.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Masse: <InlineLatex latex="m = 5{,}0\;\text{kg}" /></li>
-              <li>Startfart: <InlineLatex latex="v_1 = 8{,}0\;\text{m/s}" /></li>
-              <li>Sluttfart: <InlineLatex latex="v_2 = 0" /> (stopper)</li>
-              <li>Friksjonstall: <InlineLatex latex="\mu_R = 0{,}30" /></li>
-              <li>Horisontal flate (tyngde og normalkraft gjør null arbeid)</li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> a) Bremselengde d. b) Gjennomsnittlig effekt fra friksjon.</p>
-            <p><strong>Strategi:</strong> Friksjon er den eneste kraften som gjør arbeid (horisontal forflytning → tyngde og normalkraft er vinkelrette). Vi bruker arbeid-energi-teoremet: <InlineLatex latex="W_R = \Delta E_K" />. For del b trenger vi tiden, som vi finner via kinematikk.</p>
-            <p><strong>Løsning:</strong></p>
-            <p className="text-sm"><strong>a) Bremselengde:</strong></p>
-            <FormulaBox
-              latex="W_R = \Delta E_K \;\Rightarrow\; -\mu_R mg d = 0 - \tfrac{1}{2}mv_1^2"
-              variant="blue"
-            />
-            <p className="text-sm">Massen kansellerer:</p>
-            <FormulaBox
-              latex="d = \frac{v_1^2}{2\mu_R g} = \frac{8{,}0^2}{2 \cdot 0{,}30 \cdot 9{,}81} = \frac{64}{5{,}886} = \underline{\underline{10{,}9\;\text{m}}}"
-              variant="gold"
-            />
-            <p className="text-sm"><strong>b) Tid og effekt:</strong></p>
-            <FormulaBox
-              latex="a = -\mu_R g = -0{,}30 \cdot 9{,}81 = -2{,}94\;\text{m/s}^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="t = \frac{v_1}{|a|} = \frac{8{,}0}{2{,}94} = 2{,}72\;\text{s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\bar{P} = \frac{|W_R|}{t} = \frac{\tfrac{1}{2} \cdot 5{,}0 \cdot 8{,}0^2}{2{,}72} = \frac{160}{2{,}72} = \underline{\underline{58{,}8\;\text{W}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Bremselengden <InlineLatex latex="d = v^2/(2\mu g)" /> avhenger ikke av massen — en lett og en tung kloss med samme fart og friksjon stopper etter like lang strekning. Denne formelen er nyttig for bremsing generelt.</p>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="Fjær skyter kloss opp skråplan"
-        difficulty="vanskelig"
-        source="Øving"
-        problem={
-          <div>
-            <p>
-              En fjær med <InlineLatex latex="k = 800\;\text{N/m}" /> er komprimert <InlineLatex latex="x = 0{,}10\;\text{m}" />.
-              Den skyter en kloss (<InlineLatex latex="m = 0{,}50\;\text{kg}" />) opp et friksjonsfritt
-              skråplan med helning <InlineLatex latex="30°" />.
-            </p>
-            <p className="mt-2">Hvor langt opp skråplanet kommer klossen?</p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>All fjærenergi overføres til kinetisk energi, som deretter omgjøres til potensiell energi opp skråplanet.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p><InlineLatex latex="\tfrac{1}{2}kx^2 = mgs\sin 30°" />, løs for s.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Fjærkonstant: <InlineLatex latex="k = 800\;\text{N/m}" /></li>
-              <li>Komprimering: <InlineLatex latex="x = 0{,}10\;\text{m}" /></li>
-              <li>Masse: <InlineLatex latex="m = 0{,}50\;\text{kg}" /></li>
-              <li>Helning: <InlineLatex latex="\theta = 30°" /></li>
-              <li>Friksjonsfritt. Start og slutt: v = 0.</li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> Avstand s opp skråplanet.</p>
-            <p><strong>Strategi:</strong> All elastisk potensiell energi i fjæren omgjøres til gravitasjonell potensiell energi. Energibevaring: <InlineLatex latex="\tfrac{1}{2}kx^2 = mgh = mgs\sin\theta" />. Vi bruker energi i stedet for krefter fordi fjærkraften varierer med posisjon.</p>
-            <p><strong>Løsning:</strong></p>
-            <FormulaBox
-              latex="\tfrac{1}{2}kx^2 = mgs\sin\theta"
-              variant="blue"
-            />
-            <p className="text-sm">Løser for s:</p>
-            <FormulaBox
-              latex="s = \frac{kx^2}{2mg\sin\theta} = \frac{800 \cdot 0{,}10^2}{2 \cdot 0{,}50 \cdot 9{,}81 \cdot \sin 30°}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="s = \frac{8{,}0}{4{,}905} = \underline{\underline{1{,}63\;\text{m}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Fjærenergi <InlineLatex latex="\tfrac{1}{2}kx^2" /> fungerer som en «energipakke» som kan omgjøres til kinetisk eller potensiell energi. På skråplan er høyden <InlineLatex latex="h = s\sin\theta" /> — husk at det er den vertikale høyden som bestemmer potensiell energi, ikke buelengden.</p>
-          </div>
-        }
-      />
-
-      {/* ── EKSAMENSOPPGAVER ── */}
-      <h3 className="text-xl font-bold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-4 mb-6">
-        <p className="font-semibold text-red-700 dark:text-red-400 mb-1">Eksamenstips</p>
-        <p className="text-sm">
-          Arbeid-energi-teoremet er et av de mest brukte verktøyene på eksamen. Det kombinerer
-          ofte med friksjon, skråplan og effekt. Vis ALLTID utregning av arbeid fra hver kraft separat.
-        </p>
+          <p className="text-xs text-[var(--muted)]">Kapittel 6</p>
+        </Link>
       </div>
-
-      {/* Eksamen: Bil bremser */}
-      <ExerciseCard
-        number={1}
-        title="Bil bremser — Friksjonskraft og bremsetid"
-        difficulty="middels"
-        source="Eksamen H2023"
-        problem={
-          <div>
-            <p>
-              En bil med masse <InlineLatex latex="1500\;\text{kg}" /> kjører med
-              fart <InlineLatex latex="72\;\text{km/h}" /> og stanser etter <InlineLatex latex="50\;\text{m}" /> på
-              en horisontal vei. Motoren er koblet ut.
-            </p>
-            <p className="mt-2">
-              a) Hvor stor har friksjonskraften vært?<br />
-              b) Hvor lang tid tok nedbremsingen?
-            </p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Konverter: <InlineLatex latex="72\;\text{km/h} = 20\;\text{m/s}" />. Bruk arbeid-energi-teoremet.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p><InlineLatex latex="W_R = \Delta E_K = 0 - \tfrac{1}{2}mv_0^2" />, og <InlineLatex latex="W_R = -R \cdot s" /></p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>Hva vet vi?</strong></p>
-            <ul className="list-disc list-inside text-sm">
-              <li>Masse: <InlineLatex latex="m = 1500\;\text{kg}" /></li>
-              <li>Startfart: <InlineLatex latex="v_0 = 72\;\text{km/h} = 20\;\text{m/s}" /></li>
-              <li>Sluttfart: <InlineLatex latex="v = 0" /></li>
-              <li>Bremsestrekning: <InlineLatex latex="s = 50\;\text{m}" /></li>
-              <li>Horisontal vei, motor koblet ut</li>
-            </ul>
-            <p><strong>Hva skal vi finne?</strong> a) Friksjonskraften R. b) Bremsetid t.</p>
-            <p><strong>Strategi:</strong> a) Friksjon er den eneste kraften som gjør arbeid. Arbeid-energi-teoremet gir <InlineLatex latex="W_R = \Delta E_K" />. b) For tid bruker vi kinematikk med gjennomsnittsfart (konstant retardasjon).</p>
-            <p><strong>Løsning:</strong></p>
-            <p className="text-sm"><strong>a) Friksjonskraft via arbeid-energi-teoremet:</strong></p>
-            <FormulaBox
-              latex="W_R = \Delta E_K = \tfrac{1}{2}mv^2 - \tfrac{1}{2}mv_0^2 = 0 - \tfrac{1}{2} \cdot 1500 \cdot 20^2 = -300\;\text{kJ}"
-              variant="blue"
-            />
-            <p className="text-sm">Friksjonens arbeid er også <InlineLatex latex="W_R = -R \cdot s" />, så:</p>
-            <FormulaBox
-              latex="R = \frac{|W_R|}{s} = \frac{300\,000}{50} = \underline{\underline{6{,}0\;\text{kN}}}"
-              variant="gold"
-            />
-            <p className="text-sm"><strong>b) Bremsetid (kinematikk med konstant retardasjon):</strong></p>
-            <FormulaBox
-              latex="s = \tfrac{1}{2}(v_0 + v)t \;\Rightarrow\; t = \frac{2s}{v_0 + v} = \frac{2 \cdot 50}{20 + 0} = \underline{\underline{5{,}0\;\text{s}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Arbeid-energi-teoremet gir friksjonskraften uten å trenge akselerasjonen. Begge metoder (kinematikk og energi) gir same svar, men energimetoden er ofte raskere. Husk å konvertere km/h → m/s (del på 3,6)!</p>
-          </div>
-        }
-      />
-
-      {/* Eksamen: Kranbil */}
-      <ExerciseCard
-        number={2}
-        title="Kranbil sleper container — Arbeid, friksjon og optimal vinkel"
-        difficulty="vanskelig"
-        source="Eksamen V2023"
-        problem={
-          <div>
-            <p>
-              En kranbil sleper en container (<InlineLatex latex="m = 1000\;\text{kg}" />) langs
-              horisontal bakke med <strong>konstant fart</strong>. Glidefriksjonstall <InlineLatex latex="\mu = 0{,}65" />,
-              vaiervinkel <InlineLatex latex="\alpha = 25°" />.
-            </p>
-            <p className="mt-2">
-              a) Finn snordraget F og arbeidet over <InlineLatex latex="s = 15\;\text{m}" />.<br />
-              b) Finn arbeidet gjort av friksjon.<br />
-              c) Hvilken vinkel gir minst snordrag?<br />
-              d) Vaieren ryker ved <InlineLatex latex="v = 2{,}5\;\text{m/s}" />. Finn bremselengden.
-            </p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>Konstant fart → &Sigma;F = 0. Sett opp likevekt i x og y. Vaieren drar oppover i vinkel &alpha;, så N &ne; mg.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>N = mg − F sin &alpha;. Friksjon R = &mu;N. Likevekt i x: F cos &alpha; = &mu;N.</p>,
-          },
-          {
-            label: "Hint 3",
-            content: <p>For optimal vinkel: Derivér nevneren i F-uttrykket og sett lik null. Du får tan &alpha; = &mu;.</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>a) Snordrag og arbeid:</strong></p>
-            <p className="text-sm">Konstant fart → &Sigma;F = 0:</p>
-            <FormulaBox
-              latex="\Sigma F_y = 0: \; N + F\sin\alpha - mg = 0 \;\Rightarrow\; N = mg - F\sin\alpha"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\Sigma F_x = 0: \; F\cos\alpha - \mu N = 0 \;\Rightarrow\; F\cos\alpha = \mu(mg - F\sin\alpha)"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="F = \frac{\mu mg}{\cos\alpha + \mu\sin\alpha} = \frac{0{,}65 \cdot 1000 \cdot 9{,}81}{\cos 25° + 0{,}65 \cdot \sin 25°} = \underline{\underline{5{,}4\;\text{kN}}}"
-              variant="gold"
-            />
-            <FormulaBox
-              latex="W_F = F \cdot s \cdot \cos 25° = 5400 \cdot 15 \cdot \cos 25° = \underline{\underline{73\;\text{kJ}}}"
-              variant="gold"
-            />
-
-            <p><strong>b) Friksjonens arbeid:</strong></p>
-            <FormulaBox
-              latex="R = \mu(mg - F\sin\alpha) = 0{,}65(9810 - 5400 \cdot \sin 25°) = 4{,}9\;\text{kN}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = -R \cdot s = -4900 \cdot 15 = \underline{\underline{-73\;\text{kJ}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">Merk: |W<sub>F</sub>| = |W<sub>R</sub>| fordi farten er konstant (W<sub>tot</sub> = 0).</p>
-
-            <p><strong>c) Optimal vinkel (minst snordrag):</strong></p>
-            <FormulaBox
-              latex="\frac{d}{d\alpha}(\cos\alpha + \mu\sin\alpha) = 0 \;\Rightarrow\; \tan\alpha = \mu"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="\alpha = \arctan(0{,}65) = \underline{\underline{33°}}"
-              variant="gold"
-            />
-
-            <p><strong>d) Bremselengde etter vaieren ryker:</strong></p>
-            <FormulaBox
-              latex="a = -\mu g = -0{,}65 \cdot 9{,}81 = -6{,}4\;\text{m/s}^2"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="s = \frac{v^2}{2\mu g} = \frac{2{,}5^2}{2 \cdot 0{,}65 \cdot 9{,}81} = \underline{\underline{0{,}49\;\text{m}}}"
-              variant="gold"
-            />
-            <p className="mt-2"><strong>Hva lærte vi?</strong> Når farten er konstant er totalt arbeid null. Optimal vinkel for minst snordrag er arctan(&mu;) — en klassiker!</p>
-          </div>
-        }
-      />
-
-      {/* Eksamen: Skiløper ned bakken */}
-      <ExerciseCard
-        number={3}
-        title="Skiløper ned bakke — Energi og friksjon"
-        difficulty="middels"
-        source="Oblig 2"
-        problem={
-          <div>
-            <p>
-              Fortsettelse av skitrekk-oppgaven: En skiløper (<InlineLatex latex="m = 80{,}0\;\text{kg}" />)
-              starter fra toppen av en <InlineLatex latex="250\;\text{m}" /> lang bakke
-              med <InlineLatex latex="25°" /> helning, med startfart 0.
-            </p>
-            <p className="mt-2">
-              c) Uten friksjon — finn farten i bunnen.<br />
-              d) Med friksjon hadde farten bare blitt <InlineLatex latex="50\;\text{km/h}" />. Finn arbeidet gjort av friksjon.
-            </p>
-          </div>
-        }
-        hints={[
-          {
-            label: "Hint 1",
-            content: <p>c) Bruk energibevaring: <InlineLatex latex="\tfrac{1}{2}mv^2 = mgs\sin\theta" />.</p>,
-          },
-          {
-            label: "Hint 2",
-            content: <p>d) <InlineLatex latex="W_R = \tfrac{1}{2}mv^2 - mgs\sin\theta" /> (diff mellom faktisk og maks E<sub>K</sub>).</p>,
-          },
-        ]}
-        solution={
-          <div className="space-y-3">
-            <p><strong>c) Uten friksjon:</strong></p>
-            <FormulaBox
-              latex="v = \sqrt{2gs\sin\theta} = \sqrt{2 \cdot 9{,}81 \cdot 250 \cdot \sin 25°} = \underline{\underline{45{,}5\;\text{m/s} = 164\;\text{km/h}}}"
-              variant="gold"
-            />
-
-            <p><strong>d) Friksjonens arbeid:</strong></p>
-            <FormulaBox
-              latex="v = 50\;\text{km/h} = 13{,}9\;\text{m/s}"
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = \tfrac{1}{2}mv^2 - mgs\sin\theta = \tfrac{1}{2} \cdot 80 \cdot 13{,}9^2 - 80 \cdot 9{,}81 \cdot 250 \cdot \sin 25° "
-              variant="blue"
-            />
-            <FormulaBox
-              latex="W_R = 7\,728 - 82\,929 = \underline{\underline{-75{,}2\;\text{kJ}}}"
-              variant="gold"
-            />
-            <p className="text-sm text-[var(--muted)]">
-              Friksjon og luftmotstand har fjernet 75,2 kJ av den potensielle energien.
-            </p>
-          </div>
-        }
-      />
     </div>
   );
 }

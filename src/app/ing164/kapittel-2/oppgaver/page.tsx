@@ -3,6 +3,8 @@
 import FormulaBox from "@/components/FormulaBox";
 import InlineLatex from "@/components/InlineLatex";
 import ExerciseCard from "@/components/ExerciseCard";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import Link from "next/link";
 
 export default function OppgaverPage() {
   return (
@@ -10,9 +12,8 @@ export default function OppgaverPage() {
       <h2 className="text-2xl font-bold mb-6">Oppgaver</h2>
 
       {/* ── OPPGAVESTRATEGIER ── */}
-      <h3 className="text-xl font-semibold mb-4">Oppgavestrategier</h3>
-
-      <div className="space-y-6 mb-12">
+      <CollapsibleSection title="Oppgavestrategier">
+      <div className="space-y-6">
         {/* Strategi 1 */}
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
           <h4 className="font-semibold text-lg mb-3">Slik løser du en kinematikkoppgave</h4>
@@ -76,9 +77,10 @@ export default function OppgaverPage() {
           </ul>
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* ── GJENNOMGÅTTE EKSEMPLER ── */}
-      <h3 className="text-xl font-semibold mb-4">Gjennomgåtte eksempler</h3>
+      <CollapsibleSection title="Eksempler fra timen">
 
       {/* Eksempel 1: Gepard */}
       <ExerciseCard
@@ -541,364 +543,33 @@ export default function OppgaverPage() {
         }
       />
 
-      {/* ── ØVINGSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Øvingsoppgaver</h3>
+      </CollapsibleSection>
 
-      <ExerciseCard
-        number={1}
-        title="Kjelke på snøbakke"
-        difficulty="middels"
-        source="Oblig 1, Oppgave 1"
-        problem={
-          <div>
-            <p>
-              En jente sender en kjelke oppover en snøbakke langs ei rett linje. Posisjonen er:
-            </p>
-            <FormulaBox latex="x(t) = C_1 t^2 + C_2 t" variant="blue" />
-            <p className="text-sm mt-2">
-              der <InlineLatex latex="C_1 = -1{,}0\;\text{m/s}^2" /> og{" "}
-              <InlineLatex latex="C_2 = 10\;\text{m/s}" />.
-            </p>
-            <p className="mt-2">a) Regn ut kjelkens fart og akselerasjon som funksjon av tiden.</p>
-            <p>b) Hvor langt oppover bakken kommer kjelken?</p>
-            <p>c) Hvor lang tid tar det før kjelken er tilbake ved startpunktet? Fart da?</p>
-            <p>d) Tegn x–t og v–t diagrammer.</p>
+      {/* ── Relaterte oppgaver ── */}
+      <h3 className="text-xl font-semibold mb-4">Relaterte oppgaver</h3>
+      <div className="grid sm:grid-cols-3 gap-4">
+        <Link href="/ing164/eksamen/eksamener" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-red-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+            <h4 className="font-semibold">Eksamensoppgaver</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Deriver x(t) for fart, deriver v(t) for akselerasjon.</p> },
-          { label: "Hint 2", content: <p>Kjelken snur der v(t) = 0. Tilbake: sett x(t) = 0.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* 1. Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="x(t) = C_1 t^2 + C_2 t" /> — posisjonsfunksjon</li>
-                <li><InlineLatex latex="C_1 = -1{,}0\;\text{m/s}^2" /></li>
-                <li><InlineLatex latex="C_2 = 10\;\text{m/s}" /></li>
-                <li>Startposisjon: <InlineLatex latex="x(0) = 0" /></li>
-              </ul>
-            </div>
-
-            {/* 2. Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) <InlineLatex latex="v(t)" /> og <InlineLatex latex="a(t)" /> — fart og akselerasjon som funksjoner av tid</li>
-                <li>b) <InlineLatex latex="x_{\max}" /> — maks posisjon (der kjelken snur)</li>
-                <li>c) <InlineLatex latex="t_{\text{tilbake}}" /> og fart ved tilbakekomst</li>
-              </ul>
-            </div>
-
-            {/* 3. Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Vi kjenner <InlineLatex latex="x(t)" /> eksplisitt — deriver en gang for fart, deriver igjen for akselerasjon. Kjelken snur der <InlineLatex latex="v(t) = 0" />. Kjelken er tilbake der <InlineLatex latex="x(t) = 0" />.</p>
-            </div>
-
-            {/* 4. Løsning */}
-            <div>
-              <p className="font-semibold text-sm">Steg 1 (del a): Finn v(t) ved derivasjon</p>
-              <p className="text-sm">Setter inn <InlineLatex latex="C_1 = -1{,}0" /> og <InlineLatex latex="C_2 = 10" />, og deriverer:</p>
-              <FormulaBox latex="v(t) = \frac{dx}{dt} = 2C_1 t + C_2 = 2(-1{,}0)t + 10 = \underline{\underline{-2{,}0t + 10\;\;[\text{m/s}]}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 2 (del a): Finn a(t) ved derivasjon</p>
-              <p className="text-sm">Deriver farten:</p>
-              <FormulaBox latex="a(t) = \frac{dv}{dt} = 2C_1 = 2 \cdot (-1{,}0) = \underline{\underline{-2{,}0\;\text{m/s}^2}}" variant="gold" />
-              <p className="text-sm mt-1 text-[var(--muted)]">Akselerasjonen er konstant og negativ — kjelken bremser opp langs bakken, snur og akselererer nedover igjen.</p>
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 3 (del b): Finn maks posisjon (der kjelken snur: v = 0)</p>
-              <p className="text-sm">Kjelken snur når farten er null:</p>
-              <FormulaBox latex="-2{,}0t + 10 = 0 \;\Rightarrow\; t_{\text{topp}} = \frac{10}{2{,}0} = 5{,}0\;\text{s}" variant="blue" />
-              <p className="text-sm mt-1">Sett inn i <InlineLatex latex="x(t)" />:</p>
-              <FormulaBox latex="x(5{,}0) = (-1{,}0)(5{,}0)^2 + 10(5{,}0) = -25 + 50 = \underline{\underline{25\;\text{m}}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 4 (del c): Finn tidspunkt og fart ved tilbakekomst (x = 0)</p>
-              <p className="text-sm">Sett <InlineLatex latex="x(t) = 0" /> og løs:</p>
-              <FormulaBox latex="-1{,}0\,t^2 + 10t = 0 \;\Rightarrow\; t(-t + 10) = 0" variant="blue" />
-              <p className="text-sm mt-1">To løsninger: <InlineLatex latex="t = 0" /> (start) og <InlineLatex latex="t_{\text{tilbake}} = \underline{\underline{10\;\text{s}}}" />.</p>
-              <p className="text-sm mt-2">Fart ved tilbakekomst:</p>
-              <FormulaBox latex="v(10) = -2{,}0 \cdot 10 + 10 = \underline{\underline{-10\;\text{m/s}}}" variant="gold" />
-              <p className="text-sm mt-1 text-[var(--muted)]">Negativt fortegn betyr nedover bakken. Fartens størrelse (10 m/s) er lik startfarten — symmetri fordi akselerasjonen er konstant.</p>
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 5 (del d): Beskrivelse av grafene</p>
-              <p className="text-sm">x–t: Parabel med topp ved <InlineLatex latex="(5{,}0\;\text{s},\; 25\;\text{m})" />, symmetrisk rundt <InlineLatex latex="t = 5\;\text{s}" />, tilbake til <InlineLatex latex="x = 0" /> ved <InlineLatex latex="t = 10\;\text{s}" />.</p>
-              <p className="text-sm mt-1">v–t: Rett linje fra <InlineLatex latex="+10\;\text{m/s}" /> ved <InlineLatex latex="t = 0" /> til <InlineLatex latex="-10\;\text{m/s}" /> ved <InlineLatex latex="t = 10\;\text{s}" />, krysser null ved <InlineLatex latex="t = 5\;\text{s}" />.</p>
-            </div>
-
-            {/* 6. Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Når du kjenner <InlineLatex latex="x(t)" /> eksplisitt: deriver for å finne fart og akselerasjon. Snupunkt: sett <InlineLatex latex="v(t) = 0" />. Tilbake til start: sett <InlineLatex latex="x(t) = 0" /> og forkast <InlineLatex latex="t = 0" />. Legg merke til symmetrien når akselerasjonen er konstant.</p>
-            </div>
+          <p className="text-xs text-[var(--muted)]">Vår 2023, Høst 2023</p>
+        </Link>
+        <Link href="/ing164/eksamen/obliger" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-amber-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" /></svg>
+            <h4 className="font-semibold">Oppgaver fra obliger</h4>
           </div>
-        }
-      />
-
-      <ExerciseCard
-        number={2}
-        title="Tog bremser ned"
-        difficulty="lett"
-        problem={
-          <div>
-            <p>
-              Et tog kjører med fart 30 m/s når det begynner å bremse med konstant akselerasjon.
-              Etter 200 m har farten sunket til 10 m/s.
-            </p>
-            <p className="mt-2">a) Finn akselerasjonen.</p>
-            <p>b) Hvor langt kjører toget totalt før det stopper?</p>
-            <p>c) Hvor lang tid tar det å stoppe?</p>
+          <p className="text-xs text-[var(--muted)]">Oblig 1, oppgave 1</p>
+        </Link>
+        <Link href="/ing164/eksamen/oppgaver" className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 hover:border-blue-400/50 hover:shadow-sm transition-all">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <h4 className="font-semibold">Oppgaver fra boken</h4>
           </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>I a) kjenner du v₀, v og Δx men ikke t. Hvilken likning mangler t?</p> },
-          { label: "Hint 2", content: <p>Likning 3: v² = v₀² + 2aΔx. I b) sett v = 0.</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* 1. Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="v_0 = 30\;\text{m/s}" /> — startfart</li>
-                <li><InlineLatex latex="v_1 = 10\;\text{m/s}" /> — fart etter 200 m</li>
-                <li><InlineLatex latex="\Delta x_1 = 200\;\text{m}" /> — strekning for del a)</li>
-                <li>Konstant bremsing (konstant akselerasjon)</li>
-              </ul>
-            </div>
-
-            {/* 2. Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) <InlineLatex latex="a" /> — bremsakselerasjonen</li>
-                <li>b) <InlineLatex latex="\Delta x_{\text{tot}}" /> — total bremselengde (til <InlineLatex latex="v = 0" />)</li>
-                <li>c) <InlineLatex latex="t_{\text{stopp}}" /> — tid til toget stopper</li>
-              </ul>
-            </div>
-
-            {/* 3. Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Konstant akselerasjon → bruk de fire bevegelseslikningene. I del a) kjenner vi <InlineLatex latex="v_0, v, \Delta x" /> men ikke <InlineLatex latex="t" /> — bruk likning 3 (<InlineLatex latex="v^2 = v_0^2 + 2a\Delta x" />) som ikke inneholder tid. I del b) og c) bruker vi den akselerasjonen vi fant.</p>
-            </div>
-
-            {/* 4. Løsning */}
-            <div>
-              <p className="font-semibold text-sm">Steg 1 (del a): Finn akselerasjonen</p>
-              <p className="text-sm">Likning 3 mangler tid — perfekt her. Løs for <InlineLatex latex="a" />:</p>
-              <FormulaBox latex="v_1^2 = v_0^2 + 2a\Delta x_1 \;\Rightarrow\; a = \frac{v_1^2 - v_0^2}{2\Delta x_1}" variant="blue" />
-              <FormulaBox latex="a = \frac{(10)^2 - (30)^2}{2 \cdot 200} = \frac{100 - 900}{400} = \frac{-800}{400} = \underline{\underline{-2{,}0\;\text{m/s}^2}}" variant="gold" />
-              <p className="text-sm mt-1 text-[var(--muted)]">Negativt fortegn bekrefter at toget bremser (akselerasjon mot bevegelsesretningen).</p>
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 2 (del b): Total bremselengde (til v = 0)</p>
-              <p className="text-sm">Bruk likning 3 igjen fra <InlineLatex latex="v_0 = 30\;\text{m/s}" /> til <InlineLatex latex="v = 0" />:</p>
-              <FormulaBox latex="\Delta x_{\text{tot}} = \frac{v^2 - v_0^2}{2a} = \frac{0 - (30)^2}{2(-2{,}0)} = \frac{-900}{-4{,}0} = \underline{\underline{225\;\text{m}}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 3 (del c): Tid til stopp</p>
-              <p className="text-sm">Bruk likning 1 og løs for <InlineLatex latex="t" />:</p>
-              <FormulaBox latex="0 = v_0 + at \;\Rightarrow\; t = \frac{0 - v_0}{a} = \frac{-30}{-2{,}0} = \underline{\underline{15\;\text{s}}}" variant="gold" />
-            </div>
-
-            {/* 6. Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Likning 3 (<InlineLatex latex="v^2 = v_0^2 + 2a\Delta x" />) er nøkkelformelen når tid ikke er kjent og heller ikke etterspurt. Når du skal finne total bremselengde: bruk samme likning med <InlineLatex latex="v = 0" />.</p>
-            </div>
-          </div>
-        }
-      />
-
-      <ExerciseCard
-        number={3}
-        title="Stein slippes fra bro"
-        difficulty="lett"
-        problem={
-          <div>
-            <p>
-              En stein slippes fra ro fra en bro 45 m over vannet.
-            </p>
-            <p className="mt-2">a) Hvor lang tid tar det før steinen treffer vannet?</p>
-            <p>b) Hva er farten idet den treffer vannet?</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint", content: <p>Fritt fall: v₀ = 0, y₀ = 45 m, y = 0 (vannoverflaten).</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* 1. Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="v_0 = 0" /> — slippes fra ro</li>
-                <li><InlineLatex latex="y_0 = 45\;\text{m}" /> — starthøyde over vannet</li>
-                <li><InlineLatex latex="a_y = -g = -9{,}81\;\text{m/s}^2" /> — fritt fall, y-akse oppover</li>
-                <li>Bakken (vann): <InlineLatex latex="y = 0" /></li>
-              </ul>
-            </div>
-
-            {/* 2. Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) <InlineLatex latex="t" /> — falltiden til steinen treffer vannet</li>
-                <li>b) <InlineLatex latex="|v_y|" /> — fartens størrelse ved landing</li>
-              </ul>
-            </div>
-
-            {/* 3. Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm">Fritt fall med <InlineLatex latex="v_0 = 0" />. Sett <InlineLatex latex="y = 0" /> i posisjonsformelen og løs for <InlineLatex latex="t" />. Bruk deretter <InlineLatex latex="v_y = -gt" /> for å finne farten. Alternativt: bruk likning 3 direkte for farten.</p>
-            </div>
-
-            {/* 4. Løsning */}
-            <div>
-              <p className="font-semibold text-sm">Steg 1 (del a): Finn falltiden</p>
-              <p className="text-sm">Sett <InlineLatex latex="y = 0" /> og <InlineLatex latex="v_0 = 0" /> i posisjonsformelen:</p>
-              <FormulaBox latex="0 = y_0 - \tfrac{1}{2}g\,t^2 \;\Rightarrow\; t^2 = \frac{2y_0}{g} \;\Rightarrow\; t = \sqrt{\frac{2y_0}{g}}" variant="blue" />
-              <FormulaBox latex="t = \sqrt{\frac{2 \cdot 45}{9{,}81}} = \sqrt{\frac{90}{9{,}81}} = \sqrt{9{,}17} = \underline{\underline{3{,}03\;\text{s}}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 2 (del b): Finn farten ved landing</p>
-              <p className="text-sm">Bruk likning 1 med <InlineLatex latex="v_0 = 0" /> og <InlineLatex latex="t = 3{,}03\;\text{s}" />:</p>
-              <FormulaBox latex="v_y = -g\,t = -9{,}81 \cdot 3{,}03 = -29{,}7\;\text{m/s}" variant="blue" />
-              <p className="text-sm mt-1">Fartens størrelse (hastigheten er nedover, derav minus):</p>
-              <FormulaBox latex="|v_y| = \underline{\underline{29{,}7\;\text{m/s}}}\;\;(\approx 107\;\text{km/h})" variant="gold" />
-            </div>
-
-            {/* 6. Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Fritt fall fra ro: sett <InlineLatex latex="y = 0" /> og <InlineLatex latex="v_0 = 0" /> → <InlineLatex latex="t = \sqrt{2y_0/g}" />. Farten ved landing: <InlineLatex latex="|v| = gt" />. Alternativt kan du bruke likning 3 direkte: <InlineLatex latex="|v| = \sqrt{2gy_0}" />.</p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* ── EKSAMENSOPPGAVER ── */}
-      <h3 className="text-xl font-semibold mt-10 mb-4">Eksamensoppgaver</h3>
-
-      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 mb-6">
-        <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Eksamenstips — Kapittel 2</p>
-        <ul className="space-y-1 text-sm">
-          <li>• Rettlinjet bevegelse dukker gjerne opp som del av en større oppgave (f.eks. før et skråkast)</li>
-          <li>• Integrasjon av varierende akselerasjon er et typisk eksamenstema</li>
-          <li>• Sørg for at du kan tegne og tolke x-t og v-t grafer</li>
-          <li>• Ha et bevisst forhold til fortegnskonvensjoner</li>
-        </ul>
+          <p className="text-xs text-[var(--muted)]">Kapittel 2</p>
+        </Link>
       </div>
-
-      <ExerciseCard
-        number={1}
-        title="Varierende akselerasjon — Eksamenstype"
-        difficulty="vanskelig"
-        source="Eksamensrelevant"
-        problem={
-          <div>
-            <p>
-              En bil starter fra ro (<InlineLatex latex="v_0 = 0" />) ved posisjon <InlineLatex latex="x_0 = 0" />.
-              Akselerasjonen er gitt ved <InlineLatex latex="a(t) = 4{,}0 - 0{,}20\,t" /> m/s².
-            </p>
-            <p className="mt-2">a) Finn v(t) og x(t).</p>
-            <p>b) Når er farten maksimal? Hva er den maksimale farten?</p>
-            <p>c) Hvor langt har bilen kjørt når farten er maksimal?</p>
-            <p>d) Finn posisjonen etter 30 s.</p>
-          </div>
-        }
-        hints={[
-          { label: "Hint 1", content: <p>Varierende akselerasjon → bruk integrasjon, ikke de fire standardlikningene.</p> },
-          { label: "Hint 2", content: <p>Maks fart: sett a(t) = 0. Husk at etter dette tidspunktet bremser bilen!</p> },
-        ]}
-        solution={
-          <div className="space-y-4">
-            {/* 1. Hva vet vi? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva vet vi?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li><InlineLatex latex="a(t) = 4{,}0 - 0{,}20\,t\;\text{m/s}^2" /> — varierende akselerasjon (ikke konstant!)</li>
-                <li><InlineLatex latex="v_0 = 0" /> — starter fra ro</li>
-                <li><InlineLatex latex="x_0 = 0" /> — startposisjon</li>
-              </ul>
-            </div>
-
-            {/* 2. Hva skal vi finne? */}
-            <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-              <p className="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">Hva skal vi finne?</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>a) <InlineLatex latex="v(t)" /> og <InlineLatex latex="x(t)" /></li>
-                <li>b) <InlineLatex latex="t_{\max}" /> og <InlineLatex latex="v_{\max}" /></li>
-                <li>c) <InlineLatex latex="x(t_{\max})" /> — posisjonen ved maksimal fart</li>
-                <li>d) <InlineLatex latex="x(30)" /> — posisjon etter 30 s</li>
-              </ul>
-            </div>
-
-            {/* 3. Strategi */}
-            <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
-              <p className="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">Strategi</p>
-              <p className="text-sm"><InlineLatex latex="a(t)" /> avhenger av <InlineLatex latex="t" /> → ikke konstant → MÅ integrere. Integrer <InlineLatex latex="a(t)" /> for å finne <InlineLatex latex="v(t)" />, integrer <InlineLatex latex="v(t)" /> for å finne <InlineLatex latex="x(t)" />. Maks fart: sett <InlineLatex latex="a(t) = 0" /> — etter dette tidspunktet bremser bilen (a blir negativ), men den kjører fortsatt fremover til farten er null.</p>
-            </div>
-
-            {/* 4. Løsning */}
-            <div>
-              <p className="font-semibold text-sm">Steg 1 (del a): Integrer a(t) for v(t)</p>
-              <p className="text-sm">Med <InlineLatex latex="v_0 = 0" />:</p>
-              <FormulaBox latex="v(t) = v_0 + \int_0^t (4{,}0 - 0{,}20\,t')\,dt' = 0 + \Bigl[4{,}0t' - 0{,}10t'^2\Bigr]_0^t" variant="blue" />
-              <FormulaBox latex="v(t) = \underline{\underline{4{,}0t - 0{,}10t^2\;\;[\text{m/s}]}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 2 (del a): Integrer v(t) for x(t)</p>
-              <p className="text-sm">Med <InlineLatex latex="x_0 = 0" />:</p>
-              <FormulaBox latex="x(t) = x_0 + \int_0^t (4{,}0t' - 0{,}10t'^2)\,dt' = \Bigl[2{,}0t'^2 - \tfrac{0{,}10}{3}t'^3\Bigr]_0^t" variant="blue" />
-              <FormulaBox latex="x(t) = \underline{\underline{2{,}0t^2 - 0{,}033t^3\;\;[\text{m}]}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 3 (del b): Finn tidspunkt og verdi for maksimal fart</p>
-              <p className="text-sm">Farten er maksimal der <InlineLatex latex="a(t) = 0" />:</p>
-              <FormulaBox latex="4{,}0 - 0{,}20\,t = 0 \;\Rightarrow\; t_{\max} = \frac{4{,}0}{0{,}20} = \underline{\underline{20\;\text{s}}}" variant="gold" />
-              <p className="text-sm mt-1">Sett inn i <InlineLatex latex="v(t)" />:</p>
-              <FormulaBox latex="v_{\max} = v(20) = 4{,}0(20) - 0{,}10(20)^2 = 80 - 40 = \underline{\underline{40\;\text{m/s}}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 4 (del c): Posisjon ved maksimal fart</p>
-              <p className="text-sm">Sett <InlineLatex latex="t = 20\;\text{s}" /> inn i <InlineLatex latex="x(t)" />:</p>
-              <FormulaBox latex="x(20) = 2{,}0(20)^2 - 0{,}033(20)^3 = 2{,}0 \cdot 400 - 0{,}033 \cdot 8000 = 800 - 267 = \underline{\underline{533\;\text{m}}}" variant="gold" />
-            </div>
-
-            <div>
-              <p className="font-semibold text-sm mt-3">Steg 5 (del d): Posisjon etter 30 s</p>
-              <p className="text-sm">Sett <InlineLatex latex="t = 30\;\text{s}" /> inn i <InlineLatex latex="x(t)" />:</p>
-              <FormulaBox latex="x(30) = 2{,}0(30)^2 - 0{,}033(30)^3 = 2{,}0 \cdot 900 - 0{,}033 \cdot 27000 = 1800 - 900 = \underline{\underline{900\;\text{m}}}" variant="gold" />
-              <p className="text-sm mt-1 text-[var(--muted)]">Merk: etter <InlineLatex latex="t = 20\;\text{s}" /> er akselerasjonen negativ (bremser), men farten er fortsatt positiv — bilen kjører fortsatt fremover, bare saktere og saktere.</p>
-            </div>
-
-            {/* 6. Hva lærte vi? */}
-            <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
-              <p className="font-semibold text-amber-700 dark:text-amber-400 text-sm mb-1">Hva lærte vi?</p>
-              <p className="text-sm">Ved varierende akselerasjon: integrer <InlineLatex latex="a(t) \to v(t) \to x(t)" /> og legg til startverdiene. Maks fart oppstår der <InlineLatex latex="a(t) = 0" />. Husk: negativ akselerasjon betyr at bilen bremser, men den kjører fortsatt fremover helt til <InlineLatex latex="v(t) = 0" />.</p>
-            </div>
-          </div>
-        }
-      />
     </div>
   );
 }

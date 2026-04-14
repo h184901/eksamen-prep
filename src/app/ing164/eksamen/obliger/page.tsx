@@ -29,26 +29,36 @@ export default function ObligerPage() {
       </div>
 
       {/* Oblig selector */}
-      <div className="flex flex-wrap gap-3 mb-8">
-        <button onClick={() => setSelected(null)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selected === null ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)] hover:border-[var(--accent)]"}`}>
-          Alle obliger
-        </button>
+      <div className="grid sm:grid-cols-3 gap-4 mb-8">
         {[
-          { id: "oblig1", label: "Oblig 1" },
-          { id: "oblig2", label: "Oblig 2" },
-          { id: "oblig3", label: "Oblig 3" },
+          { id: "oblig1", label: "Oblig 1", desc: "Kinematikk, prosjektilbevegelse, Newtons lover", chapters: "Kap 2–5", count: "3 oppgaver" },
+          { id: "oblig2", label: "Oblig 2", desc: "Sirkelbevegelse, arbeid-energi, kollisjoner", chapters: "Kap 5–8", count: "3 oppgaver" },
+          { id: "oblig3", label: "Oblig 3", desc: "Rotasjon, elektrostatikk, kondensatorer", chapters: "Kap 9–10, 21–24", count: "2 oppgaver" },
         ].map((ob) => (
           <button key={ob.id} onClick={() => setSelected(selected === ob.id ? null : ob.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selected === ob.id ? "bg-[var(--accent)] text-white" : "bg-[var(--card)] text-[var(--muted)] border border-[var(--card-border)] hover:border-[var(--accent)]"}`}>
-            {ob.label}
+            className={`text-left rounded-xl border-2 p-5 transition-all ${selected === ob.id ? "border-[var(--accent)] bg-[var(--accent)]/5 shadow-md" : "border-[var(--card-border)] bg-[var(--card)] hover:border-[var(--accent)]/50 hover:shadow-sm"}`}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-bold text-lg">{ob.label}</span>
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-physics-100 text-physics-700 dark:bg-physics-900/30 dark:text-physics-400">{ob.chapters}</span>
+            </div>
+            <p className="text-sm text-[var(--muted)] mb-2">{ob.desc}</p>
+            <span className="text-xs text-[var(--muted)]">{ob.count}</span>
           </button>
         ))}
       </div>
 
+      {/* Velg-prompt */}
+      {!selected && (
+        <div className="rounded-xl border-2 border-dashed border-[var(--card-border)] p-8 text-center">
+          <p className="text-lg font-semibold text-[var(--muted)] mb-1">Velg en oblig over for å se oppgavene</p>
+          <p className="text-sm text-[var(--muted)]">Klikk på en av de tre obligene for å se oppgaver med løsningsforslag.</p>
+        </div>
+      )}
+
       {/* ════════════════════════════════════════════════ */}
       {/* OBLIG 1 — Kinematikk, prosjektilbevegelse, Newtons lover */}
       {/* ════════════════════════════════════════════════ */}
-      {(!selected || selected === "oblig1") && (
+      {selected === "oblig1" && (
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-1">
             <h2 className="text-2xl font-bold">Oblig 1</h2>
@@ -449,7 +459,7 @@ export default function ObligerPage() {
       {/* ════════════════════════════════════════════════ */}
       {/* OBLIG 2 — Arbeid, energi, bevegelsesmengde, rotasjon */}
       {/* ════════════════════════════════════════════════ */}
-      {(!selected || selected === "oblig2") && (
+      {selected === "oblig2" && (
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-1">
             <h2 className="text-2xl font-bold">Oblig 2</h2>
@@ -773,7 +783,7 @@ export default function ObligerPage() {
       {/* ════════════════════════════════════════════════ */}
       {/* OBLIG 3 — Elektrisitet og magnetisme */}
       {/* ════════════════════════════════════════════════ */}
-      {(!selected || selected === "oblig3") && (
+      {selected === "oblig3" && (
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-1">
             <h2 className="text-2xl font-bold">Oblig 3</h2>
