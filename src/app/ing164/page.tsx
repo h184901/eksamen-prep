@@ -341,11 +341,11 @@ export default function ING164Page() {
         >
           <div className="text-3xl mb-2">🎯</div>
           <h3 className="font-bold text-lg mb-1 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-            Eksamensøving
+            Eksamensøving og oppgaver
           </h3>
           <p className="text-sm text-[var(--muted)]">
-            Alle oppgaver fra tidligere eksamener med fullstendige løsninger.
-            Tidtaker for øvingseksamen inkludert.
+            Tidligere eksamener, obligoppgaver og oppgaver fra boken — alt med
+            fullstendige løsninger og formelhenvisninger.
           </p>
         </Link>
       </div>
