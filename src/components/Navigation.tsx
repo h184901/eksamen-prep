@@ -9,6 +9,7 @@ const navItems = [
   { href: "/", label: "Hjem" },
   { href: "/ing164", label: "ING164 Fysikk" },
   { href: "/dat109", label: "DAT109 Systemutvikling" },
+  { href: "/dat110", label: "DAT110 Nettverk" },
 ];
 
 export default function Navigation() {

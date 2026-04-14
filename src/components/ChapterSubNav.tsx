@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const subPages = [
+const basePages = [
   { segment: "", label: "Oversikt" },
   { segment: "teori", label: "Teori" },
   { segment: "formler", label: "Formler" },
@@ -11,12 +11,16 @@ const subPages = [
   { segment: "visualiseringer", label: "Visualiseringer" },
 ];
 
+const kilderPage = { segment: "kilder", label: "Relevante kilder" };
+
 interface ChapterSubNavProps {
   basePath: string;
 }
 
 export default function ChapterSubNav({ basePath }: ChapterSubNavProps) {
   const pathname = usePathname();
+  const isIng164 = basePath.startsWith("/ing164");
+  const subPages = isIng164 ? [...basePages, kilderPage] : basePages;
 
   return (
     <div className="sticky top-0 z-20 bg-[var(--background)]/95 backdrop-blur-sm border-b border-[var(--card-border)] -mx-4 px-4 mb-8">

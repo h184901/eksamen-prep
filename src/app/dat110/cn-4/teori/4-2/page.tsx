@@ -368,7 +368,7 @@ export default function CN4_2Page() {
         </p>
 
         <FormulaBox
-          latex="\\text{IP-adresse} = \\underbrace{a.b.c.d}_{\\text{dotted-decimal}} \\rightarrow \\underbrace{32 \\text{ bit binær}}_{\\text{nettverksnivå}}"
+          latex="\\textbf{IPv4:} \\quad \\underbrace{\\texttt{a.b.c.d}}_{\\text{dotted-decimal}} \\;\\longrightarrow\\; \\underbrace{\\texttt{xxxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx}}_{32 \\text{ bit binær}}"
           title="IPv4-adresserepresentasjon"
           variant="gold"
           description="Eks: 192.168.1.1 = 11000000.10101000.00000001.00000001"
@@ -380,7 +380,7 @@ export default function CN4_2Page() {
         </p>
 
         <FormulaBox
-          latex="\\underbrace{a.b.c.d}_{\\text{adresse}}/\\underbrace{x}_{\\text{prefiks}} \\quad \\Rightarrow \\quad 2^{32-x} \\text{ adresser}"
+          latex="\\underbrace{\\texttt{a.b.c.d}}_{\\text{adresse}}\\,/\\,\\underbrace{x}_{\\text{prefiks}} \\quad \\Longrightarrow \\quad 2^{\\,32-x} \\text{ adresser totalt}"
           title="CIDR-notasjon"
           variant="gold"
           description="Eksempel: 192.168.1.0/24 har 2^(32-24) = 256 adresser (inkl. nettverksadresse og broadcast)"

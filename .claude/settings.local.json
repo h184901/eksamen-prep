@@ -51,7 +51,9 @@
       "Bash(find src/app/dat110 -name \"page.tsx\" -path \"*/teori/*/page.tsx\" -exec wc -l {} +)",
       "Bash(find src/app/dat110 -path \"*/formler/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
       "Bash(find src/app/dat110 -path \"*/oppgaver/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
-      "Bash(find src/app/dat110 -path \"*/visualiseringer/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)"
+      "Bash(find src/app/dat110 -path \"*/visualiseringer/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
+      "Bash(ls -d /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/kapittel-*)",
+      "Bash(ls:*)"
     ]
   }
 }
