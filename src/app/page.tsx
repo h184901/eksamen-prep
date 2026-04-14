@@ -17,7 +17,7 @@ const subjects = [
     color: "network",
     href: "/dat110",
     status: "Aktiv" as const,
-    chapters: 7,
+    chapters: 13,
   },
   {
     id: "dat109",

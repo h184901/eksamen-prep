@@ -1,99 +1,263 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import {
+  dat110Chapters,
+  categoryLabels,
+  categoryDescriptions,
+  categoryChapterRange,
+  SECTIONS_PER_CHAPTER,
+  type DAT110Chapter,
+} from "@/lib/dat110-chapters";
 
-const topics = [
-  {
-    id: "nettverk",
-    slug: "nettverk",
-    title: "Nettverksgrunnlag og protokoller",
-    description:
-      "TCP/IP-modellen, forsinkelser, gjennomstrømning, HTTP, DNS, TCP, UDP og sockets",
-    weight: "Oppg 3–4",
-    icon: "globe",
-    exam: "~20%",
-    cn: "CN 1–3",
-  },
-  {
-    id: "ruting",
-    slug: "ruting",
-    title: "IP-ruting, adressering og switching",
-    description:
-      "IPv4-datagram, fragmentering, CIDR, longest-prefix match, avstandsvektor, ARP, switch og DHCP",
-    weight: "Oppg 5–6",
-    icon: "route",
-    exam: "~20%",
-    cn: "CN 4–6",
-  },
-  {
-    id: "kommunikasjon",
-    slug: "kommunikasjon",
-    title: "Kommunikasjon i DS",
-    description:
-      "RPC, MQTT, publish-subscribe, multicast, overlay-nettverk, RDP, prosesser og tråder",
-    weight: "Oppg 7–8",
-    icon: "network",
-    exam: "~15%",
-    cn: "DS 3–4",
-  },
-  {
-    id: "konsistens",
-    slug: "konsistens",
-    title: "Koordinering, konsistens og feiltoleranse",
-    description:
-      "Logiske/vektorklokker, konsistensmodeller, replikering, Byzantine-feiltoleranse og RPC-feil",
-    weight: "Oppg 9",
-    icon: "clipboard",
-    exam: "~10%",
-    cn: "DS 5–8",
-  },
-  {
-    id: "chord",
-    slug: "chord",
-    title: "DHT og Chord",
-    description:
-      "Distribuert hash-tabell, fingertabeller, nøkkelansvar og skalerbar søking — O(log n)",
-    weight: "Oppg 10",
-    icon: "ring",
-    exam: "~15%",
-    cn: "DS 6",
-  },
-];
+const categoryOrder: DAT110Chapter["category"][] = ["cn", "ds"];
 
-const iconMap: Record<string, React.ReactNode> = {
-  globe: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-    </svg>
-  ),
-  route: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-    </svg>
-  ),
-  network: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-    </svg>
-  ),
-  ring: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-    </svg>
-  ),
-  clipboard: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-    </svg>
-  ),
-  target: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  ),
+const categoryStyles: Record<
+  DAT110Chapter["category"],
+  {
+    border: string;
+    badge: string;
+    accent: string;
+    progressBar: string;
+    progressBg: string;
+    chevron: string;
+    headerHover: string;
+  }
+> = {
+  cn: {
+    border: "border-network-400/30 hover:border-network-400/60",
+    badge:
+      "bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400",
+    accent: "text-network-600 dark:text-network-400",
+    progressBar: "bg-network-500",
+    progressBg: "bg-network-100 dark:bg-network-900/30",
+    chevron: "text-network-500",
+    headerHover: "hover:bg-network-50/50 dark:hover:bg-network-950/20",
+  },
+  ds: {
+    border: "border-blue-400/30 hover:border-blue-400/60",
+    badge:
+      "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    accent: "text-blue-600 dark:text-blue-400",
+    progressBar: "bg-blue-500",
+    progressBg: "bg-blue-100 dark:bg-blue-900/30",
+    chevron: "text-blue-500",
+    headerHover: "hover:bg-blue-50/50 dark:hover:bg-blue-950/20",
+  },
 };
 
+function useGroupProgress(chapterIds: number[]) {
+  const [progress, setProgress] = useState({ completed: 0, total: 0 });
+  const [mounted, setMounted] = useState(false);
+  const idsKey = chapterIds.join(",");
+
+  useEffect(() => {
+    setMounted(true);
+    const ids = idsKey.split(",").map(Number);
+    let totalCompleted = 0;
+    const totalSections = ids.reduce((sum, id) => {
+      const ch = dat110Chapters.find((c) => c.id === id);
+      return sum + (ch?.sectionCount ?? SECTIONS_PER_CHAPTER);
+    }, 0);
+
+    for (const id of ids) {
+      const stored = localStorage.getItem(`dat110-progress-ch${id}`);
+      if (stored) {
+        try {
+          const arr = JSON.parse(stored);
+          totalCompleted += Array.isArray(arr) ? arr.length : 0;
+        } catch {
+          // ignore
+        }
+      }
+    }
+
+    setProgress({ completed: totalCompleted, total: totalSections });
+  }, [idsKey]);
+
+  if (!mounted) return { completed: 0, total: 1, percent: 0, mounted: false };
+
+  const percent =
+    progress.total > 0
+      ? Math.round((progress.completed / progress.total) * 100)
+      : 0;
+  return { ...progress, percent, mounted: true };
+}
+
+function useChapterProgress(chapter: DAT110Chapter) {
+  const [completed, setCompleted] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const total = chapter.sectionCount ?? SECTIONS_PER_CHAPTER;
+
+  useEffect(() => {
+    setMounted(true);
+    const stored = localStorage.getItem(`dat110-progress-ch${chapter.id}`);
+    if (stored) {
+      try {
+        const arr = JSON.parse(stored);
+        setCompleted(Array.isArray(arr) ? arr.length : 0);
+      } catch {
+        // ignore
+      }
+    }
+  }, [chapter.id]);
+
+  if (!mounted) return { completed: 0, total, percent: 0, mounted: false };
+
+  const percent = Math.round((completed / total) * 100);
+  return { completed, total, percent, mounted: true };
+}
+
+function ChapterCard({ chapter }: { chapter: DAT110Chapter }) {
+  const styles = categoryStyles[chapter.category];
+  const { completed, total, percent, mounted } = useChapterProgress(chapter);
+
+  return (
+    <Link
+      href={`/dat110/${chapter.slug}`}
+      className={`group rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 bg-[var(--card)] ${styles.border}`}
+    >
+      <div className="flex items-center justify-between mb-1">
+        <p className={`text-xs font-bold ${styles.accent}`}>
+          {chapter.bookRef}
+        </p>
+        {chapter.examWeight && (
+          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
+            {chapter.examWeight}
+          </span>
+        )}
+      </div>
+      <h3 className="font-semibold mb-1 group-hover:text-[var(--accent)] transition-colors">
+        {chapter.title}
+      </h3>
+      <p className="text-sm text-[var(--muted)] mb-3">{chapter.description}</p>
+
+      {/* Mini progress bar */}
+      <div className="h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+          style={{ width: mounted ? `${percent}%` : "0%" }}
+        />
+      </div>
+      {mounted && (
+        <p className="text-[11px] text-[var(--muted)] mt-1">
+          {completed}/{total} seksjoner fullfort
+        </p>
+      )}
+    </Link>
+  );
+}
+
+function CollapsibleSection({
+  category,
+  label,
+  chapters: cats,
+}: {
+  category: DAT110Chapter["category"];
+  label: string;
+  chapters: DAT110Chapter[];
+}) {
+  const [open, setOpen] = useState(true);
+  const styles = categoryStyles[category];
+  const chapterIds = cats.map((c) => c.id);
+  const { percent, completed, total, mounted } = useGroupProgress(chapterIds);
+
+  return (
+    <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`w-full flex items-center gap-4 p-5 text-left transition-colors ${styles.headerHover}`}
+      >
+        <svg
+          className={`w-5 h-5 shrink-0 transition-transform duration-200 ${styles.chevron} ${
+            open ? "rotate-90" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-1">
+            <h2 className="text-lg font-bold">{label}</h2>
+            <span
+              className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${styles.badge}`}
+            >
+              {categoryChapterRange[category]}
+            </span>
+          </div>
+          <p className="text-sm text-[var(--muted)] line-clamp-1">
+            {categoryDescriptions[category]}
+          </p>
+        </div>
+
+        <div className="shrink-0 w-32 hidden sm:block">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-medium text-[var(--muted)]">
+              {mounted ? `${percent}%` : "\u2014"}
+            </span>
+            <span className="text-[11px] text-[var(--muted)]">
+              {mounted ? `${completed}/${total}` : ""}
+            </span>
+          </div>
+          <div
+            className={`h-2 rounded-full overflow-hidden ${styles.progressBg}`}
+          >
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+              style={{ width: mounted ? `${percent}%` : "0%" }}
+            />
+          </div>
+        </div>
+      </button>
+
+      <div
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-5 pb-5 pt-1">
+          <div className="sm:hidden mb-4">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs font-medium text-[var(--muted)]">
+                Fremgang
+              </span>
+              <span className="text-xs text-[var(--muted)]">
+                {mounted ? `${completed}/${total} (${percent}%)` : "\u2014"}
+              </span>
+            </div>
+            <div
+              className={`h-2 rounded-full overflow-hidden ${styles.progressBg}`}
+            >
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${styles.progressBar}`}
+                style={{ width: mounted ? `${percent}%` : "0%" }}
+              />
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cats.map((chapter) => (
+              <ChapterCard key={chapter.id} chapter={chapter} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function DAT110Page() {
+  const grouped = categoryOrder.map((cat) => ({
+    category: cat,
+    label: categoryLabels[cat],
+    chapters: dat110Chapters.filter((c) => c.category === cat),
+  }));
+
   return (
     <div>
       {/* Header */}
@@ -107,8 +271,9 @@ export default function DAT110Page() {
         </div>
         <h1 className="text-3xl font-bold mb-2">DAT110 Nettverksteknologi</h1>
         <p className="text-[var(--muted)] max-w-2xl">
-          Nettverksprotokoller (TCP/IP, HTTP, DNS), IP-adressering og ruting,
-          distribuerte systemer, feiltoleranse og Chord DHT.
+          To boker: Computer Networking (Kurose & Ross) og Distributed Systems
+          (Van Steen & Tanenbaum). Nettverksprotokoller, distribuerte systemer,
+          Chord DHT og feiltoleranse.
         </p>
       </div>
 
@@ -118,16 +283,17 @@ export default function DAT110Page() {
           Eksamenformat
         </h2>
         <p className="text-sm text-[var(--muted)] mb-4">
-          10 oppgaver à 10–15% — alltid samme struktur. Oppgave 2 handler alltid om det obligatoriske
-          prosjektet. Oppgave 10 (DHT/Chord, 15%) er den tyngste enkeltoppgaven.
+          10 oppgaver, alltid samme struktur. Oppgave 2 handler alltid om det
+          obligatoriske prosjektet. Oppgave 10 (DHT/Chord, 15%) er den tyngste
+          enkeltoppgaven.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
           {[
             { label: "Oppg 1", topic: "Flervalg (10 spm)", pct: "10%", detail: "Dekker alt pensum" },
-            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert år" },
-            { label: "Oppg 3–4", topic: "Forsinkelser + protokoll", pct: "20%", detail: "CN: delay, IP/TCP/UDP" },
-            { label: "Oppg 5–6", topic: "Ruting + ARP/switch", pct: "20%", detail: "CN: CIDR, DV, ARP" },
-            { label: "Oppg 7–8", topic: "RPC + overlay/multicast", pct: "15%", detail: "DS: RPC, RDP" },
+            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert ar" },
+            { label: "Oppg 3\u20134", topic: "Forsinkelser + protokoll", pct: "20%", detail: "CN: delay, IP/TCP/UDP" },
+            { label: "Oppg 5\u20136", topic: "Ruting + ARP/switch", pct: "20%", detail: "CN: CIDR, DV, ARP" },
+            { label: "Oppg 7\u20138", topic: "RPC + overlay/multicast", pct: "15%", detail: "DS: RPC, RDP" },
             { label: "Oppg 9", topic: "Konsistens + klokker", pct: "10%", detail: "DS: vektorklokker" },
             { label: "Oppg 10", topic: "DHT/Chord", pct: "15%", detail: "DS: fingertabeller" },
           ].map((item) => (
@@ -148,70 +314,71 @@ export default function DAT110Page() {
         </div>
       </div>
 
-      {/* Hurtigtips */}
-      <div className="rounded-xl border border-amber-400/40 bg-amber-50 dark:bg-amber-950/20 p-4 mb-10">
-        <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">
-          Gjentakende mønstre fra alle eksamener (2022–2025)
-        </h3>
-        <ul className="text-sm text-[var(--muted)] space-y-1 list-disc list-inside">
-          <li>Forsinkelsesberegning: L/R (sending), d/s (forplantning), sum av alle fire typer</li>
-          <li>Avstandsvektoralgoritme: initialiser, oppdater med Bellman-Ford, vis steg for steg</li>
-          <li>CIDR og binær konvertering: longest-prefix matching i forwardingstabell</li>
-          <li>ARP-tabell og switch-tabell: læringsalgoritmen, hva skjer steg for steg</li>
-          <li>DHT/Chord fingertabell: succ(n + 2^(i-1)), nøkkelansvar, O(log n) søking</li>
-          <li>Konsistensmodeller: klient-sentrert vs data-sentrert — vit forskjellen</li>
-          <li>RPC-feil: de fem klassene — klient finner ikke server, req/reply lost, krasj</li>
-          <li>Overlay RDP = overlay-sti / beste fysiske sti — nær 1.0 er effektivt</li>
-        </ul>
-      </div>
-
-      {/* Emner */}
-      <h2 className="text-xl font-bold mb-4">Emner</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        {topics.map((topic) => (
-          <Link
-            key={topic.id}
-            href={`/dat110/${topic.slug}`}
-            className="group rounded-xl border-2 border-network-500/30 hover:border-network-500/60 bg-[var(--card)] p-6 transition-all hover:shadow-md hover:-translate-y-0.5"
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 rounded-lg bg-network-100 dark:bg-network-900/30 text-network-600 dark:text-network-400 flex items-center justify-center">
-                {iconMap[topic.icon]}
-              </div>
-              <div className="text-right">
-                <span className="block text-xs font-bold px-2.5 py-1 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-                  {topic.weight}
-                </span>
-                <span className="block text-[10px] text-[var(--muted)] mt-1">{topic.cn}</span>
-              </div>
-            </div>
-            <h3 className="font-bold text-lg mb-1 group-hover:text-network-600 dark:group-hover:text-network-400 transition-colors">
-              {topic.title}
-            </h3>
-            <p className="text-sm text-[var(--muted)]">{topic.description}</p>
-          </Link>
-        ))}
-      </div>
-
-      {/* Verktøy */}
-      <h2 className="text-xl font-bold mb-4">Verktøy</h2>
-      <div className="grid sm:grid-cols-2 gap-4">
+      {/* Verktoy */}
+      <div className="grid sm:grid-cols-3 gap-4 mb-10">
+        <Link
+          href="/dat110/obliger"
+          className="group relative overflow-hidden rounded-xl border-2 border-purple-400/40 hover:border-purple-400/80 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <h3 className="font-bold text-lg mb-1 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+            Obliger
+          </h3>
+          <p className="text-sm text-[var(--muted)]">
+            Obligatoriske prosjekter med forklaring og eksamen-relevante
+            konsepter
+          </p>
+        </Link>
         <Link
           href="/dat110/eksamen"
           className="group relative overflow-hidden rounded-xl border-2 border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center">
-              {iconMap.target}
-            </div>
-            <h3 className="font-bold text-lg group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-              Eksamensoppgaver
-            </h3>
-          </div>
+          <h3 className="font-bold text-lg mb-1 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+            Eksamensoppgaver
+          </h3>
           <p className="text-sm text-[var(--muted)]">
-            Alle 5 eksamener (2022–2025) med fullstendige løsningsforslag — sorterbart etter tema
+            Alle 5 eksamener (2022\u20132025) med fullstendige losningsforslag
           </p>
         </Link>
+        <Link
+          href="/dat110/oppsummering"
+          className="group relative overflow-hidden rounded-xl border-2 border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <h3 className="font-bold text-lg mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+            Oppsummering
+          </h3>
+          <p className="text-sm text-[var(--muted)]">
+            Kompakt referanseark med alt du ma kunne til eksamen
+          </p>
+        </Link>
+      </div>
+
+      {/* Hurtigtips */}
+      <div className="rounded-xl border border-amber-400/40 bg-amber-50 dark:bg-amber-950/20 p-4 mb-10">
+        <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">
+          Gjentakende monstre fra alle eksamener (2022\u20132025)
+        </h3>
+        <ul className="text-sm text-[var(--muted)] space-y-1 list-disc list-inside">
+          <li>Forsinkelsesberegning: L/R (sending), d/s (forplantning), sum av alle fire typer</li>
+          <li>Avstandsvektoralgoritme: initialiser, oppdater med Bellman-Ford, vis steg for steg</li>
+          <li>CIDR og binar konvertering: longest-prefix matching i forwardingstabell</li>
+          <li>ARP-tabell og switch-tabell: laringsalgoritmen, hva skjer steg for steg</li>
+          <li>DHT/Chord fingertabell: succ(n + 2^(i-1)), nokkelansvar, O(log n) soking</li>
+          <li>Konsistensmodeller: klient-sentrert vs data-sentrert \u2014 vit forskjellen</li>
+          <li>RPC-feil: de fem klassene \u2014 klient finner ikke server, req/reply lost, krasj</li>
+          <li>Overlay RDP = overlay-sti / beste fysiske sti \u2014 nar 1.0 er effektivt</li>
+        </ul>
+      </div>
+
+      {/* Collapsible chapter groups */}
+      <div className="space-y-4">
+        {grouped.map(({ category, label, chapters: cats }) => (
+          <CollapsibleSection
+            key={category}
+            category={category}
+            label={label}
+            chapters={cats}
+          />
+        ))}
       </div>
     </div>
   );

@@ -38,7 +38,10 @@
       "Bash(file /Users/erlendmoheim/Downloads/Studiet/Semester4/materials/dat109/eksamensoppgaver/*.pdf)",
       "Bash(\" /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/dat109/modellering/page.tsx | head -20)",
       "Bash(awk '{s+=$1} END {print \"Total lines: \" s}')",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(ls -d obliger/*/ oppsummering/*/)",
+      "Bash(rm src/app/dat110/nettverk/page.tsx src/app/dat110/ruting/page.tsx src/app/dat110/distribuerte/page.tsx src/app/dat110/chord/page.tsx src/app/dat110/kommunikasjon/page.tsx src/app/dat110/konsistens/page.tsx)",
+      "Bash(rmdir src/app/dat110/nettverk src/app/dat110/ruting src/app/dat110/distribuerte src/app/dat110/chord src/app/dat110/kommunikasjon src/app/dat110/konsistens)"
     ]
   }
 }
