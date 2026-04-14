@@ -29,7 +29,7 @@ export default function ChapterSubNav({ basePath }: ChapterSubNavProps) {
             ? `${basePath}/${page.segment}`
             : basePath;
           const isActive = page.segment
-            ? pathname === href
+            ? pathname === href || pathname.startsWith(href + "/")
             : pathname === basePath;
 
           return (
