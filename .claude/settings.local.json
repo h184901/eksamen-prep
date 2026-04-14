@@ -58,7 +58,8 @@
       "WebFetch(domain:www.video-tutor.net)",
       "WebFetch(domain:glasp.co)",
       "WebFetch(domain:www.classcentral.com)",
-      "WebFetch(domain:eightify.app)"
+      "WebFetch(domain:eightify.app)",
+      "Bash(awk '{print $4}')"
     ]
   }
 }
