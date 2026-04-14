@@ -74,7 +74,26 @@ export default function CN2TeoriPage() {
   return (
     <div className="max-w-3xl">
       <h1 className="text-2xl font-bold mb-1">Teori: Applikasjonslaget</h1>
-      <p className="text-[var(--muted)] mb-8 text-sm">CN 2.1–2.7 — HTTP, DNS, e-post, P2P og socket-programmering</p>
+      <p className="text-[var(--muted)] mb-4 text-sm">CN 2.1–2.7 — HTTP, DNS, e-post, P2P og socket-programmering</p>
+
+      {/* Delkapittel-navigasjon */}
+      <div className="flex flex-wrap gap-2 mb-8">
+        {[
+          { id: "2.1", title: "Applikasjonsarkitektur" },
+          { id: "2.2", title: "HTTP og webben" },
+          { id: "2.4", title: "DNS" },
+          { id: "2.7", title: "Socket-programmering" },
+        ].map((ch) => (
+          <span
+            key={ch.id}
+            className="px-3 py-1.5 rounded-lg text-sm font-medium border border-[var(--card-border)] bg-[var(--card)] text-[var(--foreground)]"
+            title={ch.title}
+          >
+            <span className="font-bold text-network-600 dark:text-network-400">{ch.id}</span>
+            <span className="ml-1.5 text-xs text-[var(--muted)] hidden sm:inline">{ch.title}</span>
+          </span>
+        ))}
+      </div>
 
       {/* ── 1. Applikasjonsarkitektur ── */}
       <Section title="1. Nettverksapplikasjoner og arkitektur">

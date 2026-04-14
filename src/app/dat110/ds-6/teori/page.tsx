@@ -72,9 +72,28 @@ export default function DS6TeoriPage() {
       </div>
 
       <h1 className="text-3xl font-bold mb-2">Navngiving og Chord DHT — Teori</h1>
-      <p className="text-[var(--muted)] mb-8">
+      <p className="text-[var(--muted)] mb-4">
         Fra navngivingsproblemer i distribuerte systemer til Chord-ringens elegante O(log N)-løsning.
       </p>
+
+      {/* Delkapittel-navigasjon */}
+      <div className="flex flex-wrap gap-2 mb-8">
+        {[
+          { id: "6.1", title: "Flat navngiving" },
+          { id: "6.2", title: "Strukturert navngiving" },
+          { id: "6.3", title: "DHT og Chord" },
+          { id: "6.4", title: "Attributtbasert navngiving" },
+        ].map((ch) => (
+          <span
+            key={ch.id}
+            className="px-3 py-1.5 rounded-lg text-sm font-medium border border-[var(--card-border)] bg-[var(--card)] text-[var(--foreground)]"
+            title={ch.title}
+          >
+            <span className="font-bold text-blue-600 dark:text-blue-400">{ch.id}</span>
+            <span className="ml-1.5 text-xs text-[var(--muted)] hidden sm:inline">{ch.title}</span>
+          </span>
+        ))}
+      </div>
 
       {/* ── 1. Navngiving ── */}
       <Section title="1. Navngiving i distribuerte systemer">

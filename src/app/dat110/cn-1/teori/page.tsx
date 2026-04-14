@@ -48,11 +48,33 @@ export default function CN1TeoriPage() {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Teori: Nettverksintroduksjon og metrikker</h2>
-      <p className="text-[var(--muted)] max-w-2xl">
+      <p className="text-[var(--muted)] max-w-2xl mb-4">
         Dette kapittelet er fundamentet for hele faget. Her laerer du hva internett er,
         hvordan protokollstakken fungerer, og de kritiske formlene for forsinkelse
         og gjennomstromning som alltid kommer pa eksamen.
       </p>
+
+      {/* Delkapittel-navigasjon */}
+      <div className="flex flex-wrap gap-2">
+        {[
+          { id: "1.1", title: "Hva er internett?" },
+          { id: "1.2", title: "Nettverkskanten" },
+          { id: "1.3", title: "Nettverkskjernen" },
+          { id: "1.4", title: "Forsinkelse og gjennomstromning" },
+          { id: "1.5", title: "Protokolllag" },
+          { id: "1.6", title: "Angrep pa nettverk" },
+          { id: "1.7", title: "Historikk" },
+        ].map((ch) => (
+          <span
+            key={ch.id}
+            className="px-3 py-1.5 rounded-lg text-sm font-medium border border-[var(--card-border)] bg-[var(--card)] text-[var(--foreground)]"
+            title={ch.title}
+          >
+            <span className="font-bold text-network-600 dark:text-network-400">{ch.id}</span>
+            <span className="ml-1.5 text-xs text-[var(--muted)] hidden sm:inline">{ch.title}</span>
+          </span>
+        ))}
+      </div>
 
       <MustKnow items={[
         "TCP/IP 5-lagsmodell med eksempler pa protokoller per lag",

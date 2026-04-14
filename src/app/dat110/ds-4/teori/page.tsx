@@ -11,14 +11,14 @@ type SectionKey =
   | "overlay"
   | "gossip";
 
-const sections: { key: SectionKey; title: string }[] = [
-  { key: "kommunikasjon", title: "Kommunikasjonsstilar" },
-  { key: "rpc", title: "RPC — Remote Procedure Call" },
-  { key: "asynkron", title: "Asynkron og Deferred Synchronous RPC" },
-  { key: "feil", title: "RPC-feilklasser (5 typer)" },
-  { key: "mqtt", title: "MQTT og QoS-nivåer" },
-  { key: "overlay", title: "Overlay-nettverk og ALM" },
-  { key: "gossip", title: "Gossip-protokoller" },
+const sections: { key: SectionKey; title: string; section: string }[] = [
+  { key: "kommunikasjon", title: "Kommunikasjonsstilar", section: "4.1" },
+  { key: "rpc", title: "RPC — Remote Procedure Call", section: "4.2" },
+  { key: "asynkron", title: "Asynkron og Deferred Synchronous RPC", section: "4.2" },
+  { key: "feil", title: "RPC-feilklasser (5 typer)", section: "4.2" },
+  { key: "mqtt", title: "MQTT og QoS-nivaer", section: "4.3" },
+  { key: "overlay", title: "Overlay-nettverk og ALM", section: "4.4" },
+  { key: "gossip", title: "Gossip-protokoller", section: "4.4" },
 ];
 
 export default function DS4TeoriPage() {
@@ -37,12 +37,13 @@ export default function DS4TeoriPage() {
           <button
             key={s.key}
             onClick={() => setActive(s.key)}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
               active === s.key
-                ? "bg-blue-600 text-white"
-                : "bg-[var(--card)] border border-[var(--card-border)] text-[var(--muted)] hover:text-[var(--foreground)]"
+                ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                : "bg-[var(--card)] border-[var(--card-border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-blue-400"
             }`}
           >
+            <span className="font-bold text-xs mr-1">{s.section}</span>
             {s.title}
           </button>
         ))}

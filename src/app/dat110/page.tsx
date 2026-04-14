@@ -151,7 +151,7 @@ function CollapsibleSection({
   label: string;
   chapters: DAT110Chapter[];
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const styles = categoryStyles[category];
   const chapterIds = cats.map((c) => c.id);
   const { percent, completed, total, mounted } = useGroupProgress(chapterIds);
@@ -277,7 +277,7 @@ const oppgaveColorStyles: Record<string, { border: string; badge: string }> = {
 };
 
 function ExamPracticeSection() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden mb-4">
@@ -372,43 +372,6 @@ export default function DAT110Page() {
         </p>
       </div>
 
-      {/* Eksamenformat */}
-      <div className="rounded-xl border-2 border-network-400/40 bg-gradient-to-br from-network-50 to-blue-50 dark:from-network-950/30 dark:to-blue-950/20 p-6 mb-10">
-        <h2 className="font-bold text-lg mb-3 text-network-700 dark:text-network-400">
-          Eksamenformat
-        </h2>
-        <p className="text-sm text-[var(--muted)] mb-4">
-          10 oppgaver, alltid samme struktur. Oppgave 2 handler alltid om det
-          obligatoriske prosjektet. Oppgave 10 (DHT/Chord, 15%) er den tyngste
-          enkeltoppgaven.
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-          {[
-            { label: "Oppg 1", topic: "Flervalg (10 spm)", pct: "10%", detail: "Dekker alt pensum" },
-            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert år" },
-            { label: "Oppg 3\u20134", topic: "Forsinkelser + protokoll", pct: "20%", detail: "CN: delay, IP/TCP/UDP" },
-            { label: "Oppg 5\u20136", topic: "Ruting + ARP/switch", pct: "20%", detail: "CN: CIDR, DV, ARP" },
-            { label: "Oppg 7\u20138", topic: "RPC + overlay/multicast", pct: "15%", detail: "DS: RPC, RDP" },
-            { label: "Oppg 9", topic: "Konsistens + klokker", pct: "10%", detail: "DS: vektorklokker" },
-            { label: "Oppg 10", topic: "DHT/Chord", pct: "15%", detail: "DS: fingertabeller" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-network-200 dark:border-network-800/40 p-3 text-center"
-            >
-              <p className="text-xs font-medium text-[var(--muted)] mb-0.5">
-                {item.label}
-              </p>
-              <p className="font-bold text-xs">{item.topic}</p>
-              <p className="text-xs font-bold text-network-600 dark:text-network-400 mt-0.5">
-                {item.pct}
-              </p>
-              <p className="text-[10px] text-[var(--muted)] mt-0.5">{item.detail}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Verktøy */}
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
         <Link
@@ -433,23 +396,6 @@ export default function DAT110Page() {
             Obligatoriske prosjekter med forklaring og eksamen-relevante konsepter
           </p>
         </Link>
-      </div>
-
-      {/* Hurtigtips */}
-      <div className="rounded-xl border border-amber-400/40 bg-amber-50 dark:bg-amber-950/20 p-4 mb-10">
-        <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">
-          Gjentakende mønstre fra alle eksamener (2022–2025)
-        </h3>
-        <ul className="text-sm text-[var(--muted)] space-y-1 list-disc list-inside">
-          <li>Forsinkelsesberegning: L/R (sending), d/s (forplantning), sum av alle fire typer</li>
-          <li>Avstandsvektoralgoritme: initialiser, oppdater med Bellman-Ford, vis steg for steg</li>
-          <li>CIDR og binær konvertering: longest-prefix matching i forwardingtabell</li>
-          <li>ARP-tabell og switch-tabell: læringsalgoritmen, hva skjer steg for steg</li>
-          <li>DHT/Chord fingertabell: succ(n + 2^(i-1)), nøkkelansvar, O(log n) søking</li>
-          <li>Konsistensmodeller: klient-sentrert vs data-sentrert — vit forskjellen</li>
-          <li>RPC-feil: de fem klassene — klient finner ikke server, req/reply lost, krasj</li>
-          <li>Overlay RDP = overlay-sti / beste fysiske sti — når 1.0 er effektivt</li>
-        </ul>
       </div>
 
       {/* Eksamensøving */}

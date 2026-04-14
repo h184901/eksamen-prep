@@ -1329,6 +1329,64 @@ export default function EksamensoppgaverPage() {
       {activeExam === "jan2024" && <EksamenPlaceholder year="Jan 2024" />}
       {activeExam === "mai2022" && <EksamenPlaceholder year="Mai 2022" />}
 
+      {/* Eksamenformat — visuell oversikt */}
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 space-y-4">
+        <h2 className="font-bold text-lg">Eksamenformat — fast struktur hvert år</h2>
+        <p className="text-sm text-[var(--muted)]">
+          DAT110-eksamen har alltid 10 oppgaver med samme struktur. Oppgave 2
+          handler om det obligatoriske prosjektet, og oppgave 10 (DHT/Chord, 15 %)
+          er den tyngste enkeltoppgaven.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+          {[
+            { label: "Oppg 1", topic: "Flervalg", pct: "10 %", color: "emerald" },
+            { label: "Oppg 2", topic: "Oblig", pct: "10 %", color: "purple" },
+            { label: "Oppg 3–4", topic: "Forsinkelse + protokoll", pct: "20 %", color: "network" },
+            { label: "Oppg 5–6", topic: "Ruting + ARP", pct: "20 %", color: "network" },
+            { label: "Oppg 7–8", topic: "RPC + overlay", pct: "15 %", color: "blue" },
+            { label: "Oppg 9", topic: "Klokker + konsistens", pct: "10 %", color: "blue" },
+            { label: "Oppg 10", topic: "DHT/Chord", pct: "15 %", color: "blue" },
+          ].map((item) => {
+            const c: Record<string, string> = {
+              emerald: "border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400",
+              purple: "border-purple-300 dark:border-purple-700 bg-purple-50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-400",
+              network: "border-network-300 dark:border-network-700 bg-network-50 dark:bg-network-950/20 text-network-700 dark:text-network-400",
+              blue: "border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400",
+            };
+            return (
+              <div key={item.label} className={`rounded-lg border p-3 text-center ${c[item.color]}`}>
+                <p className="text-[10px] font-medium opacity-70 mb-0.5">{item.label}</p>
+                <p className="font-bold text-xs leading-tight">{item.topic}</p>
+                <p className="text-sm font-black mt-1">{item.pct}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Gjentakende mønstre */}
+      <div className="rounded-xl border border-amber-300 dark:border-amber-800/40 bg-amber-50 dark:bg-amber-950/20 p-5 space-y-3">
+        <h2 className="font-bold text-amber-800 dark:text-amber-400">Gjentakende mønstre fra alle eksamener (2022–2025)</h2>
+        <p className="text-sm text-[var(--muted)]">Disse emnene dukker opp i en eller annen form hvert eneste år:</p>
+        <div className="grid sm:grid-cols-2 gap-2">
+          {[
+            { icon: "⏱", text: "Forsinkelsesberegning: L/R (sending), d/s (forplantning), sum av alle fire typer" },
+            { icon: "🔄", text: "Avstandsvektoralgoritme: initialiser, oppdater med Bellman-Ford, vis steg for steg" },
+            { icon: "🔢", text: "CIDR og binær konvertering: longest-prefix matching i forwardingtabell" },
+            { icon: "📡", text: "ARP-tabell og switch-tabell: læringsalgoritmen, hva skjer steg for steg" },
+            { icon: "💍", text: "DHT/Chord fingertabell: succ(n + 2^(i-1)), nøkkelansvar, O(log n) søking" },
+            { icon: "📊", text: "Konsistensmodeller: klient-sentrert vs data-sentrert — vit forskjellen" },
+            { icon: "🔌", text: "RPC-feil: de fem klassene — klient finner ikke server, req/reply lost, krasj" },
+            { icon: "🌐", text: "Overlay RDP = overlay-sti / beste fysiske sti — 1.0 er ideelt" },
+          ].map(({ icon, text }) => (
+            <div key={text} className="flex items-start gap-2 text-sm text-amber-800 dark:text-amber-300">
+              <span className="text-base mt-0.5 shrink-0">{icon}</span>
+              <span>{text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Generell eksamensstrategi */}
       <div className="rounded-xl border border-amber-200 dark:border-amber-800/40 bg-amber-50 dark:bg-amber-900/20 p-5 space-y-3">
         <h2 className="font-bold text-amber-800 dark:text-amber-400">Generell eksamensstrategi for DAT110</h2>
