@@ -1,101 +1,79 @@
 "use client";
 
 import Link from "next/link";
-import { FlashcardDeck } from "@/components/Flashcard";
-import { QuizSet } from "@/components/QuizQuestion";
-
-const flashcards = [
-  { front: "Hva er et overlay-nettverk?", back: "Logisk nettverk bygget oppA det fysiske nettverket. Noder er prosesser, lenker er logiske forbindelser som kan gA over flere fysiske hopp." },
-  { front: "Hva er Relative Delay Penalty (RDP)?", back: "RDP = forsinkelse via overlay / forsinkelse via beste fysiske sti. RDP = 1.0 betyr at overlayet er like effektivt som det fysiske nettverket." },
-  { front: "Hva er forskjellen pA strukturert og ustrukturert overlay?", back: "Strukturert: deterministisk topologi (f.eks. Chord DHT, CAN). Ustrukturert: tilfeldig topologi (f.eks. Gnutella), soking ved flooding." },
-  { front: "Hva er multicast vs broadcast?", back: "Multicast: send til en delmengde (gruppe) av noder. Broadcast: send til alle noder i nettverket." },
-  { front: "Hva er et multicast-tre?", back: "Tre-topologi der kilden er roten og mottakerne er lov. Sikrer at hver mottaker fAr noyaktig en kopi uten looper." },
-  { front: "Hva er gossip-basert dataspredning?", back: "Epidemisk protokoll: en node velger tilfeldig nabo og deler data. Spres eksponentielt raskt. Brukes for oppdateringer i store distribuerte systemer." },
-];
-
-const quizQuestions = [
-  {
-    question: "Overlay-sti mellom A og B har forsinkelse 45 ms. Optimal fysisk sti er 15 ms. Hva er RDP?",
-    options: ["0.33", "1.0", "3.0", "45"],
-    correctIndex: 2,
-    explanation: "RDP = overlay-forsinkelse / fysisk forsinkelse = 45/15 = 3.0. Overlayet er 3x saktere enn optimalt.",
-  },
-  {
-    question: "Chord DHT er et eksempel pA hvilket type overlay?",
-    options: ["Ustrukturert", "Strukturert", "Hierarkisk", "Flat"],
-    correctIndex: 1,
-    explanation: "Chord er strukturert: deterministisk ring-topologi med fingertabeller for O(log N) oppslag.",
-  },
-  {
-    question: "Hva er fordelen med gossip/epidemisk spredning?",
-    options: ["Garanterer levering til alle", "Veldig rask spredning med lav overhead per node", "Bruker minst mulig bAndbredde", "Ordnet levering"],
-    correctIndex: 1,
-    explanation: "Gossip sprer data eksponentielt raskt (O(log N) runder) med lav overhead — hver node kontakter kun en tilfeldig nabo per runde.",
-  },
-  {
-    question: "Nar er RDP = 1.0?",
-    options: [
-      "Overlay er dobbelt sA raskt som fysisk",
-      "Overlay-stien er identisk med beste fysiske sti",
-      "Overlay er uendelig tregt",
-      "Det fysiske nettverket er nede"
-    ],
-    correctIndex: 1,
-    explanation: "RDP = 1.0 betyr overlay-forsinkelse = fysisk forsinkelse. Overlayet tilforer ingen ekstra forsinkelse — optimalt.",
-  },
-];
 
 export default function Oppg8Page() {
   return (
     <div>
-      <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
-        <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
-        <span>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
-        <span>/</span>
-        <Link href="/dat110/eksamenoving" className="hover:text-[var(--accent)]">Eksamensorving</Link>
-        <span>/</span>
-        <span className="text-[var(--foreground)]">Oppg 8: Overlay og multicast</span>
-      </div>
-
-      <div className="flex items-center gap-3 mb-1">
-        <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-          ~7.5%
-        </span>
-      </div>
-      <h1 className="text-3xl font-bold mb-2">Oppg 8: Overlay og multicast</h1>
-      <p className="text-[var(--muted)] max-w-2xl mb-8">
-        Overlay-nettverk, Relative Delay Penalty (RDP), multicast-trar og
-        gossip-basert dataspredning. Typisk: beregn RDP og analyser overlay-topologi.
-      </p>
-
-      <div className="rounded-xl border border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-800 p-4 mb-8">
-        <h3 className="font-bold text-sm text-blue-700 dark:text-blue-400 mb-2">
-          Strategi
-        </h3>
+      <div className="rounded-xl border border-blue-200 dark:border-blue-800/40 bg-blue-50 dark:bg-blue-950/20 p-4 mb-8">
+        <h3 className="font-bold text-sm text-blue-700 dark:text-blue-400 mb-2">Strategi</h3>
         <ol className="text-sm text-blue-900 dark:text-blue-200 space-y-1 list-decimal list-inside">
-          <li>Identifiser overlay-stien og den fysiske stien mellom nodene</li>
-          <li>Summer forsinkelsene langs overlay-stien</li>
-          <li>Finn optimal fysisk sti (kortest forsinkelse)</li>
-          <li>RDP = overlay / fysisk — lavere er bedre, 1.0 er perfekt</li>
+          <li>Tegn det fysiske nettverket: noder (prosesser + rutere) og kantkostnader</li>
+          <li>Finn korteste fysiske sti mellom hvert prosesspar (kjøres manuelt med Dijkstra/øyemål)</li>
+          <li>Bygg overlay-grafen: kanter kun mellom prosesser (ikke rutere)</li>
+          <li>Beregn overlaykostnaden = sum av fysiske kostnader langs overlay-veien</li>
+          <li>RDP = overlay-forsinkelse / beste fysiske forsinkelse — lavere er bedre, 1.0 er perfekt</li>
+          <li>Sammenlign to multicast-trær: sum kostnader for alle kanter, lavere sum = bedre tre</li>
         </ol>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-3 mb-8">
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">RDP-formelen</h2>
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 text-center">
+          <p className="text-2xl font-mono font-bold mb-2">RDP = d_overlay / d_fysisk</p>
+          <p className="text-sm text-[var(--muted)]">
+            d_overlay = forsinkelse via overlay-nettverket (sum av fysiske hopp langs overlay-veien)<br />
+            d_fysisk = korteste mulige forsinkelse i det fysiske nettverket<br />
+            RDP = 1.0 → overlay er like godt som fysisk nettverk<br />
+            RDP = 2.0 → overlay er dobbelt så tregt
+          </p>
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">Hva oppgaven alltid tester</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {[
+            {
+              label: "Tegne overlay-graf",
+              desc: "Gitt fysisk nett med prosesser A–E og rutere Ra–Re: koble prosessene direkte. Overlay-kanten A–D har kostnad = korteste fysiske sti fra A til D.",
+            },
+            {
+              label: "Beregne RDP",
+              desc: "Velg et multicast-tre, summer kantkostnadene for stien A→D. Finn den korteste fysiske stien A→D. RDP = sum(overlay)/min(fysisk).",
+            },
+            {
+              label: "Sammenligne trær",
+              desc: "To ulike multicast-trær fra A til {B,C,D,E}: summer totalforsinkelse for hvert tre. Lavest sum = mest effektivt tre.",
+            },
+            {
+              label: "Overlay-typer",
+              desc: "Strukturert (Chord DHT): deterministisk topologi. Ustrukturert (Gnutella): tilfeldig. Gossip: epidemisk spredning.",
+            },
+          ].map((item) => (
+            <div key={item.label} className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+              <p className="font-bold text-sm text-blue-600 dark:text-blue-400 mb-1">{item.label}</p>
+              <p className="text-xs text-[var(--muted)]">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">Eksempel: enkel RDP-beregning</h2>
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-2">
+          <p className="text-[var(--muted)]">Fysisk nett: A→Ra (10ms), Ra→Rd (20ms), Rd→D (10ms). Korteste A→D = 40ms.</p>
+          <p className="text-[var(--muted)]">Overlay: A→B→D. Overlay-sti: A→Ra→Rb→B (15ms+5ms=20ms) + B→Rb→Rd→D (5ms+20ms+10ms=35ms) = 55ms.</p>
+          <p className="font-mono font-bold text-blue-600 dark:text-blue-400">RDP(A→D via B) = 55 / 40 = 1.375</p>
+          <p className="text-xs text-[var(--muted)]">Overlayet via B er 37.5% tregere enn optimal fysisk rute.</p>
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-3">
         <Link href="/dat110/ds-4" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-blue-400/60 transition-colors text-sm">
           <span className="font-bold text-xs text-blue-600 dark:text-blue-400">DS 4</span>
-          <span>Kommunikasjon: RPC, overlay og MQTT</span>
+          <span>Kommunikasjon: overlay og multicast</span>
         </Link>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Flashcards</h2>
-        <FlashcardDeck cards={flashcards} />
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Ov-quiz</h2>
-        <QuizSet questions={quizQuestions} />
       </div>
     </div>
   );

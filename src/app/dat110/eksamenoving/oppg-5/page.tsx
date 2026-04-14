@@ -1,103 +1,136 @@
 "use client";
 
 import Link from "next/link";
-import { FlashcardDeck } from "@/components/Flashcard";
-import { QuizSet } from "@/components/QuizQuestion";
 
-const flashcards = [
-  { front: "Hva er CIDR-notasjon?", back: "Classless Inter-Domain Routing. a.b.c.d/x der x = antall nettverksbiter. Eks: 200.23.16.0/23 gir 2^(32-23) = 512 adresser." },
-  { front: "Hva er longest-prefix match?", back: "Ruter matcher dest-IP mot forwardingtabell og velger oppforingen med lengst matchende prefiks. Mer spesifikk rute vinner." },
-  { front: "Hva er Bellman-Ford-ligningen?", back: "dx(y) = min_v { c(x,v) + dv(y) } — korteste avstand fra x til y er minimum over alle naboer v av (kostnad til v + vs avstand til y)." },
-  { front: "Hvordan fungerer avstandsvektoralgoritmen?", back: "Iterativt: 1) Initialiser (0 til seg selv, uendelig til alle andre). 2) Motta DV fra naboer. 3) Oppdater med Bellman-Ford. 4) Send oppdatert DV til naboer. Gjenta til stabil." },
-  { front: "Hva er count-to-infinity-problemet?", back: "I DV-ruting: nar en link feiler, kan noder telle kostnaden oppover mot uendelig fordi de tror naboen har en sti. Loses med poison reverse." },
-  { front: "Hva er forskjellen pA link-state og distance-vector?", back: "LS: global info (hele topologien), Dijkstra, raskere konvergens. DV: lokal info (kun naboer), Bellman-Ford, distribuert, kan ha count-to-infinity." },
-];
-
-const quizQuestions = [
-  {
-    question: "IP-adressen 192.168.1.0/26 gir hvor mange brukbare host-adresser?",
-    options: ["26", "62", "64", "256"],
-    correctIndex: 1,
-    explanation: "26 nettverksbiter -> 32-26 = 6 host-biter -> 2^6 = 64 adresser. Minus nettverks- og broadcast-adresse = 62 brukbare.",
-  },
-  {
-    question: "En ruter har to oppforinger: 200.23.16.0/20 og 200.23.18.0/23. En pakke til 200.23.18.5 matcher hvilken?",
-    options: ["200.23.16.0/20", "200.23.18.0/23", "Begge like", "Ingen"],
-    correctIndex: 1,
-    explanation: "Begge matcher, men /23 er lengre (mer spesifikk). Longest-prefix match velger /23.",
-  },
-  {
-    question: "I avstandsvektoralgoritmen, hva er initial-verdien for avstand til seg selv?",
-    options: ["1", "Uendelig", "0", "Antall naboer"],
-    correctIndex: 2,
-    explanation: "Avstanden fra en node til seg selv er alltid 0. Avstand til alle andre initialiseres til uendelig (eller direkte link-kostnad for naboer).",
-  },
-  {
-    question: "Hva er poison reverse brukt til?",
-    options: ["Kryptere rutingmeldinger", "Forhindre count-to-infinity", "Fjerne doble ruter", "Balansere last mellom linker"],
-    correctIndex: 1,
-    explanation: "Poison reverse: en node annonserer uendelig kostnad tilbake til naboen den ruter gjennom. Forhindrer rutinglooper.",
-  },
-  {
-    question: "En forwardingtabell har oppforinger for /0, /16, /24 og /32. Hvilken prefereres?",
-    options: ["/0 (default route)", "/16", "/24", "/32 (mest spesifikk)"],
-    correctIndex: 3,
-    explanation: "Longest-prefix match: /32 er lengst og mest spesifikk. /0 er default route som kun brukes nar ingen annen matcher.",
-  },
-];
-
-export default function Oppg5Page() {
+export default function Oppg5Oversikt() {
   return (
     <div>
-      <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
-        <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
-        <span>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
-        <span>/</span>
-        <Link href="/dat110/eksamenoving" className="hover:text-[var(--accent)]">Eksamensorving</Link>
-        <span>/</span>
-        <span className="text-[var(--foreground)]">Oppg 5: Ruting</span>
+      {/* Hva kan du forvente */}
+      <div className="rounded-xl border border-network-300 bg-network-50 dark:bg-network-950/20 dark:border-network-800 p-5 mb-8">
+        <h2 className="font-bold text-lg text-network-700 dark:text-network-400 mb-3">
+          Hva kan du forvente?
+        </h2>
+        <p className="text-sm text-network-900 dark:text-network-200 mb-3">
+          Oppgave 5 gir alltid et nettverk med rutere (R1–R4) og linkkostnader. Du
+          blir bedt om å: (1) finne billigste sti, (2) sette opp initielle
+          avstandsvektortabeller, (3) oppdatere én ruters DV etter å ha mottatt
+          naboenes DV, og (4) finne neste hopp. Alltid en figur med nettverkstopologi.
+        </p>
+        <p className="text-sm font-bold text-network-800 dark:text-network-300">
+          Format: nettverk R1–R2–R3–R4 med gitte kostnader — initialisering og én
+          runde Bellman-Ford er nesten alltid inkludert.
+        </p>
       </div>
 
-      <div className="flex items-center gap-3 mb-1">
-        <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-          10%
-        </span>
-      </div>
-      <h1 className="text-3xl font-bold mb-2">Oppg 5: Ruting</h1>
-      <p className="text-[var(--muted)] max-w-2xl mb-8">
-        CIDR-adressering, subnett, longest-prefix match, avstandsvektoralgoritme
-        og forwardingtabeller. Typisk: beregn DV steg-for-steg eller finn riktig
-        rute i forwardingtabell.
-      </p>
-
-      <div className="rounded-xl border border-network-300 bg-network-50 dark:bg-network-950/20 dark:border-network-800 p-4 mb-8">
-        <h3 className="font-bold text-sm text-network-700 dark:text-network-400 mb-2">
-          Strategi
-        </h3>
-        <ol className="text-sm text-network-900 dark:text-network-200 space-y-1 list-decimal list-inside">
-          <li>Konverter IP-adresser til binar for CIDR-oppgaver</li>
-          <li>Tell nettverksbiter og beregn antall adresser (2^host-biter)</li>
-          <li>For DV: sett opp initialtabell, oppdater med Bellman-Ford per runde</li>
-          <li>For forwarding: match dest-IP mot tabellen, bruk longest prefix</li>
+      {/* Strategi */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold mb-3">Løsningsstrategi</h2>
+        <ol className="space-y-3">
+          {[
+            {
+              step: "Initialiser DV-tabellene",
+              detail:
+                "Hver ruter setter avstand til seg selv = 0, direkte naboer = linkkostnad, alle andre = ∞.",
+            },
+            {
+              step: "Motta naboenes DV-tabeller",
+              detail:
+                "Etter første utveksling kjenner hver ruter naboenes avstandsvektorer.",
+            },
+            {
+              step: "Anvend Bellman-Ford",
+              detail:
+                "For hvert mål y: D_x(y) = min over alle naboer v av [c(x,v) + D_v(y)].",
+            },
+            {
+              step: "Oppdater og spre",
+              detail:
+                "Hvis noen verdier endres, send oppdatert DV til naboer. Gjenta til stabil.",
+            },
+            {
+              step: "Finn neste hopp",
+              detail:
+                "Neste hopp til mål y er den naboen v som gir minimumsverdien i Bellman-Ford.",
+            },
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3">
+              <span className="shrink-0 w-7 h-7 rounded-full bg-network-100 dark:bg-network-900/30 text-network-700 dark:text-network-400 flex items-center justify-center text-sm font-bold">
+                {i + 1}
+              </span>
+              <div>
+                <p className="font-bold text-sm">{item.step}</p>
+                <p className="text-sm text-[var(--muted)]">{item.detail}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-3 mb-8">
-        <Link href="/dat110/cn-4" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors text-sm">
-          <span className="font-bold text-xs text-network-600 dark:text-network-400">CN 4-5</span>
-          <span>Nettverkslaget og ruting</span>
-        </Link>
+      {/* Nøkkelformler */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold mb-3">Nøkkelformler</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <div className="rounded-lg border-2 border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-700 p-4">
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">
+              Bellman-Ford (avstandsvektorligningen)
+            </p>
+            <p className="font-mono text-base font-bold">
+              D_x(y) = min_v [ c(x,v) + D_v(y) ]
+            </p>
+            <p className="text-xs text-[var(--muted)] mt-1">
+              x = gjeldende ruter, y = mål, v = nabo, c(x,v) = linkkostnad
+            </p>
+          </div>
+          <div className="rounded-lg border-2 border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-700 p-4">
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">
+              CIDR-notasjon
+            </p>
+            <p className="font-mono text-base font-bold">a.b.c.d / x</p>
+            <p className="text-xs text-[var(--muted)] mt-1">
+              x = antall nettverksbiter, 2^(32-x) = antall adresser i blokken
+            </p>
+          </div>
+          <div className="rounded-lg border-2 border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-700 p-4">
+            <p className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">
+              Longest-prefix match
+            </p>
+            <p className="font-mono text-base font-bold">velg lengste /x</p>
+            <p className="text-xs text-[var(--muted)] mt-1">
+              Ruter matcher destinasjons-IP mot forwardingtabell — mer spesifikk
+              rute vinner alltid
+            </p>
+          </div>
+          <div className="rounded-lg border-2 border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-700 p-4">
+            <p className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">
+              Antall adresser i et subnett
+            </p>
+            <p className="font-mono text-base font-bold">2^(32 - x)</p>
+            <p className="text-xs text-[var(--muted)] mt-1">
+              Eks: /24 → 2^8 = 256 adresser. /26 → 2^6 = 64 adresser.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Flashcards</h2>
-        <FlashcardDeck cards={flashcards} />
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Ov-quiz</h2>
-        <QuizSet questions={quizQuestions} />
+      {/* Relevant teori */}
+      <div>
+        <h2 className="text-xl font-bold mb-3">Relevant teori</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Link
+            href="/dat110/cn-4"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors"
+          >
+            <span className="font-bold text-xs text-network-600 dark:text-network-400">
+              CN 4–5
+            </span>
+            <div>
+              <p className="text-sm font-medium">Nettverkslaget og ruting</p>
+              <p className="text-xs text-[var(--muted)]">
+                IP, CIDR, avstandsvektoralgoritmen
+              </p>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

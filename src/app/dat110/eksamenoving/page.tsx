@@ -3,16 +3,16 @@
 import Link from "next/link";
 
 const oppgaver = [
-  { id: 1, label: "Oppg 1", title: "Flervalg", weight: "10%", description: "10 flervalgssporsmol som dekker hele pensum fra begge boker. Tester bred forstaelse av alle kapitler.", format: "10 sporsmol med 4 alternativer", chapters: ["Alle CN- og DS-kapitler"], color: "emerald" },
-  { id: 2, label: "Oppg 2", title: "Oblig-prosjekt", weight: "10%", description: "Sporsmol om arkitektur, konsepter og design-valg fra de obligatoriske prosjektene.", format: "Aapne sporsmol om prosjektarkitektur", chapters: ["Prosjekt 1: RPC", "Prosjekt 2: Pub/Sub", "Prosjekt 3: DHT"], color: "purple" },
-  { id: 3, label: "Oppg 3", title: "Forsinkelser", weight: "10%", description: "Beregn sending-, forplantnings-, ko- og prosesseringsforsinkelse. Trafikkintensitet og gjennomstromning.", format: "Beregningsoppgaver med formler", chapters: ["CN 1: Nettverksmetrikker"], color: "network" },
-  { id: 4, label: "Oppg 4", title: "Protokoller", weight: "10%", description: "TCP 3-veis handshake, UDP-segmentering, IP-header-felt og protokollmekanismer.", format: "Tegn og forklar protokollmekansimer", chapters: ["CN 3: Transport", "CN 4: Nettverk"], color: "network" },
-  { id: 5, label: "Oppg 5", title: "Ruting", weight: "10%", description: "CIDR-adressering, longest-prefix match, avstandsvektoralgoritme og forwarding-tabell.", format: "Beregninger og tabelloppgaver", chapters: ["CN 4-5: IP og ruting"], color: "network" },
-  { id: 6, label: "Oppg 6", title: "ARP og Switch", weight: "10%", description: "ARP-tabell, switch self-learning, MAC-adresser og Ethernet-rammer.", format: "Steg-for-steg nettverksscenario", chapters: ["CN 6: Linklaget"], color: "network" },
-  { id: 7, label: "Oppg 7", title: "RPC", weight: "~7.5%", description: "Remote Procedure Call: arkitektur, feilklasser, klient- og server-stubs.", format: "Forklar og analyser RPC-scenarier", chapters: ["DS 4: Kommunikasjon"], color: "blue" },
-  { id: 8, label: "Oppg 8", title: "Overlay og multicast", weight: "~7.5%", description: "Overlay-nettverk, Relative Delay Penalty, multicast-trar og gossip.", format: "Beregn RDP og analyser overlay", chapters: ["DS 4: Kommunikasjon"], color: "blue" },
-  { id: 9, label: "Oppg 9", title: "Konsistens og klokker", weight: "10%", description: "Lamport-klokker, vektorklokker, konsistensmodeller og happens-before.", format: "Tidsdiagram og klokkeoppdatering", chapters: ["DS 5: Koordinering", "DS 7: Konsistens"], color: "blue" },
-  { id: 10, label: "Oppg 10", title: "DHT/Chord", weight: "15%", description: "Chord-ring, fingertabeller, nokkelansvar, O(log N) oppslag og noder join/leave.", format: "Beregn fingertabell og sok etter nokler", chapters: ["DS 6: Navngiving og DHT"], color: "blue" },
+  { id: 1, label: "Oppg 1", title: "Flervalg", weight: "10%", description: "10 flervalgsspørsmål som dekker hele pensum fra begge bøker. Tester bred forståelse av alle kapitler.", format: "10 spørsmål med 3–4 alternativer", chapters: ["Alle CN- og DS-kapitler"], color: "emerald" },
+  { id: 2, label: "Oppg 2", title: "Oblig-prosjekt", weight: "10%", description: "Spørsmål om arkitektur, konsepter og design-valg fra de obligatoriske prosjektene.", format: "Åpne spørsmål om prosjektarkitektur", chapters: ["Prosjekt 1: RPC", "Prosjekt 2: Pub/Sub", "Prosjekt 3: DHT"], color: "purple" },
+  { id: 3, label: "Oppg 3", title: "Forsinkelser", weight: "10%", description: "Beregn sendings-, forplantnings-, kø- og prosesseringsforsinkelse. Trafikkintensitet og gjennomstrømning.", format: "Beregningsoppgaver med formler", chapters: ["CN 1: Nettverksmetrikker"], color: "network" },
+  { id: 4, label: "Oppg 4", title: "Protokoller", weight: "10%", description: "IP-headerfelt, TCP/UDP-forskjeller, pålitelig dataoverføring og protokollmekanismer.", format: "Forklar felt og mekanismer", chapters: ["CN 3: Transport", "CN 4: Nettverk"], color: "network" },
+  { id: 5, label: "Oppg 5", title: "Ruting", weight: "10%", description: "Avstandsvektoralgoritme med Bellman-Ford. Steg-for-steg oppdatering av DV-tabeller.", format: "Beregninger og tabelloppgaver", chapters: ["CN 4–5: IP og ruting"], color: "network" },
+  { id: 6, label: "Oppg 6", title: "ARP og Switch", weight: "10%", description: "ARP-tabell, switch self-learning, CIDR-adressering og forwardingtabell.", format: "Steg-for-steg nettverksscenario", chapters: ["CN 6: Linklaget"], color: "network" },
+  { id: 7, label: "Oppg 7", title: "DS-teori", weight: "5%", description: "Serverdesign, transparens, stateful/stateless, synkron/asynkron kommunikasjon.", format: "Korte åpne spørsmål (2–3 setninger)", chapters: ["DS 3–4: Prosesser og kommunikasjon"], color: "blue" },
+  { id: 8, label: "Oppg 8", title: "Overlay og multicast", weight: "10%", description: "Tegn overlay-graf, beregn RDP og sammenlign multicast-trær.", format: "Tegn graf, beregn RDP og trækostnad", chapters: ["DS 4: Kommunikasjon"], color: "blue" },
+  { id: 9, label: "Oppg 9", title: "Konsistens og klokker", weight: "10%", description: "Vektorklokker, RPC-feilklasser, replikering og feiltoleranse.", format: "Vektorklokke-beregning + teori", chapters: ["DS 5: Koordinering", "DS 7–8: Konsistens og feiltoleranse"], color: "blue" },
+  { id: 10, label: "Oppg 10", title: "DHT/Chord", weight: "15%", description: "Chord-ring, fingertabeller, nøkkelansvar og steg-for-steg oppslag.", format: "Beregn fingertabell, finn nøkkelansvar, vis oppslag", chapters: ["DS 6: Navngiving og DHT"], color: "blue" },
 ];
 
 const colorStyles: Record<string, { border: string; badge: string; accent: string }> = {
@@ -46,13 +46,14 @@ export default function EksamenovingPage() {
         <span>/</span>
         <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
         <span>/</span>
-        <span className="text-[var(--foreground)]">Eksamensorving</span>
+        <span className="text-[var(--foreground)]">Eksamensøving</span>
       </div>
 
-      <h1 className="text-3xl font-bold mb-2">Eksamensorving</h1>
+      <h1 className="text-3xl font-bold mb-2">Eksamensøving</h1>
       <p className="text-[var(--muted)] max-w-2xl mb-8">
-        DAT110-eksamen har alltid 10 oppgaver med fast struktur. Ov pA hver
-        oppgavetype med quiz, flashcards og forklaringer koblet til relevant teori.
+        DAT110-eksamen har alltid 10 oppgaver med fast struktur. Øv på hver
+        oppgavetype med quiz, flashcards, forklaringer og ekte eksamensoppgaver
+        fra 2022–2025 med trinnvise løsninger.
       </p>
 
       <div className="rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-800 p-4 mb-8">
@@ -60,10 +61,10 @@ export default function EksamenovingPage() {
           Slik bruker du denne seksjonen
         </h3>
         <ul className="text-sm text-emerald-900 dark:text-emerald-200 space-y-1 list-disc list-inside">
-          <li>Velg en oppgavetype du vil ove pA</li>
-          <li>Les formatet og hva som typisk sporres om</li>
-          <li>Test deg selv med quiz og flashcards</li>
-          <li>Folg lenkene til relevant teori i CN/DS-kapitlene</li>
+          <li>Hver oppgavetype har tre faner: <strong>Oversikt</strong> (strategi og nøkkelkonsepter), <strong>Tidligere oppgaver</strong> (ekte eksamensoppgaver med løsninger), og <strong>Øving</strong> (flashcards og quiz)</li>
+          <li>Start med oversikten for å forstå formatet, gå deretter til tidligere oppgaver for å se ekte eksempler</li>
+          <li>Test deg selv med flashcards og quiz under øving-fanen</li>
+          <li>Følg lenkene til relevant teori i CN/DS-kapitlene for å lese mer</li>
         </ul>
       </div>
 

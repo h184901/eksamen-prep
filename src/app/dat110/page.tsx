@@ -135,7 +135,7 @@ function ChapterCard({ chapter }: { chapter: DAT110Chapter }) {
       </div>
       {mounted && (
         <p className="text-[11px] text-[var(--muted)] mt-1">
-          {completed}/{total} seksjoner fullfort
+          {completed}/{total} seksjoner fullført
         </p>
       )}
     </Link>
@@ -245,16 +245,16 @@ function CollapsibleSection({
 }
 
 const examOppgaver = [
-  { id: 1, label: "Oppg 1", title: "Flervalg", weight: "10%", description: "10 flervalgssporsmol fra hele pensum", chapters: "Alle kapitler", color: "emerald" },
+  { id: 1, label: "Oppg 1", title: "Flervalg", weight: "10%", description: "10 flervalgsspørsmål fra hele pensum", chapters: "Alle kapitler", color: "emerald" },
   { id: 2, label: "Oppg 2", title: "Oblig-prosjekt", weight: "10%", description: "Arkitektur og konsepter fra obliger", chapters: "Prosjekt 1\u20133", color: "purple" },
   { id: 3, label: "Oppg 3", title: "Forsinkelser", weight: "10%", description: "Beregn forsinkelser i nettverk", chapters: "CN 1", color: "network" },
   { id: 4, label: "Oppg 4", title: "Protokoller", weight: "10%", description: "TCP, UDP, IP-header og segmentering", chapters: "CN 3\u20134", color: "network" },
   { id: 5, label: "Oppg 5", title: "Ruting", weight: "10%", description: "CIDR, subnett, avstandsvektor", chapters: "CN 4\u20135", color: "network" },
-  { id: 6, label: "Oppg 6", title: "ARP og Switch", weight: "10%", description: "ARP-tabell, switch-laring", chapters: "CN 6", color: "network" },
-  { id: 7, label: "Oppg 7", title: "RPC", weight: "~7.5%", description: "Remote Procedure Call og feil", chapters: "DS 4", color: "blue" },
-  { id: 8, label: "Oppg 8", title: "Overlay og multicast", weight: "~7.5%", description: "Overlay-nettverk, RDP", chapters: "DS 4", color: "blue" },
-  { id: 9, label: "Oppg 9", title: "Konsistens og klokker", weight: "10%", description: "Konsistensmodeller, vektorklokker", chapters: "DS 5, 7", color: "blue" },
-  { id: 10, label: "Oppg 10", title: "DHT/Chord", weight: "15%", description: "Chord-ring, fingertabeller, oppslag", chapters: "DS 6", color: "blue" },
+  { id: 6, label: "Oppg 6", title: "ARP og Switch", weight: "10%", description: "ARP-tabell, switch-læring", chapters: "CN 6", color: "network" },
+  { id: 7, label: "Oppg 7", title: "DS-teori", weight: "5%", description: "Serverdesign, transparens, RPC-konsepter", chapters: "DS 3\u20134", color: "blue" },
+  { id: 8, label: "Oppg 8", title: "Overlay og multicast", weight: "10%", description: "Overlay-nettverk, RDP, multicast-trær", chapters: "DS 4", color: "blue" },
+  { id: 9, label: "Oppg 9", title: "Konsistens og klokker", weight: "10%", description: "Vektorklokker, replikering, feiltoleranse", chapters: "DS 5, 7, 8", color: "blue" },
+  { id: 10, label: "Oppg 10", title: "DHT/Chord", weight: "15%", description: "Chord-ring, fingertabeller, nøkkeloppslag", chapters: "DS 6", color: "blue" },
 ];
 
 const oppgaveColorStyles: Record<string, { border: string; badge: string }> = {
@@ -299,13 +299,13 @@ function ExamPracticeSection() {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-1">
-            <h2 className="text-lg font-bold">Eksamensorving</h2>
+            <h2 className="text-lg font-bold">Eksamensøving</h2>
             <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
               10 oppgavetyper
             </span>
           </div>
           <p className="text-sm text-[var(--muted)] line-clamp-1">
-            Ov pA hver oppgavetype med quiz, flashcards og lenker til relevant teori
+            Øv på hver oppgavetype med quiz, flashcards og lenker til relevant teori
           </p>
         </div>
       </button>
@@ -416,10 +416,10 @@ export default function DAT110Page() {
           className="group relative overflow-hidden rounded-xl border-2 border-emerald-400/40 hover:border-emerald-400/80 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
         >
           <h3 className="font-bold text-lg mb-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-            Eksamensorving
+            Eksamensøving
           </h3>
           <p className="text-sm text-[var(--muted)]">
-            Ov pA alle 10 oppgavetypene med quiz, flashcards og forklaringer
+            Øv på alle 10 oppgavetypene med quiz, flashcards og forklaringer
           </p>
         </Link>
         <Link
@@ -475,7 +475,7 @@ export default function DAT110Page() {
         </ul>
       </div>
 
-      {/* Eksamensorving */}
+      {/* Eksamensøving */}
       <ExamPracticeSection />
 
       {/* Collapsible chapter groups */}

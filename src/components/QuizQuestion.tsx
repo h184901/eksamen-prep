@@ -94,8 +94,8 @@ export function QuizSet({ questions }: { questions: QuizQuestionProps[] }) {
             {correctCount === questions.length
               ? "Perfekt! Du kan dette!"
               : correctCount >= questions.length * 0.7
-                ? "Bra jobba! Les gjennom det du bomma paa."
-                : "Ov litt mer, og prov igjen!"}
+                ? "Bra jobba! Les gjennom det du bomma på."
+                : "Øv litt mer, og prøv igjen!"}
           </p>
         </div>
       )}
@@ -121,7 +121,7 @@ function QuizQuestionTracked({
   return (
     <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5">
       <p className="text-xs font-bold text-[var(--muted)] mb-2">
-        Sporsmol {index + 1}
+        Spørsmål {index + 1}
       </p>
       <p className="font-medium text-sm mb-4">{props.question}</p>
       <div className="space-y-2 mb-3">

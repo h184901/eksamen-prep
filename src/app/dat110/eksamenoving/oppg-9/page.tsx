@@ -1,117 +1,133 @@
 "use client";
 
 import Link from "next/link";
-import { FlashcardDeck } from "@/components/Flashcard";
-import { QuizSet } from "@/components/QuizQuestion";
-
-const flashcards = [
-  { front: "Hva er Lamport-klokke?", back: "Logisk klokke: LC(e) oker med 1 for lokal hendelse. Ved sending: inkluder LC i melding. Ved mottak: LC = max(egen LC, mottatt LC) + 1. Gir partiell ordning." },
-  { front: "Hva er vektorklokke?", back: "Vektor med en klokke per prosess. Fanger kausalitet: a -> b iff VC(a) < VC(b) (alle elementer <=, minst ett <). Kan skille kausal og concurrent." },
-  { front: "Hva er forskjellen mellom Lamport- og vektorklokker?", back: "Lamport: LC(a) < LC(b) betyr IKKE at a -> b. Vektorklokker: VC(a) < VC(b) betyr GARANTERT at a -> b. Vektorklokker er sterkere." },
-  { front: "Hva er sekvensiell konsistens?", back: "Alle prosesser ser operasjonene i SAMME rekkefølge, og rekkefølgen respekterer programordenen innad i hver prosess. Sterkere enn kausal." },
-  { front: "Hva er read-your-writes konsistens?", back: "Klient-sentrert modell: en prosess ser alltid effekten av sine egne skriveoperasjoner. Svakere enn sekvensiell, men viktig i praksis." },
-  { front: "Hva er forskjellen pA data-sentrerte og klient-sentrerte konsistensmodeller?", back: "Data-sentrerte: global garanti for alle prosesser (sekvensiell, kausal, eventual). Klient-sentrerte: garantier for EN klients perspektiv (read-your-writes, monotonic reads)." },
-  { front: "Hva er happens-before-relasjonen (->)?", back: "a -> b hvis: 1) a og b er i samme prosess og a kommer for b, ELLER 2) a er sending og b er mottak av samme melding. Transitiv: a->b og b->c => a->c." },
-];
-
-const quizQuestions = [
-  {
-    question: "Prosess P1 har VC=(3,1,0), prosess P2 har VC=(2,4,0). Er disse hendelsene kausalt relaterte?",
-    options: [
-      "P1 -> P2 (P1 skjedde for P2)",
-      "P2 -> P1 (P2 skjedde for P1)",
-      "De er samtidige (concurrent)",
-      "Kan ikke avgjores"
-    ],
-    correctIndex: 2,
-    explanation: "P1[0]=3 > P2[0]=2, men P1[1]=1 < P2[1]=4. Ingen dominerer den andre, sA hendelsene er samtidige (concurrent).",
-  },
-  {
-    question: "I Lamport-klokker, prosess P1 sender melding med LC=5 til P2 som har LC=3. Hva blir P2s nye LC?",
-    options: ["4", "5", "6", "8"],
-    correctIndex: 2,
-    explanation: "Ved mottak: LC = max(egen LC, mottatt LC) + 1 = max(3, 5) + 1 = 6.",
-  },
-  {
-    question: "Hvilken konsistensmodell garanterer at alle prosesser ser skriveoperasjoner i same rekkefølge?",
-    options: ["Eventual consistency", "Read-your-writes", "Sekvensiell konsistens", "Monotonic reads"],
-    correctIndex: 2,
-    explanation: "Sekvensiell konsistens: det finnes en global ordning av alle operasjoner som alle prosesser er enige om, og den respekterer programordenen.",
-  },
-  {
-    question: "Hva er eventual consistency?",
-    options: [
-      "Alle leser alltid siste skrivning",
-      "Uten nye skrivninger konvergerer alle replikaer til samme verdi",
-      "Operasjoner utfores i programrekkefølge",
-      "Kun en replika kan skrives til"
-    ],
-    correctIndex: 1,
-    explanation: "Eventual consistency: hvis skrivninger stopper, vil alle replikaer til slutt ha same verdi. Ingen garanti om nar. Svakeste modell.",
-  },
-  {
-    question: "To hendelser har Lamport-tid LC(a)=4 og LC(b)=7. Kan vi si at a -> b?",
-    options: ["Ja, alltid", "Nei, aldri", "Bare hvis de er i samme prosess", "Nei — LC(a) < LC(b) betyr IKKE at a -> b"],
-    correctIndex: 3,
-    explanation: "Lamport: a -> b => LC(a) < LC(b), men IKKE omvendt. LC(a) < LC(b) kan ogsA bety concurrent. Kun vektorklokker kan avgjore kausalitet.",
-  },
-];
 
 export default function Oppg9Page() {
   return (
     <div>
-      <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
-        <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
-        <span>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
-        <span>/</span>
-        <Link href="/dat110/eksamenoving" className="hover:text-[var(--accent)]">Eksamensorving</Link>
-        <span>/</span>
-        <span className="text-[var(--foreground)]">Oppg 9: Konsistens og klokker</span>
+      <div className="rounded-xl border border-blue-200 dark:border-blue-800/40 bg-blue-50 dark:bg-blue-950/20 p-4 mb-8">
+        <h3 className="font-bold text-sm text-blue-700 dark:text-blue-400 mb-2">Strategi</h3>
+        <ol className="text-sm text-blue-900 dark:text-blue-200 space-y-1 list-decimal list-inside">
+          <li>Teoridelen (a og b): svar med presise definisjoner (2–3 setninger per del)</li>
+          <li>Vektorklokke-del: gå gjennom hendelsene kronologisk, oppdater etter reglene</li>
+          <li>Lokal hendelse: inkrementer kun din egen teller, alle andre forblir uendret</li>
+          <li>Send: inkrementer din teller, legg ved hele vektoren i meldingen</li>
+          <li>Mottak: ta max av hvert element, inkrementer deretter din teller</li>
+        </ol>
       </div>
 
-      <div className="flex items-center gap-3 mb-1">
-        <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-          10%
-        </span>
-      </div>
-      <h1 className="text-3xl font-bold mb-2">Oppg 9: Konsistens og klokker</h1>
-      <p className="text-[var(--muted)] max-w-2xl mb-8">
-        Lamport-klokker, vektorklokker, konsistensmodeller og happens-before.
-        Typisk: oppdater klokker i tidsdiagram, identifiser konsistensmodell.
-      </p>
-
-      <div className="rounded-xl border border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-800 p-4 mb-8">
-        <h3 className="font-bold text-sm text-blue-700 dark:text-blue-400 mb-2">
-          Viktige regler
-        </h3>
-        <ul className="text-sm text-blue-900 dark:text-blue-200 space-y-1 list-disc list-inside">
-          <li><strong>Lamport:</strong> a -&gt; b =&gt; LC(a) &lt; LC(b), men IKKE omvendt</li>
-          <li><strong>Vektor:</strong> a -&gt; b &lt;=&gt; VC(a) &lt; VC(b) — begge retninger holder</li>
-          <li><strong>Concurrent:</strong> verken VC(a) &lt; VC(b) eller VC(b) &lt; VC(a)</li>
-          <li><strong>Sekvensiell:</strong> global ordning + programordre. <strong>Kausal:</strong> respekterer happens-before</li>
-        </ul>
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">Vektorklokke-regler</h2>
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5">
+          <div className="space-y-3 text-sm">
+            <div className="flex gap-3 items-start">
+              <span className="flex-shrink-0 font-mono text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded px-2 py-1">Lokal</span>
+              <p className="text-[var(--muted)]"><span className="font-semibold text-[var(--foreground)]">VC[i]++</span> — inkrementer kun prosess i sin teller. Resten uendret.</p>
+            </div>
+            <div className="flex gap-3 items-start">
+              <span className="flex-shrink-0 font-mono text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded px-2 py-1">Send</span>
+              <p className="text-[var(--muted)]"><span className="font-semibold text-[var(--foreground)]">VC[i]++</span>, deretter send hele VC-vektoren som del av meldingen.</p>
+            </div>
+            <div className="flex gap-3 items-start">
+              <span className="flex-shrink-0 font-mono text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded px-2 py-1">Motta</span>
+              <p className="text-[var(--muted)]"><span className="font-semibold text-[var(--foreground)]">VC[j] = max(VC[j], m[j])</span> for alle j, deretter <strong>VC[i]++</strong>.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-3 mb-8">
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">Hva oppgaven alltid tester</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {[
+            {
+              label: "Feiltolerante grupper",
+              desc: "Flat vs. hierarkisk organisering. Flat: alle likeverdige, beslutning ved majoritet. Hierarkisk: primær koordinator, sekundærer tar over ved feil.",
+            },
+            {
+              label: "RPC-feilscenarier",
+              desc: "Lost request, lost reply, server crash before/after execution. Klienten kan ikke skille mellom disse — derav behovet for idempotente operasjoner.",
+            },
+            {
+              label: "Replikering",
+              desc: "Hvorfor replisere: ytelse, feiltoleranse, tilgjengelighet. Utfordring: konsistens mellom replikaer.",
+            },
+            {
+              label: "Vektorklokker",
+              desc: "Beregne VC for 3–4 prosesser gjennom en sekvens av hendelser. Vis mellomregning for hvert steg.",
+            },
+          ].map((item) => (
+            <div key={item.label} className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+              <p className="font-bold text-sm text-blue-600 dark:text-blue-400 mb-1">{item.label}</p>
+              <p className="text-xs text-[var(--muted)]">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-3">Eksempel: vektorklokke steg-for-steg</h2>
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-xs overflow-x-auto">
+          <p className="text-[var(--muted)] mb-3">3 prosesser P1, P2, P3. Start: alle VC = [0,0,0].</p>
+          <table className="w-full min-w-[400px]">
+            <thead>
+              <tr className="text-[var(--muted)] border-b border-[var(--card-border)]">
+                <th className="text-left pb-1 pr-4">Hendelse</th>
+                <th className="text-left pb-1 pr-4">P1</th>
+                <th className="text-left pb-1 pr-4">P2</th>
+                <th className="text-left pb-1">P3</th>
+              </tr>
+            </thead>
+            <tbody className="font-mono">
+              <tr className="border-b border-[var(--card-border)]/30">
+                <td className="py-1 pr-4 font-sans text-[var(--muted)]">P1 lokal hendelse</td>
+                <td className="py-1 pr-4 text-blue-600 dark:text-blue-400">[1,0,0]</td>
+                <td className="py-1 pr-4">[0,0,0]</td>
+                <td className="py-1">[0,0,0]</td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]/30">
+                <td className="py-1 pr-4 font-sans text-[var(--muted)]">P1 sender til P2</td>
+                <td className="py-1 pr-4 text-blue-600 dark:text-blue-400">[2,0,0]</td>
+                <td className="py-1 pr-4">—</td>
+                <td className="py-1">—</td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]/30">
+                <td className="py-1 pr-4 font-sans text-[var(--muted)]">P2 mottar fra P1</td>
+                <td className="py-1 pr-4">[2,0,0]</td>
+                <td className="py-1 pr-4 text-blue-600 dark:text-blue-400">[2,1,0]</td>
+                <td className="py-1">—</td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]/30">
+                <td className="py-1 pr-4 font-sans text-[var(--muted)]">P3 lokal hendelse</td>
+                <td className="py-1 pr-4">—</td>
+                <td className="py-1 pr-4">—</td>
+                <td className="py-1 text-blue-600 dark:text-blue-400">[0,0,1]</td>
+              </tr>
+              <tr>
+                <td className="py-1 pr-4 font-sans text-[var(--muted)]">P2 sender til P3</td>
+                <td className="py-1 pr-4">—</td>
+                <td className="py-1 pr-4 text-blue-600 dark:text-blue-400">[2,2,0]</td>
+                <td className="py-1">—</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="text-[var(--muted)] mt-3">Når P3 mottar fra P2: VC_P3 = max([0,0,1], [2,2,0]) + P3++ = [2,2,1] → [2,2,2].</p>
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-3 gap-3">
         <Link href="/dat110/ds-5" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-blue-400/60 transition-colors text-sm">
           <span className="font-bold text-xs text-blue-600 dark:text-blue-400">DS 5</span>
-          <span>Koordinering (klokker, mutex)</span>
+          <span>Koordinering</span>
         </Link>
         <Link href="/dat110/ds-7" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-blue-400/60 transition-colors text-sm">
           <span className="font-bold text-xs text-blue-600 dark:text-blue-400">DS 7</span>
-          <span>Konsistens og replikering</span>
+          <span>Konsistens</span>
         </Link>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Flashcards</h2>
-        <FlashcardDeck cards={flashcards} />
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Ov-quiz</h2>
-        <QuizSet questions={quizQuestions} />
+        <Link href="/dat110/ds-8" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-blue-400/60 transition-colors text-sm">
+          <span className="font-bold text-xs text-blue-600 dark:text-blue-400">DS 8</span>
+          <span>Feiltoleranse</span>
+        </Link>
       </div>
     </div>
   );

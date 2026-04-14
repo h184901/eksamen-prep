@@ -17,9 +17,9 @@ export default function Flashcard({ front, back }: FlashcardProps) {
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
-          {flipped ? "Svar" : "Sporsmol"}
+          {flipped ? "Svar" : "Spørsmål"}
         </span>
-        <span className="text-xs text-[var(--muted)]">Klikk for a snu</span>
+        <span className="text-xs text-[var(--muted)]">Klikk for å snu</span>
       </div>
       <p className={`text-sm leading-relaxed ${flipped ? "text-green-700 dark:text-green-400" : ""}`}>
         {flipped ? back : front}
@@ -42,7 +42,7 @@ export function FlashcardDeck({ cards }: { cards: FlashcardProps[] }) {
       >
         <div className="flex items-center justify-between mb-3">
           <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)]">
-            {flipped ? "Svar" : "Sporsmol"}
+            {flipped ? "Svar" : "Spørsmål"}
           </span>
           <span className="text-xs text-[var(--muted)]">
             {index + 1} / {cards.length}

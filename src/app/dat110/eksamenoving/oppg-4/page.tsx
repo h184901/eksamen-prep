@@ -1,106 +1,98 @@
 "use client";
 
 import Link from "next/link";
-import { FlashcardDeck } from "@/components/Flashcard";
-import { QuizSet } from "@/components/QuizQuestion";
 
-const flashcards = [
-  { front: "Hva er de viktigste forskjellene mellom TCP og UDP?", back: "TCP: tilkoblingsbasert, palitelig leveranse, flytkontroll, metningskontroll, rekkefolgekontroll. UDP: tilkoblingslost, best-effort, raskere, mindre overhead." },
-  { front: "Hva er TCP 3-veis handshake?", back: "1) Klient sender SYN (seq=x). 2) Server svarer SYN-ACK (seq=y, ack=x+1). 3) Klient sender ACK (ack=y+1). Forbindelse opprettet." },
-  { front: "Hva er de viktigste feltene i IP-headeren?", back: "Version, Header Length, TTL, Protocol (TCP=6, UDP=17), Source IP, Destination IP, Total Length, Fragment Offset." },
-  { front: "Hva er UDP pseudo-header og checksum?", back: "Pseudo-headeren inkluderer source/dest IP, protocol, UDP-lengde. Brukes i checksum-beregningen for a oppdage feil i data og feil-levering." },
-  { front: "Hva er MSS (Maximum Segment Size)?", back: "Storste mengde data i et TCP-segment (ekskl. header). Typisk 1460 bytes (1500 MTU - 20 IP - 20 TCP)." },
-  { front: "Hva er forskjellen pA port og socket?", back: "Port: 16-bit nummer som identifiserer en prosess. Socket: (IP, port)-par som unikt identifiserer en endepunkt." },
-];
-
-const quizQuestions = [
-  {
-    question: "Hvilket transportlagsprotokoll bruker DNS som standard?",
-    options: ["TCP", "UDP", "Bade TCP og UDP", "Ingen — DNS bruker IP direkte"],
-    correctIndex: 1,
-    explanation: "DNS bruker UDP port 53 som standard for rask oppslag. TCP brukes for sonesoverforinger og svar >512 bytes.",
-  },
-  {
-    question: "Hva er TCP sequence number brukt til?",
-    options: ["Identifisere avsenderprosessen", "Nummerere bytes i datastrommen", "Angi TTL for segmentet", "Beregne checksum"],
-    correctIndex: 1,
-    explanation: "TCP nummererer bytes — sequence number angir forste byte i segmentets data innen hele datastrommen.",
-  },
-  {
-    question: "Hvilket felt i IP-headeren avgjor om pakken inneholder TCP eller UDP?",
-    options: ["Version", "TTL", "Protocol", "Header Checksum"],
-    correctIndex: 2,
-    explanation: "Protocol-feltet: 6 = TCP, 17 = UDP, 1 = ICMP. Forteller neste lag hvilken protokoll payloaden bruker.",
-  },
-  {
-    question: "Hva skjer nar TCP sender et segment og ikke mottar ACK innen timeout?",
-    options: ["Segmentet forkastes", "Segmentet sendes pA nytt (retransmission)", "Forbindelsen lukkes umiddelbart", "UDP brukes som fallback"],
-    correctIndex: 1,
-    explanation: "TCP er palitelig — segmentet retransmitteres ved timeout. Timer dobbles (exponential backoff) ved gjentatte tap.",
-  },
-  {
-    question: "Hva er well-known portnumre?",
-    options: ["Port 0-1023 reservert for standard tjenester", "Port 1024-49151", "Port 49152-65535", "Alle porter under 80"],
-    correctIndex: 0,
-    explanation: "Port 0-1023 er well-known: HTTP=80, HTTPS=443, DNS=53, SSH=22, SMTP=25, FTP=21.",
-  },
-];
-
-export default function Oppg4Page() {
+export default function Oppg4Oversikt() {
   return (
     <div>
-      <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
-        <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
-        <span>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
-        <span>/</span>
-        <Link href="/dat110/eksamenoving" className="hover:text-[var(--accent)]">Eksamensorving</Link>
-        <span>/</span>
-        <span className="text-[var(--foreground)]">Oppg 4: Protokoller</span>
+      {/* Hva kan du forvente */}
+      <div className="rounded-xl border border-network-300 bg-network-50 dark:bg-network-950/20 dark:border-network-800 p-5 mb-8">
+        <h2 className="font-bold text-lg text-network-700 dark:text-network-400 mb-3">
+          Hva kan du forvente?
+        </h2>
+        <p className="text-sm text-network-900 dark:text-network-200 mb-3">
+          Oppgave 4 tester alltid protokollkunnskap: TCP vs UDP, IP-headerfelt,
+          pålitelig dataoverføring, og protokollmekanismer. Du må kunne forklare
+          hvordan protokollene fungerer, tegne tidsdiagrammer og identifisere
+          headerfelt.
+        </p>
+        <p className="text-sm font-bold text-network-800 dark:text-network-300">
+          Typisk: &ldquo;forklar felt X i IP-headeren&rdquo;, &ldquo;tegn TCP
+          3-veis handshake&rdquo;, &ldquo;hva skjer ved pakketap?&rdquo;
+        </p>
       </div>
 
-      <div className="flex items-center gap-3 mb-1">
-        <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-          10%
-        </span>
-      </div>
-      <h1 className="text-3xl font-bold mb-2">Oppg 4: Protokoller</h1>
-      <p className="text-[var(--muted)] max-w-2xl mb-8">
-        TCP 3-veis handshake, UDP-segmentering, IP-headerfelt og protokollmekanismer.
-        Typisk: tegn tidsdiagram, forklar felt, beregn checksum.
-      </p>
-
-      <div className="rounded-xl border border-network-300 bg-network-50 dark:bg-network-950/20 dark:border-network-800 p-4 mb-8">
-        <h3 className="font-bold text-sm text-network-700 dark:text-network-400 mb-2">
-          Strategi
-        </h3>
-        <ol className="text-sm text-network-900 dark:text-network-200 space-y-1 list-decimal list-inside">
-          <li>Kan du forskjellene mellom TCP og UDP?</li>
-          <li>Kan du tegne TCP 3-veis handshake med seq/ack-numre?</li>
-          <li>Vet du hva de viktigste IP-headerfeltene gjor?</li>
-          <li>Kan du beregne UDP checksum med 1s-komplement?</li>
+      {/* Strategi */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold mb-3">Løsningsstrategi</h2>
+        <ol className="space-y-3">
+          {[
+            { step: "Identifiser protokollen", detail: "Er oppgaven om TCP, UDP, IP eller en kombinasjon? Les nøye — de spør ofte om spesifikke felt eller mekanismer." },
+            { step: "Kjenn headerfeltene", detail: "IP: Version, IHL, TTL, Protocol (6=TCP, 17=UDP), Source/Dest IP. TCP: Source/Dest Port, Seq#, Ack#, Flags (SYN, ACK, FIN)." },
+            { step: "Tegn tidsdiagram ved behov", detail: "Vis meldinger mellom klient og server med piler. Merk seq/ack-numre. Vis retransmission ved tap." },
+            { step: "Forklar mekanismene", detail: "Pålitelig overføring: ACK, timeout, retransmission. Flytkontroll: sliding window. Metningskontroll: slow start, AIMD." },
+            { step: "Sjekk enheter og verdier", detail: "Port = 16-bit (0–65535). TTL = hop count. MSS = typisk 1460 bytes. Checksum = 1s-komplement." },
+          ].map((item, i) => (
+            <li key={i} className="flex gap-3">
+              <span className="shrink-0 w-7 h-7 rounded-full bg-network-100 dark:bg-network-900/30 text-network-700 dark:text-network-400 flex items-center justify-center text-sm font-bold">
+                {i + 1}
+              </span>
+              <div>
+                <p className="font-bold text-sm">{item.step}</p>
+                <p className="text-sm text-[var(--muted)]">{item.detail}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-3 mb-8">
-        <Link href="/dat110/cn-3" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors text-sm">
-          <span className="font-bold text-xs text-network-600 dark:text-network-400">CN 3</span>
-          <span>Transportlaget (TCP, UDP)</span>
-        </Link>
-        <Link href="/dat110/cn-4" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors text-sm">
-          <span className="font-bold text-xs text-network-600 dark:text-network-400">CN 4</span>
-          <span>Nettverkslaget (IP)</span>
-        </Link>
+      {/* Nøkkelkonsepter */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold mb-3">Nøkkelkonsepter</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <div className="rounded-lg border-2 border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-700 p-4">
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">TCP vs UDP</p>
+            <div className="text-sm space-y-1">
+              <p><strong>TCP:</strong> Tilkoblingsbasert, pålitelig, flytkontroll, rekkefølge, metningskontroll</p>
+              <p><strong>UDP:</strong> Tilkoblingsløst, best-effort, rask, minimal overhead</p>
+            </div>
+          </div>
+          <div className="rounded-lg border-2 border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-700 p-4">
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">TCP 3-veis handshake</p>
+            <p className="font-mono text-sm">1) SYN (seq=x) → 2) SYN-ACK (seq=y, ack=x+1) → 3) ACK (ack=y+1)</p>
+          </div>
+          <div className="rounded-lg border-2 border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-700 p-4">
+            <p className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">IP Protocol-felt</p>
+            <p className="font-mono text-sm">TCP = 6, UDP = 17, ICMP = 1</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Forteller mottakeren hvilken protokoll payloaden bruker</p>
+          </div>
+          <div className="rounded-lg border-2 border-blue-300 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-700 p-4">
+            <p className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">Well-known porter</p>
+            <p className="font-mono text-sm">HTTP=80, HTTPS=443, DNS=53, SSH=22</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Port 0–1023 er reservert for standardtjenester</p>
+          </div>
+        </div>
       </div>
 
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Flashcards</h2>
-        <FlashcardDeck cards={flashcards} />
-      </div>
-
-      <div className="mb-8">
-        <h2 className="text-xl font-bold mb-3">Ov-quiz</h2>
-        <QuizSet questions={quizQuestions} />
+      {/* Relevant teori */}
+      <div>
+        <h2 className="text-xl font-bold mb-3">Relevant teori</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Link href="/dat110/cn-3" className="flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors">
+            <span className="font-bold text-xs text-network-600 dark:text-network-400">CN 3</span>
+            <div>
+              <p className="text-sm font-medium">Transportlaget</p>
+              <p className="text-xs text-[var(--muted)]">TCP, UDP, pålitelig overføring, flytkontroll</p>
+            </div>
+          </Link>
+          <Link href="/dat110/cn-4" className="flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--card-border)] hover:border-network-400/60 transition-colors">
+            <span className="font-bold text-xs text-network-600 dark:text-network-400">CN 4</span>
+            <div>
+              <p className="text-sm font-medium">Nettverkslaget</p>
+              <p className="text-xs text-[var(--muted)]">IP-protokollen, headerfelt, fragmentering</p>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
