@@ -118,16 +118,9 @@ function ChapterCard({ chapter }: { chapter: DAT110Chapter }) {
       href={`/dat110/${chapter.slug}`}
       className={`group rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 bg-[var(--card)] ${styles.border}`}
     >
-      <div className="flex items-center justify-between mb-1">
-        <p className={`text-xs font-bold ${styles.accent}`}>
-          {chapter.bookRef}
-        </p>
-        {chapter.examWeight && (
-          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-            {chapter.examWeight}
-          </span>
-        )}
-      </div>
+      <p className={`text-xs font-bold mb-1 ${styles.accent}`}>
+        {chapter.bookRef}
+      </p>
       <h3 className="font-semibold mb-1 group-hover:text-[var(--accent)] transition-colors">
         {chapter.title}
       </h3>
@@ -251,6 +244,108 @@ function CollapsibleSection({
   );
 }
 
+const examOppgaver = [
+  { id: 1, label: "Oppg 1", title: "Flervalg", weight: "10%", description: "10 flervalgssporsmol fra hele pensum", chapters: "Alle kapitler", color: "emerald" },
+  { id: 2, label: "Oppg 2", title: "Oblig-prosjekt", weight: "10%", description: "Arkitektur og konsepter fra obliger", chapters: "Prosjekt 1\u20133", color: "purple" },
+  { id: 3, label: "Oppg 3", title: "Forsinkelser", weight: "10%", description: "Beregn forsinkelser i nettverk", chapters: "CN 1", color: "network" },
+  { id: 4, label: "Oppg 4", title: "Protokoller", weight: "10%", description: "TCP, UDP, IP-header og segmentering", chapters: "CN 3\u20134", color: "network" },
+  { id: 5, label: "Oppg 5", title: "Ruting", weight: "10%", description: "CIDR, subnett, avstandsvektor", chapters: "CN 4\u20135", color: "network" },
+  { id: 6, label: "Oppg 6", title: "ARP og Switch", weight: "10%", description: "ARP-tabell, switch-laring", chapters: "CN 6", color: "network" },
+  { id: 7, label: "Oppg 7", title: "RPC", weight: "~7.5%", description: "Remote Procedure Call og feil", chapters: "DS 4", color: "blue" },
+  { id: 8, label: "Oppg 8", title: "Overlay og multicast", weight: "~7.5%", description: "Overlay-nettverk, RDP", chapters: "DS 4", color: "blue" },
+  { id: 9, label: "Oppg 9", title: "Konsistens og klokker", weight: "10%", description: "Konsistensmodeller, vektorklokker", chapters: "DS 5, 7", color: "blue" },
+  { id: 10, label: "Oppg 10", title: "DHT/Chord", weight: "15%", description: "Chord-ring, fingertabeller, oppslag", chapters: "DS 6", color: "blue" },
+];
+
+const oppgaveColorStyles: Record<string, { border: string; badge: string }> = {
+  emerald: {
+    border: "border-emerald-400/30 hover:border-emerald-400/60",
+    badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+  },
+  purple: {
+    border: "border-purple-400/30 hover:border-purple-400/60",
+    badge: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  },
+  network: {
+    border: "border-network-400/30 hover:border-network-400/60",
+    badge: "bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400",
+  },
+  blue: {
+    border: "border-blue-400/30 hover:border-blue-400/60",
+    badge: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  },
+};
+
+function ExamPracticeSection() {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden mb-4">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center gap-4 p-5 text-left transition-colors hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20"
+      >
+        <svg
+          className={`w-5 h-5 shrink-0 transition-transform duration-200 text-emerald-500 ${
+            open ? "rotate-90" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-1">
+            <h2 className="text-lg font-bold">Eksamensorving</h2>
+            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+              10 oppgavetyper
+            </span>
+          </div>
+          <p className="text-sm text-[var(--muted)] line-clamp-1">
+            Ov pA hver oppgavetype med quiz, flashcards og lenker til relevant teori
+          </p>
+        </div>
+      </button>
+
+      <div
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-5 pb-5 pt-1">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+            {examOppgaver.map((oppg) => {
+              const styles = oppgaveColorStyles[oppg.color];
+              return (
+                <Link
+                  key={oppg.id}
+                  href={`/dat110/eksamenoving/oppg-${oppg.id}`}
+                  className={`group rounded-xl border-2 p-4 transition-all hover:shadow-md hover:-translate-y-0.5 bg-[var(--card)] ${styles.border}`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${styles.badge}`}>
+                      {oppg.weight}
+                    </span>
+                    <span className="text-[10px] text-[var(--muted)]">{oppg.chapters}</span>
+                  </div>
+                  <p className="text-xs font-bold text-[var(--muted)] mb-0.5">{oppg.label}</p>
+                  <h3 className="font-semibold text-sm mb-1 group-hover:text-[var(--accent)] transition-colors">
+                    {oppg.title}
+                  </h3>
+                  <p className="text-xs text-[var(--muted)] line-clamp-2">{oppg.description}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function DAT110Page() {
   const grouped = categoryOrder.map((cat) => ({
     category: cat,
@@ -315,7 +410,18 @@ export default function DAT110Page() {
       </div>
 
       {/* Verktoy */}
-      <div className="grid sm:grid-cols-3 gap-4 mb-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <Link
+          href="/dat110/eksamenoving"
+          className="group relative overflow-hidden rounded-xl border-2 border-emerald-400/40 hover:border-emerald-400/80 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <h3 className="font-bold text-lg mb-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            Eksamensorving
+          </h3>
+          <p className="text-sm text-[var(--muted)]">
+            Ov pA alle 10 oppgavetypene med quiz, flashcards og forklaringer
+          </p>
+        </Link>
         <Link
           href="/dat110/obliger"
           className="group relative overflow-hidden rounded-xl border-2 border-purple-400/40 hover:border-purple-400/80 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
@@ -368,6 +474,9 @@ export default function DAT110Page() {
           <li>Overlay RDP = overlay-sti / beste fysiske sti \u2014 nar 1.0 er effektivt</li>
         </ul>
       </div>
+
+      {/* Eksamensorving */}
+      <ExamPracticeSection />
 
       {/* Collapsible chapter groups */}
       <div className="space-y-4">

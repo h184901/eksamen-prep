@@ -37,16 +37,9 @@ export default function DAT110ChapterLayout({
 
       {/* Chapter header */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 mb-1">
-          <p className="text-sm font-medium text-network-600 dark:text-network-400">
-            {chapter.bookRef}
-          </p>
-          {chapter.examWeight && (
-            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-network-100 text-network-700 dark:bg-network-900/30 dark:text-network-400">
-              {chapter.examWeight}
-            </span>
-          )}
-        </div>
+        <p className="text-sm font-medium text-network-600 dark:text-network-400 mb-1">
+          {chapter.bookRef}
+        </p>
         <h1 className="text-3xl font-bold mb-2">{chapter.title}</h1>
         <p className="text-[var(--muted)]">{chapter.description}</p>
       </div>
