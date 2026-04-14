@@ -47,7 +47,11 @@
       "Bash(ls -1 src/app/dat110/eksamenoving/oppg-*/layout.tsx)",
       "Bash(ls -1 src/app/dat110/eksamenoving/oppg-*/page.tsx)",
       "Bash(ls -1 src/app/dat110/eksamenoving/oppg-*/tidligere/page.tsx)",
-      "Bash(ls -1 src/app/dat110/eksamenoving/oppg-*/oving/page.tsx)"
+      "Bash(ls -1 src/app/dat110/eksamenoving/oppg-*/oving/page.tsx)",
+      "Bash(find src/app/dat110 -name \"page.tsx\" -path \"*/teori/*/page.tsx\" -exec wc -l {} +)",
+      "Bash(find src/app/dat110 -path \"*/formler/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
+      "Bash(find src/app/dat110 -path \"*/oppgaver/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)",
+      "Bash(find src/app/dat110 -path \"*/visualiseringer/page.tsx\" -exec sh -c 'echo \"$\\(wc -l < \"$1\"\\) $1\"' _ {} \\\\;)"
     ]
   }
 }
