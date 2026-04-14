@@ -14,13 +14,13 @@ export default function CollapsibleSection({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="mb-8">
+    <div className="mb-6 rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 text-xl font-semibold mb-4 text-left hover:text-[var(--accent)] transition-colors"
+        className="w-full flex items-center gap-3 px-5 py-4 text-left font-semibold text-lg hover:bg-[var(--background)] transition-colors"
       >
         <svg
-          className={`w-5 h-5 shrink-0 transition-transform ${open ? "rotate-90" : ""}`}
+          className={`w-5 h-5 shrink-0 transition-transform text-[var(--accent)] ${open ? "rotate-90" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -30,7 +30,11 @@ export default function CollapsibleSection({
         </svg>
         {title}
       </button>
-      {open && children}
+      {open && (
+        <div className="px-5 pb-5 border-t border-[var(--card-border)] pt-4">
+          {children}
+        </div>
+      )}
     </div>
   );
 }
