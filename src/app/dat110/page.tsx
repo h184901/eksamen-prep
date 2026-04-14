@@ -366,7 +366,7 @@ export default function DAT110Page() {
         </div>
         <h1 className="text-3xl font-bold mb-2">DAT110 Nettverksteknologi</h1>
         <p className="text-[var(--muted)] max-w-2xl">
-          To boker: Computer Networking (Kurose & Ross) og Distributed Systems
+          To bøker: Computer Networking (Kurose & Ross) og Distributed Systems
           (Van Steen & Tanenbaum). Nettverksprotokoller, distribuerte systemer,
           Chord DHT og feiltoleranse.
         </p>
@@ -385,7 +385,7 @@ export default function DAT110Page() {
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
           {[
             { label: "Oppg 1", topic: "Flervalg (10 spm)", pct: "10%", detail: "Dekker alt pensum" },
-            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert ar" },
+            { label: "Oppg 2", topic: "Oblig-prosjekt", pct: "10%", detail: "Varierer hvert år" },
             { label: "Oppg 3\u20134", topic: "Forsinkelser + protokoll", pct: "20%", detail: "CN: delay, IP/TCP/UDP" },
             { label: "Oppg 5\u20136", topic: "Ruting + ARP/switch", pct: "20%", detail: "CN: CIDR, DV, ARP" },
             { label: "Oppg 7\u20138", topic: "RPC + overlay/multicast", pct: "15%", detail: "DS: RPC, RDP" },
@@ -409,8 +409,8 @@ export default function DAT110Page() {
         </div>
       </div>
 
-      {/* Verktoy */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      {/* Verktøy */}
+      <div className="grid sm:grid-cols-2 gap-4 mb-10">
         <Link
           href="/dat110/eksamenoving"
           className="group relative overflow-hidden rounded-xl border-2 border-emerald-400/40 hover:border-emerald-400/80 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
@@ -419,7 +419,7 @@ export default function DAT110Page() {
             Eksamensøving
           </h3>
           <p className="text-sm text-[var(--muted)]">
-            Øv på alle 10 oppgavetypene med quiz, flashcards og forklaringer
+            Alt du trenger: oppgavetyper, oppsummering, eksamensoppgaver med løsninger, flashcards og quiz
           </p>
         </Link>
         <Link
@@ -430,30 +430,7 @@ export default function DAT110Page() {
             Obliger
           </h3>
           <p className="text-sm text-[var(--muted)]">
-            Obligatoriske prosjekter med forklaring og eksamen-relevante
-            konsepter
-          </p>
-        </Link>
-        <Link
-          href="/dat110/eksamen"
-          className="group relative overflow-hidden rounded-xl border-2 border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
-        >
-          <h3 className="font-bold text-lg mb-1 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-            Eksamensoppgaver
-          </h3>
-          <p className="text-sm text-[var(--muted)]">
-            Alle 5 eksamener (2022\u20132025) med fullstendige losningsforslag
-          </p>
-        </Link>
-        <Link
-          href="/dat110/oppsummering"
-          className="group relative overflow-hidden rounded-xl border-2 border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
-        >
-          <h3 className="font-bold text-lg mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-            Oppsummering
-          </h3>
-          <p className="text-sm text-[var(--muted)]">
-            Kompakt referanseark med alt du ma kunne til eksamen
+            Obligatoriske prosjekter med forklaring og eksamen-relevante konsepter
           </p>
         </Link>
       </div>
@@ -461,17 +438,17 @@ export default function DAT110Page() {
       {/* Hurtigtips */}
       <div className="rounded-xl border border-amber-400/40 bg-amber-50 dark:bg-amber-950/20 p-4 mb-10">
         <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">
-          Gjentakende monstre fra alle eksamener (2022\u20132025)
+          Gjentakende mønstre fra alle eksamener (2022–2025)
         </h3>
         <ul className="text-sm text-[var(--muted)] space-y-1 list-disc list-inside">
           <li>Forsinkelsesberegning: L/R (sending), d/s (forplantning), sum av alle fire typer</li>
           <li>Avstandsvektoralgoritme: initialiser, oppdater med Bellman-Ford, vis steg for steg</li>
-          <li>CIDR og binar konvertering: longest-prefix matching i forwardingstabell</li>
-          <li>ARP-tabell og switch-tabell: laringsalgoritmen, hva skjer steg for steg</li>
-          <li>DHT/Chord fingertabell: succ(n + 2^(i-1)), nokkelansvar, O(log n) soking</li>
-          <li>Konsistensmodeller: klient-sentrert vs data-sentrert \u2014 vit forskjellen</li>
-          <li>RPC-feil: de fem klassene \u2014 klient finner ikke server, req/reply lost, krasj</li>
-          <li>Overlay RDP = overlay-sti / beste fysiske sti \u2014 nar 1.0 er effektivt</li>
+          <li>CIDR og binær konvertering: longest-prefix matching i forwardingtabell</li>
+          <li>ARP-tabell og switch-tabell: læringsalgoritmen, hva skjer steg for steg</li>
+          <li>DHT/Chord fingertabell: succ(n + 2^(i-1)), nøkkelansvar, O(log n) søking</li>
+          <li>Konsistensmodeller: klient-sentrert vs data-sentrert — vit forskjellen</li>
+          <li>RPC-feil: de fem klassene — klient finner ikke server, req/reply lost, krasj</li>
+          <li>Overlay RDP = overlay-sti / beste fysiske sti — når 1.0 er effektivt</li>
         </ul>
       </div>
 

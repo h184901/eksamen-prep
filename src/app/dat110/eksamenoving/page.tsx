@@ -56,18 +56,73 @@ export default function EksamenovingPage() {
         fra 2022–2025 med trinnvise løsninger.
       </p>
 
+      {/* Oppsummering og Eksamensoppgaver widgets */}
+      <div className="grid sm:grid-cols-2 gap-4 mb-8">
+        <Link
+          href="/dat110/eksamenoving/oppsummering"
+          className="group relative overflow-hidden rounded-xl border-2 border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <h3 className="font-bold text-lg group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              Oppsummering
+            </h3>
+          </div>
+          <p className="text-sm text-[var(--muted)]">
+            Komplett referanseark med alle formler, nøkkelkonsepter, tabeller og
+            strategier — alt du må kunne til eksamen i én oversikt.
+          </p>
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {["Formler", "Tabeller", "Konsepter", "Strategier"].map((tag) => (
+              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </Link>
+
+        <Link
+          href="/dat110/eksamenoving/eksamensoppgaver"
+          className="group relative overflow-hidden rounded-xl border-2 border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/20 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+            <h3 className="font-bold text-lg group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+              Eksamensoppgaver
+            </h3>
+          </div>
+          <p className="text-sm text-[var(--muted)]">
+            Grundig gjennomgang av alle eksamener (2022–2025) med strategi,
+            steg-for-steg løsninger, illustrasjoner og hint.
+          </p>
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {["2022", "Jan 2024", "Mai 2024", "Jan 2025"].map((year) => (
+              <span key={year} className="text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
+                {year}
+              </span>
+            ))}
+          </div>
+        </Link>
+      </div>
+
       <div className="rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-800 p-4 mb-8">
         <h3 className="font-bold text-sm text-emerald-700 dark:text-emerald-400 mb-2">
           Slik bruker du denne seksjonen
         </h3>
         <ul className="text-sm text-emerald-900 dark:text-emerald-200 space-y-1 list-disc list-inside">
           <li>Hver oppgavetype har tre faner: <strong>Oversikt</strong> (strategi og nøkkelkonsepter), <strong>Tidligere oppgaver</strong> (ekte eksamensoppgaver med løsninger), og <strong>Øving</strong> (flashcards og quiz)</li>
-          <li>Start med oversikten for å forstå formatet, gå deretter til tidligere oppgaver for å se ekte eksempler</li>
-          <li>Test deg selv med flashcards og quiz under øving-fanen</li>
+          <li>Start med <strong>Oppsummering</strong> for en komplett oversikt over alt du må kunne</li>
+          <li>Bruk <strong>Eksamensoppgaver</strong> for å gå gjennom hele eksamener med grundig gjennomgang</li>
+          <li>Test deg selv med flashcards og quiz under øving-fanen for hver oppgavetype</li>
           <li>Følg lenkene til relevant teori i CN/DS-kapitlene for å lese mer</li>
         </ul>
       </div>
 
+      <h2 className="text-xl font-bold mb-4">10 oppgavetyper</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {oppgaver.map((oppg) => {
           const styles = colorStyles[oppg.color];

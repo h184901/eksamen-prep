@@ -49,15 +49,26 @@ export default function EksamenPage() {
           Dette gjør det lettere å øve systematisk — du ser alle varianter av
           samme oppgavetype samlet, med mønstergjenkjenning og felles strategier.
         </p>
-        <Link
-          href="/dat110/eksamenoving"
-          className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition-colors"
-        >
-          Gå til Eksamensøving
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </Link>
+        <div className="flex flex-wrap gap-3 mt-3">
+          <Link
+            href="/dat110/eksamenoving/eksamensoppgaver"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-bold hover:bg-red-700 transition-colors"
+          >
+            Grundig eksamensgjennomgang
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+          <Link
+            href="/dat110/eksamenoving"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition-colors"
+          >
+            Gå til Eksamensøving
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
       <h2 className="text-xl font-bold mb-4">Tidligere oppgaver etter type</h2>

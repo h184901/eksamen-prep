@@ -65,9 +65,24 @@ export default function OppsummeringPage() {
       </div>
 
       <h1 className="text-3xl font-bold mb-2">Oppsummering / Referanseark</h1>
-      <p className="text-[var(--muted)] max-w-2xl mb-8">
-        Alt du ma kunne til eksamen i kompakt form. Apne seksjonene for detaljer.
+      <p className="text-[var(--muted)] max-w-2xl mb-4">
+        Alt du må kunne til eksamen i kompakt form. Åpne seksjonene for detaljer.
       </p>
+
+      <div className="rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-800 p-4 mb-8">
+        <p className="text-sm text-emerald-900 dark:text-emerald-200">
+          En mer detaljert oppsummering er nå tilgjengelig under Eksamensøving.
+        </p>
+        <Link
+          href="/dat110/eksamenoving/oppsummering"
+          className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition-colors"
+        >
+          Gå til detaljert oppsummering
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </Link>
+      </div>
 
       <div className="space-y-4">
         {/* 1. Forsinkelser og metrikker */}
