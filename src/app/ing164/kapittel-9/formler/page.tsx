@@ -1,26 +1,36 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  rotKin,
+  linVinkel,
+  treghetsmoment,
+  tableauI,
+  Krot,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
+      <FormulaClickCallout />
+
       <h3 className="font-semibold text-lg mt-6 mb-3">Kinematikk ved konstant vinkelakselerasjon</h3>
       <div className="grid md:grid-cols-2 gap-4">
-        <FormulaBox variant="gold" title="Ligning 1 (mangler θ)" latex="\omega = \omega_0 + \alpha t" />
-        <FormulaBox variant="gold" title="Ligning 2 (mangler ω)" latex="\theta = \theta_0 + \omega_0 t + \tfrac{1}{2}\alpha t^2" />
-        <FormulaBox variant="gold" title="Ligning 3 (mangler t)" latex="\omega^2 = \omega_0^2 + 2\alpha(\theta - \theta_0)" />
-        <FormulaBox variant="gold" title="Ligning 4 (mangler α)" latex="\theta - \theta_0 = \tfrac{1}{2}(\omega_0 + \omega)t" />
+        <FormulaBox variant="gold" title="Ligning 1 (mangler θ)" latex="\omega = \omega_0 + \alpha t" {...rotKin} />
+        <FormulaBox variant="gold" title="Ligning 2 (mangler ω)" latex="\theta = \theta_0 + \omega_0 t + \tfrac{1}{2}\alpha t^2" {...rotKin} />
+        <FormulaBox variant="gold" title="Ligning 3 (mangler t)" latex="\omega^2 = \omega_0^2 + 2\alpha(\theta - \theta_0)" {...rotKin} />
+        <FormulaBox variant="gold" title="Ligning 4 (mangler α)" latex="\theta - \theta_0 = \tfrac{1}{2}(\omega_0 + \omega)t" {...rotKin} />
       </div>
 
       <h3 className="font-semibold text-lg mt-8 mb-3">Lineær ↔ vinkelsammenheng</h3>
       <div className="grid md:grid-cols-3 gap-4">
-        <FormulaBox variant="gold" title="Linjefart" latex="v = r\omega" />
-        <FormulaBox variant="gold" title="Tangentiell akselerasjon" latex="a_\text{tan} = r\alpha" />
-        <FormulaBox variant="gold" title="Sentripetalakselerasjon" latex="a_\text{rad} = \frac{v^2}{r} = r\omega^2" />
+        <FormulaBox variant="gold" title="Linjefart" latex="v = r\omega" {...linVinkel} />
+        <FormulaBox variant="gold" title="Tangentiell akselerasjon" latex="a_\text{tan} = r\alpha" {...linVinkel} />
+        <FormulaBox variant="gold" title="Sentripetalakselerasjon" latex="a_\text{rad} = \frac{v^2}{r} = r\omega^2" {...linVinkel} />
       </div>
 
       <h3 className="font-semibold text-lg mt-8 mb-3">Treghetsmoment og rotasjonsenergi</h3>
@@ -29,22 +39,24 @@ export default function FormlerPage() {
           variant="gold"
           title="Definisjon — treghetsmoment"
           latex="I = \sum_i m_i r_i^2"
+          {...treghetsmoment}
         />
         <FormulaBox
           variant="gold"
           title="Kinetisk rotasjonsenergi"
           latex="K_\text{rot} = \tfrac{1}{2}I\omega^2"
+          {...Krot}
         />
       </div>
 
       <h3 className="font-semibold text-lg mt-8 mb-3">Treghetsmoment for vanlige former</h3>
       <div className="grid md:grid-cols-2 gap-4">
-        <FormulaBox variant="blue" title="Massiv disk / sylinder" latex="I = \tfrac{1}{2}MR^2" />
-        <FormulaBox variant="blue" title="Tynnvegget ring / hul sylinder" latex="I = MR^2" />
-        <FormulaBox variant="blue" title="Tynn stav (akse gjennom senter)" latex="I = \tfrac{1}{12}ML^2" />
-        <FormulaBox variant="blue" title="Tynn stav (akse gjennom ende)" latex="I = \tfrac{1}{3}ML^2" />
-        <FormulaBox variant="blue" title="Massiv kule" latex="I = \tfrac{2}{5}MR^2" />
-        <FormulaBox variant="blue" title="Tynnvegget hul kule" latex="I = \tfrac{2}{3}MR^2" />
+        <FormulaBox variant="blue" title="Massiv disk / sylinder" latex="I = \tfrac{1}{2}MR^2" {...tableauI} />
+        <FormulaBox variant="blue" title="Tynnvegget ring / hul sylinder" latex="I = MR^2" {...tableauI} />
+        <FormulaBox variant="blue" title="Tynn stav (akse gjennom senter)" latex="I = \tfrac{1}{12}ML^2" {...tableauI} />
+        <FormulaBox variant="blue" title="Tynn stav (akse gjennom ende)" latex="I = \tfrac{1}{3}ML^2" {...tableauI} />
+        <FormulaBox variant="blue" title="Massiv kule" latex="I = \tfrac{2}{5}MR^2" {...tableauI} />
+        <FormulaBox variant="blue" title="Tynnvegget hul kule" latex="I = \tfrac{2}{3}MR^2" {...tableauI} />
       </div>
 
       <h3 className="font-semibold text-lg mt-8 mb-3">Parallellakse-teoremet</h3>
@@ -52,6 +64,7 @@ export default function FormlerPage() {
         variant="gold"
         title="Parallellakse-teoremet"
         latex="I_P = I_{CM} + Md^2"
+        {...treghetsmoment}
       />
 
       {/* Når bruker du hva? */}

@@ -1,53 +1,73 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  FqvB,
+  rSirkelB,
+  syklotronfrekvens,
+  fluks,
+  fartsvelger,
+  FlB,
+  FlBVektor,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler — Kapittel 27</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="\vec{F}_m = q\vec{v} \times \vec{B}"
           title="Magnetisk kraft (vektor)"
           variant="gold"
+          {...FqvB}
         />
         <FormulaBox
           latex="F_m = |q|vB\sin\theta"
           title="Magnetisk kraft (størrelse)"
           variant="gold"
+          {...FqvB}
         />
         <FormulaBox
           latex="r = \frac{mv}{|q|B}"
           title="Sirkelradius i B-felt"
           variant="gold"
+          {...rSirkelB}
         />
         <FormulaBox
           latex="\omega = \frac{|q|B}{m}"
           title="Syklotronfrekvens"
           variant="gold"
+          {...syklotronfrekvens}
         />
         <FormulaBox
           latex="\Phi_B = BA\cos\varphi"
           title="Magnetisk fluks"
           variant="gold"
+          {...fluks}
         />
         <FormulaBox
           latex="v = \frac{E}{B}"
           title="Fartsvelger"
           variant="blue"
+          {...fartsvelger}
         />
         <FormulaBox
           latex="F_m = IlB\sin\theta"
           title="Kraft på strømførende leder"
           variant="gold"
+          {...FlB}
         />
         <FormulaBox
           latex="\vec{F}_m = I\vec{l} \times \vec{B}"
           title="Kraft på leder (vektor)"
           variant="gold"
+          {...FlBVektor}
         />
       </div>
 

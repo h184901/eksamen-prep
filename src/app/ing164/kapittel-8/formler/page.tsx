@@ -1,12 +1,26 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  bevegelsesmengde,
+  impulsMom,
+  avgFraImpuls,
+  bevaringP,
+  inelastisk,
+  ballistiskPendel,
+  elastisk,
+  massesenter,
+  N2LSystem,
+} from "@/data/ing164/formula-metadata";
 
 export default function Kapittel8Formler() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formelsamling</h2>
+
+      <FormulaClickCallout />
 
       <div className="space-y-3">
         <FormulaBox
@@ -14,59 +28,69 @@ export default function Kapittel8Formler() {
           title="Bevegelsesmengde"
           variant="gold"
           description="Enhet: kg·m/s. Vektor — retningen er viktig!"
+          {...bevegelsesmengde}
         />
         <FormulaBox
           latex="\vec{J} = \sum\vec{F}\,\Delta t = \Delta\vec{p}"
           title="Impuls-momentum-teoremet"
           variant="gold"
           description="Kraftimpuls = endring i bevegelsesmengde."
+          {...impulsMom}
         />
         <FormulaBox
           latex="\bar{F} = \frac{\Delta p}{\Delta t} = \frac{m(v_2 - v_1)}{\Delta t}"
           title="Gjennomsnittlig kraft fra impuls"
           variant="blue"
           description="Brukes ofte: finn kraften fra kontakttid og hastighetsendring."
+          {...avgFraImpuls}
         />
         <FormulaBox
           latex="\vec{p}_{\text{total,før}} = \vec{p}_{\text{total,etter}}"
           title="Bevaring av bevegelsesmengde"
           variant="gold"
           description="Gjelder når ΣF_ytre = 0 (eller ΣF_ytre << støtkreftene)."
+          {...bevaringP}
         />
         <FormulaBox
           latex="(m_A + m_B)\,v_2 = m_A v_{A1} + m_B v_{B1}"
           title="Fullstendig inelastisk kollisjon"
           variant="gold"
           description="Felles hastighet v₂ etter støt."
+          {...inelastisk}
         />
         <FormulaBox
           latex="v_0 = \frac{M + m}{m}\sqrt{2gh}"
           title="Ballistisk pendel"
           variant="gold"
           description="Kulefart fra høyden kloss+kule svinger opp til."
+          {...ballistiskPendel}
         />
         <FormulaBox
           latex="v_{A2} = \frac{m_A - m_B}{m_A + m_B}\,v_{A1} + \frac{2m_B}{m_A + m_B}\,v_{B1}"
           title="Elastisk kollisjon — hastighet A etter"
           variant="blue"
           description="Gjelder 1D elastisk kollisjon. Kombiner med formelen for v_B2."
+          {...elastisk}
         />
         <FormulaBox
           latex="v_{B2} = \frac{2m_A}{m_A + m_B}\,v_{A1} + \frac{m_B - m_A}{m_A + m_B}\,v_{B1}"
           title="Elastisk kollisjon — hastighet B etter"
           variant="blue"
+          {...elastisk}
         />
         <FormulaBox
           latex="\vec{r}_{cm} = \frac{\sum m_i \vec{r}_i}{\sum m_i}"
           title="Massesenter"
           variant="blue"
           description="Det massevektede gjennomsnittspunktet."
+          {...massesenter}
         />
         <FormulaBox
           latex="\sum \vec{F}_{\text{ytre}} = M\vec{a}_{cm}"
           title="Newtons 2. lov for system"
           variant="gold"
           description="Systemet som helhet oppfører seg som en partikkel i massesenteret."
+          {...N2LSystem}
         />
       </div>
 

@@ -1,38 +1,52 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  Bladning,
+  biotSavart,
+  Bleder,
+  FparallelL,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler — Kapittel 28</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="B = \frac{\mu_0}{4\pi}\frac{|q|v\sin\varphi}{r^2}"
           title="B fra ladning i bevegelse"
           variant="gold"
+          {...Bladning}
         />
         <FormulaBox
           latex="\vec{B} = \frac{\mu_0}{4\pi}\frac{q\vec{v}\times\hat{r}}{r^2}"
           title="B fra ladning (vektor)"
           variant="gold"
+          {...Bladning}
         />
         <FormulaBox
           latex="d\vec{B} = \frac{\mu_0}{4\pi}\frac{I\,d\vec{l}\times\hat{r}}{r^2}"
           title="Biot-Savarts lov"
           variant="gold"
+          {...biotSavart}
         />
         <FormulaBox
           latex="B = \frac{\mu_0 I}{2\pi r}"
           title="Lang rett leder"
           variant="gold"
+          {...Bleder}
         />
         <FormulaBox
           latex="\frac{F_m}{L} = \frac{\mu_0 I I'}{2\pi r}"
           title="Kraft mellom parallelle ledere"
           variant="gold"
+          {...FparallelL}
         />
         <FormulaBox
           latex="\mu_0 = 4\pi \times 10^{-7}\;\text{T·m/A}"

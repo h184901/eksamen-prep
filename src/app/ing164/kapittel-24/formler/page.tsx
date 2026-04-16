@@ -1,53 +1,71 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  C,
+  koblingC,
+  dielektrikum,
+  energitetthet,
+  indusertQ,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="C = \frac{Q}{V_{ab}}"
           title="Definisjon av kapasitans"
           variant="gold"
+          {...C}
         />
         <FormulaBox
           latex="C = \varepsilon_0 \frac{A}{d}"
           title="Platekondensator (vakuum)"
           variant="gold"
+          {...C}
         />
         <FormulaBox
           latex="\frac{1}{C_\text{tot}} = \frac{1}{C_1} + \frac{1}{C_2} + \cdots"
           title="Kondensatorer i serie"
           variant="gold"
+          {...koblingC}
         />
         <FormulaBox
           latex="C_\text{tot} = C_1 + C_2 + \cdots"
           title="Kondensatorer i parallell"
           variant="gold"
+          {...koblingC}
         />
         <FormulaBox
           latex="E_p = \frac{Q^2}{2C} = \frac{1}{2}CV^2 = \frac{1}{2}QV"
           title="Lagret energi"
           variant="gold"
+          {...C}
         />
         <FormulaBox
           latex="u = \frac{1}{2}\varepsilon_0 E^2"
           title="Energitetthet i E-felt"
           variant="gold"
+          {...energitetthet}
         />
         <FormulaBox
           latex="K = \frac{C}{C_0}, \quad \varepsilon = K\varepsilon_0"
           title="Dielektrikumkonstant og permittivitet"
           variant="blue"
+          {...dielektrikum}
         />
         <FormulaBox
           latex="Q_i = Q\!\left(1 - \frac{1}{K}\right)"
           title="Indusert ladning"
           variant="blue"
+          {...indusertQ}
         />
       </div>
 

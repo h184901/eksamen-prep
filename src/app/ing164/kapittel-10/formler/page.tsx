@@ -1,43 +1,86 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  tau,
+  rulling,
+  rotArbeidEffekt,
+  Lpartikkel,
+  L,
+  Lbevaring,
+  diskSkraplan,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
-      <FormulaBox
-        variant="gold"
-        title="Kraftmoment og Newtons 2. lov"
-        latex="\tau = rF\sin\phi \qquad \sum\tau = I\alpha"
-      />
+      <FormulaClickCallout />
 
-      <FormulaBox variant="gold" title="Rulling uten glidning" latex="v_{CM} = R\omega \qquad a_{CM} = R\alpha" />
-      <FormulaBox variant="gold" latex="K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2" />
+      <div className="space-y-3">
+        <FormulaBox
+          variant="gold"
+          title="Kraftmoment og Newtons 2. lov"
+          latex="\tau = rF\sin\phi \qquad \sum\tau = I\alpha"
+          {...tau}
+        />
 
-      <FormulaBox
-        variant="gold"
-        title="Arbeid og effekt i rotasjon"
-        latex="W = \tau \Delta\theta \qquad P = \tau\omega \qquad W_\text{tot} = \tfrac{1}{2}I\omega^2 - \tfrac{1}{2}I\omega_0^2"
-      />
+        <FormulaBox
+          variant="gold"
+          title="Rulling uten glidning"
+          latex="v_{CM} = R\omega \qquad a_{CM} = R\alpha"
+          {...rulling}
+        />
+        <FormulaBox
+          variant="gold"
+          title="Total kinetisk energi ved rulling"
+          latex="K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
+          {...rulling}
+        />
 
-      <FormulaBox variant="gold" title="Angulært moment — partikkel" latex="\vec{L} = \vec{r} \times m\vec{v}" />
-      <FormulaBox variant="gold" title="Angulært moment — stivt legeme" latex="L = I\omega" />
-      <FormulaBox variant="gold" latex="\sum\tau = \frac{dL}{dt}" />
+        <FormulaBox
+          variant="gold"
+          title="Arbeid og effekt i rotasjon"
+          latex="W = \tau \Delta\theta \qquad P = \tau\omega \qquad W_\text{tot} = \tfrac{1}{2}I\omega^2 - \tfrac{1}{2}I\omega_0^2"
+          {...rotArbeidEffekt}
+        />
 
-      <FormulaBox
-        variant="blue"
-        title="Bevaring av angulært moment"
-        latex="\sum\tau_\text{ext} = 0 \implies I_1\omega_1 = I_2\omega_2"
-      />
+        <FormulaBox
+          variant="gold"
+          title="Angulært moment — partikkel"
+          latex="\vec{L} = \vec{r} \times m\vec{v}"
+          {...Lpartikkel}
+        />
+        <FormulaBox
+          variant="gold"
+          title="Angulært moment — stivt legeme"
+          latex="L = I\omega"
+          {...L}
+        />
+        <FormulaBox
+          variant="gold"
+          title="Kraftmoment og L"
+          latex="\sum\tau = \frac{dL}{dt}"
+          {...L}
+        />
 
-      <FormulaBox
-        variant="blue"
-        title="Disk på skråplan (rulling uten glidning)"
-        latex="a_{CM} = \frac{2}{3}g\sin\beta \qquad \mu_s \geq \tfrac{1}{3}\tan\beta"
-      />
+        <FormulaBox
+          variant="blue"
+          title="Bevaring av angulært moment"
+          latex="\sum\tau_\text{ext} = 0 \implies I_1\omega_1 = I_2\omega_2"
+          {...Lbevaring}
+        />
+
+        <FormulaBox
+          variant="blue"
+          title="Disk på skråplan (rulling uten glidning)"
+          latex="a_{CM} = \frac{2}{3}g\sin\beta \qquad \mu_s \geq \tfrac{1}{3}\tan\beta"
+          {...diskSkraplan}
+        />
+      </div>
 
       {/* Når bruker du hva? */}
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 mt-8">

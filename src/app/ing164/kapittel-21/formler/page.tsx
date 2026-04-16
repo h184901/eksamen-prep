@@ -1,33 +1,41 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import { coulomb, eField } from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler — Kapittel 21</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="F_e = \frac{1}{4\pi\varepsilon_0} \frac{|q_1 q_2|}{r^2}"
           title="Coulombs lov"
           variant="gold"
+          {...coulomb}
         />
         <FormulaBox
           latex="\vec{E} = \frac{\vec{F}_0}{q_0}"
           title="Definisjon av E-felt"
           variant="gold"
+          {...eField}
         />
         <FormulaBox
           latex="E = \frac{1}{4\pi\varepsilon_0} \frac{|q|}{r^2}"
           title="E-felt fra punktladning"
           variant="gold"
+          {...eField}
         />
         <FormulaBox
           latex="\vec{F}_e = q\vec{E}"
           title="Kraft på ladning i E-felt"
           variant="gold"
+          {...eField}
         />
         <FormulaBox
           latex="k = \frac{1}{4\pi\varepsilon_0} = 8{,}99 \cdot 10^9 \;\text{Nm}^2/\text{C}^2"

@@ -1,45 +1,62 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  EPgrav,
+  Wtyngde,
+  EbevaringSimple,
+  EbevaringFull,
+  vSqrt2gh,
+  potEnergi,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="E_P = mgy"
           title="Gravitasjonell potensiell energi"
           variant="gold"
+          {...EPgrav}
         />
         <FormulaBox
           latex="W_{mg} = mgy_1 - mgy_2 = -\Delta E_P"
           title="Arbeid av tyngden"
           variant="gold"
+          {...Wtyngde}
         />
         <FormulaBox
           latex="\tfrac{1}{2}mv_1^2 + mgy_1 = \tfrac{1}{2}mv_2^2 + mgy_2"
           title="Bevaring av mekanisk energi"
           variant="gold"
+          {...EbevaringSimple}
         />
         <FormulaBox
           latex="\tfrac{1}{2}mv_1^2 + mgy_1 + W_{\text{andre}} = \tfrac{1}{2}mv_2^2 + mgy_2"
           title="Med andre krefter"
           variant="gold"
+          {...EbevaringFull}
         />
         <FormulaBox
           latex="E_K + E_P = \text{konstant}"
           title="Energibevaring (forenklet)"
           variant="blue"
           description="Gjelder kun når ingen andre krefter enn tyngden gjør arbeid."
+          {...potEnergi}
         />
         <FormulaBox
           latex="v = \sqrt{2g(y_1 - y_2)}"
           title="Fart fra høydefall (start fra ro)"
           variant="blue"
           description="Nyttig snarvei når v₁ = 0 og ingen friksjon."
+          {...vSqrt2gh}
         />
       </div>
 

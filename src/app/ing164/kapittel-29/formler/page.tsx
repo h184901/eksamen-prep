@@ -1,53 +1,73 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  faraday,
+  fluks,
+  BLv,
+  ACgen,
+  diskDynamo,
+  effektEMF,
+  generellEMF,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mt-6 mb-6">Formler</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="\mathcal{E} = -\frac{d\Phi_B}{dt}"
           title="Faradays lov"
           variant="gold"
+          {...faraday}
         />
         <FormulaBox
           latex="\mathcal{E} = -N\frac{d\Phi_B}{dt}"
           title="Faradays lov (N vindinger)"
           variant="gold"
+          {...faraday}
         />
         <FormulaBox
           latex="\Phi_B = BA\cos\varphi"
           title="Magnetisk fluks"
           variant="gold"
+          {...fluks}
         />
         <FormulaBox
           latex="\mathcal{E} = vBL"
           title="EMF — leder i bevegelse"
           variant="gold"
+          {...BLv}
         />
         <FormulaBox
           latex="\mathcal{E} = NAB\omega\sin(\omega t)"
           title="Vekselstrømgenerator"
           variant="gold"
+          {...ACgen}
         />
         <FormulaBox
           latex="\mathcal{E} = \tfrac{1}{2}\omega B R^2"
           title="Faradays diskdynamo"
           variant="blue"
+          {...diskDynamo}
         />
         <FormulaBox
           latex="P = \frac{\mathcal{E}^2}{R} = \frac{B^2L^2v^2}{R}"
           title="Effekt i kretsen"
           variant="blue"
+          {...effektEMF}
         />
         <FormulaBox
           latex="\mathcal{E} = \oint (\vec{v}\times\vec{B})\cdot d\vec{l}"
           title="Generell EMF (bevegelig leder)"
           variant="blue"
+          {...generellEMF}
         />
       </div>
 

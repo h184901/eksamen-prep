@@ -1,53 +1,73 @@
 "use client";
 
 import FormulaBox from "@/components/FormulaBox";
+import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
+import {
+  arbeid,
+  kinEnergi,
+  arbeidVar,
+  arbeidFjaer,
+  hookes,
+  effekt,
+  WEteorem,
+} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Formler</h2>
 
+      <FormulaClickCallout />
+
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
           latex="W = F \cdot s \cdot \cos\varphi"
           title="Arbeid (konstant kraft)"
           variant="gold"
+          {...arbeid}
         />
         <FormulaBox
           latex="W = \vec{F} \cdot \vec{s} = F_x s_x + F_y s_y"
           title="Arbeid (vektorform)"
           variant="gold"
+          {...arbeid}
         />
         <FormulaBox
           latex="E_K = \tfrac{1}{2}mv^2"
           title="Kinetisk energi"
           variant="gold"
+          {...kinEnergi}
         />
         <FormulaBox
           latex="W_{\text{tot}} = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2"
           title="Arbeid-energi-teoremet"
           variant="gold"
+          {...WEteorem}
         />
         <FormulaBox
           latex="W = \int_{x_1}^{x_2} F(x)\,dx"
           title="Arbeid (varierende kraft)"
           variant="gold"
+          {...arbeidVar}
         />
         <FormulaBox
           latex="W_{\text{fjær}} = \tfrac{1}{2}kx_2^2 - \tfrac{1}{2}kx_1^2"
           title="Arbeid på fjær (Hookes lov)"
           variant="gold"
+          {...arbeidFjaer}
         />
         <FormulaBox
           latex="P = \frac{\Delta W}{\Delta t} = \vec{F} \cdot \vec{v}"
           title="Effekt"
           variant="gold"
+          {...effekt}
         />
         <FormulaBox
           latex="F = kx"
           title="Hookes lov"
           variant="blue"
+          {...hookes}
         />
       </div>
 
