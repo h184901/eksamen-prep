@@ -116,7 +116,7 @@ export default function Kapittel8Formler() {
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">To ting spretter fra hverandre, ingen energitap</td>
-                <td className="py-2">Elastisk: p-bevaring + E<sub>K</sub>-bevaring</td>
+                <td className="py-2">Elastisk: p-bevaring + E<sub>k</sub>-bevaring</td>
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">Kule treffer kloss i tau → svinger opp</td>
@@ -148,7 +148,7 @@ export default function Kapittel8Formler() {
               <tr className="border-b-2 border-[var(--card-border)]">
                 <th className="text-left py-2 pr-4">Type</th>
                 <th className="text-left py-2 pr-4">p bevart?</th>
-                <th className="text-left py-2 pr-4">E<sub>K</sub> bevart?</th>
+                <th className="text-left py-2 pr-4">E<sub>k</sub> bevart?</th>
                 <th className="text-left py-2">Ligninger du trenger</th>
               </tr>
             </thead>

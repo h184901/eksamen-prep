@@ -252,7 +252,7 @@ export default function TeoriPage() {
       <TheorySummary
         title="24.3 Energilagring i kondensatorer og elektrisk-felt-energi"
         mustKnow={[
-          "Lagret energi: U = Q²/2C = ½CV² = ½QV",
+          "Lagret energi: E_p = Q²/2C = ½CV² = ½QV",
           "Velg formel basert på hva som er konstant i oppgaven",
           "Energitetthet i E-felt: u = ½ε₀E² (J/m³)",
           "Energien lagres i det elektriske FELTET, ikke på platene",
@@ -288,7 +288,7 @@ export default function TeoriPage() {
         </div>
 
         <FormulaBox
-          latex="U = \frac{Q^2}{2C} = \frac{1}{2}CV^2 = \frac{1}{2}QV"
+          latex="E_p = \frac{Q^2}{2C} = \frac{1}{2}CV^2 = \frac{1}{2}QV"
           title="Potensiell energi lagret i kondensator"
           variant="gold"
           description="Tre ekvivalente uttrykk. Velg det som passer til de kjente størrelsene i oppgaven."
@@ -297,9 +297,9 @@ export default function TeoriPage() {
         <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 23: Hvilken formel velger du?</p>
           <ul className="text-sm space-y-1 mt-1">
-            <li><strong><InlineLatex latex="U = \frac{1}{2}CV^2" /></strong> — bruk når spenningen V er kjent (f.eks. koblet til batteri)</li>
-            <li><strong><InlineLatex latex="U = \frac{Q^2}{2C}" /></strong> — bruk når ladningen Q er kjent (f.eks. frakoblet batteri, Q er konstant)</li>
-            <li><strong><InlineLatex latex="U = \frac{1}{2}QV" /></strong> — bruk sjelden, men nyttig i utledninger</li>
+            <li><strong><InlineLatex latex="E_p = \frac{1}{2}CV^2" /></strong> — bruk når spenningen V er kjent (f.eks. koblet til batteri)</li>
+            <li><strong><InlineLatex latex="E_p = \frac{Q^2}{2C}" /></strong> — bruk når ladningen Q er kjent (f.eks. frakoblet batteri, Q er konstant)</li>
+            <li><strong><InlineLatex latex="E_p = \frac{1}{2}QV" /></strong> — bruk sjelden, men nyttig i utledninger</li>
           </ul>
           <p className="text-sm mt-2">
             Energien tilsvarer arbeidet som er gjort for å flytte ladning fra én plate til den andre
@@ -314,7 +314,7 @@ export default function TeoriPage() {
         </p>
 
         <FormulaBox
-          latex="u = \frac{U}{V_\text{olum}} = \frac{1}{2}\varepsilon_0 E^2"
+          latex="u = \frac{E_p}{V_\text{olum}} = \frac{1}{2}\varepsilon_0 E^2"
           title="Energitetthet i elektrisk felt"
           variant="gold"
           description="u har enhet J/m³. Gjelder generelt for ALLE elektriske felt, ikke bare i kondensatorer."
@@ -329,7 +329,7 @@ export default function TeoriPage() {
             <InlineLatex latex="V_{ab} = E \cdot d" /> i <InlineLatex latex="\frac{1}{2}CV_{ab}^2" />:
           </p>
           <div className="mt-2 text-sm">
-            <InlineLatex latex="U = \frac{1}{2} \cdot \varepsilon_0\frac{A}{d} \cdot (Ed)^2 = \frac{1}{2}\varepsilon_0 E^2 \cdot Ad = u \cdot V_\text{olum}" />
+            <InlineLatex latex="E_p = \frac{1}{2} \cdot \varepsilon_0\frac{A}{d} \cdot (Ed)^2 = \frac{1}{2}\varepsilon_0 E^2 \cdot Ad = u \cdot V_\text{olum}" />
           </div>
           <p className="text-sm mt-2">
             Energitettheten <InlineLatex latex="u = \frac{1}{2}\varepsilon_0 E^2" /> gjelder ikke

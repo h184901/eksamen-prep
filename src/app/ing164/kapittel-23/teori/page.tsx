@@ -43,6 +43,29 @@ export default function TeoriPage() {
           </div>
         </div>
 
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 p-4 my-4">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">To typer arbeid — pass på fortegnet!</p>
+          <p className="text-sm mb-2">
+            Når en ladning flyttes mellom to punkter finnes det <strong>to</strong> relevante arbeid.
+            De er like store, men har motsatt fortegn:
+          </p>
+          <div className="mt-2 space-y-2">
+            <div>
+              <InlineLatex latex="W_\text{elfelt} = -\Delta E_p" />
+              <span className="text-sm ml-2 text-[var(--muted)]">— arbeid utført <em>av</em> det elektriske feltet selv</span>
+            </div>
+            <div>
+              <InlineLatex latex="W_\text{ytre} = \Delta E_p = q\,\Delta V" />
+              <span className="text-sm ml-2 text-[var(--muted)]">— arbeid en <em>ytre</em> kraft må gjøre for å flytte ladningen mot feltet</span>
+            </div>
+          </div>
+          <p className="text-sm mt-2">
+            Det første er feltets eget arbeid (kraften følger feltet). Det andre er arbeidet du selv må tilføre
+            (mot feltet) for å flytte ladningen kvasi-statisk. De er like store, men skiller seg på fortegn:{" "}
+            <InlineLatex latex="W_\text{ytre} = -W_\text{elfelt}" />.
+          </p>
+        </div>
+
         <h4 className="font-semibold mt-6 mb-2">Uniformt felt</h4>
         <p>
           I et uniformt elektrisk felt (f.eks. mellom parallelle plater) er den potensielle

@@ -16,7 +16,7 @@ export function LinearRotationalAnalogy() {
     { linear: "F = ma", linDesc: "Newtons 2. lov", rot: "\\tau = I\\alpha", rotDesc: "Newtons 2. lov (rot.)", unit: "" },
     { linear: "p = mv", linDesc: "Bevegelsesmengde", rot: "L = I\\omega", rotDesc: "Angulært moment", unit: "kg·m/s ↔ kg·m²/s" },
     { linear: "W = F \\cdot d", linDesc: "Arbeid", rot: "W = \\tau \\cdot \\Delta\\theta", rotDesc: "Arbeid (rotasjon)", unit: "J ↔ J" },
-    { linear: "K = \\tfrac{1}{2}mv^2", linDesc: "Kinetisk energi", rot: "K = \\tfrac{1}{2}I\\omega^2", rotDesc: "Rotasjonsenergi", unit: "J ↔ J" },
+    { linear: "E_k = \\tfrac{1}{2}mv^2", linDesc: "Kinetisk energi", rot: "E_k = \\tfrac{1}{2}I\\omega^2", rotDesc: "Rotasjonsenergi", unit: "J ↔ J" },
     { linear: "P = Fv", linDesc: "Effekt", rot: "P = \\tau\\omega", rotDesc: "Effekt (rotasjon)", unit: "W ↔ W" },
   ];
 

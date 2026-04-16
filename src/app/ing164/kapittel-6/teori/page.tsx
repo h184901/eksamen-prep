@@ -70,8 +70,8 @@ export default function TeoriPage() {
       <TheorySummary
         title="6.2 Arbeid og kinetisk energi"
         mustKnow={[
-          "Kinetisk energi: E_K = ½mv²",
-          "Arbeid-energi-teoremet: W_tot = ΔE_K = ½mv₂² − ½mv₁²",
+          "Kinetisk energi: E_k = ½mv²",
+          "Arbeid-energi-teoremet: W_tot = ΔE_k = ½mv₂² − ½mv₁²",
           "Positivt totalt arbeid → farten øker, negativt → farten minker",
           "Arbeid-energi-teoremet gjelder for ALLE typer krefter",
         ]}
@@ -93,12 +93,12 @@ export default function TeoriPage() {
             Et legeme med masse <InlineLatex latex="m" /> og fart <InlineLatex latex="v" /> har <strong>kinetisk energi</strong>:
           </p>
           <div className="mt-2">
-            <InlineLatex latex="E_K = \tfrac{1}{2}mv^2" />
+            <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" />
           </div>
         </div>
 
         <FormulaBox
-          latex="W_{\text{tot}} = \Delta E_K = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2"
+          latex="W_{\text{tot}} = \Delta E_k = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2"
           title="Arbeid-energi-teoremet"
           variant="gold"
           description="Det totale arbeidet utført på et legeme er lik endringen i kinetisk energi."
@@ -107,9 +107,9 @@ export default function TeoriPage() {
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Tolkning av arbeid-energi-teoremet</p>
           <ul className="space-y-1.5 text-sm">
-            <li>• <InlineLatex latex="W_{\text{tot}} > 0" /> → <InlineLatex latex="E_K" /> øker → farten øker</li>
-            <li>• <InlineLatex latex="W_{\text{tot}} = 0" /> → <InlineLatex latex="E_K" /> uendret → farten er konstant</li>
-            <li>• <InlineLatex latex="W_{\text{tot}} < 0" /> → <InlineLatex latex="E_K" /> minker → farten minker</li>
+            <li>• <InlineLatex latex="W_{\text{tot}} > 0" /> → <InlineLatex latex="E_k" /> øker → farten øker</li>
+            <li>• <InlineLatex latex="W_{\text{tot}} = 0" /> → <InlineLatex latex="E_k" /> uendret → farten er konstant</li>
+            <li>• <InlineLatex latex="W_{\text{tot}} < 0" /> → <InlineLatex latex="E_k" /> minker → farten minker</li>
           </ul>
         </div>
 

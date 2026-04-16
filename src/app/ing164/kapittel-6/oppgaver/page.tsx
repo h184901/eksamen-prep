@@ -39,7 +39,7 @@ export default function OppgaverPage() {
           <ol className="list-decimal list-inside space-y-2 text-sm">
             <li><strong>Fjærarbeid:</strong> <InlineLatex latex="W_{\text{fjær}} = \tfrac{1}{2}kx_2^2 - \tfrac{1}{2}kx_1^2" /></li>
             <li><strong>Friksjonsarbeid:</strong> <InlineLatex latex="W_R = -\mu mg \cdot d" /></li>
-            <li><strong>Sett opp arbeid-energi-teoremet:</strong> Fjærarbeid + friksjonsarbeid = &Delta;E<sub>K</sub></li>
+            <li><strong>Sett opp arbeid-energi-teoremet:</strong> Fjærarbeid + friksjonsarbeid = &Delta;E<sub>k</sub></li>
             <li><strong>Forvent andregradsligning</strong> — velg den fysisk fornuftige løsningen (positiv avstand)</li>
           </ol>
         </div>

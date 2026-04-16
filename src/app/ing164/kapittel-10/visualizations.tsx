@@ -211,15 +211,15 @@ export function RollingWithoutSlipping() {
       {/* Energy breakdown */}
       <div className="grid sm:grid-cols-3 gap-3 text-center mb-3">
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
-          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="K_\text{trans} = \tfrac{1}{2}mv^2" /></p>
+          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="E_{k,\text{trans}} = \tfrac{1}{2}mv^2" /></p>
           <p className="text-lg font-bold">{Ktrans.toFixed(1)} J</p>
         </div>
         <div className="rounded-lg bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 p-3">
-          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="K_\text{rot} = \tfrac{1}{2}I\omega^2" /></p>
+          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /></p>
           <p className="text-lg font-bold">{Krot.toFixed(1)} J</p>
         </div>
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
-          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="K_\text{tot}" /></p>
+          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="E_{k,\text{tot}}" /></p>
           <p className="text-lg font-bold">{Ktot.toFixed(1)} J</p>
         </div>
       </div>
@@ -334,16 +334,16 @@ export function AngularMomentumVisualizer() {
           <p className="text-sm font-bold">{omega2.toFixed(1)} rad/s</p>
         </div>
         <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-2">
-          <p className="text-xs text-[var(--muted)]">K₁</p>
+          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="E_{k,1}" /></p>
           <p className="text-sm font-bold">{K1.toFixed(1)} J</p>
         </div>
         <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-2">
-          <p className="text-xs text-[var(--muted)]">K₂</p>
+          <p className="text-xs text-[var(--muted)]"><InlineLatex latex="E_{k,2}" /></p>
           <p className="text-sm font-bold">{K2.toFixed(1)} J</p>
         </div>
       </div>
       <p className="text-sm text-[var(--muted)] text-center mt-3">
-        <InlineLatex latex="K_2 > K_1" /> — kinetisk energi er <strong>ikke</strong> bevart! Kunstløperen gjør arbeid ved å trekke armene inn.
+        <InlineLatex latex="E_{k,2} > E_{k,1}" /> — kinetisk energi er <strong>ikke</strong> bevart! Kunstløperen gjør arbeid ved å trekke armene inn.
       </p>
     </div>
   );

@@ -17,7 +17,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=DyaVgHGssos"
           duration="18 min"
           covers="Gravitasjonell potensiell energi (7.1–7.2)"
-          description="Introduksjon til gravitasjonell potensiell energi (U = mgh), konvertering mellom kinetisk og potensiell energi, og bevaring av mekanisk energi. Flere gjennomgatte eksempler."
+          description="Introduksjon til gravitasjonell potensiell energi (E_p = mgh), konvertering mellom kinetisk og potensiell energi, og bevaring av mekanisk energi. Flere gjennomgatte eksempler."
         />
 
         <VideoResource
@@ -26,7 +26,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=k3JRvaI-Oeo"
           duration="30 min"
           covers="Elastisk potensiell energi og fjerkraft (7.2–7.3)"
-          description="Hookes lov (F = -kx), elastisk potensiell energi (U = 1/2 kx^2), fjerkonstant, og arbeid utfort av en fjer. Gjennomgatte oppgaver med fjaerer kombinert med energibevaring."
+          description="Hookes lov (F = -kx), elastisk potensiell energi (E_p = 1/2 kx^2), fjerkonstant, og arbeid utfort av en fjer. Gjennomgatte oppgaver med fjaerer kombinert med energibevaring."
         />
 
         <VideoResource
@@ -35,7 +35,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=DyaVgHGssos"
           duration="18 min"
           covers="Energibevaring (7.1–7.4)"
-          description="Prinsippet om bevaring av mekanisk energi: KE + PE = konstant (uten friksjon). Overgang mellom gravitasjonell og kinetisk energi, og oppgaver med hoyde, fart og energibalanse."
+          description="Prinsippet om bevaring av mekanisk energi: E_k + E_p = konstant (uten friksjon). Overgang mellom gravitasjonell og kinetisk energi, og oppgaver med hoyde, fart og energibalanse."
         />
 
         <VideoResource

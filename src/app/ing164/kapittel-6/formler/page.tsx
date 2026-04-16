@@ -34,7 +34,7 @@ export default function FormlerPage() {
           {...arbeid}
         />
         <FormulaBox
-          latex="E_K = \tfrac{1}{2}mv^2"
+          latex="E_k = \tfrac{1}{2}mv^2"
           title="Kinetisk energi"
           variant="gold"
           {...kinEnergi}

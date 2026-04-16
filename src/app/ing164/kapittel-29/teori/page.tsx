@@ -446,7 +446,7 @@ export default function TeoriPage() {
         </p>
 
         <FormulaBox
-          latex="U = \frac{1}{2}LI^2"
+          latex="E_p = \frac{1}{2}LI^2"
           title="Energi lagret i induktor"
           variant="gold"
           description="Analog til ½CV² for en kondensator. Energien er lagret i magnetfeltet inne i spolen."
@@ -461,8 +461,8 @@ export default function TeoriPage() {
             <span>Induktans L</span>
             <span>Lagrer energi i E-felt</span>
             <span>Lagrer energi i B-felt</span>
-            <span><InlineLatex latex="U = \tfrac{1}{2}CV^2" /></span>
-            <span><InlineLatex latex="U = \tfrac{1}{2}LI^2" /></span>
+            <span><InlineLatex latex="E_p = \tfrac{1}{2}CV^2" /></span>
+            <span><InlineLatex latex="E_p = \tfrac{1}{2}LI^2" /></span>
             <span>Motvirker spenningsendring</span>
             <span>Motvirker strømendring</span>
             <span><InlineLatex latex="I = C\,dV/dt" /></span>

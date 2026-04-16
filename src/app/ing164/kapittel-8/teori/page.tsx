@@ -262,7 +262,7 @@ export default function Kapittel8Teori() {
           "Fullstendig inelastisk: legemene henger sammen → felles hastighet etter støtet",
           "Fullstendig inelastisk = størst mulig energitap (kompatibelt med p-bevaring)",
           "Ballistisk pendel: Steg 1 = p-bevaring (støt), Steg 2 = energibevaring (svingen)",
-          "Energitap = K_før − K_etter (alltid positivt ved inelastisk kollisjon)",
+          "Energitap = E_k,før − E_k,etter (alltid positivt ved inelastisk kollisjon)",
         ]}
       >
         <div className="overflow-x-auto my-4">
@@ -271,7 +271,7 @@ export default function Kapittel8Teori() {
               <tr className="border-b-2 border-[var(--card-border)]">
                 <th className="text-left py-2 pr-4">Type</th>
                 <th className="text-left py-2 pr-4"><InlineLatex latex="\vec{p}" /> bevart?</th>
-                <th className="text-left py-2 pr-4"><InlineLatex latex="E_K" /> bevart?</th>
+                <th className="text-left py-2 pr-4"><InlineLatex latex="E_k" /> bevart?</th>
                 <th className="text-left py-2">Kjennetegn</th>
               </tr>
             </thead>
@@ -306,10 +306,10 @@ export default function Kapittel8Teori() {
         />
 
         <FormulaBox
-          latex="\Delta E_K = \tfrac{1}{2}(m_A + m_B)v_2^2 - \left(\tfrac{1}{2}m_A v_{A1}^2 + \tfrac{1}{2}m_B v_{B1}^2\right)"
+          latex="\Delta E_k = \tfrac{1}{2}(m_A + m_B)v_2^2 - \left(\tfrac{1}{2}m_A v_{A1}^2 + \tfrac{1}{2}m_B v_{B1}^2\right)"
           title="Energitap ved inelastisk kollisjon"
           variant="blue"
-          description="Alltid negativt (energi forsvinner til varme, lyd, deformasjon). Beregn K_etter − K_før."
+          description="Alltid negativt (energi forsvinner til varme, lyd, deformasjon). Beregn E_k,etter − E_k,før."
         />
 
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
@@ -327,7 +327,7 @@ export default function Kapittel8Teori() {
             </li>
             <li>
               <strong>Etter støtet</strong> (klossen svinger oppover):{" "}
-              <em>Mekanisk energi bevart</em> (<InlineLatex latex="K \to U_g" />),
+              <em>Mekanisk energi bevart</em> (<InlineLatex latex="E_k \to E_{p,g}" />),
               men bevegelsesmengde IKKE bevart (snorkraft er ytre kraft!)
             </li>
           </ol>
@@ -357,7 +357,7 @@ export default function Kapittel8Teori() {
       <TheorySummary
         title="8.5 Elastiske kollisjoner"
         mustKnow={[
-          "Elastisk: BÅDE p og E_K er bevart → to ligninger, to ukjente",
+          "Elastisk: BÅDE p og E_k er bevart → to ligninger, to ukjente",
           "Snarveien: relativ hastighet snur: (v_A1 − v_B1) = −(v_A2 − v_B2)",
           "Like masser: hastighetene bytter (v_A2 = v_B1, v_B2 = v_A1)",
           "Tung treffer lett (m_A >> m_B): A nesten upåvirket, B får ≈2v_A",

@@ -44,7 +44,7 @@ export default function FormlerPage() {
         <FormulaBox
           variant="gold"
           title="Kinetisk rotasjonsenergi"
-          latex="K_\text{rot} = \tfrac{1}{2}I\omega^2"
+          latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2"
           {...Krot}
         />
       </div>
@@ -107,7 +107,7 @@ export default function FormlerPage() {
               </tr>
               <tr className="bg-[var(--card)]/60">
                 <td className="py-3 px-4">Rotasjonsenergi</td>
-                <td className="py-3 px-4"><InlineLatex latex="K = \tfrac{1}{2}I\omega^2" /></td>
+                <td className="py-3 px-4"><InlineLatex latex="E_k = \tfrac{1}{2}I\omega^2" /></td>
                 <td className="py-3 px-4 text-[var(--muted)]">Analog med <InlineLatex latex="\tfrac{1}{2}mv^2" /></td>
               </tr>
             </tbody>

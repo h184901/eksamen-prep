@@ -21,13 +21,13 @@ export default function FormlerPage() {
 
       <div className="grid md:grid-cols-2 gap-4">
         <FormulaBox
-          latex="E_P = mgy"
+          latex="E_p = mgy"
           title="Gravitasjonell potensiell energi"
           variant="gold"
           {...EPgrav}
         />
         <FormulaBox
-          latex="W_{mg} = mgy_1 - mgy_2 = -\Delta E_P"
+          latex="W_{mg} = mgy_1 - mgy_2 = -\Delta E_p"
           title="Arbeid av tyngden"
           variant="gold"
           {...Wtyngde}
@@ -45,7 +45,7 @@ export default function FormlerPage() {
           {...EbevaringFull}
         />
         <FormulaBox
-          latex="E_K + E_P = \text{konstant}"
+          latex="E_k + E_p = \text{konstant}"
           title="Energibevaring (forenklet)"
           variant="blue"
           description="Gjelder kun når ingen andre krefter enn tyngden gjør arbeid."

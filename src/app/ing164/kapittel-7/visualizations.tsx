@@ -82,7 +82,7 @@ export function EnergyConservationVisualizer() {
                 style={{ height: `${epBar}px` }}
               />
             </div>
-            <p className="text-xs mt-1 font-semibold text-blue-600 dark:text-blue-400">E<sub>P</sub></p>
+            <p className="text-xs mt-1 font-semibold text-blue-600 dark:text-blue-400">E<sub>p</sub></p>
             <p className="text-xs font-mono">{ep.toFixed(0)} J</p>
           </div>
           <div className="text-center">
@@ -92,7 +92,7 @@ export function EnergyConservationVisualizer() {
                 style={{ height: `${ekBar}px` }}
               />
             </div>
-            <p className="text-xs mt-1 font-semibold text-amber-600 dark:text-amber-400">E<sub>K</sub></p>
+            <p className="text-xs mt-1 font-semibold text-amber-600 dark:text-amber-400">E<sub>k</sub></p>
             <p className="text-xs font-mono">{ek.toFixed(0)} J</p>
           </div>
           <div className="text-center">
@@ -124,7 +124,7 @@ export function EnergyConservationVisualizer() {
       </div>
 
       <p className="text-sm text-[var(--muted)] text-center mt-3">
-        Dra glideren for å flytte ballen. Legg merke til at E<sub>P</sub> + E<sub>K</sub> = E<sub>tot</sub> hele tiden!
+        Dra glideren for å flytte ballen. Legg merke til at E<sub>p</sub> + E<sub>k</sub> = E<sub>tot</sub> hele tiden!
       </p>
     </div>
   );
@@ -213,11 +213,11 @@ export function BallThrowVisualizer() {
             <p className="font-bold">{Math.abs(vy).toFixed(1)} m/s</p>
           </div>
           <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 p-3 text-center">
-            <p className="text-[var(--muted)]">E<sub>P</sub>/m</p>
+            <p className="text-[var(--muted)]">E<sub>p</sub>/m</p>
             <p className="font-bold">{ep.toFixed(0)} J/kg</p>
           </div>
           <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 p-3 text-center">
-            <p className="text-[var(--muted)]">E<sub>K</sub>/m</p>
+            <p className="text-[var(--muted)]">E<sub>k</sub>/m</p>
             <p className="font-bold">{ek.toFixed(0)} J/kg</p>
           </div>
         </div>

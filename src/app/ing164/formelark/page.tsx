@@ -212,26 +212,26 @@ export default function FormelarkPage() {
           <FormulaBox
             variant="gold"
             title="Arbeid"
-            latex="W = Fd\cos\theta = \vec{F}\cdot\vec{d} \qquad W_\text{tot} = \Delta K"
+            latex="W = Fd\cos\theta = \vec{F}\cdot\vec{d} \qquad W_\text{tot} = \Delta E_k"
             description="θ er vinkelen mellom kraft og forflytning."
             {...arbeid}
           />
           <FormulaBox
             variant="gold"
             title="Kinetisk energi og arbeid-energi-teoremet"
-            latex="K = \tfrac{1}{2}mv^2 \qquad W_\text{tot} = K_2 - K_1 = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2"
+            latex="E_k = \tfrac{1}{2}mv^2 \qquad W_\text{tot} = E_{k,2} - E_{k,1} = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2"
             {...kinEnergi}
           />
           <FormulaBox
             variant="gold"
             title="Potensiell energi"
-            latex="U_\text{grav} = mgy \qquad U_\text{fjær} = \tfrac{1}{2}kx^2"
+            latex="E_{p,\text{grav}} = mgy \qquad E_{p,\text{fjær}} = \tfrac{1}{2}kx^2"
             {...potEnergi}
           />
           <FormulaBox
             variant="gold"
             title="Energibevaring"
-            latex="K_1 + U_1 + W_\text{andre} = K_2 + U_2"
+            latex="E_{k,1} + E_{p,1} + W_\text{andre} = E_{k,2} + E_{p,2}"
             description="W_andre = arbeid fra ikke-konservative krefter (friksjon, snordrag, etc.)"
             {...energibevaring}
           />
@@ -268,7 +268,7 @@ export default function FormelarkPage() {
             variant="blue"
             title="Fullkomment uelastisk støt"
             latex="m_1 v_1 + m_2 v_2 = (m_1+m_2)v_f"
-            description="Legemene henger sammen etter støtet. Bevegelsesmengde bevart, K ikke bevart."
+            description="Legemene henger sammen etter støtet. Bevegelsesmengde bevart, E_k ikke bevart."
             {...uelastisk}
           />
           <FormulaBox
@@ -314,13 +314,13 @@ export default function FormelarkPage() {
           <FormulaBox
             variant="gold"
             title="Rotasjonsenergi og arbeid"
-            latex="K_\text{rot} = \tfrac{1}{2}I\omega^2 \qquad W = \tau\Delta\theta \qquad P = \tau\omega"
+            latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2 \qquad W = \tau\Delta\theta \qquad P = \tau\omega"
             {...Krot}
           />
           <FormulaBox
             variant="gold"
             title="Rulling uten glidning"
-            latex="v_{CM} = R\omega \qquad K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
+            latex="v_{CM} = R\omega \qquad E_{k,\text{tot}} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
             {...rulling}
           />
           <FormulaBox
@@ -356,20 +356,21 @@ export default function FormelarkPage() {
           <FormulaBox
             variant="gold"
             title="Elektrisk potensial"
-            latex="V = k\frac{q}{r} \qquad W_{a\to b} = q(V_a - V_b) \qquad \vec{E} = -\nabla V"
+            latex="V = k\frac{q}{r} \qquad \vec{E} = -\nabla V"
+            description="Arbeid gjort AV feltet: W_{elfelt} = −ΔE_p = q(V_a − V_b). Arbeid gjort av ytre kraft for å flytte q: W_{ytre} = ΔE_p = q(V_b − V_a) = qΔV."
             {...V}
           />
           <FormulaBox
             variant="blue"
             title="Potensiell energi mellom punktladninger"
-            latex="U = k\frac{q_1 q_2}{r}"
-            description="Positiv U: frastøtning. Negativ U: tiltrekning."
+            latex="E_p = k\frac{q_1 q_2}{r}"
+            description="Positiv E_p: frastøtning. Negativ E_p: tiltrekning."
             {...Uladninger}
           />
           <FormulaBox
             variant="gold"
             title="Kapasitans"
-            latex="C = \frac{Q}{V_{ab}} \qquad C_\text{platekond.} = \varepsilon_0 \frac{A}{d} \qquad U = \tfrac{1}{2}CV^2 = \frac{Q^2}{2C}"
+            latex="C = \frac{Q}{V_{ab}} \qquad C_\text{platekond.} = \varepsilon_0 \frac{A}{d} \qquad E_p = \tfrac{1}{2}CV^2 = \frac{Q^2}{2C}"
             {...C}
           />
           <FormulaBox

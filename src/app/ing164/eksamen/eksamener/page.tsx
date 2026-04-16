@@ -219,7 +219,7 @@ export default function EksamenPage() {
               ]}
               formulaHints={[
                 { subQuestion: "a) startfart", formulas: <div><p><InlineLatex latex="x = v_0 \cos\theta \cdot t" />, <InlineLatex latex="y = v_0 \sin\theta \cdot t - \tfrac{1}{2}gt^2" /></p><p>Eliminer t og løs for <InlineLatex latex="v_0" /></p></div> },
-                { subQuestion: "b) kinetisk energi", formulas: <p>Energibevaring: <InlineLatex latex="E_K = \tfrac{1}{2}mv_0^2 + mg(y_0 - y)" /></p> },
+                { subQuestion: "b) kinetisk energi", formulas: <p>Energibevaring: <InlineLatex latex="E_k = \tfrac{1}{2}mv_0^2 + mg(y_0 - y)" /></p> },
                 { subQuestion: "c) maks høyde", formulas: <p>Ved topp: <InlineLatex latex="v_y = 0" />, bruk <InlineLatex latex="v_y = v_{0y} - gt" /> og <InlineLatex latex="y = v_{0y}t - \tfrac{1}{2}gt^2" /></p> },
                 { subQuestion: "d) kraftimpuls", formulas: <p><InlineLatex latex="J = \Delta p = m(v_2 - v_1)" />, <InlineLatex latex="\bar{F} = J / \Delta t" /></p> },
               ]}
@@ -230,7 +230,7 @@ export default function EksamenPage() {
                 <p><InlineLatex latex="y = x\tan 50° - \frac{gx^2}{2v_0^2\cos^2 50°}" /></p>
                 <p><InlineLatex latex="v_0 = \sqrt{\frac{-gx^2}{2\cos^2 50°(y - x\tan 50°)}} = 7{,}0 \text{ m/s}" /></p>
                 <p className="font-semibold mt-2">b) Kinetisk energi:</p>
-                <p>Energibevaring: <InlineLatex latex="E_K = \tfrac{1}{2}mv_0^2 + mg(y_0 - y) = \tfrac{1}{2}(0{,}6)(7{,}0)^2 + 0{,}6(9{,}81)(0 - 0{,}9) = 14{,}7 - 5{,}3 = 9{,}4 \text{ J}" /></p>
+                <p>Energibevaring: <InlineLatex latex="E_k = \tfrac{1}{2}mv_0^2 + mg(y_0 - y) = \tfrac{1}{2}(0{,}6)(7{,}0)^2 + 0{,}6(9{,}81)(0 - 0{,}9) = 14{,}7 - 5{,}3 = 9{,}4 \text{ J}" /></p>
                 <p className="font-semibold mt-2">c) Maks høyde:</p>
                 <p>Ved maks høyde: <InlineLatex latex="v_y = 0 \implies t = \frac{v_0\sin 50°}{g} = 0{,}547 \text{ s}" /></p>
                 <p><InlineLatex latex="y_\text{max} = v_{0y}t - \tfrac{1}{2}gt^2 = 1{,}47 \text{ m over utgangsposisjon}" /></p>
@@ -302,7 +302,7 @@ export default function EksamenPage() {
               formulaHints={[
                 { subQuestion: "a) treghetsmoment", formulas: <p>Stav om enden: <InlineLatex latex="I = \tfrac{1}{3}Ma^2" />. Totalt: <InlineLatex latex="I_\text{tot} = 4I_1" /></p> },
                 { subQuestion: "b) vinkelfart", formulas: <div><p><InlineLatex latex="\tau = F \cdot r \cdot \sin\theta" />, <InlineLatex latex="\alpha = \tau / I" /></p><p><InlineLatex latex="\omega = \omega_0 + \alpha t" /></p></div> },
-                { subQuestion: "c) energi og spinn", formulas: <p><InlineLatex latex="E_K = \tfrac{1}{2}I\omega^2" />, <InlineLatex latex="L = I\omega" /></p> },
+                { subQuestion: "c) energi og spinn", formulas: <p><InlineLatex latex="E_k = \tfrac{1}{2}I\omega^2" />, <InlineLatex latex="L = I\omega" /></p> },
                 { subQuestion: "d) kule fester seg", formulas: <p>Bevaring av spinn: <InlineLatex latex="L_\text{kule} + L_\text{dør} = (I_\text{dør} + m_\text{kule}r^2)\omega'" /></p> },
               ]}
               solution={<div className="space-y-3 text-sm">
@@ -314,7 +314,7 @@ export default function EksamenPage() {
                 <p><InlineLatex latex="\alpha = \frac{\tau}{I} = \frac{69{,}5}{115} = 0{,}604 \text{ rad/s}^2" /></p>
                 <p><InlineLatex latex="\omega = \omega_0 + \alpha t = 0 + 0{,}604 \times 3{,}0 = 1{,}81 \text{ rad/s}" /></p>
                 <p className="font-semibold mt-2">c) Energi og angulært moment:</p>
-                <p><InlineLatex latex="E_K = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(115)(1{,}81)^2 = 189 \text{ J}" /></p>
+                <p><InlineLatex latex="E_k = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(115)(1{,}81)^2 = 189 \text{ J}" /></p>
                 <p><InlineLatex latex="L = I\omega = 115 \times 1{,}81 = 209 \text{ kg·m}^2\text{/s}" /></p>
                 <p className="font-semibold mt-2">d) Kule fester seg (L bevart):</p>
                 <p><InlineLatex latex="L_\text{før} = mv_0 r\sin 75° = 0{,}010 \times 300 \times 0{,}8 \times \sin 75° = 2{,}32 \text{ kg·m}^2\text{/s}" /></p>
@@ -406,7 +406,7 @@ export default function EksamenPage() {
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Definisjoner:</p>
                 <p><strong>Elastisk støt:</strong> Kinetisk energi er bevart. Bevegelsesmengde bevart.</p>
-                <p><strong>Fullkomment uelastisk:</strong> Legemene henger sammen etter støtet. Bevegelsesmengde bevart, K ikke bevart.</p>
+                <p><strong>Fullkomment uelastisk:</strong> Legemene henger sammen etter støtet. Bevegelsesmengde bevart, E_k ikke bevart.</p>
                 <p className="font-semibold mt-2">b) Bremsing:</p>
                 <p><InlineLatex latex="v_0 = 72 \text{ km/h} = 20 \text{ m/s}" /></p>
                 <p><InlineLatex latex="a = \frac{v^2-v_0^2}{2s} = \frac{0-400}{100} = -4{,}0 \text{ m/s}^2" /></p>
@@ -443,7 +443,7 @@ export default function EksamenPage() {
               formulaHints={[
                 { subQuestion: "a) akselerasjoner", formulas: <p><InlineLatex latex="a = -\mu_k g" />, <InlineLatex latex="\alpha = 5\mu_k g/(2R)" /></p> },
                 { subQuestion: "b) ren rulling", formulas: <p>Betingelse: <InlineLatex latex="v = R\omega" /></p> },
-                { subQuestion: "c) energi", formulas: <p><InlineLatex latex="E_K = \tfrac{7}{10}mv^2" /> (rullende kule)</p> },
+                { subQuestion: "c) energi", formulas: <p><InlineLatex latex="E_k = \tfrac{7}{10}mv^2" /> (rullende kule)</p> },
               ]}
               solution={<div className="space-y-3 text-sm">
                 <p className="font-semibold">a) Akselerasjoner:</p>
@@ -455,8 +455,8 @@ export default function EksamenPage() {
                 <p><InlineLatex latex="s = v_0 t + \tfrac{1}{2}at^2 = 10{,}4 \text{ m}" /></p>
                 <p><InlineLatex latex="v = v_0 + at = 10{,}2 - 2{,}45(1{,}19) = 7{,}3 \text{ m/s}" /></p>
                 <p className="font-semibold mt-2">c) Energi:</p>
-                <p><InlineLatex latex="E_K = \tfrac{7}{10}mv^2 = \tfrac{7}{10}(5{,}2)(7{,}3)^2 = 194 \text{ J}" /></p>
-                <p><InlineLatex latex="W_\text{friksjon} = \Delta K = 194 - \tfrac{1}{2}(5{,}2)(10{,}2)^2 = 194 - 270 = -76{,}5 \text{ J}" /></p>
+                <p><InlineLatex latex="E_k = \tfrac{7}{10}mv^2 = \tfrac{7}{10}(5{,}2)(7{,}3)^2 = 194 \text{ J}" /></p>
+                <p><InlineLatex latex="W_\text{friksjon} = \Delta E_k = 194 - \tfrac{1}{2}(5{,}2)(10{,}2)^2 = 194 - 270 = -76{,}5 \text{ J}" /></p>
                 <p className="font-semibold mt-2">d) Fritt fall fra kant:</p>
                 <p><InlineLatex latex="t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2(2{,}0)}{9{,}81}} = 0{,}639 \text{ s}" /></p>
                 <p><InlineLatex latex="x = v \cdot t = 7{,}3 \times 0{,}639 = 4{,}66 \text{ m}" /></p>
@@ -492,15 +492,15 @@ export default function EksamenPage() {
                 <p>b) Elektrisk potensial i origo fra begge ladninger.</p>
               </div>}
               hints={[
-                { label: "Hint a", content: "W = ΔU = kq₁q₂/r der r = avstand mellom ladningene = 2 cm" },
+                { label: "Hint a", content: "W = ΔE_p = kq₁q₂/r der r = avstand mellom ladningene = 2 cm" },
               ]}
               formulaHints={[
-                { subQuestion: "a) arbeid", formulas: <p><InlineLatex latex="U = k\frac{q_1 q_2}{r}" /></p> },
+                { subQuestion: "a) arbeid", formulas: <p><InlineLatex latex="E_p = k\frac{q_1 q_2}{r}" /></p> },
                 { subQuestion: "b) potensial", formulas: <p><InlineLatex latex="V = k\sum \frac{q_i}{r_i}" /> (skalar sum)</p> },
               ]}
               solution={<div className="space-y-2 text-sm">
                 <p className="font-semibold">a)</p>
-                <p><InlineLatex latex="U = k\frac{q_Aq_B}{r} = 8{,}99 \times 10^9 \times \frac{(2{,}50 \times 10^{-6})^2}{0{,}02} = 2{,}80 \text{ J}" /></p>
+                <p><InlineLatex latex="E_p = k\frac{q_Aq_B}{r} = 8{,}99 \times 10^9 \times \frac{(2{,}50 \times 10^{-6})^2}{0{,}02} = 2{,}80 \text{ J}" /></p>
                 <p className="font-semibold mt-2">b)</p>
                 <p><InlineLatex latex="V_0 = k\left(\frac{q_A}{r_1} + \frac{q_B}{r_2}\right) = 8{,}99 \times 10^9\left(\frac{2{,}5 \times 10^{-6}}{0{,}02} + \frac{2{,}5 \times 10^{-6}}{0{,}04}\right) = 1{,}3 \times 10^6 \text{ V}" /></p>
               </div>}

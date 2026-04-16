@@ -124,11 +124,11 @@ export function CollisionVisualizer() {
             <p className="font-bold">{pAfter.toFixed(1)} kg·m/s</p>
           </div>
           <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 p-3 text-center">
-            <p className="text-[var(--muted)]">E<sub>K,før</sub></p>
+            <p className="text-[var(--muted)]">E<sub>k,før</sub></p>
             <p className="font-bold">{result.ekBefore.toFixed(1)} J</p>
           </div>
           <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 p-3 text-center">
-            <p className="text-[var(--muted)]">E<sub>K,etter</sub></p>
+            <p className="text-[var(--muted)]">E<sub>k,etter</sub></p>
             <p className="font-bold">{result.ekAfter.toFixed(1)} J</p>
           </div>
           <div className="col-span-2 rounded-lg bg-red-50 dark:bg-red-950/20 p-3 text-center">
@@ -139,7 +139,7 @@ export function CollisionVisualizer() {
       </div>
 
       <p className="text-sm text-[var(--muted)] text-center mt-3">
-        Bevegelsesmengden er alltid bevart (p<sub>før</sub> = p<sub>etter</sub>). Ved elastisk kollisjon er også E<sub>K</sub> bevart. Ved inelastisk går energi tapt til varme/deformasjon.
+        Bevegelsesmengden er alltid bevart (p<sub>før</sub> = p<sub>etter</sub>). Ved elastisk kollisjon er også E<sub>k</sub> bevart. Ved inelastisk går energi tapt til varme/deformasjon.
       </p>
     </div>
   );

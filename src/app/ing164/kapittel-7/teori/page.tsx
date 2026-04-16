@@ -14,10 +14,10 @@ export default function TeoriPage() {
       <TheorySummary
         title="7.1 Gravitasjonell potensiell energi"
         mustKnow={[
-          "Potensiell energi: E_P = mgy",
-          "Arbeid utført av tyngden: W_mg = mgy₁ − mgy₂ = −ΔE_P",
+          "Potensiell energi: E_p = mgy",
+          "Arbeid utført av tyngden: W_mg = mgy₁ − mgy₂ = −ΔE_p",
           "Nullnivå kan velges fritt — kun høydeforskjeller betyr noe",
-          "Kun tyngden gjør arbeid → E_K + E_P = konstant",
+          "Kun tyngden gjør arbeid → E_k + E_p = konstant",
           "Med andre krefter: ½mv₁² + mgy₁ + W_andre = ½mv₂² + mgy₂",
           "Banen er irrelevant — kun høydeforskjellen Δy teller",
         ]}
@@ -41,7 +41,7 @@ export default function TeoriPage() {
             høyde <InlineLatex latex="y" /> over nullnivået:
           </p>
           <div className="mt-2 text-center">
-            <InlineLatex latex="E_P = mgy" />
+            <InlineLatex latex="E_p = mgy" />
           </div>
         </div>
 
@@ -49,9 +49,9 @@ export default function TeoriPage() {
           Sammenhengen mellom tyngdens arbeid og potensiell energi:
         </p>
         <FormulaBox
-          latex="W_{mg} = E_{P1} - E_{P2} = -\Delta E_P"
+          latex="W_{mg} = E_{p,1} - E_{p,2} = -\Delta E_p"
           variant="blue"
-          description="Tyngden gjør positivt arbeid når E_P minker (legemet faller)."
+          description="Tyngden gjør positivt arbeid når E_p minker (legemet faller)."
         />
 
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
@@ -72,7 +72,7 @@ export default function TeoriPage() {
           latex="\tfrac{1}{2}mv_1^2 + mgy_1 = \tfrac{1}{2}mv_2^2 + mgy_2"
           title="Bevaring av mekanisk energi"
           variant="gold"
-          description="E_K + E_P = konstant. Kinetisk energi og potensiell energi kan omformes til hverandre."
+          description="E_k + E_p = konstant. Kinetisk energi og potensiell energi kan omformes til hverandre."
         />
 
         <EnergyConservationVisualizer />

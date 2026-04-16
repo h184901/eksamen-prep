@@ -17,7 +17,7 @@ export default function OppgaverPage() {
             <li><strong>Velg nullnivå</strong> for potensiell energi (der det er mest praktisk)</li>
             <li><strong>Identifiser start- og sluttpunkt</strong> med kjente størrelser</li>
             <li><strong>Sjekk:</strong> Gjør noen andre krefter enn tyngden arbeid? Normalkraft = nei. Friksjon = ja!</li>
-            <li><strong>Sett opp:</strong> <InlineLatex latex="E_{K1} + E_{P1} = E_{K2} + E_{P2}" /></li>
+            <li><strong>Sett opp:</strong> <InlineLatex latex="E_{k,1} + E_{p,1} = E_{k,2} + E_{p,2}" /></li>
             <li><strong>Løs for ukjent</strong> (v eller h)</li>
           </ol>
         </div>
@@ -27,7 +27,7 @@ export default function OppgaverPage() {
           <ol className="list-decimal list-inside space-y-2 text-sm">
             <li>Samme steg 1–3 som over</li>
             <li><strong>Beregn W<sub>andre</sub>:</strong> Friksjonens arbeid = <InlineLatex latex="-Rs" /> (alltid negativt)</li>
-            <li><strong>Sett opp:</strong> <InlineLatex latex="E_{K1} + E_{P1} + W_{\text{andre}} = E_{K2} + E_{P2}" /></li>
+            <li><strong>Sett opp:</strong> <InlineLatex latex="E_{k,1} + E_{p,1} + W_{\text{andre}} = E_{k,2} + E_{p,2}" /></li>
             <li><strong>Løs for ukjent</strong></li>
             <li><strong>Sjekk:</strong> Fikk du negativt W<sub>friksjon</sub>? Hvis ikke, er det feil!</li>
           </ol>
@@ -66,7 +66,7 @@ export default function OppgaverPage() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
               <span className="text-red-500 mt-0.5 font-bold">✗</span>
-              <span>Glemmer at E<sub>P</sub> kan være negativ (hvis y er under nullnivået)</span>
+              <span>Glemmer at E<sub>p</sub> kan være negativ (hvis y er under nullnivået)</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-red-500 mt-0.5 font-bold">✗</span>
@@ -121,7 +121,7 @@ export default function OppgaverPage() {
               <li>Kun tyngden virker (ingen luftmotstand)</li>
             </ul>
             <p><strong>Hva skal vi finne?</strong> Maksimal høyde <InlineLatex latex="y_2" />.</p>
-            <p><strong>Strategi:</strong> Ved maks høyde er all kinetisk energi omgjort til potensiell energi (<InlineLatex latex="v_2 = 0" />). Vi bruker energibevaring: <InlineLatex latex="E_{K1} + E_{P1} = E_{K2} + E_{P2}" />. Massen kansellerer — maks høyde avhenger kun av startfart!</p>
+            <p><strong>Strategi:</strong> Ved maks høyde er all kinetisk energi omgjort til potensiell energi (<InlineLatex latex="v_2 = 0" />). Vi bruker energibevaring: <InlineLatex latex="E_{k,1} + E_{p,1} = E_{k,2} + E_{p,2}" />. Massen kansellerer — maks høyde avhenger kun av startfart!</p>
             <p><strong>Løsning:</strong></p>
             <FormulaBox
               latex="\tfrac{1}{2}mv_1^2 + mgy_1 = \tfrac{1}{2}mv_2^2 + mgy_2"
@@ -291,7 +291,7 @@ export default function OppgaverPage() {
             <p><strong>Strategi:</strong> Normalkraften er alltid vinkelrett på bevegelsen og gjør null arbeid. Uten friksjon er det kun tyngden som gjør arbeid, så vi bruker energibevaring. Høydeforskjellen er R (fra topp til bunn av kvartsirkelen). Merk: formen på banen spiller ingen rolle — kun høydeforskjellen!</p>
             <p><strong>Løsning:</strong></p>
             <FormulaBox
-              latex="E_{K1} + E_{P1} = E_{K2} + E_{P2}"
+              latex="E_{k,1} + E_{p,1} = E_{k,2} + E_{p,2}"
               variant="blue"
             />
             <p className="text-sm">Med <InlineLatex latex="v_1 = 0" />, <InlineLatex latex="y_1 = R" />, <InlineLatex latex="y_2 = 0" />:</p>
@@ -340,7 +340,7 @@ export default function OppgaverPage() {
               <li>Fart i bunn: <InlineLatex latex="v_2 = 6{,}0\;\text{m/s}" /> (lavere enn 7,67 m/s uten friksjon)</li>
             </ul>
             <p><strong>Hva skal vi finne?</strong> Arbeidet gjort av friksjon <InlineLatex latex="W_R" />.</p>
-            <p><strong>Strategi:</strong> Vi bruker den utvidede energiligningen som inkluderer arbeid fra ikke-konservative krefter: <InlineLatex latex="E_{K1} + E_{P1} + W_{\text{andre}} = E_{K2} + E_{P2}" />. Friksjon er den eneste «andre» kraften, så <InlineLatex latex="W_{\text{andre}} = W_R" />.</p>
+            <p><strong>Strategi:</strong> Vi bruker den utvidede energiligningen som inkluderer arbeid fra ikke-konservative krefter: <InlineLatex latex="E_{k,1} + E_{p,1} + W_{\text{andre}} = E_{k,2} + E_{p,2}" />. Friksjon er den eneste «andre» kraften, så <InlineLatex latex="W_{\text{andre}} = W_R" />.</p>
             <p><strong>Løsning:</strong></p>
             <FormulaBox
               latex="0 + mgR + W_R = \tfrac{1}{2}mv_2^2 + 0"

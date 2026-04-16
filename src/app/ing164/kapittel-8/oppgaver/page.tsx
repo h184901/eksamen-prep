@@ -28,9 +28,9 @@ export default function Kapittel8Oppgaver() {
           <h3 className="font-semibold text-lg mb-3">Strategi: Kollisjonsoppgaver — Hvilken type?</h3>
           <ol className="list-decimal list-inside space-y-2 text-sm">
             <li><strong>Les oppgaven nøye:</strong> Henger de sammen etterpå? → Fullstendig inelastisk</li>
-            <li><strong>Elastisk?</strong> Oppgaven sier det eksplisitt, eller spør om E<sub>K</sub> er bevart</li>
+            <li><strong>Elastisk?</strong> Oppgaven sier det eksplisitt, eller spør om E<sub>k</sub> er bevart</li>
             <li><strong>Sett opp p-bevaring</strong> (alltid, uansett type)</li>
-            <li>Er den elastisk? <strong>Legg til E<sub>K</sub>-bevaring</strong> → to ligninger</li>
+            <li>Er den elastisk? <strong>Legg til E<sub>k</sub>-bevaring</strong> → to ligninger</li>
             <li><strong>Løs</strong> — ved elastisk: substitusjon, forkast triviell løsning</li>
             <li><strong>Beregn energitap</strong> hvis oppgaven spør om det</li>
           </ol>
@@ -56,7 +56,7 @@ export default function Kapittel8Oppgaver() {
           <h3 className="font-semibold text-lg mb-3">Sjekkliste — Vanlige feil i kap. 8</h3>
           <ul className="list-disc list-inside space-y-2 text-sm">
             <li>Glemmer <strong>fortegn</strong> når ting beveger seg i motsatt retning</li>
-            <li>Blander <strong>kollisjonstype</strong> — E<sub>K</sub> er KUN bevart i elastisk!</li>
+            <li>Blander <strong>kollisjonstype</strong> — E<sub>k</sub> er KUN bevart i elastisk!</li>
             <li>Glemmer å <strong>konvertere enheter</strong> (km/h → m/s, gram → kg)</li>
             <li>I 2D: Glemmer å bruke <strong>komponentmetoden</strong></li>
             <li>Bruker feil prinsipp i ballistisk pendel (se over)</li>
@@ -330,7 +330,7 @@ export default function Kapittel8Oppgaver() {
               <p className="font-semibold mb-1">Hva skal vi finne?</p>
               <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Felles hastighet <InlineLatex latex="v_2" /> etter støtet</li>
-                <li>Energitap <InlineLatex latex="\Delta E_K" /></li>
+                <li>Energitap <InlineLatex latex="\Delta E_k" /></li>
               </ul>
             </div>
             <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
@@ -346,23 +346,23 @@ export default function Kapittel8Oppgaver() {
               />
               <p className="text-sm mt-2 mb-1">Steg 2 — Kinetisk energi før støtet:</p>
               <FormulaBox
-                latex="E_{K1} = \tfrac{1}{2} m_A v_{A1}^2 + \tfrac{1}{2} m_B v_{B1}^2 = \tfrac{1}{2} \cdot 0{,}50 \cdot 4 + \tfrac{1}{2} \cdot 0{,}30 \cdot 4 = 1{,}60\;\text{J}"
+                latex="E_{k,1} = \tfrac{1}{2} m_A v_{A1}^2 + \tfrac{1}{2} m_B v_{B1}^2 = \tfrac{1}{2} \cdot 0{,}50 \cdot 4 + \tfrac{1}{2} \cdot 0{,}30 \cdot 4 = 1{,}60\;\text{J}"
                 variant="blue"
               />
               <p className="text-sm mt-2 mb-1">Steg 3 — Kinetisk energi etter støtet:</p>
               <FormulaBox
-                latex="E_{K2} = \tfrac{1}{2}(m_A+m_B)v_2^2 = \tfrac{1}{2} \cdot 0{,}80 \cdot 0{,}25 = 0{,}10\;\text{J}"
+                latex="E_{k,2} = \tfrac{1}{2}(m_A+m_B)v_2^2 = \tfrac{1}{2} \cdot 0{,}80 \cdot 0{,}25 = 0{,}10\;\text{J}"
                 variant="blue"
               />
               <p className="text-sm mt-2 mb-1">Steg 4 — Energitap:</p>
               <FormulaBox
-                latex="\Delta E_K = E_{K1} - E_{K2} = 1{,}60 - 0{,}10 = \underline{\underline{1{,}50\;\text{J (tapt)}}}"
+                latex="\Delta E_k = E_{k,1} - E_{k,2} = 1{,}60 - 0{,}10 = \underline{\underline{1{,}50\;\text{J (tapt)}}}"
                 variant="gold"
               />
             </div>
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="v_2 = 0{,}50\;\text{m/s} \quad (\rightarrow), \quad \Delta E_K = 1{,}50\;\text{J (tapt)}" variant="gold" />
+              <FormulaBox latex="v_2 = 0{,}50\;\text{m/s} \quad (\rightarrow), \quad \Delta E_k = 1{,}50\;\text{J (tapt)}" variant="gold" />
             </div>
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
               <p className="font-semibold mb-1">Hva lærte vi?</p>
@@ -491,12 +491,12 @@ export default function Kapittel8Oppgaver() {
               <p className="font-semibold mb-1">Hva skal vi finne?</p>
               <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Felles hastighet (størrelse og retning) etter kollisjonen</li>
-                <li>Energitap <InlineLatex latex="\Delta E_K" /></li>
+                <li>Energitap <InlineLatex latex="\Delta E_k" /></li>
               </ul>
             </div>
             <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
               <p className="font-semibold mb-1">Strategi</p>
-              <p className="text-sm">2D fullstendig inelastisk kollisjon. Vi setter opp <strong>p-bevaring komponentvis</strong> — x og y behandles som to uavhengige 1D-problemer. Deretter gir Pythagoras størrelsen og arctangens gir retningen. Energitapet beregnes ved å sammenligne <InlineLatex latex="E_K" /> før og etter.</p>
+              <p className="text-sm">2D fullstendig inelastisk kollisjon. Vi setter opp <strong>p-bevaring komponentvis</strong> — x og y behandles som to uavhengige 1D-problemer. Deretter gir Pythagoras størrelsen og arctangens gir retningen. Energitapet beregnes ved å sammenligne <InlineLatex latex="E_k" /> før og etter.</p>
             </div>
             <div>
               <p className="font-semibold mb-2">Løsning</p>
@@ -521,21 +521,21 @@ export default function Kapittel8Oppgaver() {
               />
               <p className="text-sm mt-2 mb-1">Steg 4 — Energitap:</p>
               <FormulaBox
-                latex="E_{K,\text{før}} = \tfrac{1}{2} \cdot 1000 \cdot 15^2 + \tfrac{1}{2} \cdot 2000 \cdot 10^2 = 112\,500 + 100\,000 = 212\,500\;\text{J}"
+                latex="E_{k,\text{før}} = \tfrac{1}{2} \cdot 1000 \cdot 15^2 + \tfrac{1}{2} \cdot 2000 \cdot 10^2 = 112\,500 + 100\,000 = 212\,500\;\text{J}"
                 variant="blue"
               />
               <FormulaBox
-                latex="E_{K,\text{etter}} = \tfrac{1}{2} \cdot 3000 \cdot 8{,}3^2 \approx 103\,335\;\text{J}"
+                latex="E_{k,\text{etter}} = \tfrac{1}{2} \cdot 3000 \cdot 8{,}3^2 \approx 103\,335\;\text{J}"
                 variant="blue"
               />
               <FormulaBox
-                latex="\Delta E_K = 212\,500 - 103\,335 = \underline{\underline{109\;\text{kJ (tapt)}}}"
+                latex="\Delta E_k = 212\,500 - 103\,335 = \underline{\underline{109\;\text{kJ (tapt)}}}"
                 variant="gold"
               />
             </div>
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold mb-1">Svar</p>
-              <FormulaBox latex="v = 8{,}3\;\text{m/s},\quad 37°\text{ nord for øst},\quad \Delta E_K = 109\;\text{kJ (tapt)}" variant="gold" />
+              <FormulaBox latex="v = 8{,}3\;\text{m/s},\quad 37°\text{ nord for øst},\quad \Delta E_k = 109\;\text{kJ (tapt)}" variant="gold" />
             </div>
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
               <p className="font-semibold mb-1">Hva lærte vi?</p>
@@ -562,7 +562,7 @@ export default function Kapittel8Oppgaver() {
         hints={[
           {
             label: "Hint 1",
-            content: <p>To ligninger: p-bevaring og E<sub>K</sub>-bevaring. Uttrykk v<sub>A2</sub> fra den ene og sett inn i den andre.</p>,
+            content: <p>To ligninger: p-bevaring og E<sub>k</sub>-bevaring. Uttrykk v<sub>A2</sub> fra den ene og sett inn i den andre.</p>,
           },
           {
             label: "Hint 2",
@@ -619,7 +619,7 @@ export default function Kapittel8Oppgaver() {
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold mb-1">Svar</p>
               <FormulaBox latex="v_{A2} = -1{,}0\;\text{m/s}\;(\leftarrow), \quad v_{B2} = +3{,}0\;\text{m/s}\;(\rightarrow)" variant="gold" />
-              <p className="text-sm mt-1">Sjekk: <InlineLatex latex="p_{\text{etter}} = 0{,}50 \cdot (-1) + 0{,}30 \cdot 3 = 0{,}40" /> ✓ og <InlineLatex latex="E_{K,\text{etter}} = 0{,}25 + 1{,}35 = 1{,}60\;\text{J}" /> ✓</p>
+              <p className="text-sm mt-1">Sjekk: <InlineLatex latex="p_{\text{etter}} = 0{,}50 \cdot (-1) + 0{,}30 \cdot 3 = 0{,}40" /> ✓ og <InlineLatex latex="E_{k,\text{etter}} = 0{,}25 + 1{,}35 = 1{,}60\;\text{J}" /> ✓</p>
             </div>
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
               <p className="font-semibold mb-1">Hva lærte vi?</p>

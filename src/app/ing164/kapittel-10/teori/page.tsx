@@ -128,7 +128,7 @@ export default function TeoriPage() {
         mustKnow={[
           "v_CM = Rω — betingelse for rulling uten glidning",
           "Kontaktpunktet har null hastighet (momentant)",
-          "Total kinetisk energi: K = ½mv²_CM + ½Iω²",
+          "Total kinetisk energi: E_{k,tot} = ½mv²_CM + ½Iω²",
           "Statisk friksjon driver rullingen — IKKE kinetisk",
         ]}
       >
@@ -142,7 +142,7 @@ export default function TeoriPage() {
           <strong>Hastighet på ulike punkter:</strong> Kontaktpunktet har <InlineLatex latex="v = 0" /> (momentan stillstand), massesenteret har <InlineLatex latex="v = v_{CM}" />, og toppen har <InlineLatex latex="v = 2v_{CM}" />.
         </p>
         <p className="mb-4">
-          <strong>Energi ved rulling:</strong> <InlineLatex latex="K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2" />. For en disk: <InlineLatex latex="K = \tfrac{3}{4}mv_{CM}^2" />, for en ring: <InlineLatex latex="K = mv_{CM}^2" />.
+          <strong>Energi ved rulling:</strong> <InlineLatex latex="E_{k,\text{tot}} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2" />. For en disk: <InlineLatex latex="E_k = \tfrac{3}{4}mv_{CM}^2" />, for en ring: <InlineLatex latex="E_k = mv_{CM}^2" />.
         </p>
 
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
@@ -194,7 +194,7 @@ export default function TeoriPage() {
         mustKnow={[
           "W = τ Δθ — arbeid utført av et konstant kraftmoment",
           "P = τω — effekt i rotasjon",
-          "Arbeid-energi-teoremet: W_tot = ΔK_rot = ½Iω² − ½Iω₀²",
+          "Arbeid-energi-teoremet: W_tot = ΔE_{k,rot} = ½Iω² − ½Iω₀²",
         ]}
       >
         <p className="mb-3">
@@ -207,7 +207,7 @@ export default function TeoriPage() {
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-800 dark:text-amber-300 mb-2">Hvorfor W = τΔθ?</p>
           <p className="text-sm">
-            Sammenlign med lineærtilfellet: <InlineLatex latex="W = F \cdot \Delta x" />. I rotasjon spiller vinkel <InlineLatex latex="\Delta\theta" /> rollen som forflytning, og kraftmoment <InlineLatex latex="\tau" /> spiller rollen som kraft. Analogien er fullstendig: <InlineLatex latex="F \leftrightarrow \tau" />, <InlineLatex latex="\Delta x \leftrightarrow \Delta\theta" />, <InlineLatex latex="v \leftrightarrow \omega" />. Dermed gir arbeid-energi-teoremet: <InlineLatex latex="W_{tot} = \Delta K_{rot} = \tfrac{1}{2}I\omega_2^2 - \tfrac{1}{2}I\omega_1^2" />.
+            Sammenlign med lineærtilfellet: <InlineLatex latex="W = F \cdot \Delta x" />. I rotasjon spiller vinkel <InlineLatex latex="\Delta\theta" /> rollen som forflytning, og kraftmoment <InlineLatex latex="\tau" /> spiller rollen som kraft. Analogien er fullstendig: <InlineLatex latex="F \leftrightarrow \tau" />, <InlineLatex latex="\Delta x \leftrightarrow \Delta\theta" />, <InlineLatex latex="v \leftrightarrow \omega" />. Dermed gir arbeid-energi-teoremet: <InlineLatex latex="W_{tot} = \Delta E_{k,rot} = \tfrac{1}{2}I\omega_2^2 - \tfrac{1}{2}I\omega_1^2" />.
           </p>
         </div>
 
@@ -221,7 +221,7 @@ export default function TeoriPage() {
         <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-blue-800 dark:text-blue-300 mb-2">Sammenheng med kap 6</p>
           <p className="text-sm">
-            Arbeid-energi-teoremet fra kap 6 (<InlineLatex latex="W_{tot} = \Delta K_{lin}" />) gjelder ord for ord for rotasjon, bare bytt ut <InlineLatex latex="\tfrac{1}{2}mv^2" /> med <InlineLatex latex="\tfrac{1}{2}I\omega^2" />. For rullende objekter bruker du <em>begge</em> bidragene: <InlineLatex latex="\Delta K_{tot} = \Delta K_{lin} + \Delta K_{rot}" />.
+            Arbeid-energi-teoremet fra kap 6 (<InlineLatex latex="W_{tot} = \Delta E_{k,lin}" />) gjelder ord for ord for rotasjon, bare bytt ut <InlineLatex latex="\tfrac{1}{2}mv^2" /> med <InlineLatex latex="\tfrac{1}{2}I\omega^2" />. For rullende objekter bruker du <em>begge</em> bidragene: <InlineLatex latex="\Delta E_{k,tot} = \Delta E_{k,lin} + \Delta E_{k,rot}" />.
           </p>
         </div>
       </TheorySummary>
@@ -315,7 +315,7 @@ export default function TeoriPage() {
         <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-red-800 dark:text-red-300 mb-2">Vanlige misforståelser</p>
           <ul className="text-sm space-y-2 list-disc list-inside">
-            <li><strong>«Hvis L er bevart, er K_rot også bevart»</strong> — Nei! Når kunstløperen trekker armene inn gjør hun <em>muskelarbeid</em> på armene sine, som øker den kinetiske energien. <InlineLatex latex="L" /> er bevart, men <InlineLatex latex="K" /> øker. Energibevaringen brytes ikke — arbeidet kommer fra kjemisk energi i musklene.</li>
+            <li><strong>«Hvis <InlineLatex latex="L" /> er bevart, er <InlineLatex latex="E_{k,\text{rot}}" /> også bevart»</strong> — Nei! Når kunstløperen trekker armene inn gjør hun <em>muskelarbeid</em> på armene sine, som øker den kinetiske energien. <InlineLatex latex="L" /> er bevart, men <InlineLatex latex="E_k" /> øker. Energibevaringen brytes ikke — arbeidet kommer fra kjemisk energi i musklene.</li>
             <li><strong>«Bevaringsloven gjelder bare for fast akse»</strong> — Nei, det er en vektorlov i 3D: <InlineLatex latex="\vec{L} = \text{konstant}" />. Alle tre komponenter er bevart. Fast akse er et spesialtilfelle.</li>
             <li><strong>«Indre krefter kan endre L»</strong> — Nei! Bare ytre kraftmomenter endrer totalt L. Interne krefters kraftmomenter kansellerer alltid i par (N3L).</li>
           </ul>
@@ -332,7 +332,7 @@ export default function TeoriPage() {
         </div>
 
         <p className="text-sm mt-2">
-          <strong>OBS:</strong> Selv om <InlineLatex latex="L" /> er bevart, er <InlineLatex latex="K_\text{rot}" /> generelt IKKE bevart. Når kunstløperen trekker armene inn gjør hun arbeid, og <InlineLatex latex="K" /> øker.
+          <strong>OBS:</strong> Selv om <InlineLatex latex="L" /> er bevart, er <InlineLatex latex="E_{k,\text{rot}}" /> generelt IKKE bevart. Når kunstløperen trekker armene inn gjør hun arbeid, og <InlineLatex latex="E_k" /> øker.
         </p>
       </TheorySummary>
 

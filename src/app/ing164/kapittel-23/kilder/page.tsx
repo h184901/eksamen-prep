@@ -17,7 +17,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=KoZ61FujkRk"
           duration="30 min"
           covers="Potensiell energi og potensial (23.1–23.2)"
-          description="Elektrisk potensiell energi mellom ladninger (U = kq1q2/r), elektrisk potensial (V = kQ/r), og spenningsforskjell. Gjennomgatte oppgaver med punktladninger og parallelle plater."
+          description="Elektrisk potensiell energi mellom ladninger (E_p = kq1q2/r), elektrisk potensial (V = kQ/r), og spenningsforskjell. Gjennomgatte oppgaver med punktladninger og parallelle plater."
         />
 
         <VideoResource

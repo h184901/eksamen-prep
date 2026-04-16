@@ -547,7 +547,7 @@ export const kinEnergi: FormulaMeta = {
   conceptExplanation:
     "Arbeid-energi-teoremet: all netto arbeid gir endring i kinetisk energi. En kraftfull måte å løse oppgaver uten å måtte kjenne tiden.",
   variables: [
-    { symbol: "K", name: "Kinetisk energi", unit: "J", unitName: "joule" },
+    { symbol: "E_k", name: "Kinetisk energi", unit: "J", unitName: "joule" },
     { symbol: "m", name: "Masse", unit: "kg", unitName: "kilogram" },
     { symbol: "v", name: "Fart", unit: "m/s", unitName: "meter per sekund" },
     { symbol: "W_\\text{tot}", name: "Netto arbeid på legemet", unit: "J", unitName: "joule" },
@@ -555,17 +555,17 @@ export const kinEnergi: FormulaMeta = {
   whenToUse:
     "Når du vil finne sluttfart etter at netto arbeid er gjort — uten å måtte regne på tid eller akselerasjon.",
   commonMistakes: [
-    "Glemme at K alltid er positiv",
-    "Legge sammen hastighetsvektorer før kvadrering — K avhenger av |v|²",
+    "Glemme at E_k alltid er positiv",
+    "Legge sammen hastighetsvektorer før kvadrering — E_k avhenger av |v|²",
   ],
 };
 
 export const potEnergi: FormulaMeta = {
   conceptExplanation:
-    "Potensiell energi er lagret energi relatert til konservative krefter. Tyngdekraft gir U = mgy; fjær gir U = ½kx². Nullnivået kan velges fritt.",
+    "Potensiell energi er lagret energi relatert til konservative krefter. Tyngdekraft gir E_p = mgy; fjær gir E_p = ½kx². Nullnivået kan velges fritt.",
   variables: [
-    { symbol: "U_\\text{grav}", name: "Gravitasjonspotensiell energi", unit: "J", unitName: "joule" },
-    { symbol: "U_\\text{fjær}", name: "Fjær-potensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_{p,\\text{grav}}", name: "Gravitasjonspotensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_{p,\\text{fjær}}", name: "Fjær-potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "m", name: "Masse", unit: "kg", unitName: "kilogram" },
     { symbol: "g", name: "Tyngdeakselerasjon", unit: "m/s²", unitName: "≈ 9,81 m/s²" },
     { symbol: "y", name: "Høyde over valgt nullnivå", unit: "m", unitName: "meter" },
@@ -574,15 +574,15 @@ export const potEnergi: FormulaMeta = {
   ],
   whenToUse: "Når du bruker energibevaring og trenger å regne lagret energi.",
   whenNotToUse:
-    "U = mgy gjelder kun når g er tilnærmet konstant (nær jordoverflaten). Bruk U = −GMm/r i astronomiske problemer.",
+    "E_p = mgy gjelder kun når g er tilnærmet konstant (nær jordoverflaten). Bruk E_p = −GMm/r i astronomiske problemer.",
 };
 
 export const energibevaring: FormulaMeta = {
   conceptExplanation:
     "Total mekanisk energi er bevart når bare konservative krefter gjør arbeid. Ikke-konservativt arbeid (friksjon, snordrag) tar fra eller gir energi til systemet.",
   variables: [
-    { symbol: "K_1, K_2", name: "Kinetisk energi før/etter", unit: "J", unitName: "joule" },
-    { symbol: "U_1, U_2", name: "Potensiell energi før/etter", unit: "J", unitName: "joule" },
+    { symbol: "E_{k,1}, E_{k,2}", name: "Kinetisk energi før/etter", unit: "J", unitName: "joule" },
+    { symbol: "E_{p,1}, E_{p,2}", name: "Potensiell energi før/etter", unit: "J", unitName: "joule" },
     { symbol: "W_\\text{andre}", name: "Arbeid fra ikke-konservative krefter", unit: "J", unitName: "joule" },
   ],
   whenToUse:
@@ -590,7 +590,7 @@ export const energibevaring: FormulaMeta = {
   whenNotToUse: "Ikke glem friksjonsarbeid — det er negativt og må inkluderes i W_andre.",
   commonMistakes: [
     "Glemme å inkludere W_andre ved friksjon",
-    "Velge ulikt nullnivå for U på før/etter-siden",
+    "Velge ulikt nullnivå for E_p på før/etter-siden",
   ],
 };
 
@@ -648,20 +648,20 @@ export const hookes: FormulaMeta = {
 
 export const EPgrav: FormulaMeta = {
   conceptExplanation:
-    "Potensiell energi ved høyde y = mgy (nær jordoverflaten). Kun endringer i E_P er fysisk relevante — derfor kan du velge nullnivå fritt.",
+    "Potensiell energi ved høyde y = mgy (nær jordoverflaten). Kun endringer i E_p er fysisk relevante — derfor kan du velge nullnivå fritt.",
   variables: [
-    { symbol: "E_P", name: "Gravitasjonell potensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_p", name: "Gravitasjonell potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "m", name: "Masse", unit: "kg", unitName: "kilogram" },
     { symbol: "g", name: "Tyngdeakselerasjon", unit: "m/s²", unitName: "≈ 9,81" },
     { symbol: "y", name: "Høyde over nullnivå", unit: "m", unitName: "meter" },
   ],
   whenToUse: "Nær jordoverflaten hvor g er tilnærmet konstant.",
-  whenNotToUse: "Ikke bruk i rombaner — bruk U = −GMm/r.",
+  whenNotToUse: "Ikke bruk i rombaner — bruk E_p = −GMm/r.",
 };
 
 export const Wtyngde: FormulaMeta = {
   conceptExplanation:
-    "Arbeidet av tyngden avhenger KUN av høydeforskjellen — ikke av banen. Det er en konservativ kraft, derfor er W = −ΔE_P.",
+    "Arbeidet av tyngden avhenger KUN av høydeforskjellen — ikke av banen. Det er en konservativ kraft, derfor er W = −ΔE_p.",
   variables: [
     { symbol: "W_{mg}", name: "Arbeid av tyngden", unit: "J", unitName: "joule" },
     { symbol: "m", name: "Masse", unit: "kg", unitName: "kilogram" },
@@ -675,8 +675,8 @@ export const EbevaringSimple: FormulaMeta = {
   conceptExplanation:
     "Når kun tyngdekraft (eller andre konservative krefter) gjør arbeid er total mekanisk energi bevart. Dette gjør oppgaver dramatisk enklere.",
   variables: [
-    { symbol: "E_K", name: "Kinetisk energi", unit: "J", unitName: "joule" },
-    { symbol: "E_P", name: "Potensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_k", name: "Kinetisk energi", unit: "J", unitName: "joule" },
+    { symbol: "E_p", name: "Potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "m", name: "Masse", unit: "kg", unitName: "kilogram" },
     { symbol: "v", name: "Fart", unit: "m/s", unitName: "meter per sekund" },
     { symbol: "g", name: "Tyngdeakselerasjon", unit: "m/s²", unitName: "≈ 9,81" },
@@ -691,8 +691,8 @@ export const EbevaringFull: FormulaMeta = {
     "Med ikke-konservative krefter (friksjon, snordrag, etc.) må arbeidet deres tas med. Friksjonsarbeid er alltid negativt.",
   variables: [
     { symbol: "W_\\text{andre}", name: "Arbeid fra ikke-konservative krefter", unit: "J", unitName: "joule" },
-    { symbol: "E_K", name: "Kinetisk energi", unit: "J", unitName: "joule" },
-    { symbol: "E_P", name: "Potensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_k", name: "Kinetisk energi", unit: "J", unitName: "joule" },
+    { symbol: "E_p", name: "Potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "y", name: "Høyde", unit: "m", unitName: "meter" },
   ],
   whenToUse: "Alltid når friksjon eller andre ytre krefter er til stede.",
@@ -760,7 +760,7 @@ export const ballistiskPendel: FormulaMeta = {
     { symbol: "g", name: "Tyngdeakselerasjon", unit: "m/s²", unitName: "≈ 9,81" },
   ],
   whenToUse: "Klassisk ballistisk pendel — kule treffer kloss i tau og svinger opp.",
-  whenNotToUse: "Ikke prøv å bruke energibevaring gjennom selve kollisjonen — K er IKKE bevart der.",
+  whenNotToUse: "Ikke prøv å bruke energibevaring gjennom selve kollisjonen — E_k er IKKE bevart der.",
 };
 
 export const N2LSystem: FormulaMeta = {
@@ -816,7 +816,7 @@ export const elastisk: FormulaMeta = {
     { symbol: "m_1, m_2", name: "Massene", unit: "kg", unitName: "kilogram" },
   ],
   whenToUse: "Elastiske støt i 1D — f.eks biljardkuler, atomiske kollisjoner.",
-  whenNotToUse: "Ikke bruk hvis støtet er uelastisk (K ikke bevart).",
+  whenNotToUse: "Ikke bruk hvis støtet er uelastisk (E_k ikke bevart).",
   commonMistakes: ["Blande opp massene — vær nøye med indeksene"],
 };
 
@@ -829,7 +829,7 @@ export const uelastisk: FormulaMeta = {
     { symbol: "v_1, v_2", name: "Starthastigheter", unit: "m/s", unitName: "meter per sekund" },
   ],
   whenToUse: "Når legemene sitter sammen etter støtet (plast som klebes, bil som kiler seg).",
-  commonMistakes: ["Prøve å bruke energibevaring — K er IKKE bevart"],
+  commonMistakes: ["Prøve å bruke energibevaring — E_k er IKKE bevart"],
 };
 
 export const massesenter: FormulaMeta = {
@@ -934,9 +934,9 @@ export const tau: FormulaMeta = {
 
 export const Krot: FormulaMeta = {
   conceptExplanation:
-    "Rotasjonsenergi K_rot = ½Iω² er den kinetiske energien i selve rotasjonen. Et rullende objekt har BÅDE translasjons- og rotasjonsenergi.",
+    "Rotasjonsenergi E_{k,rot} = ½Iω² er den kinetiske energien i selve rotasjonen. Et rullende objekt har BÅDE translasjons- og rotasjonsenergi.",
   variables: [
-    { symbol: "K_\\text{rot}", name: "Rotasjonell kinetisk energi", unit: "J", unitName: "joule" },
+    { symbol: "E_{k,\\text{rot}}", name: "Rotasjonell kinetisk energi", unit: "J", unitName: "joule" },
     { symbol: "I", name: "Treghetsmoment", unit: "kg·m²", unitName: "kilogram-meter kvadrat" },
     { symbol: "\\omega", name: "Vinkelhastighet", unit: "rad/s", unitName: "radianer per sekund" },
     { symbol: "W", name: "Rotasjonsarbeid", unit: "J", unitName: "joule" },
@@ -953,7 +953,7 @@ export const rulling: FormulaMeta = {
     { symbol: "v_{CM}", name: "Massesenterfart", unit: "m/s", unitName: "meter per sekund" },
     { symbol: "R", name: "Radius", unit: "m", unitName: "meter" },
     { symbol: "\\omega", name: "Vinkelhastighet", unit: "rad/s", unitName: "radianer per sekund" },
-    { symbol: "K_\\text{tot}", name: "Total kinetisk energi", unit: "J", unitName: "joule" },
+    { symbol: "E_{k,\\text{tot}}", name: "Total kinetisk energi", unit: "J", unitName: "joule" },
     { symbol: "I", name: "Treghetsmoment om CM", unit: "kg·m²", unitName: "kilogram-meter kvadrat" },
   ],
   whenToUse: "Kule eller sylinder som ruller uten å slure.",
@@ -1059,36 +1059,38 @@ export const eKule: FormulaMeta = {
 
 export const V: FormulaMeta = {
   conceptExplanation:
-    "Elektrisk potensial V = potensiell energi per ladning. Viktig fordi det er en SKALAR — du kan summere potensialer uten å bekymre deg om retning. Arbeidet for å flytte q fra a til b: W = q(V_a − V_b).",
+    "Elektrisk potensial V = potensiell energi per ladning. Viktig fordi det er en SKALAR — du kan summere potensialer uten å bekymre deg om retning. Arbeidet feltet gjør på en ladning q fra a til b: W_elfelt = q(V_a − V_b) = −ΔE_p. Arbeidet en YTRE kraft må gjøre for å flytte den samme veien: W_ytre = ΔE_p = q(V_b − V_a) = qΔV.",
   variables: [
     { symbol: "V", name: "Elektrisk potensial", unit: "V", unitName: "volt (1 V = 1 J/C)" },
     { symbol: "q", name: "Kildeladning", unit: "C", unitName: "coulomb" },
     { symbol: "r", name: "Avstand fra kildeladning", unit: "m", unitName: "meter" },
-    { symbol: "W_{a\\to b}", name: "Arbeid av elektrisk kraft", unit: "J", unitName: "joule" },
+    { symbol: "W_\\text{elfelt}", name: "Arbeid av elektrisk felt", unit: "J", unitName: "joule" },
+    { symbol: "W_\\text{ytre}", name: "Arbeid av ytre kraft", unit: "J", unitName: "joule" },
     { symbol: "q_0", name: "Flyttet ladning", unit: "C", unitName: "coulomb" },
   ],
   whenToUse:
     "Når du vil regne arbeid/energi i elektriske felt — ofte enklere enn å regne kraft-og-avstand.",
   alternativForms: [
-    { label: "Arbeid for å flytte ladning", latex: "W_\\text{ytre} = q(V_b - V_a) = q\\,\\Delta V" },
+    { label: "Arbeid gjort AV feltet", latex: "W_\\text{elfelt} = -\\Delta E_p = q(V_a - V_b)" },
+    { label: "Arbeid gjort av YTRE kraft", latex: "W_\\text{ytre} = \\Delta E_p = q(V_b - V_a) = q\\,\\Delta V" },
     { label: "Felt fra potensial", latex: "\\vec{E} = -\\nabla V" },
   ],
   commonMistakes: [
     "Summere potensialer som vektorer — V er en SKALAR",
-    "Blande tegnkonvensjonen: W_elektrisk = q(V_a − V_b), men W_ytre = q(V_b − V_a) = qΔV",
+    "Blande tegnkonvensjonen: W_elfelt = q(V_a − V_b), men W_ytre = q(V_b − V_a) = qΔV",
   ],
 };
 
 export const Uladninger: FormulaMeta = {
   conceptExplanation:
-    "Potensiell energi mellom to punktladninger. Positiv U = frastøtning (like ladninger), negativ U = tiltrekning (motsatte).",
+    "Potensiell energi mellom to punktladninger. Positiv E_p = frastøtning (like ladninger), negativ E_p = tiltrekning (motsatte).",
   variables: [
-    { symbol: "U", name: "Potensiell energi", unit: "J", unitName: "joule" },
+    { symbol: "E_p", name: "Potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "q_1, q_2", name: "Ladningene", unit: "C", unitName: "coulomb" },
     { symbol: "r", name: "Avstand mellom ladningene", unit: "m", unitName: "meter" },
     { symbol: "k", name: "Coulombs konstant", unit: "N·m²/C²", unitName: "≈ 8{,}99·10⁹" },
   ],
-  whenToUse: "Ved energibevaring med ladninger. U → 0 når r → ∞.",
+  whenToUse: "Ved energibevaring med ladninger. E_p → 0 når r → ∞.",
   commonMistakes: ["Glemme fortegn på ladningene"],
 };
 
@@ -1101,14 +1103,14 @@ export const C: FormulaMeta = {
     { symbol: "V_{ab}", name: "Potensialforskjell", unit: "V", unitName: "volt" },
     { symbol: "A", name: "Plateareal", unit: "m²", unitName: "kvadratmeter" },
     { symbol: "d", name: "Avstand mellom platene", unit: "m", unitName: "meter" },
-    { symbol: "U", name: "Lagret energi", unit: "J", unitName: "joule" },
+    { symbol: "E_p", name: "Lagret energi", unit: "J", unitName: "joule" },
     { symbol: "\\varepsilon_0", name: "Vakuumpermittivitet", unit: "F/m", unitName: "8{,}854·10⁻¹²" },
   ],
   whenToUse: "Platekondensatorer, energilagring, RC-kretser.",
   alternativForms: [
-    { label: "Energi via Q", latex: "U = \\frac{Q^2}{2C}" },
-    { label: "Energi via V", latex: "U = \\tfrac{1}{2}CV^2" },
-    { label: "Energi via Q og V", latex: "U = \\tfrac{1}{2}QV" },
+    { label: "Energi via Q", latex: "E_p = \\frac{Q^2}{2C}" },
+    { label: "Energi via V", latex: "E_p = \\tfrac{1}{2}CV^2" },
+    { label: "Energi via Q og V", latex: "E_p = \\tfrac{1}{2}QV" },
   ],
   commonMistakes: [
     "Bruke C = ε₀A/d uten å sjekke om dielektrikum fyller hullet",
@@ -1405,7 +1407,7 @@ export const diskSkraplan: FormulaMeta = {
 
 export const EpUniform: FormulaMeta = {
   conceptExplanation:
-    "I et UNIFORMT elektrisk felt er potensiell energi lineær i posisjon: Ep = q₀Ey (y målt mot feltets retning). Direkte analogi til U = mgh for tyngdekraft.",
+    "I et UNIFORMT elektrisk felt er potensiell energi lineær i posisjon: E_p = q₀Ey (y målt mot feltets retning). Direkte analogi til E_p = mgh for tyngdekraft.",
   variables: [
     { symbol: "E_p", name: "Elektrisk potensiell energi", unit: "J", unitName: "joule" },
     { symbol: "q_0", name: "Testladning", unit: "C", unitName: "coulomb" },
@@ -1481,7 +1483,7 @@ export const energitetthet: FormulaMeta = {
     { symbol: "E", name: "Feltstyrke", unit: "V/m", unitName: "volt per meter" },
     { symbol: "\\varepsilon_0", name: "Vakuumpermittivitet", unit: "F/m", unitName: "8,854·10⁻¹²" },
   ],
-  whenToUse: "For å finne energi distribuert i rommet — integreres over volumet: U = ∫u dV.",
+  whenToUse: "For å finne energi distribuert i rommet — integreres over volumet: E_p = ∫u dV.",
   whenNotToUse: "Må byttes ut ε₀ → ε = Kε₀ når dielektrikum er tilstede.",
 };
 

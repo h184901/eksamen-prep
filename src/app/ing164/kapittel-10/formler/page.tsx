@@ -37,7 +37,7 @@ export default function FormlerPage() {
         <FormulaBox
           variant="gold"
           title="Total kinetisk energi ved rulling"
-          latex="K_\text{tot} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
+          latex="E_{k,\text{tot}} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
           {...rulling}
         />
 

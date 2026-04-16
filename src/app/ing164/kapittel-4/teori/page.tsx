@@ -260,7 +260,7 @@ export default function TeoriPage() {
           <p className="text-sm">
             <strong>Kap. 5</strong> handler nesten utelukkende om å anvende N2L på realistiske situasjoner
             (skråplan, tau, frikisjonsoppgaver). <strong>Kap. 6</strong> integrerer N2L langs en strekning og
-            gir arbeids-energi-teoremet: <InlineLatex latex="W_{\text{netto}} = \Delta K" />.
+            gir arbeids-energi-teoremet: <InlineLatex latex="W_{\text{netto}} = \Delta E_k" />.
             Hele mekanikken er bygget på denne ene likningen.
           </p>
         </div>

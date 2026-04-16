@@ -46,7 +46,7 @@ const subPages = [
 const temaer = [
   "10.1 Kraftmoment (dreiemoment / torque): τ = rF sin φ",
   "10.2 Newtons 2. lov for rotasjon: Στ = Iα",
-  "10.3 Rulling uten glidning: v_CM = Rω, K_tot = ½mv² + ½Iω²",
+  "10.3 Rulling uten glidning: v_CM = Rω, E_{k,tot} = ½mv² + ½Iω²",
   "10.4 Arbeid og effekt i rotasjon: W = τΔθ, P = τω",
   "10.5 Angulært moment: L = Iω, τ = dL/dt",
   "10.6 Bevaring av angulært moment: I₁ω₁ = I₂ω₂",

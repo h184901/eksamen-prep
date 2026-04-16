@@ -198,7 +198,7 @@ export default function TeoriPage() {
         title="9.4 Treghetsmoment og rotasjonsenergi"
         mustKnow={[
           "I = Σ m_i r_i² er rotasjonens svar på masse",
-          "Kinetisk rotasjonsenergi: K = ½Iω²",
+          "Kinetisk rotasjonsenergi: E_k = ½Iω²",
           "I avhenger av massefordelingen OG valg av rotasjonsakse",
           "Kjenn formlene for disk, ring, stav, kule!",
         ]}
@@ -210,7 +210,7 @@ export default function TeoriPage() {
           <strong>Hvorfor I og ikke bare m?</strong> Masse i seg selv er ikke nok — det spiller også rolle <em>hvor</em> massen er. En ring og en disk med samme masse har forskjellig I fordi massen er fordelt ulikt relativt til aksen. Ringen har all masse i maksimal avstand, og er dermed tyngre å rotere.
         </p>
         <p className="mb-4">
-          Kinetisk rotasjonsenergi: <InlineLatex latex="K_\text{rot} = \tfrac{1}{2}I\omega^2" /> — analogt med <InlineLatex latex="K = \tfrac{1}{2}mv^2" />.
+          Kinetisk rotasjonsenergi: <InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /> — analogt med <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" />.
         </p>
 
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
@@ -290,7 +290,7 @@ export default function TeoriPage() {
         <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 6–7: energi ved rulling</p>
           <p className="text-sm">
-            <InlineLatex latex="K_\text{rot} = \tfrac{1}{2}I\omega^2" /> er direkte analogt med <InlineLatex latex="K = \tfrac{1}{2}mv^2" /> fra kapittel 6. Når et objekt ruller uten å gli, har det <em>begge</em> former for kinetisk energi simultaneously: <InlineLatex latex="K_\text{total} = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2" />. Dette er avgjørende i energibevaringsproblemer med rullende legemer — du kan ikke glemme rotasjonsleddet!
+            <InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /> er direkte analogt med <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" /> fra kapittel 6. Når et objekt ruller uten å gli, har det <em>begge</em> former for kinetisk energi simultaneously: <InlineLatex latex="E_{k,\text{tot}} = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2" />. Dette er avgjørende i energibevaringsproblemer med rullende legemer — du kan ikke glemme rotasjonsleddet!
           </p>
         </div>
       </TheorySummary>

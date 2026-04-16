@@ -17,7 +17,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=DyaVgHGssos"
           duration="18 min"
           covers="Kinetisk energi og arbeid-energi-teoremet (6.1–6.3)"
-          description="Grundig introduksjon til kinetisk og potensiell energi: definisjoner, formler (KE = 1/2 mv^2), arbeid-energi-teoremet, og beregning av arbeid utfort av krefter. Flere gjennomgatte eksempler."
+          description="Grundig introduksjon til kinetisk og potensiell energi: definisjoner, formler (E_k = 1/2 mv^2), arbeid-energi-teoremet, og beregning av arbeid utfort av krefter. Flere gjennomgatte eksempler."
         />
 
         <VideoResource

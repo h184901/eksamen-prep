@@ -39,7 +39,7 @@ export default function OppgaverPage() {
         <ol className="list-decimal list-inside space-y-2 text-sm">
           <li>Er summen av ytre kraftmoment null? → <InlineLatex latex="L" /> er bevart!</li>
           <li>Skriv <InlineLatex latex="I_1\omega_1 = I_2\omega_2" /> og løs for ukjent</li>
-          <li>Husk: <InlineLatex latex="K" /> er generelt IKKE bevart (beregn <InlineLatex latex="\Delta K" /> separat om nødvendig)</li>
+          <li>Husk: <InlineLatex latex="E_k" /> er generelt IKKE bevart (beregn <InlineLatex latex="\Delta E_k" /> separat om nødvendig)</li>
           <li>Ved kollisjoner med rotasjon: angulært moment bevart, kinetisk energi kan gå tapt</li>
         </ol>
       </div>
@@ -74,12 +74,12 @@ export default function OppgaverPage() {
             <p className="text-sm mb-2"><InlineLatex latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2 = 0 + \tfrac{1}{2}(5{,}0)(8{,}0)^2 = 160 \text{ rad}" /></p>
             <p className="text-sm mb-2"><InlineLatex latex="\omega = \omega_0 + \alpha t = 0 + 5{,}0 \times 8{,}0 = 40 \text{ rad/s}" /></p>
             <p className="text-sm mb-2"><InlineLatex latex="W = \tau \cdot \Delta\theta = 10 \times 160 = 1600 \text{ J}" /></p>
-            <p className="text-sm mb-2"><InlineLatex latex="K = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(2{,}0)(40)^2 = 1600 \text{ J} \checkmark" /></p>
+            <p className="text-sm mb-2"><InlineLatex latex="E_k = \tfrac{1}{2}I\omega^2 = \tfrac{1}{2}(2{,}0)(40)^2 = 1600 \text{ J} \checkmark" /></p>
             <p className="text-sm"><InlineLatex latex="\bar{P} = \frac{W}{t} = \frac{1600}{8{,}0} = 200 \text{ W}" /></p>
           </div>
           <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
             <p className="text-sm font-semibold text-green-600 dark:text-green-400">Hva lærte vi?</p>
-            <p className="text-sm"><InlineLatex latex="W = \tau\Delta\theta = \Delta K_\text{rot}" /> — arbeid-energi-teoremet bekrefter svaret. Gjennomsnittlig effekt er <InlineLatex latex="\bar{P} = W/t" />.</p>
+            <p className="text-sm"><InlineLatex latex="W = \tau\Delta\theta = \Delta E_{k,\text{rot}}" /> — arbeid-energi-teoremet bekrefter svaret. Gjennomsnittlig effekt er <InlineLatex latex="\bar{P} = W/t" />.</p>
           </div>
         </div>
       </div>

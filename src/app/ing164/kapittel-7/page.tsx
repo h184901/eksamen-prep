@@ -37,16 +37,16 @@ const subPages = [
     href: "/ing164/kapittel-7/visualiseringer",
     title: "Visualiseringer",
     description:
-      "Interaktive simulatorer for energibevaring — juster parametere og se E_P og E_K bytte mellom hverandre live.",
+      "Interaktive simulatorer for energibevaring — juster parametere og se E_p og E_k bytte mellom hverandre live.",
     color: "border-purple-400",
     icon: "📊",
   },
 ];
 
 const temaer = [
-  "7.1 Gravitasjonell potensiell energi — E_P = mgy",
-  "7.1 Arbeid utført av tyngden — W_mg = −ΔE_P",
-  "7.1 Bevaring av mekanisk energi — E_K + E_P = konstant",
+  "7.1 Gravitasjonell potensiell energi — E_p = mgy",
+  "7.1 Arbeid utført av tyngden — W_mg = −ΔE_p",
+  "7.1 Bevaring av mekanisk energi — E_k + E_p = konstant",
   "7.1 Utvidet energiligning — med friksjon og andre krefter",
   "7.1 Banen er irrelevant — kun høydeforskjellen teller",
   "7.1 Normalkraftens arbeid er alltid null",

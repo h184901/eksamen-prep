@@ -464,7 +464,7 @@ export default function TeoriPage() {
           "Magnetisk dipolmoment: μ = NIA (N = antall vindinger)",
           "Dreiemoment: τ = μ × B, størrelse τ = NIABsinθ",
           "Stabil likevekt: μ parallell med B (θ = 0, τ = 0)",
-          "Potensiell energi: U = −μ·B = −μBcosθ",
+          "Potensiell energi: E_p = −μ·B = −μBcosθ",
           "Analogi: elektrisk dipol i E-felt oppfører seg likt",
         ]}
       >
@@ -507,7 +507,7 @@ export default function TeoriPage() {
         />
 
         <FormulaBox
-          latex="U = -\vec{\mu} \cdot \vec{B} = -\mu B\cos\theta"
+          latex="E_p = -\vec{\mu} \cdot \vec{B} = -\mu B\cos\theta"
           title="Potensiell energi til magnetisk dipol"
           variant="blue"
           description="Lavest energi når μ er parallell med B (θ = 0). Høyest energi når μ er antiparallell med B (θ = 180°)."
@@ -527,7 +527,7 @@ export default function TeoriPage() {
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Sammenheng med kap. 21: Elektrisk dipol i E-felt</p>
           <p className="text-sm">
             I kap. 21 har en elektrisk dipol med moment p i et elektrisk felt E et dreiemoment
-            <InlineLatex latex="\tau = pE\sin\theta" /> og potensiell energi <InlineLatex latex="U = -pE\cos\theta" />.
+            <InlineLatex latex="\tau = pE\sin\theta" /> og potensiell energi <InlineLatex latex="E_p = -pE\cos\theta" />.
             Sammenligningen med den magnetiske dipolen er slående:
           </p>
           <div className="overflow-x-auto mt-2">
@@ -548,8 +548,8 @@ export default function TeoriPage() {
                   <td className="py-1"><InlineLatex latex="\vec{\tau} = \vec{\mu} \times \vec{B}" /></td>
                 </tr>
                 <tr>
-                  <td className="py-1 pr-4"><InlineLatex latex="U = -\vec{p} \cdot \vec{E}" /></td>
-                  <td className="py-1"><InlineLatex latex="U = -\vec{\mu} \cdot \vec{B}" /></td>
+                  <td className="py-1 pr-4"><InlineLatex latex="E_p = -\vec{p} \cdot \vec{E}" /></td>
+                  <td className="py-1"><InlineLatex latex="E_p = -\vec{\mu} \cdot \vec{B}" /></td>
                 </tr>
               </tbody>
             </table>

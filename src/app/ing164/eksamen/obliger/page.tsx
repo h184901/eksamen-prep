@@ -830,7 +830,7 @@ export default function ObligerPage() {
             hints={[
               { label: "Hint a", content: <p>Treghetsmoment for kompakt sylinder: <InlineLatex latex="I = \tfrac{1}{2}MR^2" />. Spinn: <InlineLatex latex="L = I\omega" /></p> },
               { label: "Hint b", content: <p>Ingen ytre dreiemoment om aksen → spinnet er bevart: <InlineLatex latex="L_\text{før} = L_\text{etter}" /></p> },
-              { label: "Hint c", content: <p>Friksjonsarbeid = endring i kinetisk rotasjonsenergi: <InlineLatex latex="W = \Delta KE_\text{rot}" /></p> },
+              { label: "Hint c", content: <p>Friksjonsarbeid = endring i kinetisk rotasjonsenergi: <InlineLatex latex="W = \Delta E_{k,\text{rot}}" /></p> },
               { label: "Hint d", content: <p>Angulær impuls: <InlineLatex latex="\tau \cdot \Delta t = \Delta L" /> for den nedre sylinderen.</p> },
             ]}
             formulaHints={[

@@ -72,7 +72,7 @@ export default function Kapittel6Oversikt() {
           </li>
           <li className="flex items-start gap-2">
             <span className="text-amber-500 font-bold mt-0.5">6.2</span>
-            <span>Kinetisk energi og arbeid-energi-teoremet — W&#8203;_&#8203;tot = ΔE&#8203;_&#8203;K</span>
+            <span>Kinetisk energi og arbeid-energi-teoremet — W&#8203;_&#8203;tot = ΔE&#8203;_&#8203;k</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-amber-500 font-bold mt-0.5">6.3</span>

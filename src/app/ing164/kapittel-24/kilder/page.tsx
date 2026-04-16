@@ -17,7 +17,7 @@ export default function KilderPage() {
           url="https://www.youtube.com/watch?v=BimpNou0orc"
           duration="28 min"
           covers="Kapasitans og kondensatorer (24.1–24.2)"
-          description="Grunnleggende om kondensatorer: kapasitans (C = Q/V), parallellplatekondensator (C = epsilon_0 * A/d), serie- og parallellkobling, og beregning av ekvivalent kapasitans. Mange oppgaver."
+          description="Grunnleggende om kondensatorer: kapasitans (C = Q/V), parallellplatekondensator (C = ε₀·A/d), serie- og parallellkobling, og beregning av ekvivalent kapasitans. Mange oppgaver."
         />
 
         <VideoResource
