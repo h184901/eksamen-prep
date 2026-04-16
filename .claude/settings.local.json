@@ -62,7 +62,17 @@
       "Bash(awk '{print $4}')",
       "Bash(head -575 /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/kapittel-2/oppgaver/page.tsx)",
       "Read(//tmp/**)",
-      "Bash(echo \"Exit: $?\")"
+      "Bash(echo \"Exit: $?\")",
+      "Bash(pdfinfo --help)",
+      "Bash(pdfinfo /Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf)",
+      "Read(//private/tmp/**)",
+      "Bash(pdftotext -layout -f 1 -l 20 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" first20.txt)",
+      "Bash(pdftotext -layout -f 660 -l 760 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/search.txt)",
+      "Bash(mkdir -p /tmp/bok_oppgaver)",
+      "Bash(pdftotext -layout -f 739 -l 745 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap21.txt)",
+      "Bash(pdftotext -layout -f 802 -l 807 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap23.txt)",
+      "Bash(pdftotext -layout -f 834 -l 838 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap24.txt)",
+      "Bash(pdftotext -layout -f 942 -l 947 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap27.txt)"
     ]
   }
 }
