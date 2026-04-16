@@ -1,19 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  bevegelsesmengde,
-  impulsMom,
-  avgFraImpuls,
-  bevaringP,
-  inelastisk,
-  ballistiskPendel,
-  elastisk,
-  massesenter,
-  N2LSystem,
-} from "@/data/ing164/formula-metadata";
 
 export default function Kapittel8Formler() {
   return (
@@ -23,75 +12,17 @@ export default function Kapittel8Formler() {
       <FormulaClickCallout />
 
       <div className="space-y-3">
-        <FormulaBox
-          latex="\vec{p} = m\vec{v}"
-          title="Bevegelsesmengde"
-          variant="gold"
-          description="Enhet: kg·m/s. Vektor — retningen er viktig!"
-          {...bevegelsesmengde}
-        />
-        <FormulaBox
-          latex="\vec{J} = \sum\vec{F}\,\Delta t = \Delta\vec{p}"
-          title="Impuls-momentum-teoremet"
-          variant="gold"
-          description="Kraftimpuls = endring i bevegelsesmengde."
-          {...impulsMom}
-        />
-        <FormulaBox
-          latex="\bar{F} = \frac{\Delta p}{\Delta t} = \frac{m(v_2 - v_1)}{\Delta t}"
-          title="Gjennomsnittlig kraft fra impuls"
-          variant="blue"
-          description="Brukes ofte: finn kraften fra kontakttid og hastighetsendring."
-          {...avgFraImpuls}
-        />
-        <FormulaBox
-          latex="\vec{p}_{\text{total,før}} = \vec{p}_{\text{total,etter}}"
-          title="Bevaring av bevegelsesmengde"
-          variant="gold"
-          description="Gjelder når ΣF_ytre = 0 (eller ΣF_ytre << støtkreftene)."
-          {...bevaringP}
-        />
-        <FormulaBox
-          latex="(m_A + m_B)\,v_2 = m_A v_{A1} + m_B v_{B1}"
-          title="Fullstendig inelastisk kollisjon"
-          variant="gold"
-          description="Felles hastighet v₂ etter støt."
-          {...inelastisk}
-        />
-        <FormulaBox
-          latex="v_0 = \frac{M + m}{m}\sqrt{2gh}"
-          title="Ballistisk pendel"
-          variant="gold"
-          description="Kulefart fra høyden kloss+kule svinger opp til."
-          {...ballistiskPendel}
-        />
-        <FormulaBox
-          latex="v_{A2} = \frac{m_A - m_B}{m_A + m_B}\,v_{A1} + \frac{2m_B}{m_A + m_B}\,v_{B1}"
-          title="Elastisk kollisjon — hastighet A etter"
-          variant="blue"
-          description="Gjelder 1D elastisk kollisjon. Kombiner med formelen for v_B2."
-          {...elastisk}
-        />
-        <FormulaBox
-          latex="v_{B2} = \frac{2m_A}{m_A + m_B}\,v_{A1} + \frac{m_B - m_A}{m_A + m_B}\,v_{B1}"
-          title="Elastisk kollisjon — hastighet B etter"
-          variant="blue"
-          {...elastisk}
-        />
-        <FormulaBox
-          latex="\vec{r}_{cm} = \frac{\sum m_i \vec{r}_i}{\sum m_i}"
-          title="Massesenter"
-          variant="blue"
-          description="Det massevektede gjennomsnittspunktet."
-          {...massesenter}
-        />
-        <FormulaBox
-          latex="\sum \vec{F}_{\text{ytre}} = M\vec{a}_{cm}"
-          title="Newtons 2. lov for system"
-          variant="gold"
-          description="Systemet som helhet oppfører seg som en partikkel i massesenteret."
-          {...N2LSystem}
-        />
+        <F id="bevegelsesmengde" />
+        <F id="impulsMom" />
+        <F id="avgFraImpuls" />
+        <F id="bevaringP" />
+        <F id="inelastisk" />
+        <F id="ballistiskPendel" />
+        <F id="elastiskA" />
+        <F id="elastiskB" />
+        <F id="massesenter" />
+        <F id="vCM" />
+        <F id="N2LSystem" />
       </div>
 
       {/* Når bruker du hva */}
@@ -124,7 +55,7 @@ export default function Kapittel8Formler() {
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">Noe eksploderer / sprenges i deler</td>
-                <td className="py-2">p-bevaring baklengs (p<sub>total</sub> = konstant)</td>
+                <td className="py-2">p-bevaring baklengs (<InlineLatex latex="p_\text{total}" /> = konstant)</td>
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">2D-kollisjon: finn ukjente hastigheter</td>

@@ -1,9 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import { coulomb, eField } from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -12,41 +11,25 @@ export default function FormlerPage() {
 
       <FormulaClickCallout />
 
+      <h3 className="font-semibold text-lg mt-6 mb-3">Kraft mellom ladninger</h3>
       <div className="grid md:grid-cols-2 gap-4">
-        <FormulaBox
-          latex="F_e = \frac{1}{4\pi\varepsilon_0} \frac{|q_1 q_2|}{r^2}"
-          title="Coulombs lov"
-          variant="gold"
-          {...coulomb}
-        />
-        <FormulaBox
-          latex="\vec{E} = \frac{\vec{F}_0}{q_0}"
-          title="Definisjon av E-felt"
-          variant="gold"
-          {...eField}
-        />
-        <FormulaBox
-          latex="E = \frac{1}{4\pi\varepsilon_0} \frac{|q|}{r^2}"
-          title="E-felt fra punktladning"
-          variant="gold"
-          {...eField}
-        />
-        <FormulaBox
-          latex="\vec{F}_e = q\vec{E}"
-          title="Kraft på ladning i E-felt"
-          variant="gold"
-          {...eField}
-        />
-        <FormulaBox
-          latex="k = \frac{1}{4\pi\varepsilon_0} = 8{,}99 \cdot 10^9 \;\text{Nm}^2/\text{C}^2"
-          title="Coulombs konstant"
-          variant="blue"
-        />
-        <FormulaBox
-          latex="\varepsilon_0 = 8{,}854 \cdot 10^{-12}\;\text{C}^2/\text{Nm}^2"
-          title="Vakuumpermittivitet"
-          variant="blue"
-        />
+        <F id="coulomb" />
+        <F id="eKraft" />
+        <F id="coulombKonst" />
+        <F id="eps0Konst" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Elektrisk felt</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="eFieldDef" />
+        <F id="eFieldPunkt" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Spesielle ladningsfordelinger</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="eLinje" />
+        <F id="ePlan" />
+        <F id="eKule" />
       </div>
 
       {/* Når bruker du hva? */}
@@ -81,6 +64,16 @@ export default function FormlerPage() {
                 <td className="py-2 pr-4">Kraft på ladning i kjent felt</td>
                 <td className="py-2 pr-4"><InlineLatex latex="F = qE" /></td>
                 <td className="py-2">Akselerasjon: a = F/m</td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]">
+                <td className="py-2 pr-4">E-felt fra lang linje</td>
+                <td className="py-2 pr-4"><InlineLatex latex="E = \lambda/(2\pi\varepsilon_0 r)" /></td>
+                <td className="py-2">λ = linjeladning (C/m)</td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]">
+                <td className="py-2 pr-4">E-felt fra uendelig plan</td>
+                <td className="py-2 pr-4"><InlineLatex latex="E = \sigma/(2\varepsilon_0)" /></td>
+                <td className="py-2">Uavhengig av avstand!</td>
               </tr>
               <tr>
                 <td className="py-2 pr-4">Bevegelse i uniformt felt</td>

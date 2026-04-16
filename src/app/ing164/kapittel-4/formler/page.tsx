@@ -1,16 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  newton1,
-  newton2,
-  newton3,
-  tyngdekraft,
-  komponentForm,
-  kraftdekomp,
-} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -20,50 +12,14 @@ export default function FormlerPage() {
       <FormulaClickCallout />
 
       <div className="grid sm:grid-cols-2 gap-3">
-        <FormulaBox
-          latex="\sum \vec{F} = m\vec{a}"
-          title="Newtons 2. lov"
-          variant="gold"
-          description="Den fundamentale likningen i mekanikk"
-          {...newton2}
-        />
-        <FormulaBox
-          latex="G = mg"
-          title="Tyngdekraft"
-          variant="gold"
-          description="g = 9,81 m/s² ved havoverflaten"
-          {...tyngdekraft}
-        />
-        <FormulaBox
-          latex="\sum F_x = ma_x, \quad \sum F_y = ma_y"
-          title="Komponentform"
-          variant="gold"
-          description="Slik løser vi oppgavene i praksis"
-          {...komponentForm}
-        />
-        <FormulaBox
-          latex="\vec{F}_{AB} = -\vec{F}_{BA}"
-          title="Newtons 3. lov"
-          variant="gold"
-          description="Kraft og motkraft — like store, motsatt rettet, på ulike legemer"
-          {...newton3}
-        />
-        <FormulaBox
-          latex="\sum \vec{F} = 0 \implies \vec{v} = \text{konst.}"
-          title="Newtons 1. lov"
-          variant="gold"
-          description="Treghetsloven — uten netto kraft beholdes bevegelsen"
-          {...newton1}
-        />
+        <F id="newton2" />
+        <F id="tyngdekraft" />
+        <F id="komponentForm" />
+        <F id="newton3" />
+        <F id="newton1" />
       </div>
 
-      <FormulaBox
-        latex="F_x = F\cos\theta, \quad F_y = F\sin\theta, \quad F = \sqrt{F_x^2 + F_y^2}"
-        title="Kraftdekomponering og sammensetning"
-        variant="blue"
-        description="θ er vinkelen med x-aksen. Brukes til å splitte en kraft i komponenter, eller finne resultanten."
-        {...kraftdekomp}
-      />
+      <F id="kraftdekomp" />
 
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 mt-4">
         <h3 className="font-semibold text-lg mb-3">Når bruker du hva?</h3>

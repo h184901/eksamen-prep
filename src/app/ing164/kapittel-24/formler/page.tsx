@@ -1,15 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  C,
-  koblingC,
-  dielektrikum,
-  energitetthet,
-  indusertQ,
-} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -18,55 +11,28 @@ export default function FormlerPage() {
 
       <FormulaClickCallout />
 
+      <h3 className="font-semibold text-lg mt-6 mb-3">Kapasitans</h3>
       <div className="grid md:grid-cols-2 gap-4">
-        <FormulaBox
-          latex="C = \frac{Q}{V_{ab}}"
-          title="Definisjon av kapasitans"
-          variant="gold"
-          {...C}
-        />
-        <FormulaBox
-          latex="C = \varepsilon_0 \frac{A}{d}"
-          title="Platekondensator (vakuum)"
-          variant="gold"
-          {...C}
-        />
-        <FormulaBox
-          latex="\frac{1}{C_\text{tot}} = \frac{1}{C_1} + \frac{1}{C_2} + \cdots"
-          title="Kondensatorer i serie"
-          variant="gold"
-          {...koblingC}
-        />
-        <FormulaBox
-          latex="C_\text{tot} = C_1 + C_2 + \cdots"
-          title="Kondensatorer i parallell"
-          variant="gold"
-          {...koblingC}
-        />
-        <FormulaBox
-          latex="E_p = \frac{Q^2}{2C} = \frac{1}{2}CV^2 = \frac{1}{2}QV"
-          title="Lagret energi"
-          variant="gold"
-          {...C}
-        />
-        <FormulaBox
-          latex="u = \frac{1}{2}\varepsilon_0 E^2"
-          title="Energitetthet i E-felt"
-          variant="gold"
-          {...energitetthet}
-        />
-        <FormulaBox
-          latex="K = \frac{C}{C_0}, \quad \varepsilon = K\varepsilon_0"
-          title="Dielektrikumkonstant og permittivitet"
-          variant="blue"
-          {...dielektrikum}
-        />
-        <FormulaBox
-          latex="Q_i = Q\!\left(1 - \frac{1}{K}\right)"
-          title="Indusert ladning"
-          variant="blue"
-          {...indusertQ}
-        />
+        <F id="CDef" />
+        <F id="Cplate" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Kobling av kondensatorer</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="CSerie" />
+        <F id="CParallell" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Energi</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="EpC" />
+        <F id="energitetthet" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Dielektrika</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="dielektrikum" />
+        <F id="indusertQ" />
       </div>
 
       {/* Når bruker du hva? */}
@@ -104,7 +70,7 @@ export default function FormlerPage() {
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">Lagret energi</td>
-                <td className="py-2 pr-4"><InlineLatex latex="E_p = \frac{1}{2}CV^2" /></td>
+                <td className="py-2 pr-4"><InlineLatex latex="E_p = \tfrac{1}{2}CV^2" /></td>
                 <td className="py-2">Tre likeverdige uttrykk — velg etter kjente</td>
               </tr>
               <tr>

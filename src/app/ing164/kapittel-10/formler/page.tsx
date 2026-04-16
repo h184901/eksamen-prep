@@ -1,17 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  tau,
-  rulling,
-  rotArbeidEffekt,
-  Lpartikkel,
-  L,
-  Lbevaring,
-  diskSkraplan,
-} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -20,66 +11,33 @@ export default function FormlerPage() {
 
       <FormulaClickCallout />
 
-      <div className="space-y-3">
-        <FormulaBox
-          variant="gold"
-          title="Kraftmoment og Newtons 2. lov"
-          latex="\tau = rF\sin\phi \qquad \sum\tau = I\alpha"
-          {...tau}
-        />
+      <h3 className="font-semibold text-lg mt-6 mb-3">Kraftmoment og Newtons 2. lov for rotasjon</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="tauDef" />
+        <F id="tauIalpha" />
+      </div>
 
-        <FormulaBox
-          variant="gold"
-          title="Rulling uten glidning"
-          latex="v_{CM} = R\omega \qquad a_{CM} = R\alpha"
-          {...rulling}
-        />
-        <FormulaBox
-          variant="gold"
-          title="Total kinetisk energi ved rulling"
-          latex="E_{k,\text{tot}} = \tfrac{1}{2}mv_{CM}^2 + \tfrac{1}{2}I\omega^2"
-          {...rulling}
-        />
+      <h3 className="font-semibold text-lg mt-8 mb-3">Rulling uten glidning</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="rullingVel" />
+        <F id="rullingAksel" />
+        <F id="EkTot" />
+        <F id="diskSkraplanA" />
+      </div>
 
-        <FormulaBox
-          variant="gold"
-          title="Arbeid og effekt i rotasjon"
-          latex="W = \tau \Delta\theta \qquad P = \tau\omega \qquad W_\text{tot} = \tfrac{1}{2}I\omega^2 - \tfrac{1}{2}I\omega_0^2"
-          {...rotArbeidEffekt}
-        />
+      <h3 className="font-semibold text-lg mt-8 mb-3">Arbeid og effekt i rotasjon</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="rotArbeid" />
+        <F id="rotEffekt" />
+        <F id="rotWEteorem" />
+      </div>
 
-        <FormulaBox
-          variant="gold"
-          title="Angulært moment — partikkel"
-          latex="\vec{L} = \vec{r} \times m\vec{v}"
-          {...Lpartikkel}
-        />
-        <FormulaBox
-          variant="gold"
-          title="Angulært moment — stivt legeme"
-          latex="L = I\omega"
-          {...L}
-        />
-        <FormulaBox
-          variant="gold"
-          title="Kraftmoment og L"
-          latex="\sum\tau = \frac{dL}{dt}"
-          {...L}
-        />
-
-        <FormulaBox
-          variant="blue"
-          title="Bevaring av angulært moment"
-          latex="\sum\tau_\text{ext} = 0 \implies I_1\omega_1 = I_2\omega_2"
-          {...Lbevaring}
-        />
-
-        <FormulaBox
-          variant="blue"
-          title="Disk på skråplan (rulling uten glidning)"
-          latex="a_{CM} = \frac{2}{3}g\sin\beta \qquad \mu_s \geq \tfrac{1}{3}\tan\beta"
-          {...diskSkraplan}
-        />
+      <h3 className="font-semibold text-lg mt-8 mb-3">Angulært moment</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="Lpartikkel" />
+        <F id="Lstivt" />
+        <F id="tauDLDt" />
+        <F id="Lbevaring" />
       </div>
 
       {/* Når bruker du hva? */}

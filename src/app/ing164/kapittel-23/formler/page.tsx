@@ -1,17 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  EpUniform,
-  Uladninger,
-  V,
-  Vab,
-  ElektrostEbev,
-  EVd,
-  eVoltUnit,
-} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -20,55 +11,24 @@ export default function FormlerPage() {
 
       <FormulaClickCallout />
 
+      <h3 className="font-semibold text-lg mt-6 mb-3">Potensiell energi</h3>
       <div className="grid md:grid-cols-2 gap-4">
-        <FormulaBox
-          latex="E_p = q_0 E y"
-          title="Pot. energi (uniformt felt)"
-          variant="gold"
-          {...EpUniform}
-        />
-        <FormulaBox
-          latex="E_p = \frac{1}{4\pi\varepsilon_0}\frac{q_0 q}{r}"
-          title="Pot. energi (punktladninger)"
-          variant="gold"
-          {...Uladninger}
-        />
-        <FormulaBox
-          latex="V = \frac{E_p}{q_0}"
-          title="Elektrisk potensial"
-          variant="gold"
-          {...V}
-        />
-        <FormulaBox
-          latex="V = \frac{1}{4\pi\varepsilon_0}\frac{q}{r}"
-          title="Potensial fra punktladning"
-          variant="gold"
-          {...V}
-        />
-        <FormulaBox
-          latex="V_{ab} = V_a - V_b = -\frac{\Delta E_p}{q_0}"
-          title="Potensialforskjell (spenning)"
-          variant="gold"
-          {...Vab}
-        />
-        <FormulaBox
-          latex="E_{k,1} + E_{p,1} = E_{k,2} + E_{p,2}"
-          title="Energibevaring"
-          variant="gold"
-          {...ElektrostEbev}
-        />
-        <FormulaBox
-          latex="E = \frac{V}{d}"
-          title="E-felt mellom plater"
-          variant="blue"
-          {...EVd}
-        />
-        <FormulaBox
-          latex="1\;\text{eV} = 1{,}60 \cdot 10^{-19}\;\text{J}"
-          title="Elektronvolt"
-          variant="blue"
-          {...eVoltUnit}
-        />
+        <F id="EpUniform" />
+        <F id="EpLadninger" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Elektrisk potensial</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="VDef" />
+        <F id="VPunkt" />
+        <F id="Vab" />
+        <F id="EVd" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-8 mb-3">Energibevaring og enheter</h3>
+      <div className="grid md:grid-cols-2 gap-4">
+        <F id="ElektrostEbev" />
+        <F id="eVoltUnit" />
       </div>
 
       {/* Når bruker du hva? */}
@@ -97,7 +57,7 @@ export default function FormlerPage() {
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">Arbeid for å flytte ladning</td>
                 <td className="py-2 pr-4"><InlineLatex latex="W = q_0(V_a - V_b)" /></td>
-                <td className="py-2">Eller: W = −ΔEp</td>
+                <td className="py-2">Eller: W = −ΔE_p</td>
               </tr>
               <tr className="border-b border-[var(--card-border)]">
                 <td className="py-2 pr-4">E-felt mellom plater</td>

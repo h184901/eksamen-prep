@@ -1,20 +1,8 @@
 "use client";
 
-import FormulaBox from "@/components/FormulaBox";
+import F from "@/components/F";
 import FormulaClickCallout from "@/components/FormulaClickCallout";
 import InlineLatex from "@/components/InlineLatex";
-import {
-  newton1,
-  newton2,
-  glidefriksjon,
-  hvilefriksjon,
-  sirkel,
-  sentripetalkraft,
-  skraplanAksel,
-  skraplanFriksjon,
-  skraplanNormal,
-  kritiskVinkel,
-} from "@/data/ing164/formula-metadata";
 
 export default function FormlerPage() {
   return (
@@ -24,74 +12,26 @@ export default function FormlerPage() {
       <FormulaClickCallout />
 
       <div className="grid sm:grid-cols-2 gap-3">
-        <FormulaBox
-          latex="\sum F_x = 0, \quad \sum F_y = 0"
-          title="Likevekt (N1L)"
-          variant="gold"
-          description="For legemer i ro eller konstant fart"
-          {...newton1}
-        />
-        <FormulaBox
-          latex="\sum F_x = ma_x, \quad \sum F_y = ma_y"
-          title="Dynamikk (N2L)"
-          variant="gold"
-          description="For legemer som akselererer"
-          {...newton2}
-        />
-        <FormulaBox
-          latex="R = \mu_k N \quad (\text{glidning})"
-          title="Glidefriksjon"
-          variant="gold"
-          {...glidefriksjon}
-        />
-        <FormulaBox
-          latex="R \leq \mu_s N \quad (\text{hvile})"
-          title="Maks hvilefriksjon"
-          variant="gold"
-          {...hvilefriksjon}
-        />
-        <FormulaBox
-          latex="a_\perp = \frac{v^2}{R}"
-          title="Sentripetalakselerasjon"
-          variant="gold"
-          {...sirkel}
-        />
-        <FormulaBox
-          latex="\sum F = m\frac{v^2}{R}"
-          title="Sentripetalkraft"
-          variant="gold"
-          description="Nettokraften inn mot sentrum"
-          {...sentripetalkraft}
-        />
+        <F id="newton1" titleOverride="Likevekt (N1L)" description="For legemer i ro eller konstant fart" />
+        <F id="newton2" titleOverride="Dynamikk (N2L)" description="For legemer som akselererer" />
+        <F id="glidefriksjon" />
+        <F id="hvilefriksjon" />
+        <F id="sirkelARad" />
+        <F id="sentripetalkraft" />
       </div>
 
       <h3 className="font-semibold text-lg mt-6 mb-3">Nyttige resultater for skråplan</h3>
       <div className="grid sm:grid-cols-2 gap-3">
-        <FormulaBox
-          latex="a = g\sin\alpha \quad (\text{uten friksjon})"
-          title="Akselerasjon ned skråplan"
-          variant="blue"
-          {...skraplanAksel}
-        />
-        <FormulaBox
-          latex="a = g(\sin\alpha - \mu_k\cos\alpha)"
-          title="Med glidefriksjon nedover"
-          variant="blue"
-          {...skraplanFriksjon}
-        />
-        <FormulaBox
-          latex="N = mg\cos\alpha"
-          title="Normalkraft på skråplan"
-          variant="blue"
-          {...skraplanNormal}
-        />
-        <FormulaBox
-          latex="\alpha_{\text{kritisk}} = \tan^{-1}(\mu_s)"
-          title="Kritisk vinkel"
-          variant="blue"
-          description="Vinkelen der legemet begynner å gli"
-          {...kritiskVinkel}
-        />
+        <F id="skraplanAksel" />
+        <F id="skraplanFriksjon" />
+        <F id="skraplanNormal" />
+        <F id="kritiskVinkel" />
+      </div>
+
+      <h3 className="font-semibold text-lg mt-6 mb-3">Atwood-maskin</h3>
+      <div className="grid sm:grid-cols-2 gap-3">
+        <F id="atwoodA" />
+        <F id="atwoodT" />
       </div>
 
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6 mt-4">
