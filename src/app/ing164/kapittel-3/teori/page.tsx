@@ -123,6 +123,65 @@ export default function TeoriPage() {
             Mestre vektordekomposisjon her, og kap. 4–5 faller på plass.
           </p>
         </div>
+
+        {/* SVG: Posisjons- og fartsvektor langs en 2D-bane */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 420 300" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            {/* Akser */}
+            <line x1="40" y1="260" x2="400" y2="260" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="40" y1="30" x2="40" y2="260" stroke="currentColor" strokeWidth="1.5" />
+            <polygon points="400,260 392,256 392,264" fill="currentColor" />
+            <polygon points="40,30 36,38 44,38" fill="currentColor" />
+            <text x="405" y="265" className="fill-current text-xs">x</text>
+            <text x="25" y="28" className="fill-current text-xs">y</text>
+            <text x="30" y="270" className="fill-current text-xs">O</text>
+
+            {/* Bane (kurve) */}
+            <path d="M 80,230 Q 180,80 350,180" stroke="#3b82f6" strokeWidth="2.5" fill="none" strokeDasharray="2,3" />
+
+            {/* Posisjonsvektor r */}
+            <line x1="40" y1="260" x2="220" y2="110" stroke="#ef4444" strokeWidth="2.5" />
+            <polygon points="220,110 212,112 217,119" fill="#ef4444" />
+            <text x="120" y="175" className="fill-current text-xs font-semibold" fill="#ef4444">r⃗</text>
+
+            {/* Punkt P */}
+            <circle cx="220" cy="110" r="5" fill="#3b82f6" />
+            <text x="228" y="105" className="fill-current text-xs">P</text>
+
+            {/* Fartsvektor v (tangent til banen i P) */}
+            <line x1="220" y1="110" x2="300" y2="85" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="300,85 292,86 295,93" fill="#10b981" />
+            <text x="270" y="80" className="fill-current text-xs font-semibold" fill="#10b981">v⃗</text>
+
+            {/* Komponenter av r: x og y */}
+            <line x1="40" y1="110" x2="220" y2="110" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="220" y1="260" x2="220" y2="110" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3,3" />
+            <text x="130" y="103" className="fill-current text-xs" fill="#8b5cf6">x</text>
+            <text x="228" y="190" className="fill-current text-xs" fill="#8b5cf6">y</text>
+
+            <text x="210" y="290" textAnchor="middle" className="fill-current text-xs">Posisjonsvektor r⃗ og fartsvektor v⃗ (tangent til banen)</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon: Hvorfor er v⃗ tangent?</p>
+          <p className="text-sm">
+            Tenk på en veldig kort tidsbit <InlineLatex latex="\Delta t" />. Da er forflytningen
+            <InlineLatex latex="\Delta \vec{r}" /> en <em>korde</em> som skjærer banen mellom to nærliggende
+            punkter. Når <InlineLatex latex="\Delta t \to 0" />, glir korden over i tangenten i punktet.
+            <InlineLatex latex="\vec{v} = d\vec{r}/dt" /> er derfor alltid tangent til banen — uansett hvor
+            krumt den svinger seg.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://www.khanacademy.org/science/physics" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Khan Academy — Two-dimensional motion</a></li>
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — Motion in two dimensions</a></li>
+            <li>• <a href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">3Blue1Brown — Essence of Linear Algebra (vektorer visuelt)</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* 3.2 Akselerasjonsvektoren */}
@@ -200,6 +259,85 @@ export default function TeoriPage() {
               peker den bakover; i en sving peker den innover.
             </li>
           </ul>
+        </div>
+
+        {/* SVG: Baneakselerasjon vs. sentripetalakselerasjon */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 440 300" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            {/* Buet bane */}
+            <path d="M 50,250 Q 220,50 400,200" stroke="#3b82f6" strokeWidth="2.5" fill="none" strokeDasharray="2,3" />
+
+            {/* Punkt P1 — kun a_parallell (rett linje) */}
+            <circle cx="100" cy="212" r="5" fill="#ef4444" />
+            <text x="85" y="225" className="fill-current text-xs">P₁</text>
+            {/* v tangent, a parallell */}
+            <line x1="100" y1="212" x2="155" y2="158" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="155,158 147,159 150,166" fill="#10b981" />
+            <text x="160" y="155" className="fill-current text-xs" fill="#10b981">v⃗</text>
+            <line x1="100" y1="212" x2="130" y2="183" stroke="#f59e0b" strokeWidth="2" />
+            <polygon points="130,183 122,184 125,191" fill="#f59e0b" />
+            <text x="104" y="195" className="fill-current text-xs" fill="#f59e0b">a⃗∥</text>
+
+            {/* Punkt P2 — kun a_perpendikulær */}
+            <circle cx="230" cy="80" r="5" fill="#ef4444" />
+            <text x="233" y="73" className="fill-current text-xs">P₂</text>
+            <line x1="230" y1="80" x2="290" y2="95" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="290,95 282,92 283,99" fill="#10b981" />
+            <text x="293" y="95" className="fill-current text-xs" fill="#10b981">v⃗</text>
+            <line x1="230" y1="80" x2="245" y2="135" stroke="#8b5cf6" strokeWidth="2" />
+            <polygon points="245,135 239,129 247,127" fill="#8b5cf6" />
+            <text x="250" y="130" className="fill-current text-xs" fill="#8b5cf6">a⃗⊥</text>
+
+            {/* Punkt P3 — både a_parallell og a_perp */}
+            <circle cx="350" cy="150" r="5" fill="#ef4444" />
+            <text x="355" y="145" className="fill-current text-xs">P₃</text>
+            <line x1="350" y1="150" x2="400" y2="178" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="400,178 392,177 396,184" fill="#10b981" />
+            <text x="405" y="178" className="fill-current text-xs" fill="#10b981">v⃗</text>
+            {/* Tangentiell (a∥) */}
+            <line x1="350" y1="150" x2="380" y2="167" stroke="#f59e0b" strokeWidth="2" />
+            <polygon points="380,167 373,166 375,173" fill="#f59e0b" />
+            {/* Normal (a⊥) — peker inn mot krumningssenteret */}
+            <line x1="350" y1="150" x2="335" y2="190" stroke="#8b5cf6" strokeWidth="2" />
+            <polygon points="335,190 332,183 340,183" fill="#8b5cf6" />
+            {/* Resultant */}
+            <line x1="350" y1="150" x2="365" y2="207" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="3,2" />
+            <text x="370" y="210" className="fill-current text-xs" fill="#ef4444">a⃗</text>
+
+            {/* Legende */}
+            <text x="60" y="275" className="fill-current text-xs" fill="#f59e0b">a⃗∥: endrer fartens størrelse</text>
+            <text x="240" y="275" className="fill-current text-xs" fill="#8b5cf6">a⃗⊥: endrer fartens retning</text>
+            <text x="220" y="295" textAnchor="middle" className="fill-current text-xs">Dekomposisjon av akselerasjonen langs banen</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng: kap. 5, 9 og 10</p>
+          <p className="text-sm">
+            Skillet mellom baneakselerasjon (<InlineLatex latex="a_\parallel" />) og sentripetalakselerasjon
+            (<InlineLatex latex="a_\perp" />) er fundamentalt for flere senere kapitler:
+          </p>
+          <ul className="space-y-1 text-sm mt-2 list-disc list-inside">
+            <li><strong>Kap. 5:</strong> <InlineLatex latex="a_\perp" /> krever sentripetalkraft (<InlineLatex latex="F = mv^2/r" />).</li>
+            <li><strong>Kap. 9:</strong> <InlineLatex latex="a_\parallel = r\alpha" /> og <InlineLatex latex="a_\perp = r\omega^2" /> ved rotasjon.</li>
+            <li><strong>Kap. 10:</strong> Kraftmoment endrer <InlineLatex latex="\omega" /> (analogt til <InlineLatex latex="a_\parallel" />).</li>
+          </ul>
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Praktisk trick</p>
+          <p className="text-sm">
+            For å finne <InlineLatex latex="a_\parallel" /> og <InlineLatex latex="a_\perp" /> kan du bruke:
+          </p>
+          <ul className="space-y-1 text-sm mt-2">
+            <li>• <InlineLatex latex="a_\parallel = \frac{\vec{a}\cdot\vec{v}}{|\vec{v}|}" /> (projeksjonen av <InlineLatex latex="\vec{a}" /> på <InlineLatex latex="\vec{v}" />)</li>
+            <li>• <InlineLatex latex="a_\perp = \sqrt{|\vec{a}|^2 - a_\parallel^2}" /></li>
+          </ul>
+          <p className="text-sm mt-2">
+            Alternativt: <InlineLatex latex="a_\parallel = \frac{d|\vec{v}|}{dt}" /> (endringsraten til
+            fartens størrelse) og <InlineLatex latex="a_\perp = v^2/R" /> hvor R er den <em>øyeblikkelige
+            krumningsradiusen</em>.
+          </p>
         </div>
       </TheorySummary>
 

@@ -66,6 +66,84 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        {/* KRITISK: Sammenligningstabell for W, ΔE_p, V_ab, ΔV */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">
+            MASTER-TABELL: W, ΔE_p, V_ab og ΔV — forstå forskjellene!
+          </p>
+          <p className="text-sm mb-3">
+            Dette er det som forveksles MEST på eksamen. Memorer disse fortegnsreglene:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs md:text-sm border-collapse">
+              <thead>
+                <tr className="border-b-2 border-purple-300 dark:border-purple-700">
+                  <th className="text-left py-1.5 pr-2 font-semibold">Størrelse</th>
+                  <th className="text-left py-1.5 pr-2 font-semibold">Definisjon / formel</th>
+                  <th className="text-left py-1.5 font-semibold">Fortegn når ladning går fra a (høy V) til b (lav V)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-purple-200 dark:divide-purple-800">
+                <tr>
+                  <td className="py-1.5 pr-2 font-mono"><InlineLatex latex="W_\text{felt}" /></td>
+                  <td className="py-1.5 pr-2"><InlineLatex latex="= q(V_a - V_b) = -\Delta E_p" /></td>
+                  <td className="py-1.5 text-green-700 dark:text-green-400">positiv for q &gt; 0 (feltet «hjelper»)</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-mono"><InlineLatex latex="W_\text{ytre}" /></td>
+                  <td className="py-1.5 pr-2"><InlineLatex latex="= q(V_b - V_a) = +\Delta E_p" /></td>
+                  <td className="py-1.5 text-red-700 dark:text-red-400">negativ for q &gt; 0 (du slipper å jobbe)</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-mono"><InlineLatex latex="V_{ab}" /></td>
+                  <td className="py-1.5 pr-2"><InlineLatex latex="= V_a - V_b" /> (spenning)</td>
+                  <td className="py-1.5 text-green-700 dark:text-green-400">positiv (per definisjon av a, b)</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-mono"><InlineLatex latex="\Delta V" /></td>
+                  <td className="py-1.5 pr-2"><InlineLatex latex="= V_b - V_a = -V_{ab}" /></td>
+                  <td className="py-1.5 text-red-700 dark:text-red-400">negativ (V synker når vi går fra a til b)</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-mono"><InlineLatex latex="\Delta E_p" /></td>
+                  <td className="py-1.5 pr-2"><InlineLatex latex="= E_{p,b} - E_{p,a} = q\,\Delta V" /></td>
+                  <td className="py-1.5 text-red-700 dark:text-red-400">negativ for q &gt; 0 (E_p synker)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-3 bg-white/60 dark:bg-black/30 rounded p-2 text-xs">
+            <p className="font-semibold mb-1">Huskeregel:</p>
+            <ul className="space-y-0.5">
+              <li>• <strong>V_ab</strong> bruker <em>bindestrek mellom bokstavene</em>: V<em>a</em>−V<em>b</em> (a minus b)</li>
+              <li>• <strong>ΔV</strong> er alltid <em>slutt minus start</em>: V_b − V_a</li>
+              <li>• <strong>ΔV = −V_ab</strong> (motsatt fortegn!)</li>
+              <li>• <strong>W_felt</strong> = positivt når q &gt; 0 «ruller nedover» fra høy V til lav V (naturlig retning)</li>
+              <li>• <strong>W_ytre</strong> = negativt i samme situasjon — du trenger ikke jobbe, feltet gjør jobben</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Dobbel-sjekk: konkret eksempel med tall */}
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Konkret eksempel på fortegnsreglene</p>
+          <p className="text-sm mb-2">
+            Anta <InlineLatex latex="V_a = 100\,\text{V}" />, <InlineLatex latex="V_b = 20\,\text{V}" /> og{" "}
+            <InlineLatex latex="q = +2\,\mu\text{C}" />. Ladningen flyttes fra a til b.
+          </p>
+          <ul className="text-sm space-y-1">
+            <li>• <InlineLatex latex="V_{ab} = V_a - V_b = 80\,\text{V}" /> (positiv spenning)</li>
+            <li>• <InlineLatex latex="\Delta V = V_b - V_a = -80\,\text{V}" /> (potensialet synker)</li>
+            <li>• <InlineLatex latex="W_\text{felt} = q V_{ab} = 2 \cdot 10^{-6} \cdot 80 = +160\,\mu\text{J}" /> (feltet gjør positivt arbeid)</li>
+            <li>• <InlineLatex latex="\Delta E_p = q\,\Delta V = -160\,\mu\text{J}" /> (energien synker)</li>
+            <li>• <InlineLatex latex="W_\text{ytre} = +\Delta E_p = -160\,\mu\text{J}" /> (du får energi — feltet jobber for deg)</li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Sjekk:</strong> Positiv ladning ruller «nedover» i potensial → feltet gjør positivt arbeid →
+            ladningens E_p synker → ladningen får kinetisk energi (ΔE_k = +160 μJ hvis i ro initielt).
+          </p>
+        </div>
+
         <h4 className="font-semibold mt-6 mb-2">Uniformt felt</h4>
         <p>
           I et uniformt elektrisk felt (f.eks. mellom parallelle plater) er den potensielle

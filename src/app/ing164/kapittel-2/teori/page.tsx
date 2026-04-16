@@ -82,6 +82,48 @@ export default function TeoriPage() {
             <li>• <strong>«Gjennomsnittsfart = gjennomsnittet av startfart og sluttfart»</strong> — Bare sant for konstant akselerasjon! Generelt er det <InlineLatex latex="\bar{v} = \Delta x/\Delta t" />.</li>
           </ul>
         </div>
+
+        {/* SVG: x-t-graf med sekant og forflytning */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 420 260" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            {/* Akser */}
+            <g stroke="currentColor" fill="none" strokeWidth="1.5">
+              <line x1="50" y1="220" x2="400" y2="220" />
+              <line x1="50" y1="30" x2="50" y2="220" />
+              {/* Pilspisser */}
+              <polygon points="400,220 392,216 392,224" fill="currentColor" />
+              <polygon points="50,30 46,38 54,38" fill="currentColor" />
+            </g>
+            {/* Akseetiketter */}
+            <text x="405" y="225" className="fill-current text-xs">t</text>
+            <text x="35" y="28" className="fill-current text-xs">x</text>
+            {/* Kurve: x(t) som en buet funksjon */}
+            <path d="M 70,200 Q 180,180 220,120 T 370,60" stroke="#3b82f6" strokeWidth="2.5" fill="none" />
+            {/* To punkter på kurven */}
+            <circle cx="100" cy="193" r="4" fill="#ef4444" />
+            <circle cx="340" cy="72" r="4" fill="#ef4444" />
+            {/* Sekant (rett linje mellom punktene) */}
+            <line x1="100" y1="193" x2="340" y2="72" stroke="#f59e0b" strokeWidth="2" strokeDasharray="6,4" />
+            {/* Merkelapper */}
+            <text x="85" y="210" className="fill-current text-xs">(t₁, x₁)</text>
+            <text x="325" y="60" className="fill-current text-xs">(t₂, x₂)</text>
+            <text x="210" y="120" className="fill-current text-xs" fill="#f59e0b">sekant: v̄</text>
+            {/* Δx og Δt */}
+            <line x1="340" y1="193" x2="340" y2="72" stroke="#10b981" strokeWidth="1.5" strokeDasharray="3,3" />
+            <line x1="100" y1="193" x2="340" y2="193" stroke="#10b981" strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="350" y="135" className="fill-current text-xs" fill="#10b981">Δx</text>
+            <text x="210" y="208" className="fill-current text-xs" fill="#10b981">Δt</text>
+            <text x="210" y="250" textAnchor="middle" className="fill-current text-xs">Gjennomsnittsfart = stigning på sekanten</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://www.khanacademy.org/science/physics" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Khan Academy — Physics (one-dimensional motion)</a></li>
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — Motion concepts</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* 2.2 Momentanfart */}
@@ -155,6 +197,52 @@ export default function TeoriPage() {
             <li>• <strong>«v = 0 betyr at legemet står stille for alltid»</strong> — Nei! Det betyr at det er stille <em>akkurat nå</em>. En ball kastet opp har v = 0 i toppunktet, men den akselererer stadig nedover.</li>
             <li>• <strong>«Negativ fart betyr at legemet bremser»</strong> — Nei! Negativt fortegn betyr at det beveger seg i negativ retning. Om det bremser avhenger av forholdet mellom v og a.</li>
           </ul>
+        </div>
+
+        {/* SVG: tangent på x-t-graf */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 420 260" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="currentColor" fill="none" strokeWidth="1.5">
+              <line x1="50" y1="220" x2="400" y2="220" />
+              <line x1="50" y1="30" x2="50" y2="220" />
+              <polygon points="400,220 392,216 392,224" fill="currentColor" />
+              <polygon points="50,30 46,38 54,38" fill="currentColor" />
+            </g>
+            <text x="405" y="225" className="fill-current text-xs">t</text>
+            <text x="35" y="28" className="fill-current text-xs">x</text>
+            {/* Kurve */}
+            <path d="M 70,200 Q 180,180 220,120 T 370,60" stroke="#3b82f6" strokeWidth="2.5" fill="none" />
+            {/* Tangent i punkt P */}
+            <circle cx="220" cy="120" r="4" fill="#ef4444" />
+            <line x1="130" y1="175" x2="310" y2="65" stroke="#10b981" strokeWidth="2" />
+            <text x="215" y="145" className="fill-current text-xs" fill="#ef4444">P</text>
+            <text x="135" y="170" className="fill-current text-xs" fill="#10b981">tangent: v(t)</text>
+            {/* Hjelpelinjer som viser sekant blir tangent */}
+            <line x1="220" y1="120" x2="270" y2="90" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="220" y1="120" x2="250" y2="100" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3,3" />
+            <text x="210" y="250" textAnchor="middle" className="fill-current text-xs">Momentanfart = tangentens stigning i punktet</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon: Fra sekant til tangent</p>
+          <p className="text-sm">
+            Se på et punkt P i x-t-grafen. Plasser et nabopunkt P' og trekk sekanten — den gir gjennomsnittsfarten
+            mellom de to. Flytt P' nærmere og nærmere P. Sekanten <em>roterer</em> og nærmer seg en grenseposisjon:
+            det er <strong>tangenten</strong> i P. Stigningen til tangenten er momentanfarten. Dette er den
+            geometriske essensen av den deriverte.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng med kap. 6 (arbeid og energi)</p>
+          <p className="text-sm">
+            Momentanfart er det som inngår i kinetisk energi: <InlineLatex latex="K = \tfrac{1}{2}mv^2" />.
+            Derfor må du forstå skillet mellom <em>gjennomsnittsfart</em> (mellom to tidspunkter) og
+            <em> momentanfart</em> (akkurat nå) — energibetraktninger bruker alltid momentanfarten i gitte
+            øyeblikk. I kap. 6 vil du se at arbeid gjort av nettokraft <InlineLatex latex="= \Delta K" />,
+            hvor K bruker <InlineLatex latex="v^2" /> på et bestemt tidspunkt.
+          </p>
         </div>
       </TheorySummary>
 
@@ -244,6 +332,75 @@ export default function TeoriPage() {
             <li>• <strong>Motsatt fortegn</strong> på v og a → farten <strong>minker</strong> (legemet bremser)</li>
           </ul>
         </div>
+
+        {/* SVG: tre grafer side om side — x-t, v-t, a-t */}
+        <div className="my-6">
+          <p className="text-sm font-semibold mb-2 text-center">Sammenhengen mellom x(t), v(t) og a(t) ved konstant akselerasjon</p>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 720 220" className="w-full max-w-3xl" xmlns="http://www.w3.org/2000/svg">
+              {/* x-t graf */}
+              <g>
+                <line x1="30" y1="180" x2="220" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <line x1="30" y1="30" x2="30" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <text x="222" y="185" className="fill-current text-xs">t</text>
+                <text x="18" y="28" className="fill-current text-xs">x</text>
+                {/* Parabel */}
+                <path d="M 35,170 Q 85,140 120,95 T 210,40" stroke="#3b82f6" strokeWidth="2.5" fill="none" />
+                <text x="125" y="210" textAnchor="middle" className="fill-current text-xs">x = x₀ + v₀t + ½at²</text>
+              </g>
+              {/* v-t graf */}
+              <g>
+                <line x1="270" y1="180" x2="460" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <line x1="270" y1="30" x2="270" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <text x="462" y="185" className="fill-current text-xs">t</text>
+                <text x="258" y="28" className="fill-current text-xs">v</text>
+                {/* Rett linje (lineær) */}
+                <line x1="275" y1="150" x2="455" y2="50" stroke="#10b981" strokeWidth="2.5" />
+                {/* Areal under kurven (forflytning) */}
+                <path d="M 275,150 L 455,50 L 455,180 L 275,180 Z" fill="#10b981" fillOpacity="0.15" />
+                <text x="360" y="140" textAnchor="middle" className="fill-current text-xs" fill="#10b981">Δx = areal</text>
+                <text x="365" y="210" textAnchor="middle" className="fill-current text-xs">v = v₀ + at</text>
+              </g>
+              {/* a-t graf */}
+              <g>
+                <line x1="510" y1="180" x2="700" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <line x1="510" y1="30" x2="510" y2="180" stroke="currentColor" strokeWidth="1.5" />
+                <text x="702" y="185" className="fill-current text-xs">t</text>
+                <text x="498" y="28" className="fill-current text-xs">a</text>
+                {/* Horisontal linje (konstant a) */}
+                <line x1="515" y1="90" x2="695" y2="90" stroke="#ef4444" strokeWidth="2.5" />
+                <path d="M 515,90 L 695,90 L 695,180 L 515,180 Z" fill="#ef4444" fillOpacity="0.1" />
+                <text x="605" y="80" textAnchor="middle" className="fill-current text-xs" fill="#ef4444">Δv = areal</text>
+                <text x="605" y="210" textAnchor="middle" className="fill-current text-xs">a = konstant</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Viktigste geometriske innsikt: Areal under v-t-grafen = forflytning</p>
+          <p className="text-sm">
+            Se på midtgrafen over. Arealet under v(t)-kurven mellom <InlineLatex latex="t_1" /> og
+            <InlineLatex latex="t_2" /> er <em>alltid</em> lik forflytningen <InlineLatex latex="\Delta x" /> —
+            uansett formen på kurven. Dette er fundamentalt og direkte koblet til integrasjon:
+            <InlineLatex latex="\Delta x = \int v\,dt" />.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Dette blir fryktelig viktig i kap. 6:</strong> Arbeid er <InlineLatex latex="W = \int F\,dx" /> —
+            arealet under F-x-kurven. Samme mønster, ny kontekst. Når du ser et produkt som skal summeres over et
+            intervall der den ene faktoren varierer, er svaret alltid «arealet under kurven».
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng: kap. 4 og Newtons 2. lov</p>
+          <p className="text-sm">
+            Akselerasjon er ikke bare en matematisk konstruksjon. Newtons 2. lov sier
+            <InlineLatex latex="\vec{F}_{\text{net}} = m\vec{a}" />. Det betyr at <em>akselerasjonen er direkte
+            proporsjonal med netto kraft</em>. I kap. 2 tar vi akselerasjonen som gitt og finner bevegelse;
+            i kap. 4 regner vi ut akselerasjonen fra krefter og bruker kinematikken herfra til å finne bevegelsen.
+          </p>
+        </div>
       </TheorySummary>
 
       {/* 2.4 Konstant akselerasjon — med visualisering innebygd */}
@@ -307,6 +464,53 @@ export default function TeoriPage() {
             Hver likning kobler <strong>fire</strong> av de fem størrelsene (<InlineLatex latex="x, v, v_0, a, t" />).
             Finn ut hvilken størrelse du <em>ikke</em> trenger og <em>ikke</em> kjenner — bruk
             likningen som mangler den størrelsen.
+          </p>
+        </div>
+
+        {/* Tabell over de fire likningene */}
+        <div className="overflow-x-auto my-4">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b-2 border-[var(--card-border)]">
+                <th className="text-left py-2 pr-3">Likning</th>
+                <th className="text-left py-2 pr-3">Inneholder</th>
+                <th className="text-left py-2">Mangler</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[var(--card-border)]">
+                <td className="py-2 pr-3"><InlineLatex latex="v = v_0 + at" /></td>
+                <td className="py-2 pr-3"><InlineLatex latex="v, v_0, a, t" /></td>
+                <td className="py-2"><strong><InlineLatex latex="x" /></strong></td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]">
+                <td className="py-2 pr-3"><InlineLatex latex="x = x_0 + v_0 t + \tfrac{1}{2}at^2" /></td>
+                <td className="py-2 pr-3"><InlineLatex latex="x, v_0, a, t" /></td>
+                <td className="py-2"><strong><InlineLatex latex="v" /></strong></td>
+              </tr>
+              <tr className="border-b border-[var(--card-border)]">
+                <td className="py-2 pr-3"><InlineLatex latex="v^2 = v_0^2 + 2a(x-x_0)" /></td>
+                <td className="py-2 pr-3"><InlineLatex latex="x, v, v_0, a" /></td>
+                <td className="py-2"><strong><InlineLatex latex="t" /></strong></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-3"><InlineLatex latex="x - x_0 = \tfrac{1}{2}(v_0+v)t" /></td>
+                <td className="py-2 pr-3"><InlineLatex latex="x, v, v_0, t" /></td>
+                <td className="py-2"><strong><InlineLatex latex="a" /></strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon: Hvorfor er likning 3 så kraftig?</p>
+          <p className="text-sm">
+            <InlineLatex latex="v^2 = v_0^2 + 2a(x-x_0)" /> er tidløs — den inneholder ikke
+            <InlineLatex latex="t" />. Bruk den når du ikke bryr deg om tiden («Hvor fort går kula når den treffer
+            bakken?» eller «Hvor langt kjører bilen før den stopper?»). Den er dessuten fysikkens forkledde
+            energiprinsipp: multipliser begge sider med <InlineLatex latex="\tfrac{1}{2}m" /> og du får
+            <InlineLatex latex="\tfrac{1}{2}mv^2 = \tfrac{1}{2}mv_0^2 + ma \cdot \Delta x" /> — akkurat
+            energiarbeidsetningen fra kap. 6.
           </p>
         </div>
 
@@ -473,6 +677,79 @@ export default function TeoriPage() {
             <li>• <strong>Symmetri ved kast:</strong> Tiden opp = tiden ned (til samme høyde). Farten ved landing = startfarten (i størrelse)</li>
           </ul>
         </div>
+
+        {/* SVG: Fartsvektorer langs et kast opp og ned */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 420 320" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            {/* Bakken */}
+            <line x1="20" y1="300" x2="400" y2="300" stroke="currentColor" strokeWidth="2" />
+            {/* y-akse */}
+            <line x1="60" y1="300" x2="60" y2="30" stroke="currentColor" strokeWidth="1.5" />
+            <polygon points="60,30 56,38 64,38" fill="currentColor" />
+            <text x="45" y="28" className="fill-current text-xs">y</text>
+            {/* Kuler langs banen (oppgang) */}
+            <circle cx="120" cy="270" r="8" fill="#3b82f6" />
+            <circle cx="170" cy="200" r="8" fill="#3b82f6" />
+            <circle cx="200" cy="130" r="8" fill="#3b82f6" />
+            <circle cx="210" cy="80" r="8" fill="#ef4444" />
+            {/* Fartspiler på vei opp — minker i størrelse */}
+            <line x1="120" y1="270" x2="120" y2="230" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="120,225 116,232 124,232" fill="#10b981" />
+            <line x1="170" y1="200" x2="170" y2="175" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="170,170 166,177 174,177" fill="#10b981" />
+            <line x1="200" y1="130" x2="200" y2="118" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="200,113 196,120 204,120" fill="#10b981" />
+            {/* Toppunktet: v = 0 */}
+            <text x="225" y="85" className="fill-current text-xs" fill="#ef4444">v = 0 (topp)</text>
+            {/* a piler — alltid nedover og samme lengde */}
+            <line x1="120" y1="270" x2="120" y2="288" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,2" />
+            <polygon points="120,293 116,286 124,286" fill="#f59e0b" />
+            <line x1="170" y1="200" x2="170" y2="218" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,2" />
+            <polygon points="170,223 166,216 174,216" fill="#f59e0b" />
+            <line x1="200" y1="130" x2="200" y2="148" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,2" />
+            <polygon points="200,153 196,146 204,146" fill="#f59e0b" />
+            <line x1="210" y1="80" x2="210" y2="98" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,2" />
+            <polygon points="210,103 206,96 214,96" fill="#f59e0b" />
+            {/* Legende */}
+            <line x1="300" y1="160" x2="300" y2="190" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="300,192 296,185 304,185" fill="#10b981" />
+            <text x="312" y="180" className="fill-current text-xs">v (fart)</text>
+            <line x1="300" y1="210" x2="300" y2="240" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,2" />
+            <polygon points="300,242 296,235 304,235" fill="#f59e0b" />
+            <text x="312" y="230" className="fill-current text-xs">a = −g (konstant!)</text>
+            <text x="210" y="315" textAnchor="middle" className="fill-current text-xs">Farten minker, men akselerasjonen er uforandret</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon: Symmetrien i fritt fall</p>
+          <p className="text-sm">
+            Kast en ball rett opp med fart <InlineLatex latex="v_0" />. På veien opp mister den
+            <InlineLatex latex="g" /> m/s per sekund. På veien ned får den <InlineLatex latex="g" /> m/s per
+            sekund. Derfor tar oppgangen like lang tid som nedgangen, og farten idet den returnerer til
+            utkastnivået er <InlineLatex latex="-v_0" />. Akselerasjonen er den samme hele tiden —
+            den bryr seg ikke om hvilken vei ballen beveger seg.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng: kap. 3 (skrått kast) og kap. 7 (energi)</p>
+          <p className="text-sm">
+            Fritt fall er «halve historien» for skrått kast i kap. 3: der faller ballen samtidig som den har
+            horisontal bevegelse. Den vertikale delen er nøyaktig fritt fall. I kap. 7 ser du at den
+            kinetiske energien i toppunktet av et kast er konvertert til potensiell energi —
+            <InlineLatex latex="\tfrac{1}{2}mv_0^2 = mgh" /> gir maks høyde uten å bruke tiden.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://www.khanacademy.org/science/physics" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Khan Academy — Free fall and projectile motion</a></li>
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — Free fall motion</a></li>
+            <li>• <a href="https://www.feynmanlectures.caltech.edu/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Feynman Lectures (vol. I, kap. 8)</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* 2.6 Integrasjon */}
@@ -562,6 +839,79 @@ export default function TeoriPage() {
             <li>Sett inn grensene og forenk</li>
             <li>Bruk initialbetingelsene til å bestemme eventuelle konstanter</li>
           </ol>
+        </div>
+
+        {/* SVG: Kinematikkskjema derivasjon/integrasjon */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 500 200" className="w-full max-w-xl" xmlns="http://www.w3.org/2000/svg">
+            {/* Tre bokser */}
+            <rect x="20" y="70" width="110" height="60" rx="8" stroke="#3b82f6" strokeWidth="2" fill="none" />
+            <text x="75" y="100" textAnchor="middle" className="fill-current text-sm font-semibold" fill="#3b82f6">x(t)</text>
+            <text x="75" y="118" textAnchor="middle" className="fill-current text-xs">posisjon</text>
+
+            <rect x="195" y="70" width="110" height="60" rx="8" stroke="#10b981" strokeWidth="2" fill="none" />
+            <text x="250" y="100" textAnchor="middle" className="fill-current text-sm font-semibold" fill="#10b981">v(t)</text>
+            <text x="250" y="118" textAnchor="middle" className="fill-current text-xs">fart</text>
+
+            <rect x="370" y="70" width="110" height="60" rx="8" stroke="#ef4444" strokeWidth="2" fill="none" />
+            <text x="425" y="100" textAnchor="middle" className="fill-current text-sm font-semibold" fill="#ef4444">a(t)</text>
+            <text x="425" y="118" textAnchor="middle" className="fill-current text-xs">akselerasjon</text>
+
+            {/* Piler derivasjon (over) */}
+            <path d="M 130,80 Q 160,50 195,80" stroke="#f59e0b" strokeWidth="2" fill="none" />
+            <polygon points="195,80 189,75 189,83" fill="#f59e0b" />
+            <text x="162" y="45" textAnchor="middle" className="fill-current text-xs" fill="#f59e0b">d/dt</text>
+
+            <path d="M 305,80 Q 335,50 370,80" stroke="#f59e0b" strokeWidth="2" fill="none" />
+            <polygon points="370,80 364,75 364,83" fill="#f59e0b" />
+            <text x="337" y="45" textAnchor="middle" className="fill-current text-xs" fill="#f59e0b">d/dt</text>
+
+            {/* Piler integrasjon (under) */}
+            <path d="M 370,120 Q 340,155 305,120" stroke="#8b5cf6" strokeWidth="2" fill="none" />
+            <polygon points="305,120 311,125 311,117" fill="#8b5cf6" />
+            <text x="338" y="170" textAnchor="middle" className="fill-current text-xs" fill="#8b5cf6">∫ dt</text>
+
+            <path d="M 195,120 Q 165,155 130,120" stroke="#8b5cf6" strokeWidth="2" fill="none" />
+            <polygon points="130,120 136,125 136,117" fill="#8b5cf6" />
+            <text x="163" y="170" textAnchor="middle" className="fill-current text-xs" fill="#8b5cf6">∫ dt</text>
+
+            <text x="250" y="25" textAnchor="middle" className="fill-current text-xs font-semibold">Kinematikkhierarkiet</text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon: Når deriverer og når integrerer du?</p>
+          <ul className="space-y-2 text-sm">
+            <li>• <strong>Oppgitt x(t), søker v eller a:</strong> Deriver. Det er trivielt — potensregelen er nok.</li>
+            <li>• <strong>Oppgitt a(t), søker v eller x:</strong> Integrer. Husk initialbetingelser (<InlineLatex latex="v_0, x_0" />).</li>
+            <li>• <strong>Oppgitt v(t) med a ≠ konstant:</strong> Integrer for å få x(t), deriver for å få a(t).</li>
+            <li>• <strong>Konstant a:</strong> Bruk de fire kinematiske likningene — de <em>er</em> integralene allerede.</li>
+          </ul>
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Eksempel — a(t) = 2 − 0,1t</p>
+          <p className="text-sm">
+            Gitt <InlineLatex latex="v_0 = 0" /> og <InlineLatex latex="x_0 = 0" />:
+          </p>
+          <p className="text-sm mt-2">
+            <InlineLatex latex="v(t) = 0 + \int_0^t (2 - 0{,}1\tau)\,d\tau = 2t - 0{,}05t^2" />
+          </p>
+          <p className="text-sm mt-2">
+            <InlineLatex latex="x(t) = 0 + \int_0^t (2\tau - 0{,}05\tau^2)\,d\tau = t^2 - \tfrac{0{,}05}{3}t^3" />
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Maks fart:</strong> <InlineLatex latex="a(t) = 0 \Rightarrow 2 - 0{,}1t = 0 \Rightarrow t = 20\,\text{s}" />.
+            Sett inn: <InlineLatex latex="v_{\max} = 2\cdot 20 - 0{,}05\cdot 400 = 20\,\text{m/s}" />.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">3Blue1Brown — Essence of Calculus</a> (derivasjon og integrasjon visuelt)</li>
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — Calculus applied to motion</a></li>
+          </ul>
         </div>
       </TheorySummary>
     </div>

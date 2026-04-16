@@ -62,6 +62,67 @@ export default function TeoriPage() {
             Kraftmoment er til rotasjon det kraft er til lineær bevegelse. Sammenligningen <InlineLatex latex="\tau = rF\sin\phi" /> vs. <InlineLatex latex="F" /> viser at rotasjonsfysikken legger til en ekstra faktor: avstand fra aksen og vinkel. Alt du lærte om kraftkomponenter i kap 4–5 gjelder fortsatt — du dekomponerer fortsatt krafter, bare nå er det den vinkelrette komponenten som betyr noe for rotasjon.
           </p>
         </div>
+
+        {/* SVG: tau = rF sin phi — moment-arm visualisering */}
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 420 260" className="w-full max-w-md">
+            {/* Rotasjonsakse */}
+            <circle cx="80" cy="180" r="6" fill="#8b5cf6" />
+            <text x="80" y="205" textAnchor="middle" className="fill-current text-xs">Akse O</text>
+
+            {/* r-vektoren */}
+            <line x1="80" y1="180" x2="280" y2="100" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrowBlue10)" />
+            <text x="170" y="130" className="fill-current text-xs" fill="#3b82f6">r</text>
+
+            {/* F-vektor (i punktet) */}
+            <line x1="280" y1="100" x2="340" y2="40" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrowRed10)" />
+            <text x="325" y="55" className="fill-current text-xs" fill="#ef4444">F</text>
+
+            {/* Komponent: F sin phi (vinkelrett på r) */}
+            <line x1="280" y1="100" x2="325" y2="15" stroke="#10b981" strokeWidth="2" strokeDasharray="4 3" markerEnd="url(#arrowGreen10)" />
+            <text x="345" y="30" className="fill-current text-xs" fill="#10b981">F sin φ</text>
+
+            {/* Moment-armen: r sin phi */}
+            <line x1="80" y1="180" x2="160" y2="60" stroke="#f59e0b" strokeWidth="2" strokeDasharray="5 3" />
+            <text x="95" y="115" className="fill-current text-xs" fill="#f59e0b">arm = r sin φ</text>
+
+            {/* Vinkelen phi ved punktet */}
+            <path d="M 300 93 A 25 25 0 0 1 295 118" fill="none" stroke="#6b7280" strokeWidth="1.5" />
+            <text x="310" y="115" className="fill-current text-xs">φ</text>
+
+            <defs>
+              <marker id="arrowBlue10" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#3b82f6" />
+              </marker>
+              <marker id="arrowRed10" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#ef4444" />
+              </marker>
+              <marker id="arrowGreen10" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#10b981" />
+              </marker>
+            </defs>
+            <text x="210" y="245" textAnchor="middle" className="fill-current text-xs">τ = rF sin φ = (arm) · F = r · (F⊥)</text>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">To ekvivalente tolkninger</p>
+          <ul className="text-sm space-y-2 list-disc list-inside">
+            <li><strong>Moment-arm-tolkning:</strong> <InlineLatex latex="\tau = F \cdot (r\sin\phi) = F \cdot \ell" />. Moment-armen <InlineLatex latex="\ell = r\sin\phi" /> er den korteste avstanden fra aksen til <em>kraftens virkelinje</em>. Forleng kraften som en rett linje og dropp en loddrett linje fra aksen til den.</li>
+            <li><strong>Komponent-tolkning:</strong> <InlineLatex latex="\tau = r \cdot (F\sin\phi) = r \cdot F_\perp" />. Bare kraftkomponenten vinkelrett på <InlineLatex latex="\vec{r}" /> vrir om aksen. Komponenten langs <InlineLatex latex="\vec{r}" /> drar bare ut/inn og bidrar ikke.</li>
+          </ul>
+          <p className="text-sm mt-2">
+            Begge perspektivene gir samme svar. Velg det som gjør geometrien enklest i oppgaven din.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Supplement</p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li><a href="https://www.khanacademy.org/science/physics/torque-angular-momentum" target="_blank" rel="noreferrer" className="underline">Khan Academy — Torque and angular momentum</a></li>
+            <li><a href="https://hyperphysics.phy-astr.gsu.edu/hbase/torq2.html" target="_blank" rel="noreferrer" className="underline">HyperPhysics — Torque</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       <TorqueCalculator />
@@ -119,6 +180,81 @@ export default function TeoriPage() {
           <p className="font-semibold text-blue-800 dark:text-blue-300 mb-2">Sammenheng med kap 4 og kap 8</p>
           <p className="text-sm">
             Dette er N2L i rotasjonsspråk. Analogien er fullstendig: <InlineLatex latex="m \leftrightarrow I" />, <InlineLatex latex="a \leftrightarrow \alpha" />, <InlineLatex latex="F \leftrightarrow \tau" />. For objekter som både translerer og roterer (for eksempel et hjul som akselererer) bruker du <em>begge</em> lovene simultant, og kobler dem via rullbetingelsen <InlineLatex latex="a = R\alpha" />.
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Master-analogi: lineær ↔ rotasjon</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm mt-2 border-collapse">
+              <thead>
+                <tr className="border-b border-[var(--card-border)]">
+                  <th className="text-left py-2 pr-4">Lineær</th>
+                  <th className="text-left py-2 pr-4">Rotasjon</th>
+                  <th className="text-left py-2 pr-4">Kommentar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="x" /> (posisjon)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\theta" /> (vinkel, rad)</td>
+                  <td className="py-2 pr-4">Hvor mye har du flyttet/rotert</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="v" /> (hastighet)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\omega" /> (vinkelhastighet)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="v = r\omega" /> for stiv rotasjon</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="a" /> (akselerasjon)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\alpha" /> (vinkelakselerasjon)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="a_\text{tan} = r\alpha" /></td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="m" /> (masse / treghet)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="I" /> (treghetsmoment)</td>
+                  <td className="py-2 pr-4">Treghet avhenger AV massefordeling</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="F" /> (kraft)</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\tau" /> (kraftmoment)</td>
+                  <td className="py-2 pr-4">Det som gir bevegelsesendring</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="\sum F = ma" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\sum\tau = I\alpha" /></td>
+                  <td className="py-2 pr-4">Newtons 2. lov</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="p = mv" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="L = I\omega" /></td>
+                  <td className="py-2 pr-4">Bevegelsesmengde</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="F = dp/dt" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\tau = dL/dt" /></td>
+                  <td className="py-2 pr-4">Generell N2L</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="\tfrac{1}{2}mv^2" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="\tfrac{1}{2}I\omega^2" /></td>
+                  <td className="py-2 pr-4">Kinetisk energi</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4"><InlineLatex latex="W = F\,\Delta x" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="W = \tau\,\Delta\theta" /></td>
+                  <td className="py-2 pr-4">Arbeid</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4"><InlineLatex latex="P = Fv" /></td>
+                  <td className="py-2 pr-4"><InlineLatex latex="P = \tau\omega" /></td>
+                  <td className="py-2 pr-4">Effekt</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Bruk denne tabellen som Rosetta-stein:</strong> Hvis du forstår et konsept i lineær bevegelse, kan du «oversette» det til rotasjon ved å bytte ut symbolene i samme rad. Formelstrukturen er den samme.
           </p>
         </div>
       </TheorySummary>
@@ -185,6 +321,131 @@ export default function TeoriPage() {
         <p className="text-sm">
           <strong>Friksjon:</strong> Det er <em>statisk</em> friksjon som sørger for rulling uten glidning. Den gjør ingen arbeid (kontaktpunktet har <InlineLatex latex="v = 0" />), men den skaper kraftmomentet som gir vinkelakselerasjon.
         </p>
+
+        {/* SVG: hjul som ruller — kontakpunkt i ro */}
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 420 240" className="w-full max-w-md">
+            {/* Bakken */}
+            <line x1="20" y1="200" x2="400" y2="200" stroke="currentColor" strokeWidth="1.5" />
+            {/* Hjul */}
+            <circle cx="210" cy="140" r="60" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle cx="210" cy="140" r="3" fill="#8b5cf6" />
+            {/* Eiker for å vise rotasjon */}
+            <line x1="210" y1="140" x2="210" y2="80" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="3 2" />
+            <line x1="210" y1="140" x2="270" y2="140" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="3 2" />
+
+            {/* Hastighetsvektorer */}
+            {/* Bunnen: v = 0 */}
+            <circle cx="210" cy="200" r="4" fill="#ef4444" />
+            <text x="210" y="225" textAnchor="middle" className="fill-current text-xs" fill="#ef4444">v = 0</text>
+
+            {/* Massesenter: v_CM */}
+            <line x1="210" y1="140" x2="290" y2="140" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrowRollBlue)" />
+            <text x="300" y="144" className="fill-current text-xs" fill="#3b82f6">v_CM</text>
+
+            {/* Toppen: 2 v_CM */}
+            <line x1="210" y1="80" x2="370" y2="80" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowRollGreen)" />
+            <text x="310" y="70" className="fill-current text-xs" fill="#10b981">2 v_CM</text>
+
+            {/* omega */}
+            <path d="M 250 115 A 20 20 0 0 1 230 95" fill="none" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrowRollAmber)" />
+            <text x="258" y="105" className="fill-current text-xs" fill="#f59e0b">ω</text>
+
+            <defs>
+              <marker id="arrowRollBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#3b82f6" />
+              </marker>
+              <marker id="arrowRollGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#10b981" />
+              </marker>
+              <marker id="arrowRollAmber" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#f59e0b" />
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2"><InlineLatex latex="v_{CM} = R\omega" /> er en konstrakt, ikke en naturlov</p>
+          <p className="text-sm">
+            Det er viktig å forstå at <InlineLatex latex="v_{CM} = R\omega" /> bare gjelder når vi <strong>velger</strong> å anta rulling uten glidning. Det er en geometrisk betingelse vi legger på systemet, ikke en lov naturen følger automatisk. Hvis underlaget er glatt, så ruller hjulet <em>ikke</em>, og <InlineLatex latex="v_{CM}" /> og <InlineLatex latex="\omega" /> kan være helt uavhengige.
+          </p>
+          <p className="text-sm mt-2">
+            I oppgaver må du derfor alltid spørre deg: «Er det nok statisk friksjon til å opprettholde rulling?» Sjekk at den nødvendige friksjonskraften er <em>mindre enn</em> <InlineLatex latex="\mu_s N" />. Hvis ikke — objektet sklir og du må bruke kinetisk friksjon i stedet.
+          </p>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Utledning: <InlineLatex latex="a_{CM} = \tfrac{2}{3}g\sin\beta" /> for en massiv skive på skråplan</p>
+          <p className="text-sm mb-2">
+            Tre ligninger, tre ukjente (<InlineLatex latex="a_{CM}" />, <InlineLatex latex="\alpha" />, <InlineLatex latex="f_s" />):
+          </p>
+          <ol className="text-sm space-y-1 list-decimal list-inside">
+            <li><strong>N2L langs skråplanet:</strong> <InlineLatex latex="Mg\sin\beta - f_s = Ma_{CM}" /></li>
+            <li><strong>N2L for rotasjon (akse = CM):</strong> <InlineLatex latex="f_s R = I\alpha = \tfrac{1}{2}MR^2 \alpha" /></li>
+            <li><strong>Rullbetingelse:</strong> <InlineLatex latex="a_{CM} = R\alpha" /></li>
+          </ol>
+          <p className="text-sm mt-2">
+            Fra (2) og (3): <InlineLatex latex="f_s = \tfrac{1}{2}Ma_{CM}" />. Sett inn i (1):
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="Mg\sin\beta - \tfrac{1}{2}Ma_{CM} = Ma_{CM} \implies a_{CM} = \tfrac{2}{3}g\sin\beta" />
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Observasjon:</strong> En glidende kloss ville hatt <InlineLatex latex="a = g\sin\beta" />. Rulling gir bare 2/3 så stor akselerasjon — fordi en del av potensiell energi går til <em>rotasjonsenergi</em>, ikke bare translasjon.
+          </p>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hvorfor vinner den massive kulen?</p>
+          <p className="text-sm mb-2">
+            Generelt for et objekt med <InlineLatex latex="I = cMR^2" /> (c = dimensjonsløs konstant):
+          </p>
+          <p className="text-sm text-center">
+            <InlineLatex latex="a_{CM} = \frac{g\sin\beta}{1 + c}" />
+          </p>
+          <div className="overflow-x-auto mt-3">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-[var(--card-border)]">
+                  <th className="text-left py-2 pr-4">Objekt</th>
+                  <th className="text-left py-2 pr-4">c = I/MR²</th>
+                  <th className="text-left py-2 pr-4">a_CM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4">Glidende kloss (ingen rotasjon)</td>
+                  <td className="py-2 pr-4">—</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="g\sin\beta" /></td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4">Massiv kule</td>
+                  <td className="py-2 pr-4">2/5</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="(5/7)g\sin\beta \approx 0{,}71 g\sin\beta" /></td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4">Massiv sylinder/skive</td>
+                  <td className="py-2 pr-4">1/2</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="(2/3)g\sin\beta \approx 0{,}67 g\sin\beta" /></td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="py-2 pr-4">Hul kule</td>
+                  <td className="py-2 pr-4">2/3</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="(3/5)g\sin\beta = 0{,}60 g\sin\beta" /></td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4">Ring (tynn hul sylinder)</td>
+                  <td className="py-2 pr-4">1</td>
+                  <td className="py-2 pr-4"><InlineLatex latex="(1/2)g\sin\beta = 0{,}50 g\sin\beta" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm mt-3">
+            Jo mer masse som er samlet nær aksen (lav c), jo mindre energi låses i rotasjon og jo mer går til translasjon. <strong>Den massive kulen vinner</strong>, ringen taper — <em>uavhengig av masse og radius</em>.
+          </p>
+        </div>
       </TheorySummary>
 
       <RollingWithoutSlipping />

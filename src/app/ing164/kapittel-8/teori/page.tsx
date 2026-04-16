@@ -78,6 +78,62 @@ export default function Kapittel8Teori() {
             <InlineLatex latex="L" /> når <InlineLatex latex="\sum \tau = 0" />.
           </p>
         </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Hvorfor p = mv og ikke mv²?</p>
+          <p className="mb-2">
+            En naturlig spørsmål: hvorfor er <em>bevegelsesmengden</em> lineær i <InlineLatex latex="v" />,
+            mens <em>kinetisk energi</em> går som <InlineLatex latex="v^2" />? Svaret ligger i{" "}
+            <strong>hva de to måler</strong>:
+          </p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <InlineLatex latex="p = mv" /> svarer på: «Hvor vanskelig er det å stoppe denne tingen?»
+              Doble farten → dobbel impuls trengs for å stoppe den.
+            </li>
+            <li>
+              <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" /> svarer på: «Hvor mye arbeid skal til for å sette den i gang?»
+              Doble farten → fire ganger så mye arbeid.
+            </li>
+          </ul>
+          <p className="mt-2">
+            Begge er nyttige, men i kollisjoner (korte tidsrom, store krefter) er{" "}
+            <InlineLatex latex="p" /> nesten alltid det rette verktøyet fordi det er bevart selv når energi
+            tapes til varme og deformasjon.
+          </p>
+        </div>
+
+        {/* SVG: bevegelsesmengde som vektor */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 180" className="w-full max-w-md">
+            {/* Bakgrunn-akser */}
+            <g stroke="currentColor" fill="none" strokeWidth="1" opacity="0.3">
+              <line x1="30" y1="150" x2="370" y2="150" />
+              <line x1="50" y1="30" x2="50" y2="170" />
+            </g>
+            {/* Sykkel: liten masse, høy fart → liten p */}
+            <circle cx="100" cy="120" r="12" fill="#10b981" opacity="0.7" />
+            <text x="100" y="125" textAnchor="middle" className="fill-white text-xs font-bold">m</text>
+            <line x1="115" y1="120" x2="170" y2="120" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrGreen)" />
+            <text x="140" y="110" textAnchor="middle" className="fill-current text-xs">v = 10 m/s</text>
+            <text x="140" y="145" textAnchor="middle" className="fill-current text-xs font-bold">p = 100 kg·m/s</text>
+            {/* Lastebil: stor masse, lav fart → stor p */}
+            <rect x="230" y="105" width="50" height="30" fill="#ef4444" opacity="0.7" />
+            <text x="255" y="125" textAnchor="middle" className="fill-white text-xs font-bold">5M</text>
+            <line x1="285" y1="120" x2="320" y2="120" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrRed)" />
+            <text x="303" y="110" textAnchor="middle" className="fill-current text-xs">v = 2 m/s</text>
+            <text x="255" y="160" textAnchor="middle" className="fill-current text-xs font-bold">p = 10 000 kg·m/s</text>
+            <defs>
+              <marker id="arrGreen" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#10b981" />
+              </marker>
+              <marker id="arrRed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#ef4444" />
+              </marker>
+            </defs>
+            <text x="200" y="25" textAnchor="middle" className="fill-current text-sm font-semibold">Stor p = stor «stoppkraft» nødvendig</text>
+          </svg>
+        </div>
       </TheorySummary>
 
       {/* 8.2 Kraftimpuls */}
@@ -163,6 +219,52 @@ export default function Kapittel8Teori() {
           <p className="mt-2">
             Ikke <InlineLatex latex="m(15-20) = -5m" />. Sett alltid opp fortegn <em>før</em> du regner.
           </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Hvorfor krasjputer funker — F=Δp/Δt</p>
+          <p className="mb-2">
+            Dette er kanskje den viktigste praktiske innsikten fra hele kapittelet. Når du krasjer i en vegg,
+            er <InlineLatex latex="\Delta p = m(0 - v_0) = -mv_0" /> uansett hva — bilen må stoppe.{" "}
+            <strong>Men kraften du opplever avhenger av kollisjonstiden:</strong>
+          </p>
+          <div className="text-center my-2">
+            <InlineLatex latex="F_\text{gj} = \frac{\Delta p}{\Delta t}" />
+          </div>
+          <ul className="list-disc list-inside space-y-1">
+            <li>Vegg av stål: <InlineLatex latex="\Delta t \approx 0{,}01" /> s → ekstrem kraft, dødelig</li>
+            <li>Krasjputer + knusesoner: <InlineLatex latex="\Delta t \approx 0{,}3" /> s → 30× mindre kraft</li>
+            <li>Samme prinsipp: fallskjerm, strikkhopp, boksehanske, fotballsko med demping</li>
+          </ul>
+          <p className="mt-2">
+            Ingeniører kan ikke endre <InlineLatex latex="\Delta p" />, men de kan designe systemer som
+            øker <InlineLatex latex="\Delta t" />. Det er derfor sikkerhet er så nært knyttet til
+            impuls-teoremet.
+          </p>
+        </div>
+
+        {/* SVG: F-t graf med kort vs lang Δt */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 440 220" className="w-full max-w-lg">
+            {/* Akse */}
+            <g stroke="currentColor" fill="none" strokeWidth="1.5">
+              <line x1="40" y1="180" x2="410" y2="180" />
+              <line x1="40" y1="30" x2="40" y2="180" />
+            </g>
+            <text x="415" y="185" className="fill-current text-xs">t</text>
+            <text x="25" y="35" className="fill-current text-xs">F</text>
+            {/* Tynn høy puls — hard kollisjon */}
+            <path d="M 80 180 Q 95 40 110 180 Z" fill="#ef4444" opacity="0.7" />
+            <text x="95" y="195" textAnchor="middle" className="fill-current text-xs">Hard</text>
+            <text x="95" y="208" textAnchor="middle" className="fill-current text-xs">(kort Δt)</text>
+            {/* Bred lav puls — myk kollisjon */}
+            <path d="M 200 180 Q 270 100 340 180 Z" fill="#10b981" opacity="0.7" />
+            <text x="270" y="195" textAnchor="middle" className="fill-current text-xs">Myk (med airbag)</text>
+            <text x="270" y="208" textAnchor="middle" className="fill-current text-xs">(lang Δt)</text>
+            <text x="225" y="150" textAnchor="middle" className="fill-current text-xs">samme areal =</text>
+            <text x="225" y="163" textAnchor="middle" className="fill-current text-xs">samme Δp</text>
+            <text x="220" y="25" textAnchor="middle" className="fill-current text-sm font-semibold">Areal under F-t = impuls J = Δp</text>
+          </svg>
         </div>
       </TheorySummary>
 
@@ -251,6 +353,69 @@ export default function Kapittel8Teori() {
           variant="blue"
           description="x- og y-komponentene bevares uavhengig av hverandre."
         />
+
+        {/* SVG: 2D-kollisjon med x- og y-komponenter */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 440 260" className="w-full max-w-lg">
+            <text x="220" y="20" textAnchor="middle" className="fill-current text-sm font-semibold">2D-kollisjon — p_x og p_y bevares separat</text>
+            {/* Akser */}
+            <g stroke="currentColor" fill="none" strokeWidth="1" opacity="0.3">
+              <line x1="40" y1="140" x2="400" y2="140" />
+              <line x1="220" y1="50" x2="220" y2="230" />
+            </g>
+            <text x="405" y="145" className="fill-current text-xs">x</text>
+            <text x="225" y="55" className="fill-current text-xs">y</text>
+
+            {/* FØR: ball A kommer inn fra venstre */}
+            <circle cx="90" cy="140" r="14" fill="#3b82f6" opacity="0.8" />
+            <text x="90" y="145" textAnchor="middle" className="fill-white text-xs font-bold">A</text>
+            <line x1="105" y1="140" x2="160" y2="140" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrBlue8)" />
+            <text x="132" y="135" textAnchor="middle" className="fill-current text-xs">v_A</text>
+            {/* Ball B i ro */}
+            <circle cx="220" cy="140" r="14" fill="#f59e0b" opacity="0.8" />
+            <text x="220" y="145" textAnchor="middle" className="fill-white text-xs font-bold">B</text>
+
+            {/* ETTER: A sprer seg oppover, B sprer seg nedover */}
+            <line x1="220" y1="140" x2="290" y2="90" stroke="#3b82f6" strokeWidth="2" strokeDasharray="3 2" markerEnd="url(#arrBlue8)" />
+            <text x="300" y="85" className="fill-current text-xs">v_A' (θ oppover)</text>
+            <line x1="220" y1="140" x2="290" y2="200" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3 2" markerEnd="url(#arrOr8)" />
+            <text x="300" y="210" className="fill-current text-xs">v_B' (φ nedover)</text>
+
+            {/* Vinkelmarkering */}
+            <path d="M 260 140 A 40 40 0 0 0 257 120" stroke="#3b82f6" fill="none" strokeWidth="1" />
+            <text x="267" y="132" className="fill-current text-xs">θ</text>
+            <path d="M 260 140 A 40 40 0 0 1 257 160" stroke="#f59e0b" fill="none" strokeWidth="1" />
+            <text x="267" y="155" className="fill-current text-xs">φ</text>
+
+            <defs>
+              <marker id="arrBlue8" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#3b82f6" />
+              </marker>
+              <marker id="arrOr8" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#f59e0b" />
+              </marker>
+            </defs>
+            <text x="220" y="250" textAnchor="middle" className="fill-current text-xs">p_x: m_A v_A = m_A v'_A cos θ + m_B v'_B cos φ</text>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Rakettligningen — masse som endrer seg</p>
+          <p className="mb-2">
+            En rakett er et klassisk eksempel på et system der <InlineLatex latex="F = ma" /> IKKE gjelder —
+            fordi massen endrer seg kontinuerlig. Momentformen{" "}
+            <InlineLatex latex="\sum F = dp/dt" /> er derimot helt korrekt. Ved å anvende bevaring av{" "}
+            <InlineLatex latex="p" /> på systemet (rakett + eksos) får man:
+          </p>
+          <div className="text-center my-2">
+            <InlineLatex latex="m\,\frac{dv}{dt} = -v_\text{eks}\,\frac{dm}{dt}" />
+          </div>
+          <p className="mt-2">
+            Der <InlineLatex latex="v_\text{eks}" /> er utslippshastigheten (relativ rakett). Integrert gir dette
+            Tsiolkovsky-ligningen <InlineLatex latex="\Delta v = v_\text{eks}\ln(m_0/m_f)" />. Dette er
+            romfartsligningen — og grunnlaget for all moderne rakett-design.
+          </p>
+        </div>
       </TheorySummary>
 
       {/* 8.4 Inelastiske kollisjoner */}
@@ -347,6 +512,84 @@ export default function Kapittel8Teori() {
             De har felles hastighet kun <em>etter</em> støtet. Før støtet kan de ha helt ulike hastigheter
             (kula er rask, klossen er i ro). Det er nettopp denne fartsdifferansen som er drivkraften
             i energitapet.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlig misforståelse — «fullstendig inelastisk = ingen energi igjen»</p>
+          <p className="mb-2">
+            Dette er <em>helt feil!</em> Fullstendig inelastisk betyr <strong>maksimalt</strong> energitap som er
+            kompatibelt med bevegelsesmengde-bevaringen — <em>ikke</em> at all kinetisk energi forsvinner.
+          </p>
+          <p>
+            Eksempel: To baller med samme masse kolliderer frontalt med lik fart og henger sammen.
+            Her <em>forsvinner</em> all kinetisk energi (fordi <InlineLatex latex="v_\text{etter} = 0" />{" "}
+            pga. symmetri). Men hvis de har ulik fart eller går i samme retning, blir det fortsatt
+            betydelig kinetisk energi igjen etter støtet — den felles hastigheten er ikke null.
+          </p>
+          <p className="mt-2 font-semibold">
+            Regel: p er <em>alltid</em> bevart i lukket system, men E_k er kun bevart ved elastisk støt.
+          </p>
+        </div>
+
+        {/* SVG: Elastisk vs inelastisk kollisjon */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 440 320" className="w-full max-w-lg">
+            <text x="220" y="20" textAnchor="middle" className="fill-current text-sm font-semibold">Elastisk vs Fullstendig inelastisk</text>
+
+            {/* ELASTISK — øverst */}
+            <text x="30" y="50" className="fill-current text-xs font-bold">Elastisk:</text>
+            {/* Før */}
+            <text x="100" y="68" textAnchor="middle" className="fill-current text-xs">Før</text>
+            <circle cx="80" cy="90" r="14" fill="#3b82f6" />
+            <line x1="95" y1="90" x2="130" y2="90" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrBlueC)" />
+            <circle cx="160" cy="90" r="14" fill="#f59e0b" />
+            {/* Etter */}
+            <text x="340" y="68" textAnchor="middle" className="fill-current text-xs">Etter</text>
+            <circle cx="280" cy="90" r="14" fill="#3b82f6" />
+            <line x1="260" y1="90" x2="220" y2="90" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrBlueC)" />
+            <circle cx="360" cy="90" r="14" fill="#f59e0b" />
+            <line x1="375" y1="90" x2="410" y2="90" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrOrC)" />
+            <text x="220" y="125" textAnchor="middle" className="fill-green-600 dark:fill-green-400 text-xs font-semibold">p bevart ✓  E_k bevart ✓</text>
+
+            {/* FULLSTENDIG INELASTISK — nederst */}
+            <text x="30" y="170" className="fill-current text-xs font-bold">Fullst. inelastisk:</text>
+            <text x="100" y="190" textAnchor="middle" className="fill-current text-xs">Før</text>
+            <circle cx="80" cy="215" r="14" fill="#3b82f6" />
+            <line x1="95" y1="215" x2="135" y2="215" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrBlueC)" />
+            <circle cx="160" cy="215" r="14" fill="#f59e0b" />
+
+            <text x="340" y="190" textAnchor="middle" className="fill-current text-xs">Etter (henger sammen)</text>
+            <circle cx="310" cy="215" r="14" fill="#3b82f6" opacity="0.8" />
+            <circle cx="335" cy="215" r="14" fill="#f59e0b" opacity="0.8" />
+            <line x1="350" y1="215" x2="380" y2="215" stroke="#8b5cf6" strokeWidth="2" markerEnd="url(#arrPurpC)" />
+            <text x="320" y="250" textAnchor="middle" className="fill-current text-xs">felles v</text>
+            <text x="220" y="285" textAnchor="middle" className="fill-amber-600 dark:fill-amber-400 text-xs font-semibold">p bevart ✓  E_k IKKE bevart ✗ (maks tap)</text>
+            <text x="220" y="305" textAnchor="middle" className="fill-current text-xs">→ varme, lyd, deformasjon</text>
+
+            <defs>
+              <marker id="arrBlueC" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#3b82f6" />
+              </marker>
+              <marker id="arrOrC" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#f59e0b" />
+              </marker>
+              <marker id="arrPurpC" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#8b5cf6" />
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Intuisjon — hvorfor er det maksimalt tap?</p>
+          <p>
+            Når objektene henger sammen etter, er det «slutten på jobben» — det er ingen mer relativ bevegelse
+            igjen til å produsere deformasjon, varme eller lyd. Systemet er i sin laveste energitilstand
+            som er forenlig med bevaring av <InlineLatex latex="p" />. Tenk på det som:
+          </p>
+          <p className="mt-2 italic">
+            «All den kinetiske energien som <em>kunne</em> forsvinne, har forsvunnet.»
           </p>
         </div>
       </TheorySummary>
@@ -543,7 +786,86 @@ export default function Kapittel8Teori() {
           variant="blue"
           description="Kontrollsjekk: hvis m₁ = m₂ er x_cm = (x₁ + x₂)/2 (midt mellom dem). Korrekt!"
         />
+
+        {/* SVG: Massesenter mellom to ulike masser */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 440 160" className="w-full max-w-lg">
+            <text x="220" y="20" textAnchor="middle" className="fill-current text-sm font-semibold">Massesenter — nærmere den tyngste</text>
+            {/* Stang */}
+            <line x1="60" y1="90" x2="380" y2="90" stroke="currentColor" strokeWidth="3" />
+            {/* m1 = 1 kg, posisjon 60 */}
+            <circle cx="80" cy="90" r="10" fill="#3b82f6" />
+            <text x="80" y="115" textAnchor="middle" className="fill-current text-xs">m₁ = 1 kg</text>
+            <text x="80" y="130" textAnchor="middle" className="fill-current text-xs">x = 0</text>
+            {/* m2 = 4 kg, posisjon 360 */}
+            <circle cx="360" cy="90" r="18" fill="#ef4444" />
+            <text x="360" y="115" textAnchor="middle" className="fill-current text-xs">m₂ = 4 kg</text>
+            <text x="360" y="130" textAnchor="middle" className="fill-current text-xs">x = L</text>
+            {/* Massesenter ved x = 4L/5 fra venstre → 80 + (360-80)*(4/5) = 304 */}
+            <line x1="304" y1="70" x2="304" y2="110" stroke="#10b981" strokeWidth="2" strokeDasharray="3 2" />
+            <polygon points="304,70 298,80 310,80" fill="#10b981" />
+            <text x="304" y="65" textAnchor="middle" className="fill-green-600 dark:fill-green-400 text-xs font-bold">CM</text>
+            <text x="304" y="148" textAnchor="middle" className="fill-green-600 dark:fill-green-400 text-xs">x_cm = 4L/5</text>
+            <text x="220" y="50" textAnchor="middle" className="fill-current text-xs italic">nærmere tyngste masse</text>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng — N2L for systemer → partikkel-analogi</p>
+          <p>
+            Dette er en DYP innsikt: når du studerer bevegelsen til et komplisert system (mange partikler,
+            stiv kropp, væske), kan du ofte glemme alle indre detaljer og bare spørre «hva gjør massesenteret?».
+            Massesenteret oppfører seg <em>nøyaktig</em> som en enkelt partikkel med hele systemets masse,
+            utsatt for summen av alle ytre krefter.
+          </p>
+          <p className="mt-2">
+            Dette er hvorfor vi i tidligere kapitler kunne behandle baller, klosser og til og med mennesker
+            som «partikler» — det var egentlig massesenteret vi fulgte. Nå har du det formelle grunnlaget
+            for den forenklingen.
+          </p>
+        </div>
       </TheorySummary>
+
+      {/* Eksterne lenker */}
+      <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-6">
+        <p className="font-semibold text-sm mb-2">Videre lesning — bevegelsesmengde og kollisjoner</p>
+        <ul className="text-sm space-y-1">
+          <li>
+            •{" "}
+            <a href="https://www.khanacademy.org/science/physics/linear-momentum" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+              Khan Academy — Linear momentum and collisions
+            </a>{" "}
+            (grundig gjennomgang med video-eksempler)
+          </li>
+          <li>
+            •{" "}
+            <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/mom.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+              HyperPhysics — Momentum & Collisions
+            </a>{" "}
+            (kompakte oppsummeringer, bra for repetisjon)
+          </li>
+          <li>
+            •{" "}
+            <a href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+              3Blue1Brown — Visualisering av pi fra kollisjoner
+            </a>{" "}
+            (mesterlig visuell intuisjon)
+          </li>
+          <li>
+            •{" "}
+            <a href="https://www.youtube.com/@veritasium" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+              Veritasium — Newtons vugge og elastiske kollisjoner
+            </a>
+          </li>
+          <li>
+            •{" "}
+            <a href="https://www.feynmanlectures.caltech.edu/I_10.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">
+              Feynman Lectures — Conservation of Momentum (Ch. 10)
+            </a>{" "}
+            (original, pedagogisk gull)
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

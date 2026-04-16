@@ -98,6 +98,70 @@ export default function TeoriPage() {
           begge ender. Dersom tauet har masse, øker snordraget fra det frie endepunktet og opp mot
           festepunktet, fordi tauet selv må bæres opp av snordraget.
         </p>
+
+        {/* SVG: Bilde som henger i to vaiere */}
+        <div className="my-4">
+          <p className="text-sm mb-2 font-semibold">Eksempel: bilde som henger i to vaiere</p>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 400 260" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+              {/* Tak */}
+              <line x1="50" y1="30" x2="350" y2="30" stroke="currentColor" strokeWidth="2" />
+              <g stroke="currentColor" strokeWidth="1" opacity="0.5">
+                <line x1="60" y1="30" x2="50" y2="20" />
+                <line x1="100" y1="30" x2="90" y2="20" />
+                <line x1="140" y1="30" x2="130" y2="20" />
+                <line x1="180" y1="30" x2="170" y2="20" />
+                <line x1="220" y1="30" x2="210" y2="20" />
+                <line x1="260" y1="30" x2="250" y2="20" />
+                <line x1="300" y1="30" x2="290" y2="20" />
+                <line x1="340" y1="30" x2="330" y2="20" />
+              </g>
+              {/* Vaiere */}
+              <line x1="120" y1="30" x2="200" y2="150" stroke="#3b82f6" strokeWidth="2" />
+              <line x1="280" y1="30" x2="200" y2="150" stroke="#3b82f6" strokeWidth="2" />
+              {/* Bilde */}
+              <rect x="160" y="150" width="80" height="60" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
+              <text x="200" y="185" textAnchor="middle" className="fill-current text-xs">Bilde</text>
+              {/* Tyngde */}
+              <line x1="200" y1="210" x2="200" y2="245" stroke="#ef4444" strokeWidth="3" />
+              <polygon points="200,245 196,236 204,236" fill="#ef4444" />
+              <text x="208" y="235" className="fill-current text-xs" style={{ fill: "#ef4444" }}>G = mg</text>
+              {/* T1 */}
+              <line x1="190" y1="155" x2="145" y2="85" stroke="#10b981" strokeWidth="3" />
+              <polygon points="145,85 154,89 149,95" fill="#10b981" />
+              <text x="110" y="100" className="fill-current text-xs" style={{ fill: "#10b981" }}>T₁</text>
+              {/* T2 */}
+              <line x1="210" y1="155" x2="255" y2="85" stroke="#10b981" strokeWidth="3" />
+              <polygon points="255,85 246,89 251,95" fill="#10b981" />
+              <text x="265" y="100" className="fill-current text-xs" style={{ fill: "#10b981" }}>T₂</text>
+              {/* Vinkler */}
+              <text x="170" y="145" className="fill-current text-xs" style={{ fill: "#f59e0b" }}>θ₁</text>
+              <text x="225" y="145" className="fill-current text-xs" style={{ fill: "#f59e0b" }}>θ₂</text>
+            </svg>
+          </div>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Løsning av bildeeksempelet</p>
+          <p className="text-sm">
+            Med likevekt <InlineLatex latex="\sum F_x = 0" /> og <InlineLatex latex="\sum F_y = 0" /> får vi:
+          </p>
+          <ul className="list-disc list-inside text-sm mt-2 space-y-1">
+            <li><InlineLatex latex="T_1 \sin\theta_1 = T_2 \sin\theta_2" /> (x-retning)</li>
+            <li><InlineLatex latex="T_1 \cos\theta_1 + T_2 \cos\theta_2 = mg" /> (y-retning)</li>
+          </ul>
+          <p className="text-sm mt-2">
+            To likninger, to ukjente (<InlineLatex latex="T_1, T_2" />). Løs som vanlig lineært system.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://www.khanacademy.org/science/physics/forces-newtons-laws/tension-tutorial" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Khan Academy — Tension</a></li>
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/mincl.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — Inclined planes and equilibrium</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* ------------------------------------------------------------------ */}
@@ -185,6 +249,100 @@ export default function TeoriPage() {
           også akselerasjonen. Da kan vi ikke bruke de konstante kinematikklikningene direkte.
           Vi bruker <InlineLatex latex="a(t) = F(t)/m" /> og integrerer for å finne fart og posisjon.
         </p>
+
+        {/* SVG: Atwood-maskinen */}
+        <div className="my-4">
+          <p className="text-sm mb-2 font-semibold">Eksempel: Atwood-maskinen</p>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 400 300" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+              {/* Tak */}
+              <line x1="120" y1="30" x2="280" y2="30" stroke="currentColor" strokeWidth="2" />
+              <g stroke="currentColor" strokeWidth="1" opacity="0.5">
+                <line x1="130" y1="30" x2="120" y2="20" />
+                <line x1="160" y1="30" x2="150" y2="20" />
+                <line x1="190" y1="30" x2="180" y2="20" />
+                <line x1="220" y1="30" x2="210" y2="20" />
+                <line x1="250" y1="30" x2="240" y2="20" />
+                <line x1="270" y1="30" x2="260" y2="20" />
+              </g>
+              {/* Trinse */}
+              <circle cx="200" cy="60" r="25" stroke="currentColor" strokeWidth="2" fill="none" />
+              <circle cx="200" cy="60" r="3" fill="currentColor" />
+              <line x1="200" y1="35" x2="200" y2="30" stroke="currentColor" strokeWidth="2" />
+              {/* Tau venstre */}
+              <line x1="175" y1="60" x2="175" y2="180" stroke="#10b981" strokeWidth="2" />
+              {/* Tau høyre */}
+              <line x1="225" y1="60" x2="225" y2="140" stroke="#10b981" strokeWidth="2" />
+              {/* Kloss m1 (tyngre) */}
+              <rect x="150" y="180" width="50" height="50" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.2" />
+              <text x="175" y="210" textAnchor="middle" className="fill-current text-xs font-semibold">m₁</text>
+              {/* Kloss m2 (lettere) */}
+              <rect x="205" y="140" width="40" height="40" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
+              <text x="225" y="163" textAnchor="middle" className="fill-current text-xs font-semibold">m₂</text>
+              {/* a pil ned for m1 */}
+              <line x1="125" y1="200" x2="125" y2="225" stroke="#ef4444" strokeWidth="3" />
+              <polygon points="125,225 121,217 129,217" fill="#ef4444" />
+              <text x="100" y="220" className="fill-current text-xs" style={{ fill: "#ef4444" }}>a</text>
+              {/* a pil opp for m2 */}
+              <line x1="260" y1="175" x2="260" y2="150" stroke="#ef4444" strokeWidth="3" />
+              <polygon points="260,150 256,158 264,158" fill="#ef4444" />
+              <text x="265" y="170" className="fill-current text-xs" style={{ fill: "#ef4444" }}>a</text>
+              {/* Tekst */}
+              <text x="200" y="275" textAnchor="middle" className="fill-current text-xs">Samme tau → samme T, samme |a|</text>
+              <text x="200" y="290" textAnchor="middle" className="fill-current text-xs font-semibold">a = (m₁ − m₂)g / (m₁ + m₂)</text>
+            </svg>
+          </div>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hvorfor er Atwood-akselerasjonen <em>ikke</em> bare g?</p>
+          <p className="text-sm">
+            Naiv tanke: &laquo;tyngde trekker ned, så den tunge blokken akselererer med g.&raquo; Feil —
+            den tunge blokken må <em>også</em> dra opp den lette blokken via tauet. Det koster kraft
+            og reduserer akselerasjonen.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Utledning:</strong> Sett opp N2L for hver blokk (positiv retning = tauets bevegelsesretning):
+          </p>
+          <ul className="list-disc list-inside text-sm mt-1 space-y-1">
+            <li>Tung blokk (<InlineLatex latex="m_1" />, faller): <InlineLatex latex="m_1 g - T = m_1 a" /></li>
+            <li>Lett blokk (<InlineLatex latex="m_2" />, stiger): <InlineLatex latex="T - m_2 g = m_2 a" /></li>
+          </ul>
+          <p className="text-sm mt-2">
+            Legg sammen: <InlineLatex latex="(m_1 - m_2)g = (m_1 + m_2)a" />, som gir:
+          </p>
+          <div className="mt-2">
+            <FormulaBox
+              latex="a = \frac{(m_1 - m_2)g}{m_1 + m_2}, \qquad T = \frac{2 m_1 m_2 g}{m_1 + m_2}"
+              title="Atwood-maskin"
+              variant="blue"
+              description="Samme a for begge, samme T i hele tauet."
+            />
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Sjekk:</strong> Hvis <InlineLatex latex="m_1 = m_2" />, så <InlineLatex latex="a = 0" /> (likevekt).
+            Hvis <InlineLatex latex="m_2 \to 0" />, så <InlineLatex latex="a \to g" /> (fritt fall for m₁).
+            Fornuftig!
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Sammenheng: effektiv masse og treghet</p>
+          <p className="text-sm">
+            Atwood-formelen viser et generelt prinsipp: når to masser er koblet, akselereres systemet som om
+            det hadde en &laquo;effektiv treghet&raquo; <InlineLatex latex="m_1 + m_2" />, drevet av en &laquo;effektiv kraft&raquo;{" "}
+            <InlineLatex latex="(m_1 - m_2)g" />. Det samme mønsteret ser du igjen i redusert masse ved
+            to-legemes-problemer og i kollisjoner (kap. 8).
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-4 my-4">
+          <p className="font-semibold text-sm mb-2">Videre lesning</p>
+          <ul className="text-sm space-y-1">
+            <li>• <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/atwd.html" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">HyperPhysics — The Atwood Machine</a></li>
+            <li>• <a href="https://www.khanacademy.org/science/physics/forces-newtons-laws/tension-tutorial/v/tension-in-an-accelerating-system-and-pie-in-the-face" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">Khan Academy — Tension in accelerating systems</a></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* ------------------------------------------------------------------ */}

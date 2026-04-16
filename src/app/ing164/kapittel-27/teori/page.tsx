@@ -166,6 +166,71 @@ export default function TeoriPage() {
           </ol>
         </div>
 
+        {/* SVG: Høyrehåndsregel for F = qv × B */}
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 500 280" className="w-full max-w-xl">
+            <defs>
+              <marker id="arrvPos" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+              </marker>
+              <marker id="arrBPos" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#10b981" />
+              </marker>
+              <marker id="arrFPos" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
+              </marker>
+              <marker id="arrFNeg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6" />
+              </marker>
+            </defs>
+            {/* Positiv ladning (venstre) */}
+            <text x="125" y="30" textAnchor="middle" className="fill-current text-sm font-semibold">Positiv ladning (+q)</text>
+            <circle cx="125" cy="150" r="14" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="125" y="155" textAnchor="middle" className="fill-current text-sm font-bold">+</text>
+            {/* v */}
+            <line x1="125" y1="150" x2="225" y2="150" stroke="#3b82f6" strokeWidth="3" markerEnd="url(#arrvPos)" />
+            <text x="230" y="155" className="fill-current text-sm" fill="#3b82f6">v</text>
+            {/* B */}
+            <line x1="125" y1="150" x2="125" y2="70" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrBPos)" />
+            <text x="110" y="65" className="fill-current text-sm" fill="#10b981">B</text>
+            {/* F (ut av planet = prikk / vi tegner som "ut" symbol) — her tegnes F opp-ut-av-planet representasjon; bruk pilen langs positiv z */}
+            <circle cx="125" cy="150" r="24" fill="none" stroke="#ef4444" strokeWidth="1" strokeDasharray="3,3" />
+            <circle cx="125" cy="150" r="3" fill="#ef4444" />
+            <text x="160" y="190" className="fill-current text-xs" fill="#ef4444">F ut av planet (⊙)</text>
+            <text x="125" y="235" textAnchor="middle" className="fill-current text-xs">v høyre, B opp → F ut av arket</text>
+
+            {/* Negativ ladning (høyre) */}
+            <text x="375" y="30" textAnchor="middle" className="fill-current text-sm font-semibold">Negativ ladning (−q)</text>
+            <circle cx="375" cy="150" r="14" fill="#8b5cf6" opacity="0.3" stroke="#8b5cf6" strokeWidth="2" />
+            <text x="375" y="155" textAnchor="middle" className="fill-current text-sm font-bold">−</text>
+            <line x1="375" y1="150" x2="475" y2="150" stroke="#3b82f6" strokeWidth="3" markerEnd="url(#arrvPos)" />
+            <text x="480" y="155" className="fill-current text-sm" fill="#3b82f6">v</text>
+            <line x1="375" y1="150" x2="375" y2="70" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrBPos)" />
+            <text x="360" y="65" className="fill-current text-sm" fill="#10b981">B</text>
+            <g>
+              {/* F inn i planet (×) */}
+              <circle cx="375" cy="150" r="24" fill="none" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3,3" />
+              <line x1="368" y1="143" x2="382" y2="157" stroke="#8b5cf6" strokeWidth="2" />
+              <line x1="368" y1="157" x2="382" y2="143" stroke="#8b5cf6" strokeWidth="2" />
+            </g>
+            <text x="410" y="190" className="fill-current text-xs" fill="#8b5cf6">F inn i planet (⊗)</text>
+            <text x="375" y="235" textAnchor="middle" className="fill-current text-xs">Samme v, B — men q &lt; 0 snur F</text>
+
+            <text x="250" y="265" textAnchor="middle" className="fill-current text-[10px] italic">Krysset i sirkel = inn i arket. Prikk = ut av arket.</text>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Negativ ladning: q &lt; 0 snur kraften</p>
+          <p className="text-sm">
+            Formelen <InlineLatex latex="\vec{F} = q\vec{v} \times \vec{B}" /> gjelder for alle ladninger —
+            men tegnet på <InlineLatex latex="q" /> bestemmer retningen. For et elektron (q = −e) gir
+            kryssproduktet <InlineLatex latex="\vec{v}\times\vec{B}" /> én retning, men den negative
+            ladningen snur resultatet 180°. Praktisk huskeregel: gjør høyrehåndsregelen for positiv ladning,
+            og snu resultatet for negativ. (Alternativt: bruk <em>venstre</em> hånd for negative ladninger.)
+          </p>
+        </div>
+
         <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser</p>
           <ul className="text-sm space-y-2">
