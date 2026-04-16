@@ -1761,7 +1761,7 @@ export const exercises: Record<string, ExerciseContent> = {
             Feltet mellom to koaksiale sylindre er <em>ikke</em> uniformt — det varierer som <InlineLatex latex="1/r" />.
             Bruk resultatet fra oppg. 23.61.
           </p>
-        ).concat,
+        ),
       },
       {
         label: "Hint 2",
