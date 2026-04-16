@@ -43,6 +43,33 @@ export default function TeoriPage() {
           </div>
         </div>
 
+        {/* KRYSTALLKLAR ALGEBRA: Hvorfor blir det a minus b? */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">
+            Matematikk-sjekk: hvorfor blir det &laquo;a minus b&raquo;?
+          </p>
+          <p className="text-sm mb-2">
+            Mange blir forvirret av at vi plutselig regner <em>start minus slutt</em> (a − b) i stedet for
+            <em> slutt minus start</em> (b − a) som vanlig for Δ. Her er algebraen eksplisitt:
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>1. Definisjon av Δ: &nbsp;&nbsp;<InlineLatex latex="\Delta E_p = E_{p,b} - E_{p,a}" /> &nbsp;(slutt − start)</div>
+            <div>2. Grunnregel: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<InlineLatex latex="W_{a\to b} = -\Delta E_p" /></div>
+            <div>3. Sett inn Δ: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<InlineLatex latex="W_{a\to b} = -(E_{p,b} - E_{p,a})" /></div>
+            <div>4. Fordel minustegnet: <InlineLatex latex="W_{a\to b} = E_{p,a} - E_{p,b}" /> &nbsp;(start − slutt!)</div>
+          </div>
+          <p className="text-sm mt-2">
+            Samme regnestykke gjelder for spenning:{" "}
+            <InlineLatex latex="V_{ab} = -\Delta V = -(V_b - V_a) = V_a - V_b" />. Minustegnet &laquo;snur&raquo;
+            alltid rekkefølgen, slik at du regner <strong>start minus slutt</strong>.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Huskeregel:</strong> Når du ser <InlineLatex latex="V_{ab}" /> eller{" "}
+            <InlineLatex latex="W_{a\to b}" />, er bokstav-rekkefølgen (a, b) det som skal stå i subtraksjonen —
+            altså <em>a først</em>, ikke slutt først.
+          </p>
+        </div>
+
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 p-4 my-4">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">To typer arbeid — pass på fortegnet!</p>
           <p className="text-sm mb-2">
@@ -163,6 +190,72 @@ export default function TeoriPage() {
           latex="W_{a \to b} = -\Delta E_p = -(q_0 E y_b - q_0 E y_a) = q_0 E(y_a - y_b)"
           variant="blue"
         />
+
+        {/* FELLE-VARSEL: Uniformt felt vs punktladning */}
+        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">
+            ⚠ Felle-varsel — uniformt felt vs. punktladning
+          </p>
+          <p className="text-sm mb-2">
+            Dette er den <strong>vanligste feilen</strong> studenter gjør på eksamen i kap. 23. Formlene
+            for uniformt felt og punktladning ser like ut, men de gjelder <em>helt forskjellige</em> situasjoner:
+          </p>
+          <div className="overflow-x-auto my-3">
+            <table className="w-full text-xs md:text-sm border-collapse">
+              <thead>
+                <tr className="border-b-2 border-red-300 dark:border-red-800">
+                  <th className="text-left py-1.5 pr-2 font-semibold">Situasjon</th>
+                  <th className="text-left py-1.5 pr-2 font-semibold">Riktige formler</th>
+                  <th className="text-left py-1.5 font-semibold">Kjennetegn i oppgaveteksten</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-red-200 dark:divide-red-800">
+                <tr>
+                  <td className="py-1.5 pr-2 font-semibold">Uniformt felt<br/>(parallelle plater)</td>
+                  <td className="py-1.5 pr-2">
+                    <InlineLatex latex="E_p = q_0 E y" /><br/>
+                    <InlineLatex latex="V = E y" /><br/>
+                    <InlineLatex latex="E = V/d" /><br/>
+                    <InlineLatex latex="W = q E d" />
+                  </td>
+                  <td className="py-1.5 text-xs">
+                    &laquo;parallel plates&raquo;, &laquo;parallelle plater&raquo;, &laquo;uniform field&raquo;,
+                    &laquo;konstant E-felt&raquo;, &laquo;plate-kondensator&raquo;, angitt <em>avstand d</em> mellom plater.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-semibold">Punktladning</td>
+                  <td className="py-1.5 pr-2">
+                    <InlineLatex latex="E_p = \frac{kq_1q_2}{r}" /><br/>
+                    <InlineLatex latex="V = \frac{kq}{r}" /><br/>
+                    <InlineLatex latex="E = \frac{kq}{r^2}" /><br/>
+                    <InlineLatex latex="r = \sqrt{x^2+y^2}" />
+                  </td>
+                  <td className="py-1.5 text-xs">
+                    &laquo;point charge&raquo;, &laquo;punktladning&raquo;, &laquo;ladet partikkel/kule&raquo;,
+                    ladning angis med posisjon (x, y) eller avstand <em>r</em>, ofte flere ladninger i geometriske
+                    mønstre.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm mt-3 font-semibold">
+            ALDRI bruk formler med &laquo;y&raquo; eller &laquo;d&raquo; (som <InlineLatex latex="E_p = qEy" />{" "}
+            eller <InlineLatex latex="E = V/d" />) når du regner på punktladninger. Disse gjelder <em>kun</em> i
+            uniformt felt mellom parallelle plater.
+          </p>
+          <p className="text-sm mt-2">
+            For punktladninger MÅ du bruke formler med &laquo;r&raquo; i nevneren, og husk Pytagoras
+            (<InlineLatex latex="r = \sqrt{\Delta x^2 + \Delta y^2}" />) hvis ladningen beveger seg i 2D.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Matematisk grunn:</strong> Feltet fra parallelle plater er konstant, så
+            <InlineLatex latex="\int E\,dy = Ey" /> (lineær i y). Feltet fra en punktladning faller som
+            <InlineLatex latex="1/r^2" />, så integralet gir <InlineLatex latex="1/r" /> — helt annen
+            avstandsavhengighet.
+          </p>
+        </div>
 
         <h4 className="font-semibold mt-6 mb-2">Energibevaring</h4>
         <p>

@@ -444,6 +444,69 @@ export default function TeoriPage() {
           </ul>
         </div>
 
+        {/* KRITISK FELLE: Q konstant vs V konstant */}
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">
+            ⚠ Eksamensfelle — er Q eller V konstant når dielektrikum settes inn?
+          </p>
+          <p className="text-sm mb-2">
+            Dette er den <strong>viktigste avgjørelsen</strong> i dielektrikum-oppgaver. Les oppgaveteksten
+            nøye og avgjør hvilken av disse to scenarioene du er i, <em>før</em> du begynner å regne:
+          </p>
+          <div className="overflow-x-auto my-3">
+            <table className="w-full text-xs md:text-sm border-collapse">
+              <thead>
+                <tr className="border-b-2 border-red-300 dark:border-red-800">
+                  <th className="text-left py-1.5 pr-2 font-semibold">Scenario</th>
+                  <th className="text-left py-1.5 pr-2 font-semibold">Kjennetegn i oppgaveteksten</th>
+                  <th className="text-left py-1.5 pr-2 font-semibold">Konstant</th>
+                  <th className="text-left py-1.5 font-semibold">Hva skjer når κ &gt; 1?</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-red-200 dark:divide-red-800">
+                <tr>
+                  <td className="py-1.5 pr-2 font-semibold">Batteri påkoblet</td>
+                  <td className="py-1.5 pr-2">&laquo;koblet til batteri&raquo;, &laquo;konstant spenning&raquo;,
+                    &laquo;spenningskilde&raquo;, &laquo;connected to a battery&raquo;</td>
+                  <td className="py-1.5 pr-2 font-mono">V</td>
+                  <td className="py-1.5">
+                    C øker: <InlineLatex latex="C = \kappa C_0" /><br/>
+                    Q øker: <InlineLatex latex="Q = CV = \kappa Q_0" /><br/>
+                    U øker: <InlineLatex latex="U = \tfrac{1}{2}CV^2 = \kappa U_0" /><br/>
+                    E uendret: <InlineLatex latex="E = V/d" /> (V, d konstant)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2 font-semibold">Batteri frakoblet</td>
+                  <td className="py-1.5 pr-2">&laquo;batteriet kobles fra&raquo;, &laquo;isolert&raquo;,
+                    &laquo;frakoblet&raquo;, &laquo;disconnected&raquo;, &laquo;fast ladning&raquo;</td>
+                  <td className="py-1.5 pr-2 font-mono">Q</td>
+                  <td className="py-1.5">
+                    C øker: <InlineLatex latex="C = \kappa C_0" /><br/>
+                    V synker: <InlineLatex latex="V = Q/C = V_0/\kappa" /><br/>
+                    U synker: <InlineLatex latex="U = Q^2/(2C) = U_0/\kappa" /><br/>
+                    E synker: <InlineLatex latex="E = E_0/\kappa" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Strategi:</strong> Identifiser først <em>hva som er konstant</em>. Så velger du
+            energiformelen som <em>bruker den konstante størrelsen</em>:
+          </p>
+          <ul className="text-sm mt-1 space-y-0.5">
+            <li>• V konstant → bruk <InlineLatex latex="U = \tfrac{1}{2}CV^2" /> (C endres, V fast)</li>
+            <li>• Q konstant → bruk <InlineLatex latex="U = Q^2/(2C)" /> (C endres, Q fast)</li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Hvorfor synker energien i Q-konstant-tilfellet?</strong> Dielektrikumet blir
+            <em> suget inn</em> i kondensatoren — systemet gjør arbeid på dielektrikumet, så
+            energien i feltet avtar. I V-konstant-tilfellet pumper batteriet inn ekstra ladning og
+            energi, derav økningen.
+          </p>
+        </div>
+
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Permittivitet og oppdaterte formler</p>
           <p className="text-sm">Med dielektrikum bytter vi ut <InlineLatex latex="\varepsilon_0" /> med <InlineLatex latex="\varepsilon = \kappa\varepsilon_0" /> i alle formler:</p>
