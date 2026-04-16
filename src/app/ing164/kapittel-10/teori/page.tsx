@@ -156,6 +156,55 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av <InlineLatex latex="\tau = I\alpha" /></p>
+          <p className="text-sm mb-2">
+            Tenk det stive legemet som mange partikler <InlineLatex latex="m_i" /> i avstand <InlineLatex latex="r_i" /> fra aksen. Newton 2 for partikkel <InlineLatex latex="i" /> i tangentiell retning:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="F_{i,\text{tan}} = m_i a_{i,\text{tan}} = m_i (r_i \alpha)" />
+          </p>
+          <p className="text-sm mb-2">
+            (Siden legemet er stivt, har alle partikler samme <InlineLatex latex="\alpha" />.) Multipliser med <InlineLatex latex="r_i" /> for å få kraftmomentet om aksen:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\tau_i = r_i F_{i,\text{tan}} = m_i r_i^2 \alpha" />
+          </p>
+          <p className="text-sm mb-2">
+            Summer over alle partikler. Interne krefter kansellerer i par (N3L), så bare ytre kraftmoment teller:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\sum_i \tau_i = \alpha \sum_i m_i r_i^2 = I\alpha" />
+          </p>
+          <p className="text-sm">
+            Her brukte vi definisjonen <InlineLatex latex="I = \sum m_i r_i^2" />. <strong>Konklusjon:</strong> <InlineLatex latex="\sum\tau_\text{ext} = I\alpha" /> er N2L for rotasjon — ikke et nytt postulat, men en direkte konsekvens av den vanlige Newton 2 for hver partikkel.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE: Ikke glem sin θ i τ = r × F</p>
+          <p className="text-sm mb-2">
+            Det vanligste feilen studenter gjør på eksamen: <strong>de skriver <InlineLatex latex="\tau = rF" /> uten sinus.</strong> Dette stemmer <em>bare</em> når kraften er nøyaktig vinkelrett på posisjonsvektoren. I alle andre tilfeller må du ta med vinkelen mellom <InlineLatex latex="\vec{r}" /> og <InlineLatex latex="\vec{F}" />:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\tau = rF\sin\theta" />
+          </p>
+          <p className="text-sm mb-2">
+            <strong>Vinkelens betydning:</strong>
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside mb-2">
+            <li><InlineLatex latex="\theta = 0°" /> eller <InlineLatex latex="180°" />: kraften langs armen → <InlineLatex latex="\tau = 0" /></li>
+            <li><InlineLatex latex="\theta = 90°" />: kraften vinkelrett → maksimalt <InlineLatex latex="\tau = rF" /></li>
+            <li>Mellom: bare komponenten <InlineLatex latex="F\sin\theta" /> skaper rotasjon</li>
+          </ul>
+          <p className="text-sm mb-2">
+            <strong>Vanlig felle:</strong> I en oppgave gis <em>vinkelen til horisontalen</em> eller <em>vinkelen fra normalen</em>. Dette er <em>ikke nødvendigvis</em> vinkelen mellom <InlineLatex latex="\vec{r}" /> og <InlineLatex latex="\vec{F}" />. Tegn alltid vektorene og les av vinkelen mellom dem direkte.
+          </p>
+          <p className="text-sm">
+            <strong>Tips:</strong> Hvis du er usikker — bruk moment-arm-metoden: forleng kraften som en linje, mål korteste avstanden fra aksen til denne linjen, det er armen <InlineLatex latex="\ell" />, og da er <InlineLatex latex="\tau = F\ell" />. Denne metoden kommer rundt hele sin-spørsmålet.
+          </p>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-800 dark:text-green-300 mb-2">Praktisk oppgavestrategi</p>
           <ol className="text-sm space-y-1 list-decimal list-inside">
@@ -288,6 +337,31 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Fra <InlineLatex latex="v_{CM} = R\omega" /> til <InlineLatex latex="a_{CM} = R\alpha" /></p>
+          <p className="text-sm mb-2">
+            Rullebetingelsen (ingen glidning): kontaktpunktet har null hastighet. Dette betyr at translasjon og rotasjon er geometrisk koblet. Start med buelengden:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="s_{CM} = R\,\theta" />
+          </p>
+          <p className="text-sm mb-2">
+            Når legemet har rotert én gang (<InlineLatex latex="\theta = 2\pi" />) har CM flyttet seg én omkrets <InlineLatex latex="2\pi R" />. Deriver begge sider med hensyn til tid:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\frac{ds_{CM}}{dt} = R\frac{d\theta}{dt} \implies v_{CM} = R\omega" />
+          </p>
+          <p className="text-sm mb-2">
+            Deriver igjen:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\frac{dv_{CM}}{dt} = R\frac{d\omega}{dt} \implies a_{CM} = R\alpha"  />
+          </p>
+          <p className="text-sm">
+            <strong>Merk:</strong> Disse tre sammenhengene (<InlineLatex latex="s = R\theta" />, <InlineLatex latex="v = R\omega" />, <InlineLatex latex="a = R\alpha" />) er <em>ikke</em> definisjoner — de er <em>konsekvenser</em> av rullebetingelsen. Uten rulling gjelder ingen av dem. Dette er den geometriske «koblingsligningen» som gjør at du kan løse rullingsproblemer med to ligninger (N2L translasjon + N2L rotasjon) og tre ukjente.
+          </p>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-800 dark:text-green-300 mb-2">Hverdagsanalogi: Sykkelhjul og skråplan</p>
           <ul className="text-sm space-y-2 list-disc list-inside">
@@ -375,6 +449,28 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE: Rulling uten å gli KREVER antakelsen — den er ikke gratis</p>
+          <p className="text-sm mb-2">
+            Studenter bruker ofte <InlineLatex latex="v_{CM} = R\omega" /> automatisk. Det er feil når objektet sklir!
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside mb-2">
+            <li><strong>Ren rulling («ruller uten å gli»):</strong> <InlineLatex latex="v_{CM} = R\omega" />, <InlineLatex latex="a_{CM} = R\alpha" />. Friksjonen er <em>statisk</em>, gjør ikke arbeid.</li>
+            <li><strong>Ren glidning (skrens, på is):</strong> <InlineLatex latex="v_{CM}" /> og <InlineLatex latex="\omega" /> uavhengige. Friksjonen er <em>kinetisk</em>, dissiperer energi som varme.</li>
+            <li><strong>Overgang:</strong> En bowlingkule som legges ned med <InlineLatex latex="\omega = 0" /> men <InlineLatex latex="v_{CM} > 0" /> sklir først. Kinetisk friksjon bremser <InlineLatex latex="v_{CM}" /> og øker <InlineLatex latex="\omega" /> til <InlineLatex latex="v_{CM} = R\omega" /> er nådd — da begynner ren rulling.</li>
+          </ul>
+          <p className="text-sm">
+            <strong>Sjekkliste:</strong> Før du bruker <InlineLatex latex="v_{CM} = R\omega" />, spør: står det «ruller uten å gli» eksplisitt? Finnes det nok statisk friksjon (<InlineLatex latex="f_s \leq \mu_s N" />)? Hvis ja på begge — trygt å bruke koplingen.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE: «Uten friksjon på rotasjonsaksen» ≠ uten friksjon i kontaktpunktet</p>
+          <p className="text-sm">
+            Typisk eksamensformulering: «En trinse er festet til en <em>friksjonsfri akse</em>, tauet går over trinsen uten å skli…» — dette betyr at <em>selve aksen</em> (lageret) er friksjonsfritt. Det betyr <em>ikke</em> at kontakten mellom tau og trinse er friksjonsfri. Tvert imot: tauet må ha nok friksjon mot trinsen til å få den til å rotere. Disse to formene for friksjon er uavhengige. Ikke blande dem!
+          </p>
+        </div>
+
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Utledning: <InlineLatex latex="a_{CM} = \tfrac{2}{3}g\sin\beta" /> for en massiv skive på skråplan</p>
           <p className="text-sm mb-2">
@@ -393,6 +489,62 @@ export default function TeoriPage() {
           </p>
           <p className="text-sm mt-2">
             <strong>Observasjon:</strong> En glidende kloss ville hatt <InlineLatex latex="a = g\sin\beta" />. Rulling gir bare 2/3 så stor akselerasjon — fordi en del av potensiell energi går til <em>rotasjonsenergi</em>, ikke bare translasjon.
+          </p>
+        </div>
+
+        {/* SVG: trinse med to klosser — klassisk Atwood-variant med tregt-trinse */}
+        <div className="my-4">
+          <p className="text-sm font-semibold mb-2">Klassisk oppgavetype: to klosser over en trinse med treghet</p>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 380 280" className="w-full max-w-md">
+              {/* Tak */}
+              <line x1="40" y1="20" x2="340" y2="20" stroke="currentColor" strokeWidth="2" />
+              <line x1="40" y1="20" x2="30" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="60" y1="20" x2="50" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="80" y1="20" x2="70" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="300" y1="20" x2="290" y2="15" stroke="currentColor" strokeWidth="1" />
+              <line x1="320" y1="20" x2="310" y2="15" stroke="currentColor" strokeWidth="1" />
+              {/* Trinseopphengt */}
+              <line x1="190" y1="20" x2="190" y2="40" stroke="currentColor" strokeWidth="1.5" />
+              {/* Trinse (sirkel) */}
+              <circle cx="190" cy="70" r="30" fill="none" stroke="currentColor" strokeWidth="2" />
+              <circle cx="190" cy="70" r="3" fill="#8b5cf6" />
+              {/* Eiker */}
+              <line x1="190" y1="70" x2="190" y2="40" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3 2" />
+              <line x1="190" y1="70" x2="220" y2="70" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3 2" />
+              <text x="235" y="58" className="fill-current text-xs" fill="#8b5cf6">R, I</text>
+              {/* Tau */}
+              <line x1="160" y1="70" x2="160" y2="180" stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1="220" y1="70" x2="220" y2="140" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="140" y="130" className="fill-current text-xs" fill="#3b82f6">T₁</text>
+              <text x="228" y="110" className="fill-current text-xs" fill="#3b82f6">T₂</text>
+              {/* Kloss 1 (tyngre, henger lavere) */}
+              <rect x="140" y="180" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="2" />
+              <text x="160" y="205" textAnchor="middle" className="fill-current text-xs">m₁</text>
+              {/* m1 tyngdekraft */}
+              <line x1="160" y1="220" x2="160" y2="255" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arr10pulley)" />
+              <text x="168" y="250" className="fill-current text-xs" fill="#ef4444">m₁g</text>
+              {/* Kloss 2 (lettere, henger høyere) */}
+              <rect x="205" y="140" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2" />
+              <text x="220" y="160" textAnchor="middle" className="fill-current text-xs">m₂</text>
+              {/* m2 tyngdekraft */}
+              <line x1="220" y1="170" x2="220" y2="200" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arr10pulley)" />
+              <text x="228" y="195" className="fill-current text-xs" fill="#ef4444">m₂g</text>
+              {/* Omega */}
+              <path d="M 170 45 A 20 20 0 0 1 210 45" fill="none" stroke="#f59e0b" strokeWidth="1.5" markerEnd="url(#arr10pulley2)" />
+              <text x="190" y="40" textAnchor="middle" className="fill-current text-xs" fill="#f59e0b">ω, α</text>
+              <defs>
+                <marker id="arr10pulley" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#ef4444" />
+                </marker>
+                <marker id="arr10pulley2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#f59e0b" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <p className="text-xs italic opacity-75 text-center mt-2">
+            3 ligninger: N2L for m₁ (T₁ − m₁g = −m₁a), N2L for m₂ (T₂ − m₂g = m₂a), N2L for trinsen ((T₁ − T₂)R = Iα), koblet med a = Rα. Merk: <strong>T₁ ≠ T₂</strong> når trinsen har treghet!
           </p>
         </div>
 
@@ -445,6 +597,21 @@ export default function TeoriPage() {
           <p className="text-sm mt-3">
             Jo mer masse som er samlet nær aksen (lav c), jo mindre energi låses i rotasjon og jo mer går til translasjon. <strong>Den massive kulen vinner</strong>, ringen taper — <em>uavhengig av masse og radius</em>.
           </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten</p>
+          <p className="text-sm mb-2">
+            Se etter disse formuleringene — da vet du hvilket oppsett du trenger:
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li>«ruller uten å gli» → bruk <InlineLatex latex="v_{CM} = R\omega" /> og <InlineLatex latex="a_{CM} = R\alpha" /> som koblingsligning</li>
+            <li>«to legemer koblet via tau over trinse», «Atwood-maskin med masseviktig trinse» → tre ligninger (N2L for hver kloss + N2L rotasjon for trinsen) + <InlineLatex latex="a = R\alpha" /></li>
+            <li>«tau går uten å skli over trinsen» → samme som rulling uten å gli: <InlineLatex latex="v_{tau} = R\omega" /></li>
+            <li>«uten friksjon på rotasjonsaksen» → aksen gir null kraftmoment, men friksjon i kontakt kan fortsatt finnes</li>
+            <li>«snurrer ut», «spinner opp», «starter å rulle» → dynamikk-problem, finn <InlineLatex latex="\alpha" /> fra <InlineLatex latex="\sum\tau = I\alpha" /></li>
+            <li>«rullende skive/kule ned et skråplan» → energibevaring ELLER kraft+kraftmoment, begge virker</li>
+          </ul>
         </div>
       </TheorySummary>
 
@@ -510,6 +677,54 @@ export default function TeoriPage() {
           <p className="font-semibold text-amber-800 dark:text-amber-300 mb-2">Hvorfor vektorprodukt?</p>
           <p className="text-sm">
             <InlineLatex latex="\vec{L} = \vec{r} \times m\vec{v}" /> fanger opp <em>både</em> mengden bevegelse OG hvor langt fra aksen den skjer. Kryssproduktet sørger for at bare den vinkelrette komponenten teller — nøyaktig som i kraftmoment. Retningen til <InlineLatex latex="\vec{L}" /> er langs rotasjonsaksen (høyrehåndsregelen): fingrene krøller seg i bevegelsesretningen, og tommelen peker langs <InlineLatex latex="\vec{L}" />.
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av <InlineLatex latex="L = I\omega" /> for et stivt legeme</p>
+          <p className="text-sm mb-2">
+            For en enkelt partikkel i avstand <InlineLatex latex="r_i" /> fra aksen, med tangentiell fart <InlineLatex latex="v_i = r_i\omega" />, er størrelsen på angulært moment (om aksen):
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="L_i = r_i \cdot m_i v_i = r_i \cdot m_i (r_i\omega) = m_i r_i^2 \omega" />
+          </p>
+          <p className="text-sm mb-2">
+            Retningen følger høyrehåndsregelen — langs aksen. Summér over alle partikler i legemet:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="L = \sum_i L_i = \omega \sum_i m_i r_i^2 = I\omega" />
+          </p>
+          <p className="text-sm mb-2">
+            Vi faktoriserte ut <InlineLatex latex="\omega" /> fordi stivhet betyr felles vinkelhastighet. Det som gjenstår er treghetsmomentet.
+          </p>
+          <p className="text-sm">
+            <strong>Observér parallellen:</strong> For lineær bevegelse: <InlineLatex latex="p = mv" />. For rotasjon: <InlineLatex latex="L = I\omega" />. Bytt <InlineLatex latex="m \to I" /> og <InlineLatex latex="v \to \omega" /> og du har svaret uten å utlede på nytt.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE: <InlineLatex latex="\tau_\text{ytre} = dL/dt" /> vs <InlineLatex latex="\sum F = dp/dt" /> — likhet og forskjell</p>
+          <p className="text-sm mb-2">
+            Begge lover er helt analoge, MEN det er en viktig forskjell i hvordan de brukes:
+          </p>
+          <ul className="text-sm space-y-2 list-disc list-inside mb-2">
+            <li>
+              <strong>Lineær:</strong> <InlineLatex latex="\sum \vec{F} = d\vec{p}/dt" />. Kraften er den samme uansett hvilket referansepunkt du velger.
+            </li>
+            <li>
+              <strong>Rotasjon:</strong> <InlineLatex latex="\sum \vec{\tau} = d\vec{L}/dt" />. <em>Men begge sider avhenger av valget av rotasjonsakse.</em> Endrer du aksen, endres både <InlineLatex latex="\tau" /> (via <InlineLatex latex="r" />) og <InlineLatex latex="L" />.
+            </li>
+          </ul>
+          <p className="text-sm mb-2">
+            <strong>Hva betyr dette i praksis?</strong>
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside mb-2">
+            <li>Beregn alltid <InlineLatex latex="\tau" /> og <InlineLatex latex="L" /> om <em>samme</em> akse i samme ligning.</li>
+            <li>Safe valg: en fast akse (pivot), eller massesenteret. Begge gir en gyldig N2L for rotasjon.</li>
+            <li>Et vilkårlig punkt som akselererer kan gi feil svar med mindre du inkluderer pseudokrefter.</li>
+          </ul>
+          <p className="text-sm">
+            <strong>Oppsummert:</strong> Kraftmoment-loven krever <em>aksevalg</em> — kraft-loven gjør ikke det. Glem ikke å spesifisere aksen din!
           </p>
         </div>
 
@@ -595,6 +810,17 @@ export default function TeoriPage() {
         <p className="text-sm mt-2">
           <strong>OBS:</strong> Selv om <InlineLatex latex="L" /> er bevart, er <InlineLatex latex="E_{k,\text{rot}}" /> generelt IKKE bevart. Når kunstløperen trekker armene inn gjør hun arbeid, og <InlineLatex latex="E_k" /> øker.
         </p>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten (bevaring av L)</p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li>«isolert system», «ingen ytre kraftmoment», «friksjonsfri akse» → <InlineLatex latex="L" /> er bevart</li>
+            <li>«trekker armene inn/ut», «strekker seg ut», «samler seg» → <InlineLatex latex="I" /> endres, <InlineLatex latex="\omega" /> endres motsatt</li>
+            <li>«en person på en roterende plattform», «kollaps av stjerne», «piruett», «stupmorskalv» → bruk <InlineLatex latex="I_1\omega_1 = I_2\omega_2" /></li>
+            <li>«kloss lander på roterende skive», «to skiver kobles sammen» → rotasjonskollisjon, bruk <InlineLatex latex="(I_1 + I_2)\omega_f = I_1\omega_1 + I_2\omega_2" /></li>
+            <li>«partikkel treffer stav», «kule festes i kanten på skive» → angulært moment om pivot er bevart (tyngdekraft og pivotkraft gir null moment om pivot)</li>
+          </ul>
+        </div>
       </TheorySummary>
 
       <AngularMomentumVisualizer />

@@ -127,6 +127,17 @@ export default function TeoriPage() {
             <strong>«Jeg trenger nye formler for rotasjon»</strong> — nei! Du kan alle formlene allerede fra kapittel 2. Bytt symboler og du er ferdig. Mange studenter pugger rotasjonsformlene separat og dobler arbeidsmengden unødvendig. Forstå sammenhengen én gang — så trenger du aldri pugge dem.
           </p>
         </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten (rotasjonskinematikk)</p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li>«omdreininger per minutt / rev/min / rpm» → må konverteres til rad/s (<InlineLatex latex="\omega = 2\pi \cdot \text{rpm}/60" />)</li>
+            <li>«konstant vinkelakselerasjon», «konstant bremsing», «jevn oppbremsing» → bruk de fire kinematikkligningene</li>
+            <li>«fra ro», «i ro» → <InlineLatex latex="\omega_0 = 0" /></li>
+            <li>«stopper», «kommer til stillstand» → <InlineLatex latex="\omega = 0" /></li>
+            <li>«hvor mange omdreininger» → finn <InlineLatex latex="\Delta\theta" /> og del på <InlineLatex latex="2\pi" /></li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* Inline visualisering: analogitabellen passer godt her */}
@@ -223,6 +234,40 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av <InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /></p>
+          <p className="text-sm mb-2">
+            Tenk deg det stive legemet som <em>mange</em> små masseelementer <InlineLatex latex="m_i" />, hver i avstand <InlineLatex latex="r_i" /> fra rotasjonsaksen. Hver partikkel har linjefart <InlineLatex latex="v_i = r_i \omega" /> (fordi legemet er stivt, alle har samme ω). Den totale kinetiske energien er summen av partikkelbidragene:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="E_k = \sum_i \tfrac{1}{2} m_i v_i^2 = \sum_i \tfrac{1}{2} m_i (r_i \omega)^2 = \tfrac{1}{2} \omega^2 \sum_i m_i r_i^2" />
+          </p>
+          <p className="text-sm mb-2">
+            Siden <InlineLatex latex="\omega" /> er <em>felles</em> for alle partikler, kan vi faktorisere det ut. Det som gjenstår i summen er nøyaktig definisjonen på treghetsmomentet:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="I \equiv \sum_i m_i r_i^2 \implies E_{k,\text{rot}} = \tfrac{1}{2} I \omega^2" />
+          </p>
+          <p className="text-sm">
+            Dette viser at <InlineLatex latex="I" /> <em>ikke er tilfeldig definert</em> — den er akkurat den størrelsen som gjør energiformelen enkel, akkurat som masse er definert slik at <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" />.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE: I er IKKE en fast egenskap ved legemet</p>
+          <p className="text-sm mb-2">
+            Masse <InlineLatex latex="m" /> er en egenskap ved objektet alene — den endres ikke uansett hvor du måler. <strong>Treghetsmoment er noe helt annet:</strong> <InlineLatex latex="I" /> avhenger av <em>hvilken akse</em> du roterer legemet om. Samme stav kan ha tre ulike treghetsmomenter, avhengig av aksen:
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside mb-2">
+            <li>Akse gjennom senter, vinkelrett på staven: <InlineLatex latex="I = \tfrac{1}{12}ML^2" /></li>
+            <li>Akse gjennom endepunktet, vinkelrett på staven: <InlineLatex latex="I = \tfrac{1}{3}ML^2" /> (fire ganger større!)</li>
+            <li>Akse langs staven (rotasjon om egen lengdeakse): <InlineLatex latex="I \approx 0" /> for tynn stav</li>
+          </ul>
+          <p className="text-sm">
+            <strong>Lærdom:</strong> Når du slår opp en formel for I, må du alltid kontrollere <em>hvilken akse</em> den gjelder for. En formel uten aksespesifikasjon er ubrukelig. Og: samme legeme roterer annerledes rundt kant vs midtpunkt — fordi I endres, ikke fordi massen endres.
+          </p>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: kunstløperen og baseballbattet</p>
           <p className="text-sm mb-2">
@@ -293,6 +338,77 @@ export default function TeoriPage() {
             <InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /> er direkte analogt med <InlineLatex latex="E_k = \tfrac{1}{2}mv^2" /> fra kapittel 6. Når et objekt ruller uten å gli, har det <em>begge</em> former for kinetisk energi simultaneously: <InlineLatex latex="E_{k,\text{tot}} = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2" />. Dette er avgjørende i energibevaringsproblemer med rullende legemer — du kan ikke glemme rotasjonsleddet!
           </p>
         </div>
+
+        {/* SVG: I for stav (midt vs ende), sylinder, disk */}
+        <div className="my-4">
+          <p className="text-sm font-semibold mb-2">Visuell oversikt: treghetsmoment for ulike akser</p>
+          <svg viewBox="0 0 640 220" className="w-full">
+            {/* Stav om midten */}
+            <g>
+              <line x1="30" y1="60" x2="170" y2="60" stroke="currentColor" strokeWidth="5" />
+              <circle cx="100" cy="60" r="4" fill="#8b5cf6" />
+              <line x1="100" y1="40" x2="100" y2="80" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="100" y="100" textAnchor="middle" className="fill-current text-xs">Stav om senter</text>
+              <text x="100" y="115" textAnchor="middle" className="fill-current text-xs" fill="#8b5cf6">I = (1/12) M L²</text>
+            </g>
+            {/* Stav om enden */}
+            <g>
+              <line x1="200" y1="60" x2="340" y2="60" stroke="currentColor" strokeWidth="5" />
+              <circle cx="200" cy="60" r="4" fill="#ef4444" />
+              <line x1="200" y1="40" x2="200" y2="80" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="270" y="100" textAnchor="middle" className="fill-current text-xs">Stav om enden</text>
+              <text x="270" y="115" textAnchor="middle" className="fill-current text-xs" fill="#ef4444">I = (1/3) M L² (4× større!)</text>
+            </g>
+            {/* Solid sylinder */}
+            <g>
+              <ellipse cx="420" cy="55" rx="40" ry="14" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="380" y1="55" x2="380" y2="80" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="460" y1="55" x2="460" y2="80" stroke="currentColor" strokeWidth="1.5" />
+              <ellipse cx="420" cy="80" rx="40" ry="14" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="420" y1="30" x2="420" y2="100" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="420" y="125" textAnchor="middle" className="fill-current text-xs">Solid sylinder</text>
+              <text x="420" y="140" textAnchor="middle" className="fill-current text-xs" fill="#3b82f6">I = (1/2) M R²</text>
+            </g>
+            {/* Sirkelskive */}
+            <g>
+              <circle cx="560" cy="67" r="35" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="560" cy="67" r="3" fill="#10b981" />
+              <line x1="560" y1="27" x2="560" y2="107" stroke="#10b981" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="560" y="125" textAnchor="middle" className="fill-current text-xs">Sirkelskive</text>
+              <text x="560" y="140" textAnchor="middle" className="fill-current text-xs" fill="#10b981">I = (1/2) M R²</text>
+            </g>
+            {/* Tynn ring */}
+            <g>
+              <ellipse cx="150" cy="180" rx="40" ry="12" fill="none" stroke="currentColor" strokeWidth="2.5" />
+              <line x1="150" y1="160" x2="150" y2="200" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="150" y="215" textAnchor="middle" className="fill-current text-xs" fill="#f59e0b">Tynn ring: I = M R² (all masse ytterst)</text>
+            </g>
+            {/* Solid kule */}
+            <g>
+              <circle cx="380" cy="180" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <ellipse cx="380" cy="180" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+              <line x1="380" y1="158" x2="380" y2="202" stroke="#8b5cf6" strokeWidth="1.5" strokeDasharray="3 2" />
+              <text x="380" y="215" textAnchor="middle" className="fill-current text-xs" fill="#8b5cf6">Solid kule: I = (2/5) M R²</text>
+            </g>
+          </svg>
+          <p className="text-xs mt-1 italic opacity-75 text-center">
+            Stiplede linjer viser rotasjonsaksen. Samme stav har 4× større I om enden enn om midten — samme masse, ulik fordeling!
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten</p>
+          <p className="text-sm mb-2">
+            Se etter disse ordene — da skal du tenke på treghetsmoment og rotasjonsenergi:
+          </p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li>«roterer om», «spinnende», «dreier» → rotasjonsbevegelse, trenger <InlineLatex latex="I" /></li>
+            <li>«kinetisk energi av rotasjon», «rotasjonsenergi» → <InlineLatex latex="E_{k,\text{rot}} = \tfrac{1}{2}I\omega^2" /></li>
+            <li>«treghetsmoment om aksen» → slå opp riktig formel, merk aksen</li>
+            <li>«stiv stav», «uniform skive», «hul sylinder» → signaliserer at du skal bruke standard-formel (tabell)</li>
+            <li>«gjennom senteret», «gjennom endepunktet» → angir hvilken akse du skal bruke</li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* Inline visualisering: treghetsmoment for ulike former */}
@@ -326,6 +442,30 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Full utledning av parallellaksesetningen</p>
+          <p className="text-sm mb-2">
+            La den nye aksen P være parallell med en akse gjennom CM, forskjøvet med vektor <InlineLatex latex="\vec{d}" />. Posisjonen til partikkel <InlineLatex latex="i" /> relativt til CM er <InlineLatex latex="\vec{r}_i'" />, og relativt til P er <InlineLatex latex="\vec{r}_i = \vec{r}_i' - \vec{d}" /> (i planet vinkelrett på aksen).
+          </p>
+          <p className="text-sm mb-2">Treghetsmomentet om P er:</p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="I_P = \sum_i m_i |\vec{r}_i' - \vec{d}|^2 = \sum_i m_i \left(|\vec{r}_i'|^2 - 2\vec{r}_i' \cdot \vec{d} + |\vec{d}|^2\right)" />
+          </p>
+          <p className="text-sm mb-2">Del opp i tre ledd:</p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="I_P = \underbrace{\sum_i m_i |\vec{r}_i'|^2}_{=\,I_{CM}} - 2\vec{d} \cdot \underbrace{\sum_i m_i \vec{r}_i'}_{=\,\vec{0}\;(\text{CM-def.})} + |\vec{d}|^2 \underbrace{\sum_i m_i}_{=\,M}" />
+          </p>
+          <p className="text-sm mb-2">
+            Mellomleddet forsvinner fordi <InlineLatex latex="\sum m_i \vec{r}_i' / M" /> er per definisjon CM-posisjonen målt <em>fra</em> CM — som selvsagt er null. Resultat:
+          </p>
+          <p className="text-sm text-center my-2">
+            <InlineLatex latex="\boxed{I_P = I_{CM} + Md^2}" />
+          </p>
+          <p className="text-sm">
+            Matematikken viser hvorfor CM er spesiell: det er <em>det eneste</em> referansepunktet der mellomleddet kansellerer — og dermed eneste aksen som gir minimum I.
+          </p>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: å snurre en sopelime</p>
           <p className="text-sm">
@@ -351,6 +491,16 @@ export default function TeoriPage() {
           <p className="text-sm">
             Eksempel: stav om enden er <InlineLatex latex="\frac{1}{3}ML^2" />. Vil du ha <InlineLatex latex="I_{CM}" />? Massesenteret er i midten, avstand <InlineLatex latex="d = L/2" />. Da er <InlineLatex latex="I_{CM} = \frac{1}{3}ML^2 - M\!\left(\frac{L}{2}\right)^2 = \frac{1}{3}ML^2 - \frac{1}{4}ML^2 = \frac{1}{12}ML^2" />. Stemmer med tabellen!
           </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten</p>
+          <ul className="text-sm space-y-1 list-disc list-inside">
+            <li>«parallellaksesetning», «Steiners sats» → direkte henvisning</li>
+            <li>«roterer om endepunktet», «akse gjennom hjørnet», «henger i et punkt» → aksen er <em>ikke</em> gjennom CM → bruk <InlineLatex latex="I = I_{CM} + Md^2" /></li>
+            <li>«fysisk pendel», «stav som svinger om enden» → typiske tilfeller der du må flytte aksen fra CM til opphengspunktet</li>
+            <li>Du får oppgitt avstand <InlineLatex latex="d" /> fra CM til nytt opphengspunkt → åpenbart signal</li>
+          </ul>
         </div>
       </TheorySummary>
 

@@ -83,6 +83,28 @@ export default function TeoriPage() {
           </ul>
         </div>
 
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Skalar vs. vektor på eksamen</p>
+          <p className="text-sm mb-2">
+            Dette er <strong>den klassiske eksamensfellen</strong> i kap. 2. Sørg for at du
+            skjønner forskjellen på norsk:
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Gjennomsnittlig <strong>fart</strong> (speed, skalar) = tilbakelagt distanse / Δt</div>
+            <div>Gjennomsnittlig <strong>hastighet</strong> (velocity, vektor) = Δx / Δt = forflytning / Δt</div>
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Test-oppgave:</strong> En løper jogger 400 m rundt en rundbane på 80 s og
+            ender der hun startet. Gjennomsnittsfart = 400/80 = <strong>5 m/s</strong>.
+            Gjennomsnittshastighet = 0/80 = <strong>0 m/s</strong> (forflytningen er null!).
+          </p>
+          <p className="text-sm mt-2">
+            På eksamen: les oppgaven NØYE. Spør oppgaven etter «gjennomsnittsfart» (tallet på
+            speedometeret i snitt), «gjennomsnittshastighet» (med retning), eller «gjennomsnittlig
+            hastighetsstørrelse»? Ordene er forskjellige — og svarene kan være forskjellige.
+          </p>
+        </div>
+
         {/* SVG: x-t-graf med sekant og forflytning */}
         <div className="my-6 flex justify-center">
           <svg viewBox="0 0 420 260" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
@@ -429,6 +451,100 @@ export default function TeoriPage() {
             Videre: <InlineLatex latex="\frac{dx}{dt} = v_0 + at" />.
             Integrer: <InlineLatex latex="x = x_0 + v_0 t + \tfrac{1}{2}at^2" />.
           </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av likning 3 (den tidløse)</p>
+          <p className="text-sm mb-2">
+            Hvordan får vi <InlineLatex latex="v^2 = v_0^2 + 2a(x-x_0)" /> ut fra de to
+            første likningene? Målet: eliminere <InlineLatex latex="t" />.
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Steg 1 (løs likning 1 for t):</div>
+            <div className="pl-3"><InlineLatex latex="v = v_0 + at \;\Rightarrow\; t = (v - v_0)/a" /></div>
+            <div className="mt-2">Steg 2 (sett inn i likning 2):</div>
+            <div className="pl-3"><InlineLatex latex="x - x_0 = v_0 \cdot \tfrac{v - v_0}{a} + \tfrac{1}{2}a \left(\tfrac{v - v_0}{a}\right)^2" /></div>
+            <div className="mt-2">Steg 3 (multipliser begge sider med 2a):</div>
+            <div className="pl-3"><InlineLatex latex="2a(x - x_0) = 2v_0(v - v_0) + (v - v_0)^2" /></div>
+            <div className="mt-2">Steg 4 (ekspander):</div>
+            <div className="pl-3"><InlineLatex latex="2a(x - x_0) = 2v_0 v - 2v_0^2 + v^2 - 2v_0 v + v_0^2" /></div>
+            <div className="mt-2">Steg 5 (forenkle — <InlineLatex latex="2v_0 v" />-leddene kanselleres):</div>
+            <div className="pl-3"><InlineLatex latex="2a(x - x_0) = v^2 - v_0^2" /></div>
+            <div className="mt-2 font-semibold">Resultat: <InlineLatex latex="v^2 = v_0^2 + 2a(x - x_0)" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            Poenget: Likning 3 er <em>ikke</em> en ny fysikk — den er likning 1 og 2 kombinert.
+            Det er derfor den alltid gir samme svar, og det er derfor tiden ikke er med.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Gjennomsnittsfart vs. gjennomsnittlig fart</p>
+          <p className="text-sm mb-2">
+            En vanlig eksamensfelle: «En bil kjører 60 km/t første halvdel av turen, og 40 km/t
+            andre halvdel. Hva er gjennomsnittsfarten?» Mange svarer instinktivt 50 km/t — det er
+            <strong> feil</strong>.
+          </p>
+          <ul className="text-sm space-y-1.5">
+            <li>
+              • <strong>Likning 4</strong> (<InlineLatex latex="x-x_0 = \tfrac{1}{2}(v_0+v)t" />)
+              gir at gjennomsnittsfarten er <InlineLatex latex="(v_0+v)/2" /> — men <em>KUN</em> når
+              akselerasjonen er <strong>konstant</strong>!
+            </li>
+            <li>
+              • Ved to konstante faser med ulike farter er gjennomsnittsfarten
+              <InlineLatex latex="\bar{v} = \Delta x / \Delta t" /> — bruk alltid definisjonen.
+            </li>
+            <li>
+              • Hvis like lang <em>distanse</em> per fase: <InlineLatex latex="\bar{v} = 2v_1 v_2/(v_1+v_2)" /> (harmonisk middel).
+            </li>
+            <li>
+              • Hvis like lang <em>tid</em> per fase: <InlineLatex latex="\bar{v} = (v_1+v_2)/2" /> (aritmetisk middel).
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            Spør alltid: er akselerasjonen virkelig konstant gjennom hele intervallet? Hvis ikke,
+            må du regne stykkevis.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Positiv vs. negativ akselerasjon</p>
+          <p className="text-sm mb-2">
+            «Bilen bremser med 5 m/s²» — er a = +5 eller a = −5 i formlene? Dette er kilden til
+            halvparten av fortegnsfeilene på eksamen.
+          </p>
+          <ul className="text-sm space-y-1.5">
+            <li>
+              • Skriv ALLTID ned valgt positiv retning FØRST. Skriv det på arket.
+            </li>
+            <li>
+              • Hvis bilen kjører i +x-retning (<InlineLatex latex="v_0 > 0" />) og bremser,
+              er <InlineLatex latex="a < 0" /> — dvs. du setter inn <InlineLatex latex="a = -5\;\text{m/s}^2" />.
+            </li>
+            <li>
+              • Du kan ikke «velge» at a er positiv bare fordi det ser penere ut — fortegnet
+              bestemmes av fysikken og koordinatvalget.
+            </li>
+            <li>
+              • Stopper bilen (<InlineLatex latex="v=0" />)? Bruk likning 3 med negativ a for å
+              finne bremselengden.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten → hvilken formel?</p>
+          <p className="text-sm mb-2">Oppgaver bruker bestemte formuleringer som er hint til hvilken størrelse som er gitt:</p>
+          <ul className="text-sm space-y-1.5">
+            <li>• <strong>«slippes fra ro»</strong> eller <strong>«starter i hvile»</strong> → <InlineLatex latex="v_0 = 0" /></li>
+            <li>• <strong>«konstant akselerasjon»</strong> eller <strong>«jevnt akselerert»</strong> → bruk de fire kinematikklikningene</li>
+            <li>• <strong>«stopper»</strong>, <strong>«når maksimal høyde»</strong> eller <strong>«kommer til ro»</strong> → <InlineLatex latex="v = 0" /> (sluttfart)</li>
+            <li>• <strong>«Hvor langt...?»</strong> og ikke tid gitt → bruk likning 3 (<InlineLatex latex="v^2 = v_0^2 + 2a\Delta x" />)</li>
+            <li>• <strong>«Hvor lang tid...?»</strong> og ikke sluttposisjon gitt → bruk likning 1 (<InlineLatex latex="v = v_0 + at" />)</li>
+            <li>• <strong>«Hvilken posisjon etter t sekunder?»</strong> → bruk likning 2 (<InlineLatex latex="x = x_0 + v_0 t + \tfrac{1}{2}at^2" />)</li>
+            <li>• <strong>«gjennomsnittsfart»</strong> oppgitt og søker sluttfart eller startfart → likning 4</li>
+          </ul>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-3 my-4">

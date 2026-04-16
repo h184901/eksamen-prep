@@ -260,6 +260,47 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Høyrehåndsregelen trinn-for-trinn</p>
+          <p className="text-sm">
+            Kryssproduktet <InlineLatex latex="\vec{v}\times\vec{B}" /> gir en ny vektor vinkelrett på planet v-B.
+            Konkret oppskrift for F på en positiv ladning:
+          </p>
+          <ol className="text-sm mt-2 space-y-1 list-decimal list-inside">
+            <li>Strekk fingrene i retning <strong>v</strong> (flat hånd)</li>
+            <li>Krumm fingrene mot <strong>B</strong> (kortere vinkel &lt; 180°)</li>
+            <li>Tommelen peker i retning <strong>v × B</strong></li>
+            <li>For <InlineLatex latex="q > 0" />: F samme retning som v × B. For <InlineLatex latex="q < 0" />: snu 180°.</li>
+          </ol>
+          <p className="text-sm mt-2">
+            <strong>Spesialtilfeller du MÅ huske:</strong> v høyre og B opp → F ut av arket (⊙).
+            v høyre og B inn i arket (⊗) → F opp. v opp og B høyre → F inn i arket (⊗).
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Klassiske magnetkraft-tabber</p>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>F_magnet gjør ALDRI arbeid:</strong> Fordi F ⊥ v alltid, er <InlineLatex latex="W = \int \vec{F}\cdot d\vec{s} = 0" />.
+              Energibevaring gir ingen fart-endring. Hvis oppgaven påstår at B-feltet «akselererer» en partikkel,
+              menes retningsendring — ikke fartendring.
+            </li>
+            <li>
+              <strong>B endrer bare retning, ikke fart:</strong> Sjekk alltid: partikkelen har samme fart inn som ut av B-feltet.
+              Kinetisk energi er bevart. Trenger du økning av fart, må det være et E-felt til stede.
+            </li>
+            <li>
+              <strong>Forveksle ikke B med E:</strong> E-felt virker på <em>alle</em> ladninger (også i ro),
+              langs feltet. B-felt virker bare på <em>bevegde</em> ladninger, vinkelrett på både v og B.
+            </li>
+            <li>
+              <strong>Glem ikke absoluttverdi av q:</strong> I formelen <InlineLatex latex="r = mv/(|q|B)" /> er det
+              <em> betraget</em> av ladningen. Radien er alltid positiv — fortegnet bestemmer kun rotasjonsretningen.
+            </li>
+          </ul>
+        </div>
+
         {/* Inline visualisering */}
         <LorentzForceCalculator />
       </TheorySummary>
@@ -311,6 +352,20 @@ export default function TeoriPage() {
             → færre feltlinjer passerer gjennom → fluks × cos(φ) avtar. Vipp den 90° → ingen feltlinjer
             passerer gjennom → fluks = 0. Dette er akkurat hva cos(φ)-leddet beskriver.
           </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: φ måles mellom B og NORMALEN — ikke flaten!</p>
+          <p className="text-sm">
+            Den aller vanligste feilen på eksamen: å bruke vinkelen mellom B og <em>flaten</em> i stedet for mellom
+            B og <em>normalvektoren</em> til flaten.
+          </p>
+          <ul className="text-sm mt-2 space-y-1">
+            <li>• Hvis B er <strong>vinkelrett på flaten</strong> (parallell med normalen): φ = 0, <InlineLatex latex="\cos\varphi = 1" /> → <strong>maks</strong> fluks <InlineLatex latex="\Phi = BA" /></li>
+            <li>• Hvis B ligger <strong>langs flaten</strong> (vinkelrett på normalen): φ = 90°, <InlineLatex latex="\cos\varphi = 0" /> → fluks = 0</li>
+            <li>• Tommelfingerregel: «flest feltlinjer gjennom» = størst fluks = minst φ (mellom B og normal)</li>
+            <li>• Hvis oppgaven sier «B lager vinkel α med <em>flaten</em>», så er <InlineLatex latex="\varphi = 90^\circ - \alpha" /></li>
+          </ul>
         </div>
       </TheorySummary>
 
@@ -411,6 +466,47 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        {/* SVG: Sirkelbane i B-felt */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrVCircle" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+              </marker>
+              <marker id="arrFCircle" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
+              </marker>
+            </defs>
+            <text x="200" y="22" textAnchor="middle" className="fill-current text-sm font-semibold">Sirkelbane i B-felt (B inn i arket)</text>
+            {/* B-felt inn i arket — x-mønster (bakgrunn) */}
+            {[[60,60],[120,60],[180,60],[240,60],[300,60],[340,60],
+              [60,120],[120,120],[300,120],[340,120],
+              [60,180],[120,180],[180,180],[240,180],[300,180],[340,180]].map(([cx, cy], i) => (
+              <g key={i}>
+                <line x1={cx-4} y1={cy-4} x2={cx+4} y2={cy+4} stroke="#10b981" strokeWidth="1.5" />
+                <line x1={cx-4} y1={cy+4} x2={cx+4} y2={cy-4} stroke="#10b981" strokeWidth="1.5" />
+              </g>
+            ))}
+            {/* Sirkelbane */}
+            <circle cx="200" cy="120" r="60" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,3" />
+            {/* Partikkel (positiv) */}
+            <circle cx="260" cy="120" r="8" fill="#ef4444" opacity="0.4" stroke="#ef4444" strokeWidth="2" />
+            <text x="260" y="124" textAnchor="middle" className="fill-current text-[10px] font-bold">+</text>
+            {/* v — tangent oppover */}
+            <line x1="260" y1="120" x2="260" y2="80" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrVCircle)" />
+            <text x="268" y="82" className="fill-current text-xs" fill="#3b82f6">v</text>
+            {/* F — sentripetal, innover (mot sentrum) */}
+            <line x1="260" y1="120" x2="222" y2="120" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrFCircle)" />
+            <text x="225" y="112" className="fill-current text-xs" fill="#ef4444">F</text>
+            {/* r */}
+            <line x1="200" y1="120" x2="252" y2="120" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
+            <text x="225" y="135" className="fill-current text-[10px] italic">r</text>
+            {/* Sentrum */}
+            <circle cx="200" cy="120" r="2" fill="currentColor" />
+            <text x="200" y="220" textAnchor="middle" className="fill-current text-[10px] italic">r = mv/(|q|B) — F peker alltid mot sentrum</text>
+          </svg>
+        </div>
+
         {/* Inline visualisering */}
         <CircularMotionVisualizer />
       </TheorySummary>
@@ -436,6 +532,58 @@ export default function TeoriPage() {
           description="Bare partikler med denne farten passerer uavbøyd. Uavhengig av masse og ladning!"
         />
 
+        {/* SVG: Fartsvelger — E og B vinkelrett balanserer */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrV27" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+              </marker>
+              <marker id="arrE27" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b" />
+              </marker>
+              <marker id="arrFe27" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b" />
+              </marker>
+              <marker id="arrFm27" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
+              </marker>
+            </defs>
+            <text x="200" y="22" textAnchor="middle" className="fill-current text-sm font-semibold">Fartsvelger: E-felt og B-felt i balanse</text>
+            {/* Parallelle plater */}
+            <line x1="40" y1="55" x2="360" y2="55" stroke="#f59e0b" strokeWidth="3" />
+            <line x1="40" y1="185" x2="360" y2="185" stroke="#f59e0b" strokeWidth="3" />
+            <text x="30" y="50" className="fill-current text-xs" fill="#f59e0b">+</text>
+            <text x="30" y="198" className="fill-current text-xs" fill="#f59e0b">−</text>
+            {/* E-felt piler (nedover fra + til -) */}
+            {[80, 140, 200, 260, 320].map((x, i) => (
+              <line key={i} x1={x} y1="60" x2={x} y2="115" stroke="#f59e0b" strokeWidth="1.5" markerEnd="url(#arrE27)" opacity="0.5" />
+            ))}
+            <text x="80" y="108" className="fill-current text-xs" fill="#f59e0b">E</text>
+            {/* B-felt — inn i arket (×) */}
+            {[[110, 155],[170, 155],[230, 155],[290, 155]].map(([cx, cy], i) => (
+              <g key={i}>
+                <circle cx={cx} cy={cy} r="7" fill="none" stroke="#10b981" strokeWidth="1.2" />
+                <line x1={cx-5} y1={cy-5} x2={cx+5} y2={cy+5} stroke="#10b981" strokeWidth="1.2" />
+                <line x1={cx-5} y1={cy+5} x2={cx+5} y2={cy-5} stroke="#10b981" strokeWidth="1.2" />
+              </g>
+            ))}
+            <text x="110" y="175" className="fill-current text-xs" fill="#10b981">B (inn i arket)</text>
+            {/* Partikkel + v */}
+            <circle cx="80" cy="120" r="8" fill="#ef4444" opacity="0.4" stroke="#ef4444" strokeWidth="2" />
+            <text x="80" y="124" textAnchor="middle" className="fill-current text-[10px] font-bold">+</text>
+            <line x1="80" y1="120" x2="150" y2="120" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrV27)" />
+            <text x="155" y="124" className="fill-current text-xs" fill="#3b82f6">v</text>
+            {/* Fe nedover (på +) */}
+            <line x1="110" y1="120" x2="110" y2="140" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrFe27)" />
+            <text x="116" y="138" className="fill-current text-[10px]" fill="#f59e0b">Fe</text>
+            {/* Fm oppover */}
+            <line x1="90" y1="120" x2="90" y2="100" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrFm27)" />
+            <text x="68" y="105" className="fill-current text-[10px]" fill="#ef4444">Fm</text>
+            <text x="200" y="220" textAnchor="middle" className="fill-current text-[10px] italic">Balanse: qE = qvB → bare v = E/B passerer rett gjennom</text>
+          </svg>
+        </div>
+
         <p className="mt-4">
           <strong>Massespektrometer:</strong> Partikler med kjent fart (fra fartsvelger) sendes inn
           i et nytt magnetfelt B&apos;. De følger en sirkelbane med radius:
@@ -454,6 +602,20 @@ export default function TeoriPage() {
             etterforskning brukes det til å identifisere ukjente substanser. Prinsippet er alltid det samme:
             ioneradius i B-felt avslører massen.
           </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Kjennetegn i oppgaveteksten — «bruk kap. 27-verktøy!»</p>
+          <ul className="text-sm space-y-1">
+            <li>• <strong>«Magnetfelt»</strong>, <strong>«B-felt»</strong>, <strong>«flux», «Tesla»</strong> → kap. 27</li>
+            <li>• <strong>«Ladet partikkel»</strong> + <strong>«fart»</strong> nevnes → <InlineLatex latex="\vec{F} = q\vec{v}\times\vec{B}" /></li>
+            <li>• <strong>«Sirkelbane», «krummer», «bueform», «radius»</strong> → <InlineLatex latex="r = mv/(|q|B)" /></li>
+            <li>• <strong>«Syklotron», «omløpstid»</strong> → <InlineLatex latex="T = 2\pi m/(|q|B)" />, uavhengig av v</li>
+            <li>• <strong>«Fartsvelger», «uavbøyd»</strong>, «E og B vinkelrett» → <InlineLatex latex="v = E/B" /></li>
+            <li>• <strong>«Massespektrometer»</strong> → <InlineLatex latex="R = mv/(qB)" /> — finn m fra målt R</li>
+            <li>• <strong>«Strømførende leder i B-felt»</strong> → <InlineLatex latex="\vec{F} = I\vec{l}\times\vec{B}" /></li>
+            <li>• <strong>«⊗ eller ⊙»</strong> i figuren → B-felt inn i/ut av arket; bruk høyrehåndsregelen</li>
+          </ul>
         </div>
       </TheorySummary>
 

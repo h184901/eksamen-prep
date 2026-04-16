@@ -424,6 +424,53 @@ export default function TeoriPage() {
           description="Eliminerer t for å finne y som funksjon av x. Gjelder fra origo."
         />
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av baneligningen</p>
+          <p className="text-sm mb-2">
+            Målet: vis at banen er en parabel ved å eliminere tiden <InlineLatex latex="t" /> fra
+            x- og y-likningene (med <InlineLatex latex="x_0 = y_0 = 0" />).
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Steg 1 (start med x- og y-likningene):</div>
+            <div className="pl-3"><InlineLatex latex="x = v_{0x}\,t" /></div>
+            <div className="pl-3"><InlineLatex latex="y = v_{0y}\,t - \tfrac{1}{2}g\,t^2" /></div>
+            <div className="mt-2">Steg 2 (løs x-likningen for t):</div>
+            <div className="pl-3"><InlineLatex latex="t = x / v_{0x}" /></div>
+            <div className="mt-2">Steg 3 (sett inn i y-likningen):</div>
+            <div className="pl-3"><InlineLatex latex="y = v_{0y} \cdot \tfrac{x}{v_{0x}} - \tfrac{1}{2}g \left(\tfrac{x}{v_{0x}}\right)^2" /></div>
+            <div className="mt-2">Steg 4 (forenkle):</div>
+            <div className="pl-3"><InlineLatex latex="y = \tfrac{v_{0y}}{v_{0x}}\,x - \tfrac{g}{2v_{0x}^2}\,x^2" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            Formelen er på formen <InlineLatex latex="y = Ax - Bx^2" /> med
+            <InlineLatex latex="A, B > 0" /> (for kast oppover) — det er definisjonen på en
+            nedovervendt parabel. Derfor er prosjektilbanen ALLTID en parabel (i vakuum).
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utledning av rekkevidden R</p>
+          <p className="text-sm mb-2">
+            Rekkevidden er x-verdien når <InlineLatex latex="y = 0" /> igjen (fra <InlineLatex latex="y_0 = 0" />).
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Steg 1 (sett <InlineLatex latex="y = 0" /> i y-likningen):</div>
+            <div className="pl-3"><InlineLatex latex="0 = v_{0y}\,t - \tfrac{1}{2}g\,t^2 = t(v_{0y} - \tfrac{1}{2}g\,t)" /></div>
+            <div className="mt-2">Steg 2 (to løsninger):</div>
+            <div className="pl-3"><InlineLatex latex="t = 0" /> (utkast) eller <InlineLatex latex="t = 2v_{0y}/g" /> (landing)</div>
+            <div className="mt-2">Steg 3 (sett landingstiden inn i x):</div>
+            <div className="pl-3"><InlineLatex latex="R = v_{0x} \cdot \tfrac{2v_{0y}}{g} = \tfrac{2 v_{0x} v_{0y}}{g}" /></div>
+            <div className="mt-2">Steg 4 (bruk <InlineLatex latex="v_{0x} = v_0\cos\alpha_0" />, <InlineLatex latex="v_{0y} = v_0\sin\alpha_0" />):</div>
+            <div className="pl-3"><InlineLatex latex="R = \tfrac{2v_0^2 \sin\alpha_0 \cos\alpha_0}{g} = \tfrac{v_0^2 \sin(2\alpha_0)}{g}" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            (Siste steg bruker identiteten <InlineLatex latex="2\sin\theta\cos\theta = \sin(2\theta)" />.)
+            Maks ved <InlineLatex latex="\sin(2\alpha_0) = 1 \Rightarrow \alpha_0 = 45°" />. Merk:
+            formelen gjelder KUN fra bakkenivå; er startpunktet høyere enn landingsnivået, er
+            optimal vinkel mindre enn 45°.
+          </p>
+        </div>
+
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
           <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Sentrale resultater</p>
           <ul className="space-y-1 text-sm">
@@ -458,6 +505,74 @@ export default function TeoriPage() {
             <li>
               Glemmer å sette y₀ ≠ 0 når kastet skjer fra en høyde over bakken.
             </li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: x- og y-bevegelsen er UAVHENGIGE</p>
+          <p className="text-sm mb-2">
+            Dette er prosjektilbevegelsens mest misforståtte prinsipp — og det kommer garantert
+            på eksamen. To bevegelser skjer <em>samtidig</em>, men de påvirker IKKE hverandre:
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Horisontalt: <InlineLatex latex="a_x = 0" />  →  <InlineLatex latex="v_x" /> er konstant</div>
+            <div>Vertikalt:   <InlineLatex latex="a_y = -g" /> →  <InlineLatex latex="v_y" /> endres lineært</div>
+            <div className="mt-2">Koblingen er KUN via tiden <InlineLatex latex="t" />.</div>
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Berømt eksperiment:</strong> Skyt én kule horisontalt fra en klippe, og slipp
+            en annen fra samme høyde samtidig. De treffer bakken <em>nøyaktig samtidig</em> — den
+            horisontale bevegelsen påvirker ikke falltiden. Dette er fordi y-likningen
+            (<InlineLatex latex="y = y_0 - \tfrac{1}{2}gt^2" />) ikke inneholder
+            <InlineLatex latex="v_{0x}" /> i det hele tatt.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Praktisk konsekvens på eksamen:</strong>
+          </p>
+          <ul className="text-sm space-y-1 mt-1">
+            <li>• For falltid: bruk KUN y-likningen. <InlineLatex latex="v_{0x}" /> er irrelevant.</li>
+            <li>• For horisontal distanse: finn t fra y-likningen, så bruk <InlineLatex latex="x = v_{0x}\,t" />.</li>
+            <li>• Aldri bruk <InlineLatex latex="v_0" /> direkte — alltid dekomponert.</li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: v₀ vs v(t) ved landing</p>
+          <p className="text-sm mb-2">
+            Ved en typisk eksamensoppgave fra en klippe: «En stein kastes med startfart
+            <InlineLatex latex="v_0 = 15" /> m/s i vinkel 30° fra en klippe 20 m over bakken.
+            Med hvilken fart treffer steinen bakken?»
+          </p>
+          <p className="text-sm mb-2">
+            <strong>Fellen:</strong> Mange studenter skriver <InlineLatex latex="v_{\text{landing}} = v_0 = 15" /> m/s.
+            Dette er feil. <InlineLatex latex="v_0" /> er KUN startfarten.
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Riktig fremgang:</div>
+            <div>1. <InlineLatex latex="v_x" /> ved landing = <InlineLatex latex="v_{0x} = v_0\cos\alpha = 15\cdot\cos 30°" /></div>
+            <div>2. <InlineLatex latex="v_y" /> ved landing: bruk kap. 2 likning 3 vertikalt:</div>
+            <div className="pl-3"><InlineLatex latex="v_y^2 = v_{0y}^2 + 2g \cdot h" /></div>
+            <div>3. Landingsfart: <InlineLatex latex="v = \sqrt{v_x^2 + v_y^2}" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            Kortversjon for energibevaring (foregriper kap. 7): <InlineLatex latex="v_{\text{landing}}^2 = v_0^2 + 2gh" />.
+            Men IKKE <InlineLatex latex="v_{\text{landing}} = v_0" />!
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten → fremgangsmåte</p>
+          <p className="text-sm mb-2">Slik gjenkjenner du oppgavetyper i prosjektilbevegelse:</p>
+          <ul className="text-sm space-y-1.5">
+            <li>• <strong>«kastes horisontalt»</strong> → <InlineLatex latex="v_{0y} = 0" />, <InlineLatex latex="v_{0x} = v_0" /> (ingen vinkel nødvendig)</li>
+            <li>• <strong>«slippes fra et fly i fart»</strong> → samme som horisontalt kast (<InlineLatex latex="v_{0y} = 0" />)</li>
+            <li>• <strong>«i en vinkel α over horisontalen»</strong> → <InlineLatex latex="v_{0x} = v_0\cos\alpha" />, <InlineLatex latex="v_{0y} = v_0\sin\alpha" /></li>
+            <li>• <strong>«hvor langt fra foten av klippen treffer...?»</strong> → finn falltiden fra y, så <InlineLatex latex="x = v_{0x}\,t" /></li>
+            <li>• <strong>«maks høyde»</strong> eller <strong>«høyeste punkt»</strong> → <InlineLatex latex="v_y = 0" /> i det punktet</li>
+            <li>• <strong>«rekkevidde på flatt underlag»</strong> → bruk <InlineLatex latex="R = v_0^2\sin(2\alpha)/g" /> (KUN fra bakkenivå)</li>
+            <li>• <strong>«med hvilken fart treffer...?»</strong> → regn ut <InlineLatex latex="v_x" /> OG <InlineLatex latex="v_y" /> ved landing, så Pytagoras</li>
+            <li>• <strong>«i hvilken vinkel treffer...?»</strong> → <InlineLatex latex="\tan\theta = v_y/v_x" /> ved landing</li>
+            <li>• <strong>«to kuler samtidig, én horisontalt, én slippes»</strong> → klassisk oppgave: de lander samtidig!</li>
           </ul>
         </div>
 
@@ -562,6 +677,65 @@ export default function TeoriPage() {
             variant="blue"
             description="Nyttig når omløpstiden er gitt."
           />
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Fra a = v²/R til a = 4π²R/T²</p>
+          <p className="text-sm mb-2">
+            Hvorfor er det to uttrykk for sentripetaakselerasjonen? De er den samme formelen
+            skrevet ulikt. Her er algebraen:
+          </p>
+          <div className="bg-white/60 dark:bg-black/30 rounded p-3 my-2 font-mono text-sm space-y-1.5">
+            <div>Steg 1 (farten for én omløpstid):</div>
+            <div className="pl-3">omkrets = <InlineLatex latex="2\pi R" />, fart = omkrets/tid:</div>
+            <div className="pl-3"><InlineLatex latex="v = 2\pi R / T" /></div>
+            <div className="mt-2">Steg 2 (sett v inn i <InlineLatex latex="a = v^2/R" />):</div>
+            <div className="pl-3"><InlineLatex latex="a = \tfrac{(2\pi R/T)^2}{R} = \tfrac{4\pi^2 R^2 / T^2}{R}" /></div>
+            <div className="mt-2">Steg 3 (forenkle — én R kanselleres):</div>
+            <div className="pl-3"><InlineLatex latex="a = \tfrac{4\pi^2 R}{T^2}" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Når bruker du hva?</strong> Hvis <em>farten</em> er oppgitt, bruk
+            <InlineLatex latex="a = v^2/R" />. Hvis <em>omløpstiden</em> eller frekvensen er oppgitt,
+            bruk <InlineLatex latex="a = 4\pi^2 R/T^2" />. Samme formel — velg den som lar deg
+            sette inn tallene direkte uten omregning.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Typiske eksamensfeil i sirkelbevegelse</p>
+          <ul className="text-sm space-y-1.5">
+            <li>
+              • <strong>Å bruke diameter i stedet for radius:</strong> Hvis oppgaven sier «karusellen
+              har diameter 10 m», er <InlineLatex latex="R = 5" /> m i formlene. Les to ganger!
+            </li>
+            <li>
+              • <strong>Blande fart (m/s) og frekvens (omløp/s):</strong> Hvis oppgaven oppgir
+              «2 omløp per sekund», er <InlineLatex latex="T = 0{,}5" /> s, ikke <InlineLatex latex="T = 2" /> s.
+            </li>
+            <li>
+              • <strong>Glemme <InlineLatex latex="v = \omega R" />:</strong> Hvis vinkelhastigheten er
+              oppgitt (rad/s), ikke banefarten, konverter først med <InlineLatex latex="v = \omega R" />.
+            </li>
+            <li>
+              • <strong>Anta konstant fart når oppgaven sier noe annet:</strong>
+              <InlineLatex latex="a = v^2/R" /> gir KUN sentripetalbidraget. Hvis farten også
+              endres, har du også <InlineLatex latex="a_\parallel = dv/dt" />, og total akselerasjon
+              er <InlineLatex latex="a = \sqrt{a_\perp^2 + a_\parallel^2}" />.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten → formel</p>
+          <ul className="text-sm space-y-1.5">
+            <li>• <strong>«går rundt med konstant fart»</strong> → kun sentripetal, bruk <InlineLatex latex="a = v^2/R" /></li>
+            <li>• <strong>«omløpstid T»</strong> oppgitt → <InlineLatex latex="a = 4\pi^2 R/T^2" /></li>
+            <li>• <strong>«frekvens f»</strong> oppgitt → <InlineLatex latex="T = 1/f" />, så bruk T-formelen</li>
+            <li>• <strong>«akselererer langs sirkelbane»</strong> → både <InlineLatex latex="a_\perp" /> og <InlineLatex latex="a_\parallel" /></li>
+            <li>• <strong>«vinkelhastighet ω (rad/s)»</strong> → <InlineLatex latex="v = \omega R" />, <InlineLatex latex="a_\perp = \omega^2 R" /></li>
+            <li>• <strong>«bilen tar en sving med radius R»</strong> → friksjonskraft gir sentripetal: <InlineLatex latex="\mu mg = mv^2/R" /> (kap. 5)</li>
+          </ul>
         </div>
 
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">

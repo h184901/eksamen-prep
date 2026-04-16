@@ -146,6 +146,77 @@ export default function TeoriPage() {
           description="Integrasjonen summerer bidragene fra alle strømelementer langs lederen."
         />
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Utlede B = μ₀I/(2πr) for en lang rett leder</p>
+          <p className="text-sm">
+            La lederen ligge langs y-aksen, og vi vil finne B i avstand <InlineLatex latex="r" /> fra
+            lederen. Et strømelement <InlineLatex latex="d\vec{l} = dy\,\hat{y}" /> har avstand{" "}
+            <InlineLatex latex="R = \sqrt{r^2+y^2}" /> til punktet, og vinkelen mellom{" "}
+            <InlineLatex latex="d\vec{l}" /> og <InlineLatex latex="\hat{R}" /> gir{" "}
+            <InlineLatex latex="\sin\varphi = r/\sqrt{r^2+y^2}" />. Fra Biot-Savart:
+          </p>
+          <p className="text-sm mt-2 text-center">
+            <InlineLatex latex="B = \frac{\mu_0 I}{4\pi}\int_{-\infty}^{\infty}\frac{\sin\varphi\,dy}{R^2} = \frac{\mu_0 I}{4\pi}\int_{-\infty}^{\infty}\frac{r\,dy}{(r^2+y^2)^{3/2}}" />
+          </p>
+          <p className="text-sm mt-2">
+            Standardintegralet gir <InlineLatex latex="\int_{-\infty}^{\infty}\frac{dy}{(r^2+y^2)^{3/2}} = 2/r^2" />, og vi får:
+          </p>
+          <p className="text-sm mt-2 text-center">
+            <InlineLatex latex="B = \frac{\mu_0 I}{4\pi}\cdot r \cdot \frac{2}{r^2} = \frac{\mu_0 I}{2\pi r}" />
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Solenoid</strong> (fra Ampère): summen av N viklinger i lengde <InlineLatex latex="\ell" /> gir{" "}
+            <InlineLatex latex="\oint \vec{B}\cdot d\vec{l} = B\ell = \mu_0 N I" />, altså{" "}
+            <InlineLatex latex="B = \mu_0(N/\ell)I = \mu_0 n I" />.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Avstanden r i Biot-Savart</p>
+          <p className="text-sm">
+            <InlineLatex latex="r" /> er avstanden <strong>FRA strømelementet dl TIL observasjonspunktet</strong>,
+            IKKE fra koordinatsystemets origo eller fra noe annet. Dette betyr at for en utstrakt leder
+            er <InlineLatex latex="r" /> forskjellig for hvert element — du må uttrykke r som en funksjon
+            av integrasjonsvariabelen (f.eks. <InlineLatex latex="r = \sqrt{x^2+y^2}" />) før du integrerer.
+            Likeledes: <InlineLatex latex="\hat{r}" /> peker FRA elementet dl TIL punktet.
+          </p>
+        </div>
+
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrowBlueK28" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+              </marker>
+              <marker id="arrowAmberK28" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b" />
+              </marker>
+            </defs>
+            {/* Conductor (vertical) */}
+            <line x1="200" y1="20" x2="200" y2="220" stroke="#f59e0b" strokeWidth="5" />
+            {/* Current arrow up */}
+            <line x1="200" y1="210" x2="200" y2="30" stroke="#f59e0b" strokeWidth="5" markerEnd="url(#arrowAmberK28)" />
+            <text x="210" y="30" fontSize="13" fill="#f59e0b" fontWeight="bold">I</text>
+            {/* B-field circles around wire */}
+            <ellipse cx="200" cy="70" rx="50" ry="12" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
+            <ellipse cx="200" cy="120" rx="75" ry="16" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
+            <ellipse cx="200" cy="170" rx="50" ry="12" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
+            {/* Arrow heads on the front (B direction: counterclockwise seen from above since I points up) */}
+            <polygon points="250,120 242,115 242,125" fill="#3b82f6" />
+            <polygon points="125,120 133,115 133,125" fill="#3b82f6" transform="rotate(180 129 120)" />
+            <polygon points="250,70 243,66 243,74" fill="#3b82f6" />
+            <polygon points="250,170 243,166 243,174" fill="#3b82f6" />
+            {/* Labels */}
+            <text x="260" y="125" fontSize="12" fill="#3b82f6" fontWeight="bold">B</text>
+            <text x="20" y="30" fontSize="11" fill="currentColor">Høyrehåndsregel:</text>
+            <text x="20" y="45" fontSize="11" fill="currentColor">tommel = I,</text>
+            <text x="20" y="60" fontSize="11" fill="currentColor">fingre = B</text>
+            {/* r-distance indicator */}
+            <line x1="200" y1="120" x2="275" y2="120" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3 2" />
+            <text x="230" y="115" fontSize="11" fill="#8b5cf6">r</text>
+          </svg>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Hverdagsanalogi: Biot-Savart er magnetismens Coulomb-lov</p>
           <p className="text-sm">
@@ -286,6 +357,79 @@ export default function TeoriPage() {
             <InlineLatex latex="B = \mu_0 N I / (2R)" /> i sentrum.
           </p>
         </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: B-feltet er sirkler, IKKE stråler</p>
+          <p className="text-sm">
+            Rundt en lang rett leder danner B-feltet <strong>konsentriske sirkler</strong> i plan vinkelrett
+            på lederen — akkurat som ringer i vann rundt en dråpe. B-feltet peker IKKE radialt utover som
+            E-feltet fra en linjeladning. Dette er en av de mest vanlige feilene på eksamen. Sett inn{" "}
+            <InlineLatex latex="\vec{B}" /> som en tangent til sirkelen (ikke en radial stråle) når du
+            tegner kraftbilder.
+          </p>
+        </div>
+
+        <h3 className="font-semibold mt-5 mb-2">Solenoid (lang, tett viklet spole)</h3>
+
+        <p>
+          En solenoid er mange sirkulære løkker i rekke. For en lang solenoid med <InlineLatex latex="n = N/\ell" />
+          {" "}viklinger per meter er feltet inni nesten uniformt:
+        </p>
+
+        <FormulaBox
+          latex="B = \mu_0 n I"
+          title="B-felt inni lang solenoid"
+          variant="gold"
+          description="n = viklinger per meter. B ≈ 0 utenfor. Uniformt og parallelt med aksen inni."
+        />
+
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrowBlueSolenoid" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+              </marker>
+            </defs>
+            {/* Solenoid cross-section: top row (dots = current out), bottom row (x = current in) */}
+            <rect x="50" y="70" width="300" height="100" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="5 3" />
+            {/* Top: current coming out (dots) */}
+            {[70, 100, 130, 160, 190, 220, 250, 280, 310, 340].map((x, i) => (
+              <g key={`top-${i}`}>
+                <circle cx={x} cy="70" r="8" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
+                <circle cx={x} cy="70" r="2.5" fill="#f59e0b" />
+              </g>
+            ))}
+            {/* Bottom: current going in (x) */}
+            {[70, 100, 130, 160, 190, 220, 250, 280, 310, 340].map((x, i) => (
+              <g key={`bot-${i}`}>
+                <circle cx={x} cy="170" r="8" fill="none" stroke="#f59e0b" strokeWidth="1.5" />
+                <line x1={x - 5} y1="165" x2={x + 5} y2="175" stroke="#f59e0b" strokeWidth="1.5" />
+                <line x1={x - 5} y1="175" x2={x + 5} y2="165" stroke="#f59e0b" strokeWidth="1.5" />
+              </g>
+            ))}
+            {/* B-field lines inside (uniform, to the right) */}
+            <line x1="65" y1="100" x2="345" y2="100" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrowBlueSolenoid)" />
+            <line x1="65" y1="120" x2="345" y2="120" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrowBlueSolenoid)" />
+            <line x1="65" y1="140" x2="345" y2="140" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrowBlueSolenoid)" />
+            <text x="170" y="130" fontSize="13" fill="#3b82f6" fontWeight="bold">B = μ₀nI (uniform)</text>
+            {/* Outside label */}
+            <text x="20" y="30" fontSize="12" fill="currentColor">Solenoid-snitt:</text>
+            <text x="20" y="47" fontSize="11" fill="#f59e0b">⊙ = strøm ut</text>
+            <text x="20" y="62" fontSize="11" fill="#f59e0b">⊗ = strøm inn</text>
+            <text x="155" y="210" fontSize="11" fill="currentColor">B ≈ 0 utenfor, uniformt inni</text>
+          </svg>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Kjennetegn i oppgaveteksten — kapittel 28</p>
+          <ul className="text-sm space-y-1">
+            <li>• &quot;<strong>lang rett leder</strong>&quot; eller &quot;<strong>strøm gjennom en leder</strong>&quot; → <InlineLatex latex="B = \mu_0 I/(2\pi r)" /></li>
+            <li>• &quot;<strong>avstand r fra leder</strong>&quot; → bruk <InlineLatex latex="1/r" />-formelen</li>
+            <li>• &quot;<strong>solenoid</strong>&quot; eller &quot;<strong>spole med n viklinger per meter</strong>&quot; → <InlineLatex latex="B = \mu_0 n I" /></li>
+            <li>• &quot;<strong>sirkulær spole</strong>&quot; eller &quot;<strong>strømsløyfe med radius R</strong>&quot; → <InlineLatex latex="B = \mu_0 I/(2R)" /> i sentrum</li>
+            <li>• &quot;<strong>to parallelle ledere</strong>&quot; → <InlineLatex latex="F/L = \mu_0 I I'/(2\pi d)" /> (seksjon 28.4)</li>
+          </ul>
+        </div>
       </TheorySummary>
 
       {/* 28.4 Krefter mellom parallelle ledere */}
@@ -357,6 +501,57 @@ export default function TeoriPage() {
             <li>• <strong>Motsatt strømretning:</strong> Lederne <span className="text-red-600 dark:text-red-400 font-semibold">frastøter</span> hverandre</li>
             <li>• Analogt med magneter: "like poler frastøter" — men her er det <em>strøm</em>, og regelen er snudd!</li>
           </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Lik retning gir TILTREKNING (motsatt av ladninger!)</p>
+          <p className="text-sm">
+            Intuisjonen fra elektrostatikk: <em>like ladninger frastøter, motsatte tiltrekker</em>.
+            For parallelle ledere er det <strong>STIKK MOTSATT</strong>:
+          </p>
+          <ul className="text-sm mt-2 space-y-1">
+            <li>• Strømmene i <strong>samme retning</strong> → ledere <strong>TILTREKKES</strong></li>
+            <li>• Strømmene i <strong>motsatt retning</strong> → ledere <strong>FRASTØTES</strong></li>
+          </ul>
+          <p className="text-sm mt-2">
+            Dette er en klassisk eksamensfelle. Grunnen: kraften kommer fra{" "}
+            <InlineLatex latex="\vec{F} = I\vec{L}\times\vec{B}" />, ikke fra ladningsinteraksjon.
+            Fortegnsregelen for strømmer er motsatt av fortegnsregelen for ladninger. Tegn alltid
+            B-feltet fra én leder og finn kraften på den andre via høyrehåndsregelen.
+          </p>
+        </div>
+
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrowAmberParallel" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b" />
+              </marker>
+              <marker id="arrowGreenForce" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#10b981" />
+              </marker>
+            </defs>
+            {/* Two parallel conductors */}
+            <line x1="120" y1="30" x2="120" y2="210" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrowAmberParallel)" />
+            <line x1="280" y1="30" x2="280" y2="210" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrowAmberParallel)" />
+            <text x="104" y="225" fontSize="13" fill="#f59e0b" fontWeight="bold">I</text>
+            <text x="264" y="225" fontSize="13" fill="#f59e0b" fontWeight="bold">I'</text>
+            {/* Distance d */}
+            <line x1="120" y1="120" x2="280" y2="120" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="3 2" />
+            <text x="192" y="115" fontSize="12" fill="#8b5cf6" fontWeight="bold">d</text>
+            {/* Forces arrows toward each other (attractive, same direction) */}
+            <line x1="135" y1="80" x2="175" y2="80" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowGreenForce)" />
+            <line x1="265" y1="80" x2="225" y2="80" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowGreenForce)" />
+            <text x="140" y="70" fontSize="12" fill="#10b981" fontWeight="bold">F</text>
+            <text x="240" y="70" fontSize="12" fill="#10b981" fontWeight="bold">F</text>
+            {/* B-field at conductor 2 from conductor 1 (into page, marked with x) */}
+            <circle cx="220" cy="160" r="8" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
+            <line x1="215" y1="155" x2="225" y2="165" stroke="#3b82f6" strokeWidth="1.5" />
+            <line x1="215" y1="165" x2="225" y2="155" stroke="#3b82f6" strokeWidth="1.5" />
+            <text x="232" y="165" fontSize="11" fill="#3b82f6">B₁ ved leder 2</text>
+            {/* Title */}
+            <text x="80" y="20" fontSize="12" fill="currentColor" fontWeight="bold">Parallelle strømmer (samme retning) → tiltrekning</text>
+          </svg>
         </div>
       </TheorySummary>
 

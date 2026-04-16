@@ -205,20 +205,24 @@ export default function Kapittel8Teori() {
           </p>
         </div>
 
-        <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
-          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlig misforståelse — retningen!</p>
-          <p>
-            Impulsen er en <strong>vektor</strong>. Når en ball treffer en vegg og spretter rett tilbake,
-            er <InlineLatex latex="\Delta \vec{p} = m\vec{v}_2 - m\vec{v}_1" />. Hvis ballen
-            kommer inn med <InlineLatex latex="v_1 = +20\;\text{m/s}" /> og spretter ut med{" "}
-            <InlineLatex latex="v_2 = -15\;\text{m/s}" />, er
-          </p>
-          <div className="mt-2">
-            <InlineLatex latex="\Delta p = m(-15 - 20) = -35m\;\text{kg·m/s}" />
-          </div>
-          <p className="mt-2">
-            Ikke <InlineLatex latex="m(15-20) = -5m" />. Sett alltid opp fortegn <em>før</em> du regner.
-          </p>
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel — <InlineLatex latex="J = F\Delta t" /> gjelder BARE for konstant kraft</p>
+          <ul className="space-y-1.5 text-sm">
+            <li>
+              • <strong>Konstant kraft:</strong> <InlineLatex latex="\vec J = \vec F\,\Delta t" />.
+              Men i de fleste realistiske kollisjoner (biltransjer, slag, sprett) er kraften SVÆRT tidsavhengig — den stiger fra 0, topper, og faller til 0. Da må du bruke integralet:{" "}
+              <InlineLatex latex="\vec J = \int_{t_1}^{t_2}\vec F(t)\,dt" />. Geometrisk: <em>areal</em> under F-t-grafen.
+            </li>
+            <li>
+              • <strong>Gjennomsnittskraft-trikset:</strong> Du finner ofte <InlineLatex latex="\bar F = J/\Delta t = \Delta p/\Delta t" /> — dette gir <em>gjennomsnittet</em>, ikke toppkraften. Toppkraften kan være 2–3× større!
+            </li>
+            <li>
+              • <strong>Bevegelsesmengde er VEKTOR — komponenter er uavhengig bevart:</strong> Når en ball treffer en vegg og spretter med <InlineLatex latex="v_1 = +20" /> m/s inn og <InlineLatex latex="v_2 = -15" /> m/s ut, er <InlineLatex latex="\Delta p = m(-15 - 20) = -35m" /> — IKKE <InlineLatex latex="m(15-20) = -5m" />. Sett opp fortegn FØR du regner.
+            </li>
+            <li>
+              • <strong>2D: <InlineLatex latex="p_x" /> og <InlineLatex latex="p_y" /> bevares hver for seg</strong> — du får to ligninger, aldri bland komponentene. En ball som beveger seg diagonalt og spretter: <InlineLatex latex="p_x" /> kan endres (vegg langs y-aksen), men <InlineLatex latex="p_y" /> er uendret.
+            </li>
+          </ul>
         </div>
 
         <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
@@ -311,6 +315,41 @@ export default function Kapittel8Teori() {
           </p>
         </div>
 
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk — utledning fra Newtons 3. lov</p>
+          <p className="text-sm mb-2">
+            Bevaringsloven er ikke et &laquo;eget prinsipp&raquo; — den er en direkte konsekvens av Newtons 3. lov. Start med to legemer A og B som virker på hverandre (ingen ytre krefter):
+          </p>
+          <div className="text-center text-sm space-y-1">
+            <div><InlineLatex latex="\vec F_{AB} = -\vec F_{BA}" /> &nbsp;&nbsp;(Newton III: aksjon = reaksjon)</div>
+            <div>Newton II på hver: <InlineLatex latex="\vec F_{AB} = d\vec p_B/dt" /> og <InlineLatex latex="\vec F_{BA} = d\vec p_A/dt" /></div>
+            <div>Adder: <InlineLatex latex="\dfrac{d\vec p_A}{dt} + \dfrac{d\vec p_B}{dt} = \vec F_{BA} + \vec F_{AB} = 0" /></div>
+            <div><InlineLatex latex="\dfrac{d}{dt}(\vec p_A + \vec p_B) = 0 \;\Rightarrow\; \vec p_A + \vec p_B = \text{konst.}" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Konklusjon:</strong> N3L + N2L (momentform) ⇒ indre krefter kansellerer alltid parvis, og total <InlineLatex latex="\vec p" /> endres kun av <em>ytre</em> krefter.
+            Generaliserer direkte til N partikler — hvert par kansellerer, så <InlineLatex latex="\vec p_\text{tot} = \sum_i m_i\vec v_i" /> er bevart når <InlineLatex latex="\sum\vec F_\text{ytre} = 0" />.
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk — massesenterets hastighet</p>
+          <p className="text-sm mb-2">
+            Bevaring av <InlineLatex latex="\vec p" /> kan omformuleres via massesenteret. Definer total bevegelsesmengde og massesenterhastighet:
+          </p>
+          <div className="text-center text-sm space-y-1">
+            <div><InlineLatex latex="\vec p_\text{tot} = m_1\vec v_1 + m_2\vec v_2 + \cdots = \sum_i m_i \vec v_i" /></div>
+            <div><InlineLatex latex="\vec v_\text{cm} = \dfrac{\sum_i m_i\vec v_i}{M} = \dfrac{m_1\vec v_1 + m_2\vec v_2}{m_1 + m_2}" /> &nbsp;(to-legeme)</div>
+            <div>Dermed: <InlineLatex latex="\vec p_\text{tot} = M\vec v_\text{cm}" /></div>
+          </div>
+          <p className="text-sm mt-2">
+            <strong>Konsekvens:</strong> Når <InlineLatex latex="\vec p_\text{tot}" /> er bevart, er
+            <InlineLatex latex="\vec v_\text{cm}" /> også bevart — massesenteret beveger seg med
+            <em>konstant</em> hastighet uansett hva som skjer inne i systemet (kollisjoner, eksplosjoner, deformasjon).
+            For en fullstendig uelastisk kollisjon der legemene henger sammen etterpå, er felles sluttfart nøyaktig <InlineLatex latex="\vec v_\text{cm}" />!
+          </p>
+        </div>
+
         <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-green-700 dark:text-green-400 mb-2">Praktisk tips — når gjelder bevaringen?</p>
           <ul className="space-y-2 list-disc list-inside">
@@ -399,6 +438,72 @@ export default function Kapittel8Teori() {
           </svg>
         </div>
 
+        {/* SVG: Bevegelsesmengde før/etter — vektor-addisjon */}
+        <div className="my-6">
+          <p className="text-sm font-semibold text-[var(--muted)] mb-3 text-center">Bevaring av <InlineLatex latex="\vec p" />: sum av piler FØR = sum av piler ETTER</p>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 640 280" className="w-full max-w-2xl">
+              {/* FØR-paneel */}
+              <text x="160" y="25" textAnchor="middle" className="fill-current text-sm font-bold">FØR kollisjonen</text>
+              <rect x="30" y="40" width="260" height="220" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" rx="6" />
+
+              {/* A beveger seg til høyre */}
+              <circle cx="80" cy="100" r="14" fill="#3b82f6" />
+              <text x="80" y="105" textAnchor="middle" className="fill-white text-xs font-bold">A</text>
+              <text x="60" y="85" className="fill-current text-[10px]">m_A</text>
+              {/* p_A pil */}
+              <line x1="95" y1="100" x2="175" y2="100" stroke="#3b82f6" strokeWidth="3" markerEnd="url(#arrBlueP)" />
+              <text x="135" y="92" textAnchor="middle" fill="#3b82f6" className="text-[11px] font-bold">p_A = m_A v_A</text>
+
+              {/* B i ro */}
+              <circle cx="220" cy="180" r="14" fill="#f59e0b" />
+              <text x="220" y="185" textAnchor="middle" className="fill-white text-xs font-bold">B</text>
+              <text x="198" y="165" className="fill-current text-[10px]">m_B</text>
+              <text x="248" y="182" className="fill-current text-[10px]">p_B = 0</text>
+
+              {/* p_total-FØR nede */}
+              <text x="160" y="235" textAnchor="middle" className="fill-current text-xs font-semibold">Total: <tspan fill="#3b82f6">p_A</tspan> + 0</text>
+              <line x1="100" y1="248" x2="220" y2="248" stroke="#3b82f6" strokeWidth="3" markerEnd="url(#arrBlueP)" />
+
+              {/* Pil mellom paneler */}
+              <text x="320" y="150" textAnchor="middle" className="fill-current text-xl">→</text>
+
+              {/* ETTER-paneel */}
+              <text x="490" y="25" textAnchor="middle" className="fill-current text-sm font-bold">ETTER kollisjonen</text>
+              <rect x="360" y="40" width="260" height="220" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" rx="6" />
+
+              {/* A sprer seg sakte fremover */}
+              <circle cx="410" cy="100" r="14" fill="#3b82f6" opacity="0.8" />
+              <text x="410" y="105" textAnchor="middle" className="fill-white text-xs font-bold">A</text>
+              <line x1="425" y1="100" x2="465" y2="100" stroke="#3b82f6" strokeWidth="3" markerEnd="url(#arrBlueP)" />
+              <text x="445" y="92" textAnchor="middle" fill="#3b82f6" className="text-[11px] font-bold">p'_A</text>
+
+              {/* B sprer seg raskt fremover */}
+              <circle cx="490" cy="180" r="14" fill="#f59e0b" opacity="0.8" />
+              <text x="490" y="185" textAnchor="middle" className="fill-white text-xs font-bold">B</text>
+              <line x1="505" y1="180" x2="595" y2="180" stroke="#f59e0b" strokeWidth="3" markerEnd="url(#arrOrP)" />
+              <text x="552" y="172" textAnchor="middle" fill="#f59e0b" className="text-[11px] font-bold">p'_B</text>
+
+              {/* p_total-ETTER nede: p'_A + p'_B = p_A */}
+              <text x="490" y="235" textAnchor="middle" className="fill-current text-xs font-semibold">Total: <tspan fill="#3b82f6">p'_A</tspan> + <tspan fill="#f59e0b">p'_B</tspan></text>
+              <line x1="430" y1="248" x2="470" y2="248" stroke="#3b82f6" strokeWidth="3" />
+              <line x1="470" y1="248" x2="550" y2="248" stroke="#f59e0b" strokeWidth="3" markerEnd="url(#arrOrP)" />
+
+              <defs>
+                <marker id="arrBlueP" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#3b82f6" />
+                </marker>
+                <marker id="arrOrP" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 z" fill="#f59e0b" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <p className="text-xs text-[var(--muted)] text-center mt-2 italic">
+            Total-pilen nede i hvert panel har samme lengde i begge: <InlineLatex latex="\vec p_A + \vec p_B = \vec p'_A + \vec p'_B" />.
+          </p>
+        </div>
+
         <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Rakettligningen — masse som endrer seg</p>
           <p className="mb-2">
@@ -430,6 +535,79 @@ export default function Kapittel8Teori() {
           "Energitap = E_k,før − E_k,etter (alltid positivt ved inelastisk kollisjon)",
         ]}
       >
+        <div className="bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-indigo-700 dark:text-indigo-400 mb-2">Kjennetegn i oppgaveteksten — hvilken kollisjonstype?</p>
+          <p className="text-sm mb-2">
+            Les oppgaven NØYE og let etter disse nøkkelordene — de avgjør hvilke ligninger du har lov å bruke:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-indigo-300 dark:border-indigo-700">
+                  <th className="text-left py-1.5 pr-3">Formulering</th>
+                  <th className="text-left py-1.5 pr-3">Type</th>
+                  <th className="text-left py-1.5">Bruk</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs">
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;henger sammen etter&raquo;, &laquo;fester seg i&raquo;, &laquo;borer seg inn i&raquo;, &laquo;kobler seg til&raquo;</td>
+                  <td className="py-1.5 pr-3">Fullst. uelastisk</td>
+                  <td className="py-1.5">Kun <InlineLatex latex="\vec p" /> bevart. Én felles sluttfart <InlineLatex latex="v_2" />.</td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;elastisk&raquo;, &laquo;billard&raquo;, &laquo;uten energitap&raquo;, &laquo;spretter&raquo; (ideelt)</td>
+                  <td className="py-1.5 pr-3">Elastisk</td>
+                  <td className="py-1.5"><InlineLatex latex="\vec p" /> OG <InlineLatex latex="E_k" /> bevart. Snarvei: <InlineLatex latex="v_{A1}-v_{B1} = -(v_{A2}-v_{B2})" /></td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;uelastisk&raquo;, &laquo;energi tapt til varme&raquo;, &laquo;hastigheter etter gitt&raquo;</td>
+                  <td className="py-1.5 pr-3">Uelastisk</td>
+                  <td className="py-1.5">Kun <InlineLatex latex="\vec p" /> bevart. <InlineLatex latex="E_k" /> NEI — regn tap etter.</td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;eksplosjon&raquo;, &laquo;fragmenterer&raquo;, &laquo;sprenger&raquo;, &laquo;fjær løsner&raquo;</td>
+                  <td className="py-1.5 pr-3">Indre krefter (omvendt)</td>
+                  <td className="py-1.5"><InlineLatex latex="\vec p_\text{før} = \vec p_\text{etter}" />. Hvis hvile før: <InlineLatex latex="0 = m_1\vec v_1 + m_2\vec v_2" />.</td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;rekyl&raquo;, &laquo;tilbakeslag&raquo;, &laquo;gevær/rifle avfyrer&raquo;</td>
+                  <td className="py-1.5 pr-3">Indre krefter (skyteeksempel)</td>
+                  <td className="py-1.5"><InlineLatex latex="0 = m_\text{kule}v_\text{kule} + m_\text{våpen}v_\text{rekyl}" /></td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-3">&laquo;kollisjon&raquo; uten nærmere info</td>
+                  <td className="py-1.5 pr-3">Antatt uelastisk</td>
+                  <td className="py-1.5">Kun <InlineLatex latex="\vec p" /> sikkert bevart. Bruk <InlineLatex latex="E_k" /> bare hvis oppgaven sier det.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs mt-2 italic text-[var(--muted)]">
+            Tommelfingerregel: <InlineLatex latex="\vec p" /> er bevart i ALLE kollisjoner (så lenge ytre krefter er neglisjerbare). <InlineLatex latex="E_k" /> er BARE bevart hvis oppgaven sier &laquo;elastisk&raquo;.
+          </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel — velg riktig ligning for elastisk vs. uelastisk!</p>
+          <ul className="space-y-1.5 text-sm">
+            <li>
+              • <strong>Uelastisk (inkl. fullst. uelastisk):</strong> Bruk KUN <InlineLatex latex="\sum m_i v_{i,\text{før}} = \sum m_i v_{i,\text{etter}}" />.
+              Ikke sett opp <InlineLatex latex="E_{k,\text{før}} = E_{k,\text{etter}}" /> — det er galt (energi tapes). Du vil få <em>feil</em> svar.
+            </li>
+            <li>
+              • <strong>Elastisk:</strong> BÅDE <InlineLatex latex="\vec p" /> OG <InlineLatex latex="E_k" /> bevart — to ligninger. Bruk SNARVEIEN (relativ hastighet snur) i stedet for kvadratiske energiligningen:{" "}
+              <InlineLatex latex="v_{A1}-v_{B1} = -(v_{A2}-v_{B2})" />.
+            </li>
+            <li>
+              • <strong>Fullst. uelastisk ≠ &laquo;all energi tapt&raquo;:</strong> Maks mulig tap er kompatibelt med p-bevaring. Hvis begge beveger seg samme vei: lite tap. Hvis de møtes med samme masse og motsatt fart: alt tapes.
+            </li>
+            <li>
+              • <strong>Ballistisk pendel — to-stegs problem:</strong> Steg 1 (kollisjon): <InlineLatex latex="\vec p" /> bevart, <InlineLatex latex="E_k" /> IKKE. Steg 2 (sving opp): <InlineLatex latex="E_k + E_p = \text{konst.}" />, <InlineLatex latex="\vec p" /> IKKE bevart (snorkraft er ytre). Ikke bland stegene!
+            </li>
+          </ul>
+        </div>
+
         <div className="overflow-x-auto my-4">
           <table className="w-full text-sm border-collapse">
             <thead>

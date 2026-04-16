@@ -149,13 +149,14 @@ export default function TeoriPage() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-4 my-4">
-          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Typiske misforståelser</p>
+        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel — arbeid er SKALAR, ikke vektor</p>
           <ul className="space-y-1.5 text-sm">
+            <li>• <strong>Arbeid er en skalar</strong> (ingen retning!), selv om det defineres via to vektorer (<InlineLatex latex="\vec F" /> og <InlineLatex latex="\vec s" />). Prikkproduktet &laquo;spiser&raquo; retningsinformasjonen. Du kan ALDRI skrive <InlineLatex latex="\vec W" /> med pil — det er matematisk nonsens.</li>
+            <li>• <strong>Negativt arbeid når <InlineLatex latex="\vec F" /> og <InlineLatex latex="\vec s" /> er motsatt rettet</strong>: når <InlineLatex latex="90° < \varphi \leq 180°" /> er <InlineLatex latex="\cos\varphi < 0" />, og arbeidet er negativt. Friksjonsarbeid er ALLTID negativt — tegn kraft- og forflytningsvektorene og se etter motsatt retning.</li>
             <li>• <strong>&laquo;Muskelsliter = arbeid&raquo;</strong>: Fysisk arbeid krever forflytning. Å holde en tung koffert stille gir null arbeid, selv om du blir sliten (musklene dine bruker kjemisk energi internt).</li>
             <li>• <strong>Bruker massen i stedet for kraften</strong>: <InlineLatex latex="W = F\cdot s" />, ikke <InlineLatex latex="m\cdot s" />. Tyngden er <InlineLatex latex="F = mg" />.</li>
-            <li>• <strong>Glemmer fortegnet</strong>: Friksjonsarbeid er ALLTID negativt, selv om du regner &laquo;bare tallet&raquo;. Ta med minus i energiregnskapet!</li>
-            <li>• <strong>Summerer krefter først</strong>: Du kan regne <InlineLatex latex="W_\text{tot} = \sum W_i" /> (arbeid per kraft) ELLER <InlineLatex latex="W_\text{tot} = F_\text{netto}\cdot s" />, men ikke miks.</li>
+            <li>• <strong>Summerer krefter først, men miks</strong>: Du kan regne <InlineLatex latex="W_\text{tot} = \sum W_i" /> (arbeid per kraft) ELLER <InlineLatex latex="W_\text{tot} = F_\text{netto}\cdot s" />, men ikke miks.</li>
           </ul>
         </div>
 
@@ -230,19 +231,36 @@ export default function TeoriPage() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
-          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Hvorfor <InlineLatex latex="\tfrac{1}{2}mv^2" />? — ikke <InlineLatex latex="mv" /> eller <InlineLatex latex="mv^3" /></p>
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk — utledning fra Newtons 2. lov</p>
           <p className="text-sm mb-2">
-            Utledningen bestemmer formen helt tvangmessig. Fra Newtons 2. lov <InlineLatex latex="F = m\,dv/dt" /> og
-            <InlineLatex latex="dx = v\,dt" /> får vi <InlineLatex latex="F\,dx = mv\,dv" />. Integrerer vi begge sider:
+            Utledningen bestemmer formen helt tvangmessig. Start med Newtons 2. lov i én dimensjon og multipliser begge sider med <InlineLatex latex="dx" />:
           </p>
-          <div className="text-center">
-            <InlineLatex latex="W = \int F\,dx = \int_{v_1}^{v_2} mv\,dv = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2" />
+          <div className="text-center text-sm space-y-1">
+            <div><InlineLatex latex="\sum F = m\,\frac{dv}{dt}" /> &nbsp;&nbsp;|&nbsp;&nbsp; gang med <InlineLatex latex="dx" /></div>
+            <div><InlineLatex latex="\sum F \cdot dx = m\,\frac{dv}{dt}\,dx = m\,v\,dv" /> &nbsp;&nbsp; (brukte <InlineLatex latex="dx = v\,dt" />)</div>
+            <div>Integrer fra <InlineLatex latex="x_1" /> til <InlineLatex latex="x_2" /> (venstre) og <InlineLatex latex="v_1" /> til <InlineLatex latex="v_2" /> (høyre):</div>
+            <div><InlineLatex latex="W_\text{tot} = \int_{x_1}^{x_2}\!\sum F\,dx = \int_{v_1}^{v_2} m\,v\,dv = \tfrac{1}{2}mv_2^2 - \tfrac{1}{2}mv_1^2 = \Delta E_k" /></div>
           </div>
           <p className="text-sm mt-2">
-            Kvadratet kommer fra integrasjonen av <InlineLatex latex="v" />. <strong>Konsekvens:</strong> Å doble farten
-            firedobler energien (<InlineLatex latex="2^2 = 4" />). Dette er grunnen til at bremselengden i en bil
-            firedobles når farten dobles — det er fire ganger så mye energi som må fjernes av friksjonen!
+            <strong>Legg merke til:</strong> utledningen bruker <InlineLatex latex="F = m\,dv/dt" />, ikke <InlineLatex latex="F = ma" /> direkte — derfor gjelder teoremet også for <em>varierende</em> krefter.
+            Kvadratet kommer fra <InlineLatex latex="\int v\,dv = \tfrac{1}{2}v^2" />. <strong>Konsekvens:</strong> doble farten firedobler energien — derfor firedobles bremselengden når farten dobles!
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk — arbeid for variabel kraft som integral</p>
+          <p className="text-sm mb-2">
+            For en kraft <InlineLatex latex="F(x)" /> som varierer med posisjonen, definerer vi arbeidet som
+            grenseverdien av summen <InlineLatex latex="\sum F(x_i)\,\Delta x_i" /> når <InlineLatex latex="\Delta x_i \to 0" />:
+          </p>
+          <div className="text-center text-sm">
+            <InlineLatex latex="W = \lim_{\Delta x \to 0}\sum_i F(x_i)\,\Delta x_i = \int_{x_1}^{x_2} F(x)\,dx" />
+          </div>
+          <p className="text-sm mt-2">
+            Dette er <em>samme definisjon</em> som arealet under <InlineLatex latex="F(x)" />-grafen. For
+            konstant kraft gir integralet <InlineLatex latex="F\cdot(x_2-x_1) = F\cdot s" /> — altså er
+            den enkle formelen <InlineLatex latex="W = Fs" /> bare et <em>spesialtilfelle</em> av integralformelen.
           </p>
         </div>
 
@@ -488,13 +506,57 @@ export default function TeoriPage() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-4 my-4">
-          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Typiske misforståelser</p>
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel — <InlineLatex latex="P = \vec F \cdot \vec v" /> er ØYEBLIKKELIG effekt</p>
           <ul className="space-y-1.5 text-sm">
+            <li>• <strong>Øyeblikkelig vs. gjennomsnittlig</strong>: <InlineLatex latex="P = \vec F\cdot\vec v" /> gir effekten <em>akkurat nå</em> ved den aktuelle farten. Hvis farten endrer seg (f.eks. akselerasjon fra hvile), varierer effekten. For <em>gjennomsnittseffekt</em> over et tidsrom må du bruke <InlineLatex latex="\bar P = W_\text{tot}/\Delta t" />.</li>
             <li>• <strong>Blander effekt og energi</strong>: Effekt (W) er RATE. Energi (J) er total. 60 W lyspære som lyser i 1 time bruker <InlineLatex latex="60 \cdot 3600 = 216\,000" /> J energi.</li>
             <li>• <strong>kWh = kW per time</strong>: NEI! kWh er &laquo;kilowatt ganger time&raquo; = energienhet. Ikke deling.</li>
             <li>• <strong>Glemmer <InlineLatex latex="\cos\varphi" /> i <InlineLatex latex="P = F\cdot v" /></strong>: Den fulle formelen er <InlineLatex latex="P = Fv\cos\varphi" />. Hvis kraft og hastighet ikke er parallelle, må du ta vinkelen med.</li>
           </ul>
+        </div>
+
+        <div className="bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-indigo-700 dark:text-indigo-400 mb-2">Kjennetegn i oppgaveteksten — hvilken formel skal jeg bruke?</p>
+          <p className="text-sm mb-2">Les oppgaven NØYE og let etter disse nøkkelordene før du velger verktøy:</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-indigo-300 dark:border-indigo-700">
+                  <th className="text-left py-1.5 pr-3">Formulering i oppgaven</th>
+                  <th className="text-left py-1.5 pr-3">Hva spørres om</th>
+                  <th className="text-left py-1.5">Formel/strategi</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs">
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;hvor mye arbeid&raquo;, &laquo;hvor mye energi trengs&raquo;</td>
+                  <td className="py-1.5 pr-3">arbeid <InlineLatex latex="W" /> (J)</td>
+                  <td className="py-1.5"><InlineLatex latex="W = Fs\cos\varphi" /> eller <InlineLatex latex="W = \int F\,dx" /></td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;hvilken fart&raquo;, &laquo;hvor fort beveger den seg&raquo;</td>
+                  <td className="py-1.5 pr-3">fart <InlineLatex latex="v" /> (m/s)</td>
+                  <td className="py-1.5">Arbeid-energi-teoremet: <InlineLatex latex="W_\text{tot} = \Delta E_k" /></td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;hvor lang tid&raquo;, &laquo;i løpet av&raquo;</td>
+                  <td className="py-1.5 pr-3">tid <InlineLatex latex="\Delta t" /> (s)</td>
+                  <td className="py-1.5"><InlineLatex latex="\Delta t = W/P" /> (via effekt-likningen)</td>
+                </tr>
+                <tr className="border-b border-indigo-200/50 dark:border-indigo-800/50">
+                  <td className="py-1.5 pr-3">&laquo;effekt&raquo;, &laquo;ytelse&raquo;, &laquo;watt&raquo;, &laquo;hk&raquo;</td>
+                  <td className="py-1.5 pr-3">effekt <InlineLatex latex="P" /> (W)</td>
+                  <td className="py-1.5"><InlineLatex latex="P = W/\Delta t" /> eller <InlineLatex latex="P = \vec F\cdot\vec v" /></td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-3">&laquo;konstant fart&raquo; + &laquo;effekt&raquo;</td>
+                  <td className="py-1.5 pr-3"><InlineLatex latex="P_\text{motor}" /> mot friksjon/tyngde</td>
+                  <td className="py-1.5"><InlineLatex latex="P = Fv" /> der <InlineLatex latex="F" /> = drag/vekt-komp.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">

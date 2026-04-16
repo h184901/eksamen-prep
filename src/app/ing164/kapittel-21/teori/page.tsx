@@ -155,6 +155,102 @@ export default function TeoriPage() {
           vakuumpermittiviteten, og <InlineLatex latex="k = \frac{1}{4\pi\varepsilon_0} = 8{,}99 \cdot 10^9\;\text{Nm}^2/\text{C}^2" />.
         </p>
 
+        {/* SVG: Coulombkraft mellom to ladninger — like og ulike */}
+        <div className="my-6 flex justify-center">
+          <svg viewBox="0 0 400 240" className="w-full max-w-md">
+            <defs>
+              <marker id="arrRed21" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
+              </marker>
+              <marker id="arrBlue21" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+              </marker>
+            </defs>
+            {/* Like ladninger: frastøtning */}
+            <text x="100" y="25" textAnchor="middle" className="fill-current text-sm font-semibold">Like ladninger (frastøter)</text>
+            <circle cx="50" cy="75" r="14" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="50" y="80" textAnchor="middle" className="fill-current text-sm font-bold">+</text>
+            <circle cx="150" cy="75" r="14" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="150" y="80" textAnchor="middle" className="fill-current text-sm font-bold">+</text>
+            <line x1="50" y1="75" x2="20" y2="75" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrRed21)" />
+            <line x1="150" y1="75" x2="180" y2="75" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrRed21)" />
+            <text x="100" y="105" textAnchor="middle" className="fill-current text-xs">r</text>
+            <line x1="60" y1="95" x2="140" y2="95" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
+
+            {/* Ulike ladninger: tiltrekning */}
+            <text x="300" y="25" textAnchor="middle" className="fill-current text-sm font-semibold">Ulike ladninger (tiltrekker)</text>
+            <circle cx="250" cy="75" r="14" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="250" y="80" textAnchor="middle" className="fill-current text-sm font-bold">+</text>
+            <circle cx="350" cy="75" r="14" fill="#3b82f6" opacity="0.3" stroke="#3b82f6" strokeWidth="2" />
+            <text x="350" y="80" textAnchor="middle" className="fill-current text-sm font-bold">−</text>
+            <line x1="250" y1="75" x2="285" y2="75" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrRed21)" />
+            <line x1="350" y1="75" x2="315" y2="75" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrBlue21)" />
+            <text x="300" y="105" textAnchor="middle" className="fill-current text-xs">r</text>
+
+            {/* Superposisjon: tre ladninger */}
+            <text x="200" y="145" textAnchor="middle" className="fill-current text-sm font-semibold">Superposisjon: F_tot = F₁ + F₂ (vektorsum)</text>
+            <circle cx="100" cy="200" r="12" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="100" y="204" textAnchor="middle" className="fill-current text-xs font-bold">q₁</text>
+            <circle cx="300" cy="200" r="12" fill="#ef4444" opacity="0.3" stroke="#ef4444" strokeWidth="2" />
+            <text x="300" y="204" textAnchor="middle" className="fill-current text-xs font-bold">q₂</text>
+            <circle cx="200" cy="175" r="12" fill="#f59e0b" opacity="0.3" stroke="#f59e0b" strokeWidth="2" />
+            <text x="200" y="179" textAnchor="middle" className="fill-current text-xs font-bold">q₃</text>
+            {/* F1 på q3 */}
+            <line x1="200" y1="175" x2="240" y2="165" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrRed21)" />
+            <text x="248" y="163" className="fill-current text-xs" fill="#ef4444">F₁</text>
+            {/* F2 på q3 */}
+            <line x1="200" y1="175" x2="160" y2="165" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrBlue21)" />
+            <text x="140" y="163" className="fill-current text-xs" fill="#3b82f6">F₂</text>
+            <text x="200" y="230" textAnchor="middle" className="fill-current text-[10px] italic">Kraften er langs linjen mellom ladningene</text>
+          </svg>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: Coulombs lov med vektorer</p>
+          <p className="text-sm">
+            Full vektorform: <InlineLatex latex="\vec{F}_{1\to 2} = \frac{1}{4\pi\varepsilon_0}\frac{q_1 q_2}{r^2}\hat{r}_{1\to 2}" />.
+            Her er <InlineLatex latex="\hat{r}_{1\to 2}" /> enhetsvektoren som peker FRA ladning 1 MOT
+            ladning 2 — altså retningen en positiv q₂ ville blitt skjøvet hvis q₁ også var positiv.
+          </p>
+          <ul className="text-sm mt-2 space-y-1">
+            <li>• <strong>Fortegnsbruk:</strong> Hvis <InlineLatex latex="q_1 q_2 > 0" /> (like) → kraft langs <InlineLatex latex="\hat{r}" /> (frastøtning)</li>
+            <li>• Hvis <InlineLatex latex="q_1 q_2 < 0" /> (ulike) → kraft motsatt <InlineLatex latex="\hat{r}" /> (tiltrekning)</li>
+            <li>• <strong>Når bruker du superposisjon?</strong> Når det er 3 eller flere ladninger — regn ut hver kraft for seg, dekomponér i x/y, summer hver komponent.</li>
+            <li>• <strong>Enhetsvektor-tips:</strong> <InlineLatex latex="\hat{r} = \vec{r}/|\vec{r}|" />. Bruk <InlineLatex latex="\hat{r} = (\cos\theta,\sin\theta)" /> når du kjenner vinkelen.</li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: Klassiske Coulomb-tabber</p>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>Fortegn i formelen:</strong> Bruker du <InlineLatex latex="|q_1 q_2|" /> får du bare
+              <em> størrelsen</em> av kraften. Du må selv bestemme retningen ut fra fortegnene (like = frastøter, ulike = tiltrekker). Alternativt: putt inn fortegnene direkte i <InlineLatex latex="q_1 q_2" /> og bruk <InlineLatex latex="\hat{r}" /> konsekvent.
+            </li>
+            <li>
+              <strong>Avstanden r er en LENGDE, ikke en vektor-komponent:</strong> Hvis to ladninger ligger i (0, 0) og (3, 4), er
+              <InlineLatex latex="r = \sqrt{3^2 + 4^2} = 5" />, ikke 3 eller 4. Bruk Pytagoras!
+            </li>
+            <li>
+              <strong>Husk kvadratet:</strong> dobler du avstanden → kraften blir 1/4, ikke 1/2. Avstanden kvadreres, ikke lineariseres.
+            </li>
+            <li>
+              <strong>Enheter:</strong> r i oppgaven er ofte i cm eller mm. Konverter til meter FØR du putter inn i formelen.
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Kjennetegn i oppgaveteksten — «bruk Coulomb!»</p>
+          <ul className="text-sm space-y-1">
+            <li>• Ordet <strong>«punktladning»</strong> eller <strong>«ladde partikler»</strong> nevnes</li>
+            <li>• Spørsmål om <strong>«kraften på»</strong> en ladning fra andre ladninger</li>
+            <li>• Oppgaven beskriver <strong>flere ladninger i en trekant, firkant eller på akse</strong> → superposisjon</li>
+            <li>• «Ligevektsposisjon» eller «hvor er total kraft null» → superposisjon med <InlineLatex latex="\vec{F}_\text{tot} = 0" /></li>
+            <li>• Ladninger henger i snor (pendelkonfigurasjon) → Coulomb + krefter fra snor/gravitasjon</li>
+          </ul>
+        </div>
+
         {/* Interaktiv visualisering innblandet i teorien */}
         <CoulombCalculator />
 
@@ -337,6 +433,29 @@ export default function TeoriPage() {
             <li>• <strong>«E = 0 betyr ingen ladning i nærheten»</strong> — Feil! E kan være null der bidragene fra flere ladninger kansellerer hverandre.</li>
             <li>• <strong>«En negativ ladning i et E-felt beveger seg i feltretningen»</strong> — Nei! <InlineLatex latex="\vec{F} = q\vec{E}" />. Negativt q betyr at kraften peker <em>motsatt</em> av feltet.</li>
             <li>• <strong>«Feltlinjene viser banen til en partikkel»</strong> — Bare hvis partikkelen starter fra ro. En partikkel med startfart kan bevege seg på tvers av feltlinjene.</li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Felle-varsel: E-felt av punktladning bruker AVSTANDEN r</p>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>Ikke bland avstand med koordinat:</strong> En ladning i origo gir feltet i punktet (x, y) med
+              styrke <InlineLatex latex="E = kq/r^2" /> der <InlineLatex latex="r = \sqrt{x^2+y^2}" />.
+              <em> Ikke</em> del på y eller x alene — del på <InlineLatex latex="r^2" />.
+            </li>
+            <li>
+              <strong>Retning via enhetsvektor:</strong> <InlineLatex latex="\hat{r} = (x,y)/r" />. For å finne
+              x- og y-komponenter av feltet: <InlineLatex latex="E_x = E\cdot x/r" />, <InlineLatex latex="E_y = E\cdot y/r" />.
+            </li>
+            <li>
+              <strong>Null-felt-punkter eksisterer:</strong> Mellom to like ladninger er E = 0 på midtpunktet. Mellom
+              ulike ladninger er E ALDRI null mellom dem — men kan være null utenfor den minste ladningen.
+            </li>
+            <li>
+              <strong>Tegn på q i formelen:</strong> Hvis q er negativ, peker feltet <em>mot</em> ladningen, ikke bort.
+              Enklest: finn størrelsen <InlineLatex latex="|E|" /> og bestem retningen separat.
+            </li>
           </ul>
         </div>
 

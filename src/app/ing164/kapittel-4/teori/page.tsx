@@ -226,6 +226,25 @@ export default function TeoriPage() {
         />
 
         <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: hvorfor likevekt ⟺ null akselerasjon</p>
+          <p className="text-sm">
+            Utgangspunktet er N2L som vi møter i neste seksjon:
+            <InlineLatex latex="\;\sum \vec{F} = m\vec{a}" />. Sett inn <InlineLatex latex="\sum \vec{F} = 0" />:
+          </p>
+          <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+            <li>Steg 1: <InlineLatex latex="\sum \vec{F} = m\vec{a}" /> (N2L)</li>
+            <li>Steg 2: Anta likevekt, så <InlineLatex latex="\sum \vec{F} = 0" /></li>
+            <li>Steg 3: Altså <InlineLatex latex="m\vec{a} = 0" /></li>
+            <li>Steg 4: Siden <InlineLatex latex="m \neq 0" />, må <InlineLatex latex="\vec{a} = 0" /></li>
+            <li>Steg 5: <InlineLatex latex="\vec{a} = d\vec{v}/dt = 0 \Rightarrow \vec{v} = \text{konstant}" /></li>
+          </ul>
+          <p className="text-sm mt-2">
+            Omvendt vei: hvis <InlineLatex latex="\vec{v} = \text{konstant}" />, er <InlineLatex latex="\vec{a} = 0" /> og dermed <InlineLatex latex="\sum \vec{F} = m\vec{a} = 0" />.
+            <strong> Ekvivalensen er dermed matematisk stram</strong> — likevekt og null akselerasjon er to sider av samme mynt.
+          </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Hva er en inertialreferanseramme?</p>
           <p className="text-sm">
             N1L gjelder bare i <strong>inertialsystemer</strong> — referansesystemer som ikke akselererer.
@@ -660,6 +679,39 @@ export default function TeoriPage() {
           </ul>
         </div>
 
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE — aksjon/reaksjon er ALDRI på samme legeme</p>
+          <p className="text-sm">
+            Dette er den <strong>vanligste feilen på eksamen</strong>. Normalkraft og tyngde på en kloss på bordet ser ut som et
+            aksjon/reaksjon-par fordi de er like store (når a = 0) og motsatt rettet. <strong>Men det er de ikke!</strong>
+          </p>
+          <div className="mt-3 grid sm:grid-cols-2 gap-3">
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border border-red-200 dark:border-red-900">
+              <p className="text-sm font-semibold mb-1">N3L-par (OK):</p>
+              <ul className="text-xs space-y-1 list-disc list-inside">
+                <li>Kloss dytter bord ned (kontakt)</li>
+                <li>Bord dytter kloss opp (normalkraft)</li>
+                <li>Virker på <strong>ulike</strong> legemer ✓</li>
+                <li>Samme type kraft (kontakt) ✓</li>
+              </ul>
+            </div>
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border border-red-200 dark:border-red-900">
+              <p className="text-sm font-semibold mb-1">IKKE et N3L-par:</p>
+              <ul className="text-xs space-y-1 list-disc list-inside">
+                <li>Tyngde (jord trekker kloss)</li>
+                <li>Normalkraft (bord dytter kloss)</li>
+                <li>Begge virker på <strong>klossen</strong> ✗</li>
+                <li>Ulik type kraft (grav/kontakt) ✗</li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Test på eksamen:</strong> Klarer du å skrive parets to krefter på formen &laquo;A på B&raquo; og &laquo;B på A&raquo; —
+            med <em>samme</em> to legemer men byttet rolle — er det et ekte N3L-par. Hvis ikke, er det to uavhengige
+            krefter som <em>tilfeldigvis</em> balanserer via N2L.
+          </p>
+        </div>
+
         {/* SVG: N3L — person mot vegg */}
         <div className="my-4 flex justify-center">
           <svg viewBox="0 0 400 220" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
@@ -746,6 +798,64 @@ export default function TeoriPage() {
             Hvilke krefter oppstår da? Uten FBD er det lett å glemme en kraft (f.eks. normalkraften)
             eller inkludere en kraft som ikke virker på legemet (f.eks. en kraft legemet utøver på noe annet).
             Eksperter tegner FBD-er fordi det fungerer — ikke fordi det er obligatorisk.
+          </p>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten — hvilken lov skal jeg bruke?</p>
+          <p className="text-sm mb-2">
+            Les oppgaven nøye. Signalordene nedenfor forteller deg nesten alltid hva slags oppsett du trenger:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="text-xs w-full border-collapse">
+              <thead>
+                <tr className="bg-blue-100 dark:bg-blue-900/40">
+                  <th className="border border-blue-300 dark:border-blue-800 p-2 text-left">Ordlyd i oppgaven</th>
+                  <th className="border border-blue-300 dark:border-blue-800 p-2 text-left">Betyr</th>
+                  <th className="border border-blue-300 dark:border-blue-800 p-2 text-left">Verktøy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;i ro&raquo;, &laquo;henger stille&raquo;, &laquo;konstant fart&raquo;, &laquo;jevn hastighet&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2"><InlineLatex latex="\vec{a} = 0" /></td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">N1L: <InlineLatex latex="\sum \vec{F} = 0" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;akselererer&raquo;, &laquo;starter fra ro&raquo;, &laquo;øker farten&raquo;, &laquo;bremser&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2"><InlineLatex latex="\vec{a} \neq 0" /></td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">N2L: <InlineLatex latex="\sum \vec{F} = m\vec{a}" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;glatt underlag&raquo;, &laquo;friksjonsløst&raquo;, &laquo;isfritt&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Ignorer friksjon</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Kun N, G, evt. F, T</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;hviler på&raquo;, &laquo;ligger på&raquo;, &laquo;støtter seg mot&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Kontakt → normalkraft <InlineLatex latex="N" /></td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Tegn N vinkelrett ut fra flaten</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;tau&raquo;, &laquo;snor&raquo;, &laquo;vaier&raquo;, &laquo;kabel&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Strekktau → snordrag <InlineLatex latex="T" /></td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Tegn T <em>bort fra</em> legemet langs tauet</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;skråplan&raquo;, &laquo;helling&raquo;, &laquo;skliner ned&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Roter koordinatsystem</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">x langs planet, y vinkelrett</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;i fritt fall&raquo;, &laquo;uten luftmotstand&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Kun tyngde virker</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2"><InlineLatex latex="a = g" />, nedover</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Regel:</strong> Lag FBD <em>først</em>, så bestemmer ordlyden om du setter høyresiden til 0 (N1L) eller <InlineLatex latex="m\vec{a}" /> (N2L).
           </p>
         </div>
 

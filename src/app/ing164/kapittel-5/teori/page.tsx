@@ -71,6 +71,61 @@ export default function TeoriPage() {
           </p>
         </div>
 
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Kjennetegn i oppgaveteksten — dekoder for kapittel 5</p>
+          <p className="text-sm mb-2">
+            Oppgavene i kap. 5 bruker faste fraser. Lær å gjenkjenne dem:
+          </p>
+          <div className="overflow-x-auto">
+            <table className="text-xs w-full border-collapse">
+              <thead>
+                <tr className="bg-blue-100 dark:bg-blue-900/40">
+                  <th className="border border-blue-300 dark:border-blue-800 p-2 text-left">Formulering</th>
+                  <th className="border border-blue-300 dark:border-blue-800 p-2 text-left">Setup</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;henger stille&raquo;, &laquo;bildet er i likevekt&raquo;, &laquo;står urørlig&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Likevekt (5.1): <InlineLatex latex="\sum F_x = 0, \; \sum F_y = 0" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;akselererer med&raquo;, &laquo;når farten v etter tid t&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Dynamikk (5.2): <InlineLatex latex="\sum F = ma" /> + kinematikk</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;koblet med et tau over en trinse&raquo;, &laquo;henger på&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Atwood / koblet system — ett FBD per legeme, samme <InlineLatex latex="|a|" />, samme <InlineLatex latex="T" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;skråplan med vinkel θ&raquo;, &laquo;en rampe heller&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Roter akser. Dekomponer tyngde: <InlineLatex latex="mg\sin\theta" /> langs, <InlineLatex latex="mg\cos\theta" /> vinkelrett</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;ruhetstall&raquo;, &laquo;friksjonskoeffisient μ&raquo;, &laquo;glir&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Friksjon (5.3): glir? <InlineLatex latex="\mu_k N" />. Står stille? <InlineLatex latex="R_s \leq \mu_s N" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;på grensen til å skli&raquo;, &laquo;akkurat før det glir&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Maksimal hvilefriksjon: <InlineLatex latex="R_s = \mu_s N" /> (likhet!)</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;svinger med radius R&raquo;, &laquo;beveger seg i en sirkel&raquo;, &laquo;loop&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Sirkel (5.4): nettokraft inn mot sentrum = <InlineLatex latex="mv^2/R" /></td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;minste fart for å&raquo; (holde kontakt med banen)</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Sett <InlineLatex latex="N = 0" /> i topp av loop, løs for v</td>
+                </tr>
+                <tr>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">&laquo;dossert sving&raquo;, &laquo;banked curve&raquo;, &laquo;ideell fart&raquo;</td>
+                  <td className="border border-blue-200 dark:border-blue-900 p-2">Sett friksjon = 0, <InlineLatex latex="v = \sqrt{gR\tan\beta}" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
           <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Løsningsstrategi (6 steg)</p>
           <ol className="list-decimal list-inside space-y-1 text-sm">
@@ -91,6 +146,69 @@ export default function TeoriPage() {
             normalkraften og friksjonen — bare tyngden får komponenter. Dette sparer tid og
             reduserer regnefeil.
           </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4 rounded-lg">
+          <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">Matematikk-sjekk: dekomponering av tyngden på skråplan</p>
+          <p className="text-sm">
+            På et skråplan med helningsvinkel <InlineLatex latex="\theta" /> roterer vi koordinatsystemet slik at
+            x-aksen ligger <em>langs</em> planet og y-aksen står <em>vinkelrett</em> på planet. Da må vi dekomponere
+            tyngden <InlineLatex latex="\vec{G} = -mg\hat{j}_{\text{vertikal}}" /> i de nye aksene:
+          </p>
+          <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+            <li>Steg 1: Tegn en rettvinklet trekant der <InlineLatex latex="\vec{G}" /> er hypotenusen (loddrett ned)</li>
+            <li>Steg 2: Vinkelen mellom <InlineLatex latex="\vec{G}" /> og y-aksen (vinkelrett på planet) er <em>også</em> <InlineLatex latex="\theta" /> — følger av at sidene har vinkelrette sider</li>
+            <li>Steg 3: Komponent <em>langs</em> planet (nedover skråningen): <InlineLatex latex="G_x = mg\sin\theta" /></li>
+            <li>Steg 4: Komponent <em>vinkelrett</em> på planet (inn i flaten): <InlineLatex latex="G_y = mg\cos\theta" /></li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Sjekk grensetilfellene:</strong>
+          </p>
+          <ul className="text-sm mt-1 space-y-1 list-disc list-inside">
+            <li>Flatt plan (<InlineLatex latex="\theta = 0" />): <InlineLatex latex="G_x = 0, \; G_y = mg" /> — all tyngde er vinkelrett, ingen driver noe langs planet. ✓</li>
+            <li>Loddrett vegg (<InlineLatex latex="\theta = 90°" />): <InlineLatex latex="G_x = mg, \; G_y = 0" /> — tyngden drar rett nedover planet, ingen presser mot flaten. ✓</li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Vanlig feil:</strong> å bytte <InlineLatex latex="\sin" /> og <InlineLatex latex="\cos" />. Bruk grensesjekken
+            (<InlineLatex latex="\theta = 0" />: normalkraften skal være mg, altså cos-leddet) for å avgjøre hver gang.
+          </p>
+        </div>
+
+        {/* Liten SVG: skråplan med dekomponering av mg */}
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 420 260" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            {/* Skråplan */}
+            <line x1="40" y1="220" x2="380" y2="220" stroke="currentColor" strokeWidth="2" />
+            <line x1="380" y1="220" x2="100" y2="80" stroke="currentColor" strokeWidth="2" />
+            <line x1="100" y1="80" x2="100" y2="220" stroke="currentColor" strokeWidth="1" strokeDasharray="4,3" opacity="0.4" />
+            {/* Vinkel θ ved bunn */}
+            <path d="M 330 220 A 50 50 0 0 0 340 195" stroke="#f59e0b" strokeWidth="2" fill="none" />
+            <text x="336" y="214" className="fill-current text-xs" style={{ fill: "#f59e0b" }}>θ</text>
+            {/* Kloss på planet (roterte) */}
+            <g transform="translate(230,160) rotate(-27)">
+              <rect x="-25" y="-20" width="50" height="40" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
+              <text x="0" y="4" textAnchor="middle" className="fill-current text-xs font-semibold">m</text>
+            </g>
+            {/* Tyngde G (rett ned) */}
+            <line x1="230" y1="160" x2="230" y2="235" stroke="#ef4444" strokeWidth="3" />
+            <polygon points="230,235 226,226 234,226" fill="#ef4444" />
+            <text x="238" y="225" className="fill-current text-xs" style={{ fill: "#ef4444" }}>G = mg</text>
+            {/* G_x = mg sin θ (langs plan, ned-skrå) */}
+            <line x1="230" y1="160" x2="265" y2="177" stroke="#10b981" strokeWidth="2.5" />
+            <polygon points="265,177 257,174 259,181" fill="#10b981" />
+            <text x="268" y="176" className="fill-current text-xs" style={{ fill: "#10b981" }}>mg sin θ</text>
+            {/* G_y = mg cos θ (vinkelrett, inn i plan) */}
+            <line x1="230" y1="160" x2="195" y2="228" stroke="#3b82f6" strokeWidth="2.5" />
+            <polygon points="195,228 194,219 201,224" fill="#3b82f6" />
+            <text x="140" y="225" className="fill-current text-xs" style={{ fill: "#3b82f6" }}>mg cos θ</text>
+            {/* Normalkraft N ut fra plan */}
+            <line x1="230" y1="160" x2="265" y2="92" stroke="#8b5cf6" strokeWidth="2.5" />
+            <polygon points="265,92 258,98 264,101" fill="#8b5cf6" />
+            <text x="270" y="95" className="fill-current text-xs" style={{ fill: "#8b5cf6" }}>N</text>
+            {/* Tittel */}
+            <text x="210" y="30" textAnchor="middle" className="fill-current text-sm font-semibold">Dekomponering av tyngde på skråplan</text>
+            <text x="210" y="50" textAnchor="middle" className="fill-current text-xs">Grønn: langs planet (mg sin θ) — Blå: vinkelrett (mg cos θ)</text>
+          </svg>
         </div>
 
         <p className="mt-3">
@@ -432,6 +550,42 @@ export default function TeoriPage() {
           description="Dimensjonsløst tall. Typisk: μs ≈ 0,3–0,8 for vanlige materialer."
         />
 
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE — statisk friksjon er en ULIKHET, ikke en likhet</p>
+          <p className="text-sm">
+            Den viktigste regnefeilen studenter gjør på eksamen:
+          </p>
+          <div className="mt-2 grid sm:grid-cols-2 gap-3">
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border-2 border-red-300 dark:border-red-900">
+              <p className="text-sm font-semibold text-red-700 dark:text-red-400 mb-1">FEIL</p>
+              <p className="text-xs">
+                &laquo;Klossen står i ro, så hvilefriksjonen er <InlineLatex latex="R = \mu_s N" />.&raquo;
+              </p>
+              <p className="text-xs mt-1">
+                Dette gir oftest for stor friksjon og dermed feil nettokraft.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border-2 border-green-300 dark:border-green-900">
+              <p className="text-sm font-semibold text-green-700 dark:text-green-400 mb-1">RIKTIG</p>
+              <p className="text-xs">
+                Hvilefriksjonen tilpasser seg: <InlineLatex latex="R_s \leq \mu_s N" /> (ulikhet!).
+              </p>
+              <p className="text-xs mt-1">
+                Den er akkurat så stor som nødvendig for å holde legemet i ro — ikke mer.
+              </p>
+            </div>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Bare når glidning er i ferd med å starte</strong> (maksimal hvilefriksjon) når vi likheten <InlineLatex latex="R_{s,\max} = \mu_s N" />.
+            I alle andre tilfeller av hvile er <InlineLatex latex="R_s" /> ukjent og bestemmes fra N1L (<InlineLatex latex="\sum F = 0" />).
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Eksempel:</strong> Du legger en bok på bordet. <InlineLatex latex="\mu_s = 0{,}4" />, <InlineLatex latex="N = 10\;\text{N}" />. Er <InlineLatex latex="R_s = 4\;\text{N}" />?
+            Nei! Ingen horisontal ytre kraft virker, så <InlineLatex latex="R_s = 0" />. Dytter du med 2 N horisontalt, er <InlineLatex latex="R_s = 2\;\text{N}" />
+            (ikke 4!). Først når dyttet overstiger 4 N begynner boken å gli, og da bytter vi til <InlineLatex latex="R_k = \mu_k N" />.
+          </p>
+        </div>
+
         <div className="bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 p-4 my-4 rounded-lg">
           <p className="font-semibold text-red-700 dark:text-red-400 mb-2">Vanlige misforståelser om friksjon</p>
           <ul className="text-sm space-y-2 list-disc list-inside">
@@ -672,6 +826,39 @@ export default function TeoriPage() {
             inn mot sentrum lik <InlineLatex latex="mv^2/R" />, og løs. Tegner du en ekstra pil
             ut fra sentrum, teller du den to ganger og får feil svar.
           </p>
+        </div>
+
+        <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-5 rounded-lg">
+          <p className="font-semibold text-red-700 dark:text-red-400 mb-2">FELLE — &laquo;sentripetalkraft&raquo; er IKKE en ny kraft</p>
+          <p className="text-sm">
+            Mange studenter tegner en egen pil de kaller <InlineLatex latex="F_{\text{sentripetal}}" /> i FBD-en.
+            <strong> Det er feil.</strong> Sentripetalkraften er ikke et eget kraftslag — det er <em>navnet på
+            summen</em> av de ekte kreftene når summen peker inn mot sentrum.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Riktig resonnement — stein i snor, vannrett sirkel:</strong>
+          </p>
+          <ul className="text-sm mt-1 space-y-1 list-disc list-inside">
+            <li>FBD har kun <em>ekte</em> krefter: snordrag <InlineLatex latex="T" />, tyngde <InlineLatex latex="G" /></li>
+            <li>Ikke tegn en separat <InlineLatex latex="F_{\text{sent}}" /> — den finnes ikke!</li>
+            <li>Langs retningen inn mot sentrum: <InlineLatex latex="T = mv^2/R" /></li>
+            <li>Konklusjon: i <em>dette</em> tilfellet <em>er</em> snordraget sentripetalkraften</li>
+          </ul>
+          <p className="text-sm mt-2">
+            På skråplan i sving: sentripetalkraften er <InlineLatex latex="N\sin\beta + R\cos\beta" />.
+            På loop i bunn: sentripetalkraften er <InlineLatex latex="N - mg" />. <strong>Det er alltid en kombinasjon
+            av de vanlige kreftene</strong>, ikke en ekstra kraft du legger til.
+          </p>
+          <div className="mt-3 grid sm:grid-cols-2 gap-3">
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border border-red-200 dark:border-red-900">
+              <p className="text-sm font-semibold text-red-700 dark:text-red-400 mb-1">FEIL FBD</p>
+              <p className="text-xs">T ut mot omkretsen, G ned, <em>og</em> <InlineLatex latex="F_{\text{sent}}" /> inn mot sentrum (dobbelttelt).</p>
+            </div>
+            <div className="bg-white dark:bg-gray-900 rounded p-3 border border-green-200 dark:border-green-900">
+              <p className="text-sm font-semibold text-green-700 dark:text-green-400 mb-1">RIKTIG FBD</p>
+              <p className="text-xs">Kun T (inn mot sentrum, langs tauet) og G (ned). Sett <InlineLatex latex="\sum F_{\text{inn}} = mv^2/R" />.</p>
+            </div>
+          </div>
         </div>
 
         {/* Sirkel-simulator inline */}
