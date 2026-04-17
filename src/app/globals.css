@@ -63,3 +63,133 @@ button {
   transition-duration: 150ms;
   transition-timing-function: ease;
 }
+
+/* AI Tutor styles */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.6; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.animate-ping-slow {
+  animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Markdown styling for tutor responses */
+.tutor-markdown h1,
+.tutor-markdown h2,
+.tutor-markdown h3,
+.tutor-markdown h4 {
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 0.75rem;
+  margin-bottom: 0.375rem;
+  line-height: 1.3;
+}
+.tutor-markdown h1 { font-size: 1.05rem; }
+.tutor-markdown h2 { font-size: 1rem; color: var(--accent); }
+.tutor-markdown h3 { font-size: 0.95rem; }
+.tutor-markdown p {
+  margin: 0.4rem 0;
+  line-height: 1.55;
+}
+.tutor-markdown ul,
+.tutor-markdown ol {
+  margin: 0.4rem 0;
+  padding-left: 1.25rem;
+}
+.tutor-markdown ul { list-style: disc; }
+.tutor-markdown ol { list-style: decimal; }
+.tutor-markdown li {
+  margin: 0.15rem 0;
+  line-height: 1.5;
+}
+.tutor-markdown li > p { margin: 0; }
+.tutor-markdown strong { color: var(--foreground); font-weight: 600; }
+.tutor-markdown em { font-style: italic; }
+.tutor-markdown blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+  color: var(--muted);
+  margin: 0.5rem 0;
+  font-style: italic;
+}
+.tutor-markdown code {
+  background: var(--background);
+  border: 1px solid var(--card-border);
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.tutor-markdown pre {
+  background: var(--background);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  font-size: 0.8rem;
+}
+.tutor-markdown pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+.tutor-markdown a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.tutor-markdown table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+.tutor-markdown th,
+.tutor-markdown td {
+  border: 1px solid var(--card-border);
+  padding: 0.3rem 0.5rem;
+}
+.tutor-markdown th {
+  background: var(--background);
+  font-weight: 600;
+}
+.tutor-markdown .katex-display {
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+.tutor-markdown hr {
+  border: 0;
+  border-top: 1px solid var(--card-border);
+  margin: 0.75rem 0;
+}
+
+/* Explain-formula button overlay on FormulaBox */
+.formula-explain-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+  transform: translateY(2px);
+  z-index: 2;
+}
+.formula-box-gold:hover .formula-explain-btn,
+.formula-box-blue:hover .formula-explain-btn,
+.formula-explain-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}

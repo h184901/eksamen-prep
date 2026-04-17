@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import AITutor from "@/components/AITutor";
 
 export const metadata: Metadata = {
   title: "Eksamensøving — Semester 4",
@@ -30,8 +31,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen antialiased">
-        <Navigation />
-        <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+        <AITutor>
+          <Navigation />
+          <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+        </AITutor>
       </body>
     </html>
   );

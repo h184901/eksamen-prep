@@ -7,6 +7,7 @@ import FormulaDetailModal, {
   FormulaVariable,
   RelatedFormula,
 } from "./FormulaDetailModal";
+import { useOptionalTutor } from "./AITutor";
 
 export type { FormulaVariable, RelatedFormula, FormulaDetailData };
 
@@ -41,6 +42,13 @@ export default function FormulaBox({
 }: FormulaBoxProps) {
   const mathRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const tutor = useOptionalTutor();
+
+  const askTutor = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    tutor?.askAboutFormula(latex, title);
+  };
 
   const hasDetails = Boolean(
     conceptExplanation ||
@@ -155,17 +163,50 @@ export default function FormulaBox({
     commonMistakes,
   };
 
+  const handleOpenDetails = () => setOpen(true);
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setOpen(true);
+    }
+  };
+
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={handleOpenDetails}
+        onKeyDown={handleKeyDown}
         aria-haspopup="dialog"
         aria-label={`Vis detaljer${title ? ` om ${title}` : ""}`}
         className={`${baseClasses} block w-full text-left cursor-pointer transition-all duration-150 ease-out hover:shadow-lg hover:-translate-y-0.5 hover:brightness-[1.02] active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]`}
       >
         {content}
-      </button>
+        {tutor && (
+          <button
+            type="button"
+            onClick={askTutor}
+            aria-label={`Forklar ${title ?? "formelen"} med AI-tutor`}
+            className="formula-explain-btn"
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z" />
+            </svg>
+            <span>Forklar med AI</span>
+          </button>
+        )}
+      </div>
       <FormulaDetailModal
         open={open}
         onClose={() => setOpen(false)}
