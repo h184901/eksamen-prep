@@ -5,7 +5,8 @@ import AITutor from "@/components/AITutor";
 
 export const metadata: Metadata = {
   title: "Eksamensøving — Semester 4",
-  description: "Skreddersydd eksamensøving for ING164 Fysikk, DAT110 og DAT109",
+  description:
+    "Skreddersydd eksamensøving for ING164 Fysikk, DAT110 Nettverk, DAT109 Systemutvikling og DAT107 Databaser",
 };
 
 export default function RootLayout({

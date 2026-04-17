@@ -51,7 +51,11 @@ Skreddersydd eksamensøvingsside.
 1. **ING164 Fysikk** — PRIORITET NÅ
 2. DAT110 Nettverksteknologi — NÅ
 3. DAT109 Systemutvikling — PRIORITERT NÅ
+<<<<<<< HEAD
 4. DAT107 Database - PRIORITET NÅ
+=======
+4. DAT107 Databaser — IMPLEMENTERT som hovedfag på samme nivå som de andre fagene (lilla identitet)
+>>>>>>> 51b5a2b (La til DAT107 som fag)
 
 DAT110 Nettverksteknologi og distribuerte systemer
 
@@ -155,6 +159,54 @@ Domenemodellen skal ALDRI inneholde metoder
 Sekvensdiagram skal samsvare med brukstilfellebeskrivelsen
 Prioriter de nyeste eksamenene da de er mest representative
 
+DAT107 Databaser
+
+Status
+DAT107 er nå implementert som hovedfag på samme nivå som ING164, DAT110 og DAT109. Det har egen hovedinngang, egne delområder og to separate eksamensspor. Lilla fagidentitet er aktiv gjennom hele stacken.
+
+Implementert sidestruktur
+
+- `src/app/dat107/page.tsx` — dashboard med seks områdekort gruppert i Teori (SQL/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
+- `src/app/dat107/[area]/page.tsx` — dynamisk områdeside som lister alle tema i et delområde.
+- `src/app/dat107/[area]/[topic]/page.tsx` — dynamisk tema-/innholdsside som leser Markdown fra `src/content/dat107/<area>/<fil>.md`, rendrer via `src/components/Markdown.tsx`, og har prev/next-navigasjon + sidemeny.
+- `src/lib/dat107.ts` — metadata for alle seks områder og totalt 55 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
+- `src/content/dat107/<area>/<slug>.md` — alt faglig innhold er kopiert fra `DAT107-structured/` med ASCII-slug-filnavn (`æøå` normalisert) slik at URL-er og statisk generering fungerer på Vercel.
+- `src/components/Markdown.tsx` — serversidig minimal Markdown-renderer (h1–h3, paragrafer, punkt- og nummerlister, fenced code blocks med språk, inline `code`, `**bold**`, rørseparerte tabeller). Ingen ekstra npm-avhengighet.
+
+Seks faste hoveddeler (nå implementert som slug-er)
+
+- `sql` — SQL (teori)
+- `jpa` — JPA (teori)
+- `nosql` — NoSQL (teori)
+- `obliger` — Obliger (praksis)
+- `eksamen-gjengangere` — bearbeidet eksamensspor
+- `originale-eksamen` — kildetro eksamensspor
+
+Hvordan DAT107 skiller seg fra de andre fagene
+
+- `ing164` er kapittelbasert.
+- `dat110` er en blanding av kapittelspor (`cn-*`, `ds-*`) og egne områder for eksamen, obliger og oppsummering.
+- `dat109` er temabaserte toppdeler (`modellering`, `ooa-ood`, `oop`, `utviklingsmetode`, `oppsummering`, `eksamen`).
+- `dat107` er temabasert (som dat109) og bruker dynamiske ruter `[area]/[topic]` fremfor én mappe per side, fordi antallet tema er for stort til å duplisere.
+- Eksamensdelen er delt i to eksplisitt separate spor, og begge bevares.
+
+Viktig om de to eksamenssporene
+
+- `eksamen-gjengangere` og `originale-eksamen` skal ikke slås sammen og ikke beskrives som samme type innhold.
+- `eksamen-gjengangere` er bearbeidet analyse: mønstre, typiske oppgavetyper, strategi og øvingsoppgaver.
+- `originale-eksamen` er kildetro Markdown av originale PDF-sett og løsningsforslag.
+- Dashbordet skiller dem visuelt: gjengangere har ravgul aksent, originale har rød aksent.
+
+Kildegrunnlag
+
+- `DAT107-structured/` er fortsatt innholdskilden og skal ikke endres direkte.
+- `src/content/dat107/` er den versjonen nettsiden faktisk leser fra. Hvis kilden oppdateres, kopieres endringene over med slug-normaliserte filnavn.
+
+Design og identitet for DAT107
+
+- Lilla fagidentitet er aktiv i hele nettsiden (Tailwind-palett `dat107` 50–900, `a855f7` som 500-farge).
+- Samme komponentstil som de andre fagene: kort med fargebord, avrundede hjørner, hover-løft, mørkt/lyst tema.
+
 ## Materialer for ING164
 Alt pensum ligger i ~/Downloads/Studiet/Semester4/materials/ing164/
 (UTENFOR prosjektmappen — ikke flytt dem tilbake til public/)
@@ -220,9 +272,17 @@ Hver kapittelside skal inneholde disse seksjonene:
 - Fullstendige løsningsforslag med forklaring
 - "Eksamenstips"-bokser
 
+## Tilpasning av denne malen for DAT107
+
+- DAT107 skal bruke samme overordnede sidemønster som kapittelside-malen der det er naturlig.
+- For DAT107 skal "kapittel" ofte forstås som "temaområde" eller "delområde".
+- Dette gjelder særlig `SQL`, `JPA` og `NoSQL`.
+- `Obliger`, `eksamen_gjengangere` og `Originale eksamen` vil være egne typer delområder og trenger ikke å se helt like ut som vanlige teorikapitler, men skal fortsatt følge samme helhetlige nettstedsmønster.
+- `Originale eksamen` skal ikke omformes til vanlige teorisider; det skal beholdes som et separat originaltro eksamensspor.
+
 ## Design
 - Mørkt/lyst tema-toggle
-- Fargekoding: rød/oransje = fysikk, blå = nettverk, grønn = systemutvikling
+- Fargekoding: rød/oransje = fysikk, blå = nettverk, grønn = systemutvikling, lilla = DAT107
 - Profesjonelt, rent, pedagogisk, visuelt
 - Mobilresponsivt
 - Bruk UI/UX Pro Max skill for design der det er relevant

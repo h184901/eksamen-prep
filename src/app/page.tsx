@@ -28,6 +28,15 @@ const subjects = [
     status: "Aktiv" as const,
     chapters: 6,
   },
+  {
+    id: "dat107",
+    name: "DAT107 Databaser",
+    description: "SQL, JPA/ORM, NoSQL, modellering og normalisering",
+    color: "dat107",
+    href: "/dat107",
+    status: "Aktiv" as const,
+    chapters: 6,
+  },
 ];
 
 const colorMap: Record<string, string> = {
@@ -37,12 +46,15 @@ const colorMap: Record<string, string> = {
     "border-network-500/30 hover:border-network-500/60 bg-gradient-to-br from-network-500/5 to-network-500/10",
   sysdev:
     "border-sysdev-500/30 hover:border-sysdev-500/60 bg-gradient-to-br from-sysdev-500/5 to-sysdev-500/10",
+  dat107:
+    "border-dat107-500/30 hover:border-dat107-500/60 bg-gradient-to-br from-dat107-500/5 to-dat107-500/10",
 };
 
 const accentMap: Record<string, string> = {
   physics: "text-physics-600 dark:text-physics-400",
   network: "text-network-600 dark:text-network-400",
   sysdev: "text-sysdev-600 dark:text-sysdev-400",
+  dat107: "text-dat107-600 dark:text-dat107-400",
 };
 
 export default function HomePage() {
@@ -63,7 +75,7 @@ export default function HomePage() {
       </section>
 
       {/* Subject cards */}
-      <section className="grid md:grid-cols-3 gap-6 mb-16">
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         {subjects.map((subject) => {
           const Card = subject.status === "Aktiv" ? Link : "div";
           return (
