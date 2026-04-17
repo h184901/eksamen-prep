@@ -90,7 +90,8 @@
       "Bash(pdftotext -f 285 -l 288 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
       "Bash(pdftotext -f 294 -l 295 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
       "Bash(pdftotext -f 293 -l 294 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
-      "Bash(pdftotext -f 294 -l 294 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)"
+      "Bash(pdftotext -f 294 -l 294 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(perl -i -0pe 's/\\(latex=\"[^\"]*?\"\\)|\\\\{,\\\\}/defined\\($1\\) ? $1 : \",\"/ge' src/app/ing164/eksamen/oppgaver/kapittel-6/exercises.tsx)"
     ]
   }
 }
