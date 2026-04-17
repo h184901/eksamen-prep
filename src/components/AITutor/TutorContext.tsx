@@ -23,12 +23,16 @@ export interface ChatMessage {
 interface TutorState {
   isOpen: boolean;
   isMinimized: boolean;
+  isExpanded: boolean;
   messages: ChatMessage[];
   isStreaming: boolean;
   context: PageContext;
+  pastQuestions: string[];
   open: () => void;
   close: () => void;
   toggleMinimize: () => void;
+  toggleExpand: () => void;
+  collapse: () => void;
   newConversation: () => void;
   sendMessage: (text: string) => Promise<void>;
   cancelStream: () => void;
@@ -42,6 +46,40 @@ function uid(): string {
 }
 
 const STORAGE_KEY = "ai-tutor:messages";
+const PAST_Q_KEY = "ai-tutor:past-questions";
+const MAX_PAST_PER_PAGE = 8;
+
+function contextKey(ctx: PageContext): string {
+  return `${ctx.subject}:${ctx.chapterId ?? "_"}:${ctx.pageType}`;
+}
+
+function readPastQuestions(ctx: PageContext): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(PAST_Q_KEY);
+    if (!raw) return [];
+    const map = JSON.parse(raw) as Record<string, string[]>;
+    return map[contextKey(ctx)] ?? [];
+  } catch {
+    return [];
+  }
+}
+
+function writePastQuestion(ctx: PageContext, question: string): void {
+  if (typeof window === "undefined") return;
+  const q = question.trim();
+  if (!q || q.length > 500) return;
+  try {
+    const raw = localStorage.getItem(PAST_Q_KEY);
+    const map: Record<string, string[]> = raw ? JSON.parse(raw) : {};
+    const key = contextKey(ctx);
+    const existing = (map[key] ?? []).filter((x) => x !== q);
+    map[key] = [q, ...existing].slice(0, MAX_PAST_PER_PAGE);
+    localStorage.setItem(PAST_Q_KEY, JSON.stringify(map));
+  } catch {
+    // ignore
+  }
+}
 
 export function TutorProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/";
@@ -49,9 +87,16 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
 
   const [isOpen, setOpen] = useState(false);
   const [isMinimized, setMinimized] = useState(false);
+  const [isExpanded, setExpanded] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isStreaming, setStreaming] = useState(false);
+  const [pastVersion, setPastVersion] = useState(0);
   const abortRef = useRef<AbortController | null>(null);
+
+  const pastQuestions = useMemo(
+    () => readPastQuestions(context),
+    [context, pastVersion],
+  );
 
   // Hydrate from sessionStorage (per-tab persistence)
   useEffect(() => {
@@ -83,10 +128,19 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
   const close = useCallback(() => {
     setOpen(false);
     setMinimized(false);
+    setExpanded(false);
   }, []);
 
   const toggleMinimize = useCallback(() => {
     setMinimized((m) => !m);
+  }, []);
+
+  const toggleExpand = useCallback(() => {
+    setExpanded((e) => !e);
+  }, []);
+
+  const collapse = useCallback(() => {
+    setExpanded(false);
   }, []);
 
   const cancelStream = useCallback(() => {
@@ -125,6 +179,8 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
 
       setMessages((prev) => [...prev, userMsg, placeholder]);
       setStreaming(true);
+      writePastQuestion(context, trimmed);
+      setPastVersion((v) => v + 1);
 
       const controller = new AbortController();
       abortRef.current = controller;
@@ -219,12 +275,16 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
     () => ({
       isOpen,
       isMinimized,
+      isExpanded,
       messages,
       isStreaming,
       context,
+      pastQuestions,
       open,
       close,
       toggleMinimize,
+      toggleExpand,
+      collapse,
       newConversation,
       sendMessage,
       cancelStream,
@@ -233,12 +293,16 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
     [
       isOpen,
       isMinimized,
+      isExpanded,
       messages,
       isStreaming,
       context,
+      pastQuestions,
       open,
       close,
       toggleMinimize,
+      toggleExpand,
+      collapse,
       newConversation,
       sendMessage,
       cancelStream,
