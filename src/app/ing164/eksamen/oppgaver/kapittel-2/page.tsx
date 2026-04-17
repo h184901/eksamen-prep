@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CollapsibleSection from "@/components/CollapsibleSection";
+import { exercises, ExerciseContent } from "./exercises";
 
 const sections = [
   { id: "2.1", title: "Forflytning, tid og gjennomsnittsfart", exercises: ["2.1", "2.2", "2.4", "2.5", "2.6"] },
@@ -15,8 +16,144 @@ const sections = [
   { id: "challenge", title: "Challenge Problems", exercises: ["2.88"] },
 ];
 
+const difficultyBadge: Record<ExerciseContent["difficulty"], string> = {
+  lett: "bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700",
+  middels: "bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700",
+  vanskelig: "bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-200 border-red-300 dark:border-red-700",
+};
+
+function ExerciseDisplay({ exercise, id }: { exercise: ExerciseContent; id: string }) {
+  const [visibleHints, setVisibleHints] = useState(0);
+  const [showSolution, setShowSolution] = useState(false);
+  const [showAlternative, setShowAlternative] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex flex-wrap items-center gap-3 pb-3 border-b border-[var(--card-border)]">
+        <h3 className="text-xl font-semibold">Oppgave {id}</h3>
+        <span
+          className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${difficultyBadge[exercise.difficulty]}`}
+        >
+          {exercise.difficulty}
+        </span>
+        <span className="text-xs text-[var(--muted)]">{exercise.pageRef}</span>
+        <span className="text-sm text-[var(--muted)] italic ml-auto">{exercise.title}</span>
+      </div>
+
+      {/* Problem */}
+      <div className="rounded-lg bg-[var(--background)] border border-[var(--card-border)] p-4">
+        <p className="font-semibold text-sm mb-2 text-[var(--accent)]">Oppgavetekst</p>
+        <div className="text-sm space-y-2">{exercise.problem}</div>
+      </div>
+
+      {/* Hva vet vi / Hva skal vi finne */}
+      <div className="grid md:grid-cols-2 gap-3">
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
+          <p className="font-semibold text-sm mb-2 text-blue-700 dark:text-blue-300">Hva vet vi?</p>
+          <div className="text-sm">{exercise.knowns}</div>
+        </div>
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-3">
+          <p className="font-semibold text-sm mb-2 text-purple-700 dark:text-purple-300">Hva skal vi finne?</p>
+          <div className="text-sm">{exercise.unknowns}</div>
+        </div>
+      </div>
+
+      {/* Strategi */}
+      <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
+        <p className="font-semibold text-sm mb-1 text-green-700 dark:text-green-300">Strategi</p>
+        <div className="text-sm">{exercise.strategy}</div>
+      </div>
+
+      {/* Hints */}
+      <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
+        <p className="font-semibold text-sm mb-2">Hint</p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {exercise.hints.map((_, idx) => (
+            <button
+              key={idx}
+              disabled={idx >= visibleHints + 1 ? false : true}
+              onClick={() => setVisibleHints(Math.max(visibleHints, idx + 1))}
+              className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
+                idx < visibleHints
+                  ? "bg-[var(--accent)] text-white"
+                  : "bg-[var(--background)] text-[var(--muted)] border border-[var(--card-border)] hover:border-[var(--accent)]/50"
+              }`}
+            >
+              Vis {exercise.hints[idx].label}
+            </button>
+          ))}
+          {visibleHints > 0 && (
+            <button
+              onClick={() => setVisibleHints(0)}
+              className="px-3 py-1 rounded-md text-xs text-[var(--muted)] hover:text-[var(--accent)]"
+            >
+              Skjul alle
+            </button>
+          )}
+        </div>
+        <div className="space-y-2">
+          {exercise.hints.slice(0, visibleHints).map((hint, idx) => (
+            <div
+              key={idx}
+              className="rounded-md bg-[var(--background)] border-l-4 border-[var(--accent)] p-2 text-sm"
+            >
+              <p className="font-semibold text-xs text-[var(--accent)] mb-1">{hint.label}</p>
+              {hint.content}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Løsning */}
+      <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
+        <div className="flex items-center justify-between mb-2">
+          <p className="font-semibold text-sm">Løsning</p>
+          <button
+            onClick={() => setShowSolution(!showSolution)}
+            className="px-3 py-1 rounded-md text-xs font-semibold bg-[var(--accent)] text-white hover:opacity-90 transition-opacity"
+          >
+            {showSolution ? "Skjul løsning" : "Vis løsning"}
+          </button>
+        </div>
+        {showSolution && (
+          <div className="pt-2 border-t border-[var(--card-border)] text-sm">{exercise.solution}</div>
+        )}
+      </div>
+
+      {/* Alternativ løsning */}
+      {exercise.alternativeSolution && (
+        <div className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-semibold text-sm">Alternativ løsning</p>
+            <button
+              onClick={() => setShowAlternative(!showAlternative)}
+              className="px-3 py-1 rounded-md text-xs font-semibold bg-[var(--background)] text-[var(--accent)] border border-[var(--accent)] hover:bg-[var(--accent)]/10 transition-colors"
+            >
+              {showAlternative ? "Skjul" : "Vis alternativ"}
+            </button>
+          </div>
+          {showAlternative && (
+            <div className="pt-2 border-t border-[var(--card-border)] text-sm">
+              {exercise.alternativeSolution}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Hva lærte vi */}
+      <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3">
+        <p className="font-semibold text-sm mb-1 text-amber-700 dark:text-amber-300">Hva lærte vi?</p>
+        <div className="text-sm">{exercise.summary}</div>
+      </div>
+    </div>
+  );
+}
+
 export default function Kapittel2OppgaverPage() {
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
+
+  const selected = selectedExercise ? exercises[selectedExercise] : null;
 
   return (
     <div>
@@ -51,9 +188,7 @@ export default function Kapittel2OppgaverPage() {
             title={section.id === "problems" || section.id === "challenge" ? section.title : `${section.id} — ${section.title}`}
             defaultOpen={false}
           >
-            {section.exercises.length === 0 ? (
-              <p className="text-sm text-[var(--muted)] italic">Ingen oppgaver for dette delkapittelet</p>
-            ) : (
+            {section.exercises.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {section.exercises.map((ex) => (
                   <button
@@ -69,22 +204,32 @@ export default function Kapittel2OppgaverPage() {
                   </button>
                 ))}
               </div>
+            ) : (
+              <p className="text-sm text-[var(--muted)]">Ingen oppgaver for dette delkapittelet.</p>
             )}
           </CollapsibleSection>
         ))}
       </div>
 
-      {/* Selected exercise placeholder */}
+      {/* Selected exercise */}
       {selectedExercise && (
         <div className="mt-8 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Oppgave {selectedExercise}</h3>
-            <button onClick={() => setSelectedExercise(null)} className="text-sm text-[var(--muted)] hover:text-[var(--accent)]">Lukk</button>
+          <div className="flex items-center justify-end mb-3">
+            <button
+              onClick={() => setSelectedExercise(null)}
+              className="text-sm text-[var(--muted)] hover:text-[var(--accent)]"
+            >
+              Lukk
+            </button>
           </div>
-          <div className="rounded-lg border-2 border-dashed border-[var(--card-border)] p-8 text-center">
-            <p className="text-[var(--muted)] font-medium">Oppgavetekst og løsning kommer snart</p>
-            <p className="text-xs text-[var(--muted)] mt-1">Oppgave {selectedExercise} fra University Physics</p>
-          </div>
+          {selected ? (
+            <ExerciseDisplay key={selectedExercise} exercise={selected} id={selectedExercise} />
+          ) : (
+            <div className="rounded-lg border-2 border-dashed border-[var(--card-border)] p-8 text-center">
+              <p className="text-[var(--muted)] font-medium">Oppgavetekst og løsning kommer snart</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Oppgave {selectedExercise} fra University Physics</p>
+            </div>
+          )}
         </div>
       )}
     </div>
