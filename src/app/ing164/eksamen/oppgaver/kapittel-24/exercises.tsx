@@ -273,7 +273,7 @@ export const exercises: Record<string, ExerciseContent> = {
         </p>
 
         <FormulaBox
-          latex="V_{ab} = \underline{\underline{1{,}00 \cdot 10^{4}\;\text{V}}},\quad A = \underline{\underline{2{,}26 \cdot 10^{-3}\;\text{m}^2}},\quad C = \underline{\underline{8{,}00\;\text{pF}}}"
+          latex="V_{ab} = \boxed{1{,}00 \cdot 10^{4}\;\text{V}},\quad A = \boxed{2{,}26 \cdot 10^{-3}\;\text{m}^2},\quad C = \boxed{8{,}00\;\text{pF}}"
           variant="gold"
         />
       </div>
@@ -352,7 +352,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="C = \underline{\underline{2{,}87\;\text{pF}}},\quad V_{ab} = \underline{\underline{2{,}37 \cdot 10^{4}\;\text{V}}},\quad E = \underline{\underline{6{,}85 \cdot 10^{6}\;\text{V/m}}}"
+          latex="C = \boxed{2{,}87\;\text{pF}},\quad V_{ab} = \boxed{2{,}37 \cdot 10^{4}\;\text{V}},\quad E = \boxed{6{,}85 \cdot 10^{6}\;\text{V/m}}"
           variant="gold"
         />
       </div>
@@ -434,7 +434,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="Q = \underline{\underline{120\;\mu\text{C}}},\quad Q_b = \underline{\underline{60{,}0\;\mu\text{C}}},\quad Q_c = \underline{\underline{480\;\mu\text{C}}}"
+          latex="Q = \boxed{120\;\mu\text{C}},\quad Q_b = \boxed{60{,}0\;\mu\text{C}},\quad Q_c = \boxed{480\;\mu\text{C}}"
           variant="gold"
         />
       </div>
@@ -515,7 +515,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="d = \underline{\underline{1{,}00\;\text{cm}}},\quad r = \underline{\underline{4{,}24\;\text{cm}}},\quad Q_\text{max} = \underline{\underline{500\;\text{pC}}}"
+          latex="d = \boxed{1{,}00\;\text{cm}},\quad r = \boxed{4{,}24\;\text{cm}},\quad Q_\text{max} = \boxed{500\;\text{pC}}"
           variant="gold"
         />
       </div>
@@ -613,7 +613,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="C_{ab} = \underline{\underline{3{,}47\;\mu\text{F}}},\quad Q_\text{tot} = \underline{\underline{174\;\mu\text{C}}},\quad Q_{10} = Q_9 = \underline{\underline{174\;\mu\text{C}}}"
+          latex="C_{ab} = \boxed{3{,}47\;\mu\text{F}},\quad Q_\text{tot} = \boxed{174\;\mu\text{C}},\quad Q_{10} = Q_9 = \boxed{174\;\mu\text{C}}"
           variant="gold"
         />
       </div>
@@ -738,7 +738,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="C_{ab} = \underline{\underline{13{,}0\;\text{nF}}},\quad Q_\text{tot} = \underline{\underline{324\;\text{nC}}},\quad Q_3 = \underline{\underline{24{,}4\;\text{nC}}},\quad V_5 = \underline{\underline{25\;\text{V}}}"
+          latex="C_{ab} = \boxed{13{,}0\;\text{nF}},\quad Q_\text{tot} = \boxed{324\;\text{nC}},\quad Q_3 = \boxed{24{,}4\;\text{nC}},\quad V_5 = \boxed{25\;\text{V}}"
           variant="gold"
         />
       </div>
@@ -820,7 +820,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="u = \underline{\underline{2{,}83 \cdot 10^{-2}\;\text{J/m}^3}}"
+          latex="u = \boxed{2{,}83 \cdot 10^{-2}\;\text{J/m}^3}"
           variant="gold"
         />
 
@@ -911,7 +911,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="C = \underline{\underline{90{,}0\;\text{pF}}},\; A = \underline{\underline{1{,}52 \cdot 10^{-2}\;\text{m}^2}},\; V_\text{max} = \underline{\underline{4500\;\text{V}}},\; U = \underline{\underline{1{,}80\;\mu\text{J}}}"
+          latex="C = \boxed{90{,}0\;\text{pF}},\; A = \boxed{1{,}52 \cdot 10^{-2}\;\text{m}^2},\; V_\text{max} = \boxed{4500\;\text{V}},\; U = \boxed{1{,}80\;\mu\text{J}}"
           variant="gold"
         />
       </div>
@@ -996,7 +996,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="text-sm">Energien <strong>øker</strong>. Batteriet leverer energi (K − 1)U₀ til kondensatoren pluss like mye som tas ut av dielektrikumet i form av arbeid (totalt sett kommer alt fra batteriet).</p>
 
         <FormulaBox
-          latex="U_0 = \underline{\underline{4{,}06\;\text{mJ}}},\quad U = \underline{\underline{14{,}8\;\text{mJ}}},\quad \Delta U = \underline{\underline{+10{,}7\;\text{mJ}}}\text{ (økning)}"
+          latex="U_0 = \boxed{4{,}06\;\text{mJ}},\quad U = \boxed{14{,}8\;\text{mJ}},\quad \Delta U = \boxed{+10{,}7\;\text{mJ}}\text{ (økning)}"
           variant="gold"
         />
       </div>
@@ -1083,7 +1083,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="text-sm text-[var(--muted)]">Sjekk: <InlineLatex latex="Q = K Q_0 = 3{,}10 \cdot 265 \approx 822\;\text{pC}\;\checkmark" /></p>
 
         <FormulaBox
-          latex="Q_{0,\text{maks}} = \underline{\underline{2{,}65 \cdot 10^{-10}\;\text{C}}},\quad Q_\text{maks} = \underline{\underline{8{,}22 \cdot 10^{-10}\;\text{C}}}"
+          latex="Q_{0,\text{maks}} = \boxed{2{,}65 \cdot 10^{-10}\;\text{C}},\quad Q_\text{maks} = \boxed{8{,}22 \cdot 10^{-10}\;\text{C}}"
           variant="gold"
         />
       </div>
@@ -1182,7 +1182,7 @@ export const exercises: Record<string, ExerciseContent> = {
         </p>
 
         <FormulaBox
-          latex="\Delta Q = \underline{\underline{6{,}3\;\mu\text{C}}},\quad Q_i = \underline{\underline{6{,}3\;\mu\text{C}}},\quad E\;\text{uendret}"
+          latex="\Delta Q = \boxed{6{,}3\;\mu\text{C}},\quad Q_i = \boxed{6{,}3\;\mu\text{C}},\quad E\;\text{uendret}"
           variant="gold"
         />
       </div>
@@ -1277,7 +1277,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="text-sm">E er uendret før og etter — fordi V og d er fast, og dielektrikumets induserte ladning kompenserer for den ekstra ladningen på platene.</p>
 
         <FormulaBox
-          latex="K = \underline{\underline{1{,}80}},\quad V_0 = V = \underline{\underline{2{,}00\;\text{V}}},\quad E_0 = E = \underline{\underline{1{,}00 \cdot 10^{3}\;\text{V/m}}}"
+          latex="K = \boxed{1{,}80},\quad V_0 = V = \boxed{2{,}00\;\text{V}},\quad E_0 = E = \boxed{1{,}00 \cdot 10^{3}\;\text{V/m}}"
           variant="gold"
         />
       </div>
@@ -1363,7 +1363,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="U = \underline{\underline{421\;\text{J}}},\quad C = \underline{\underline{53{,}9\;\text{mF}}}"
+          latex="U = \boxed{421\;\text{J}},\quad C = \boxed{53{,}9\;\text{mF}}"
           variant="gold"
         />
 
@@ -1453,7 +1453,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
 
         <FormulaBox
-          latex="C_0 = \underline{\underline{0{,}531\;\text{pF}}},\quad \Delta d = \underline{\underline{0{,}224\;\text{mm}}}"
+          latex="C_0 = \boxed{0{,}531\;\text{pF}},\quad \Delta d = \boxed{0{,}224\;\text{mm}}"
           variant="gold"
         />
 
@@ -1587,7 +1587,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="text-sm text-[var(--muted)]">Kontroll: <InlineLatex latex="V_1 + V_2 = 20{,}0 + 40{,}0 = 60{,}0\;\text{V} = V_{ab}\;\checkmark" /></p>
 
         <FormulaBox
-          latex="V_1 = \underline{\underline{20{,}0\;\text{V}}},\; V_2 = \underline{\underline{40{,}0\;\text{V}}},\; V_4 = \underline{\underline{20{,}0\;\text{V}}},\; V_{ab} = \underline{\underline{60{,}0\;\text{V}}}"
+          latex="V_1 = \boxed{20{,}0\;\text{V}},\; V_2 = \boxed{40{,}0\;\text{V}},\; V_4 = \boxed{20{,}0\;\text{V}},\; V_{ab} = \boxed{60{,}0\;\text{V}}"
           variant="gold"
         />
       </div>

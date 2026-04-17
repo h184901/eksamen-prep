@@ -143,7 +143,7 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p><strong>Steg 3: Antall elektroner</strong></p>
         <FormulaBox
-          latex="N = \frac{q}{e} = \frac{1{,}217 \cdot 10^{-16}}{1{,}602 \cdot 10^{-19}} = \underline{\underline{\,760\;\text{elektroner}\,}}"
+          latex="N = \frac{q}{e} = \frac{1{,}217 \cdot 10^{-16}}{1{,}602 \cdot 10^{-19}} = \boxed{\,760\;\text{elektroner}\,}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -242,7 +242,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="q = 0{,}154\sqrt{\frac{0{,}205}{8{,}988 \cdot 10^9}}\;\text{C} = 0{,}154 \cdot 4{,}776 \cdot 10^{-6}"
           variant="blue"
         />
-        <FormulaBox latex="\underline{\underline{\,q = 7{,}35 \cdot 10^{-7}\;\text{C} = 0{,}735\;\mu\text{C}\,}}" variant="gold" />
+        <FormulaBox latex="\boxed{\,q = 7{,}35 \cdot 10^{-7}\;\text{C} = 0{,}735\;\mu\text{C}\,}" variant="gold" />
 
         <p><strong>(b) Ulike ladninger, <InlineLatex latex="q_2 = 4q_1" /></strong></p>
         <p className="text-sm">
@@ -253,11 +253,11 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="q_1 = \tfrac{1}{2}\cdot 7{,}35 \cdot 10^{-7}\;\text{C} = \underline{\underline{\,3{,}68 \cdot 10^{-7}\;\text{C}\,}}"
+          latex="q_1 = \tfrac{1}{2}\cdot 7{,}35 \cdot 10^{-7}\;\text{C} = \boxed{\,3{,}68 \cdot 10^{-7}\;\text{C}\,}"
           variant="gold"
         />
         <FormulaBox
-          latex="q_2 = 4q_1 = \underline{\underline{\,1{,}47 \cdot 10^{-6}\;\text{C} = 1{,}47\;\mu\text{C}\,}}"
+          latex="q_2 = 4q_1 = \boxed{\,1{,}47 \cdot 10^{-6}\;\text{C} = 1{,}47\;\mu\text{C}\,}"
           variant="gold"
         />
       </div>
@@ -382,7 +382,7 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p><strong>Steg 3: Svaret</strong></p>
         <FormulaBox
-          latex="\underline{\underline{\;q_1 = +0{,}653\;\text{nC}\;}}"
+          latex="\boxed{\;q_1 = +0{,}653\;\text{nC}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -527,7 +527,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;x_3 = -0{,}144\;\text{m} = -14{,}4\;\text{cm}\;}}"
+          latex="\boxed{\;x_3 = -0{,}144\;\text{m} = -14{,}4\;\text{cm}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -653,7 +653,7 @@ export const exercises: Record<string, ExerciseContent> = {
           <InlineLatex latex="F_1" /> peker i −y (tiltrekning mot <InlineLatex latex="q_1" /> under). Begge −y:
         </p>
         <FormulaBox
-          latex="F_{\text{netto}} = F_1 + F_2 = 3{,}602\cdot 10^{-6} + 0{,}872\cdot 10^{-6} = \underline{\underline{\;4{,}47\cdot 10^{-6}\;\text{N}\;}}"
+          latex="F_{\text{netto}} = F_1 + F_2 = 3{,}602\cdot 10^{-6} + 0{,}872\cdot 10^{-6} = \boxed{\;4{,}47\cdot 10^{-6}\;\text{N}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -834,7 +834,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;|F_{\text{netto}}|\approx 4{,}7\cdot 10^{-8}\;\text{N},\;\text{tiltrekkende}\;}}"
+          latex="\boxed{\;|F_{\text{netto}}|\approx 4{,}7\cdot 10^{-8}\;\text{N},\;\text{tiltrekkende}\;}"
           variant="gold"
         />
 
@@ -1004,7 +1004,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;F_{\text{netto}} \approx -6{,}99\cdot 10^{-8}\;\text{N}\;(\text{tiltrekkende})\;}}"
+          latex="\boxed{\;F_{\text{netto}} \approx -6{,}99\cdot 10^{-8}\;\text{N}\;(\text{tiltrekkende})\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1092,7 +1092,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="E = \frac{30{,}11}{0{,}0400} = \underline{\underline{\;753\;\text{N/C}\;}}"
+          latex="E = \frac{30{,}11}{0{,}0400} = \boxed{\;753\;\text{N/C}\;}"
           variant="gold"
         />
         <p className="text-sm">
@@ -1105,7 +1105,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="r = \sqrt{2{,}688}\;\text{m} = \underline{\underline{\;1{,}64\;\text{m}\;}}"
+          latex="r = \sqrt{2{,}688}\;\text{m} = \boxed{\;1{,}64\;\text{m}\;}"
           variant="gold"
         />
       </div>
@@ -1191,7 +1191,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;E = 5{,}69\;\text{N/C},\;\text{rettet nedover}\;}}"
+          latex="\boxed{\;E = 5{,}69\;\text{N/C},\;\text{rettet nedover}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1286,7 +1286,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;q = -2{,}11\cdot 10^{-5}\;\text{C} = -21{,}1\;\mu\text{C}\;}}"
+          latex="\boxed{\;q = -2{,}11\cdot 10^{-5}\;\text{C} = -21{,}1\;\mu\text{C}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1299,7 +1299,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;E = 1{,}02\cdot 10^{-7}\;\text{N/C}\;}}"
+          latex="\boxed{\;E = 1{,}02\cdot 10^{-7}\;\text{N/C}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1432,7 +1432,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;E = 364\;\text{N/C}\;}}"
+          latex="\boxed{\;E = 364\;\text{N/C}\;}"
           variant="gold"
         />
 
@@ -1450,7 +1450,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;d_p = 2{,}73\cdot 10^{-6}\;\text{m} = 2{,}73\;\mu\text{m}\;\text{nedover}\;}}"
+          latex="\boxed{\;d_p = 2{,}73\cdot 10^{-6}\;\text{m} = 2{,}73\;\mu\text{m}\;\text{nedover}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1574,7 +1574,7 @@ export const exercises: Record<string, ExerciseContent> = {
     solution: (
       <div className="space-y-3">
         <p><strong>(a) Punkt (0, −1,35)</strong></p>
-        <FormulaBox latex="|\vec r| = 1{,}35\;\text{m} \;\Longrightarrow\; \underline{\underline{\hat r = -\hat\jmath}}" variant="gold" />
+        <FormulaBox latex="|\vec r| = 1{,}35\;\text{m} \;\Longrightarrow\; \boxed{\hat r = -\hat\jmath}" variant="gold" />
 
         <p><strong>(b) Punkt (0,120, 0,120) m</strong></p>
         <FormulaBox
@@ -1582,7 +1582,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\hat r = \frac{0{,}120\,\hat\imath + 0{,}120\,\hat\jmath}{0{,}1697} = \underline{\underline{\;0{,}707\,\hat\imath + 0{,}707\,\hat\jmath\;}}"
+          latex="\hat r = \frac{0{,}120\,\hat\imath + 0{,}120\,\hat\jmath}{0{,}1697} = \boxed{\;0{,}707\,\hat\imath + 0{,}707\,\hat\jmath\;}"
           variant="gold"
         />
         <p className="text-sm">
@@ -1596,7 +1596,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\hat r = \frac{-1{,}10\,\hat\imath + 2{,}60\,\hat\jmath}{2{,}823} = \underline{\underline{\;-0{,}390\,\hat\imath + 0{,}921\,\hat\jmath\;}}"
+          latex="\hat r = \frac{-1{,}10\,\hat\imath + 2{,}60\,\hat\jmath}{2{,}823} = \boxed{\;-0{,}390\,\hat\imath + 0{,}921\,\hat\jmath\;}"
           variant="gold"
         />
       </div>
@@ -1692,7 +1692,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;v_B = 6{,}26\cdot 10^5\;\text{m/s}\;}}"
+          latex="\boxed{\;v_B = 6{,}26\cdot 10^5\;\text{m/s}\;}"
           variant="gold"
         />
 
@@ -1714,7 +1714,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;v_B = 1{,}587\cdot 10^4\;\text{m/s} \approx 1{,}59\cdot 10^4\;\text{m/s}\;}}"
+          latex="\boxed{\;v_B = 1{,}587\cdot 10^4\;\text{m/s} \approx 1{,}59\cdot 10^4\;\text{m/s}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -1859,7 +1859,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;F_x = +8{,}63\cdot 10^{-5}\;\text{N},\;F_y = -5{,}51\cdot 10^{-5}\;\text{N}\;}}"
+          latex="\boxed{\;F_x = +8{,}63\cdot 10^{-5}\;\text{N},\;F_y = -5{,}51\cdot 10^{-5}\;\text{N}\;}"
           variant="gold"
         />
 
@@ -1873,7 +1873,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;|\vec F| = 1{,}02\cdot 10^{-4}\;\text{N},\;32{,}6°\text{ under }+x\text{-aksen}\;}}"
+          latex="\boxed{\;|\vec F| = 1{,}02\cdot 10^{-4}\;\text{N},\;32{,}6°\text{ under }+x\text{-aksen}\;}"
           variant="gold"
         />
       </div>
@@ -2000,7 +2000,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;d = \left(\dfrac{q^2 L}{2\pi\varepsilon_0\,m g}\right)^{1/3}\;}}"
+          latex="\boxed{\;d = \left(\dfrac{q^2 L}{2\pi\varepsilon_0\,m g}\right)^{1/3}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -2099,7 +2099,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;|q| = 2{,}80\cdot 10^{-6}\;\text{C} = 2{,}80\;\mu\text{C}\;}}"
+          latex="\boxed{\;|q| = 2{,}80\cdot 10^{-6}\;\text{C} = 2{,}80\;\mu\text{C}\;}"
           variant="gold"
         />
 
@@ -2125,7 +2125,7 @@ export const exercises: Record<string, ExerciseContent> = {
           Ved θ = 39°: 0,396·0,810 = 0,321 (litt for lite). Ved θ ≈ 39,5°: 0,405·0,824 = 0,334. Treff!
         </p>
         <FormulaBox
-          latex="\underline{\underline{\;\theta \approx 39{,}5°\;}}"
+          latex="\boxed{\;\theta \approx 39{,}5°\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -2225,11 +2225,11 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;q = 6{,}56\cdot 10^{-13}\;\text{C}\;}}"
+          latex="\boxed{\;q = 6{,}56\cdot 10^{-13}\;\text{C}\;}"
           variant="gold"
         />
         <FormulaBox
-          latex="N = \frac{q}{e} = \frac{6{,}56\cdot 10^{-13}}{1{,}602\cdot 10^{-19}} = \underline{\underline{\;4{,}1\cdot 10^{6}\;\text{elektroner}\;}}"
+          latex="N = \frac{q}{e} = \frac{6{,}56\cdot 10^{-13}}{1{,}602\cdot 10^{-19}} = \boxed{\;4{,}1\cdot 10^{6}\;\text{elektroner}\;}"
           variant="gold"
         />
 
@@ -2239,7 +2239,7 @@ export const exercises: Record<string, ExerciseContent> = {
           <InlineLatex latex="v_0" />, så blir <InlineLatex latex="q" /> redusert med faktor 4:
         </p>
         <FormulaBox
-          latex="q' = q\cdot(1/2)^2 = 6{,}56\cdot 10^{-13}/4 = \underline{\underline{\;1{,}64\cdot 10^{-13}\;\text{C}\;}}"
+          latex="q' = q\cdot(1/2)^2 = 6{,}56\cdot 10^{-13}/4 = \boxed{\;1{,}64\cdot 10^{-13}\;\text{C}\;}"
           variant="gold"
         />
         <p className="text-sm text-[var(--muted)]">
@@ -2408,7 +2408,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;q_2 = +0{,}844\;\mu\text{C}\;}}"
+          latex="\boxed{\;q_2 = +0{,}844\;\mu\text{C}\;}"
           variant="gold"
         />
 
@@ -2423,7 +2423,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\underline{\underline{\;F = 35{,}95 + 20{,}23 = 56{,}2\;\text{N}\;}}"
+          latex="\boxed{\;F = 35{,}95 + 20{,}23 = 56{,}2\;\text{N}\;}"
           variant="gold"
         />
       </div>

@@ -474,7 +474,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\vec{F}_{(a)} = \underline{\underline{-6{,}68\cdot 10^{-4}\;\text{N}\,\hat{k}}}"
+          latex="\vec{F}_{(a)} = \boxed{-6{,}68\cdot 10^{-4}\;\text{N}\,\hat{k}}"
           variant="gold"
         />
         <p className="text-sm">Kraften peker i <strong>negativ z-retning</strong>.</p>
@@ -497,7 +497,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\vec{F}_{(b)} = \underline{\underline{(6{,}68\cdot 10^{-4}\,\hat{i} + 7{,}27\cdot 10^{-4}\,\hat{j})\;\text{N}}}"
+          latex="\vec{F}_{(b)} = \boxed{(6{,}68\cdot 10^{-4}\,\hat{i} + 7{,}27\cdot 10^{-4}\,\hat{j})\;\text{N}}"
           variant="gold"
         />
         <p className="text-sm">
@@ -583,7 +583,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\vec{a} = \underline{\underline{-0{,}330\;\text{m/s}^2\,\hat{k}}}"
+          latex="\vec{a} = \boxed{-0{,}330\;\text{m/s}^2\,\hat{k}}"
           variant="gold"
         />
         <p className="text-sm">Altså <strong>0,330 m/s² i −z-retning</strong>.</p>
@@ -661,7 +661,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="v = \underline{\underline{1{,}72\cdot 10^{2}\;\text{m/s}}}"
+          latex="v = \boxed{1{,}72\cdot 10^{2}\;\text{m/s}}"
           variant="gold"
         />
 
@@ -747,7 +747,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\Phi_B = \underline{\underline{2{,}69\cdot 10^{-3}\;\text{Wb}}}"
+          latex="\Phi_B = \boxed{2{,}69\cdot 10^{-3}\;\text{Wb}}"
           variant="gold"
         />
 
@@ -757,13 +757,13 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="\Phi_B = \underline{\underline{1{,}61\cdot 10^{-3}\;\text{Wb}}}"
+          latex="\Phi_B = \boxed{1{,}61\cdot 10^{-3}\;\text{Wb}}"
           variant="gold"
         />
 
         <p className="font-semibold text-sm">c) B i +y-retning (φ = 90°)</p>
         <FormulaBox
-          latex="\Phi_B = BA\cos 90° = \underline{\underline{0}}"
+          latex="\Phi_B = BA\cos 90° = \boxed{0}"
           variant="gold"
         />
         <p className="text-sm">Når B er parallell med arealet passerer ingen feltlinjer gjennom flaten.</p>
@@ -838,7 +838,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="B = \underline{\underline{1{,}60\cdot 10^{-4}\;\text{T}}}"
+          latex="B = \boxed{1{,}60\cdot 10^{-4}\;\text{T}}"
           variant="gold"
         />
         <p className="text-sm">
@@ -853,7 +853,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="t_{AB} = \underline{\underline{1{,}11\cdot 10^{-7}\;\text{s} = 111\;\text{ns}}}"
+          latex="t_{AB} = \boxed{1{,}11\cdot 10^{-7}\;\text{s} = 111\;\text{ns}}"
           variant="gold"
         />
       </div>
@@ -925,7 +925,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="B = \underline{\underline{0{,}294\;\text{T}}}"
+          latex="B = \boxed{0{,}294\;\text{T}}"
           variant="gold"
         />
         <p className="text-sm">
@@ -936,7 +936,7 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p className="font-semibold text-sm mt-2">b) Tid</p>
         <FormulaBox
-          latex="t_{AB} = \frac{\pi r}{v_0} = \frac{\pi (5{,}00\cdot 10^{-2})}{1{,}41\cdot 10^{6}} = \underline{\underline{1{,}11\cdot 10^{-7}\;\text{s}}}"
+          latex="t_{AB} = \frac{\pi r}{v_0} = \frac{\pi (5{,}00\cdot 10^{-2})}{1{,}41\cdot 10^{6}} = \boxed{1{,}11\cdot 10^{-7}\;\text{s}}"
           variant="gold"
         />
         <p className="text-sm">
@@ -1021,7 +1021,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="F = \underline{\underline{7{,}92\cdot 10^{-10}\;\text{N}}}"
+          latex="F = \boxed{7{,}92\cdot 10^{-10}\;\text{N}}"
           variant="gold"
         />
 
@@ -1105,7 +1105,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="B = \underline{\underline{1{,}79\cdot 10^{-3}\;\text{T} \approx 1{,}79\;\text{mT}}}"
+          latex="B = \boxed{1{,}79\cdot 10^{-3}\;\text{T} \approx 1{,}79\;\text{mT}}"
           variant="gold"
         />
       </div>
@@ -1185,14 +1185,14 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\vec{F} = Il\hat{i}\times B\hat{j} = IlB\,\hat{k} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{opp})"
           variant="blue"
         />
-        <p className="text-sm">Størrelse <InlineLatex latex="\underline{\underline{2{,}1\cdot 10^{-4}\;\text{N, rett opp}}}" />.</p>
+        <p className="text-sm">Størrelse <InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, rett opp}}" />.</p>
 
         <p className="font-semibold text-sm">b) Strøm vertikalt opp, <InlineLatex latex="\vec{l}=l\hat{k}" />.</p>
         <FormulaBox
           latex="\vec{F} = Il\hat{k}\times B\hat{j} = -IlB\,\hat{i} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{mot vest})"
           variant="blue"
         />
-        <p className="text-sm"><InlineLatex latex="\underline{\underline{2{,}1\cdot 10^{-4}\;\text{N, mot vest}}}" />.</p>
+        <p className="text-sm"><InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, mot vest}}" />.</p>
 
         <p className="font-semibold text-sm">c) Strøm N→S, <InlineLatex latex="\vec{l}=-l\hat{j}" />.</p>
         <FormulaBox
@@ -1274,7 +1274,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="V_{maks} = I_{maks}R = (32{,}67)(25{,}0) = \underline{\underline{817\;\text{V}}}"
+          latex="V_{maks} = I_{maks}R = (32{,}67)(25{,}0) = \boxed{817\;\text{V}}"
           variant="gold"
         />
 
@@ -1292,7 +1292,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="a = \underline{\underline{113\;\text{m/s}^2\;(\text{oppover})}}"
+          latex="a = \boxed{113\;\text{m/s}^2\;(\text{oppover})}"
           variant="gold"
         />
       </div>
@@ -1356,7 +1356,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="F = \underline{\underline{0{,}172\;\text{N}}}"
+          latex="F = \boxed{0{,}172\;\text{N}}"
           variant="gold"
         />
         <p className="text-sm">Retningen bestemmes av høyrehåndsregelen <InlineLatex latex="\vec{l}\times\vec{B}" />.</p>
@@ -1427,14 +1427,14 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\vec{F}=I(-l\hat{k})\times B\hat{i} = -IlB(\hat{k}\times\hat{i}) = -IlB\,\hat{j}\;(\text{mot sør})"
           variant="blue"
         />
-        <p className="text-sm"><InlineLatex latex="F/l = \underline{\underline{1{,}53\;\text{N/m, mot sør}}}" />.</p>
+        <p className="text-sm"><InlineLatex latex="F/l = \boxed{1{,}53\;\text{N/m, mot sør}}" />.</p>
 
         <p className="font-semibold text-sm">b) B mot sør, <InlineLatex latex="\vec{B}=-B\hat{j}" /></p>
         <FormulaBox
           latex="\vec{F}=I(-l\hat{k})\times(-B\hat{j}) = IlB(\hat{k}\times\hat{j}) = -IlB\,\hat{i}\;(\text{mot vest})"
           variant="blue"
         />
-        <p className="text-sm"><InlineLatex latex="F/l = \underline{\underline{1{,}53\;\text{N/m, mot vest}}}" />.</p>
+        <p className="text-sm"><InlineLatex latex="F/l = \boxed{1{,}53\;\text{N/m, mot vest}}" />.</p>
 
         <p className="font-semibold text-sm">c) B 30° sør for vest</p>
         <p className="text-sm">
@@ -1449,7 +1449,7 @@ export const exercises: Record<string, ExerciseContent> = {
           Kraftens retning er 30° øst for nord (eller 60° nord for øst).
         </p>
         <FormulaBox
-          latex="|\vec{F}|/l = IB = \underline{\underline{1{,}53\;\text{N/m, 30° øst for nord}}}"
+          latex="|\vec{F}|/l = IB = \boxed{1{,}53\;\text{N/m, 30° øst for nord}}"
           variant="gold"
         />
       </div>
@@ -1560,7 +1560,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="(x,y,z)\big|_{t=0{,}0200} = \underline{\underline{(0{,}565;\;0{,}825;\;0{,}0900)\;\text{m}}}"
+          latex="(x,y,z)\big|_{t=0{,}0200} = \boxed{(0{,}565;\;0{,}825;\;0{,}0900)\;\text{m}}"
           variant="gold"
         />
 
@@ -1577,7 +1577,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="v = \underline{\underline{31{,}3\;\text{m/s}}}"
+          latex="v = \boxed{31{,}3\;\text{m/s}}"
           variant="gold"
         />
       </div>
@@ -1694,7 +1694,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox
-          latex="d = \underline{\underline{1{,}87\cdot 10^{6}\;\text{m} \approx 1\,870\;\text{km}}}"
+          latex="d = \boxed{1{,}87\cdot 10^{6}\;\text{m} \approx 1\,870\;\text{km}}"
           variant="gold"
         />
       </div>

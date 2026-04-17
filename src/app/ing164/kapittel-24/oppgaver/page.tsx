@@ -119,7 +119,7 @@ export default function OppgaverPage() {
 
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="C \approx \underline{\underline{0{,}885\;\text{pF}}}, \quad Q \approx \underline{\underline{4{,}43\;\text{nC}}}, \quad E = \underline{\underline{5{,}0 \cdot 10^6\;\text{V/m}}}" variant="gold" />
+              <FormulaBox latex="C \approx \boxed{0{,}885\;\text{pF}}, \quad Q \approx \boxed{4{,}43\;\text{nC}}, \quad E = \boxed{5{,}0 \cdot 10^6\;\text{V/m}}" variant="gold" />
             </div>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
@@ -195,7 +195,7 @@ export default function OppgaverPage() {
 
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="C_\text{tot} = \underline{\underline{2\;\mu\text{F}}}, \quad Q = \underline{\underline{36\;\mu\text{C}}}, \quad V_1 = \underline{\underline{6\;\text{V}}}, \quad V_2 = \underline{\underline{12\;\text{V}}}" variant="gold" />
+              <FormulaBox latex="C_\text{tot} = \boxed{2\;\mu\text{F}}, \quad Q = \boxed{36\;\mu\text{C}}, \quad V_1 = \boxed{6\;\text{V}}, \quad V_2 = \boxed{12\;\text{V}}" variant="gold" />
             </div>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">
@@ -271,7 +271,7 @@ export default function OppgaverPage() {
 
             <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="font-semibold text-blue-700 dark:text-blue-300 mb-1">Svar</p>
-              <FormulaBox latex="Q_0 = \underline{\underline{960\;\mu\text{C}}}, \quad E_p = \underline{\underline{0{,}058\;\text{J}}}, \quad V = \underline{\underline{80\;\text{V}}}, \quad E_p' = \underline{\underline{0{,}038\;\text{J}}}" variant="gold" />
+              <FormulaBox latex="Q_0 = \boxed{960\;\mu\text{C}}, \quad E_p = \boxed{0{,}058\;\text{J}}, \quad V = \boxed{80\;\text{V}}, \quad E_p' = \boxed{0{,}038\;\text{J}}" variant="gold" />
             </div>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 mt-3">

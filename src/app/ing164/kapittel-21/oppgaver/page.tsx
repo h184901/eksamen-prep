@@ -105,7 +105,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="F_e = 8{,}99 \cdot 10^9 \cdot \frac{1{,}875 \cdot 10^{-15}}{9{,}0 \cdot 10^{-4}} = \underline{\underline{0{,}0187\;\text{N}}}"
+              latex="F_e = 8{,}99 \cdot 10^9 \cdot \frac{1{,}875 \cdot 10^{-15}}{9{,}0 \cdot 10^{-4}} = \boxed{0{,}0187\;\text{N}}"
               variant="gold"
             />
             <p className="text-sm text-[var(--muted)]">
@@ -171,11 +171,11 @@ export default function OppgaverPage() {
               y-komponentene er like store og motsatte (symmetri!):
             </p>
             <FormulaBox
-              latex="\sum F_x = F_1\cos 36{,}9° + F_2\cos 36{,}9° = 2 \cdot 0{,}29 \cdot 0{,}8 = \underline{\underline{0{,}46\;\text{N}}}"
+              latex="\sum F_x = F_1\cos 36{,}9° + F_2\cos 36{,}9° = 2 \cdot 0{,}29 \cdot 0{,}8 = \boxed{0{,}46\;\text{N}}"
               variant="gold"
             />
             <FormulaBox
-              latex="\sum F_y = -F_1\sin 36{,}9° + F_2\sin 36{,}9° = \underline{\underline{0}}"
+              latex="\sum F_y = -F_1\sin 36{,}9° + F_2\sin 36{,}9° = \boxed{0}"
               variant="gold"
             />
             <p className="text-sm">
@@ -219,7 +219,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="\vec{E} = \underline{\underline{(-11\,\hat{\imath} + 14\,\hat{\jmath})\;\text{N/C}}}"
+              latex="\vec{E} = \boxed{(-11\,\hat{\imath} + 14\,\hat{\jmath})\;\text{N/C}}"
               variant="gold"
             />
             <p className="text-sm text-[var(--muted)]">
@@ -264,7 +264,7 @@ export default function OppgaverPage() {
           <div className="space-y-3">
             <p><strong>a) Kraft på elektronet</strong></p>
             <FormulaBox
-              latex="F_e = qE = (-1{,}60\cdot10^{-19})(1{,}0\cdot10^4) = \underline{\underline{-1{,}6\cdot10^{-15}\;\text{N}}}"
+              latex="F_e = qE = (-1{,}60\cdot10^{-19})(1{,}0\cdot10^4) = \boxed{-1{,}6\cdot10^{-15}\;\text{N}}"
               variant="gold"
             />
             <p className="text-sm">Negativt fortegn betyr kraften er nedover (motsatt E).</p>
@@ -281,13 +281,13 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="v = \sqrt{2a\Delta y} = \underline{\underline{5{,}93 \cdot 10^6\;\text{m/s}}}"
+              latex="v = \sqrt{2a\Delta y} = \boxed{5{,}93 \cdot 10^6\;\text{m/s}}"
               variant="gold"
             />
 
             <p><strong>c) Tid</strong></p>
             <FormulaBox
-              latex="t = \frac{v}{a} = \frac{5{,}93\cdot10^6}{1{,}76\cdot10^{15}} = \underline{\underline{3{,}37 \cdot 10^{-9}\;\text{s}}}"
+              latex="t = \frac{v}{a} = \frac{5{,}93\cdot10^6}{1{,}76\cdot10^{15}} = \boxed{3{,}37 \cdot 10^{-9}\;\text{s}}"
               variant="gold"
             />
             <p className="mt-2"><strong>Hva lærte vi?</strong> Elektroner i uniformt felt oppfører seg som en ball i tyngdefelt — bruk kinematikkformlene du kan fra kap. 2!</p>
@@ -334,13 +334,13 @@ export default function OppgaverPage() {
 
             <p><strong>Steg 3:</strong> Vertikal avbøyning:</p>
             <FormulaBox
-              latex="y = \tfrac{1}{2}a_y t^2 = \tfrac{1}{2}(-1{,}76\cdot10^{15})(2{,}0\cdot10^{-9})^2 = \underline{\underline{-3{,}52\;\text{mm}}}"
+              latex="y = \tfrac{1}{2}a_y t^2 = \tfrac{1}{2}(-1{,}76\cdot10^{15})(2{,}0\cdot10^{-9})^2 = \boxed{-3{,}52\;\text{mm}}"
               variant="gold"
             />
 
             <p><strong>Steg 4:</strong> Vertikal hastighet:</p>
             <FormulaBox
-              latex="v_y = a_y t = (-1{,}76\cdot10^{15})(2{,}0\cdot10^{-9}) = \underline{\underline{-3{,}52\cdot10^6\;\text{m/s}}}"
+              latex="v_y = a_y t = (-1{,}76\cdot10^{15})(2{,}0\cdot10^{-9}) = \boxed{-3{,}52\cdot10^6\;\text{m/s}}"
               variant="gold"
             />
             <p className="mt-2"><strong>Hva lærte vi?</strong> Denne oppgaven er identisk med prosjektilbevegelse fra kap. 3. x-retning: konstant fart. y-retning: konstant akselerasjon fra E-feltet.</p>

@@ -116,7 +116,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="v = \underline{\underline{1{,}9 \cdot 10^7\;\text{m/s}}}"
+              latex="v = \boxed{1{,}9 \cdot 10^7\;\text{m/s}}"
               variant="gold"
             />
             <p className="mt-2"><strong>Hva lærte vi?</strong> Energibevaring er ofte enklere enn kinematikk — vi trenger ikke å vite akselerasjonen eller tiden, bare start- og slutttilstand!</p>
@@ -152,7 +152,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="E_p = \underline{\underline{-4{,}35 \cdot 10^{-18}\;\text{J}}} = -27{,}2\;\text{eV}"
+              latex="E_p = \boxed{-4{,}35 \cdot 10^{-18}\;\text{J}} = -27{,}2\;\text{eV}"
               variant="gold"
             />
             <p className="text-sm text-[var(--muted)]">
@@ -192,19 +192,19 @@ export default function OppgaverPage() {
           <div className="space-y-3">
             <p><strong>a) Kraft</strong></p>
             <FormulaBox
-              latex="F_e = eE = 1{,}60\cdot10^{-19}\cdot 1{,}5\cdot10^7 = \underline{\underline{2{,}4 \cdot 10^{-12}\;\text{N}}}"
+              latex="F_e = eE = 1{,}60\cdot10^{-19}\cdot 1{,}5\cdot10^7 = \boxed{2{,}4 \cdot 10^{-12}\;\text{N}}"
               variant="gold"
             />
 
             <p><strong>b) Arbeid</strong></p>
             <FormulaBox
-              latex="W = F_e \cdot d = 2{,}4\cdot10^{-12}\cdot 0{,}50 = \underline{\underline{1{,}2 \cdot 10^{-12}\;\text{J}}} \;(= 7{,}5 \cdot 10^6\;\text{eV})"
+              latex="W = F_e \cdot d = 2{,}4\cdot10^{-12}\cdot 0{,}50 = \boxed{1{,}2 \cdot 10^{-12}\;\text{J}} \;(= 7{,}5 \cdot 10^6\;\text{eV})"
               variant="gold"
             />
 
             <p><strong>c) Potensialforskjell</strong></p>
             <FormulaBox
-              latex="V_{ab} = -\frac{\Delta E_p}{q_0} = \frac{W}{q_0} = \frac{1{,}2\cdot10^{-12}}{1{,}60\cdot10^{-19}} = \underline{\underline{7{,}5 \cdot 10^6\;\text{V}}}"
+              latex="V_{ab} = -\frac{\Delta E_p}{q_0} = \frac{W}{q_0} = \frac{1{,}2\cdot10^{-12}}{1{,}60\cdot10^{-19}} = \boxed{7{,}5 \cdot 10^6\;\text{V}}"
               variant="gold"
             />
             <p className="mt-2"><strong>Hva lærte vi?</strong> Potensialforskjellen = arbeid per enhet ladning. Den forteller oss hvor mye energi feltet gir per coulomb.</p>
@@ -273,7 +273,7 @@ export default function OppgaverPage() {
             <FormulaBox latex="0 = q_0 V_2 + \tfrac{1}{2}mv_2^2" variant="blue" />
             <FormulaBox latex="\tfrac{1}{2}mv_2^2 = q_0(V_1 - V_2) = 2{,}0\cdot10^{-9}\cdot(0-(-1350))" variant="blue" />
             <FormulaBox
-              latex="v_2 = \sqrt{\frac{2q_0(V_1 - V_2)}{m}} = \sqrt{\frac{2\cdot2{,}0\cdot10^{-9}\cdot1350}{5{,}0\cdot10^{-9}}} = \underline{\underline{46\;\text{m/s}}}"
+              latex="v_2 = \sqrt{\frac{2q_0(V_1 - V_2)}{m}} = \sqrt{\frac{2\cdot2{,}0\cdot10^{-9}\cdot1350}{5{,}0\cdot10^{-9}}} = \boxed{46\;\text{m/s}}"
               variant="gold"
             />
             <p className="mt-2"><strong>Hva lærte vi?</strong> Energibevaring med potensial er elegant: beregn V i start og slutt, sett inn i energibevaringen. Ingen behov for krefter, akselerasjon eller tid!</p>

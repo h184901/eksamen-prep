@@ -75,10 +75,10 @@ export const exercises: Record<string, ExerciseContent> = {
           {/* bane */}
           <line x1="170" y1="200" x2="280" y2="75" stroke="#3b82f6" strokeWidth="2" strokeDasharray="5 3" markerEnd="url(#arr-231)" />
           {/* r_a */}
-          <text x="115" y="195" textAnchor="middle" fontSize="10" fill="#ef4444">r_a = 0,150 m</text>
+          <text x="115" y="195" textAnchor="middle" fontSize="10" fill="#ef4444">r<tspan dy="3" fontSize="8">a</tspan><tspan dy="-3"> = 0,150 m</tspan></text>
           {/* r_b */}
           <line x1="60" y1="200" x2="280" y2="75" stroke="#ef4444" strokeWidth="1" strokeDasharray="2 2" opacity="0.5" />
-          <text x="185" y="135" fontSize="10" fill="#ef4444">r_b ≈ 0,368 m</text>
+          <text x="185" y="135" fontSize="10" fill="#ef4444">r<tspan dy="3" fontSize="8">b</tspan><tspan dy="-3"> ≈ 0,368 m</tspan></text>
         </svg>
       </div>
     ),
@@ -161,7 +161,7 @@ export const exercises: Record<string, ExerciseContent> = {
           og den elektriske kraften gjør derfor <strong>negativt</strong> arbeid:
         </p>
         <FormulaBox latex="W_{a\to b} = U_a - U_b = -0{,}579 - (-0{,}2360) = -0{,}343\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W_{a\to b} = \underline{\underline{-0{,}343\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_{a\to b} = \boxed{-0{,}343\;\text{J}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -290,7 +290,7 @@ export const exercises: Record<string, ExerciseContent> = {
         />
         <FormulaBox latex="\tfrac{1}{2}(1{,}50\cdot10^{-3})v_2^2 = 0{,}3630 - 0{,}1983 = 0{,}1647\;\text{J}" variant="blue" />
         <FormulaBox latex="v_2^2 = \dfrac{2(0{,}1647)}{1{,}50\cdot10^{-3}} = 219{,}6\;\text{m}^2/\text{s}^2" variant="blue" />
-        <FormulaBox latex="\boxed{v_2 = \underline{\underline{14{,}8\;\text{m/s}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{v_2 = \boxed{14{,}8\;\text{m/s}}}" variant="gold" />
 
         <p className="font-semibold">Steg 4: (b) Finn minste avstand</p>
         <p>
@@ -300,7 +300,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <FormulaBox latex="\tfrac{1}{2}mv_1^2 + U_1 = 0 + \dfrac{kq_1q_2}{r_{\min}}" variant="blue" />
         <FormulaBox latex="E_{\text{tot}} = 0{,}3630 + 0{,}2191 = 0{,}5821\;\text{J}" variant="blue" />
         <FormulaBox latex="r_{\min} = \dfrac{k q_1 q_2}{E_{\text{tot}}} = \dfrac{0{,}1753}{0{,}5821}" variant="blue" />
-        <FormulaBox latex="\boxed{r_{\min} = \underline{\underline{0{,}301\;\text{m}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{r_{\min} = \boxed{0{,}301\;\text{m}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -435,7 +435,7 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p className="font-semibold">Steg 4: Multiplisér med ke²</p>
         <FormulaBox latex="U_{AT} = (1{,}44\;\text{eV}\!\cdot\!\text{nm})(-11{,}28\;\text{nm}^{-1}) = -16{,}2\;\text{eV}" variant="blue" />
-        <FormulaBox latex="\boxed{U_{AT} = \underline{\underline{-16{,}2\;\text{eV}}} \approx -2{,}60\cdot10^{-18}\;\text{J}}" variant="gold" />
+        <FormulaBox latex="\boxed{U_{AT} = \boxed{-16{,}2\;\text{eV}} \approx -2{,}60\cdot10^{-18}\;\text{J}}" variant="gold" />
 
         <p className="font-semibold">Steg 5: (b) Sammenlign med hydrogen</p>
         <FormulaBox latex="U_H = -\dfrac{ke^2}{r_H} = -\dfrac{1{,}44\;\text{eV}\!\cdot\!\text{nm}}{0{,}0529\;\text{nm}} = -27{,}2\;\text{eV}" variant="blue" />
@@ -558,7 +558,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="F_{\max} = \dfrac{ke^2}{r_{\min}^2} = \dfrac{2{,}307\cdot10^{-28}}{(3{,}45\cdot10^{-12})^2} = \dfrac{2{,}307\cdot10^{-28}}{1{,}191\cdot10^{-23}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{F_{\max} = \underline{\underline{1{,}94\cdot10^{-5}\;\text{N}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{F_{\max} = \boxed{1{,}94\cdot10^{-5}\;\text{N}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -661,7 +661,7 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p className="font-semibold">Steg 3: Multiplisér med 3 (tre par)</p>
         <FormulaBox latex="U_{\text{tot}} = 3 \cdot 5{,}873\cdot10^{-2}\;\text{J} = 0{,}1762\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{U_{\text{tot}} = \underline{\underline{0{,}176\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{U_{\text{tot}} = \boxed{0{,}176\;\text{J}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -752,7 +752,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="font-semibold">Steg 3: Sett sammen</p>
         <FormulaBox latex="\tfrac{1}{2}m v_B^2 = 4{,}70\cdot10^{-3} + 3{,}19\cdot10^{-3} = 7{,}89\cdot10^{-3}\;\text{J}" variant="blue" />
         <FormulaBox latex="v_B^2 = \dfrac{2(7{,}89\cdot10^{-3})}{2{,}70\cdot10^{-4}} = 58{,}44\;\text{m}^2/\text{s}^2" variant="blue" />
-        <FormulaBox latex="\boxed{v_B = \underline{\underline{7{,}64\;\text{m/s}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{v_B = \boxed{7{,}64\;\text{m/s}}}" variant="gold" />
 
         <p className="font-semibold">Steg 4: Raskere eller tregere?</p>
         <p>
@@ -878,12 +878,12 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="font-semibold">(a) Arbeidet utført av elektrisk kraft</p>
         <p>Fra arbeid-energi-setningen (eneste kraft er elektrisk):</p>
         <FormulaBox latex="W_E = K_f - K_0 = 2{,}20\cdot10^{-6} - 0 = 2{,}20\cdot10^{-6}\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W_E = \underline{\underline{+2{,}20\cdot10^{-6}\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_E = \boxed{+2{,}20\cdot10^{-6}\;\text{J}}}" variant="gold" />
 
         <p className="font-semibold">(b) Potensialforskjell start − slutt</p>
         <FormulaBox latex="W_E = q(V_{\text{start}} - V_{\text{slutt}}) \;\Rightarrow\; V_{\text{start}} - V_{\text{slutt}} = \dfrac{W_E}{q}" variant="blue" />
         <FormulaBox latex="= \dfrac{2{,}20\cdot10^{-6}}{4{,}20\cdot10^{-9}} = 523{,}8\;\text{V}" variant="blue" />
-        <FormulaBox latex="\boxed{V_{\text{start}} - V_{\text{slutt}} = \underline{\underline{+524\;\text{V}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{V_{\text{start}} - V_{\text{slutt}} = \boxed{+524\;\text{V}}}" variant="gold" />
         <p>
           Positiv verdi betyr at <strong>startpunktet er på høyere potensial</strong> — som seg bør,
           siden den positive partikkelen «faller» mot lavere V.
@@ -894,7 +894,7 @@ export const exercises: Record<string, ExerciseContent> = {
           For uniformt felt parallelt med forflytningen:
         </p>
         <FormulaBox latex="|\vec E| = \dfrac{V_{\text{start}} - V_{\text{slutt}}}{d} = \dfrac{523{,}8\;\text{V}}{0{,}0600\;\text{m}}" variant="blue" />
-        <FormulaBox latex="\boxed{|\vec E| = \underline{\underline{8{,}73\cdot10^{3}\;\text{V/m}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{|\vec E| = \boxed{8{,}73\cdot10^{3}\;\text{V/m}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -1003,19 +1003,19 @@ export const exercises: Record<string, ExerciseContent> = {
 
         <p className="font-semibold">(a) 0,490 m mot høyre</p>
         <p><InlineLatex latex="\vec F" /> er loddrett på forflytningen (<InlineLatex latex="\theta=90°" />):</p>
-        <FormulaBox latex="\boxed{W_a = \underline{\underline{0}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_a = \boxed{0}}" variant="gold" />
 
         <p className="font-semibold">(b) 0,700 m oppover</p>
         <p><InlineLatex latex="\vec F" /> er i samme retning som forflytningen (<InlineLatex latex="\theta=0°" />):</p>
         <FormulaBox latex="W_b = Fd = (1{,}08\cdot10^{-3})(0{,}700) = 7{,}56\cdot10^{-4}\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W_b = \underline{\underline{+7{,}56\cdot10^{-4}\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_b = \boxed{+7{,}56\cdot10^{-4}\;\text{J}}}" variant="gold" />
 
         <p className="font-semibold">(c) 2,80 m i 45° nedover fra horisontalen</p>
         <p>
           Vertikal komponent av forflytning: <InlineLatex latex="\Delta y = -d\sin 45° = -2{,}80\cdot 0{,}7071 = -1{,}980\;\text{m}" /> (negativ = nedover).
         </p>
         <FormulaBox latex="W_c = F \cdot \Delta y = (1{,}08\cdot10^{-3})(-1{,}980) = -2{,}14\cdot10^{-3}\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W_c = \underline{\underline{-2{,}14\cdot10^{-3}\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_c = \boxed{-2{,}14\cdot10^{-3}\;\text{J}}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -1139,7 +1139,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="= \dfrac{8{,}99\cdot10^{9}}{0{,}050}\big(2{,}00 - 6{,}10\big)\cdot10^{-9} = (1{,}798\cdot10^{11})(-4{,}10\cdot10^{-9})"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{V_A = \underline{\underline{-737\;\text{V}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{V_A = \boxed{-737\;\text{V}}}" variant="gold" />
 
         <p className="font-semibold">(b) Potensialet i B</p>
         <FormulaBox latex="V_B = \dfrac{k q_1}{0{,}080} + \dfrac{k q_2}{0{,}060}" variant="blue" />
@@ -1148,7 +1148,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox latex="= 224{,}8\;\text{V} + (-914{,}0)\;\text{V} = -689{,}2\;\text{V}" variant="blue" />
-        <FormulaBox latex="\boxed{V_B = \underline{\underline{-689\;\text{V}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{V_B = \boxed{-689\;\text{V}}}" variant="gold" />
 
         <p className="font-semibold">(c) Arbeid fra B til A</p>
         <p>
@@ -1156,7 +1156,7 @@ export const exercises: Record<string, ExerciseContent> = {
           (startpunkt minus sluttpunkt):
         </p>
         <FormulaBox latex="W_E = (3{,}00\cdot10^{-9})\big(-689{,}2 - (-737{,}2)\big) = (3{,}00\cdot10^{-9})(48{,}0)" variant="blue" />
-        <FormulaBox latex="\boxed{W_E = \underline{\underline{+1{,}44\cdot10^{-7}\;\text{J}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{W_E = \boxed{+1{,}44\cdot10^{-7}\;\text{J}}}" variant="gold" />
         <p>
           Positivt arbeid betyr at feltet <em>hjalp</em> ladningen fra B til A — som gir mening siden
           den positive ladningen går fra høyere (B) til lavere (A) potensial.
@@ -1257,7 +1257,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\Delta V = \dfrac{\Delta K}{e} = \dfrac{3{,}006\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx +188\;\text{V}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{\Delta V_{(a)} = \underline{\underline{+188\;\text{V}}}\;(\text{høyere V i sluttpunkt})}" variant="gold" />
+        <FormulaBox latex="\boxed{\Delta V_{(a)} = \boxed{+188\;\text{V}}\;(\text{høyere V i sluttpunkt})}" variant="gold" />
 
         <p className="font-semibold">(b) Bremsing fra 8,50 Mm/s → 0</p>
         <FormulaBox
@@ -1268,7 +1268,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\Delta V = \dfrac{-3{,}291\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx -206\;\text{V}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{\Delta V_{(b)} = \underline{\underline{-206\;\text{V}}}\;(\text{lavere V i sluttpunkt})}" variant="gold" />
+        <FormulaBox latex="\boxed{\Delta V_{(b)} = \boxed{-206\;\text{V}}\;(\text{lavere V i sluttpunkt})}" variant="gold" />
         <p>
           Elektronet tapes fart fordi det må klatre mot «elektrisk motbakke» — dvs. at{" "}
           <InlineLatex latex="U = qV" /> øker for negativ ladning når V synker.
@@ -1357,12 +1357,12 @@ export const exercises: Record<string, ExerciseContent> = {
       <div className="space-y-3 text-sm">
         <p className="font-semibold">(a) Avstand</p>
         <FormulaBox latex="r = \dfrac{V}{E} = \dfrac{4{,}98\;\text{V}}{16{,}2\;\text{V/m}}" variant="blue" />
-        <FormulaBox latex="\boxed{r = \underline{\underline{0{,}307\;\text{m}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{r = \boxed{0{,}307\;\text{m}}}" variant="gold" />
 
         <p className="font-semibold">(b) Ladning</p>
         <FormulaBox latex="|q| = \dfrac{V r}{k} = \dfrac{(4{,}98)(0{,}307)}{8{,}99\cdot10^{9}}" variant="blue" />
         <FormulaBox latex="= \dfrac{1{,}531}{8{,}99\cdot10^{9}} = 1{,}703\cdot10^{-10}\;\text{C}" variant="blue" />
-        <FormulaBox latex="\boxed{|q| = \underline{\underline{170\;\text{pC}}} \approx 0{,}170\;\text{nC}}" variant="gold" />
+        <FormulaBox latex="\boxed{|q| = \boxed{170\;\text{pC}} \approx 0{,}170\;\text{nC}}" variant="gold" />
 
         <p className="font-semibold">(c) Retning</p>
         <p>
@@ -1407,7 +1407,7 @@ export const exercises: Record<string, ExerciseContent> = {
           <text x="80" y="100" textAnchor="middle" fontSize="10" fill="currentColor">proton (m, +e)</text>
           {/* v_p */}
           <line x1="68" y1="45" x2="10" y2="45" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arr-2352p)" />
-          <text x="40" y="35" textAnchor="middle" fontSize="10" fill="#3b82f6">v_p</text>
+          <text x="40" y="35" textAnchor="middle" fontSize="10" fill="#3b82f6">v<tspan dy="3" fontSize="8">p</tspan></text>
           {/* alpha */}
           <circle cx="380" cy="65" r="16" fill="#ef4444" />
           <text x="380" y="69" textAnchor="middle" fontSize="12" fill="white" fontWeight="bold">+</text>
@@ -1503,8 +1503,8 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="v_\alpha^{\max} = \sqrt{\dfrac{U_0}{10 m_p}} = \sqrt{\dfrac{2{,}051\cdot10^{-18}}{10(1{,}673\cdot10^{-27})}} = \sqrt{1{,}226\cdot10^{8}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{v_\alpha^{\max} = \underline{\underline{1{,}11\cdot10^{4}\;\text{m/s}}}}" variant="gold" />
-        <FormulaBox latex="\boxed{v_p^{\max} = 4 v_\alpha^{\max} = \underline{\underline{4{,}43\cdot10^{4}\;\text{m/s}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{v_\alpha^{\max} = \boxed{1{,}11\cdot10^{4}\;\text{m/s}}}" variant="gold" />
+        <FormulaBox latex="\boxed{v_p^{\max} = 4 v_\alpha^{\max} = \boxed{4{,}43\cdot10^{4}\;\text{m/s}}}" variant="gold" />
 
         <p className="font-semibold">Steg 4: Maksimal akselerasjon (ved t=0)</p>
         <FormulaBox
@@ -1516,12 +1516,12 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="a_p^{\max} = \dfrac{F_0}{m_p} = \dfrac{9{,}11\cdot10^{-9}}{1{,}673\cdot10^{-27}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{a_p^{\max} = \underline{\underline{5{,}45\cdot10^{18}\;\text{m/s}^2}}}" variant="gold" />
+        <FormulaBox latex="\boxed{a_p^{\max} = \boxed{5{,}45\cdot10^{18}\;\text{m/s}^2}}" variant="gold" />
         <FormulaBox
           latex="a_\alpha^{\max} = \dfrac{F_0}{m_\alpha} = \dfrac{9{,}11\cdot10^{-9}}{6{,}69\cdot10^{-27}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{a_\alpha^{\max} = \underline{\underline{1{,}36\cdot10^{18}\;\text{m/s}^2}}}" variant="gold" />
+        <FormulaBox latex="\boxed{a_\alpha^{\max} = \boxed{1{,}36\cdot10^{18}\;\text{m/s}^2}}" variant="gold" />
 
         <p className="font-semibold">Steg 5: Når?</p>
         <p>
@@ -1670,7 +1670,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <FormulaBox latex="-12 + 8{,}485 - 2{,}309 = -5{,}824" variant="blue" />
 
         <p className="font-semibold">Steg 4: Endelig uttrykk</p>
-        <FormulaBox latex="\boxed{U = \underline{\underline{-5{,}824\,\dfrac{kq^2}{d}}}}" variant="gold" />
+        <FormulaBox latex="\boxed{U = \boxed{-5{,}824\,\dfrac{kq^2}{d}}}" variant="gold" />
 
         <p className="font-semibold">(b) Tolkning</p>
         <p>
@@ -1794,7 +1794,7 @@ export const exercises: Record<string, ExerciseContent> = {
         <FormulaBox latex="V_{ab} = E(r)\cdot r\cdot \ln(b/a)" variant="blue" />
         <FormulaBox latex="= (2{,}00\cdot10^{4})(0{,}0120)(4{,}821)" variant="blue" />
         <FormulaBox latex="= 240\cdot 4{,}821" variant="blue" />
-        <FormulaBox latex="\boxed{V_{ab} = \underline{\underline{1{,}16\cdot10^{3}\;\text{V}}} \approx 1160\;\text{V}}" variant="gold" />
+        <FormulaBox latex="\boxed{V_{ab} = \boxed{1{,}16\cdot10^{3}\;\text{V}} \approx 1160\;\text{V}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -1928,31 +1928,31 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="font-semibold">(a) Kraft mellom platene</p>
         <FormulaBox latex="E = \dfrac{\Delta V}{d} = \dfrac{22{,}0}{0{,}020} = 1100\;\text{V/m}" variant="blue" />
         <FormulaBox latex="F = eE = (1{,}602\cdot10^{-19})(1100) = 1{,}76\cdot10^{-16}\;\text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{F = \underline{\underline{1{,}76\cdot10^{-16}\;\text{N}}}\;\text{(ned, mot nedre plate)}}" variant="gold" />
+        <FormulaBox latex="\boxed{F = \boxed{1{,}76\cdot10^{-16}\;\text{N}}\;\text{(ned, mot nedre plate)}}" variant="gold" />
 
         <p className="font-semibold">(b) Akselerasjon</p>
         <FormulaBox
           latex="a = \dfrac{F}{m_e} = \dfrac{1{,}76\cdot10^{-16}}{9{,}109\cdot10^{-31}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{a = \underline{\underline{1{,}93\cdot10^{14}\;\text{m/s}^{2}}}\;\text{(nedover)}}" variant="gold" />
+        <FormulaBox latex="\boxed{a = \boxed{1{,}93\cdot10^{14}\;\text{m/s}^{2}}\;\text{(nedover)}}" variant="gold" />
 
         <p className="font-semibold">(c) Forflytning y₁ ved enden av platene</p>
         <FormulaBox latex="t_1 = \dfrac{L_1}{v_0} = \dfrac{0{,}060}{6{,}50\cdot10^{6}} = 9{,}23\cdot10^{-9}\;\text{s}" variant="blue" />
         <FormulaBox latex="y_1 = \tfrac{1}{2}a t_1^2 = \tfrac{1}{2}(1{,}93\cdot10^{14})(9{,}23\cdot10^{-9})^2" variant="blue" />
         <FormulaBox latex="= \tfrac{1}{2}(1{,}93\cdot10^{14})(8{,}52\cdot10^{-17}) = 8{,}23\cdot10^{-3}\;\text{m}" variant="blue" />
-        <FormulaBox latex="\boxed{y_1 = \underline{\underline{0{,}823\;\text{cm}}}\;\text{(under aksen)}}" variant="gold" />
+        <FormulaBox latex="\boxed{y_1 = \boxed{0{,}823\;\text{cm}}\;\text{(under aksen)}}" variant="gold" />
 
         <p className="font-semibold">(d) Utgangsvinkel θ</p>
         <FormulaBox latex="v_y = a t_1 = (1{,}93\cdot10^{14})(9{,}23\cdot10^{-9}) = 1{,}78\cdot10^{6}\;\text{m/s}" variant="blue" />
         <FormulaBox latex="\tan\theta = \dfrac{v_y}{v_0} = \dfrac{1{,}78\cdot10^{6}}{6{,}50\cdot10^{6}} = 0{,}2745" variant="blue" />
-        <FormulaBox latex="\boxed{\theta = \underline{\underline{15{,}3°}}\;\text{(under aksen)}}" variant="gold" />
+        <FormulaBox latex="\boxed{\theta = \boxed{15{,}3°}\;\text{(under aksen)}}" variant="gold" />
 
         <p className="font-semibold">(e) Totalt under aksen på skjermen</p>
         <FormulaBox latex="t_2 = \dfrac{L_2}{v_0} = \dfrac{0{,}120}{6{,}50\cdot10^{6}} = 1{,}846\cdot10^{-8}\;\text{s}" variant="blue" />
         <FormulaBox latex="y_2 = v_y t_2 = (1{,}78\cdot10^{6})(1{,}846\cdot10^{-8}) = 3{,}29\cdot10^{-2}\;\text{m} = 3{,}29\;\text{cm}" variant="blue" />
         <FormulaBox latex="y_{\text{total}} = y_1 + y_2 = 0{,}823 + 3{,}29 = 4{,}12\;\text{cm}" variant="blue" />
-        <FormulaBox latex="\boxed{y_{\text{total}} = \underline{\underline{4{,}12\;\text{cm}}}\;\text{(under aksen)}}" variant="gold" />
+        <FormulaBox latex="\boxed{y_{\text{total}} = \boxed{4{,}12\;\text{cm}}\;\text{(under aksen)}}" variant="gold" />
       </div>
     ),
     summary: (
@@ -2043,7 +2043,7 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="= \dfrac{164 \cdot 2{,}307\cdot10^{-28}}{1{,}522\cdot10^{-12}} = \dfrac{3{,}783\cdot10^{-26}}{1{,}522\cdot10^{-12}}"
           variant="blue"
         />
-        <FormulaBox latex="\boxed{r_{\min} = \underline{\underline{2{,}49\cdot10^{-14}\;\text{m}}} \approx 24{,}9\;\text{fm}}" variant="gold" />
+        <FormulaBox latex="\boxed{r_{\min} = \boxed{2{,}49\cdot10^{-14}\;\text{m}} \approx 24{,}9\;\text{fm}}" variant="gold" />
       </div>
     ),
     alternativeSolution: (

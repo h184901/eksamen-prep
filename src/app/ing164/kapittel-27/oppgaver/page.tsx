@@ -121,7 +121,7 @@ export default function OppgaverPage() {
               Steg 2: <InlineLatex latex="\sin 30° = 0{,}5" />, så:
             </p>
             <FormulaBox
-              latex="F_m = 1{,}60 \cdot 10^{-19} \cdot 3{,}0 \cdot 10^5 \cdot 2{,}0 \cdot 0{,}5 = \underline{\underline{4{,}8 \cdot 10^{-14}\;\text{N}}}"
+              latex="F_m = 1{,}60 \cdot 10^{-19} \cdot 3{,}0 \cdot 10^5 \cdot 2{,}0 \cdot 0{,}5 = \boxed{4{,}8 \cdot 10^{-14}\;\text{N}}"
               variant="gold"
             />
 
@@ -205,7 +205,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="F_m = \underline{\underline{1{,}60 \cdot 10^{-14}\;\text{N}}}"
+              latex="F_m = \boxed{1{,}60 \cdot 10^{-14}\;\text{N}}"
               variant="gold"
             />
             <p className="text-sm">Retning: i y-retningen (fra høyrehåndsregelen: <InlineLatex latex="\hat{z} \times \hat{x} = \hat{y}" />).</p>
@@ -220,7 +220,7 @@ export default function OppgaverPage() {
               variant="blue"
             />
             <FormulaBox
-              latex="r = \underline{\underline{4{,}18 \cdot 10^{-3}\;\text{m} \approx 4{,}18\;\text{mm}}}"
+              latex="r = \boxed{4{,}18 \cdot 10^{-3}\;\text{m} \approx 4{,}18\;\text{mm}}"
               variant="gold"
             />
 
@@ -300,7 +300,7 @@ export default function OppgaverPage() {
               Steg 2: <InlineLatex latex="\sin 45° = \frac{\sqrt{2}}{2} \approx 0{,}7071" />, så:
             </p>
             <FormulaBox
-              latex="F_m = 60 \cdot 0{,}7071 = \underline{\underline{42{,}4\;\text{N}}}"
+              latex="F_m = 60 \cdot 0{,}7071 = \boxed{42{,}4\;\text{N}}"
               variant="gold"
             />
             <p className="text-sm">Retning: ut av arket (høyrehåndsregelen).</p>
@@ -311,7 +311,7 @@ export default function OppgaverPage() {
               Steg 3: Maks kraft oppnås når <InlineLatex latex="\sin\theta = 1" />, dvs. <InlineLatex latex="\theta = 90°" />.
             </p>
             <FormulaBox
-              latex="F_\text{maks} = IlB = 50 \cdot 1{,}00 \cdot 1{,}20 = \underline{\underline{60\;\text{N}}} \quad (\theta = 90°)"
+              latex="F_\text{maks} = IlB = 50 \cdot 1{,}00 \cdot 1{,}20 = \boxed{60\;\text{N}} \quad (\theta = 90°)"
               variant="gold"
             />
 
