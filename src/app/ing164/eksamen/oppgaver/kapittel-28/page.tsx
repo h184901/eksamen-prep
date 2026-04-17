@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CollapsibleSection from "@/components/CollapsibleSection";
+import OppgavetekstBox from "@/components/OppgavetekstBox";
 import { exercises, ExerciseContent } from "./exercises";
 
 const sections = [
@@ -35,10 +36,7 @@ function ExerciseDisplay({ exercise, id }: { exercise: ExerciseContent; id: stri
         <span className="text-sm text-[var(--muted)] italic ml-auto">{exercise.title}</span>
       </div>
 
-      <div className="rounded-lg bg-[var(--background)] border border-[var(--card-border)] p-4">
-        <p className="font-semibold text-sm mb-2 text-[var(--accent)]">Oppgavetekst</p>
-        <div className="text-sm space-y-2">{exercise.problem}</div>
-      </div>
+      <OppgavetekstBox copyLabel={id}>{exercise.problem}</OppgavetekstBox>
 
       <div className="grid md:grid-cols-2 gap-3">
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">

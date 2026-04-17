@@ -74,6 +74,19 @@ button {
   animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* AI tutor textarea — manual vertical resize handle always visible */
+.tutor-textarea {
+  resize: vertical;
+  min-height: 2rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+.tutor-textarea::-webkit-resizer {
+  background-color: var(--muted);
+  opacity: 0.3;
+}
+
 /* Markdown styling for tutor responses */
 .tutor-markdown h1,
 .tutor-markdown h2,

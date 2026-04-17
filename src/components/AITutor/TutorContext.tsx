@@ -212,25 +212,43 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
 
         const decoder = new TextDecoder();
         let acc = "";
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value, { stream: true });
-          acc += chunk;
+        let lastFlush = 0;
+        let lastRenderedLen = 0;
+        const MIN_INTERVAL_MS = 60;
+
+        const flushNow = (final: boolean) => {
+          const snapshot = acc;
+          lastRenderedLen = snapshot.length;
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId
-                ? { ...m, content: acc, pending: true }
+                ? { ...m, content: snapshot, pending: !final }
                 : m,
             ),
           );
+        };
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          acc += decoder.decode(value, { stream: true });
+          const now =
+            typeof performance !== "undefined" ? performance.now() : Date.now();
+          if (now - lastFlush >= MIN_INTERVAL_MS) {
+            lastFlush = now;
+            flushNow(false);
+          }
         }
 
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId ? { ...m, pending: false } : m,
-          ),
-        );
+        if (acc.length !== lastRenderedLen) {
+          flushNow(true);
+        } else {
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId ? { ...m, pending: false } : m,
+            ),
+          );
+        }
       } catch (err) {
         const isAbort = err instanceof DOMException && err.name === "AbortError";
         const msg = isAbort

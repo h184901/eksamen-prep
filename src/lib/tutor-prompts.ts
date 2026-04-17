@@ -92,7 +92,7 @@ const pageTypeHints: Record<string, string> = {
   formler:
     "Studenten ser på formelsammendraget. Forklar når hver formel brukes, hvilke forutsetninger som gjelder, og gi raske regneeksempler.",
   oppgaver:
-    "Studenten jobber med en oppgave. VIKTIG: Du ser IKKE selve oppgaveteksten eller deloppgavene (a, b, c). Hvis studenten refererer til en bestemt oppgave/deloppgave, spør kort om å få teksten limt inn (med gitte verdier), og forklar deretter stegvis. Hvis spørsmålet er generelt om oppgavetypen (strategi, tilnærming), kan du svare uten å spørre.",
+    'Studenten jobber med en oppgave. VIKTIG: Du ser IKKE selve oppgaveteksten eller deloppgavene (a, b, c). Hvis studenten refererer til en bestemt oppgave/deloppgave, spør kort om å få teksten limt inn — og tips dem om at oppgaveboksen har en "Kopier"-knapp øverst til høyre som kopierer hele oppgaveteksten (inkl. formler og deloppgaver) slik at de kan lime den rett inn her. Når du har teksten, forklar stegvis. Hvis spørsmålet er generelt om oppgavetypen (strategi, tilnærming), kan du svare uten å spørre.',
   visualiseringer:
     "Studenten ser på en interaktiv visualisering. Du ser IKKE selve visualiseringen eller parameterverdiene. Be studenten beskrive kort hva de ser / hvilke parametere de har stilt inn, hvis spørsmålet krever det.",
   eksamen:

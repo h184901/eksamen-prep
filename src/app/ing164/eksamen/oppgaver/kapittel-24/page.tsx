@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import CollapsibleSection from "@/components/CollapsibleSection";
+import OppgavetekstBox from "@/components/OppgavetekstBox";
 import { exercises, type ExerciseContent } from "./exercises";
 
 const sections = [
@@ -66,9 +67,8 @@ function ExerciseView({ id, data, onClose }: { id: string; data: ExerciseContent
       </div>
 
       {/* Oppgavetekst */}
-      <div className="rounded-lg border border-[var(--card-border)] bg-[var(--background)] p-4 mb-4">
-        <p className="text-xs uppercase tracking-wide font-semibold text-[var(--muted)] mb-2">Oppgavetekst</p>
-        <div className="space-y-2 text-sm">{data.problem}</div>
+      <div className="mb-4">
+        <OppgavetekstBox copyLabel={id}>{data.problem}</OppgavetekstBox>
       </div>
 
       {/* Hva vet vi / Hva skal vi finne */}

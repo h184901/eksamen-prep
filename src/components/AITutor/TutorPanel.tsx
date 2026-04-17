@@ -24,15 +24,54 @@ export default function TutorPanel() {
   } = useTutor();
 
   const [input, setInput] = useState("");
+  const [atBottom, setAtBottom] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const lastAutoHeightRef = useRef<number>(0);
+  const atBottomRef = useRef(true);
+  const userResizedRef = useRef(false);
+  const lastMessagesCountRef = useRef(0);
 
-  // Auto-scroll to bottom on new content
+  const isNearBottom = () => {
+    const el = scrollRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+  };
+
+  const scrollToBottom = (smooth = false) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({
+      top: el.scrollHeight,
+      behavior: smooth ? "smooth" : "auto",
+    });
+  };
+
+  // Auto-scroll only if user is already at bottom, or when a new user message is sent
   useEffect(() => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    const el = scrollRef.current;
+    if (!el) return;
+    const prevCount = lastMessagesCountRef.current;
+    lastMessagesCountRef.current = messages.length;
+    const newMessage = messages.length > prevCount;
+    const lastIsUser = messages[messages.length - 1]?.role === "user";
+    if (newMessage && lastIsUser) {
+      atBottomRef.current = true;
+      setAtBottom(true);
+      scrollToBottom(false);
+      return;
+    }
+    if (atBottomRef.current) {
+      scrollToBottom(false);
+    }
   }, [messages]);
+
+  const onMessagesScroll = () => {
+    const near = isNearBottom();
+    if (near !== atBottomRef.current) {
+      atBottomRef.current = near;
+      setAtBottom(near);
+    }
+  };
 
   // Focus input when panel opens
   useEffect(() => {
@@ -44,25 +83,32 @@ export default function TutorPanel() {
   const autoGrow = () => {
     const el = inputRef.current;
     if (!el) return;
-    const currentHeight = el.offsetHeight;
-    const userResized =
-      lastAutoHeightRef.current > 0 &&
-      currentHeight > lastAutoHeightRef.current + 4;
-    if (userResized) return;
+    if (userResizedRef.current) return;
     el.style.height = "auto";
     const cap = Math.round(window.innerHeight * (isExpanded ? 0.6 : 0.5));
     const needed = Math.min(el.scrollHeight, cap);
     el.style.height = needed + "px";
-    lastAutoHeightRef.current = needed;
   };
 
-  // Reset height when input cleared (after send)
+  // Detect manual resize via pointerdown in the bottom-right grip region
+  const onTextareaPointerDown = (e: React.PointerEvent<HTMLTextAreaElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const gripSize = 18;
+    if (offsetX >= rect.width - gripSize && offsetY >= rect.height - gripSize) {
+      userResizedRef.current = true;
+    }
+  };
+
+  // Reset height + resize flag when input cleared (after send)
   useEffect(() => {
     if (input !== "") return;
     const el = inputRef.current;
     if (!el) return;
     el.style.height = "";
-    lastAutoHeightRef.current = 0;
+    userResizedRef.current = false;
   }, [input]);
 
   // Recalc cap when toggling expand (larger cap in fullscreen)
@@ -203,19 +249,40 @@ export default function TutorPanel() {
         </header>
 
         {/* Messages */}
-        <div
-          ref={scrollRef}
-          className={[
-            "flex-1 overflow-y-auto px-3 py-4 space-y-3",
-            isExpanded ? "md:px-8 md:py-6" : "",
-          ].join(" ")}
-        >
-          <div className={isExpanded ? "max-w-3xl mx-auto space-y-3" : ""}>
-            {messages.length === 0 && <WelcomeCard />}
-            {messages.map((m) => (
-              <TutorMessage key={m.id} message={m} />
-            ))}
+        <div className="relative flex-1 min-h-0">
+          <div
+            ref={scrollRef}
+            onScroll={onMessagesScroll}
+            className={[
+              "absolute inset-0 overflow-y-auto px-3 py-4 space-y-3",
+              isExpanded ? "md:px-8 md:py-6" : "",
+            ].join(" ")}
+          >
+            <div className={isExpanded ? "max-w-3xl mx-auto space-y-3" : ""}>
+              {messages.length === 0 && <WelcomeCard />}
+              {messages.map((m) => (
+                <TutorMessage key={m.id} message={m} />
+              ))}
+            </div>
           </div>
+          {!atBottom && messages.length > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                atBottomRef.current = true;
+                setAtBottom(true);
+                scrollToBottom(true);
+              }}
+              title="Hopp til siste melding"
+              aria-label="Hopp til siste melding"
+              className="absolute bottom-3 right-3 z-10 flex items-center gap-1 px-3 py-1.5 rounded-full bg-[var(--accent)] text-white text-xs font-medium shadow-lg hover:opacity-90 transition-opacity"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+              {isStreaming ? "Følg svaret" : "Til bunn"}
+            </button>
+          )}
         </div>
 
         {/* Smart suggestions */}
@@ -239,12 +306,10 @@ export default function TutorPanel() {
                   autoGrow();
                 }}
                 onKeyDown={onKey}
+                onPointerDown={onTextareaPointerDown}
                 rows={1}
                 placeholder="Spør om hva som helst i dette kapittelet…"
-                className="tutor-textarea flex-1 resize-y bg-transparent outline-none text-sm placeholder:text-[var(--muted)] overflow-y-auto"
-                style={{
-                  minHeight: "2rem",
-                }}
+                className="tutor-textarea flex-1 min-w-0 bg-transparent outline-none text-sm placeholder:text-[var(--muted)]"
                 disabled={isStreaming}
               />
               {isStreaming ? (
@@ -287,6 +352,7 @@ export default function TutorPanel() {
 function WelcomeCard() {
   const { context } = useTutor();
   const ctxText = describeContext(context);
+  const isOppgaver = context.pageType === "oppgaver";
 
   return (
     <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-2">
@@ -301,10 +367,30 @@ function WelcomeCard() {
         <span className="font-medium text-[var(--foreground)]">{ctxText}</span>,
         og jeg er her for å forklare, regne og drille med deg.
       </p>
-      <p className="text-[var(--muted)]">
-        Prøv en av forslagene under, eller skriv ditt eget spørsmål. Klikk på
-        utvid-ikonet øverst for å få et større chatvindu.
-      </p>
+      {isOppgaver ? (
+        <div className="rounded-lg border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-2 text-xs text-[var(--foreground)]/80">
+          <p className="font-medium mb-0.5 text-[var(--accent)]">
+            Tips — jeg ser ikke selve oppgaveteksten.
+          </p>
+          <p>
+            Bruk{" "}
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-[var(--card-border)] bg-[var(--background)] font-medium">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+              Kopier
+            </span>{" "}
+            -knappen øverst i oppgaveboksen og lim inn her. Da kan jeg løse den
+            steg for steg med deg.
+          </p>
+        </div>
+      ) : (
+        <p className="text-[var(--muted)]">
+          Prøv en av forslagene under, eller skriv ditt eget spørsmål. Klikk på
+          utvid-ikonet øverst for å få et større chatvindu.
+        </p>
+      )}
     </div>
   );
 }

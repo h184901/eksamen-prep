@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import type { ChatMessage } from "./TutorContext";
 
-export default function TutorMessage({ message }: { message: ChatMessage }) {
+function TutorMessageImpl({ message }: { message: ChatMessage }) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -82,6 +82,17 @@ export default function TutorMessage({ message }: { message: ChatMessage }) {
     </div>
   );
 }
+
+const TutorMessage = memo(TutorMessageImpl, (prev, next) => {
+  return (
+    prev.message.id === next.message.id &&
+    prev.message.content === next.message.content &&
+    prev.message.pending === next.message.pending &&
+    prev.message.error === next.message.error
+  );
+});
+
+export default TutorMessage;
 
 function SparkleIcon() {
   return (
