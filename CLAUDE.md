@@ -166,16 +166,17 @@ DAT107 er nå implementert som hovedfag på samme nivå som ING164, DAT110 og DA
 
 Implementert sidestruktur
 
-- `src/app/dat107/page.tsx` — dashboard med seks områdekort gruppert i Teori (SQL/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
+- `src/app/dat107/page.tsx` — dashboard med sju områdekort gruppert i Teori (SQL/Modellering/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
 - `src/app/dat107/[area]/page.tsx` — dynamisk områdeside som lister alle tema i et delområde.
 - `src/app/dat107/[area]/[topic]/page.tsx` — dynamisk tema-/innholdsside som leser Markdown fra `src/content/dat107/<area>/<fil>.md`, rendrer via `src/components/Markdown.tsx`, og har prev/next-navigasjon + sidemeny.
-- `src/lib/dat107.ts` — metadata for alle seks områder og totalt 55 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
+- `src/lib/dat107.ts` — metadata for alle sju områder og totalt 58 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
 - `src/content/dat107/<area>/<slug>.md` — alt faglig innhold er kopiert fra `DAT107-structured/` med ASCII-slug-filnavn (`æøå` normalisert) slik at URL-er og statisk generering fungerer på Vercel.
 - `src/components/Markdown.tsx` — serversidig minimal Markdown-renderer (h1–h3, paragrafer, punkt- og nummerlister, fenced code blocks med språk, inline `code`, `**bold**`, rørseparerte tabeller). Ingen ekstra npm-avhengighet.
 
-Seks faste hoveddeler (nå implementert som slug-er)
+Sju faste hoveddeler (nå implementert som slug-er)
 
-- `sql` — SQL (teori)
+- `sql` — SQL (teori): spørringer, tabeller, joins, indekser, transaksjoner
+- `modellering` — Modellering (teori): relasjonsmodell, ER, mapping, 3NF (~25 % av eksamen)
 - `jpa` — JPA (teori)
 - `nosql` — NoSQL (teori)
 - `obliger` — Obliger (praksis)

@@ -1,5 +1,6 @@
 export type DAT107AreaSlug =
   | "sql"
+  | "modellering"
   | "jpa"
   | "nosql"
   | "obliger"
@@ -32,9 +33,9 @@ export const dat107Areas: DAT107Area[] = [
     title: "SQL",
     shortTitle: "SQL",
     description:
-      "Relasjonsmodellen, spørringer, ER-modellering, normalisering, indekser og transaksjoner.",
+      "Spørringer, tabeller, joins, views, indekser og transaksjoner.",
     longDescription:
-      "SQL-delen bygger grunnmuren i DAT107. Her lærer du spørringer mot én og flere tabeller, opprettelse av tabeller, relasjonsmodellen, ER-modellering, normalisering til 3NF, filer og indekser og transaksjoner med ACID.",
+      "SQL-delen bygger den praktiske SQL-ferdigheten i DAT107. Her lærer du spørringer mot én og flere tabeller, opprettelse og endring av tabeller, joins og avanserte spørringer, filer og indekser samt transaksjoner med ACID. Modelleringsteorien ligger i egen hoveddel.",
     kind: "teori",
     icon: "database",
     topics: [
@@ -69,24 +70,6 @@ export const dat107Areas: DAT107Area[] = [
         file: "avanserte-sporringer.md",
       },
       {
-        slug: "relasjonsmodellen",
-        title: "Relasjonsmodellen",
-        description: "Relasjon, attributt, kandidatnøkkel og funksjonelle avhengigheter.",
-        file: "relasjonsmodellen.md",
-      },
-      {
-        slug: "er-modellering",
-        title: "ER-modellering",
-        description: "Entiteter, relasjoner, kardinalitet og svake entiteter.",
-        file: "er-modellering.md",
-      },
-      {
-        slug: "fra-modell-til-database",
-        title: "Fra modell til database",
-        description: "Mapping av 1:N og M:N, og normalisering til 3NF.",
-        file: "fra-modell-til-database.md",
-      },
-      {
         slug: "filer-indekser",
         title: "Filer og indekser",
         description: "Blokker, B+-tre og når indekser hjelper.",
@@ -108,6 +91,55 @@ export const dat107Areas: DAT107Area[] = [
         slug: "oppgaver",
         title: "Øvingsoppgaver",
         description: "Praktiske oppgaver i eksamensstil.",
+        file: "oppgaver.md",
+      },
+    ],
+  },
+  {
+    slug: "modellering",
+    title: "Modellering",
+    shortTitle: "Modellering",
+    description:
+      "Relasjonsmodellen, ER-modellering, mapping til tabeller og normalisering til 3NF.",
+    longDescription:
+      "Modellering er egen hoveddel og teller rundt 25 % av eksamen. Her lærer du relasjonsmodellen som teori, ER-modellering fra tekst, mapping til tabeller med riktige nøkler, og normalisering til 1NF, 2NF og 3NF med funksjonelle avhengigheter.",
+    kind: "teori",
+    icon: "diagram",
+    topics: [
+      {
+        slug: "introduksjon",
+        title: "Introduksjon",
+        description: "Hva modellering er og hvordan delen henger sammen med SQL og JPA.",
+        file: "introduksjon.md",
+      },
+      {
+        slug: "relasjonsmodellen",
+        title: "Relasjonsmodellen",
+        description: "Relasjon, attributt, kandidatnøkkel og funksjonelle avhengigheter.",
+        file: "relasjonsmodellen.md",
+      },
+      {
+        slug: "er-modellering",
+        title: "ER-modellering",
+        description: "Entiteter, relasjoner, kardinalitet og svake entiteter.",
+        file: "er-modellering.md",
+      },
+      {
+        slug: "fra-modell-til-database",
+        title: "Fra modell til database",
+        description: "Mapping av 1:N og M:N, og normalisering til 3NF.",
+        file: "fra-modell-til-database.md",
+      },
+      {
+        slug: "sjekkliste",
+        title: "Kortversjon og sjekkliste",
+        description: "Tett repetisjonsark for ER, mapping og 3NF.",
+        file: "sjekkliste.md",
+      },
+      {
+        slug: "oppgaver",
+        title: "Øvingsoppgaver",
+        description: "Modell- og normaliseringsoppgaver i eksamensstil.",
         file: "oppgaver.md",
       },
     ],
