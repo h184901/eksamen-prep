@@ -74,7 +74,7 @@ function parse(md: string): Block[] {
       continue;
     }
 
-    if (line.includes("|") && i + 1 < lines.length && /^\s*\|?\s*[-:|\s]+\|[-:|\s]+/.test(lines[i + 1])) {
+    if (line.includes("|") && i + 1 < lines.length && /^\s*\|?\s*(?:-|:|\||\s)+\|(?:-|:|\||\s)+/.test(lines[i + 1])) {
       const head = splitRow(line);
       i += 2;
       const rows: string[][] = [];

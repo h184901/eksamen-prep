@@ -26,6 +26,7 @@ export default function TutorPanel() {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const lastAutoHeightRef = useRef<number>(0);
 
   // Auto-scroll to bottom on new content
   useEffect(() => {
@@ -39,6 +40,36 @@ export default function TutorPanel() {
       inputRef.current?.focus();
     }
   }, [isOpen, isMinimized]);
+
+  const autoGrow = () => {
+    const el = inputRef.current;
+    if (!el) return;
+    const currentHeight = el.offsetHeight;
+    const userResized =
+      lastAutoHeightRef.current > 0 &&
+      currentHeight > lastAutoHeightRef.current + 4;
+    if (userResized) return;
+    el.style.height = "auto";
+    const cap = Math.round(window.innerHeight * (isExpanded ? 0.6 : 0.5));
+    const needed = Math.min(el.scrollHeight, cap);
+    el.style.height = needed + "px";
+    lastAutoHeightRef.current = needed;
+  };
+
+  // Reset height when input cleared (after send)
+  useEffect(() => {
+    if (input !== "") return;
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "";
+    lastAutoHeightRef.current = 0;
+  }, [input]);
+
+  // Recalc cap when toggling expand (larger cap in fullscreen)
+  useEffect(() => {
+    if (input) autoGrow();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isExpanded]);
 
   // ESC: collapse expanded mode first, otherwise close
   useEffect(() => {
@@ -203,13 +234,16 @@ export default function TutorPanel() {
               <textarea
                 ref={inputRef}
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  autoGrow();
+                }}
                 onKeyDown={onKey}
                 rows={1}
                 placeholder="Spør om hva som helst i dette kapittelet…"
-                className="flex-1 resize-none bg-transparent outline-none text-sm placeholder:text-[var(--muted)] max-h-32"
+                className="tutor-textarea flex-1 resize-y bg-transparent outline-none text-sm placeholder:text-[var(--muted)] overflow-y-auto"
                 style={{
-                  minHeight: "1.5rem",
+                  minHeight: "2rem",
                 }}
                 disabled={isStreaming}
               />
@@ -240,8 +274,8 @@ export default function TutorPanel() {
               )}
             </div>
             <p className="text-[10px] text-[var(--muted)] mt-1.5 text-center">
-              Drevet av Claude Sonnet 4.5 • Shift+Enter for ny linje • Esc for å{" "}
-              {isExpanded ? "krympe" : "lukke"}
+              Shift+Enter for ny linje • Dra nede-høyre for større felt • Esc
+              for å {isExpanded ? "krympe" : "lukke"}
             </p>
           </div>
         </form>
