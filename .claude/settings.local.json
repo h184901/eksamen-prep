@@ -74,7 +74,23 @@
       "Bash(pdftotext -layout -f 834 -l 838 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap24.txt)",
       "Bash(pdftotext -layout -f 942 -l 947 \"/Users/erlendmoheim/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf\" /tmp/bok_oppgaver/kap27.txt)",
       "Bash(awk NR>=1222 && NR<=1235 *)",
-      "Bash(awk 'NR==1228' /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/eksamen/oppgaver/kapittel-10/exercises.tsx)"
+      "Bash(awk 'NR==1228' /Users/erlendmoheim/Downloads/Studiet/Semester4/nettsideforeksamen/src/app/ing164/eksamen/oppgaver/kapittel-10/exercises.tsx)",
+      "Bash(file ~/Downloads/Studiet/Semester4/materials/ing164/bok/*.pdf)",
+      "Bash(pdfinfo ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf)",
+      "Bash(pdftotext -f 245 -l 248 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 255 -l 260 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 260 -l 263 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 258 -l 259 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 257 -l 258 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 258 -l 258 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 260 -l 261 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 259 -l 262 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 262 -l 265 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 261 -l 264 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 285 -l 288 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 294 -l 295 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 293 -l 294 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)",
+      "Bash(pdftotext -f 294 -l 294 ~/Downloads/Studiet/Semester4/materials/ing164/bok/university-physics-with-modern-physics-in-si-units-15nbsped-1292314737-9781292314730_compress.pdf -)"
     ]
   }
 }
