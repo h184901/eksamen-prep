@@ -49,8 +49,9 @@ Skreddersydd eksamensøvingsside.
 
 ## Fag
 1. **ING164 Fysikk** — PRIORITET NÅ
-2. DAT110 Nettverksteknologi — senere
+2. DAT110 Nettverksteknologi — NÅ
 3. DAT109 Systemutvikling — PRIORITERT NÅ
+4. DAT107 Database - PRIORITET NÅ
 
 DAT110 Nettverksteknologi og distribuerte systemer
 
