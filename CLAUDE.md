@@ -208,6 +208,20 @@ Design og identitet for DAT107
 - Lilla fagidentitet er aktiv i hele nettsiden (Tailwind-palett `dat107` 50–900, `a855f7` som 500-farge).
 - Samme komponentstil som de andre fagene: kort med fargebord, avrundede hjørner, hover-løft, mørkt/lyst tema.
 
+Pedagogisk mønster (skal bygges som DAT109)
+
+- DAT109 er referansen for pedagogisk kvalitet. DAT107 skal bygges i samme pedagogiske mønster — samme type teorisammendrag, eksempler, sjekklister, callout-bokser og progress-tracking.
+- Dashbordet (`src/app/dat107/page.tsx`) er client-komponent og viser progress per område basert på besøkte tema via `localStorage`-nøkkel `progress-dat107-<area>`.
+- Besøk registreres av `src/components/dat107/VisitTracker.tsx` som monteres på hver temaside.
+- Områdesiden `src/app/dat107/[area]/page.tsx` viser en "Dette må du kunne"-boks hentet fra `mustKnow`-feltet i `src/lib/dat107.ts`.
+- Teori-innhold er foreløpig rene Markdown-filer under `src/content/dat107/` og rendres med `src/components/Markdown.tsx`. Planen er å migrere viktige tema gradvis til egne React-sider med `TheorySummary` (som DAT109/modellering) når dybden krever det — ikke som big-bang.
+- SVG brukes til pedagogiske illustrasjoner og seksjonsikoner (f.eks. database-, diagram- og dokument-ikoner i dashbord). Ingen tung pynt eller tunge bibliotek — kun inline SVG.
+
+Dark mode-regler
+
+- Eksamensformat-boksen og andre gradient-kort skal bruke tilstrekkelig opasitet i dark mode (`dark:from-*950/70 dark:to-*950/50` eller sterkere) slik at tekst får kontrast.
+- Indre "stats"-kort skal bruke `bg-white/80 dark:bg-neutral-900/90` og eksplisitt `text-neutral-700 dark:text-neutral-200` for labels og `text-neutral-900 dark:text-neutral-50` for hovedtekst — ikke `text-[var(--muted)]` alene, som gir for dårlig kontrast i dark mode.
+
 ## Materialer for ING164
 Alt pensum ligger i ~/Downloads/Studiet/Semester4/materials/ing164/
 (UTENFOR prosjektmappen — ikke flytt dem tilbake til public/)

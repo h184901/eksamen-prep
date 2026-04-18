@@ -16,6 +16,20 @@ export interface DAT107Topic {
   file: string;
 }
 
+export interface DAT107AreaIntroSection {
+  title: string;
+  body: string;
+  accent?: "purple" | "sky" | "emerald" | "amber" | "fuchsia";
+}
+
+export interface DAT107AreaPhase {
+  title: string;
+  description?: string;
+  topicSlugs: string[];
+}
+
+export type DAT107Accent = "purple" | "amber" | "red";
+
 export interface DAT107Area {
   slug: DAT107AreaSlug;
   title: string;
@@ -24,6 +38,13 @@ export interface DAT107Area {
   longDescription: string;
   kind: DAT107AreaKind;
   icon: string;
+  weight?: string;
+  mustKnow?: string[];
+  examFocus?: string[];
+  intro?: DAT107AreaIntroSection[];
+  phases?: DAT107AreaPhase[];
+  accent?: DAT107Accent;
+  trackLabel?: string;
   topics: DAT107Topic[];
 }
 
@@ -38,6 +59,54 @@ export const dat107Areas: DAT107Area[] = [
       "SQL-delen bygger den praktiske SQL-ferdigheten i DAT107. Her lærer du spørringer mot én og flere tabeller, opprettelse og endring av tabeller, joins og avanserte spørringer, filer og indekser samt transaksjoner med ACID. Modelleringsteorien ligger i egen hoveddel.",
     kind: "teori",
     icon: "database",
+    weight: "~25%",
+    mustKnow: [
+      "Spørringsrekkefølge: select → from → where → group by → having → order by",
+      "Join vs. left join, og når null dukker opp i resultatet",
+      "Views, vindusfunksjoner og delspørringer",
+      "Indekser: når de hjelper og når de ikke gjør det",
+      "Transaksjoner og ACID, typiske samtidighetsproblemer",
+    ],
+    examFocus: [
+      "Skrive korrekt spørring med join/group by/having fra tekstlig beskrivelse",
+      "Forklare forskjellen på where og having og på join og left join",
+      "Lese en enkel B+-tre-figur og si når en indeks hjelper",
+      "Diskutere ACID og typiske samtidighetsproblemer i transaksjoner",
+    ],
+    intro: [
+      {
+        title: "Hvorfor SQL teller",
+        body: "SQL er ferdighetsdelen av DAT107. Eksamen gir deg en tekstlig oppgave — du skal oversette den direkte til en spørring. Feil i rekkefølgen på select-delene eller i join-logikken er den klassiske karaktertyvende feilen.",
+        accent: "purple",
+      },
+      {
+        title: "Hvordan denne delen er bygget opp",
+        body: "Først grunnmønsteret og mengdefunksjoner. Deretter hvordan du bygger opp og endrer tabeller. Så joins og avanserte konstruksjoner (null, case, views, vindusfunksjoner). Til slutt det som ligger under motoren: filer og indekser, og transaksjoner med ACID.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Gå gjennom Grunnleggende i rekkefølge — du må kunne skrive enkle spørringer i søvne. I Praktisk SQL trener du det som faktisk kommer på eksamen: joins og avanserte spørringer. Avslutt med sjekkliste og oppgaver, som er tett repetisjon før eksamensdagen.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Grunnleggende",
+        description: "Grunnmønsteret og det du må kunne i søvne.",
+        topicSlugs: ["introduksjon", "sporringer-en-tabell", "tabeller-dataendringer"],
+      },
+      {
+        title: "Praktisk SQL",
+        description: "Det som faktisk skiller god og middels besvarelse på eksamen.",
+        topicSlugs: ["joins", "avanserte-sporringer", "filer-indekser", "transaksjoner"],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Tett sjekkliste og oppgaver i eksamensstil.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "introduksjon",
@@ -105,6 +174,54 @@ export const dat107Areas: DAT107Area[] = [
       "Modellering er egen hoveddel og teller rundt 25 % av eksamen. Her lærer du relasjonsmodellen som teori, ER-modellering fra tekst, mapping til tabeller med riktige nøkler, og normalisering til 1NF, 2NF og 3NF med funksjonelle avhengigheter.",
     kind: "teori",
     icon: "diagram",
+    weight: "~25%",
+    mustKnow: [
+      "Skille relasjonsmodellen (teori) fra tabell-SQL (syntaks)",
+      "Finne entiteter, attributter og relasjoner fra tekst",
+      "Kardinalitet (1:1, 1:N, M:N) og svake entiteter",
+      "Mappe ER til tabeller med riktige nøkler og fremmednøkler",
+      "Vise 1NF, 2NF og 3NF med funksjonelle avhengigheter",
+    ],
+    examFocus: [
+      "Tegne ER-diagram fra tekstlig beskrivelse med riktig kardinalitet",
+      "Mappe ER til tabeller med korrekte primær- og fremmednøkler",
+      "Argumentere for 3NF ved hjelp av funksjonelle avhengigheter",
+      "Drøfte svake entiteter og sammensatte nøkler",
+    ],
+    intro: [
+      {
+        title: "Hvorfor modellering er egen del",
+        body: "Modellering er ikke SQL-syntaks. Det er selve tenkemåten for hvordan data struktureres. Rundt 25 % av eksamen er ren modellering, og det er her sensor leter etter om du har forstått faget eller bare pugget spørringer.",
+        accent: "purple",
+      },
+      {
+        title: "Prosessen i tre steg",
+        body: "Først relasjonsmodellen som teori (nøkler, funksjonelle avhengigheter). Så ER-modellen som visuelt verktøy fra tekst. Til slutt mapping til tabeller og normalisering til 3NF — dette er selve eksamensleveransen.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Start med introduksjon og relasjonsmodellen — teorien må sitte. Deretter ER-modellering og mapping, som er det du faktisk tegner og skriver på eksamen. Avslutt med sjekkliste og oppgaver for målrettet trening.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Teori",
+        description: "Relasjonsmodellen og funksjonelle avhengigheter — grunnmuren.",
+        topicSlugs: ["introduksjon", "relasjonsmodellen"],
+      },
+      {
+        title: "Praktisk modellering",
+        description: "Det du faktisk tegner og skriver på eksamen.",
+        topicSlugs: ["er-modellering", "fra-modell-til-database"],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Sjekkliste og oppgaver i eksamensstil.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "introduksjon",
@@ -154,6 +271,54 @@ export const dat107Areas: DAT107Area[] = [
       "JPA-delen lærer deg å koble Java og relasjonsdatabase via ORM. Du går gjennom oppsett, EntityManager og CRUD, 1:N og 1:1-relasjoner, mange-til-mange med assosiasjonsentitet, cascade og orphanRemoval, og arvstrategier.",
     kind: "teori",
     icon: "code",
+    weight: "~25%",
+    mustKnow: [
+      "ORM-tankegang: Java-klasse ↔ tabell, felt ↔ kolonne",
+      "EntityManager-metodene: persist, find, merge, remove",
+      "Owning side og mappedBy i 1:N og 1:1",
+      "Mange-til-mange med assosiasjonsentitet",
+      "Cascade og orphanRemoval, samt arvstrategier",
+    ],
+    examFocus: [
+      "Skrive entitetsklasse fra tabellskisse med riktige annotasjoner",
+      "Velge owning side og bruke mappedBy riktig i 1:N",
+      "Lage assosiasjonsentitet for M:N med ekstra attributter",
+      "Begrunne valg mellom JOINED, SINGLE_TABLE og TABLE_PER_CLASS",
+    ],
+    intro: [
+      {
+        title: "Hvorfor JPA står sentralt",
+        body: "JPA er broen mellom Java-koden og relasjonsdatabasen. På eksamen får du typisk en tabellskisse eller klassediagram og skal skrive tilsvarende entitetsklasser med riktige annotasjoner. Du må forstå begge sider samtidig.",
+        accent: "purple",
+      },
+      {
+        title: "Hvordan delen er bygget opp",
+        body: "Først grunnleggende oppsett og CRUD via EntityManager. Deretter relasjonene — 1:N, 1:1, og det vanskelige M:N med assosiasjonsentitet. Til slutt arvstrategier og mønstre fra forelesningsprosjektene.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Grunnleggende + CRUD må sitte før du går videre. Relasjoner er kjernen i eksamensoppgavene. Arv og subtyper er ofte begrunnelsesspørsmål. Sjekkliste og oppgaver til slutt.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Grunnleggende",
+        description: "ORM-tankegang, entiteter og CRUD via EntityManager.",
+        topicSlugs: ["grunnleggende", "crud-entitymanager"],
+      },
+      {
+        title: "Relasjoner og avanserte mønstre",
+        description: "Det eksamen oftest tester — relasjoner og arv.",
+        topicSlugs: ["relasjoner", "mange-til-mange", "arv-og-subtyper", "praktiske-monstre"],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Sjekkliste og oppgaver i eksamensstil.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "grunnleggende",
@@ -215,6 +380,60 @@ export const dat107Areas: DAT107Area[] = [
       "NoSQL-delen dekker semistrukturerte data. Du lærer XML og XML Schema, XPath og XSLT, hvordan XML og JSON lagres i PostgreSQL som hybrid, og hvordan man drøfter valg mellom relasjonsmodell og dokumentmodell.",
     kind: "teori",
     icon: "document",
+    weight: "~25%",
+    mustKnow: [
+      "XML: well-formed vs. valid, XSD med key/unique/keyref",
+      "XPath-navigering og XSLT-transformasjon",
+      "json vs. jsonb i PostgreSQL, operatorene -> og ->>",
+      "Hybrid lagring: relasjonstabell med xml- eller jsonb-kolonne",
+      "Drøfte når dokumentmodell passer bedre enn relasjonsmodell",
+    ],
+    examFocus: [
+      "Lese og skrive XSD-skjema med key/unique/keyref",
+      "Skrive XPath-uttrykk og enkle XSLT-transformasjoner",
+      "Hente verdier ut av jsonb-kolonne med -> og ->>",
+      "Begrunne valg mellom relasjons- og dokumentmodell",
+    ],
+    intro: [
+      {
+        title: "Hvorfor NoSQL er en egen del",
+        body: "NoSQL i DAT107 handler ikke om å erstatte relasjonsdatabasen, men om hvordan semistrukturerte data (XML og JSON) lagres og hentes. Eksamen tester både syntaks (XPath, XSD) og forståelse (når passer hva).",
+        accent: "purple",
+      },
+      {
+        title: "Hvordan delen er bygget opp",
+        body: "Først XML-familien: well-formed, XSD, XPath, XSLT. Deretter hvordan XML og JSON lever som kolonner i PostgreSQL. Til slutt den bredere drøftingen: dokumentdatabaser mot relasjonsmodell.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Start med introduksjon og XML/XSD — dette er teknisk tyngst. XPath og XSLT er rene syntaksoppgaver. PostgreSQL-delene er praktiske, og dokumentdatabaser er drøftingen. Avslutt med sjekkliste og oppgaver.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Grunnleggende",
+        description: "XML-familien: well-formed, valid og skjemavalidering.",
+        topicSlugs: ["introduksjon", "xml-og-xsd"],
+      },
+      {
+        title: "Praktisk NoSQL",
+        description: "Syntaks du må kunne skrive, og hybrid lagring i PostgreSQL.",
+        topicSlugs: [
+          "xpath-og-xslt",
+          "xml-i-postgresql",
+          "json-og-postgresql",
+          "dokumentdatabaser",
+          "eksempler",
+        ],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Sjekkliste og oppgaver i eksamensstil.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "introduksjon",
@@ -282,6 +501,54 @@ export const dat107Areas: DAT107Area[] = [
       "Obligene brukes her som aktive øvingsressurser. Fokus er ikke bare oppgavetekst, men hvilke faglige mønstre hver oblig trener og hvordan de kobler tilbake til eksamensoppgaver.",
     kind: "praksis",
     icon: "clipboard",
+    accent: "purple",
+    trackLabel: "Praktisk treningsspor",
+    mustKnow: [
+      "Oblig 1 (SQL): joins og null-håndtering i bompengecaset",
+      "Oblig 2 (Modellering): ER og 3NF for forening med medlemsavgift per år",
+      "Oblig 3 (JPA): ansatt, avdeling, prosjekt og prosjektdeltagelse",
+      "Oblig 4 (NoSQL): XML i PostgreSQL, JSON og MongoDB",
+    ],
+    examFocus: [
+      "Kjenne igjen oblig-mønstre i eksamensoppgaver",
+      "Null-håndtering i joins (bompengeoppgaven)",
+      "ER og 3NF i forening-caset",
+      "Assosiasjonsentitet mellom ansatt og prosjekt",
+    ],
+    intro: [
+      {
+        title: "Hvorfor obligene teller",
+        body: "Obligene er den mest konkrete forberedelsen til eksamen. Hver oblig trener ett fagområde med én case som går igjen — bompenger for SQL, forening for modellering, ansatt/prosjekt for JPA og hobbyhus for NoSQL. Mønstrene kommer tilbake på eksamen.",
+        accent: "purple",
+      },
+      {
+        title: "Hvordan delen er bygget opp",
+        body: "Én side per oblig med case, hva den trener og hva du bør se etter. Deretter en samlet treningsblikk-side som kobler obligene tilbake til eksamensmønstre. Til slutt sjekkliste og små oppgaver inspirert av obligene.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Les gjennom hver oblig først for å friske opp caset. Gå deretter til samlet treningsblikk for å se mønstrene på tvers. Sjekklisten er siste repetisjon, og oppgavene er små dryppende øvelser du kan ta under tidspress.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Gjennomgang per oblig",
+        description: "Hva hver oblig trener og hvilket mønster den bygger.",
+        topicSlugs: ["oblig1", "oblig2", "oblig3", "oblig4"],
+      },
+      {
+        title: "Samlet treningsblikk",
+        description: "Mønstre på tvers av obligene som kommer tilbake på eksamen.",
+        topicSlugs: ["hva-du-bor-ove-pa"],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Sjekkliste og små oppgaver inspirert av obligene.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "oblig1",
@@ -337,6 +604,54 @@ export const dat107Areas: DAT107Area[] = [
       "Dette er det bearbeidede eksamenssporet. Her finner du hvilke oppgavetyper som går igjen, hvordan sensor leser besvarelsene dine, praktisk strategi per fagområde og øvelser i eksamensstil. Bruk dette sporet til siste målrettede repetisjon.",
     kind: "eksamen-bearbeidet",
     icon: "target",
+    accent: "amber",
+    trackLabel: "Bearbeidet eksamensspor",
+    mustKnow: [
+      "Firedelingen: JPA, Modellering, SQL, NoSQL (~25 % hver)",
+      "Vanlige oppgavetyper og klassiske feller per fagområde",
+      "Hvordan lese kommandordene (skriv, forklar, modellér, begrunn)",
+      "Tidsstrategi i selve eksamenen",
+    ],
+    examFocus: [
+      "Gjenkjenne oppgavetyper før du begynner å skrive",
+      "Svare direkte på kommandordet (skriv / forklar / begrunn)",
+      "Unngå klassiske feller per fagområde",
+      "Disponere tiden så du rekker alle fire oppgavetyper",
+    ],
+    intro: [
+      {
+        title: "Dette er det bearbeidede sporet",
+        body: "Her er eksamen analysert for deg: hvilke oppgavetyper som går igjen, hva sensor leter etter, hvilke feller som går igjen. Språket er forklarende og strategisk — dette er ikke originale eksamenstekster, men mønstre og strategi destillert ut av dem.",
+        accent: "amber",
+      },
+      {
+        title: "Hvordan delen er bygget opp",
+        body: "Først oversikt og strategi. Deretter mønsteranalyse per fagområde: JPA, SQL, NoSQL og Modellering. Til slutt sjekkliste og eksamensnære oppgaver i bearbeidet form.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Bruk dette til siste målrettede repetisjon. Les oversikt og strategi først for å få eksamensoversikten. Gå deretter tilbake til det fagområdet du er svakest på. Se gjengangere for originaltekster når du vil trene under tidspress.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Oversikt og strategi",
+        description: "Les dette først — gir deg eksamenskartet og tidsstrategi.",
+        topicSlugs: ["oversikt", "strategi"],
+      },
+      {
+        title: "Mønsteranalyse per fagområde",
+        description: "Typiske oppgavetyper og klassiske feller per fagområde.",
+        topicSlugs: ["jpa", "sql", "nosql", "modellering"],
+      },
+      {
+        title: "Repetisjon og trening",
+        description: "Sjekkliste og blandede eksamensnære oppgaver.",
+        topicSlugs: ["sjekkliste", "oppgaver"],
+      },
+    ],
     topics: [
       {
         slug: "oversikt",
@@ -398,6 +713,67 @@ export const dat107Areas: DAT107Area[] = [
       "Dette er det kildetro eksamenssporet. Hver fil er én original PDF konvertert til Markdown med bevart oppgaverekkefølge og deloppgaver. Dette er IKKE bearbeidede notater — bruk gjengangersporet for mønsteranalyse. Bruk dette sporet til å lese eller løse originale sett.",
     kind: "eksamen-original",
     icon: "archive",
+    accent: "red",
+    trackLabel: "Kildetro eksamensspor",
+    mustKnow: [
+      "Kjenne stilen og språket i originale eksamenssett",
+      "Bruke løsningsforslagene som fasit, ikke som oppsummering",
+      "Øve full gjennomkjøring under tidspress før eksamen",
+    ],
+    examFocus: [
+      "Gjenkjenne språket og stilen i originale eksamenstekster",
+      "Øve full gjennomkjøring under tidspress på originale sett",
+      "Sammenligne egen løsning med originalt løsningsforslag",
+      "Lese løsningsforslag som fasit, ikke som læringsnotat",
+    ],
+    intro: [
+      {
+        title: "Dette er det kildetro sporet",
+        body: "Her er originale eksamenssett og løsningsforslag bevart så tett som mulig til originalteksten. Språket er formelt og eksamensnært. Dette er IKKE bearbeidede notater — bruk gjengangersporet for mønsteranalyse og strategi. Bruk dette sporet for å lese, løse og sammenligne.",
+        accent: "purple",
+      },
+      {
+        title: "Hvordan delen er bygget opp",
+        body: "Temaene er gruppert fra nyeste og nedover. De siste eksamenssettene er viktigst — de reflekterer det faktiske nivået du vil møte. Løsningsforslagene er sortert side om side med de tilhørende settene der vi har begge deler.",
+        accent: "sky",
+      },
+      {
+        title: "Slik bruker du sporet",
+        body: "Start med de nyeste settene. Løs oppgaven først selv under tidspress, sammenlign deretter mot løsningsforslag. Når flere eksamenssett er gjennomført, se mønstrene i bearbeidet gjengangerspor.",
+        accent: "emerald",
+      },
+    ],
+    phases: [
+      {
+        title: "Nyeste — les først",
+        description: "De siste eksamenssettene og løsningsforslagene. Disse er mest representative.",
+        topicSlugs: [
+          "2026-januar-losning",
+          "2025-mai-losning",
+          "2025-januar-losning",
+        ],
+      },
+      {
+        title: "Komplette eksamenssett",
+        description: "Originaltekster uten fasit — bruk disse til full gjennomkjøring under tidspress.",
+        topicSlugs: ["2024-januar", "2023-januar", "2022-januar"],
+      },
+      {
+        title: "Løsningsforslag",
+        description: "Sammenlign med egne svar etter du har løst oppgaven selv.",
+        topicSlugs: [
+          "2024-mai-losning",
+          "2023-mai-losning",
+          "2022-mai-losning",
+          "2021-mai-losning",
+        ],
+      },
+      {
+        title: "Temaspesifikk eksamensøving",
+        description: "Utvalgte fagområder bevart i originalform.",
+        topicSlugs: ["jpa-jan-2022-losning"],
+      },
+    ],
     topics: [
       {
         slug: "2026-januar-losning",

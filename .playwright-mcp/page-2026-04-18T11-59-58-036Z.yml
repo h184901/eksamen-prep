@@ -1,0 +1,1111 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "📚 Eksamensøving" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: 📚
+        - generic [ref=e6]: Eksamensøving
+      - generic [ref=e7]:
+        - link "Hjem" [ref=e8] [cursor=pointer]:
+          - /url: /
+        - link "ING164 Fysikk" [ref=e9] [cursor=pointer]:
+          - /url: /ing164
+        - link "DAT109 Systemutvikling" [ref=e10] [cursor=pointer]:
+          - /url: /dat109
+        - link "DAT110 Nettverk" [ref=e11] [cursor=pointer]:
+          - /url: /dat110
+        - link "DAT107 Databaser" [ref=e12] [cursor=pointer]:
+          - /url: /dat107
+        - button "Bytt til lyst tema" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - link "Hjem" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e20]: /
+        - link "DAT109" [ref=e21] [cursor=pointer]:
+          - /url: /dat109
+        - generic [ref=e22]: /
+        - generic [ref=e23]: Modellering
+      - generic [ref=e24]:
+        - generic [ref=e25]: ~40% av eksamen
+        - heading "Modellering" [level=1] [ref=e26]
+        - paragraph [ref=e27]: Brukstilfellemodell, domenemodell og sekvensdiagram. Dette er den viktigste delen av eksamen og utgjør nesten halvparten av karakteren.
+      - generic [ref=e28]:
+        - 'button "Den store sammenhengen: OOA → OOD → OOP" [ref=e29] [cursor=pointer]':
+          - 'heading "Den store sammenhengen: OOA → OOD → OOP" [level=2] [ref=e30]'
+          - img [ref=e31]
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - paragraph [ref=e35]:
+              - text: Hele faget handler om å gå fra en
+              - strong [ref=e36]: problembeskrivelse
+              - text: (vanligvis et spill) til
+              - strong [ref=e37]: kjørbar kode
+              - text: "gjennom tre steg:"
+            - generic [ref=e38]:
+              - generic [ref=e39]:
+                - heading "OOA — Analyse" [level=4] [ref=e40]
+                - paragraph [ref=e41]:
+                  - strong [ref=e42]: HVA
+                  - text: skal systemet gjøre?
+                - list [ref=e43]:
+                  - listitem [ref=e44]: Brukstilfeller (funksjonelle krav)
+                  - listitem [ref=e45]: Domenemodell (objekter i problemet)
+                - paragraph [ref=e46]: Du tenker IKKE på kode ennå.
+              - generic [ref=e47]:
+                - heading "OOD — Design" [level=4] [ref=e48]
+                - paragraph [ref=e49]:
+                  - strong [ref=e50]: HVORDAN
+                  - text: skal objektene samarbeide?
+                - list [ref=e51]:
+                  - listitem [ref=e52]: Sekvensdiagram (meldinger)
+                  - listitem [ref=e53]: Utformingsmodell (klasser med metoder)
+                - paragraph [ref=e54]: Du begynner å tenke på kode.
+              - generic [ref=e55]:
+                - heading "OOP — Kode" [level=4] [ref=e56]
+                - paragraph [ref=e57]:
+                  - strong [ref=e58]: SKRIV
+                  - text: Java fra diagrammene.
+                - list [ref=e59]:
+                  - listitem [ref=e60]: Klasser fra utformingsmodellen
+                  - listitem [ref=e61]: Metoder fra sekvensdiagrammet
+                - paragraph [ref=e62]: Oppgave 4 på eksamen.
+            - paragraph [ref=e63]:
+              - text: Professoren understreker at dette er en
+              - strong [ref=e64]: iterativ prosess
+              - text: . I Monopol-eksempelet startet han med et spill uten penger, uten eiendom, kun 20 runder. Deretter la han til penger, fengsel, og eiendommer i nye iterasjoner. På eksamen har du ikke tid til iterasjoner, men
+              - strong [ref=e65]: tankemåten
+              - text: "er viktig: start enkelt og lag en konsistent modell."
+            - generic [ref=e66]:
+              - heading "Oppgave 1 på eksamen" [level=4] [ref=e67]
+              - paragraph [ref=e68]: "Gitt en problemstilling (nesten alltid et spill), lag:"
+              - list [ref=e69]:
+                - listitem [ref=e70]:
+                  - strong [ref=e71]: a)
+                  - text: Brukstilfellemodell med diagram + beskrivelser
+                - listitem [ref=e72]:
+                  - strong [ref=e73]: b)
+                  - text: Domenemodell (klassediagram med konseptuelle klasser)
+                - listitem [ref=e74]:
+                  - strong [ref=e75]: c)
+                  - text: Sekvensdiagram for brukstilfellene (maks 3)
+          - generic [ref=e76]:
+            - heading "Du MÅ kunne:" [level=4] [ref=e77]
+            - list [ref=e78]:
+              - listitem [ref=e79]:
+                - generic [ref=e80]: ✓
+                - generic [ref=e81]: Forskjellen mellom analyse (HVA) og design (HVORDAN)
+              - listitem [ref=e82]:
+                - generic [ref=e83]: ✓
+                - generic [ref=e84]: Domenemodell = virkelig verden (ingen metoder), utformingsmodell = programvare (med metoder)
+              - listitem [ref=e85]:
+                - generic [ref=e86]: ✓
+                - generic [ref=e87]: Sekvensdiagrammet binder brukstilfellebeskrivelsen til klassedesignet
+              - listitem [ref=e88]:
+                - generic [ref=e89]: ✓
+                - generic [ref=e90]: Prosessen er iterativ — start enkelt, bygg ut gradvis
+      - generic [ref=e91]:
+        - button "1. Brukstilfellemodell (Use Case)" [ref=e92] [cursor=pointer]:
+          - heading "1. Brukstilfellemodell (Use Case)" [level=2] [ref=e93]
+          - img [ref=e94]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - heading "Hva er en brukstilfellemodell?" [level=3] [ref=e98]
+            - paragraph [ref=e99]:
+              - text: "En brukstilfellemodell består av to deler: et"
+              - strong [ref=e100]: brukstilfellediagram
+              - text: (tegning) og
+              - strong [ref=e101]: brukstilfellebeskrivelser
+              - text: (tekst eller aktivitetsdiagram). Til sammen viser de
+              - emphasis [ref=e102]: hva
+              - text: systemet gjør for brukerne — ikke
+              - emphasis [ref=e103]: hvordan
+              - text: .
+            - generic [ref=e104]:
+              - heading "KRITISK REGEL — vanligste feilen på eksamen" [level=4] [ref=e105]
+              - paragraph [ref=e106]: Brukstilfellesdiagrammet skal IKKE være et flytdiagram!
+              - paragraph [ref=e107]:
+                - text: Mange studenter lager en sekvens av handlinger som separate brukstilfeller (f.eks. «Trill terning» → «Flytt brikke» → «Sjekk vinner»). Det er
+                - strong [ref=e108]: feil
+                - text: . Et brukstilfelle er en
+                - strong [ref=e109]: funksjon
+                - text: systemet tilbyr — noe en aktør kan gjøre med systemet på et
+                - strong [ref=e110]: høyt nivå
+                - text: . For spillene på eksamen trenger du vanligvis bare 2–4 brukstilfeller.
+            - heading "Elementene i diagrammet" [level=3] [ref=e111]
+            - table [ref=e113]:
+              - rowgroup [ref=e114]:
+                - row "Element Symbol Beskrivelse" [ref=e115]:
+                  - columnheader "Element" [ref=e116]
+                  - columnheader "Symbol" [ref=e117]
+                  - columnheader "Beskrivelse" [ref=e118]
+              - rowgroup [ref=e119]:
+                - row "Aktør Strekfigur med navn Noen/noe utenfor systemet som interagerer med det. Kan være person eller system (da markert med <<actor>>)." [ref=e120]:
+                  - cell "Aktør" [ref=e121]
+                  - cell "Strekfigur med navn" [ref=e122]
+                  - cell "Noen/noe utenfor systemet som interagerer med det. Kan være person eller system (da markert med <<actor>>)." [ref=e123]:
+                    - text: Noen/noe
+                    - emphasis [ref=e124]: utenfor
+                    - text: systemet som interagerer med det. Kan være person eller system (da markert med
+                    - code [ref=e125]: <<actor>>
+                    - text: ).
+                - row "System Rektangel med navn Rammen rundt brukstilfellene. Systemnavnet øverst." [ref=e126]:
+                  - cell "System" [ref=e127]
+                  - cell "Rektangel med navn" [ref=e128]
+                  - cell "Rammen rundt brukstilfellene. Systemnavnet øverst." [ref=e129]
+                - row "Brukstilfelle Ellipse med navn En funksjon systemet tilbyr. Representerer hva brukeren kan gjøre." [ref=e130]:
+                  - cell "Brukstilfelle" [ref=e131]
+                  - cell "Ellipse med navn" [ref=e132]
+                  - cell "En funksjon systemet tilbyr. Representerer hva brukeren kan gjøre." [ref=e133]:
+                    - text: En funksjon systemet tilbyr. Representerer
+                    - emphasis [ref=e134]: hva
+                    - text: brukeren kan gjøre.
+                - row "Assosiasjon Linje Kobler aktør til brukstilfelle." [ref=e135]:
+                  - cell "Assosiasjon" [ref=e136]
+                  - cell "Linje" [ref=e137]
+                  - cell "Kobler aktør til brukstilfelle." [ref=e138]
+                - row "<<include>> Stiplet pil med tekst Et brukstilfelle inkluderer alltid et annet. F.eks. «Spill» includes «Init»." [ref=e139]:
+                  - cell "<<include>>" [ref=e140]
+                  - cell "Stiplet pil med tekst" [ref=e141]
+                  - cell "Et brukstilfelle inkluderer alltid et annet. F.eks. «Spill» includes «Init»." [ref=e142]:
+                    - text: Et brukstilfelle inkluderer
+                    - emphasis [ref=e143]: alltid
+                    - text: et annet. F.eks. «Spill» includes «Init».
+                - row "<<extends>> Stiplet pil med tekst Et brukstilfelle kan utvide et annet (valgfri tilleggsfunksjonalitet)." [ref=e144]:
+                  - cell "<<extends>>" [ref=e145]
+                  - cell "Stiplet pil med tekst" [ref=e146]
+                  - cell "Et brukstilfelle kan utvide et annet (valgfri tilleggsfunksjonalitet)." [ref=e147]:
+                    - text: Et brukstilfelle
+                    - emphasis [ref=e148]: kan
+                    - text: utvide et annet (valgfri tilleggsfunksjonalitet).
+            - generic [ref=e149]:
+              - 'heading "Steg-for-steg: Slik lager du brukstilfellemodellen på eksamen" [level=4] [ref=e150]'
+              - list [ref=e151]:
+                - listitem [ref=e152]:
+                  - strong [ref=e153]: Les oppgaven to ganger.
+                  - text: Let etter handlinger på høyt nivå — «Hva kan brukeren gjøre med systemet?»
+                - listitem [ref=e154]:
+                  - strong [ref=e155]: Identifiser aktører.
+                  - text: "For spill: vanligvis «Observatør» eller «Spiller». Noen ganger et eksternt system ("
+                  - code [ref=e156]: <<actor>>
+                  - text: ).
+                - listitem [ref=e157]:
+                  - strong [ref=e158]: Finn 2–4 brukstilfeller.
+                  - text: "For spill er det nesten alltid: sette opp spillet (init) og spille spillet. Eventuelt et tredje for en spesialhandling."
+                - listitem [ref=e159]:
+                  - strong [ref=e160]: Tegn diagrammet
+                  - text: med system-rektangel, aktører utenfor, brukstilfeller (ellipser) inni.
+                - listitem [ref=e161]:
+                  - strong [ref=e162]: "Legg til relasjoner:"
+                  - text: assosiasjoner mellom aktører og brukstilfeller,
+                  - code [ref=e163]: <<include>>
+                  - text: der det gir mening.
+                - listitem [ref=e164]:
+                  - strong [ref=e165]: Skriv brukstilfellebeskrivelse
+                  - text: for hvert brukstilfelle med nummererte steg.
+            - heading "Brukstilfellebeskrivelsen" [level=3] [ref=e166]
+            - paragraph [ref=e167]:
+              - text: For hvert brukstilfelle skriver du en
+              - strong [ref=e168]: tekstlig algoritme
+              - text: — nummererte steg som beskriver hovedflyten. Alternativt kan du tegne et aktivitetsdiagram, men tekst er raskere på eksamen.
+            - generic [ref=e169]:
+              - heading "Struktur for beskrivelsen" [level=4] [ref=e170]
+              - list [ref=e171]:
+                - listitem [ref=e172]:
+                  - strong [ref=e173]: "Navn:"
+                  - text: Brukstilfelleets navn
+                - listitem [ref=e174]:
+                  - strong [ref=e175]: "Aktør:"
+                  - text: Hvem utfører det
+                - listitem [ref=e176]:
+                  - strong [ref=e177]: "Forkrav:"
+                  - text: Hva må være sant før brukstilfellet starter
+                - listitem [ref=e178]:
+                  - strong [ref=e179]: "Hovedflyt:"
+                  - text: Nummerert liste med steg (inkl. løkker og betingelser)
+                - listitem [ref=e180]:
+                  - strong [ref=e181]: "Alternativ flyt:"
+                  - text: Hva skjer ved avvik (valgfritt)
+            - 'heading "Eksempel fra forelesning: Monopol" [level=3] [ref=e182]'
+            - paragraph [ref=e183]: Professorens eget eksempel (F03–F06)
+            - generic [ref=e184]:
+              - heading "Brukstilfellesdiagram — Monopol" [level=4] [ref=e185]
+              - img "Brukstilfellesdiagram for Monopol" [ref=e187]:
+                - generic [ref=e189]: Monopol
+                - generic [ref=e194]: Observatør
+                - generic [ref=e197]: Init
+                - generic [ref=e200]: Spill
+                - generic [ref=e203]: <<include>>
+              - paragraph [ref=e204]:
+                - strong [ref=e205]: Bare 2 brukstilfeller!
+                - text: «Spill» inkluderer «Init». Observatøren starter spillet og overvåker det. Simuleringen kjører automatisk.
+            - generic [ref=e206]:
+              - heading "Brukstilfellebeskrivelse — «Spill Monopol»" [level=4] [ref=e207]
+              - generic [ref=e208]:
+                - paragraph [ref=e209]:
+                  - strong [ref=e210]: "Forkrav:"
+                  - text: Spillet er initialisert
+                - list [ref=e211]:
+                  - listitem [ref=e212]: Start spillet
+                  - listitem [ref=e213]:
+                    - text: "Hver spiller gjør et trekk:"
+                    - list [ref=e214]:
+                      - listitem [ref=e215]: Trill terningene
+                      - listitem [ref=e216]: Flytt brikken det antall ruter terningene viser
+                      - listitem [ref=e217]: Utfør handling basert på ruten man lander på
+                  - listitem [ref=e218]: Gjenta fra steg 2 til spillet er ferdig (20 runder)
+            - 'heading "Eksempel fra forelesning: Stigespill" [level=3] [ref=e219]'
+            - paragraph [ref=e220]: Fra F08 — brukt i obligatorisk øvelse
+            - generic [ref=e221]:
+              - heading "Brukstilfellesdiagram — Stigespill" [level=4] [ref=e222]
+              - img "Brukstilfellesdiagram for Stigespill" [ref=e224]:
+                - generic [ref=e226]: Stigespill
+                - generic [ref=e231]: Observatør
+                - generic [ref=e234]: Spill stigespill
+              - paragraph [ref=e235]:
+                - strong [ref=e236]: Bare 1 brukstilfelle!
+                - text: "Professorens kommentar: «For et simulert spill trenger du svært få brukstilfeller.»"
+            - 'heading "Eksempel fra eksamen: Eksamenssystem (2020)" [level=3] [ref=e237]'
+            - paragraph [ref=e238]: Fra eksamen høst 2020 med fasit
+            - generic [ref=e239]:
+              - heading "Brukstilfellesdiagram — Eksamenssystem" [level=4] [ref=e240]
+              - paragraph [ref=e241]: Automatisert system for avvikling av digital multiple-choice eksamen.
+              - img "Brukstilfellesdiagram for Eksamenssystem" [ref=e243]:
+                - generic [ref=e245]: Eksamenssystem
+                - generic [ref=e250]: Lærer
+                - generic [ref=e255]: Student
+                - generic [ref=e260]: Klokke
+                - generic [ref=e261]: <<actor>>
+                - generic [ref=e264]: Lag oppgave
+                - generic [ref=e267]: Definer eksamen
+                - generic [ref=e270]: Besvar eksamen
+                - generic [ref=e273]: Lever besvarelse
+                - generic [ref=e276]: Godkjenn karakter
+                - generic [ref=e283]: <<include>>
+              - paragraph [ref=e284]: Her er det 5 brukstilfeller fordi systemet er mer komplekst enn et spill. «Lever besvarelse» er <<include>> av «Besvar eksamen» og kan også utløses av aktøren «Klokke» (automatisk levering ved tidsfrist).
+            - 'heading "Eksempel fra eksamen: Max Mümmelmann (vår 2023)" [level=3] [ref=e285]'
+            - paragraph [ref=e286]: Nyeste eksamen med komplett fasit fra professoren
+            - generic [ref=e287]:
+              - heading "Brukstilfellesdiagram — Max Mümmelmann" [level=4] [ref=e288]
+              - img "Brukstilfellesdiagram for Max Mümmelmann" [ref=e290]:
+                - generic [ref=e292]: Max Mümmelmann
+                - generic [ref=e297]: Admin
+                - generic [ref=e302]: Spiller
+                - generic [ref=e305]: Init spill
+                - generic [ref=e308]: Start spill
+                - generic [ref=e311]: Spill tur
+                - generic [ref=e316]: <<include>>
+              - generic [ref=e317]:
+                - heading "Brukstilfellebeskrivelse — «Spill tur»" [level=4] [ref=e318]
+                - paragraph [ref=e319]:
+                  - strong [ref=e320]: "Forkrav:"
+                  - text: Spillet må være startet
+                - list [ref=e321]:
+                  - listitem [ref=e322]: Trill terning
+                  - listitem [ref=e323]: Flytt kaninbrikken det antall plasser som terningen viser
+                  - listitem [ref=e324]: Ta det øverste kortet i stabelen der spilleren landet
+                  - listitem [ref=e325]: Hvis spilleren mangler familiemedlemmet → behold kortet
+                  - listitem [ref=e326]: Ellers → legg kortet tilbake i bunnen av bunken
+                  - listitem [ref=e327]: Hvis terningen viser 6 → spill ny tur
+              - generic [ref=e328]:
+                - heading "Brukstilfellebeskrivelse — «Start spill»" [level=4] [ref=e329]
+                - list [ref=e330]:
+                  - listitem [ref=e331]: «Init spill» (included)
+                  - listitem [ref=e332]: For alle spillerne → «Spill tur»
+                  - listitem [ref=e333]: Hvis en spiller har full familie → Spilleren er vinner, avslutt
+                  - listitem [ref=e334]: Fortsett fra steg 2
+            - generic [ref=e335]:
+              - heading "Vanlige feil" [level=4] [ref=e336]
+              - list [ref=e337]:
+                - listitem [ref=e338]:
+                  - generic [ref=e339]: ✗
+                  - generic [ref=e340]:
+                    - text: Lager et
+                    - strong [ref=e341]: flytdiagram
+                    - text: med mange brukstilfeller i sekvens (Trill → Flytt → Sjekk)
+                - listitem [ref=e342]:
+                  - generic [ref=e343]: ✗
+                  - generic [ref=e344]: For mange brukstilfeller — for spill trenger du vanligvis bare 2–3
+                - listitem [ref=e345]:
+                  - generic [ref=e346]: ✗
+                  - generic [ref=e347]: Mangler brukstilfellebeskrivelse — diagrammet alene er ikke nok
+                - listitem [ref=e348]:
+                  - generic [ref=e349]: ✗
+                  - generic [ref=e350]: Glemmer forkrav og aktører i beskrivelsen
+          - generic [ref=e351]:
+            - heading "Du MÅ kunne:" [level=4] [ref=e352]
+            - list [ref=e353]:
+              - listitem [ref=e354]:
+                - generic [ref=e355]: ✓
+                - generic [ref=e356]: Tegne brukstilfellesdiagram med aktører, system, og brukstilfeller
+              - listitem [ref=e357]:
+                - generic [ref=e358]: ✓
+                - generic [ref=e359]: Skrive tekstlig brukstilfellebeskrivelse (nummererte steg)
+              - listitem [ref=e360]:
+                - generic [ref=e361]: ✓
+                - generic [ref=e362]: Bruke <<include>> og <<extends>> korrekt
+              - listitem [ref=e363]:
+                - generic [ref=e364]: ✓
+                - generic [ref=e365]: Et brukstilfelle er en FUNKSJON, ikke et steg i en sekvens
+      - generic [ref=e366]:
+        - button "2. Domenemodell (klassediagram for analyse)" [ref=e367] [cursor=pointer]:
+          - heading "2. Domenemodell (klassediagram for analyse)" [level=2] [ref=e368]
+          - img [ref=e369]
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - heading "Hva er en domenemodell?" [level=3] [ref=e373]
+            - paragraph [ref=e374]:
+              - text: En domenemodell er et
+              - strong [ref=e375]: klassediagram med konseptuelle klasser
+              - text: som representerer den
+              - strong [ref=e376]: virkelige verden
+              - text: ", ikke programvare. Den viser objekter, attributter og relasjoner fra problemdomenet."
+            - generic [ref=e377]:
+              - heading "Domenemodell vs. Utformingsmodell" [level=4] [ref=e378]
+              - generic [ref=e379]:
+                - generic [ref=e380]:
+                  - paragraph [ref=e381]: Domenemodell (oppgave 1b)
+                  - list [ref=e382]:
+                    - listitem [ref=e383]: Konsepter fra virkeligheten
+                    - listitem [ref=e384]:
+                      - strong [ref=e385]: Ingen metoder
+                    - listitem [ref=e386]: Bare klassenavn, attributter, assosiasjoner
+                    - listitem [ref=e387]: Multiplisitet på alle assosiasjoner
+                - generic [ref=e388]:
+                  - paragraph [ref=e389]: Utformingsmodell (oppgave 4)
+                  - list [ref=e390]:
+                    - listitem [ref=e391]: Programvare-klasser
+                    - listitem [ref=e392]:
+                      - strong [ref=e393]: Med metoder
+                    - listitem [ref=e394]: "Synlighet (+, -, #), datatyper"
+                    - listitem [ref=e395]: Navigasjonspiler (retning)
+            - generic [ref=e396]:
+              - heading "Professorens eksplisitte regel (2021-fasit):" [level=4] [ref=e397]
+              - paragraph [ref=e398]:
+                - text: «En domenemodell gir et statisk bilde av den verden som vi skal modellere og seinere programmere og derfor er det
+                - strong [ref=e399]: ingen metoder i domenemodellen
+                - text: .»
+            - heading "Hvordan finne konseptuelle klasser" [level=3] [ref=e400]
+            - paragraph [ref=e401]:
+              - text: "Professorens metode (fra Larman):"
+              - strong [ref=e402]: finn substantivene
+              - text: i oppgaveteksten! Understrek alle substantiver — disse er sterke kandidater for klasser.
+            - generic [ref=e403]:
+              - 'heading "Eksempel: Substantiv-analyse for Skyjo (eksamen 2024)" [level=4] [ref=e404]'
+              - paragraph [ref=e405]: «Spillet er et kortspill som spilles av 2 til 8 spillere.Spillet går over flere omganger. Spillet inneholder 150 kortmed et tall som er poeng. En blokk for å notere poeng.Kastehaugen.»
+              - paragraph [ref=e406]: "Klasser: Spill, Spiller, Kort, Kortstokk/Kastehaug, Omgang, Poengblokk"
+            - heading "Assosiasjonstyper" [level=3] [ref=e407]
+            - table [ref=e409]:
+              - rowgroup [ref=e410]:
+                - row "Type Symbol Beskrivelse" [ref=e411]:
+                  - columnheader "Type" [ref=e412]
+                  - columnheader "Symbol" [ref=e413]
+                  - columnheader "Beskrivelse" [ref=e414]
+              - rowgroup [ref=e415]:
+                - row "Enkel assosiasjon Strek (———) To klasser er relatert. Brukes oftest." [ref=e416]:
+                  - cell "Enkel assosiasjon" [ref=e417]
+                  - cell "Strek (———)" [ref=e418]
+                  - cell "To klasser er relatert. Brukes oftest." [ref=e419]
+                - row "Aggregering Åpen diamant (◇———) «Har»-relasjon. Delene kan eksistere uavhengig." [ref=e420]:
+                  - cell "Aggregering" [ref=e421]
+                  - cell "Åpen diamant (◇———)" [ref=e422]
+                  - cell "«Har»-relasjon. Delene kan eksistere uavhengig." [ref=e423]
+                - row "Komposisjon Fylt diamant (◆———) Sterk «eier»-relasjon. Delene forsvinner hvis helheten slettes. F.eks. Brett ◆— Rute." [ref=e424]:
+                  - cell "Komposisjon" [ref=e425]
+                  - cell "Fylt diamant (◆———)" [ref=e426]
+                  - cell "Sterk «eier»-relasjon. Delene forsvinner hvis helheten slettes. F.eks. Brett ◆— Rute." [ref=e427]
+                - row "Arv/generalisering Trekant-pil (△) «Er-en»-relasjon. Subklasser arver fra superklasse. F.eks. StartRute arver fra Rute." [ref=e428]:
+                  - cell "Arv/generalisering" [ref=e429]
+                  - cell "Trekant-pil (△)" [ref=e430]
+                  - cell "«Er-en»-relasjon. Subklasser arver fra superklasse. F.eks. StartRute arver fra Rute." [ref=e431]
+            - heading "Multiplisitet" [level=3] [ref=e432]
+            - paragraph [ref=e433]:
+              - strong [ref=e434]: Alltid påkrevd!
+              - text: Professoren trekker for manglende multiplisitet.
+            - table [ref=e436]:
+              - rowgroup [ref=e437]:
+                - row "Notasjon Betydning" [ref=e438]:
+                  - columnheader "Notasjon" [ref=e439]
+                  - columnheader "Betydning" [ref=e440]
+              - rowgroup [ref=e441]:
+                - row "1 Nøyaktig én" [ref=e442]:
+                  - cell "1" [ref=e443]
+                  - cell "Nøyaktig én" [ref=e444]
+                - row "* Null til mange (0..∞)" [ref=e445]:
+                  - cell "*" [ref=e446]
+                  - cell "Null til mange (0..∞)" [ref=e447]
+                - row "0..1 Null eller én" [ref=e448]:
+                  - cell "0..1" [ref=e449]
+                  - cell "Null eller én" [ref=e450]
+                - row "1..* Én eller flere" [ref=e451]:
+                  - cell "1..*" [ref=e452]
+                  - cell "Én eller flere" [ref=e453]
+                - row "2..8 Mellom to og åtte" [ref=e454]:
+                  - cell "2..8" [ref=e455]
+                  - cell "Mellom to og åtte" [ref=e456]
+                - row "40 Nøyaktig 40" [ref=e457]:
+                  - cell "40" [ref=e458]
+                  - cell "Nøyaktig 40" [ref=e459]
+            - generic [ref=e460]:
+              - heading "Når bruke arv i domenemodellen?" [level=4] [ref=e461]
+              - paragraph [ref=e462]: "Professorens retningslinjer (F06):"
+              - list [ref=e463]:
+                - listitem [ref=e464]:
+                  - text: Subklassen har
+                  - strong [ref=e465]: ekstra attributter
+                - listitem [ref=e466]:
+                  - text: Subklassen har
+                  - strong [ref=e467]: ekstra assosiasjoner
+                - listitem [ref=e468]:
+                  - text: Subklassen
+                  - strong [ref=e469]: oppfører seg annerledes
+                - listitem [ref=e470]:
+                  - text: Subklassen representerer noe
+                  - strong [ref=e471]: konseptuelt ulikt
+              - paragraph [ref=e472]: I mange spilloppgaver på eksamen trenger du IKKE arv i domenemodellen. Bruk det kun hvis det er tydelige undertyper (f.eks. ulike rutetyper i Monopol).
+            - generic [ref=e473]:
+              - 'heading "Steg-for-steg: Slik lager du domenemodellen på eksamen" [level=4] [ref=e474]'
+              - list [ref=e475]:
+                - listitem [ref=e476]:
+                  - strong [ref=e477]: Understrek alle substantiver
+                  - text: i oppgaveteksten — dette er klassekandidater.
+                - listitem [ref=e478]:
+                  - strong [ref=e479]: "Filtrer:"
+                  - text: Fjern trivielle ting (tall, farger) som bør være attributter, ikke klasser.
+                - listitem [ref=e480]:
+                  - strong [ref=e481]: Legg til attributter
+                  - text: på hver klasse (egenskaper som navn, verdi, pris).
+                - listitem [ref=e482]:
+                  - strong [ref=e483]: Tegn assosiasjoner
+                  - text: "mellom klassene. Spør: «Må systemet huske denne relasjonen?»"
+                - listitem [ref=e484]:
+                  - strong [ref=e485]: Legg til multiplisitet
+                  - text: på ALLE assosiasjoner.
+                - listitem [ref=e486]:
+                  - strong [ref=e487]: Vurder arv
+                  - text: bare hvis det er tydelige undertyper.
+                - listitem [ref=e488]:
+                  - strong [ref=e489]: Sjekk konsistens
+                  - text: med brukstilfellebeskrivelsen — alle konsepter bør være med.
+            - 'heading "Eksempel: Monopol — domenemodell (endelig versjon)" [level=3] [ref=e490]'
+            - paragraph [ref=e491]: Fra F05–F06 — utviklet over 3 iterasjoner
+            - generic [ref=e492]:
+              - img "Domenemodell for Monopol" [ref=e494]:
+                - generic [ref=e495]:
+                  - generic [ref=e499]: Monopol
+                  - generic [ref=e500]: rundeNr
+                - generic [ref=e505]: Brett
+                - generic [ref=e506]:
+                  - generic [ref=e510]: Spiller
+                  - generic [ref=e511]: navn
+                  - generic [ref=e512]: penger
+                - generic [ref=e513]:
+                  - generic [ref=e517]: Kopp
+                  - generic [ref=e518]: sum
+                - generic [ref=e519]:
+                  - generic [ref=e523]: Terning
+                  - generic [ref=e524]: verdi
+                - generic [ref=e525]:
+                  - generic [ref=e529]: Brikke
+                  - generic [ref=e530]: navn
+                - generic [ref=e531]:
+                  - generic [ref=e535]: «abstract» Rute
+                  - generic [ref=e536]: navn
+                - generic [ref=e541]: StartRute
+                - generic [ref=e546]: VanligRute
+                - generic [ref=e547]:
+                  - generic [ref=e551]: «abstract» SkjøteRute
+                  - generic [ref=e552]: pris
+                - generic [ref=e557]: Eiendom
+                - generic [ref=e562]: Jernbane
+                - generic [ref=e567]: Offentlig
+                - generic [ref=e569]: "1"
+                - generic [ref=e570]: "1"
+                - generic [ref=e571]: "1"
+                - generic [ref=e572]: 2..8
+                - generic [ref=e574]: "1"
+                - generic [ref=e575]: "1"
+                - generic [ref=e577]: "1"
+                - generic [ref=e578]: "40"
+                - generic [ref=e580]: "1"
+                - generic [ref=e581]: "2"
+                - generic [ref=e583]: "1"
+                - generic [ref=e584]: "1"
+                - generic [ref=e586]: Er på
+                - generic [ref=e587]: "1"
+                - generic [ref=e588]: 0..8
+                - generic [ref=e592]: Eier
+                - generic [ref=e593]: 0..1
+                - generic [ref=e594]: "*"
+              - generic [ref=e595]:
+                - paragraph [ref=e596]:
+                  - strong [ref=e597]: "Klasser:"
+                  - text: Monopol, Brett, Spiller, Kopp, Terning, Brikke, Rute (abstrakt) med subklasser StartRute, VanligRute, InntektsskattRute, DeSettesIFengselRute, SkjøteRute (abstrakt) med subklasser EiendomRute, JernbaneRute, OffentligRute.
+                - paragraph [ref=e598]:
+                  - strong [ref=e599]: "Nøkkelpunkter:"
+                - list [ref=e600]:
+                  - listitem [ref=e601]: Brett eier 40 Ruter (komposisjon, 1:40)
+                  - listitem [ref=e602]: Kopp er «ren fabrikkering» — finnes ikke i virkeligheten
+                  - listitem [ref=e603]: Arv brukt for rutetyper (de har ulik oppførsel)
+                  - listitem [ref=e604]: SkjøteRute har ekstra assosiasjon Eier → Spiller (0..1:*)
+            - 'heading "Eksempel fra eksamen: Max Mümmelmann (vår 2023)" [level=3] [ref=e605]'
+            - generic [ref=e606]:
+              - heading "Professorens domenemodell — fasit" [level=4] [ref=e607]
+              - img "Domenemodell for Max Mümmelmann" [ref=e609]:
+                - generic [ref=e614]: MaxMummelmann
+                - generic [ref=e619]: Brett
+                - generic [ref=e624]: Rute
+                - generic [ref=e625]:
+                  - generic [ref=e629]: Spiller
+                  - generic [ref=e630]: navn
+                - generic [ref=e631]:
+                  - generic [ref=e635]: Kort
+                  - generic [ref=e636]: nummer
+                - generic [ref=e637]:
+                  - generic [ref=e641]: Terning
+                  - generic [ref=e642]: verdi
+                - generic [ref=e647]: Brikke
+                - generic [ref=e648]: "1"
+                - generic [ref=e649]: "1"
+                - generic [ref=e650]: "1"
+                - generic [ref=e651]: "8"
+                - generic [ref=e652]: "1"
+                - generic [ref=e653]: 2..4
+                - generic [ref=e654]: 0..6
+                - generic [ref=e655]: 0..*
+                - generic [ref=e656]: "1"
+                - generic [ref=e658]: 1:1
+              - generic [ref=e659]:
+                - paragraph [ref=e660]:
+                  - strong [ref=e661]: "Klasser:"
+                  - text: MaxMummelmann, Brett, Rute, Spiller, Kort, Terning, Brikke
+                - paragraph [ref=e662]:
+                  - strong [ref=e663]: "Attributter:"
+                  - text: Terning.verdi, Kort.nummer, Spiller.navn
+                - paragraph [ref=e664]:
+                  - strong [ref=e665]: "Multiplisitet:"
+                  - text: 2..4 spillere, 0..6 kort per spiller, 8 ruter på brettet
+            - 'heading "Eksempel fra eksamen: Eksamenssystem (2020)" [level=3] [ref=e666]'
+            - generic [ref=e667]:
+              - heading "Professorens domenemodell — fasit" [level=4] [ref=e668]
+              - img "Domenemodell for Eksamenssystem" [ref=e670]:
+                - generic [ref=e675]: Lærer
+                - generic [ref=e680]: Oppgave
+                - generic [ref=e685]: Spørsmål
+                - generic [ref=e686]:
+                  - generic [ref=e690]: Svaralternativ
+                  - generic [ref=e691]: "riktig: boolsk"
+                - generic [ref=e692]:
+                  - generic [ref=e696]: Eksamen
+                  - generic [ref=e697]: "tid: dato"
+                  - generic [ref=e698]: "varighet: heltall"
+                - generic [ref=e699]:
+                  - generic [ref=e703]: Student
+                  - generic [ref=e704]: brukernavn
+                  - generic [ref=e705]: passord
+                - generic [ref=e706]:
+                  - generic [ref=e710]: Besvarelse
+                  - generic [ref=e711]: karakter
+                - generic [ref=e712]:
+                  - generic [ref=e716]: Svar
+                  - generic [ref=e717]: "kryss: boolsk"
+                - generic [ref=e718]: "*"
+                - generic [ref=e719]: "*"
+                - generic [ref=e720]: "*"
+                - generic [ref=e721]: "*"
+                - generic [ref=e723]: "*"
+                - generic [ref=e724]: "*"
+                - generic [ref=e725]: "*"
+                - generic [ref=e727]: "*"
+              - generic [ref=e728]:
+                - paragraph [ref=e729]:
+                  - strong [ref=e730]: "8 klasser:"
+                  - text: Lærer, Student, Oppgave, Eksamen, Spørsmål, Svaralternativ, Besvarelse, Svar
+                - paragraph [ref=e731]: "Merk: Svar (det studenten gir, med kryss:boolsk) vs Svaralternativ (mulige valg, med riktig:boolsk)."
+            - generic [ref=e732]:
+              - heading "Vanlige feil" [level=4] [ref=e733]
+              - list [ref=e734]:
+                - listitem [ref=e735]:
+                  - generic [ref=e736]: ✗
+                  - generic [ref=e737]:
+                    - strong [ref=e738]: Metoder i domenemodellen
+                    - text: — aldri! Domenemodellen er analyse, ikke design.
+                - listitem [ref=e739]:
+                  - generic [ref=e740]: ✗
+                  - generic [ref=e741]:
+                    - strong [ref=e742]: Manglende multiplisitet
+                    - text: — professoren trekker for dette. Alle assosiasjoner MÅ ha multiplisitet.
+                - listitem [ref=e743]:
+                  - generic [ref=e744]: ✗
+                  - generic [ref=e745]:
+                    - strong [ref=e746]: For få klasser
+                    - text: — du har sannsynligvis oversett substantiver i teksten.
+                - listitem [ref=e747]:
+                  - generic [ref=e748]: ✗
+                  - generic [ref=e749]:
+                    - strong [ref=e750]: For mange klasser
+                    - text: — trivielle ting som «tall», «farge», «tekst» er attributter, ikke klasser.
+                - listitem [ref=e751]:
+                  - generic [ref=e752]: ✗
+                  - generic [ref=e753]:
+                    - strong [ref=e754]: Bruker fremmednøkler
+                    - text: som attributter i stedet for assosiasjonslinjer — dette er OOAD, ikke database.
+                - listitem [ref=e755]:
+                  - generic [ref=e756]: ✗
+                  - generic [ref=e757]:
+                    - strong [ref=e758]: Inkonsistens
+                    - text: med brukstilfellebeskrivelsen — alle konsepter nevnt i brukstilfellene bør finnes i domenemodellen.
+          - generic [ref=e759]:
+            - heading "Du MÅ kunne:" [level=4] [ref=e760]
+            - list [ref=e761]:
+              - listitem [ref=e762]:
+                - generic [ref=e763]: ✓
+                - generic [ref=e764]: Finne konseptuelle klasser fra substantiv i oppgaveteksten
+              - listitem [ref=e765]:
+                - generic [ref=e766]: ✓
+                - generic [ref=e767]: Tegne klasser med attributter — ALDRI med metoder
+              - listitem [ref=e768]:
+                - generic [ref=e769]: ✓
+                - generic [ref=e770]: Tegne assosiasjoner med korrekt multiplisitet
+              - listitem [ref=e771]:
+                - generic [ref=e772]: ✓
+                - generic [ref=e773]: Forskjellen mellom assosiasjon, aggregering, komposisjon og arv
+              - listitem [ref=e774]:
+                - generic [ref=e775]: ✓
+                - generic [ref=e776]: Bruke arv/generalisering der det er tydelige undertyper
+      - generic [ref=e777]:
+        - button "3. Sekvensdiagram" [ref=e778] [cursor=pointer]:
+          - heading "3. Sekvensdiagram" [level=2] [ref=e779]
+          - img [ref=e780]
+        - generic [ref=e782]:
+          - generic [ref=e783]:
+            - heading "Hva er et sekvensdiagram?" [level=3] [ref=e784]
+            - paragraph [ref=e785]:
+              - text: Sekvensdiagrammet viser
+              - strong [ref=e786]: hvordan objekter kommuniserer
+              - text: for å utføre et brukstilfelle. Det er overgangen fra analyse (hva) til design (hvordan) — du bestemmer hvilke objekter som sender hvilke meldinger til hvilke andre objekter.
+            - generic [ref=e787]:
+              - heading "Viktig kobling" [level=4] [ref=e788]
+              - paragraph [ref=e789]:
+                - text: Sekvensdiagrammet binder brukstilfellebeskrivelsen til klassedesignet. Hvert
+                - strong [ref=e790]: steg
+                - text: i brukstilfellebeskrivelsen blir én eller flere
+                - strong [ref=e791]: meldinger
+                - text: i sekvensdiagrammet. Og meldingene et objekt mottar blir til
+                - strong [ref=e792]: metoder
+                - text: i utformingsmodellen (oppgave 4).
+            - heading "Elementene" [level=3] [ref=e793]
+            - table [ref=e795]:
+              - rowgroup [ref=e796]:
+                - row "Element Beskrivelse" [ref=e797]:
+                  - columnheader "Element" [ref=e798]
+                  - columnheader "Beskrivelse" [ref=e799]
+              - rowgroup [ref=e800]:
+                - 'row "Objekt Boks øverst: : Klassenavn (anonymt) eller navn : Klassenavn" [ref=e801]':
+                  - cell "Objekt" [ref=e802]
+                  - 'cell "Boks øverst: : Klassenavn (anonymt) eller navn : Klassenavn" [ref=e803]':
+                    - text: "Boks øverst:"
+                    - code [ref=e804]: ": Klassenavn"
+                    - text: (anonymt) eller
+                    - code [ref=e805]: "navn : Klassenavn"
+                - row "Livslinje Stiplet vertikal linje nedover fra objektet. Viser at objektet eksisterer." [ref=e806]:
+                  - cell "Livslinje" [ref=e807]
+                  - cell "Stiplet vertikal linje nedover fra objektet. Viser at objektet eksisterer." [ref=e808]
+                - row "Aktiveringsboks Tynt rektangel på livslinjen. Viser at objektet er aktivt (utfører noe)." [ref=e809]:
+                  - cell "Aktiveringsboks" [ref=e810]
+                  - cell "Tynt rektangel på livslinjen. Viser at objektet er aktivt (utfører noe)." [ref=e811]:
+                    - text: Tynt rektangel på livslinjen. Viser at objektet er
+                    - strong [ref=e812]: aktivt
+                    - text: (utfører noe).
+                - row "Synkron melding Hel pil med fylt spiss (→). Representerer et metodekall." [ref=e813]:
+                  - cell "Synkron melding" [ref=e814]
+                  - cell "Hel pil med fylt spiss (→). Representerer et metodekall." [ref=e815]:
+                    - text: Hel pil med fylt spiss (→). Representerer et
+                    - strong [ref=e816]: metodekall
+                    - text: .
+                - 'row "Returmelding Stiplet pil tilbake (- - →). Viser returverdi: verdi = metode()" [ref=e817]':
+                  - cell "Returmelding" [ref=e818]
+                  - 'cell "Stiplet pil tilbake (- - →). Viser returverdi: verdi = metode()" [ref=e819]':
+                    - text: "Stiplet pil tilbake (- - →). Viser returverdi:"
+                    - code [ref=e820]: verdi = metode()
+                - row "<<create>> Stiplet pil til et nytt objekt — oppretter objektet." [ref=e821]:
+                  - cell "<<create>>" [ref=e822]
+                  - cell "Stiplet pil til et nytt objekt — oppretter objektet." [ref=e823]
+            - heading "Interaksjonsfragmenter (rammer)" [level=3] [ref=e824]
+            - table [ref=e826]:
+              - rowgroup [ref=e827]:
+                - row "Fragment Tilsvarer Eksempel" [ref=e828]:
+                  - columnheader "Fragment" [ref=e829]
+                  - columnheader "Tilsvarer" [ref=e830]
+                  - columnheader "Eksempel" [ref=e831]
+              - rowgroup [ref=e832]:
+                - row "loop for/while-løkke loop [for alle spillere]" [ref=e833]:
+                  - cell "loop" [ref=e834]
+                  - cell "for/while-løkke" [ref=e835]
+                  - cell "loop [for alle spillere]" [ref=e836]:
+                    - code [ref=e837]: loop [for alle spillere]
+                - row "alt if/else alt [eid] / [ikke eid]" [ref=e838]:
+                  - cell "alt" [ref=e839]
+                  - cell "if/else" [ref=e840]
+                  - cell "alt [eid] / [ikke eid]" [ref=e841]:
+                    - code [ref=e842]: alt [eid] / [ikke eid]
+                - row "opt if (uten else) opt [har nok penger]" [ref=e843]:
+                  - cell "opt" [ref=e844]
+                  - cell "if (uten else)" [ref=e845]
+                  - cell "opt [har nok penger]" [ref=e846]:
+                    - code [ref=e847]: opt [har nok penger]
+            - generic [ref=e848]:
+              - heading "Professorens regel (2021-fasit):" [level=4] [ref=e849]
+              - paragraph [ref=e850]: «En melding kan kun sendes fra et objekt som er aktivt og ettersom vi programmerer sekvensielt må metodekallene komme i en sekvens også, de kan ikke plutselig dukke opp.»
+              - paragraph [ref=e851]:
+                - text: Et objekt kan altså bare sende en melding hvis det
+                - strong [ref=e852]: allerede har fått en melding
+                - text: (er aktivt).
+            - generic [ref=e853]:
+              - 'heading "Steg-for-steg: Slik lager du sekvensdiagrammet på eksamen" [level=4] [ref=e854]'
+              - list [ref=e855]:
+                - listitem [ref=e856]:
+                  - strong [ref=e857]: Ta utgangspunkt i brukstilfellebeskrivelsen
+                  - text: — hvert steg i beskrivelsen blir én eller flere meldinger.
+                - listitem [ref=e858]:
+                  - strong [ref=e859]: Identifiser hvilke objekter som trengs
+                  - text: — se på domenemodellen din. Plasser dem som bokser øverst.
+                - listitem [ref=e860]:
+                  - strong [ref=e861]: Tenk «hvem vet hva?»
+                  - text: — bruk GRASP Informasjonsekspert. Brettet vet om rutene, spilleren vet sin brikke.
+                - listitem [ref=e862]:
+                  - strong [ref=e863]: Tegn meldingene
+                  - text: fra venstre (aktør/kontroller) og utover. Bruk parametere der det er naturlig.
+                - listitem [ref=e864]:
+                  - strong [ref=e865]: Bruk loop
+                  - text: for gjentakelser fra brukstilfellebeskrivelsen.
+                - listitem [ref=e866]:
+                  - strong [ref=e867]: Bruk alt/opt
+                  - text: for betingelser (if/else fra beskrivelsen).
+                - listitem [ref=e868]:
+                  - strong [ref=e869]: "Sjekk konsistens:"
+                  - text: Samsvarer diagrammet med brukstilfellebeskrivelsen?
+            - heading "Det faste mønsteret fra alle eksamener" [level=3] [ref=e870]
+            - paragraph [ref=e871]:
+              - text: Se på hvert eneste sekvensdiagram fra professorens løsninger — de følger
+              - strong [ref=e872]: nøyaktig
+              - text: "dette mønsteret:"
+            - list [ref=e874]:
+              - listitem [ref=e875]:
+                - text: En melding kaller en metode på et
+                - strong [ref=e876]: hovedobjekt
+                - text: (kontrolleren)
+              - listitem [ref=e877]:
+                - text: Kontrolleren har en
+                - code [ref=e878]: loop
+                - text: der den itererer over en samling
+              - listitem [ref=e879]:
+                - text: I loopen kalles metoder på
+                - strong [ref=e880]: subobjektene
+              - listitem [ref=e881]:
+                - text: Inne i loopen kan det være
+                - code [ref=e882]: opt
+                - text: eller
+                - code [ref=e883]: alt
+                - text: for betingelser
+              - listitem [ref=e884]:
+                - text: Returverdier vises med
+                - code [ref=e885]: variabel = metode()
+            - 'heading "Eksempel: Monopol — sekvensdiagram «spillTrekk»" [level=3] [ref=e886]'
+            - paragraph [ref=e887]: Fra F04–F05
+            - generic [ref=e888]:
+              - img "Sekvensdiagram for Monopol spillTrekk" [ref=e890]:
+                - generic [ref=e893]: :Monopol
+                - generic [ref=e896]: :Spiller
+                - generic [ref=e899]: :Kopp
+                - generic [ref=e902]: :Brett
+                - generic [ref=e905]: :Brikke
+                - generic [ref=e910]: spill()
+                - generic [ref=e911]:
+                  - generic [ref=e915]: loop
+                  - generic [ref=e916]: "[20 runder]"
+                - generic [ref=e917]:
+                  - generic [ref=e921]: loop
+                  - generic [ref=e922]: "[for alle spillere]"
+                - generic [ref=e925]: spillTrekk()
+                - generic [ref=e928]: trill()
+                - generic [ref=e931]: sum = getSum()
+                - generic [ref=e934]: getRute()
+                - generic [ref=e937]: nyRute = flytt(rute, sum)
+                - generic [ref=e940]: nyRute
+                - generic [ref=e943]: setRute(nyRute)
+              - generic [ref=e944]:
+                - paragraph [ref=e945]:
+                  - strong [ref=e946]: "Kobling til Java (oppgave 4):"
+                - list [ref=e947]:
+                  - listitem [ref=e948]:
+                    - text: Monopol har metoden
+                    - code [ref=e949]: spill()
+                    - text: og
+                    - code [ref=e950]: spillRunde()
+                  - listitem [ref=e951]:
+                    - text: Spiller har metoden
+                    - code [ref=e952]: spillTrekk()
+                    - text: — som kaller kopp.trill(), brett.flytt(), brikke.setRute()
+                  - listitem [ref=e953]: Meldingene i sekvensdiagrammet → metodene i Java-klassene
+            - generic [ref=e954]:
+              - heading "Fra sekvensdiagram til Java" [level=4] [ref=e955]
+              - paragraph [ref=e956]: "Sekvensdiagrammet forteller deg direkte hva koden skal gjøre:"
+              - generic [ref=e958]: "// Spiller.java public void spillTrekk(Kopp kopp, Brett brett) { kopp.trill(); // → trill() int sum = kopp.getSum(); // sum = getSum() Rute rute = brikke.getRute(); // getRute() Rute nyRute = brett.flytt(rute, sum);// rute = flytt(rute, sum) brikke.setRute(nyRute); // setRute(rute) }"
+            - 'heading "Eksempel: Stigespill — sekvensdiagram «spillTrekk»" [level=3] [ref=e959]'
+            - paragraph [ref=e960]: Fra F08 — brukt i obligatorisk øvelse
+            - generic [ref=e961]:
+              - img "Sekvensdiagram for Stigespill spillTrekk" [ref=e963]:
+                - generic [ref=e966]: :Stigespill
+                - generic [ref=e969]: :Spiller
+                - generic [ref=e972]: :Terning
+                - generic [ref=e975]: :Brett
+                - generic [ref=e978]: :Brikke
+                - generic [ref=e983]: spill()
+                - generic [ref=e984]:
+                  - generic [ref=e988]: loop
+                  - generic [ref=e989]: "[ingen vinner]"
+                - generic [ref=e990]:
+                  - generic [ref=e994]: loop
+                  - generic [ref=e995]: "[for alle spillere]"
+                - generic [ref=e998]: spillTrekk()
+                - generic [ref=e1001]: trill()
+                - generic [ref=e1004]: verdi = getVerdi()
+                - generic [ref=e1007]: getPlass()
+                - generic [ref=e1010]: nyRute = finnNyRute(rute, verdi)
+                - generic [ref=e1013]: nyRute
+                - generic [ref=e1016]: setPlass(nyRute)
+              - paragraph [ref=e1017]:
+                - text: "Merk: Brettet er"
+                - strong [ref=e1018]: Informasjonsekspert
+                - text: for å finne ny rute (den kjenner alle ruter, stiger og slanger). Brikken vet sin posisjon. Terningen kjenner sin verdi.
+            - 'heading "Eksempel fra eksamen: Max Mümmelmann (vår 2023)" [level=3] [ref=e1019]'
+            - generic [ref=e1020]:
+              - heading "Sekvensdiagram — «Spill tur» (forenklet fra fasit)" [level=4] [ref=e1021]
+              - img "Sekvensdiagram for Max Mümmelmann Spill tur" [ref=e1023]:
+                - generic [ref=e1026]: :Spiller
+                - generic [ref=e1029]: :MaxMümm.
+                - generic [ref=e1032]: :Terning
+                - generic [ref=e1035]: :Brikke
+                - generic [ref=e1038]: :Brett
+                - generic [ref=e1041]: :Rute
+                - generic [ref=e1045]: trill()
+                - generic [ref=e1048]: trill()
+                - generic [ref=e1051]: verdi = getVerdi()
+                - generic [ref=e1054]: flyttBrikke(verdi)
+                - generic [ref=e1057]: flytt(verdi)
+                - generic [ref=e1060]: kort = visØversteKort()
+                - generic [ref=e1061]:
+                  - generic [ref=e1065]: alt
+                  - generic [ref=e1066]: "[mangler familiemedlem]"
+                - generic [ref=e1069]: taKort()
+                - generic [ref=e1072]: taØversteKort()
+                - generic [ref=e1075]: kort
+                - generic [ref=e1078]: leggTilKort(kort)
+              - generic [ref=e1079]:
+                - paragraph [ref=e1080]:
+                  - strong [ref=e1081]: "Kobling til brukstilfellebeskrivelsen:"
+                - list [ref=e1082]:
+                  - listitem [ref=e1083]:
+                    - text: «Trill terning» →
+                    - code [ref=e1084]: trill()
+                    - text: på Terning
+                  - listitem [ref=e1085]:
+                    - text: «Flytt kaninbrikken» →
+                    - code [ref=e1086]: flyttBrikke(verdi)
+                    - text: på Brikke
+                  - listitem [ref=e1087]:
+                    - text: «Ta øverste kort» →
+                    - code [ref=e1088]: visØversteKort()
+                    - text: på Rute
+                  - listitem [ref=e1089]:
+                    - text: «Hvis mangler → behold» →
+                    - code [ref=e1090]: alt
+                    - text: "-fragment med"
+                    - code [ref=e1091]: taKort()
+            - generic [ref=e1092]:
+              - heading "Vanlige feil" [level=4] [ref=e1093]
+              - list [ref=e1094]:
+                - listitem [ref=e1095]:
+                  - generic [ref=e1096]: ✗
+                  - generic [ref=e1097]:
+                    - text: Meldinger fra
+                    - strong [ref=e1098]: inaktive objekter
+                    - text: — et objekt kan bare sende melding hvis det er aktivt
+                - listitem [ref=e1099]:
+                  - generic [ref=e1100]: ✗
+                  - generic [ref=e1101]:
+                    - text: Diagrammet
+                    - strong [ref=e1102]: samsvarer ikke
+                    - text: med brukstilfellebeskrivelsen — professoren sjekker dette!
+                - listitem [ref=e1103]:
+                  - generic [ref=e1104]: ✗
+                  - generic [ref=e1105]:
+                    - text: Manglende
+                    - strong [ref=e1106]: loop/alt/opt
+                    - text: for løkker og betingelser fra brukstilfellebeskrivelsen
+                - listitem [ref=e1107]:
+                  - generic [ref=e1108]: ✗
+                  - generic [ref=e1109]:
+                    - text: Feil bruk av
+                    - strong [ref=e1110]: Informasjonsekspert
+                    - text: — feil objekt får ansvaret (f.eks. Spilleren finner ruter istedenfor Brettet)
+                - listitem [ref=e1111]:
+                  - generic [ref=e1112]: ✗
+                  - generic [ref=e1113]:
+                    - text: Meldinger uten
+                    - strong [ref=e1114]: parametere
+                    - text: der de trengs — parametere gir pluss
+          - generic [ref=e1115]:
+            - heading "Du MÅ kunne:" [level=4] [ref=e1116]
+            - list [ref=e1117]:
+              - listitem [ref=e1118]:
+                - generic [ref=e1119]: ✓
+                - generic [ref=e1120]: Tegne objekter med livslinjer og aktiveringsbokser
+              - listitem [ref=e1121]:
+                - generic [ref=e1122]: ✓
+                - generic [ref=e1123]: Meldinger (kall og retur), inkludert parametere og returverdier
+              - listitem [ref=e1124]:
+                - generic [ref=e1125]: ✓
+                - generic [ref=e1126]: "Interaksjonsfragmenter: loop, alt, opt"
+              - listitem [ref=e1127]:
+                - generic [ref=e1128]: ✓
+                - generic [ref=e1129]: Diagrammet MÅ samsvare med brukstilfellebeskrivelsen
+              - listitem [ref=e1130]:
+                - generic [ref=e1131]: ✓
+                - generic [ref=e1132]: En melding kan kun sendes fra et aktivt objekt
+      - generic [ref=e1133]:
+        - button "Sjekkliste for oppgave 1 på eksamen" [ref=e1134] [cursor=pointer]:
+          - heading "Sjekkliste for oppgave 1 på eksamen" [level=2] [ref=e1135]
+          - img [ref=e1136]
+        - generic [ref=e1138]:
+          - generic [ref=e1139]:
+            - heading "Før du begynner" [level=3] [ref=e1140]
+            - paragraph [ref=e1141]:
+              - text: Les spillbeskrivelsen to ganger. Understrek
+              - strong [ref=e1142]: substantiver
+              - text: (→ klasser) og
+              - strong [ref=e1143]: verb/handlinger
+              - text: (→ brukstilfeller/metoder).
+            - generic [ref=e1144]:
+              - generic [ref=e1145]:
+                - heading "1a — Brukstilfellemodell" [level=4] [ref=e1146]
+                - list [ref=e1147]:
+                  - listitem [ref=e1148]:
+                    - generic [ref=e1149]: ☐
+                    - text: Diagram med aktør, system, 2–4 brukstilfeller
+                  - listitem [ref=e1150]:
+                    - generic [ref=e1151]: ☐
+                    - text: Ikke et flytdiagram!
+                  - listitem [ref=e1152]:
+                    - generic [ref=e1153]: ☐
+                    - text: Tekstlig beskrivelse for hvert brukstilfelle
+                  - listitem [ref=e1154]:
+                    - generic [ref=e1155]: ☐
+                    - text: Forkrav nevnt
+                  - listitem [ref=e1156]:
+                    - generic [ref=e1157]: ☐
+                    - text: <<include>> der det gir mening
+              - generic [ref=e1158]:
+                - heading "1b — Domenemodell" [level=4] [ref=e1159]
+                - list [ref=e1160]:
+                  - listitem [ref=e1161]:
+                    - generic [ref=e1162]: ☐
+                    - text: Konseptuelle klasser fra substantiver
+                  - listitem [ref=e1163]:
+                    - generic [ref=e1164]: ☐
+                    - text: INGEN metoder!
+                  - listitem [ref=e1165]:
+                    - generic [ref=e1166]: ☐
+                    - text: Attributter på alle klasser
+                  - listitem [ref=e1167]:
+                    - generic [ref=e1168]: ☐
+                    - text: Multiplisitet på ALLE assosiasjoner
+                  - listitem [ref=e1169]:
+                    - generic [ref=e1170]: ☐
+                    - text: Arv kun ved tydelige undertyper
+                  - listitem [ref=e1171]:
+                    - generic [ref=e1172]: ☐
+                    - text: Konsistent med brukstilfellene
+              - generic [ref=e1173]:
+                - heading "1c — Sekvensdiagram" [level=4] [ref=e1174]
+                - list [ref=e1175]:
+                  - listitem [ref=e1176]:
+                    - generic [ref=e1177]: ☐
+                    - text: Objekter fra domenemodellen
+                  - listitem [ref=e1178]:
+                    - generic [ref=e1179]: ☐
+                    - text: Samsvarer med brukstilfellebeskrivelsen
+                  - listitem [ref=e1180]:
+                    - generic [ref=e1181]: ☐
+                    - text: loop for gjentakelser
+                  - listitem [ref=e1182]:
+                    - generic [ref=e1183]: ☐
+                    - text: alt/opt for betingelser
+                  - listitem [ref=e1184]:
+                    - generic [ref=e1185]: ☐
+                    - text: Meldinger kun fra aktive objekter
+                  - listitem [ref=e1186]:
+                    - generic [ref=e1187]: ☐
+                    - text: Parametere og returverdier
+            - heading "Hva har kommet på eksamen?" [level=3] [ref=e1188]
+            - table [ref=e1190]:
+              - rowgroup [ref=e1191]:
+                - row "År Spill/System Fasit?" [ref=e1192]:
+                  - columnheader "År" [ref=e1193]
+                  - columnheader "Spill/System" [ref=e1194]
+                  - columnheader "Fasit?" [ref=e1195]
+              - rowgroup [ref=e1196]:
+                - row "Høst 2020 Automatisert eksamenssystem Ja" [ref=e1197]:
+                  - cell "Høst 2020" [ref=e1198]
+                  - cell "Automatisert eksamenssystem" [ref=e1199]
+                  - cell "Ja" [ref=e1200]
+                - row "Vår 2021 Hungry Cats (brettspill) Delvis" [ref=e1201]:
+                  - cell "Vår 2021" [ref=e1202]
+                  - cell "Hungry Cats (brettspill)" [ref=e1203]
+                  - cell "Delvis" [ref=e1204]
+                - row "Vår 2022 KIMBO (brettspill) Nei" [ref=e1205]:
+                  - cell "Vår 2022" [ref=e1206]
+                  - cell "KIMBO (brettspill)" [ref=e1207]
+                  - cell "Nei" [ref=e1208]
+                - row "Jan 2023 (konte) Magiske øyne (terningspill) Nei" [ref=e1209]:
+                  - cell "Jan 2023 (konte)" [ref=e1210]
+                  - cell "Magiske øyne (terningspill)" [ref=e1211]
+                  - cell "Nei" [ref=e1212]
+                - row "Vår 2023 Max Mümmelmann (kortspill) Ja (best ref.)" [ref=e1213]:
+                  - cell "Vår 2023" [ref=e1214]
+                  - cell "Max Mümmelmann (kortspill)" [ref=e1215]
+                  - cell "Ja (best ref.)" [ref=e1216]
+                - row "Høst 2023 (konte) Ganz Schön Clever (terningspill) Nei" [ref=e1217]:
+                  - cell "Høst 2023 (konte)" [ref=e1218]
+                  - cell "Ganz Schön Clever (terningspill)" [ref=e1219]
+                  - cell "Nei" [ref=e1220]
+                - row "Vår 2024 Skyjo (kortspill) Nei" [ref=e1221]:
+                  - cell "Vår 2024" [ref=e1222]
+                  - cell "Skyjo (kortspill)" [ref=e1223]
+                  - cell "Nei" [ref=e1224]
+            - paragraph [ref=e1225]:
+              - text: Det er nesten
+              - strong [ref=e1226]: alltid et spill
+              - text: (brett-, kort- eller terningspill) med 2–4 spillere og runder. Den beste referanseeksamenen er
+              - strong [ref=e1227]: vår 2023 (Max Mümmelmann)
+              - text: som har det mest komplette løsningsforslaget fra professoren.
+          - generic [ref=e1228]:
+            - heading "Du MÅ kunne:" [level=4] [ref=e1229]
+            - list [ref=e1230]:
+              - listitem [ref=e1231]:
+                - generic [ref=e1232]: ✓
+                - generic [ref=e1233]: Les oppgaven to ganger. Understrek substantiver (→ klasser) og verb (→ brukstilfeller/metoder).
+              - listitem [ref=e1234]:
+                - generic [ref=e1235]: ✓
+                - generic [ref=e1236]: Diagrammene MÅ være konsistente med hverandre.
+              - listitem [ref=e1237]:
+                - generic [ref=e1238]: ✓
+                - generic [ref=e1239]: Start enkelt — det er bedre med en enkel, riktig modell enn en komplisert, feil modell.
+  - button "Åpne AI-tutor" [ref=e1240] [cursor=pointer]:
+    - generic [ref=e1242]:
+      - img [ref=e1244]
+      - generic [ref=e1247]: Spør tutoren
+  - alert [ref=e1248]

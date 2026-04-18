@@ -1,0 +1,103 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "📚 Eksamensøving" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: 📚
+        - generic [ref=e6]: Eksamensøving
+      - generic [ref=e7]:
+        - link "Hjem" [ref=e8] [cursor=pointer]:
+          - /url: /
+        - link "ING164 Fysikk" [ref=e9] [cursor=pointer]:
+          - /url: /ing164
+        - link "DAT109 Systemutvikling" [ref=e10] [cursor=pointer]:
+          - /url: /dat109
+        - link "DAT110 Nettverk" [ref=e11] [cursor=pointer]:
+          - /url: /dat110
+        - link "DAT107 Databaser" [ref=e12] [cursor=pointer]:
+          - /url: /dat107
+        - button "Bytt til mørkt tema" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - link "Hjem" [ref=e20] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e21]: /
+          - generic [ref=e22]: DAT109 Systemutvikling
+        - heading "DAT109 Systemutvikling" [level=1] [ref=e23]
+        - paragraph [ref=e24]: Objektorientert analyse og design, UML-modellering, smidige utviklingsmetoder og Java-programmering fra UML-diagrammer.
+      - generic [ref=e25]:
+        - heading "Eksamenformat" [level=2] [ref=e26]
+        - paragraph [ref=e27]: Skriftlig eksamen med 4 oppgaver. Fra 2023 er oppgave 2 og 3 flervalg. Oppgave 1 (modellering) og 4 (Java fra UML) er alltid samme type.
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - paragraph [ref=e30]: Oppgave 1
+            - paragraph [ref=e31]: Modellering
+            - paragraph [ref=e32]: 40%
+          - generic [ref=e33]:
+            - paragraph [ref=e34]: Oppgave 2
+            - paragraph [ref=e35]: OOA/OOD
+            - paragraph [ref=e36]: 20%
+          - generic [ref=e37]:
+            - paragraph [ref=e38]: Oppgave 3
+            - paragraph [ref=e39]: Utviklingsmetode
+            - paragraph [ref=e40]: 20%
+          - generic [ref=e41]:
+            - paragraph [ref=e42]: Oppgave 4
+            - paragraph [ref=e43]: OOP (Java)
+            - paragraph [ref=e44]: 20%
+      - heading "Emner" [level=2] [ref=e45]
+      - generic [ref=e46]:
+        - link "~40% Modellering Brukstilfellemodell, domenemodell og sekvensdiagram — den viktigste delen av eksamen 0/4 seksjoner fullført" [ref=e47] [cursor=pointer]:
+          - /url: /dat109/modellering
+          - generic [ref=e48]:
+            - img [ref=e50]
+            - generic [ref=e52]: ~40%
+          - heading "Modellering" [level=3] [ref=e53]
+          - paragraph [ref=e54]: Brukstilfellemodell, domenemodell og sekvensdiagram — den viktigste delen av eksamen
+          - paragraph [ref=e56]: 0/4 seksjoner fullført
+        - link "~20% OOA og OOD SOLID-prinsippene og GRASP-mønstrene — gjenkjenn dem i kode og UML 0/3 seksjoner fullført" [ref=e57] [cursor=pointer]:
+          - /url: /dat109/ooa-ood
+          - generic [ref=e58]:
+            - img [ref=e60]
+            - generic [ref=e62]: ~20%
+          - heading "OOA og OOD" [level=3] [ref=e63]
+          - paragraph [ref=e64]: SOLID-prinsippene og GRASP-mønstrene — gjenkjenn dem i kode og UML
+          - paragraph [ref=e66]: 0/3 seksjoner fullført
+        - link "~20% Utviklingsmetode Scrum, XP, TDD, CI/CD, AUP og smidig utvikling 0/10 seksjoner fullført" [ref=e67] [cursor=pointer]:
+          - /url: /dat109/utviklingsmetode
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - generic [ref=e72]: ~20%
+          - heading "Utviklingsmetode" [level=3] [ref=e73]
+          - paragraph [ref=e74]: Scrum, XP, TDD, CI/CD, AUP og smidig utvikling
+          - paragraph [ref=e76]: 0/10 seksjoner fullført
+        - link "~20% OOP — Java fra UML Skriv Java-klasser fra klassediagram og sekvensdiagram 0/4 seksjoner fullført" [ref=e77] [cursor=pointer]:
+          - /url: /dat109/oop
+          - generic [ref=e78]:
+            - img [ref=e80]
+            - generic [ref=e82]: ~20%
+          - heading "OOP — Java fra UML" [level=3] [ref=e83]
+          - paragraph [ref=e84]: Skriv Java-klasser fra klassediagram og sekvensdiagram
+          - paragraph [ref=e86]: 0/4 seksjoner fullført
+      - heading "Verktøy" [level=2] [ref=e87]
+      - generic [ref=e88]:
+        - link "Oppsummering Komplett sammendrag av alle konsepter, sjekklister og hurtigreferanse" [ref=e89] [cursor=pointer]:
+          - /url: /dat109/oppsummering
+          - generic [ref=e90]:
+            - img [ref=e92]
+            - heading "Oppsummering" [level=3] [ref=e94]
+          - paragraph [ref=e95]: Komplett sammendrag av alle konsepter, sjekklister og hurtigreferanse
+        - link "Eksamen Alle tidligere eksamener (2020–2024) med fullstendige løsningsforslag" [ref=e96] [cursor=pointer]:
+          - /url: /dat109/eksamen
+          - generic [ref=e97]:
+            - img [ref=e99]
+            - heading "Eksamen" [level=3] [ref=e101]
+          - paragraph [ref=e102]: Alle tidligere eksamener (2020–2024) med fullstendige løsningsforslag
+  - button "Åpne AI-tutor" [ref=e103] [cursor=pointer]:
+    - generic [ref=e105]:
+      - img [ref=e107]
+      - generic [ref=e110]: Spør tutoren
+  - alert [ref=e111]
