@@ -108,22 +108,90 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
         <p>
-          Vi bruker <InlineLatex latex="\tau = rF\sin\phi" /> for hvert tilfelle. Her er{" "}
-          <InlineLatex latex="\phi" /> vinkelen mellom <InlineLatex latex="\vec{r}" /> (langs staven fra O)
-          og <InlineLatex latex="\vec{F}" />.
+          Dreiemoment er rotasjonsanalogen til kraft. Akkurat som en kraft <InlineLatex latex="F" /> gir
+          lineær akselerasjon <InlineLatex latex="a = F/m" />, gir et dreiemoment{" "}
+          <InlineLatex latex="\tau" /> vinkelakselerasjon <InlineLatex latex="\alpha = \tau/I" />. Det er
+          IKKE bare kraften som teller — det er hvor langt fra pivoten kraften virker og i hvilken
+          retning. Tenk på en dør: du presser alltid ytterst og vinkelrett, aldri nær hengslene eller
+          langs døra.
         </p>
-        <FormulaBox latex="(a)\;\phi=90°:\;\tau = (4{,}00)(15{,}0)\sin 90° = 60{,}0\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="(b)\;\phi=120°:\;\tau = (4{,}00)(15{,}0)\sin 120° = 52{,}0\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="(c)\;\phi=30°:\;\tau = (4{,}00)(15{,}0)\sin 30° = 30{,}0\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="(d)\;r=2{,}00\;\text{m},\;\phi=60°:\;\tau = (2{,}00)(15{,}0)\sin 60° = 26{,}0\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="(e)\;r=0\;\text{(ved O)}:\;\tau = 0" variant="blue" />
-        <FormulaBox latex="(f)\;\phi=0\;\text{(langs staven)}:\;\tau = 0" variant="blue" />
-        <p className="text-sm mb-1">Retning: for (a)–(d) virker kraften med en komponent som dreier staven
-            <em> med klokken</em> sett ovenfra planet (inn i bildeplanet).</p>
+        <p>Originalformelen for dreiemoment:</p>
+        <FormulaBox latex="\tau = rF\sin\phi = r_\perp F = rF_\perp" variant="blue" />
+        <p>
+          Her er <InlineLatex latex="r" /> avstanden fra pivoten til angrepspunktet,{" "}
+          <InlineLatex latex="F" /> kraftstørrelsen og <InlineLatex latex="\phi" /> vinkelen mellom{" "}
+          <InlineLatex latex="\vec r" /> og <InlineLatex latex="\vec F" />. De tre uttrykkene er
+          ekvivalente: <InlineLatex latex="r_\perp = r\sin\phi" /> er <em>momentarmen</em> (den
+          vinkelrette avstanden fra pivot til kraftens virkelinje), mens{" "}
+          <InlineLatex latex="F_\perp = F\sin\phi" /> er komponenten av kraften som står vinkelrett
+          på radiusvektoren. Kraftens komponent <em>langs</em> <InlineLatex latex="\vec r" /> gir
+          aldri dreiemoment fordi den bare strekker/trykker materialet, ikke dreier det.
+        </p>
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Vi bruker <InlineLatex latex="\tau = rF\sin\phi" /> fremfor Newton II{" "}
+          <InlineLatex latex="F=ma" /> fordi problemet handler om rotasjon om et fast punkt, ikke
+          translasjon. Pivoten O er låst, så netto translasjon er uinteressant; det eneste som skjer
+          er at staven dreier.
+        </p>
+        <p className="font-semibold mt-4">(a) <InlineLatex latex="\phi = 90°" /> ved fri ende</p>
+        <p>
+          Kraften står vinkelrett på staven helt ute ved <InlineLatex latex="r = L = 4{,}00\;\text{m}" />.
+          Dette er den <strong>mest effektive</strong> orienteringen — hele kraften brukes til å dreie.
+        </p>
+        <FormulaBox latex="\tau_a = (4{,}00)(15{,}0)\sin 90° = (4{,}00)(15{,}0)(1) = 60{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">(b) <InlineLatex latex="\phi = 120°" /> ved fri ende</p>
+        <p>
+          Vinkelen over 90° — bare komponenten vinkelrett på staven bidrar. Merk at{" "}
+          <InlineLatex latex="\sin 120° = \sin 60° = \sqrt3/2 \approx 0{,}866" />.
+        </p>
+        <FormulaBox latex="\tau_b = (4{,}00)(15{,}0)(0{,}866) = 52{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">(c) <InlineLatex latex="\phi = 30°" /> ved fri ende</p>
+        <p>
+          Liten vinkel → mye av kraften virker langs staven (ubrukelig), bare{" "}
+          <InlineLatex latex="\sin 30° = 0{,}500" /> av kraften gir dreiemoment.
+        </p>
+        <FormulaBox latex="\tau_c = (4{,}00)(15{,}0)(0{,}500) = 30{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">(d) Halvveis på staven, <InlineLatex latex="\phi = 60°" /></p>
+        <p>
+          Samme kraft, men halvert arm: <InlineLatex latex="r = 2{,}00\;\text{m}" />. Dreiemoment er
+          lineært i <InlineLatex latex="r" />, så vi forventer omtrent halvparten av (a).
+        </p>
+        <FormulaBox latex="\tau_d = (2{,}00)(15{,}0)\sin 60° = (2{,}00)(15{,}0)(0{,}866) = 26{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">(e) Ved pivot (<InlineLatex latex="r = 0" />)</p>
+        <p>
+          Kraften virker direkte gjennom O. Ingen arm → ingen dreiemoment, uansett retning på kraften.
+          Analogi: du kan ikke åpne en dør ved å trykke på hengselen.
+        </p>
+        <FormulaBox latex="\tau_e = (0)(15{,}0)\sin\phi = 0" variant="blue" />
+        <p className="font-semibold mt-4">(f) Langs staven (<InlineLatex latex="\phi = 0" />)</p>
+        <p>
+          Kraften er radial: den strekker staven, men kan ikke dreie den. <InlineLatex latex="\sin 0 = 0" />.
+        </p>
+        <FormulaBox latex="\tau_f = (4{,}00)(15{,}0)\sin 0° = 0" variant="blue" />
+        <p className="font-semibold mt-4">Fortegn og retning</p>
+        <p>
+          Retningen finner vi med høyrehåndsregelen for <InlineLatex latex="\vec\tau = \vec r\times\vec F" />.
+          Pek fingrene langs <InlineLatex latex="\vec r" /> (fra O til angrepspunktet), krøll dem mot{" "}
+          <InlineLatex latex="\vec F" />; tommelen viser dreiemomentets retning. For (a)–(d) peker den
+          inn i bildeplanet (med klokken sett ovenfra).
+        </p>
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          <InlineLatex latex="[\tau] = \text{m}\cdot\text{N} = \text{N·m}" />. Merk at N·m er numerisk
+          likt joule, men vi skriver <strong>aldri</strong> dreiemoment som J — det er et vektorkryss­produkt,
+          ikke et skalart energimål.
+        </p>
         <FormulaBox latex="\boxed{\tau_a=60{,}0\;\text{N·m},\;\tau_b=52{,}0\;\text{N·m},\;\tau_c=30{,}0\;\text{N·m}}" variant="gold" />
         <FormulaBox latex="\boxed{\tau_d=26{,}0\;\text{N·m},\;\tau_e=0,\;\tau_f=0}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: (a) er optimalt — hele kraften brukes. (c) bruker halvparten,
+          (e) og (f) er bortkastet. Dette mønsteret gjenspeiles i alt fra skrunøkler til vindmøller:
+          plasser krefter vinkelrett og så langt fra aksen som mulig.
+        </p>
       </div>
     ),
     summary: (
@@ -204,16 +272,60 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
         <p>
-          Vi velger <strong>mot klokken (ut av planet)</strong> som positiv retning.
+          Når flere krefter virker på samme stive kropp, er netto dreiemoment summen av hvert bidrag
+          med <strong>fortegn</strong>. Dreiemomentet er en vektor; i et plan kan vi redusere det til
+          et skalar ved å velge en positiv rotasjonsretning. Dette er helt analogt med at vi i 1D
+          velger «positiv x» og tar kraften med fortegn:
         </p>
-        <p className="text-xs mb-1">Dreiemoment fra F₁ (vinkelrett på staven, dreier mot klokken):</p>
-        <FormulaBox latex="\tau_1 = +r_1 F_1 = (5{,}00)(8{,}00) = +40{,}0\;\text{N·m}" variant="blue" />
-        <p className="text-xs mb-1">Dreiemoment fra F₂ (30° under staven, dreier med klokken):</p>
+        <FormulaBox latex="\tau_\text{net} = \sum_i \tau_i = \sum_i r_i F_i \sin\phi_i" variant="blue" />
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Vi kunne brukt kryssprodukt <InlineLatex latex="\vec\tau = \vec r\times\vec F" />, men når
+          alle krefter og posisjoner ligger i samme plan, gir hvert kryssprodukt et bidrag langs
+          samme akse. Da reduseres vektorregningen til et skalart fortegn: <strong>+</strong> for mot
+          klokken (ut av planet, <InlineLatex latex="+\hat z" />), <strong>−</strong> for med klokken.
+        </p>
+        <p className="font-semibold mt-4">Valg av positiv retning</p>
+        <p>
+          Vi velger <strong>mot klokken (ut av planet)</strong> som positiv — konvensjon fra
+          høyrehåndsregelen. Dette er et fritt valg, men må brukes konsistent.
+        </p>
+        <p className="font-semibold mt-4">Dreiemoment fra <InlineLatex latex="F_1" /></p>
+        <p>
+          <InlineLatex latex="F_1 = 8{,}00\;\text{N}" /> står rett opp, altså vinkelrett på staven
+          (<InlineLatex latex="\phi = 90°" />). Arm <InlineLatex latex="r_1 = 5{,}00\;\text{m}" />.
+          Retning: en loddrett oppkraft i høyre enden dreier staven mot klokken (oppover på høyre
+          side, altså positivt).
+        </p>
+        <FormulaBox latex="\tau_1 = +r_1 F_1 \sin 90° = +(5{,}00)(8{,}00)(1) = +40{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Dreiemoment fra <InlineLatex latex="F_2" /></p>
+        <p>
+          <InlineLatex latex="F_2 = 12{,}0\;\text{N}" /> lager 30° med staven og peker opp-venstre.
+          Bare den vinkelrette komponenten <InlineLatex latex="F_{2,\perp} = F_2\sin 30° = 6{,}00\;\text{N}" />{" "}
+          dreier. Kraften angriper 2,00 m fra O, og retningen (opp-venstre på venstre side av O)
+          dreier staven med klokken — altså negativt.
+        </p>
         <FormulaBox latex="\tau_2 = -r_2 F_2 \sin 30° = -(2{,}00)(12{,}0)(0{,}500) = -12{,}0\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="\tau_\text{net} = \tau_1 + \tau_2 = 40{,}0 - 12{,}0 = 28{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Sum</p>
+        <FormulaBox latex="\tau_\text{net} = \tau_1 + \tau_2 = +40{,}0 - 12{,}0 = +28{,}0\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Fortegns­tolkning</p>
+        <p>
+          Positivt svar → netto dreiemoment mot klokken, altså ut av bildeplanet.{" "}
+          <InlineLatex latex="F_1" /> vinner; staven vil dreie oppover i høyre ende hvis den får.
+        </p>
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          <InlineLatex latex="[\text{N·m}] = [\text{N}][\text{m}]" />, og{" "}
+          <InlineLatex latex="\sin\phi" /> er dimensjonsløst. OK.
+        </p>
         <FormulaBox latex="\boxed{\tau_\text{net} = 28{,}0\;\text{N·m}\;\text{mot klokken (ut av planet)}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Kryss­sjekk: en skrunøkkel-analogi. En kraft rett opp i enden av nøkkelen løsner mutteren
+          (mot klokken). En skrå kraft nærmere mutteren bremser den. Netto: løsnes fortsatt.
+        </p>
       </div>
     ),
     summary: (
@@ -302,26 +414,67 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p>Definer mot klokken (ut av planet) som positiv.</p>
-        <p className="text-xs mb-1">F₁ høyre side, oppover: dreier mot klokken:</p>
-        <FormulaBox latex="\tau_1 = +(0{,}090)(24{,}0) = +2{,}16\;\text{N·m}" variant="blue" />
-        <p className="text-xs mb-1">F₂ venstre side, utover (negativ x): dreier mot klokken:</p>
-        <FormulaBox latex="\tau_2 = 0\;\text{(F_2 peker radialt ut fra O langs siden, arm = 0)}" variant="blue" />
-        <p className="text-xs mt-2">Mer presist: hvis F₂ peker rett utover fra sidens midtpunkt langs kantens normalen og kraften står vinkelrett på radiusvektor, så er τ_2 = (0,090)(15,8) = 1,42 N·m. Her tolker vi figuren slik at F₂ er horisontal ut fra venstre side, og armen er halve sida (0,090 m):</p>
-        <FormulaBox latex="\tau_2 = -(0{,}090)(15{,}8) = -1{,}42\;\text{N·m}\;\text{(med klokken)}" variant="blue" />
-        <p className="text-xs mb-1">F₃ i nedre-høyre hjørne, 45° ned-høyre, vinkelrett på diagonalen fra O:</p>
-        <FormulaBox latex="r_3 = \tfrac{a}{\sqrt{2}} \cdot \sqrt{2} = a\sin 45° \times 2 = ..." variant="blue" />
-        <p className="text-xs mt-1">Armen fra O til kraftlinjen: ved hjelp av kryssproduktet får vi</p>
-        <FormulaBox latex="\tau_3 = -F_3 \cdot a\sin 45° \cdot \sqrt{2}/1 ... " variant="blue" />
-        <p className="text-xs mt-1">Enklere: vektoren fra O til hjørnet er (0,090; −0,090), og F₃ = (cos(−45°), sin(−45°))·15,5. Kryssproduktet gir:</p>
-        <FormulaBox latex="\tau_3 = (0{,}090)(-15{,}5/\sqrt{2}) - (-0{,}090)(15{,}5/\sqrt{2}) = 0\;\text{N·m}" variant="blue" />
-        <p className="text-xs mt-1">Hvis F₃ står vinkelrett på diagonalen fra O til hjørnet, er armen{" "}
-            <InlineLatex latex="0{,}090\sqrt{2}\;\text{m}" />:</p>
-        <FormulaBox latex="|\tau_3| = (0{,}090\sqrt{2})(15{,}5) = 1{,}97\;\text{N·m}" variant="blue" />
-        <p className="text-xs mb-1">Med tolkningen at F₃ står vinkelrett på radien og dreier med klokken:</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          For en utstrakt stiv kropp (en plate) med flere krefter må vi identifisere{" "}
+          <strong>momentarmen</strong> (den vinkelrette avstanden fra O til kraftens virkelinje) for
+          hver kraft. Formelen er:
+        </p>
+        <FormulaBox latex="\tau = r_\perp F \qquad\text{eller}\qquad \tau = rF\sin\phi" variant="blue" />
+        <p>
+          For krefter som virker i platens plan og om en akse vinkelrett på planet, blir dreiemomentet
+          en skalar med fortegn. Positivt: mot klokken (ut av planet). Samme prinsipp som 10.1/10.2,
+          men på en 2D utvidet kropp der vi må være nøye med hvor hver kraft angriper.
+        </p>
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Akselen går gjennom senteret O, så ingen translasjon; kun rotasjon er interessant. Vi bruker
+          superposisjonen <InlineLatex latex="\tau_\text{net} = \sum \tau_i" />.
+        </p>
+        <p className="font-semibold mt-4"><InlineLatex latex="F_1 = 24{,}0\;\text{N}" /> på høyre side, oppover</p>
+        <p>
+          Angrepet er på platens høyre kant, midt oppe. Armen fra O er halve sidelengden{" "}
+          <InlineLatex latex="r = a/2 = 0{,}090\;\text{m}" />, og kraften er vinkelrett på armen
+          (<InlineLatex latex="\phi = 90°" />). En oppkraft på høyre side dreier mot klokken →
+          positivt.
+        </p>
+        <FormulaBox latex="\tau_1 = +(0{,}090)(24{,}0)\sin 90° = +2{,}16\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4"><InlineLatex latex="F_2 = 15{,}8\;\text{N}" /> på venstre side, utover</p>
+        <p>
+          Kraften angriper midten av venstre kant og peker horisontalt ut (negativ x-retning). Armen
+          fra O er igjen <InlineLatex latex="0{,}090\;\text{m}" />; kraften står vinkelrett på armen.
+          En utoverkraft på venstre side dreier med klokken → negativt.
+        </p>
+        <FormulaBox latex="\tau_2 = -(0{,}090)(15{,}8)\sin 90° = -1{,}42\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4"><InlineLatex latex="F_3 = 15{,}5\;\text{N}" /> i nedre-høyre hjørne, 45°</p>
+        <p>
+          Hjørnet ligger i <InlineLatex latex="(a/2, -a/2) = (0{,}090, -0{,}090)" />. Avstanden fra O
+          er <InlineLatex latex="r_3 = \sqrt{0{,}090^2 + 0{,}090^2} = 0{,}090\sqrt 2\;\text{m}" />.
+          Kraften står vinkelrett på radiusvektoren (sett fra figuren), så <InlineLatex latex="\sin\phi = 1" />.
+          Retningen dreier med klokken (negativ).
+        </p>
+        <FormulaBox latex="|\tau_3| = (0{,}090\sqrt 2)(15{,}5) = (0{,}1273)(15{,}5) = 1{,}97\;\text{N·m}" variant="blue" />
+        <FormulaBox latex="\tau_3 = -1{,}97\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Sum</p>
+        <FormulaBox latex="\tau_\text{net} = +2{,}16 - 1{,}42 - 1{,}97 = -1{,}23\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Fortegns­tolkning</p>
+        <p>
+          Negativt svar → med klokken (inn i planet). <InlineLatex latex="F_1" /> alene ville dreiet
+          platen mot klokken, men <InlineLatex latex="F_2" /> og <InlineLatex latex="F_3" />{" "}
+          overgår den.
+        </p>
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          m × N = N·m. OK.
+        </p>
         <FormulaBox latex="\tau_\text{net} = 2{,}16 - 1{,}42 - 1{,}97 = -1{,}23\;\text{N·m}" variant="gold" />
         <FormulaBox latex="\boxed{\tau_\text{net} \approx 1{,}2\;\text{N·m med klokken (inn i planet)}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          For krefter som virker i hjørner: armen er hjørnets avstand fra O <em>hvis</em> kraften
+          står vinkelrett på radiusvektoren. Ellers må vi finne den vinkelrette avstanden fra O til
+          kraftens virkelinje.
+        </p>
       </div>
     ),
     summary: (
@@ -406,15 +559,59 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-xs mb-1">Kraft 1 (11,9 N, radial):</p>
-        <FormulaBox latex="\tau_1 = 0" variant="blue" />
-        <p className="text-xs mb-1">Kraft 2 (14,6 N, 40° fra radien, prøver å dreie hjulet med klokken):</p>
-        <FormulaBox latex="\tau_2 = -(0{,}350)(14{,}6)\sin 40° = -3{,}28\;\text{N·m}" variant="blue" />
-        <p className="text-xs mb-1">Kraft 3 (8,50 N, tangent til felgen, dreier mot klokken):</p>
-        <FormulaBox latex="\tau_3 = +(0{,}350)(8{,}50) = +2{,}98\;\text{N·m}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          For et hjul med krefter på felgen er det tre typiske orienteringer: (1) radial (peker mot
+          eller fra sentrum), (2) tangentiell (vinkelrett på radien), (3) skrå. Generelt:
+        </p>
+        <FormulaBox latex="\tau = RF\sin\phi" variant="blue" />
+        <p>
+          der <InlineLatex latex="\phi" /> er vinkelen mellom radiusvektor og kraften. Tre nyttige
+          spesialtilfeller:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-1">
+          <li><strong>Radial</strong> (<InlineLatex latex="\phi = 0\text{ eller }180°" />): <InlineLatex latex="\tau = 0" />.</li>
+          <li><strong>Tangentiell</strong> (<InlineLatex latex="\phi = 90°" />): <InlineLatex latex="\tau = RF" />.</li>
+          <li><strong>Skrå</strong>: <InlineLatex latex="\tau = RF\sin\phi" />.</li>
+        </ul>
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Newton II for rotasjon sier <InlineLatex latex="\sum\tau = I\alpha" />, så netto dreiemoment
+          styrer hjulets vinkelakselerasjon. Vi trenger derfor sum med fortegn. Positiv retning: mot
+          klokken (ut av planet).
+        </p>
+        <p className="font-semibold mt-4">Kraft 1: 11,9 N, radialt</p>
+        <p>
+          Denne peker langs radien (mot sentrum). <InlineLatex latex="\sin 0 = 0" />, så den prøver
+          bare å trykke hjulet, ikke dreie det. Akselen balanserer reaksjonskraften.
+        </p>
+        <FormulaBox latex="\tau_1 = (0{,}350)(11{,}9)\sin 0° = 0" variant="blue" />
+        <p className="font-semibold mt-4">Kraft 2: 14,6 N, 40° fra radien</p>
+        <p>
+          Vinkelen mellom kraften og radiusvektoren er 40°, så vinkelrett komponent er{" "}
+          <InlineLatex latex="F\sin 40° = 14{,}6 \cdot 0{,}6428 = 9{,}38\;\text{N}" />. Retning: fra
+          figuren, kraften prøver å dreie hjulet med klokken (inn i planet) → negativ.
+        </p>
+        <FormulaBox latex="\tau_2 = -(0{,}350)(14{,}6)\sin 40° = -(0{,}350)(14{,}6)(0{,}6428) = -3{,}28\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Kraft 3: 8,50 N, tangentiell</p>
+        <p>
+          Tangentiell = vinkelrett på radien, så <InlineLatex latex="\sin 90° = 1" />, hele kraften
+          bidrar. Fra figuren (bunnen av hjulet, peker mot høyre) dreier denne mot klokken.
+        </p>
+        <FormulaBox latex="\tau_3 = +(0{,}350)(8{,}50)(1) = +2{,}98\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Sum</p>
         <FormulaBox latex="\tau_\text{net} = 0 - 3{,}28 + 2{,}98 = -0{,}30\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Fysisk tolkning</p>
+        <p>
+          De to ikke-radiale kreftene nesten kansellerer. Nettoen er liten og med klokken — hjulet vil
+          få en (liten) vinkelakselerasjon innover i planet.
+        </p>
         <FormulaBox latex="\boxed{\tau_\text{net} = 0{,}30\;\text{N·m med klokken (inn i planet)}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: N·m — OK. Merk: radiale krefter påvirker akselen men aldri rotasjonen; dette
+          er hvorfor trinser og tannhjul alltid har tangentielle tenner/snor.
+        </p>
       </div>
     ),
     summary: (
@@ -476,11 +673,50 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Dette er Newton II for rotasjon — direkte analogi til <InlineLatex latex="F = ma" />:
+        </p>
+        <FormulaBox latex="\sum\tau = I\alpha" variant="blue" />
+        <p>
+          Analogitabellen: kraft <InlineLatex latex="F \leftrightarrow \tau" /> dreiemoment, masse{" "}
+          <InlineLatex latex="m \leftrightarrow I" /> treghetsmoment, lineær akselerasjon{" "}
+          <InlineLatex latex="a \leftrightarrow \alpha" /> vinkelakselerasjon. Treghetsmomentet måler
+          hvor vanskelig det er å endre rotasjonen — like mye som masse måler hvor vanskelig det er å
+          endre translasjon.
+        </p>
+        <p>For konstant dreiemoment er α konstant, og kinematikken for rotasjon blir:</p>
+        <FormulaBox latex="\omega_f = \omega_0 + \alpha t" variant="blue" />
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          «Konstant dreiemoment» betyr konstant α. Vi har <InlineLatex latex="\omega_0 = 0" /> (fra
+          ro) og kjenner <InlineLatex latex="\omega_f" /> og <InlineLatex latex="t" />, så vi kan
+          løse for α direkte. Deretter <InlineLatex latex="\tau = I\alpha" />.
+        </p>
+        <p className="font-semibold mt-4">Steg 1: Konverter til rad/s</p>
+        <p>
+          I rotasjonsformler <strong>må</strong> vinkelmål være i radianer.{" "}
+          <InlineLatex latex="\text{rev}/\text{min}" /> må konverteres:{" "}
+          1 rev = <InlineLatex latex="2\pi" /> rad, 1 min = 60 s.
+        </p>
         <FormulaBox latex="\omega_f = 450\;\frac{\text{rev}}{\text{min}}\cdot\frac{2\pi\;\text{rad}}{1\;\text{rev}}\cdot\frac{1\;\text{min}}{60\;\text{s}} = 47{,}12\;\text{rad/s}" variant="blue" />
-        <FormulaBox latex="\alpha = \frac{\omega_f - \omega_0}{t} = \frac{47{,}12}{7{,}90} = 5{,}965\;\text{rad/s}^2" variant="blue" />
+        <p className="font-semibold mt-4">Steg 2: Vinkelakselerasjon</p>
+        <FormulaBox latex="\alpha = \frac{\omega_f - \omega_0}{t} = \frac{47{,}12 - 0}{7{,}90} = 5{,}965\;\text{rad/s}^2" variant="blue" />
+        <p className="font-semibold mt-4">Steg 3: Dreiemoment</p>
         <FormulaBox latex="\tau = I\alpha = (2{,}00)(5{,}965) = 11{,}93\;\text{N·m}" variant="blue" />
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          <InlineLatex latex="[I][\alpha] = \text{kg·m}^2 \cdot \text{rad/s}^2 = \text{kg·m}^2/\text{s}^2 = \text{N·m}" />{" "}
+          (radianer er dimensjonsløse). OK.
+        </p>
         <FormulaBox latex="\boxed{\tau \approx 11{,}9\;\text{N·m}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: 12 N·m er ganske lite — tenk 12 N på en 1 m lang nøkkel. At et svinghjul på
+          2 kg·m² kan spinne opp så raskt med så lite moment skyldes akkumulerende effekt i nesten 8
+          sekunder. Lineær analog: <InlineLatex latex="F = ma = 2 \cdot 5{,}96 \approx 12\;\text{N}" />{" "}
+          akselererer en 2 kg-kropp fra 0 til 47 m/s på 7,9 s.
+        </p>
       </div>
     ),
     summary: (
@@ -553,26 +789,55 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-xs mb-1">Treghetsmoment:</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Dette er et typisk rotasjonsproblem med to aspekter: (1) rotasjonsbevegelse styrt av{" "}
+          <InlineLatex latex="\sum\tau = I\alpha" />, og (2) translasjonsbalanse for at akselen skal
+          holde hjulets tyngdepunkt i ro. For en uniform massiv skive (sylinder) om senteraksen er
+          treghetsmomentet:
+        </p>
+        <FormulaBox latex="I = \tfrac12 MR^2" variant="blue" />
+        <p>
+          For en snor som forlater felgen uten å gli, er akselerasjonen til snorstykket lik den
+          tangentielle akselerasjonen på felgen:
+        </p>
+        <FormulaBox latex="a = R\alpha" variant="blue" />
+        <p className="font-semibold mt-4">Hvorfor disse formlene?</p>
+        <p>
+          Trekket virker tangentielt på felgen, så momentarmen er <InlineLatex latex="R" />, og
+          dreiemomentet er rett og slett <InlineLatex latex="\tau = FR" />. Newton II for rotasjon
+          gir α. For akselkraften bruker vi Newton II for translasjon: siden akselen er lagret i
+          ro, må <InlineLatex latex="\sum\vec F = 0" /> på hjulet.
+        </p>
+        <p className="font-semibold mt-4">(a) α og snorens akselerasjon</p>
         <FormulaBox latex="I = \tfrac12 MR^2 = \tfrac12 (7{,}80)(0{,}290)^2 = 0{,}328\;\text{kg·m}^2" variant="blue" />
-        <p className="text-xs mb-1">Vinkelakselerasjon:</p>
         <FormulaBox latex="\alpha = \frac{\tau}{I} = \frac{FR}{I} = \frac{(32{,}0)(0{,}290)}{0{,}328} = 28{,}28\;\text{rad/s}^2" variant="blue" />
-        <p className="text-xs mb-1">Snorens akselerasjon:</p>
         <FormulaBox latex="a = R\alpha = (0{,}290)(28{,}28) = 8{,}20\;\text{m/s}^2" variant="blue" />
         <FormulaBox latex="\boxed{\alpha = 28{,}3\;\text{rad/s}^2,\;a = 8{,}20\;\text{m/s}^2}" variant="gold" />
-        <p className="text-xs mb-1">Aksling-kraften (horisontal og vertikal balanse for hjulet):</p>
-        <FormulaBox latex="A_x = F = 32{,}0\;\text{N} \text{ (motsatt av trekket)}" variant="blue" />
-        <FormulaBox latex="A_y = Mg = (7{,}80)(9{,}80) = 76{,}4\;\text{N (oppover)}" variant="blue" />
-        <FormulaBox latex="|\vec{A}| = \sqrt{32{,}0^2 + 76{,}4^2} = 82{,}8\;\text{N}" variant="blue" />
-        <FormulaBox latex="\theta = \arctan(76{,}4/32{,}0) = 67{,}3°\;\text{over horisontalen}" variant="blue" />
+        <p className="font-semibold mt-4">(b) Akselkraft — translasjonsbalanse</p>
+        <p>
+          Hjulets tyngdepunkt beveger seg ikke. Vertikalt balanserer akselen tyngden, horisontalt
+          balanserer akselen trekket:
+        </p>
+        <FormulaBox latex="\sum F_x = 0:\; A_x - F = 0 \Rightarrow A_x = F = 32{,}0\;\text{N}" variant="blue" />
+        <FormulaBox latex="\sum F_y = 0:\; A_y - Mg = 0 \Rightarrow A_y = Mg = (7{,}80)(9{,}80) = 76{,}4\;\text{N}" variant="blue" />
+        <FormulaBox latex="|\vec A| = \sqrt{A_x^2 + A_y^2} = \sqrt{32{,}0^2 + 76{,}4^2} = 82{,}8\;\text{N}" variant="blue" />
+        <FormulaBox latex="\theta = \arctan(A_y/A_x) = \arctan(76{,}4/32{,}0) = 67{,}3°\;\text{over horisontalen}" variant="blue" />
         <FormulaBox latex="\boxed{\vec{A} \approx 82{,}8\;\text{N},\;67{,}3°\;\text{fra horisontalen, mot trekkets retning}}" variant="gold" />
-        <p className="text-xs mb-1">(c) Hvis trekket er oppover:</p>
-        <p className="text-xs">Dreiemomentet er fortsatt FR (vinkelrett kraft), så α og a er uendret.
-            Men aksel-kraftens retning endres siden kraftbalansen endres:{" "}
-            <InlineLatex latex="A_y = Mg - F = 76{,}4 - 32{,}0 = 44{,}4\;\text{N}" />,{" "}
-            <InlineLatex latex="A_x = 0" />.
-          </p>
+        <p className="font-semibold mt-4">(c) Endring hvis trekket er oppover?</p>
+        <p>
+          <strong>α og a er uendret.</strong> Hvorfor? Fordi dreiemomentet avhenger bare av at
+          kraften virker tangentielt på felgen med arm <InlineLatex latex="R" />; retningen i rommet
+          spiller ingen rolle for momentet om akselen. Men aksel-<em>kraften</em> endres fordi
+          kraftbalansen blir annerledes:
+        </p>
+        <FormulaBox latex="A_x = 0,\qquad A_y = Mg - F = 76{,}4 - 32{,}0 = 44{,}4\;\text{N}" variant="blue" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\alpha = \text{N·m}/\text{kg·m}^2 = \text{rad/s}^2" />{" "}
+          (siden <InlineLatex latex="\text{N} = \text{kg·m/s}^2" />). OK. Fysisk tolkning: akselen må
+          både bære hjulets vekt og reagere mot trekket — som en hengsel på en dør du drar i.
+        </p>
       </div>
     ),
     summary: (
@@ -638,13 +903,52 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Problemet kombinerer tre nøkkelideer:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-1">
+          <li>Treghetsmoment for uniform kule om sentrum: <InlineLatex latex="I = \tfrac{2}{5}mR^2" /> (fra tabell).</li>
+          <li>Tangentiell friksjon på felgen gir dreiemoment: <InlineLatex latex="\tau = fR" />.</li>
+          <li>Newton II for rotasjon: <InlineLatex latex="\tau = I\alpha" />.</li>
+          <li>Konstant α → kinematikk <InlineLatex latex="\omega_f = \omega_0 + \alpha t" />.</li>
+        </ul>
+        <p className="font-semibold mt-4">Hvorfor disse formlene?</p>
+        <p>
+          Friksjonen er konstant (kulen roterer med konstant kontakt), så α er konstant. Det gjør det
+          raskt å finne tid via <InlineLatex latex="\omega_f = \omega_0 + \alpha t" />. Tangential
+          friksjon gir <InlineLatex latex="\sin 90° = 1" />, så <InlineLatex latex="\tau = fR" /> uten
+          noen sin-faktor.
+        </p>
+        <p className="font-semibold mt-4">(a) Vinkelakselerasjon</p>
+        <p>Finn I (enheter: m = 0,225 kg, R = 0,0150 m):</p>
         <FormulaBox latex="I = \tfrac{2}{5}(0{,}225)(0{,}0150)^2 = 2{,}025\times 10^{-5}\;\text{kg·m}^2" variant="blue" />
+        <p>Dreiemoment fra friksjon (bremsende, altså motsatt rotasjon):</p>
         <FormulaBox latex="\tau = fR = (0{,}0200)(0{,}0150) = 3{,}00\times 10^{-4}\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="\alpha = \tau/I = 3{,}00\times 10^{-4}/2{,}025\times 10^{-5} = 14{,}8\;\text{rad/s}^2" variant="blue" />
+        <p>Newton II for rotasjon:</p>
+        <FormulaBox latex="\alpha = \tau/I = \frac{3{,}00\times 10^{-4}}{2{,}025\times 10^{-5}} = 14{,}8\;\text{rad/s}^2" variant="blue" />
         <FormulaBox latex="\boxed{\alpha = 14{,}8\;\text{rad/s}^2\;\text{(bremsende)}}" variant="gold" />
-        <FormulaBox latex="t = \frac{\omega_0}{|\alpha|} = \frac{22{,}5}{14{,}8} = 1{,}52\;\text{s}" variant="blue" />
+        <p className="font-semibold mt-4">(b) Bremsetid</p>
+        <p>
+          Friksjonen er motsatt rotasjonen, så fortegnet på α er negativt (retardasjon). Vi bruker
+          <InlineLatex latex="\omega_f = \omega_0 + \alpha t" /> med{" "}
+          <InlineLatex latex="\omega_f = 0" /> og løser for t:
+        </p>
+        <FormulaBox latex="0 = \omega_0 - |\alpha| t \Rightarrow t = \frac{\omega_0}{|\alpha|} = \frac{22{,}5}{14{,}8} = 1{,}52\;\text{s}" variant="blue" />
         <FormulaBox latex="\boxed{t \approx 1{,}52\;\text{s}}" variant="gold" />
+        <p className="font-semibold mt-4">Enhetssjekk og tolkning</p>
+        <p>
+          <InlineLatex latex="\alpha = \text{N·m}/\text{kg·m}^2 = 1/\text{s}^2" />, altså rad/s². OK.
+          Fysisk: liten R → liten I → α blir stor per N·m, så selv en liten friksjonskraft bremser
+          raskt. Dette er grunnen til at små kulelagere kan lage mye støy og varme ved dårlig
+          smøring.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Lineær analogi: en 0,225 kg blokk med en 0,0200 N friksjonskraft får{" "}
+          <InlineLatex latex="a = F/m = 0{,}0889\;\text{m/s}^2" />. Forskjellen (små vs. store
+          retardasjoner) ligger i at rotasjonen forsterker effekten gjennom armen R.
+        </p>
       </div>
     ),
     summary: (
@@ -710,19 +1014,58 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-xs mb-1">Koblede ligninger: sylinder TR = (½MR²)α, a = Rα → T = ½Ma:</p>
-        <FormulaBox latex="a = \frac{mg}{m + M/2} = \frac{(15{,}0)(9{,}80)}{15{,}0 + 6{,}00} = 7{,}00\;\text{m/s}^2" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Dette er Atwood-type problem, men med en tung trinse. Tre legemer/relasjoner:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-1">
+          <li>Newton II på bøtte (translasjon): <InlineLatex latex="mg - T = ma" />.</li>
+          <li>Newton II på sylinder (rotasjon): <InlineLatex latex="\tau = TR = I\alpha" />.</li>
+          <li>Geometrisk kobling (snor som ikke glir): <InlineLatex latex="a = R\alpha" />.</li>
+          <li>Treghetsmoment for massiv sylinder: <InlineLatex latex="I = \tfrac12 MR^2" />.</li>
+        </ul>
+        <p className="font-semibold mt-4">Hvorfor disse formlene?</p>
+        <p>
+          Når en snor glir uten å skli over en trinse med masse, er snorspenningen <strong>ulik</strong>{" "}
+          på de to sidene — her har vi bare én side, men T er likevel mindre enn <InlineLatex latex="mg" />{" "}
+          (ellers ville bøtta ikke falle). En trinse med masseløs snor og friksjon som hindrer skli
+          gir T virker både som kraft nedover på snoren og som tangentiell kraft som dreier
+          sylinderen. Vi kan IKKE bruke energibevaring i (a)/(c) fordi vi vil ha T, ikke bare farten.
+        </p>
+        <p className="font-semibold mt-4">Algebraisk utledning</p>
+        <p>
+          Fra sylinder-ligningen: <InlineLatex latex="TR = \tfrac12 MR^2 \cdot \alpha = \tfrac12 MR^2 \cdot a/R = \tfrac12 MRa" />,
+          altså <InlineLatex latex="T = \tfrac12 Ma" />. Sett inn i bøtte-ligningen:
+        </p>
+        <FormulaBox latex="mg - \tfrac12 Ma = ma \Rightarrow mg = (m + \tfrac12 M)a \Rightarrow a = \frac{mg}{m + M/2}" variant="blue" />
+        <p className="font-semibold mt-4">(a) Snorspenning og akselerasjon</p>
+        <FormulaBox latex="a = \frac{(15{,}0)(9{,}80)}{15{,}0 + 6{,}00} = \frac{147}{21{,}0} = 7{,}00\;\text{m/s}^2" variant="blue" />
         <FormulaBox latex="T = \tfrac12 Ma = \tfrac12 (12{,}0)(7{,}00) = 42{,}0\;\text{N}" variant="blue" />
         <FormulaBox latex="\boxed{T = 42{,}0\;\text{N}}" variant="gold" />
-        <FormulaBox latex="v = \sqrt{2ah} = \sqrt{2(7{,}00)(10{,}0)} = 11{,}83\;\text{m/s}" variant="blue" />
+        <p>
+          Merk: <InlineLatex latex="T < mg = 147\;\text{N}" /> — ellers ville ikke bøtta falle.{" "}
+          <InlineLatex latex="a < g" /> av samme grunn (trinsen «spiser» noe av kraften).
+        </p>
+        <p className="font-semibold mt-4">(b) Fart ved vannoverflaten</p>
+        <p>Konstant akselerasjon + kinematikk (starter fra ro):</p>
+        <FormulaBox latex="v^2 = v_0^2 + 2ah \Rightarrow v = \sqrt{2ah} = \sqrt{2(7{,}00)(10{,}0)} = 11{,}83\;\text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v = 11{,}8\;\text{m/s}}" variant="gold" />
-        <FormulaBox latex="t = \sqrt{2h/a} = \sqrt{2(10{,}0)/7{,}00} = 1{,}69\;\text{s}" variant="blue" />
+        <p className="font-semibold mt-4">(c) Falltid</p>
+        <FormulaBox latex="h = \tfrac12 at^2 \Rightarrow t = \sqrt{2h/a} = \sqrt{20{,}0/7{,}00} = 1{,}69\;\text{s}" variant="blue" />
         <FormulaBox latex="\boxed{t = 1{,}69\;\text{s}}" variant="gold" />
-        <p className="text-xs mb-1">(d) Akselen holder sylinder+bøtte i ro vertikalt. Total kraft nedover:
-            sylinderens vekt + snorspenning:</p>
+        <p className="font-semibold mt-4">(d) Akselkraften</p>
+        <p>
+          Sylinderen translaterer ikke (akselen er lagret). Vertikal balanse: akselens kraft opp =
+          sylinderens vekt ned + snorens trekk ned.
+        </p>
         <FormulaBox latex="A = Mg + T = (12{,}0)(9{,}80) + 42{,}0 = 117{,}6 + 42{,}0 = 159{,}6\;\text{N}" variant="blue" />
         <FormulaBox latex="\boxed{A \approx 160\;\text{N}\;\text{oppover}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Kryssjekk med energibevaring (alternativ): <InlineLatex latex="mgh = \tfrac12 mv^2 + \tfrac12 I\omega^2 = \tfrac12 (m + M/2)v^2" />,
+          gir samme <InlineLatex latex="v = 11{,}83\;\text{m/s}" />. Men energi gir ikke T direkte —
+          derfor krefter+dreiemoment er best her.
+        </p>
       </div>
     ),
     summary: (
@@ -783,13 +1126,52 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\frac{K_\text{rot}}{K_\text{tot}} = \frac{\tfrac12 I\omega^2}{\tfrac12 Mv^2 + \tfrac12 I\omega^2} = \frac{I/MR^2}{1 + I/MR^2} = \frac{\beta}{1+\beta}" variant="blue" />
-        <p className="text-xs mb-1">(a) Massiv sylinder (β = 1/2): forhold = (1/2)/(3/2) = 1/3</p>
-        <p className="text-xs mb-1">(b) Uniform kule (β = 2/5): forhold = (2/5)/(7/5) = 2/7</p>
-        <p className="text-xs mb-1">(c) Hulk kule (β = 2/3): forhold = (2/3)/(5/3) = 2/5</p>
-        <p className="text-xs mb-1">(d) Hulsylinder, R og R/2: β = 5/8, forhold = (5/8)/(13/8) = 5/13</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Total kinetisk energi av et rullende legeme er summen av translatorisk og rotasjons-KE:
+        </p>
+        <FormulaBox latex="K = K_\text{transl} + K_\text{rot} = \tfrac12 Mv_\text{cm}^2 + \tfrac12 I_\text{cm}\omega^2" variant="blue" />
+        <p>
+          Dette følger direkte av at bevegelsen til en stiv kropp kan dekomponeres i translasjon av
+          tyngdepunktet + rotasjon om tyngdepunktet (König's teorem). Ved rulling uten å skli er
+          kontaktpunktet i ro, så:
+        </p>
+        <FormulaBox latex="v_\text{cm} = R\omega \Leftrightarrow \omega = v/R" variant="blue" />
+        <p>
+          For mange vanlige legemer skrives <InlineLatex latex="I = \beta MR^2" /> med β avhengig av
+          formen: <InlineLatex latex="\tfrac12" /> (massiv sylinder), <InlineLatex latex="\tfrac25" />{" "}
+          (uniform kule), <InlineLatex latex="\tfrac23" /> (hulk kule), 1 (ring/hoop).
+        </p>
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Vi spør om <em>forholdet</em> mellom rotasjonsenergi og total, som er dimensjonsløst — det
+          vil bare avhenge av β, ikke av masse, radius eller fart. Det gjør det til et universelt
+          mål på «hvor dominert av rotasjon» et rullende legeme er.
+        </p>
+        <p className="font-semibold mt-4">Generell utledning</p>
+        <FormulaBox latex="\frac{K_\text{rot}}{K_\text{tot}} = \frac{\tfrac12 I\omega^2}{\tfrac12 Mv^2 + \tfrac12 I\omega^2}" variant="blue" />
+        <p>Sett inn <InlineLatex latex="v = R\omega" /> og <InlineLatex latex="I = \beta MR^2" />:</p>
+        <FormulaBox latex="\frac{\tfrac12 \beta MR^2 \omega^2}{\tfrac12 M(R\omega)^2 + \tfrac12 \beta MR^2 \omega^2} = \frac{\beta}{1 + \beta}" variant="blue" />
+        <p className="font-semibold mt-4">(a) Massiv sylinder, <InlineLatex latex="\beta = 1/2" /></p>
+        <FormulaBox latex="\frac{1/2}{1 + 1/2} = \frac{1/2}{3/2} = \frac{1}{3}" variant="blue" />
+        <p className="font-semibold mt-4">(b) Uniform kule, <InlineLatex latex="\beta = 2/5" /></p>
+        <FormulaBox latex="\frac{2/5}{1 + 2/5} = \frac{2/5}{7/5} = \frac{2}{7}" variant="blue" />
+        <p className="font-semibold mt-4">(c) Tynnvegget hulk kule, <InlineLatex latex="\beta = 2/3" /></p>
+        <FormulaBox latex="\frac{2/3}{1 + 2/3} = \frac{2/3}{5/3} = \frac{2}{5}" variant="blue" />
+        <p className="font-semibold mt-4">(d) Hulsylinder med <InlineLatex latex="R_2 = R" />, <InlineLatex latex="R_1 = R/2" /></p>
+        <p>
+          Treghetsmoment for hulsylinder: <InlineLatex latex="I = \tfrac12 M(R_1^2 + R_2^2)" />.
+        </p>
+        <FormulaBox latex="\beta = \frac{\tfrac12 M((R/2)^2 + R^2)}{MR^2} = \frac{R^2/4 + R^2}{2R^2} = \frac{5}{8}" variant="blue" />
+        <FormulaBox latex="\frac{5/8}{1 + 5/8} = \frac{5/8}{13/8} = \frac{5}{13}" variant="blue" />
         <FormulaBox latex="\boxed{\text{(a) } \tfrac{1}{3},\;\text{(b) } \tfrac{2}{7},\;\text{(c) } \tfrac{2}{5},\;\text{(d) } \tfrac{5}{13}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: Massiv kule (<InlineLatex latex="2/7 \approx 29\%" />) er mest
+          «translasjons­effektiv» — rekker lengst med samme KE. Hulk kule
+          (<InlineLatex latex="2/5 = 40\%" />) lagrer mer energi i rotasjon, som er grunnen til at
+          en fotball akselererer saktere enn en bowling-kule ned en bakke.
+        </p>
       </div>
     ),
     summary: (
@@ -865,11 +1247,55 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="Mgh = \tfrac12 Mv^2 + \tfrac12 (MR^2)\omega^2 = Mv^2" variant="blue" />
-        <FormulaBox latex="v = \sqrt{gh} = \sqrt{(9{,}80)(0{,}750)} = 2{,}71\;\text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Når snoren er festet i den faste enden og den frie enden holdes i ro, har snoren samme fart
+          som felgen på stedet der den forlater hoopen. Siden holderens hånd er stillestående, er
+          det stedet der snoren forlater felgen også stillestående — dette er en{" "}
+          <strong>øyeblikkelig rotasjonsakse</strong>. Hoopen «ruller opp» snoren på akkurat samme måte
+          som en kule ruller på bakken. Nøkkelrelasjonen er derfor:
+        </p>
+        <FormulaBox latex="v_\text{cm} = R\omega" variant="blue" />
+        <p>
+          Og treghetsmoment for en ring (hoop) om senteraksen er:
+        </p>
+        <FormulaBox latex="I = MR^2" variant="blue" />
+        <p className="font-semibold mt-4">Hvorfor energibevaring?</p>
+        <p>
+          Snoren trekker oppover på hoopen med en kraft <InlineLatex latex="T" />. Men kontaktpunktet
+          mellom snor og felg er øyeblikkelig i ro (som kontaktpunktet ved ren rulling), så snoren
+          utfører <strong>null arbeid</strong> på hoopen. Derfor er mekanisk energi bevart. Vi kan
+          ikke enkelt bruke Newton II uten først å finne α, men energibevaring gir farten direkte.
+        </p>
+        <p className="font-semibold mt-4">Energibalansen</p>
+        <p>
+          Initialt i ro, slutter med fart v og vinkelhastighet ω. Potensiell energi mgh går til
+          translatorisk + rotasjons-KE:
+        </p>
+        <FormulaBox latex="Mgh = \tfrac12 Mv^2 + \tfrac12 I\omega^2" variant="blue" />
+        <p>
+          Sett inn <InlineLatex latex="I = MR^2" /> og <InlineLatex latex="\omega = v/R" />:
+        </p>
+        <FormulaBox latex="Mgh = \tfrac12 Mv^2 + \tfrac12 MR^2 \cdot \frac{v^2}{R^2} = Mv^2" variant="blue" />
+        <p>M kansellerer, og vi løser for v:</p>
+        <FormulaBox latex="v = \sqrt{gh} = \sqrt{(9{,}80)(0{,}750)} = \sqrt{7{,}35} = 2{,}71\;\text{m/s}" variant="blue" />
+        <p>Og ω:</p>
         <FormulaBox latex="\omega = v/R = 2{,}71/0{,}0800 = 33{,}9\;\text{rad/s}" variant="blue" />
         <FormulaBox latex="\boxed{\omega = 33{,}9\;\text{rad/s},\;v = 2{,}71\;\text{m/s}}" variant="gold" />
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          <InlineLatex latex="\sqrt{\text{m/s}^2 \cdot \text{m}} = \text{m/s}" />. OK.{" "}
+          <InlineLatex latex="(\text{m/s})/\text{m} = 1/\text{s} = \text{rad/s}" /> (radianer er
+          dimensjonsløse).
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: For hoop fordeles KE likt mellom translasjon og rotasjon (fordi β = 1),
+          og fartloven er <InlineLatex latex="v = \sqrt{gh}" /> — nøyaktig halvparten av farten til
+          et fritt fall (<InlineLatex latex="\sqrt{2gh}" />) med samme høyde. Dette bekrefter at
+          50 % av energien blir rotasjonsenergi. Merkverdig: resultatet er uavhengig av både masse og
+          radius.
+        </p>
       </div>
     ),
     summary: (
@@ -935,17 +1361,61 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-xs mb-1">For uniform kule er β = 2/5, så minste μ_s:</p>
-        <FormulaBox latex="\mu_s = \frac{2/5}{1 + 2/5}\tan 70° = \tfrac{2}{7}\tan 70°" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn — rulling ned skråning</p>
+        <p>
+          For et legeme som ruller uten å skli ned en skråning virker tre krefter: tyngde{" "}
+          <InlineLatex latex="Mg" /> ned, normalkraft <InlineLatex latex="N = Mg\cos\theta" /> fra
+          skråningen, og statisk friksjon <InlineLatex latex="f" /> langs skråningen. Friksjonen
+          peker <strong>oppover</strong> skråningen — den må gi rotasjonens dreiemoment (ellers
+          ville kulen gli).
+        </p>
+        <p>Newton II langs skråningen (ta nedover positivt):</p>
+        <FormulaBox latex="Mg\sin\theta - f = Ma" variant="blue" />
+        <p>Newton II for rotasjon om tyngdepunktet (friksjonen gir dreiemoment):</p>
+        <FormulaBox latex="fR = I\alpha = \beta MR^2 \alpha" variant="blue" />
+        <p>Rullevilkår (kontaktpunktet har null fart):</p>
+        <FormulaBox latex="a = R\alpha" variant="blue" />
+        <p className="font-semibold mt-4">Algebraisk kombinasjon</p>
+        <p>
+          Fra rotasjonsligningen + rullevilkår: <InlineLatex latex="f = \beta Ma" />. Sett inn i
+          Newton II:
+        </p>
+        <FormulaBox latex="Mg\sin\theta - \beta Ma = Ma \Rightarrow a = \frac{g\sin\theta}{1 + \beta}" variant="blue" />
+        <FormulaBox latex="f = \beta Ma = \frac{\beta}{1+\beta} Mg\sin\theta" variant="blue" />
+        <p>
+          Vilkåret for at statisk friksjon kan holde: <InlineLatex latex="f \leq \mu_s N = \mu_s Mg\cos\theta" />.
+        </p>
+        <FormulaBox latex="\mu_s \geq \frac{\beta}{1+\beta}\tan\theta" variant="blue" />
+        <p className="font-semibold mt-4">Hvorfor denne formelen og ikke energibevaring?</p>
+        <p>
+          Energibevaring gir ikke μ fordi friksjonen i <em>ren</em> rulling utfører null arbeid
+          (kontaktpunktet er i ro). Vi må bruke Newton II på både translasjon og rotasjon for å
+          isolere f. Deretter sammenlignes f med maks statisk friksjon <InlineLatex latex="\mu_s N" />.
+        </p>
+        <p className="font-semibold mt-4">(a) Uniform kule, <InlineLatex latex="\beta = 2/5" /></p>
+        <FormulaBox latex="\mu_s = \frac{2/5}{1 + 2/5}\tan 70° = \frac{2/5}{7/5}\tan 70° = \tfrac{2}{7}\tan 70°" variant="blue" />
         <FormulaBox latex="\tan 70° = 2{,}747 \Rightarrow \mu_s = \tfrac{2}{7}(2{,}747) = 0{,}785" variant="blue" />
         <FormulaBox latex="\boxed{\mu_{s,\min} = 0{,}785}" variant="gold" />
-        <p className="text-xs mb-1">(b) For hulk kule er β = 2/3:</p>
-        <FormulaBox latex="\mu_s = \frac{2/3}{5/3}\tan 70° = \tfrac{2}{5}\tan 70° = 1{,}10" variant="blue" />
-        <p className="text-xs mt-1">Så 0,785 er <em>ikke</em> nok for en hulk kule.</p>
-        <p className="text-xs">(c) Vi bruker statisk friksjon fordi kontaktpunktet mellom kulen og
-            flaten har <strong>null relativ fart</strong> ved ren rulling. Kinetisk friksjon ville
-            bare gjelde hvis sklis oppsto.</p>
+        <p className="font-semibold mt-4">(b) Hulk kule, <InlineLatex latex="\beta = 2/3" /></p>
+        <FormulaBox latex="\mu_s = \frac{2/3}{5/3}\tan 70° = \tfrac{2}{5}\tan 70° = (0{,}400)(2{,}747) = 1{,}10" variant="blue" />
+        <p>
+          Siden <InlineLatex latex="\mu_s > 1" /> er umulig for fleste materialer, vil en hulk kule{" "}
+          <em>alltid</em> gli på en 70°-skråning. En massiv kule (0,785) er grensetilfellet — kun
+          spesielle materialer (gummi på gummi) når så høy μ.
+        </p>
+        <p className="font-semibold mt-4">(c) Hvorfor statisk og ikke kinetisk?</p>
+        <p>
+          Ved <strong>ren rulling</strong> er kontaktpunktet mellom kule og flate øyeblikkelig i ro
+          (null relativ hastighet). Friksjonen er derfor <strong>statisk</strong>, ikke kinetisk.
+          Statisk friksjon er hva som helst mellom 0 og <InlineLatex latex="\mu_s N" />, justert slik
+          at rulling opprettholdes. Kinetisk friksjon virker bare dersom sklis allerede har inntruffet.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: både <InlineLatex latex="\tan\theta" /> og μ er dimensjonsløse. OK. Analogi:
+          hulke objekter (som fotballer, hule rør) har mer treghet per masse — derfor krever de mer
+          friksjon for å rulles uten å gli.
+        </p>
       </div>
     ),
     summary: (
@@ -1002,13 +1472,52 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          Helt parallelt med oppgave 10.23: rulling uten å skli ned skråning gir tre relasjoner,
+          Newton II langs skråningen, Newton II for rotasjon, og rullevilkår <InlineLatex latex="a = R\alpha" />.
+          Resultatet uttrykt i <InlineLatex latex="\beta = I/MR^2" />:
+        </p>
+        <FormulaBox latex="a = \frac{g\sin\theta}{1 + \beta},\qquad f = \frac{\beta}{1+\beta}Mg\sin\theta,\qquad \mu_{s,\min} = \frac{\beta}{1+\beta}\tan\theta" variant="blue" />
+        <p>
+          For hul sfære om sentrum: <InlineLatex latex="I = \tfrac23 MR^2 \Rightarrow \beta = 2/3" />.
+        </p>
+        <p className="font-semibold mt-4">Hvorfor denne formelen?</p>
+        <p>
+          Samme argumentasjon som 10.23. Newton II (transl+rot) + rullevilkår → a. Energibevaring
+          ville bare gitt fart etter en gitt distanse, ikke akselerasjon eller f.
+        </p>
+        <p className="font-semibold mt-4">(a) Akselerasjon, friksjon, minste μ</p>
+        <p>Forhold: <InlineLatex latex="\frac{1}{1 + 2/3} = \frac{3}{5}" /> og <InlineLatex latex="\frac{2/3}{5/3} = \frac{2}{5}" />.</p>
         <FormulaBox latex="a = \tfrac{3}{5} g\sin 38° = \tfrac{3}{5}(9{,}80)(0{,}6157) = 3{,}62\;\text{m/s}^2" variant="blue" />
-        <FormulaBox latex="f = \tfrac{2/3}{5/3}Mg\sin\theta = \tfrac{2}{5}(2{,}00)(9{,}80)(0{,}6157) = 4{,}83\;\text{N}" variant="blue" />
+        <FormulaBox latex="f = \tfrac{2}{5}Mg\sin\theta = \tfrac{2}{5}(2{,}00)(9{,}80)(0{,}6157) = 4{,}83\;\text{N}" variant="blue" />
         <FormulaBox latex="\mu_{s,\min} = \tfrac{2}{5}\tan 38° = \tfrac{2}{5}(0{,}7813) = 0{,}313" variant="blue" />
         <FormulaBox latex="\boxed{a = 3{,}62\;\text{m/s}^2,\;f = 4{,}83\;\text{N},\;\mu_{s,\min} = 0{,}313}" variant="gold" />
-        <p className="text-xs">(b) Når massen dobles (M = 4,00 kg): <strong>a og μ forblir uendret</strong>,
-            men friksjonskraften f dobles til 9,66 N.</p>
+        <p className="font-semibold mt-4">(b) Effekt av å doble massen</p>
+        <p>
+          I formlene for a og μ kansellerer M — <strong>a og μ er uavhengig av masse</strong> (og
+          radius). Dette er ett av rotasjonsmekanikkens elegante resultater: formen (β) og vinkelen
+          (θ) er alt som teller.
+        </p>
+        <p>
+          Friksjonskraften <InlineLatex latex="f = \beta Ma" /> er derimot{" "}
+          <strong>proporsjonal med masse</strong>. Dobler vi M til 4,00 kg, dobles f til{" "}
+          <InlineLatex latex="9{,}66\;\text{N}" />.
+        </p>
+        <p className="font-semibold mt-4">Enhetssjekk</p>
+        <p>
+          <InlineLatex latex="[a] = \text{m/s}^2,\;[f] = \text{kg}\cdot\text{m/s}^2 = \text{N},\;[\mu_s]" />{" "}
+          dimensjonsløs. OK.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: Dette er hvorfor alle kuler av samme form (alle bowling-kuler, alle
+          fotballer) akselererer likt ned en gitt skråning. Galileo oppdaget dette for fritt fall;
+          Huygens generaliserte til rullende kropper. Du kan enkelt huske: <InlineLatex latex="\tfrac{5}{7}" />{" "}
+          for massiv kule, <InlineLatex latex="\tfrac{3}{5}" /> for hul kule,{" "}
+          <InlineLatex latex="\tfrac{2}{3}" /> for massiv sylinder, <InlineLatex latex="\tfrac12" />{" "}
+          for hoop — multiplisér med <InlineLatex latex="g\sin\theta" />.
+        </p>
       </div>
     ),
     summary: (
@@ -1075,23 +1584,53 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-xs mb-1">(a) Kulen bremses på vei opp. For å bremse rotasjonen (som er
-            i samme retning som bevegelsen) må friksjonen gi et dreiemoment som motvirker denne
-            rotasjonen. Det oppnås når friksjonen peker <strong>oppover skråningen</strong>.</p>
-        <p className="text-xs mb-1">(b) Langs skråningen (positiv nedover), Newton II:</p>
-        <FormulaBox latex="Mg\sin\beta - f = Ma" variant="blue" />
-        <p className="text-xs mt-2">Rotasjon om sentrum (friksjonen gir dreiemoment):</p>
-        <FormulaBox latex="fR = I\alpha = \tfrac{2}{5}MR^2\alpha" variant="blue" />
-        <p className="text-xs mt-2">Rullevilkår:</p>
-        <FormulaBox latex="a = R\alpha \Rightarrow f = \tfrac{2}{5}Ma" variant="blue" />
-        <p className="text-xs mt-2">Sett inn:</p>
-        <FormulaBox latex="Mg\sin\beta - \tfrac{2}{5}Ma = Ma \Rightarrow a = \tfrac{5}{7}g\sin\beta" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <p>
+          En rullende kule som beveger seg opp en skråning bremser. To ting bremses samtidig: (1)
+          tyngdepunktets translasjonsfart <InlineLatex latex="v_\text{cm}" />, og (2) rotasjonen ω.
+          Rullevilkåret <InlineLatex latex="v = R\omega" /> krever at begge bremses i samme takt
+          (<InlineLatex latex="a = R\alpha" />). Det er her friksjonens retning blir interessant.
+        </p>
+        <p className="font-semibold mt-4">(a) Hvorfor friksjonen peker opp</p>
+        <p>
+          Tyngden gir et dreiemoment nedover skråningen gjennom kontaktpunktet, som bremser{" "}
+          <em>translasjonen</em>. Men gravity virker gjennom tyngdepunktet; om tyngdepunktet gir den
+          null dreiemoment. Det er <strong>bare friksjonen</strong> som gir dreiemoment om
+          tyngdepunktet. For at rotasjonen skal bremses (siden v bremses, og rullevilkåret krever at
+          ω også bremses), må friksjonens dreiemoment virke mot rotasjonen. Det krever friksjon rettet{" "}
+          <strong>oppover skråningen</strong>.
+        </p>
+        <p className="font-semibold mt-4">(b) Akselerasjon — Newton II</p>
+        <p>Ta nedover skråningen som positiv. Kulen ruller opp, så faktisk fart er negativ; men a er positiv nedover:</p>
+        <FormulaBox latex="Mg\sin\beta - f = Ma \qquad\text{(translasjon langs skråningen)}" variant="blue" />
+        <p>
+          Rotasjon om tyngdepunktet. Friksjonen peker oppover skråningen, på bunnen av kulen; dette
+          gir et dreiemoment som bremser rotasjonen:
+        </p>
+        <FormulaBox latex="fR = I\alpha = \tfrac{2}{5}MR^2 \alpha" variant="blue" />
+        <p>Rullevilkår:</p>
+        <FormulaBox latex="a = R\alpha \Rightarrow \alpha = a/R" variant="blue" />
+        <p>Sett inn i rotasjonslikningen:</p>
+        <FormulaBox latex="fR = \tfrac{2}{5}MR^2 \cdot \frac{a}{R} \Rightarrow f = \tfrac{2}{5}Ma" variant="blue" />
+        <p>Sett inn i translasjonslikningen:</p>
+        <FormulaBox latex="Mg\sin\beta - \tfrac{2}{5}Ma = Ma \Rightarrow Mg\sin\beta = \tfrac{7}{5}Ma \Rightarrow a = \tfrac{5}{7}g\sin\beta" variant="blue" />
         <FormulaBox latex="\boxed{a = \tfrac{5}{7}g\sin\beta}" variant="gold" />
-        <p className="text-xs mb-1">(c) Minste μ_s for at friksjonen er tilstrekkelig:</p>
+        <p>
+          Bemerk: Akselerasjonen er identisk med den for rulling <em>ned</em>! Retningen snur, men
+          tallet er det samme. Det er fordi både friksjonsretning og dreiemomentretning snur når man
+          går fra opp- til nedrullling — nettoeffekten er speilet.
+        </p>
+        <p className="font-semibold mt-4">(c) Minste μ_s</p>
+        <p>Krav: <InlineLatex latex="f \leq \mu_s N = \mu_s Mg\cos\beta" />. Beregn f:</p>
         <FormulaBox latex="f = \tfrac{2}{5}Ma = \tfrac{2}{5}M \cdot \tfrac{5}{7}g\sin\beta = \tfrac{2}{7}Mg\sin\beta" variant="blue" />
-        <FormulaBox latex="\mu_{s,\min} = f/(Mg\cos\beta) = \tfrac{2}{7}\tan\beta" variant="blue" />
+        <FormulaBox latex="\mu_{s,\min} = \frac{f}{Mg\cos\beta} = \tfrac{2}{7}\tan\beta" variant="blue" />
         <FormulaBox latex="\boxed{\mu_{s,\min} = \tfrac{2}{7}\tan\beta}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: Dette bekrefter at minste μ er identisk enten kulen ruller opp eller ned
+          — den <em>eneste</em> forskjellen er at friksjonens retning snur. Derfor: en bowling-kule
+          som ruller opp en rampe og så tilbake bruker samme μ hele tiden.
+        </p>
       </div>
     ),
     summary: (

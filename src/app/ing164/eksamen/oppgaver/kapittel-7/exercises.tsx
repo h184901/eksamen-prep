@@ -118,15 +118,52 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Tyngdekraften nær jordoverflaten er en{" "}
+          <em>konservativ</em> kraft: arbeidet den gjør avhenger bare av start- og
+          sluttpunkt, ikke av banen. Derfor kan vi definere en potensiell energi
+          (gravitasjonsenergi) <InlineLatex latex="U_g = mgy" /> hvor{" "}
+          <InlineLatex latex="y" /> er høyden over et fritt valgt referansenivå.
+          Endringen mellom to høyder er dermed baneuavhengig og gis av:
+        </p>
+        <FormulaBox latex="\Delta U_\text{grav} = U_2 - U_1 = mgy_2 - mgy_1 = mg\,\Delta y" variant="blue" />
+        <p>
+          <strong>Hvorfor er dette så nyttig?</strong> Det betyr at vi ikke trenger
+          å bry oss om den faktiske stien i fjellveggen — bare høydeforskjellen
+          <InlineLatex latex="\Delta y = y_2 - y_1" /> teller. Positiv{" "}
+          <InlineLatex latex="\Delta y" /> (man går opp) gir positiv
+          <InlineLatex latex="\Delta U" /> (energi må tilføres), negativ{" "}
+          <InlineLatex latex="\Delta y" /> gir negativ <InlineLatex latex="\Delta U" />.
+        </p>
         <p><strong>Dag 1 (opp fra 1560 m til 2500 m):</strong></p>
-        <FormulaBox latex="\Delta y = 2500 - 1560 = 940\;\text{m}" variant="blue" />
+        <p>
+          Vi bruker formelen direkte med gitte høyder. Legg merke til at
+          referansenivået er helt irrelevant — det forsvinner når vi tar
+          differansen <InlineLatex latex="y_2 - y_1" />.
+        </p>
+        <FormulaBox latex="\Delta y = y_2 - y_1 = 2500 - 1560 = 940\;\text{m}" variant="blue" />
         <FormulaBox latex="\Delta U_1 = mg\Delta y = (90)(9{,}80)(940) = 829\;080\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{\Delta U_1 \approx 8{,}29 \cdot 10^5\;\text{J} = 829\;\text{kJ}}" variant="gold" />
+        <p>
+          Positivt tegn: klatreren får mer potensiell energi lagret i kroppen
+          (hun har utført mekanisk arbeid mot tyngdekraften).
+        </p>
         <p><strong>Dag 2 (ned fra 2500 m til 1260 m):</strong></p>
-        <FormulaBox latex="\Delta y = 1260 - 2500 = -1240\;\text{m}" variant="blue" />
-        <FormulaBox latex="\Delta U_2 = (90)(9{,}80)(-1240) = -1\;093\;680\;\text{J}" variant="blue" />
+        <p>
+          Samme formel, men nå er <InlineLatex latex="y_2 < y_1" />, så{" "}
+          <InlineLatex latex="\Delta y" /> blir negativ:
+        </p>
+        <FormulaBox latex="\Delta y = y_2 - y_1 = 1260 - 2500 = -1240\;\text{m}" variant="blue" />
+        <FormulaBox latex="\Delta U_2 = mg\Delta y = (90)(9{,}80)(-1240) = -1\;093\;680\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{\Delta U_2 \approx -1{,}09 \cdot 10^6\;\text{J} = -1094\;\text{kJ}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Negativt fortegn betyr at systemet
+          <em> mister</em> potensiell energi — den frigjøres til andre energiformer
+          (kinetisk hvis hun faller fritt, eller varme via friksjon i klatreutstyret,
+          musklene osv.). Merk også at |ΔU₂| &gt; |ΔU₁| fordi nedstigningen dag 2
+          (1240 m) er lengre enn oppstigningen dag 1 (940 m).
+        </p>
       </div>
     ),
     summary: (
@@ -204,20 +241,65 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Energibevaring uten luftmotstand</strong></p>
-        <FormulaBox latex="\tfrac12 m v_0^2 + mgh = \tfrac12 m v^2" variant="blue" />
-        <FormulaBox latex="v^2 = v_0^2 + 2gh = (11{,}5)^2 + 2(9{,}80)(20{,}8) = 132{,}25 + 407{,}68 = 539{,}93\;\text{m}^2/\text{s}^2" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Uten luftmotstand er den eneste krafta som gjør
+          arbeid på ballen tyngdekraften, som er konservativ. Da er mekanisk energi
+          <InlineLatex latex="E = K + U" /> bevart mellom to vilkårlige punkter på
+          banen. Grunnprinsippet:
+        </p>
+        <FormulaBox latex="K_1 + U_1 = K_2 + U_2" variant="blue" />
+        <p>
+          <strong>(a) Energibevaring uten luftmotstand</strong>
+        </p>
+        <p>
+          Velg bakken som nullnivå: <InlineLatex latex="U = 0" /> ved{" "}
+          <InlineLatex latex="y = 0" />. Da er <InlineLatex latex="U_1 = mgh" />{" "}
+          (ballen starter på taket, høyde h) og <InlineLatex latex="U_2 = 0" /> (ved
+          bakken). Kinetisk energi: <InlineLatex latex="K_1 = \tfrac12 m v_0^2" />{" "}
+          og <InlineLatex latex="K_2 = \tfrac12 m v^2" />. Sett inn i
+          energibevaringen:
+        </p>
+        <FormulaBox latex="\tfrac12 m v_0^2 + mgh = \tfrac12 m v^2 + 0" variant="blue" />
+        <p>
+          <strong>Algebraisk omforming:</strong> Massen <InlineLatex latex="m" />{" "}
+          faller ut (del begge sider på <InlineLatex latex="\tfrac12 m" />), og vi
+          løser for <InlineLatex latex="v" />:
+        </p>
+        <FormulaBox latex="v^2 = v_0^2 + 2gh \;\Rightarrow\; v = \sqrt{v_0^2 + 2gh}" variant="blue" />
+        <p>
+          Legg merke til: <InlineLatex latex="v_0^2" /> avhenger bare av{" "}
+          <em>størrelsen</em> på startfarten, ikke retningen. Dette er nøkkelen til
+          (b). Sett inn tall:
+        </p>
+        <FormulaBox latex="v^2 = (11{,}5)^2 + 2(9{,}80)(20{,}8) = 132{,}25 + 407{,}68 = 539{,}93\;\text{m}^2/\text{s}^2" variant="blue" />
         <FormulaBox latex="v = \sqrt{539{,}93} = 23{,}2\;\text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v = 23{,}2\;\text{m/s}}" variant="gold" />
         <p><strong>(b) Kastet ned i 50,1° under horisontalen</strong></p>
-        <p className="text-sm">Energibevaring avhenger kun av <InlineLatex latex="v_0^2" />, ikke retning:</p>
+        <p>
+          Siden <InlineLatex latex="v_0^2" /> er uavhengig av retningen på
+          starthastigheten (<InlineLatex latex="|\vec{v}_0|^2 = v_{0x}^2 + v_{0y}^2" />{" "}
+          er det samme uansett fortegn på <InlineLatex latex="v_{0y}" />), gir
+          energimetoden nøyaktig samme svar:
+        </p>
         <FormulaBox latex="\boxed{v = 23{,}2\;\text{m/s}\;\;(\text{samme som (a)})}" variant="gold" />
+        <p>
+          Dette er en vakker demonstrasjon av hvor mektig energibevaring er: vi slipper
+          å spalte opp bevegelsen i x- og y-komponenter og løse bevegelsesligninger.
+        </p>
         <p><strong>(c) Med luftmotstand</strong></p>
-        <p className="text-sm">
-          Ballen som kastes oppover (a) er lenger i luften og har lengre banelengde enn ballen kastet
-          nedover (b). Luftmotstand fjerner mer energi i (a) enn i (b). Derfor gir{" "}
-          <strong>(b) høyere fart</strong> når ballen treffer bakken.
+        <p>
+          Luftmotstand er en <em>ikke-konservativ</em> kraft som alltid peker motsatt
+          bevegelsesretningen. Den gjør negativt arbeid{" "}
+          <InlineLatex latex="W_\text{luft} < 0" />, proporsjonalt med banelengden.
+          Da gjelder:
+        </p>
+        <FormulaBox latex="K_1 + U_1 + W_\text{luft} = K_2 + U_2" variant="blue" />
+        <p>
+          Ballen som kastes oppover (a) stiger først og faller så — lengre total
+          banelengde og lengre tid i lufta. Ballen som kastes nedover (b) har kortere
+          banelengde. Derfor taper (a) mer energi til luftmotstand, og{" "}
+          <strong>(b) gir høyest sluttfart</strong>.
         </p>
       </div>
     ),
@@ -309,27 +391,80 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Arbeid fra hver kraft</strong></p>
-        <p className="text-sm">(i) Normalkraften står vinkelrett på bevegelsen i alle punkter:</p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori — arbeid-energi-teoremet med friksjon:</strong> Kinetisk
+          friksjon er ikke-konservativ, så mekanisk energi er ikke bevart.
+          Det generelle arbeid-energi-teoremet sier likevel at summen av
+          <em> alt</em> arbeid på objektet er lik endring i kinetisk energi:
+        </p>
+        <FormulaBox latex="W_\text{tot} = W_N + W_g + W_\text{frik} = \Delta K = \tfrac12 m v_B^2 - \tfrac12 m v_A^2" variant="blue" />
+        <p>
+          <strong>(a) Arbeid fra hver kraft</strong>
+        </p>
+        <p>
+          <strong>(i) Normalkraft:</strong> Normalkrafta står definisjonsmessig
+          vinkelrett på overflaten og dermed på hastigheten. Når{" "}
+          <InlineLatex latex="\vec{F} \perp \vec{v}" /> er{" "}
+          <InlineLatex latex="\vec{F}\cdot\vec{v} = 0" />, så krafta leverer null
+          effekt — og null arbeid uansett bane:
+        </p>
+        <FormulaBox latex="W_N = \int \vec{F}_N \cdot d\vec{r} = 0" variant="blue" />
         <FormulaBox latex="\boxed{W_N = 0}" variant="gold" />
-        <p className="text-sm">(ii) Tyngdekraftens arbeid (fall R = 0,50 m):</p>
-        <FormulaBox latex="W_g = mgR = (0{,}20)(9{,}80)(0{,}50) = 0{,}98\;\text{J}" variant="blue" />
+        <p>
+          <strong>(ii) Tyngdekraft:</strong> Siden tyngdekrafta er konservativ, er
+          <InlineLatex latex="W_g = -\Delta U_g = -(U_B - U_A) = mg(y_A - y_B)" />.
+          Steinen faller en høyde R (fra bollekanten til bunnen), så:
+        </p>
+        <FormulaBox latex="W_g = mg(y_A - y_B) = mgR = (0{,}20)(9{,}80)(0{,}50) = 0{,}98\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{W_g = +0{,}98\;\text{J}}" variant="gold" />
-        <p><strong>(b) Fart i B via energisetningen</strong></p>
-        <FormulaBox latex="\tfrac12 m v_B^2 - 0 = W_g + W_\text{frik} = 0{,}98 - 0{,}22 = 0{,}76\;\text{J}" variant="blue" />
-        <FormulaBox latex="v_B^2 = \frac{2(0{,}76)}{0{,}20} = 7{,}6\;\text{m}^2/\text{s}^2" variant="blue" />
+        <p>
+          Legg merke til at vi ikke trengte å integrere langs den buede banen —
+          konservativitet gjør at vi bare trenger høydeforskjellen.
+        </p>
+        <p><strong>(b) Fart i B via arbeid-energi-teoremet</strong></p>
+        <p>
+          Vi setter inn alle tre arbeidene. Friksjonsarbeidet er gitt som 0,22 J i
+          tallverdi, men friksjon peker alltid motsatt bevegelsen, så{" "}
+          <InlineLatex latex="W_\text{frik} = -0{,}22\;\text{J}" />. Siden
+          <InlineLatex latex="v_A = 0" /> er <InlineLatex latex="K_A = 0" />:
+        </p>
+        <FormulaBox latex="\tfrac12 m v_B^2 - 0 = W_N + W_g + W_\text{frik} = 0 + 0{,}98 - 0{,}22 = 0{,}76\;\text{J}" variant="blue" />
+        <p>Løs for <InlineLatex latex="v_B" />:</p>
+        <FormulaBox latex="v_B^2 = \frac{2(0{,}76)}{0{,}20} = 7{,}6\;\text{m}^2/\text{s}^2 \;\Rightarrow\; v_B = \sqrt{7{,}6}" variant="blue" />
         <FormulaBox latex="\boxed{v_B = 2{,}76\;\text{m/s}}" variant="gold" />
+        <p>
+          <strong>Kontroll:</strong> Uten friksjon ville{" "}
+          <InlineLatex latex="v_B = \sqrt{2gR} = \sqrt{9{,}8} = 3{,}13\;\text{m/s}" />.
+          Med friksjon er svaret lavere — det stemmer med intuisjonen.
+        </p>
         <p><strong>(c) Hvilke krefter er konstante?</strong></p>
-        <p className="text-sm">
-          Tyngdekraften er konstant (både størrelse og retning). Normalkraften er IKKE konstant
-          (retningen endrer seg langs bollen, størrelsen også). Friksjonskraften er heller ikke
-          konstant (størrelsen avhenger av N, som varierer).
+        <p>
+          <strong>Tyngdekraft:</strong> konstant i både størrelse (<InlineLatex latex="mg" />) og
+          retning (loddrett ned). <strong>Normalkraft:</strong> IKKE konstant —
+          retningen peker alltid mot bollens sentrum, og endrer seg dermed kontinuerlig
+          mens steinen glir; størrelsen varierer også fordi farten (og dermed
+          sentripetalkraft-behovet) endres. <strong>Friksjon:</strong> IKKE
+          konstant — <InlineLatex latex="f_k = \mu_k N" />, og N varierer.
         </p>
         <p><strong>(d) Normalkraft i B (sirkelbevegelse)</strong></p>
-        <FormulaBox latex="N - mg = \frac{m v_B^2}{R}" variant="blue" />
+        <p>
+          I bunnen av bollen beveger steinen seg på en sirkulær bane med radius R.
+          Netto kraft må peke mot sentrum (oppover i B) og gi sentripetalakselerasjonen
+          <InlineLatex latex="a_c = v_B^2 / R" />. Newtons 2. lov i radiell
+          retning:
+        </p>
+        <FormulaBox latex="\sum F_\text{radiell} = ma_c \;\Rightarrow\; N - mg = \frac{m v_B^2}{R}" variant="blue" />
+        <p>Løs for N:</p>
         <FormulaBox latex="N = m\left(g + \frac{v_B^2}{R}\right) = (0{,}20)\left(9{,}80 + \frac{7{,}6}{0{,}50}\right) = (0{,}20)(9{,}80 + 15{,}2)" variant="blue" />
         <FormulaBox latex="\boxed{N = (0{,}20)(25{,}0) = 5{,}0\;\text{N}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> N er betydelig større enn vekten{" "}
+          <InlineLatex latex="mg = 1{,}96\;\text{N}" />. Ekstra krafta (≈3 N) er
+          akkurat det som trengs for å få steinen til å «svinge inn i sirkelbanen»
+          i bunnpunktet. Det er derfor det kjennes tungt når du er på bunnen av et
+          pariserhjul.
+        </p>
       </div>
     ),
     summary: (
@@ -425,41 +560,60 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Høydeforskjell</strong></p>
-        <p className="text-sm">
-          La festepunktet være referanse. Ved vinkel θ fra vertikalen er Tarzans høyde{" "}
-          <InlineLatex latex="y = -L\cos\theta" /> (negativ, under festet).
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Vinranken trekker alltid Tarzan mot festepunktet,
+          dvs. vinkelrett på bevegelsen (som alltid er tangent til sirkelen med
+          radius L). En kraft vinkelrett på hastigheten gjør null arbeid:{" "}
+          <InlineLatex latex="W_T = \int \vec{T}\cdot d\vec{r} = 0" />. Da er kun
+          tyngdekrafta (konservativ) som gjør arbeid, og mekanisk energi er bevart:
         </p>
-        <FormulaBox latex="\Delta h = y_2 - y_1 = -L\cos\theta_2 - (-L\cos\theta_1) = L(\cos\theta_1 - \cos\theta_2)" variant="blue" />
-        <p className="text-sm">
-          Tarzan er lavere ved slutt? Nei – ved sluttvinkel 30° er han høyere enn ved startvinkel 45°
-          (siden cos 30° &gt; cos 45°, <InlineLatex latex="-L\cos\theta" /> blir mer negativ ved 30°).
-          La oss regne Δh = y(slutt) − y(start):
+        <FormulaBox latex="K_1 + U_1 = K_2 + U_2" variant="blue" />
+        <p><strong>Steg 1: Finn høydeforskjellen geometrisk</strong></p>
+        <p>
+          La festepunktet i treet være referanse (<InlineLatex latex="y = 0" />).
+          Når vinranken danner vinkelen <InlineLatex latex="\theta" /> med vertikalen,
+          er Tarzan i høyden:
         </p>
-        <FormulaBox latex="\Delta h = -L\cos 30° - (-L\cos 45°) = -L(\cos 30° - \cos 45°) < 0" variant="blue" />
-        <p className="text-sm">Altså stiger Tarzan. Fallhøyden er negativ. Vi skriver stigningen som h:</p>
-        <FormulaBox latex="h = L(\cos 30° - \cos 45°) = 20(0{,}8660 - 0{,}7071) = 20(0{,}1589) = 3{,}178\;\text{m}" variant="blue" />
-        <p><strong>Steg 2: Energibevaring</strong></p>
-        <FormulaBox latex="K_1 + U_1 = K_2 + U_2 \;\Rightarrow\; 0 + 0 = \tfrac12 m v_2^2 + mgh" variant="blue" />
-        <p className="text-sm">Det gir negativ <InlineLatex latex="v_2^2" /> – som betyr at han ikke rekker så langt opp. Sjekk oppgaveteksten:</p>
-        <p className="text-sm">
-          Her antar vi at 45° er startvinkel (høyere posisjon) og at han svinger ned og så opp igjen
-          til 30° (lavere). Da er Tarzan LAVERE ved Jane. Faktisk: ved 45° fra vertikal er han lavere
-          enn ved 30° (fordi cos 45° &lt; cos 30°). Men tenk over det geometrisk: hvis vinranken er
-          helt vertikal (0°), henger han rett under festet – dette er det laveste punktet. Så 45° gir
-          høyere posisjon enn 30°. Men 45° er starten (høyest), og 30° er slutten...
+        <FormulaBox latex="y(\theta) = -L\cos\theta" variant="blue" />
+        <p>
+          Negativt fortegn fordi han henger <em>under</em> festet. Jo mindre vinkel
+          (nærmere loddrett), jo lavere er han — <InlineLatex latex="\theta = 0" />{" "}
+          gir det laveste punktet <InlineLatex latex="y = -L" />. Siden
+          <InlineLatex latex="\cos 30° = 0{,}8660 > \cos 45° = 0{,}7071" />, er
+          Tarzan lavere ved 30° enn ved 45° (for 30°: <InlineLatex latex="y = -0{,}866 L" />;
+          for 45°: <InlineLatex latex="y = -0{,}707 L" />). Han faller altså fra
+          startvinkel 45° ned til sluttvinkel 30°.
         </p>
-        <p className="text-sm">
-          Hvis han svinger FRA 45° TIL 30° (dvs. fra høyere til lavere vinkel), så ender han lavere enn
-          han startet. Da faller han: <InlineLatex latex="\Delta h = L(\cos 30° - \cos 45°) = 3{,}178\;\text{m}" />{" "}
-          (Tarzan synker denne avstanden).
+        <p>
+          <strong>Fallhøyden</strong> (som vi kaller <InlineLatex latex="h" />, positiv) er:
         </p>
-        <FormulaBox latex="\tfrac12 m v_2^2 = mgh \;\Rightarrow\; v_2 = \sqrt{2gh}" variant="blue" />
+        <FormulaBox latex="h = y_1 - y_2 = -L\cos 45° - (-L\cos 30°) = L(\cos 30° - \cos 45°)" variant="blue" />
+        <FormulaBox latex="h = 20(0{,}8660 - 0{,}7071) = 20(0{,}1589) = 3{,}178\;\text{m}" variant="blue" />
+        <p><strong>Steg 2: Energibevaring og løs for fart</strong></p>
+        <p>
+          Han starter fra ro (<InlineLatex latex="K_1 = 0" />). Sett{" "}
+          <InlineLatex latex="U = 0" /> ved sluttpunktet (Janes høyde). Da er
+          <InlineLatex latex="U_1 = mgh" /> og <InlineLatex latex="U_2 = 0" />,
+          og energibevaringen reduseres til:
+        </p>
+        <FormulaBox latex="0 + mgh = \tfrac12 m v_2^2 + 0" variant="blue" />
+        <p>
+          <strong>Algebraisk omforming:</strong> massen <InlineLatex latex="m" />{" "}
+          faller ut (uavhengig av Tarzans vekt!), og vi løser for{" "}
+          <InlineLatex latex="v_2" />:
+        </p>
+        <FormulaBox latex="\tfrac12 v_2^2 = gh \;\Rightarrow\; v_2 = \sqrt{2gh}" variant="blue" />
+        <p>Sett inn tall:</p>
         <FormulaBox latex="v_2 = \sqrt{2(9{,}80)(3{,}178)} = \sqrt{62{,}29} = 7{,}89\;\text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_2 \approx 7{,}9\;\text{m/s}}" variant="gold" />
-        <p className="text-sm">
-          7,9 m/s ≈ 28 km/t. Det er nok til å banke Jane av grenen! (En stygg klem.)
+        <p>
+          <strong>Fysisk tolkning:</strong> Dette er akkurat samme formel som for
+          fritt fall fra høyden h — vinranken endrer retningen på bevegelsen, men
+          ikke energibalansen. 7,9 m/s ≈ 28 km/t. Det er nok til å banke Jane av
+          grenen (en stygg klem!). Hadde det vært luftmotstand eller friksjon i
+          festet, ville <InlineLatex latex="v_2" /> vært mindre — da måtte vi
+          brukt <InlineLatex latex="K_1 + U_1 + W_\text{annet} = K_2 + U_2" />.
         </p>
       </div>
     ),
@@ -558,23 +712,74 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> I en Atwood-maskin er de to klossene koblet
+          sammen med et uelastisk tau over en friksjonsfri trinse. Dette gir to
+          viktige begrensninger (constraints): (1) fartens størrelse er lik for
+          begge klossene siden tauet ikke strekker seg, og (2) strekkkrafta T er
+          lik langs hele tauet fordi trinsa er masseløs og friksjonsfri. Systemet
+          analyseres enklest som én enhet.
+        </p>
+        <FormulaBox latex="U_g = mgy,\quad K = \tfrac12 m v^2" variant="blue" />
         <p><strong>(a) Endring i gravitasjonsenergi for hver kloss</strong></p>
+        <p>
+          Bruk <InlineLatex latex="\Delta U = mg\,\Delta y" /> for hver kloss
+          separat. Kloss 1 (8 kg) går ned (<InlineLatex latex="\Delta y_1 = -0{,}200\;\text{m}" />),
+          kloss 2 (6 kg) går opp (<InlineLatex latex="\Delta y_2 = +0{,}200\;\text{m}" />):
+        </p>
         <FormulaBox latex="\Delta U_1 = m_1 g \Delta y_1 = (8{,}00)(9{,}80)(-0{,}200) = -15{,}68\;\text{J}" variant="blue" />
         <FormulaBox latex="\Delta U_2 = m_2 g \Delta y_2 = (6{,}00)(9{,}80)(+0{,}200) = +11{,}76\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{\Delta U_1 = -15{,}68\;\text{J},\;\Delta U_2 = +11{,}76\;\text{J}}" variant="gold" />
+        <p>
+          Den tunge klossen frigjør mer potensiell energi enn den lette
+          «spiser opp» — differansen blir til kinetisk energi.
+        </p>
         <p><strong>(b) Arbeid fra tau på hver kloss</strong></p>
-        <p className="text-sm">Tauet drar kloss 1 oppover (motsatt bevegelsesretning): <InlineLatex latex="W_{T,1} = -Td" />.</p>
-        <p className="text-sm">Tauet drar kloss 2 oppover (samme bevegelsesretning): <InlineLatex latex="W_{T,2} = +Td" />.</p>
+        <p>
+          <strong>Generell formel:</strong>{" "}
+          <InlineLatex latex="W = \vec{F}\cdot\vec{d} = Fd\cos\phi" />, der
+          <InlineLatex latex="\phi" /> er vinkelen mellom kraft og forskyvning.
+          Tauet trekker <em>begge</em> klossene <em>oppover</em>:
+        </p>
+        <p>
+          Kloss 1 beveger seg nedover mens tauet drar oppover →{" "}
+          <InlineLatex latex="\phi = 180°" />, <InlineLatex latex="\cos\phi = -1" />:{" "}
+          <InlineLatex latex="W_{T,1} = -Td" />.
+        </p>
+        <p>
+          Kloss 2 beveger seg oppover og tauet drar oppover →{" "}
+          <InlineLatex latex="\phi = 0°" />, <InlineLatex latex="\cos\phi = +1" />:{" "}
+          <InlineLatex latex="W_{T,2} = +Td" />.
+        </p>
         <FormulaBox latex="\boxed{W_{T,1} = -T(0{,}200),\;W_{T,2} = +T(0{,}200)}" variant="gold" />
         <p><strong>(c) Totalarbeid fra tau + energibevaring</strong></p>
+        <p>
+          Tauet er en intern kraft i systemet (bøtte + kloss + tau). Sum av arbeidet
+          det gjør på de to klossene:
+        </p>
         <FormulaBox latex="W_\text{T,tot} = W_{T,1} + W_{T,2} = -Td + Td = 0" variant="blue" />
-        <p className="text-sm">Total endring i U:</p>
+        <p>
+          <strong>Hvorfor er dette så fint?</strong> Vi trenger aldri å bestemme T
+          selv — tauet «flytter» bare energi mellom klossene uten å endre systemets
+          totale energi. Da kan vi bruke ren mekanisk energibevaring for systemet:
+        </p>
+        <FormulaBox latex="K_\text{f} + U_\text{f} = K_\text{i} + U_\text{i} \;\Rightarrow\; \Delta K = -\Delta U_\text{tot}" variant="blue" />
+        <p>Total endring i U:</p>
         <FormulaBox latex="\Delta U_\text{tot} = \Delta U_1 + \Delta U_2 = -15{,}68 + 11{,}76 = -3{,}92\;\text{J}" variant="blue" />
-        <p className="text-sm">Energibevaring: K_f − K_i = W_ikke_konservativ + (−ΔU). Her er W_tau = 0:</p>
-        <FormulaBox latex="\tfrac12 (m_1 + m_2) v^2 - 0 = -\Delta U_\text{tot} = 3{,}92\;\text{J}" variant="blue" />
-        <FormulaBox latex="v^2 = \frac{2(3{,}92)}{14{,}0} = 0{,}560\;\text{m}^2/\text{s}^2" variant="blue" />
+        <p>
+          Siden begge klossene har samme fart v, er total kinetisk energi{" "}
+          <InlineLatex latex="K = \tfrac12 m_1 v^2 + \tfrac12 m_2 v^2 = \tfrac12 (m_1 + m_2) v^2" />.
+          Systemet starter fra ro, så:
+        </p>
+        <FormulaBox latex="\tfrac12 (m_1 + m_2) v^2 - 0 = -\Delta U_\text{tot} = +3{,}92\;\text{J}" variant="blue" />
+        <FormulaBox latex="v^2 = \frac{2(3{,}92)}{m_1 + m_2} = \frac{7{,}84}{14{,}0} = 0{,}560\;\text{m}^2/\text{s}^2" variant="blue" />
         <FormulaBox latex="\boxed{v = 0{,}748\;\text{m/s}}" variant="gold" />
+        <p>
+          <strong>Kontroll:</strong> Newton gir akselerasjonen{" "}
+          <InlineLatex latex="a = (m_1 - m_2)g/(m_1 + m_2) = (2)(9{,}80)/14 = 1{,}40\;\text{m/s}^2" />.
+          Da er <InlineLatex latex="v^2 = 2ad = 2(1{,}40)(0{,}200) = 0{,}560" />, som stemmer.
+        </p>
       </div>
     ),
     summary: (
@@ -677,40 +882,108 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Friksjon mens alt er i ro</strong></p>
-        <p className="text-sm">
-          Bøtta henger i ro, så T = m_b g = (67,0)(9,80) = 656,6 N. Denne trekker horisontalt på
-          kassen. Grussekken har ingen horisontale krefter på seg (den ligger bare oppå), så
-          friksjonskraften på grussekken er:
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Dette er et koblet system med to typer krefter
+          som spiller hovedroller: tyngdekrafta (konservativ — kan beskrives med
+          potensiell energi <InlineLatex latex="U_g = mgy" />) og friksjon
+          (ikke-konservativ — tapper systemets mekaniske energi). Nøkkelprinsipper:
         </p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Statisk friksjon er <em>reaktiv</em>: den leverer <em>akkurat så mye</em> kraft som trengs for å holde et objekt i ro, opp til maksgrensen <InlineLatex latex="f_{s,\max} = \mu_s N" />.</li>
+          <li>Kinetisk friksjon har fast størrelse <InlineLatex latex="f_k = \mu_k N" /> så snart det er relativ bevegelse.</li>
+          <li>Mekanisk energi er ikke bevart når friksjon virker. I stedet: <InlineLatex latex="K_1 + U_1 + W_\text{ikke-konservativ} = K_2 + U_2" />, med <InlineLatex latex="W_\text{frik} = -f_k \cdot d" /> (negativt fordi motsatt bevegelsen).</li>
+        </ul>
+        <p><strong>(a) Statisk tilfelle — hvorfor energibevaring ikke er verktøyet her</strong></p>
+        <p>
+          Systemet er i ro, så ingen energi endres. Vi bruker Newtons 2. lov
+          (<InlineLatex latex="\sum \vec{F} = 0" />) på hvert legeme.
+          <strong>Hvorfor Newton og ikke energi?</strong> Fordi det ikke skjer
+          noen forskyvning — uten forskyvning er arbeidet null for alle krefter,
+          og energibevaring gir bare <InlineLatex latex="0 = 0" />.
+        </p>
+        <p><strong>Bøtta (vertikalt, i ro):</strong> Tauspenning opp, tyngde ned.</p>
+        <FormulaBox latex="T - m_b g = 0 \;\Rightarrow\; T = m_b g" variant="blue" />
+        <FormulaBox latex="T = (67{,}0)(9{,}80) = 656{,}6\;\text{N}" variant="blue" />
+        <p>
+          <strong>Grussekken:</strong> Hvilke horisontale krefter virker på den?
+          Tyngde og normalkraft fra kassen er begge <em>vertikale</em>. Tauet er
+          ikke festet til grussekken. Eneste mulige horisontale kraft er friksjon
+          fra kassen <em>hvis</em> noe drar sekken. Siden ingen horisontal kraft
+          drar, trengs ingen friksjon for å holde balanse:
+        </p>
+        <FormulaBox latex="\sum F_{x,\text{grus}} = 0 \;\Rightarrow\; f_\text{grus} = 0" variant="blue" />
         <FormulaBox latex="\boxed{f_\text{grus} = 0\;\text{N}}" variant="gold" />
-        <p className="text-sm">
-          Kassen holder seg i ro via statisk friksjon fra taket. Normalkraften på kassen fra taket
-          er vekten av kasse + grus:
+        <p>
+          <strong>Vanlig feil:</strong> Mange tror automatisk at det må være
+          friksjon fordi det er to overflater i kontakt. Men statisk friksjon
+          oppstår bare <em>som respons</em> på en påført kraft.
+        </p>
+        <p><strong>Kassen:</strong> Tauet drar med kraft T mot trinsa (horisontalt). For at kassen skal stå i ro må statisk friksjon fra taket balansere akkurat denne kraften:</p>
+        <FormulaBox latex="\sum F_{x,\text{kasse}} = T - f_\text{kasse} = 0 \;\Rightarrow\; f_\text{kasse} = T = 656{,}6\;\text{N}" variant="blue" />
+        <p>
+          <strong>Er dette mulig?</strong> Vi må sjekke om det kreves mer enn
+          makssgrensen. Normalkraft fra taket bærer både kassen og grussekken:
         </p>
         <FormulaBox latex="N = (m_k + m_g) g = (82{,}0 + 45{,}0)(9{,}80) = 1244{,}6\;\text{N}" variant="blue" />
         <FormulaBox latex="f_{s,\max} = \mu_s N = (0{,}700)(1244{,}6) = 871{,}2\;\text{N}" variant="blue" />
-        <p className="text-sm">
-          Siden 656,6 N &lt; 871,2 N, holder statisk friksjon. Faktisk friksjon = 656,6 N (akkurat
-          like stor som tauspenningen for å holde kassen i ro):
+        <p>
+          Siden <InlineLatex latex="656{,}6 < 871{,}2" />, holder statisk
+          friksjon — systemet er i ro som antatt.
         </p>
         <FormulaBox latex="\boxed{f_\text{kasse} = 656{,}6\;\text{N}\;(\text{statisk, rettet mot tau})}" variant="gold" />
-        <p><strong>(b) Fart etter at grus er fjernet</strong></p>
-        <p className="text-sm">Ny normalkraft på kassen er bare m_k g. Kinetisk friksjonskraft:</p>
-        <FormulaBox latex="f_k = \mu_k m_k g = (0{,}400)(82{,}0)(9{,}80) = 321{,}4\;\text{N}" variant="blue" />
-        <p className="text-sm">
-          Sjekk om bøttas vekt nå er større: 656,6 N &gt; 321,4 N ✓ (akselererer).
-          Energibevaring (bøtte faller d = 1,60 m, kasse glir 1,60 m):
+        <p><strong>(b) Energibevaring etter at grus fjernes</strong></p>
+        <p>
+          Nå er systemet ubalansert og beveger seg. <strong>Hvorfor energibevaring
+          og ikke kinematikk (v = v₀ + at)?</strong> Vi kjenner distansen (1,60 m),
+          men ikke tiden. Energimetoden går direkte fra posisjon til fart uten å
+          gå veien om tiden — mye raskere. Grunnprinsippet med friksjon:
+        </p>
+        <FormulaBox latex="K_1 + U_1 + W_\text{frik} = K_2 + U_2" variant="blue" />
+        <p>
+          <strong>Hva trengs? Ny normalkraft og ny kinetisk friksjon.</strong>{" "}
+          Grussekken er borte, så normalkrafta fra taket bærer bare kassen:
+        </p>
+        <FormulaBox latex="N' = m_k g = (82{,}0)(9{,}80) = 803{,}6\;\text{N}" variant="blue" />
+        <FormulaBox latex="f_k = \mu_k N' = (0{,}400)(803{,}6) = 321{,}4\;\text{N}" variant="blue" />
+        <p>
+          <strong>Akselererer systemet i det hele tatt?</strong> Bøttas vekt
+          (656,6 N) må overvinne kinetisk friksjon (321,4 N). Ja —
+          <InlineLatex latex="656{,}6 > 321{,}4" />, så systemet akselererer.
+        </p>
+        <p>
+          <strong>Sette opp energibalansen for hele systemet:</strong> Kassen
+          glir horisontalt, så <InlineLatex latex="\Delta U_\text{kasse} = 0" />.
+          Bøtta synker <InlineLatex latex="d = 1{,}60" /> m, så
+          <InlineLatex latex="\Delta U_\text{bøtte} = -m_b g d" /> (negativt —
+          potensiell energi frigjøres). Både bøtte og kasse har samme fart v
+          (koblet med tau). Tauets arbeid på bøtta og kassen kansellerer
+          (intern kraft, samme resonnement som i 7.13). Friksjon gjør arbeid
+          <InlineLatex latex="W_\text{frik} = -f_k d" /> på kassen:
         </p>
         <FormulaBox latex="m_b g d - f_k d = \tfrac12 (m_b + m_k) v^2" variant="blue" />
-        <FormulaBox latex="(67{,}0)(9{,}80)(1{,}60) - (321{,}4)(1{,}60) = \tfrac12 (149{,}0) v^2" variant="blue" />
-        <FormulaBox latex="1050{,}6 - 514{,}3 = 74{,}5\, v^2 \;\Rightarrow\; 536{,}3 = 74{,}5\, v^2" variant="blue" />
-        <FormulaBox latex="v^2 = 7{,}199\;\text{m}^2/\text{s}^2" variant="blue" />
+        <p>
+          Venstre side: netto potensiell energi frigjort minus friksjonstap.
+          Høyre side: total kinetisk energi av systemet som beveger seg med
+          samme fart.
+        </p>
+        <p><strong>Steg-for-steg innsetting:</strong></p>
+        <FormulaBox latex="(67{,}0)(9{,}80)(1{,}60) - (321{,}4)(1{,}60) = \tfrac12 (67{,}0 + 82{,}0) v^2" variant="blue" />
+        <FormulaBox latex="1050{,}6 - 514{,}3 = 74{,}5\, v^2 \;\Rightarrow\; 536{,}3\;\text{J} = 74{,}5\, v^2" variant="blue" />
+        <FormulaBox latex="v^2 = \frac{536{,}3}{74{,}5} = 7{,}199\;\text{m}^2/\text{s}^2" variant="blue" />
+        <FormulaBox latex="v = \sqrt{7{,}199} = 2{,}68\;\text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v = 2{,}68\;\text{m/s}}" variant="gold" />
-        <p className="text-sm text-[var(--muted)]">
-          Kontroll med Newton: <InlineLatex latex="a = (m_b g - f_k)/(m_b + m_k) = 2{,}25\;\text{m/s}^2" />.
-          Så <InlineLatex latex="v^2 = 2 a d = 2(2{,}25)(1{,}60) = 7{,}20" />, <InlineLatex latex="v = 2{,}68\;\text{m/s}" />. ✓
+        <p>
+          <strong>Enhetssjekk:</strong> J/kg = (kg·m²/s²)/kg = m²/s², så
+          <InlineLatex latex="\sqrt{v^2}" /> gir m/s. ✓
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Uten friksjon ville v vært
+          <InlineLatex latex="\sqrt{2 m_b g d / (m_b + m_k)} = \sqrt{2(656{,}6)(1{,}60)/149} = 3{,}76" /> m/s.
+          Friksjonen har «spist» omtrent halvparten av den mulige kinetiske
+          energien (514 J av 1051 J). Kontroll via Newton:{" "}
+          <InlineLatex latex="a = (m_b g - f_k)/(m_b + m_k) = 335{,}2/149 = 2{,}25\;\text{m/s}^2" />,
+          så <InlineLatex latex="v^2 = 2ad = 2(2{,}25)(1{,}60) = 7{,}20" />. ✓
         </p>
       </div>
     ),
@@ -807,24 +1080,120 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Dette er et klassisk multi-segment-problem som
+          demonstrerer hvorfor arbeid-energi-teoremet er så mektig. Nøkkelen er
+          å gjenkjenne at vi kan bruke den generelle formuleringen:
+        </p>
+        <FormulaBox latex="K_f - K_i = W_\text{tot} = W_\text{grav} + W_\text{frik} + W_\text{luft} + \cdots" variant="blue" />
+        <p>
+          eller ekvivalent, i skikkelsen med potensiell energi for den
+          konservative tyngdekrafta:
+        </p>
+        <FormulaBox latex="K_1 + U_1 + W_\text{ikke-konservativ} = K_2 + U_2" variant="blue" />
+        <p>
+          Her dukker både konservative (tyngde, <InlineLatex latex="U_g = mgy" />)
+          og ikke-konservative krefter (friksjon, luftmotstand, kraft fra
+          snødriven) opp. <strong>Hvorfor energi og ikke kinematikk?</strong>{" "}
+          Banen er krum (skibakken), friksjonsarbeidet er gitt som ett tall for
+          hele bakken (vi vet ikke helningen), og vi kjenner ingen tid noe sted.
+          Energi hopper rett fra «hvor mye høyde har jeg mistet» til «hvor raskt
+          går jeg» — uten å røre ved detaljer i mellom.
+        </p>
         <p><strong>(a) Fart i bunnen av bakken</strong></p>
-        <FormulaBox latex="\tfrac12 m v_1^2 - 0 = mgh + W_\text{frik}" variant="blue" />
-        <FormulaBox latex="\tfrac12 (60{,}0) v_1^2 = (60{,}0)(9{,}80)(63{,}0) + (-10\;900)" variant="blue" />
+        <p>
+          <strong>Hvilke krefter gjør arbeid?</strong> Tyngdekrafta (positivt, hun
+          synker) og friksjon (negativt). Normalkrafta står vinkelrett på
+          bevegelsen i hvert punkt og gjør null arbeid. Start fra ro, så
+          <InlineLatex latex="K_i = 0" />. Velg bunnen som U = 0, da er
+          <InlineLatex latex="U_i = mgh" /> og <InlineLatex latex="U_f = 0" />:
+        </p>
+        <FormulaBox latex="0 + mgh + W_\text{frik} = \tfrac12 m v_1^2 + 0" variant="blue" />
+        <p>
+          <strong>Fortegnssanalyse:</strong> Friksjonsarbeidet er oppgitt som
+          <InlineLatex latex="W_\text{frik} = -10{,}9\;\text{kJ} = -10\;900\;\text{J}" />
+          — negativt fordi friksjon alltid motvirker bevegelsen. Løs for{" "}
+          <InlineLatex latex="v_1" />:
+        </p>
+        <FormulaBox latex="\tfrac12 m v_1^2 = mgh + W_\text{frik}" variant="blue" />
+        <FormulaBox latex="\tfrac12 (60{,}0)\, v_1^2 = (60{,}0)(9{,}80)(63{,}0) + (-10\;900)" variant="blue" />
         <FormulaBox latex="30\, v_1^2 = 37\;044 - 10\;900 = 26\;144\;\text{J}" variant="blue" />
-        <FormulaBox latex="v_1^2 = 871{,}5\;\text{m}^2/\text{s}^2 \;\Rightarrow\; v_1 = 29{,}5\;\text{m/s}" variant="blue" />
+        <FormulaBox latex="v_1^2 = \frac{26\;144}{30} = 871{,}5\;\text{m}^2/\text{s}^2 \;\Rightarrow\; v_1 = \sqrt{871{,}5}" variant="blue" />
         <FormulaBox latex="\boxed{v_1 = 29{,}5\;\text{m/s}}" variant="gold" />
-        <p><strong>(b) Fart etter bløt snø (65 m)</strong></p>
-        <FormulaBox latex="f_k = \mu_k m g = (0{,}21)(60{,}0)(9{,}80) = 123{,}5\;\text{N}" variant="blue" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Uten friksjon ville hun hatt
+          <InlineLatex latex="v = \sqrt{2gh} = \sqrt{2(9{,}80)(63)} = 35{,}1\;\text{m/s}" />
+          (≈ 126 km/t). Friksjonen har redusert det til 29,5 m/s (≈ 106 km/t) —
+          omtrent 29 % reduksjon i kinetisk energi. Enhetssjekk: m²/s² → m/s ✓.
+        </p>
+        <p><strong>(b) Horisontal strekning med bløt snø (65 m)</strong></p>
+        <p>
+          <strong>Hvorfor kinematikk fortsatt ikke funker:</strong> To
+          ikke-konservative krefter virker samtidig (glidefriksjon og
+          luftmotstand). Det gir en konstant netto motstandskraft, men
+          energimetoden håndterer det elegant som bare sum av arbeid.
+        </p>
+        <p>
+          <strong>Normalkraft på horisontal overflate:</strong> Her er
+          <InlineLatex latex="N = mg" /> (hun beveger seg horisontalt, ingen
+          vertikal akselerasjon). Kinetisk friksjon:
+        </p>
+        <FormulaBox latex="f_k = \mu_k N = \mu_k m g = (0{,}21)(60{,}0)(9{,}80) = 123{,}5\;\text{N}" variant="blue" />
+        <p>
+          <strong>Kombiner motstandskreftene:</strong> Luftmotstand er oppgitt som
+          gjennomsnittlig 180 N. Begge krefter peker motsatt bevegelsen og gir
+          samme fortegnseffekt:
+        </p>
         <FormulaBox latex="F_\text{motstand} = f_k + F_\text{luft} = 123{,}5 + 180 = 303{,}5\;\text{N}" variant="blue" />
-        <FormulaBox latex="W_\text{mot} = -(303{,}5)(65{,}0) = -19\;728\;\text{J}" variant="blue" />
-        <FormulaBox latex="\tfrac12 m v_2^2 = \tfrac12 m v_1^2 + W_\text{mot} = 26\;144 - 19\;728 = 6416\;\text{J}" variant="blue" />
+        <FormulaBox latex="W_\text{motstand} = -F_\text{motstand} \cdot d = -(303{,}5)(65{,}0) = -19\;728\;\text{J}" variant="blue" />
+        <p>
+          <strong>Energibalanse på flat strekning:</strong> Ingen høydeendring,
+          så <InlineLatex latex="\Delta U = 0" />. Arbeid-energi-teoremet:
+        </p>
+        <FormulaBox latex="\tfrac12 m v_2^2 = \tfrac12 m v_1^2 + W_\text{motstand}" variant="blue" />
+        <FormulaBox latex="\tfrac12 (60{,}0)\, v_2^2 = 26\;144 - 19\;728 = 6416\;\text{J}" variant="blue" />
         <FormulaBox latex="v_2^2 = \frac{2(6416)}{60{,}0} = 213{,}9\;\text{m}^2/\text{s}^2" variant="blue" />
+        <FormulaBox latex="v_2 = \sqrt{213{,}9}" variant="blue" />
         <FormulaBox latex="\boxed{v_2 = 14{,}6\;\text{m/s}}" variant="gold" />
-        <p><strong>(c) Kraft fra snødrive over 3,0 m</strong></p>
-        <FormulaBox latex="F_\text{drive} \cdot 3{,}0 = \tfrac12 m v_2^2 = 6416\;\text{J}" variant="blue" />
-        <FormulaBox latex="F_\text{drive} = \frac{6416}{3{,}0} = 2139\;\text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{F_\text{drive} \approx 2{,}14\;\text{kN}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Den bløte snøen og lufta har
+          halvert farten hennes (fra ~30 til ~15 m/s), og kinetisk energi er
+          redusert med en faktor 4 — helt konsistent med at
+          <InlineLatex latex="K \propto v^2" />.
+        </p>
+        <p><strong>(c) Gjennomsnittlig kraft fra snødriven</strong></p>
+        <p>
+          <strong>Hvorfor arbeid-energi-teoremet her?</strong> Snødriven er
+          inhomogen — krafta varierer sikkert fra punkt til punkt etter hvor
+          kompakt snøen er. Men vi kan definere en <em>gjennomsnittlig</em>
+          kraft <InlineLatex latex="\bar{F}" /> slik at det totale arbeidet den
+          gjør er <InlineLatex latex="W = -\bar{F} \cdot d" />. Hun stopper i
+          snødriven, så <InlineLatex latex="K_f = 0" />:
+        </p>
+        <FormulaBox latex="W_\text{drive} = K_f - K_i = 0 - \tfrac12 m v_2^2" variant="blue" />
+        <FormulaBox latex="-\bar{F}_\text{drive} \cdot d_\text{drive} = -\tfrac12 m v_2^2" variant="blue" />
+        <p>Fjern minustegnene (de kansellerer) og løs for <InlineLatex latex="\bar{F}" />:</p>
+        <FormulaBox latex="\bar{F}_\text{drive} = \frac{\tfrac12 m v_2^2}{d_\text{drive}} = \frac{6416}{3{,}0}" variant="blue" />
+        <FormulaBox latex="\bar{F}_\text{drive} = 2139\;\text{N}" variant="blue" />
+        <FormulaBox latex="\boxed{\bar{F}_\text{drive} \approx 2{,}14\;\text{kN}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> 2,14 kN er omtrent 3,6 ganger
+          skiløperens vekt (<InlineLatex latex="mg = 588\;\text{N}" />). Det
+          tilsvarer en retardasjon på
+          <InlineLatex latex="a = \bar{F}/m = 2139/60 \approx 35{,}6\;\text{m/s}^2" />,
+          eller rundt <InlineLatex latex="3{,}6\,g" />. Ganske brutalt — men
+          ikke livsfarlig, fordi krafta fordeles jevnt over 3 meter.
+          <strong>Enhetssjekk:</strong> J/m = N·m/m = N ✓.
+        </p>
+        <p>
+          <strong>Sammenheng mellom delene:</strong> Vi løste hver etappe med
+          samme grunnprinsipp (<InlineLatex latex="\Delta K = W_\text{tot}" />),
+          men med forskjellig ukjent størrelse hver gang: (a) ukjent{" "}
+          <InlineLatex latex="v_1" />, (b) ukjent <InlineLatex latex="v_2" />,
+          (c) ukjent <InlineLatex latex="\bar{F}" />. Det er styrken ved
+          energimetoden — samme ligning, bytt bare hva vi vil finne.
+        </p>
       </div>
     ),
     summary: (

@@ -102,16 +102,42 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a)</strong> Bevegelsesmengden til lastebilen:</p>
-        <FormulaBox latex="p_L = m_L v_L = (10\,000)(12{,}0) = 1{,}20\times 10^{5}\ \text{kg\cdot m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Bevegelsesmengde (momentum) er en vektorstørrelse definert som
+          <InlineLatex latex="\vec p = m\vec v" />. Kinetisk energi er en skalar definert
+          som <InlineLatex latex="K = \tfrac12 m v^2" />. Siden <InlineLatex latex="p" /> er
+          lineær i farten, mens <InlineLatex latex="K" /> er kvadratisk, svarer de to
+          størrelsene forskjellig på endringer i fart. Originalformlene er:
+        </p>
+        <FormulaBox latex="p = mv \qquad K = \tfrac{1}{2} m v^2" variant="blue" />
+        <p className="font-semibold">(a) Bevegelsesmengden til lastebilen</p>
+        <p>
+          Her setter vi bare tall direkte inn i <InlineLatex latex="p=mv" />:
+        </p>
+        <FormulaBox latex="p_L = m_L v_L = (10\,000\;\text{kg})(12{,}0\;\text{m/s}) = 1{,}20\times 10^{5}\ \text{kg\cdot m/s}" variant="blue" />
         <FormulaBox latex="\boxed{p_L = 1{,}20\times 10^{5}\ \text{kg}\cdot\text{m/s}}" variant="gold" />
-        <p><strong>(b-i)</strong> Samme bevegelsesmengde: <InlineLatex latex="m_S v_S = p_L" /></p>
-        <FormulaBox latex="v_S = \frac{p_L}{m_S} = \frac{1{,}20\times 10^{5}}{2000} = 60{,}0\ \text{m/s}" variant="blue" />
+        <p className="font-semibold">(b-i) SUV med samme bevegelsesmengde</p>
+        <p>
+          Vi krever <InlineLatex latex="p_S = p_L" />. Omformer <InlineLatex latex="p=mv" />
+          ved å dele på massen:
+        </p>
+        <FormulaBox latex="m_S v_S = p_L \;\Longrightarrow\; v_S = \dfrac{p_L}{m_S}" variant="blue" />
+        <FormulaBox latex="v_S = \dfrac{1{,}20\times 10^{5}}{2000} = 60{,}0\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_S = 60{,}0\ \text{m/s}}" variant="gold" />
-        <p><strong>(b-ii)</strong> Samme kinetisk energi: <InlineLatex latex="\tfrac{1}{2}m_S v_S^2 = \tfrac{1}{2}m_L v_L^2" /></p>
-        <FormulaBox latex="v_S = v_L\sqrt{\frac{m_L}{m_S}} = 12{,}0\sqrt{\frac{10\,000}{2000}} = 12{,}0\sqrt{5}\ \text{m/s}" variant="blue" />
+        <p className="font-semibold">(b-ii) SUV med samme kinetiske energi</p>
+        <p>
+          Nå krever vi <InlineLatex latex="K_S = K_L" />. Setter opp likningen og løser
+          algebraisk for <InlineLatex latex="v_S" />:
+        </p>
+        <FormulaBox latex="\tfrac12 m_S v_S^2 = \tfrac12 m_L v_L^2 \;\Longrightarrow\; v_S = v_L\sqrt{\dfrac{m_L}{m_S}}" variant="blue" />
+        <FormulaBox latex="v_S = 12{,}0\sqrt{\dfrac{10\,000}{2000}} = 12{,}0\sqrt{5}\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_S \approx 26{,}8\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> SUV-en er 5 ganger lettere enn lastebilen. For
+          lik <InlineLatex latex="p" /> må farten være 5 ganger høyere (lineært), men for
+          lik <InlineLatex latex="K" /> holder det med <InlineLatex latex="\sqrt{5}\approx 2{,}24" /> ganger høyere fart.
+        </p>
       </div>
     ),
     summary: (
@@ -158,12 +184,33 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="p = mv = (10)(8{,}0) = 80\ \text{kg\cdot m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Dette er ren innsetting i de to definisjonene fra kapittel 8 og 6.
+          Originalformlene er:
+        </p>
+        <FormulaBox latex="p = mv \qquad K = \tfrac{1}{2} m v^2" variant="blue" />
+        <p>
+          Merk at <InlineLatex latex="p" /> er en vektor, men siden kondoren flyr rett fram
+          trenger vi bare størrelsen.
+        </p>
+        <p className="font-semibold">(a) Bevegelsesmengde</p>
+        <FormulaBox latex="p = mv = (10\;\text{kg})(8{,}0\;\text{m/s}) = 80\ \text{kg\cdot m/s}" variant="blue" />
         <FormulaBox latex="\boxed{p = 80\ \text{kg\cdot m/s}}" variant="gold" />
-        <FormulaBox latex="K = \tfrac{1}{2}mv^2 = \tfrac{1}{2}(10)(8{,}0)^2 = 320\ \text{J}" variant="blue" />
+        <p className="font-semibold">(b) Kinetisk energi</p>
+        <FormulaBox latex="K = \tfrac{1}{2} m v^2 = \tfrac{1}{2}(10)(8{,}0)^2 = 320\ \text{J}" variant="blue" />
         <FormulaBox latex="\boxed{K = 3{,}2\times 10^{2}\ \text{J}}" variant="gold" />
-        <p>(c) Hvis <InlineLatex latex="v\to 2v" />: <InlineLatex latex="p\to 2p=160\ \text{kg\cdot m/s}" />, <InlineLatex latex="K\to 4K=1280\ \text{J}" />.</p>
+        <p className="font-semibold">(c) Hva skjer om farten dobles?</p>
+        <p>
+          Siden <InlineLatex latex="p\propto v" /> og <InlineLatex latex="K\propto v^2" />,
+          kan vi bare skalere svarene:
+        </p>
+        <FormulaBox latex="v\to 2v \;\Longrightarrow\; p\to 2p = 160\ \text{kg\cdot m/s},\quad K\to 4K = 1280\ \text{J}" variant="blue" />
+        <p>
+          <strong>Fysisk intuisjon:</strong> En dobling i fart dobler momentum, men firedobler
+          energien. Det er derfor en liten fartsøkning i bil føles uskyldig, mens
+          kollisjonsenergien blir dramatisk mye større.
+        </p>
       </div>
     ),
     summary: <p>Bevegelsesmengden skalerer <em>lineært</em>, kinetisk energi <em>kvadratisk</em> med farten.</p>,
@@ -223,10 +270,29 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\Delta p_x = m(v_{2x}-v_{1x}) = 0{,}145\bigl[(-40)-(30)\bigr]" variant="blue" />
-        <FormulaBox latex="\Delta p_x = 0{,}145(-70) = -10{,}15\ \text{kg\cdot m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Bevegelsesmengde er en <em>vektor</em>,
+          <InlineLatex latex="\vec p = m\vec v" />. Når vi regner endring i én dimensjon,
+          bruker vi signert x-komponent. Velger vi positiv retning <em>mot</em> batter
+          (slik ballen flyr i utgangspunktet), blir <InlineLatex latex="v_{1x}=+30\;\text{m/s}" />
+          og <InlineLatex latex="v_{2x}=-40\;\text{m/s}" /> (motsatt retning etter slaget).
+          Originalformelen er:
+        </p>
+        <FormulaBox latex="\Delta \vec p = m\,\Delta\vec v = m(\vec v_2 - \vec v_1)" variant="blue" />
+        <p>
+          I komponentform blir dette rett fram:
+        </p>
+        <FormulaBox latex="\Delta p_x = m(v_{2x} - v_{1x}) = 0{,}145\bigl[(-40) - (+30)\bigr]" variant="blue" />
+        <FormulaBox latex="\Delta p_x = 0{,}145\cdot(-70) = -10{,}15\ \text{kg\cdot m/s}" variant="blue" />
         <FormulaBox latex="\boxed{|\Delta \vec p|\approx 10{,}2\ \text{kg\cdot m/s, rettet tilbake mot pitcher}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Selv om fartens størrelse bare endret seg fra 30
+          til 40 m/s, er fartsendringen som vektor hele 70 m/s fordi ballen snur. Det
+          negative fortegnet viser at <InlineLatex latex="\Delta\vec p" /> peker motsatt
+          den opprinnelige bevegelsesretningen — altså tilbake mot pitcher. Vanlig feil:
+          å glemme fortegnet og bare regne <InlineLatex latex="m(40-30)" />.
+        </p>
       </div>
     ),
     summary: (
@@ -275,11 +341,34 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="J = m(v_2 - v_1) = 0{,}0450\cdot 25{,}0 = 1{,}125\ \text{kg\cdot m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Impuls-bevegelsesmengdeteoremet sier at netto impuls på
+          et legeme er lik endringen i bevegelsesmengde. Impuls er selv en tidsintegral av
+          netto kraft:
+        </p>
+        <FormulaBox latex="\vec J = \int_{t_1}^{t_2} \vec F\,dt = \Delta \vec p = m\vec v_2 - m\vec v_1" variant="blue" />
+        <p>
+          Hvis vi i stedet bruker den <em>gjennomsnittlige</em> kraften i kontaktperioden,
+          blir integralet erstattet av et enkelt produkt:
+        </p>
+        <FormulaBox latex="\vec J = \vec F_\text{gj}\,\Delta t \;\Longrightarrow\; \vec F_\text{gj} = \dfrac{\vec J}{\Delta t}" variant="blue" />
+        <p className="font-semibold">(a) Impuls fra køllen</p>
+        <p>
+          Ballen starter i ro (<InlineLatex latex="v_1=0" />), så
+          <InlineLatex latex="\Delta p = m v_2" />:
+        </p>
+        <FormulaBox latex="J = m(v_2 - v_1) = (0{,}0450\;\text{kg})(25{,}0\;\text{m/s}) = 1{,}125\ \text{kg\cdot m/s}" variant="blue" />
         <FormulaBox latex="\boxed{J \approx 1{,}13\ \text{N\cdot s}}" variant="gold" />
+        <p className="font-semibold">(b) Gjennomsnittlig kraft</p>
         <FormulaBox latex="F_\text{gj} = \dfrac{J}{\Delta t} = \dfrac{1{,}125}{2{,}00\times 10^{-3}} = 562{,}5\ \text{N}" variant="blue" />
         <FormulaBox latex="\boxed{F_\text{gj} \approx 563\ \text{N}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> 563 N tilsvarer vekten av ~57 kg — betydelig
+          kraft på en liten ball! Kort kontakttid (2 ms) forklarer hvorfor
+          <InlineLatex latex="F_\text{gj}" /> blir så stor. Hadde vi doblet kontakttiden,
+          ville kraften halveres for samme impuls.
+        </p>
       </div>
     ),
     summary: (
@@ -328,11 +417,29 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="J = m(v_2-v_1) = 0{,}145(55-(-45)) = 0{,}145\cdot 100" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Impuls-bevegelsesmengdeteoremet
+          <InlineLatex latex="\vec J = \Delta \vec p" /> gjelder uansett hvor kompleks
+          kraftprofilen er. Når ballen snur retning, er fartsendringen som vektor lik
+          <em>summen</em> av innfartsfart og utfartsfart. Vi velger positiv x i
+          utfartsretningen (bort fra batter), slik at
+          <InlineLatex latex="v_1 = -45\;\text{m/s}" /> (innkommende) og
+          <InlineLatex latex="v_2 = +55\;\text{m/s}" />. Originalformelen er:
+        </p>
+        <FormulaBox latex="\vec J = \Delta \vec p = m(\vec v_2 - \vec v_1),\qquad \vec F_\text{gj} = \dfrac{\vec J}{\Delta t}" variant="blue" />
+        <p className="font-semibold">(a) Impulsen på ballen</p>
+        <FormulaBox latex="J = m(v_2 - v_1) = 0{,}145\bigl[55 - (-45)\bigr] = 0{,}145\cdot 100" variant="blue" />
         <FormulaBox latex="\boxed{J = 14{,}5\ \text{N\cdot s}}" variant="gold" />
+        <p className="font-semibold">(b) Gjennomsnittskraft</p>
         <FormulaBox latex="F_\text{gj} = \dfrac{J}{\Delta t} = \dfrac{14{,}5}{2{,}00\times 10^{-3}}" variant="blue" />
         <FormulaBox latex="\boxed{F_\text{gj} = 7{,}25\times 10^{3}\ \text{N}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> 7250 N tilsvarer ~740 kg vekt — en enorm kraft
+          på 145 g ball. Det er fortegnet på <InlineLatex latex="v_1" /> som gir den
+          store fartsendringen (100 m/s, ikke 10 m/s). Vanlig feil: å tro at
+          <InlineLatex latex="\Delta v = 55 - 45 = 10\;\text{m/s}" />.
+        </p>
       </div>
     ),
     summary: (
@@ -378,11 +485,28 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="J = (-25{,}0)(0{,}050) + (-12{,}0)(0{,}050) = -1{,}85\ \text{N\cdot s}" variant="blue" />
-        <FormulaBox latex="v_2 = v_1 + \frac{J}{m} = 3{,}00 + \frac{-1{,}85}{0{,}160}" variant="blue" />
-        <FormulaBox latex="v_2 = 3{,}00 - 11{,}5625 = -8{,}56\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Siden kraften er konstant innenfor hver fase, kan vi
+          dele integralet <InlineLatex latex="J=\int F\,dt" /> opp i to stykker. Impulser
+          fra flere delintervaller summeres som <em>vektorer</em>. Impuls-bevegelsesmengdeteoremet:
+        </p>
+        <FormulaBox latex="J_\text{tot} = \sum_i F_i \Delta t_i = \Delta p = m(v_2 - v_1)" variant="blue" />
+        <p>
+          Omformer for sluttfarten:
+        </p>
+        <FormulaBox latex="v_2 = v_1 + \dfrac{J_\text{tot}}{m}" variant="blue" />
+        <p>
+          Begge kreftene peker langs −x, så vi beholder de negative fortegnene:
+        </p>
+        <FormulaBox latex="J_\text{tot} = F_1\Delta t_1 + F_2\Delta t_2 = (-25{,}0)(0{,}050) + (-12{,}0)(0{,}050) = -1{,}85\ \text{N\cdot s}" variant="blue" />
+        <FormulaBox latex="v_2 = 3{,}00 + \dfrac{-1{,}85}{0{,}160} = 3{,}00 - 11{,}5625 = -8{,}56\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_2 \approx -8{,}56\ \text{m/s (motsatt retning)}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Totalimpulsen er negativ og stor nok til ikke
+          bare å stoppe pucken men også sende den andre veien. Det negative fortegnet
+          på svaret bekrefter at pucken nå beveger seg mot −x.
+        </p>
       </div>
     ),
     summary: (
@@ -428,10 +552,47 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="J = \tfrac{1}{2}(2{,}00\times 10^{-3})(5{,}00\times 10^{3}) = 5{,}00\ \text{N\cdot s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Når kraften varierer i tid er impulsen selve
+          tidsintegralet: <InlineLatex latex="J=\int F(t)\,dt" />. Geometrisk tilsvarer
+          integralet <em>arealet under</em> <InlineLatex latex="F(t)" />-grafen. For enkle
+          former (rektangel, trekant, trapes) kan vi unngå integrasjon og bruke
+          formelen for arealet direkte. Originalformlene er:
+        </p>
+        <FormulaBox latex="\vec J = \int_{t_1}^{t_2}\vec F\,dt = \Delta\vec p = m\vec v_2 - m\vec v_1" variant="blue" />
+        <p>
+          <strong>Hvorfor denne formelen?</strong> Vi bruker impuls-momentum-teoremet fordi
+          kraften er <em>tidsvarierende</em>, ikke konstant. Alternativt kunne vi tenke
+          gjennomsnittskraft <InlineLatex latex="F_\text{gj}" /> og bruke
+          <InlineLatex latex="J=F_\text{gj}\Delta t" />, men det krever at vi først finner
+          <InlineLatex latex="F_\text{gj}" />. Arealformelen er raskere.
+        </p>
+        <p>
+          <strong>Geometri:</strong> To trekanter som møtes på toppen former én stor trekant
+          med base <InlineLatex latex="\Delta t_\text{tot}=2{,}00\ \text{ms}" /> og høyde
+          <InlineLatex latex="F_\text{maks}=5000\ \text{N}" />. Areal av trekant:
+          <InlineLatex latex="A=\tfrac12\,\text{base}\cdot\text{høyde}" />.
+        </p>
+        <FormulaBox latex="J = \tfrac{1}{2}\cdot\Delta t_\text{tot}\cdot F_\text{maks} = \tfrac{1}{2}(2{,}00\times 10^{-3})(5{,}00\times 10^{3}) = 5{,}00\ \text{N\cdot s}" variant="blue" />
+        <p>
+          Siden ballen starter i ro (<InlineLatex latex="v_1=0" />), gir impuls-teoremet
+          <InlineLatex latex="J=mv_2" /> som omformes til
+          <InlineLatex latex="v_2=J/m" />:
+        </p>
         <FormulaBox latex="v_2 = \frac{J}{m} = \frac{5{,}00}{0{,}145} = 34{,}5\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_2 \approx 34{,}5\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Enhetssjekk:</strong>
+          <InlineLatex latex="[J]/[m] = \text{N\cdot s}/\text{kg} = \text{kg\cdot m/s^2\cdot s}/\text{kg} = \text{m/s}" />.
+          Stemmer.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> 34,5 m/s (~124 km/t) er en realistisk fart
+          for en baseball etter et godt slag. Merk at <em>gjennomsnittskraften</em> i denne
+          trekantprofilen er <InlineLatex latex="F_\text{gj}=F_\text{maks}/2=2500\ \text{N}" />
+          — toppkraften er dobbelt så stor som gjennomsnittet for en symmetrisk trekant.
+        </p>
       </div>
     ),
     summary: (
@@ -476,14 +637,40 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="J(t) = At + \tfrac{B}{3}t^3" variant="blue" />
-        <p>(a) <InlineLatex latex="t=1{,}00\ \text{s}" />:</p>
-        <FormulaBox latex="J_1 = 1{,}50\times 10^{5} + \tfrac{2{,}00\times 10^3}{3} = 1{,}50\times 10^{5} + 6{,}67\times 10^{2}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Kraften er en ren funksjon av tid, så impulsen er direkte
+          gitt ved integralet i impuls-definisjonen. Vi bruker ingen gjennomsnittskraft
+          eller arealtrick her — vi må integrere eksplisitt.
+        </p>
+        <FormulaBox latex="\vec J = \int_{t_1}^{t_2} \vec F(t)\,dt" variant="blue" />
+        <p>
+          <strong>Hvorfor integrere?</strong> Fordi <InlineLatex latex="F" /> ikke er
+          konstant, og grafen er heller ingen enkel trekant — det er en parabel pluss
+          en konstant. Da må vi bruke analytisk integrasjon.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Sett inn
+          <InlineLatex latex="F(t')=A+Bt'^2" /> og integrer ledd for ledd fra 0 til
+          <InlineLatex latex="t" />:
+        </p>
+        <FormulaBox latex="J(t) = \int_0^{t}(A+Bt'^2)\,dt' = \Bigl[At'+\tfrac{B}{3}t'^3\Bigr]_0^t = At + \tfrac{B}{3}t^3" variant="blue" />
+        <p className="font-semibold">(a) Impuls fra 0 til 1,00 s</p>
+        <p>Steg-for-steg innsetting med <InlineLatex latex="A=1{,}50\times 10^{5}\ \text{N}" /> og <InlineLatex latex="B=2{,}00\times 10^{3}\ \text{N/s}^2" />:</p>
+        <FormulaBox latex="J_1 = (1{,}50\times 10^{5})(1) + \tfrac{2{,}00\times 10^3}{3}(1)^3 = 1{,}50\times 10^{5} + 6{,}67\times 10^{2}" variant="blue" />
         <FormulaBox latex="\boxed{J_1 \approx 1{,}51\times 10^{5}\ \text{N\cdot s}}" variant="gold" />
-        <p>(b) <InlineLatex latex="t=2{,}00\ \text{s}" />:</p>
-        <FormulaBox latex="J_2 = 3{,}00\times 10^{5} + \tfrac{2{,}00\times 10^3}{3}\cdot 8 = 3{,}00\times 10^{5} + 5{,}33\times 10^{3}" variant="blue" />
+        <p className="font-semibold">(b) Impuls fra 0 til 2,00 s</p>
+        <FormulaBox latex="J_2 = (1{,}50\times 10^{5})(2) + \tfrac{2{,}00\times 10^3}{3}(2)^3 = 3{,}00\times 10^{5} + \tfrac{2{,}00\times 10^3}{3}\cdot 8" variant="blue" />
+        <FormulaBox latex="J_2 = 3{,}00\times 10^{5} + 5{,}33\times 10^{3}" variant="blue" />
         <FormulaBox latex="\boxed{J_2 \approx 3{,}05\times 10^{5}\ \text{N\cdot s}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Den konstante delen <InlineLatex latex="A" />
+          dominerer tidlig (6,67·10² vs 1,50·10⁵ ved <InlineLatex latex="t=1\ \text{s}" />).
+          Etter 2 s bidrar <InlineLatex latex="Bt^2" />-leddet med ~5300 N·s — fortsatt
+          mye mindre enn konstantdelen, men det vokser som <InlineLatex latex="t^3" />
+          i integralet og vil etter hvert dominere. Dette reflekterer at rakettmotorer
+          ofte har en gradvis oppbyggende trykkurve.
+        </p>
       </div>
     ),
     summary: (
@@ -542,11 +729,41 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="0 = MV + m v_\text{verktøy}" variant="blue" />
-        <FormulaBox latex="V = -\dfrac{m}{M}v_\text{verktøy} = -\dfrac{2{,}25}{68{,}5}\cdot 3{,}20" variant="blue" />
-        <FormulaBox latex="V = -0{,}1051\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> I rommet er det ingen ytre horisontal kraft (ingen
+          friksjon, ingen tyngde relevant for horisontal akse), så systemet
+          astronaut+verktøy er et <em>isolert</em> system. Da er total bevegelsesmengde
+          bevart. Originalformelen er:
+        </p>
+        <FormulaBox latex="\vec p_i = \vec p_f \quad\text{når}\quad \sum\vec F_\text{ekst}=0" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum-bevaring og ikke energi-bevaring?</strong> Musklene i
+          armen gjør <em>arbeid</em> når hun kaster verktøyet — kjemisk energi blir til
+          kinetisk energi i både henne og verktøyet. Derfor kan vi <em>ikke</em> anta
+          <InlineLatex latex="K_i=K_f" />. Men massen er konstant i systemet og ingen ytre
+          kraft virker, så <InlineLatex latex="p" /> er bevart.
+        </p>
+        <p>
+          <strong>Fortegn:</strong> Velg positiv x-retning som «bort fra stasjonen» (samme
+          retning som kastet). Da er <InlineLatex latex="v_\text{verktøy}=+3{,}20\ \text{m/s}" />,
+          og vi forventer <InlineLatex latex="V<0" /> (astronauten drives mot stasjonen).
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Start med
+          <InlineLatex latex="p_i=0" /> (alt i ro) og <InlineLatex latex="p_f=MV+mv_\text{verktøy}" />.
+          Sett likhetstegn og løs for <InlineLatex latex="V" />:
+        </p>
+        <FormulaBox latex="0 = MV + m v_\text{verktøy} \;\Longrightarrow\; V = -\dfrac{m}{M}v_\text{verktøy}" variant="blue" />
+        <p>Steg-for-steg innsetting:</p>
+        <FormulaBox latex="V = -\dfrac{2{,}25}{68{,}5}\cdot 3{,}20 = -0{,}1051\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{|V|\approx 0{,}105\ \text{m/s mot stasjonen}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Dette er rakettprinsippet i miniatyr — kaster
+          du en bit fremover, får du et lite støt bakover. Siden astronauten er ~30 ganger
+          tyngre enn verktøyet, blir farten hennes ~30 ganger mindre. Samme fysikk som
+          gevær-rekyl (oppgave 8.30) og rakettmotorer.
+        </p>
       </div>
     ),
     summary: (
@@ -590,9 +807,40 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \dfrac{mv}{M+m} = \dfrac{0{,}150\cdot 22{,}0}{70{,}15}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Skøyteløperen griper og holder fast ballen — det er per
+          definisjon en <em>helt uelastisk kollisjon</em> (objektene sitter sammen etterpå
+          og beveger seg med felles fart). Friksjonsfri is betyr ingen ytre horisontal
+          kraft, så bevegelsesmengde er bevart. Originalformelen er:
+        </p>
+        <FormulaBox latex="p_i = p_f : \quad mv + MV_0 = (m+M)V" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke energi-bevaring?</strong> I en helt uelastisk kollisjon går
+          mye av den kinetiske energien tapt (deformasjon, varme, lyd). Altså er <InlineLatex latex="K" />
+          <em>ikke</em> bevart. Men <InlineLatex latex="p" /> er alltid bevart i en isolert
+          kollisjon, uavhengig av om den er elastisk eller ikke.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Skøyteløperen starter i ro
+          (<InlineLatex latex="V_0=0" />), så <InlineLatex latex="p_i=mv" />. Etter
+          kollisjonen beveger <InlineLatex latex="(M+m)" /> seg sammen med farten
+          <InlineLatex latex="V" />. Løser for <InlineLatex latex="V" />:
+        </p>
+        <FormulaBox latex="V = \dfrac{mv}{M+m}" variant="blue" />
+        <p>Velg positiv x-retning i ballens startretning. Sett inn tall:</p>
+        <FormulaBox latex="V = \dfrac{mv}{M+m} = \dfrac{(0{,}150)(22{,}0)}{70{,}0+0{,}150} = \dfrac{3{,}30}{70{,}15}" variant="blue" />
         <FormulaBox latex="\boxed{V \approx 0{,}0470\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Enhetssjekk:</strong>
+          <InlineLatex latex="\text{kg}\cdot\text{m/s}/\text{kg}=\text{m/s}" />. Stemmer.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Ballen er ~467 ganger lettere enn skøyteløperen,
+          så farten blir tilsvarende mindre. 4,7 cm/s er nesten ikke merkbar, men den er
+          der! Dette er samme logikk som astronaut-problemet (8.16), bare «invertert»: her
+          tar tyngre objekt opp momentum, ikke gir det fra seg.
+        </p>
       </div>
     ),
     summary: (
@@ -641,13 +889,41 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \dfrac{(0{,}250)(6{,}00)}{0{,}600} = 2{,}50\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Air-hockey-banen er tilnærmet friksjonsfri, og pucksene
+          henger sammen etter støtet. Dette er en <em>helt uelastisk kollisjon</em>.
+          Bevegelsesmengde er bevart, men <em>kinetisk energi er ikke</em>: en del går
+          tapt til varme, lyd og deformasjon i klebingen. Originalformlene er:
+        </p>
+        <FormulaBox latex="p_i = p_f :\quad m_A v_A + m_B v_B = (m_A+m_B)V" variant="blue" />
+        <FormulaBox latex="K = \tfrac12 m v^2,\quad \Delta K/K_i = 1 - K_f/K_i" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum og ikke energi?</strong> Når pucksene kleber er
+          systemet deformerbart under støtet, og kinetisk energi går ikke i null men
+          reduseres. Vi bruker derfor bare bevaringsloven som faktisk gjelder
+          (momentum), og beregner <InlineLatex latex="K" /> før og etter separat.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Med B i ro (<InlineLatex latex="v_B=0" />)
+          forsvinner det leddet:
+        </p>
+        <FormulaBox latex="V = \dfrac{m_A v_A}{m_A+m_B}" variant="blue" />
+        <p className="font-semibold">(a) Sluttfart</p>
+        <FormulaBox latex="V = \dfrac{(0{,}250)(6{,}00)}{0{,}250+0{,}350} = \dfrac{1{,}50}{0{,}600} = 2{,}50\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{V = 2{,}50\ \text{m/s}}" variant="gold" />
-        <FormulaBox latex="K_i = \tfrac12(0{,}250)(6{,}00)^2 = 4{,}50\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(0{,}600)(2{,}50)^2 = 1{,}875\ \text{J}" variant="blue" />
-        <FormulaBox latex="\text{Tap:}\ 1 - \dfrac{1{,}875}{4{,}50} = 0{,}583" variant="blue" />
+        <p className="font-semibold">(b) Andel tapt kinetisk energi</p>
+        <p>Regn ut <InlineLatex latex="K_i" /> og <InlineLatex latex="K_f" />:</p>
+        <FormulaBox latex="K_i = \tfrac12 m_A v_A^2 = \tfrac12(0{,}250)(6{,}00)^2 = 4{,}50\ \text{J}" variant="blue" />
+        <FormulaBox latex="K_f = \tfrac12(m_A+m_B)V^2 = \tfrac12(0{,}600)(2{,}50)^2 = 1{,}875\ \text{J}" variant="blue" />
+        <FormulaBox latex="\text{Tap:}\ 1 - \dfrac{K_f}{K_i} = 1 - \dfrac{1{,}875}{4{,}50} = 0{,}583" variant="blue" />
         <FormulaBox latex="\boxed{\text{58{,}3\% av KE tapes}}" variant="gold" />
+        <p>
+          <strong>Generell sjekk:</strong> For helt uelastisk kollisjon med ett legeme i ro
+          gjelder <InlineLatex latex="K_f/K_i = m_A/(m_A+m_B)=0{,}250/0{,}600=0{,}417" />.
+          Altså 41,7% beholdes, 58,3% tapes — stemmer med regnestykket. Den tyngre blokken
+          «stjeler» energi.
+        </p>
       </div>
     ),
     summary: (
@@ -693,10 +969,46 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="v_B = -\dfrac{m_A v_A}{m_B} = -\dfrac{(1{,}00)(-1{,}20)}{3{,}00} = +0{,}400\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Systemet starter i ro med en sammentrykt fjær. Når fjæra
+          slipper, gjør den <em>indre</em> arbeid på blokkene. Indre krefter kan ikke
+          endre total bevegelsesmengde — den er fortsatt null etter separasjonen.
+          Originalformelen er:
+        </p>
+        <FormulaBox latex="p_i = p_f : \quad 0 = m_A v_A + m_B v_B" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum-bevaring?</strong> Fordi det friksjonsfrie bordet ikke
+          gir horisontal ytre kraft. Fjæra er intern og gir bare motsatt rettede
+          krefter på A og B som (pga Newtons 3. lov) netto er null for systemet. Vi
+          kan IKKE bruke energi-bevaring uten å først kjenne <InlineLatex latex="U_\text{fjær}" />,
+          men momentum-bevaring gir oss <InlineLatex latex="v_B" /> direkte.
+        </p>
+        <p>
+          <strong>Fortegn:</strong> Velg positiv x mot høyre. Da er
+          <InlineLatex latex="v_A=-1{,}20\ \text{m/s}" /> (venstre er negativ retning).
+          Vi forventer <InlineLatex latex="v_B>0" /> siden B må gå motsatt vei.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Løs for <InlineLatex latex="v_B" />:
+        </p>
+        <FormulaBox latex="v_B = -\dfrac{m_A v_A}{m_B}" variant="blue" />
+        <p>Sett inn tall:</p>
+        <FormulaBox latex="v_B = -\dfrac{(1{,}00)(-1{,}20)}{3{,}00} = +0{,}400\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v_B = 0{,}400\ \text{m/s mot høyre}}" variant="gold" />
-        <FormulaBox latex="U_\text{fjær} = \tfrac12 m_A v_A^2 + \tfrac12 m_B v_B^2 = 0{,}720 + 0{,}240 = 0{,}960\ \text{J}" variant="blue" />
+        <p>
+          <strong>Energi lagret i fjæra</strong> finner vi nå fra energi-bevaring: all
+          fjærenergien er blitt kinetisk energi i de to blokkene:
+        </p>
+        <FormulaBox latex="U_\text{fjær} = K_\text{tot} = \tfrac12 m_A v_A^2 + \tfrac12 m_B v_B^2" variant="blue" />
+        <FormulaBox latex="U_\text{fjær} = \tfrac12(1{,}00)(1{,}20)^2 + \tfrac12(3{,}00)(0{,}400)^2 = 0{,}720 + 0{,}240 = 0{,}960\ \text{J}" variant="blue" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Den lette blokken A får 3 ganger så høy fart
+          som B (siden <InlineLatex latex="v\propto 1/m" /> når <InlineLatex latex="p=0" />).
+          Den får også mesteparten av den kinetiske energien (0,720 J mot 0,240 J) —
+          typisk 3:1-forhold for masseforholdet 3:1. Dette er samme prinsipp som
+          gevær-rekyl.
+        </p>
       </div>
     ),
     summary: (
@@ -742,11 +1054,40 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="(M+m)v_0 = MV' + m(10{,}0)" variant="blue" />
-        <FormulaBox latex="(70{,}0)(2{,}50) = 65{,}0\,V' + (5{,}00)(10{,}0)" variant="blue" />
-        <FormulaBox latex="175 = 65{,}0\,V' + 50{,}0 \Rightarrow V' = \dfrac{125}{65{,}0} \approx 1{,}92\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Systemet (skøyteløper + stein) er isolert horisontalt —
+          isen er friksjonsfri, og kastet skjer så raskt at ytre krefter ikke rekker å
+          gi merkbar impuls. Total bevegelsesmengde er bevart. Originalformelen:
+        </p>
+        <FormulaBox latex="p_i = p_f : \quad (M+m)v_0 = MV' + mv_\text{stein}'" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum-bevaring?</strong> Muskelarbeidet under kastet er
+          internt for systemet — det overfører energi, men ikke total momentum.
+          Energi-bevaring holder ikke (kjemisk energi blir KE), men momentum-bevaring
+          gjelder.
+        </p>
+        <p>
+          <strong>Fortegn:</strong> Velg positiv x-retning i skøyteløperens opprinnelige
+          bevegelsesretning. Alle verdier er positive. Før kastet beveger skøyteløper
+          og stein seg sammen med fart <InlineLatex latex="v_0=2{,}50\ \text{m/s}" />.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> Løs for <InlineLatex latex="V'" />:
+        </p>
+        <FormulaBox latex="V' = \dfrac{(M+m)v_0 - mv_\text{stein}'}{M}" variant="blue" />
+        <p>Steg-for-steg innsetting:</p>
+        <FormulaBox latex="(70{,}0)(2{,}50) = (65{,}0)V' + (5{,}00)(10{,}0)" variant="blue" />
+        <FormulaBox latex="175 = 65{,}0\,V' + 50{,}0 \;\Longrightarrow\; V' = \dfrac{125}{65{,}0}" variant="blue" />
+        <FormulaBox latex="V' \approx 1{,}92\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{V' \approx 1{,}92\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Ved å kaste steinen forover (raskere enn
+          hun selv beveget seg), «sender hun momentum fremover». For å bevare total
+          <InlineLatex latex="p" /> må hun selv sakne ned, fra 2,50 til 1,92 m/s. Det
+          er samme prinsipp som raketter: motsatt retning på det som «kastes» gir
+          motsatt fortegn på endringen i egen fart.
+        </p>
       </div>
     ),
     summary: (
@@ -784,9 +1125,39 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = -\dfrac{mv}{M} = -\dfrac{(0{,}0120)(380)}{4{,}50}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Rifla henger fritt og starter i ro sammen med kula.
+          Krutteksplosjonen er en <em>intern</em> kraftpåvirkning i systemet rifla+kule
+          og kan ikke endre total bevegelsesmengde. Ingen ytre horisontal kraft
+          virker (tyngdekraft er vertikal). Originalformelen:
+        </p>
+        <FormulaBox latex="p_i = p_f :\quad 0 = MV + mv" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum-bevaring?</strong> Krutteksplosjonen omdanner kjemisk
+          energi til kinetisk energi i både kula og rifla — <InlineLatex latex="K" /> er
+          ikke bevart (den <em>økte</em>!), men <InlineLatex latex="p" /> er bevart fordi
+          ingen ytre horisontal kraft virker.
+        </p>
+        <p>
+          <strong>Fortegn:</strong> Velg positiv x-retning i kulas bevegelsesretning. Da
+          er <InlineLatex latex="v=+380\ \text{m/s}" /> og vi forventer <InlineLatex latex="V<0" />
+          (rekyl bakover).
+        </p>
+        <p>
+          <strong>Algebraisk omforming:</strong>
+        </p>
+        <FormulaBox latex="V = -\dfrac{mv}{M}" variant="blue" />
+        <p>Steg-for-steg innsetting:</p>
+        <FormulaBox latex="V = -\dfrac{(0{,}0120)(380)}{4{,}50} = -\dfrac{4{,}56}{4{,}50} = -1{,}013\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{|V|\approx 1{,}01\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Selv om rifla er 375 ganger tyngre enn kula,
+          får den fortsatt 1 m/s rekyl. Dette er nok til å gi et merkbart støt i skyterens
+          skulder. Hadde rifla vært fast forankret i et massivt stativ, ville stativet
+          (og bakgrunnen) tatt opp impulsen og rekylen blitt ubetydelig. Samme fysikk
+          som astronaut-verktøy (8.16) og kanon-båt (8.65).
+        </p>
       </div>
     ),
     summary: <p>Samme fysikk som astronaut-verktøy. Rekyl er direkte konsekvens av momentum-bevaring.</p>,
@@ -821,13 +1192,44 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \dfrac{(10^4)(24{,}0)}{3\cdot 10^4} = 8{,}00\ \text{m/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Automatiske koblinger klikker fast ved sammenstøt og
+          vognene beveger seg som ett legeme etterpå. Dette er en <em>helt uelastisk
+          kollisjon</em>. Bevegelsesmengde er bevart fordi friksjon fra skinnene er
+          ubetydelig under den korte støtperioden (impulsen fra friksjon er liten
+          i forhold til kollisjonsimpulsen). Originalformelen:
+        </p>
+        <FormulaBox latex="p_i = p_f :\quad m_A v_A + m_B v_B = (m_A+m_B)V" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum og ikke energi?</strong> Klikkmekanismen deformerer
+          materialet og genererer varme/lyd — KE er ikke bevart. Men ingen merkbar ytre
+          kraft virker på kort sikt, så p er bevart.
+        </p>
+        <p className="font-semibold">(a) Sluttfart</p>
+        <p>
+          Med <InlineLatex latex="v_B=0" /> forenkles likningen til
+          <InlineLatex latex="V=m_A v_A/(m_A+m_B)" />:
+        </p>
+        <FormulaBox latex="V = \dfrac{m_A v_A}{m_A+m_B} = \dfrac{(10^4)(24{,}0)}{10^4 + 2\cdot 10^4} = \dfrac{2{,}4\times 10^5}{3\times 10^4}" variant="blue" />
         <FormulaBox latex="\boxed{V = 8{,}00\ \text{m/s}}" variant="gold" />
-        <FormulaBox latex="K_i = \tfrac12(10^4)(24)^2 = 2{,}88\times 10^{6}\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(3\cdot 10^4)(8)^2 = 9{,}60\times 10^{5}\ \text{J}" variant="blue" />
-        <FormulaBox latex="\Delta K/K_i = 1 - \dfrac{9{,}6\times 10^5}{2{,}88\times 10^6} = 0{,}667" variant="blue" />
+        <p className="font-semibold">(b) Andel tapt kinetisk energi</p>
+        <p>Før og etter kollisjonen:</p>
+        <FormulaBox latex="K_i = \tfrac12 m_A v_A^2 = \tfrac12(10^4)(24)^2 = 2{,}88\times 10^{6}\ \text{J}" variant="blue" />
+        <FormulaBox latex="K_f = \tfrac12(m_A+m_B)V^2 = \tfrac12(3\cdot 10^4)(8)^2 = 9{,}60\times 10^{5}\ \text{J}" variant="blue" />
+        <FormulaBox latex="\Delta K/K_i = 1 - \dfrac{K_f}{K_i} = 1 - \dfrac{9{,}6\times 10^5}{2{,}88\times 10^6} = 0{,}667" variant="blue" />
         <FormulaBox latex="\boxed{66{,}7\% \text{ av KE gått til varme}}" variant="gold" />
+        <p>
+          <strong>Generell regel:</strong> For helt uelastisk kollisjon med ett legeme
+          i ro: bevart andel KE = <InlineLatex latex="m_A/(m_A+m_B)=1/3" />. Tapt andel
+          = <InlineLatex latex="m_B/(m_A+m_B)=2/3=66{,}7\%" />. Stemmer.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Nesten 2/3 av energien (~1,9 MJ) omdannes til
+          varme, lyd og mekanisk deformasjon av koblingene. Dette er grunnen til at
+          togkoblinger er designet med støtdempere — ellers ville slitasjen blitt
+          enorm. Jo større masseforskjell, jo mer energi tapes i slike uelastiske støt.
+        </p>
       </div>
     ),
     summary: (
@@ -867,14 +1269,39 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \dfrac{1050\cdot 15{,}0 + 6320\cdot 10{,}0}{7370}" variant="blue" />
-        <FormulaBox latex="V = \dfrac{15\,750 + 63\,200}{7370} = \dfrac{78\,950}{7370}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Siden kjøretøyene setter seg fast er det en helt
+          uelastisk kollisjon. Bevegelsesmengde er bevart (friksjon fra asfalten gir
+          ubetydelig impuls i det korte støyøyeblikket). Begge beveger seg i samme
+          retning — velg positiv x nordover, så er begge farter positive.
+          Originalformelen:
+        </p>
+        <FormulaBox latex="m_b v_b + m_l v_l = (m_b + m_l)V" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum-bevaring?</strong> Kollisjonstiden er kort (~0,1 s), så
+          friksjonsimpuls <InlineLatex latex="\mu m g\Delta t" /> er ubetydelig i forhold
+          til den interne kollisjonsimpulsen. KE er ikke bevart — deformasjon og varme.
+        </p>
+        <p className="font-semibold">(a) Felles sluttfart</p>
+        <p>Løs algebraisk for <InlineLatex latex="V" />:</p>
+        <FormulaBox latex="V = \dfrac{m_b v_b + m_l v_l}{m_b + m_l}" variant="blue" />
+        <FormulaBox latex="V = \dfrac{(1050)(15{,}0) + (6320)(10{,}0)}{1050+6320} = \dfrac{15\,750 + 63\,200}{7370} = \dfrac{78\,950}{7370}" variant="blue" />
         <FormulaBox latex="\boxed{V \approx 10{,}7\ \text{m/s nordover}}" variant="gold" />
-        <FormulaBox latex="K_i = \tfrac12(1050)(225) + \tfrac12(6320)(100) = 1{,}18\times 10^5 + 3{,}16\times 10^5" variant="blue" />
+        <p className="font-semibold">(b) Energi tapt i kollisjonen</p>
+        <FormulaBox latex="K_i = \tfrac12 m_b v_b^2 + \tfrac12 m_l v_l^2" variant="blue" />
+        <FormulaBox latex="K_i = \tfrac12(1050)(15{,}0)^2 + \tfrac12(6320)(10{,}0)^2 = 1{,}18\times 10^5 + 3{,}16\times 10^5" variant="blue" />
         <FormulaBox latex="K_i \approx 4{,}34\times 10^5\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(7370)(10{,}7)^2 \approx 4{,}22\times 10^5\ \text{J}" variant="blue" />
+        <FormulaBox latex="K_f = \tfrac12(m_b+m_l)V^2 = \tfrac12(7370)(10{,}7)^2 \approx 4{,}22\times 10^5\ \text{J}" variant="blue" />
+        <FormulaBox latex="\Delta K = K_i - K_f \approx 1{,}2\times 10^4\ \text{J}" variant="blue" />
         <FormulaBox latex="\boxed{\Delta K \approx 1{,}2\times 10^4\ \text{J gått til varme/skade}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Bare ~3% av KE tapes! Når objektene allerede
+          beveger seg i samme retning, er <em>relativ fart</em> lav
+          (<InlineLatex latex="15{,}0-10{,}0=5{,}0\ \text{m/s}" />) og kollisjonen er mild.
+          Sammenlign med 8.33 der 66,7% tapes fordi ene vognen står i ro. Generelt:
+          jo mindre relativ fart før støtet, jo mindre energi tapes i uelastiske kollisjoner.
+        </p>
       </div>
     ),
     summary: (
@@ -941,11 +1368,54 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \sqrt{2gh} = \sqrt{2\cdot 9{,}80\cdot 0{,}0600} = 1{,}0844\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v = \dfrac{m+M}{m}V = \dfrac{3{,}012}{0{,}0120}\cdot 1{,}0844" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Dette er den klassiske <em>ballistiske pendelen</em> —
+          et oppgavearketype som kombinerer to bevaringslover i to helt forskjellige
+          trinn. Det er avgjørende å skille de to trinnene og bruke riktig lov i hvert.
+        </p>
+        <p>
+          <strong>Trinn 1 — Kollisjon (varighet ms).</strong> Kula sitter fast i blokka
+          ⇒ helt uelastisk kollisjon. Bevegelsesmengde er bevart. KE er IKKE bevart
+          (mye går til varme og deformasjon i treet). Snoren er vertikal under støtet,
+          så den virker ikke horisontalt i kollisjonsøyeblikket.
+        </p>
+        <FormulaBox latex="mv = (m+M)V" variant="blue" />
+        <p>
+          <strong>Trinn 2 — Sving oppover.</strong> Etter at kula er fast i blokka, er
+          systemet en pendel. Ingen friksjon eller luftmotstand oppgitt ⇒ mekanisk
+          energi bevart fra bunnposisjon til topp:
+        </p>
+        <FormulaBox latex="\tfrac12(m+M)V^2 = (m+M)gh \;\Longrightarrow\; V=\sqrt{2gh}" variant="blue" />
+        <p>
+          <strong>Hvorfor kan vi IKKE bruke energi-bevaring gjennom hele?</strong> Fordi KE
+          ikke er bevart i selve kollisjonen — mye tapes til varme i treet. Å regne
+          <InlineLatex latex="\tfrac12 mv^2 = (m+M)gh" /> er en vanlig feil og gir grovt
+          feil svar. Vi MÅ bruke momentum i trinn 1 og energi i trinn 2.
+        </p>
+        <p>
+          <strong>Algebraisk sammenkobling.</strong> Fra trinn 2 finner vi
+          <InlineLatex latex="V" />, deretter fra trinn 1:
+        </p>
+        <FormulaBox latex="v = \dfrac{m+M}{m}V = \dfrac{m+M}{m}\sqrt{2gh}" variant="blue" />
+        <p>Steg-for-steg innsetting:</p>
+        <FormulaBox latex="V = \sqrt{2gh} = \sqrt{2\cdot 9{,}80\cdot 0{,}0600} = \sqrt{1{,}176} = 1{,}0844\ \text{m/s}" variant="blue" />
+        <FormulaBox latex="v = \dfrac{0{,}0120 + 3{,}00}{0{,}0120}\cdot 1{,}0844 = \dfrac{3{,}012}{0{,}0120}\cdot 1{,}0844" variant="blue" />
         <FormulaBox latex="v = 251\cdot 1{,}0844 \approx 272\ \text{m/s}" variant="blue" />
         <FormulaBox latex="\boxed{v \approx 272\ \text{m/s}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> 272 m/s er en realistisk kulefart for
+          mellomstore rifler. Den enorme forsterkningsfaktoren <InlineLatex latex="(m+M)/m=251" />
+          kommer av at kula er 250 ganger lettere enn blokka — nesten hele kulans momentum
+          overføres til det tunge systemet.
+        </p>
+        <p>
+          <strong>Energi-sjekk:</strong> Opprinnelig KE
+          <InlineLatex latex="K_i = \tfrac12(0{,}0120)(272)^2 \approx 444\ \text{J}" />.
+          KE etter kollisjon <InlineLatex latex="K_f=\tfrac12(3{,}012)(1{,}08)^2\approx 1{,}77\ \text{J}" />.
+          Altså: over 99% av KE ble borte i trefet! Dette bekrefter at energibevaring
+          gjennom kollisjonen ville vært totalt feil.
+        </p>
       </div>
     ),
     summary: (
@@ -1008,17 +1478,51 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>x-komponent:</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Bevegelsesmengde er en <em>vektor</em>. I 2D betyr
+          bevaring at både x- og y-komponenten bevares separat. Friksjonsfri is ⇒ ingen
+          ytre horisontal kraft ⇒ total <InlineLatex latex="\vec p" /> bevart.
+          Originalformelen:
+        </p>
+        <FormulaBox latex="\vec p_i = \vec p_f :\quad m_A\vec v_{Ai} = m_A\vec v_{Af} + m_B\vec v_{Bf}" variant="blue" />
+        <p>
+          <strong>Hvorfor komponentbasert og ikke vektorgeometri?</strong> Fordi vi har
+          to ukjente (<InlineLatex latex="v_{Bf}" /> og <InlineLatex latex="\theta_B" />).
+          To likninger (x og y) gir to ukjente. Dette er standardmetoden for 2D-kollisjoner.
+          Vi oppgis ikke at kollisjonen er elastisk, så vi bruker kun p-bevaring.
+        </p>
+        <p>
+          <strong>Fortegn og koordinatsystem:</strong> +x langs A sin startretning, +y 90°
+          til venstre (oppover). A kommer inn langs +x, A går ut i +30° fra +x (over
+          x-aksen). Før støtet har B null fart og null momentum.
+        </p>
+        <p><strong>Algebraisk oppsett — x-komponent:</strong></p>
+        <FormulaBox latex="m_A v_{Ai} = m_A v_{Af}\cos\theta_A + m_B v_{Bx}" variant="blue" />
         <FormulaBox latex="(0{,}025)(5{,}50) = (0{,}025)(4{,}15)\cos 30^\circ + (0{,}050)v_{Bx}" variant="blue" />
-        <FormulaBox latex="0{,}1375 = 0{,}0898 + 0{,}050\,v_{Bx} \Rightarrow v_{Bx} = 0{,}954\ \text{m/s}" variant="blue" />
-        <p><strong>y-komponent:</strong></p>
+        <FormulaBox latex="0{,}1375 = (0{,}1038)(0{,}8660) + 0{,}050\,v_{Bx}" variant="blue" />
+        <FormulaBox latex="0{,}1375 = 0{,}0898 + 0{,}050\,v_{Bx} \;\Longrightarrow\; v_{Bx} = \dfrac{0{,}0477}{0{,}050} = 0{,}954\ \text{m/s}" variant="blue" />
+        <p><strong>Algebraisk oppsett — y-komponent:</strong> Før støtet er
+        <InlineLatex latex="p_y=0" /> (A går rent langs x, B i ro):</p>
+        <FormulaBox latex="0 = m_A v_{Af}\sin\theta_A + m_B v_{By}" variant="blue" />
         <FormulaBox latex="0 = (0{,}025)(4{,}15)\sin 30^\circ + (0{,}050)v_{By}" variant="blue" />
-        <FormulaBox latex="0 = 0{,}0519 + 0{,}050 v_{By} \Rightarrow v_{By} = -1{,}038\ \text{m/s}" variant="blue" />
-        <p><strong>Sett sammen:</strong></p>
-        <FormulaBox latex="v_{Bf} = \sqrt{0{,}954^2 + 1{,}038^2} \approx 1{,}41\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\theta_B = \arctan(-1{,}038/0{,}954) \approx -47{,}4^\circ" variant="blue" />
+        <FormulaBox latex="0 = 0{,}0519 + 0{,}050 v_{By} \;\Longrightarrow\; v_{By} = -1{,}038\ \text{m/s}" variant="blue" />
+        <p>
+          Det <em>negative</em> fortegnet viser at B må gå nedover (<InlineLatex latex="-y" />-retning)
+          for å kompensere for at A gikk oppover.
+        </p>
+        <p><strong>Sett sammen vektorkomponentene:</strong></p>
+        <FormulaBox latex="v_{Bf} = \sqrt{v_{Bx}^2 + v_{By}^2} = \sqrt{0{,}954^2 + 1{,}038^2} = \sqrt{0{,}910 + 1{,}077}" variant="blue" />
+        <FormulaBox latex="v_{Bf} = \sqrt{1{,}987} \approx 1{,}41\ \text{m/s}" variant="blue" />
+        <FormulaBox latex="\theta_B = \arctan\!\left(\dfrac{-1{,}038}{0{,}954}\right) \approx -47{,}4^\circ" variant="blue" />
         <FormulaBox latex="\boxed{v_{Bf}\approx 1{,}41\ \text{m/s, } 47{,}4^\circ \text{ under x-aksen}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Siden B er dobbelt så tung som A og går ut i
+          skrå vinkel, er den noe langsommere enn A. Total y-momentum før og etter er null
+          — A går opp-høyre, B må gå ned-høyre. Kollisjonen er forresten ikke elastisk
+          (sjekk: <InlineLatex latex="K_i\approx 0{,}378" />, <InlineLatex latex="K_f\approx 0{,}215+0{,}050=0{,}265" /> J
+          — ~30% tapt).
+        </p>
       </div>
     ),
     summary: (
@@ -1059,12 +1563,42 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V_x = \dfrac{1500\cdot 20{,}0}{4000} = 7{,}50\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="V_y = \dfrac{2500\cdot 15{,}0}{4000} = 9{,}375\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="V = \sqrt{7{,}50^2+9{,}375^2}\approx 12{,}0\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\theta = \arctan(9{,}375/7{,}50)\approx 51{,}3^\circ \text{ nord for øst}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Helt uelastisk 2D-kollisjon: kjøretøyene vikler seg sammen
+          og får felles sluttfart <InlineLatex latex="\vec V" />. Bevegelsesmengde er
+          bevart i BEGGE retninger (x og y separat). Friksjon fra asfalt gir ubetydelig
+          impuls i det korte støyøyeblikket. Originalformelen:
+        </p>
+        <FormulaBox latex="\vec p_i = \vec p_f :\quad m_1\vec v_1 + m_2\vec v_2 = (m_1+m_2)\vec V" variant="blue" />
+        <p>
+          <strong>Hvorfor momentum og ikke energi?</strong> Helt uelastisk kollisjon ⇒ mye
+          KE går til deformasjon og varme. Energi-bevaring gjelder ikke.
+        </p>
+        <p>
+          <strong>Koordinatsystem:</strong> +x østover, +y nordover. Da er
+          <InlineLatex latex="\vec v_1=(20{,}0, 0)" /> (bilen) og
+          <InlineLatex latex="\vec v_2=(0, 15{,}0)" /> (pickup). De to komponentene er
+          uavhengige — vi kan løse x og y separat.
+        </p>
+        <p>
+          <strong>Algebraisk omforming.</strong> For hver komponent:
+          <InlineLatex latex="V_k = (m_1 v_{1k}+m_2 v_{2k})/(m_1+m_2)" />.
+          Siden bilen bare har x-fart og pickupen bare y-fart:
+        </p>
+        <FormulaBox latex="V_x = \dfrac{m_1 v_1 + 0}{m_1+m_2} = \dfrac{1500\cdot 20{,}0}{4000} = 7{,}50\ \text{m/s}" variant="blue" />
+        <FormulaBox latex="V_y = \dfrac{0 + m_2 v_2}{m_1+m_2} = \dfrac{2500\cdot 15{,}0}{4000} = 9{,}375\ \text{m/s}" variant="blue" />
+        <p><strong>Sett sammen vektoren:</strong></p>
+        <FormulaBox latex="V = \sqrt{V_x^2+V_y^2} = \sqrt{7{,}50^2+9{,}375^2} = \sqrt{56{,}25+87{,}89}" variant="blue" />
+        <FormulaBox latex="V = \sqrt{144{,}14}\approx 12{,}0\ \text{m/s}" variant="blue" />
+        <FormulaBox latex="\theta = \arctan\!\left(\dfrac{V_y}{V_x}\right) = \arctan\!\left(\dfrac{9{,}375}{7{,}50}\right)\approx 51{,}3^\circ \text{ nord for øst}" variant="blue" />
         <FormulaBox latex="\boxed{V\approx 12{,}0\ \text{m/s, } 51{,}3^\circ \text{ N av Ø}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Pickupen er tyngre og gir størst bidrag til
+          sluttretningen (mer mot nord). Sluttvinkelen er derfor skjevt mot
+          pickupens retning — slik bruker politiet denne typen analyse til å finne
+          fart før kollisjon i trafikkulykker.
+        </p>
       </div>
     ),
     summary: (

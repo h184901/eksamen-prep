@@ -123,14 +123,51 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Løs Coulombs lov for q</strong></p>
-        <p className="text-sm">
-          Når begge kulene har samme ladning <InlineLatex latex="q" />, gir Coulombs lov
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — Coulombs lov:</strong> Den elektrostatiske kraften
+          mellom to ladninger i ro er analog med Newtons gravitasjonslov: proporsjonal
+          med produktet av de to «kildene» (her ladning, ikke masse) og omvendt
+          proporsjonal med kvadratet av avstanden. Den store forskjellen fra
+          gravitasjon er at Coulomb-kraften kan ha begge fortegn — like ladninger
+          frastøter, ulike tiltrekker. Formuleringen i vektorform med enhetsvektor{" "}
+          <InlineLatex latex="\hat r_{12}" /> (fra ladning 1 til ladning 2) koder
+          både størrelse og retning:
         </p>
-        <FormulaBox latex="F = \frac{k\,q^2}{r^2} \quad\Longrightarrow\quad q = r\sqrt{\frac{F}{k}}" variant="blue" />
+        <FormulaBox latex="\vec F_{12} = \dfrac{k\,q_1 q_2}{r^2}\,\hat r_{12}" variant="blue" />
+        <p>
+          Her er <InlineLatex latex="k = 8{,}988\cdot10^9\;\text{N}\cdot\text{m}^2/\text{C}^2" />{" "}
+          Coulombs konstant. Siden oppgaven kun spør om antall elektroner (ikke
+          retning), kan vi jobbe med størrelsen <InlineLatex latex="F" /> og
+          utelate <InlineLatex latex="\hat r" />.
+        </p>
 
-        <p><strong>Steg 2: Sett inn tall</strong></p>
+        <p>
+          <strong>Hvorfor Coulomb og ikke noe annet?</strong> Feltet fra én kule sett
+          fra den andre er ikke uniformt — det avtar som{" "}
+          <InlineLatex latex="1/r^2" />. Derfor kan vi ikke bruke en formel som{" "}
+          <InlineLatex latex="F = qE_{\text{uniform}}" /> uten å først regne ut{" "}
+          <InlineLatex latex="E = k|q|/r^2" />. Coulombs lov <em>er</em> den direkte
+          kraftformelen mellom to punktladninger, så vi bruker den rett.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Sett opp Coulombs lov for lik ladning</p>
+        <p>
+          Begge kulene har samme ladning, så{" "}
+          <InlineLatex latex="q_1 = q_2 = q" /> gir{" "}
+          <InlineLatex latex="q_1 q_2 = q^2" />. Med kun størrelser blir ligningen:
+        </p>
+        <FormulaBox latex="F = \dfrac{k\,q^2}{r^2}" variant="blue" />
+
+        <p className="font-semibold mt-4">Steg 2: Algebraisk omforming — løs for q</p>
+        <p>
+          Vi ønsker <InlineLatex latex="q" /> alene. Multipliser begge sider med{" "}
+          <InlineLatex latex="r^2" />, del på <InlineLatex latex="k" />, og ta
+          kvadratroten:
+        </p>
+        <FormulaBox latex="q^2 = \dfrac{F\,r^2}{k} \;\Longrightarrow\; q = r\sqrt{\dfrac{F}{k}}" variant="blue" />
+
+        <p className="font-semibold mt-4">Steg 3: Sett inn tall steg for steg</p>
         <FormulaBox
           latex="q = 0{,}200\sqrt{\frac{3{,}33 \cdot 10^{-21}}{8{,}988 \cdot 10^9}}\;\text{C}"
           variant="blue"
@@ -140,15 +177,32 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox latex="q = 1{,}217 \cdot 10^{-16}\;\text{C}" variant="blue" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\sqrt{\text{N}/(\text{N}\,\text{m}^2/\text{C}^2)} = \text{C}/\text{m}" />,
+          ganget med meter gir <InlineLatex latex="\text{C}" />. OK.
+        </p>
 
-        <p><strong>Steg 3: Antall elektroner</strong></p>
+        <p className="font-semibold mt-4">Steg 4: Ladningskvantisering gir antall elektroner</p>
+        <p>
+          All ladning er heltallige multipler av elementærladningen{" "}
+          <InlineLatex latex="e = 1{,}602\cdot10^{-19}\;\text{C}" />. Siden kulene
+          frastøter hverandre og vi skal finne overskuddselektroner, må kulene være
+          negativt ladet med samme antall <InlineLatex latex="N" />:
+        </p>
+        <FormulaBox latex="|q| = N\,e \;\Longrightarrow\; N = \dfrac{|q|}{e}" variant="blue" />
         <FormulaBox
           latex="N = \frac{q}{e} = \frac{1{,}217 \cdot 10^{-16}}{1{,}602 \cdot 10^{-19}} = \boxed{\,760\;\text{elektroner}\,}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Det må altså være omtrent <strong>760 overskuddselektroner</strong> på hver kule.
-          Legg merke til hvor liten ladning dette er — under en billiondels coulomb!
+        <p>
+          <strong>Fysisk tolkning og sammenligning:</strong> Rundt 760
+          overskuddselektroner — en utrolig liten ladning (under en billiondels
+          coulomb!). Men kraften er likevel målbar fordi{" "}
+          <InlineLatex latex="k" /> er stor. Per partikkel er Coulomb ca.{" "}
+          <InlineLatex latex="10^{42}" /> ganger sterkere enn gravitasjon. Dette er
+          grunnen til at elektrostatikk dominerer all mikroskopisk fysikk, mens
+          gravitasjon dominerer på makroskopisk/astronomisk skala (fordi den er
+          <em>additiv</em> og aldri kansellerer).
         </p>
       </div>
     ),
@@ -232,8 +286,32 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Like ladninger</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn:</strong> Coulombs lov kobler <em>produktet</em> av
+          de to ladningene til kraften — ikke ladningene enkeltvis. Det er en
+          veldig viktig observasjon: hvis vi kjenner en <em>sammenheng</em> mellom
+          ladningene (f.eks. at de er like eller at en er fire ganger den andre),
+          kan vi uttrykke produktet ved bare én ukjent og løse.
+        </p>
+        <FormulaBox latex="F = \dfrac{k\,|q_1 q_2|}{r^2}" variant="blue" />
+        <p>
+          <strong>Hvorfor denne formelen?</strong> Punktladninger med kjent avstand
+          → bruk Coulomb direkte. Vi kan ikke bruke <InlineLatex latex="F = qE" /> med
+          et uniformt felt her, fordi feltet fra en punktladning er radielt og
+          avtar som <InlineLatex latex="1/r^2" />. Vi kunne i prinsippet sagt{" "}
+          <InlineLatex latex="F = q_1 E_2" /> der{" "}
+          <InlineLatex latex="E_2 = kq_2/r^2" />, men det gir nøyaktig samme
+          ligning — Coulomb er en snarvei.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Like ladninger</p>
+        <p>
+          Setter <InlineLatex latex="q_1 = q_2 = q" /> slik at{" "}
+          <InlineLatex latex="q_1 q_2 = q^2" />. Algebraisk omforming (gang med{" "}
+          <InlineLatex latex="r^2" />, del på <InlineLatex latex="k" />, ta
+          kvadratrot):
+        </p>
         <FormulaBox
           latex="F = \frac{k\,q^2}{r^2} \quad\Longrightarrow\quad q = r\sqrt{\frac{F}{k}}"
           variant="blue"
@@ -243,10 +321,23 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox latex="\boxed{\,q = 7{,}35 \cdot 10^{-7}\;\text{C} = 0{,}735\;\mu\text{C}\,}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{m}\sqrt{\text{N}/(\text{N}\,\text{m}^2/\text{C}^2)} = \text{C}" />. OK.
+        </p>
 
-        <p><strong>(b) Ulike ladninger, <InlineLatex latex="q_2 = 4q_1" /></strong></p>
-        <p className="text-sm">
-          Produktet er nå <InlineLatex latex="q_1 q_2 = 4 q_1^2" />:
+        <p className="font-semibold mt-4">(b) Ulike ladninger, <InlineLatex latex="q_2 = 4q_1" /></p>
+        <p>
+          Nå er produktet <InlineLatex latex="q_1 q_2 = q_1\cdot(4q_1) = 4q_1^2" />.
+          Coulombs lov blir:
+        </p>
+        <FormulaBox
+          latex="F = \frac{k\,(4 q_1^2)}{r^2}"
+          variant="blue"
+        />
+        <p>
+          Løser for <InlineLatex latex="q_1" />: <InlineLatex latex="q_1^2 = F r^2/(4k)" />,
+          så <InlineLatex latex="q_1 = \tfrac{r}{2}\sqrt{F/k}" />. Sammenligner vi
+          med (a), ser vi at <InlineLatex latex="q_1 = \tfrac{1}{2}q_{(a)}" />:
         </p>
         <FormulaBox
           latex="F = \frac{k\,(4 q_1^2)}{r^2} \quad\Longrightarrow\quad q_1 = \tfrac{1}{2}\,r\sqrt{\frac{F}{k}} = \tfrac{1}{2}\,q_{(a)}"
@@ -260,6 +351,14 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="q_2 = 4q_1 = \boxed{\,1{,}47 \cdot 10^{-6}\;\text{C} = 1{,}47\;\mu\text{C}\,}"
           variant="gold"
         />
+        <p>
+          <strong>Fysisk tolkning:</strong> Legg merke til at produktet{" "}
+          <InlineLatex latex="q_1 q_2 = 4q_1^2 = 4(3{,}68\cdot10^{-7})^2 = 5{,}42\cdot10^{-13}\;\text{C}^2" />,
+          samme som i (a) der <InlineLatex latex="q^2 = (7{,}35\cdot10^{-7})^2 = 5{,}40\cdot10^{-13}\;\text{C}^2" />.
+          Kraften er lik når <em>produktet</em> er likt, uavhengig av fordelingen.
+          En liten og en stor ladning gir samme kraft som to middelsstore hvis
+          produktet stemmer.
+        </p>
       </div>
     ),
     summary: (
@@ -356,23 +455,63 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Finn retningene på kreftene</strong></p>
-        <p className="text-sm">
-          <InlineLatex latex="q_2" /> (−) ligger til høyre for <InlineLatex latex="q_3" />, så den
-          trekker <InlineLatex latex="q_3" /> i +x-retning. For at kreftene skal kansellere må{" "}
-          <InlineLatex latex="q_1" /> skyve <InlineLatex latex="q_3" /> i −x-retning, altså bort fra{" "}
-          <InlineLatex latex="q_1" />. Derfor må <InlineLatex latex="q_1" /> ha <strong>samme fortegn</strong>{" "}
-          som <InlineLatex latex="q_3" />, dvs. positiv.
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — superposisjonsprinsippet:</strong> Den totale
+          elektriske kraften på en ladning er <em>vektorsummen</em> av kreftene fra
+          alle andre ladninger. Coulombs lov er lineær i ladningene, så bidragene
+          kan adderes uavhengig av hverandre. Dette er byggesteinen i all
+          elektrostatikk med flere ladninger.
+        </p>
+        <FormulaBox latex="\vec F_{\text{tot}} = \sum_i \vec F_i,\quad \vec F_i = \dfrac{k\,q_i q}{r_i^2}\,\hat r_i" variant="blue" />
+        <p>
+          <strong>Hvorfor superposisjon og ikke bare Coulomb direkte?</strong> Fordi
+          det er mer enn to ladninger. For likevekt (null netto kraft) må bidragene
+          oppheve hverandre, så vi trenger både <em>retningsanalyse</em> (fortegn)
+          og <em>størrelseslikhet</em> (moduler).
         </p>
 
-        <p><strong>Steg 2: Krev likhet i kraftstørrelse</strong></p>
+        <p className="font-semibold mt-4">Steg 1: Retningsanalyse — hvilket fortegn må <InlineLatex latex="q_1" /> ha?</p>
+        <p>
+          <InlineLatex latex="q_2" /> (negativ) ligger til høyre for{" "}
+          <InlineLatex latex="q_3" /> (positiv). Motsatte ladninger tiltrekker
+          hverandre, så kraften på <InlineLatex latex="q_3" /> fra{" "}
+          <InlineLatex latex="q_2" /> peker <em>mot</em>{" "}
+          <InlineLatex latex="q_2" />, dvs. i +x-retning. For at netto kraft skal
+          bli null må kraften fra <InlineLatex latex="q_1" /> peke i −x.{" "}
+          <InlineLatex latex="q_1" /> ligger også til høyre for{" "}
+          <InlineLatex latex="q_3" />. For at den skal <em>skyve</em>{" "}
+          <InlineLatex latex="q_3" /> mot −x (bort fra <InlineLatex latex="q_1" />),
+          må den <em>frastøte</em> → <InlineLatex latex="q_1" /> må være
+          <strong> positiv</strong> (samme fortegn som <InlineLatex latex="q_3" />).
+        </p>
+
+        <p className="font-semibold mt-4">Steg 2: Størrelseslikhet</p>
+        <p>
+          For at kreftene skal kansellere må størrelsene være like. Bruk Coulombs
+          lov for begge bidrag:
+        </p>
         <FormulaBox
           latex="\frac{k\,|q_1|\,|q_3|}{r_1^2} = \frac{k\,|q_2|\,|q_3|}{r_2^2}"
           variant="blue"
         />
+        <p>
+          <InlineLatex latex="k" /> og <InlineLatex latex="|q_3|" /> står på begge
+          sider — de kansellerer. Det viser en generell regel: den testede
+          ladningen (<InlineLatex latex="q_3" />) forsvinner fra likevektsbetingelsen.
+          Omform algebraisk for <InlineLatex latex="|q_1|" />:
+        </p>
         <FormulaBox
-          latex="|q_1| = |q_2|\left(\frac{r_1}{r_2}\right)^2 = 2{,}00\;\text{nC} \cdot \left(\frac{0{,}020}{0{,}035}\right)^2"
+          latex="|q_1| = |q_2|\left(\frac{r_1}{r_2}\right)^2"
+          variant="blue"
+        />
+        <p>
+          Avstander: <InlineLatex latex="r_1 = 2{,}00\;\text{cm} = 0{,}0200\;\text{m}" />{" "}
+          (fra <InlineLatex latex="q_3" /> i origo til <InlineLatex latex="q_1" />),{" "}
+          <InlineLatex latex="r_2 = 3{,}50\;\text{cm} = 0{,}0350\;\text{m}" />.
+        </p>
+        <FormulaBox
+          latex="|q_1| = 2{,}00\;\text{nC} \cdot \left(\frac{0{,}020}{0{,}035}\right)^2"
           variant="blue"
         />
         <FormulaBox
@@ -380,14 +519,17 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p><strong>Steg 3: Svaret</strong></p>
+        <p className="font-semibold mt-4">Steg 3: Kombiner fortegn og størrelse</p>
         <FormulaBox
           latex="\boxed{\;q_1 = +0{,}653\;\text{nC}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          <InlineLatex latex="q_1" /> er positiv og nesten tredjedelen av ladningen til{" "}
-          <InlineLatex latex="q_2" />, fordi den står nærmere <InlineLatex latex="q_3" />.
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: <InlineLatex latex="q_1" /> er mindre i størrelse enn{" "}
+          <InlineLatex latex="q_2" /> fordi den står nærmere{" "}
+          <InlineLatex latex="q_3" />. Coulombs <InlineLatex latex="1/r^2" /> gjør
+          at nærmere kilde trenger mindre ladning for samme kraft — konsistent med
+          forholdet <InlineLatex latex="(r_1/r_2)^2 \approx 0{,}33" />.
         </p>
       </div>
     ),
@@ -488,14 +630,33 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Kraft fra q₂ på q₁</strong></p>
-        <p className="text-sm">
-          <InlineLatex latex="q_2" /> er negativ, så kraften på <InlineLatex latex="q_1" /> (+) er
-          tiltrekkende mot <InlineLatex latex="q_2" />, dvs. i +x.
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn:</strong> Tre punktladninger på en rett linje er en
+          ren 1D-oppgave. Superposisjon: netto kraft på{" "}
+          <InlineLatex latex="q_1" /> er summen av kraftene fra{" "}
+          <InlineLatex latex="q_2" /> og <InlineLatex latex="q_3" />. Vi jobber
+          konsekvent med fortegn (positiv x-retning = positiv kraft).
         </p>
+        <FormulaBox latex="\vec F_{\text{tot},1} = \vec F_{21} + \vec F_{31}" variant="blue" />
+        <p>
+          <strong>Hvorfor Coulomb og ikke et uniformt felt?</strong> Vi har
+          punktladninger på kjente posisjoner. Coulomb gir direkte kraft på{" "}
+          <InlineLatex latex="q_1" />. En «<InlineLatex latex="F = qE" />» med
+          uniformt felt ville vært feil — feltet er ikke uniformt, det avtar som{" "}
+          <InlineLatex latex="1/r^2" /> bort fra hver kilde.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Retning og kraft fra <InlineLatex latex="q_2" /></p>
+        <p>
+          <InlineLatex latex="q_2" /> (negativ) ligger til høyre for{" "}
+          <InlineLatex latex="q_1" /> (positiv) — motsatte fortegn tiltrekker, så
+          kraften på <InlineLatex latex="q_1" /> peker mot{" "}
+          <InlineLatex latex="q_2" />, dvs. i +x-retning. Størrelsen fra Coulomb:
+        </p>
+        <FormulaBox latex="F_{21} = \dfrac{k\,|q_1 q_2|}{r_{12}^2}" variant="blue" />
         <FormulaBox
-          latex="F_{21} = \frac{k\,|q_1 q_2|}{r_{12}^2} = \frac{(8{,}988 \cdot 10^9)(3{,}00 \cdot 10^{-6})(5{,}00 \cdot 10^{-6})}{(0{,}200)^2}"
+          latex="F_{21} = \frac{(8{,}988 \cdot 10^9)(3{,}00 \cdot 10^{-6})(5{,}00 \cdot 10^{-6})}{(0{,}200)^2}"
           variant="blue"
         />
         <FormulaBox
@@ -503,17 +664,40 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p><strong>Steg 2: Krev netto kraft = 7,00 N i −x</strong></p>
-        <p className="text-sm">
-          La kraften fra <InlineLatex latex="q_3" /> på <InlineLatex latex="q_1" /> være{" "}
-          <InlineLatex latex="F_{31}" /> (i −x, altså negativ). Da er
+        <p className="font-semibold mt-4">Steg 2: Retning for <InlineLatex latex="q_3" /> og superposisjon</p>
+        <p>
+          Vi vet nettokraften skal være 7,00 N i −x. Siden{" "}
+          <InlineLatex latex="F_{21}" /> bidrar i +x, må{" "}
+          <InlineLatex latex="F_{31}" /> peke i −x og være <em>større enn</em>{" "}
+          <InlineLatex latex="F_{21}" /> i størrelse. Skriv fortegnsligning langs
+          x-aksen (ta +x positivt):
         </p>
         <FormulaBox
-          latex="-F_{31} + F_{21} = -7{,}00 \;\Longleftrightarrow\; F_{31} = 7{,}00 + 3{,}37 = 10{,}37\;\text{N}"
+          latex="F_{\text{netto},x} = F_{21,x} + F_{31,x} = -7{,}00\;\text{N}"
           variant="blue"
         />
+        <p>
+          Med <InlineLatex latex="F_{21,x} = +3{,}37" /> og{" "}
+          <InlineLatex latex="F_{31,x} = -F_{31}" /> (ukjent størrelse, negativ
+          fortegn fordi retningen er −x):
+        </p>
+        <FormulaBox
+          latex="3{,}37 - F_{31} = -7{,}00 \;\Longleftrightarrow\; F_{31} = 7{,}00 + 3{,}37 = 10{,}37\;\text{N}"
+          variant="blue"
+        />
+        <p>
+          <strong>Hvor er <InlineLatex latex="q_3" />?</strong>{" "}
+          <InlineLatex latex="q_3" /> er negativ; for at den skal <em>dra</em>{" "}
+          <InlineLatex latex="q_1" /> (+) i −x-retning, må{" "}
+          <InlineLatex latex="q_3" /> ligge til venstre for <InlineLatex latex="q_1" />,
+          dvs. ved <InlineLatex latex="x_3 < 0" />.
+        </p>
 
-        <p><strong>Steg 3: Finn posisjonen</strong></p>
+        <p className="font-semibold mt-4">Steg 3: Løs Coulomb for avstanden</p>
+        <p>
+          Avstanden fra <InlineLatex latex="q_1" /> (origo) til{" "}
+          <InlineLatex latex="q_3" /> er <InlineLatex latex="|x_3|" />. Coulomb gir:
+        </p>
         <FormulaBox
           latex="F_{31} = \frac{k\,|q_1 q_3|}{x_3^2} \;\Longrightarrow\; x_3^2 = \frac{k\,|q_1 q_3|}{F_{31}}"
           variant="blue"
@@ -530,8 +714,12 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\boxed{\;x_3 = -0{,}144\;\text{m} = -14{,}4\;\text{cm}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          <InlineLatex latex="q_3" /> må ligge <strong>14,4 cm til venstre for origo</strong>.
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: <InlineLatex latex="q_3" /> må ligge 14,4 cm til venstre for
+          origo. Fornuftig: <InlineLatex latex="q_3" /> har større størrelse enn{" "}
+          <InlineLatex latex="q_2" /> (8 vs. 5 μC), men må overvinne både
+          avstandsulempen og tillegget på 7 N, så den trenger ikke ligge så langt
+          unna.
         </p>
       </div>
     ),
@@ -630,12 +818,41 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Avstander</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn:</strong> Når alle ladningene ligger på én akse,
+          reduseres vektorsummen til en algebraisk sum av fortegnsbestemte
+          skalarer. Superposisjonsprinsippet gjelder fortsatt: total kraft er
+          summen av parvise Coulomb-krefter.
+        </p>
+        <FormulaBox latex="\vec F_{\text{tot},3} = \vec F_{13} + \vec F_{23},\quad F_{i3} = \dfrac{k\,|q_i q_3|}{r_{i3}^2}" variant="blue" />
+        <p>
+          <strong>Hvorfor Coulomb og ikke <InlineLatex latex="F = qE" />?</strong>{" "}
+          Vi har to punktladninger, ikke et uniformt felt. Vi kunne regnet ut{" "}
+          <InlineLatex latex="E_1" /> og <InlineLatex latex="E_2" /> på plasseringen
+          til <InlineLatex latex="q_3" />, addert vektorielt og så brukt{" "}
+          <InlineLatex latex="F = q_3 E" />. Det gir samme resultat og er et godt
+          alternativ, men her er Coulomb direkte like raskt.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Avstander fra geometrien</p>
         <FormulaBox latex="r_{23} = |0 - (-0{,}420)| = 0{,}420\;\text{m}" variant="blue" />
         <FormulaBox latex="r_{13} = |-0{,}575 - (-0{,}420)| = 0{,}155\;\text{m}" variant="blue" />
 
-        <p><strong>Steg 2: Størrelser på krefter</strong></p>
+        <p className="font-semibold mt-4">Steg 2: Retningsanalyse før tall</p>
+        <p>
+          <InlineLatex latex="q_3" /> ligger ved{" "}
+          <InlineLatex latex="y = -0{,}420\;\text{m}" />. <InlineLatex latex="q_2" />{" "}
+          (+) er over (i origo) og <em>frastøter</em>{" "}
+          <InlineLatex latex="q_3" /> (+) → kraft på <InlineLatex latex="q_3" />{" "}
+          peker bort fra <InlineLatex latex="q_2" />, dvs. nedover (−y).{" "}
+          <InlineLatex latex="q_1" /> (−) er enda lenger nede og{" "}
+          <em>tiltrekker</em> <InlineLatex latex="q_3" /> (+) → kraft også nedover
+          (−y). Begge bidrag peker altså samme vei, så vi kan addere størrelsene
+          direkte.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 3: Regn ut hver kraftstørrelse</p>
         <FormulaBox
           latex="F_2 = \frac{k\,|q_2 q_3|}{r_{23}^2} = \frac{(8{,}988\cdot 10^9)(3{,}20\cdot 10^{-9})(5{,}35\cdot 10^{-9})}{(0{,}420)^2}"
           variant="blue"
@@ -647,18 +864,20 @@ export const exercises: Record<string, ExerciseContent> = {
         />
         <FormulaBox latex="F_1 = \frac{8{,}656\cdot 10^{-8}}{0{,}02403} = 3{,}602\cdot 10^{-6}\;\text{N}" variant="blue" />
 
-        <p><strong>Steg 3: Retning og sum</strong></p>
-        <p className="text-sm">
-          <InlineLatex latex="F_2" /> peker i −y (frastøtning fra <InlineLatex latex="q_2" /> over).{" "}
-          <InlineLatex latex="F_1" /> peker i −y (tiltrekning mot <InlineLatex latex="q_1" /> under). Begge −y:
+        <p className="font-semibold mt-4">Steg 4: Vektorsum (1D)</p>
+        <p>
+          Begge krefter peker i −y, så netto størrelse er summen:
         </p>
         <FormulaBox
           latex="F_{\text{netto}} = F_1 + F_2 = 3{,}602\cdot 10^{-6} + 0{,}872\cdot 10^{-6} = \boxed{\;4{,}47\cdot 10^{-6}\;\text{N}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Retning: <strong>nedover (−y)</strong>. Merk at <InlineLatex latex="F_1" /> dominerer
-          fordi <InlineLatex latex="r_{13}" /> er mye kortere enn <InlineLatex latex="r_{23}" />.
+        <p className="italic text-[var(--muted)]">
+          Retning: nedover (−y). Krysssjekk: <InlineLatex latex="F_1" /> dominerer
+          sterkt (faktor ca. 4) fordi <InlineLatex latex="r_{13}" /> er mye
+          kortere enn <InlineLatex latex="r_{23}" /> — <InlineLatex latex="1/r^2" />
+          straffer avstand hardt. Selv om <InlineLatex latex="q_1" /> er mindre enn{" "}
+          <InlineLatex latex="q_2" />, veier avstandsforskjellen tyngre.
         </p>
       </div>
     ),
@@ -778,14 +997,38 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Konstantene</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — hydrogenbinding som partielle Coulomb-krefter:</strong>{" "}
+          I DNA-dobbelthelixen holdes basene sammen av «hydrogenbindinger» — rekker
+          av atomer O–H–N og N–H–N. Hvert atom har delvis ladning{" "}
+          <InlineLatex latex="\pm e" /> i den idealiserte modellen. Total kraft er
+          <em> superposisjonen</em> av alle Coulomb-krefter mellom par med én ladning
+          på thymin-siden og én på adenin-siden.
+        </p>
+        <FormulaBox latex="F_{\text{netto}} = \sum_{i,j}\dfrac{k\,q_i q_j}{r_{ij}^2}" variant="blue" />
+        <p>
+          <strong>Hvorfor enkel Coulomb og ikke dipol-formel?</strong> Selv om
+          oppsettet ligner en dipol, er avstandene mellom atomene sammenlignbare
+          med bindingslengden, så dipoltilnærmingen (som forutsetter at avstanden
+          til feltpunktet er mye større enn dipollengden) er ikke gyldig. Vi må
+          behandle hvert par eksakt.
+        </p>
+        <p>
+          <strong>Fortegnskonvensjon:</strong> Langs bindingsaksen regner vi
+          frastøtning (som trekker basene fra hverandre) positiv og tiltrekning
+          (som drar dem sammen) negativ. Ulike fortegn gir tiltrekning, like
+          fortegn frastøtning.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Beregn konstanten <InlineLatex latex="ke^2" /></p>
         <FormulaBox latex="k e^2 = (8{,}988\cdot 10^9)(1{,}602\cdot 10^{-19})^2 = 2{,}307\cdot 10^{-28}\;\text{N}\cdot\text{m}^2" variant="blue" />
 
-        <p><strong>Steg 2: O–H–N-kombinasjonen</strong></p>
-        <p className="text-sm">
-          Thyminens O⁻ virker på adenin-ladningene. Adenin har H⁺ (i 0,170 nm fra O) og N⁻ (i 0,280
-          nm fra O). Tilsvarende virker thyminens H⁺ på adeninens N⁻ (i 0,110 nm).
+        <p className="font-semibold mt-4">Steg 2: O–H–N-kombinasjonen</p>
+        <p>
+          Thyminens O⁻ virker på adenin-ladningene. Adenin har H⁺ (i 0,170 nm fra
+          O) og N⁻ (i 0,280 nm fra O). Tilsvarende virker thyminens H⁺ på
+          adeninens N⁻ (i 0,110 nm). Tre par — tre bidrag.
         </p>
         <FormulaBox
           latex="F_{O^-\text{-}H^+} = -\frac{ke^2}{(0{,}170\cdot 10^{-9})^2} = -7{,}98\cdot 10^{-9}\;\text{N}"
@@ -807,9 +1050,11 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p><strong>Steg 3: N–H–N-kombinasjonen (øvre)</strong></p>
-        <p className="text-sm">
-          Her er avstandene 0,110 nm, 0,190 nm og 0,300 nm.
+        <p className="font-semibold mt-4">Steg 3: N–H–N-kombinasjonen (øvre)</p>
+        <p>
+          Samme struktur som over, bare med andre avstander: 0,110 nm (thyminens
+          H⁺ til adeninens N⁻), 0,190 nm (thyminens N⁻ til adeninens H⁺) og 0,300
+          nm (N⁻ til N⁻).
         </p>
         <FormulaBox
           latex="F_{N^-\text{-}H^+} = -\frac{ke^2}{(0{,}190\cdot 10^{-9})^2} = -6{,}39\cdot 10^{-9}\;\text{N}"
@@ -828,7 +1073,7 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p><strong>Steg 4: Sum</strong></p>
+        <p className="font-semibold mt-4">Steg 4: Sum av hydrogenbindingene</p>
         <FormulaBox
           latex="F_{\text{netto}} = F_{\text{OHN}} + F_{\text{NHN}} \approx -4{,}70\cdot 10^{-8}\;\text{N}"
           variant="blue"
@@ -837,8 +1082,19 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\boxed{\;|F_{\text{netto}}|\approx 4{,}7\cdot 10^{-8}\;\text{N},\;\text{tiltrekkende}\;}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Tegnet er negativt (tiltrekkende), fordi H⁺ i midten dominerer med{" "}
+          <InlineLatex latex="1/(0{,}110)^2" /> i nevneren — korte avstander gir
+          store tiltrekninger som overgår de lengre frastøtningene.
+        </p>
 
-        <p><strong>Steg 5: (b) Kraft på elektron i H-atom</strong></p>
+        <p className="font-semibold mt-4">(b) Kraft på elektron i H-atom — sammenligning</p>
+        <p>
+          Elektronet i hydrogen er i Bohr-radien{" "}
+          <InlineLatex latex="a_0 = 0{,}0529\;\text{nm}" /> fra protonet. Samme
+          Coulomb-formel:
+        </p>
+        <FormulaBox latex="F_{eH} = \dfrac{k e^2}{a_0^2}" variant="blue" />
         <FormulaBox
           latex="F_{eH} = \frac{ke^2}{(0{,}0529\cdot 10^{-9})^2} = \frac{2{,}307\cdot10^{-28}}{2{,}80\cdot10^{-21}}= 8{,}24\cdot10^{-8}\;\text{N}"
           variant="blue"
@@ -847,9 +1103,12 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\frac{F_{eH}}{|F_{\text{netto}}|} = \frac{8{,}24\cdot10^{-8}}{4{,}70\cdot10^{-8}} \approx 1{,}75"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Bindingen mellom elektron og proton i hydrogen er omtrent <strong>1,75 ganger sterkere</strong>{" "}
-          enn den nettotiltrekkende DNA-parbindingen mellom thymin og adenin.
+        <p className="italic text-[var(--muted)]">
+          Kraften inne i et hydrogenatom er ca. 1,75 ganger sterkere enn den
+          nettotiltrekkende parbindingen mellom thymin og adenin. Det gir
+          termodynamisk mening: hydrogenbindinger brytes ved moderate
+          temperaturer (smelting av DNA), mens atomer ikke ioniseres før ved
+          mange tusen K.
         </p>
       </div>
     ),
@@ -960,26 +1219,44 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Steg 1: Generell formel per kombinasjon</strong></p>
-        <p className="text-sm">
-          For en kombinasjon med avstand <InlineLatex latex="d" /> (ytterste-til-ytterste) og H i
-          midten med 0,110 nm fra hver side:
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn:</strong> Samme fysikk som i 21.18 — superposisjon
+          av Coulomb-krefter mellom alle par. Cytosin–guanin har <em>tre</em>{" "}
+          hydrogenbindinger (O–H–O, N–H–N, O–H–N), mot to for adenin–thymin. Hver
+          binding bidrar tre par: endepunkt-til-endepunkt (lik fortegn,
+          frastøter), og to med H⁺ i midten (motsatt fortegn, tiltrekker).
+        </p>
+        <FormulaBox latex="F_{\text{netto}} = \sum_{\text{binding}}\sum_{i,j}\dfrac{k\,q_i q_j}{r_{ij}^2}" variant="blue" />
+        <p>
+          <strong>Hvorfor samme formel som 21.18?</strong> Strukturen er identisk
+          (endepunkt–H⁺–endepunkt), så vi kan gjenbruke den samme Coulomb-formelen
+          tre ganger med ulike avstander. Fortegnskonvensjon som før: positiv =
+          frastøtende.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Generell formel per kombinasjon</p>
+        <p>
+          For en kombinasjon med avstand <InlineLatex latex="d" /> (ytterste-til-ytterste)
+          og H i midten med 0,110 nm fra hver side kommer tre bidrag:
+          ytterste-ytterste (frastøter, <InlineLatex latex="+1/d^2" />), ytterste-H
+          (tiltrekker, <InlineLatex latex="-1/(d-0{,}110)^2" />) og H-ytterste
+          (tiltrekker, <InlineLatex latex="-1/(0{,}110)^2" />).
         </p>
         <FormulaBox
           latex="F_{\text{komb}} = \underbrace{+\frac{ke^2}{d^2}}_{\text{y.-y., frastøt}} \underbrace{-\frac{ke^2}{(d-0{,}110)^2}}_{\text{y.-H, tiltrek}} \underbrace{-\frac{ke^2}{(0{,}110)^2}}_{\text{H-y., tiltrek}}"
           variant="blue"
         />
-        <p className="text-sm">(avstander i nm, tegnkonvensjon: + = frastøtende)</p>
+        <p>(avstander i nm, tegnkonvensjon: + = frastøtende, − = tiltrekkende)</p>
 
-        <p><strong>Steg 2: Beregn konstanten</strong></p>
+        <p className="font-semibold mt-4">Steg 2: Beregn konstanten</p>
         <FormulaBox latex="ke^2 = 2{,}307\cdot 10^{-28}\;\text{N}\cdot\text{m}^2" variant="blue" />
         <FormulaBox
           latex="\frac{ke^2}{(0{,}110\cdot 10^{-9})^2} = 1{,}907\cdot 10^{-8}\;\text{N}"
           variant="blue"
         />
 
-        <p><strong>Steg 3: O–H–O (d = 0,290 nm, d − 0,110 = 0,180 nm)</strong></p>
+        <p className="font-semibold mt-4">Steg 3: O–H–O (d = 0,290 nm, d − 0,110 = 0,180 nm)</p>
         <FormulaBox
           latex="F_1 = \frac{ke^2}{(0{,}290)^2}\cdot 10^{18} - \frac{ke^2}{(0{,}180)^2}\cdot 10^{18} - 1{,}907\cdot 10^{-8}"
           variant="blue"
@@ -989,16 +1266,16 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p><strong>Steg 4: N–H–N (d = 0,300 nm, d − 0,110 = 0,190 nm)</strong></p>
+        <p className="font-semibold mt-4">Steg 4: N–H–N (d = 0,300 nm, d − 0,110 = 0,190 nm)</p>
         <FormulaBox
           latex="F_2 = 2{,}563\cdot 10^{-9} - 6{,}390\cdot 10^{-9} - 1{,}907\cdot 10^{-8} = -2{,}29\cdot 10^{-8}\;\text{N}"
           variant="blue"
         />
 
-        <p><strong>Steg 5: O–H–N (d = 0,290 nm, d − 0,110 = 0,180 nm)</strong> — samme som O–H–O</p>
+        <p className="font-semibold mt-4">Steg 5: O–H–N (d = 0,290 nm, d − 0,110 = 0,180 nm) — samme tall som O–H–O</p>
         <FormulaBox latex="F_3 = -2{,}35\cdot 10^{-8}\;\text{N}" variant="blue" />
 
-        <p><strong>Steg 6: Netto kraft</strong></p>
+        <p className="font-semibold mt-4">Steg 6: Netto kraft (summér alle tre bindinger)</p>
         <FormulaBox
           latex="F_{\text{netto}} = F_1 + F_2 + F_3 = -2{,}35\cdot10^{-8} - 2{,}29\cdot10^{-8} - 2{,}35\cdot10^{-8}"
           variant="blue"
@@ -1007,10 +1284,13 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\boxed{\;F_{\text{netto}} \approx -6{,}99\cdot 10^{-8}\;\text{N}\;(\text{tiltrekkende})\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Cytosin–guanin-bindingen er tre hydrogenbindinger (mot to for adenin–thymin), og netto
-          tiltrekning er derfor ca. 50% sterkere. Dette er grunnen til at GC-rike DNA-sekvenser er
-          termisk mer stabile enn AT-rike.
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: sammenlign med 21.18 (thymin–adenin, to bindinger):{" "}
+          <InlineLatex latex="4{,}7\cdot10^{-8}\;\text{N}" />. Cytosin–guanin er
+          ca. <InlineLatex latex="6{,}99/4{,}70 \approx 1{,}5" /> ganger sterkere
+          — som forventet siden bindingen bare har én ekstra hydrogenbinding (3
+          vs. 2). Dette forklarer hvorfor GC-rike DNA-sekvenser har høyere
+          smeltetemperatur enn AT-rike.
         </p>
       </div>
     ),
@@ -1085,29 +1365,84 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Feltstørrelse</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — E-felt fra punktladning:</strong> Det elektriske
+          feltet er kraft per enhet testladning,{" "}
+          <InlineLatex latex="\vec E = \vec F/q_0" />. For en punktladning{" "}
+          <InlineLatex latex="q" /> finner vi feltet på avstand{" "}
+          <InlineLatex latex="r" /> ved å sette en liten positiv testladning{" "}
+          <InlineLatex latex="q_0" /> der, regne kraften{" "}
+          <InlineLatex latex="F = k|q|q_0/r^2" /> og dele på{" "}
+          <InlineLatex latex="q_0" />. Resultatet er uavhengig av{" "}
+          <InlineLatex latex="q_0" /> — feltet er en egenskap ved kildens romlige
+          omgivelser:
+        </p>
+        <FormulaBox latex="\vec E = \dfrac{k\,q}{r^2}\,\hat r" variant="blue" />
+        <p>
+          <InlineLatex latex="\hat r" /> peker fra kilden til feltpunktet.
+          Positive ladninger gir felt som peker <em>bort</em>; negative gir felt
+          som peker <em>inn mot</em> ladningen.
+        </p>
+        <p>
+          <strong>Hvorfor denne formelen og ikke{" "}
+          <InlineLatex latex="E = V/d" />?</strong> Den sistnevnte gjelder bare
+          mellom to parallelle plater der feltet er <em>uniformt</em>. Her har vi
+          én punktladning som lager et radielt felt som avtar med{" "}
+          <InlineLatex latex="1/r^2" /> — helt ikke-uniformt. Derfor må vi bruke{" "}
+          <InlineLatex latex="E = k|q|/r^2" />.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Feltstørrelse og retning</p>
+        <p>
+          Sett inn tallene direkte:
+        </p>
+        <FormulaBox latex="E = \dfrac{k|q|}{r^2}" variant="blue" />
         <FormulaBox
-          latex="E = \frac{k|q|}{r^2} = \frac{(8{,}988\cdot 10^9)(3{,}35\cdot 10^{-9})}{(0{,}200)^2}"
+          latex="E = \frac{(8{,}988\cdot 10^9)(3{,}35\cdot 10^{-9})}{(0{,}200)^2}"
           variant="blue"
         />
         <FormulaBox
           latex="E = \frac{30{,}11}{0{,}0400} = \boxed{\;753\;\text{N/C}\;}"
           variant="gold"
         />
-        <p className="text-sm">
-          Retning: <strong>nedover</strong> (mot den negative ladningen).
+        <p>
+          <strong>Retningsbestemmelse:</strong> Ladningen er negativ, og
+          feltpunktet er <em>over</em> ladningen. For en negativ ladning peker
+          feltet <em>mot</em> ladningen (tenk: en positiv testladning blir
+          tiltrukket mot <InlineLatex latex="q" />). Feltet i P peker altså
+          <strong> nedover</strong>, mot <InlineLatex latex="q" />.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk:{" "}
+          <InlineLatex latex="(\text{N}\,\text{m}^2/\text{C}^2)\cdot\text{C}/\text{m}^2 = \text{N}/\text{C} = \text{V}/\text{m}" />.
+          OK.
         </p>
 
-        <p><strong>(b) Avstand</strong></p>
+        <p className="font-semibold mt-4">(b) Avstand for gitt feltstørrelse</p>
+        <p>
+          Her <em>kan</em> vi ikke bruke <InlineLatex latex="r = V/E" /> — feltet
+          er ikke uniformt. Vi må bruke punktladningsformelen og løse for{" "}
+          <InlineLatex latex="r" />. Omform algebraisk:{" "}
+          <InlineLatex latex="E = k|q|/r^2 \Rightarrow r^2 = k|q|/E \Rightarrow r = \sqrt{k|q|/E}" />.
+        </p>
+        <FormulaBox latex="r = \sqrt{\dfrac{k|q|}{E}}" variant="blue" />
         <FormulaBox
-          latex="r = \sqrt{\frac{k|q|}{E}} = \sqrt{\frac{(8{,}988\cdot 10^9)(3{,}35\cdot 10^{-9})}{11{,}2}}"
+          latex="r = \sqrt{\frac{(8{,}988\cdot 10^9)(3{,}35\cdot 10^{-9})}{11{,}2}}"
           variant="blue"
         />
         <FormulaBox
           latex="r = \sqrt{2{,}688}\;\text{m} = \boxed{\;1{,}64\;\text{m}\;}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: i (a) var <InlineLatex latex="r = 0{,}200\;\text{m}" />{" "}
+          og <InlineLatex latex="E = 753\;\text{N/C}" />. Kvadratloven sier at
+          når <InlineLatex latex="E" /> reduseres med faktor{" "}
+          <InlineLatex latex="753/11{,}2 \approx 67" />, må{" "}
+          <InlineLatex latex="r" /> øke med faktor <InlineLatex latex="\sqrt{67} \approx 8{,}2" />.
+          Faktisk: <InlineLatex latex="1{,}64/0{,}200 = 8{,}2" />. Stemmer!
+        </p>
       </div>
     ),
     summary: (
@@ -1180,33 +1515,77 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Feltstørrelse og retning</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — partikkel i uniformt E-felt:</strong> I et
+          uniformt felt virker det en konstant kraft{" "}
+          <InlineLatex latex="\vec F = q\vec E" /> på en ladning{" "}
+          <InlineLatex latex="q" />. Newton II gir konstant akselerasjon{" "}
+          <InlineLatex latex="\vec a = \vec F/m = q\vec E/m" />. Siden
+          akselerasjonen er konstant, gjelder kinematikkformlene fra kap. 2
+          (fritt fall-analogien):{" "}
+          <InlineLatex latex="\Delta y = v_0 t + \tfrac12 a t^2" /> osv.
+        </p>
+        <FormulaBox latex="\vec F = q\vec E,\quad \vec a = \dfrac{q\vec E}{m},\quad \Delta y = v_0 t + \tfrac{1}{2}a t^2" variant="blue" />
+        <p>
+          <strong>Hvorfor kinematikk + Newton II?</strong> Vi har en partikkel med
+          kjent bevegelse (distanse og tid) i et uniformt felt. Vi bruker
+          kinematikk for å finne <InlineLatex latex="a" />, deretter Newton II med{" "}
+          <InlineLatex latex="F = |q|E" /> for å finne <InlineLatex latex="E" />.
+          Merk: siden feltet er uniformt (ikke en punktladning), kan vi ikke
+          bruke <InlineLatex latex="E = k|q|/r^2" /> — det er kun for
+          punktkilder.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Feltstørrelse og retning</p>
+        <p>
+          <strong>Steg 1: Finn akselerasjonen fra kinematikk.</strong> Elektronet
+          starter i ro (<InlineLatex latex="v_0 = 0" />), så:
+        </p>
+        <FormulaBox latex="\Delta y = \tfrac{1}{2} a t^2 \;\Longrightarrow\; a = \dfrac{2\Delta y}{t^2}" variant="blue" />
         <FormulaBox
           latex="a = \frac{2\Delta y}{t^2} = \frac{2\cdot 4{,}50}{(3{,}00\cdot 10^{-6})^2} = \frac{9{,}00}{9{,}00\cdot 10^{-12}} = 1{,}00\cdot 10^{12}\;\text{m/s}^2"
           variant="blue"
         />
+        <p>
+          <strong>Steg 2: Finn E fra Newton II.</strong> Kraften på elektronet er{" "}
+          <InlineLatex latex="|F| = eE" /> (siden{" "}
+          <InlineLatex latex="|q| = e" />), og{" "}
+          <InlineLatex latex="|F| = m_e a" />. Algebraisk omforming gir:
+        </p>
+        <FormulaBox latex="m_e a = e E \;\Longrightarrow\; E = \dfrac{m_e\,a}{e}" variant="blue" />
         <FormulaBox
-          latex="E = \frac{m_e\,a}{e} = \frac{(9{,}109\cdot 10^{-31})(1{,}00\cdot 10^{12})}{1{,}602\cdot 10^{-19}}"
+          latex="E = \frac{(9{,}109\cdot 10^{-31})(1{,}00\cdot 10^{12})}{1{,}602\cdot 10^{-19}}"
           variant="blue"
         />
         <FormulaBox
           latex="\boxed{\;E = 5{,}69\;\text{N/C},\;\text{rettet nedover}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Retning: <strong>nedover</strong>. Elektronet er negativt, så kraften er motsatt feltet:{" "}
-          felt nedover → kraft på elektron oppover.
+        <p>
+          <strong>Retningsbestemmelse:</strong> Akselerasjonen er oppover.
+          Elektronet har negativ ladning, så{" "}
+          <InlineLatex latex="\vec F = q\vec E = -e\vec E" /> — kraften er{" "}
+          <em>motsatt</em> feltet. Kraft oppover ⇒ felt <strong>nedover</strong>.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{kg}\cdot\text{m/s}^2/\text{C} = \text{N/C}" />. OK.
         </p>
 
-        <p><strong>(b) Kan vi neglisjere tyngdekraften?</strong></p>
+        <p className="font-semibold mt-4">(b) Kan vi neglisjere tyngdekraften?</p>
+        <p>
+          Beregn forholdet mellom elektrisk og gravitasjonell akselerasjon:
+        </p>
         <FormulaBox
           latex="\frac{a_{\text{el}}}{g} = \frac{1{,}00\cdot 10^{12}}{9{,}81} \approx 1{,}02\cdot 10^{11}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Elektrisk akselerasjon er <strong>omtrent 10¹¹ ganger større</strong> enn g. Ja, vi kan
-          trygt neglisjere gravitasjonen.
+        <p className="italic text-[var(--muted)]">
+          Elektrisk akselerasjon er <strong>omtrent 10¹¹ ganger større</strong>{" "}
+          enn <InlineLatex latex="g" />. Tyngdekraften er fullstendig
+          neglisjerbar. Dette er typisk for problemer med elektroner eller
+          protoner i E-felt: massen er så liten at selv moderate felt gir
+          enorme akselerasjoner.
         </p>
       </div>
     ),
@@ -1279,32 +1658,73 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Ladning</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — likevekt:</strong> En partikkel i ro i et felt
+          krever at summen av krefter er null (Newton I). Her er det to krefter:
+          tyngden <InlineLatex latex="\vec F_g = m\vec g" /> (nedover) og den
+          elektriske kraften <InlineLatex latex="\vec F_e = q\vec E" />. For
+          likevekt må disse være like store og motsatt rettet.
+        </p>
+        <FormulaBox latex="\sum \vec F = 0 \;\Longrightarrow\; q\vec E = -m\vec g" variant="blue" />
+        <p>
+          <strong>Hvorfor <InlineLatex latex="F = qE" /> og ikke Coulomb?</strong>{" "}
+          Her er E gitt direkte — vi trenger ikke kjenne kilden som lager feltet.
+          Formelen <InlineLatex latex="\vec F = q\vec E" /> er
+          <em> definisjonen</em> av det elektriske feltet og virker uansett om
+          feltet er uniformt eller ikke, så lenge <InlineLatex latex="E" /> er
+          verdien ved partikkelens posisjon.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Ladning på partikkelen</p>
+        <p>
+          <strong>Retningsanalyse:</strong> Tyngden er nedover og feltet er
+          nedover. For likevekt må den elektriske kraften være oppover. Siden{" "}
+          <InlineLatex latex="\vec F_e = q\vec E" /> må{" "}
+          <InlineLatex latex="q" /> være <strong>negativ</strong> for at kraften
+          skal bli motsatt feltretningen.
+        </p>
+        <p>
+          <strong>Størrelse:</strong> I likevekt er{" "}
+          <InlineLatex latex="|q|E = mg" />. Algebraisk omforming:
+        </p>
+        <FormulaBox latex="|q|E = mg \;\Longrightarrow\; |q| = \dfrac{mg}{E}" variant="blue" />
         <FormulaBox
-          latex="|q|E = mg \;\Longrightarrow\; |q| = \frac{mg}{E} = \frac{(1{,}46\cdot 10^{-3})(9{,}81)}{680}"
+          latex="|q| = \frac{(1{,}46\cdot 10^{-3})(9{,}81)}{680}"
           variant="blue"
         />
         <FormulaBox
           latex="\boxed{\;q = -2{,}11\cdot 10^{-5}\;\text{C} = -21{,}1\;\mu\text{C}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Negativt fortegn fordi feltet er nedover og kraften må være oppover.
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk:{" "}
+          <InlineLatex latex="\text{kg}\cdot\text{m/s}^2/(\text{N/C}) = \text{N}/(\text{N/C}) = \text{C}" />.
+          OK.
         </p>
 
-        <p><strong>(b) E for proton</strong></p>
+        <p className="font-semibold mt-4">(b) Felt som oppveier protonets vekt</p>
+        <p>
+          Samme likevektsligning, nå med <InlineLatex latex="m_p" /> og{" "}
+          <InlineLatex latex="q = +e" />:
+        </p>
+        <FormulaBox latex="e E = m_p g \;\Longrightarrow\; E = \dfrac{m_p g}{e}" variant="blue" />
         <FormulaBox
-          latex="eE = m_p g \;\Longrightarrow\; E = \frac{m_p g}{e} = \frac{(1{,}673\cdot 10^{-27})(9{,}81)}{1{,}602\cdot 10^{-19}}"
+          latex="E = \frac{(1{,}673\cdot 10^{-27})(9{,}81)}{1{,}602\cdot 10^{-19}}"
           variant="blue"
         />
         <FormulaBox
           latex="\boxed{\;E = 1{,}02\cdot 10^{-7}\;\text{N/C}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Selv et ekstremt svakt felt kan oppveie protonvekten — illustrerer igjen at E-kraft
-          dominerer gravitasjon i mikroskopisk fysikk.
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: forholdet mellom feltene er{" "}
+          <InlineLatex latex="680/(1{,}02\cdot10^{-7}) \approx 6{,}7\cdot10^9" />.
+          Samme som forholdet{" "}
+          <InlineLatex latex="(m/m_p)\cdot(e/|q|) = (1{,}46\cdot10^{-3}/1{,}673\cdot10^{-27})\cdot(1{,}602\cdot10^{-19}/2{,}11\cdot10^{-5})" /> —
+          konsistent. Protonvekten er ekstremt liten, så et bittelite felt er nok.
+          Nok en illustrasjon av at E-kraften dominerer gravitasjon på
+          mikroskopisk skala.
         </p>
       </div>
     ),
@@ -1413,38 +1833,91 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Feltstørrelse</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teoribakgrunn — ladet prosjektil i uniformt felt:</strong>{" "}
+          Mellom to parallelle plater er feltet uniformt. En ladning som kommer
+          inn med horisontal fart <InlineLatex latex="v_0" /> opplever:
+        </p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Ingen horisontal kraft ⇒ konstant <InlineLatex latex="v_x = v_0" /></li>
+          <li>Konstant vertikal akselerasjon <InlineLatex latex="a = qE/m" /></li>
+        </ul>
+        <p>
+          Dette er en perfekt analog til prosjektilbevegelse i tyngdefelt (kap. 3).
+          Kinematikkformlene fra den tid gjelder fremdeles:
+        </p>
+        <FormulaBox latex="x = v_0 t,\quad y = \tfrac{1}{2}a t^2" variant="blue" />
+        <p>
+          <strong>Hvorfor prosjektilbevegelse og ikke annet?</strong> Feltet er
+          uniformt (konstant vektor) ⇒ konstant akselerasjon ⇒ parabolsk bane.
+          Hvis feltet varierte med posisjon (som for punktladning), måtte vi
+          integrert Newton II.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Feltstørrelse</p>
+        <p>
+          <strong>Steg 1: Tid mellom platene.</strong> Horisontalt{" "}
+          <InlineLatex latex="v_x = v_0" /> konstant:
+        </p>
+        <FormulaBox latex="t = \dfrac{L}{v_0}" variant="blue" />
         <FormulaBox
-          latex="t = \frac{L}{v_0} = \frac{0{,}0200}{1{,}60\cdot 10^6} = 1{,}25\cdot 10^{-8}\;\text{s}"
+          latex="t = \frac{0{,}0200}{1{,}60\cdot 10^6} = 1{,}25\cdot 10^{-8}\;\text{s}"
+          variant="blue"
+        />
+        <p>
+          <strong>Steg 2: Vertikal akselerasjon fra kravet{" "}
+          <InlineLatex latex="d = \tfrac12 at^2" />.</strong> Elektronet akkurat
+          unngår øvre plate, så vertikal forskyvning er akkurat halve
+          plateavstanden <InlineLatex latex="d = 0{,}500\;\text{cm} = 5{,}00\cdot 10^{-3}\;\text{m}" />:
+        </p>
+        <FormulaBox
+          latex="d = \tfrac{1}{2} a t^2 \;\Longrightarrow\; a = \dfrac{2d}{t^2}"
           variant="blue"
         />
         <FormulaBox
-          latex="d = \tfrac{1}{2} a t^2 \;\Longrightarrow\; a = \frac{2d}{t^2} = \frac{2\cdot 5{,}00\cdot 10^{-3}}{(1{,}25\cdot 10^{-8})^2}"
+          latex="a = \frac{2\cdot 5{,}00\cdot 10^{-3}}{(1{,}25\cdot 10^{-8})^2} = \frac{0{,}0100}{1{,}5625\cdot 10^{-16}} = 6{,}40\cdot 10^{13}\;\text{m/s}^2"
           variant="blue"
         />
+        <p>
+          <strong>Steg 3: Newton II for å finne E.</strong> Kraft på elektronet:{" "}
+          <InlineLatex latex="|F| = eE = m_e a" />:
+        </p>
+        <FormulaBox latex="E = \dfrac{m_e\,a}{e}" variant="blue" />
         <FormulaBox
-          latex="a = \frac{0{,}0100}{1{,}5625\cdot 10^{-16}} = 6{,}40\cdot 10^{13}\;\text{m/s}^2"
-          variant="blue"
-        />
-        <FormulaBox
-          latex="E = \frac{m_e\,a}{e} = \frac{(9{,}109\cdot 10^{-31})(6{,}40\cdot 10^{13})}{1{,}602\cdot 10^{-19}}"
+          latex="E = \frac{(9{,}109\cdot 10^{-31})(6{,}40\cdot 10^{13})}{1{,}602\cdot 10^{-19}}"
           variant="blue"
         />
         <FormulaBox
           latex="\boxed{\;E = 364\;\text{N/C}\;}"
           variant="gold"
         />
-
-        <p><strong>(b) Proton</strong></p>
-        <p className="text-sm">
-          Protonet har motsatt ladning enn elektronet, så kraften virker <em>i</em> feltretningen
-          (nedover). Avstanden til nedre plate er 5,00 mm.
+        <p className="italic text-[var(--muted)]">
+          Retning: feltet er gitt nedover. Kraft på elektron (negativ) er
+          motsatt, dvs. oppover — som forventet (elektronet akselereres mot
+          øvre plate).
         </p>
+
+        <p className="font-semibold mt-4">(b) Proton med samme <InlineLatex latex="v_0" /></p>
+        <p>
+          <strong>Retningsanalyse:</strong> Protonet er positivt, så kraften{" "}
+          <InlineLatex latex="\vec F = e\vec E" /> er <em>i</em> feltretningen
+          — nedover, motsatt av elektronet. Protonet avbøyes mot nedre plate
+          (5 mm unna).
+        </p>
+        <p>
+          <strong>Akselerasjon:</strong> Samme <InlineLatex latex="E" />, men nå
+          <InlineLatex latex="\,m = m_p" />:
+        </p>
+        <FormulaBox latex="a_p = \dfrac{eE}{m_p}" variant="blue" />
         <FormulaBox
-          latex="a_p = \frac{eE}{m_p} = \frac{(1{,}602\cdot 10^{-19})(364)}{1{,}673\cdot 10^{-27}} = 3{,}49\cdot 10^{10}\;\text{m/s}^2"
+          latex="a_p = \frac{(1{,}602\cdot 10^{-19})(364)}{1{,}673\cdot 10^{-27}} = 3{,}49\cdot 10^{10}\;\text{m/s}^2"
           variant="blue"
         />
+        <p>
+          Tiden i feltet er den samme som før (<InlineLatex latex="t = L/v_0" />
+          avhenger ikke av masse). Forskyvning:
+        </p>
         <FormulaBox
           latex="d_p = \tfrac{1}{2} a_p t^2 = \tfrac{1}{2}(3{,}49\cdot 10^{10})(1{,}25\cdot 10^{-8})^2"
           variant="blue"
@@ -1453,24 +1926,29 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\boxed{\;d_p = 2{,}73\cdot 10^{-6}\;\text{m} = 2{,}73\;\mu\text{m}\;\text{nedover}\;}"
           variant="gold"
         />
-        <p className="text-sm text-[var(--muted)]">
-          Protonet treffer <strong>ikke</strong> nedre plate (som er 5 mm unna). Forskyvningen er
-          kun 2,73 μm — ca. <InlineLatex latex="m_e/m_p \approx 1/1836" /> av elektronets
-          avbøyning.
+        <p className="italic text-[var(--muted)]">
+          Krysssjekk: forholdet{" "}
+          <InlineLatex latex="d_p/d = a_p/a = m_e/m_p \approx 1/1836" />.
+          Faktisk: <InlineLatex latex="2{,}73\cdot10^{-6}/5{,}00\cdot10^{-3} = 5{,}46\cdot10^{-4} \approx 1/1832" />.
+          Stemmer! Protonet treffer <strong>ikke</strong> nedre plate (avstanden
+          er 5 mm, forskyvningen er bare 2,73 μm).
         </p>
 
-        <p><strong>(c) Sammenligning av baner</strong></p>
-        <p className="text-sm">
-          Elektronet: kraftig parabolisk avbøyning oppover (mot øvre plate), fordi kraften er
-          motsatt feltet (negativ ladning) og massen er liten.
-          Protonet: svak parabolisk avbøyning nedover (mot nedre plate), i feltretningen, fordi
-          massen er 1836 ganger større.
+        <p className="font-semibold mt-4">(c) Sammenligning av baner</p>
+        <p>
+          Elektronet: kraftig parabolsk avbøyning oppover (mot øvre plate,
+          kraften er motsatt feltet fordi ladningen er negativ).
+          Protonet: svak parabolsk avbøyning nedover (i feltretningen, positiv
+          ladning), 1836 ganger mindre enn elektronet fordi massen er 1836
+          ganger større for samme kraft.
         </p>
 
-        <p><strong>(d) Gravitasjon?</strong></p>
-        <p className="text-sm">
-          Selv for protonet: <InlineLatex latex="a_p/g \approx 3{,}6\cdot 10^9" />. Helt trygt å
-          neglisjere gravitasjonen.
+        <p className="font-semibold mt-4">(d) Gravitasjonssjekk</p>
+        <p>
+          Selv for protonet:{" "}
+          <InlineLatex latex="a_p/g = 3{,}49\cdot10^{10}/9{,}81 \approx 3{,}6\cdot 10^9" />.
+          Helt trygt å neglisjere gravitasjonen. For elektronet er forholdet
+          enda større.
         </p>
       </div>
     ),

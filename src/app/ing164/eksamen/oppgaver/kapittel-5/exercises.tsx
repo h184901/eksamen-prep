@@ -164,26 +164,53 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
+        <p>
+          <strong>Teori:</strong> Bildet henger stille, så det er i <em>likevekt</em>. Første Newtons lov
+          sier da at <InlineLatex latex="\sum\vec F = 0" />. Siden vi jobber i 2D gir dette
+          én ligning per akse — totalt to ligninger, som er akkurat det vi trenger for å
+          finne to ukjente snordrag. Vi bruker knuten der snorene møtes som «legeme».
+        </p>
         <Step n={1} title="Frilegemediagram og koordinater">
           <p>
-            Velg standard akser: x mot høyre, y oppover. Krefter på knuten:
+            Vi velger standard akser: x mot høyre, y oppover. Hver snor trekker <em>bort</em> fra
+            knuten langs sin egen retning. Vi dekomponerer:
           </p>
           <FormulaBox latex="\vec T_1 = (-T_1\cos 30^\circ,\ +T_1\sin 30^\circ)" variant="blue" />
           <FormulaBox latex="\vec T_2 = (+T_2\cos 45^\circ,\ +T_2\sin 45^\circ)" variant="blue" />
           <FormulaBox latex="\vec W = (0,\ -mg)" variant="blue" />
+          <p>
+            Merk: <InlineLatex latex="T_1" /> peker opp mot venstre, så x-komponenten er <em>negativ</em>.
+            <InlineLatex latex="T_2" /> peker opp mot høyre, så den er positiv. Tyngden virker
+            bare nedover.
+          </p>
         </Step>
 
-        <Step n={2} title="Newton 1 i x-retning">
+        <Step n={2} title="Originalformelen — Newton 1 i komponenter">
+          <p>
+            Vi starter med den generelle likevektsbetingelsen og splitter i komponenter:
+          </p>
+          <FormulaBox latex="\sum \vec F = 0 \;\Longleftrightarrow\; \sum F_x = 0 \;\text{og}\; \sum F_y = 0" variant="blue" />
+          <p>x-retning (ingen tyngdekomponent her):</p>
           <FormulaBox latex="\sum F_x: -T_1\cos 30^\circ + T_2\cos 45^\circ = 0" variant="blue" />
-          <FormulaBox latex="\Rightarrow T_2 = T_1\dfrac{\cos 30^\circ}{\cos 45^\circ} = T_1\cdot\dfrac{\sqrt{3}/2}{\sqrt{2}/2} = T_1\sqrt{\dfrac{3}{2}}" variant="blue" />
+          <p>
+            Vi <em>omformer</em> for å uttrykke <InlineLatex latex="T_2" /> i <InlineLatex latex="T_1" />:
+          </p>
+          <FormulaBox latex="T_2 = T_1\dfrac{\cos 30^\circ}{\cos 45^\circ} = T_1\cdot\dfrac{\sqrt{3}/2}{\sqrt{2}/2} = T_1\sqrt{\dfrac{3}{2}}" variant="blue" />
         </Step>
 
-        <Step n={3} title="Newton 1 i y-retning">
+        <Step n={3} title="Bruk y-ligningen til å løse for T₁">
           <FormulaBox latex="\sum F_y: T_1\sin 30^\circ + T_2\sin 45^\circ - mg = 0" variant="blue" />
-          <p>Sett inn uttrykket for <InlineLatex latex="T_2" />:</p>
+          <p>
+            Setter inn uttrykket for <InlineLatex latex="T_2" /> fra x-ligningen — da har vi kun
+            én ukjent igjen:
+          </p>
           <FormulaBox latex="T_1\cdot\tfrac12 + T_1\sqrt{\tfrac32}\cdot\tfrac{\sqrt 2}{2} = mg" variant="blue" />
           <FormulaBox latex="T_1\left(\tfrac12 + \tfrac{\sqrt 3}{2}\right) = mg" variant="blue" />
           <FormulaBox latex="T_1 = \dfrac{mg}{\tfrac12(1+\sqrt 3)} = \dfrac{2mg}{1+\sqrt 3}" variant="blue" />
+          <p>
+            <strong>Hvorfor virker dette?</strong> Fordi x-ligningen bare kobler de to snordragene
+            til hverandre, mens y-ligningen bringer inn tyngdekraften og dermed skalaen.
+          </p>
         </Step>
 
         <Step n={4} title="Innsetting av tall">
@@ -193,9 +220,12 @@ export const exercises: Record<string, ExerciseContent> = {
           <FormulaBox latex="\boxed{T_2 \approx 70{,}3\ \text{N}}" variant="gold" />
         </Step>
 
-        <p className="mt-3 italic">
-          Fysisk sjekk: Den brattere snoren (45°) bærer mest vekt — logisk, siden
-          den peker «mer oppover».
+        <p className="mt-3">
+          <strong>Fysisk tolkning:</strong> Den brattere snoren (45°) bærer mest vekt — den
+          har størst vertikalkomponent per newton drag og gjør dermed «mest nytte» med å
+          bære tyngden. En snor som var helt horisontal ville hatt <InlineLatex latex="\sin\theta = 0" /> og
+          kunne ikke bære noe vertikalt i det hele tatt — derfor henger klessnorer alltid
+          litt nedover.
         </p>
       </div>
     ),
@@ -260,10 +290,25 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <Step n={1} title="Likevektsligninger">
+        <p>
+          <strong>Teori:</strong> Lampen henger i ro, altså i likevekt. Det vil si at summen av
+          alle krefter er null: <InlineLatex latex="\sum\vec F = 0" />. Vi frilegger knuten der
+          snorene møtes og dekomponerer hver snor i x- og y-komponenter. Snoren til venstre
+          drar knuten opp og <em>mot venstre</em> (negativ x), og snoren til høyre drar opp og
+          <em>mot høyre</em> (positiv x).
+        </p>
+        <Step n={1} title="Originalformlene — Newton 1 i komponenter">
+          <FormulaBox latex="\sum F_x: -T_1\cos 40^\circ + T_2\cos 20^\circ = 0" variant="blue" />
+          <FormulaBox latex="\sum F_y: T_1\sin 40^\circ + T_2\sin 20^\circ - mg = 0" variant="blue" />
+          <p>
+            <em>Omforming av x-ligningen</em> til å isolere <InlineLatex latex="T_2" />:
+          </p>
           <FormulaBox latex="T_2 = T_1\dfrac{\cos 40^\circ}{\cos 20^\circ} = T_1\cdot\dfrac{0{,}766}{0{,}940} = 0{,}8152\,T_1" variant="blue" />
         </Step>
         <Step n={2} title="Sett inn i y-ligningen">
+          <p>
+            Nå har vi bare én ukjent igjen. Vi substituerer inn uttrykket for <InlineLatex latex="T_2" />:
+          </p>
           <FormulaBox latex="T_1\sin 40^\circ + (0{,}8152\,T_1)\sin 20^\circ = mg" variant="blue" />
           <FormulaBox latex="T_1(0{,}6428 + 0{,}2788) = (4{,}00)(9{,}80)" variant="blue" />
           <FormulaBox latex="T_1\cdot 0{,}9216 = 39{,}2 \Rightarrow T_1 = 42{,}5\ \text{N}" variant="blue" />
@@ -271,6 +316,13 @@ export const exercises: Record<string, ExerciseContent> = {
           <FormulaBox latex="T_2 = 0{,}8152\cdot 42{,}5 \approx 34{,}7\ \text{N}" variant="blue" />
           <FormulaBox latex="\boxed{T_2 \approx 34{,}7\ \text{N}}" variant="gold" />
         </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Snoren med <em>størst</em> vinkel (40°) tar
+          størst drag — litt overraskende! Årsaken er at vertikalkomponenten er <InlineLatex latex="T\sin\theta" />.
+          Snoren med liten vinkel bidrar lite vertikalt per newton, så for å holde lampa
+          må mye av tyngden dekkes av den brattere snoren. Samtidig balanserer horisontalkomponentene
+          hverandre: <InlineLatex latex="T_1\cos 40^\circ = T_2\cos 20^\circ" />.
+        </p>
       </div>
     ),
     summary: (
@@ -344,32 +396,62 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <Step n={1} title="Koordinater langs skråplanet">
+        <p>
+          <strong>Teori:</strong> Når et legeme glir ned et skråplan, virker to krefter: tyngden
+          <InlineLatex latex="\vec W = m\vec g" /> rett nedover og normalkraften <InlineLatex latex="\vec n" /> vinkelrett
+          ut fra overflaten. Nøkkelen — og en av de viktigste teknikkene i hele mekanikken —
+          er å <em>rotere</em> koordinatsystemet så x-aksen ligger langs planet. Da blir
+          akselerasjonsvektoren ren i x-retning (<InlineLatex latex="a_y = 0" />), og vi kan behandle
+          hver akse uavhengig.
+        </p>
+        <Step n={1} title="Koordinater langs skråplanet og dekomponering av tyngden">
           <p>
-            x-aksen peker ned skråplanet (bevegelsesretning), y-aksen vinkelrett ut fra
-            overflaten. Krefter i disse retningene:
+            x-aksen peker ned skråplanet (i bevegelsesretning), y-aksen vinkelrett ut.
+            Tyngdevektoren <InlineLatex latex="\vec W" /> danner vinkelen <InlineLatex latex="\theta" /> med y-aksen, og
+            dekomponeres som:
           </p>
           <ul className="list-disc list-inside">
             <li><InlineLatex latex="W_x = mg\sin\theta" /> (ned langs skråplanet)</li>
             <li><InlineLatex latex="W_y = -mg\cos\theta" /> (inn i overflaten)</li>
             <li><InlineLatex latex="n_y = +n" /> (ut fra overflaten)</li>
           </ul>
+          <p>
+            <em>Hvorfor sin og cos?</em> Tegn et rettvinklet hjelpe-trekant: hypotenusen er
+            <InlineLatex latex="mg" />, vinkelen mot planet er <InlineLatex latex="\theta" />. Komponenten
+            langs planet (<InlineLatex latex="\sin\theta" />) vokser med vinkelen; komponenten inn mot
+            planet (<InlineLatex latex="\cos\theta" />) avtar.
+          </p>
         </Step>
-        <Step n={2} title="Newton 2 i x-retning (langs plan)">
-          <FormulaBox latex="\sum F_x = ma_x: \quad mg\sin\theta = ma" variant="blue" />
+        <Step n={2} title="Newton 2 langs planet — finn (a)">
+          <p>Originalformelen:</p>
+          <FormulaBox latex="\sum F_x = ma_x" variant="blue" />
+          <p>Langs planet er den eneste nettokraften tyngdekomponenten:</p>
+          <FormulaBox latex="mg\sin\theta = ma \;\Longrightarrow\; a = g\sin\theta" variant="blue" />
+          <p>
+            <strong>Massen forsvinner!</strong> Det skjer fordi Newton 2 har <InlineLatex latex="m" /> på
+            høyre side, og tyngden <InlineLatex latex="mg" /> har <InlineLatex latex="m" /> på venstre
+            side — de stryker hverandre. Innsetting:
+          </p>
           <FormulaBox latex="a = g\sin\theta = (9{,}80)\sin 30^\circ = 4{,}90\ \text{m/s}^2" variant="blue" />
           <FormulaBox latex="\boxed{a = 4{,}90\ \text{m/s}^2 \text{ ned skråplanet}}" variant="gold" />
         </Step>
-        <Step n={3} title="Newton 2 i y-retning (vinkelrett)">
-          <p>Ingen bevegelse vinkelrett, så <InlineLatex latex="a_y=0" />:</p>
-          <FormulaBox latex="n - mg\cos\theta = 0 \Rightarrow n = mg\cos\theta" variant="blue" />
+        <Step n={3} title="Newton 2 vinkelrett på planet — finn (b)">
+          <p>
+            I y-retning er det ingen bevegelse (blokken glir <em>langs</em> planet, ikke <em>inn i</em> det),
+            så <InlineLatex latex="a_y=0" /> og vi har statisk likevekt:
+          </p>
+          <FormulaBox latex="\sum F_y = 0: \quad n - mg\cos\theta = 0 \;\Longrightarrow\; n = mg\cos\theta" variant="blue" />
           <FormulaBox latex="n = (5{,}00)(9{,}80)\cos 30^\circ = 42{,}4\ \text{N}" variant="blue" />
           <FormulaBox latex="\boxed{n \approx 42{,}4\ \text{N}}" variant="gold" />
         </Step>
-        <p className="italic mt-3">
-          Merk: <InlineLatex latex="a" /> avhenger <em>ikke</em> av massen.
-          En fjær og en steinklump akselererer likt ned et friksjonsfritt skråplan —
-          samme grunn som at alt faller likt i vakuum.
+        <p className="mt-3">
+          <strong>Fysisk tolkning:</strong> Akselerasjonen avhenger <em>ikke</em> av massen —
+          en fjær og en steinklump akselererer likt ned et friksjonsfritt skråplan (samme
+          grunn som at alt faller likt i vakuum). Normalkraften er <em>mindre</em> enn
+          <InlineLatex latex="mg" /> fordi planet bare «ser» vinkelrett-komponenten av tyngden.
+          Grensetester: ved <InlineLatex latex="\theta = 0" /> (flat) blir <InlineLatex latex="a=0" /> og
+          <InlineLatex latex="n=mg" /> — riktig. Ved <InlineLatex latex="\theta=90^\circ" /> (loddrett) blir
+          <InlineLatex latex="a=g" /> og <InlineLatex latex="n=0" /> — fritt fall.
         </p>
       </div>
     ),
@@ -456,32 +538,55 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
+        <p>
+          <strong>Teori:</strong> Snoren og trinsen er ideelle (masseløs snor, friksjonsfri og
+          masseløs trinse). Det gir to nyttige <em>tvangsbetingelser</em>: (i) snordraget er likt
+          i begge ender (ellers ville et «segment» av snoren få netto kraft og uendelig
+          akselerasjon, siden den er masseløs), og (ii) snoren strekker seg ikke — så når
+          én masse går ned én cm, går den andre opp én cm. Det betyr at
+          <InlineLatex latex="|a_1| = |a_2| = a" />. Nå kan vi skrive Newton 2 for hver masse separat
+          og løse to ligninger for to ukjente.
+        </p>
         <Step n={1} title="Frilegemediagram for hver masse">
           <p>
-            For <InlineLatex latex="m_1" /> (som aksepteres å akselerere oppover, positiv retning up):
-            <InlineLatex latex="T" /> opp, <InlineLatex latex="m_1 g" /> ned.
+            For <InlineLatex latex="m_1" /> (lettere, akselererer oppover — velg opp som positiv her):
+            snordraget <InlineLatex latex="T" /> virker opp og tyngden <InlineLatex latex="m_1 g" /> ned.
           </p>
           <p>
-            For <InlineLatex latex="m_2" /> (akselererer ned, positiv retning down):
-            <InlineLatex latex="m_2 g" /> ned, <InlineLatex latex="T" /> opp.
+            For <InlineLatex latex="m_2" /> (tyngre, akselererer ned — velg ned som positiv her):
+            tyngden <InlineLatex latex="m_2 g" /> virker ned og snordraget <InlineLatex latex="T" /> opp.
           </p>
         </Step>
-        <Step n={2} title="Newton 2 for hver masse">
+        <Step n={2} title="Originalformelen — Newton 2 for hver masse">
+          <FormulaBox latex="\sum F = ma" variant="blue" />
+          <p>Dette gir ett ligningspar:</p>
           <FormulaBox latex="(1):\ T - m_1 g = m_1 a" variant="blue" />
           <FormulaBox latex="(2):\ m_2 g - T = m_2 a" variant="blue" />
         </Step>
         <Step n={3} title="Eliminer T — adder ligningene">
+          <p>
+            <strong>Trikset:</strong> adder (1) og (2). Da stryker <InlineLatex latex="T" /> og
+            <InlineLatex latex="-T" /> hverandre ut:
+          </p>
           <FormulaBox latex="(m_2 - m_1)g = (m_1 + m_2)a" variant="blue" />
+          <p>Løs for <InlineLatex latex="a" />:</p>
           <FormulaBox latex="a = \dfrac{(m_2 - m_1)g}{m_1+m_2} = \dfrac{(5{,}00-3{,}00)(9{,}80)}{8{,}00}" variant="blue" />
           <FormulaBox latex="\boxed{a = 2{,}45\ \text{m/s}^2}" variant="gold" />
         </Step>
-        <Step n={4} title="Sett tilbake for å finne T">
+        <Step n={4} title="Finn T ved innsetting">
+          <p>
+            Setter <InlineLatex latex="a" /> tilbake i ligning (1), som gir <InlineLatex latex="T = m_1(g+a)" />:
+          </p>
           <FormulaBox latex="T = m_1(g+a) = (3{,}00)(9{,}80+2{,}45) = 36{,}75\ \text{N}" variant="blue" />
           <FormulaBox latex="\boxed{T \approx 36{,}8\ \text{N}}" variant="gold" />
         </Step>
-        <p className="italic mt-3">
-          Sjekk: <InlineLatex latex="T" /> ligger mellom de to vektene (29,4 N og 49,0 N) — riktig,
-          for den lettere blir akselerert oppover, den tyngre bremset nedover.
+        <p className="mt-3">
+          <strong>Fysisk tolkning:</strong> <InlineLatex latex="T" /> ligger mellom de to
+          vektene (<InlineLatex latex="m_1 g = 29{,}4\ \text{N}" /> og <InlineLatex latex="m_2 g = 49{,}0\ \text{N}" />) —
+          akkurat som det skal. Den lettere blir akselerert <em>opp</em> (så <InlineLatex latex="T > m_1 g" />),
+          og den tyngre blir bremset når den faller ned (så <InlineLatex latex="T < m_2 g" />).
+          Grensetest: hvis <InlineLatex latex="m_1 = m_2" /> blir <InlineLatex latex="a = 0" /> og <InlineLatex latex="T = mg" /> —
+          perfekt balanse.
         </p>
       </div>
     ),
@@ -538,18 +643,43 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <p><strong>(a)</strong> <InlineLatex latex="a_y=+3{,}20\ \text{m/s}^2" />:</p>
+        <p>
+          <strong>Teori:</strong> En personvekt måler ikke tyngdekraften din direkte — den måler
+          kontaktkraften (normalkraften <InlineLatex latex="n" />) mellom deg og vekten. I et ikke-akselererende
+          system er de like, men i akselererte system skiller de seg. Personen har to krefter
+          på seg: tyngden <InlineLatex latex="mg" /> nedover og normalkraften <InlineLatex latex="n" /> oppover.
+          Vi setter positiv y-retning oppover og anvender Newton 2:
+        </p>
+        <FormulaBox latex="\sum F_y = ma_y: \quad n - mg = ma_y" variant="blue" />
+        <p>
+          <em>Omforming</em> til å løse for normalkraften (det vekten viser):
+        </p>
+        <FormulaBox latex="n = m(g + a_y)" variant="blue" />
+        <p>
+          Her har <InlineLatex latex="a_y" /> <em>fortegn</em>: positiv når heisen akselererer opp,
+          negativ når den akselererer ned. Dette er det hele hemmelighetenbak «apparent weight».
+        </p>
+        <p><strong>(a)</strong> Heisen akselererer oppover: <InlineLatex latex="a_y=+3{,}20\ \text{m/s}^2" />. Gulvet må
+        både bære tyngden <em>og</em> akselerere deg oppover — du føles tyngre:</p>
         <FormulaBox latex="n = m(g+a_y) = 72{,}0(9{,}80+3{,}20) = 72{,}0\cdot 13{,}0" variant="blue" />
         <FormulaBox latex="\boxed{n = 936\ \text{N}}" variant="gold" />
-        <p><strong>(b)</strong> <InlineLatex latex="a_y=0" />:</p>
+        <p><strong>(b)</strong> Konstant hastighet: <InlineLatex latex="a_y=0" />. Ingen akselerasjon
+        ⇒ likevekt ⇒ vekten viser «normal» verdi:</p>
         <FormulaBox latex="n = mg = 72{,}0\cdot 9{,}80 = 706\ \text{N}" variant="blue" />
         <FormulaBox latex="\boxed{n \approx 706\ \text{N}}" variant="gold" />
-        <p><strong>(c)</strong> <InlineLatex latex="a_y=-2{,}40\ \text{m/s}^2" />:</p>
+        <p><strong>(c)</strong> Heisen akselererer nedover: <InlineLatex latex="a_y=-2{,}40\ \text{m/s}^2" />.
+        Gulvet trenger ikke bære like mye — du føles lettere:</p>
         <FormulaBox latex="n = 72{,}0(9{,}80-2{,}40) = 72{,}0\cdot 7{,}40" variant="blue" />
         <FormulaBox latex="\boxed{n \approx 533\ \text{N}}" variant="gold" />
-        <p><strong>(d)</strong> Fritt fall: <InlineLatex latex="a_y=-g" />:</p>
+        <p><strong>(d)</strong> Fritt fall: <InlineLatex latex="a_y=-g" />. Ingenting holder deg oppe
+        fordi du og heisen akselererer likt nedover:</p>
         <FormulaBox latex="n = m(g-g) = 0" variant="blue" />
         <FormulaBox latex="\boxed{n = 0\ \text{N (vektløshet)}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Astronauter i bane er egentlig i konstant fritt
+          fall — de faller «rundt» jorda. Derfor føler de seg vektløse selv om tyngdekraften
+          der oppe nesten er like stor som på bakken.
+        </p>
       </div>
     ),
     summary: (
@@ -592,10 +722,32 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="a = F/m = 80{,}0/25{,}0 = 3{,}20\ \text{m/s}^2" variant="blue" />
+        <p>
+          <strong>Teori:</strong> Dette er standard «to-trinns»-oppgave: Newton 2 gir akselerasjonen
+          fra kreftene, og kinematikk gir bevegelsen over tid. Siden gulvet er friksjonsfritt,
+          er den eneste horisontale kraften den anvendte kraften <InlineLatex latex="F" />. Tyngden
+          og normalkraften balanserer vertikalt (<InlineLatex latex="n = mg" />), så de bidrar ikke
+          til horisontal akselerasjon.
+        </p>
+        <p><strong>(a) Akselerasjon.</strong> Originalformelen er Newtons andre lov:</p>
+        <FormulaBox latex="\sum F_x = ma" variant="blue" />
+        <p>
+          Her er <InlineLatex latex="\sum F_x = F" />. <em>Omforming</em> for å løse for <InlineLatex latex="a" />:
+        </p>
+        <FormulaBox latex="a = \dfrac{F}{m}" variant="blue" />
+        <FormulaBox latex="a = \dfrac{80{,}0\ \text{N}}{25{,}0\ \text{kg}} = 3{,}20\ \text{m/s}^2" variant="blue" />
         <FormulaBox latex="\boxed{a = 3{,}20\ \text{m/s}^2}" variant="gold" />
-        <FormulaBox latex="x = \tfrac12 a t^2 = \tfrac12(3{,}20)(3{,}00)^2 = 14{,}4\ \text{m}" variant="blue" />
+        <p><strong>(b) Tilbakelagt strekning.</strong> Med konstant akselerasjon og start i ro
+        (<InlineLatex latex="v_0 = 0" />), gir kinematikkformelen:</p>
+        <FormulaBox latex="x(t) = v_0 t + \tfrac12 a t^2 = \tfrac12 a t^2" variant="blue" />
+        <FormulaBox latex="x = \tfrac12(3{,}20)(3{,}00)^2 = \tfrac12(3{,}20)(9{,}00) = 14{,}4\ \text{m}" variant="blue" />
         <FormulaBox latex="\boxed{x = 14{,}4\ \text{m}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Kraften bestemmer akselerasjonen, akselerasjonen
+          bestemmer bevegelsen. Legg merke til at <InlineLatex latex="x" /> vokser <em>kvadratisk</em> med
+          tiden — dobler vi tiden, går den fire ganger så langt. Dette er karakteristisk
+          for konstant akselerasjon fra ro.
+        </p>
       </div>
     ),
     summary: <p>Newton 2 + kinematikk er to-trinns standardpakke. Alltid: regn ut <InlineLatex latex="a" /> først, så kinematikken.</p>,
@@ -664,16 +816,60 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <Step n={1} title="Hele systemet">
+        <p>
+          <strong>Teori:</strong> To klosser forbundet med en <em>uttøybar</em> snor har
+          samme fart og samme akselerasjon til enhver tid — snorens lengde er konstant. Dette
+          er en <em>tvangsbetingelse</em>. Vi bruker to komplementære teknikker: (1) «system»-tilnærmingen,
+          som gir akselerasjonen raskt fordi indre snordrag kansellerer (Newtons 3. lov: snoren
+          drar A fremover og B bakover med like stor kraft, så de summeres til null når vi ser på
+          A+B sammen). (2) «frilegeme»-tilnærmingen, hvor vi isolerer én kloss og skriver Newton 2
+          for bare den — dette er <em>eneste</em> måte å få fram en indre kraft som <InlineLatex latex="T" />.
+        </p>
+        <Step n={1} title="Hele systemet — eliminer T ved å gruppere">
+          <p>
+            Originalformelen er Newtons 2. lov anvendt på <em>hele systemet</em> (begge klosser
+            betraktet som ett legeme med total masse <InlineLatex latex="m_A+m_B" />):
+          </p>
+          <FormulaBox latex="\sum F_\text{ytre} = (m_A+m_B)a" variant="blue" />
+          <p>
+            <em>Hvorfor virker dette?</em> Fordi snordragene <InlineLatex latex="T" /> (på A) og
+            <InlineLatex latex="-T" /> (på B) er <strong>indre</strong> krefter mellom A og B, og
+            ifølge Newton 3 kansellerer de parvis når vi legger sammen. Det eneste som står igjen
+            er den ytre kraften <InlineLatex latex="F" />. Friksjonsfritt gulv ⇒ ingen horisontal
+            friksjon å ta hensyn til. <em>Omforming</em> til å isolere akselerasjonen:
+          </p>
+          <FormulaBox latex="a = \dfrac{F}{m_A+m_B}" variant="blue" />
           <FormulaBox latex="a = \dfrac{F}{m_A+m_B} = \dfrac{30{,}0}{10{,}0} = 3{,}00\ \text{m/s}^2" variant="blue" />
           <FormulaBox latex="\boxed{a = 3{,}00\ \text{m/s}^2}" variant="gold" />
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{N}/\text{kg}=\text{m/s}^2" /> ✓.
+          </p>
         </Step>
-        <Step n={2} title="Isoler A">
+        <Step n={2} title="Isoler A — eneste måte å få fram T">
+          <p>
+            Når vi skal finne <em>snordraget</em> (en indre kraft), <strong>må</strong> vi bryte
+            systemet: T «synes» ikke før vi ser på én kloss for seg. Velg den minste A, siden
+            færrest krefter virker på den. Frilegeme for A: kun snordraget <InlineLatex latex="T" />{" "}
+            horisontalt (tyngden og normalkraften balanserer vertikalt).
+          </p>
+          <FormulaBox latex="\sum F_x = m_A a: \quad T = m_A a" variant="blue" />
+          <p>
+            Vi kjenner nå <InlineLatex latex="a" /> fra steg 1, og kan sette inn direkte:
+          </p>
           <FormulaBox latex="T = m_A a = (4{,}00)(3{,}00) = 12{,}0\ \text{N}" variant="blue" />
           <FormulaBox latex="\boxed{T = 12{,}0\ \text{N}}" variant="gold" />
         </Step>
         <p className="italic">
-          Sjekk med B: <InlineLatex latex="F - T = m_B a \Rightarrow 30-12=18=(6)(3)\ \checkmark" />.
+          <strong>Kryss-sjekk med B</strong> (bra vane!): På B virker <InlineLatex latex="F" /> (fremover)
+          og <InlineLatex latex="T" /> (bakover — Newton 3 på snoren). Newton 2 gir
+          <InlineLatex latex="F - T = m_B a \Rightarrow 30-12=18=(6)(3)\ \checkmark" />. Perfekt.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Snordraget (12 N) er <em>mindre</em> enn den anvendte
+          kraften (30 N) — fordi snoren bare trenger å dra A, mens <InlineLatex latex="F" /> må
+          akselerere både A og B. Hadde A vært tyngre, ville <InlineLatex latex="T" /> vært større.
+          Dette er generelt: den fremste klossen «føler» hele kraften, og bakre klosser «føler» bare
+          det som trengs for å akselerere det som ligger foran snoren.
         </p>
       </div>
     ),
@@ -721,10 +917,54 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="a = \dfrac{\Delta v}{\Delta t} = \dfrac{25{,}0}{10{,}0} = 2{,}50\ \text{m/s}^2" variant="blue" />
-        <FormulaBox latex="T - f = m_h a \Rightarrow T = m_h a + f" variant="blue" />
-        <FormulaBox latex="T = (1200)(2{,}50) + 200 = 3000 + 200 = 3200\ \text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{T = 3{,}20\times 10^{3}\ \text{N}}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Vi har et to-legeme system, men spørsmålet handler om en
+          <em>indre</em> kraft (dragkraften i kroken mellom bil og henger). Da må vi <strong>isolere
+          hengeren</strong> og anvende Newtons 2. lov på bare den. Alt som virker på hengeren
+          horisontalt er: (a) dragkraften <InlineLatex latex="T" /> i kroken (fremover) og
+          (b) rullemotstanden <InlineLatex latex="f=200\ \text{N}" /> (bakover). Vertikalt balanserer
+          tyngden og normalkraften, så de gir ikke bidrag. Bilens masse er irrelevant for dette —
+          bilens motor er kilden til <InlineLatex latex="T" />, men når vi analyserer <em>hengeren</em>,
+          er det hengerens masse og hengerens kraftbilde som teller.
+        </p>
+        <Step n={1} title="Først: finn akselerasjonen fra kinematikk">
+          <p>
+            Start fra ro og får 25 m/s på 10 s — konstant akselerasjon. Originalformelen er
+            definisjonen av gjennomsnittlig akselerasjon:
+          </p>
+          <FormulaBox latex="a = \dfrac{\Delta v}{\Delta t}" variant="blue" />
+          <FormulaBox latex="a = \dfrac{\Delta v}{\Delta t} = \dfrac{25{,}0}{10{,}0} = 2{,}50\ \text{m/s}^2" variant="blue" />
+        </Step>
+        <Step n={2} title="Newton 2 på hengeren alene">
+          <p>
+            Velg x-aksen i bilens kjøreretning (positiv). På hengeren virker <InlineLatex latex="T" /> fremover
+            og <InlineLatex latex="f" /> bakover (friksjon virker alltid <em>mot</em> bevegelsen):
+          </p>
+          <FormulaBox latex="\sum F_x = m_h a: \quad T - f = m_h a" variant="blue" />
+          <p>
+            <em>Omforming</em> for å isolere det vi skal finne:
+          </p>
+          <FormulaBox latex="T - f = m_h a \Rightarrow T = m_h a + f" variant="blue" />
+          <p>
+            <strong>Hvorfor denne formelen?</strong> Fordi dragkraften må (1) akselerere hengeren
+            (<InlineLatex latex="m_h a" />) <em>og</em> (2) overvinne friksjonen (<InlineLatex latex="f" />).
+            Begge bidragene summeres.
+          </p>
+        </Step>
+        <Step n={3} title="Innsetting">
+          <FormulaBox latex="T = (1200)(2{,}50) + 200 = 3000 + 200 = 3200\ \text{N}" variant="blue" />
+          <FormulaBox latex="\boxed{T = 3{,}20\times 10^{3}\ \text{N}}" variant="gold" />
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{kg}\cdot\text{m/s}^2 + \text{N} = \text{N} + \text{N} = \text{N}" /> ✓.
+          </p>
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Av de 3200 N går 3000 N til å akselerere hengeren (gi
+          den fart), mens 200 N går til å vinne mot friksjon. Hadde hengeren hatt konstant fart
+          (<InlineLatex latex="a=0" />), ville <InlineLatex latex="T" /> kun behøvd å motvirke friksjonen,
+          altså 200 N. Dette er grunnen til at <em>kjøring</em> bruker mer drivstoff enn <em>cruising</em> —
+          akselerasjon koster mer enn å holde konstant fart.
+        </p>
       </div>
     ),
     summary: <p>Isoler hengeren, legg til friksjon. Bilens masse er irrelevant for dette spørsmålet.</p>,
@@ -773,18 +1013,70 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <Step n={1} title="Finn akselerasjonen">
+        <p>
+          <strong>Teori:</strong> Vi har to typer informasjon: <em>kinematisk</em> (hvor langt
+          kassa gled og hvor fort den startet) og <em>dynamisk</em> (at kinetisk friksjon er det
+          som bremset). Planen er å bygge en bro mellom dem: kinematikken gir oss akselerasjonen
+          <InlineLatex latex="a" />, og Newtons 2. lov kobler akselerasjonen til friksjonskraften,
+          som igjen er <InlineLatex latex="f_k=\mu_k n" />. Fordi gulvet er horisontalt og ingen
+          andre vertikale krefter virker, er normalkraften bare <InlineLatex latex="n=mg" />.
+          Ingen vertikal akselerasjon ⇒ <InlineLatex latex="\sum F_y=0" />.
+        </p>
+        <Step n={1} title="Originalformel (kinematikk) — finn akselerasjonen">
+          <p>
+            Vi bruker den tidløse kinematikkformelen (utledet fra <InlineLatex latex="v=v_0+at" />{" "}
+            og <InlineLatex latex="x=v_0 t+\tfrac12 at^2" /> ved å eliminere <InlineLatex latex="t" />):
+          </p>
+          <FormulaBox latex="v^2 = v_0^2 + 2ad" variant="blue" />
+          <p>
+            <em>Hvorfor denne, ikke <InlineLatex latex="v=v_0+at" />?</em> Fordi vi ikke vet tiden,
+            men vi vet strekningen. Sett <InlineLatex latex="v=0" /> (kassen stopper) og løs for
+            <InlineLatex latex="a" />:
+          </p>
+          <FormulaBox latex="0 = v_0^2 + 2ad \;\Longrightarrow\; a = -\dfrac{v_0^2}{2d}" variant="blue" />
+          <p>
+            Fortegnet <em>minus</em> er viktig: akselerasjonen peker <em>motsatt</em> av bevegelsen
+            (bremseretning). Innsetting:
+          </p>
           <FormulaBox latex="a = -\dfrac{v_0^2}{2d} = -\dfrac{(5{,}00)^2}{2\cdot 8{,}50} = -1{,}471\ \text{m/s}^2" variant="blue" />
         </Step>
-        <Step n={2} title="Newton 2">
+        <Step n={2} title="Newton 2 — koble akselerasjon til friksjonskraften">
+          <p>
+            La x peke i bevegelsens retning (positiv). Den eneste horisontale kraften er kinetisk
+            friksjon, som peker motsatt bevegelsen (negativ):
+          </p>
+          <FormulaBox latex="\sum F_x = ma: \quad -f_k = ma" variant="blue" />
           <FormulaBox latex="-f_k = ma \Rightarrow f_k = -ma = -(14{,}0)(-1{,}471) = 20{,}6\ \text{N}" variant="blue" />
+          <p>
+            De to minustegnene opphever hverandre og gir en positiv friksjonsstørrelse — akkurat
+            som forventet, siden kraftens <em>størrelse</em> alltid er positiv.
+          </p>
         </Step>
-        <Step n={3} title="Finn μₖ">
+        <Step n={3} title="Friksjonsformelen — omform til μₖ">
+          <p>
+            Originalformelen for kinetisk friksjon er:
+          </p>
+          <FormulaBox latex="f_k = \mu_k n" variant="blue" />
+          <p>
+            På horisontalt gulv uten andre vertikale krefter: <InlineLatex latex="n=mg" />. Sett inn
+            og <em>omform</em> for å isolere <InlineLatex latex="\mu_k" />:
+          </p>
+          <FormulaBox latex="\mu_k = \dfrac{f_k}{mg}" variant="blue" />
+          <p>
+            Substituer <InlineLatex latex="f_k=-ma = m\cdot v_0^2/(2d)" /> — vi ser at <em>massen
+            forkorter bort</em>:
+          </p>
           <FormulaBox latex="\mu_k = \dfrac{f_k}{mg} = \dfrac{v_0^2}{2gd} = \dfrac{25{,}0}{2\cdot 9{,}80\cdot 8{,}50}" variant="blue" />
           <FormulaBox latex="\boxed{\mu_k \approx 0{,}150}" variant="gold" />
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="(\text{m/s})^2/(\text{m/s}^2\cdot\text{m}) = 1" /> ✓,
+            dimensjonsløs som en koeffisient skal være.
+          </p>
         </Step>
         <p className="italic">
-          Massen falt ut — derfor kan politiet anslå fart fra bremsespor uten å veie bilen!
+          <strong>Fysisk tolkning:</strong> Massen falt ut — akkurat som for fritt fall. Det er fordi
+          både tyngden (som setter normalkraften) og tregheten skaleres likt med <InlineLatex latex="m" />.
+          Derfor kan politiet anslå bilens fart fra bremsespor uten å veie bilen!
         </p>
       </div>
     ),
@@ -834,11 +1126,66 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="n = mg - F\sin\theta = (30)(9{,}80) - (150)\sin 30^\circ = 294 - 75 = 219\ \text{N}" variant="blue" />
-        <FormulaBox latex="f_k = \mu_k n = (0{,}300)(219) = 65{,}7\ \text{N}" variant="blue" />
-        <FormulaBox latex="F_\text{netto},x = F\cos\theta - f_k = (150)(0{,}866) - 65{,}7 = 129{,}9 - 65{,}7 = 64{,}2\ \text{N}" variant="blue" />
-        <FormulaBox latex="a = F_\text{netto}/m = 64{,}2/30 = 2{,}14\ \text{m/s}^2" variant="blue" />
-        <FormulaBox latex="\boxed{a \approx 2{,}14\ \text{m/s}^2}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Når kraften er vinklet oppover, må den <em>dekomponeres</em>
+          i en horisontal og en vertikal komponent. Den vertikale komponenten <InlineLatex latex="F\sin\theta" />{" "}
+          løfter kassen litt og reduserer derfor normalkraften. Siden friksjon er proporsjonal med
+          normalkraft (<InlineLatex latex="f_k=\mu_k n" />), reduseres også friksjonen — et <em>doble
+          gevinst</em> ved å trekke i vinkel: du bruker mer av kraften til å akselerere, og samtidig
+          har du mindre friksjon å vinne over. (Dette er nøyaktig hvorfor oppgave 5.35 finner en
+          optimal vinkel.) Jeg velger standard akser: x horisontalt (positivt i dragretningen),
+          y vertikalt (positivt opp).
+        </p>
+        <Step n={1} title="Dekomponer den vinklede dragkraften">
+          <p>
+            Dragkraften <InlineLatex latex="F" /> lager vinkel 30° over horisontalen, så:
+          </p>
+          <FormulaBox latex="F_x = F\cos\theta,\quad F_y = +F\sin\theta" variant="blue" />
+          <p>
+            Y-komponenten er positiv (opp) — dette er fortegnet som løfter kassen.
+          </p>
+        </Step>
+        <Step n={2} title="Originalformel — Newton 2 vinkelrett (y): finn n">
+          <p>
+            I y-retning er det ingen bevegelse (kassa sklir langs gulvet, ikke opp fra det),
+            så <InlineLatex latex="a_y=0" /> og vi får likevekt:
+          </p>
+          <FormulaBox latex="\sum F_y = 0: \quad n + F\sin\theta - mg = 0" variant="blue" />
+          <p>
+            <em>Omforming</em> for å isolere <InlineLatex latex="n" />:
+          </p>
+          <FormulaBox latex="n = mg - F\sin\theta" variant="blue" />
+          <FormulaBox latex="n = mg - F\sin\theta = (30)(9{,}80) - (150)\sin 30^\circ = 294 - 75 = 219\ \text{N}" variant="blue" />
+          <p>
+            Merk: uten vinkel ville <InlineLatex latex="n" /> vært <InlineLatex latex="mg=294\ \text{N}" />.
+            Vinkelen fjerner 75 N fra normalkraften — altså 25 % mindre friksjon å vinne over.
+          </p>
+        </Step>
+        <Step n={3} title="Friksjon — originalformel fk = μₖ n">
+          <FormulaBox latex="f_k = \mu_k n = (0{,}300)(219) = 65{,}7\ \text{N}" variant="blue" />
+          <p>
+            Retning: motsatt bevegelse (bakover, negativ x).
+          </p>
+        </Step>
+        <Step n={4} title="Newton 2 i x — finn a">
+          <p>
+            Nå anvender vi Newton 2 langs bevegelsesretningen. Horisontal netto = dragkomponenten
+            fremover minus friksjonen:
+          </p>
+          <FormulaBox latex="\sum F_x = ma: \quad F\cos\theta - f_k = ma" variant="blue" />
+          <FormulaBox latex="F_\text{netto},x = F\cos\theta - f_k = (150)(0{,}866) - 65{,}7 = 129{,}9 - 65{,}7 = 64{,}2\ \text{N}" variant="blue" />
+          <FormulaBox latex="a = F_\text{netto}/m = 64{,}2/30 = 2{,}14\ \text{m/s}^2" variant="blue" />
+          <FormulaBox latex="\boxed{a \approx 2{,}14\ \text{m/s}^2}" variant="gold" />
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Hadde vi dratt helt horisontalt (<InlineLatex latex="\theta=0" />),
+          ville <InlineLatex latex="F_x=150" /> men <InlineLatex latex="n=294" /> og <InlineLatex latex="f_k=88{,}2\ \text{N}" /> ⇒
+          netto = 61,8 N, <InlineLatex latex="a=2{,}06\ \text{m/s}^2" />. Altså litt <em>mindre</em>
+          akselerasjon enn med 30°-vinkel! Den vinklede kraften vant fordi friksjonsreduksjonen
+          betyr mer enn at kun <InlineLatex latex="\cos 30^\circ=0{,}866" /> av kraften går til
+          akselerasjon. Eksistensen av en slik optimal vinkel er helt generell — og den finnes vi
+          i oppgave 5.35.
+        </p>
       </div>
     ),
     summary: (
@@ -893,27 +1240,84 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <Step n={1} title="Oppstill likevekt">
+        <p>
+          <strong>Teori:</strong> Dette er et klassisk <em>optimeringsproblem</em> som bygger bro
+          mellom fysikk og kalkulus. Vi skal finne den vinkelen der kraften <InlineLatex latex="F" />{" "}
+          er minimal for «akkurat å få kassen til å bevege seg ved konstant fart» — det vil si
+          akkurat på grensen for statisk friksjon, der <InlineLatex latex="f = \mu_s n" /> og
+          akselerasjonen er null. Hvorfor finnes det et minimum? Fordi to motstridende effekter
+          spiller mot hverandre: (1) en brattere vinkel reduserer normalkraften <InlineLatex latex="n=mg-F\sin\theta" />{" "}
+          og dermed friksjonen, men (2) mindre av kraften (<InlineLatex latex="F\cos\theta" />) går
+          langs gulvet. Balansepunktet finnes med derivasjon.
+        </p>
+        <Step n={1} title="Oppstill likevektsligningene (originalformler)">
+          <p>
+            Konstant fart ⇒ <InlineLatex latex="\vec a=0" /> ⇒ Newton 1 / likevekt. Dekomponer
+            <InlineLatex latex="F" /> (vinkel <InlineLatex latex="\theta" /> over horisontalen):
+          </p>
+          <FormulaBox latex="\sum F_x = 0: \quad F\cos\theta - f = 0" variant="blue" />
+          <FormulaBox latex="\sum F_y = 0: \quad n + F\sin\theta - mg = 0" variant="blue" />
+          <p>
+            På grensen (<em>akkurat</em> i bevegelse): <InlineLatex latex="f = \mu_s n" />. Sett inn:
+          </p>
           <FormulaBox latex="F\cos\theta = \mu_s n,\quad n = mg - F\sin\theta" variant="blue" />
+        </Step>
+        <Step n={2} title="Eliminer n og omform til F(θ)">
+          <p>
+            Substituer det andre uttrykket inn i det første:
+          </p>
+          <FormulaBox latex="F\cos\theta = \mu_s(mg - F\sin\theta) = \mu_s mg - \mu_s F\sin\theta" variant="blue" />
+          <p>
+            Samle alle <InlineLatex latex="F" />-ledd på venstre side:
+          </p>
           <FormulaBox latex="F(\cos\theta + \mu_s\sin\theta) = \mu_s mg" variant="blue" />
           <FormulaBox latex="F(\theta) = \dfrac{\mu_s mg}{\cos\theta + \mu_s\sin\theta}" variant="blue" />
+          <p>
+            <strong>Dette er funksjonen vi skal minimere</strong> mhp. <InlineLatex latex="\theta" />.
+            Telleren er konstant, så minimum <InlineLatex latex="F" /> ⇔ <em>maksimum</em> av
+            nevneren.
+          </p>
         </Step>
-        <Step n={2} title="Optimer">
-          <p>Minimum av <InlineLatex latex="F" /> ⇔ maksimum av nevneren <InlineLatex latex="N(\theta)=\cos\theta + \mu_s\sin\theta" />:</p>
+        <Step n={3} title="Derivér og sett lik null">
+          <p>
+            La <InlineLatex latex="N(\theta)=\cos\theta + \mu_s\sin\theta" />. Standard derivasjonsregler
+            (<InlineLatex latex="\tfrac{d}{d\theta}\cos\theta=-\sin\theta" />, <InlineLatex latex="\tfrac{d}{d\theta}\sin\theta=\cos\theta" />):
+          </p>
           <FormulaBox latex="\dfrac{dN}{d\theta} = -\sin\theta + \mu_s\cos\theta = 0" variant="blue" />
+          <p>
+            <em>Omform</em> til en relasjon mellom sin og cos:
+          </p>
+          <FormulaBox latex="\mu_s\cos\theta = \sin\theta \;\Longleftrightarrow\; \dfrac{\sin\theta}{\cos\theta} = \mu_s" variant="blue" />
           <FormulaBox latex="\Rightarrow \tan\theta_\text{opt} = \mu_s" variant="blue" />
           <FormulaBox latex="\boxed{\theta_\text{opt} = \arctan\mu_s}" variant="gold" />
         </Step>
-        <Step n={3} title="Maks-nevner og minimum kraft">
+        <Step n={4} title="Sjekk at det er maksimum, ikke minimum">
           <p>
-            Med <InlineLatex latex="\tan\theta=\mu_s" />: <InlineLatex latex="\sin\theta=\mu_s/\sqrt{1+\mu_s^2}" />, <InlineLatex latex="\cos\theta=1/\sqrt{1+\mu_s^2}" />.
+            Andre derivert: <InlineLatex latex="N''(\theta) = -\cos\theta - \mu_s\sin\theta < 0" /> for
+            <InlineLatex latex="\theta\in(0,\pi/2)" />, så ja — nevneren har <em>maksimum</em> her,
+            og <InlineLatex latex="F" /> dermed minimum. (Intuitivt: grenser fungerer også —
+            ved <InlineLatex latex="\theta=0" /> og <InlineLatex latex="\theta=\pi/2" /> er F stor,
+            så et indre kritisk punkt må være minimum.)
           </p>
+        </Step>
+        <Step n={5} title="Sett inn for å få Fmin">
+          <p>
+            Med <InlineLatex latex="\tan\theta=\mu_s" /> har vi en rettvinklet trekant med motstående
+            side <InlineLatex latex="\mu_s" /> og hosliggende 1, hypotenus <InlineLatex latex="\sqrt{1+\mu_s^2}" />.
+            Dermed:
+          </p>
+          <FormulaBox latex="\sin\theta=\dfrac{\mu_s}{\sqrt{1+\mu_s^2}},\quad \cos\theta=\dfrac{1}{\sqrt{1+\mu_s^2}}" variant="blue" />
           <FormulaBox latex="N_\text{maks} = \dfrac{1+\mu_s^2}{\sqrt{1+\mu_s^2}} = \sqrt{1+\mu_s^2}" variant="blue" />
           <FormulaBox latex="\boxed{F_\text{min} = \dfrac{\mu_s mg}{\sqrt{1+\mu_s^2}}}" variant="gold" />
         </Step>
         <p className="italic">
-          Eksempel: <InlineLatex latex="\mu_s=0{,}4" /> ⇒ <InlineLatex latex="\theta_\text{opt}\approx 21{,}8^\circ" />.
-          Å trekke i vinkel lønner seg fordi det reduserer normalkraften (og dermed friksjonen) samtidig som du bruker kraft i bevegelsesretningen.
+          <strong>Fysisk tolkning:</strong> Eksempel: <InlineLatex latex="\mu_s=0{,}4" /> ⇒
+          <InlineLatex latex="\theta_\text{opt}\approx 21{,}8^\circ" />, og <InlineLatex latex="F_\text{min}" />{" "}
+          er bare ca. 93 % av <InlineLatex latex="\mu_s mg" /> (kraften uten vinkel). Å trekke i
+          vinkel <em>lønner seg</em> fordi det reduserer normalkraften (og dermed friksjonen)
+          samtidig som du bruker kraft i bevegelsesretningen. Legg merke til den elegante
+          likheten med <InlineLatex latex="\tan\theta_c=\mu_s" /> fra oppgave 5.41 (kritisk vinkel
+          før glidning) — samme matematikk, samme friksjonsgeometri!
         </p>
       </div>
     ),
@@ -959,9 +1363,59 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="a = g(\sin\theta - \mu_k\cos\theta) = 9{,}80(\sin 15^\circ - 0{,}0500\cos 15^\circ)" variant="blue" />
-        <FormulaBox latex="a = 9{,}80(0{,}2588 - 0{,}0483) = 9{,}80\cdot 0{,}2105" variant="blue" />
-        <FormulaBox latex="\boxed{a \approx 2{,}06\ \text{m/s}^2\text{ ned skråplanet}}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Dette er det generelle skråplanproblemet med kinetisk friksjon.
+          Vi kombinerer to byggesteiner fra oppgave 5.8 og 5.25: skråplan-dekomponering av tyngden,
+          og kinetisk friksjon som <InlineLatex latex="f_k=\mu_k n" />. Den store gevinsten er at vi
+          roterer koordinatsystemet så x ligger langs planet — da er akselerasjonen rent langs
+          x-aksen (skiløperen forlater ikke overflaten). Siden bevegelsen er <em>ned</em> planet,
+          peker kinetisk friksjon <em>oppover langs planet</em> (motsatt bevegelse).
+        </p>
+        <Step n={1} title="Originalformler — Newton 2 i roterte akser">
+          <p>
+            La x være positivt ned langs planet, y vinkelrett ut. Dekomponer tyngden
+            <InlineLatex latex="\vec W = m\vec g" />:
+          </p>
+          <FormulaBox latex="W_x = +mg\sin\theta\ \text{(ned langs planet)}" variant="blue" />
+          <FormulaBox latex="W_y = -mg\cos\theta\ \text{(inn i planet)}" variant="blue" />
+          <p>Newton 2 langs hver akse:</p>
+          <FormulaBox latex="\sum F_y = 0: \quad n - mg\cos\theta = 0 \;\Longrightarrow\; n = mg\cos\theta" variant="blue" />
+          <FormulaBox latex="\sum F_x = ma: \quad mg\sin\theta - f_k = ma" variant="blue" />
+          <p>
+            <em>Hvorfor y=0?</em> Fordi skiløperen ikke hopper eller faller inn i snøen — bevegelsen
+            er langs flaten. <em>Hvorfor minus foran <InlineLatex latex="f_k" /></em>? Fordi bevegelsen
+            er ned (positiv x), så friksjon virker opp (negativ x).
+          </p>
+        </Step>
+        <Step n={2} title="Sett inn friksjonsuttrykket">
+          <p>
+            Bruk <InlineLatex latex="f_k=\mu_k n=\mu_k mg\cos\theta" /> (substituering av det vi
+            fant i y-ligningen):
+          </p>
+          <FormulaBox latex="mg\sin\theta - \mu_k mg\cos\theta = ma" variant="blue" />
+          <p>
+            <strong>Faktoriser</strong> ut <InlineLatex latex="mg" /> og del på <InlineLatex latex="m" />:
+          </p>
+          <FormulaBox latex="a = g(\sin\theta - \mu_k\cos\theta)" variant="blue" />
+          <p>
+            Massen faller ut — nok en gang — fordi både tyngden og tregheten skaleres med
+            <InlineLatex latex="m" />. Dette er grunnen til at skikjørere av alle størrelser
+            akselererer (omtrent) likt i samme løype.
+          </p>
+        </Step>
+        <Step n={3} title="Innsetting og svar">
+          <FormulaBox latex="a = g(\sin\theta - \mu_k\cos\theta) = 9{,}80(\sin 15^\circ - 0{,}0500\cos 15^\circ)" variant="blue" />
+          <FormulaBox latex="a = 9{,}80(0{,}2588 - 0{,}0483) = 9{,}80\cdot 0{,}2105" variant="blue" />
+          <FormulaBox latex="\boxed{a \approx 2{,}06\ \text{m/s}^2\text{ ned skråplanet}}" variant="gold" />
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Friksjonen reduserer akselerasjonen betydelig — uten
+          friksjon ville <InlineLatex latex="a=g\sin 15^\circ\approx 2{,}54\ \text{m/s}^2" />.
+          Kritisk vinkel for at skiløperen skal begynne å gli (terskel) er
+          <InlineLatex latex="\theta_c=\arctan 0{,}05\approx 2{,}9^\circ" /> — under dette står man
+          stille! Ved større vinkel (f.eks. en bratt alpin-bakke på 30°) blir akselerasjonen stor
+          og friksjonen ubetydelig.
+        </p>
       </div>
     ),
     summary: <p>Massen faller ut. Denne formelen dekker alle «skiløpere på skråplan»-oppgaver.</p>,
@@ -1013,15 +1467,76 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="n = mg\cos\theta + F\sin\theta" variant="blue" />
-        <FormulaBox latex="n = (12{,}0)(9{,}80)\cos 20^\circ + (150)\sin 20^\circ" variant="blue" />
-        <FormulaBox latex="n = 110{,}5 + 51{,}3 = 161{,}8\ \text{N}" variant="blue" />
-        <FormulaBox latex="f_k = \mu_k n = (0{,}200)(161{,}8) = 32{,}4\ \text{N}" variant="blue" />
-        <FormulaBox latex="F_\parallel = F\cos\theta - mg\sin\theta - f_k" variant="blue" />
-        <FormulaBox latex="F_\parallel = (150)(0{,}940) - (12{,}0)(9{,}80)(0{,}342) - 32{,}4" variant="blue" />
-        <FormulaBox latex="F_\parallel = 141 - 40{,}2 - 32{,}4 = 68{,}4\ \text{N}" variant="blue" />
-        <FormulaBox latex="a = F_\parallel/m = 68{,}4/12{,}0 = 5{,}70\ \text{m/s}^2" variant="blue" />
-        <FormulaBox latex="\boxed{a \approx 5{,}70\ \text{m/s}^2\text{ opp skråplanet}}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Subtilitet her — kraften <InlineLatex latex="F" /> er <em>horisontal</em>,
+          ikke parallelt med skråplanet. Den må derfor dekomponeres i skråplanets roterte koordinatsystem.
+          En horisontal vektor som peker mot skråplanet har både en komponent <em>opp langs planet</em>{" "}
+          (nyttig) og en komponent <em>inn mot planet</em> (unyttig, men med en bivirkning: den
+          <strong>øker normalkraften</strong> og dermed friksjonen). Dette er motsatt av 5.26 der
+          en vinklet oppadrettet kraft <em>reduserte</em> normalkraften.
+        </p>
+        <Step n={1} title="Velg akser og dekomponer alle krefter">
+          <p>
+            La x være positivt <em>opp langs planet</em>, y vinkelrett ut. Det er tre krefter:
+            tyngden <InlineLatex latex="\vec W" /> (rett ned), normalkraften <InlineLatex latex="\vec n" /> (ut fra planet),
+            og den påtrykte horisontalkraften <InlineLatex latex="\vec F" />. Tyngden er kjent fra
+            5.8:
+          </p>
+          <FormulaBox latex="W_x = -mg\sin\theta,\quad W_y = -mg\cos\theta" variant="blue" />
+          <p>
+            For horisontalkraften: tegn en liten hjelpe-trekant. Planet heller med vinkel <InlineLatex latex="\theta" />,
+            og <InlineLatex latex="\vec F" /> er horisontal. Vinkelen mellom <InlineLatex latex="\vec F" /> og
+            skråplanet (x-aksen) er <InlineLatex latex="\theta" />, og vinkelen mellom
+            <InlineLatex latex="\vec F" /> og den innadrettede y-retningen er <InlineLatex latex="90^\circ-\theta" />.
+            Slik blir dekomponeringen:
+          </p>
+          <FormulaBox latex="F_x = +F\cos\theta\ \text{(opp langs planet)}" variant="blue" />
+          <FormulaBox latex="F_y = -F\sin\theta\ \text{(inn mot planet)}" variant="blue" />
+          <p>
+            <strong>Fortegnsanalyse:</strong> Positiv <InlineLatex latex="F_x" /> fordi den dytter
+            kassen oppover planet. Negativ <InlineLatex latex="F_y" /> fordi den presser kassen
+            <em>mot</em> planet (gjør at planet må trykke hardere tilbake ⇒ større n).
+          </p>
+        </Step>
+        <Step n={2} title="Newton 2 vinkelrett (y) — finn n">
+          <p>
+            Ingen bevegelse inn/ut av planet ⇒ <InlineLatex latex="\sum F_y=0" />:
+          </p>
+          <FormulaBox latex="\sum F_y = 0: \quad n - mg\cos\theta - F\sin\theta = 0" variant="blue" />
+          <FormulaBox latex="n = mg\cos\theta + F\sin\theta" variant="blue" />
+          <FormulaBox latex="n = (12{,}0)(9{,}80)\cos 20^\circ + (150)\sin 20^\circ" variant="blue" />
+          <FormulaBox latex="n = 110{,}5 + 51{,}3 = 161{,}8\ \text{N}" variant="blue" />
+          <p>
+            Normalkraften er <em>større</em> enn <InlineLatex latex="mg\cos\theta=110{,}5\ \text{N}" />.
+            Kraften bidrar med ekstra 51,3 N inn mot planet.
+          </p>
+        </Step>
+        <Step n={3} title="Friksjonsformelen (originalformel)">
+          <p>
+            Kinetisk friksjon motvirker bevegelsen. Kassen går <em>oppover</em>, så friksjonen
+            peker <em>nedover langs planet</em> (negativ x):
+          </p>
+          <FormulaBox latex="f_k = \mu_k n = (0{,}200)(161{,}8) = 32{,}4\ \text{N}" variant="blue" />
+        </Step>
+        <Step n={4} title="Newton 2 langs planet (x) — finn a">
+          <p>
+            Originalformel: <InlineLatex latex="\sum F_x = ma" />. Sett inn alle x-komponenter:
+          </p>
+          <FormulaBox latex="F\cos\theta - mg\sin\theta - f_k = ma" variant="blue" />
+          <FormulaBox latex="F_\parallel = F\cos\theta - mg\sin\theta - f_k" variant="blue" />
+          <FormulaBox latex="F_\parallel = (150)(0{,}940) - (12{,}0)(9{,}80)(0{,}342) - 32{,}4" variant="blue" />
+          <FormulaBox latex="F_\parallel = 141 - 40{,}2 - 32{,}4 = 68{,}4\ \text{N}" variant="blue" />
+          <FormulaBox latex="a = F_\parallel/m = 68{,}4/12{,}0 = 5{,}70\ \text{m/s}^2" variant="blue" />
+          <FormulaBox latex="\boxed{a \approx 5{,}70\ \text{m/s}^2\text{ opp skråplanet}}" variant="gold" />
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Av de 141 N som <InlineLatex latex="F\cos\theta" /> bidrar
+          med langs planet, går 40,2 N til å overvinne tyngdekomponenten og 32,4 N til friksjon.
+          Bare 68,4 N står igjen til netto akselerasjon. Sammenlign med å <em>skyve parallelt</em>:
+          da ville <InlineLatex latex="n=mg\cos\theta" /> og friksjonen bare 22,1 N — og hele 150 N
+          ville gå langs planet. Horisontal dytt er altså <em>ineffektivt</em> på skråplan nettopp
+          pga. den ekstra normalkraften — dette er en helt generell innsikt.
+        </p>
       </div>
     ),
     summary: (
@@ -1071,8 +1586,61 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="\theta_c = \arctan\mu_s = \arctan 0{,}400" variant="blue" />
-        <FormulaBox latex="\boxed{\theta_c \approx 21{,}8^\circ}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Kassa ligger i ro — det er <em>statisk</em> friksjon som holder
+          den. Statisk friksjon er spesiell: den tar nøyaktig den verdien som trengs for å holde
+          likevekten, <em>opp til en maksimal verdi</em> <InlineLatex latex="f_{s,\text{maks}}=\mu_s n" />.
+          På den kritiske vinkelen er friksjonen på sitt <em>absolutte maksimum</em> og planet er
+          akkurat <em>på grensen</em> til å gi etter. Ved større vinkel er den maksimale
+          friksjonen utilstrekkelig til å motstå tyngdekomponenten, og kassa begynner å gli.
+        </p>
+        <Step n={1} title="Oppstill originalformlene — Newton 1 på roterte akser">
+          <p>
+            x langs planet (ned positiv), y vinkelrett. Tyngden har standardkomponentene (som i 5.8):
+          </p>
+          <FormulaBox latex="W_x = +mg\sin\theta,\quad W_y = -mg\cos\theta" variant="blue" />
+          <p>Likevekt i y-retning gir normalkraften:</p>
+          <FormulaBox latex="\sum F_y = 0: \quad n = mg\cos\theta" variant="blue" />
+          <p>
+            Likevekt i x-retning krever at statisk friksjon <InlineLatex latex="f_s" /> (som virker
+            oppover langs planet, motsatt tendensen til å gli ned) balanserer parallellkomponenten:
+          </p>
+          <FormulaBox latex="\sum F_x = 0: \quad mg\sin\theta - f_s = 0 \;\Longrightarrow\; f_s = mg\sin\theta" variant="blue" />
+        </Step>
+        <Step n={2} title="Terskelbetingelsen: fs = μs n">
+          <p>
+            På den kritiske vinkelen har friksjonen nådd sin maksimale verdi:
+          </p>
+          <FormulaBox latex="f_{s,\text{maks}} = \mu_s n = \mu_s mg\cos\theta" variant="blue" />
+          <p>
+            Sett lik parallellkomponenten fra x-ligningen (<em>dette er betingelsen for «akkurat
+            på grensen»</em>):
+          </p>
+          <FormulaBox latex="mg\sin\theta_c = \mu_s mg\cos\theta_c" variant="blue" />
+        </Step>
+        <Step n={3} title="Omform — massen forsvinner">
+          <p>
+            Del på <InlineLatex latex="mg\cos\theta_c" /> på begge sider:
+          </p>
+          <FormulaBox latex="\dfrac{\sin\theta_c}{\cos\theta_c} = \mu_s \;\Longleftrightarrow\; \tan\theta_c = \mu_s" variant="blue" />
+          <p>
+            Massen (og tyngdens størrelse!) stryker bort — den kritiske vinkelen avhenger bare av
+            friksjonskoeffisienten. Derfor er dette også en måle­teknikk for <InlineLatex latex="\mu_s" />.
+          </p>
+        </Step>
+        <Step n={4} title="Innsetting">
+          <FormulaBox latex="\theta_c = \arctan\mu_s = \arctan 0{,}400" variant="blue" />
+          <FormulaBox latex="\boxed{\theta_c \approx 21{,}8^\circ}" variant="gold" />
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Ved nøyaktig 21,8° henger kassa i likevekt — den står
+          stille, men den minste forstyrrelse (litt mer tilt, litt vibrasjon) vil få den til å
+          gli. Merk den slående likheten med 5.35: samme formel <InlineLatex latex="\tan\theta=\mu_s" />{" "}
+          gir både optimal dragvinkel og kritisk tiltvinkel. Dette er ingen tilfeldighet — begge
+          problemene har samme grunnleggende geometri mellom normalkraft, friksjon og
+          tyngdekomponenter. I klatring: en fjellvegg kan stå stabilt opptil denne vinkelen; over
+          det kreves eksterne krefter (f.eks. reb).
+        </p>
       </div>
     ),
     summary: (
@@ -1135,8 +1703,48 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="T = \dfrac{mv^2}{R} = \dfrac{(0{,}200)(4{,}00)^2}{0{,}500} = \dfrac{3{,}20}{0{,}500}" variant="blue" />
-        <FormulaBox latex="\boxed{T = 6{,}40\ \text{N}}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Dette er vår første direkte anvendelse av sentripetalbevegelse.
+          Vær oppmerksom: <em>sentripetalkraft er ikke en egen kraft</em>. Det er bare <em>navnet</em>
+          på <em>summen av alle reelle krefter</em> når den summen peker inn mot sirkelens sentrum.
+          Her er den reelle kraften snordraget. Jeg velger polare koordinater: radial-aksen (positiv
+          <em>inn mot senteret</em>) og tangensial-aksen (langs bevegelsen). Med konstant fart er
+          det ingen tangensial akselerasjon; all akselerasjon er radial innover, med størrelse
+          <InlineLatex latex="a_c=v^2/R" />.
+        </p>
+        <Step n={1} title="Hvorfor polare og ikke kartesiske?">
+          <p>
+            Hadde vi brukt kartesiske x og y, ville <em>både</em> x- og y-komponentene av
+            posisjonen (og dermed akselerasjonen) endre seg hele tiden — svært ubeleilig. I polare
+            er bildet mye enklere: nettokraft peker hele tiden innover med konstant størrelse,
+            og ingenting tangentielt.
+          </p>
+        </Step>
+        <Step n={2} title="Originalformel — Newton 2 i radial retning">
+          <FormulaBox latex="\sum F_\text{radial inn} = ma_c = \dfrac{mv^2}{R}" variant="blue" />
+          <p>
+            Eneste radiale kraft er snordraget (horisontal bane ⇒ tyngden spiller ingen radial
+            rolle, den er vertikal). Så:
+          </p>
+          <FormulaBox latex="T = \dfrac{mv^2}{R}" variant="blue" />
+          <p>
+            <em>Omforming</em> er trivielt her — selve ligningen er allerede løst for <InlineLatex latex="T" />.
+          </p>
+        </Step>
+        <Step n={3} title="Innsetting og enhetssjekk">
+          <FormulaBox latex="T = \dfrac{mv^2}{R} = \dfrac{(0{,}200)(4{,}00)^2}{0{,}500} = \dfrac{3{,}20}{0{,}500}" variant="blue" />
+          <FormulaBox latex="\boxed{T = 6{,}40\ \text{N}}" variant="gold" />
+          <p>
+            <strong>Enhet:</strong> <InlineLatex latex="\text{kg}\cdot(\text{m/s})^2/\text{m} = \text{kg}\cdot\text{m/s}^2 = \text{N}" /> ✓.
+          </p>
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Doble farten ⇒ fire ganger så stort drag (kvadratisk!).
+          Halver radius ⇒ dobbel kraft. Dette er grunnen til at en slyngel som roterer raskt med
+          kort snor føles «tyngre» enn en som roterer sakte på lang snor. For at ballen skulle
+          gå i perfekt horisontal sirkel måtte snoren egentlig vært tiltet litt oppover mot senteret
+          (konisk pendel — se 5.53), men her forenkler vi.
+        </p>
       </div>
     ),
     summary: (
@@ -1186,8 +1794,56 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-2">
-        <FormulaBox latex="v_\text{maks} = \sqrt{(0{,}650)(9{,}80)(45{,}0)} = \sqrt{286{,}65}" variant="blue" />
-        <FormulaBox latex="\boxed{v_\text{maks} \approx 16{,}9\ \text{m/s} \approx 61\ \text{km/t}}" variant="gold" />
+        <p>
+          <strong>Teori:</strong> Flat sving betyr at veien er horisontal (ingen dosering). De
+          eneste horisontale kreftene på bilen er statisk friksjon mellom dekk og vei. Merk:
+          her er det <em>statisk</em> friksjon, ikke kinetisk, fordi dekkene <em>ruller</em> uten
+          å skli — kontaktpunktet er momentant i ro mot asfalten. Vi bruker polare akser (radial
+          inn, tangensial). Sentripetalakselerasjon peker inn mot sirkelens senter, og den må
+          leveres av friksjonen. I yttergrensen — «maks fart før bilen sklir» — har friksjonen nådd
+          sin maksimale verdi <InlineLatex latex="\mu_s n" />.
+        </p>
+        <Step n={1} title="Newton 2 vertikalt — finn normalkraften">
+          <p>
+            Bilen hopper ikke; <InlineLatex latex="\sum F_y=0" />:
+          </p>
+          <FormulaBox latex="\sum F_y = 0: \quad n - mg = 0 \;\Longrightarrow\; n = mg" variant="blue" />
+        </Step>
+        <Step n={2} title="Newton 2 radialt — originalformel">
+          <p>
+            Eneste radiale kraft er friksjonen (innover mot sirkelens senter). Sentripetalbetingelsen:
+          </p>
+          <FormulaBox latex="\sum F_\text{radial} = \dfrac{mv^2}{R}: \quad f_s = \dfrac{mv^2}{R}" variant="blue" />
+          <p>
+            Friksjonen er begrenset oppover: <InlineLatex latex="f_s\leq\mu_s n=\mu_s mg" />. Ved
+            maks fart er denne begrensningen akkurat truffet:
+          </p>
+          <FormulaBox latex="\mu_s mg = \dfrac{mv^2_\text{maks}}{R}" variant="blue" />
+        </Step>
+        <Step n={3} title="Omform — løs for v">
+          <p>
+            Massen stryker bort fra begge sider (samme grunn som alltid: tyngden setter
+            normalkraften, og normalkraften skaleres med m; det høyre leddet har også m i teller):
+          </p>
+          <FormulaBox latex="\mu_s g = \dfrac{v^2_\text{maks}}{R} \;\Longrightarrow\; v^2_\text{maks} = \mu_s gR" variant="blue" />
+          <FormulaBox latex="v_\text{maks} = \sqrt{\mu_s gR}" variant="blue" />
+        </Step>
+        <Step n={4} title="Innsetting">
+          <FormulaBox latex="v_\text{maks} = \sqrt{(0{,}650)(9{,}80)(45{,}0)} = \sqrt{286{,}65}" variant="blue" />
+          <FormulaBox latex="\boxed{v_\text{maks} \approx 16{,}9\ \text{m/s} \approx 61\ \text{km/t}}" variant="gold" />
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="\sqrt{1\cdot(\text{m/s}^2)\cdot\text{m}}=\sqrt{\text{m}^2/\text{s}^2}=\text{m/s}" /> ✓.
+          </p>
+        </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Massen forsvinner — en truck og en liten sportsbil
+          har samme maks fart i samme sving (gitt samme <InlineLatex latex="\mu_s" />). Våt vei
+          (<InlineLatex latex="\mu_s=0{,}3" /> istedenfor 0,65) halverer farten omtrent. Doble
+          radius gir <InlineLatex latex="\sqrt 2\approx 1{,}41" /> ganger mer fart — derfor er
+          motorvei-avkjørsler designet med større radius enn bygate-svinger. Vær også oppmerksom
+          på at <em>om bilen skli</em> (kinetisk friksjon), reduseres koeffisienten betraktelig —
+          derfor er det livsviktig å ikke bråbremse i sving.
+        </p>
       </div>
     ),
     summary: (

@@ -113,17 +113,57 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint", content: <p><InlineLatex latex="10^2=6^2+8^2+\ldots" /> — legg merke til at 6,8,10 er pytagoreisk.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="Sett opp likning">
-          <FormulaBox latex="10{,}0^2=6{,}00^2+8{,}00^2+2\cdot 6{,}00\cdot 8{,}00\cos\theta" />
-          <FormulaBox latex="100=36+64+96\cos\theta\;\Rightarrow\;96\cos\theta=0" />
-        </Step>
-        <Step n={2} title="Løs for vinkelen">
-          <FormulaBox variant="gold" latex="\cos\theta=0\;\Rightarrow\;\boxed{\;\theta=90^\circ\;}" />
-          <p className="italic text-[var(--muted)]">
-            Kreftene står vinkelrett på hverandre — og danner en 6-8-10-triangel.
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Krefter er vektorer — ikke tall">
+          <p>
+            Newtons 1. lov sier at et legeme i hvile forblir i hvile hvis <InlineLatex latex="\sum\vec F=0" />.
+            For å avgjøre om to krefter kansellerer, holder det ikke å se på størrelsene — vi må ta vektorsummen.
+            Når to vektorer <InlineLatex latex="\vec F_1,\vec F_2" /> har samme angrepspunkt og vinkel
+            <InlineLatex latex="\theta" /> mellom seg, gir parallelogram-regelen resultanten.
           </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor trenger vi en formel i det hele tatt?</strong> Vi kan ikke bare legge sammen 6 + 8 og få 14,
+          for da har vi <em>antatt</em> at kreftene peker samme vei. Vi kan heller ikke gjøre 8 − 6 = 2, for da har vi antatt
+          motsatte retninger. Vi trenger cosinussetningen, som er gyldig for en vilkårlig vinkel.
+        </p>
+        <p>
+          <strong>Hvor kommer formelen fra?</strong> Fra prikkproduktet:
+          <InlineLatex latex="\;|\vec a+\vec b|^2=(\vec a+\vec b)\cdot(\vec a+\vec b)=|\vec a|^2+|\vec b|^2+2\,\vec a\cdot\vec b" />,
+          der <InlineLatex latex="\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta" />.
+          Legg merke til pluss-tegnet: ved <InlineLatex latex="\theta=0" /> (samme retning)
+          er <InlineLatex latex="\cos\theta=1" /> og resultanten er maks (<InlineLatex latex="F_1+F_2" />). Ved
+          <InlineLatex latex="\theta=180^\circ" /> er <InlineLatex latex="\cos\theta=-1" /> og resultanten er min
+          (<InlineLatex latex="|F_1-F_2|" />).
+        </p>
+        <p className="font-semibold">Originalformel (cosinussetning for vektorsum):</p>
+        <FormulaBox variant="blue" latex="|\vec F_1+\vec F_2|^2=F_1^2+F_2^2+2F_1F_2\cos\theta" />
+        <Step n={1} title="Algebraisk omforming: løs for cos θ">
+          <p>
+            Vi kjenner <InlineLatex latex="F_1,F_2" /> og <InlineLatex latex="R=|\vec F_1+\vec F_2|" />, men ikke
+            <InlineLatex latex="\theta" />. Isoler derfor <InlineLatex latex="\cos\theta" />:
+          </p>
+          <FormulaBox variant="blue" latex="\cos\theta=\dfrac{R^2-F_1^2-F_2^2}{2F_1F_2}" />
         </Step>
+        <Step n={2} title="Steg-for-steg innsetting">
+          <FormulaBox variant="blue" latex="10{,}0^2=6{,}00^2+8{,}00^2+2\cdot 6{,}00\cdot 8{,}00\cos\theta" />
+          <FormulaBox variant="blue" latex="100=36+64+96\cos\theta\;\Rightarrow\;96\cos\theta=0" />
+          <p>Telleren blir eksakt null fordi 6–8–10 er en pytagoreisk trippel.</p>
+        </Step>
+        <Step n={3} title="Løs for vinkelen">
+          <FormulaBox variant="gold" latex="\cos\theta=0\;\Rightarrow\;\boxed{\;\theta=90^\circ\;}" />
+        </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> Alle ledd er i N², så <InlineLatex latex="\cos\theta" /> er dimensjonsløst som seg hør og bør.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Ved <InlineLatex latex="\theta=0^\circ" /> ville resultanten blitt
+          <InlineLatex latex="\;F_1+F_2=14\;\text{N}" />, og ved <InlineLatex latex="180^\circ" /> ville den blitt
+          <InlineLatex latex="\;|F_1-F_2|=2\;\text{N}" />. 10 N ligger midt imellom — konsistent med en rett vinkel.
+          Geometrisk danner de to kreftene katetene i en 6-8-10-rettvinklet trekant, og resultanten er hypotenusen.
+          <strong> Vanlig feil:</strong> å bruke cosinussetningen fra trekantgeometri (med minus foran cos) — den gir vinkelen
+          <em>mellom hypotenusen og en katet</em>, ikke mellom vektorene.
+        </p>
       </div>
     ),
     summary: (
@@ -168,17 +208,51 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint", content: <p><InlineLatex latex="F_2" /> peker mot vest: x-komponenten blir negativ.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="Komponenter">
-          <FormulaBox latex="F_{1x}=9{,}00\cos 60^\circ=4{,}50\;\text{N},\;F_{1y}=9{,}00\sin 60^\circ\approx 7{,}79\;\text{N}" />
-          <FormulaBox latex="F_{2x}=-6{,}00\cos 53^\circ\approx -3{,}61\;\text{N},\;F_{2y}=6{,}00\sin 53^\circ\approx 4{,}79\;\text{N}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Komponentmetoden">
+          <p>
+            Vektoraddisjon er definert komponentvis: hvis <InlineLatex latex="\vec F=F_x\hat i+F_y\hat j" />,
+            er <InlineLatex latex="\;\vec R=\vec F_1+\vec F_2=(F_{1x}+F_{2x})\hat i+(F_{1y}+F_{2y})\hat j" />.
+            Dette er mye enklere enn cosinussetningen når vi har flere vektorer, og det skalerer umiddelbart til 3D.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor komponentmetoden, ikke cosinussetningen?</strong> Cosinussetningen gir deg bare størrelsen
+          av summen, og blir rotete med tre eller flere vektorer. Komponentmetoden gir både størrelse <em>og</em> retning
+          direkte, og fungerer uansett hvor mange vektorer du adderer.
+        </p>
+        <p className="font-semibold">Originalformel (projeksjon):</p>
+        <FormulaBox variant="blue" latex="F_x=F\cos\theta,\quad F_y=F\sin\theta" />
+        <p>
+          <strong>Koordinatvalg og fortegn:</strong> Vi legger +x langs øst, +y langs nord.
+          «60° nord for øst» betyr 60° mot klokka fra +x, altså standardvinkel <InlineLatex latex="\theta_1=60^\circ" />.
+          «53° nord for vest» betyr 53° nord, men fra <em>vest-aksen</em>. Retningen er 180° − 53° = 127° fra +x. Her velger vi
+          en enklere vei: gjenkjenn at x-komponenten peker <em>vestover</em> (derfor negativ), mens y-komponenten peker <em>nordover</em> (positiv).
+        </p>
+        <Step n={1} title="(a) Dekomponer hver kraft">
+          <p>For <InlineLatex latex="\vec F_1" /> rett fra formelen <InlineLatex latex="F_x=F\cos\theta,\;F_y=F\sin\theta" />:</p>
+          <FormulaBox variant="blue" latex="F_{1x}=9{,}00\cos 60^\circ=4{,}50\;\text{N},\;F_{1y}=9{,}00\sin 60^\circ\approx 7{,}79\;\text{N}" />
+          <p>For <InlineLatex latex="\vec F_2" /> peker vektoren opp-og-vestover. Bruk 53° fra vest-aksen og sett inn minus på x:</p>
+          <FormulaBox variant="blue" latex="F_{2x}=-6{,}00\cos 53^\circ\approx -3{,}61\;\text{N},\;F_{2y}=6{,}00\sin 53^\circ\approx 4{,}79\;\text{N}" />
         </Step>
-        <Step n={2} title="Sum">
-          <FormulaBox latex="R_x=4{,}50-3{,}61=0{,}89\;\text{N},\;R_y=7{,}79+4{,}79=12{,}58\;\text{N}" />
+        <Step n={2} title="Summer komponentvis">
+          <FormulaBox variant="blue" latex="R_x=\sum F_{ix}=4{,}50+(-3{,}61)=0{,}89\;\text{N}" />
+          <FormulaBox variant="blue" latex="R_y=\sum F_{iy}=7{,}79+4{,}79=12{,}58\;\text{N}" />
         </Step>
-        <Step n={3} title="Størrelse">
+        <Step n={3} title="(b) Størrelsen av resultanten">
+          <p>Størrelsen er lengden av vektoren, fra Pytagoras:</p>
+          <FormulaBox variant="blue" latex="|\vec R|=\sqrt{R_x^2+R_y^2}" />
           <FormulaBox variant="gold" latex="|\vec R|=\sqrt{0{,}89^2+12{,}58^2}\approx 12{,}6\;\text{N}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\sqrt{\text{N}^2}=\text{N}" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> <InlineLatex latex="R_y\gg R_x" /> betyr at resultanten peker nesten rett nord —
+          konsistent med at begge kreftene har store nord-komponenter, mens deres øst-vest-komponenter nesten kansellerer.
+          <strong> Vanlig feil:</strong> å glemme minustegnet på x-komponenten når vektoren peker mot vest. Tegn alltid et lite
+          koordinatkryss og se hvilken vei vektoren peker før du bestemmer fortegn.
+        </p>
       </div>
     ),
     summary: (
@@ -236,13 +310,53 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint", content: <p>cos 36° ≈ 0,809, sin 36° ≈ 0,588.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="Horisontal komponent">
-          <FormulaBox latex="F_x=80{,}0\cos 36^\circ\approx 64{,}7\;\text{N (forover)}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Projeksjon av vektor på akser">
+          <p>
+            Enhver kraftvektor kan spaltes i komponenter langs koordinataksene. Dette er essensielt i Newton 2,
+            fordi loven <InlineLatex latex="\sum\vec F=m\vec a" /> må holde <em>langs hver akse separat</em>.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor dekomponere?</strong> Fordi Newtons 2. lov er en vektorligning, og den gir oss
+          to skalar-ligninger i 2D (x og y). Hvis kraften hadde vært horisontal, ville hele kraften vært <InlineLatex latex="F_x" />.
+          Men siden den peker skrått, bidrar den både horisontalt og vertikalt — og vi må dele den opp for å kunne arbeide med hver retning.
+        </p>
+        <p className="font-semibold">Originalformel (projeksjon):</p>
+        <FormulaBox variant="blue" latex="F_x=F\cos\theta,\quad F_y=F\sin\theta" />
+        <p>
+          <strong>Hvor kommer formelen fra?</strong> Tenk på en rettvinklet trekant der kraftvektoren er hypotenusen.
+          Cosinus gir nabokateten (langs x), sinus motstående katet (langs y). Fortegnet må vi selv tilføre
+          basert på retningen.
+        </p>
+        <p>
+          <strong>Koordinatsystem:</strong> Vi legger +x langs bevegelsesretningen (forover), +y oppover. Kraften peker nedover-forover,
+          så x-komponenten er positiv, y-komponenten er negativ.
+        </p>
+        <Step n={1} title="(a) Horisontal komponent">
+          <p>Kraften har positiv x-komponent:</p>
+          <FormulaBox variant="blue" latex="F_x=F\cos\theta=80{,}0\cdot\cos 36^\circ" />
+          <FormulaBox variant="gold" latex="F_x=80{,}0\cos 36^\circ\approx 64{,}7\;\text{N (forover)}" />
         </Step>
-        <Step n={2} title="Vertikal komponent">
+        <Step n={2} title="(b) Vertikal komponent">
+          <p>Siden hånden skyver <em>nedover</em> (mens +y er oppover), setter vi minustegn:</p>
+          <FormulaBox variant="blue" latex="F_y=-F\sin\theta=-80{,}0\sin 36^\circ" />
           <FormulaBox variant="gold" latex="F_y=-80{,}0\sin 36^\circ\approx -47{,}0\;\text{N (nedover)}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> Kraft · (dimensjonsløs cosinus/sinus) = Kraft. Begge svar i N. ✓
+        </p>
+        <p>
+          <strong>Sjekk med Pytagoras:</strong> <InlineLatex latex="\sqrt{64{,}7^2+47{,}0^2}\approx\sqrt{4186+2209}=\sqrt{6395}\approx 80{,}0\;\text{N}" /> — som forventet.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Den nedadrettede komponenten øker normalkraften (bakken presser mer tilbake),
+          som igjen øker friksjonen (<InlineLatex latex="f_k=\mu_k N" />). Grensetilfeller: ved <InlineLatex latex="\theta=0^\circ" />
+          (rent horisontalt dytt) blir <InlineLatex latex="F_x=80,\;F_y=0" /> — all kraft går til bevegelse. Ved
+          <InlineLatex latex="\theta=90^\circ" /> blir <InlineLatex latex="F_x=0" /> — klipperen står stille.
+          Dette er hvorfor det er lettere å <em>dra</em> enn å <em>skyve</em> en gressklipper.
+          <strong> Vanlig feil:</strong> å bytte cos og sin fordi man glemmer hvilken vinkel vektoren danner med hvilken akse.
+        </p>
       </div>
     ),
     summary: (
@@ -289,15 +403,56 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p><InlineLatex latex="\vec F_3=-(\vec F_1+\vec F_2)" />.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="Sum av F1 og F2">
-          <FormulaBox latex="R_x=100+(-40)=60\;\text{N},\;R_y=0+69{,}3=69{,}3\;\text{N}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Newtons 1. lov: likevekt i 2D">
+          <p>
+            Newtons 1. lov: et legeme uten netto kraft forblir i hvile eller i konstant hastighet.
+            For en partikkel i hvile må derfor kraftsummen være null. I 2D gir det <em>to</em> separate skalarligninger,
+            én for hver akse.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvilken formel, og hvorfor?</strong> Vi bruker Newtons 1. lov i komponentform. Vi kunne teoretisk regnet
+          grafisk med parallelogramregelen, men komponentmetoden gir direkte både størrelse og retning, og er mer presis.
+        </p>
+        <p className="font-semibold">Originalformel (likevektsbetingelsen):</p>
+        <FormulaBox variant="blue" latex="\sum \vec F=0\;\Leftrightarrow\;\sum F_x=0\;\text{og}\;\sum F_y=0" />
+        <p>
+          <strong>Algebraisk omforming:</strong> Hvis to krefter er kjent og én er ukjent, løses
+          <InlineLatex latex="\;\vec F_1+\vec F_2+\vec F_3=0" /> for <InlineLatex latex="\vec F_3" /> ved å
+          flytte over: <InlineLatex latex="\;\vec F_3=-(\vec F_1+\vec F_2)" />.
+        </p>
+        <Step n={1} title="(a) Dekomponer F₁ og F₂">
+          <p>La +x peke øst, +y peke nord. <InlineLatex latex="\vec F_1" /> ligger helt langs +x:</p>
+          <FormulaBox variant="blue" latex="F_{1x}=100\;\text{N},\;F_{1y}=0" />
+          <p>For <InlineLatex latex="\vec F_2" /> ved 120° fra +x bruker vi <InlineLatex latex="F_x=F\cos\theta,\;F_y=F\sin\theta" />:</p>
+          <FormulaBox variant="blue" latex="F_{2x}=80\cos 120^\circ=-40\;\text{N},\;F_{2y}=80\sin 120^\circ\approx 69{,}3\;\text{N}" />
         </Step>
-        <Step n={2} title="F3 motvirker summen">
-          <FormulaBox latex="F_{3x}=-60\;\text{N},\;F_{3y}=-69{,}3\;\text{N}" />
-          <FormulaBox latex="|\vec F_3|=\sqrt{60^2+69{,}3^2}\approx 91{,}6\;\text{N}" />
+        <Step n={2} title="Summer til netto R">
+          <FormulaBox variant="blue" latex="R_x=F_{1x}+F_{2x}=100-40=60\;\text{N}" />
+          <FormulaBox variant="blue" latex="R_y=F_{1y}+F_{2y}=0+69{,}3=69{,}3\;\text{N}" />
+        </Step>
+        <Step n={3} title="(b) F₃ = −R">
+          <p>For at ringen skal være i likevekt må <InlineLatex latex="\vec F_3=-\vec R" />:</p>
+          <FormulaBox variant="blue" latex="F_{3x}=-60\;\text{N},\;F_{3y}=-69{,}3\;\text{N}" />
+          <FormulaBox variant="blue" latex="|\vec F_3|=\sqrt{F_{3x}^2+F_{3y}^2}=\sqrt{60^2+69{,}3^2}\approx 91{,}6\;\text{N}" />
+          <p>
+            <strong>Fortegnsanalyse for retningen:</strong> Begge komponenter er negative, så vektoren ligger i 3. kvadrant
+            (mellom 180° og 270°). Referansevinkelen er <InlineLatex latex="\alpha=\arctan(69{,}3/60)\approx 49{,}1^\circ" />,
+            og vi legger til 180°:
+          </p>
           <FormulaBox variant="gold" latex="\theta=\arctan\!\left(\dfrac{-69{,}3}{-60}\right)=180^\circ+49{,}1^\circ\approx 229^\circ" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> Alle komponenter i N, så <InlineLatex latex="\sqrt{N^2}=N" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> <InlineLatex latex="|\vec F_3|\approx 92\;\text{N}" /> er mindre enn 100 + 80 = 180 N
+          — riktig, fordi <InlineLatex latex="\vec F_1" /> og <InlineLatex latex="\vec F_2" /> delvis motvirker hverandre (F₂ har negativ x-komponent).
+          Setter vi inn alle tre, summerer hver komponent til null.
+          <strong> Vanlig feil:</strong> å stole blindt på arctan (som gir tall mellom −90° og 90°) uten å sjekke hvilken kvadrant
+          vektoren faktisk ligger i.
+        </p>
       </div>
     ),
     summary: (
@@ -342,14 +497,49 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint", content: <p>Resultatet blir stort — elektroner er ekstremt lette.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="Akselerasjon">
-          <FormulaBox latex="a=\dfrac{F}{m}=\dfrac{1{,}60\times 10^{-15}}{9{,}11\times 10^{-31}}\approx 1{,}76\times 10^{15}\;\text{m/s}^2" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Newtons 2. lov og konstant akselerasjon">
+          <p>
+            Newtons 2. lov binder <em>årsak</em> (nettkraft) til <em>virkning</em> (akselerasjon) via masse.
+            Når nettkraften er konstant, blir akselerasjonen også konstant — og da gjelder de kjente
+            kinematikkformlene (<InlineLatex latex="v=v_0+at" /> osv.).
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor Newton 2 her, og hvorfor kinematikk?</strong> Vi har to ukjente: <InlineLatex latex="a" /> og
+          <InlineLatex latex="v" />. Vi har direkte informasjon om kraft → bruk Newton 2 for akselerasjon. For fart etter
+          gitt tid trenger vi kinematikk — siden akselerasjonen er konstant (konstant kraft på konstant masse), er
+          <InlineLatex latex="v=v_0+at" /> riktig form.
+        </p>
+        <p className="font-semibold">Originalformler:</p>
+        <FormulaBox variant="blue" latex="\sum \vec F=m\vec a" />
+        <FormulaBox variant="blue" latex="v=v_0+at" />
+        <p>
+          <strong>Algebraisk omforming av Newton 2:</strong> Med én kraft langs én akse er
+          <InlineLatex latex="\;\sum F=F" />, og vi isolerer <InlineLatex latex="a" />:
+        </p>
+        <FormulaBox variant="blue" latex="a=\dfrac{\sum F}{m}=\dfrac{F}{m}" />
+        <Step n={1} title="(a) Akselerasjonen">
+          <FormulaBox variant="blue" latex="a=\dfrac{F}{m}=\dfrac{1{,}60\times 10^{-15}}{9{,}11\times 10^{-31}}\approx 1{,}76\times 10^{15}\;\text{m/s}^2" />
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="\dfrac{\text{N}}{\text{kg}}=\dfrac{\text{kg}\cdot\text{m/s}^2}{\text{kg}}=\text{m/s}^2" /> ✓.
+          </p>
         </Step>
-        <Step n={2} title="Sluttfart">
+        <Step n={2} title="(b) Sluttfart etter 5,00 ns">
+          <p>Elektronet starter fra hvile, så <InlineLatex latex="v_0=0" />, og <InlineLatex latex="v=at" />:</p>
+          <FormulaBox variant="blue" latex="v=at" />
           <FormulaBox variant="gold" latex="v=at=(1{,}76\times 10^{15})(5{,}00\times 10^{-9})\approx 8{,}78\times 10^{6}\;\text{m/s}" />
-          <p className="italic text-[var(--muted)]">Omtrent 3 % av lysets hastighet på bare 5 ns.</p>
+          <p>
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="(\text{m/s}^2)(\text{s})=\text{m/s}" /> ✓.
+          </p>
         </Step>
+        <p>
+          <strong>Fysisk tolkning:</strong> Omtrent 3 % av lysets hastighet på bare 5 ns. Enorm akselerasjon er mulig
+          fordi elektronet er svært lett — en liten kraft fordelt på en bitte liten masse gir stor <InlineLatex latex="a" />.
+          Dette er prinsippet bak CRT-skjermer, elektronmikroskoper og partikkelakseleratorer.
+          <strong> Realismesjekk:</strong> Ved 3 % av <InlineLatex latex="c" /> er klassisk mekanikk fortsatt en god
+          tilnærming (relativistiske korreksjoner &lt; 0,05 %).
+        </p>
       </div>
     ),
     summary: (
@@ -390,13 +580,44 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [{ label: "Hint", content: <p>Regn først netto kraft langs x.</p> }],
     solution: (
-      <div>
-        <Step n={1} title="Nettkraft">
-          <FormulaBox latex="F_\text{net}=5{,}00-3{,}00=2{,}00\;\text{N}\;(+x)" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Newton 2 gjelder nettkraften">
+          <p>
+            Newtons 2. lov sier at <em>summen</em> av alle krefter (nettkraften) er proporsjonal med akselerasjonen — ikke
+            hver enkelt kraft. I 1D blir summen algebraisk, med fortegn fra kraftens retning langs en valgt akse.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvilken formel, og hvorfor?</strong> Vi bruker Newton 2 komponentvis langs x, fordi kreftene er parallelle
+          (horisontale) men peker motsatt. Vertikalt virker tyngden <InlineLatex latex="mg" /> og normalkraften <InlineLatex latex="N" />,
+          men de kansellerer (friksjonsfri is, horisontalt plan), så vi trenger ikke regne på y-aksen.
+        </p>
+        <p className="font-semibold">Originalformel (Newton 2, x-komponent):</p>
+        <FormulaBox variant="blue" latex="\sum F_x=m a_x" />
+        <p>
+          <strong>Fortegnsanalyse:</strong> La +x peke mot høyre (standardvalg). Da får 5,00 N positivt fortegn og
+          3,00 N negativt fortegn — vi oversetter retning til fortegn én gang for alle, og gjør deretter vanlig addisjon.
+        </p>
+        <Step n={1} title="(a) Nettkraft langs x">
+          <FormulaBox variant="blue" latex="F_\text{net}=F_1+F_2=5{,}00+(-3{,}00)=2{,}00\;\text{N}\;(+x)" />
         </Step>
-        <Step n={2} title="Akselerasjon">
+        <Step n={2} title="Løs Newton 2 for a">
+          <p>Algebraisk omforming:</p>
+          <FormulaBox variant="blue" latex="a=\dfrac{F_\text{net}}{m}" />
+        </Step>
+        <Step n={3} title="(b) Akselerasjon">
           <FormulaBox variant="gold" latex="a=\dfrac{F_\text{net}}{m}=\dfrac{2{,}00}{0{,}160}=12{,}5\;\text{m/s}^2\;(+x)" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\dfrac{\text{N}}{\text{kg}}=\text{m/s}^2" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Pucken akselererer mot høyre — konsistent med at den største kraften drar mot høyre.
+          Hvis <InlineLatex latex="F_1=F_2" /> ville <InlineLatex latex="a=0" /> selv om kreftene virker — Newton 1 i praksis.
+          Dette er et eksempel på at <em>netto</em> kraft, ikke antall krefter, avgjør bevegelsen.
+          <strong> Vanlig feil:</strong> å regne ut <InlineLatex latex="a_1=F_1/m" /> og <InlineLatex latex="a_2=F_2/m" /> separat og så summere —
+          det fungerer her (lineariteten hjelper), men konseptuelt er det feil. Alltid sum først, så del på m.
+        </p>
       </div>
     ),
     summary: (
@@ -438,13 +659,47 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [{ label: "Hint", content: <p><InlineLatex latex="a=(5-0)/2=2{,}5\;\text{m/s}^2" />.</p> }],
     solution: (
-      <div>
-        <Step n={1} title="Akselerasjon">
-          <FormulaBox latex="a=\dfrac{5{,}00}{2{,}00}=2{,}50\;\text{m/s}^2" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Kinematikk + Newton 2">
+          <p>
+            Newton 2 kobler kraft og akselerasjon, mens kinematikken kobler akselerasjon til fart og posisjon.
+            Her kjenner vi fartsendringen, men ikke direkte kraften — så vi går via akselerasjon.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor to formler?</strong> Vi har informasjon om fart og tid, men ikke om kraft direkte. Derfor:
+          (1) bruk kinematikk <InlineLatex latex="v=v_0+at" /> for å finne <InlineLatex latex="a" />, (2) bruk Newton 2 for å
+          oversette <InlineLatex latex="a" /> til kraft. Denne «kinematikk → Newton 2»-strategien dukker opp overalt i kapittel 4–5.
+        </p>
+        <p className="font-semibold">Originalformler:</p>
+        <FormulaBox variant="blue" latex="v=v_0+at\qquad\text{(kinematikk, konstant a)}" />
+        <FormulaBox variant="blue" latex="\sum F_x=m a_x\qquad\text{(Newton 2)}" />
+        <p>
+          <strong>Frilegemediagram:</strong> kassa har tauspenningen <InlineLatex latex="T" /> fremover, tyngden
+          <InlineLatex latex="mg" /> nedover, normalkraften <InlineLatex latex="N" /> oppover. Siden bevegelsen er horisontal og
+          isen er friksjonsfri, kansellerer <InlineLatex latex="N" /> og <InlineLatex latex="mg" />. Horisontalt virker kun <InlineLatex latex="T" />,
+          så <InlineLatex latex="T" /> <em>er</em> nettkraften.
+        </p>
+        <Step n={1} title="Algebraisk omforming av kinematikken">
+          <p>Isoler akselerasjonen:</p>
+          <FormulaBox variant="blue" latex="a=\dfrac{v-v_0}{t}" />
         </Step>
-        <Step n={2} title="Taukraft">
+        <Step n={2} title="(a) Sett inn tall for a">
+          <FormulaBox variant="blue" latex="a=\dfrac{5{,}00-0}{2{,}00}=2{,}50\;\text{m/s}^2" />
+        </Step>
+        <Step n={3} title="(b) Newton 2 gir T">
+          <FormulaBox variant="blue" latex="T=ma" />
           <FormulaBox variant="gold" latex="T=ma=25\cdot 2{,}50=62{,}5\;\text{N}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{kg}\cdot\text{m/s}^2=\text{N}" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> 62,5 N er omtrent vekten av 6,4 kg — en moderat drakraft for en 25 kg kasse.
+          Hadde det vært friksjon, måtte <InlineLatex latex="T" /> vært større for å gi samme akselerasjon (<InlineLatex latex="T-f_k=ma" />).
+          <strong> Vanlig feil:</strong> å regne <InlineLatex latex="T=mg" /> — det ville vært riktig bare hvis kassa hang
+          i ro vertikalt, ikke når den akselereres horisontalt.
+        </p>
       </div>
     ),
     summary: (
@@ -485,13 +740,48 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [{ label: "Hint", content: <p><InlineLatex latex="0=25^2+2a(60)" /> gir <InlineLatex latex="a=-625/120\approx -5{,}21\;\text{m/s}^2" />.</p> }],
     solution: (
-      <div>
-        <Step n={1} title="Akselerasjon">
-          <FormulaBox latex="a=\dfrac{v^2-v_0^2}{2\Delta x}=\dfrac{0-625}{120}\approx -5{,}21\;\text{m/s}^2" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Tidløs kinematikk + Newton 2">
+          <p>
+            Når vi har informasjon om fart og distanse — men ikke tid — er den tidløse kinematikkformelen
+            <InlineLatex latex="\;v^2=v_0^2+2a\Delta x" /> redningen. Den utledes ved å eliminere <InlineLatex latex="t" /> mellom
+            <InlineLatex latex="v=v_0+at" /> og <InlineLatex latex="\Delta x=v_0t+\tfrac{1}{2}at^2" />.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor denne formelen og ikke <InlineLatex latex="a=\Delta v/\Delta t" />?</strong> Fordi vi <em>ikke</em> har tid.
+          Vi har fart og strekning. Å bruke en formel som inneholder <InlineLatex latex="t" /> ville krevd et ekstra ledd
+          (finne tiden først). Den tidløse formelen er mer direkte.
+        </p>
+        <p className="font-semibold">Originalformler:</p>
+        <FormulaBox variant="blue" latex="v^2=v_0^2+2a\Delta x" />
+        <FormulaBox variant="blue" latex="\sum F=ma" />
+        <Step n={1} title="Algebraisk omforming: løs for a">
+          <p>Trekk <InlineLatex latex="v_0^2" /> over og del på <InlineLatex latex="2\Delta x" />:</p>
+          <FormulaBox variant="blue" latex="a=\dfrac{v^2-v_0^2}{2\Delta x}" />
         </Step>
-        <Step n={2} title="Kraft">
+        <Step n={2} title="(a) Sett inn tall">
+          <FormulaBox variant="blue" latex="a=\dfrac{0-25{,}0^2}{2\cdot 60{,}0}=\dfrac{-625}{120}\approx -5{,}21\;\text{m/s}^2" />
+          <p>
+            <strong>Fortegnsanalyse:</strong> Vi la +x i bevegelsesretningen, så <InlineLatex latex="v_0=+25" />, <InlineLatex latex="v=0" />.
+            Minustegnet bekrefter at akselerasjonen peker <em>mot</em> bevegelsen — altså retardasjon.
+            «Retardasjon» er ikke et eget fysikkbegrep; det er bare akselerasjon med motsatt fortegn av farten.
+          </p>
+        </Step>
+        <Step n={3} title="(b) Bremsekraft via Newton 2">
+          <FormulaBox variant="blue" latex="|F|=m|a|" />
           <FormulaBox variant="gold" latex="|F|=m|a|=1200\cdot 5{,}21\approx 6250\;\text{N}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{kg}\cdot\text{m/s}^2=\text{N}" /> ✓.
+        </p>
+        <p>
+          <strong>Realismesjekk:</strong> 6250 N ≈ 640 kgf, omtrent halvparten av bilens vekt (11,8 kN) — fornuftig for en hard,
+          men ikke nødbremsing. Akselerasjonen er <InlineLatex latex="|a|/g\approx 0{,}53g" />, innenfor hva gode bildekk kan gi
+          på tørt asfalt. Hadde bilen stoppet på halve strekningen (30 m) måtte <InlineLatex latex="|a|" /> vært dobbelt så stor — og kraften også.
+          <strong> Vanlig feil:</strong> å skrive <InlineLatex latex="F=ma" /> med positive tall uten å reflektere over retning,
+          og så bli forvirret når svaret er «negativt». Jobb med <em>størrelser</em> når du rapporterer svar, men pass på fortegn underveis.
+        </p>
       </div>
     ),
     summary: (
@@ -531,15 +821,50 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [],
     solution: (
-      <div>
-        <Step n={1} title="Kraftsum">
-          <FormulaBox latex="\sum\vec F=(7{,}00\hat i+3{,}00\hat j)\;\text{N}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Newton 2 som vektorlikning">
+          <p>
+            Newtons 2. lov er egentlig en <em>vektorlikning</em>. Det betyr at den holder komponentvis,
+            og i 2D gir oss to uavhengige skalarligninger — én langs hver akse.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvilken formel, og hvorfor?</strong> Når kreftene er gitt på <InlineLatex latex="\hat i,\hat j" />-form,
+          er komponentmetoden naturlig. Vi slipper å regne vinkler og størrelser først — de er allerede bakt inn i komponentene.
+          Newton 2 komponentvis er dermed superdirekte.
+        </p>
+        <p className="font-semibold">Originalformel (Newton 2 komponentvis):</p>
+        <FormulaBox variant="blue" latex="\sum F_x=m a_x,\qquad\sum F_y=m a_y" />
+        <p>
+          <strong>Algebraisk omforming for akselerasjon:</strong>
+        </p>
+        <FormulaBox variant="blue" latex="\vec a=\dfrac{\sum\vec F}{m}" />
+        <Step n={1} title="(a) Kraftsum komponentvis">
+          <FormulaBox variant="blue" latex="\sum\vec F=\vec F_1+\vec F_2=(2{,}00+5{,}00)\hat i+(4{,}00-1{,}00)\hat j" />
+          <FormulaBox variant="blue" latex="\sum\vec F=(7{,}00\hat i+3{,}00\hat j)\;\text{N}" />
         </Step>
-        <Step n={2} title="Akselerasjon">
-          <FormulaBox latex="\vec a=(1{,}75\hat i+0{,}75\hat j)\;\text{m/s}^2" />
-          <FormulaBox latex="|\vec a|=\sqrt{1{,}75^2+0{,}75^2}\approx 1{,}90\;\text{m/s}^2" />
+        <Step n={2} title="(b) Akselerasjonens komponenter">
+          <p>Del hele vektoren på massen (skalar-divisjon fordeler seg på komponentene):</p>
+          <FormulaBox variant="blue" latex="\vec a=\dfrac{1}{4{,}00}(7{,}00\hat i+3{,}00\hat j)=(1{,}75\hat i+0{,}75\hat j)\;\text{m/s}^2" />
+        </Step>
+        <Step n={3} title="(c) Størrelse og retning">
+          <p>Pytagoras for størrelse, arctan for vinkel fra +x:</p>
+          <FormulaBox variant="blue" latex="|\vec a|=\sqrt{a_x^2+a_y^2}=\sqrt{1{,}75^2+0{,}75^2}\approx 1{,}90\;\text{m/s}^2" />
+          <p>
+            Begge komponenter er positive — 1. kvadrant — så arctan gir direkte riktig vinkel uten korreksjon:
+          </p>
           <FormulaBox variant="gold" latex="\theta=\arctan(0{,}75/1{,}75)\approx 23{,}2^\circ\text{ over }+x" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{N}/\text{kg}=\text{m/s}^2" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Akselerasjonen peker i samme retning som <em>nettkraften</em> —
+          ikke nødvendigvis samme retning som hastigheten (som vi ikke vet noe om her). Newton 2 handler kun om hvordan
+          hastigheten <em>endrer</em> seg.
+          <strong> Vanlig feil:</strong> å regne ut størrelsene <InlineLatex latex="|\vec F_1|,|\vec F_2|" /> først og prøve å addere
+          som vanlig tall — det vil gi feil svar med mindre vektorene tilfeldigvis er parallelle.
+        </p>
       </div>
     ),
     summary: (
@@ -580,13 +905,41 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [],
     solution: (
-      <div>
-        <Step n={1} title="(a) Masse">
-          <FormulaBox latex="m=\dfrac{w_j}{g_j}=\dfrac{750}{9{,}80}\approx 76{,}5\;\text{kg}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Masse ≠ vekt">
+          <p>
+            <strong>Masse</strong> (kg) er hvor mye stoff et legeme har — en iboende egenskap som er den samme overalt i universet.
+            <strong> Vekt</strong> (N) er tyngdekraften <InlineLatex latex="\vec w=m\vec g" />, altså kraften fra et tyngdefelt på legemet.
+            Vekt endres med <InlineLatex latex="g" />; masse endres ikke.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor formelen <InlineLatex latex="w=mg" />?</strong> Den er et spesialtilfelle av Newtons 2. lov: nær jordas
+          overflate er tyngdefeltet tilnærmet konstant, og tyngden på et legeme er
+          <InlineLatex latex="\;\vec w=m\vec g" />. Størrelsen er <InlineLatex latex="w=mg" />.
+        </p>
+        <p className="font-semibold">Originalformel:</p>
+        <FormulaBox variant="blue" latex="w=mg" />
+        <Step n={1} title="(a) Algebraisk omforming: løs for m">
+          <p>Del på <InlineLatex latex="g" />:</p>
+          <FormulaBox variant="blue" latex="m=\dfrac{w}{g}" />
+          <FormulaBox variant="blue" latex="m=\dfrac{w_j}{g_j}=\dfrac{750}{9{,}80}\approx 76{,}5\;\text{kg}" />
         </Step>
-        <Step n={2} title="(b) Månevekt">
+        <Step n={2} title="(b) Vekten på månen">
+          <p>Massen er den samme (iboende egenskap), bare <InlineLatex latex="g" /> endres:</p>
+          <FormulaBox variant="blue" latex="w_m=m\,g_m" />
           <FormulaBox variant="gold" latex="w_m=m\,g_m=76{,}5\cdot 1{,}62\approx 124\;\text{N}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{kg}\cdot\text{m/s}^2=\text{N}" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Månevekten er <InlineLatex latex="g_m/g_j\approx 0{,}165" /> av jordvekten,
+          altså ca. 1/6. Derfor kan astronauter hoppe så høyt på månen: samme muskelkraft, langt mindre motkraft.
+          Massen 76,5 kg er den samme uansett.
+          <strong> Vanlig feil:</strong> å blande masse og vekt i daglig tale («jeg veier 70 kg» — det er massen, ikke vekten).
+          I fysikk må du alltid skille: kg er masse, N er vekt.
+        </p>
       </div>
     ),
     summary: (
@@ -630,19 +983,59 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint", content: <p>Vekten viser normalkraften — ikke ekte vekt! I fritt fall: <InlineLatex latex="a=-g" /> gir <InlineLatex latex="N=0" />.</p> },
     ],
     solution: (
-      <div>
-        <Step n={1} title="(a) Hvile">
-          <FormulaBox latex="N=m\,g=68{,}0\cdot 9{,}80\approx 666\;\text{N}" />
+      <div className="space-y-3 text-sm">
+        <TheoryBox title="Tilsynelatende vekt = normalkraften">
+          <p>
+            En badevekt måler <em>ikke</em> ekte vekt (<InlineLatex latex="mg" />), men <em>normalkraften</em> den
+            skyver opp mot deg med. Det samme gjelder hva du «føler». Ved hvile er <InlineLatex latex="N=mg" />, men ved
+            vertikal akselerasjon skiller de seg — og det er dette fenomenet heis-opplevelsen handler om.
+          </p>
+        </TheoryBox>
+        <p>
+          <strong>Hvorfor Newton 2 her?</strong> Vi har to krefter på personen (tyngde ned, normalkraft opp) og en kjent akselerasjon.
+          Newton 2 langs vertikal knytter disse sammen, slik at vi kan løse for den ukjente <InlineLatex latex="N" />.
+        </p>
+        <p>
+          <strong>Frilegemediagram:</strong> tegn personen som en prikk. På prikken virker to krefter — <InlineLatex latex="N" />
+          oppover (fra vekten) og <InlineLatex latex="mg" /> nedover (tyngden).
+          <strong> Koordinatvalg:</strong> positiv y oppover. Da er tyngden <InlineLatex latex="-mg" /> (negativ komponent fordi den peker ned).
+        </p>
+        <p className="font-semibold">Originalformel (Newton 2 vertikalt):</p>
+        <FormulaBox variant="blue" latex="\sum F_y=N+(-mg)=ma\;\Rightarrow\;N-mg=ma" />
+        <Step n={1} title="Algebraisk omforming: løs for N">
+          <p>Legg til <InlineLatex latex="mg" /> på begge sider:</p>
+          <FormulaBox variant="blue" latex="N=m(g+a)" />
+          <p>
+            <strong>Fortegnsregel:</strong> <InlineLatex latex="a" /> er positiv når heisen akselererer oppover og negativ
+            nedover. «Tilsynelatende vekt» = <InlineLatex latex="N" />.
+          </p>
         </Step>
-        <Step n={2} title="(b) 2 m/s² oppover">
-          <FormulaBox latex="N=68{,}0(9{,}80+2{,}00)\approx 802\;\text{N}" />
+        <Step n={2} title="(a) Heisen står stille: a = 0">
+          <FormulaBox variant="blue" latex="N=m(g+0)=mg=68{,}0\cdot 9{,}80\approx 666\;\text{N}" />
         </Step>
-        <Step n={3} title="(c) 2 m/s² nedover">
-          <FormulaBox latex="N=68{,}0(9{,}80-2{,}00)\approx 530\;\text{N}" />
+        <Step n={3} title="(b) Akselererer 2,00 m/s² oppover">
+          <p>Normalkraften må både støtte tyngden <em>og</em> akselerere personen oppover — du føler deg tyngre:</p>
+          <FormulaBox variant="blue" latex="N=68{,}0(9{,}80+2{,}00)\approx 802\;\text{N}" />
         </Step>
-        <Step n={4} title="(d) Fritt fall">
+        <Step n={4} title="(c) Akselererer 2,00 m/s² nedover">
+          <p>Her er <InlineLatex latex="a=-2{,}00" />. Normalkraften trenger ikke bære hele tyngden; du føler deg lettere:</p>
+          <FormulaBox variant="blue" latex="N=68{,}0(9{,}80-2{,}00)\approx 530\;\text{N}" />
+        </Step>
+        <Step n={5} title="(d) Fritt fall: a = −g">
+          <p>Nå forsvinner normalkraften helt — den eneste kraften som virker er tyngden:</p>
           <FormulaBox variant="gold" latex="N=68{,}0(9{,}80-9{,}80)=0\;\text{N (vektløshet)}" />
         </Step>
+        <p>
+          <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{kg}\cdot\text{m/s}^2=\text{N}" /> ✓.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> «Vektløshet» i rommet er egentlig bare kontinuerlig fritt fall (rundt jorda).
+          Astronautene er ikke uten tyngdekraft — de er alltid i fritt fall. Legg merke til at ekte vekt
+          <InlineLatex latex="\;mg\approx 666\;\text{N}" /> er uendret i alle fire tilfeller — det er kun <em>tilsynelatende</em>
+          vekt som endres.
+          <strong> Vanlig feil:</strong> å tro at <InlineLatex latex="a" /> alltid er positiv. Tegn alltid aksene, og la fortegnet
+          på <InlineLatex latex="a" /> følge koordinatsystemet.
+        </p>
       </div>
     ),
     summary: (

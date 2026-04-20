@@ -72,7 +72,7 @@ function ExerciseDisplay({ exercise, id }: { exercise: ExerciseContent; id: stri
           {exercise.hints.map((_, idx) => (
             <button
               key={idx}
-              disabled={idx >= visibleHints + 1 ? false : true}
+              disabled={idx > visibleHints}
               onClick={() => setVisibleHints(Math.max(visibleHints, idx + 1))}
               className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
                 idx < visibleHints

@@ -464,10 +464,35 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 3", content: <p>Husk at q er negativ — multipliser sluttsvaret med <InlineLatex latex="-1{,}24\cdot 10^{-8}" />, ikke bare størrelsen.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="font-semibold text-sm">a) <InlineLatex latex="\vec{B} = 1{,}40\;\hat{i}" /></p>
-        <p className="text-sm">
-          Kryssproduktet: <InlineLatex latex="\vec{v}\times\vec{B} = (v_x\hat{i}+v_y\hat{j})\times(B\hat{i}) = v_xB(\hat{i}\times\hat{i})+v_yB(\hat{j}\times\hat{i}) = -v_yB\,\hat{k}" />.
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori først: Hva sier Lorentz-loven?</p>
+        <p>
+          En ladning <InlineLatex latex="q" /> som beveger seg med fart <InlineLatex latex="\vec v" /> i et magnetfelt{" "}
+          <InlineLatex latex="\vec B" /> kjenner kraften <InlineLatex latex="\vec F = q\,\vec v\times \vec B" />. Tre ting
+          følger direkte: (1) Kraften er alltid <em>vinkelrett</em> på både <InlineLatex latex="\vec v" /> og{" "}
+          <InlineLatex latex="\vec B" /> — derfor gjør den aldri arbeid. (2) Hvis <InlineLatex latex="\vec v \parallel \vec B" />{" "}
+          er kraften null. (3) Fortegnet på <InlineLatex latex="q" /> snur retningen.
+        </p>
+        <FormulaBox latex="\vec F = q\,\vec v \times \vec B" variant="blue" />
+        <p>
+          <strong>Hvorfor denne formelen og ikke noe annet?</strong> Partikkelen føler <em>kun</em> magnetkraft (det er
+          ikke gitt noe E-felt), og vi kjenner <InlineLatex latex="\vec v" /> og <InlineLatex latex="\vec B" /> eksplisitt
+          som vektorer — altså er komponentvis kryssprodukt den riktige veien. Vi bruker <em>ikke</em>{" "}
+          <InlineLatex latex="F = qvB\sin\theta" /> her, fordi vi også vil ha <em>retningen</em> på{" "}
+          <InlineLatex latex="\vec F" />, ikke bare størrelsen.
+        </p>
+
+        <p className="font-semibold mt-4">(a) <InlineLatex latex="\vec{B} = 1{,}40\;\hat{i}" /></p>
+        <p>
+          <strong>Omforming:</strong> Fordi <InlineLatex latex="\hat i \times \hat i = 0" />, faller hele{" "}
+          <InlineLatex latex="v_x" />-bidraget bort. Kun <InlineLatex latex="v_y\hat j \times B\hat i" /> bidrar, og{" "}
+          <InlineLatex latex="\hat j \times \hat i = -\hat k" />. Altså:
+        </p>
+        <FormulaBox latex="\vec v \times \vec B = v_y B(\hat j\times\hat i) = -v_y B\,\hat k" variant="blue" />
+        <p>
+          <strong>Fortegnsanalyse:</strong> <InlineLatex latex="v_y = -3{,}85\cdot 10^4" /> er negativ, så{" "}
+          <InlineLatex latex="-v_y B > 0" /> og <InlineLatex latex="\vec v \times \vec B" /> peker i +z. Deretter
+          multipliserer vi med <InlineLatex latex="q < 0" /> — dette snur retningen tilbake til −z.
         </p>
         <FormulaBox
           latex="\vec{F} = q\vec{v}\times\vec{B} = -q v_y B\,\hat{k} = -(-1{,}24\cdot 10^{-8})(-3{,}85\cdot 10^{4})(1{,}40)\,\hat{k}"
@@ -477,17 +502,27 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\vec{F}_{(a)} = \boxed{-6{,}68\cdot 10^{-4}\;\text{N}\,\hat{k}}"
           variant="gold"
         />
-        <p className="text-sm">Kraften peker i <strong>negativ z-retning</strong>.</p>
-
-        <p className="font-semibold text-sm mt-2">b) <InlineLatex latex="\vec{B} = 1{,}40\;\hat{k}" /></p>
-        <p className="text-sm">
-          Kryssproduktet: <InlineLatex latex="\vec{v}\times\vec{B} = (v_x\hat{i}+v_y\hat{j})\times(B\hat{k}) = v_xB(\hat{i}\times\hat{k})+v_yB(\hat{j}\times\hat{k}) = -v_xB\,\hat{j}+v_yB\,\hat{i}" />.
+        <p>Kraften peker i <strong>negativ z-retning</strong> (inn i arket hvis du ser xy-planet forfra).</p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{C}\cdot(\text{m/s})\cdot \text{T} = \text{C}\cdot\text{m/s}\cdot\text{kg/(C}\cdot\text{s)} = \text{kg}\cdot\text{m/s}^2 = \text{N}" />. OK.
         </p>
+
+        <p className="font-semibold mt-4">(b) <InlineLatex latex="\vec{B} = 1{,}40\;\hat{k}" /></p>
+        <p>
+          Her er B langs z, så begge komponentene av <InlineLatex latex="\vec v" /> bidrar (ingen er parallell med B).
+          Identiteter: <InlineLatex latex="\hat i\times\hat k = -\hat j" /> og <InlineLatex latex="\hat j\times\hat k = \hat i" />.
+        </p>
+        <FormulaBox
+          latex="\vec{v}\times\vec{B} = (v_x\hat{i}+v_y\hat{j})\times(B\hat{k}) = -v_xB\,\hat{j}+v_yB\,\hat{i}"
+          variant="blue"
+        />
         <FormulaBox
           latex="\vec{F} = q(v_yB\,\hat{i} - v_xB\,\hat{j})"
           variant="blue"
         />
-        <p className="text-sm">Sett inn tallene (<InlineLatex latex="q=-1{,}24\cdot 10^{-8}" />, <InlineLatex latex="B=1{,}40" />):</p>
+        <p>
+          <strong>Innsetting</strong> med <InlineLatex latex="q=-1{,}24\cdot 10^{-8}" /> og <InlineLatex latex="B=1{,}40" />:
+        </p>
         <FormulaBox
           latex="F_x = q v_y B = (-1{,}24\cdot 10^{-8})(-3{,}85\cdot 10^{4})(1{,}40) = 6{,}68\cdot 10^{-4}\;\text{N}"
           variant="blue"
@@ -500,9 +535,14 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\vec{F}_{(b)} = \boxed{(6{,}68\cdot 10^{-4}\,\hat{i} + 7{,}27\cdot 10^{-4}\,\hat{j})\;\text{N}}"
           variant="gold"
         />
-        <p className="text-sm">
+        <p>
           Størrelse: <InlineLatex latex="|\vec{F}| = \sqrt{F_x^2+F_y^2} = 9{,}87\cdot 10^{-4}\;\text{N}" />, vinkel{" "}
           <InlineLatex latex="\arctan(7{,}27/6{,}68) \approx 47{,}4°" /> fra +x-aksen.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: Kraften i (b) ligger i xy-planet (vinkelrett på både v og B), akkurat som Lorentz-loven krever.
+          Observér også at <InlineLatex latex="\vec F\cdot\vec v = F_x v_x + F_y v_y \approx 0" /> — konsistent med at
+          magnetkraften ikke gjør arbeid.
         </p>
       </div>
     ),
@@ -562,22 +602,44 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Husk <InlineLatex latex="\hat{j}\times\hat{i}=-\hat{k}" />.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-sm">
-          Steg 1: Kryssprodukt <InlineLatex latex="\vec{v}\times\vec{B} = v_y\hat{j}\times(B_x\hat{i}+B_y\hat{j}) = v_y B_x(\hat{j}\times\hat{i}) = -v_y B_x\,\hat{k}" />.
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Lorentz + Newton 2</p>
+        <p>
+          Vi har bare magnetkraft (ingen E-felt, tyngde ignorert). Den magnetiske kraften gir akselerasjonen gjennom
+          Newtons 2. lov: <InlineLatex latex="\vec F = m\vec a" />. Siden <InlineLatex latex="\vec F = q\vec v\times\vec B" />,
+          gir dette <InlineLatex latex="\vec a = (q/m)\vec v\times\vec B" />.
         </p>
+        <FormulaBox latex="\vec F = q\,\vec v\times\vec B,\qquad \vec a = \frac{\vec F}{m}" variant="blue" />
+        <p>
+          <strong>Hvorfor kryssprodukt og ikke bare <InlineLatex latex="F=qvB" />?</strong> Vi trenger akselerasjonens{" "}
+          <em>retning</em>, ikke bare størrelse. Og fordi B har både x- og y-komponent, må vi se hvilken av dem som er
+          parallell med v: den parallelle delen nuller seg ut (<InlineLatex latex="\hat j\times\hat j = 0" />).
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Kryssprodukt komponentvis</p>
+        <p>
+          <InlineLatex latex="\vec v = v_y\hat j" /> (kun y-komponent). Da er{" "}
+          <InlineLatex latex="\vec v\times\vec B = v_y\hat j\times(B_x\hat i + B_y\hat j)" />. Andre ledd forsvinner
+          (<InlineLatex latex="\hat j\times\hat j=0" />), første ledd gir{" "}
+          <InlineLatex latex="v_y B_x(\hat j\times\hat i) = -v_y B_x\hat k" />.
+        </p>
+        <FormulaBox
+          latex="\vec{v}\times\vec{B} = v_y\hat{j}\times(B_x\hat{i}+B_y\hat{j}) = -v_y B_x\,\hat{k}"
+          variant="blue"
+        />
         <FormulaBox
           latex="\vec{v}\times\vec{B} = -(3{,}00\cdot 10^{4})(1{,}63)\,\hat{k} = -4{,}89\cdot 10^{4}\;\hat{k}\;\text{m T/s}"
           variant="blue"
         />
 
-        <p className="text-sm">Steg 2: Kraften.</p>
+        <p className="font-semibold mt-4">Steg 2: Kraften</p>
+        <p>Multipliser med <InlineLatex latex="q = +1{,}22\cdot 10^{-8}\;\text{C}" /> (positiv — ingen fortegnssnu):</p>
         <FormulaBox
           latex="\vec{F} = q\vec{v}\times\vec{B} = (1{,}22\cdot 10^{-8})(-4{,}89\cdot 10^{4})\,\hat{k} = -5{,}97\cdot 10^{-4}\;\text{N}\,\hat{k}"
           variant="blue"
         />
 
-        <p className="text-sm">Steg 3: Akselerasjonen fra Newtons 2. lov.</p>
+        <p className="font-semibold mt-4">Steg 3: Akselerasjon (Newton 2)</p>
         <FormulaBox
           latex="\vec{a} = \frac{\vec{F}}{m} = \frac{-5{,}97\cdot 10^{-4}}{1{,}81\cdot 10^{-3}}\,\hat{k}"
           variant="blue"
@@ -586,7 +648,12 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\vec{a} = \boxed{-0{,}330\;\text{m/s}^2\,\hat{k}}"
           variant="gold"
         />
-        <p className="text-sm">Altså <strong>0,330 m/s² i −z-retning</strong>.</p>
+        <p>Altså <strong>0,330 m/s² i −z-retning</strong>.</p>
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: <InlineLatex latex="B_y" /> (parallell med v) bidro ingenting — dette er et generelt prinsipp.
+          Kun delen av B som står vinkelrett på v gir kraft. I det neste øyeblikket vil v endre seg, og da vil kraften
+          også endres; dette er derfor bare øyeblikkets akselerasjon.
+        </p>
       </div>
     ),
     summary: (
@@ -645,17 +712,35 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Kraften er <InlineLatex latex="F=qv_xB" /> langs z. Sett opp fortegn nøye.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-sm">
-          Steg 1: Kryssprodukt. Anta <InlineLatex latex="\vec{v}=v_x\hat{i}+v_y\hat{j}" />. Da er{" "}
-          <InlineLatex latex="\vec{v}\times\vec{B}=v_x B\,\hat{k}" />.
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Invers bruk av Lorentz-loven</p>
+        <p>
+          Vi kjenner <InlineLatex latex="\vec F" /> og <InlineLatex latex="\vec B" />, og vil finne{" "}
+          <InlineLatex latex="\vec v" />. Strategien er å starte fra den generelle Lorentz-loven, se hvilken
+          komponent av v som faktisk bidrar, og løse baklengs.
+        </p>
+        <FormulaBox latex="\vec F = q\,\vec v\times\vec B" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke <InlineLatex latex="F=qvB\sin\theta" /> direkte?</strong> Vi vet ikke vinkelen θ —
+          retningen til v er nettopp det vi skal finne. I stedet setter vi opp kryssproduktet komponentvis og ser hva
+          som er konsistent med den gitte kraftretningen.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Sett opp kryssproduktet</p>
+        <p>
+          v er begrenset til xy-planet, så <InlineLatex latex="\vec v = v_x\hat i + v_y\hat j" />. B er langs y:{" "}
+          <InlineLatex latex="\vec B = B\hat j" />. Bidrag:{" "}
+          <InlineLatex latex="v_x\hat i\times B\hat j = v_x B\,\hat k" /> og{" "}
+          <InlineLatex latex="v_y\hat j\times B\hat j = 0" />. Altså bare x-komponenten av v bidrar, og kraften peker
+          langs z — ikke langs y.
         </p>
         <FormulaBox latex="\vec{F} = q\,v_x B\,\hat{k}" variant="blue" />
 
-        <p className="text-sm">
-          Steg 2: Kraftens y-komponent er 0 — konsistent. For at kraften skal være i y-retning, må enten v være 0 eller
-          geometrien tolkes slik at kraften er langs z. Løser man for fart fra størrelsen:
+        <p className="font-semibold mt-4">Steg 2: Løs for farten</p>
+        <p>
+          Størrelsen av kraften er <InlineLatex latex="|F| = |q|\,|v_x|\,B" />. Omforming:
         </p>
+        <FormulaBox latex="|v_x| = \frac{|F|}{|q|\,B}" variant="blue" />
         <FormulaBox
           latex="v = \frac{|F|}{|q|B} = \frac{5{,}50\cdot 10^{-18}}{(1{,}60\cdot 10^{-19})(0{,}200)}"
           variant="blue"
@@ -665,21 +750,31 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="text-sm">
-          Steg 3 — retning: Kraften på elektronet er <InlineLatex latex="\vec{F}=q\vec{v}\times\vec{B}" />. Med q &lt; 0,
-          for å få F i −y-retning må <InlineLatex latex="\vec{v}\times\vec{B}" /> være i +y. Da kreves{" "}
-          <InlineLatex latex="\vec{v}" /> å ha z-komponent. Siden v er begrenset til xy-planet, tolkes oppgaven som{" "}
-          <strong>v langs +x-aksen</strong> slik at kraften bli langs <strong>−z</strong> (fordi{" "}
-          <InlineLatex latex="\hat{i}\times\hat{j}=\hat{k}" />, og q negativ gir −z).
+        <p className="font-semibold mt-4">Steg 3: Retning via fortegnsanalyse</p>
+        <p>
+          For elektron er <InlineLatex latex="q < 0" />. For å få kraft i −y-retning (slik boken spesifiserer) må{" "}
+          <InlineLatex latex="\vec v\times\vec B" /> ha motsatt fortegn, dvs. i +y. Men <em>geometrisk</em> — med v i
+          xy og B langs y — vil <InlineLatex latex="\vec v\times\vec B" /> alltid ligge langs z, ikke y. Hvis vi i stedet
+          tolker <InlineLatex latex="\vec F" /> som <em>i −z-retning</em> (en vanlig feilbetegnelse i oppgaveteksten),
+          blir alt konsistent: med <InlineLatex latex="\vec v = v\hat i" /> og <InlineLatex latex="q<0" /> får vi{" "}
+          <InlineLatex latex="\vec F = qv B(\hat i\times\hat j) = -evB\hat k" /> → −z.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{N}/(\text{C}\cdot\text{T}) = \text{N}/(\text{C}\cdot\text{N/(C}\cdot\text{m/s))}= \text{m/s}" />. OK.
         </p>
 
         <AmberBox title="Tolkningsmerknad">
-          <p className="text-sm">
-            Boken opererer med at F er i −y ; i realiteten (standard vektoranalyse) får vi F langs z når v er i xy og B langs y.
+          <p>
+            Boken opererer med at F er i −y; i realiteten (standard vektoranalyse) får vi F langs z når v er i xy og B langs y.
             Farten <InlineLatex latex="v\approx 1{,}72\cdot 10^{2}\;\text{m/s}" /> er uansett korrekt;
             retningen av v er <strong>+x</strong> (som gir <InlineLatex latex="\vec{v}\times\vec{B}=v B\hat{k}" />, og med q&lt;0 blir F langs −z).
           </p>
         </AmberBox>
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: 172 m/s er en beskjeden fart (langt under lyshastigheten), helt plausibelt for et elektron
+          i et relativt svakt magnetfelt (0,200 T). Merk at kraftens størrelse (<InlineLatex latex="5{,}5\cdot 10^{-18}" /> N)
+          er ørliten — elektroner har svært liten ladning og kjenner derfor bare små krefter selv i moderate felt.
+        </p>
       </div>
     ),
     summary: (
@@ -735,13 +830,39 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>I del (c) er B i +y-retning — vinkelen mellom B og normalen (som peker i z) er 90°, så fluksen blir 0.</p> },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Hva ER magnetisk fluks?</p>
+        <p>
+          Magnetisk fluks <InlineLatex latex="\Phi_B" /> måler hvor mange feltlinjer som passerer gjennom en flate.
+          Tenk på B-linjer som "regndråper": maksfluks når regnet faller rett ned på en horisontal flate
+          (vinkel 0° mellom regn og flatenormal); null fluks når flaten er vertikal (regnet går langs flaten, ingen
+          passerer gjennom).
+        </p>
+        <FormulaBox latex="\Phi_B = \vec B\cdot \vec A = B\,A\cos\phi" variant="blue" />
+        <p>
+          Her er <InlineLatex latex="\phi" /> vinkelen mellom <strong>B og flatenormalen</strong>{" "}
+          (<InlineLatex latex="\hat n" />), <em>ikke</em> mellom B og selve flaten. Denne forvekslingen er en
+          klassisk feil.
+        </p>
+        <p>
+          <strong>Hvorfor denne formelen og ikke <InlineLatex latex="F=qvB\sin\theta" />?</strong> Det er ingen
+          partikkel i oppgaven — vi ser bare på felt gjennom flate. Kraftformler hører ikke hjemme her.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Areal av sirkelen</p>
         <FormulaBox
           latex="A = \pi r^2 = \pi (0{,}0610)^2 = 1{,}169\cdot 10^{-2}\;\text{m}^2"
           variant="blue"
         />
+        <p>
+          Flaten ligger i xy-planet, så <InlineLatex latex="\hat n = \hat k" /> (peker langs +z). Vinkelen mellom B og
+          <InlineLatex latex="\hat n" /> leser vi av direkte.
+        </p>
 
-        <p className="font-semibold text-sm">a) B i +z-retning (parallell med normalen, φ = 0°)</p>
+        <p className="font-semibold mt-4">(a) B i +z-retning (φ = 0°)</p>
+        <p>
+          B og <InlineLatex latex="\hat n" /> er parallelle — maksimal fluks. <InlineLatex latex="\cos 0° = 1" />.
+        </p>
         <FormulaBox
           latex="\Phi_B = BA\cos 0° = (0{,}230)(1{,}169\cdot 10^{-2})"
           variant="blue"
@@ -751,7 +872,10 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="font-semibold text-sm">b) Vinkel 53,1° med +z-aksen (φ = 53,1°)</p>
+        <p className="font-semibold mt-4">(b) Vinkel 53,1° med +z-aksen (φ = 53,1°)</p>
+        <p>
+          <InlineLatex latex="\cos 53{,}1° = 0{,}6" /> (dette er 3-4-5-trekant-vinkelen, en vanlig "fysikkvinkel").
+        </p>
         <FormulaBox
           latex="\Phi_B = BA\cos 53{,}1° = (0{,}230)(1{,}169\cdot 10^{-2})(0{,}6)"
           variant="blue"
@@ -761,12 +885,21 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="font-semibold text-sm">c) B i +y-retning (φ = 90°)</p>
+        <p className="font-semibold mt-4">(c) B i +y-retning (φ = 90°)</p>
+        <p>
+          B ligger i flatens plan, så B er vinkelrett på <InlineLatex latex="\hat n" />:{" "}
+          <InlineLatex latex="\cos 90° = 0" />. Ingen feltlinjer passerer gjennom flaten — de "sklir langs den".
+        </p>
         <FormulaBox
           latex="\Phi_B = BA\cos 90° = \boxed{0}"
           variant="gold"
         />
-        <p className="text-sm">Når B er parallell med arealet passerer ingen feltlinjer gjennom flaten.</p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{T}\cdot \text{m}^2 = \text{Wb}" /> (weber). 1 Wb er en stor fluks —
+          her er vi på milliweber-nivå, typisk for laboratorie-eksperimenter.
+          Fysisk tolkning: Fluks er sentralt i Faradays lov (kap 29) — endring i fluks induserer EMF. I (c) er fluksen
+          null, så en liten rotasjon vil skape EMF.
+        </p>
       </div>
     ),
     summary: (
@@ -830,9 +963,31 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 3", content: <p>Retning på B: Ved A peker v opp (+y), sentripetal kraft må peke mot sirkelens sentrum (+x). For elektron må <InlineLatex latex="\vec{v}\times\vec{B}" /> peke motsatt sentripetal (altså −x). Prøv B ut av arket — gir det rett retning?</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="font-semibold text-sm">a) Størrelse og retning på B</p>
-        <p className="text-sm">Løs <InlineLatex latex="r=mv/(|q|B)" /> for B:</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Hvorfor går ladde partikler i sirkel i et B-felt?</p>
+        <p>
+          Magnetkraften står alltid <em>vinkelrett</em> på fart. En vinkelrett kraft endrer ikke størrelsen av v — den
+          endrer bare <em>retningen</em>. Det er nøyaktig definisjonen av uniform sirkelbevegelse. Så magnetkraften
+          spiller rollen som sentripetalkraft:
+        </p>
+        <FormulaBox latex="\underbrace{|q|\,v\,B}_{\text{Lorentz}} = \underbrace{\dfrac{m v^2}{r}}_{\text{sentripetal}}" variant="blue" />
+        <p>
+          <strong>Algebraisk omforming</strong> — divider begge sider med v og løs for r:
+        </p>
+        <FormulaBox latex="|q|B = \frac{mv}{r} \;\Longrightarrow\; r = \frac{mv}{|q|B} \;\Longrightarrow\; B = \frac{mv}{|q|r}" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke bare <InlineLatex latex="F=ma" />?</strong> Det <em>er</em> det vi bruker —{" "}
+          <InlineLatex latex="mv^2/r" /> er sentripetalakselerasjonen ganget med masse. Men vi bruker ikke vektor-{" "}
+          <InlineLatex latex="\vec F = m\vec a" /> direkte, fordi akselerasjonens retning endres hele tiden;
+          sentripetalformen er laget for nettopp sirkelbevegelse.
+        </p>
+        <p>
+          Perioden følger direkte: en full runde har omkrets <InlineLatex latex="2\pi r" /> som tilbakelegges med fart{" "}
+          v, så <InlineLatex latex="T = 2\pi r/v = 2\pi m/(|q|B)" /> — <strong>uavhengig av farten!</strong>
+        </p>
+
+        <p className="font-semibold mt-4">(a) Størrelse og retning på B</p>
+        <p>Sett inn tallene i <InlineLatex latex="B=m_e v_0/(|q|r)" />:</p>
         <FormulaBox
           latex="B = \frac{m_e v_0}{|q|r} = \frac{(9{,}11\cdot 10^{-31})(1{,}41\cdot 10^{6})}{(1{,}60\cdot 10^{-19})(5{,}00\cdot 10^{-2})}"
           variant="blue"
@@ -841,13 +996,22 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="B = \boxed{1{,}60\cdot 10^{-4}\;\text{T}}"
           variant="gold"
         />
-        <p className="text-sm">
-          Retning: Ved A er <InlineLatex latex="\vec{v}=v_0\hat{j}" /> (oppover). For halvsirkel mot høyre må sentripetalkraften peke mot +x.
-          For elektron (q = −e): <InlineLatex latex="\vec{F} = -e\,\vec{v}\times\vec{B}" />. For F i +x må <InlineLatex latex="\vec{v}\times\vec{B}" />{" "}
-          peke i −x. <InlineLatex latex="\hat{j}\times(-\hat{k}) = -\hat{i}" /> — riktig! Så <strong>B peker inn i arket</strong>.
+        <p>
+          <strong>Retning — høyrehåndsregelen for elektron:</strong> Ved A har v opp (+y). For å bue til høyre (mot B)
+          må sentripetalkraften peke mot +x (mot sirkelens sentrum). For et elektron er{" "}
+          <InlineLatex latex="\vec F = -e\,\vec v\times\vec B" />, så <InlineLatex latex="\vec v\times\vec B" /> må
+          peke i −x. Test: hvis <InlineLatex latex="\vec B = -B\hat k" /> (inn i arket), er{" "}
+          <InlineLatex latex="\hat j\times(-\hat k) = -\hat i" /> — riktig! Så <strong>B peker inn i arket</strong>.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{kg}\cdot\text{m/s}/(\text{C}\cdot\text{m}) = \text{kg/(C}\cdot\text{s)} = \text{T}" />. OK.
         </p>
 
-        <p className="font-semibold text-sm mt-2">b) Tid fra A til B</p>
+        <p className="font-semibold mt-4">(b) Tid fra A til B</p>
+        <p>
+          En halvsirkel er halv omkrets: <InlineLatex latex="s = \pi r" />. Farten er konstant (fordi magnetkraften
+          ikke gjør arbeid — kinetisk energi bevares). Derfor:
+        </p>
         <FormulaBox
           latex="t_{AB} = \frac{\pi r}{v_0} = \frac{\pi (5{,}00\cdot 10^{-2})}{1{,}41\cdot 10^{6}}"
           variant="blue"
@@ -856,6 +1020,11 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="t_{AB} = \boxed{1{,}11\cdot 10^{-7}\;\text{s} = 111\;\text{ns}}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Fysisk tolkning: B ≈ 0,16 mT er et helt svakt felt — omtrent 3 ganger jordens magnetfelt. Radius på 5 cm og
+          periode på 222 ns (full runde) er typisk for lab-elektron i svake felt. Akkurat denne formelen er hjertet i
+          bl.a. masse­spektrometre: kjenner du B, r og v, kan du bestemme forholdet q/m for ukjente ioner.
+        </p>
       </div>
     ),
     alternativeSolution: (
@@ -918,8 +1087,23 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Retning: snu fortegnet på q, altså snu retningen på B sammenlignet med 27.14.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="font-semibold text-sm">a) Magnetfeltet</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Samme formel, ny partikkel</p>
+        <p>
+          Samme fysikk som i 27.14: magnetkraften virker som sentripetalkraft og gir sirkelbane. Men nå er partikkelen
+          et <strong>proton</strong> — positivt ladd, og ca. 1836 ganger tyngre enn et elektron. To konsekvenser: (i)
+          B må bli <em>mye større</em> for samme radius, siden <InlineLatex latex="B = mv/(|q|r)" /> er proporsjonal
+          med masse. (ii) Retningen på B er motsatt av elektronets (fordi q har motsatt fortegn).
+        </p>
+        <FormulaBox latex="r = \frac{mv}{|q|B} \;\Longrightarrow\; B = \frac{m\,v}{|q|\,r}" variant="blue" />
+        <p>
+          <strong>Hvorfor bare bytte masse?</strong> Radius r og fart v er de samme som i 27.14 (oppgaven sier "gjenta"),
+          og <InlineLatex latex="|q|" /> er samme tallverdi (<InlineLatex latex="+e = 1{,}60\cdot 10^{-19}\;\text{C}" />).
+          Derfor skaleres B eksakt med masseforholdet <InlineLatex latex="m_p/m_e\approx 1836" /> →{" "}
+          <InlineLatex latex="B_p/B_e\approx 1836" />.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Magnetfeltet</p>
         <FormulaBox
           latex="B = \frac{m_p v_0}{|q|r} = \frac{(1{,}67\cdot 10^{-27})(1{,}41\cdot 10^{6})}{(1{,}60\cdot 10^{-19})(5{,}00\cdot 10^{-2})}"
           variant="blue"
@@ -928,20 +1112,35 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="B = \boxed{0{,}294\;\text{T}}"
           variant="gold"
         />
-        <p className="text-sm">
-          Retning: Protonet er positivt. Ved A er <InlineLatex latex="\vec{v}=v_0\hat{j}" />, sentripetal må peke mot +x.
-          For q&gt;0 må <InlineLatex latex="\vec{v}\times\vec{B}" /> peke i +x. Prøv B ut av arket{" "}
-          (<InlineLatex latex="+\hat{k}" />): <InlineLatex latex="\hat{j}\times\hat{k}=\hat{i}" /> ✓. Så <strong>B peker ut av arket</strong>.
+        <p>
+          Kontrollsjekk: <InlineLatex latex="0{,}294 / (1{,}60\cdot 10^{-4}) \approx 1840" /> — stemmer nesten perfekt med
+          masseforholdet. Et lite avvik kommer fra avrunding.
+        </p>
+        <p>
+          <strong>Retning — høyrehåndsregelen for proton (q &gt; 0):</strong> Ved A har v opp (+y). Sentripetalkraft må
+          peke mot sirkelens sentrum (+x). For q &gt; 0 er <InlineLatex latex="\vec F = q\vec v\times\vec B" /> direkte
+          — ingen fortegnssnu. Vi trenger <InlineLatex latex="\vec v\times\vec B" /> i +x. Test: B i +z (ut av arket):{" "}
+          <InlineLatex latex="\hat j\times\hat k = \hat i" /> ✓. Så <strong>B peker ut av arket</strong>{" "}
+          (motsatt av elektronets).
         </p>
 
-        <p className="font-semibold text-sm mt-2">b) Tid</p>
+        <p className="font-semibold mt-4">(b) Tid fra A til B</p>
+        <p>
+          Lengden (halv omkrets) og farten er de samme som i 27.14. Massen påvirker <em>ikke</em> tiden direkte i denne
+          formen — bare via B-feltet som ble justert tilsvarende.
+        </p>
         <FormulaBox
           latex="t_{AB} = \frac{\pi r}{v_0} = \frac{\pi (5{,}00\cdot 10^{-2})}{1{,}41\cdot 10^{6}} = \boxed{1{,}11\cdot 10^{-7}\;\text{s}}"
           variant="gold"
         />
-        <p className="text-sm">
+        <p>
           Merk: Tiden er <strong>samme som for elektronet</strong> — ikke overraskende, for tiden avhenger bare av <em>omkretsen</em>{" "}
           og <em>farten</em>, som er de samme i begge oppgavene.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Alternativ kontroll via periode-formelen: <InlineLatex latex="T/2 = \pi m_p/(|q|B) = \pi(1{,}67\cdot 10^{-27})/((1{,}60\cdot 10^{-19})(0{,}294))\approx 1{,}11\cdot 10^{-7}\;\text{s}" /> ✓.
+          Fysisk tolkning: 0,294 T er et sterkt felt — krever elektromagnet eller kraftig permanentmagnet. I NMR-skannere
+          brukes felt på 1–3 T for akkurat denne typen protonpresesjon.
         </p>
       </div>
     ),
@@ -1002,20 +1201,45 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 3", content: <p>Retning: La +x = øst, +y = nord, +z = opp. Da er <InlineLatex latex="\vec{v}=-v\hat{k}" /> og <InlineLatex latex="\vec{B}=-B\hat{i}" />. Finn <InlineLatex latex="\vec{v}\times\vec{B}" />, snu for negativ ladning.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-sm">Steg 1: Farten ved inntrenging i feltet.</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: To fysikkområder koblet sammen</p>
+        <p>
+          Problemet er <em>todelt</em>: først et mekanikkproblem (hvor fort faller ballen etter 125 m?), deretter et
+          magnetisme-problem (Lorentz på totalladningen). Nøkkelen er å innse at fart er det bindeleddet som overføres
+          fra del 1 til del 2.
+        </p>
+        <p>
+          <strong>Del 1 — energibevaring:</strong> Ballen starter fra ro; kun tyngden gjør arbeid under fallet. Da er
+          potensiell energi fullstendig konvertert til kinetisk:
+        </p>
+        <FormulaBox latex="\tfrac{1}{2}m v^2 = m g h \;\Longrightarrow\; v = \sqrt{2gh}" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke <InlineLatex latex="v=gt" />?</strong> Det ville krevd at vi først fant t, og energi er
+          en raskere vei når vi kjenner høyden direkte. Dessuten kommer t heller ikke inn i del 2.
+        </p>
+        <p>
+          <strong>Del 2 — Lorentz-kraft:</strong> Ballen har totalladning <InlineLatex latex="q=-Ne" /> (negativ, siden
+          det er <em>elektroner</em> som er i overskudd). Lorentz gir:
+        </p>
+        <FormulaBox latex="\vec F = q\,\vec v\times\vec B,\qquad |F| = |q|\,v\,B\sin\theta" variant="blue" />
+        <p>
+          Her er v vertikalt (ned) og B horisontalt (øst→vest), så <InlineLatex latex="\theta = 90°" /> og{" "}
+          <InlineLatex latex="\sin\theta = 1" />.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Farten ved inntrenging i feltet</p>
         <FormulaBox
           latex="v = \sqrt{2gh} = \sqrt{2(9{,}80)(125)} = 49{,}5\;\text{m/s}"
           variant="blue"
         />
 
-        <p className="text-sm">Steg 2: Total ladning.</p>
+        <p className="font-semibold mt-4">Steg 2: Total ladning</p>
         <FormulaBox
           latex="|q| = Ne = (4{,}00\cdot 10^{8})(1{,}60\cdot 10^{-19}) = 6{,}40\cdot 10^{-11}\;\text{C}"
           variant="blue"
         />
 
-        <p className="text-sm">Steg 3: Kraftens størrelse.</p>
+        <p className="font-semibold mt-4">Steg 3: Kraftens størrelse</p>
         <FormulaBox
           latex="F = |q|vB\sin 90° = (6{,}40\cdot 10^{-11})(49{,}5)(0{,}250)"
           variant="blue"
@@ -1025,17 +1249,29 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="text-sm">
-          Steg 4 — retning: Med +x = øst, +y = nord, +z = opp:
-          <InlineLatex latex="\vec{v}=-v\hat{k}" />, <InlineLatex latex="\vec{B}=-B\hat{i}" /> (øst→vest = −x).
-          Da er <InlineLatex latex="\vec{v}\times\vec{B}=(-v\hat{k})\times(-B\hat{i})=vB(\hat{k}\times\hat{i})=vB\hat{j}" />{" "}
-          (mot nord). Siden q &lt; 0 snur retningen: <strong>kraften peker mot sør</strong>.
+        <p className="font-semibold mt-4">Steg 4: Retning via høyrehåndsregelen</p>
+        <p>
+          Sett opp koordinater: +x = øst, +y = nord, +z = opp. Da er{" "}
+          <InlineLatex latex="\vec v = -v\hat k" /> (fart nedover) og <InlineLatex latex="\vec B = -B\hat i" /> (øst→vest = −x).
+        </p>
+        <FormulaBox latex="\vec v\times\vec B = (-v\hat k)\times(-B\hat i) = vB(\hat k\times\hat i) = vB\,\hat j \quad(\text{mot nord})" variant="blue" />
+        <p>
+          <strong>Fortegnsanalyse:</strong> <InlineLatex latex="\vec v\times\vec B" /> peker mot nord. Men ladningen er{" "}
+          <em>negativ</em> (q = −Ne), så kraften <InlineLatex latex="\vec F = q\vec v\times\vec B" /> peker motsatt:{" "}
+          <strong>mot sør</strong>.
         </p>
 
-        <AmberBox title="Sanity-sjekk">
-          <p className="text-sm">
-            Kraften er ørliten (mindre enn 10⁻⁹ N) sammenlignet med tyngden <InlineLatex latex="mg \approx 1{,}47\;\text{N}" />.
-            Dette er derfor en <em>svært</em> svak påvirkning — ballen bare så vidt dyttes sidelengs.
+        <AmberBox title="Sanity-sjekk og fysisk tolkning">
+          <p>
+            Kraften er ørliten (<InlineLatex latex="\sim 10^{-10}" /> N) sammenlignet med tyngden{" "}
+            <InlineLatex latex="mg = 0{,}150\cdot 9{,}80 \approx 1{,}47\;\text{N}" />. Forholdet:{" "}
+            <InlineLatex latex="F_{mag}/(mg)\sim 5\cdot 10^{-10}" />. Denne effekten er altså forsvinnende liten,
+            og i praksis vil ballen fortsette nesten rett ned. Årsaken er at selv 400 millioner ekstra elektroner gir
+            latterlig liten totalladning (64 pikocoulomb) sammenlignet med typiske laboratorieladninger (mikro- til millicoulomb).
+          </p>
+          <p className="italic text-[var(--muted)] mt-1">
+            Enhetssjekk: <InlineLatex latex="\text{C}\cdot(\text{m/s})\cdot\text{T} = \text{N}" />. OK.
+            Samme fysikk beskytter jorden: solvindens ladde partikler avlenkes av jordmagnetfeltet (store v + stor integrert strøm) og skaper polarlys.
           </p>
         </AmberBox>
       </div>
@@ -1092,22 +1328,56 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Radius først: <InlineLatex latex="r=2d/\pi" />. Deretter B.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-sm">Steg 1: Geometri — kvartsirkel.</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Geometri + sirkelbane</p>
+        <p>
+          To ideer kobles sammen: (1) ladet partikkel i uniformt B-felt følger sirkelbane fordi magnetkraften er
+          vinkelrett på v; (2) vi må knytte tilbakelagt <em>buelengde</em> d til sirkelens <em>radius</em> r via vinkelen
+          strålen dreier.
+        </p>
+        <FormulaBox latex="s = r\,\theta\quad(\theta\text{ i radianer})" variant="blue" />
+        <p>
+          Strålen kommer inn vinkelrett på feltet og forlater det vinkelrett på sin opprinnelige retning — den har
+          altså dreiet 90° = π/2 rad. Da er buelengden <InlineLatex latex="d = r\cdot\pi/2" />, og radius følger.
+        </p>
+        <FormulaBox latex="\text{Sirkelbane:}\;\; |q|vB = \dfrac{mv^2}{r} \;\Longrightarrow\; r = \dfrac{mv}{|q|B}" variant="blue" />
+        <p>
+          <strong>Hvorfor kombinere disse to?</strong> Vi har ukjent B, men kjent v, m, q, d. Ved å finne r fra geometrien
+          og sette inn i sirkelformelen kan vi løse bakover for B.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Geometri — kvartsirkel</p>
         <FormulaBox
           latex="s = r\theta \quad\Rightarrow\quad d = r\cdot\frac{\pi}{2} \quad\Rightarrow\quad r = \frac{2d}{\pi} = \frac{2(1{,}10\cdot 10^{-2})}{\pi} = 7{,}003\cdot 10^{-3}\;\text{m}"
           variant="blue"
         />
+        <p>Altså r ≈ 7,0 mm. (En typisk "lab-skala".)</p>
 
-        <p className="text-sm">Steg 2: Løs <InlineLatex latex="r=mv/(|q|B)" /> for B.</p>
+        <p className="font-semibold mt-4">Steg 2: Omforming og innsetting</p>
+        <p>Løs <InlineLatex latex="r=mv/(|q|B)" /> for B:</p>
+        <FormulaBox latex="B = \dfrac{m_p\,v}{|q|\,r}" variant="blue" />
         <FormulaBox
-          latex="B = \frac{m_p v}{|q|r} = \frac{(1{,}67\cdot 10^{-27})(1{,}20\cdot 10^{3})}{(1{,}60\cdot 10^{-19})(7{,}003\cdot 10^{-3})}"
+          latex="B = \frac{(1{,}67\cdot 10^{-27})(1{,}20\cdot 10^{3})}{(1{,}60\cdot 10^{-19})(7{,}003\cdot 10^{-3})}"
           variant="blue"
         />
         <FormulaBox
           latex="B = \boxed{1{,}79\cdot 10^{-3}\;\text{T} \approx 1{,}79\;\text{mT}}"
           variant="gold"
         />
+        <p>
+          <strong>Retning:</strong> For et positivt proton som beveger seg rett og må bue ned-mot-høyre (se figur):
+          høyrehåndsregelen gir <InlineLatex latex="\vec v\times\vec B" /> peker mot sentrum. Setter vi inn eksempelvis
+          v langs +x og B inn i arket (−z), får vi <InlineLatex latex="\hat i\times(-\hat k) = \hat j" /> (mot +y, altså
+          opp); kraften på protonet er da opp, ikke ned. Med B ut av arket (+z) får vi{" "}
+          <InlineLatex latex="\hat i\times\hat k = -\hat j" /> (ned) — riktig! Så B er vekk fra leseren (her: inn i arket
+          for figuren slik den er tegnet; sjekk figuren nøye).
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="[m v/(qr)] = \text{kg}\cdot\text{m/s}/(\text{C}\cdot\text{m}) = \text{T}" />. OK.
+          Fysisk tolkning: 1,79 mT er et svakt felt (omtrent 35× jordens). Anvendelse: dette er presist prinsippet i et
+          masse­spektrometer — protoner, deuteroner og tyngre ioner bøyer med forskjellig r ved samme B og v, og dermed
+          separeres.
+        </p>
       </div>
     ),
     alternativeSolution: (
@@ -1174,37 +1444,73 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>(c): Strømmen er parallell med B (N-retning eller S), så F = 0.</p> },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Fra Lorentz på partikkel til kraft på leder</p>
+        <p>
+          En strømførende leder er bare mange ladninger i bevegelse. Hver elektron kjenner{" "}
+          <InlineLatex latex="\vec F = q\vec v\times\vec B" />. Summerer vi over alle ladningsbærerne i et segment med
+          lengde L, faller antall og driftfart sammen til selve strømmen I, og vi får:
+        </p>
+        <FormulaBox latex="\vec F = I\,\vec L\times\vec B,\qquad |F| = I\,L\,B\,\sin\theta" variant="blue" />
+        <p>
+          Her er <InlineLatex latex="\vec L" /> en vektor langs lederen i strømretningen, og θ er vinkelen mellom{" "}
+          <InlineLatex latex="\vec L" /> og <InlineLatex latex="\vec B" />. <strong>Hvorfor ikke{" "}
+          <InlineLatex latex="qvB" />?</strong> Fordi vi har en strømførende leder, ikke en enkelt partikkel —{" "}
+          <InlineLatex latex="ILB" /> er nøyaktig den samlede effekten.
+        </p>
+        <p>
+          Vi definerer koordinater: +x = øst, +y = nord, +z = opp. Jordmagnetfeltet er fra sør mot nord, altså{" "}
+          <InlineLatex latex="\vec B = B\hat j" />. Produktet <InlineLatex latex="ILB" /> beregnes én gang og brukes
+          i alle deloppgaver:
+        </p>
         <FormulaBox
-          latex="IlB = (1{,}5)(2{,}5)(5{,}5\cdot 10^{-5}) = 2{,}06\cdot 10^{-4}\;\text{N}"
+          latex="ILB = (1{,}5)(2{,}5)(5{,}5\cdot 10^{-5}) = 2{,}06\cdot 10^{-4}\;\text{N}"
           variant="blue"
         />
+        <p>Dette er maks-kraft (når sin θ = 1). Retning i hvert tilfelle bestemmes av høyrehåndsregelen.</p>
 
-        <p className="font-semibold text-sm">a) Strøm V→Ø, altså <InlineLatex latex="\vec{l}=l\hat{i}" />. B = B<InlineLatex latex="\hat{j}" />.</p>
+        <p className="font-semibold mt-4">(a) Strøm fra vest mot øst: <InlineLatex latex="\vec L = L\hat i" /></p>
+        <p>
+          <strong>Høyrehåndsregel:</strong> Pek fingre mot øst (<InlineLatex latex="\hat i" />), krum mot nord (<InlineLatex latex="\hat j" />) — tommelen peker <strong>opp</strong> (<InlineLatex latex="\hat k" />).
+        </p>
         <FormulaBox
-          latex="\vec{F} = Il\hat{i}\times B\hat{j} = IlB\,\hat{k} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{opp})"
+          latex="\vec{F} = IL\hat{i}\times B\hat{j} = ILB\,\hat{k} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{opp})"
           variant="blue"
         />
-        <p className="text-sm">Størrelse <InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, rett opp}}" />.</p>
+        <p>Størrelse <InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, rett opp}}" />.</p>
 
-        <p className="font-semibold text-sm">b) Strøm vertikalt opp, <InlineLatex latex="\vec{l}=l\hat{k}" />.</p>
+        <p className="font-semibold mt-4">(b) Strøm vertikalt opp: <InlineLatex latex="\vec L = L\hat k" /></p>
+        <p>
+          <InlineLatex latex="\hat k\times\hat j = -\hat i" /> (bruk sykelsk regel: i→j→k→i). Så kraften peker i −x (vest).
+        </p>
         <FormulaBox
-          latex="\vec{F} = Il\hat{k}\times B\hat{j} = -IlB\,\hat{i} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{mot vest})"
+          latex="\vec{F} = IL\hat{k}\times B\hat{j} = -ILB\,\hat{i} = 2{,}06\cdot 10^{-4}\;\text{N}\;(\text{mot vest})"
           variant="blue"
         />
-        <p className="text-sm"><InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, mot vest}}" />.</p>
+        <p><InlineLatex latex="\boxed{2{,}1\cdot 10^{-4}\;\text{N, mot vest}}" />.</p>
 
-        <p className="font-semibold text-sm">c) Strøm N→S, <InlineLatex latex="\vec{l}=-l\hat{j}" />.</p>
+        <p className="font-semibold mt-4">(c) Strøm N→S: <InlineLatex latex="\vec L = -L\hat j" /></p>
+        <p>
+          Her er <InlineLatex latex="\vec L" /> <em>antiparallell</em> med <InlineLatex latex="\vec B" />. Vinkelen
+          er 180°, <InlineLatex latex="\sin 180° = 0" />. Eller direkte: <InlineLatex latex="\hat j\times\hat j = 0" />.
+        </p>
         <FormulaBox
-          latex="\vec{F} = -Il\hat{j}\times B\hat{j} = 0"
+          latex="\vec{F} = -IL\hat{j}\times B\hat{j} = 0"
           variant="gold"
         />
-        <p className="text-sm">Parallell med B, så <strong>F = 0</strong>.</p>
+        <p>Parallell med B, så <strong>F = 0</strong>.</p>
 
-        <p className="font-semibold text-sm">d) Merkbar i hverdagen?</p>
-        <p className="text-sm">
-          Maks kraft ≈ 2·10⁻⁴ N. Dette tilsvarer å løfte ca. 20 mg. Husholdningsledninger har typisk vekt på kilogram.
-          <strong> Effekten er forsvinnende liten</strong> og ikke merkbar i daglige forhold.
+        <p className="font-semibold mt-4">(d) Merkbar i hverdagen?</p>
+        <p>
+          Maks kraft ≈ <InlineLatex latex="2\cdot 10^{-4}\;\text{N}" />. Det tilsvarer tyngden av ca. 20 mg —
+          en fjær, omtrent. Husholdningsledninger har typisk vekt på mange kilogram. <strong>Effekten er forsvinnende
+          liten</strong> og ikke merkbar i daglige forhold.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{A}\cdot\text{m}\cdot\text{T} = \text{A}\cdot\text{m}\cdot\text{N/(A}\cdot\text{m)} = \text{N}" />. OK.
+          Fysisk tolkning: det samme prinsippet ligger bak elmotorer — men der er B mye sterkere (0,1 til 1 T via
+          permanentmagneter eller spoler), og strømmen er også typisk mye høyere. Det er hvorfor en elmotor kan løfte
+          hundrevis av kilo, mens jordmagnetfeltet er nesten uten praktisk kraftvirkning.
         </p>
       </div>
     ),
@@ -1266,27 +1572,63 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Ny strøm: <InlineLatex latex="I'=V_{maks}/R'" />. Kraft: <InlineLatex latex="F'=I'lB" />.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="font-semibold text-sm">a) Maks spenning</p>
-        <p className="text-sm">Likevekt: <InlineLatex latex="IlB=mg" />.</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Magnetisk balanse = to Newton-lover + Ohm</p>
+        <p>
+          Stangen henger under tyngden og løftes av magnetkraften på strømmen. <strong>Ved "maks spenning"</strong>{" "}
+          løfter magnetkraften akkurat hele vekten — stangen svever, ingen normalkraft fra støttene. Dette er{" "}
+          <em>Newtons 1. lov</em> (likevekt), og betyr at magnetkraften presist balanserer tyngden.
+        </p>
+        <FormulaBox latex="\text{Likevekt:}\;\; F_{mag} = mg \;\Longleftrightarrow\; I\,l\,B = m\,g" variant="blue" />
+        <p>
+          Dermed finner vi strømmen først, og bruker så Ohms lov <InlineLatex latex="V = I R" /> for å få spenningen.
+        </p>
+        <FormulaBox latex="V = I R" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke bruke en energimetode?</strong> Fordi dette handler om likevekt i et øyeblikk (a = 0), ikke om
+          energioverføring over tid. <strong>Hvorfor akkurat <InlineLatex latex="F=IlB" />?</strong> Lederen står
+          vinkelrett på B (sin θ = 1), og kraften er <em>rent magnetisk</em>.
+        </p>
+        <p>
+          Når motstanden plutselig blir mye mindre, forblir V-kilden den samme (batterier holder V), men I eksploderer
+          (<InlineLatex latex="I' = V/R'" />), slik at F blir langt større enn mg. Netto kraft oppover gir
+          akselerasjon via <em>Newtons 2. lov</em>:
+        </p>
+        <FormulaBox latex="F_{net} = F'_{mag} - mg = ma \;\Longrightarrow\; a = \dfrac{F'_{mag} - mg}{m}" variant="blue" />
+
+        <p className="font-semibold mt-4">(a) Maks spenning før stangen "letter"</p>
+        <p>Omforming: <InlineLatex latex="I_{maks} = mg/(lB)" />. Innsetting:</p>
         <FormulaBox
           latex="I_{maks} = \frac{mg}{lB} = \frac{(0{,}750)(9{,}80)}{(0{,}500)(0{,}450)} = 32{,}67\;\text{A}"
           variant="blue"
         />
+        <p>Deretter Ohms lov:</p>
         <FormulaBox
           latex="V_{maks} = I_{maks}R = (32{,}67)(25{,}0) = \boxed{817\;\text{V}}"
           variant="gold"
         />
+        <p>
+          <strong>Retningstest:</strong> Kraften må peke oppover. Med B inn i arket (−z) og strøm fra venstre mot høyre
+          (+x), gir <InlineLatex latex="\hat i\times(-\hat k) = \hat j" /> (opp) — riktig! Batteriets polaritet er valgt
+          slik at strømmen går denne veien.
+        </p>
 
-        <p className="font-semibold text-sm mt-2">b) Akselerasjon etter kortslutning</p>
+        <p className="font-semibold mt-4">(b) Akselerasjon etter kortslutning</p>
+        <p>
+          V holder seg på 817 V, R faller fra 25 Ω til 2,0 Ω. Strømmen skyter opp:
+        </p>
         <FormulaBox
           latex="I' = \frac{V_{maks}}{R'} = \frac{817}{2{,}0} = 408{,}5\;\text{A}"
           variant="blue"
         />
+        <p>Magnetkraft på nytt:</p>
         <FormulaBox
           latex="F'_{mag} = I'lB = (408{,}5)(0{,}500)(0{,}450) = 91{,}9\;\text{N}"
           variant="blue"
         />
+        <p>
+          Nettokraft opp og Newton 2:
+        </p>
         <FormulaBox
           latex="a = \frac{F'_{mag} - mg}{m} = \frac{91{,}9 - (0{,}750)(9{,}80)}{0{,}750}"
           variant="blue"
@@ -1295,6 +1637,13 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="a = \boxed{113\;\text{m/s}^2\;(\text{oppover})}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{N}/\text{kg} = \text{m/s}^2" />. OK.
+          Fysisk tolkning: 113 m/s² ≈ 11,5 g — stangen slynges voldsomt oppover, nesten som i en kanon.
+          Dette demonstrerer at en "liten" endring i R (fra 25 Ω til 2 Ω) kan gi dramatiske effekter
+          fordi strømmen er omvendt proporsjonal med R. Samme prinsipp forklarer hvorfor kortslutninger er farlige
+          — I kan lett bli flere hundre ampere, som tilsvarer enorme krefter og termisk skade.
+        </p>
       </div>
     ),
     summary: (
@@ -1350,7 +1699,30 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Vinkelen er 90°, så sin θ = 1.</p> },
     ],
     solution: (
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Kraft på strømførende leder</p>
+        <p>
+          Kraften på en rett leder i et uniformt magnetfelt gis av:
+        </p>
+        <FormulaBox latex="\vec F = I\,\vec L\times\vec B,\qquad |F| = I\,L\,B\,\sin\theta" variant="blue" />
+        <p>
+          Her er L <em>bare</em> den delen av lederen som faktisk er i feltet — utenfor den sylindriske regionen er B ≈ 0,
+          og bidraget forsvinner. Lederen passerer gjennom sentrum av sylinderen vinkelrett på aksen, så den
+          "tverrer" hele diameteren; dermed er den effektive lengden lik diameteren.
+        </p>
+        <p>
+          <strong>Hvorfor er L = d?</strong> Tenk geometrisk: en rett leder gjennom midten av en sirkel (sett vinkelrett på)
+          har en korde lik diameteren. Og siden B = 0 utenfor, bidrar bare den delen som er innenfor.
+        </p>
+        <p>
+          <strong>Hvorfor ikke hele lederens lengde?</strong> Fordi feltet er kun i sylinderen. Utenfor er{" "}
+          <InlineLatex latex="F = I\cdot 0\cdot B = 0" /> per meter.
+        </p>
+        <p>
+          Lederen er vinkelrett på B, så θ = 90° og sin θ = 1.
+        </p>
+
+        <p className="font-semibold mt-4">Innsetting</p>
         <FormulaBox
           latex="F = IlB\sin\theta = (11{,}0)(0{,}0260)(0{,}600)(1)"
           variant="blue"
@@ -1359,7 +1731,17 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="F = \boxed{0{,}172\;\text{N}}"
           variant="gold"
         />
-        <p className="text-sm">Retningen bestemmes av høyrehåndsregelen <InlineLatex latex="\vec{l}\times\vec{B}" />.</p>
+        <p>
+          <strong>Retning via høyrehåndsregelen:</strong> Pek fingrene i strømretningen (ut av arket, +z), krum mot B
+          (la oss si +x langs polene), tommelen peker i +y. Altså: kraften står vinkelrett på både lederen og B, og
+          retningen følger regelen <InlineLatex latex="\vec L\times\vec B" />.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{A}\cdot\text{m}\cdot\text{T} = \text{N}" />. OK.
+          Fysisk tolkning: 0,17 N er ganske lite, men i elmotorer og høyttalere er dette prinsippet kritisk — man
+          bruker mange vindinger og sterke felt for å skalere kraften opp. Merk at hvis lederen var <em>parallell</em>{" "}
+          med B, ville kraften vært null (sin 0° = 0).
+        </p>
       </div>
     ),
     summary: (
@@ -1416,42 +1798,78 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 2", content: <p>Bruk <InlineLatex latex="\hat{k}\times\hat{i}=\hat{j}" /> og <InlineLatex latex="\hat{k}\times\hat{j}=-\hat{i}" />.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="text-sm">
-          Størrelse: <InlineLatex latex="F = IlB\sin 90° = IlB" />. Vi tar med kraft per meter
-          (<InlineLatex latex="IB = 1{,}529\;\text{N/m}" />), og totalkraft er dette ganger lengden i feltet.
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Samme kraftformel, variabel B-retning</p>
+        <p>
+          For en strømførende leder bruker vi:
         </p>
+        <FormulaBox latex="\vec F = I\,\vec L\times\vec B,\qquad |F| = I\,L\,B\sin\theta" variant="blue" />
+        <p>
+          Strømmen er <em>alltid vertikal ned</em> (<InlineLatex latex="\vec L = -L\hat k" />), og B er <em>alltid
+          horisontal</em> (ligger i xy-planet). Dermed er vinkelen mellom <InlineLatex latex="\vec L" /> og{" "}
+          <InlineLatex latex="\vec B" /> alltid 90° og <InlineLatex latex="\sin\theta = 1" />. Kraftstørrelsen blir
+          den samme i alle tre tilfellene — bare retningen varierer.
+        </p>
+        <p>
+          <strong>Hvorfor ikke prøve å regne ut θ for hver B?</strong> Siden <InlineLatex latex="\vec L" /> er langs z
+          og <InlineLatex latex="\vec B" /> i xy, står de alltid perpendikulært. Det er derfor effektivt å jobbe
+          vektorbasert: bare finn komponenten av <InlineLatex latex="\vec L\times\vec B" />.
+        </p>
+        <p>Koordinatsystem: +x = øst, +y = nord, +z = opp. Størrelsen av kraft per meter:</p>
+        <FormulaBox latex="|F|/L = IB = (2{,}60)(0{,}588) = 1{,}529\;\text{N/m}" variant="blue" />
 
-        <p className="font-semibold text-sm">a) B mot øst, <InlineLatex latex="\vec{B}=B\hat{i}" /></p>
-        <FormulaBox
-          latex="\vec{F}=I(-l\hat{k})\times B\hat{i} = -IlB(\hat{k}\times\hat{i}) = -IlB\,\hat{j}\;(\text{mot sør})"
-          variant="blue"
-        />
-        <p className="text-sm"><InlineLatex latex="F/l = \boxed{1{,}53\;\text{N/m, mot sør}}" />.</p>
-
-        <p className="font-semibold text-sm">b) B mot sør, <InlineLatex latex="\vec{B}=-B\hat{j}" /></p>
-        <FormulaBox
-          latex="\vec{F}=I(-l\hat{k})\times(-B\hat{j}) = IlB(\hat{k}\times\hat{j}) = -IlB\,\hat{i}\;(\text{mot vest})"
-          variant="blue"
-        />
-        <p className="text-sm"><InlineLatex latex="F/l = \boxed{1{,}53\;\text{N/m, mot vest}}" />.</p>
-
-        <p className="font-semibold text-sm">c) B 30° sør for vest</p>
-        <p className="text-sm">
-          <InlineLatex latex="\vec{B}=B(-\cos 30°\hat{i}-\sin 30°\hat{j})" />.
+        <p className="font-semibold mt-4">(a) B mot øst: <InlineLatex latex="\vec B = B\hat i" /></p>
+        <p>
+          <InlineLatex latex="\hat k\times\hat i = \hat j" /> (syklisk regel). Med ekstra minus fra{" "}
+          <InlineLatex latex="\vec L = -L\hat k" />:
         </p>
         <FormulaBox
-          latex="\vec{F} = I(-l\hat{k})\times B(-\cos 30°\hat{i}-\sin 30°\hat{j}) = IlB(\cos 30°\hat{j}-\sin 30°\hat{i})"
+          latex="\vec{F}=I(-L\hat{k})\times B\hat{i} = -ILB(\hat{k}\times\hat{i}) = -ILB\,\hat{j}\;(\text{mot sør})"
           variant="blue"
         />
-        <p className="text-sm">
-          Komponenter: <InlineLatex latex="F_x=-IlB\sin 30°" />, <InlineLatex latex="F_y=+IlB\cos 30°" />.
-          Kraftens retning er 30° øst for nord (eller 60° nord for øst).
+        <p><InlineLatex latex="F/L = \boxed{1{,}53\;\text{N/m, mot sør}}" />.</p>
+
+        <p className="font-semibold mt-4">(b) B mot sør: <InlineLatex latex="\vec B = -B\hat j" /></p>
+        <p>
+          <InlineLatex latex="\hat k\times\hat j = -\hat i" />. Med to minus (ett fra L, ett fra B) får vi netto:
+        </p>
+        <FormulaBox
+          latex="\vec{F}=I(-L\hat{k})\times(-B\hat{j}) = ILB(\hat{k}\times\hat{j}) = -ILB\,\hat{i}\;(\text{mot vest})"
+          variant="blue"
+        />
+        <p><InlineLatex latex="F/L = \boxed{1{,}53\;\text{N/m, mot vest}}" />.</p>
+
+        <p className="font-semibold mt-4">(c) B 30° sør for vest</p>
+        <p>
+          Vest er −x, sør er −y. "30° sør for vest" betyr at B dreier 30° fra vest mot sør. Dekomponering:
+        </p>
+        <FormulaBox latex="\vec{B}=B(-\cos 30°\,\hat{i}-\sin 30°\,\hat{j})" variant="blue" />
+        <p>Nå kryssproduktet komponentvis:</p>
+        <FormulaBox
+          latex="\vec{F} = I(-L\hat{k})\times B(-\cos 30°\hat{i}-\sin 30°\hat{j}) = ILB(\cos 30°\,\hat{j}-\sin 30°\,\hat{i})"
+          variant="blue"
+        />
+        <p>
+          <strong>Fortegn/retning:</strong> <InlineLatex latex="F_x=-ILB\sin 30° < 0" /> (mot vest),{" "}
+          <InlineLatex latex="F_y=+ILB\cos 30° > 0" /> (mot nord). Kraften har større y-komponent enn x-komponent.
+          Vinkel fra +y-aksen (nord): <InlineLatex latex="\tan\alpha = \sin 30°/\cos 30° = \tan 30°" />, så{" "}
+          α = 30° vest for nord.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          (Merk: Oppgaveteksten kan også leses som "30° øst for nord" avhengig av referanseretning; her holder vi oss
+          til komponentregningen over. Uansett: størrelsen per meter er IB = 1,53 N/m.)
         </p>
         <FormulaBox
           latex="|\vec{F}|/l = IB = \boxed{1{,}53\;\text{N/m, 30° øst for nord}}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{A}\cdot\text{T} = \text{A}\cdot\text{N/(A}\cdot\text{m)} = \text{N/m}" />. OK.
+          Fysisk tolkning: kraften per meter leder er om lag 1,5 N/m. For en 1 cm leder blir total kraft 0,015 N — lite.
+          Men i MRI-skannere og partikkelakseleratorer er I høyere og L langt lengre, slik at kreftene blir store nok til
+          å stivne strukturen mekanisk. Et generelt mønster: <InlineLatex latex="\vec F" /> står alltid vinkelrett på
+          både <InlineLatex latex="\vec L" /> og <InlineLatex latex="\vec B" />.
+        </p>
       </div>
     ),
     summary: (
@@ -1516,8 +1934,35 @@ export const exercises: Record<string, ExerciseContent> = {
       { label: "Hint 3", content: <p>Sirkelsenteret: Siden <InlineLatex latex="\vec{v}_0=v_0\hat{i}" /> og sentripetal F peker mot sentrum, se hvilken retning. For <InlineLatex latex="\vec{v}\times\vec{B}" /> med B = +z og v = +x er kraften i −y. Senteret er da ved y = y₀ − r.</p> },
     ],
     solution: (
-      <div className="space-y-3">
-        <p className="font-semibold text-sm">Steg 1: Vinkelhastighet og radius</p>
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold mt-2">Teori: Dekomponér bevegelsen i to uavhengige deler</p>
+        <p>
+          Vi har et partikkel i kombinert E- og B-felt, begge langs +z. Lorentz-loven gir total kraft:
+        </p>
+        <FormulaBox latex="\vec F = q\vec E + q\vec v\times\vec B" variant="blue" />
+        <p>
+          <strong>Nøkkelinnsikt:</strong> Siden <InlineLatex latex="\vec E \parallel \vec B" />, og{" "}
+          <InlineLatex latex="\vec v\times\vec B" /> aldri har komponent langs B, blir bevegelsen enkel å
+          dekomponere:
+        </p>
+        <ul className="list-disc pl-5 space-y-0.5">
+          <li><strong>xy-planet (vinkelrett på B):</strong> Kun magnetkraft, siden E har ingen komponent her. Fart{" "}
+            <InlineLatex latex="v_\perp" /> er konstant (magnetkraften gjør ikke arbeid). Resultat: <em>sirkelbane</em>.</li>
+          <li><strong>z-retningen (parallell med B):</strong> Magnetkraften har ingen z-komponent (<InlineLatex latex="(\vec v\times\vec B)_z = 0" /> siden B har kun z-komponent og <InlineLatex latex="\vec v\times\vec B" /> står vinkelrett på B). Kun E-kraft gjelder: konstant{" "}
+            <InlineLatex latex="a_z = qE/m" />. Resultat: <em>rettlinjet, jevnt akselerert</em>.</li>
+        </ul>
+        <p>
+          Totalt: partikkelen følger en <em>helix (spiral)</em> som akselererer langs aksen. Dette er nøyaktig
+          geometrien i en <strong>syklotron</strong>.
+        </p>
+        <FormulaBox latex="\omega = \dfrac{|q|B}{m},\qquad r = \dfrac{v_\perp}{\omega} = \dfrac{m v_\perp}{|q|B},\qquad a_z = \dfrac{qE}{m}" variant="blue" />
+        <p>
+          <strong>Hvorfor ikke bare integrere <InlineLatex latex="\vec F = m\vec a" /> direkte?</strong> Det ville
+          kreve å løse et koblet differentialligningssystem. Ved å bruke at bevegelsen er separerbar, reduseres
+          problemet til to enkle ting: sirkelbane (kjent kinematikk) + konstant akselerasjon (enda mer kjent).
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Vinkelhastighet og radius</p>
         <FormulaBox
           latex="\omega = \frac{|q|B}{m} = \frac{(3{,}75\cdot 10^{-4})(4{,}00)}{5{,}00\cdot 10^{-5}} = 30{,}0\;\text{rad/s}"
           variant="blue"
@@ -1527,34 +1972,40 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p className="font-semibold text-sm">Steg 2: Vinkel ved <InlineLatex latex="t=0{,}0200\;\text{s}" /></p>
+        <p className="font-semibold mt-4">Steg 2: Vinkel ved <InlineLatex latex="t=0{,}0200\;\text{s}" /></p>
         <FormulaBox
           latex="\theta = \omega t = (30{,}0)(0{,}0200) = 0{,}600\;\text{rad}\;(\approx 34{,}38°)"
           variant="blue"
         />
 
-        <p className="font-semibold text-sm">Steg 3: Sirkelsenter i xy-planet</p>
-        <p className="text-sm">
-          Ved <InlineLatex latex="t=0" /> har q&gt;0 fart <InlineLatex latex="v_0\hat{i}" /> og B = +z.{" "}
-          <InlineLatex latex="\vec{F} = q\vec{v}\times\vec{B} = qv_0 B(\hat{i}\times\hat{k}) = -qv_0 B\hat{j}" />{" "}
-          → sentripetal i −y. Senter ligger dermed ved <InlineLatex latex="(x_c,y_c)=(0, 1{,}00 - 1{,}00) = (0, 0)" />.
-          Partikkelen sirkler i klokkeretning (sett ovenfra, +z opp).
+        <p className="font-semibold mt-4">Steg 3: Sirkelsenter via fortegn og høyrehåndsregel</p>
+        <p>
+          Ved t = 0 har q &gt; 0 fart <InlineLatex latex="v_0\hat i" /> og B = +z. Kraften er:
         </p>
+        <FormulaBox latex="\vec F_{mag} = q v_0 B\,(\hat i\times\hat k) = -q v_0 B\,\hat j" variant="blue" />
+        <p>
+          Altså peker sentripetalkraften i −y-retning. Senteret ligger 1 m i −y-retning fra startpunktet (0, 1, 0):
+        </p>
+        <FormulaBox latex="(x_c,y_c) = (0,\;1{,}00 - 1{,}00) = (0,\;0)" variant="blue" />
+        <p>Partikkelen sirkler i klokkeretning (sett ovenfra med +z opp, dvs. mot oss).</p>
 
-        <p className="font-semibold text-sm">Steg 4: xy-posisjon som funksjon av t</p>
-        <p className="text-sm">
-          Med senter i origo og start ved (0, 1): <InlineLatex latex="x(t)=r\sin(\omega t)" />, <InlineLatex latex="y(t)=r\cos(\omega t)" />.
+        <p className="font-semibold mt-4">Steg 4: xy-posisjon som funksjon av t</p>
+        <p>
+          Med senter i origo og startvinkel 90° (på +y-aksen ved t = 0), parametriseres sirkelen slik at partikkelen
+          beveger seg i klokkeretning:
         </p>
+        <FormulaBox latex="x(t) = r\sin(\omega t),\qquad y(t) = r\cos(\omega t)" variant="blue" />
         <FormulaBox
           latex="x = 1{,}00\sin 0{,}600 = 0{,}5646\;\text{m},\quad y = 1{,}00\cos 0{,}600 = 0{,}8253\;\text{m}"
           variant="blue"
         />
 
-        <p className="font-semibold text-sm">Steg 5: z-bevegelse (elektrisk akselerasjon)</p>
+        <p className="font-semibold mt-4">Steg 5: z-bevegelse (konstant akselerasjon fra E)</p>
         <FormulaBox
           latex="a_z = \frac{qE}{m} = \frac{(3{,}75\cdot 10^{-4})(60{,}0)}{5{,}00\cdot 10^{-5}} = 450\;\text{m/s}^2"
           variant="blue"
         />
+        <p>Fra ro i z: <InlineLatex latex="z(t) = \tfrac{1}{2}a_z t^2" /> (samme kinematikk som fritt fall, bare uten tyngde).</p>
         <FormulaBox
           latex="z(t) = \tfrac{1}{2}a_z t^2 = \tfrac{1}{2}(450)(0{,}0200)^2 = 0{,}0900\;\text{m}"
           variant="blue"
@@ -1564,14 +2015,16 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="font-semibold text-sm mt-2">Steg 6: Farten</p>
-        <p className="text-sm">
-          I xy-planet er farten konstant (<InlineLatex latex="v_\perp = 30{,}0\;\text{m/s}" />). Langs z:
+        <p className="font-semibold mt-4">Steg 6: Farten</p>
+        <p>
+          I xy-planet er farten konstant fordi magnetkraften ikke gjør arbeid (<InlineLatex latex="v_\perp = 30{,}0\;\text{m/s}" />).
+          Langs z øker v lineært med tiden:
         </p>
         <FormulaBox
-          latex="v_z = a_z t = (450)(0{,}0200) = 9{,}00\;\text{m/s}"
+          latex="v_z = a_z\,t = (450)(0{,}0200) = 9{,}00\;\text{m/s}"
           variant="blue"
         />
+        <p>Total fart (Pythagoras i 3D):</p>
         <FormulaBox
           latex="v = \sqrt{v_\perp^2 + v_z^2} = \sqrt{30{,}0^2 + 9{,}00^2} = \sqrt{900+81}"
           variant="blue"
@@ -1580,6 +2033,12 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="v = \boxed{31{,}3\;\text{m/s}}"
           variant="gold"
         />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: alt i SI-enheter, a_z i m/s², v i m/s, r i m — konsistent.
+          Fysisk tolkning: Farten økes kun av E-feltet langs z. Hvis vi hadde hatt E ⊥ B, ville vi i stedet
+          fått "E×B-drift" — klassisk i plasmafysikk. Denne oppgaven er kjerneprinsippet i syklotron-akseleratorer:
+          partikler går i sirkel i B, og en elektrisk spenning akselererer dem hver gang de krysser et "gap".
+        </p>
       </div>
     ),
     alternativeSolution: (

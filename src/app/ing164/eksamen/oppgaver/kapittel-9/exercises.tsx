@@ -118,17 +118,60 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Finn vinkelen</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Radianen er definert slik at en bue som er like lang som
+          radien spenner ut 1 rad. Fra denne definisjonen følger den grunnleggende relasjonen{" "}
+          <InlineLatex latex="s = r\theta" /> — men kun når <InlineLatex latex="\theta" /> er
+          i radianer. Dette er fordi en full omkrets <InlineLatex latex="s = 2\pi r" /> skal
+          tilsvare <InlineLatex latex="\theta = 2\pi" /> rad. Konverteringen mellom grader og
+          radianer følger av <InlineLatex latex="360° = 2\pi\;\text{rad}" />, altså{" "}
+          <InlineLatex latex="1\;\text{rad} = 180°/\pi \approx 57{,}3°" />.
+        </p>
+
+        <p className="font-semibold">(a) Finn vinkelen</p>
+        <p>
+          <strong>Originalformel</strong> (gjelder bare når <InlineLatex latex="\theta" /> er i
+          radianer):
+        </p>
+        <FormulaBox latex="s = r\theta" variant="blue" />
+        <p>
+          Vi kjenner bue og radius og skal finne vinkelen, så vi løser algebraisk for{" "}
+          <InlineLatex latex="\theta" />:
+        </p>
+        <FormulaBox latex="\theta = \frac{s}{r}" variant="blue" />
+        <p>Sett inn tall:</p>
         <FormulaBox latex="\theta = \frac{s}{r} = \frac{1{,}57}{2{,}45} = 0{,}641\;\text{rad}" variant="blue" />
+        <p>
+          Konverter til grader ved å gange med <InlineLatex latex="180°/\pi" />:
+        </p>
         <FormulaBox latex="\theta = 0{,}641\;\text{rad} \cdot \frac{180°}{\pi} = \boxed{\,36{,}7°\,}" variant="gold" />
 
-        <p><strong>(b) Finn radien</strong></p>
+        <p className="font-semibold">(b) Finn radien</p>
+        <p>
+          Her er vinkelen gitt i grader, så vi må først konvertere til radianer — ellers gir{" "}
+          <InlineLatex latex="s = r\theta" /> feil svar:
+        </p>
         <FormulaBox latex="\theta = 125° \cdot \frac{\pi}{180°} = 2{,}182\;\text{rad}" variant="blue" />
+        <p>
+          Løs <InlineLatex latex="s = r\theta" /> for r:
+        </p>
+        <FormulaBox latex="r = \frac{s}{\theta}" variant="blue" />
         <FormulaBox latex="r = \frac{s}{\theta} = \frac{0{,}133}{2{,}182} = \boxed{\,0{,}0609\;\text{m} = 6{,}09\;\text{cm}\,}" variant="gold" />
 
-        <p><strong>(c) Finn buelengden</strong></p>
+        <p className="font-semibold">(c) Finn buelengden</p>
+        <p>
+          Vinkelen er allerede i radianer, så vi kan sette rett inn i originalformelen{" "}
+          <InlineLatex latex="s = r\theta" />:
+        </p>
         <FormulaBox latex="s = r\theta = 1{,}60 \cdot 0{,}800 = \boxed{\,1{,}28\;\text{m}\,}" variant="gold" />
+
+        <p>
+          <strong>Fysisk tolkning:</strong> En vinkel på 0,8 rad er ca 46° — litt mindre enn
+          en kvartsirkel, så buen 1,28 m er litt mindre enn en kvartsirkel av omkretsen{" "}
+          <InlineLatex latex="2\pi \cdot 1{,}60 \approx 10{,}05\;\text{m}" />, som stemmer
+          (10,05/4 ≈ 2,51 m er kvart, så 1,28 m ligger under det).
+        </p>
       </div>
     ),
     summary: (
@@ -186,19 +229,48 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Vinkelhastighet</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Vinkelhastigheten{" "}
+          <InlineLatex latex="\omega = d\theta/dt" /> måler hvor raskt vinkelen endrer seg. I
+          SI-systemet er enheten rad/s, men i praksis oppgis turtall ofte i <em>rpm</em>{" "}
+          (revolutions per minute = omdreininger per minutt). For å bruke rotasjonskinematikken
+          må vi konvertere til rad/s. Siden 1 omdreining = <InlineLatex latex="2\pi" /> rad og
+          1 min = 60 s, får vi den universelle konverteringsformelen:
+        </p>
+        <FormulaBox latex="\omega\;[\text{rad/s}] = n\;[\text{rpm}] \cdot \frac{2\pi}{60} = n \cdot \frac{\pi}{30}" variant="blue" />
+
+        <p className="font-semibold">(a) Vinkelhastighet</p>
+        <p>Sett inn <InlineLatex latex="n = 1860" /> med eksplisitt enhetsmultiplikasjon:</p>
         <FormulaBox
           latex="\omega = 1860\;\frac{\text{rev}}{\text{min}} \cdot \frac{2\pi\;\text{rad}}{1\;\text{rev}} \cdot \frac{1\;\text{min}}{60\;\text{s}} = \boxed{\,194{,}8\;\text{rad/s}\,}"
           variant="gold"
         />
 
-        <p><strong>(b) Tid for 40°</strong></p>
+        <p className="font-semibold">(b) Tid for 40°</p>
+        <p>
+          <strong>Originalformel</strong> for konstant vinkelhastighet (analogt med{" "}
+          <InlineLatex latex="x = vt" />):
+        </p>
+        <FormulaBox latex="\theta = \omega t" variant="blue" />
+        <p>
+          Vi skal finne tiden, så vi løser for t:
+        </p>
+        <FormulaBox latex="t = \frac{\theta}{\omega}" variant="blue" />
+        <p>
+          Men denne formelen krever at <InlineLatex latex="\theta" /> er i radianer (fordi{" "}
+          <InlineLatex latex="\omega" /> er i rad/s). Konverter 40° til radianer først:
+        </p>
         <FormulaBox latex="\theta = 40° \cdot \frac{\pi}{180°} = 0{,}6981\;\text{rad}" variant="blue" />
         <FormulaBox
           latex="t = \frac{\theta}{\omega} = \frac{0{,}6981}{194{,}8} = \boxed{\,3{,}58\cdot 10^{-3}\;\text{s} = 3{,}58\;\text{ms}\,}"
           variant="gold"
         />
+        <p>
+          <strong>Fysisk tolkning:</strong> 3,58 ms er en svært kort tid — som forventet når
+          propellen roterer nesten 200 rad/s. Til sammenligning bruker en mekanisk klokkevisere
+          ett minutt på 6° — propellen er altså flere størrelsesordener raskere.
+        </p>
       </div>
     ),
     summary: (
@@ -259,14 +331,42 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Derivér ω(t)</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Rotasjonsbevegelse er analog til rettlinjet bevegelse:{" "}
+          <InlineLatex latex="x \to \theta" />, <InlineLatex latex="v \to \omega" />,{" "}
+          <InlineLatex latex="a \to \alpha" />. Akkurat som{" "}
+          <InlineLatex latex="a = dv/dt" /> i lineær bevegelse, gjelder her:
+        </p>
+        <FormulaBox latex="\alpha_z = \frac{d\omega_z}{dt}" variant="blue" />
+        <p>
+          <strong>Viktig:</strong> Dette er <em>momentan</em> vinkelakselerasjon — gyldig hvert
+          øyeblikk, selv når <InlineLatex latex="\alpha" /> ikke er konstant. Dersom{" "}
+          <InlineLatex latex="\omega(t)" /> IKKE er lineær, kan vi ikke bruke de fire
+          konstant-<InlineLatex latex="\alpha" />-kinematikkformlene — vi må deriver/integrere.
+        </p>
+
+        <p className="font-semibold">(a) Derivér ω(t)</p>
+        <p>
+          Vi har <InlineLatex latex="\omega_z(t) = \gamma - \beta t^2" />.{" "}
+          <InlineLatex latex="\gamma" /> er konstant og deriveres til 0. Effektregelen gir{" "}
+          <InlineLatex latex="d(t^2)/dt = 2t" />:
+        </p>
         <FormulaBox latex="\alpha_z(t) = \frac{d\omega_z}{dt} = \boxed{\,-2\beta t = -(1{,}584\;\text{rad/s}^3)\,t\,}" variant="gold" />
 
-        <p><strong>(b) Ved t = 3,50 s</strong></p>
+        <p className="font-semibold">(b) Ved t = 3,50 s</p>
+        <p>Sett inn tallene i uttrykket fra (a):</p>
         <FormulaBox latex="\alpha_z(3{,}50) = -2(0{,}792)(3{,}50) = \boxed{\,-5{,}54\;\text{rad/s}^2\,}" variant="gold" />
 
-        <p><strong>Gjennomsnittlig akselerasjon</strong></p>
+        <p className="font-semibold">Gjennomsnittlig akselerasjon</p>
+        <p>
+          <strong>Originalformel</strong> for gjennomsnittlig vinkelakselerasjon:
+        </p>
+        <FormulaBox latex="\alpha_{\text{av-z}} = \frac{\omega_z(t_2) - \omega_z(t_1)}{t_2 - t_1}" variant="blue" />
+        <p>
+          Vi må altså finne <InlineLatex latex="\omega" /> ved starten og slutten av
+          intervallet, ved å evaluere den originale <InlineLatex latex="\omega(t)" />:
+        </p>
         <FormulaBox latex="\omega_z(0) = \gamma = 4{,}85\;\text{rad/s}" variant="blue" />
         <FormulaBox latex="\omega_z(3{,}50) = 4{,}85 - 0{,}792(3{,}50)^2 = -4{,}85\;\text{rad/s}" variant="blue" />
         <FormulaBox
@@ -274,11 +374,14 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="gold"
         />
 
-        <p className="text-sm">
-          De to verdiene er ulike fordi <InlineLatex latex="\alpha" /> ikke er konstant — den øker
-          lineært med tiden. Momentan er nettopp dobbelt av gjennomsnitt:{" "}
-          <InlineLatex latex="\alpha_z(3{,}50) = 2 \alpha_{\text{av}}" />, som stemmer for en lineær{" "}
-          <InlineLatex latex="\alpha(t)" />.
+        <p>
+          <strong>Fysisk tolkning:</strong> De to verdiene er ulike fordi{" "}
+          <InlineLatex latex="\alpha" /> ikke er konstant — den øker lineært med tiden. Momentan
+          ved t = 3,50 s er nettopp dobbelt av gjennomsnittet:{" "}
+          <InlineLatex latex="\alpha_z(3{,}50) = 2 \alpha_{\text{av}}" />, som stemmer for en
+          lineær <InlineLatex latex="\alpha(t)" /> (gjennomsnitt av null og en verdi er halve
+          verdien). At <InlineLatex latex="\omega" /> skifter fortegn midt i intervallet
+          forteller oss at viften faktisk stopper og begynner å rotere motsatt vei.
         </p>
       </div>
     ),
@@ -342,31 +445,73 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) ω(t)</strong></p>
-        <FormulaBox latex="\omega_z(t) = \frac{d\theta}{dt} = \boxed{\,\gamma + 3\beta t^2\,}" variant="gold" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> I rotasjonskinematikk er de tre sentrale variablene analoge med
+          lineære størrelser: vinkelposisjon <InlineLatex latex="\theta" /> (tilsvarer{" "}
+          <InlineLatex latex="x" />), vinkelhastighet <InlineLatex latex="\omega = d\theta/dt" />{" "}
+          (tilsvarer <InlineLatex latex="v = dx/dt" />) og vinkelakselerasjon{" "}
+          <InlineLatex latex="\alpha = d\omega/dt" /> (tilsvarer <InlineLatex latex="a = dv/dt" />).
+          Når vi har posisjonsfunksjonen <InlineLatex latex="\theta(t)" /> får vi alltid hastigheten
+          ved å derivere — aldri ved å "dele på tid", fordi det bare fungerer når bevegelsen er lineær.
+        </p>
 
-        <p><strong>(b) Ved t = 0</strong></p>
-        <FormulaBox latex="\omega_z(0) = \gamma = \boxed{\,0{,}428\;\text{rad/s}\,}" variant="gold" />
+        <p className="font-semibold mt-4">(a) Finn ω(t) fra θ(t)</p>
+        <p>
+          <strong>Originalformel</strong> (definisjonen av momentan vinkelhastighet):
+        </p>
+        <FormulaBox latex="\omega_z(t) = \frac{d\theta}{dt}" variant="blue" />
+        <p>
+          Vi bruker denne fordi <InlineLatex latex="\theta(t)" /> ikke er lineær i t (har{" "}
+          <InlineLatex latex="t^3" />-ledd), så <InlineLatex latex="\omega" /> varierer med tiden og
+          kan ikke finnes ved <InlineLatex latex="\Delta\theta/\Delta t" /> for et vilkårlig øyeblikk.
+          Effektregelen gir <InlineLatex latex="d(t)/dt = 1" /> og{" "}
+          <InlineLatex latex="d(t^3)/dt = 3t^2" />:
+        </p>
+        <FormulaBox latex="\omega_z(t) = \frac{d}{dt}(\gamma t + \beta t^3) = \boxed{\,\gamma + 3\beta t^2\,}" variant="gold" />
+        <p>Enhetssjekk: <InlineLatex latex="[\gamma] = \text{rad/s}" /> og <InlineLatex latex="[\beta t^2] = (\text{rad/s}^3)\cdot \text{s}^2 = \text{rad/s}" /> — stemmer.</p>
 
-        <p><strong>(c) Ved t = 4,55 s</strong></p>
+        <p className="font-semibold mt-4">(b) Initial ω</p>
+        <p>Sett t = 0 inn i uttrykket fra (a). <InlineLatex latex="t^2" />-leddet blir null:</p>
+        <FormulaBox latex="\omega_z(0) = \gamma + 3\beta(0)^2 = \gamma = \boxed{\,0{,}428\;\text{rad/s}\,}" variant="gold" />
+        <p>Dette viser hvorfor konstanten <InlineLatex latex="\gamma" /> tolkes som starthastigheten.</p>
+
+        <p className="font-semibold mt-4">(c) Momentan ω ved t = 4,55 s</p>
+        <p>Sett inn tall i formelen fra (a) steg for steg:</p>
         <FormulaBox
-          latex="\omega_z(4{,}55) = 0{,}428 + 3(0{,}01)(4{,}55)^2 = 0{,}428 + 0{,}621 = \boxed{\,1{,}049\;\text{rad/s}\,}"
+          latex="\omega_z(4{,}55) = 0{,}428 + 3(1{,}00\cdot 10^{-2})(4{,}55)^2"
+          variant="blue"
+        />
+        <FormulaBox
+          latex="= 0{,}428 + 0{,}03 \cdot 20{,}7 = 0{,}428 + 0{,}621 = \boxed{\,1{,}049\;\text{rad/s}\,}"
           variant="gold"
         />
 
-        <p><strong>Gjennomsnittlig ω</strong></p>
-        <FormulaBox latex="\theta(4{,}55) = 0{,}428(4{,}55) + 0{,}01(4{,}55)^3 = 1{,}948 + 0{,}942 = 2{,}890\;\text{rad}" variant="blue" />
+        <p className="font-semibold mt-4">Gjennomsnittlig ω — hvorfor integrere og ikke bare snitte?</p>
+        <p>
+          <strong>Originalformel</strong> for gjennomsnittlig vinkelhastighet (definisjon):
+        </p>
+        <FormulaBox latex="\omega_{\text{av-z}} = \frac{\Delta\theta}{\Delta t} = \frac{\theta(t_2) - \theta(t_1)}{t_2 - t_1}" variant="blue" />
+        <p>
+          Denne formelen bruker <em>den faktiske endringen i vinkel</em>, som igjen er lik{" "}
+          integralet av <InlineLatex latex="\omega(t)" /> over intervallet. Vi bruker altså
+          posisjonsfunksjonen direkte, ikke snittet av endepunktsverdiene:
+        </p>
+        <FormulaBox latex="\theta(4{,}55) = 0{,}428(4{,}55) + 1{,}00\cdot 10^{-2}(4{,}55)^3 = 1{,}948 + 0{,}942 = 2{,}890\;\text{rad}" variant="blue" />
+        <FormulaBox latex="\theta(0) = 0" variant="blue" />
         <FormulaBox
-          latex="\omega_{\text{av-z}} = \frac{\theta(4{,}55) - \theta(0)}{4{,}55} = \frac{2{,}890}{4{,}55} = \boxed{\,0{,}635\;\text{rad/s}\,}"
+          latex="\omega_{\text{av-z}} = \frac{2{,}890 - 0}{4{,}55 - 0} = \boxed{\,0{,}635\;\text{rad/s}\,}"
           variant="gold"
         />
 
-        <p className="text-sm">
-          Gjennomsnittet av endepunktene er{" "}
-          <InlineLatex latex="(0{,}428 + 1{,}049)/2 = 0{,}739" />, som er forskjellig fra{" "}
-          <InlineLatex latex="0{,}635" />. Grunnen er at <InlineLatex latex="\omega" /> øker som{" "}
-          <InlineLatex latex="t^2" />, ikke lineært, så den bruker mer tid på lave verdier.
+        <p>
+          <strong>Fysisk tolkning:</strong> Snittet av endepunktsverdiene er{" "}
+          <InlineLatex latex="(0{,}428 + 1{,}049)/2 = 0{,}739\;\text{rad/s}" />, mens det <em>faktiske</em>{" "}
+          gjennomsnittet er 0,635 rad/s — lavere. Grunnen: <InlineLatex latex="\omega(t) = \gamma + 3\beta t^2" />{" "}
+          vokser som <InlineLatex latex="t^2" />, altså tregt i starten og raskt mot slutten. Karusellen
+          bruker derfor størstedelen av tiden på lave hastigheter, og det drar gjennomsnittet ned.
+          Analogt med lineær kinematikk: snitt av endepunktsverdier gir riktig gjennomsnitt kun når
+          hastigheten endres lineært (konstant akselerasjon).
         </p>
       </div>
     ),
@@ -426,19 +571,55 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Vinkelhastighet</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Når vinkelakselerasjonen er <em>konstant</em>, gjelder de fire
+          kinematikkligningene for rotasjon — helt analogt med rettlinjet bevegelse med konstant
+          akselerasjon. Erstatt <InlineLatex latex="x \to \theta" />,{" "}
+          <InlineLatex latex="v \to \omega" />, <InlineLatex latex="a \to \alpha" />, så ser
+          du umiddelbart likhetene. Disse gjelder <strong>bare når α er konstant</strong> — hvis α
+          varierer med tiden må vi integrere (som i oppg. 9.4 og 9.5).
+        </p>
+        <FormulaBox latex="\omega = \omega_0 + \alpha t" variant="blue" />
+        <FormulaBox latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2" variant="blue" />
+        <FormulaBox latex="\omega^2 = \omega_0^2 + 2\alpha\Delta\theta" variant="blue" />
+        <FormulaBox latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)t" variant="blue" />
+
+        <p className="font-semibold mt-4">(a) Vinkelhastighet ved t = 2,65 s</p>
+        <p>
+          Vi kjenner <InlineLatex latex="\omega_0" />, <InlineLatex latex="\alpha" /> og t, og
+          skal finne ω. Formelen <InlineLatex latex="\omega = \omega_0 + \alpha t" /> passer
+          perfekt — den kobler akkurat de fire størrelsene uten å involvere den ukjente
+          Δθ. Analogien til lineær er <InlineLatex latex="v = v_0 + at" />:
+        </p>
+        <FormulaBox latex="\omega = \omega_0 + \alpha t" variant="blue" />
         <FormulaBox
-          latex="\omega = \omega_0 + \alpha t = 1{,}35 + 0{,}310 \cdot 2{,}65 = \boxed{\,2{,}17\;\text{rad/s}\,}"
+          latex="\omega = 1{,}35 + 0{,}310 \cdot 2{,}65 = 1{,}35 + 0{,}8215 = \boxed{\,2{,}17\;\text{rad/s}\,}"
           variant="gold"
         />
+        <p>
+          Begge ledd er positive, så hjulet akselererer i samme retning det allerede roterer —
+          vinkelhastigheten vokser, som forventet.
+        </p>
 
-        <p><strong>(b) Vinkel</strong></p>
+        <p className="font-semibold mt-4">(b) Vinkel rotert</p>
+        <p>
+          Vi har <InlineLatex latex="\omega_0" />, α og t — ukjent er Δθ. Formelen{" "}
+          <InlineLatex latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2" /> inneholder
+          akkurat disse fire og er direkte analog med <InlineLatex latex="\Delta x = v_0 t + \tfrac{1}{2}at^2" />:
+        </p>
+        <FormulaBox latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2" variant="blue" />
         <FormulaBox
-          latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2 = 1{,}35 \cdot 2{,}65 + \tfrac{1}{2}(0{,}310)(2{,}65)^2"
+          latex="\Delta\theta = 1{,}35 \cdot 2{,}65 + \tfrac{1}{2}(0{,}310)(2{,}65)^2 = 3{,}578 + 1{,}088"
           variant="blue"
         />
-        <FormulaBox latex="\Delta\theta = 3{,}578 + 1{,}088 = \boxed{\,4{,}67\;\text{rad}\,}" variant="gold" />
+        <FormulaBox latex="\Delta\theta = \boxed{\,4{,}67\;\text{rad}\,}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> 4,67 rad ≈ 268° — altså litt mer enn 3/4 omdreining.
+          Vi kan kontrollere med <InlineLatex latex="\omega^2 = \omega_0^2 + 2\alpha\Delta\theta" />:{" "}
+          <InlineLatex latex="\omega = \sqrt{1{,}35^2 + 2(0{,}310)(4{,}67)} = \sqrt{1{,}823 + 2{,}895} = 2{,}17" />{" "}
+          rad/s. Stemmer med (a) — konsistens!
+        </p>
       </div>
     ),
     summary: (
@@ -494,14 +675,56 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\alpha = \frac{\omega - \omega_0}{t} = \frac{148}{6{,}35} = \boxed{\,23{,}3\;\text{rad/s}^2\,}" variant="gold" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Vi har et tilfelle med konstant vinkelakselerasjon og starthastighet
+          null. Alle fire rotasjonskinematikkformlene gjelder — vi velger den som kobler de størrelsene
+          vi kjenner og den vi vil finne, uten å introdusere nye ukjente. Dette er samme tankesett som
+          i rettlinjet bevegelse: «lag en tabell over hva du vet og hva du vil ha, og velg formelen som
+          matcher».
+        </p>
+
+        <p className="font-semibold mt-4">Finn vinkelakselerasjonen α</p>
+        <p>
+          <strong>Originalformel</strong> (analog med <InlineLatex latex="v = v_0 + at" />):
+        </p>
+        <FormulaBox latex="\omega = \omega_0 + \alpha t" variant="blue" />
+        <p>
+          Vi kjenner <InlineLatex latex="\omega, \omega_0, t" /> og vil finne α, så vi løser algebraisk
+          for α:
+        </p>
+        <FormulaBox latex="\alpha = \frac{\omega - \omega_0}{t}" variant="blue" />
+        <p>
+          Med <InlineLatex latex="\omega_0 = 0" /> (fra ro) forenkles dette til{" "}
+          <InlineLatex latex="\alpha = \omega/t" />:
+        </p>
         <FormulaBox
-          latex="\Delta\theta = \tfrac{1}{2}\alpha t^2 = \tfrac{1}{2}(23{,}3)(6{,}35)^2 = \boxed{\,470\;\text{rad}\,}"
+          latex="\alpha = \frac{148 - 0}{6{,}35} = \boxed{\,23{,}3\;\text{rad/s}^2\,}"
           variant="gold"
         />
-        <p className="text-sm">
-          Tilsvarer <InlineLatex latex="470/2\pi \approx 74{,}8" /> omdreininger.
+
+        <p className="font-semibold mt-4">Finn vinkelen Δθ</p>
+        <p>
+          Nå som vi kjenner α, kan vi bruke{" "}
+          <InlineLatex latex="\Delta\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2" />. Alternativt —{" "}
+          og <em>bedre</em> pedagogisk — kan vi bruke formelen som <em>unngår</em> α som mellomsteg.
+          Når <InlineLatex latex="\omega_0 = 0" /> gir <InlineLatex latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)t = \tfrac{1}{2}\omega t" />{" "}
+          (gjennomsnittshastigheten ganger tid):
+        </p>
+        <FormulaBox latex="\Delta\theta = \tfrac{1}{2}(\omega_0 + \omega)t = \tfrac{1}{2}\omega t" variant="blue" />
+        <FormulaBox
+          latex="\Delta\theta = \tfrac{1}{2}(148)(6{,}35) = \boxed{\,470\;\text{rad}\,}"
+          variant="gold"
+        />
+        <p>
+          Eller ekvivalent med α-formelen:{" "}
+          <InlineLatex latex="\Delta\theta = \tfrac{1}{2}(23{,}3)(6{,}35)^2 = 470" /> rad. Samme svar.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> 470 rad / <InlineLatex latex="2\pi" /> ≈ 74,8
+          omdreininger. Bladets kant (r = 0,090 m) har til slutt lineær fart{" "}
+          <InlineLatex latex="v = r\omega = 0{,}090 \cdot 148 \approx 13{,}3" /> m/s — ca 48 km/t.
+          Derfor bremser aldri et sirkelsagblad momentant: rotasjonsenergien er betydelig.
         </p>
       </div>
     ),
@@ -565,30 +788,67 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Fase 1 (0 → 2,50 s)</strong></p>
-        <FormulaBox latex="\omega_1 = \omega_0 + \alpha_1 t_1 = 27{,}0 + 31{,}0 \cdot 2{,}50 = 104{,}5\;\text{rad/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> En bevegelse med <em>to faser</em> med ulik konstant α må
+          behandles som to separate problemer. Vi kan IKKE bruke én formel over hele tidsintervallet,
+          fordi α er ikke konstant — den skifter verdi ved t = 2,50 s. Strategien er:
+          (1) løs fase 1 med de kjente verdiene fra t = 0, (2) bruk sluttilstanden i fase 1 som
+          starttilstand for fase 2. Fortegn er viktig: <InlineLatex latex="\alpha_2" /> blir negativ
+          fordi retningen er motsatt av ω.
+        </p>
+
+        <p className="font-semibold mt-4">Fase 1 (0 → 2,50 s): akselerasjon</p>
+        <p>
+          <strong>Originalformler</strong> (analogt med lineær kinematikk):
+        </p>
+        <FormulaBox latex="\omega_1 = \omega_0 + \alpha_1 t_1" variant="blue" />
+        <FormulaBox latex="\Delta\theta_1 = \omega_0 t_1 + \tfrac{1}{2}\alpha_1 t_1^2" variant="blue" />
+        <p>Slutthastighet etter fase 1:</p>
+        <FormulaBox latex="\omega_1 = 27{,}0 + 31{,}0 \cdot 2{,}50 = 27{,}0 + 77{,}5 = 104{,}5\;\text{rad/s}" variant="blue" />
+        <p>Vinkel rotert i fase 1:</p>
         <FormulaBox
-          latex="\Delta\theta_1 = \omega_0 t_1 + \tfrac{1}{2}\alpha_1 t_1^2 = 27 \cdot 2{,}5 + \tfrac{1}{2}(31)(2{,}5)^2 = 164{,}4\;\text{rad}"
+          latex="\Delta\theta_1 = 27{,}0 \cdot 2{,}50 + \tfrac{1}{2}(31{,}0)(2{,}50)^2 = 67{,}5 + 96{,}88 = 164{,}4\;\text{rad}"
           variant="blue"
         />
 
-        <p><strong>(a) Totalvinkel</strong></p>
+        <p className="font-semibold mt-4">(a) Totalvinkel fra start til stillstand</p>
+        <p>Fase 1 ga 164,4 rad, fase 2 ga 430 rad (gitt). Summér:</p>
         <FormulaBox
           latex="\Delta\theta_{\text{tot}} = \Delta\theta_1 + \Delta\theta_2 = 164{,}4 + 430 = \boxed{\,594\;\text{rad}\,}"
           variant="gold"
         />
 
-        <p><strong>(c) Retardasjon</strong></p>
-        <FormulaBox latex="0 = \omega_1^2 + 2\alpha_2\Delta\theta_2" variant="blue" />
+        <p className="font-semibold mt-4">(c) Retardasjonen α₂</p>
+        <p>
+          I fase 2 kjenner vi <InlineLatex latex="\omega_1 = 104{,}5" /> (starthastighet),{" "}
+          <InlineLatex latex="\omega = 0" /> (slutt — stopper), og{" "}
+          <InlineLatex latex="\Delta\theta_2 = 430" /> rad. Vi kjenner IKKE tiden. Formelen{" "}
+          <InlineLatex latex="\omega^2 = \omega_1^2 + 2\alpha_2\Delta\theta_2" /> passer perfekt —
+          den inneholder akkurat disse fire:
+        </p>
+        <FormulaBox latex="\omega^2 = \omega_1^2 + 2\alpha_2\Delta\theta_2" variant="blue" />
+        <p>Løs for <InlineLatex latex="\alpha_2" /> med ω = 0:</p>
+        <FormulaBox latex="\alpha_2 = -\frac{\omega_1^2}{2\Delta\theta_2}" variant="blue" />
         <FormulaBox
-          latex="\alpha_2 = -\frac{\omega_1^2}{2\Delta\theta_2} = -\frac{(104{,}5)^2}{2 \cdot 430} = \boxed{\,-12{,}7\;\text{rad/s}^2\,}"
+          latex="\alpha_2 = -\frac{(104{,}5)^2}{2 \cdot 430} = -\frac{10920}{860} = \boxed{\,-12{,}7\;\text{rad/s}^2\,}"
           variant="gold"
         />
+        <p>
+          Negativt fortegn bekrefter at <InlineLatex latex="\alpha_2" /> peker motsatt av{" "}
+          <InlineLatex latex="\omega" /> (retardasjon) — konsistent med at slipesteinen bremses.
+        </p>
 
-        <p><strong>(b) Tid i fase 2 og total tid</strong></p>
-        <FormulaBox latex="t_2 = \frac{0 - \omega_1}{\alpha_2} = \frac{-104{,}5}{-12{,}7} = 8{,}23\;\text{s}" variant="blue" />
-        <FormulaBox latex="t_{\text{tot}} = 2{,}50 + 8{,}23 = \boxed{\,10{,}7\;\text{s}\,}" variant="gold" />
+        <p className="font-semibold mt-4">(b) Total tid</p>
+        <p>Fase 2-tid: bruk <InlineLatex latex="\omega = \omega_1 + \alpha_2 t_2" />, løs for t₂:</p>
+        <FormulaBox latex="t_2 = \frac{\omega - \omega_1}{\alpha_2} = \frac{0 - 104{,}5}{-12{,}7} = 8{,}23\;\text{s}" variant="blue" />
+        <p>Begge fortegn er negative, så t₂ blir positiv — det må den, siden tid ikke kan være negativ.</p>
+        <FormulaBox latex="t_{\text{tot}} = t_1 + t_2 = 2{,}50 + 8{,}23 = \boxed{\,10{,}7\;\text{s}\,}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Retardasjonsfasen er mye lengre enn akselerasjonsfasen
+          (8,23 s vs 2,50 s), fordi |α₂| ≈ 12,7 er mindre enn α₁ = 31,0 — slipesteinen mister fart
+          saktere enn den ble satt opp i fart.
+        </p>
       </div>
     ),
     summary: (
@@ -648,8 +908,24 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) ω innerst og ytterst</strong></p>
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Koblingen mellom lineær og rotasjonsbevegelse kommer fra buelengde-
+          formelen <InlineLatex latex="s = r\theta" />. Deriverer vi med hensyn på tiden (med r
+          konstant for et fast punkt på legemet) får vi <InlineLatex latex="v = r\omega" />.
+          Dette er en av de mest brukte broene mellom lineær og rotasjon. På en CD leser laseren med{" "}
+          <em>konstant lineær fart</em> — og siden r varierer langs sporet (fra 25 mm innerst til 58 mm
+          ytterst), må ω synke når r øker for å holde v konstant. Dette er motsatt av en platespiller,
+          som har konstant ω.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Vinkelfart innerst og ytterst</p>
+        <p>
+          <strong>Originalformel</strong> (tangentiell fart på en sirkelbane):
+        </p>
+        <FormulaBox latex="v = r\omega" variant="blue" />
+        <p>Vi kjenner v og r, vil ha ω. Løs for ω:</p>
+        <FormulaBox latex="\omega = \frac{v}{r}" variant="blue" />
         <FormulaBox
           latex="\omega_1 = \frac{v}{r_1} = \frac{1{,}25}{0{,}0250} = \boxed{\,50{,}0\;\text{rad/s}\,}"
           variant="gold"
@@ -658,15 +934,36 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="\omega_2 = \frac{v}{r_2} = \frac{1{,}25}{0{,}0580} = \boxed{\,21{,}6\;\text{rad/s}\,}"
           variant="gold"
         />
+        <p>
+          Enhetssjekk: <InlineLatex latex="\text{m/s} / \text{m} = 1/\text{s} = \text{rad/s}" />{" "}
+          (radianer er dimensjonsløse). CDen snurrer altså mer enn dobbelt så fort i starten
+          (innerst) som på slutten (ytterst) — motsatt av hva mange tror.
+        </p>
 
-        <p><strong>(b) Sporlengde</strong></p>
+        <p className="font-semibold mt-4">(b) Total sporlengde</p>
+        <p>
+          Med konstant lineærfart og total tid T er sporlengden rett og slett{" "}
+          <InlineLatex latex="L = vT" /> — lineærfart er per definisjon meter per sekund.
+          Konverter 74 min til sekunder først:
+        </p>
+        <FormulaBox latex="T = 74{,}0 \cdot 60 = 4440\;\text{s}" variant="blue" />
         <FormulaBox latex="L = vT = 1{,}25 \cdot 4440 = \boxed{\,5550\;\text{m} = 5{,}55\;\text{km}\,}" variant="gold" />
+        <p>Over 5 km spor på en liten disk — imponerende tetthet!</p>
 
-        <p><strong>(c) Gjennomsnittlig α</strong></p>
+        <p className="font-semibold mt-4">(c) Gjennomsnittlig vinkelakselerasjon</p>
+        <p>
+          <strong>Originalformel</strong> (definisjon av gjennomsnittlig α):
+        </p>
+        <FormulaBox latex="\alpha_{\text{av}} = \frac{\Delta\omega}{\Delta t} = \frac{\omega_2 - \omega_1}{T}" variant="blue" />
         <FormulaBox
-          latex="\alpha_{\text{av}} = \frac{\omega_2 - \omega_1}{T} = \frac{21{,}6 - 50{,}0}{4440} = \boxed{\,-6{,}39\cdot 10^{-3}\;\text{rad/s}^2\,}"
+          latex="\alpha_{\text{av}} = \frac{21{,}6 - 50{,}0}{4440} = \frac{-28{,}4}{4440} = \boxed{\,-6{,}39\cdot 10^{-3}\;\text{rad/s}^2\,}"
           variant="gold"
         />
+        <p>
+          <strong>Fortegn og tolkning:</strong> Negativt α betyr at ω avtar — hvilket er
+          korrekt, siden CDen saktner ned som funksjon av tid (laseren beveger seg utover).
+          Verdien er svært liten fordi endringen skjer over en lang periode (over en time).
+        </p>
       </div>
     ),
     summary: (
@@ -719,26 +1016,56 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>Finn ω</strong></p>
-        <FormulaBox latex="\omega^2 = 2\alpha\Delta\theta = 2 \cdot 3{,}50 \cdot 4\pi = 87{,}96\;(\text{rad/s})^2" variant="blue" />
-        <FormulaBox latex="\omega = 9{,}38\;\text{rad/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Radial (sentripetal) akselerasjon er den komponenten av
+          akselerasjonen som peker inn mot sentrum og holder et punkt i sirkelbevegelse. For et
+          punkt på kanten av et roterende hjul er den koblet både til lineær fart v (langs tangenten)
+          og vinkelhastighet ω gjennom <InlineLatex latex="v = r\omega" />. Derfor kan{" "}
+          <InlineLatex latex="a_{\text{rad}}" /> skrives på to ekvivalente måter:{" "}
+          <InlineLatex latex="a_{\text{rad}} = v^2/r = r\omega^2" />. De må gi samme svar — velg den
+          formen som bruker de størrelsene du allerede kjenner.
+        </p>
 
-        <p><strong>(a) Med ω²r</strong></p>
+        <p className="font-semibold mt-4">Steg 1 — Finn ω etter 2 omdreininger</p>
+        <p>
+          Siden α er konstant og vi kjenner <InlineLatex latex="\omega_0 = 0" />, α og Δθ (men ikke
+          tid), passer formelen <InlineLatex latex="\omega^2 = \omega_0^2 + 2\alpha\Delta\theta" />{" "}
+          perfekt — den inneholder akkurat disse fire. Ingen grunn til å regne ut tid først.
+        </p>
+        <FormulaBox latex="\omega^2 = \omega_0^2 + 2\alpha\Delta\theta" variant="blue" />
+        <p>Konverter 2 omdreininger til radianer: <InlineLatex latex="\Delta\theta = 2 \cdot 2\pi = 4\pi" /> rad.</p>
+        <FormulaBox latex="\omega^2 = 0 + 2(3{,}50)(4\pi) = 28\pi = 87{,}96\;(\text{rad/s})^2" variant="blue" />
+        <FormulaBox latex="\omega = \sqrt{87{,}96} = 9{,}38\;\text{rad/s}" variant="blue" />
+
+        <p className="font-semibold mt-4">(a) Med <InlineLatex latex="a_{\text{rad}} = \omega^2 r" /></p>
+        <p>
+          <strong>Originalformel</strong> — direkte fra definisjonen av sentripetal akselerasjon når
+          ω er kjent:
+        </p>
+        <FormulaBox latex="a_{\text{rad}} = \omega^2 r" variant="blue" />
+        <p>Vi bruker denne fordi vi allerede har <InlineLatex latex="\omega^2" /> uten å ta kvadratrot:</p>
         <FormulaBox
-          latex="a_{\text{rad}} = \omega^2 r = 87{,}96 \cdot 0{,}100 = \boxed{\,8{,}80\;\text{m/s}^2\,}"
+          latex="a_{\text{rad}} = 87{,}96 \cdot 0{,}100 = \boxed{\,8{,}80\;\text{m/s}^2\,}"
           variant="gold"
         />
 
-        <p><strong>(b) Med v²/r</strong></p>
+        <p className="font-semibold mt-4">(b) Med <InlineLatex latex="a_{\text{rad}} = v^2/r" /></p>
+        <p>Finn først v fra <InlineLatex latex="v = r\omega" />:</p>
         <FormulaBox latex="v = r\omega = 0{,}100 \cdot 9{,}38 = 0{,}938\;\text{m/s}" variant="blue" />
+        <p>Deretter <InlineLatex latex="a_{\text{rad}}" />:</p>
+        <FormulaBox latex="a_{\text{rad}} = \frac{v^2}{r}" variant="blue" />
         <FormulaBox
-          latex="a_{\text{rad}} = \frac{v^2}{r} = \frac{(0{,}938)^2}{0{,}100} = \boxed{\,8{,}80\;\text{m/s}^2\,}"
+          latex="a_{\text{rad}} = \frac{(0{,}938)^2}{0{,}100} = \frac{0{,}880}{0{,}100} = \boxed{\,8{,}80\;\text{m/s}^2\,}"
           variant="gold"
         />
 
-        <p className="text-sm">
-          Samme svar — som forventet. Begge formlene er samme uttrykk, skrevet ulikt.
+        <p>
+          <strong>Hvorfor samme svar?</strong> Formlene er identiske algebraisk:{" "}
+          <InlineLatex latex="v^2/r = (r\omega)^2/r = r\omega^2" />. De uttrykker samme fysikk ulikt.
+          Dette er en nyttig sjekk: hvis de to metodene gir ulike svar, er det en feil et sted.
+          Enhetssjekk: <InlineLatex latex="(\text{rad/s})^2 \cdot \text{m} = \text{m/s}^2" /> —
+          stemmer.
         </p>
       </div>
     ),
@@ -782,13 +1109,45 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [{ label: "Hint 1", content: <p className="text-sm"><InlineLatex latex="\omega = n \cdot 2\pi/60" />.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\omega = 2600 \cdot \frac{2\pi}{60} = 272{,}3\;\text{rad/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> For et punkt på kanten av et roterende legeme er lineær fart
+          (tangentiell fart) gitt ved <InlineLatex latex="v = r\omega" />. Denne formelen kommer
+          direkte fra buelengdeformelen <InlineLatex latex="s = r\theta" /> — derivert med hensyn
+          på tiden (med konstant r) gir <InlineLatex latex="ds/dt = r\, d\theta/dt" />, altså{" "}
+          <InlineLatex latex="v = r\omega" />. Husk: <InlineLatex latex="\omega" /> må være i rad/s,
+          ikke rpm — ellers får vi feil enhet.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1 — Konverter rpm til rad/s</p>
+        <p>
+          <strong>Originalformel</strong> for konvertering:
+        </p>
+        <FormulaBox latex="\omega = n \cdot \frac{2\pi}{60}" variant="blue" />
+        <p>
+          Grunnlaget: 1 omdreining = <InlineLatex latex="2\pi" /> rad og 1 min = 60 s, så faktoren
+          er <InlineLatex latex="2\pi/60" />.
+        </p>
+        <FormulaBox latex="\omega = 2600 \cdot \frac{2\pi}{60} = 2600 \cdot 0{,}1047 = 272{,}3\;\text{rad/s}" variant="blue" />
+
+        <p className="font-semibold mt-4">Steg 2 — Finn lineærfart på kanten</p>
+        <p>
+          <strong>Originalformel</strong> (kobling lineær ↔ rotasjon):
+        </p>
+        <FormulaBox latex="v = r\omega" variant="blue" />
+        <p>
+          Vi bruker denne direkte — ingen algebraisk omforming nødvendig. Radien er halve
+          diameteren: <InlineLatex latex="r = D/2 = 0{,}18/2 = 0{,}09" /> m.
+        </p>
         <FormulaBox
-          latex="v = r\omega = 0{,}09 \cdot 272{,}3 = \boxed{\,24{,}5\;\text{m/s}\,}"
+          latex="v = 0{,}09 \cdot 272{,}3 = \boxed{\,24{,}5\;\text{m/s}\,}"
           variant="gold"
         />
-        <p className="text-sm">Det er nesten 90 km/t — derfor må man være forsiktig med sirkelsag!</p>
+        <p>
+          Enhetssjekk: <InlineLatex latex="\text{m} \cdot \text{rad/s} = \text{m/s}" /> (radianer
+          er dimensjonsløse). Omregnet: 24,5 m/s · 3,6 ≈ 88 km/t — nesten motorveifart på kanten!
+          Derfor er sirkelsager så farlige: masseløse tenner treffer treverket med enorm lineærfart.
+        </p>
       </div>
     ),
     summary: (
@@ -832,15 +1191,51 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     hints: [{ label: "Hint 1", content: <p className="text-sm">Konverter 4330 rpm til rad/s først.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\omega = 4330 \cdot \frac{2\pi}{60} = 453{,}4\;\text{rad/s}" variant="blue" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Sentripetal akselerasjon i en sirkelbevegelse er kraften som
+          «trekker» et legeme inn mot sentrum. Formelen{" "}
+          <InlineLatex latex="a_{\text{rad}} = \omega^2 r = v^2/r" /> viser at akselerasjonen øker
+          lineært med r for gitt ω — men i en sentrifuge ønsker man <em>stor</em> akselerasjon ved
+          <em>liten</em> radius, derfor må ω være svært høy. Uttrykket «2600 g» er en praktisk måte
+          å angi akselerasjon i enheter av tyngdeakselerasjon: <InlineLatex latex="a = N \cdot g" />.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1 — Gjør om 2600 g til m/s²</p>
         <FormulaBox
-          latex="r = \frac{a_{\text{rad}}}{\omega^2} = \frac{25\,506}{(453{,}4)^2} = \boxed{\,0{,}124\;\text{m}\,}"
+          latex="a_{\text{rad}} = 2600 g = 2600 \cdot 9{,}81 = 25\,506\;\text{m/s}^2"
+          variant="blue"
+        />
+        <p>
+          Altså ca 25 000 m/s² — 2600 ganger tyngdeakselerasjonen. Umulig å oppnå uten en
+          sentrifuge.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 2 — Konverter rpm til rad/s</p>
+        <FormulaBox latex="\omega = n \cdot \frac{2\pi}{60}" variant="blue" />
+        <FormulaBox latex="\omega = 4330 \cdot \frac{2\pi}{60} = 453{,}4\;\text{rad/s}" variant="blue" />
+
+        <p className="font-semibold mt-4">Steg 3 — Finn radien</p>
+        <p>
+          <strong>Originalformel</strong> for sentripetal akselerasjon:
+        </p>
+        <FormulaBox latex="a_{\text{rad}} = \omega^2 r" variant="blue" />
+        <p>Vi kjenner <InlineLatex latex="a_{\text{rad}}" /> og ω, vil finne r. Løs algebraisk:</p>
+        <FormulaBox latex="r = \frac{a_{\text{rad}}}{\omega^2}" variant="blue" />
+        <FormulaBox
+          latex="r = \frac{25\,506}{(453{,}4)^2} = \frac{25\,506}{205\,571} = \boxed{\,0{,}124\;\text{m}\,}"
           variant="gold"
         />
-        <p className="text-sm">
-          Radien er 12,4 cm, som er under påstanden på 12,7 cm. Diameteren er ~25 cm, så påstanden er
-          <strong> realistisk</strong> (passer i det oppgitte benkearealet).
+        <p>
+          Enhetssjekk: <InlineLatex latex="\frac{\text{m/s}^2}{(\text{rad/s})^2} = \text{m}" />{" "}
+          (radianer er dimensjonsløse) — stemmer.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Radien er 12,4 cm, altså diameter ≈ 24,8 cm. Selve
+          sentrifugen er dermed noe bredere (pga motor og kapping) men 12,7 cm benkeplass henviser
+          trolig til radien eller en noe konservativ margin. Påstanden er{" "}
+          <strong>realistisk</strong>: selv i et kompakt apparat kan man oppnå tusener av g ved
+          svært høye rpm. Dette er prinsippet bak ultrasentrifuger i biokjemien.
         </p>
       </div>
     ),
@@ -908,30 +1303,63 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Akse gjennom O, vinkelrett på planet</strong></p>
-        <p className="text-sm">Alle fire kuler har samme avstand <InlineLatex latex="r = a/\sqrt{2} = 0{,}283\;\text{m}" /> fra O.</p>
-        <FormulaBox
-          latex="I_a = 4 \cdot m \cdot (a/\sqrt{2})^2 = 4 \cdot 0{,}200 \cdot \frac{0{,}160}{2} = \boxed{\,0{,}064\;\text{kg}\cdot\text{m}^2\,}"
-          variant="gold"
-        />
-
-        <p><strong>(b) Akse AB — bisecting to sider</strong></p>
-        <p className="text-sm">Alle fire kuler er i samme avstand <InlineLatex latex="a/2 = 0{,}200\;\text{m}" /> fra aksen.</p>
-        <FormulaBox
-          latex="I_b = 4 \cdot m \cdot (a/2)^2 = 4 \cdot 0{,}200 \cdot (0{,}200)^2 = \boxed{\,0{,}032\;\text{kg}\cdot\text{m}^2\,}"
-          variant="gold"
-        />
-
-        <p><strong>(c) Akse gjennom diagonalen</strong></p>
-        <p className="text-sm">
-          To kuler på aksen bidrar ikke (<InlineLatex latex="r = 0" />). De to andre ligger i avstand{" "}
-          <InlineLatex latex="a/\sqrt{2}" /> fra aksen.
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> Treghetsmomentet I er et mål på hvor motstandsdyktig et legeme er
+          mot vinkelakselerasjon — rotasjonsanalogen til massen m i <InlineLatex latex="F = ma" />.
+          For et system av diskrete masser er{" "}
+          <InlineLatex latex="I = \sum_i m_i r_i^2" />, der <InlineLatex latex="r_i" /> er{" "}
+          <em>vinkelrett</em> avstand fra masse <InlineLatex latex="m_i" /> til rotasjonsaksen.
+          Viktige observasjoner: (1) I avhenger sterkt av aksen — samme objekt kan ha vidt forskjellig
+          I om ulike akser; (2) masser <em>på</em> aksen bidrar ikke (r = 0); (3) faktoren{" "}
+          <InlineLatex latex="r^2" /> gjør at massene langt unna dominerer.
         </p>
+        <FormulaBox latex="I = \sum_i m_i r_i^2" variant="blue" />
+
+        <p className="font-semibold mt-4">(a) Akse gjennom O, vinkelrett på planet</p>
+        <p>
+          Aksen går gjennom midtpunktet i kvadratet og står vinkelrett på planet. Alle fire kuler
+          er da i samme avstand fra aksen — diagonalen fra sentrum til hjørne. Bruk Pythagoras på
+          halvparten av diagonalen:
+        </p>
+        <FormulaBox latex="r = \sqrt{(a/2)^2 + (a/2)^2} = \frac{a}{\sqrt{2}}" variant="blue" />
+        <p>Med a = 0,400 m: <InlineLatex latex="r = 0{,}400/\sqrt{2} = 0{,}283" /> m. Sett inn i I-formelen:</p>
+        <FormulaBox latex="I_a = \sum_i m_i r_i^2 = 4 m \left(\frac{a}{\sqrt{2}}\right)^2 = 4m \cdot \frac{a^2}{2} = 2 m a^2" variant="blue" />
         <FormulaBox
-          latex="I_c = 2 \cdot m \cdot (a/\sqrt{2})^2 = 2 \cdot 0{,}200 \cdot 0{,}080 = \boxed{\,0{,}032\;\text{kg}\cdot\text{m}^2\,}"
+          latex="I_a = 2(0{,}200)(0{,}400)^2 = 2 \cdot 0{,}200 \cdot 0{,}160 = \boxed{\,0{,}0640\;\text{kg}\cdot\text{m}^2\,}"
           variant="gold"
         />
+
+        <p className="font-semibold mt-4">(b) Akse AB (gjennom midtpunktene av to motstående sider)</p>
+        <p>
+          Aksen går horisontalt gjennom sentrum. Hver kule er i avstand a/2 = 0,200 m fra aksen
+          (halvparten av siden). Alle fire bidrar likt:
+        </p>
+        <FormulaBox latex="I_b = 4 m (a/2)^2 = m a^2" variant="blue" />
+        <FormulaBox
+          latex="I_b = (0{,}200)(0{,}400)^2 \cdot \frac{4}{4} = 4 \cdot 0{,}200 \cdot 0{,}0400 = \boxed{\,0{,}0320\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+
+        <p className="font-semibold mt-4">(c) Akse gjennom to diagonalt motstående kuler</p>
+        <p>
+          Aksen går fra en kule til den diagonalt motsatte. To kuler ligger <em>på</em> aksen
+          (r = 0 og bidrar ikke). De to andre kulene ligger vinkelrett på aksen i avstand lik
+          halve diagonalen, altså <InlineLatex latex="r = a/\sqrt{2}" />:
+        </p>
+        <FormulaBox latex="I_c = 2 m \left(\frac{a}{\sqrt{2}}\right)^2 + 2 m (0)^2 = m a^2" variant="blue" />
+        <FormulaBox
+          latex="I_c = 2(0{,}200) \cdot \frac{(0{,}400)^2}{2} = 2 \cdot 0{,}200 \cdot 0{,}0800 = \boxed{\,0{,}0320\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+
+        <p>
+          <strong>Fysisk tolkning:</strong> <InlineLatex latex="I_a = 2 I_b = 2 I_c" /> — dobbelt
+          så stort om vinkelrett-akse som om de to andre aksene. Grunnen: om vinkelrett-aksen er
+          <em>alle</em> fire kuler like langt unna, mens om de andre aksene ligger halvparten
+          nærme (eller på) aksen. Analog: en ballerina som trekker armene inn reduserer I; strekker
+          hun dem ut øker I. Samme mengde masse, ulik I — avhenger av plasseringen.
+        </p>
       </div>
     ),
     summary: (
@@ -984,19 +1412,81 @@ export const exercises: Record<string, ExerciseContent> = {
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <p><strong>(a) Stav — L = 0,600 m</strong></p>
-        <FormulaBox latex="(\text{i})\; I = \tfrac{1}{3}mL^2 = \tfrac{1}{3}(2{,}80)(0{,}600)^2 = \boxed{\,0{,}336\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
-        <FormulaBox latex="(\text{ii})\; I = \tfrac{1}{12}mL^2 = \boxed{\,0{,}0840\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
-        <FormulaBox latex="(\text{iii})\; I \approx \boxed{\,0\;\;(\text{tynn stav om sin egen akse})\,}" variant="gold" />
+      <div className="space-y-3 text-sm">
+        <p>
+          <strong>Teori:</strong> For kontinuerlige legemer er{" "}
+          <InlineLatex latex="I = \int r^2\,dm" />, som kan være vanskelig å integrere for
+          vilkårlige former. Derfor har læreboken en tabell (Table 9.2) med ferdige resultater for
+          standardformer. Nøkkelen er å gjenkjenne formen og{" "}
+          <em>hvilken akse</em> formelen gjelder om — en og samme form har ulik I om ulike akser.
+          Felles form: <InlineLatex latex="I = c \cdot M R^2" /> (eller <InlineLatex latex="ML^2" />),
+          der c er en geometrisk faktor som sier hvor langt ute massen er fordelt.
+        </p>
 
-        <p><strong>(b) Kule — R = 0,100 m</strong></p>
-        <FormulaBox latex="(\text{i massiv})\; I = \tfrac{2}{5}mR^2 = \tfrac{2}{5}(5{,}00)(0{,}100)^2 = \boxed{\,0{,}0200\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
-        <FormulaBox latex="(\text{ii hul skall})\; I = \tfrac{2}{3}mR^2 = \boxed{\,0{,}0333\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
+        <p className="font-semibold mt-4">(a) Tynn stav — L = 0,600 m, M = 2,80 kg</p>
+        <p>
+          (i) Om akse gjennom <strong>én ende</strong>, vinkelrett på staven. Formel fra tabell:
+        </p>
+        <FormulaBox latex="I = \tfrac{1}{3}ML^2" variant="blue" />
+        <p>
+          Denne er større enn gjennom-midten-formelen fordi massen i gjennomsnitt er lengre unna
+          aksen. Sett inn:
+        </p>
+        <FormulaBox
+          latex="I = \tfrac{1}{3}(2{,}80)(0{,}600)^2 = \tfrac{1}{3}(2{,}80)(0{,}360) = \boxed{\,0{,}336\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>(ii) Om akse gjennom <strong>sentrum</strong>, vinkelrett på staven:</p>
+        <FormulaBox latex="I = \tfrac{1}{12}ML^2" variant="blue" />
+        <FormulaBox
+          latex="I = \tfrac{1}{12}(2{,}80)(0{,}600)^2 = \tfrac{1}{12}(2{,}80)(0{,}360) = \boxed{\,0{,}0840\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>
+          Legg merke til: <InlineLatex latex="I_{\text{ende}} = 4 I_{\text{sentrum}}" />. Dette
+          stemmer med parallellakseteoremet:{" "}
+          <InlineLatex latex="I_{\text{ende}} = I_{\text{sentrum}} + M(L/2)^2 = \tfrac{1}{12}ML^2 + \tfrac{1}{4}ML^2 = \tfrac{1}{3}ML^2" />.
+        </p>
+        <p>(iii) Om aksen <strong>langs staven</strong>: alle masseelementer ligger nær aksen (r ≈ 0 for en tynn stav):</p>
+        <FormulaBox latex="I \approx \boxed{\,0\;\;(\text{tynn stav om egen lengdeakse})\,}" variant="gold" />
 
-        <p><strong>(c) Sylinder — R = 0,060 m</strong></p>
-        <FormulaBox latex="(\text{i tynn hul})\; I = mR^2 = 8{,}50 \cdot (0{,}060)^2 = \boxed{\,0{,}0306\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
-        <FormulaBox latex="(\text{ii massiv})\; I = \tfrac{1}{2}mR^2 = \boxed{\,0{,}0153\;\text{kg}\cdot\text{m}^2\,}" variant="gold" />
+        <p className="font-semibold mt-4">(b) Kule — R = 0,100 m, M = 5,00 kg</p>
+        <p>(i) Massiv kule om akse gjennom sentrum:</p>
+        <FormulaBox latex="I = \tfrac{2}{5}MR^2" variant="blue" />
+        <FormulaBox
+          latex="I = \tfrac{2}{5}(5{,}00)(0{,}100)^2 = 0{,}400 \cdot 0{,}0100 \cdot 5 = \boxed{\,0{,}0200\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>(ii) Tynn hul kuleskall (all masse på radius R):</p>
+        <FormulaBox latex="I = \tfrac{2}{3}MR^2" variant="blue" />
+        <FormulaBox
+          latex="I = \tfrac{2}{3}(5{,}00)(0{,}100)^2 = \boxed{\,0{,}0333\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>
+          Hul skall &gt; massiv kule (2/3 &gt; 2/5) fordi all massen ligger lengst mulig ute fra
+          aksen, mens i den massive kulen er mye av massen lengre inn.
+        </p>
+
+        <p className="font-semibold mt-4">(c) Sylinder — R = 0,060 m, M = 8,50 kg</p>
+        <p>(i) Tynn hul sylinder (ring) om sentralaksen — all masse på radius R:</p>
+        <FormulaBox latex="I = MR^2" variant="blue" />
+        <FormulaBox
+          latex="I = 8{,}50 \cdot (0{,}060)^2 = 8{,}50 \cdot 0{,}00360 = \boxed{\,0{,}0306\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>(ii) Massiv sylinder om sentralaksen:</p>
+        <FormulaBox latex="I = \tfrac{1}{2}MR^2" variant="blue" />
+        <FormulaBox
+          latex="I = \tfrac{1}{2}(8{,}50)(0{,}060)^2 = \boxed{\,0{,}0153\;\text{kg}\cdot\text{m}^2\,}"
+          variant="gold"
+        />
+        <p>
+          <strong>Mønster:</strong> Alle formler har formen{" "}
+          <InlineLatex latex="I = c \cdot MR^2" />. Faktoren c stiger med hvor mye masse som er
+          plassert langt ute: punktmasse/ring (c = 1) &gt; kuleskall (2/3) &gt; sylinder (1/2) &gt;
+          massiv kule (2/5). Husk c-verdiene — de er kritiske for eksamen.
+        </p>
       </div>
     ),
     summary: (

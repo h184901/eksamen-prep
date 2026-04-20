@@ -132,36 +132,81 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Finn avstandene fra q₁ (origo) til punkt a og b</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Den elektriske kraften mellom to punktladninger
+          er en <em>konservativ</em> kraft (akkurat som gravitasjon). Det betyr at arbeidet den gjør
+          bare avhenger av start- og sluttpunkt — ikke av banen. Dette er den store fordelen med
+          å introdusere potensiell energi <InlineLatex latex="U" />: vi kan svare uten å integrere
+          kraft langs banen. Sammenhengen mellom arbeid og potensiell energi for en konservativ
+          kraft er:
+        </p>
+        <FormulaBox latex="W_{a\to b} = -\Delta U = U_a - U_b" variant="blue" />
+        <p>
+          For to punktladninger er den elektriske potensielle energien (med <InlineLatex latex="U(\infty)=0" />):
+        </p>
+        <FormulaBox latex="U(r) = \dfrac{k q_1 q_2}{r}" variant="blue" />
+        <p>
+          <strong>Hvorfor denne formelen og ikke <InlineLatex latex="W = Fd" />?</strong>{" "}
+          Coulomb-kraften er <em>ikke</em> konstant — den avtar som <InlineLatex latex="1/r^2" /> når
+          avstanden øker. <InlineLatex latex="W = Fd" /> gjelder bare for konstant kraft. Med varierende
+          kraft måtte vi egentlig integrert <InlineLatex latex="W = \int \vec F \cdot d\vec r" />, men
+          siden kraften er konservativ har vi allerede gjort jobben én gang for alle og fått
+          <InlineLatex latex="\;U(r) = kq_1q_2/r" />. Bonus: banen spiller ingen rolle — vi trenger ikke
+          engang vite formen på banen fra a til b.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Finn avstandene fra q₁ (origo) til punkt a og b</p>
         <p>
           Siden <InlineLatex latex="q_1" /> er i origo, er <InlineLatex latex="r_a" /> bare x-koordinaten
-          til punkt a, mens <InlineLatex latex="r_b" /> beregnes med Pythagoras:
+          til punkt a, mens <InlineLatex latex="r_b" /> beregnes med Pythagoras
+          (<InlineLatex latex="r = \sqrt{x^2 + y^2}" />):
         </p>
         <FormulaBox latex="r_a = 0{,}150\;\text{m}" variant="blue" />
         <FormulaBox latex="r_b = \sqrt{(0{,}250)^2 + (0{,}270)^2} = \sqrt{0{,}1354}\;\text{m} = 0{,}3680\;\text{m}" variant="blue" />
-
-        <p className="font-semibold">Steg 2: Beregn produktet k·q₁·q₂</p>
         <p>
-          Siden <InlineLatex latex="q_1 > 0" /> og <InlineLatex latex="q_2 < 0" />, blir produktet negativt —
-          dette reflekterer at ladningene tiltrekker hverandre:
+          Merk at <InlineLatex latex="r_b > r_a" />: ladningen flyttes <em>lenger bort</em> fra
+          <InlineLatex latex="\;q_1" />. Det kommer til å bety at <InlineLatex latex="|U_b| < |U_a|" /> —
+          potensiell energi blir «tynnere» med større avstand.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 2: Fortegnsanalyse av produktet k·q₁·q₂</p>
+        <p>
+          Dette er et kritisk steg — her avgjøres fortegnet på hele svaret. Vi har
+          <InlineLatex latex="\;q_1 > 0" /> og <InlineLatex latex="q_2 < 0" />, så produktet{" "}
+          <InlineLatex latex="q_1 q_2 < 0" />. Dette er konsistent med at ulike ladninger
+          <em>tiltrekker</em> hverandre — det er «bundet» konfigurasjon der U er negativ (man må
+          tilføre energi for å rive dem fra hverandre).
         </p>
         <FormulaBox
           latex="k q_1 q_2 = (8{,}99\cdot10^{9})(2{,}10\cdot10^{-6})(-4{,}60\cdot10^{-6}) = -8{,}68\cdot10^{-2}\;\text{J}\!\cdot\!\text{m}"
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 3: Regn ut U_a og U_b</p>
+        <p className="font-semibold mt-4">Steg 3: Regn ut U_a og U_b</p>
         <FormulaBox latex="U_a = \dfrac{k q_1 q_2}{r_a} = \dfrac{-8{,}68\cdot10^{-2}}{0{,}150} = -0{,}579\;\text{J}" variant="blue" />
         <FormulaBox latex="U_b = \dfrac{k q_1 q_2}{r_b} = \dfrac{-8{,}68\cdot10^{-2}}{0{,}3680} = -0{,}2360\;\text{J}" variant="blue" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{(N·m}^2/\text{C}^2\text{)} \cdot \text{C}^2 / \text{m} = \text{N·m} = \text{J}" />. ✓
+        </p>
 
-        <p className="font-semibold">Steg 4: Arbeidet = U_a − U_b</p>
+        <p className="font-semibold mt-4">Steg 4: Arbeidet = U_a − U_b</p>
         <p>
-          Ladningen flyttes vekk fra <InlineLatex latex="q_1" /> (større r → <InlineLatex latex="U_b" /> er mindre negativ).
-          Siden ladningene tiltrekker hverandre, må vi utføre arbeid <em>mot</em> feltet for å dra dem fra hverandre,
-          og den elektriske kraften gjør derfor <strong>negativt</strong> arbeid:
+          Nå er vi klare til å bruke <InlineLatex latex="W = U_a - U_b" />. Begge potensialer er negative,
+          men <InlineLatex latex="U_a" /> er <em>mer</em> negativ enn <InlineLatex latex="U_b" /> (fordi
+          <InlineLatex latex="\;1/r_a > 1/r_b" /> og produktet er negativt):
         </p>
         <FormulaBox latex="W_{a\to b} = U_a - U_b = -0{,}579 - (-0{,}2360) = -0{,}343\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{W_{a\to b} = \boxed{-0{,}343\;\text{J}}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Svaret er negativt. Det gir mening:{" "}
+          <InlineLatex latex="q_2" /> blir flyttet <em>mot</em> den tiltrekkende kraften
+          (kraften trekker mot <InlineLatex latex="q_1" />, forflytningen går utover). Noen{" "}
+          <em>annen</em> kraft (f.eks. hånd/ytre agens) må ha gjort positivt arbeid
+          <InlineLatex latex="\;W_{\text{ytre}} = +0{,}343\;\text{J}" /> for å dra dem fra hverandre.
+          Den elektriske kraften selv «mistet energi» til systemet — derfor øker U
+          (blir mindre negativ) og <InlineLatex latex="W_E < 0" />. Størrelsesorden 0,34 J tilsvarer
+          energien i ~1 sek LED-pære — ikke ubetydelig på skala av mikrocoulomb!
+        </p>
       </div>
     ),
     summary: (
@@ -266,7 +311,28 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Beregn konstanten k·q₁·q₂</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Når to ladninger beveger seg mot hverandre og ingen
+          andre krefter virker (tyngdekraft ignorert, ikke friksjon), er den elektrostatiske kraften
+          den eneste. Den er <em>konservativ</em>, så <strong>mekanisk energi er bevart</strong>:
+          summen av kinetisk og potensiell energi er konstant hele tiden.
+        </p>
+        <FormulaBox latex="E_{\text{mek}} = \tfrac{1}{2}mv^2 + U(r) = \text{konstant}" variant="blue" />
+        <p>
+          For to punktladninger er <InlineLatex latex="U(r) = kq_1q_2/r" />. Med to negative ladninger
+          blir <InlineLatex latex="q_1 q_2 > 0" />, og derfor er <InlineLatex latex="U > 0" /> — ladningene
+          frastøter, så det er en «potensialfjær» som motarbeider bevegelsen innover (analog til å
+          presse en fjær sammen).
+        </p>
+        <p>
+          <strong>Hvorfor energibevaring og ikke Newtons 2. lov direkte?</strong> Kraften{" "}
+          <InlineLatex latex="F = kq_1q_2/r^2" /> er ikke konstant (akselerasjonen endrer seg med avstanden),
+          så vi kan ikke bruke <InlineLatex latex="v_2^2 = v_1^2 + 2a\Delta r" /> med et fast{" "}
+          <InlineLatex latex="a" />. Energibevaring lar oss hoppe direkte fra «tilstand 1» til
+          «tilstand 2» uten å holde styr på tiden eller banen imellom.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Beregn konstanten k·q₁·q₂</p>
         <p>
           Begge ladninger er negative, så produktet er <em>positivt</em> — systemet frastøter:
         </p>
@@ -274,14 +340,23 @@ export const exercises: Record<string, ExerciseContent> = {
           latex="k q_1 q_2 = (8{,}99\cdot10^{9})(-2{,}60\cdot10^{-6})(-7{,}50\cdot10^{-6}) = +0{,}1753\;\text{J}\!\cdot\!\text{m}"
           variant="blue"
         />
+        <p className="italic text-[var(--muted)]">
+          Fortegnsanalyse: <InlineLatex latex="(-)(-)=(+)" />, så U blir positiv. Frastøting → U øker når r
+          minker → kinetisk energi må synke når kulene nærmer seg.
+        </p>
 
-        <p className="font-semibold">Steg 2: (a) Regn ut U₁ og U₂ (ved r=0,420 m)</p>
+        <p className="font-semibold mt-4">Steg 2: (a) Regn ut U₁ og U₂ (ved r=0,420 m)</p>
         <FormulaBox latex="U_1 = \dfrac{0{,}1753}{0{,}800} = +0{,}2191\;\text{J}" variant="blue" />
         <FormulaBox latex="U_2 = \dfrac{0{,}1753}{0{,}420} = +0{,}4174\;\text{J}" variant="blue" />
-
-        <p className="font-semibold">Steg 3: Løs energibevaring for v₂</p>
         <p>
-          Kinetisk energi må <em>synke</em> når <InlineLatex latex="U" /> øker (kulen nærmer seg den andre ladningen):
+          Merk at <InlineLatex latex="U_2 > U_1" /> (avstanden er mindre). Derfor <em>må</em> kinetisk
+          energi synke — noe annet ville brutt energibevaring.
+        </p>
+
+        <p className="font-semibold mt-4">Steg 3: Løs energibevaring for v₂</p>
+        <p>
+          Startformelen: <InlineLatex latex="\tfrac{1}{2}mv_1^2 + U_1 = \tfrac{1}{2}mv_2^2 + U_2" />.
+          Algebraisk omforming — flytt U-leddene til høyre side av likhetstegnet:
         </p>
         <FormulaBox latex="\tfrac{1}{2}mv_2^2 = \tfrac{1}{2}mv_1^2 + U_1 - U_2" variant="blue" />
         <FormulaBox
@@ -291,16 +366,36 @@ export const exercises: Record<string, ExerciseContent> = {
         <FormulaBox latex="\tfrac{1}{2}(1{,}50\cdot10^{-3})v_2^2 = 0{,}3630 - 0{,}1983 = 0{,}1647\;\text{J}" variant="blue" />
         <FormulaBox latex="v_2^2 = \dfrac{2(0{,}1647)}{1{,}50\cdot10^{-3}} = 219{,}6\;\text{m}^2/\text{s}^2" variant="blue" />
         <FormulaBox latex="\boxed{v_2 = \boxed{14{,}8\;\text{m/s}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\sqrt{\text{J/kg}} = \sqrt{\text{m}^2/\text{s}^2} = \text{m/s}" />. ✓
+          Rimelighetssjekk: Farten har sunket fra 22 til 15 m/s — det er i riktig retning (kulen bremses).
+        </p>
 
-        <p className="font-semibold">Steg 4: (b) Finn minste avstand</p>
+        <p className="font-semibold mt-4">Steg 4: (b) Finn minste avstand</p>
         <p>
-          Ved <InlineLatex latex="r_{\min}" /> er <InlineLatex latex="v = 0" />. All kinetisk energi + potensiell ved start
-          blir omgjort til potensiell energi:
+          <strong>Hvilken betingelse definerer <InlineLatex latex="r_{\min}" />?</strong> Ved vendepunktet
+          snur kulen retning — og for en brøkdel av et sekund står den stille, så{" "}
+          <InlineLatex latex="v = 0" />. (Dette er nøyaktig samme prinsipp som når du kaster en ball rett
+          opp: på toppen er farten null et øyeblikk før den snur.)
+        </p>
+        <p>
+          Setter <InlineLatex latex="v = 0" /> inn i energibevaringen mellom tilstand 1 og{" "}
+          <InlineLatex latex="r_{\min}" />:
         </p>
         <FormulaBox latex="\tfrac{1}{2}mv_1^2 + U_1 = 0 + \dfrac{kq_1q_2}{r_{\min}}" variant="blue" />
+        <p>
+          Algebraisk omforming — løs for <InlineLatex latex="r_{\min}" />:
+        </p>
+        <FormulaBox latex="r_{\min} = \dfrac{kq_1q_2}{\tfrac{1}{2}mv_1^2 + U_1} = \dfrac{kq_1q_2}{E_{\text{tot}}}" variant="blue" />
         <FormulaBox latex="E_{\text{tot}} = 0{,}3630 + 0{,}2191 = 0{,}5821\;\text{J}" variant="blue" />
         <FormulaBox latex="r_{\min} = \dfrac{k q_1 q_2}{E_{\text{tot}}} = \dfrac{0{,}1753}{0{,}5821}" variant="blue" />
         <FormulaBox latex="\boxed{r_{\min} = \boxed{0{,}301\;\text{m}}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Kulen kommer 0,301 m fra <InlineLatex latex="q_1" /> — mellom
+          startposisjonen (0,800 m) og den tidligere målte posisjonen (0,420 m, fart 14,8 m/s). Ved
+          denne avstanden er «fjæren» (den elektrostatiske frastøtingen) sterk nok til å stoppe kulen
+          helt. Deretter snur den og akselererer tilbake — men det er en annen fase av problemet.
+        </p>
       </div>
     ),
     summary: (
@@ -418,30 +513,82 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Identifiser krysspar og fortegn</p>
         <p>
-          O⁻…N⁻ og N⁻…N⁻ gir <em>positivt</em> bidrag (likhetsfrastøting, <InlineLatex latex="+ke^2/r" />).
-          H⁺…N⁻ gir <em>negativt</em> bidrag (tiltrekking, <InlineLatex latex="-ke^2/r" />).
+          <strong>Kort teoretisk bakgrunn:</strong> Når vi har flere punktladninger er den totale
+          elektrostatiske energien summen over <em>alle unike par</em>:
+        </p>
+        <FormulaBox latex="U_{\text{tot}} = \sum_{i<j} \dfrac{k q_i q_j}{r_{ij}}" variant="blue" />
+        <p>
+          Men oppgaven spør spesifikt om <em>bindingsenergien</em> mellom A og T — altså energien som
+          holder de to molekylene sammen. Da skal vi bare ta med par der den ene ladningen tilhører A
+          og den andre T (kryssparene). Ladninger innad i samme molekyl inngår i molekylets egen interne
+          energi og kansellerer ut når vi sammenligner «sammen» vs. «uendelig adskilt».
+        </p>
+        <p>
+          <strong>Hvorfor ikke bare bruke dipoltilnærming?</strong> Med så små avstander
+          (<InlineLatex latex="r \sim 0{,}1" /> nm, sammenlignbart med ladningsavstanden innad i dipolen)
+          bryter dipoltilnærmingen <InlineLatex latex="U \propto 1/r^3" /> sammen. Vi må regne hvert
+          krysspar eksplisitt.
+        </p>
+        <p>
+          <strong>Smart triks:</strong> Siden alle ladninger er <InlineLatex latex="\pm e" />, kan vi
+          faktorisere ut <InlineLatex latex="ke^2" />. Bruker vi nm for avstand, gjør
+          <InlineLatex latex="\;ke^2 = 1{,}44\;\text{eV}\cdot\text{nm}" /> at svaret kommer direkte i eV
+          — standardenhet i atomfysikk.
         </p>
 
-        <p className="font-semibold">Steg 2: Sett opp summen</p>
+        <p className="font-semibold mt-4">Steg 1: Identifiser krysspar og fortegn</p>
+        <p>
+          Fortegnet på hvert bidrag bestemmes av produktet <InlineLatex latex="q_i q_j" />:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>O⁻ (tymin) … N⁻ (adenin): like fortegn → <InlineLatex latex="(-)(-)=(+)" /> → frastøting,
+          <InlineLatex latex="\;+ke^2/r" /></li>
+          <li>H⁺ (tymin) … N⁻ (adenin): motsatte fortegn → <InlineLatex latex="(+)(-)=(-)" /> → tiltrekking,
+          <InlineLatex latex="\;-ke^2/r" /></li>
+          <li>N⁻ (tymin) … N⁻ (adenin): like → <InlineLatex latex="\;+ke^2/r" /></li>
+          <li>H⁺ (tymin) … N⁻ (adenin): motsatte → <InlineLatex latex="\;-ke^2/r" /></li>
+        </ul>
+
+        <p className="font-semibold mt-4">Steg 2: Sett opp summen</p>
+        <p>
+          For hvert krysspar er avstanden lest fra figuren. Faktoriser <InlineLatex latex="ke^2" /> ut:
+        </p>
         <FormulaBox
           latex="U_{AT} = ke^2\!\left[\dfrac{1}{0{,}280\;\text{nm}} - \dfrac{1}{0{,}110\;\text{nm}} + \dfrac{1}{0{,}300\;\text{nm}} - \dfrac{1}{0{,}110\;\text{nm}}\right]"
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 3: Beregn klammeparentesen (i nm⁻¹)</p>
+        <p className="font-semibold mt-4">Steg 3: Beregn klammeparentesen (i nm⁻¹)</p>
         <FormulaBox latex="3{,}571 - 9{,}091 + 3{,}333 - 9{,}091 = -11{,}28\;\text{nm}^{-1}" variant="blue" />
+        <p>
+          Summen er <em>negativ</em> fordi tiltrekningsleddene (H⁺…N⁻, små avstander
+          <InlineLatex latex="\;0{,}110" /> nm → store bidrag) dominerer over frastøtningsleddene (større
+          avstander, mindre bidrag). Dette er nøkkelen til bindingen!
+        </p>
 
-        <p className="font-semibold">Steg 4: Multiplisér med ke²</p>
+        <p className="font-semibold mt-4">Steg 4: Multiplisér med ke²</p>
         <FormulaBox latex="U_{AT} = (1{,}44\;\text{eV}\!\cdot\!\text{nm})(-11{,}28\;\text{nm}^{-1}) = -16{,}2\;\text{eV}" variant="blue" />
         <FormulaBox latex="\boxed{U_{AT} = \boxed{-16{,}2\;\text{eV}} \approx -2{,}60\cdot10^{-18}\;\text{J}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="(\text{eV}\!\cdot\!\text{nm}) \cdot \text{nm}^{-1} = \text{eV}" />. ✓
+        </p>
 
-        <p className="font-semibold">Steg 5: (b) Sammenlign med hydrogen</p>
+        <p className="font-semibold mt-4">Steg 5: (b) Sammenlign med hydrogen</p>
+        <p>
+          I hydrogenatomet er det bare <em>ett</em> par: proton (+e) og elektron (−e) på avstand{" "}
+          <InlineLatex latex="r_H" />. Fortegnet: <InlineLatex latex="(+)(-)=(-)" /> → tiltrekkende →{" "}
+          <InlineLatex latex="U < 0" />:
+        </p>
         <FormulaBox latex="U_H = -\dfrac{ke^2}{r_H} = -\dfrac{1{,}44\;\text{eV}\!\cdot\!\text{nm}}{0{,}0529\;\text{nm}} = -27{,}2\;\text{eV}" variant="blue" />
         <FormulaBox latex="\dfrac{|U_{AT}|}{|U_H|} = \dfrac{16{,}2}{27{,}2} \approx 0{,}60" variant="blue" />
         <p>
-          A–T-bindingen er altså omtrent <strong>60 %</strong> så sterk som proton–elektron-bindingen i hydrogen.
+          <strong>Fysisk tolkning:</strong> A–T-bindingen er omtrent <strong>60 %</strong> så sterk som
+          proton–elektron-bindingen i hydrogen. Det er mye mindre enn en kovalent binding (~4,5 eV per
+          mol H₂ → ~5 eV per binding), men fortsatt betydelig sterkere enn termisk energi ved kroppstemperatur
+          (<InlineLatex latex="k_B T \approx 0{,}026" /> eV). Dette er akkurat den balansen DNA trenger:
+          stabilt nok til å lagre informasjon, men svakt nok til å «unnzippes» av enzymer ved
+          replikasjon. Tre hydrogenbindinger (G–C-par) gir enda sterkere feste.
         </p>
       </div>
     ),
@@ -533,32 +680,81 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Total kinetisk energi ved start</p>
         <p>
-          Siden begge protoner har samme fart, og <InlineLatex latex="U \approx 0" /> langt unna:
+          <strong>Kort teoretisk bakgrunn:</strong> «Maksimal kraft» er ikke gitt direkte i oppgaven —
+          vi må oversette den til et fysisk vilkår. Fra Coulombs lov (kap. 21):
+        </p>
+        <FormulaBox latex="F(r) = \dfrac{k e^2}{r^2}" variant="blue" />
+        <p>
+          Siden <InlineLatex latex="F \propto 1/r^2" /> er den <strong>maksimal når r er minimal</strong>.
+          Så spørsmålet «hva er <InlineLatex latex="F_{\max}" />?» blir «hva er <InlineLatex latex="r_{\min}" />?».
+        </p>
+        <p>
+          <strong>Hvilken betingelse definerer <InlineLatex latex="r_{\min}" />?</strong> Ved vendepunktet har
+          begge protoner <em>stanset</em> et øyeblikk. Men hvorfor begge samtidig? To bevaringslover:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>
+            <strong>Impulsbevaring:</strong> Totalimpulsen er null i starten (like masser, motsatte
+            hastigheter), og intern Coulomb-kraft bevarer den. Så{" "}
+            <InlineLatex latex="m_p v_1 + m_p v_2 = 0" /> hele tiden → ved likhet i masser betyr dette
+            at <InlineLatex latex="v_1 = -v_2" /> til enhver tid. Når <InlineLatex latex="v_1 = 0" />,
+            må <InlineLatex latex="v_2 = 0" /> også.
+          </li>
+          <li>
+            <strong>Energibevaring:</strong> Siden eneste kraft er konservativ, er mekanisk energi bevart.
+            Alt vi trenger er starttilstand og slutt­tilstand:
+          </li>
+        </ul>
+        <FormulaBox latex="\underbrace{K_1 + K_2 + U_1}_{\text{start}} = \underbrace{0 + 0 + U(r_{\min})}_{\text{vendepunkt}}" variant="blue" />
+        <p>
+          Med <InlineLatex latex="U(r) = ke^2/r" /> (positive ladninger → frastøting → U &gt; 0) og
+          <InlineLatex latex="\;U_1 \approx 0" /> (start «flere meter unna»).
+        </p>
+
+        <p className="font-semibold mt-4">Steg 1: Total kinetisk energi ved start</p>
+        <p>
+          Begge protoner bidrar med <InlineLatex latex="\tfrac{1}{2}m_p v_0^2" /> hver, så total K er
+          dobbelt — og med samme fart forenkles dette til <InlineLatex latex="m_p v_0^2" />:
         </p>
         <FormulaBox
           latex="K_{\text{tot}} = 2\!\cdot\!\tfrac{1}{2}m_p v_0^2 = m_p v_0^2 = (1{,}673\cdot10^{-27})(2{,}00\cdot10^{5})^2 = 6{,}69\cdot10^{-17}\;\text{J}"
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 2: Energibevaring → minste avstand</p>
+        <p className="font-semibold mt-4">Steg 2: Energibevaring → minste avstand</p>
         <p>
-          Ved <InlineLatex latex="r_{\min}" /> er <InlineLatex latex="v = 0" /> for begge; all kinetisk energi
-          er blitt potensiell:
+          Ved <InlineLatex latex="r_{\min}" /> er <InlineLatex latex="v = 0" /> for begge (fra impulsbevaring
+          + symmetri); all kinetisk energi er blitt potensiell. Algebraisk omforming — løs for{" "}
+          <InlineLatex latex="r_{\min}" />:
         </p>
-        <FormulaBox latex="\dfrac{ke^2}{r_{\min}} = K_{\text{tot}}" variant="blue" />
+        <FormulaBox latex="\dfrac{ke^2}{r_{\min}} = K_{\text{tot}} \;\Rightarrow\; r_{\min} = \dfrac{ke^2}{K_{\text{tot}}}" variant="blue" />
         <FormulaBox
           latex="r_{\min} = \dfrac{ke^2}{K_{\text{tot}}} = \dfrac{(8{,}99\cdot10^{9})(1{,}602\cdot10^{-19})^2}{6{,}69\cdot10^{-17}} = 3{,}45\cdot10^{-12}\;\text{m}"
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 3: Sett inn i Coulombs lov</p>
+        <p className="font-semibold mt-4">Steg 3: Sett inn i Coulombs lov</p>
+        <p>
+          Nå som <InlineLatex latex="r_{\min}" /> er kjent, bruker vi Coulombs lov direkte:
+        </p>
         <FormulaBox
           latex="F_{\max} = \dfrac{ke^2}{r_{\min}^2} = \dfrac{2{,}307\cdot10^{-28}}{(3{,}45\cdot10^{-12})^2} = \dfrac{2{,}307\cdot10^{-28}}{1{,}191\cdot10^{-23}}"
           variant="blue"
         />
         <FormulaBox latex="\boxed{F_{\max} = \boxed{1{,}94\cdot10^{-5}\;\text{N}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="(\text{N·m}^2/\text{C}^2) \cdot \text{C}^2 / \text{m}^2 = \text{N}" />. ✓
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> <InlineLatex latex="F_{\max} \approx 19\;\mu\text{N}" /> kan
+          virke lite, men protonets masse er <InlineLatex latex="\sim 10^{-27}" /> kg, så akselerasjonen
+          er <InlineLatex latex="F/m \sim 10^{22}" /> m/s² — absurd stort på makroskala. Avstanden{" "}
+          <InlineLatex latex="r_{\min} \approx 3{,}5\;\text{pm}" /> er likevel tusen ganger større enn
+          protonets egen radius (~1 fm) og mye større enn rekkevidden til kjernekraften. Det er kun
+          Coulomb som virker — protonene «speiler tilbake» uten å fusjonere. (Fusjon krever farter
+          mer enn <InlineLatex latex="10^{6}" /> m/s for å bringe dem innenfor ~1 fm.)
+        </p>
       </div>
     ),
     summary: (
@@ -645,11 +841,47 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Sett opp summen</p>
-        <p>Alle tre par er identiske, så:</p>
-        <FormulaBox latex="U_{\text{tot}} = 3\cdot\dfrac{k q^2}{d}" variant="blue" />
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> For to punktladninger er den elektrostatiske
+          potensielle energien (med <InlineLatex latex="U(\infty)=0" />):
+        </p>
+        <FormulaBox latex="U_{ij} = \dfrac{k q_i q_j}{r_{ij}}" variant="blue" />
+        <p>
+          For et system av <em>flere</em> ladninger tolker vi <InlineLatex latex="U" /> som <strong>arbeidet
+          som kreves for å sette sammen konfigurasjonen</strong> fra uendelig. Første ladning koster ingenting
+          (ingen andre ladninger rundt). Andre ladning påvirkes av første. Tredje påvirkes av de to første,
+          osv. Resultatet er en sum over <em>alle unike par</em>:
+        </p>
+        <FormulaBox latex="U_{\text{tot}} = \sum_{i<j} \dfrac{k q_i q_j}{r_{ij}}" variant="blue" />
+        <p>
+          <strong>Hvorfor unike par, ikke alle ordnede kombinasjoner?</strong> Paret (1,2) er det samme
+          som (2,1) fysisk — de representerer samme interaksjon. Hvis vi summerte både
+          (1,2) og (2,1) ville vi telt hver interaksjon to ganger. For n ladninger er antall
+          unike par <InlineLatex latex="\binom{n}{2} = n(n-1)/2" />. For <InlineLatex latex="n=3" />: tre par.
+        </p>
+        <p>
+          <strong>Hvorfor ikke bare <InlineLatex latex="U = kqV" />?</strong> Det ville blande sammen
+          to forskjellige ting. Potensialet <InlineLatex latex="V" /> i ett punkt er opprinnelig definert
+          i fravær av ladningen vi snakker om. I et allerede sammensatt system er hver ladning del av
+          feltet — å multiplisere alle ladninger med alle V-verdier og dele på 2 er faktisk ekvivalent
+          med parsummen (<InlineLatex latex="U = \tfrac{1}{2}\sum_i q_i V_i" />), men her er parsummen direkte.
+        </p>
 
-        <p className="font-semibold">Steg 2: Beregn ett par</p>
+        <p className="font-semibold mt-4">Steg 1: Sett opp summen</p>
+        <p>
+          Trekanten har 3 hjørner, altså <InlineLatex latex="\binom{3}{2} = 3" /> par: (1,2), (1,3), (2,3).
+          Alle ladninger er like (<InlineLatex latex="q_1=q_2=q_3=q" />), og alle avstander er like
+          (<InlineLatex latex="r_{12}=r_{13}=r_{23}=d" /> — likesidet trekant). Derfor er alle tre ledd
+          identiske:
+        </p>
+        <FormulaBox latex="U_{\text{tot}} = \dfrac{kq_1q_2}{r_{12}} + \dfrac{kq_1q_3}{r_{13}} + \dfrac{kq_2q_3}{r_{23}} = 3\cdot\dfrac{k q^2}{d}" variant="blue" />
+        <p>
+          <strong>Fortegnsanalyse:</strong> Alle ladninger er positive, så
+          <InlineLatex latex="\;q_i q_j > 0" /> for alle par. Det betyr <InlineLatex latex="U > 0" /> —
+          det koster energi å sette sammen et system av like ladninger (de vil gjerne fra hverandre).
+        </p>
+
+        <p className="font-semibold mt-4">Steg 2: Beregn ett par</p>
         <FormulaBox
           latex="\dfrac{k q^2}{d} = \dfrac{(8{,}99\cdot10^{9})(1{,}40\cdot10^{-6})^2}{0{,}300}"
           variant="blue"
@@ -659,9 +891,19 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 3: Multiplisér med 3 (tre par)</p>
+        <p className="font-semibold mt-4">Steg 3: Multiplisér med 3 (tre par)</p>
         <FormulaBox latex="U_{\text{tot}} = 3 \cdot 5{,}873\cdot10^{-2}\;\text{J} = 0{,}1762\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{U_{\text{tot}} = \boxed{0{,}176\;\text{J}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="(\text{N·m}^2/\text{C}^2) \cdot \text{C}^2 / \text{m} = \text{N·m} = \text{J}" />. ✓
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> 0,176 J er energien som ble «puttet inn» da vi stilte de
+          tre ladningene opp fra uendelig. Hvis vi slipper dem alle samtidig fra ro, vil de fly fra
+          hverandre, og etter lang tid vil all <InlineLatex latex="U" /> være omgjort til kinetisk
+          energi (<InlineLatex latex="K_{\text{tot}} = 0{,}176" /> J, fordelt etter impulsbevaring). Merk
+          at trekantens plassering ikke påvirker U — bare avstander og ladninger betyr noe.
+        </p>
       </div>
     ),
     summary: (
@@ -742,23 +984,72 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Energiligning</p>
-        <FormulaBox latex="\tfrac{1}{2}m v_B^2 = \tfrac{1}{2}m v_A^2 + q(V_A - V_B)" variant="blue" />
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Potensial <InlineLatex latex="V" /> er definert som
+          potensiell energi per enhet testladning. Så for en ladning <InlineLatex latex="q" /> i et punkt
+          med potensial <InlineLatex latex="V" /> er potensiell energi:
+        </p>
+        <FormulaBox latex="U = qV" variant="blue" />
+        <p>
+          Når eneste kraft er elektrisk (konservativ), er mekanisk energi bevart:
+        </p>
+        <FormulaBox latex="\tfrac{1}{2}m v_A^2 + qV_A = \tfrac{1}{2}m v_B^2 + qV_B" variant="blue" />
+        <p>
+          <strong>Hvorfor fungerer denne formelen for en partikkel som beveger seg i et felt, og ikke
+          formelen <InlineLatex latex="U = kq_1q_2/r" />?</strong> Forskjellen er hva «kilden» til feltet
+          er. Her er potensialet <InlineLatex latex="V" /> gitt ved hvert punkt — vi vet ikke nødvendigvis
+          hvilken ladningsfordeling som produserer det, og bryr oss ikke. Partikkelens egen ladning{" "}
+          <InlineLatex latex="q" /> føler feltet som et potensial-landskap. <InlineLatex latex="U = kq_1q_2/r" />{" "}
+          gjelder eksplisitt for to punktladninger; <InlineLatex latex="U = qV" /> gjelder generelt for en
+          ladning i et vilkårlig eksternt potensialfelt.
+        </p>
+        <p>
+          <strong>Kvalitativ analyse før tall:</strong> Partikkelen er <em>negativ</em>
+          (<InlineLatex latex="q = -5{,}70" /> μC) og flyttes mot <em>høyere</em> V (270 → 830 V). Da blir{" "}
+          <InlineLatex latex="U = qV" /> <em>mer negativ</em> (både q og ΔV er negative i det relevante
+          fortegnsmønsteret når man ser på <InlineLatex latex="qV_B" /> vs <InlineLatex latex="qV_A" />).
+          Siden <InlineLatex latex="U" /> synker, må kinetisk energi <em>øke</em>. Altså forventer vi{" "}
+          <InlineLatex latex="v_B > v_A" />. Huskeregel: negative ladninger «faller oppover» i potensialet.
+        </p>
 
-        <p className="font-semibold">Steg 2: Regn ut hvert ledd</p>
+        <p className="font-semibold mt-4">Steg 1: Algebraisk omforming — løs for v_B</p>
+        <p>
+          Flytt kinetisk-ledd til høyre, potensial-ledd til venstre, for å få <InlineLatex latex="v_B^2" /> isolert:
+        </p>
+        <FormulaBox latex="\tfrac{1}{2}m v_B^2 = \tfrac{1}{2}m v_A^2 + qV_A - qV_B = \tfrac{1}{2}m v_A^2 + q(V_A - V_B)" variant="blue" />
+
+        <p className="font-semibold mt-4">Steg 2: Regn ut hvert ledd — pass på fortegn</p>
         <FormulaBox latex="\tfrac{1}{2}m v_A^2 = \tfrac{1}{2}(2{,}70\cdot10^{-4})(5{,}90)^2 = 4{,}70\cdot10^{-3}\;\text{J}" variant="blue" />
+        <p>
+          For arbeidsleddet <InlineLatex latex="q(V_A - V_B)" />: q er negativ,
+          <InlineLatex latex="\;V_A - V_B = -560\;\text{V}" /> (også negativ). To negative =
+          positiv:
+        </p>
         <FormulaBox latex="q(V_A - V_B) = (-5{,}70\cdot10^{-6})(270 - 830) = (-5{,}70\cdot10^{-6})(-560) = +3{,}19\cdot10^{-3}\;\text{J}" variant="blue" />
+        <p>
+          Positivt ledd → kinetisk energi øker → raskere. (Dette er akkurat hva den kvalitative analysen
+          spådde.)
+        </p>
 
-        <p className="font-semibold">Steg 3: Sett sammen</p>
+        <p className="font-semibold mt-4">Steg 3: Sett sammen og løs</p>
         <FormulaBox latex="\tfrac{1}{2}m v_B^2 = 4{,}70\cdot10^{-3} + 3{,}19\cdot10^{-3} = 7{,}89\cdot10^{-3}\;\text{J}" variant="blue" />
         <FormulaBox latex="v_B^2 = \dfrac{2(7{,}89\cdot10^{-3})}{2{,}70\cdot10^{-4}} = 58{,}44\;\text{m}^2/\text{s}^2" variant="blue" />
         <FormulaBox latex="\boxed{v_B = \boxed{7{,}64\;\text{m/s}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\sqrt{\text{J/kg}} = \sqrt{\text{m}^2/\text{s}^2} = \text{m/s}" />. ✓
+        </p>
 
-        <p className="font-semibold">Steg 4: Raskere eller tregere?</p>
+        <p className="font-semibold mt-4">Steg 4: Raskere eller tregere?</p>
         <p>
-          <InlineLatex latex="v_B > v_A" /> — partikkelen er <strong>raskere ved B</strong>.
-          Årsak: negativ ladning vinner energi når den beveger seg mot høyere V (potensiell
-          energi <InlineLatex latex="qV" /> blir mer negativ, kinetisk energi øker tilsvarende).
+          <InlineLatex latex="v_B = 7{,}64 > 5{,}90 = v_A" /> — partikkelen er <strong>raskere ved B</strong>.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Den negative partikkelen vinner energi når den beveger seg
+          mot høyere V. For en <em>positiv</em> ladning ville det vært omvendt: den ville bremset når V
+          stiger, og akselerert når V synker. Huskeregelen «positive ladninger faller mot lav V, negative
+          mot høy V» er direkte konsekvens av <InlineLatex latex="U = qV" />: systemet søker minimum U, og
+          fortegnet på q avgjør om det betyr høy eller lav V. Farten gikk fra 5,90 til 7,64 m/s — ikke
+          relativistisk, så vår klassiske beskrivelse er gyldig.
         </p>
       </div>
     ),
@@ -875,26 +1166,78 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">(a) Arbeidet utført av elektrisk kraft</p>
-        <p>Fra arbeid-energi-setningen (eneste kraft er elektrisk):</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Denne oppgaven knytter sammen tre ideer som ofte
+          behandles separat: arbeid-energi, arbeid-potensialforskjell, og potensialforskjell-felt. Vi må
+          bruke alle tre i rekkefølge.
+        </p>
+        <p>
+          <strong>Originalformler:</strong>
+        </p>
+        <FormulaBox latex="W_{\text{netto}} = \Delta K = K_f - K_0 \quad\text{(arbeid-energi-setningen)}" variant="blue" />
+        <FormulaBox latex="W_E = q(V_a - V_b) \quad\text{(arbeid og potensial)}" variant="blue" />
+        <FormulaBox latex="V_a - V_b = \int_a^b \vec E \cdot d\vec l \quad\text{(potensial fra felt)}" variant="blue" />
+        <p>
+          For et <em>uniformt</em> felt parallelt med forflytningen reduseres integralet til
+          <InlineLatex latex="\;V_a - V_b = E\,d" />.
+        </p>
+        <p>
+          <strong>Hvorfor kan vi bruke <InlineLatex latex="V_a - V_b = Ed" /> her?</strong> Problemet sier
+          eksplisitt at feltet er <em>uniformt</em>, og forflytningen er parallell med feltet (begge mot
+          venstre). I dette spesialtilfellet er integralet enkelt: konstant integrand ganger lengde. For
+          et ikke-uniformt felt (som rundt en punktladning) måtte vi integrert eksplisitt — da virker
+          ikke <InlineLatex latex="V/d = E" /> som snarvei (jf. oppg. 23.22).
+        </p>
+
+        <p className="font-semibold mt-4">(a) Arbeidet utført av elektrisk kraft</p>
+        <p>
+          Oppgaven sier at eneste kraft er den elektriske, så hele arbeid-energi-setningen handler om
+          elektrisk arbeid: <InlineLatex latex="W_E = W_{\text{netto}} = \Delta K" />.
+          Partikkelen starter i ro (<InlineLatex latex="K_0 = 0" />):
+        </p>
         <FormulaBox latex="W_E = K_f - K_0 = 2{,}20\cdot10^{-6} - 0 = 2{,}20\cdot10^{-6}\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{W_E = \boxed{+2{,}20\cdot10^{-6}\;\text{J}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Fortegnssjekk: <InlineLatex latex="W_E > 0" /> fordi partikkelen akselereres — kraft og
+          forflytning peker i samme retning (begge mot venstre). ✓
+        </p>
 
-        <p className="font-semibold">(b) Potensialforskjell start − slutt</p>
+        <p className="font-semibold mt-4">(b) Potensialforskjell start − slutt</p>
+        <p>
+          Bruk <InlineLatex latex="W_E = q(V_{\text{start}} - V_{\text{slutt}})" /> og løs algebraisk for
+          potensialforskjellen:
+        </p>
         <FormulaBox latex="W_E = q(V_{\text{start}} - V_{\text{slutt}}) \;\Rightarrow\; V_{\text{start}} - V_{\text{slutt}} = \dfrac{W_E}{q}" variant="blue" />
         <FormulaBox latex="= \dfrac{2{,}20\cdot10^{-6}}{4{,}20\cdot10^{-9}} = 523{,}8\;\text{V}" variant="blue" />
         <FormulaBox latex="\boxed{V_{\text{start}} - V_{\text{slutt}} = \boxed{+524\;\text{V}}}" variant="gold" />
         <p>
-          Positiv verdi betyr at <strong>startpunktet er på høyere potensial</strong> — som seg bør,
-          siden den positive partikkelen «faller» mot lavere V.
+          <strong>Fortegnsanalyse:</strong> Positiv verdi betyr at <strong>startpunktet er på høyere
+          potensial</strong> — som seg bør, siden den positive partikkelen «faller» mot lavere V (akkurat
+          som en ball faller mot lavere gravitasjonspotensial).
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{J}/\text{C} = \text{V}" />. ✓
         </p>
 
-        <p className="font-semibold">(c) Størrelsen på E-feltet</p>
+        <p className="font-semibold mt-4">(c) Størrelsen på E-feltet</p>
         <p>
           For uniformt felt parallelt med forflytningen:
         </p>
-        <FormulaBox latex="|\vec E| = \dfrac{V_{\text{start}} - V_{\text{slutt}}}{d} = \dfrac{523{,}8\;\text{V}}{0{,}0600\;\text{m}}" variant="blue" />
+        <FormulaBox latex="V_{\text{start}} - V_{\text{slutt}} = E\cdot d \;\Rightarrow\; |\vec E| = \dfrac{V_{\text{start}} - V_{\text{slutt}}}{d}" variant="blue" />
+        <FormulaBox latex="|\vec E| = \dfrac{523{,}8\;\text{V}}{0{,}0600\;\text{m}}" variant="blue" />
         <FormulaBox latex="\boxed{|\vec E| = \boxed{8{,}73\cdot10^{3}\;\text{V/m}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{V}/\text{m}" /> er standardenheten for E-felt. ✓
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Et felt på 8,7 kV/m er moderat — tilsvarer en typisk spenning
+          på 500 V over 6 cm. Tre ulike fysiske størrelser (arbeid, potensial, felt) viser seg å være
+          proporsjonale i dette uniforme-felt-spesialtilfellet:
+          <InlineLatex latex="\;W_E = qEd" />,
+          <InlineLatex latex="\;\Delta V = Ed" />,
+          <InlineLatex latex="\;F = qE" />. Å se hvordan de henger sammen er ofte halvparten av en
+          eksamensoppgave!
+        </p>
       </div>
     ),
     summary: (
@@ -998,24 +1341,90 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Felleskalkyle: F = qE</p>
-        <FormulaBox latex="F = qE = (3{,}00\cdot10^{-8})(3{,}60\cdot10^{4}) = 1{,}08\cdot10^{-3}\;\text{N} \text{ (oppover)}" variant="blue" />
-
-        <p className="font-semibold">(a) 0,490 m mot høyre</p>
-        <p><InlineLatex latex="\vec F" /> er loddrett på forflytningen (<InlineLatex latex="\theta=90°" />):</p>
-        <FormulaBox latex="\boxed{W_a = \boxed{0}}" variant="gold" />
-
-        <p className="font-semibold">(b) 0,700 m oppover</p>
-        <p><InlineLatex latex="\vec F" /> er i samme retning som forflytningen (<InlineLatex latex="\theta=0°" />):</p>
-        <FormulaBox latex="W_b = Fd = (1{,}08\cdot10^{-3})(0{,}700) = 7{,}56\cdot10^{-4}\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W_b = \boxed{+7{,}56\cdot10^{-4}\;\text{J}}}" variant="gold" />
-
-        <p className="font-semibold">(c) 2,80 m i 45° nedover fra horisontalen</p>
         <p>
-          Vertikal komponent av forflytning: <InlineLatex latex="\Delta y = -d\sin 45° = -2{,}80\cdot 0{,}7071 = -1{,}980\;\text{m}" /> (negativ = nedover).
+          <strong>Kort teoretisk bakgrunn:</strong> Siden feltet er <em>uniformt</em>, er kraften
+          <InlineLatex latex="\;\vec F = q\vec E" /> konstant både i størrelse og retning. Da er
+          arbeidet gitt av det velkjente skalarproduktet:
+        </p>
+        <FormulaBox latex="W = \vec F \cdot \vec d = F\,d\cos\theta" variant="blue" />
+        <p>
+          der <InlineLatex latex="\theta" /> er vinkelen mellom <InlineLatex latex="\vec F" /> og{" "}
+          <InlineLatex latex="\vec d" />. Siden feltet (og dermed kraften) er vertikal, avhenger arbeidet
+          kun av den <em>vertikale</em> komponenten av forflytningen. Horisontal bevegelse i vertikalt
+          felt gir null arbeid — uansett hvor langt du går sidelengs!
+        </p>
+        <p>
+          <strong>Hvorfor trenger vi ikke integrere?</strong> I et generelt felt ville{" "}
+          <InlineLatex latex="W = \int \vec F \cdot d\vec l" />. Men når <InlineLatex latex="\vec F" /> er
+          konstant kan vi trekke den ut av integralet, og integralet av <InlineLatex latex="d\vec l" /> er
+          bare totalforflytningen <InlineLatex latex="\vec d" />. Det er derfor <InlineLatex latex="W = F d \cos\theta" />
+          fungerer her.
+        </p>
+        <p>
+          <strong>Snarvei for vertikalt felt:</strong>{" "}
+          <InlineLatex latex="W = F_y \Delta y = qE \Delta y" />, der <InlineLatex latex="\Delta y" /> er
+          den vertikale komponenten av forflytningen (positiv opp, negativ ned). Denne formen er lettere
+          enn å regne vinkler.
+        </p>
+
+        <p className="font-semibold mt-4">Felleskalkyle: F = qE</p>
+        <FormulaBox latex="F = qE = (3{,}00\cdot10^{-8})(3{,}60\cdot10^{4}) = 1{,}08\cdot10^{-3}\;\text{N} \text{ (oppover)}" variant="blue" />
+        <p>
+          Positiv ladning i felt pekende opp → kraft oppover.
+        </p>
+
+        <p className="font-semibold mt-4">(a) 0,490 m mot høyre</p>
+        <p>
+          Kraften er vertikal, forflytningen er horisontal:{" "}
+          <InlineLatex latex="\vec F \perp \vec d" /> (<InlineLatex latex="\theta=90°" />). Vertikal komponent av
+          forflytningen <InlineLatex latex="\Delta y = 0" />. Derfor:
+        </p>
+        <FormulaBox latex="W_a = Fd\cos 90° = F\cdot\Delta y = F\cdot 0" variant="blue" />
+        <FormulaBox latex="\boxed{W_a = \boxed{0}}" variant="gold" />
+        <p>
+          <strong>Fysisk tolkning:</strong> Dette er ikke bare «null fordi regnemåten gir null» — den
+          elektriske kraften har ingen påvirkning på energien når partikkelen beveger seg sidelengs,
+          akkurat som tyngdekraften ikke gjør arbeid på et objekt som ruller horisontalt.
+        </p>
+
+        <p className="font-semibold mt-4">(b) 0,700 m oppover</p>
+        <p>
+          Forflytning og kraft peker samme vei (<InlineLatex latex="\theta=0°" />,{" "}
+          <InlineLatex latex="\cos 0°=1" />). Hele forflytningen bidrar:
+        </p>
+        <FormulaBox latex="W_b = F\cdot d\cos 0° = Fd = (1{,}08\cdot10^{-3})(0{,}700) = 7{,}56\cdot10^{-4}\;\text{J}" variant="blue" />
+        <FormulaBox latex="\boxed{W_b = \boxed{+7{,}56\cdot10^{-4}\;\text{J}}}" variant="gold" />
+        <p>
+          <strong>Fortegnssjekk:</strong> Positiv fordi kraft og forflytning er parallelle. Den elektriske
+          kraften leverer energi til ladningen — den akselereres.
+        </p>
+
+        <p className="font-semibold mt-4">(c) 2,80 m i 45° nedover fra horisontalen</p>
+        <p>
+          Her er det lettest å finne den vertikale komponenten direkte. «45° nedover fra horisontalen»
+          betyr at banen går ned og til siden med like stor vertikal og horisontal komponent:
+        </p>
+        <FormulaBox latex="\Delta y = -d\sin 45° = -2{,}80\cdot 0{,}7071 = -1{,}980\;\text{m}" variant="blue" />
+        <p>
+          Minus-tegnet er viktig: <InlineLatex latex="\Delta y < 0" /> fordi forflytningen har komponent
+          nedover. Arbeidet blir:
         </p>
         <FormulaBox latex="W_c = F \cdot \Delta y = (1{,}08\cdot10^{-3})(-1{,}980) = -2{,}14\cdot10^{-3}\;\text{J}" variant="blue" />
         <FormulaBox latex="\boxed{W_c = \boxed{-2{,}14\cdot10^{-3}\;\text{J}}}" variant="gold" />
+        <p>
+          <strong>Fortegnssjekk:</strong> Negativ fordi kraft (oppover) og vertikal komponent av forflytning
+          (nedover) er motsatte. Alternativ regning med <InlineLatex latex="\cos\theta" />: vinkelen mellom
+          <InlineLatex latex="\vec F" /> (opp) og <InlineLatex latex="\vec d" /> (45° under horisontalen) er
+          <InlineLatex latex="\;90° + 45° = 135°" />, og <InlineLatex latex="\cos 135° = -0{,}7071" />. Da:
+          <InlineLatex latex="\;W = Fd\cos 135° = (1{,}08\cdot10^{-3})(2{,}80)(-0{,}7071) = -2{,}14\cdot10^{-3}\;\text{J}" />. ✓
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Ladningen bruker energi på å bevege seg «nedover mot kraften».
+          Den taper kinetisk energi tilsvarende — eller sagt annerledes: dens potensielle energi
+          <InlineLatex latex="\;U = qV" /> øker. Nøkkelen i hele oppgaven: i uniformt felt teller bare
+          <em>komponenten</em> av forflytningen langs feltet. Pythagoras-lignende oppskrift:{" "}
+          del opp forflytningen og bruk komponenter.
+        </p>
       </div>
     ),
     summary: (
@@ -1130,18 +1539,57 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">(a) Potensialet i A</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Potensialet fra en punktladning (med
+          <InlineLatex latex="\;V(\infty)=0" />) er:
+        </p>
+        <FormulaBox latex="V(r) = \dfrac{kq}{r}" variant="blue" />
+        <p>
+          For flere ladninger bruker vi <em>superposisjonsprinsippet</em>: totalpotensialet i et punkt er
+          summen av potensialene fra hver ladning:
+        </p>
+        <FormulaBox latex="V_{\text{tot}} = \sum_i \dfrac{k q_i}{r_i}" variant="blue" />
+        <p>
+          <strong>Hvorfor er dette mye enklere enn å summere E-felt?</strong> E-felt er vektorer — man
+          må dekomponere i x- og y-komponenter og Pythagorisere summen. Potensial er en <em>skalar</em>:
+          bare legg sammen tall med riktig fortegn. Dette er en av potensialets største styrker, og hvorfor
+          vi ofte regner V først og utleder E etterpå.
+        </p>
+        <p>
+          For arbeidet vi regner i (c) bruker vi sammenhengen mellom arbeid og potensialforskjell (se
+          23.14):
+        </p>
+        <FormulaBox latex="W_E = q_3(V_{\text{start}} - V_{\text{slutt}})" variant="blue" />
+
+        <p className="font-semibold mt-4">(a) Potensialet i A</p>
+        <p>
+          A ligger midt mellom <InlineLatex latex="q_1" /> og <InlineLatex latex="q_2" />, så{" "}
+          <InlineLatex latex="r_{1A} = r_{2A} = 0{,}050" /> m. Begge ledd har samme nevner, så vi kan
+          faktorisere:
+        </p>
         <FormulaBox
           latex="V_A = \dfrac{k q_1}{0{,}050} + \dfrac{k q_2}{0{,}050} = \dfrac{k}{0{,}050}(q_1 + q_2)"
           variant="blue"
         />
+        <p>
+          <strong>Fortegnsanalyse:</strong> <InlineLatex latex="q_1 + q_2 = +2{,}00 - 6{,}10 = -4{,}10" /> nC.
+          Sumladningen er <em>negativ</em> — dominert av <InlineLatex latex="q_2" />. Altså forventer vi{" "}
+          <InlineLatex latex="V_A < 0" />:
+        </p>
         <FormulaBox
           latex="= \dfrac{8{,}99\cdot10^{9}}{0{,}050}\big(2{,}00 - 6{,}10\big)\cdot10^{-9} = (1{,}798\cdot10^{11})(-4{,}10\cdot10^{-9})"
           variant="blue"
         />
         <FormulaBox latex="\boxed{V_A = \boxed{-737\;\text{V}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="(\text{N·m}^2/\text{C}^2)\cdot\text{C}/\text{m} = \text{N·m}/\text{C} = \text{J/C} = \text{V}" />. ✓
+        </p>
 
-        <p className="font-semibold">(b) Potensialet i B</p>
+        <p className="font-semibold mt-4">(b) Potensialet i B</p>
+        <p>
+          Nå har de to leddene <em>forskjellige</em> nevnere (B er ikke ekvidistant fra de to ladningene),
+          så vi regner hver for seg:
+        </p>
         <FormulaBox latex="V_B = \dfrac{k q_1}{0{,}080} + \dfrac{k q_2}{0{,}060}" variant="blue" />
         <FormulaBox
           latex="= \dfrac{(8{,}99\cdot10^{9})(2{,}00\cdot10^{-9})}{0{,}080} + \dfrac{(8{,}99\cdot10^{9})(-6{,}10\cdot10^{-9})}{0{,}060}"
@@ -1149,17 +1597,31 @@ export const exercises: Record<string, ExerciseContent> = {
         />
         <FormulaBox latex="= 224{,}8\;\text{V} + (-914{,}0)\;\text{V} = -689{,}2\;\text{V}" variant="blue" />
         <FormulaBox latex="\boxed{V_B = \boxed{-689\;\text{V}}}" variant="gold" />
-
-        <p className="font-semibold">(c) Arbeid fra B til A</p>
         <p>
-          Arbeid utført av E-feltet: <InlineLatex latex="W_E = q_3(V_B - V_A)" />{" "}
-          (startpunkt minus sluttpunkt):
+          Igjen negativt, men <em>mindre</em> negativt enn <InlineLatex latex="V_A" />. Det betyr
+          <InlineLatex latex="\;V_B > V_A" /> (B er på «høyere» potensial enn A). Dette vil bli viktig i
+          neste delspørsmål.
         </p>
+
+        <p className="font-semibold mt-4">(c) Arbeid fra B til A</p>
+        <p>
+          Bruk <InlineLatex latex="W_E = q_3(V_{\text{start}} - V_{\text{slutt}})" /> der start er B og slutt
+          er A:
+        </p>
+        <FormulaBox latex="W_E = q_3(V_B - V_A)" variant="blue" />
         <FormulaBox latex="W_E = (3{,}00\cdot10^{-9})\big(-689{,}2 - (-737{,}2)\big) = (3{,}00\cdot10^{-9})(48{,}0)" variant="blue" />
         <FormulaBox latex="\boxed{W_E = \boxed{+1{,}44\cdot10^{-7}\;\text{J}}}" variant="gold" />
         <p>
-          Positivt arbeid betyr at feltet <em>hjalp</em> ladningen fra B til A — som gir mening siden
-          den positive ladningen går fra høyere (B) til lavere (A) potensial.
+          <strong>Fortegnsanalyse:</strong> Differansen <InlineLatex latex="V_B - V_A = +48" /> V er positiv
+          (B er høyere V enn A). Ladningen er positiv (<InlineLatex latex="q_3 > 0" />). Produktet blir
+          positivt → feltet gjør positivt arbeid.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Positivt arbeid betyr at feltet <em>hjalp</em> ladningen fra B
+          til A — som gir mening siden den positive ladningen «faller» fra høyere V (B) til lavere V (A),
+          akkurat som en ball faller fra større høyde. Bevares mekanisk energi, ville <InlineLatex latex="q_3" />
+          akselerert (fått kinetisk energi <InlineLatex latex="1{,}44\cdot10^{-7}" /> J). Merk hvor mye
+          enklere dette var enn å regne kraft integrert langs banen — det er potensialets vakre styrke!
         </p>
       </div>
     ),
@@ -1243,7 +1705,36 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">(a) Akselerasjon fra 2,50 → 8,50 Mm/s</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Energibevaring for en ladning i et potensialfelt:
+        </p>
+        <FormulaBox latex="\tfrac{1}{2}mv_i^2 + qV_i = \tfrac{1}{2}mv_f^2 + qV_f" variant="blue" />
+        <p>
+          Algebraisk omforming gir sammenhengen mellom endring i kinetisk energi og potensialforskjell
+          (<InlineLatex latex="\Delta V = V_f - V_i" />):
+        </p>
+        <FormulaBox latex="\Delta K = K_f - K_i = -q\,\Delta V = -q(V_f - V_i)" variant="blue" />
+        <p>
+          <strong>Spesialtilfellet elektron:</strong> For et elektron er <InlineLatex latex="q = -e" />,
+          så <InlineLatex latex="-q = +e" />. Da blir:
+        </p>
+        <FormulaBox latex="\Delta K = e\,\Delta V \quad\text{(for elektron)}" variant="blue" />
+        <p>
+          <strong>Hvorfor det positive tegnet?</strong> Det «to minus gir pluss»-tegnet er essensen: et
+          elektron taper energi når det beveger seg mot lavere V (da er <InlineLatex latex="\Delta V < 0" />, og{" "}
+          <InlineLatex latex="\Delta K < 0" />), og vinner energi når det beveger seg mot høyere V. Dette
+          er motsatt av en positiv ladning — en av de viktigste intuisjonene i elektrisitetslæren.
+        </p>
+        <p>
+          <strong>Hvorfor bruker vi energibevaring og ikke F=ma?</strong> Vi vet ikke hvor lang strekning
+          akselerasjonen skjer over, eller om feltet er uniformt. Energibevaring trenger bare start og
+          slutt — ikke detaljer om mellomliggende tilstand.
+        </p>
+
+        <p className="font-semibold mt-4">(a) Akselerasjon fra 2,50 → 8,50 Mm/s</p>
+        <p>
+          Regn først ut <InlineLatex latex="\Delta K" /> (hvor mye kinetisk energi elektronet skal vinne):
+        </p>
         <FormulaBox latex="\Delta K = \tfrac{1}{2}m(v_f^2 - v_i^2)" variant="blue" />
         <FormulaBox
           latex="= \tfrac{1}{2}(9{,}109\cdot10^{-31})\big[(8{,}50\cdot10^{6})^2 - (2{,}50\cdot10^{6})^2\big]"
@@ -1251,27 +1742,52 @@ export const exercises: Record<string, ExerciseContent> = {
         />
         <FormulaBox latex="= \tfrac{1}{2}(9{,}109\cdot10^{-31})(6{,}60\cdot10^{13}) = 3{,}006\cdot10^{-17}\;\text{J}" variant="blue" />
         <p>
-          For elektron: <InlineLatex latex="\Delta K = e\Delta V" />, så:
+          Positiv <InlineLatex latex="\Delta K" /> (skal jo akselereres). Nå løser vi{" "}
+          <InlineLatex latex="\Delta K = e\Delta V" /> for <InlineLatex latex="\Delta V" />:
         </p>
+        <FormulaBox latex="\Delta V = \dfrac{\Delta K}{e}" variant="blue" />
         <FormulaBox
-          latex="\Delta V = \dfrac{\Delta K}{e} = \dfrac{3{,}006\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx +188\;\text{V}"
+          latex="= \dfrac{3{,}006\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx +188\;\text{V}"
           variant="blue"
         />
         <FormulaBox latex="\boxed{\Delta V_{(a)} = \boxed{+188\;\text{V}}\;(\text{høyere V i sluttpunkt})}" variant="gold" />
+        <p>
+          <strong>Fortegnstolkning:</strong> <InlineLatex latex="\Delta V > 0" /> betyr{" "}
+          <InlineLatex latex="V_f > V_i" /> — elektronet har gått fra lavere til høyere potensial. Dette er
+          mønsteret «negative ladninger akselereres mot høy V». I et elektronkanon-oppsett vil lavere V
+          være en katode, høyere V være en anode.
+        </p>
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{J}/\text{C} = \text{V}" />. ✓
+        </p>
 
-        <p className="font-semibold">(b) Bremsing fra 8,50 Mm/s → 0</p>
+        <p className="font-semibold mt-4">(b) Bremsing fra 8,50 Mm/s → 0</p>
+        <p>
+          Nå skal elektronet <em>tape</em> kinetisk energi, så{" "}
+          <InlineLatex latex="\Delta K < 0" />:
+        </p>
         <FormulaBox
-          latex="\Delta K = \tfrac{1}{2}m(0 - v_i^2) = -\tfrac{1}{2}(9{,}109\cdot10^{-31})(8{,}50\cdot10^{6})^2 = -3{,}291\cdot10^{-17}\;\text{J}"
+          latex="\Delta K = \tfrac{1}{2}m(v_f^2 - v_i^2) = \tfrac{1}{2}(9{,}109\cdot10^{-31})(0 - (8{,}50\cdot10^{6})^2) = -3{,}291\cdot10^{-17}\;\text{J}"
           variant="blue"
         />
         <FormulaBox
-          latex="\Delta V = \dfrac{-3{,}291\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx -206\;\text{V}"
+          latex="\Delta V = \dfrac{\Delta K}{e} = \dfrac{-3{,}291\cdot10^{-17}}{1{,}602\cdot10^{-19}} \approx -206\;\text{V}"
           variant="blue"
         />
         <FormulaBox latex="\boxed{\Delta V_{(b)} = \boxed{-206\;\text{V}}\;(\text{lavere V i sluttpunkt})}" variant="gold" />
         <p>
-          Elektronet tapes fart fordi det må klatre mot «elektrisk motbakke» — dvs. at{" "}
-          <InlineLatex latex="U = qV" /> øker for negativ ladning når V synker.
+          <strong>Fortegnstolkning:</strong> <InlineLatex latex="\Delta V < 0" /> betyr elektronet måtte
+          «klatre» til lavere V. For elektron er dette «motbakke»: potensiell energi{" "}
+          <InlineLatex latex="U = qV = (-e)V" /> øker når V synker, så kinetisk energi må synke
+          tilsvarende. Derfor bremses det ned.
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Legg merke til at størrelsen på ΔV er litt forskjellig i de
+          to delene (188 V vs 206 V) selv om begge involverer elektronet ved 8,50 Mm/s. Det er fordi
+          spranget fra <em>lav</em> fart til 8,50 Mm/s krever mindre energi enn spranget fra <em>null</em>
+          til 8,50 Mm/s — fordi kinetisk energi er kvadratisk i farten. Typisk oppsett som brukes i
+          CRT-rør, TV-skjermer og elektronmikroskoper: lav V akselererer, høy V bremser (eller omvendt,
+          avhengig av hvilken elektrode).
         </p>
       </div>
     ),
@@ -1355,19 +1871,84 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">(a) Avstand</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Her kommer en fristelse vi må motstå: kan vi ikke bare
+          bruke <InlineLatex latex="E = V/d" /> og få <InlineLatex latex="d = V/E" /> rett ut? <strong>Nei</strong>,
+          og det er verdt å forstå hvorfor:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>
+            <InlineLatex latex="E = V/d" /> gjelder KUN i et <em>uniformt</em> elektrisk felt
+            (f.eks. mellom to store parallelle plater). Da er E konstant og V varierer lineært
+            med posisjonen, så <InlineLatex latex="E = \Delta V/\Delta d" />.
+          </li>
+          <li>
+            Rundt en <em>punktladning</em> er feltet <strong>ikke uniformt</strong> — det avtar som
+            <InlineLatex latex="\;1/r^2" />, mens potensialet avtar som <InlineLatex latex="1/r" />.
+            De to avtar i ulik takt, så forholdet <InlineLatex latex="V/E" /> er ikke konstant og
+            svarer ikke til noen fast «platedistanse».
+          </li>
+        </ul>
+        <p>
+          For en punktladning er de riktige originalformlene:
+        </p>
+        <FormulaBox latex="V(r) = \dfrac{kq}{r},\qquad E(r) = \dfrac{k|q|}{r^2}" variant="blue" />
+        <p>
+          der <InlineLatex latex="k = 8{,}99\times 10^{9}\;\text{N·m}^2/\text{C}^2" />. At V har tegn (kan være
+          negativt for <InlineLatex latex="q<0" />) mens E er definert med <InlineLatex latex="|q|" /> her, er
+          viktig — det skal vi bruke i (c).
+        </p>
+
+        <p className="font-semibold mt-4">(a) Avstand — hvorfor V/E gir r</p>
+        <p>
+          Vi har to ukjente (r og q) og to ligninger. Del V på E:
+        </p>
+        <FormulaBox latex="\dfrac{V}{E} = \dfrac{kq/r}{k|q|/r^2} = \dfrac{q}{|q|}\cdot r" variant="blue" />
+        <p>
+          Legg merke til triks­et: <InlineLatex latex="k" /> kanselleres, og
+          <InlineLatex latex="\;(1/r)/(1/r^2) = r" />. Faktoren <InlineLatex latex="q/|q|" /> er
+          <InlineLatex latex="\;+1" /> for positiv q og <InlineLatex latex="-1" /> for negativ q — altså
+          gir fortegnet på <InlineLatex latex="V/E" /> direkte ladningens fortegn. Siden V er
+          <strong> positivt</strong> her, er q positiv, og dermed <InlineLatex latex="V/E = r" /> (uten
+          fortegnsproblem).
+        </p>
         <FormulaBox latex="r = \dfrac{V}{E} = \dfrac{4{,}98\;\text{V}}{16{,}2\;\text{V/m}}" variant="blue" />
         <FormulaBox latex="\boxed{r = \boxed{0{,}307\;\text{m}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Enhetssjekk: <InlineLatex latex="\text{V}/(\text{V/m}) = \text{m}" />. ✓
+        </p>
 
-        <p className="font-semibold">(b) Ladning</p>
-        <FormulaBox latex="|q| = \dfrac{V r}{k} = \dfrac{(4{,}98)(0{,}307)}{8{,}99\cdot10^{9}}" variant="blue" />
-        <FormulaBox latex="= \dfrac{1{,}531}{8{,}99\cdot10^{9}} = 1{,}703\cdot10^{-10}\;\text{C}" variant="blue" />
-        <FormulaBox latex="\boxed{|q| = \boxed{170\;\text{pC}} \approx 0{,}170\;\text{nC}}" variant="gold" />
-
-        <p className="font-semibold">(c) Retning</p>
+        <p className="font-semibold mt-4">(b) Ladning — velg formel og løs</p>
         <p>
-          Siden <InlineLatex latex="V = +4{,}98\;\text{V} > 0" />, er <InlineLatex latex="q" /> <strong>positiv</strong>.
-          Derfor peker <InlineLatex latex="\vec E" /> <strong>vekk fra</strong> ladningen.
+          Nå som r er kjent kan vi bruke <em>enten</em> V- eller E-uttrykket. Vi velger V-ligningen (ett
+          færre r å kvadrere, så mindre avrundingsfeil):
+        </p>
+        <FormulaBox latex="V = \dfrac{k|q|}{r}\;\Rightarrow\;|q| = \dfrac{V\,r}{k}" variant="blue" />
+        <FormulaBox latex="|q| = \dfrac{(4{,}98)(0{,}307)}{8{,}99\times 10^{9}} = \dfrac{1{,}531}{8{,}99\times 10^{9}}" variant="blue" />
+        <FormulaBox latex="|q| = 1{,}703\times 10^{-10}\;\text{C}" variant="blue" />
+        <FormulaBox latex="\boxed{|q| = \boxed{170\;\text{pC}} \approx 0{,}170\;\text{nC}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Kryss­sjekk med E-ligningen:
+          <InlineLatex latex="\;|q| = Er^2/k = (16{,}2)(0{,}307)^2/(8{,}99\times 10^{9}) \approx 1{,}70\times 10^{-10}\;\text{C}" />
+          — samme verdi. ✓
+        </p>
+
+        <p className="font-semibold mt-4">(c) Retning — fra fortegnet til V</p>
+        <p>
+          Siden <InlineLatex latex="V = +4{,}98\;\text{V} > 0" /> og
+          <InlineLatex latex="\;V = kq/r" /> med <InlineLatex latex="r>0" />, må <InlineLatex latex="q>0" />.
+          Konvensjonen er at <InlineLatex latex="\vec E" /> peker i retningen en positiv testladning ville
+          akselerere. Rundt en positiv ladning blir testladningen frastøtt — altså
+          peker <InlineLatex latex="\vec E" /> <strong>vekk fra</strong> ladningen (radielt utover).
+        </p>
+
+        <p>
+          <strong>Fysisk tolkning:</strong> 170 pC er en veldig liten ladning — tilsvarer ca.
+          <InlineLatex latex="\;10^{9}" /> elementærladninger, men bare femtomol. 30 cm unna gir den likevel
+          et felt på 16 V/m (omtrent som feltet under en høyspentlinje på bakkenivå). Nøkkelen i oppgaven er
+          forholdet <InlineLatex latex="V/E = r" /> — en snarvei som bare virker for punktladning
+          (eller eksternt felt fra sfærisk symmetrisk ladning), fordi den utnytter den spesifikke
+          <InlineLatex latex="\;1/r" /> vs. <InlineLatex latex="1/r^2" />-strukturen.
         </p>
       </div>
     ),
@@ -1483,7 +2064,54 @@ export const exercises: Record<string, ExerciseContent> = {
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold">Steg 1: Startenergi U₀</p>
+        <p>
+          <strong>Kort teoretisk bakgrunn:</strong> Dette er et to-partikkel-problem med to bevaringslover
+          i spill samtidig. Systemet er isolert (ingen ytre krefter), så både <em>impuls</em> og
+          <em> energi</em> bevares. Coulomb-kraften er konservativ, og ladningene har samme fortegn
+          (frastøter hverandre).
+        </p>
+        <p>
+          <strong>Impulsbevaring:</strong> Totalimpulsen er null i starten (begge i ro). Ingen ytre krefter
+          → totalimpulsen forblir null hele tiden:
+        </p>
+        <FormulaBox latex="m_p \vec v_p + m_\alpha \vec v_\alpha = 0 \;\Rightarrow\; m_p v_p = m_\alpha v_\alpha" variant="blue" />
+        <p>
+          Med <InlineLatex latex="m_\alpha = 4m_p" /> får vi{" "}
+          <InlineLatex latex="v_p = 4 v_\alpha" /> (protonet beveger seg 4× raskere fordi det har 1/4 av
+          massen).
+        </p>
+        <p>
+          <strong>Energibevaring:</strong>
+        </p>
+        <FormulaBox latex="K_i + U_i = K_f + U_f" variant="blue" />
+        <p>
+          Med <InlineLatex latex="K_i = 0" /> (fra ro) og{" "}
+          <InlineLatex latex="U = kq_p q_\alpha/r" />:
+        </p>
+        <FormulaBox latex="0 + \dfrac{kq_p q_\alpha}{r_0} = \tfrac{1}{2}m_p v_p^2 + \tfrac{1}{2}m_\alpha v_\alpha^2 + \dfrac{kq_p q_\alpha}{r}" variant="blue" />
+        <p>
+          <strong>Når er fart maksimal? Når er akselerasjon maksimal?</strong> To forskjellige spørsmål,
+          to forskjellige svar:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>
+            <strong>Maks fart:</strong> Akselerasjonen <InlineLatex latex="a = F/m = kq_pq_\alpha/(mr^2)" />{" "}
+            er alltid i retning «mot partenariat-partikkelen» — dvs. i bevegelsesretningen. Partikkelene
+            bremses aldri opp — de fortsetter å akselerere så lenge de føler kraften. Men kraften minker
+            med <InlineLatex latex="1/r^2" />, så ved <InlineLatex latex="r\to\infty" /> har de all
+            potensiell energi blitt kinetisk og farten stabiliseres. Altså: <InlineLatex latex="v_{\max}" />
+            nåes ved <InlineLatex latex="r = \infty" />.
+          </li>
+          <li>
+            <strong>Maks akselerasjon:</strong> Siden <InlineLatex latex="F \propto 1/r^2" /> er kraften
+            størst når r er minst — dvs. <em>ved start</em> (<InlineLatex latex="r = r_0" />).
+          </li>
+        </ul>
+
+        <p className="font-semibold mt-4">Steg 1: Startenergi U₀</p>
+        <p>
+          Med <InlineLatex latex="q_p = +e" /> og <InlineLatex latex="q_\alpha = +2e" />, begge positive:
+        </p>
         <FormulaBox
           latex="U_0 = \dfrac{k q_p q_\alpha}{r_0} = \dfrac{k(e)(2e)}{r_0} = \dfrac{2ke^2}{r_0}"
           variant="blue"
@@ -1493,25 +2121,46 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
 
-        <p className="font-semibold">Steg 2: Impulsbevaring</p>
-        <FormulaBox latex="m_p v_p = m_\alpha v_\alpha \;\Rightarrow\; v_p = 4 v_\alpha" variant="blue" />
+        <p className="font-semibold mt-4">Steg 2: Impulsbevaring</p>
+        <FormulaBox latex="m_p v_p = m_\alpha v_\alpha \;\Rightarrow\; v_p = \dfrac{m_\alpha}{m_p} v_\alpha = 4 v_\alpha" variant="blue" />
 
-        <p className="font-semibold">Steg 3: Energibevaring (r → ∞)</p>
+        <p className="font-semibold mt-4">Steg 3: Energibevaring (r → ∞)</p>
+        <p>
+          Ved <InlineLatex latex="r\to\infty" /> er <InlineLatex latex="U \to 0" />, så all U₀ har blitt K:
+        </p>
+        <FormulaBox latex="U_0 = \tfrac{1}{2}m_p v_p^2 + \tfrac{1}{2}m_\alpha v_\alpha^2" variant="blue" />
+        <p>
+          Substituer <InlineLatex latex="v_p = 4v_\alpha" /> og <InlineLatex latex="m_\alpha = 4m_p" />:
+        </p>
         <FormulaBox latex="\tfrac{1}{2}m_p(4v_\alpha)^2 + \tfrac{1}{2}(4m_p)v_\alpha^2 = U_0" variant="blue" />
         <FormulaBox latex="8 m_p v_\alpha^2 + 2 m_p v_\alpha^2 = 10 m_p v_\alpha^2 = U_0" variant="blue" />
+        <p>
+          Løs for <InlineLatex latex="v_\alpha" />:
+        </p>
         <FormulaBox
           latex="v_\alpha^{\max} = \sqrt{\dfrac{U_0}{10 m_p}} = \sqrt{\dfrac{2{,}051\cdot10^{-18}}{10(1{,}673\cdot10^{-27})}} = \sqrt{1{,}226\cdot10^{8}}"
           variant="blue"
         />
         <FormulaBox latex="\boxed{v_\alpha^{\max} = \boxed{1{,}11\cdot10^{4}\;\text{m/s}}}" variant="gold" />
         <FormulaBox latex="\boxed{v_p^{\max} = 4 v_\alpha^{\max} = \boxed{4{,}43\cdot10^{4}\;\text{m/s}}}" variant="gold" />
+        <p className="italic text-[var(--muted)]">
+          Kryss­sjekk: <InlineLatex latex="K_p + K_\alpha = \tfrac{1}{2}m_p(4{,}43\cdot10^4)^2 + \tfrac{1}{2}(4m_p)(1{,}11\cdot10^4)^2 \approx 2{,}05\cdot10^{-18}" /> J,
+          samsvarer med U₀. ✓
+        </p>
 
-        <p className="font-semibold">Steg 4: Maksimal akselerasjon (ved t=0)</p>
+        <p className="font-semibold mt-4">Steg 4: Maksimal akselerasjon (ved t=0)</p>
+        <p>
+          Bruk Coulombs lov for kraften ved startavstanden <InlineLatex latex="r_0" />:
+        </p>
         <FormulaBox
           latex="F_0 = \dfrac{k q_p q_\alpha}{r_0^2} = \dfrac{2ke^2}{r_0^2} = \dfrac{2(8{,}99\cdot10^9)(1{,}602\cdot10^{-19})^2}{(2{,}25\cdot10^{-10})^2}"
           variant="blue"
         />
         <FormulaBox latex="= 9{,}11\cdot10^{-9}\;\text{N}" variant="blue" />
+        <p>
+          Samme kraft virker på begge (Newtons 3. lov), men de har ulik masse, så akselerasjonene
+          <InlineLatex latex="\;a = F/m" /> er forskjellige:
+        </p>
         <FormulaBox
           latex="a_p^{\max} = \dfrac{F_0}{m_p} = \dfrac{9{,}11\cdot10^{-9}}{1{,}673\cdot10^{-27}}"
           variant="blue"
@@ -1522,12 +2171,25 @@ export const exercises: Record<string, ExerciseContent> = {
           variant="blue"
         />
         <FormulaBox latex="\boxed{a_\alpha^{\max} = \boxed{1{,}36\cdot10^{18}\;\text{m/s}^2}}" variant="gold" />
+        <p>
+          Forholdet: <InlineLatex latex="a_p/a_\alpha = m_\alpha/m_p = 4" />. Lettere partikkel får
+          større akselerasjon ved samme kraft — nøyaktig som forventet.
+        </p>
 
-        <p className="font-semibold">Steg 5: Når?</p>
+        <p className="font-semibold mt-4">Steg 5: Når?</p>
         <p>
           <strong>Max fart:</strong> etter lang tid (når <InlineLatex latex="r\to\infty" />, all U→K).
           <br />
           <strong>Max akselerasjon:</strong> like etter utslipp (når r er minst og kraften er størst).
+        </p>
+        <p>
+          <strong>Fysisk tolkning:</strong> Partikkelene starter i ro, men med potensiell energi lagret i
+          Coulomb-feltet. Denne energien omdannes gradvis til kinetisk mens de flyr fra hverandre. Kraften
+          avtar med avstanden (<InlineLatex latex="1/r^2" />), så akselerasjonen synker hele tiden — men
+          farten fortsetter likevel å øke (bare saktere og saktere) mot asymptotiske verdier ved uendelig.
+          Akselerasjonen <InlineLatex latex="\sim 10^{18}" /> m/s² er vanvittig, men kraften er bare
+          <InlineLatex latex="\sim 10^{-8}" /> N — igjen typisk: enorme akselerasjoner på mikroskopiske
+          partikler fordi massen er ubetydelig.
         </p>
       </div>
     ),
