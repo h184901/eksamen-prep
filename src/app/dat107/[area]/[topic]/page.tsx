@@ -10,7 +10,8 @@ import {
   type DAT107Topic,
 } from "@/lib/dat107";
 import Markdown from "@/components/Markdown";
-import VisitTracker from "@/components/dat107/VisitTracker";
+import CompletionToggle from "@/components/dat107/CompletionToggle";
+import TopicSidenav from "@/components/dat107/TopicSidenav";
 
 export function generateStaticParams() {
   return dat107Areas.flatMap((a) =>
@@ -158,41 +159,23 @@ export default async function DAT107TopicPage({
 
       <div className="grid lg:grid-cols-[240px_1fr] gap-8">
         <aside className="hidden lg:block">
-          <div className="sticky top-20 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-            <p
-              className={`text-xs uppercase tracking-wide font-bold mb-3 ${a.shortTitle}`}
-            >
-              {area.shortTitle}
-            </p>
-            <nav className="space-y-4">
-              {navGroups.map((group, gi) => (
-                <div key={gi}>
-                  {group.title && (
-                    <p className="text-[10px] uppercase tracking-wider font-semibold text-[var(--muted)] mb-1.5 px-3">
-                      {group.title}
-                    </p>
-                  )}
-                  <div className="space-y-0.5">
-                    {group.topics.map((t) => (
-                      <Link
-                        key={t.slug}
-                        href={`/dat107/${area.slug}/${t.slug}`}
-                        className={`block px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                          t.slug === topic.slug ? a.activeItem : a.hoverItem
-                        }`}
-                      >
-                        {t.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </nav>
-          </div>
+          <TopicSidenav
+            areaSlug={area.slug}
+            currentTopicSlug={topic.slug}
+            shortTitle={area.shortTitle}
+            groups={navGroups.map((g) => ({
+              title: g.title,
+              topics: g.topics.map((t) => ({ slug: t.slug, title: t.title })),
+            }))}
+            classes={{
+              shortTitle: a.shortTitle,
+              activeItem: a.activeItem,
+              hoverItem: a.hoverItem,
+            }}
+          />
         </aside>
 
         <article className="min-w-0 max-w-3xl">
-          <VisitTracker areaSlug={area.slug} topicSlug={topic.slug} />
           <div className="mb-4 flex items-center gap-2 flex-wrap">
             <span
               className={`text-xs uppercase tracking-wide font-bold ${a.shortTitle}`}
@@ -219,6 +202,7 @@ export default async function DAT107TopicPage({
               {topic.description}
             </p>
           )}
+          <CompletionToggle pageKey={`dat107/${area.slug}/${topic.slug}`} />
           <Markdown content={content} />
 
           <div className="mt-12 pt-6 border-t border-[var(--card-border)] grid sm:grid-cols-2 gap-3">

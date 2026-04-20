@@ -8,6 +8,7 @@ import {
   type DAT107Accent,
   type DAT107Topic,
 } from "@/lib/dat107";
+import TopicCard from "@/components/dat107/TopicCard";
 
 export function generateStaticParams() {
   return dat107Areas.map((a) => ({ area: a.slug }));
@@ -126,39 +127,6 @@ function areaAccentClasses(accent: DAT107Accent): AreaAccentClasses {
   }
 }
 
-function TopicCard({
-  area,
-  topic,
-  index,
-  accent,
-}: {
-  area: DAT107Area;
-  topic: DAT107Topic;
-  index: number;
-  accent: AreaAccentClasses;
-}) {
-  return (
-    <Link
-      href={`/dat107/${area.slug}/${topic.slug}`}
-      className={`group rounded-xl border-2 bg-[var(--card)] p-5 transition-all hover:shadow-md hover:-translate-y-0.5 ${accent.cardBorder}`}
-    >
-      <div className="flex items-start gap-3 mb-2">
-        <span
-          className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${accent.cardIndexBg}`}
-        >
-          {index}
-        </span>
-        <h3
-          className={`font-bold leading-snug transition-colors ${accent.cardHoverText}`}
-        >
-          {topic.title}
-        </h3>
-      </div>
-      <p className="text-sm text-[var(--muted)] pl-11">{topic.description}</p>
-    </Link>
-  );
-}
-
 function PhaseGroup({
   area,
   title,
@@ -186,7 +154,7 @@ function PhaseGroup({
         {topics.map((topic, i) => (
           <TopicCard
             key={topic.slug}
-            area={area}
+            areaSlug={area.slug}
             topic={topic}
             index={startIndex + i}
             accent={accent}
@@ -399,7 +367,7 @@ export default async function DAT107AreaPage({
             {area.topics.map((topic, i) => (
               <TopicCard
                 key={topic.slug}
-                area={area}
+                areaSlug={area.slug}
                 topic={topic}
                 index={i + 1}
                 accent={accent}

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { dat107Areas, type DAT107Area } from "@/lib/dat107";
+import { useProgress } from "@/components/ProgressProvider";
 
 const iconMap: Record<string, React.ReactNode> = {
   database: (
@@ -51,29 +51,18 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 function useAreaProgress(area: DAT107Area) {
-  const [visited, setVisited] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const { ready, isCompleted } = useProgress();
   const total = area.topics.length;
-
-  useEffect(() => {
-    setMounted(true);
-    try {
-      const stored = localStorage.getItem(`progress-dat107-${area.slug}`);
-      if (stored) {
-        const arr = JSON.parse(stored);
-        if (Array.isArray(arr)) setVisited(arr.length);
-      }
-    } catch {
-      // ignore
-    }
-  }, [area.slug]);
-
-  const percent = total === 0 ? 0 : Math.round((visited / total) * 100);
-  return { visited, total, percent, mounted };
+  let done = 0;
+  for (const t of area.topics) {
+    if (isCompleted(`dat107/${area.slug}/${t.slug}`)) done++;
+  }
+  const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+  return { done, total, percent, ready };
 }
 
 function AreaCard({ area }: { area: DAT107Area }) {
-  const { visited, total, percent, mounted } = useAreaProgress(area);
+  const { done, total, percent, ready } = useAreaProgress(area);
 
   return (
     <Link
@@ -103,12 +92,12 @@ function AreaCard({ area }: { area: DAT107Area }) {
       <div className="h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
         <div
           className="h-full rounded-full bg-dat107-500 transition-all duration-500"
-          style={{ width: mounted ? `${percent}%` : "0%" }}
+          style={{ width: ready ? `${percent}%` : "0%" }}
         />
       </div>
-      {mounted && (
+      {ready && (
         <p className="text-[11px] text-[var(--muted)] mt-1">
-          {visited}/{total} tema besøkt
+          {done}/{total} tema fullført
         </p>
       )}
     </Link>
@@ -117,7 +106,7 @@ function AreaCard({ area }: { area: DAT107Area }) {
 
 function ExamAreaCard({ area }: { area: DAT107Area }) {
   const accent = area.kind === "eksamen-bearbeidet" ? "amber" : "red";
-  const { visited, total, percent, mounted } = useAreaProgress(area);
+  const { done, total, percent, ready } = useAreaProgress(area);
 
   return (
     <Link
@@ -157,12 +146,12 @@ function ExamAreaCard({ area }: { area: DAT107Area }) {
           className={`h-full rounded-full transition-all duration-500 ${
             accent === "amber" ? "bg-amber-500" : "bg-red-500"
           }`}
-          style={{ width: mounted ? `${percent}%` : "0%" }}
+          style={{ width: ready ? `${percent}%` : "0%" }}
         />
       </div>
-      {mounted && (
+      {ready && (
         <p className="text-[11px] text-neutral-600 dark:text-neutral-300 mt-1">
-          {visited}/{total} sett besøkt
+          {done}/{total} sett fullført
         </p>
       )}
     </Link>

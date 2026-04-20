@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import UserBadge from "./UserBadge";
 import { useState } from "react";
 
 const navItems = [
@@ -16,6 +17,8 @@ const navItems = [
 export default function Navigation() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  if (pathname === "/login") return null;
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-md">
@@ -40,11 +43,13 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
+          <UserBadge />
           <ThemeToggle />
         </div>
 
         {/* Mobile menu button */}
         <div className="flex md:hidden items-center gap-2">
+          <UserBadge />
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}

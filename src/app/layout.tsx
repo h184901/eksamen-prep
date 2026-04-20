@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import AITutor from "@/components/AITutor";
+import { ProgressProvider } from "@/components/ProgressProvider";
 
 export const metadata: Metadata = {
   title: "Eksamensøving — Semester 4",
@@ -35,10 +36,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen antialiased">
-        <AITutor>
-          <Navigation />
-          <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
-        </AITutor>
+        <ProgressProvider>
+          <AITutor>
+            <Navigation />
+            <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+          </AITutor>
+        </ProgressProvider>
       </body>
     </html>
   );

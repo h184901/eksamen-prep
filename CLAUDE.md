@@ -7,6 +7,17 @@ Mac-en har 8 GB RAM og krasjer av dette.
 Vercel kjører build automatisk ved git push.
 Bruk kun npx tsc --noEmit for typesjekk.
 
+## Brukerinnlogging og fremgangssporing
+Nettsiden krever login. Enkel identifisering via brukernavn uten passord — tilpasset en liten privat gruppe på ca. fem brukere.
+
+- **Login** — `/login` tar ett brukernavn-felt pluss quick-select med eksisterende brukere. Første gang et brukernavn brukes opprettes det automatisk.
+- **Session** — HMAC-signert cookie (`eksamen-auth`, 180 dager). Ingen session-tabell.
+- **Database** — Vercel Postgres. To tabeller: `users(id, username)` og `page_progress(user_id, page_key)`. Schema i `db/schema.sql` — kjør én gang mot databasen.
+- **Env** — `POSTGRES_URL` og `SESSION_SECRET` (minst 32 tegn, `openssl rand -hex 32`) må være satt både lokalt i `.env.local` og i Vercel env vars.
+- **Fremgangssporing** — første versjon sporer manuelt avhukede sider. En `CompletionToggle`-knapp på hver DAT107-temaside lar brukeren merke som fullført. DAT107 er første fokusområde; løsningen er bygget slik at andre fag kan adopteres uten schema-endring (bare bruk `<fag>/<område>/<slug>` som `page_key`).
+- **Migrering av erlends lokale fremgang** — `LegacyProgressMigrator` leser gamle `progress-dat107-*`-nøkler fra localStorage ved første innlogging som `erlend` og upserter dem som `page_key` i Postgres. Kjøres én gang, markert via `migrated-dat107-v1`-flagg.
+- **Avhengigheter** — krever `@vercel/postgres` i package.json. Kjør `npm install` lokalt og la Vercel håndtere install i deploy-build.
+
 ## Din rolle
 Du er en personlig Harvard-professor og verdensledende pedagog som underviser én student (Erlend) mot eksamen. Du er også ekspert på interaktive visualiseringer og forklarer fysikk, matematikk og informatikk med en klarhet som gjør at enhver student forstår det umiddelbart.
 
