@@ -166,16 +166,17 @@ DAT107 er nå implementert som hovedfag på samme nivå som ING164, DAT110 og DA
 
 Implementert sidestruktur
 
-- `src/app/dat107/page.tsx` — dashboard med seks områdekort gruppert i Teori (SQL/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
+- `src/app/dat107/page.tsx` — dashboard med sju områdekort gruppert i Teori (SQL/Modellering/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
 - `src/app/dat107/[area]/page.tsx` — dynamisk områdeside som lister alle tema i et delområde.
 - `src/app/dat107/[area]/[topic]/page.tsx` — dynamisk tema-/innholdsside som leser Markdown fra `src/content/dat107/<area>/<fil>.md`, rendrer via `src/components/Markdown.tsx`, og har prev/next-navigasjon + sidemeny.
-- `src/lib/dat107.ts` — metadata for alle seks områder og totalt 55 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
+- `src/lib/dat107.ts` — metadata for alle sju områder og totalt 58 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
 - `src/content/dat107/<area>/<slug>.md` — alt faglig innhold er kopiert fra `DAT107-structured/` med ASCII-slug-filnavn (`æøå` normalisert) slik at URL-er og statisk generering fungerer på Vercel.
 - `src/components/Markdown.tsx` — serversidig minimal Markdown-renderer (h1–h3, paragrafer, punkt- og nummerlister, fenced code blocks med språk, inline `code`, `**bold**`, rørseparerte tabeller). Ingen ekstra npm-avhengighet.
 
-Seks faste hoveddeler (nå implementert som slug-er)
+Sju faste hoveddeler (nå implementert som slug-er)
 
-- `sql` — SQL (teori)
+- `sql` — SQL (teori): spørringer, tabeller, joins, indekser, transaksjoner
+- `modellering` — Modellering (teori): relasjonsmodell, ER, mapping, 3NF (~25 % av eksamen)
 - `jpa` — JPA (teori)
 - `nosql` — NoSQL (teori)
 - `obliger` — Obliger (praksis)
@@ -206,6 +207,20 @@ Design og identitet for DAT107
 
 - Lilla fagidentitet er aktiv i hele nettsiden (Tailwind-palett `dat107` 50–900, `a855f7` som 500-farge).
 - Samme komponentstil som de andre fagene: kort med fargebord, avrundede hjørner, hover-løft, mørkt/lyst tema.
+
+Pedagogisk mønster (skal bygges som DAT109)
+
+- DAT109 er referansen for pedagogisk kvalitet. DAT107 skal bygges i samme pedagogiske mønster — samme type teorisammendrag, eksempler, sjekklister, callout-bokser og progress-tracking.
+- Dashbordet (`src/app/dat107/page.tsx`) er client-komponent og viser progress per område basert på besøkte tema via `localStorage`-nøkkel `progress-dat107-<area>`.
+- Besøk registreres av `src/components/dat107/VisitTracker.tsx` som monteres på hver temaside.
+- Områdesiden `src/app/dat107/[area]/page.tsx` viser en "Dette må du kunne"-boks hentet fra `mustKnow`-feltet i `src/lib/dat107.ts`.
+- Teori-innhold er foreløpig rene Markdown-filer under `src/content/dat107/` og rendres med `src/components/Markdown.tsx`. Planen er å migrere viktige tema gradvis til egne React-sider med `TheorySummary` (som DAT109/modellering) når dybden krever det — ikke som big-bang.
+- SVG brukes til pedagogiske illustrasjoner og seksjonsikoner (f.eks. database-, diagram- og dokument-ikoner i dashbord). Ingen tung pynt eller tunge bibliotek — kun inline SVG.
+
+Dark mode-regler
+
+- Eksamensformat-boksen og andre gradient-kort skal bruke tilstrekkelig opasitet i dark mode (`dark:from-*950/70 dark:to-*950/50` eller sterkere) slik at tekst får kontrast.
+- Indre "stats"-kort skal bruke `bg-white/80 dark:bg-neutral-900/90` og eksplisitt `text-neutral-700 dark:text-neutral-200` for labels og `text-neutral-900 dark:text-neutral-50` for hovedtekst — ikke `text-[var(--muted)]` alene, som gir for dårlig kontrast i dark mode.
 
 ## Materialer for ING164
 Alt pensum ligger i ~/Downloads/Studiet/Semester4/materials/ing164/

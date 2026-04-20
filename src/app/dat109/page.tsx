@@ -124,11 +124,11 @@ export default function DAT109Page() {
       </div>
 
       {/* Eksamenformat */}
-      <div className="rounded-xl border-2 border-sysdev-400/40 bg-gradient-to-br from-sysdev-50 to-emerald-50 dark:from-sysdev-950/30 dark:to-emerald-950/20 p-6 mb-10">
-        <h2 className="font-bold text-lg mb-3 text-sysdev-700 dark:text-sysdev-400">
+      <div className="rounded-xl border-2 border-sysdev-400/40 dark:border-sysdev-500/50 bg-gradient-to-br from-sysdev-50 to-emerald-50 dark:from-sysdev-950/70 dark:to-emerald-950/50 p-6 mb-10">
+        <h2 className="font-bold text-lg mb-3 text-sysdev-700 dark:text-sysdev-300">
           Eksamenformat
         </h2>
-        <p className="text-sm text-[var(--muted)] mb-4">
+        <p className="text-sm text-neutral-700 dark:text-neutral-200 mb-4">
           Skriftlig eksamen med 4 oppgaver. Fra 2023 er oppgave 2 og 3
           flervalg. Oppgave 1 (modellering) og 4 (Java fra UML) er alltid
           samme type.
@@ -142,13 +142,13 @@ export default function DAT109Page() {
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-sysdev-200 dark:border-sysdev-800/40 p-3 text-center"
+              className="rounded-lg bg-white/80 dark:bg-neutral-900/90 border border-sysdev-200 dark:border-sysdev-700/60 p-3 text-center"
             >
-              <p className="text-xs font-medium text-[var(--muted)] mb-1">
+              <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 mb-1">
                 {item.label}
               </p>
-              <p className="font-bold text-sm">{item.topic}</p>
-              <p className="text-xs font-bold text-sysdev-600 dark:text-sysdev-400 mt-1">
+              <p className="font-bold text-sm text-neutral-900 dark:text-neutral-50">{item.topic}</p>
+              <p className="text-xs font-bold text-sysdev-600 dark:text-sysdev-300 mt-1">
                 {item.pct}
               </p>
             </div>

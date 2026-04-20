@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { dat107Areas, type DAT107Area } from "@/lib/dat107";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -12,6 +15,15 @@ const iconMap: Record<string, React.ReactNode> = {
   code: (
     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>
+  ),
+  diagram: (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <rect x="3" y="3" width="7" height="5" rx="1" />
+      <rect x="14" y="3" width="7" height="5" rx="1" />
+      <rect x="3" y="16" width="7" height="5" rx="1" />
+      <rect x="14" y="16" width="7" height="5" rx="1" />
+      <path strokeLinecap="round" d="M10 5.5h4M10 18.5h4M6.5 8v8M17.5 8v8" />
     </svg>
   ),
   document: (
@@ -38,24 +50,121 @@ const iconMap: Record<string, React.ReactNode> = {
   ),
 };
 
+function useAreaProgress(area: DAT107Area) {
+  const [visited, setVisited] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const total = area.topics.length;
+
+  useEffect(() => {
+    setMounted(true);
+    try {
+      const stored = localStorage.getItem(`progress-dat107-${area.slug}`);
+      if (stored) {
+        const arr = JSON.parse(stored);
+        if (Array.isArray(arr)) setVisited(arr.length);
+      }
+    } catch {
+      // ignore
+    }
+  }, [area.slug]);
+
+  const percent = total === 0 ? 0 : Math.round((visited / total) * 100);
+  return { visited, total, percent, mounted };
+}
+
 function AreaCard({ area }: { area: DAT107Area }) {
+  const { visited, total, percent, mounted } = useAreaProgress(area);
+
   return (
     <Link
       href={`/dat107/${area.slug}`}
       className="group rounded-xl border-2 border-dat107-500/30 hover:border-dat107-500/60 bg-[var(--card)] p-6 transition-all hover:shadow-md hover:-translate-y-0.5"
     >
       <div className="flex items-start justify-between mb-3">
-        <div className="w-10 h-10 rounded-lg bg-dat107-100 dark:bg-dat107-900/30 text-dat107-600 dark:text-dat107-400 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-lg bg-dat107-100 dark:bg-dat107-900/40 text-dat107-600 dark:text-dat107-300 flex items-center justify-center">
           {iconMap[area.icon]}
         </div>
-        <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-dat107-100 text-dat107-700 dark:bg-dat107-900/30 dark:text-dat107-400">
-          {area.topics.length} tema
-        </span>
+        <div className="flex items-center gap-2">
+          {area.weight && (
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-dat107-100 text-dat107-700 dark:bg-dat107-900/40 dark:text-dat107-200">
+              {area.weight}
+            </span>
+          )}
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
+            {total} tema
+          </span>
+        </div>
       </div>
-      <h3 className="font-bold text-lg mb-1 group-hover:text-dat107-600 dark:group-hover:text-dat107-400 transition-colors">
+      <h3 className="font-bold text-lg mb-1 group-hover:text-dat107-600 dark:group-hover:text-dat107-300 transition-colors">
         {area.title}
       </h3>
-      <p className="text-sm text-[var(--muted)]">{area.description}</p>
+      <p className="text-sm text-[var(--muted)] mb-4">{area.description}</p>
+
+      <div className="h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
+        <div
+          className="h-full rounded-full bg-dat107-500 transition-all duration-500"
+          style={{ width: mounted ? `${percent}%` : "0%" }}
+        />
+      </div>
+      {mounted && (
+        <p className="text-[11px] text-[var(--muted)] mt-1">
+          {visited}/{total} tema besøkt
+        </p>
+      )}
+    </Link>
+  );
+}
+
+function ExamAreaCard({ area }: { area: DAT107Area }) {
+  const accent = area.kind === "eksamen-bearbeidet" ? "amber" : "red";
+  const { visited, total, percent, mounted } = useAreaProgress(area);
+
+  return (
+    <Link
+      href={`/dat107/${area.slug}`}
+      className={`group relative overflow-hidden rounded-xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 ${
+        accent === "amber"
+          ? "border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/40"
+          : "border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/50 dark:to-pink-950/40"
+      }`}
+    >
+      <div className="flex items-center gap-3 mb-2">
+        <div
+          className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+            accent === "amber"
+              ? "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300"
+              : "bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300"
+          }`}
+        >
+          {iconMap[area.icon]}
+        </div>
+        <h3
+          className={`font-bold text-lg transition-colors ${
+            accent === "amber"
+              ? "group-hover:text-amber-700 dark:group-hover:text-amber-300"
+              : "group-hover:text-red-700 dark:group-hover:text-red-300"
+          }`}
+        >
+          {area.title}
+        </h3>
+        <span className="ml-auto text-xs font-bold px-2.5 py-1 rounded-full bg-white/80 dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200">
+          {total} sett
+        </span>
+      </div>
+      <p className="text-sm text-neutral-700 dark:text-neutral-200 mb-4">{area.description}</p>
+      <div className="h-1.5 rounded-full bg-white/60 dark:bg-neutral-900/60 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${
+            accent === "amber" ? "bg-amber-500" : "bg-red-500"
+          }`}
+          style={{ width: mounted ? `${percent}%` : "0%" }}
+        />
+      </div>
+      {mounted && (
+        <p className="text-[11px] text-neutral-600 dark:text-neutral-300 mt-1">
+          {visited}/{total} sett besøkt
+        </p>
+      )}
     </Link>
   );
 }
@@ -84,16 +193,17 @@ export default function DAT107Page() {
         </p>
       </div>
 
-      <div className="rounded-xl border-2 border-dat107-400/40 bg-gradient-to-br from-dat107-50 to-fuchsia-50 dark:from-dat107-950/30 dark:to-fuchsia-950/20 p-6 mb-10">
-        <h2 className="font-bold text-lg mb-3 text-dat107-700 dark:text-dat107-400">
+      {/* Eksamensformat */}
+      <div className="rounded-xl border-2 border-dat107-400/40 dark:border-dat107-500/50 bg-gradient-to-br from-dat107-50 to-fuchsia-50 dark:from-dat107-950/70 dark:to-fuchsia-950/50 p-6 mb-10">
+        <h2 className="font-bold text-lg mb-3 text-dat107-700 dark:text-dat107-300">
           Eksamensformat
         </h2>
-        <p className="text-sm text-[var(--muted)] mb-4">
+        <p className="text-sm text-neutral-700 dark:text-neutral-200 mb-4">
           Skriftlig eksamen med fire hovedoppgaver. Typisk fordeling: ORM/JPA,
           modellering/normalisering, SQL og NoSQL. Se{" "}
           <Link
             href="/dat107/eksamen-gjengangere"
-            className="text-dat107-600 dark:text-dat107-400 hover:underline"
+            className="text-dat107-700 dark:text-dat107-300 font-semibold hover:underline"
           >
             eksamen gjengangere
           </Link>{" "}
@@ -108,13 +218,15 @@ export default function DAT107Page() {
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-dat107-200 dark:border-dat107-800/40 p-3 text-center"
+              className="rounded-lg bg-white/80 dark:bg-neutral-900/90 border border-dat107-200 dark:border-dat107-700/60 p-3 text-center"
             >
-              <p className="text-xs font-medium text-[var(--muted)] mb-1">
+              <p className="text-xs font-semibold text-neutral-600 dark:text-neutral-300 mb-1">
                 {item.label}
               </p>
-              <p className="font-bold text-sm">{item.topic}</p>
-              <p className="text-xs font-bold text-dat107-600 dark:text-dat107-400 mt-1">
+              <p className="font-bold text-sm text-neutral-900 dark:text-neutral-50">
+                {item.topic}
+              </p>
+              <p className="text-xs font-bold text-dat107-600 dark:text-dat107-300 mt-1">
                 {item.pct}
               </p>
             </div>
@@ -139,40 +251,7 @@ export default function DAT107Page() {
       <h2 className="text-xl font-bold mb-4">Eksamen</h2>
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
         {eksamen.map((area) => (
-          <Link
-            key={area.slug}
-            href={`/dat107/${area.slug}`}
-            className={`group relative overflow-hidden rounded-xl border-2 p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 ${
-              area.kind === "eksamen-bearbeidet"
-                ? "border-amber-400/40 hover:border-amber-400/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20"
-                : "border-red-400/40 hover:border-red-400/80 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/30 dark:to-pink-950/20"
-            }`}
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <div
-                className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  area.kind === "eksamen-bearbeidet"
-                    ? "bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400"
-                    : "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400"
-                }`}
-              >
-                {iconMap[area.icon]}
-              </div>
-              <h3
-                className={`font-bold text-lg transition-colors ${
-                  area.kind === "eksamen-bearbeidet"
-                    ? "group-hover:text-amber-600 dark:group-hover:text-amber-400"
-                    : "group-hover:text-red-600 dark:group-hover:text-red-400"
-                }`}
-              >
-                {area.title}
-              </h3>
-              <span className="ml-auto text-xs font-bold px-2.5 py-1 rounded-full bg-white/60 dark:bg-neutral-900/40">
-                {area.topics.length} sett
-              </span>
-            </div>
-            <p className="text-sm text-[var(--muted)]">{area.description}</p>
-          </Link>
+          <ExamAreaCard key={area.slug} area={area} />
         ))}
       </div>
 

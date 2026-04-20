@@ -21,15 +21,9 @@
 9. Skriv samme idé med `left join` og forklar hva som endres.
 10. Lag et eksempel på en feil join som gir kartesisk produkt, og forklar hvorfor den er feil.
 
-## Del 4: Modell og normalisering
+## Del 4: Indekser og transaksjoner
 
-11. Modellér et system for medlemmer, lokallag og medlemsavgift per år. Skriv hvilke tabeller du ville laget.
-12. Forklar hvorfor medlemsavgift per år ofte krever en egen tabell.
-13. Gi et eksempel på en transitiv avhengighet og forklar hvordan du ville normalisert bort problemet.
-
-## Del 5: Indekser og transaksjoner
-
-14. Skriv SQL for å opprette en indeks på `navn` i `Ansatt`.
-15. Forklar når en slik indeks er nyttig, og når den ikke er det.
-16. Beskriv et scenario som kan gi lost update.
-17. Skriv en kort transaksjon for pengeoverføring eller ordreinnlegging og forklar hvorfor `commit` og `rollback` er viktige.
+11. Skriv SQL for å opprette en indeks på `navn` i `Ansatt`.
+12. Forklar når en slik indeks er nyttig, og når den ikke er det.
+13. Beskriv et scenario som kan gi lost update.
+14. Skriv en kort transaksjon for pengeoverføring eller ordreinnlegging og forklar hvorfor `commit` og `rollback` er viktige.
