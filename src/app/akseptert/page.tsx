@@ -154,6 +154,50 @@ const kodeCards: LinkedCard[] = [
   },
 ];
 
+const magiCards: LinkedCard[] = [
+  {
+    href: "/akseptert/magi/supabase",
+    label: "1 · Supabase",
+    title: "Supabase Deep Dive",
+    description:
+      "Query builder vs Hibernate/JPA vs rå SQL. Interaktiv query-bygger og Row Level Security forklart.",
+    tag: "Postgres · RLS",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v7c0 1.657 4.03 3 9 3s9-1.343 9-3V5" />
+        <path d="M3 12v7c0 1.657 4.03 3 9 3s9-1.343 9-3v-7" />
+      </svg>
+    ),
+  },
+  {
+    href: "/akseptert/magi/webhooks",
+    label: "2 · Webhooks",
+    title: "Webhook Pipeline",
+    description:
+      "Inbound email fra Mittanbud → Resend → OpenAI → Supabase. Svix-signaturer og hvordan tampering stoppes.",
+    tag: "Svix · HMAC · inbound",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    href: "/akseptert/magi/hooks",
+    label: "3 · Avanserte Hooks",
+    title: "Advanced Hooks",
+    description:
+      "useAccess forklart. Race conditions, cleanup-mønsteret, og når du trenger useCallback/useMemo.",
+    tag: "useEffect · useCallback",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 4l5 16L13 10l7-2z" />
+      </svg>
+    ),
+  },
+];
+
 const linkedSections: LinkedSection[] = [
   {
     key: "intro",
@@ -171,17 +215,17 @@ const linkedSections: LinkedSection[] = [
     intro: "Vi leser filer rett fra handverker-ai-repoet med Node sin fs-modul og forklarer dem steg for steg. Du får se layout.tsx, generate.ts og hele dataflyten fra klikk til UI-oppdatering.",
     cards: kodeCards,
   },
-];
-
-const placeholderSections: PlaceholderSection[] = [
   {
     key: "avansert",
     title: "Avansert Magi",
-    subtitle: "Database, Webhooks og Server Actions",
+    subtitle: "Database, Webhooks og avanserte hooks — enterprise-delen av stacken",
     badge: "Fullstack",
-    placeholder:
-      "Postgres via Vercel Marketplace, webhook-mønstre (Stripe, Slack), og Server Actions som erstatter klassiske API-ruter. Innhold kommer i fase 3.",
+    intro: "De mer subtile delene av Akseptert.no: hvordan vi snakker med Postgres, hvordan vi verifiserer at webhooks er fra den vi tror, og hvordan vi unngår race conditions i React-hooks.",
+    cards: magiCards,
   },
+];
+
+const placeholderSections: PlaceholderSection[] = [
   {
     key: "oving",
     title: "Interaktiv Øving",
@@ -230,7 +274,7 @@ function ChevronIcon({ open }: { open: boolean }) {
 }
 
 export default function AkseptertPage() {
-  const [openKey, setOpenKey] = useState<SectionKey | null>("kode");
+  const [openKey, setOpenKey] = useState<SectionKey | null>("avansert");
 
   function toggle(key: SectionKey) {
     setOpenKey((current) => (current === key ? null : key));
