@@ -5,6 +5,77 @@ import { useState } from "react";
 
 type SectionKey = "intro" | "kode" | "avansert" | "oving";
 
+interface IntroCard {
+  href: string;
+  label: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  tag: string;
+}
+
+const introCards: IntroCard[] = [
+  {
+    href: "/akseptert/intro/react",
+    label: "1 · React",
+    title: "React Basics",
+    description:
+      "JSX, komponenter, state og effekter. Bygd fra bunnen av med live-eksempler.",
+    tag: "useState · useEffect",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <ellipse cx="12" cy="12" rx="10" ry="4" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+        <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    href: "/akseptert/intro/typescript",
+    label: "2 · TypeScript",
+    title: "TypeScript Basics",
+    description:
+      "Fra Java og JavaScript til TypeScript. Interaktivt type-sjekk-verktøy og interface-matcher.",
+    tag: "types · interfaces",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path strokeLinecap="round" d="M8 10.5h4M10 10.5V16M14.5 14.5c.5.8 1.3 1.5 2.5 1.5 1.4 0 2-.8 2-1.6 0-.8-.6-1.3-1.8-1.7-1.2-.4-1.7-.8-1.7-1.5 0-.7.6-1.2 1.5-1.2.8 0 1.3.4 1.7 1" />
+      </svg>
+    ),
+  },
+  {
+    href: "/akseptert/intro/tailwind",
+    label: "3 · Tailwind",
+    title: "Tailwind CSS",
+    description:
+      "Utility-first CSS. Interaktiv playground der du klikker klasser og ser boksen forandre seg.",
+    tag: "playground · responsive",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 14c2-4 5-5 8-4s4 3 6 2c-2 4-5 5-8 4s-4-3-6-2zM2 8c2-4 5-5 8-4s4 3 6 2c-2 4-5 5-8 4S4 7 2 8z" />
+      </svg>
+    ),
+  },
+  {
+    href: "/akseptert/intro/komponenter",
+    label: "4 · Komponenter",
+    title: "Component Thinking",
+    description:
+      "import/export, props, komposisjon og children. Bygg en komponent stein for stein.",
+    tag: "props · children",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+    ),
+  },
+];
+
 interface Section {
   key: SectionKey;
   title: string;
@@ -13,15 +84,7 @@ interface Section {
   placeholder: string;
 }
 
-const sections: Section[] = [
-  {
-    key: "intro",
-    title: "Intro til Stacken",
-    subtitle: "React, TypeScript og Tailwind fra scratch",
-    badge: "Fundament",
-    placeholder:
-      "Her bygger vi mental modell av hele stacken: hvorfor React renderer som den gjør, hva TypeScript gir deg utover JavaScript, og hvordan Tailwind utility-klasser fungerer i praksis. Innhold kommer i fase 2.",
-  },
+const otherSections: Section[] = [
   {
     key: "kode",
     title: "Slik fungerer Akseptert.no",
@@ -70,11 +133,13 @@ const practiceWidgets = [
 ];
 
 export default function AkseptertPage() {
-  const [openKey, setOpenKey] = useState<SectionKey | null>(null);
+  const [openKey, setOpenKey] = useState<SectionKey | null>("intro");
 
   function toggle(key: SectionKey) {
     setOpenKey((current) => (current === key ? null : key));
   }
+
+  const introOpen = openKey === "intro";
 
   return (
     <div>
@@ -101,20 +166,97 @@ export default function AkseptertPage() {
         </p>
       </div>
 
-      {/* Intro-card (valgfritt verktøykort for fremtiden) */}
+      {/* Intro phase card */}
       <div className="rounded-xl border-2 border-akseptert-400/40 bg-gradient-to-br from-akseptert-500/10 to-akseptert-700/5 dark:from-akseptert-900/30 dark:to-akseptert-950/20 p-6 mb-10">
         <h2 className="font-bold text-lg mb-1 text-akseptert-700 dark:text-akseptert-200">
-          Fase 1 — Skjelett
+          Start her — Intro til Stacken
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Strukturen står klar. Hver seksjon nedenfor er en placeholder som
-          fylles med teori, kodegjennomgang og interaktive eksempler i fase 2.
+          Hvis du kommer fra Java/Spring og bare kan litt JavaScript, begynn
+          med de fire delene under «Intro til Stacken». Hver del har live
+          eksempler, sammenligninger med Spring MVC og mini-quizer.
         </p>
       </div>
 
       {/* Accordion sections */}
       <div className="space-y-4">
-        {sections.map((section) => {
+        {/* Intro — special: linked cards */}
+        <section className="rounded-2xl border border-akseptert-400/30 bg-[var(--card)] overflow-hidden">
+          <button
+            type="button"
+            onClick={() => toggle("intro")}
+            aria-expanded={introOpen}
+            className="w-full flex items-center gap-4 p-5 text-left transition-colors hover:bg-akseptert-50/60 dark:hover:bg-akseptert-950/30"
+          >
+            <svg
+              className={`w-5 h-5 shrink-0 transition-transform duration-200 text-akseptert-500 ${
+                introOpen ? "rotate-90" : ""
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-1 flex-wrap">
+                <h2 className="text-lg font-bold">Intro til Stacken</h2>
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-akseptert-100 text-akseptert-700 dark:bg-akseptert-900/40 dark:text-akseptert-200">
+                  Fundament
+                </span>
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
+                  Klart
+                </span>
+              </div>
+              <p className="text-sm text-[var(--muted)] line-clamp-1">
+                React, TypeScript og Tailwind fra scratch — 4 sub-sider med live-widgets
+              </p>
+            </div>
+          </button>
+
+          <div
+            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+              introOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="px-5 pb-5 pt-1">
+              <p className="text-sm text-[var(--muted)] mb-4">
+                Velg et tema å dykke inn i. Ta dem gjerne i rekkefølge —
+                komponenter bygger på React og TypeScript.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {introCards.map((card) => (
+                  <Link
+                    key={card.href}
+                    href={card.href}
+                    className="group rounded-xl border-2 border-akseptert-400/30 hover:border-akseptert-500/70 bg-[var(--card)] p-5 transition-all hover:shadow-md hover:-translate-y-0.5"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="w-11 h-11 rounded-xl bg-akseptert-500/10 border border-akseptert-400/30 flex items-center justify-center text-akseptert-600 dark:text-akseptert-300">
+                        {card.icon}
+                      </div>
+                      <span className="text-[11px] font-mono text-akseptert-600 dark:text-akseptert-300 mt-1">
+                        {card.tag}
+                      </span>
+                    </div>
+                    <p className="text-xs font-bold text-akseptert-600 dark:text-akseptert-300 mb-1">
+                      {card.label}
+                    </p>
+                    <h3 className="font-bold mb-1 group-hover:text-akseptert-600 dark:group-hover:text-akseptert-300 transition-colors">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-[var(--muted)]">{card.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Other three accordions (still skeleton) */}
+        {otherSections.map((section) => {
           const open = openKey === section.key;
           return (
             <section
@@ -140,7 +282,7 @@ export default function AkseptertPage() {
                 </svg>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-1">
+                  <div className="flex items-center gap-3 mb-1 flex-wrap">
                     <h2 className="text-lg font-bold">{section.title}</h2>
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-akseptert-100 text-akseptert-700 dark:bg-akseptert-900/40 dark:text-akseptert-200">
                       {section.badge}
