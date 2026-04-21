@@ -107,3 +107,11 @@ export async function getSession(): Promise<Session | null> {
   if (!token) return null;
   return verifySession(token);
 }
+
+// Usernames are normalized to lowercase in src/lib/progress.ts, so the stored
+// form is always "erlend". A literal "Erlend" would never match a real session.
+export const AKSEPTERT_ALLOWED_USERNAME = "erlend";
+
+export function isAkseptertUser(session: Session | null): boolean {
+  return session?.username === AKSEPTERT_ALLOWED_USERNAME;
+}

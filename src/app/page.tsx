@@ -1,13 +1,28 @@
 import Link from "next/link";
+import { getSession, isAkseptertUser } from "@/lib/auth";
 
-const subjects = [
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+interface Subject {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  href: string;
+  status: "Aktiv";
+  chapters: number;
+  badge?: string;
+}
+
+const baseSubjects: Subject[] = [
   {
     id: "ing164",
     name: "ING164 Fysikk",
     description: "Mekanikk, elektrisitet og magnetisme",
     color: "physics",
     href: "/ing164",
-    status: "Aktiv" as const,
+    status: "Aktiv",
     chapters: 15,
   },
   {
@@ -16,7 +31,7 @@ const subjects = [
     description: "Nettverk, protokoller, distribuerte systemer og Chord DHT",
     color: "network",
     href: "/dat110",
-    status: "Aktiv" as const,
+    status: "Aktiv",
     chapters: 13,
   },
   {
@@ -25,7 +40,7 @@ const subjects = [
     description: "Modellering, OOA/OOD, smidig utvikling og Java fra UML",
     color: "sysdev",
     href: "/dat109",
-    status: "Aktiv" as const,
+    status: "Aktiv",
     chapters: 6,
   },
   {
@@ -34,10 +49,22 @@ const subjects = [
     description: "SQL, JPA/ORM, NoSQL, modellering og normalisering",
     color: "dat107",
     href: "/dat107",
-    status: "Aktiv" as const,
+    status: "Aktiv",
     chapters: 6,
   },
 ];
+
+const akseptertSubject: Subject = {
+  id: "akseptert",
+  name: "Akseptert — SaaS Masterclass",
+  description:
+    "Next.js, React, TypeScript og Tailwind fra scratch. Slik bygges Akseptert.no.",
+  color: "akseptert",
+  href: "/akseptert",
+  status: "Aktiv",
+  chapters: 4,
+  badge: "Masterclass",
+};
 
 const colorMap: Record<string, string> = {
   physics:
@@ -48,6 +75,8 @@ const colorMap: Record<string, string> = {
     "border-sysdev-500/30 hover:border-sysdev-500/60 bg-gradient-to-br from-sysdev-500/5 to-sysdev-500/10",
   dat107:
     "border-dat107-500/30 hover:border-dat107-500/60 bg-gradient-to-br from-dat107-500/5 to-dat107-500/10",
+  akseptert:
+    "border-akseptert-500/40 hover:border-akseptert-500/70 bg-gradient-to-br from-akseptert-500/10 to-akseptert-700/10",
 };
 
 const accentMap: Record<string, string> = {
@@ -55,9 +84,20 @@ const accentMap: Record<string, string> = {
   network: "text-network-600 dark:text-network-400",
   sysdev: "text-sysdev-600 dark:text-sysdev-400",
   dat107: "text-dat107-600 dark:text-dat107-400",
+  akseptert: "text-akseptert-600 dark:text-akseptert-300",
 };
 
-export default function HomePage() {
+const badgeMap: Record<string, string> = {
+  akseptert:
+    "bg-akseptert-100 text-akseptert-700 dark:bg-akseptert-900/40 dark:text-akseptert-200",
+};
+
+export default async function HomePage() {
+  const session = await getSession();
+  const subjects: Subject[] = isAkseptertUser(session)
+    ? [...baseSubjects, akseptertSubject]
+    : baseSubjects;
+
   return (
     <div>
       {/* Hero */}
@@ -75,42 +115,35 @@ export default function HomePage() {
       </section>
 
       {/* Subject cards */}
-      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-        {subjects.map((subject) => {
-          const Card = subject.status === "Aktiv" ? Link : "div";
-          return (
-            <Card
-              key={subject.id}
-              href={subject.href}
-              className={`relative rounded-xl border-2 p-6 transition-all ${colorMap[subject.color]} ${
-                subject.status === "Aktiv"
-                  ? "cursor-pointer hover:shadow-lg hover:-translate-y-1"
-                  : "opacity-60 cursor-default"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                    subject.status === "Aktiv"
-                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                      : "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
-                  }`}
-                >
-                  {subject.status}
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-16">
+        {subjects.map((subject) => (
+          <Link
+            key={subject.id}
+            href={subject.href}
+            className={`relative rounded-xl border-2 p-6 transition-all ${colorMap[subject.color]} cursor-pointer hover:shadow-lg hover:-translate-y-1`}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span
+                className={
+                  subject.badge
+                    ? `text-xs font-bold px-2.5 py-1 rounded-full ${badgeMap[subject.color] ?? ""}`
+                    : "text-xs font-bold px-2.5 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                }
+              >
+                {subject.badge ?? subject.status}
+              </span>
+              {subject.chapters > 0 && (
+                <span className="text-xs text-[var(--muted)]">
+                  {subject.chapters} kapitler
                 </span>
-                {subject.chapters > 0 && (
-                  <span className="text-xs text-[var(--muted)]">
-                    {subject.chapters} kapitler
-                  </span>
-                )}
-              </div>
-              <h2 className={`text-xl font-bold mb-2 ${accentMap[subject.color]}`}>
-                {subject.name}
-              </h2>
-              <p className="text-sm text-[var(--muted)]">{subject.description}</p>
-            </Card>
-          );
-        })}
+              )}
+            </div>
+            <h2 className={`text-xl font-bold mb-2 ${accentMap[subject.color]}`}>
+              {subject.name}
+            </h2>
+            <p className="text-sm text-[var(--muted)]">{subject.description}</p>
+          </Link>
+        ))}
       </section>
     </div>
   );
