@@ -17,6 +17,7 @@ type Block =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "code"; lang: string; body: string }
+  | { type: "image"; alt: string; src: string; title?: string }
   | { type: "hr" }
   | { type: "quote"; lines: string[] }
   | { type: "callout"; kind: CalloutKind; title?: string; blocks: Block[] }
@@ -39,6 +40,27 @@ function isTableSeparator(line: string): boolean {
 function parse(md: string): Block[] {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   return parseLines(lines, 0, lines.length).blocks;
+}
+
+function parseImageLine(
+  line: string,
+): { alt: string; src: string; title?: string } | null {
+  const m = line.trim().match(/^!\[([^\]]*)\]\((.+)\)$/);
+  if (!m) return null;
+
+  const alt = m[1].trim();
+  const target = m[2].trim();
+  const titleMatch = target.match(/^(\S+)\s+["']([^"']+)["']$/);
+
+  if (titleMatch) {
+    return {
+      alt,
+      src: titleMatch[1],
+      title: titleMatch[2].trim(),
+    };
+  }
+
+  return { alt, src: target };
 }
 
 function parseLines(
@@ -93,6 +115,13 @@ function parseLines(
       } else {
         blocks.push({ type: "quote", lines: qLines });
       }
+      continue;
+    }
+
+    const image = parseImageLine(line);
+    if (image) {
+      blocks.push({ type: "image", ...image });
+      i++;
       continue;
     }
 
@@ -158,6 +187,7 @@ function parseLines(
       !/^#{1,3}\s/.test(lines[i]) &&
       !/^\s*[-*]\s+/.test(lines[i]) &&
       !/^\s*\d+[.)]\s+/.test(lines[i]) &&
+      !parseImageLine(lines[i]) &&
       !/^>\s?/.test(lines[i])
     ) {
       paraLines.push(lines[i]);
@@ -402,6 +432,27 @@ function renderBlock(block: Block, bi: number, keyPrefix = ""): React.ReactNode 
             <code>{block.body}</code>
           </pre>
         </div>
+      );
+    }
+    case "image": {
+      const caption = block.title ?? block.alt;
+      return (
+        <figure key={key} className="my-6">
+          <div className="overflow-hidden rounded-xl border border-[var(--card-border)] bg-white shadow-sm dark:bg-neutral-950">
+            <img
+              src={block.src}
+              alt={block.alt}
+              title={block.title}
+              loading="lazy"
+              className="block h-auto w-full object-contain"
+            />
+          </div>
+          {caption && (
+            <figcaption className="mt-2 text-center text-xs leading-relaxed text-[var(--muted)]">
+              {renderInline(caption, `figcaption-${key}`)}
+            </figcaption>
+          )}
+        </figure>
       );
     }
     case "hr":
