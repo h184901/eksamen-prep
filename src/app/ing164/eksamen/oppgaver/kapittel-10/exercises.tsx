@@ -19,6 +19,32 @@ export interface ExerciseContent {
 }
 
 // ============================================================================
+// Pedagogiske hjelpere
+// ============================================================================
+
+function TheoryBox({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-indigo-700 dark:text-indigo-300 mb-1">
+        Teori: {title}
+      </p>
+      <div className="text-sm text-indigo-900 dark:text-indigo-100">{children}</div>
+    </div>
+  );
+}
+
+function Pitfall({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-rose-700 dark:text-rose-300 mb-1">
+        Vanlig feil
+      </p>
+      <div className="text-sm text-rose-900 dark:text-rose-100">{children}</div>
+    </div>
+  );
+}
+
+// ============================================================================
 // SVG-helpere
 // ============================================================================
 
@@ -1536,110 +1562,195 @@ export const exercises: Record<string, ExerciseContent> = {
     difficulty: "middels",
     pageRef: "s. 358",
     problem: (
-      <p>
-        En bowling-kule ruller uten å skli oppover en skråning som heller vinkel β. Behandle kulen
-        som uniform og massiv. (a) Tegn frilegeme-diagrammet og forklar hvorfor friksjonen må peke
-        oppover. (b) Hva er akselerasjonen til kulens sentrum? (c) Hvilken minste statisk
-        friksjonskoeffisient trengs for å unngå sklis?
-      </p>
+      <div className="space-y-2">
+        <p>
+          En bowling-kule ruller uten å skli oppover en rampe som heller med en vinkel β fra horisontalen
+          (se Eksempel 10.7 i seksjon 10.3). Behandle kulen som en uniform, massiv kule og se bort fra fingerhullene.
+          (a) Tegn frilegeme-diagrammet for kulen. Forklar hvorfor friksjons­kraften må peke <em>oppover</em>.
+          (b) Hva er akselerasjonen til kulens massesenter? (c) Hvilken minste statisk friksjons­koeffisient
+          trengs for å hindre at kulen sklir?
+        </p>
+        <svg viewBox="0 0 360 220" className="w-full max-w-md mx-auto">
+          <defs>
+            <marker id="arr-r-1030" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
+            </marker>
+            <marker id="arr-b-1030" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+            </marker>
+            <marker id="arr-g-1030" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#10b981" />
+            </marker>
+            <marker id="arr-p-1030" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6" />
+            </marker>
+          </defs>
+          {/* Skråning — 30° */}
+          <line x1="20" y1="190" x2="340" y2="190" stroke="#6b7280" strokeWidth="1" />
+          <line x1="40" y1="190" x2="320" y2="80" stroke="#92400e" strokeWidth="3" />
+          <text x="80" y="205" fontSize="11" fill="#6b7280">β</text>
+          <path d="M 100 190 A 60 60 0 0 0 95 169" fill="none" stroke="#6b7280" />
+          {/* Kule */}
+          <circle cx="200" cy="120" r="22" fill="#fbbf24" stroke="#92400e" strokeWidth="2" />
+          <text x="195" y="125" fontSize="12" fill="#92400e" fontWeight="bold">M</text>
+          {/* Bevegelsesretning */}
+          <line x1="225" y1="105" x2="265" y2="85" stroke="#10b981" strokeWidth="3" markerEnd="url(#arr-g-1030)" />
+          <text x="265" y="78" fontSize="10" fill="#10b981" fontWeight="bold">v (oppover)</text>
+          {/* Tyngde Mg */}
+          <line x1="200" y1="120" x2="200" y2="180" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arr-b-1030)" />
+          <text x="205" y="170" fontSize="10" fill="#3b82f6" fontWeight="bold">Mg</text>
+          {/* Normal N — vinkelrett på rampen, opp og litt mot venstre */}
+          <line x1="200" y1="120" x2="178" y2="78" stroke="#8b5cf6" strokeWidth="2" markerEnd="url(#arr-p-1030)" />
+          <text x="155" y="80" fontSize="10" fill="#8b5cf6" fontWeight="bold">N</text>
+          {/* Friksjon f — langs rampen, oppover (mot øvre høyre) */}
+          <line x1="200" y1="120" x2="245" y2="100" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arr-r-1030)" />
+          <text x="248" y="115" fontSize="10" fill="#ef4444" fontWeight="bold">f (opp)</text>
+          {/* Rotasjonsretning på kulen */}
+          <path d="M 187 110 A 13 13 0 0 1 215 112" fill="none" stroke="#7f1d1d" strokeWidth="1.5" markerEnd="url(#arr-r-1030)" />
+          <text x="190" y="105" fontSize="9" fill="#7f1d1d" fontStyle="italic">ω avtar</text>
+        </svg>
+      </div>
     ),
     knowns: (
       <ul className="list-disc list-inside space-y-1 text-sm">
-        <li>Uniform kule: <InlineLatex latex="I = \tfrac{2}{5}MR^2" /></li>
-        <li>Skråningsvinkel β</li>
+        <li>Uniform massiv kule: <InlineLatex latex="I=\tfrac{2}{5}MR^2" /></li>
+        <li>Helningsvinkel β, ruller uten å skli oppover</li>
       </ul>
     ),
     unknowns: (
       <ul className="list-disc list-inside space-y-1 text-sm">
-        <li>Retning til friksjon</li>
-        <li>Akselerasjon a</li>
-        <li>Minste μ_s</li>
+        <li>(a) FBD og forklaring</li>
+        <li>(b) <InlineLatex latex="a_\text{cm}" /></li>
+        <li>(c) <InlineLatex latex="\mu_{s,\min}" /></li>
       </ul>
     ),
     strategy: (
-      <p className="text-sm">
-        Når kulen ruller oppover og bremses, må friksjonen gi et dreiemoment som opprettholder
-        vinkelakselerasjonen (bremser rotasjonen med kulens bevegelsesretning). Dette krever
-        friksjon som peker <strong>oppover skråningen</strong>.
-      </p>
+      <TheoryBox title="Newton 2 + rotasjons-Newton 2 + rullebetingelse">
+        <p>
+          Translasjon langs rampen: <InlineLatex latex="\sum F=Ma_\text{cm}" />.
+          Rotasjon om massesenter: <InlineLatex latex="\sum\tau=I\alpha" />.
+          Rullebetingelse: <InlineLatex latex="a_\text{cm}=R\alpha" />.
+        </p>
+      </TheoryBox>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: (
-          <p>
-            Newton II langs skråningen: <InlineLatex latex="-Mg\sin\beta + f = -Ma" /> (vi bremser, så a
-            er positiv nedover skråningen... egentlig er kulens akselerasjon <em>negativ</em> oppover: den bremses).
-          </p>
-        ),
+        content: <p>Velg +x oppover langs rampen. Da er a_cm negativ (kulen bremses opp). Tyngde-komponenten er −Mg sin β.</p>,
       },
       {
         label: "Hint 2",
-        content: (
-          <p>
-            Kulens rotasjon bremses også: <InlineLatex latex="fR = I\alpha" />. Og{" "}
-            <InlineLatex latex="a = R\alpha" />.
-          </p>
-        ),
+        content: <p>Friksjon er den ENESTE kraften med arm om massesenteret. Tyngde og normal går gjennom senter ⇒ ingen torque.</p>,
+      },
+      {
+        label: "Hint 3",
+        content: <p>For å bremse rotasjonen (ω avtar) må friksjons­kraftens torque virke <em>mot</em> rotasjons­retningen.</p>,
       },
     ],
     solution: (
       <div className="space-y-3 text-sm">
-        <p className="font-semibold mt-4">Teoretisk bakgrunn</p>
+        <TheoryBox title="Hvorfor er dette problemet kontraintuitivt?">
+          <p>
+            Mange tror at friksjons­kraften alltid peker «mot bevegelsen». Det er IKKE riktig for ruller­problemer.
+            Kulen ruller oppover og bremses, så <em>begge</em> de to bevegelsene må bremse synkront:
+          </p>
+          <ul className="list-disc pl-5 mt-1">
+            <li>Translasjons­fart <InlineLatex latex="v_\text{cm}" /> avtar</li>
+            <li>Vinkelfart ω avtar (rullebetingelsen <InlineLatex latex="v=R\omega" /> krever det)</li>
+          </ul>
+          <p className="mt-2">
+            Spørsmålet er da: <em>hvilken kraft</em> får ω til å avta? Bare friksjonen kan, fordi tyngde og normal
+            går gjennom kulens senter og dermed gir null dreiemoment.
+          </p>
+        </TheoryBox>
+
+        <p className="font-semibold mt-4">(a) Hvorfor friksjon peker oppover skråningen — full begrunnelse</p>
         <p>
-          En rullende kule som beveger seg opp en skråning bremser. To ting bremses samtidig: (1)
-          tyngdepunktets translasjonsfart <InlineLatex latex="v_\text{cm}" />, og (2) rotasjonen ω.
-          Rullevilkåret <InlineLatex latex="v = R\omega" /> krever at begge bremses i samme takt
-          (<InlineLatex latex="a = R\alpha" />). Det er her friksjonens retning blir interessant.
+          Kulen ruller oppover, så ω peker «inn i siden av rampen» (rotasjons­akse er horisontal, ut av papiret om
+          vi tegner rampen i 2D mot venstre). For at ω skal avta — som rullebetingelsen krever — må netto torque
+          rundt massesenteret peke <em>mot</em> ω.
         </p>
-        <p className="font-semibold mt-4">(a) Hvorfor friksjonen peker opp</p>
         <p>
-          Tyngden gir et dreiemoment nedover skråningen gjennom kontaktpunktet, som bremser{" "}
-          <em>translasjonen</em>. Men gravity virker gjennom tyngdepunktet; om tyngdepunktet gir den
-          null dreiemoment. Det er <strong>bare friksjonen</strong> som gir dreiemoment om
-          tyngdepunktet. For at rotasjonen skal bremses (siden v bremses, og rullevilkåret krever at
-          ω også bremses), må friksjonens dreiemoment virke mot rotasjonen. Det krever friksjon rettet{" "}
-          <strong>oppover skråningen</strong>.
+          Friksjons­kraft virker på <em>kontaktpunktet</em> i bunn av kulen. Hvis friksjonen peker oppover langs
+          rampen, så blir torque om senteret rettet «inn i papiret motsatt vei av ω» — altså bremsende. Dette er
+          den eneste mulige retningen som er konsistent med rullebetingelsen.
         </p>
-        <p className="font-semibold mt-4">(b) Akselerasjon — Newton II</p>
-        <p>Ta nedover skråningen som positiv. Kulen ruller opp, så faktisk fart er negativ; men a er positiv nedover:</p>
-        <FormulaBox latex="Mg\sin\beta - f = Ma \qquad\text{(translasjon langs skråningen)}" variant="blue" />
+        <Pitfall>
+          Hvis friksjonen pekte nedover (intuitiv «mot bevegelsen»-feil), ville den faktisk øke ω istedenfor å
+          minske den. Det ville bryte rullebetingelsen og kulen ville begynne å skli. Derfor MÅ friksjonen peke
+          oppover når kulen ruller oppover.
+        </Pitfall>
+
+        <p className="font-semibold mt-4">(b) Akselerasjonen — sett opp tre likninger</p>
+        <p>Velg +x oppover langs rampen. Da er <InlineLatex latex="a_\text{cm}" /> negativ (kulen bremses).</p>
+
+        <p className="mt-2 font-semibold">Likning 1 — Newton 2 langs rampen:</p>
+        <FormulaBox latex="\underbrace{-Mg\sin\beta}_\text{tyngde-komp.}+\underbrace{f}_\text{friksjon opp}=Ma_\text{cm}" variant="blue" />
+        <p>Vi forventer <InlineLatex latex="a_\text{cm}<0" />, altså må tyngde­komponenten være større enn friksjonen.</p>
+
+        <p className="mt-2 font-semibold">Likning 2 — Newton 2 for rotasjon (om massesenteret):</p>
         <p>
-          Rotasjon om tyngdepunktet. Friksjonen peker oppover skråningen, på bunnen av kulen; dette
-          gir et dreiemoment som bremser rotasjonen:
+          Friksjonen peker oppover langs rampen og virker på bunnen av kulen, så torque er
+          <InlineLatex latex="\;\tau=fR" /> rettet <em>mot</em> ω-retningen. Det gir ω-tap (negativ α):
         </p>
-        <FormulaBox latex="fR = I\alpha = \tfrac{2}{5}MR^2 \alpha" variant="blue" />
-        <p>Rullevilkår:</p>
-        <FormulaBox latex="a = R\alpha \Rightarrow \alpha = a/R" variant="blue" />
-        <p>Sett inn i rotasjonslikningen:</p>
-        <FormulaBox latex="fR = \tfrac{2}{5}MR^2 \cdot \frac{a}{R} \Rightarrow f = \tfrac{2}{5}Ma" variant="blue" />
-        <p>Sett inn i translasjonslikningen:</p>
-        <FormulaBox latex="Mg\sin\beta - \tfrac{2}{5}Ma = Ma \Rightarrow Mg\sin\beta = \tfrac{7}{5}Ma \Rightarrow a = \tfrac{5}{7}g\sin\beta" variant="blue" />
-        <FormulaBox latex="\boxed{a = \tfrac{5}{7}g\sin\beta}" variant="gold" />
+        <FormulaBox latex="-fR=I\alpha=\tfrac{2}{5}MR^2\,\alpha" variant="blue" />
+
+        <p className="mt-2 font-semibold">Likning 3 — Rullebetingelsen:</p>
+        <FormulaBox latex="a_\text{cm}=R\alpha\Rightarrow \alpha=a_\text{cm}/R" variant="blue" />
+
+        <p className="mt-2 font-semibold">Kombiner og løs for f:</p>
+        <FormulaBox latex="-fR=\tfrac{2}{5}MR^2\cdot \dfrac{a_\text{cm}}{R}\Rightarrow f=-\tfrac{2}{5}Ma_\text{cm}" variant="blue" />
         <p>
-          Bemerk: Akselerasjonen er identisk med den for rulling <em>ned</em>! Retningen snur, men
-          tallet er det samme. Det er fordi både friksjonsretning og dreiemomentretning snur når man
-          går fra opp- til nedrullling — nettoeffekten er speilet.
+          Siden <InlineLatex latex="a_\text{cm}<0" />, blir f positiv ⇒ friksjonen peker faktisk i +x (opp langs rampen).
+          Dette bekrefter resonnementet i (a).
         </p>
-        <p className="font-semibold mt-4">(c) Minste μ_s</p>
-        <p>Krav: <InlineLatex latex="f \leq \mu_s N = \mu_s Mg\cos\beta" />. Beregn f:</p>
-        <FormulaBox latex="f = \tfrac{2}{5}Ma = \tfrac{2}{5}M \cdot \tfrac{5}{7}g\sin\beta = \tfrac{2}{7}Mg\sin\beta" variant="blue" />
-        <FormulaBox latex="\mu_{s,\min} = \frac{f}{Mg\cos\beta} = \tfrac{2}{7}\tan\beta" variant="blue" />
-        <FormulaBox latex="\boxed{\mu_{s,\min} = \tfrac{2}{7}\tan\beta}" variant="gold" />
+
+        <p className="mt-2 font-semibold">Sett inn i Likning 1:</p>
+        <FormulaBox latex="-Mg\sin\beta+(-\tfrac{2}{5}Ma_\text{cm})=Ma_\text{cm}" variant="blue" />
+        <FormulaBox latex="-Mg\sin\beta=Ma_\text{cm}+\tfrac{2}{5}Ma_\text{cm}=\tfrac{7}{5}Ma_\text{cm}" variant="blue" />
+        <FormulaBox latex="a_\text{cm}=-\tfrac{5}{7}g\sin\beta" variant="blue" />
+        <FormulaBox variant="gold" latex="\boxed{\;|a_\text{cm}|=\tfrac{5}{7}g\sin\beta,\;\text{rettet ned langs rampen}\;}" />
+
         <p className="italic text-[var(--muted)]">
-          Fysisk tolkning: Dette bekrefter at minste μ er identisk enten kulen ruller opp eller ned
-          — den <em>eneste</em> forskjellen er at friksjonens retning snur. Derfor: en bowling-kule
-          som ruller opp en rampe og så tilbake bruker samme μ hele tiden.
+          Sammenlign med en kasse som sklir uten friksjon (eller en kule som glir uten å rulle): den ville hatt
+          <InlineLatex latex="\;a=g\sin\beta" />. Rullebetingelsen reduserer akselerasjonen med en faktor 5/7 fordi
+          en del av tyngdens arbeid omdannes til rotasjons-KE i stedet for translasjons-KE.
         </p>
+
+        <p className="font-semibold mt-4">(c) Minste statisk friksjons­koeffisient</p>
+        <p>Vi trenger at faktisk friksjon ikke overstiger maks tilgjengelig statisk friksjon:</p>
+        <FormulaBox latex="f\leq\mu_s N=\mu_s Mg\cos\beta" variant="blue" />
+        <p>Vi fant <InlineLatex latex="\;f=\tfrac{2}{5}M|a_\text{cm}|=\tfrac{2}{5}M\cdot\tfrac{5}{7}g\sin\beta=\tfrac{2}{7}Mg\sin\beta" />. Sett inn:</p>
+        <FormulaBox latex="\tfrac{2}{7}Mg\sin\beta\leq\mu_s Mg\cos\beta" variant="blue" />
+        <FormulaBox latex="\mu_{s,\min}=\dfrac{2\sin\beta}{7\cos\beta}=\tfrac{2}{7}\tan\beta" variant="blue" />
+        <FormulaBox variant="gold" latex="\boxed{\;\mu_{s,\min}=\tfrac{2}{7}\tan\beta\;}" />
+
+        <TheoryBox title="Sammenligning: opp vs ned">
+          <p>
+            <strong>Opp:</strong> friksjon peker opp langs rampen. <strong>Ned:</strong> friksjon peker opp langs rampen også!
+            I begge tilfeller er <InlineLatex latex="\;|a_\text{cm}|=\tfrac{5}{7}g\sin\beta" /> og
+            <InlineLatex latex="\;\mu_{s,\min}=\tfrac{2}{7}\tan\beta" />.
+          </p>
+          <p className="mt-2">
+            <strong>Hvorfor samme retning?</strong> Når kulen ruller ned, må ω <em>øke</em>, så torque må peke i ω-retning.
+            Friksjon i bunn må peke <em>opp</em> langs rampen for å gi denne torque. Når kulen ruller opp og ω avtar, må torque
+            peke <em>mot</em> ω. Men siden ω-retningen også er motsatt opp vs ned, ender vi opp med friksjon opp langs rampen
+            i begge tilfeller. Symmetrisk og elegant.
+          </p>
+        </TheoryBox>
+
+        <Pitfall>
+          Vanlig regnefeil: glemme rotasjons­bidraget og bruke <InlineLatex latex="a=g\sin\beta" />. Det gir feil med faktor 7/5.
+          Annen klassisk feil: skrive <InlineLatex latex="\sum\tau=I\alpha" /> uten å ta med fortegn på α (så f kommer ut negativ),
+          og tro at friksjonen peker nedover.
+        </Pitfall>
       </div>
     ),
     summary: (
       <p className="text-sm">
-        Enten en kule ruller opp eller ned en skråning, er akselerasjonen{" "}
-        <InlineLatex latex="\tfrac57 g\sin\beta" /> og minste friksjonskoeffisient{" "}
-        <InlineLatex latex="\tfrac27\tan\beta" />. Men friksjonen <strong>skifter retning</strong>:
-        peker oppover når kulen ruller opp, nedover når den ruller ned (slik at den gir nødvendig
-        dreiemoment).
+        Klassisk «rull oppover»-problem: friksjonen peker <strong>oppover</strong> langs rampen i begge retninger,
+        akselerasjonen er <InlineLatex latex="\tfrac{5}{7}g\sin\beta" />, og minste statisk koeffisient er
+        <InlineLatex latex="\;\tfrac{2}{7}\tan\beta" />. Nøkkelen er rullebetingelsen som binder a og α sammen.
       </p>
     ),
   },
@@ -1653,58 +1764,62 @@ export const exercises: Record<string, ExerciseContent> = {
     pageRef: "s. 358",
     problem: (
       <p>
-        En flymotor leverer 175 kW effekt til en flypropell ved 2400 rev/min. (a) Hvor mye
-        dreiemoment leverer motoren? (b) Hvor mye arbeid gjør motoren i én omdreining av propellen?
+        En flymotor leverer 130 kW effekt til en flypropell ved 2400 rev/min. (a) Hvor mye
+        dreiemoment leverer flymotoren? (b) Hvor mye arbeid gjør motoren i én omdreining av propellen?
       </p>
     ),
     knowns: (
       <ul className="list-disc list-inside space-y-1 text-sm">
-        <li><InlineLatex latex="P = 175{,}000\;\text{W}" /></li>
-        <li><InlineLatex latex="\omega = 2400\;\text{rev/min} = 251{,}3\;\text{rad/s}" /></li>
+        <li><InlineLatex latex="P = 1{,}30\times 10^{5}\;\text{W}" /></li>
+        <li><InlineLatex latex="\omega = 2400\;\text{rev/min}" /></li>
       </ul>
     ),
     unknowns: (
       <ul className="list-disc list-inside space-y-1 text-sm">
-        <li>Dreiemoment τ og arbeid per omdreining W</li>
+        <li>(a) Dreiemoment τ. (b) Arbeid per omdreining W.</li>
       </ul>
     ),
     strategy: (
-      <p className="text-sm">
-        Rotasjonseffekt: <InlineLatex latex="P = \tau\omega" />. Arbeid per omdreining:{" "}
-        <InlineLatex latex="W = \tau \cdot 2\pi" />.
-      </p>
+      <TheoryBox title="Rotasjons-effekt og rotasjons-arbeid">
+        <p>
+          Rotasjons­effekt: <InlineLatex latex="P=\tau\omega" /> — direkte analog til
+          <InlineLatex latex="\;P=Fv" /> for translasjon. Arbeid per omdreining:
+          <InlineLatex latex="\;W=\tau\,\Delta\theta=\tau\cdot 2\pi" /> rad.
+        </p>
+      </TheoryBox>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: (
-          <p>
-            <InlineLatex latex="\omega = 2400 \cdot 2\pi/60 = 251{,}3\;\text{rad/s}" />.
-          </p>
-        ),
+        content: <p>Konverter til rad/s: <InlineLatex latex="\omega = 2400\cdot 2\pi/60 = 251{,}3\;\text{rad/s}" />.</p>,
       },
       {
         label: "Hint 2",
-        content: (
-          <p>
-            <InlineLatex latex="\tau = P/\omega" />, og arbeid per rev = τ × Δθ der Δθ = 2π rad.
-          </p>
-        ),
+        content: <p>(a) <InlineLatex latex="\tau=P/\omega" />. (b) <InlineLatex latex="W=\tau\cdot 2\pi" />.</p>,
       },
     ],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\omega = 2400 \cdot \frac{2\pi}{60} = 251{,}3\;\text{rad/s}" variant="blue" />
-        <FormulaBox latex="\tau = P/\omega = 175{,}000/251{,}3 = 696\;\text{N·m}" variant="blue" />
-        <FormulaBox latex="\boxed{\tau \approx 696\;\text{N·m}}" variant="gold" />
-        <FormulaBox latex="W = \tau \cdot 2\pi = (696)(2\pi) = 4376\;\text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{W \approx 4380\;\text{J per omdreining}}" variant="gold" />
+      <div className="space-y-3 text-sm">
+        <p className="font-semibold">(a) Dreiemoment</p>
+        <p>Først konverter til SI:</p>
+        <FormulaBox latex="\omega=2400\;\text{rev/min}\times\dfrac{2\pi\;\text{rad}}{1\;\text{rev}}\times\dfrac{1\;\text{min}}{60\;\text{s}}=251{,}3\;\text{rad/s}" variant="blue" />
+        <p>Sett inn i <InlineLatex latex="\tau=P/\omega" />:</p>
+        <FormulaBox latex="\tau=\dfrac{P}{\omega}=\dfrac{1{,}30\times 10^{5}}{251{,}3}\approx 517\;\text{N·m}" variant="blue" />
+        <FormulaBox latex="\boxed{\tau\approx 517\;\text{N·m}}" variant="gold" />
+
+        <p className="font-semibold mt-3">(b) Arbeid per omdreining</p>
+        <FormulaBox latex="W=\tau\cdot 2\pi=(517)(2\pi)=3249\;\text{J}" variant="blue" />
+        <FormulaBox latex="\boxed{W\approx 3{,}25\times 10^{3}\;\text{J/omdr.}}" variant="gold" />
+
+        <p className="italic text-[var(--muted)]">
+          Sjekk: motoren går 2400/60 = 40 omdr/s, ganger 3,25 kJ/omdr = 130 kJ/s = 130 kW. ✓ Stemmer.
+        </p>
       </div>
     ),
     summary: (
       <p className="text-sm">
-        Analogien med translasjon: <InlineLatex latex="P = Fv" /> ↔{" "}
-        <InlineLatex latex="P = \tau\omega" />. Arbeid i rotasjon er τΔθ.
+        Rotasjon analogt translasjon: <InlineLatex latex="P=\tau\omega" /> og <InlineLatex latex="W=\tau\Delta\theta" />.
+        Husk å konvertere rev/min til rad/s før innsetting.
       </p>
     ),
   },

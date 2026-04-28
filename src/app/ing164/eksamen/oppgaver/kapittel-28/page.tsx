@@ -8,9 +8,9 @@ import { exercises, ExerciseContent } from "./exercises";
 
 const sections = [
   { id: "28.1", title: "Magnetfelt fra en bevegelig ladning", exercises: ["28.1", "28.5", "28.6"] },
-  { id: "28.2", title: "Magnetfelt fra en strømførende leder", exercises: ["28.11"] },
-  { id: "28.3", title: "Magnetfelt fra en spole", exercises: ["28.19", "28.20", "28.21"] },
-  { id: "28.4", title: "Amperes lov", exercises: ["28.27", "28.29", "28.30"] },
+  { id: "28.2", title: "Magnetfelt fra et strømelement", exercises: ["28.11"] },
+  { id: "28.3", title: "Magnetfelt fra en lang rett leder", exercises: ["28.19", "28.20", "28.21"] },
+  { id: "28.4", title: "Kraft mellom parallelle ledere", exercises: ["28.27", "28.29", "28.30"] },
   { id: "problems", title: "Problems", exercises: ["28.61"] },
 ];
 

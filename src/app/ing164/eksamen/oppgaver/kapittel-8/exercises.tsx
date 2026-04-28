@@ -19,8 +19,44 @@ export interface ExerciseContent {
 }
 
 // ============================================================================
-// SVG-helpere
+// Pedagogiske hjelpere
 // ============================================================================
+
+function TheoryBox({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-indigo-700 dark:text-indigo-300 mb-1">
+        Teori: {title}
+      </p>
+      <div className="text-sm text-indigo-900 dark:text-indigo-100">{children}</div>
+    </div>
+  );
+}
+
+function Pitfall({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-rose-700 dark:text-rose-300 mb-1">
+        Vanlig feil
+      </p>
+      <div className="text-sm text-rose-900 dark:text-rose-100">{children}</div>
+    </div>
+  );
+}
+
+function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-3">
+      <p className="font-semibold text-sm">
+        <span className="inline-block w-6 h-6 rounded-full bg-[var(--accent)] text-white text-xs font-bold leading-6 text-center mr-2">
+          {n}
+        </span>
+        {title}
+      </p>
+      <div className="mt-2 ml-8 text-sm space-y-2">{children}</div>
+    </div>
+  );
+}
 
 function Arrowheads() {
   return (
@@ -37,649 +73,448 @@ function Arrowheads() {
       <marker id="arrow-amber-k8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b" />
       </marker>
+      <marker id="arrow-purple-k8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6" />
+      </marker>
     </defs>
   );
 }
 
 // ============================================================================
-// OPPGAVESAMLING — KAPITTEL 8
+// OPPGAVESAMLING — KAPITTEL 8 (matcher University Physics 15. utg.)
 // ============================================================================
 
 export const exercises: Record<string, ExerciseContent> = {
   // ==========================================================================
-  // 8.1 — Bevegelsesmengde for lastebil vs SUV
+  // 8.1 — Lastebil og SUV: bevegelsesmengde og kinetisk energi
   // ==========================================================================
   "8.1": {
-    title: "Bevegelsesmengde og kinetisk energi: lastebil vs SUV",
+    title: "Lastebil vs SUV — momentum og energi",
     difficulty: "lett",
-    pageRef: "s. 282",
+    pageRef: "s. 291",
     problem: (
-      <div className="space-y-2">
-        <p>
-          (a) Hva er størrelsen på bevegelsesmengden til en 10 000 kg lastebil som har
-          en fart på 12{"\u00A0"}m/s? (b) Hvilken fart må en 2000{"\u00A0"}kg SUV ha for å ha
-          (i) samme bevegelsesmengde? (ii) samme kinetiske energi?
-        </p>
-      </div>
+      <p>
+        (a) Hva er størrelsen på bevegelses­mengden til en 10 000 kg lastebil med fart
+        12,0 m/s? (b) Med hvilken fart må en 2000 kg SUV kjøre for å ha (i) den samme
+        bevegelses­mengden, og (ii) den samme kinetiske energien som lastebilen?
+      </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside space-y-1">
-        <li>Lastebil: <InlineLatex latex="m_L = 10\,000\ \text{kg}" />, <InlineLatex latex="v_L = 12{,}0\ \text{m/s}" /></li>
-        <li>SUV: <InlineLatex latex="m_S = 2000\ \text{kg}" /></li>
+      <ul className="list-disc pl-5">
+        <li>Lastebil: <InlineLatex latex="m_L=10\,000\;\text{kg},\;v_L=12{,}0\;\text{m/s}" /></li>
+        <li>SUV: <InlineLatex latex="m_S=2000\;\text{kg}" /></li>
       </ul>
     ),
-    unknowns: (
-      <ul className="list-disc list-inside space-y-1">
-        <li>(a) <InlineLatex latex="p_L" /></li>
-        <li>(b-i) SUVs fart når <InlineLatex latex="p_S = p_L" /></li>
-        <li>(b-ii) SUVs fart når <InlineLatex latex="K_S = K_L" /></li>
-      </ul>
-    ),
+    unknowns: <p>(a) <InlineLatex latex="p_L" />. (b-i) <InlineLatex latex="v_S" /> for samme p. (b-ii) <InlineLatex latex="v_S" /> for samme K.</p>,
     strategy: (
-      <p>
-        Bruk definisjonene <InlineLatex latex="p = mv" /> og <InlineLatex latex="K = \tfrac{1}{2}mv^2" />.
-        Sett de to verdiene like for SUV og lastebil, og løs for farten.
-      </p>
+      <TheoryBox title="To grunndefinisjoner">
+        <p>
+          <InlineLatex latex="p=mv" /> (vektor, lineær i v).
+          <InlineLatex latex="\;K=\tfrac12 mv^2" /> (skalar, kvadratisk i v).
+        </p>
+      </TheoryBox>
     ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: (
-          <p>
-            Bevegelsesmengde er <em>lineær</em> i farten, men kinetisk energi er
-            <em> kvadratisk</em>. Det gir ulike svar.
-          </p>
-        ),
-      },
-      {
-        label: "Hint 2",
-        content: (
-          <p>
-            For samme <InlineLatex latex="K" /> må du løse <InlineLatex latex="\tfrac{1}{2}m_S v_S^2 = \tfrac{1}{2}m_L v_L^2" />,
-            altså <InlineLatex latex="v_S = v_L\sqrt{m_L/m_S}" />.
-          </p>
-        ),
-      },
-    ],
+    hints: [{ label: "Hint", content: <p>For samme K: <InlineLatex latex="v_S=v_L\sqrt{m_L/m_S}" />.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Bevegelsesmengde (momentum) er en vektorstørrelse definert som
-          <InlineLatex latex="\vec p = m\vec v" />. Kinetisk energi er en skalar definert
-          som <InlineLatex latex="K = \tfrac12 m v^2" />. Siden <InlineLatex latex="p" /> er
-          lineær i farten, mens <InlineLatex latex="K" /> er kvadratisk, svarer de to
-          størrelsene forskjellig på endringer i fart. Originalformlene er:
-        </p>
-        <FormulaBox latex="p = mv \qquad K = \tfrac{1}{2} m v^2" variant="blue" />
-        <p className="font-semibold">(a) Bevegelsesmengden til lastebilen</p>
-        <p>
-          Her setter vi bare tall direkte inn i <InlineLatex latex="p=mv" />:
-        </p>
-        <FormulaBox latex="p_L = m_L v_L = (10\,000\;\text{kg})(12{,}0\;\text{m/s}) = 1{,}20\times 10^{5}\ \text{kg\cdot m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{p_L = 1{,}20\times 10^{5}\ \text{kg}\cdot\text{m/s}}" variant="gold" />
-        <p className="font-semibold">(b-i) SUV med samme bevegelsesmengde</p>
-        <p>
-          Vi krever <InlineLatex latex="p_S = p_L" />. Omformer <InlineLatex latex="p=mv" />
-          ved å dele på massen:
-        </p>
-        <FormulaBox latex="m_S v_S = p_L \;\Longrightarrow\; v_S = \dfrac{p_L}{m_S}" variant="blue" />
-        <FormulaBox latex="v_S = \dfrac{1{,}20\times 10^{5}}{2000} = 60{,}0\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_S = 60{,}0\ \text{m/s}}" variant="gold" />
-        <p className="font-semibold">(b-ii) SUV med samme kinetiske energi</p>
-        <p>
-          Nå krever vi <InlineLatex latex="K_S = K_L" />. Setter opp likningen og løser
-          algebraisk for <InlineLatex latex="v_S" />:
-        </p>
-        <FormulaBox latex="\tfrac12 m_S v_S^2 = \tfrac12 m_L v_L^2 \;\Longrightarrow\; v_S = v_L\sqrt{\dfrac{m_L}{m_S}}" variant="blue" />
-        <FormulaBox latex="v_S = 12{,}0\sqrt{\dfrac{10\,000}{2000}} = 12{,}0\sqrt{5}\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_S \approx 26{,}8\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> SUV-en er 5 ganger lettere enn lastebilen. For
-          lik <InlineLatex latex="p" /> må farten være 5 ganger høyere (lineært), men for
-          lik <InlineLatex latex="K" /> holder det med <InlineLatex latex="\sqrt{5}\approx 2{,}24" /> ganger høyere fart.
+      <div>
+        <Step n={1} title="(a) Lastebilens momentum">
+          <FormulaBox latex="p_L=m_Lv_L=(10\,000)(12{,}0)=1{,}20\times 10^{5}\;\text{kg·m/s}" />
+        </Step>
+        <Step n={2} title="(b-i) SUV med samme p">
+          <FormulaBox latex="v_S=\dfrac{p_L}{m_S}=\dfrac{1{,}20\times 10^{5}}{2000}=60{,}0\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="(b-ii) SUV med samme K">
+          <FormulaBox latex="v_S=v_L\sqrt{m_L/m_S}=12{,}0\sqrt{5}\approx 26{,}8\;\text{m/s}" />
+        </Step>
+        <FormulaBox variant="gold" latex="p_L=1{,}20\times 10^5\,\text{kg·m/s},\;v_{S,p}=60{,}0\,\text{m/s},\;v_{S,K}\approx 26{,}8\,\text{m/s}" />
+        <p className="mt-2 italic text-[var(--muted)]">
+          For samme p må SUV kjøre 5× raskere (lineært); for samme K bare √5 ≈ 2,24× raskere.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Bevegelsesmengde skalerer lineært med fart (<InlineLatex latex="p\propto v" />), kinetisk
-        energi skalerer kvadratisk (<InlineLatex latex="K\propto v^2" />). Et lettere legeme trenger
-        derfor mye høyere fart for samme <InlineLatex latex="p" />, men bare <InlineLatex latex="\sqrt{m_L/m_S}" /> ganger
-        for samme <InlineLatex latex="K" />.
-      </p>
-    ),
+    summary: <p>p ∝ v, K ∝ v². Lett legeme trenger mye høyere fart for samme p enn for samme K.</p>,
   },
 
   // ==========================================================================
-  // 8.3 — Storfugl i bevegelse
+  // 8.3 — Objekter A, B, C i Fig E8.3
   // ==========================================================================
   "8.3": {
-    title: "Bevegelsesmengde og kinetisk energi for kondor",
-    difficulty: "lett",
-    pageRef: "s. 282",
-    problem: (
-      <p>
-        En 10 kg kondor flyr med en fart på 8{"\u00A0"}m/s. (a) Hva er størrelsen på
-        bevegelsesmengden til fuglen? (b) Hva er den kinetiske energien? (c) Hvis
-        vi dobler farten, hvor mye øker <InlineLatex latex="p" /> og <InlineLatex latex="K" />?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m = 10\ \text{kg}" />, <InlineLatex latex="v = 8{,}0\ \text{m/s}" /></li>
-      </ul>
-    ),
-    unknowns: (
-      <ul className="list-disc list-inside">
-        <li>(a) <InlineLatex latex="p" /> (b) <InlineLatex latex="K" /> (c) forholdstall når <InlineLatex latex="v\to 2v" /></li>
-      </ul>
-    ),
-    strategy: (
-      <p>Direkte innsetting i <InlineLatex latex="p=mv" /> og <InlineLatex latex="K=\tfrac{1}{2}mv^2" />.</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Dobling av fart gir dobbel <InlineLatex latex="p" /> men fire ganger så stor <InlineLatex latex="K" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er ren innsetting i de to definisjonene fra kapittel 8 og 6.
-          Originalformlene er:
-        </p>
-        <FormulaBox latex="p = mv \qquad K = \tfrac{1}{2} m v^2" variant="blue" />
-        <p>
-          Merk at <InlineLatex latex="p" /> er en vektor, men siden kondoren flyr rett fram
-          trenger vi bare størrelsen.
-        </p>
-        <p className="font-semibold">(a) Bevegelsesmengde</p>
-        <FormulaBox latex="p = mv = (10\;\text{kg})(8{,}0\;\text{m/s}) = 80\ \text{kg\cdot m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{p = 80\ \text{kg\cdot m/s}}" variant="gold" />
-        <p className="font-semibold">(b) Kinetisk energi</p>
-        <FormulaBox latex="K = \tfrac{1}{2} m v^2 = \tfrac{1}{2}(10)(8{,}0)^2 = 320\ \text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{K = 3{,}2\times 10^{2}\ \text{J}}" variant="gold" />
-        <p className="font-semibold">(c) Hva skjer om farten dobles?</p>
-        <p>
-          Siden <InlineLatex latex="p\propto v" /> og <InlineLatex latex="K\propto v^2" />,
-          kan vi bare skalere svarene:
-        </p>
-        <FormulaBox latex="v\to 2v \;\Longrightarrow\; p\to 2p = 160\ \text{kg\cdot m/s},\quad K\to 4K = 1280\ \text{J}" variant="blue" />
-        <p>
-          <strong>Fysisk intuisjon:</strong> En dobling i fart dobler momentum, men firedobler
-          energien. Det er derfor en liten fartsøkning i bil føles uskyldig, mens
-          kollisjonsenergien blir dramatisk mye større.
-        </p>
-      </div>
-    ),
-    summary: <p>Bevegelsesmengden skalerer <em>lineært</em>, kinetisk energi <em>kvadratisk</em> med farten.</p>,
-  },
-
-  // ==========================================================================
-  // 8.5 — Baseballens retningsendring
-  // ==========================================================================
-  "8.5": {
-    title: "Endring av bevegelsesmengde i kastet baseball",
-    difficulty: "lett",
-    pageRef: "s. 282",
+    title: "Netto bevegelsesmengde for objekter A, B, C (Fig E8.3)",
+    difficulty: "middels",
+    pageRef: "s. 291",
     problem: (
       <div className="space-y-2">
         <p>
-          En baseball med masse 0,145{"\u00A0"}kg har en fart på 30{"\u00A0"}m/s rett mot batter.
-          Etter støtet går ballen med 40{"\u00A0"}m/s rett tilbake. Finn størrelse og retning
-          på endringen i ballens bevegelsesmengde.
+          Tre objekter A (5,0 kg), B (6,0 kg) og C (10,0 kg) beveger seg som vist i Fig. E8.3:
+          A langs +y med 11,0 m/s; B langs en linje 60,0° mot +x-aksen (under) med 10,0 m/s;
+          C langs +x med 3,0 m/s. Finn x- og y-komponentene av netto bevegelses­mengde for systemet
+          som består av (a) A og C; (b) B og C; (c) alle tre.
         </p>
-        <svg viewBox="0 0 300 80" className="w-full max-w-sm mx-auto block">
+        <svg viewBox="0 0 320 240" className="w-full max-w-md mx-auto">
           <Arrowheads />
-          <circle cx="80" cy="30" r="6" fill="#3b82f6" />
-          <line x1="80" y1="30" x2="140" y2="30" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
-          <text x="85" y="20" fontSize="11" fill="#3b82f6">før: 30 m/s →</text>
-          <circle cx="240" cy="60" r="6" fill="#ef4444" />
-          <line x1="240" y1="60" x2="170" y2="60" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
-          <text x="170" y="75" fontSize="11" fill="#ef4444">etter: 40 m/s ←</text>
+          {/* x og y-akse */}
+          <line x1="160" y1="220" x2="160" y2="20" stroke="#6b7280" strokeWidth="1" />
+          <line x1="20" y1="120" x2="300" y2="120" stroke="#6b7280" strokeWidth="1" />
+          <text x="165" y="22" fontSize="11" fill="#6b7280">y</text>
+          <text x="302" y="124" fontSize="11" fill="#6b7280">x</text>
+          {/* A i +y, 5 kg, 11 m/s */}
+          <circle cx="160" cy="120" r="9" fill="#ef4444" />
+          <text x="166" y="125" fontSize="10" fill="white" fontWeight="bold">A</text>
+          <line x1="160" y1="111" x2="160" y2="50" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="115" y="60" fontSize="10" fill="#ef4444">5 kg, 11 m/s</text>
+          {/* B i 60° under +x, 6 kg, 10 m/s */}
+          <circle cx="160" cy="120" r="9" fill="#3b82f6" />
+          <text x="166" y="125" fontSize="10" fill="white" fontWeight="bold">B</text>
+          <line x1="160" y1="120" x2="225" y2="170" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
+          <text x="195" y="195" fontSize="10" fill="#3b82f6">6 kg, 10 m/s, 60°</text>
+          {/* C i +x, 10 kg, 3 m/s */}
+          <circle cx="160" cy="120" r="9" fill="#10b981" />
+          <text x="166" y="125" fontSize="10" fill="white" fontWeight="bold">C</text>
+          <line x1="170" y1="120" x2="225" y2="120" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k8)" />
+          <text x="225" y="140" fontSize="10" fill="#10b981">10 kg, 3 m/s</text>
         </svg>
       </div>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m = 0{,}145\ \text{kg}" /></li>
-        <li><InlineLatex latex="v_{1x} = +30\ \text{m/s}" />, <InlineLatex latex="v_{2x} = -40\ \text{m/s}" /></li>
+      <ul className="list-disc pl-5">
+        <li>A: 5,0 kg langs +y, 11,0 m/s</li>
+        <li>B: 6,0 kg, 60° under +x, 10,0 m/s</li>
+        <li>C: 10,0 kg langs +x, 3,0 m/s</li>
       </ul>
     ),
-    unknowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="\Delta p_x = m(v_{2x}-v_{1x})" /></li>
-      </ul>
-    ),
+    unknowns: <p>x- og y-komponentene av netto p for tre delsystemer.</p>,
     strategy: (
-      <p>
-        Velg en positiv retning (mot batter). Bevegelsesmengde er en vektor, så
-        retningsendring må behandles med fortegn.
-      </p>
+      <TheoryBox title="Momentum er en vektor">
+        <p>
+          Regn ut <InlineLatex latex="p_x" /> og <InlineLatex latex="p_y" /> separat for hvert objekt, så summer.
+          B's vektor: <InlineLatex latex="p_{Bx}=m_B v_B\cos 60°,\;p_{By}=-m_B v_B\sin 60°" /> (60° under x ⇒ negativ y).
+        </p>
+      </TheoryBox>
     ),
     hints: [
-      {
-        label: "Hint",
-        content: (
-          <p>
-            <InlineLatex latex="\Delta p_x = m v_{2x} - m v_{1x}" />. Husk at
-            fartene har motsatte fortegn.
-          </p>
-        ),
-      },
+      { label: "Hint", content: <p>A: kun y-komponent. C: kun x-komponent. B: begge komponenter med fortegn.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Bevegelsesmengde er en <em>vektor</em>,
-          <InlineLatex latex="\vec p = m\vec v" />. Når vi regner endring i én dimensjon,
-          bruker vi signert x-komponent. Velger vi positiv retning <em>mot</em> batter
-          (slik ballen flyr i utgangspunktet), blir <InlineLatex latex="v_{1x}=+30\;\text{m/s}" />
-          og <InlineLatex latex="v_{2x}=-40\;\text{m/s}" /> (motsatt retning etter slaget).
-          Originalformelen er:
-        </p>
-        <FormulaBox latex="\Delta \vec p = m\,\Delta\vec v = m(\vec v_2 - \vec v_1)" variant="blue" />
-        <p>
-          I komponentform blir dette rett fram:
-        </p>
-        <FormulaBox latex="\Delta p_x = m(v_{2x} - v_{1x}) = 0{,}145\bigl[(-40) - (+30)\bigr]" variant="blue" />
-        <FormulaBox latex="\Delta p_x = 0{,}145\cdot(-70) = -10{,}15\ \text{kg\cdot m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{|\Delta \vec p|\approx 10{,}2\ \text{kg\cdot m/s, rettet tilbake mot pitcher}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Selv om fartens størrelse bare endret seg fra 30
-          til 40 m/s, er fartsendringen som vektor hele 70 m/s fordi ballen snur. Det
-          negative fortegnet viser at <InlineLatex latex="\Delta\vec p" /> peker motsatt
-          den opprinnelige bevegelsesretningen — altså tilbake mot pitcher. Vanlig feil:
-          å glemme fortegnet og bare regne <InlineLatex latex="m(40-30)" />.
-        </p>
+      <div>
+        <Step n={1} title="Komponenter for hver">
+          <FormulaBox latex="p_{Ax}=0,\quad p_{Ay}=(5{,}0)(11{,}0)=55{,}0\;\text{kg·m/s}" />
+          <FormulaBox latex="p_{Bx}=(6{,}0)(10{,}0)\cos 60°=30{,}0,\quad p_{By}=-(6{,}0)(10{,}0)\sin 60°=-52{,}0" />
+          <FormulaBox latex="p_{Cx}=(10{,}0)(3{,}0)=30{,}0,\quad p_{Cy}=0" />
+        </Step>
+        <Step n={2} title="(a) System A + C">
+          <FormulaBox variant="gold" latex="p_x=0+30{,}0=30{,}0\;\text{kg·m/s},\;p_y=55{,}0+0=55{,}0\;\text{kg·m/s}" />
+        </Step>
+        <Step n={3} title="(b) System B + C">
+          <FormulaBox variant="gold" latex="p_x=30{,}0+30{,}0=60{,}0\;\text{kg·m/s},\;p_y=-52{,}0+0=-52{,}0\;\text{kg·m/s}" />
+        </Step>
+        <Step n={4} title="(c) Alle tre">
+          <FormulaBox variant="gold" latex="p_x=0+30+30=60{,}0\;\text{kg·m/s},\;p_y=55-52+0=3{,}0\;\text{kg·m/s}" />
+        </Step>
+        <Pitfall>
+          Forveksling av <InlineLatex latex="\sin/\cos" />, eller fortegn på y-komponent når vinkelen er <em>under</em> x-aksen. Tegn alltid pil­diagram først.
+        </Pitfall>
       </div>
     ),
-    summary: (
-      <p>
-        Selv om «fartsendring» kan virke som 10{"\u00A0"}m/s, er retningsvendingen avgjørende:
-        <InlineLatex latex="\Delta\vec v=-70\ \text{m/s}" />. Vær alltid konsekvent med
-        positiv retning.
-      </p>
-    ),
+    summary: <p>Netto p er vektorsum: regn x og y separat, så Pythagoras hvis du vil ha størrelsen.</p>,
   },
 
   // ==========================================================================
-  // 8.7 — Impuls på golfball
+  // 8.5 — American Football: 110 kg vs 125 kg
+  // ==========================================================================
+  "8.5": {
+    title: "American football — to linemen kolliderer",
+    difficulty: "middels",
+    pageRef: "s. 291",
+    problem: (
+      <p>
+        I amerikansk fotball støter to «defensive linemen» rett mot hverandre. Den 110 kg tunge
+        spilleren beveger seg mot høyre med 2,65 m/s når en 125 kg spiller løper rett mot ham
+        med 2,80 m/s. (a) Finn størrelse og retning på netto bevegelses­mengde for systemet av
+        de to spillerne. (b) Finn total kinetisk energi.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_1=110\;\text{kg},\;v_1=+2{,}65\;\text{m/s}" /> (mot høyre)</li>
+        <li><InlineLatex latex="m_2=125\;\text{kg},\;v_2=-2{,}80\;\text{m/s}" /> (mot venstre)</li>
+      </ul>
+    ),
+    unknowns: <p>(a) Netto p (størrelse + retning). (b) Total K.</p>,
+    strategy: <p>Velg positiv x mot høyre. Begge er 1D — bare summer fortegn­settene.</p>,
+    hints: [{ label: "Hint", content: <p>p kan bli negativ ⇒ retning «mot venstre».</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="(a) Netto bevegelses­mengde">
+          <FormulaBox latex="p=m_1v_1+m_2v_2=(110)(+2{,}65)+(125)(-2{,}80)" />
+          <FormulaBox latex="p=291{,}5-350{,}0=-58{,}5\;\text{kg·m/s}" />
+          <FormulaBox variant="gold" latex="|p|=58{,}5\;\text{kg·m/s, mot venstre}" />
+        </Step>
+        <Step n={2} title="(b) Total kinetisk energi">
+          <FormulaBox latex="K=\tfrac12 m_1v_1^2+\tfrac12 m_2v_2^2" />
+          <FormulaBox latex="K=\tfrac12(110)(2{,}65)^2+\tfrac12(125)(2{,}80)^2=386{,}2+490{,}0" />
+          <FormulaBox variant="gold" latex="K\approx 876\;\text{J}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Tyngste spiller dominerer momentum; netto p peker hans vei. K er positiv (skalar) — ingen retning.
+        </p>
+      </div>
+    ),
+    summary: <p>Momentum er vektor (kan kanselleres delvis); kinetisk energi er skalar (legges alltid sammen positivt).</p>,
+  },
+
+  // ==========================================================================
+  // 8.7 — Force of a Golf Swing
   // ==========================================================================
   "8.7": {
-    title: "Impuls på golfball",
+    title: "Kraft fra et golfslag",
     difficulty: "lett",
-    pageRef: "s. 282",
+    pageRef: "s. 291",
     problem: (
       <p>
-        Man slår en 0,0450{"\u00A0"}kg golfball slik at den går fra ro til
-        25{"\u00A0"}m/s i kontaktperioden på 2,00{"\u00A0"}ms. (a) Finn størrelsen på
-        impulsen køllen leverer. (b) Finn den gjennomsnittlige kraften på ballen.
+        En 0,0450 kg golfball går fra ro til 24,9 m/s når køllen treffer den. Hvis kontakt­tiden er
+        2,40 ms, hvilken gjennomsnittlig kraft virker på ballen i denne perioden? Hvor stor er
+        denne kraften sammenlignet med ballens vekt?
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=0{,}0450\ \text{kg}" />, <InlineLatex latex="v_1=0" />, <InlineLatex latex="v_2=25{,}0\ \text{m/s}" /></li>
-        <li><InlineLatex latex="\Delta t = 2{,}00\times 10^{-3}\ \text{s}" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}0450\;\text{kg},\;v_1=0,\;v_2=24{,}9\;\text{m/s}" /></li>
+        <li><InlineLatex latex="\Delta t=2{,}40\times 10^{-3}\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: (
-      <ul className="list-disc list-inside">
-        <li>Impuls <InlineLatex latex="J" />, gjennomsnittskraft <InlineLatex latex="F_\text{gj}" /></li>
-      </ul>
-    ),
+    unknowns: <p>Gjennomsnittlig kraft <InlineLatex latex="F_\text{gj}" />, og forhold til vekt.</p>,
     strategy: (
-      <p>
-        Impuls-bevegelsesmengde-teoremet: <InlineLatex latex="J=\Delta p=m(v_2-v_1)" /> og <InlineLatex latex="F_\text{gj}=J/\Delta t" />.
-      </p>
+      <TheoryBox title="Impuls-momentum">
+        <p>
+          <InlineLatex latex="J=F_\text{gj}\Delta t=m(v_2-v_1)" />, så
+          <InlineLatex latex="F_\text{gj}=m\Delta v/\Delta t" />.
+        </p>
+      </TheoryBox>
     ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Bruk <InlineLatex latex="J = \Delta p" /> og deretter <InlineLatex latex="F_\text{gj} = J/\Delta t" />.</p>,
-      },
-    ],
+    hints: [{ label: "Hint", content: <p>Vekten er <InlineLatex latex="W=mg=0{,}0450\cdot 9{,}80=0{,}441\;\text{N}" />.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Impuls-bevegelsesmengdeteoremet sier at netto impuls på
-          et legeme er lik endringen i bevegelsesmengde. Impuls er selv en tidsintegral av
-          netto kraft:
-        </p>
-        <FormulaBox latex="\vec J = \int_{t_1}^{t_2} \vec F\,dt = \Delta \vec p = m\vec v_2 - m\vec v_1" variant="blue" />
-        <p>
-          Hvis vi i stedet bruker den <em>gjennomsnittlige</em> kraften i kontaktperioden,
-          blir integralet erstattet av et enkelt produkt:
-        </p>
-        <FormulaBox latex="\vec J = \vec F_\text{gj}\,\Delta t \;\Longrightarrow\; \vec F_\text{gj} = \dfrac{\vec J}{\Delta t}" variant="blue" />
-        <p className="font-semibold">(a) Impuls fra køllen</p>
-        <p>
-          Ballen starter i ro (<InlineLatex latex="v_1=0" />), så
-          <InlineLatex latex="\Delta p = m v_2" />:
-        </p>
-        <FormulaBox latex="J = m(v_2 - v_1) = (0{,}0450\;\text{kg})(25{,}0\;\text{m/s}) = 1{,}125\ \text{kg\cdot m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{J \approx 1{,}13\ \text{N\cdot s}}" variant="gold" />
-        <p className="font-semibold">(b) Gjennomsnittlig kraft</p>
-        <FormulaBox latex="F_\text{gj} = \dfrac{J}{\Delta t} = \dfrac{1{,}125}{2{,}00\times 10^{-3}} = 562{,}5\ \text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{F_\text{gj} \approx 563\ \text{N}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> 563 N tilsvarer vekten av ~57 kg — betydelig
-          kraft på en liten ball! Kort kontakttid (2 ms) forklarer hvorfor
-          <InlineLatex latex="F_\text{gj}" /> blir så stor. Hadde vi doblet kontakttiden,
-          ville kraften halveres for samme impuls.
+      <div>
+        <Step n={1} title="Gjennomsnittlig kraft">
+          <FormulaBox latex="F_\text{gj}=\dfrac{m(v_2-v_1)}{\Delta t}=\dfrac{(0{,}0450)(24{,}9)}{2{,}40\times 10^{-3}}" />
+          <FormulaBox variant="gold" latex="F_\text{gj}=467\;\text{N}" />
+        </Step>
+        <Step n={2} title="Forhold til vekt">
+          <FormulaBox latex="\dfrac{F_\text{gj}}{W}=\dfrac{467}{0{,}441}\approx 1060" />
+          <p>Kraften er ca. <strong>1060 ganger ballens vekt</strong> — nesten tre størrelses­ordener mer.</p>
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Kort kontakt­tid (2 ms) gir veldig store krefter, akkurat som krevd av impuls-momentum-loven.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Kort kontakttid gir enorme krefter selv for små masseendringer i fart —
-        derfor er idrettsutstyr designet for å lange ut kontakttiden for sikkerhet.
-      </p>
-    ),
+    summary: <p>Impuls-momentum gir <InlineLatex latex="F_\text{gj}=m\Delta v/\Delta t" />. Korte støt ⇒ store krefter.</p>,
   },
 
   // ==========================================================================
-  // 8.8 — Baseball og slagtre
+  // 8.8 — Baseball snur retning
   // ==========================================================================
   "8.8": {
-    title: "Baseball snur retning — gjennomsnittlig kraft",
+    title: "Baseball snur retning — impuls og kraft",
     difficulty: "middels",
-    pageRef: "s. 282",
+    pageRef: "s. 291",
     problem: (
       <p>
-        En 0,145{"\u00A0"}kg baseball ankommer i 45{"\u00A0"}m/s og forlater batten i
-        55{"\u00A0"}m/s motsatt vei. Kontakttid: 2,00{"\u00A0"}ms. Finn (a) impulsen på ballen
-        og (b) gjennomsnittskraften i kontaktøyeblikket.
+        En 0,143 kg baseball ankommer slag­treet med 40,5 m/s. Etter slaget går den i 54,5 m/s i
+        motsatt retning. (a) Finn impulsen (endring i bevegelses­mengde). (b) Hvis kontakt­tiden er
+        1,50 ms, hva er gjennomsnittlig kraft på ballen?
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=0{,}145\ \text{kg}" /></li>
-        <li><InlineLatex latex="v_1=-45\ \text{m/s}" />, <InlineLatex latex="v_2=+55\ \text{m/s}" /></li>
-        <li><InlineLatex latex="\Delta t=2{,}00\ \text{ms}" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}143\;\text{kg}" /></li>
+        <li><InlineLatex latex="v_1=-40{,}5\;\text{m/s},\;v_2=+54{,}5\;\text{m/s}" /> (positiv retning bort fra slagtreet)</li>
+        <li><InlineLatex latex="\Delta t=1{,}50\times 10^{-3}\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="J" /> og <InlineLatex latex="F_\text{gj}" /></li>
-      </ul>
-    ),
-    strategy: (
-      <p>
-        Velg positiv x i ballens retning etter slaget. Bruk impuls-teoremet.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Farten endres fra <InlineLatex latex="-45" /> til <InlineLatex latex="+55" />, altså en endring på 100 m/s.</p>,
-      },
-    ],
+    unknowns: <p>(a) <InlineLatex latex="J" />. (b) <InlineLatex latex="F_\text{gj}" />.</p>,
+    strategy: <p>Velg positiv retning bort fra batter. Innkommende fart er da negativ. <InlineLatex latex="J=m(v_2-v_1)" />.</p>,
+    hints: [{ label: "Hint", content: <p>Endring i fart er <InlineLatex latex="54{,}5-(-40{,}5)=95{,}0\;\text{m/s}" /> — ikke 14!</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Impuls-bevegelsesmengdeteoremet
-          <InlineLatex latex="\vec J = \Delta \vec p" /> gjelder uansett hvor kompleks
-          kraftprofilen er. Når ballen snur retning, er fartsendringen som vektor lik
-          <em>summen</em> av innfartsfart og utfartsfart. Vi velger positiv x i
-          utfartsretningen (bort fra batter), slik at
-          <InlineLatex latex="v_1 = -45\;\text{m/s}" /> (innkommende) og
-          <InlineLatex latex="v_2 = +55\;\text{m/s}" />. Originalformelen er:
-        </p>
-        <FormulaBox latex="\vec J = \Delta \vec p = m(\vec v_2 - \vec v_1),\qquad \vec F_\text{gj} = \dfrac{\vec J}{\Delta t}" variant="blue" />
-        <p className="font-semibold">(a) Impulsen på ballen</p>
-        <FormulaBox latex="J = m(v_2 - v_1) = 0{,}145\bigl[55 - (-45)\bigr] = 0{,}145\cdot 100" variant="blue" />
-        <FormulaBox latex="\boxed{J = 14{,}5\ \text{N\cdot s}}" variant="gold" />
-        <p className="font-semibold">(b) Gjennomsnittskraft</p>
-        <FormulaBox latex="F_\text{gj} = \dfrac{J}{\Delta t} = \dfrac{14{,}5}{2{,}00\times 10^{-3}}" variant="blue" />
-        <FormulaBox latex="\boxed{F_\text{gj} = 7{,}25\times 10^{3}\ \text{N}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> 7250 N tilsvarer ~740 kg vekt — en enorm kraft
-          på 145 g ball. Det er fortegnet på <InlineLatex latex="v_1" /> som gir den
-          store fartsendringen (100 m/s, ikke 10 m/s). Vanlig feil: å tro at
-          <InlineLatex latex="\Delta v = 55 - 45 = 10\;\text{m/s}" />.
-        </p>
+      <div>
+        <Step n={1} title="(a) Impuls">
+          <FormulaBox latex="J=m(v_2-v_1)=0{,}143\cdot[54{,}5-(-40{,}5)]=0{,}143\cdot 95{,}0" />
+          <FormulaBox variant="gold" latex="J=13{,}6\;\text{kg·m/s (eller N·s)}" />
+        </Step>
+        <Step n={2} title="(b) Gjennomsnittlig kraft">
+          <FormulaBox latex="F_\text{gj}=\dfrac{J}{\Delta t}=\dfrac{13{,}6}{1{,}50\times 10^{-3}}" />
+          <FormulaBox variant="gold" latex="F_\text{gj}\approx 9{,}05\times 10^{3}\;\text{N}" />
+        </Step>
+        <Pitfall>
+          Klassisk feil: <InlineLatex latex="\Delta v=54{,}5-40{,}5=14\;\text{m/s}" />. Det glemmer at retningen snur.
+          Riktig: subtrahér med fortegn — fart endres fra −40,5 til +54,5, total endring 95,0 m/s.
+        </Pitfall>
       </div>
     ),
-    summary: (
-      <p>
-        Gjennomsnittskraften blir over 7 kN — tilsvarer ~740 kg vekt! Kort kontakt
-        gjør at store krefter må til for å snu bevegelsesmengden.
-      </p>
-    ),
+    summary: <p>Når retningen snur er fartsendringen summen av størrelsene, ikke differansen.</p>,
   },
 
   // ==========================================================================
-  // 8.9 — Hockeypuck med varierende kraft
+  // 8.9 — Hockey­puck — to scenarier
   // ==========================================================================
   "8.9": {
-    title: "Hockeypuck med tidsvarierende kraft",
+    title: "Hockeypuck — to ulike scenarier",
     difficulty: "middels",
-    pageRef: "s. 282",
+    pageRef: "s. 291",
     problem: (
       <p>
-        En 0,160{"\u00A0"}kg hockeypuck beveger seg langs +x-aksen med 3,00{"\u00A0"}m/s.
-        Den påvirkes av en kraft rettet langs −x-aksen som har størrelsen 25,0{"\u00A0"}N
-        i 0,050{"\u00A0"}s og deretter 12,0{"\u00A0"}N i ytterligere 0,050{"\u00A0"}s.
-        Finn pucken sin endelige fart.
+        En 0,160 kg hockey­puck beveger seg på friksjons­fritt is mot høyre med 3,00 m/s ved
+        t = 0. (a) Hvis den utsettes for en horisontal kraft 25,0 N <em>mot høyre</em> i 0,050 s, hva
+        er pucken sin fart etterpå? (b) <em>I stedet</em> utsettes pucken for en kraft 12,0 N mot
+        venstre i 0,050 s. Hva er nå farten etterpå?
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=0{,}160\ \text{kg}" />, <InlineLatex latex="v_1 = +3{,}00\ \text{m/s}" /></li>
-        <li>Fase 1: <InlineLatex latex="F_1=-25{,}0\ \text{N}" />, <InlineLatex latex="\Delta t_1=0{,}050\ \text{s}" /></li>
-        <li>Fase 2: <InlineLatex latex="F_2=-12{,}0\ \text{N}" />, <InlineLatex latex="\Delta t_2=0{,}050\ \text{s}" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}160\;\text{kg},\;v_0=+3{,}00\;\text{m/s}" /></li>
+        <li><InlineLatex latex="\Delta t=0{,}050\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Sluttfart <InlineLatex latex="v_2" />.</p>,
-    strategy: (
-      <p>
-        Summer impulsene fra begge fasene og bruk <InlineLatex latex="\sum J = m(v_2-v_1)" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Totalimpuls er <InlineLatex latex="J = F_1\Delta t_1 + F_2\Delta t_2" />.</p>,
-      },
-    ],
+    unknowns: <p>Slutt­fart i hvert av scenariene.</p>,
+    strategy: <p>Impuls-teoremet: <InlineLatex latex="v_2=v_1+F\Delta t/m" />.</p>,
+    hints: [{ label: "Hint", content: <p>Negativ kraft (mot venstre) gir negativt bidrag til v.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Siden kraften er konstant innenfor hver fase, kan vi
-          dele integralet <InlineLatex latex="J=\int F\,dt" /> opp i to stykker. Impulser
-          fra flere delintervaller summeres som <em>vektorer</em>. Impuls-bevegelsesmengdeteoremet:
-        </p>
-        <FormulaBox latex="J_\text{tot} = \sum_i F_i \Delta t_i = \Delta p = m(v_2 - v_1)" variant="blue" />
-        <p>
-          Omformer for sluttfarten:
-        </p>
-        <FormulaBox latex="v_2 = v_1 + \dfrac{J_\text{tot}}{m}" variant="blue" />
-        <p>
-          Begge kreftene peker langs −x, så vi beholder de negative fortegnene:
-        </p>
-        <FormulaBox latex="J_\text{tot} = F_1\Delta t_1 + F_2\Delta t_2 = (-25{,}0)(0{,}050) + (-12{,}0)(0{,}050) = -1{,}85\ \text{N\cdot s}" variant="blue" />
-        <FormulaBox latex="v_2 = 3{,}00 + \dfrac{-1{,}85}{0{,}160} = 3{,}00 - 11{,}5625 = -8{,}56\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_2 \approx -8{,}56\ \text{m/s (motsatt retning)}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Totalimpulsen er negativ og stor nok til ikke
-          bare å stoppe pucken men også sende den andre veien. Det negative fortegnet
-          på svaret bekrefter at pucken nå beveger seg mot −x.
+      <div>
+        <Step n={1} title="(a) 25 N mot høyre">
+          <FormulaBox latex="v_2=v_0+\dfrac{F\Delta t}{m}=3{,}00+\dfrac{(25{,}0)(0{,}050)}{0{,}160}" />
+          <FormulaBox latex="v_2=3{,}00+7{,}81=10{,}8\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_2\approx +10{,}8\;\text{m/s (mot høyre)}" />
+        </Step>
+        <Step n={2} title="(b) 12 N mot venstre">
+          <FormulaBox latex="v_2=3{,}00+\dfrac{(-12{,}0)(0{,}050)}{0{,}160}=3{,}00-3{,}75" />
+          <FormulaBox variant="gold" latex="v_2\approx -0{,}75\;\text{m/s (mot venstre)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          I (b) reverseres puckens retning fordi impulsen er stor nok til å først stoppe pucken og deretter sende den motsatt vei.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Impuls er enkel å summere — den er rett og slett «krafttid». Når en kraft
-        virker mot bevegelsen lenge nok, snur legemet retning.
-      </p>
-    ),
+    summary: <p>Konstant kraft × tid = impuls. Tegnet bestemmer om farten øker, minsker eller snur.</p>,
   },
 
   // ==========================================================================
-  // 8.10 — Slag på baseball, lineær kraftprofil
+  // 8.10 — Slagtre treffer ball med vinkel
   // ==========================================================================
   "8.10": {
-    title: "Trekantprofil av kraft: baseball mot batten",
-    difficulty: "middels",
-    pageRef: "s. 283",
+    title: "Slagtre treffer ball — komponenter av kraft",
+    difficulty: "vanskelig",
+    pageRef: "s. 291",
     problem: (
-      <p>
-        Et slag på en 0,145{"\u00A0"}kg baseball lager en kraftprofil som øker lineært
-        fra 0 til <InlineLatex latex="F_\text{maks}=5{,}00\times 10^{3}\ \text{N}" /> over
-        1,00{"\u00A0"}ms og deretter synker lineært tilbake til null over 1,00{"\u00A0"}ms.
-        Hvor stor sluttfart får ballen hvis den startet i ro?
-      </p>
+      <div className="space-y-2">
+        <p>
+          Et slag­tre treffer en 0,145 kg baseball som reiser horisontalt mot høyre i 40,0 m/s.
+          Etter slaget går ballen med 52,0 m/s ved 45° over horisontal­planet (og fortsatt fremover).
+          Kontakt­tiden er 1,75 ms. Finn de horisontale og vertikale komponentene av den
+          gjennomsnittlige kraften som slagtreet utøvet på ballen.
+        </p>
+        <svg viewBox="0 0 320 180" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          {/* baseball før — kommer fra høyre, mot venstre */}
+          <line x1="280" y1="120" x2="180" y2="120" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
+          <text x="220" y="135" fontSize="10" fill="#3b82f6">før: 40 m/s ←</text>
+          {/* slagtre */}
+          <rect x="140" y="80" width="20" height="60" fill="#92400e" />
+          <text x="140" y="160" fontSize="10" fill="#92400e">bat</text>
+          {/* baseball etter — i 45° opp over (motsatt retning) */}
+          <line x1="150" y1="120" x2="240" y2="40" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="180" y="50" fontSize="10" fill="#ef4444">etter: 52 m/s, 45°</text>
+        </svg>
+      </div>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=0{,}145\ \text{kg}" /></li>
-        <li>Trekantprofil: base 2,00{"\u00A0"}ms, topp 5000{"\u00A0"}N</li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}145\;\text{kg}" /></li>
+        <li>Før: 40,0 m/s i +x; etter: 52,0 m/s ved 45° over −x</li>
+        <li><InlineLatex latex="\Delta t=1{,}75\times 10^{-3}\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Sluttfart <InlineLatex latex="v_2" /> (start i ro).</p>,
+    unknowns: <p>Komponentene <InlineLatex latex="F_x" /> og <InlineLatex latex="F_y" /> av middel­kraften.</p>,
     strategy: (
-      <p>
-        Impuls er arealet under <InlineLatex latex="F(t)" />-grafen. For trekant
-        er arealet <InlineLatex latex="\tfrac12\cdot\text{base}\cdot\text{høyde}" />.
-      </p>
+      <TheoryBox title="Vektor­impuls — komponentvis">
+        <p>
+          Velg +x i ballens opprinnelige retning. Da er <InlineLatex latex="v_{1x}=+40{,}0,\;v_{1y}=0" />.
+          Etter slaget går ballen motsatt vei og oppover: <InlineLatex latex="v_{2x}=-52{,}0\cos 45°,\;v_{2y}=+52{,}0\sin 45°" />.
+        </p>
+      </TheoryBox>
     ),
     hints: [
-      {
-        label: "Hint",
-        content: <p>Impuls = areal under grafen. Trekant: halv base ganger høyde.</p>,
-      },
+      { label: "Hint 1", content: <p>«Etter»-vektoren har <em>negativ</em> x-komponent (ball går tilbake mot pitcher).</p> },
+      { label: "Hint 2", content: <p><InlineLatex latex="F_{gj,x}=m\Delta v_x/\Delta t,\;F_{gj,y}=m\Delta v_y/\Delta t" />.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Når kraften varierer i tid er impulsen selve
-          tidsintegralet: <InlineLatex latex="J=\int F(t)\,dt" />. Geometrisk tilsvarer
-          integralet <em>arealet under</em> <InlineLatex latex="F(t)" />-grafen. For enkle
-          former (rektangel, trekant, trapes) kan vi unngå integrasjon og bruke
-          formelen for arealet direkte. Originalformlene er:
-        </p>
-        <FormulaBox latex="\vec J = \int_{t_1}^{t_2}\vec F\,dt = \Delta\vec p = m\vec v_2 - m\vec v_1" variant="blue" />
-        <p>
-          <strong>Hvorfor denne formelen?</strong> Vi bruker impuls-momentum-teoremet fordi
-          kraften er <em>tidsvarierende</em>, ikke konstant. Alternativt kunne vi tenke
-          gjennomsnittskraft <InlineLatex latex="F_\text{gj}" /> og bruke
-          <InlineLatex latex="J=F_\text{gj}\Delta t" />, men det krever at vi først finner
-          <InlineLatex latex="F_\text{gj}" />. Arealformelen er raskere.
-        </p>
-        <p>
-          <strong>Geometri:</strong> To trekanter som møtes på toppen former én stor trekant
-          med base <InlineLatex latex="\Delta t_\text{tot}=2{,}00\ \text{ms}" /> og høyde
-          <InlineLatex latex="F_\text{maks}=5000\ \text{N}" />. Areal av trekant:
-          <InlineLatex latex="A=\tfrac12\,\text{base}\cdot\text{høyde}" />.
-        </p>
-        <FormulaBox latex="J = \tfrac{1}{2}\cdot\Delta t_\text{tot}\cdot F_\text{maks} = \tfrac{1}{2}(2{,}00\times 10^{-3})(5{,}00\times 10^{3}) = 5{,}00\ \text{N\cdot s}" variant="blue" />
-        <p>
-          Siden ballen starter i ro (<InlineLatex latex="v_1=0" />), gir impuls-teoremet
-          <InlineLatex latex="J=mv_2" /> som omformes til
-          <InlineLatex latex="v_2=J/m" />:
-        </p>
-        <FormulaBox latex="v_2 = \frac{J}{m} = \frac{5{,}00}{0{,}145} = 34{,}5\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_2 \approx 34{,}5\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Enhetssjekk:</strong>
-          <InlineLatex latex="[J]/[m] = \text{N\cdot s}/\text{kg} = \text{kg\cdot m/s^2\cdot s}/\text{kg} = \text{m/s}" />.
-          Stemmer.
-        </p>
-        <p>
-          <strong>Fysisk tolkning:</strong> 34,5 m/s (~124 km/t) er en realistisk fart
-          for en baseball etter et godt slag. Merk at <em>gjennomsnittskraften</em> i denne
-          trekantprofilen er <InlineLatex latex="F_\text{gj}=F_\text{maks}/2=2500\ \text{N}" />
-          — toppkraften er dobbelt så stor som gjennomsnittet for en symmetrisk trekant.
+      <div>
+        <Step n={1} title="Komponenter etter slaget">
+          <FormulaBox latex="v_{2x}=-52{,}0\cos 45°=-36{,}77\;\text{m/s}" />
+          <FormulaBox latex="v_{2y}=+52{,}0\sin 45°=+36{,}77\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="Endringer">
+          <FormulaBox latex="\Delta v_x=v_{2x}-v_{1x}=-36{,}77-40{,}0=-76{,}77\;\text{m/s}" />
+          <FormulaBox latex="\Delta v_y=v_{2y}-v_{1y}=+36{,}77-0=+36{,}77\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="Komponenter av middel­kraft">
+          <FormulaBox latex="F_x=\dfrac{m\Delta v_x}{\Delta t}=\dfrac{(0{,}145)(-76{,}77)}{1{,}75\times 10^{-3}}=-6{,}36\times 10^{3}\;\text{N}" />
+          <FormulaBox latex="F_y=\dfrac{m\Delta v_y}{\Delta t}=\dfrac{(0{,}145)(36{,}77)}{1{,}75\times 10^{-3}}=+3{,}05\times 10^{3}\;\text{N}" />
+          <FormulaBox variant="gold" latex="F_x\approx -6{,}36\,\text{kN (mot pitcher)},\;F_y\approx +3{,}05\,\text{kN (oppover)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Total kraft: <InlineLatex latex="|F|=\sqrt{F_x^2+F_y^2}\approx 7{,}05\times 10^{3}" /> N. Vinkel:
+          <InlineLatex latex="\arctan(F_y/|F_x|)\approx 25{,}6°" /> over horisontal — slagtreet skyver ballen oppover-bakover.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        For <em>ikke-konstante</em> krefter: impuls = areal under <InlineLatex latex="F(t)" />.
-        Kjente geometriske former som trekanter og trapeser gjør dette enkelt.
-      </p>
-    ),
+    summary: <p>2D impuls-problemer: jobb komponentvis, husk fortegn på «etter»-komponentene.</p>,
   },
 
   // ==========================================================================
-  // 8.11 — Rakettmotor med F = k·t²
+  // 8.11 — Rakett med F = At²
   // ==========================================================================
   "8.11": {
-    title: "Rakett med tidsavhengig trykk",
+    title: "Rakettmotor med F = At²",
     difficulty: "vanskelig",
-    pageRef: "s. 283",
+    pageRef: "s. 292",
     problem: (
       <p>
-        En 2{"\u00A0"}500{"\u00A0"}kg rakett på testramma påvirkes av en kraft
-        <InlineLatex latex="F(t)=A+Bt^2" /> der
-        <InlineLatex latex="A=1{,}50\times 10^{5}\ \text{N}" />,
-        <InlineLatex latex="B=2{,}00\times 10^{3}\ \text{N/s}^2" />. Kraften virker i 2,00{"\u00A0"}s.
-        Finn impuls (a) fra 0 til 1,00{"\u00A0"}s og (b) fra 0 til 2,00{"\u00A0"}s.
+        Ved <InlineLatex latex="t=0" /> tenner en 2150 kg rakett i tomrommet en motor som virker i +x-retning
+        og hvor kraften øker med tid: <InlineLatex latex="F_x=At^2" />, og kraften har størrelsen
+        781,25 N ved <InlineLatex latex="t=1{,}25\;\text{s}" />. (a) Finn SI-verdien av A. (b) Finn impulsen
+        som motoren leverer i intervallet 1,50 s etter <InlineLatex latex="t=2{,}00\;\text{s}" />, dvs.
+        fra t = 2,00 s til t = 3,50 s. (c) Finn farts­endringen i samme intervall.
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="F(t) = 1{,}50\times 10^{5} + 2{,}00\times 10^{3}t^2" /> N</li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=2150\;\text{kg},\;F_x(t)=At^2,\;F_x(1{,}25)=781{,}25\;\text{N}" /></li>
       </ul>
     ),
-    unknowns: <p>Impuls <InlineLatex latex="J=\int F\,dt" /> for to ulike tidsintervaller.</p>,
-    strategy: (
-      <p>
-        Integrer kraften over tiden: <InlineLatex latex="J=\int_0^{t} (A+Bt'^2)\,dt' = At + \tfrac{B}{3}t^3" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Anti-derivasjon: <InlineLatex latex="\int t^2\,dt = \tfrac{1}{3}t^3" />.</p>,
-      },
-    ],
+    unknowns: <p>(a) A. (b) Impuls fra 2,00 til 3,50 s. (c) <InlineLatex latex="\Delta v" /> samme intervall.</p>,
+    strategy: <p>(a) Sett inn t=1,25 s og løs. (b) Integrer F dt. (c) <InlineLatex latex="\Delta v=J/m" />.</p>,
+    hints: [{ label: "Hint", content: <p><InlineLatex latex="\int t^2\,dt=t^3/3" />, så impuls = <InlineLatex latex="A(t_2^3-t_1^3)/3" />.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Kraften er en ren funksjon av tid, så impulsen er direkte
-          gitt ved integralet i impuls-definisjonen. Vi bruker ingen gjennomsnittskraft
-          eller arealtrick her — vi må integrere eksplisitt.
-        </p>
-        <FormulaBox latex="\vec J = \int_{t_1}^{t_2} \vec F(t)\,dt" variant="blue" />
-        <p>
-          <strong>Hvorfor integrere?</strong> Fordi <InlineLatex latex="F" /> ikke er
-          konstant, og grafen er heller ingen enkel trekant — det er en parabel pluss
-          en konstant. Da må vi bruke analytisk integrasjon.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Sett inn
-          <InlineLatex latex="F(t')=A+Bt'^2" /> og integrer ledd for ledd fra 0 til
-          <InlineLatex latex="t" />:
-        </p>
-        <FormulaBox latex="J(t) = \int_0^{t}(A+Bt'^2)\,dt' = \Bigl[At'+\tfrac{B}{3}t'^3\Bigr]_0^t = At + \tfrac{B}{3}t^3" variant="blue" />
-        <p className="font-semibold">(a) Impuls fra 0 til 1,00 s</p>
-        <p>Steg-for-steg innsetting med <InlineLatex latex="A=1{,}50\times 10^{5}\ \text{N}" /> og <InlineLatex latex="B=2{,}00\times 10^{3}\ \text{N/s}^2" />:</p>
-        <FormulaBox latex="J_1 = (1{,}50\times 10^{5})(1) + \tfrac{2{,}00\times 10^3}{3}(1)^3 = 1{,}50\times 10^{5} + 6{,}67\times 10^{2}" variant="blue" />
-        <FormulaBox latex="\boxed{J_1 \approx 1{,}51\times 10^{5}\ \text{N\cdot s}}" variant="gold" />
-        <p className="font-semibold">(b) Impuls fra 0 til 2,00 s</p>
-        <FormulaBox latex="J_2 = (1{,}50\times 10^{5})(2) + \tfrac{2{,}00\times 10^3}{3}(2)^3 = 3{,}00\times 10^{5} + \tfrac{2{,}00\times 10^3}{3}\cdot 8" variant="blue" />
-        <FormulaBox latex="J_2 = 3{,}00\times 10^{5} + 5{,}33\times 10^{3}" variant="blue" />
-        <FormulaBox latex="\boxed{J_2 \approx 3{,}05\times 10^{5}\ \text{N\cdot s}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Den konstante delen <InlineLatex latex="A" />
-          dominerer tidlig (6,67·10² vs 1,50·10⁵ ved <InlineLatex latex="t=1\ \text{s}" />).
-          Etter 2 s bidrar <InlineLatex latex="Bt^2" />-leddet med ~5300 N·s — fortsatt
-          mye mindre enn konstantdelen, men det vokser som <InlineLatex latex="t^3" />
-          i integralet og vil etter hvert dominere. Dette reflekterer at rakettmotorer
-          ofte har en gradvis oppbyggende trykkurve.
+      <div>
+        <Step n={1} title="(a) Finn A">
+          <FormulaBox latex="A=\dfrac{F_x}{t^2}=\dfrac{781{,}25}{(1{,}25)^2}=\dfrac{781{,}25}{1{,}5625}" />
+          <FormulaBox variant="gold" latex="A=500\;\text{N/s}^2" />
+        </Step>
+        <Step n={2} title="(b) Impuls fra 2,00 til 3,50 s">
+          <FormulaBox latex="J=\int_{2{,}00}^{3{,}50}At^2\,dt=\dfrac{A}{3}\bigl[t^3\bigr]_{2{,}00}^{3{,}50}" />
+          <FormulaBox latex="J=\dfrac{500}{3}\bigl[(3{,}50)^3-(2{,}00)^3\bigr]=\dfrac{500}{3}\bigl[42{,}875-8{,}000\bigr]" />
+          <FormulaBox latex="J=\dfrac{500}{3}\cdot 34{,}875=5812{,}5\;\text{N·s}" />
+          <FormulaBox variant="gold" latex="J\approx 5{,}81\times 10^{3}\;\text{N·s}" />
+        </Step>
+        <Step n={3} title="(c) Fartsendring">
+          <FormulaBox latex="\Delta v=\dfrac{J}{m}=\dfrac{5812{,}5}{2150}\approx 2{,}70\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="\Delta v\approx 2{,}70\;\text{m/s (i +x)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Tidsavhengig kraft krever integrasjon. Sjekk grenseverdiene nøye.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Impuls for variabel kraft er en integral: <InlineLatex latex="J=\int_{t_1}^{t_2}F\,dt" />.
-        Den konstante delen dominerer her; <InlineLatex latex="Bt^2" />-leddet bidrar mindre
-        i starten men vokser som <InlineLatex latex="t^3" />.
-      </p>
-    ),
+    summary: <p>For variabel kraft: integrer for å få impuls. Δv = J/m.</p>,
   },
 
   // ==========================================================================
@@ -688,1694 +523,1370 @@ export const exercises: Record<string, ExerciseContent> = {
   "8.16": {
     title: "Astronaut kaster verktøy",
     difficulty: "lett",
-    pageRef: "s. 283",
+    pageRef: "s. 292",
     problem: (
-      <div className="space-y-2">
-        <p>
-          En 68,5{"\u00A0"}kg astronaut er i ro i rommet. For å komme tilbake til stasjonen
-          kaster hun et 2,25{"\u00A0"}kg verktøy med 3,20{"\u00A0"}m/s i retning bort fra
-          stasjonen. Hvor fort beveger astronauten seg etterpå, og i hvilken retning?
-        </p>
-        <svg viewBox="0 0 320 100" className="w-full max-w-sm mx-auto block">
-          <Arrowheads />
-          <circle cx="170" cy="50" r="18" fill="#3b82f6" opacity="0.35" />
-          <text x="160" y="54" fontSize="10" fill="currentColor">astro</text>
-          <circle cx="250" cy="50" r="8" fill="#f59e0b" />
-          <line x1="250" y1="50" x2="300" y2="50" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrow-amber-k8)" />
-          <text x="250" y="40" fontSize="10" fill="#f59e0b">verktøy</text>
-          <line x1="160" y1="50" x2="110" y2="50" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
-          <text x="80" y="40" fontSize="10" fill="#3b82f6">astro ←</text>
-        </svg>
-      </div>
+      <p>
+        En 65,5 kg astronaut utfører reparasjoner i en romstasjon. Hun kaster et 2,50 kg verktøy
+        bort fra seg med fart 3,10 m/s relativt til romstasjonen. Med hvilken fart, og i hvilken
+        retning, beveger hun seg etterpå?
+      </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="M=68{,}5\ \text{kg}" />, <InlineLatex latex="m=2{,}25\ \text{kg}" /></li>
-        <li><InlineLatex latex="v_\text{verktøy}=+3{,}20\ \text{m/s}" /> (bort fra stasjonen)</li>
-        <li>Astronaut og verktøy starter i ro.</li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="M=65{,}5\;\text{kg},\;m=2{,}50\;\text{kg},\;v_\text{verktøy}=3{,}10\;\text{m/s}" /></li>
+        <li>Begge i ro før kastet (relativt stasjonen)</li>
       </ul>
     ),
-    unknowns: <p>Astronautens fart <InlineLatex latex="V" /> etter kastet.</p>,
-    strategy: (
-      <p>
-        Ingen ytre krefter ⇒ <em>bevegelsesmengde er bevart</em>. Total <InlineLatex latex="p_i=0" />,
-        så <InlineLatex latex="p_f=0" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="MV + mv = 0" /> ⇒ <InlineLatex latex="V = -\dfrac{m}{M}v" />.</p>,
-      },
-    ],
+    unknowns: <p>Astronautens fart V og retning.</p>,
+    strategy: <p>Ingen ytre horisontal kraft ⇒ bevegelses­mengde bevart fra null.</p>,
+    hints: [{ label: "Hint", content: <p><InlineLatex latex="MV+mv=0\Rightarrow V=-mv/M" />.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> I rommet er det ingen ytre horisontal kraft (ingen
-          friksjon, ingen tyngde relevant for horisontal akse), så systemet
-          astronaut+verktøy er et <em>isolert</em> system. Da er total bevegelsesmengde
-          bevart. Originalformelen er:
-        </p>
-        <FormulaBox latex="\vec p_i = \vec p_f \quad\text{når}\quad \sum\vec F_\text{ekst}=0" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum-bevaring og ikke energi-bevaring?</strong> Musklene i
-          armen gjør <em>arbeid</em> når hun kaster verktøyet — kjemisk energi blir til
-          kinetisk energi i både henne og verktøyet. Derfor kan vi <em>ikke</em> anta
-          <InlineLatex latex="K_i=K_f" />. Men massen er konstant i systemet og ingen ytre
-          kraft virker, så <InlineLatex latex="p" /> er bevart.
-        </p>
-        <p>
-          <strong>Fortegn:</strong> Velg positiv x-retning som «bort fra stasjonen» (samme
-          retning som kastet). Da er <InlineLatex latex="v_\text{verktøy}=+3{,}20\ \text{m/s}" />,
-          og vi forventer <InlineLatex latex="V<0" /> (astronauten drives mot stasjonen).
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Start med
-          <InlineLatex latex="p_i=0" /> (alt i ro) og <InlineLatex latex="p_f=MV+mv_\text{verktøy}" />.
-          Sett likhetstegn og løs for <InlineLatex latex="V" />:
-        </p>
-        <FormulaBox latex="0 = MV + m v_\text{verktøy} \;\Longrightarrow\; V = -\dfrac{m}{M}v_\text{verktøy}" variant="blue" />
-        <p>Steg-for-steg innsetting:</p>
-        <FormulaBox latex="V = -\dfrac{2{,}25}{68{,}5}\cdot 3{,}20 = -0{,}1051\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{|V|\approx 0{,}105\ \text{m/s mot stasjonen}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Dette er rakettprinsippet i miniatyr — kaster
-          du en bit fremover, får du et lite støt bakover. Siden astronauten er ~30 ganger
-          tyngre enn verktøyet, blir farten hennes ~30 ganger mindre. Samme fysikk som
-          gevær-rekyl (oppgave 8.30) og rakettmotorer.
+      <div>
+        <Step n={1} title="Momentum-bevaring fra ro">
+          <FormulaBox latex="0=MV+mv\Rightarrow V=-\dfrac{mv}{M}" />
+          <FormulaBox latex="V=-\dfrac{(2{,}50)(3{,}10)}{65{,}5}=-0{,}1183\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="|V|\approx 0{,}118\;\text{m/s, motsatt vei av verktøyet}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Massefor­holdet 2,50/65,5 ≈ 0,038 betyr at astronauten beveger seg ~26 ganger saktere enn verktøyet.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Raketprinsippet i miniatyr: Kaster du noe bort fra deg, får du et støt i
-        motsatt retning. Massefortoldningen <InlineLatex latex="m/M" /> bestemmer hvor fort.
-      </p>
-    ),
+    summary: <p>Rakettprinsippet: kaste m raskt frem ⇒ M får liten fart bakover.</p>,
   },
 
   // ==========================================================================
-  // 8.20 — Skøyteløper griper ball
+  // 8.20 — Catch-or-bounce på is
   // ==========================================================================
   "8.20": {
-    title: "Griping av ball på friksjonsfri is",
-    difficulty: "lett",
-    pageRef: "s. 284",
+    title: "Catch eller bounce — friksjons­fri is",
+    difficulty: "middels",
+    pageRef: "s. 292",
     problem: (
       <p>
-        En 70,0{"\u00A0"}kg skøyteløper står i ro på friksjonsfri is. Hun griper en
-        0,150{"\u00A0"}kg baseball som kommer mot henne i 22,0{"\u00A0"}m/s. Hvor raskt
-        beveger hun seg etter at hun har grepet ballen?
+        Du står på et lag is som dekker gårdsplassen, så du kan se vekk fra friksjon. En venn
+        kaster en 0,400 kg ball horisontalt mot deg med 10,0 m/s. Massen din er 70,0 kg. (a) Hvis
+        du griper ballen, hvor raskt beveger du og ballen seg etterpå? (b) Hvis ballen i stedet
+        treffer brystkassen din og spretter tilbake med 7,0 m/s i motsatt retning, hva er din fart?
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="M=70{,}0\ \text{kg}" /> (i ro), <InlineLatex latex="m=0{,}150\ \text{kg}" /> i 22 m/s</li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="M=70{,}0\;\text{kg},\;m=0{,}400\;\text{kg},\;v=10{,}0\;\text{m/s}" /></li>
+        <li>(b): ball spretter til <InlineLatex latex="-7{,}0\;\text{m/s}" /></li>
       </ul>
     ),
-    unknowns: <p>Fart <InlineLatex latex="V" /> etter.</p>,
-    strategy: (
-      <p>
-        Friksjonsfri is ⇒ bevegelsesmengde bevart. Etter gripet beveger de seg sammen
-        (helt uelastisk kollisjon).
-      </p>
-    ),
+    unknowns: <p>(a) felles fart etter griping. (b) din fart etter sprett.</p>,
+    strategy: <p>Momentum-bevaring i begge tilfeller. (a) er helt uelastisk; (b) er ikke helt uelastisk.</p>,
     hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="mv = (M+m)V" /></p>,
-      },
+      { label: "Hint 1", content: <p>(a): <InlineLatex latex="mv=(M+m)V" />.</p> },
+      { label: "Hint 2", content: <p>(b): <InlineLatex latex="mv=mv'+MV" /> med <InlineLatex latex="v'=-7{,}0" />.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Skøyteløperen griper og holder fast ballen — det er per
-          definisjon en <em>helt uelastisk kollisjon</em> (objektene sitter sammen etterpå
-          og beveger seg med felles fart). Friksjonsfri is betyr ingen ytre horisontal
-          kraft, så bevegelsesmengde er bevart. Originalformelen er:
-        </p>
-        <FormulaBox latex="p_i = p_f : \quad mv + MV_0 = (m+M)V" variant="blue" />
-        <p>
-          <strong>Hvorfor ikke energi-bevaring?</strong> I en helt uelastisk kollisjon går
-          mye av den kinetiske energien tapt (deformasjon, varme, lyd). Altså er <InlineLatex latex="K" />
-          <em>ikke</em> bevart. Men <InlineLatex latex="p" /> er alltid bevart i en isolert
-          kollisjon, uavhengig av om den er elastisk eller ikke.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Skøyteløperen starter i ro
-          (<InlineLatex latex="V_0=0" />), så <InlineLatex latex="p_i=mv" />. Etter
-          kollisjonen beveger <InlineLatex latex="(M+m)" /> seg sammen med farten
-          <InlineLatex latex="V" />. Løser for <InlineLatex latex="V" />:
-        </p>
-        <FormulaBox latex="V = \dfrac{mv}{M+m}" variant="blue" />
-        <p>Velg positiv x-retning i ballens startretning. Sett inn tall:</p>
-        <FormulaBox latex="V = \dfrac{mv}{M+m} = \dfrac{(0{,}150)(22{,}0)}{70{,}0+0{,}150} = \dfrac{3{,}30}{70{,}15}" variant="blue" />
-        <FormulaBox latex="\boxed{V \approx 0{,}0470\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Enhetssjekk:</strong>
-          <InlineLatex latex="\text{kg}\cdot\text{m/s}/\text{kg}=\text{m/s}" />. Stemmer.
-        </p>
-        <p>
-          <strong>Fysisk tolkning:</strong> Ballen er ~467 ganger lettere enn skøyteløperen,
-          så farten blir tilsvarende mindre. 4,7 cm/s er nesten ikke merkbar, men den er
-          der! Dette er samme logikk som astronaut-problemet (8.16), bare «invertert»: her
-          tar tyngre objekt opp momentum, ikke gir det fra seg.
+      <div>
+        <Step n={1} title="(a) Du griper ballen (uelastisk)">
+          <FormulaBox latex="V=\dfrac{mv}{M+m}=\dfrac{(0{,}400)(10{,}0)}{70{,}4}=0{,}0568\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="V\approx 0{,}0568\;\text{m/s i ballens retning}" />
+        </Step>
+        <Step n={2} title="(b) Ball spretter tilbake">
+          <FormulaBox latex="mv=mv'+MV\Rightarrow V=\dfrac{m(v-v')}{M}=\dfrac{(0{,}400)(10{,}0-(-7{,}0))}{70{,}0}" />
+          <FormulaBox latex="V=\dfrac{(0{,}400)(17{,}0)}{70{,}0}=0{,}0971\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="V\approx 0{,}0971\;\text{m/s i opprinnelig ballretning}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Du blir skjøvet ~70 % raskere når ballen spretter tilbake! Grunnen: total endring i ballens
+          momentum er større når den snur retning enn når den bare stopper i hånden din.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Helt uelastisk kollisjon: <InlineLatex latex="V=(mv)/(M+m)" />. Jo større
-        masseforhold, jo mindre endring i farten.
-      </p>
-    ),
+    summary: <p>Sprettende ball gir mer impuls enn fanget ball — derfor er kollisjons­elastisitet viktig.</p>,
   },
 
   // ==========================================================================
-  // 8.21 — Air hockey-pucker
+  // 8.21 — Air-table puck kollisjon (ikke uelastisk)
   // ==========================================================================
   "8.21": {
-    title: "Air hockey-pucker kolliderer og kleber",
+    title: "Pucker på luft­bord — finn fart før kollisjon",
     difficulty: "middels",
-    pageRef: "s. 284",
+    pageRef: "s. 292",
     problem: (
       <p>
-        På en air-hockey-bane kolliderer en 0,250{"\u00A0"}kg puck i 6,00{"\u00A0"}m/s
-        med en 0,350{"\u00A0"}kg puck i ro. De henger sammen etter støtet. Finn
-        sluttfart og brøkdelen av kinetisk energi som tapes.
+        På et friksjons­fritt luft­bord beveger en 0,245 kg puck seg mot en stilles­tående 0,360 kg
+        puck. Etter kollisjonen har 0,245 kg puck en fart 0,118 m/s mot venstre, og 0,360 kg puck
+        beveger seg 0,650 m/s mot høyre. (a) Hva var farten til 0,245 kg puck før kollisjonen?
+        (b) Beregn endringen i total kinetisk energi for systemet.
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_A=0{,}250\ \text{kg},\ v_A=6{,}00\ \text{m/s}" /></li>
-        <li><InlineLatex latex="m_B=0{,}350\ \text{kg},\ v_B=0" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_A=0{,}245\;\text{kg},\;m_B=0{,}360\;\text{kg}" /></li>
+        <li>Etter: <InlineLatex latex="v_{Af}=-0{,}118\;\text{m/s},\;v_{Bf}=+0{,}650\;\text{m/s}" /></li>
+        <li><InlineLatex latex="v_{Bi}=0" /></li>
       </ul>
     ),
-    unknowns: <p>Sluttfart <InlineLatex latex="V" /> og relativ tap i <InlineLatex latex="K" />.</p>,
-    strategy: (
-      <p>
-        Bevegelsesmengde bevart i uelastisk kollisjon. Tap i <InlineLatex latex="K" />
-        = <InlineLatex latex="1-K_f/K_i" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p><InlineLatex latex="V=\frac{m_Av_A}{m_A+m_B}" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>For uelastisk kollisjon fra ro: <InlineLatex latex="K_f/K_i=m_A/(m_A+m_B)" />.</p>,
-      },
-    ],
+    unknowns: <p>(a) <InlineLatex latex="v_{Ai}" />. (b) <InlineLatex latex="\Delta K" />.</p>,
+    strategy: <p>Bruk momentum-bevaring til å finne <InlineLatex latex="v_{Ai}" />. Så regn K før og etter.</p>,
+    hints: [{ label: "Hint", content: <p>Velg +x mot høyre. <InlineLatex latex="v_{Af}" /> blir negativ.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Air-hockey-banen er tilnærmet friksjonsfri, og pucksene
-          henger sammen etter støtet. Dette er en <em>helt uelastisk kollisjon</em>.
-          Bevegelsesmengde er bevart, men <em>kinetisk energi er ikke</em>: en del går
-          tapt til varme, lyd og deformasjon i klebingen. Originalformlene er:
-        </p>
-        <FormulaBox latex="p_i = p_f :\quad m_A v_A + m_B v_B = (m_A+m_B)V" variant="blue" />
-        <FormulaBox latex="K = \tfrac12 m v^2,\quad \Delta K/K_i = 1 - K_f/K_i" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum og ikke energi?</strong> Når pucksene kleber er
-          systemet deformerbart under støtet, og kinetisk energi går ikke i null men
-          reduseres. Vi bruker derfor bare bevaringsloven som faktisk gjelder
-          (momentum), og beregner <InlineLatex latex="K" /> før og etter separat.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Med B i ro (<InlineLatex latex="v_B=0" />)
-          forsvinner det leddet:
-        </p>
-        <FormulaBox latex="V = \dfrac{m_A v_A}{m_A+m_B}" variant="blue" />
-        <p className="font-semibold">(a) Sluttfart</p>
-        <FormulaBox latex="V = \dfrac{(0{,}250)(6{,}00)}{0{,}250+0{,}350} = \dfrac{1{,}50}{0{,}600} = 2{,}50\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{V = 2{,}50\ \text{m/s}}" variant="gold" />
-        <p className="font-semibold">(b) Andel tapt kinetisk energi</p>
-        <p>Regn ut <InlineLatex latex="K_i" /> og <InlineLatex latex="K_f" />:</p>
-        <FormulaBox latex="K_i = \tfrac12 m_A v_A^2 = \tfrac12(0{,}250)(6{,}00)^2 = 4{,}50\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(m_A+m_B)V^2 = \tfrac12(0{,}600)(2{,}50)^2 = 1{,}875\ \text{J}" variant="blue" />
-        <FormulaBox latex="\text{Tap:}\ 1 - \dfrac{K_f}{K_i} = 1 - \dfrac{1{,}875}{4{,}50} = 0{,}583" variant="blue" />
-        <FormulaBox latex="\boxed{\text{58{,}3\% av KE tapes}}" variant="gold" />
-        <p>
-          <strong>Generell sjekk:</strong> For helt uelastisk kollisjon med ett legeme i ro
-          gjelder <InlineLatex latex="K_f/K_i = m_A/(m_A+m_B)=0{,}250/0{,}600=0{,}417" />.
-          Altså 41,7% beholdes, 58,3% tapes — stemmer med regnestykket. Den tyngre blokken
-          «stjeler» energi.
+      <div>
+        <Step n={1} title="(a) Momentum-bevaring">
+          <FormulaBox latex="m_A v_{Ai}+0=m_A v_{Af}+m_B v_{Bf}" />
+          <FormulaBox latex="v_{Ai}=v_{Af}+\dfrac{m_B v_{Bf}}{m_A}=-0{,}118+\dfrac{(0{,}360)(0{,}650)}{0{,}245}" />
+          <FormulaBox latex="v_{Ai}=-0{,}118+0{,}955=0{,}837\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_{Ai}\approx 0{,}837\;\text{m/s mot høyre}" />
+        </Step>
+        <Step n={2} title="(b) Endring i kinetisk energi">
+          <FormulaBox latex="K_i=\tfrac12(0{,}245)(0{,}837)^2=0{,}0858\;\text{J}" />
+          <FormulaBox latex="K_f=\tfrac12(0{,}245)(0{,}118)^2+\tfrac12(0{,}360)(0{,}650)^2" />
+          <FormulaBox latex="K_f=0{,}00170+0{,}0761=0{,}0778\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta K=K_f-K_i=-0{,}00800\;\text{J (tap)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          ~9 % av KE gikk tapt — kollisjonen er nesten elastisk, men ikke helt.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        I en uelastisk kollisjon der ett legeme er i ro, blir brøkdelen
-        <InlineLatex latex="m_B/(m_A+m_B)" /> av kinetisk energi til varme/deformasjon.
-      </p>
-    ),
+    summary: <p>Selv kollisjoner som ikke kleber er sjelden helt elastiske. ΔK forteller hvor mye «sklerose» det er.</p>,
   },
 
   // ==========================================================================
-  // 8.24 — Fjær mellom to blokker
+  // 8.24 — Fjær mellom A og B (Fig E8.24)
   // ==========================================================================
   "8.24": {
-    title: "Fjærdrevet separasjon av to blokker",
+    title: "Fjær mellom blokk A og B (Fig E8.24)",
     difficulty: "middels",
-    pageRef: "s. 284",
-    problem: (
-      <p>
-        To blokker med masser <InlineLatex latex="m_A=1{,}00\ \text{kg}" /> og
-        <InlineLatex latex="m_B=3{,}00\ \text{kg}" /> er i ro på et friksjonsfritt bord
-        med en sammentrykt fjær mellom seg. Fjæra slippes og blokk A beveger seg med
-        fart 1,20{"\u00A0"}m/s mot venstre. Finn farten til blokk B.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_A = 1{,}00\ \text{kg},\ v_A = -1{,}20\ \text{m/s}" /></li>
-        <li><InlineLatex latex="m_B = 3{,}00\ \text{kg}" />, start i ro</li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="v_B" /> og energi lagret i fjæra.</p>,
-    strategy: (
-      <p>
-        Ingen ytre horisontal kraft ⇒ <InlineLatex latex="p_i = 0" />, så
-        <InlineLatex latex="p_f = 0" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="m_A v_A + m_B v_B = 0" /> ⇒ <InlineLatex latex="v_B = -m_A v_A/m_B" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Systemet starter i ro med en sammentrykt fjær. Når fjæra
-          slipper, gjør den <em>indre</em> arbeid på blokkene. Indre krefter kan ikke
-          endre total bevegelsesmengde — den er fortsatt null etter separasjonen.
-          Originalformelen er:
-        </p>
-        <FormulaBox latex="p_i = p_f : \quad 0 = m_A v_A + m_B v_B" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum-bevaring?</strong> Fordi det friksjonsfrie bordet ikke
-          gir horisontal ytre kraft. Fjæra er intern og gir bare motsatt rettede
-          krefter på A og B som (pga Newtons 3. lov) netto er null for systemet. Vi
-          kan IKKE bruke energi-bevaring uten å først kjenne <InlineLatex latex="U_\text{fjær}" />,
-          men momentum-bevaring gir oss <InlineLatex latex="v_B" /> direkte.
-        </p>
-        <p>
-          <strong>Fortegn:</strong> Velg positiv x mot høyre. Da er
-          <InlineLatex latex="v_A=-1{,}20\ \text{m/s}" /> (venstre er negativ retning).
-          Vi forventer <InlineLatex latex="v_B>0" /> siden B må gå motsatt vei.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Løs for <InlineLatex latex="v_B" />:
-        </p>
-        <FormulaBox latex="v_B = -\dfrac{m_A v_A}{m_B}" variant="blue" />
-        <p>Sett inn tall:</p>
-        <FormulaBox latex="v_B = -\dfrac{(1{,}00)(-1{,}20)}{3{,}00} = +0{,}400\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_B = 0{,}400\ \text{m/s mot høyre}}" variant="gold" />
-        <p>
-          <strong>Energi lagret i fjæra</strong> finner vi nå fra energi-bevaring: all
-          fjærenergien er blitt kinetisk energi i de to blokkene:
-        </p>
-        <FormulaBox latex="U_\text{fjær} = K_\text{tot} = \tfrac12 m_A v_A^2 + \tfrac12 m_B v_B^2" variant="blue" />
-        <FormulaBox latex="U_\text{fjær} = \tfrac12(1{,}00)(1{,}20)^2 + \tfrac12(3{,}00)(0{,}400)^2 = 0{,}720 + 0{,}240 = 0{,}960\ \text{J}" variant="blue" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Den lette blokken A får 3 ganger så høy fart
-          som B (siden <InlineLatex latex="v\propto 1/m" /> når <InlineLatex latex="p=0" />).
-          Den får også mesteparten av den kinetiske energien (0,720 J mot 0,240 J) —
-          typisk 3:1-forhold for masseforholdet 3:1. Dette er samme prinsipp som
-          gevær-rekyl.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        Momentum bevart fra ro: lette blokker må bevege seg raskere for å balansere.
-        Den lagrede fjærenergien overføres til kinetisk energi i begge blokkene.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.27 — Pil avfyrt fra ferjeapparat
-  // ==========================================================================
-  "8.27": {
-    title: "Skøyteløper kaster stein",
-    difficulty: "middels",
-    pageRef: "s. 284",
-    problem: (
-      <p>
-        En 65,0{"\u00A0"}kg skøyteløper beveger seg i 2,50{"\u00A0"}m/s over friksjonsfri is.
-        Hun kaster en 5,00{"\u00A0"}kg stein i samme retning med 10,0{"\u00A0"}m/s
-        relativt til bakken. Hva er hennes fart etterpå?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="M=65{,}0\ \text{kg},\ m=5{,}00\ \text{kg}" /></li>
-        <li>Før: begge med fart 2,50 m/s</li>
-        <li>Etter: stein 10,0 m/s i bakkeramme</li>
-      </ul>
-    ),
-    unknowns: <p>Skøyteløperens sluttfart <InlineLatex latex="V'" />.</p>,
-    strategy: (
-      <p>
-        Friksjonsfritt ⇒ <InlineLatex latex="p" /> bevart.
-        <InlineLatex latex="(M+m)v_0 = MV' + mv_\text{stein}'" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Før kastet beveger skøyter og stein seg sammen med 2,50 m/s.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Systemet (skøyteløper + stein) er isolert horisontalt —
-          isen er friksjonsfri, og kastet skjer så raskt at ytre krefter ikke rekker å
-          gi merkbar impuls. Total bevegelsesmengde er bevart. Originalformelen:
-        </p>
-        <FormulaBox latex="p_i = p_f : \quad (M+m)v_0 = MV' + mv_\text{stein}'" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum-bevaring?</strong> Muskelarbeidet under kastet er
-          internt for systemet — det overfører energi, men ikke total momentum.
-          Energi-bevaring holder ikke (kjemisk energi blir KE), men momentum-bevaring
-          gjelder.
-        </p>
-        <p>
-          <strong>Fortegn:</strong> Velg positiv x-retning i skøyteløperens opprinnelige
-          bevegelsesretning. Alle verdier er positive. Før kastet beveger skøyteløper
-          og stein seg sammen med fart <InlineLatex latex="v_0=2{,}50\ \text{m/s}" />.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> Løs for <InlineLatex latex="V'" />:
-        </p>
-        <FormulaBox latex="V' = \dfrac{(M+m)v_0 - mv_\text{stein}'}{M}" variant="blue" />
-        <p>Steg-for-steg innsetting:</p>
-        <FormulaBox latex="(70{,}0)(2{,}50) = (65{,}0)V' + (5{,}00)(10{,}0)" variant="blue" />
-        <FormulaBox latex="175 = 65{,}0\,V' + 50{,}0 \;\Longrightarrow\; V' = \dfrac{125}{65{,}0}" variant="blue" />
-        <FormulaBox latex="V' \approx 1{,}92\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{V' \approx 1{,}92\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Ved å kaste steinen forover (raskere enn
-          hun selv beveget seg), «sender hun momentum fremover». For å bevare total
-          <InlineLatex latex="p" /> må hun selv sakne ned, fra 2,50 til 1,92 m/s. Det
-          er samme prinsipp som raketter: motsatt retning på det som «kastes» gir
-          motsatt fortegn på endringen i egen fart.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        Ved å kaste steinen fremover saknar skøyteløperen ned. Hadde hun kastet
-        steinen bakover, ville hun ha aksellerert fremover.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.30 — Rifle og kule: rekyl
-  // ==========================================================================
-  "8.30": {
-    title: "Rekyl fra rifle",
-    difficulty: "lett",
-    pageRef: "s. 284",
-    problem: (
-      <p>
-        En 4,50{"\u00A0"}kg rifle avfyrer en 12,0{"\u00A0"}g kule med munningsfart
-        380{"\u00A0"}m/s. Hvor raskt rykker rifla bakover hvis den er fritt opphengt?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="M=4{,}50\ \text{kg},\ m=0{,}0120\ \text{kg},\ v=380\ \text{m/s}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Rekylfart <InlineLatex latex="V" />.</p>,
-    strategy: <p>Bevaring av bevegelsesmengde fra ro.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="MV + mv=0" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Rifla henger fritt og starter i ro sammen med kula.
-          Krutteksplosjonen er en <em>intern</em> kraftpåvirkning i systemet rifla+kule
-          og kan ikke endre total bevegelsesmengde. Ingen ytre horisontal kraft
-          virker (tyngdekraft er vertikal). Originalformelen:
-        </p>
-        <FormulaBox latex="p_i = p_f :\quad 0 = MV + mv" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum-bevaring?</strong> Krutteksplosjonen omdanner kjemisk
-          energi til kinetisk energi i både kula og rifla — <InlineLatex latex="K" /> er
-          ikke bevart (den <em>økte</em>!), men <InlineLatex latex="p" /> er bevart fordi
-          ingen ytre horisontal kraft virker.
-        </p>
-        <p>
-          <strong>Fortegn:</strong> Velg positiv x-retning i kulas bevegelsesretning. Da
-          er <InlineLatex latex="v=+380\ \text{m/s}" /> og vi forventer <InlineLatex latex="V<0" />
-          (rekyl bakover).
-        </p>
-        <p>
-          <strong>Algebraisk omforming:</strong>
-        </p>
-        <FormulaBox latex="V = -\dfrac{mv}{M}" variant="blue" />
-        <p>Steg-for-steg innsetting:</p>
-        <FormulaBox latex="V = -\dfrac{(0{,}0120)(380)}{4{,}50} = -\dfrac{4{,}56}{4{,}50} = -1{,}013\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{|V|\approx 1{,}01\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Selv om rifla er 375 ganger tyngre enn kula,
-          får den fortsatt 1 m/s rekyl. Dette er nok til å gi et merkbart støt i skyterens
-          skulder. Hadde rifla vært fast forankret i et massivt stativ, ville stativet
-          (og bakgrunnen) tatt opp impulsen og rekylen blitt ubetydelig. Samme fysikk
-          som astronaut-verktøy (8.16) og kanon-båt (8.65).
-        </p>
-      </div>
-    ),
-    summary: <p>Samme fysikk som astronaut-verktøy. Rekyl er direkte konsekvens av momentum-bevaring.</p>,
-  },
-
-  // ==========================================================================
-  // 8.33 — Jernbanevogner kolliderer (helt uelastisk)
-  // ==========================================================================
-  "8.33": {
-    title: "Togvogner kolliderer og kobler seg sammen",
-    difficulty: "middels",
-    pageRef: "s. 285",
-    problem: (
-      <p>
-        En 10{"\u00A0"}000{"\u00A0"}kg vogn triller i 24,0{"\u00A0"}m/s og støter sammen
-        med en 20{"\u00A0"}000{"\u00A0"}kg vogn i ro. De kobler seg automatisk.
-        Finn (a) sluttfart og (b) brøkdelen av kinetisk energi som omdannes til varme/deformasjon.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_A=10^4\ \text{kg},\ v_A=24{,}0\ \text{m/s}" /></li>
-        <li><InlineLatex latex="m_B=2\cdot 10^4\ \text{kg},\ v_B=0" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="V" /> og <InlineLatex latex="\Delta K/K_i" />.</p>,
-    strategy: <p>Helt uelastisk kollisjon: <InlineLatex latex="V=m_Av_A/(m_A+m_B)" />.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Brøkdelen bevart er <InlineLatex latex="m_A/(m_A+m_B)" />, brøkdelen tapt er <InlineLatex latex="m_B/(m_A+m_B)" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Automatiske koblinger klikker fast ved sammenstøt og
-          vognene beveger seg som ett legeme etterpå. Dette er en <em>helt uelastisk
-          kollisjon</em>. Bevegelsesmengde er bevart fordi friksjon fra skinnene er
-          ubetydelig under den korte støtperioden (impulsen fra friksjon er liten
-          i forhold til kollisjonsimpulsen). Originalformelen:
-        </p>
-        <FormulaBox latex="p_i = p_f :\quad m_A v_A + m_B v_B = (m_A+m_B)V" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum og ikke energi?</strong> Klikkmekanismen deformerer
-          materialet og genererer varme/lyd — KE er ikke bevart. Men ingen merkbar ytre
-          kraft virker på kort sikt, så p er bevart.
-        </p>
-        <p className="font-semibold">(a) Sluttfart</p>
-        <p>
-          Med <InlineLatex latex="v_B=0" /> forenkles likningen til
-          <InlineLatex latex="V=m_A v_A/(m_A+m_B)" />:
-        </p>
-        <FormulaBox latex="V = \dfrac{m_A v_A}{m_A+m_B} = \dfrac{(10^4)(24{,}0)}{10^4 + 2\cdot 10^4} = \dfrac{2{,}4\times 10^5}{3\times 10^4}" variant="blue" />
-        <FormulaBox latex="\boxed{V = 8{,}00\ \text{m/s}}" variant="gold" />
-        <p className="font-semibold">(b) Andel tapt kinetisk energi</p>
-        <p>Før og etter kollisjonen:</p>
-        <FormulaBox latex="K_i = \tfrac12 m_A v_A^2 = \tfrac12(10^4)(24)^2 = 2{,}88\times 10^{6}\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(m_A+m_B)V^2 = \tfrac12(3\cdot 10^4)(8)^2 = 9{,}60\times 10^{5}\ \text{J}" variant="blue" />
-        <FormulaBox latex="\Delta K/K_i = 1 - \dfrac{K_f}{K_i} = 1 - \dfrac{9{,}6\times 10^5}{2{,}88\times 10^6} = 0{,}667" variant="blue" />
-        <FormulaBox latex="\boxed{66{,}7\% \text{ av KE gått til varme}}" variant="gold" />
-        <p>
-          <strong>Generell regel:</strong> For helt uelastisk kollisjon med ett legeme
-          i ro: bevart andel KE = <InlineLatex latex="m_A/(m_A+m_B)=1/3" />. Tapt andel
-          = <InlineLatex latex="m_B/(m_A+m_B)=2/3=66{,}7\%" />. Stemmer.
-        </p>
-        <p>
-          <strong>Fysisk tolkning:</strong> Nesten 2/3 av energien (~1,9 MJ) omdannes til
-          varme, lyd og mekanisk deformasjon av koblingene. Dette er grunnen til at
-          togkoblinger er designet med støtdempere — ellers ville slitasjen blitt
-          enorm. Jo større masseforskjell, jo mer energi tapes i slike uelastiske støt.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        I helt uelastisk kollisjon med ett legeme i ro: tapt KE-andel
-        = <InlineLatex latex="m_B/(m_A+m_B)" />. Her <InlineLatex latex="2/3\approx 66{,}7\%" />.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.36 — Bil og lastebil
-  // ==========================================================================
-  "8.36": {
-    title: "Bil og lastebil kolliderer og kleber",
-    difficulty: "middels",
-    pageRef: "s. 285",
-    problem: (
-      <p>
-        En 1050{"\u00A0"}kg bil i 15,0{"\u00A0"}m/s nordover kolliderer bak en
-        6320{"\u00A0"}kg lastebil som kjører 10,0{"\u00A0"}m/s i samme retning. Kjøretøyene
-        setter seg fast. Finn sluttfart og energi som omdannes.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_b=1050,\ v_b=15{,}0" /></li>
-        <li><InlineLatex latex="m_l=6320,\ v_l=10{,}0" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="V" /> og tap i <InlineLatex latex="K" />.</p>,
-    strategy: <p>Helt uelastisk kollisjon.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="V = \dfrac{m_b v_b + m_l v_l}{m_b+m_l}" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Siden kjøretøyene setter seg fast er det en helt
-          uelastisk kollisjon. Bevegelsesmengde er bevart (friksjon fra asfalten gir
-          ubetydelig impuls i det korte støyøyeblikket). Begge beveger seg i samme
-          retning — velg positiv x nordover, så er begge farter positive.
-          Originalformelen:
-        </p>
-        <FormulaBox latex="m_b v_b + m_l v_l = (m_b + m_l)V" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum-bevaring?</strong> Kollisjonstiden er kort (~0,1 s), så
-          friksjonsimpuls <InlineLatex latex="\mu m g\Delta t" /> er ubetydelig i forhold
-          til den interne kollisjonsimpulsen. KE er ikke bevart — deformasjon og varme.
-        </p>
-        <p className="font-semibold">(a) Felles sluttfart</p>
-        <p>Løs algebraisk for <InlineLatex latex="V" />:</p>
-        <FormulaBox latex="V = \dfrac{m_b v_b + m_l v_l}{m_b + m_l}" variant="blue" />
-        <FormulaBox latex="V = \dfrac{(1050)(15{,}0) + (6320)(10{,}0)}{1050+6320} = \dfrac{15\,750 + 63\,200}{7370} = \dfrac{78\,950}{7370}" variant="blue" />
-        <FormulaBox latex="\boxed{V \approx 10{,}7\ \text{m/s nordover}}" variant="gold" />
-        <p className="font-semibold">(b) Energi tapt i kollisjonen</p>
-        <FormulaBox latex="K_i = \tfrac12 m_b v_b^2 + \tfrac12 m_l v_l^2" variant="blue" />
-        <FormulaBox latex="K_i = \tfrac12(1050)(15{,}0)^2 + \tfrac12(6320)(10{,}0)^2 = 1{,}18\times 10^5 + 3{,}16\times 10^5" variant="blue" />
-        <FormulaBox latex="K_i \approx 4{,}34\times 10^5\ \text{J}" variant="blue" />
-        <FormulaBox latex="K_f = \tfrac12(m_b+m_l)V^2 = \tfrac12(7370)(10{,}7)^2 \approx 4{,}22\times 10^5\ \text{J}" variant="blue" />
-        <FormulaBox latex="\Delta K = K_i - K_f \approx 1{,}2\times 10^4\ \text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{\Delta K \approx 1{,}2\times 10^4\ \text{J gått til varme/skade}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Bare ~3% av KE tapes! Når objektene allerede
-          beveger seg i samme retning, er <em>relativ fart</em> lav
-          (<InlineLatex latex="15{,}0-10{,}0=5{,}0\ \text{m/s}" />) og kollisjonen er mild.
-          Sammenlign med 8.33 der 66,7% tapes fordi ene vognen står i ro. Generelt:
-          jo mindre relativ fart før støtet, jo mindre energi tapes i uelastiske kollisjoner.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        Når kjøretøyene allerede beveger seg i samme retning, blir tapet lite —
-        relativ fart før støtet var bare 5 m/s.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.37 — Ballistisk pendel (bullet in block)
-  // ==========================================================================
-  "8.37": {
-    title: "Kule skytes inn i treblokk — ballistisk pendel",
-    difficulty: "vanskelig",
-    pageRef: "s. 285",
+    pageRef: "s. 292",
     problem: (
       <div className="space-y-2">
         <p>
-          En 12,0{"\u00A0"}g kule avfyres horisontalt inn i en 3,00{"\u00A0"}kg treblokk som
-          henger i to lange snorer (ballistisk pendel). Kulen sitter fast i blokka og
-          systemet svinger opp 6,00{"\u00A0"}cm. Finn kulens opprinnelige fart.
+          Blokk A i Fig. E8.24 har masse 1,00 kg, og B 3,00 kg. Blokkene er presset mot hver sin
+          ende av en lett fjær S, slik at fjæra er sammen­presset. Systemet slippes deretter fra
+          ro på et friksjons­fritt, horisontalt bord. Den endelige farten til A er 1,10 m/s.
+          (a) Finn den endelige farten til blokk B. (b) Hvor mye potensiell energi var lagret i
+          den sammen­pressede fjæra?
         </p>
-        <svg viewBox="0 0 300 160" className="w-full max-w-sm mx-auto block">
+        <svg viewBox="0 0 320 120" className="w-full max-w-md mx-auto">
           <Arrowheads />
-          <line x1="30" y1="10" x2="30" y2="110" stroke="currentColor" strokeDasharray="3" />
-          <rect x="20" y="110" width="40" height="30" fill="#10b981" opacity="0.4" stroke="#10b981" />
-          <rect x="140" y="70" width="40" height="30" fill="#10b981" opacity="0.4" stroke="#10b981" />
-          <line x1="30" y1="10" x2="50" y2="125" stroke="currentColor" />
-          <line x1="30" y1="10" x2="160" y2="85" stroke="currentColor" />
-          <circle cx="0" cy="125" r="4" fill="#ef4444" />
-          <line x1="0" y1="125" x2="15" y2="125" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
-          <text x="180" y="55" fontSize="10" fill="currentColor">h = 6 cm</text>
+          {/* underlag */}
+          <line x1="20" y1="100" x2="300" y2="100" stroke="#6b7280" strokeWidth="1" />
+          {/* blokk A */}
+          <rect x="60" y="65" width="40" height="35" fill="#ef4444" />
+          <text x="73" y="88" fontSize="10" fill="white" fontWeight="bold">A</text>
+          {/* fjær */}
+          <path d="M 100 82 L 110 75 L 120 89 L 130 75 L 140 89 L 150 75 L 160 89 L 170 75 L 180 82" stroke="#92400e" strokeWidth="2" fill="none" />
+          <text x="125" y="65" fontSize="9" fill="#92400e">S</text>
+          {/* blokk B */}
+          <rect x="180" y="55" width="60" height="45" fill="#3b82f6" />
+          <text x="200" y="83" fontSize="10" fill="white" fontWeight="bold">B</text>
+          {/* hastighetspiler etter slipp */}
+          <line x1="55" y1="50" x2="20" y2="50" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="20" y="42" fontSize="9" fill="#ef4444">v_A</text>
+          <line x1="245" y1="50" x2="285" y2="50" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
+          <text x="270" y="42" fontSize="9" fill="#3b82f6">v_B</text>
         </svg>
       </div>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=0{,}0120\ \text{kg},\ M=3{,}00\ \text{kg}" /></li>
-        <li><InlineLatex latex="h=0{,}0600\ \text{m},\ g=9{,}80\ \text{m/s}^2" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_A=1{,}00\;\text{kg},\;m_B=3{,}00\;\text{kg}" /></li>
+        <li>Start fra ro, fjær sammen­presset</li>
+        <li>Slutt­fart A: <InlineLatex latex="v_A=1{,}10\;\text{m/s}" /></li>
+      </ul>
+    ),
+    unknowns: <p>(a) <InlineLatex latex="v_B" />. (b) Lagret <InlineLatex latex="U_\text{fjær}" />.</p>,
+    strategy: <p>Momentum bevart fra null (intern fjær­kraft, ingen ytre). Energi: hele fjær­energien blir KE.</p>,
+    hints: [
+      { label: "Hint 1", content: <p><InlineLatex latex="m_Av_A+m_Bv_B=0" /> (motsatt retning).</p> },
+      { label: "Hint 2", content: <p><InlineLatex latex="U_\text{fjær}=\tfrac12 m_Av_A^2+\tfrac12 m_Bv_B^2" />.</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="(a) Fart B fra momentum">
+          <p>Velg +x mot høyre. A går mot venstre, så <InlineLatex latex="v_A=-1{,}10\;\text{m/s}" />.</p>
+          <FormulaBox latex="0=m_Av_A+m_Bv_B\Rightarrow v_B=-\dfrac{m_Av_A}{m_B}=-\dfrac{(1{,}00)(-1{,}10)}{3{,}00}=+0{,}367\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_B=0{,}367\;\text{m/s mot høyre}" />
+        </Step>
+        <Step n={2} title="(b) Energi i fjæra = total KE etter">
+          <FormulaBox latex="U=\tfrac12(1{,}00)(1{,}10)^2+\tfrac12(3{,}00)(0{,}367)^2" />
+          <FormulaBox latex="U=0{,}605+0{,}202=0{,}807\;\text{J}" />
+          <FormulaBox variant="gold" latex="U_\text{fjær}\approx 0{,}807\;\text{J}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Lett blokk får mer KE: 0,605 J vs. 0,202 J. Det er konsistent med at <InlineLatex latex="K=p^2/(2m)" /> — for samme |p| får
+          lett blokk mer KE.
+        </p>
+      </div>
+    ),
+    summary: <p>Intern fjær­energi → 2 KE. Lett legeme får mest av den (men begge får like mye |p|).</p>,
+  },
+
+  // ==========================================================================
+  // 8.27 — Hockeyspillere kolliderer
+  // ==========================================================================
+  "8.27": {
+    title: "Hockey: forward møter forsvarer",
+    difficulty: "middels",
+    pageRef: "s. 292",
+    problem: (
+      <p>
+        En 70,0 kg ishockey­spiller (forward) skøyter nordover med 5,5 m/s. En 110 kg forsvarer
+        kommer mot ham fra nord med 4,0 m/s. Etter kollisjonen sitter spillerne sammen og beveger
+        seg som ett legeme. I hvilken retning og med hvilken fart beveger de seg etterpå?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_1=70{,}0\;\text{kg},\;v_1=+5{,}5\;\text{m/s (mot N)}" /></li>
+        <li><InlineLatex latex="m_2=110\;\text{kg},\;v_2=-4{,}0\;\text{m/s (mot S)}" /></li>
+      </ul>
+    ),
+    unknowns: <p>Felles fart V og retning.</p>,
+    strategy: <p>Helt uelastisk 1D-kollisjon: <InlineLatex latex="V=(m_1v_1+m_2v_2)/(m_1+m_2)" />.</p>,
+    hints: [{ label: "Hint", content: <p>Tegn fortegn — forsvareren går mot S (negativ).</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Felles fart">
+          <FormulaBox latex="V=\dfrac{(70{,}0)(+5{,}5)+(110)(-4{,}0)}{180}=\dfrac{385-440}{180}=\dfrac{-55}{180}" />
+          <FormulaBox variant="gold" latex="V\approx -0{,}306\;\text{m/s, dvs. 0,306 m/s mot SØR}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Forsvareren har større momentum (440 vs 385 kg·m/s), så den samlede klumpen driver i hans retning — sør.
+        </p>
+      </div>
+    ),
+    summary: <p>Ved frontkollisjon i 1D: tyngste momentum dikterer netto retning.</p>,
+  },
+
+  // ==========================================================================
+  // 8.30 — Asteroide­kollisjon (Fig E8.30)
+  // ==========================================================================
+  "8.30": {
+    title: "Asteroide­kollisjon (Fig E8.30)",
+    difficulty: "vanskelig",
+    pageRef: "s. 293",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          To asteroider med ulike masser kolliderer i rommet og kleber sammen. Asteroide A
+          (massen 1000 kg) beveger seg mot øst med 40,0 m/s. Asteroide B (massen 2000 kg)
+          beveger seg slik som vist i Fig. E8.30 — ved 30,0° nord for vest med 50,0 m/s.
+          Etter kollisjonen reiser den sammen­satte massen i en retning som vi skal finne.
+          Bestem størrelse og retning av sluttvelosit­eten.
+        </p>
+        <svg viewBox="0 0 340 200" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          {/* aksesett */}
+          <line x1="20" y1="120" x2="320" y2="120" stroke="#6b7280" strokeWidth="1" />
+          <line x1="170" y1="20" x2="170" y2="180" stroke="#6b7280" strokeWidth="1" />
+          <text x="322" y="118" fontSize="10" fill="#6b7280">Ø</text>
+          <text x="173" y="22" fontSize="10" fill="#6b7280">N</text>
+          <text x="13" y="118" fontSize="10" fill="#6b7280">V</text>
+          {/* A går mot øst */}
+          <circle cx="100" cy="120" r="8" fill="#ef4444" />
+          <text x="92" y="124" fontSize="9" fill="white" fontWeight="bold">A</text>
+          <line x1="108" y1="120" x2="155" y2="120" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="115" y="135" fontSize="9" fill="#ef4444">40 m/s</text>
+          {/* B går SØV — egentlig 30° N for V */}
+          <circle cx="230" cy="80" r="9" fill="#3b82f6" />
+          <text x="222" y="84" fontSize="9" fill="white" fontWeight="bold">B</text>
+          <line x1="222" y1="84" x2="170" y2="115" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
+          <text x="178" y="78" fontSize="9" fill="#3b82f6">50 m/s, 30° N for V</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>A: 1000 kg, +x (Ø), 40,0 m/s</li>
+        <li>B: 2000 kg, 30° N for V (= 180−30 = 150° fra +x), 50,0 m/s</li>
+      </ul>
+    ),
+    unknowns: <p>Sluttvelosit­et (størrelse + retning).</p>,
+    strategy: <p>Helt uelastisk 2D. Komponentvis momentum-bevaring.</p>,
+    hints: [{ label: "Hint", content: <p>B har <InlineLatex latex="v_{Bx}=-50\cos 30°,\;v_{By}=+50\sin 30°" />.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Komponenter">
+          <FormulaBox latex="p_x=m_A v_{Ax}+m_B v_{Bx}=(1000)(40)+(2000)(-50\cos 30°)" />
+          <FormulaBox latex="p_x=40\,000-86\,603=-46\,603\;\text{kg·m/s}" />
+          <FormulaBox latex="p_y=0+(2000)(50\sin 30°)=50\,000\;\text{kg·m/s}" />
+        </Step>
+        <Step n={2} title="Felles fart">
+          <FormulaBox latex="V_x=\dfrac{p_x}{M}=\dfrac{-46\,603}{3000}=-15{,}53\;\text{m/s}" />
+          <FormulaBox latex="V_y=\dfrac{p_y}{M}=\dfrac{50\,000}{3000}=16{,}67\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="Størrelse og retning">
+          <FormulaBox latex="V=\sqrt{V_x^2+V_y^2}=\sqrt{241+278}=\sqrt{519}\approx 22{,}8\;\text{m/s}" />
+          <FormulaBox latex="\theta=\arctan(V_y/|V_x|)=\arctan(16{,}67/15{,}53)\approx 47{,}0°" />
+          <FormulaBox variant="gold" latex="V\approx 22{,}8\;\text{m/s, } 47{,}0°\text{ N for V (NV-kvadrant)}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>2D inelastiske: regn p_x og p_y separat, så sett sammen vektor.</p>,
+  },
+
+  // ==========================================================================
+  // 8.33 — Stor fisk eter liten fisk
+  // ==========================================================================
+  "8.33": {
+    title: "Stor fisk gobbler liten fisk",
+    difficulty: "lett",
+    pageRef: "s. 293",
+    problem: (
+      <p>
+        En 16,0 kg fisk svømmer mot høyre med 1,10 m/s og spiser plutselig en 4,40 kg fisk som
+        var i ro. Anta vannet ikke utøver merkbar friksjon under spise­akten. (a) Finn farten til
+        den store fisken etterpå. (b) Hvor mye mekanisk energi gikk tapt under prosessen?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_A=16{,}0\;\text{kg},\;v_A=1{,}10\;\text{m/s},\;m_B=4{,}40\;\text{kg},\;v_B=0" /></li>
+      </ul>
+    ),
+    unknowns: <p>(a) Felles fart V. (b) ΔK.</p>,
+    strategy: <p>Helt uelastisk 1D.</p>,
+    hints: [{ label: "Hint", content: <p>Gnask­ing er per definisjon helt uelastisk.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="(a) Felles fart">
+          <FormulaBox latex="V=\dfrac{m_Av_A}{m_A+m_B}=\dfrac{(16{,}0)(1{,}10)}{20{,}4}=0{,}863\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="V\approx 0{,}863\;\text{m/s mot høyre}" />
+        </Step>
+        <Step n={2} title="(b) Energitap">
+          <FormulaBox latex="K_i=\tfrac12(16{,}0)(1{,}10)^2=9{,}68\;\text{J}" />
+          <FormulaBox latex="K_f=\tfrac12(20{,}4)(0{,}863)^2=7{,}60\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta K=K_i-K_f\approx 2{,}08\;\text{J tapt}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>For uelastisk kollisjon med ett legeme i ro: <InlineLatex latex="K_f/K_i=m_A/(m_A+m_B)" />.</p>,
+  },
+
+  // ==========================================================================
+  // 8.36 — Sportsbil/lastebil samme retning
+  // ==========================================================================
+  "8.36": {
+    title: "Sportsbil bak lastebil — uelastisk",
+    difficulty: "middels",
+    pageRef: "s. 293",
+    problem: (
+      <p>
+        En 1050 kg sportsbil i 13,0 m/s mot øst kolliderer med en 6320 kg lastebil i 11,0 m/s mot
+        øst. Kjøretøyene henger sammen etter støtet. (a) Hva er farten på det sammen­hengende
+        systemet rett etter kollisjonen? (b) Med hvilken fart må lastebilen ha kjørt for at sportsbilen
+        skulle ha stoppet helt opp i kollisjonen? (c) Sammenlign endringene i kinetisk energi for
+        situasjonene i (a) og (b). Hvilken er størst?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>Bil: <InlineLatex latex="m_1=1050,\;v_1=+13{,}0" /></li>
+        <li>Lastebil: <InlineLatex latex="m_2=6320,\;v_2=+11{,}0" /></li>
+      </ul>
+    ),
+    unknowns: <p>(a) V. (b) <InlineLatex latex="v_2" /> som gjør at <InlineLatex latex="v_{1f}=0" />? Egentlig V=0 for sportsbil ⇒ V=0. (c) Sammenlign ΔK.</p>,
+    strategy: <p>(a) Helt uelastisk. (b) Kollisjon der V=0 etter krever bestemt <InlineLatex latex="v_2" />. (c) Sammenlign K_i og K_f.</p>,
+    hints: [{ label: "Hint", content: <p>(b): hvis sportsbilen skal stoppe må samlet momentum etter være null (men da må også lastebilen stoppe siden de er sammenkoblet). Det krever at samlet p før er null: <InlineLatex latex="m_1v_1+m_2v_2=0" />.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="(a) Felles fart">
+          <FormulaBox latex="V=\dfrac{(1050)(13{,}0)+(6320)(11{,}0)}{7370}=\dfrac{13\,650+69\,520}{7370}=\dfrac{83\,170}{7370}" />
+          <FormulaBox variant="gold" latex="V\approx 11{,}3\;\text{m/s mot øst}" />
+        </Step>
+        <Step n={2} title="(b) Hvilken v₂ stopper sportsbilen?">
+          <p>For at felles V = 0 må <InlineLatex latex="m_1v_1+m_2v_2=0" />:</p>
+          <FormulaBox latex="v_2=-\dfrac{m_1v_1}{m_2}=-\dfrac{(1050)(13{,}0)}{6320}=-2{,}16\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_2\approx -2{,}16\;\text{m/s (mot vest, dvs. mot sportsbilen)}" />
+        </Step>
+        <Step n={3} title="(c) Sammenlign ΔK">
+          <p>(a):</p>
+          <FormulaBox latex="K_i=\tfrac12(1050)(13)^2+\tfrac12(6320)(11)^2=88\,725+382\,360=471\,085\;\text{J}" />
+          <FormulaBox latex="K_f=\tfrac12(7370)(11{,}3)^2=470\,556\;\text{J}" />
+          <FormulaBox latex="\Delta K_a\approx -0{,}5\;\text{kJ (lite, fordi farts­forskjell er kun 2 m/s)}" />
+          <p>(b):</p>
+          <FormulaBox latex="K_i=\tfrac12(1050)(13)^2+\tfrac12(6320)(2{,}16)^2=88\,725+14\,742=103\,467\;\text{J}" />
+          <FormulaBox latex="K_f=0,\;\Delta K_b\approx -103\,\text{kJ}" />
+          <FormulaBox variant="gold" latex="(b)\text{ taper langt mer KE}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Når begge kjørte i samme retning er den relative farten lav (2 m/s) og energi­tapet ubetydelig.
+          Når lastebilen kommer mot sportsbilen er relativ fart 15,2 m/s — alt går tapt.
+        </p>
+      </div>
+    ),
+    summary: <p>Energi­tap i uelastisk kollisjon ∝ kvadratet av relativ fart før støtet.</p>,
+  },
+
+  // ==========================================================================
+  // 8.37 — Slammy field tackle (defender N, forward E)
+  // ==========================================================================
+  "8.37": {
+    title: "Tackle på leir­plassen — vinkler i 2D",
+    difficulty: "vanskelig",
+    pageRef: "s. 293",
+    problem: (
+      <p>
+        På en gjørmete fotball­bane tackler en 90 kg forsvarer en 75 kg forward. Like før kollisjonen sklir
+        forsvareren med 8,8 m/s mot nord, og forwarden 7,2 m/s mot øst. Hva er hastigheten (størrelse + retning)
+        som de to spillerne beveger seg sammen med rett etter kollisjonen?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>Forsvarer: 90 kg, +y (N), 8,8 m/s</li>
+        <li>Forward: 75 kg, +x (Ø), 7,2 m/s</li>
+      </ul>
+    ),
+    unknowns: <p>Felles V (størrelse + retning).</p>,
+    strategy: <p>Helt uelastisk 2D.</p>,
+    hints: [{ label: "Hint", content: <p>Komponenter ortogonale ⇒ Pythagoras.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Komponenter">
+          <FormulaBox latex="V_x=\dfrac{(75)(7{,}2)}{165}=3{,}27\;\text{m/s}" />
+          <FormulaBox latex="V_y=\dfrac{(90)(8{,}8)}{165}=4{,}80\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="Størrelse og vinkel">
+          <FormulaBox latex="V=\sqrt{3{,}27^2+4{,}80^2}=\sqrt{10{,}69+23{,}04}=5{,}81\;\text{m/s}" />
+          <FormulaBox latex="\theta=\arctan(4{,}80/3{,}27)=55{,}7°\;\text{N for Ø}" />
+          <FormulaBox variant="gold" latex="V\approx 5{,}81\;\text{m/s, } 55{,}7°\text{ N for Ø}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Tyngre legeme dominerer komponenten i sin retning.</p>,
+  },
+
+  // ==========================================================================
+  // 8.41 — Trafikkulykke (Fig E8.41)
+  // ==========================================================================
+  "8.41": {
+    title: "Trafikk­ulykke i kryss (Fig E8.41)",
+    difficulty: "vanskelig",
+    pageRef: "s. 294",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          I et kryss kolliderer en 950 kg gul småbil som beveger seg mot øst med 16,0 m/s med en 1900 kg
+          rød pickup som beveger seg mot nord (Fig. E8.41). Etter kollisjonen sitter de to kjøretøyene
+          fast og glir med 16,0 m/s i en retning 24,0° øst for nord. Beregn farten til hvert kjøretøy
+          rett før kollisjonen. Hva slags effekt hadde kollisjonen på fysisk skade og menneskelig ulykke?
+        </p>
+        <svg viewBox="0 0 320 220" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          {/* Veg-kryss */}
+          <rect x="120" y="20" width="60" height="180" fill="#dee2e6" />
+          <rect x="20" y="100" width="280" height="40" fill="#dee2e6" />
+          {/* Gul bil mot øst */}
+          <rect x="40" y="115" width="40" height="20" fill="#fbbf24" />
+          <line x1="80" y1="125" x2="115" y2="125" stroke="#fbbf24" strokeWidth="2" markerEnd="url(#arrow-amber-k8)" />
+          <text x="40" y="155" fontSize="9" fill="#92400e">950 kg, Ø</text>
+          {/* Rød pickup mot nord */}
+          <rect x="135" y="170" width="30" height="40" fill="#ef4444" />
+          <line x1="150" y1="165" x2="150" y2="135" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="170" y="195" fontSize="9" fill="#7f1d1d">1900 kg, N</text>
+          {/* Etter: 16 m/s, 24° E for N */}
+          <line x1="150" y1="120" x2="190" y2="55" stroke="#10b981" strokeWidth="3" strokeDasharray="3 2" markerEnd="url(#arrow-green-k8)" />
+          <text x="195" y="50" fontSize="9" fill="#065f46">16,0 m/s, 24° Ø for N</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>Gul bil: 950 kg, +x (Ø), <InlineLatex latex="v_g=?" /></li>
+        <li>Pickup: 1900 kg, +y (N), <InlineLatex latex="v_p=?" /></li>
+        <li>Etter: 16,0 m/s, 24,0° Ø for N (24° fra +y mot +x)</li>
+      </ul>
+    ),
+    unknowns: <p>Farten <InlineLatex latex="v_g" /> og <InlineLatex latex="v_p" /> før kollisjonen.</p>,
+    strategy: <p>Bevart momentum komponentvis. Etter-vektoren har <InlineLatex latex="V_x=16\sin 24°,\;V_y=16\cos 24°" />.</p>,
+    hints: [{ label: "Hint", content: <p>Total masse 2850 kg. Sett opp ligning for x og y separat.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Slutt-komponenter">
+          <FormulaBox latex="V_x=16{,}0\sin 24°=6{,}51\;\text{m/s}" />
+          <FormulaBox latex="V_y=16{,}0\cos 24°=14{,}62\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="x-momentum: bare gul bil bidrar">
+          <FormulaBox latex="m_g v_g=(m_g+m_p)V_x" />
+          <FormulaBox latex="v_g=\dfrac{2850\cdot 6{,}51}{950}=19{,}5\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_g\approx 19{,}5\;\text{m/s mot Ø}" />
+        </Step>
+        <Step n={3} title="y-momentum: bare pickup bidrar">
+          <FormulaBox latex="v_p=\dfrac{2850\cdot 14{,}62}{1900}=21{,}9\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_p\approx 21{,}9\;\text{m/s mot N}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Begge over fartsgrenser i et byby-kryss — typisk politisak­analyse for å rekonstruere hvem som kjørte for fort.
+        </p>
+      </div>
+    ),
+    summary: <p>2D uelastiske: del komponenter — hvert kjøretøy bidrar bare til sin egen retning før støtet.</p>,
+  },
+
+  // ==========================================================================
+  // 8.42 — Kule i blokk + friksjon
+  // ==========================================================================
+  "8.42": {
+    title: "Kule embedded i blokk, blokk glir og stopper",
+    difficulty: "vanskelig",
+    pageRef: "s. 294",
+    problem: (
+      <p>
+        En 5,00 g kule skytes horisontalt inn i en 1,20 kg treblokk som hviler på et horisontalt
+        underlag. Friksjons­koeffisienten mellom blokk og underlag er 0,20. Kulen sitter fast i blokka,
+        og blokka sklir 0,310 m før den stopper. Finn kulens opprinnelige fart.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=5{,}00\times 10^{-3}\;\text{kg},\;M=1{,}20\;\text{kg}" /></li>
+        <li><InlineLatex latex="\mu_k=0{,}20,\;d=0{,}310\;\text{m}" /></li>
       </ul>
     ),
     unknowns: <p>Kulens opprinnelige fart <InlineLatex latex="v" />.</p>,
     strategy: (
-      <p>
-        <strong>To-trinns problem:</strong> (1) <em>Uelastisk kollisjon</em> —
-        bevegelsesmengde bevart. (2) <em>Fra etter kollisjon til topp</em> —
-        mekanisk energi bevart.
-      </p>
+      <TheoryBox title="To-trinns: kollisjon + friksjons-stopp">
+        <p>
+          Kollisjon: <InlineLatex latex="mv=(m+M)V" /> (uelastisk).
+          Etter kollisjon: friksjon stopper med <InlineLatex latex="V=\sqrt{2\mu_k g d}" />.
+        </p>
+      </TheoryBox>
     ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Kollisjon: <InlineLatex latex="mv = (m+M)V" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Sving: <InlineLatex latex="\tfrac12(m+M)V^2 = (m+M)gh \Rightarrow V=\sqrt{2gh}" />.</p>,
-      },
-      {
-        label: "Hint 3",
-        content: <p>Sett sammen: <InlineLatex latex="v = \dfrac{m+M}{m}\sqrt{2gh}" />.</p>,
-      },
-    ],
+    hints: [{ label: "Hint", content: <p>Først finn V fra friksjons­stopp, så v fra momentum.</p> }],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er den klassiske <em>ballistiske pendelen</em> —
-          et oppgavearketype som kombinerer to bevaringslover i to helt forskjellige
-          trinn. Det er avgjørende å skille de to trinnene og bruke riktig lov i hvert.
-        </p>
-        <p>
-          <strong>Trinn 1 — Kollisjon (varighet ms).</strong> Kula sitter fast i blokka
-          ⇒ helt uelastisk kollisjon. Bevegelsesmengde er bevart. KE er IKKE bevart
-          (mye går til varme og deformasjon i treet). Snoren er vertikal under støtet,
-          så den virker ikke horisontalt i kollisjonsøyeblikket.
-        </p>
-        <FormulaBox latex="mv = (m+M)V" variant="blue" />
-        <p>
-          <strong>Trinn 2 — Sving oppover.</strong> Etter at kula er fast i blokka, er
-          systemet en pendel. Ingen friksjon eller luftmotstand oppgitt ⇒ mekanisk
-          energi bevart fra bunnposisjon til topp:
-        </p>
-        <FormulaBox latex="\tfrac12(m+M)V^2 = (m+M)gh \;\Longrightarrow\; V=\sqrt{2gh}" variant="blue" />
-        <p>
-          <strong>Hvorfor kan vi IKKE bruke energi-bevaring gjennom hele?</strong> Fordi KE
-          ikke er bevart i selve kollisjonen — mye tapes til varme i treet. Å regne
-          <InlineLatex latex="\tfrac12 mv^2 = (m+M)gh" /> er en vanlig feil og gir grovt
-          feil svar. Vi MÅ bruke momentum i trinn 1 og energi i trinn 2.
-        </p>
-        <p>
-          <strong>Algebraisk sammenkobling.</strong> Fra trinn 2 finner vi
-          <InlineLatex latex="V" />, deretter fra trinn 1:
-        </p>
-        <FormulaBox latex="v = \dfrac{m+M}{m}V = \dfrac{m+M}{m}\sqrt{2gh}" variant="blue" />
-        <p>Steg-for-steg innsetting:</p>
-        <FormulaBox latex="V = \sqrt{2gh} = \sqrt{2\cdot 9{,}80\cdot 0{,}0600} = \sqrt{1{,}176} = 1{,}0844\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v = \dfrac{0{,}0120 + 3{,}00}{0{,}0120}\cdot 1{,}0844 = \dfrac{3{,}012}{0{,}0120}\cdot 1{,}0844" variant="blue" />
-        <FormulaBox latex="v = 251\cdot 1{,}0844 \approx 272\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v \approx 272\ \text{m/s}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> 272 m/s er en realistisk kulefart for
-          mellomstore rifler. Den enorme forsterkningsfaktoren <InlineLatex latex="(m+M)/m=251" />
-          kommer av at kula er 250 ganger lettere enn blokka — nesten hele kulans momentum
-          overføres til det tunge systemet.
-        </p>
-        <p>
-          <strong>Energi-sjekk:</strong> Opprinnelig KE
-          <InlineLatex latex="K_i = \tfrac12(0{,}0120)(272)^2 \approx 444\ \text{J}" />.
-          KE etter kollisjon <InlineLatex latex="K_f=\tfrac12(3{,}012)(1{,}08)^2\approx 1{,}77\ \text{J}" />.
-          Altså: over 99% av KE ble borte i trefet! Dette bekrefter at energibevaring
-          gjennom kollisjonen ville vært totalt feil.
-        </p>
+      <div>
+        <Step n={1} title="V fra friksjon">
+          <FormulaBox latex="V=\sqrt{2\mu_k g d}=\sqrt{2(0{,}20)(9{,}80)(0{,}310)}=\sqrt{1{,}2152}=1{,}102\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="Kulens opprinnelige fart">
+          <FormulaBox latex="v=\dfrac{(m+M)V}{m}=\dfrac{(1{,}205)(1{,}102)}{0{,}005}=\dfrac{1{,}328}{0{,}005}=265{,}7\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 266\;\text{m/s}" />
+        </Step>
       </div>
     ),
-    summary: (
-      <p>
-        Den ballistiske pendelen er <em>klassisk to-trinns</em>: først
-        momentum-bevaring (kollisjon), så energi-bevaring (sving). Aldri
-        bruk energibevaring gjennom kollisjonen selv — mye KE går tapt der.
-      </p>
-    ),
+    summary: <p>Klassisk to-trinns: momentum (kollisjon) + arbeid-energi (friksjon).</p>,
   },
 
   // ==========================================================================
-  // 8.41 — Puck-kollisjon på is i 2D
-  // ==========================================================================
-  "8.41": {
-    title: "2D-kollisjon: Puck A sender ballen i vinkel",
-    difficulty: "vanskelig",
-    pageRef: "s. 286",
-    problem: (
-      <div className="space-y-2">
-        <p>
-          Puck A (0,025{"\u00A0"}kg) beveger seg i 5,50{"\u00A0"}m/s langs +x og
-          kolliderer med puck B (0,050{"\u00A0"}kg) i ro. Etter kollisjonen går
-          A i 4,15{"\u00A0"}m/s i en vinkel 30° over x-aksen. Finn farten og
-          retningen til B.
-        </p>
-        <svg viewBox="0 0 320 180" className="w-full max-w-xs mx-auto block">
-          <Arrowheads />
-          <line x1="40" y1="120" x2="150" y2="120" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
-          <text x="60" y="135" fontSize="10" fill="#3b82f6">A før</text>
-          <line x1="160" y1="120" x2="230" y2="60" stroke="#3b82f6" strokeWidth="2" strokeDasharray="3" markerEnd="url(#arrow-blue-k8)" />
-          <text x="195" y="75" fontSize="10" fill="#3b82f6">A etter 30°</text>
-          <line x1="160" y1="120" x2="240" y2="170" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
-          <text x="195" y="175" fontSize="10" fill="#ef4444">B etter ?</text>
-        </svg>
-      </div>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_A=0{,}025,\ v_{Ai}=5{,}50" /> langs x</li>
-        <li><InlineLatex latex="m_B=0{,}050" />, i ro</li>
-        <li><InlineLatex latex="v_{Af}=4{,}15\ \text{m/s},\ \theta_A=+30^\circ" /></li>
-      </ul>
-    ),
-    unknowns: <p>Fart <InlineLatex latex="v_{Bf}" /> og vinkel <InlineLatex latex="\theta_B" /> for B.</p>,
-    strategy: (
-      <p>
-        Bevegelsesmengde er vektor — bevares i hver akse. Oppstill
-        ligninger for x og y separat.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Skriv ut <InlineLatex latex="p_x" />: <InlineLatex latex="m_Av_{Ai} = m_Av_{Af}\cos\theta_A + m_Bv_{Bf}\cos\theta_B" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Skriv ut <InlineLatex latex="p_y" />: <InlineLatex latex="0 = m_Av_{Af}\sin\theta_A + m_Bv_{Bf}\sin\theta_B" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Bevegelsesmengde er en <em>vektor</em>. I 2D betyr
-          bevaring at både x- og y-komponenten bevares separat. Friksjonsfri is ⇒ ingen
-          ytre horisontal kraft ⇒ total <InlineLatex latex="\vec p" /> bevart.
-          Originalformelen:
-        </p>
-        <FormulaBox latex="\vec p_i = \vec p_f :\quad m_A\vec v_{Ai} = m_A\vec v_{Af} + m_B\vec v_{Bf}" variant="blue" />
-        <p>
-          <strong>Hvorfor komponentbasert og ikke vektorgeometri?</strong> Fordi vi har
-          to ukjente (<InlineLatex latex="v_{Bf}" /> og <InlineLatex latex="\theta_B" />).
-          To likninger (x og y) gir to ukjente. Dette er standardmetoden for 2D-kollisjoner.
-          Vi oppgis ikke at kollisjonen er elastisk, så vi bruker kun p-bevaring.
-        </p>
-        <p>
-          <strong>Fortegn og koordinatsystem:</strong> +x langs A sin startretning, +y 90°
-          til venstre (oppover). A kommer inn langs +x, A går ut i +30° fra +x (over
-          x-aksen). Før støtet har B null fart og null momentum.
-        </p>
-        <p><strong>Algebraisk oppsett — x-komponent:</strong></p>
-        <FormulaBox latex="m_A v_{Ai} = m_A v_{Af}\cos\theta_A + m_B v_{Bx}" variant="blue" />
-        <FormulaBox latex="(0{,}025)(5{,}50) = (0{,}025)(4{,}15)\cos 30^\circ + (0{,}050)v_{Bx}" variant="blue" />
-        <FormulaBox latex="0{,}1375 = (0{,}1038)(0{,}8660) + 0{,}050\,v_{Bx}" variant="blue" />
-        <FormulaBox latex="0{,}1375 = 0{,}0898 + 0{,}050\,v_{Bx} \;\Longrightarrow\; v_{Bx} = \dfrac{0{,}0477}{0{,}050} = 0{,}954\ \text{m/s}" variant="blue" />
-        <p><strong>Algebraisk oppsett — y-komponent:</strong> Før støtet er
-        <InlineLatex latex="p_y=0" /> (A går rent langs x, B i ro):</p>
-        <FormulaBox latex="0 = m_A v_{Af}\sin\theta_A + m_B v_{By}" variant="blue" />
-        <FormulaBox latex="0 = (0{,}025)(4{,}15)\sin 30^\circ + (0{,}050)v_{By}" variant="blue" />
-        <FormulaBox latex="0 = 0{,}0519 + 0{,}050 v_{By} \;\Longrightarrow\; v_{By} = -1{,}038\ \text{m/s}" variant="blue" />
-        <p>
-          Det <em>negative</em> fortegnet viser at B må gå nedover (<InlineLatex latex="-y" />-retning)
-          for å kompensere for at A gikk oppover.
-        </p>
-        <p><strong>Sett sammen vektorkomponentene:</strong></p>
-        <FormulaBox latex="v_{Bf} = \sqrt{v_{Bx}^2 + v_{By}^2} = \sqrt{0{,}954^2 + 1{,}038^2} = \sqrt{0{,}910 + 1{,}077}" variant="blue" />
-        <FormulaBox latex="v_{Bf} = \sqrt{1{,}987} \approx 1{,}41\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\theta_B = \arctan\!\left(\dfrac{-1{,}038}{0{,}954}\right) \approx -47{,}4^\circ" variant="blue" />
-        <FormulaBox latex="\boxed{v_{Bf}\approx 1{,}41\ \text{m/s, } 47{,}4^\circ \text{ under x-aksen}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Siden B er dobbelt så tung som A og går ut i
-          skrå vinkel, er den noe langsommere enn A. Total y-momentum før og etter er null
-          — A går opp-høyre, B må gå ned-høyre. Kollisjonen er forresten ikke elastisk
-          (sjekk: <InlineLatex latex="K_i\approx 0{,}378" />, <InlineLatex latex="K_f\approx 0{,}215+0{,}050=0{,}265" /> J
-          — ~30% tapt).
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        I 2D-kollisjoner: <em>to ligninger, to ukjente</em> (fra x og y).
-        Total momentum i y var null før, så må være null etter — derfor går B
-        motsatt y-vei av A.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.42 — Biler krysser kryss i 2D
-  // ==========================================================================
-  "8.42": {
-    title: "To biler kolliderer i T-kryss",
-    difficulty: "vanskelig",
-    pageRef: "s. 286",
-    problem: (
-      <p>
-        En 1500{"\u00A0"}kg bil kjører 20,0{"\u00A0"}m/s østover. Den kolliderer med en
-        2500{"\u00A0"}kg pickup som kjører 15,0{"\u00A0"}m/s nordover. De vikler seg sammen.
-        Finn felles fart og retning etter kollisjonen.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_1=1500,\ \vec v_1 = 20{,}0\,\hat{x}" /></li>
-        <li><InlineLatex latex="m_2=2500,\ \vec v_2 = 15{,}0\,\hat{y}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Sluttvektor <InlineLatex latex="\vec V" />.</p>,
-    strategy: <p>Helt uelastisk 2D-kollisjon — sum momentum, del på total masse.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Komponentene blir <InlineLatex latex="V_x=m_1v_1/M_\text{tot}" /> og <InlineLatex latex="V_y=m_2v_2/M_\text{tot}" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Helt uelastisk 2D-kollisjon: kjøretøyene vikler seg sammen
-          og får felles sluttfart <InlineLatex latex="\vec V" />. Bevegelsesmengde er
-          bevart i BEGGE retninger (x og y separat). Friksjon fra asfalt gir ubetydelig
-          impuls i det korte støyøyeblikket. Originalformelen:
-        </p>
-        <FormulaBox latex="\vec p_i = \vec p_f :\quad m_1\vec v_1 + m_2\vec v_2 = (m_1+m_2)\vec V" variant="blue" />
-        <p>
-          <strong>Hvorfor momentum og ikke energi?</strong> Helt uelastisk kollisjon ⇒ mye
-          KE går til deformasjon og varme. Energi-bevaring gjelder ikke.
-        </p>
-        <p>
-          <strong>Koordinatsystem:</strong> +x østover, +y nordover. Da er
-          <InlineLatex latex="\vec v_1=(20{,}0, 0)" /> (bilen) og
-          <InlineLatex latex="\vec v_2=(0, 15{,}0)" /> (pickup). De to komponentene er
-          uavhengige — vi kan løse x og y separat.
-        </p>
-        <p>
-          <strong>Algebraisk omforming.</strong> For hver komponent:
-          <InlineLatex latex="V_k = (m_1 v_{1k}+m_2 v_{2k})/(m_1+m_2)" />.
-          Siden bilen bare har x-fart og pickupen bare y-fart:
-        </p>
-        <FormulaBox latex="V_x = \dfrac{m_1 v_1 + 0}{m_1+m_2} = \dfrac{1500\cdot 20{,}0}{4000} = 7{,}50\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="V_y = \dfrac{0 + m_2 v_2}{m_1+m_2} = \dfrac{2500\cdot 15{,}0}{4000} = 9{,}375\ \text{m/s}" variant="blue" />
-        <p><strong>Sett sammen vektoren:</strong></p>
-        <FormulaBox latex="V = \sqrt{V_x^2+V_y^2} = \sqrt{7{,}50^2+9{,}375^2} = \sqrt{56{,}25+87{,}89}" variant="blue" />
-        <FormulaBox latex="V = \sqrt{144{,}14}\approx 12{,}0\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\theta = \arctan\!\left(\dfrac{V_y}{V_x}\right) = \arctan\!\left(\dfrac{9{,}375}{7{,}50}\right)\approx 51{,}3^\circ \text{ nord for øst}" variant="blue" />
-        <FormulaBox latex="\boxed{V\approx 12{,}0\ \text{m/s, } 51{,}3^\circ \text{ N av Ø}}" variant="gold" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Pickupen er tyngre og gir størst bidrag til
-          sluttretningen (mer mot nord). Sluttvinkelen er derfor skjevt mot
-          pickupens retning — slik bruker politiet denne typen analyse til å finne
-          fart før kollisjon i trafikkulykker.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        Ortogonale innkomne momenta gir sluttretning som Pythagoras av komponentene.
-        Del alltid totalmomentet (vektor) på total masse.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.43 — Elastisk 2D-kollisjon (glancing)
+  // 8.43 — Ballistisk pendel
   // ==========================================================================
   "8.43": {
-    title: "Likevekts-glancing kollisjon (elastic)",
+    title: "Ballistisk pendel — full løsning",
     difficulty: "vanskelig",
-    pageRef: "s. 286",
+    pageRef: "s. 294",
     problem: (
       <p>
-        En 0,200{"\u00A0"}kg puck beveger seg med 2,00{"\u00A0"}m/s langs +x og kolliderer
-        elastisk med en identisk puck i ro. Etter elastisk kollisjon mellom like masser
-        går de i 90° fra hverandre. Hvis den innkommende går i 30° nord for x etterpå,
-        hvor går den andre?
+        En 12,0 g rifle­kule blir avfyrt med 380 m/s inn i en ballistisk pendel med masse 9,00 kg, som
+        henger fra en snor 70,0 cm lang. (a) Finn den vertikale høyden pendelen stiger. (b) Finn opprinnelig
+        kinetisk energi til kulen. (c) Finn kinetisk energi til kule + pendel umiddelbart etter at kulen er fast.
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li>Like masser, elastisk kollisjon, 2D</li>
-        <li>Start: A i 2,00 m/s +x, B i ro</li>
-        <li>Etter: A i +30°</li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}0120\;\text{kg},\;v=380\;\text{m/s},\;M=9{,}00\;\text{kg},\;L=0{,}700\;\text{m}" /></li>
       </ul>
     ),
-    unknowns: <p>B sin retning og begge fartene.</p>,
-    strategy: (
-      <p>
-        For like masser i elastisk 2D-kollisjon er <em>sluttvinklene 90° mellom</em>.
-        Bruk også momentum-bevaring.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Vinkler: <InlineLatex latex="\theta_A=+30^\circ" /> ⇒ <InlineLatex latex="\theta_B=-60^\circ" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Fart: <InlineLatex latex="v_A = v_i\cos 30^\circ" /> og <InlineLatex latex="v_B=v_i\sin 30^\circ" />.</p>,
-      },
-    ],
+    unknowns: <p>(a) h. (b) <InlineLatex latex="K_i" />. (c) <InlineLatex latex="K_f" /> rett etter kollisjon.</p>,
+    strategy: <p>Trinn 1: <InlineLatex latex="V=mv/(m+M)" />. Trinn 2: <InlineLatex latex="h=V^2/(2g)" />.</p>,
+    hints: [{ label: "Hint", content: <p>K_f er KE til (m+M) som beveger seg med felles V.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\theta_B = -60^\circ \text{ (90° fra A)}" variant="blue" />
-        <FormulaBox latex="v_{Af} = 2{,}00\cos 30^\circ = 1{,}732\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v_{Bf} = 2{,}00\sin 30^\circ = 1{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_A\approx 1{,}73\ \text{m/s ved }+30^\circ;\ v_B = 1{,}00\ \text{m/s ved }-60^\circ}" variant="gold" />
+      <div>
+        <Step n={1} title="V etter kollisjon">
+          <FormulaBox latex="V=\dfrac{(0{,}0120)(380)}{9{,}012}=0{,}506\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Høyde">
+          <FormulaBox latex="h=\dfrac{V^2}{2g}=\dfrac{(0{,}506)^2}{19{,}6}=0{,}01307\;\text{m}=1{,}31\;\text{cm}" />
+          <FormulaBox variant="gold" latex="h\approx 1{,}31\;\text{cm}" />
+        </Step>
+        <Step n={3} title="(b) Opprinnelig KE">
+          <FormulaBox latex="K_i=\tfrac12(0{,}0120)(380)^2=866\;\text{J}" />
+        </Step>
+        <Step n={4} title="(c) KE etter kollisjon">
+          <FormulaBox latex="K_f=\tfrac12(9{,}012)(0{,}506)^2=1{,}154\;\text{J}" />
+          <FormulaBox variant="gold" latex="K_i\approx 866\;\text{J},\;K_f\approx 1{,}15\;\text{J}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          99,87 % av KE gikk tapt i treet! Klassisk poeng: bruk momentum (ikke energi) i kollisjons­trinnet.
+        </p>
       </div>
     ),
-    summary: (
-      <p>
-        For like masser i elastisk 2D-kollisjon med ett legeme i ro: sluttvinkelen er
-        alltid <strong>90°</strong> mellom dem. Fartene følger <InlineLatex latex="\cos\theta" /> og <InlineLatex latex="\sin\theta" />.
-      </p>
-    ),
+    summary: <p>To-trinns: momentum + energi. Aldri sett <InlineLatex latex="\tfrac12 mv^2=(m+M)gh" /> direkte.</p>,
   },
 
   // ==========================================================================
-  // 8.46 — Elastisk 1D: ulike masser
+  // 8.46 — Elastisk: glider 0.160 mot glider 0.291 motsatt
   // ==========================================================================
   "8.46": {
-    title: "Elastisk 1D: kule treffer stillestående mål",
+    title: "Elastisk frontkollisjon — luftglidere",
     difficulty: "middels",
-    pageRef: "s. 287",
+    pageRef: "s. 295",
     problem: (
       <p>
-        En 0,150{"\u00A0"}kg kule beveger seg mot høyre i 0,80{"\u00A0"}m/s og kolliderer
-        elastisk med en 0,300{"\u00A0"}kg kule i ro. Finn fart og retning for begge
-        etter kollisjonen.
+        En 0,160 kg glider beveger seg mot høyre med 0,90 m/s på et friksjons­fritt luft­spor og kolliderer
+        elastisk og frontalt med en 0,291 kg glider som beveger seg mot venstre med 2,27 m/s. Finn slutt­fart
+        og retning til hver glider.
       </p>
     ),
     knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_A=0{,}150,\ v_A=0{,}80" /></li>
-        <li><InlineLatex latex="m_B=0{,}300,\ v_B=0" /></li>
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_A=0{,}160,\;v_{Ai}=+0{,}90;\;m_B=0{,}291,\;v_{Bi}=-2{,}27" /></li>
       </ul>
     ),
-    unknowns: <p><InlineLatex latex="v_{Af},\ v_{Bf}" />.</p>,
+    unknowns: <p><InlineLatex latex="v_{Af},\;v_{Bf}" />.</p>,
     strategy: (
-      <p>
-        Elastiske 1D-formler:
-        <InlineLatex latex="v_{Af}=\dfrac{m_A-m_B}{m_A+m_B}v_{Ai}" />,
-        <InlineLatex latex="v_{Bf}=\dfrac{2m_A}{m_A+m_B}v_{Ai}" />.
-      </p>
+      <TheoryBox title="Elastisk 1D-formler">
+        <p>
+          <InlineLatex latex="v_{Af}=\dfrac{m_A-m_B}{m_A+m_B}v_{Ai}+\dfrac{2m_B}{m_A+m_B}v_{Bi}" />,
+          tilsvarende for B med A og B byttet.
+        </p>
+      </TheoryBox>
     ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Lettere projektil mot tyngre mål: lettere vil sprette tilbake.</p>,
-      },
-    ],
+    hints: [{ label: "Hint", content: <p>Total masse 0,451 kg. Begge formler bruker den.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="v_{Af} = \dfrac{0{,}150-0{,}300}{0{,}450}(0{,}80) = -0{,}267\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v_{Bf} = \dfrac{0{,}300}{0{,}450}(0{,}80) = 0{,}533\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_A' \approx -0{,}267\ \text{m/s (spretter tilbake)}}" variant="gold" />
-        <FormulaBox latex="\boxed{v_B' \approx 0{,}533\ \text{m/s (fremover)}}" variant="gold" />
+      <div>
+        <Step n={1} title="Sett inn">
+          <FormulaBox latex="v_{Af}=\dfrac{0{,}160-0{,}291}{0{,}451}(0{,}90)+\dfrac{2(0{,}291)}{0{,}451}(-2{,}27)" />
+          <FormulaBox latex="v_{Af}=(-0{,}2905)(0{,}90)+(1{,}2904)(-2{,}27)=-0{,}2614-2{,}929=-3{,}19\;\text{m/s}" />
+          <FormulaBox latex="v_{Bf}=\dfrac{2(0{,}160)}{0{,}451}(0{,}90)+\dfrac{0{,}291-0{,}160}{0{,}451}(-2{,}27)" />
+          <FormulaBox latex="v_{Bf}=(0{,}7095)(0{,}90)+(0{,}2905)(-2{,}27)=0{,}6385-0{,}6594=-0{,}021\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_{Af}\approx -3{,}19\;\text{m/s},\;v_{Bf}\approx -0{,}021\;\text{m/s (begge mot V)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Den lette glideren får stort sett B's fart i bakkant. Den tunge er nesten i ro etter — typisk for elastisk når en lett treffer en tung som kommer mot.
+        </p>
       </div>
     ),
-    summary: (
-      <p>
-        For elastisk 1D-kollisjon mot stillestående mål: lett mot tungt ⇒ sprett
-        tilbake; tungt mot lett ⇒ tungt fortsetter nesten uforstyrret; like masser
-        ⇒ utbytte av farten.
-      </p>
-    ),
+    summary: <p>1D elastisk: bruk de to standard­formlene direkte. Sjekk alltid både p og K bevart.</p>,
   },
 
   // ==========================================================================
-  // 8.48 — Elastisk, like masser
+  // 8.48 — Marbles, elastisk (Fig E8.48)
   // ==========================================================================
   "8.48": {
-    title: "Elastisk kollisjon mellom like masser",
-    difficulty: "lett",
-    pageRef: "s. 287",
+    title: "Klinkekuler i frontal elastisk kollisjon (Fig E8.48)",
+    difficulty: "middels",
+    pageRef: "s. 295",
     problem: (
       <p>
-        To billardkuler har samme masse. Kule 1 beveger seg med 5,00{"\u00A0"}m/s mot
-        kule 2 som er i ro, og kolliderer elastisk. Hva er begge fartene etter?
+        En 10,0 g klinkekule glir mot venstre med 0,400 m/s på et iset fortau, og har frontal elastisk
+        kollisjon med en 30,0 g klinkekule som glir mot høyre med 0,200 m/s. (a) Finn fart og retning til
+        hver kule etterpå. (b) Hva er endringen i bevegelses­mengde for hver kule? (c) Hva er endringen i
+        kinetisk energi for hver kule og samlet?
       </p>
     ),
-    knowns: <p>Like masser, elastisk, én i ro.</p>,
-    unknowns: <p><InlineLatex latex="v_{1f},\ v_{2f}" />.</p>,
-    strategy: <p>Klassisk resultat: farten utveksles fullstendig.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="m_1=m_2" /> i de elastiske formlene gir <InlineLatex latex="v_{1f}=0,\ v_{2f}=v_{1i}" />.</p>,
-      },
-    ],
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m_A=0{,}010,\;v_{Ai}=-0{,}400;\;m_B=0{,}030,\;v_{Bi}=+0{,}200" /></li>
+      </ul>
+    ),
+    unknowns: <p>Slutt­fart, Δp, ΔK.</p>,
+    strategy: <p>Elastisk 1D-formler (A og B bytter rolle pga retningene).</p>,
+    hints: [{ label: "Hint", content: <p>Velg +x mot høyre fra start. Da er v_A negativ.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="v_{1f} = 0,\quad v_{2f} = 5{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_1' = 0,\ v_2' = 5{,}00\ \text{m/s}}" variant="gold" />
+      <div>
+        <Step n={1} title="(a) Slutt­fart">
+          <FormulaBox latex="v_{Af}=\dfrac{m_A-m_B}{0{,}040}v_{Ai}+\dfrac{2m_B}{0{,}040}v_{Bi}=(-0{,}5)(-0{,}4)+(1{,}5)(0{,}2)=0{,}2+0{,}3=0{,}500\;\text{m/s}" />
+          <FormulaBox latex="v_{Bf}=\dfrac{2m_A}{0{,}040}v_{Ai}+\dfrac{m_B-m_A}{0{,}040}v_{Bi}=(0{,}5)(-0{,}4)+(0{,}5)(0{,}2)=-0{,}2+0{,}1=-0{,}100\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_{Af}=+0{,}500\;\text{m/s (h),}\;v_{Bf}=-0{,}100\;\text{m/s (v)}" />
+        </Step>
+        <Step n={2} title="(b) Endring i p">
+          <FormulaBox latex="\Delta p_A=m_A(v_{Af}-v_{Ai})=0{,}010(0{,}500-(-0{,}400))=+9{,}00\times 10^{-3}\;\text{kg·m/s}" />
+          <FormulaBox latex="\Delta p_B=0{,}030(-0{,}100-0{,}200)=-9{,}00\times 10^{-3}\;\text{kg·m/s}" />
+          <p>Summen er null — som forventet (momentum bevart).</p>
+        </Step>
+        <Step n={3} title="(c) Endring i KE">
+          <FormulaBox latex="K_{iA}=\tfrac12(0{,}010)(0{,}4)^2=8{,}00\times 10^{-4}\;\text{J}" />
+          <FormulaBox latex="K_{fA}=\tfrac12(0{,}010)(0{,}5)^2=12{,}5\times 10^{-4}\;\text{J}" />
+          <FormulaBox latex="\Delta K_A=+4{,}5\times 10^{-4}\;\text{J}" />
+          <FormulaBox latex="K_{iB}=\tfrac12(0{,}030)(0{,}2)^2=6{,}00\times 10^{-4}\;\text{J}" />
+          <FormulaBox latex="K_{fB}=\tfrac12(0{,}030)(0{,}1)^2=1{,}50\times 10^{-4}\;\text{J}" />
+          <FormulaBox latex="\Delta K_B=-4{,}5\times 10^{-4}\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta K_\text{tot}=0\;\text{(elastisk!)}" />
+        </Step>
       </div>
     ),
-    summary: (
-      <p>
-        Like masser, elastisk, én i ro: den bevegelige stopper, målet overtar hele
-        farten. Kjernen i mange Newton-pendel-demoer.
-      </p>
-    ),
+    summary: <p>I elastisk kollisjon: Δp på hver er motsatt og lik. ΔK på enkelt­legemer kan være ulik null, men summen er null.</p>,
   },
 
   // ==========================================================================
-  // 8.52 — Massesenter for to masser
+  // 8.52 — Sun-Jupiter COM
   // ==========================================================================
   "8.52": {
-    title: "Massesenter for to masser",
+    title: "Massesenter for sol + Jupiter",
     difficulty: "lett",
-    pageRef: "s. 287",
+    pageRef: "s. 295",
     problem: (
       <p>
-        Finn massesenteret til et system av to kuler: 0,100{"\u00A0"}kg i
-        <InlineLatex latex="(0, 0)" /> og 0,300{"\u00A0"}kg i <InlineLatex latex="(0{,}500, 0)" /> (m).
+        Bestem posisjonen til massesenteret for systemet sol + Jupiter (siden Jupiter er mer massiv enn alle
+        andre planeter til sammen, er dette omtrent massesenteret for hele solsystemet). Ligger det innenfor
+        eller utenfor solens overflate? Bruk verdier fra bokens data­tabell:
+        <InlineLatex latex="\;M_\text{sol}=1{,}99\times 10^{30}\;\text{kg},\;M_J=1{,}90\times 10^{27}\;\text{kg},\;d_J=7{,}78\times 10^{11}\;\text{m},\;R_\text{sol}=6{,}96\times 10^{8}\;\text{m}" />.
       </p>
     ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_1=0{,}100,\ x_1=0" /></li>
-        <li><InlineLatex latex="m_2=0{,}300,\ x_2=0{,}500" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="x_\text{cm}" /></p>,
-    strategy: <p>Vekt gjennomsnitt: <InlineLatex latex="x_\text{cm}=\sum m_ix_i / \sum m_i" />.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Tyngre masse «trekker» COM mot seg.</p>,
-      },
-    ],
+    knowns: <p>Som angitt i tekst.</p>,
+    unknowns: <p>Avstand fra sol­senter til COM, og om den ligger inne/ute av solen.</p>,
+    strategy: <p><InlineLatex latex="x_\text{cm}=M_J d_J/(M_\text{sol}+M_J)" />.</p>,
+    hints: [{ label: "Hint", content: <p>Massefor­holdet <InlineLatex latex="M_J/(M_\text{sol}+M_J)" /> er liten.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="x_\text{cm} = \dfrac{0{,}100\cdot 0 + 0{,}300\cdot 0{,}500}{0{,}400}" variant="blue" />
-        <FormulaBox latex="\boxed{x_\text{cm} = 0{,}375\ \text{m}}" variant="gold" />
+      <div>
+        <Step n={1} title="Sett inn">
+          <FormulaBox latex="x_\text{cm}=\dfrac{M_J d_J}{M_\text{sol}+M_J}=\dfrac{(1{,}90\times 10^{27})(7{,}78\times 10^{11})}{1{,}99\times 10^{30}+1{,}90\times 10^{27}}" />
+          <FormulaBox latex="x_\text{cm}\approx \dfrac{1{,}478\times 10^{39}}{1{,}992\times 10^{30}}\approx 7{,}42\times 10^{8}\;\text{m}" />
+          <FormulaBox variant="gold" latex="x_\text{cm}\approx 7{,}42\times 10^{8}\;\text{m fra sol­senter}" />
+        </Step>
+        <Step n={2} title="Sammenlign med solens radius">
+          <p><InlineLatex latex="R_\text{sol}=6{,}96\times 10^{8}\;\text{m}" />. COM er <em>ca. 6,6 % utenfor</em> solens overflate.</p>
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Solen «vagger» faktisk litt rundt dette punktet — det er denne effekten man bruker for å oppdage exoplaneter.
+        </p>
       </div>
     ),
-    summary: <p>COM ligger nærmere den tyngre massen — i forhold til masseforholdet.</p>,
+    summary: <p>Vekt­gjennomsnitts­formel for COM. Sol+Jupiter: COM er like utenfor sol­overflaten.</p>,
   },
 
   // ==========================================================================
-  // 8.54 — COM 2D
+  // 8.54 — SUV/bil COM (Fig E8.54)
   // ==========================================================================
   "8.54": {
-    title: "Massesenter for tre punktmasser (2D)",
+    title: "Massesenter for SUV + bil (Fig E8.54)",
     difficulty: "middels",
-    pageRef: "s. 288",
+    pageRef: "s. 295",
     problem: (
       <p>
-        Finn <InlineLatex latex="(x_\text{cm}, y_\text{cm})" /> for tre masser:
-        0,30{"\u00A0"}kg i (0,0), 0,40{"\u00A0"}kg i (0,20; 0), 0,20{"\u00A0"}kg i
-        (0,10; 0,30) (alle i m).
+        En 1200 kg SUV beveger seg langs en horisontal vei med 12,0 m/s. En annen bil med masse 1800 kg
+        og fart 20,0 m/s har sitt massesenter 40,0 m foran SUVens massesenter. Bilene beveger seg i samme
+        retning. (a) Hvor er massesenteret for det samlede systemet, målt fra SUVens posisjon?
+        (b) Beregn størrelsen av total bevegelses­mengde direkte. (c) Beregn farten til
+        massesenteret. (d) Beregn total bevegelses­mengde via <InlineLatex latex="P=Mv_\text{cm}" /> og
+        sammenlign med (b).
       </p>
     ),
-    knowns: <p>tre masser, tre posisjoner (gitt).</p>,
-    unknowns: <p>COM-koordinater.</p>,
-    strategy: <p>Bruk formelen komponentvis.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="x_\text{cm}=\sum m_ix_i/M" />, <InlineLatex latex="y_\text{cm}=\sum m_iy_i/M" />.</p>,
-      },
-    ],
+    knowns: <p>Som tekst.</p>,
+    unknowns: <p>(a) <InlineLatex latex="x_\text{cm}" />. (b) P direkte. (c) <InlineLatex latex="v_\text{cm}" />. (d) P via M·v_cm.</p>,
+    strategy: <p>Definisjoner gjelder.</p>,
+    hints: [{ label: "Hint", content: <p>Velg SUV ved x=0; den andre bilen ved x=40 m.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="M = 0{,}30+0{,}40+0{,}20 = 0{,}90\ \text{kg}" variant="blue" />
-        <FormulaBox latex="x_\text{cm} = \dfrac{0+0{,}40\cdot 0{,}20+0{,}20\cdot 0{,}10}{0{,}90} = \dfrac{0{,}10}{0{,}90}" variant="blue" />
-        <FormulaBox latex="x_\text{cm} \approx 0{,}111\ \text{m}" variant="blue" />
-        <FormulaBox latex="y_\text{cm} = \dfrac{0{,}20\cdot 0{,}30}{0{,}90} = 0{,}0667\ \text{m}" variant="blue" />
-        <FormulaBox latex="\boxed{(x_\text{cm},y_\text{cm})\approx (0{,}111,\ 0{,}067)\ \text{m}}" variant="gold" />
+      <div>
+        <Step n={1} title="(a) Posisjonen til COM">
+          <FormulaBox latex="x_\text{cm}=\dfrac{(1200)(0)+(1800)(40{,}0)}{3000}=\dfrac{72\,000}{3000}=24{,}0\;\text{m}" />
+          <FormulaBox variant="gold" latex="x_\text{cm}=24{,}0\;\text{m foran SUV}" />
+        </Step>
+        <Step n={2} title="(b) Total p">
+          <FormulaBox latex="P=(1200)(12{,}0)+(1800)(20{,}0)=14\,400+36\,000=50\,400\;\text{kg·m/s}" />
+        </Step>
+        <Step n={3} title="(c) v_cm">
+          <FormulaBox latex="v_\text{cm}=\dfrac{P}{M}=\dfrac{50\,400}{3000}=16{,}8\;\text{m/s}" />
+        </Step>
+        <Step n={4} title="(d) Sjekk">
+          <FormulaBox latex="M v_\text{cm}=3000\cdot 16{,}8=50\,400\;\text{kg·m/s}=P" />
+          <FormulaBox variant="gold" latex="\text{Stemmer (per definisjon)}" />
+        </Step>
       </div>
     ),
-    summary: <p>I 2D/3D: finn COM komponent for komponent.</p>,
+    summary: <p>P = M·v_cm er ekvivalent med direkte sum av enkelt­momenta.</p>,
   },
 
   // ==========================================================================
-  // 8.56 — COM-bevegelse under eksplosjon
+  // 8.56 — System på x-aksen
   // ==========================================================================
   "8.56": {
-    title: "Eksplosjon i luft — COM fortsetter banen",
+    title: "Massesenter på x-aksen — finn ukjente",
     difficulty: "middels",
-    pageRef: "s. 288",
+    pageRef: "s. 295",
     problem: (
       <p>
-        En 2,00{"\u00A0"}kg rakett kastes opp og eksploderer i to like biter (1,00{"\u00A0"}kg hver)
-        ved høyeste punkt. Én bit faller rett ned og treffer jorda 1,00{"\u00A0"}s senere.
-        Hvor treffer den andre biten i forhold til startstedet?
+        Massesenteret til et system bestående av to partikler på x-aksen er ved <InlineLatex latex="x=2{,}0\;\text{m}" />,
+        og dette beveger seg med hastighet <InlineLatex latex="(5{,}0\;\text{m/s})\hat i" />. Den ene partikkelen er
+        i origo. Den andre har masse 0,10 kg og er i ro ved <InlineLatex latex="x=8{,}0\;\text{m}" />.
+        (a) Hva er massen til partikkelen i origo? (b) Hva er den totale bevegelses­mengden til systemet?
+        (c) Hva er hastigheten til partikkelen i origo?
       </p>
     ),
-    knowns: <p>Se tekst.</p>,
-    unknowns: <p>Posisjonen der bit 2 treffer.</p>,
-    strategy: (
-      <p>
-        Etter eksplosjonen virker bare tyngdekraft (ytre). Massesenteret
-        fortsetter originalbanen — men raketten hadde null horisontal hastighet
-        fordi den ble kastet rett opp! Så COM faller rett ned.
-      </p>
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="x_\text{cm}=2{,}0\;\text{m},\;v_\text{cm}=5{,}0\;\text{m/s}" /></li>
+        <li>Partikkel 2: 0,10 kg ved x=8,0 m, i ro</li>
+        <li>Partikkel 1: i origo, masse ukjent</li>
+      </ul>
     ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Hvis begge biter har 1 kg og bit 1 faller rett ned, må COM (som er midt mellom dem horisontalt) være over startpunktet.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Det betyr at bit 2 må lande på samme sted som bit 1 (horisontalt), dvs. rett under eksplosjonspunktet.</p>,
-      },
-    ],
+    unknowns: <p>(a) <InlineLatex latex="m_1" />. (b) total p. (c) <InlineLatex latex="v_1" />.</p>,
+    strategy: <p>Bruk COM-definisjon for posisjon og fart.</p>,
+    hints: [{ label: "Hint", content: <p><InlineLatex latex="x_\text{cm}=(m_1\cdot 0+m_2\cdot 8)/M" />.</p> }],
     solution: (
-      <div className="space-y-3">
-        <p>
-          Siden COM ikke akselererer horisontalt og starter med null horisontal fart,
-          blir <InlineLatex latex="x_\text{cm}(t) = 0" /> alltid. Med like biter:
-        </p>
-        <FormulaBox latex="x_\text{cm} = \tfrac12(x_1+x_2)=0 \Rightarrow x_1 = -x_2" variant="blue" />
-        <p>
-          Hvis bit 1 faller rett ned (<InlineLatex latex="x_1=0" />), må
-          <InlineLatex latex="x_2=0" /> også — altså lander begge på startpunktet.
-        </p>
-        <FormulaBox latex="\boxed{\text{bit 2 lander rett under eksplosjonspunktet}}" variant="gold" />
+      <div>
+        <Step n={1} title="(a) Masse av partikkel 1">
+          <FormulaBox latex="2{,}0=\dfrac{(0)m_1+(8{,}0)(0{,}10)}{m_1+0{,}10}\Rightarrow 2{,}0(m_1+0{,}10)=0{,}80" />
+          <FormulaBox latex="2m_1=0{,}80-0{,}20=0{,}60\Rightarrow m_1=0{,}30\;\text{kg}" />
+          <FormulaBox variant="gold" latex="m_1=0{,}30\;\text{kg}" />
+        </Step>
+        <Step n={2} title="(b) Total p">
+          <FormulaBox latex="P=Mv_\text{cm}=(0{,}40)(5{,}0)=2{,}0\;\text{kg·m/s}" />
+        </Step>
+        <Step n={3} title="(c) Hastighet til partikkel 1">
+          <p>Bare partikkel 1 beveger seg (siden 2 er i ro):</p>
+          <FormulaBox latex="P=m_1 v_1\Rightarrow v_1=\dfrac{2{,}0}{0{,}30}=6{,}67\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_1\approx 6{,}67\;\text{m/s i +x}" />
+        </Step>
       </div>
     ),
-    summary: (
-      <p>
-        <strong>COM-prinsippet:</strong> Ytre krefter bestemmer COM-banen. Indre krefter
-        (som eksplosjon) omfordeler massen om COM, men endrer ikke COM-banen.
-      </p>
-    ),
+    summary: <p>COM-definisjon kombinert med <InlineLatex latex="P=Mv_\text{cm}" /> løser ofte for ukjent masse/fart.</p>,
   },
 
   // ==========================================================================
-  // 8.58 — Rakettligning
+  // 8.58 — CALC: COM-dynamikk
   // ==========================================================================
   "8.58": {
-    title: "Rakettfart etter forbrenning",
-    difficulty: "vanskelig",
-    pageRef: "s. 289",
-    problem: (
-      <p>
-        En rakett har startmasse 6000{"\u00A0"}kg, hvorav 4800{"\u00A0"}kg er drivstoff.
-        Effektiv utløpsfart (relativt rakett) er 2000{"\u00A0"}m/s. Finn farten når alt
-        drivstoffet er brent, antatt ingen tyngdekraft.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m_0=6000\ \text{kg},\ m_f=1200\ \text{kg}" /></li>
-        <li><InlineLatex latex="v_\text{ex}=2000\ \text{m/s}" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="v_f-v_0" /> (her fra ro).</p>,
-    strategy: <p>Tsiolkovskys rakettligning: <InlineLatex latex="\Delta v = v_\text{ex}\ln(m_0/m_f)" />.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Bruk naturlig logaritme av masseforholdet.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\Delta v = 2000\cdot\ln\!\left(\dfrac{6000}{1200}\right) = 2000\ln 5" variant="blue" />
-        <FormulaBox latex="\Delta v = 2000\cdot 1{,}609 = 3219\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_f \approx 3{,}22\times 10^{3}\ \text{m/s}}" variant="gold" />
-      </div>
-    ),
-    summary: (
-      <p>
-        Rakettligningen er logaritmisk i masseforhold. Å doble slutthastigheten krever
-        å kvadrere masseforholdet — derfor trenger stor Δv flertrinnsraketter.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.59 — COM-hastighet for system
-  // ==========================================================================
-  "8.59": {
-    title: "COM-hastighet for to objekter",
-    difficulty: "lett",
-    pageRef: "s. 289",
-    problem: (
-      <p>
-        To biler på en rett vei: en 1500{"\u00A0"}kg bil i 20,0{"\u00A0"}m/s østover, og
-        en 2000{"\u00A0"}kg bil i 15,0{"\u00A0"}m/s vestover. Hva er COM-hastigheten?
-      </p>
-    ),
-    knowns: <p>Gitt i teksten.</p>,
-    unknowns: <p><InlineLatex latex="v_\text{cm}" /></p>,
-    strategy: <p><InlineLatex latex="v_\text{cm}=(m_1v_1+m_2v_2)/(m_1+m_2)" />.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Motsatt retning gir motsatt fortegn.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="v_\text{cm} = \dfrac{1500(20{,}0)+2000(-15{,}0)}{3500}" variant="blue" />
-        <FormulaBox latex="v_\text{cm} = \dfrac{30\,000-30\,000}{3500} = 0\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_\text{cm}=0}" variant="gold" />
-      </div>
-    ),
-    summary: <p>Når momenta er nøyaktig motsatte, står COM stille — uansett hva enkeltlegemene gjør.</p>,
-  },
-
-  // ==========================================================================
-  // 8.64 — Problems: baseballballens impuls fra graf
-  // ==========================================================================
-  "8.64": {
-    title: "Baseball med grafisk kraftprofil",
-    difficulty: "middels",
-    pageRef: "s. 290",
-    problem: (
-      <p>
-        En 0,145{"\u00A0"}kg ball treffes med en kraft som gir trekantprofil:
-        lineær opp fra 0 til <InlineLatex latex="F_\text{maks}" /> over 1,25{"\u00A0"}ms,
-        og lineært ned igjen over 1,25{"\u00A0"}ms. Totalimpuls skal være 15,0{"\u00A0"}N·s.
-        Finn <InlineLatex latex="F_\text{maks}" /> og gjennomsnittskraften.
-      </p>
-    ),
-    knowns: <p>trekantprofil, total varighet 2,50 ms, <InlineLatex latex="J=15{,}0" />.</p>,
-    unknowns: <p><InlineLatex latex="F_\text{maks}" /> og <InlineLatex latex="F_\text{gj}" />.</p>,
-    strategy: <p>Trekantareal = <InlineLatex latex="\tfrac12 \Delta t\,F_\text{maks}" />, gj. = <InlineLatex latex="J/\Delta t" />.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>For en trekant: <InlineLatex latex="F_\text{maks}=2J/\Delta t" /> og <InlineLatex latex="F_\text{gj}=F_\text{maks}/2" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="F_\text{maks} = \dfrac{2J}{\Delta t} = \dfrac{2\cdot 15{,}0}{2{,}50\times 10^{-3}} = 1{,}20\times 10^{4}\ \text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{F_\text{maks} = 1{,}20\times 10^{4}\ \text{N}}" variant="gold" />
-        <FormulaBox latex="F_\text{gj} = \dfrac{J}{\Delta t} = 6{,}00\times 10^{3}\ \text{N}" variant="blue" />
-        <FormulaBox latex="\boxed{F_\text{gj}=6{,}00\times 10^{3}\ \text{N}}" variant="gold" />
-      </div>
-    ),
-    summary: <p>For trekantformet kraftprofil er <InlineLatex latex="F_\text{gj}=F_\text{maks}/2" />.</p>,
-  },
-
-  // ==========================================================================
-  // 8.65 — Problem: Kanonballa og båten
-  // ==========================================================================
-  "8.65": {
-    title: "Kanonball avfyres fra båt — rekyl",
-    difficulty: "middels",
-    pageRef: "s. 290",
-    problem: (
-      <p>
-        En 12,0{"\u00A0"}kg kanonball avfyres fra en 750{"\u00A0"}kg båt i ro med
-        200{"\u00A0"}m/s horisontalt. Finn båtens rekylfart og energi levert av kruttet.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="m=12{,}0,\ v=200" />; <InlineLatex latex="M=750,\ V=?" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="V" /> og total energi.</p>,
-    strategy: <p>Bevegelsesmengde bevart fra ro + sum kinetisk energi.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p><InlineLatex latex="V=-mv/M" /> og <InlineLatex latex="E=\tfrac12mv^2+\tfrac12MV^2" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = -\dfrac{12{,}0\cdot 200}{750} = -3{,}20\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{|V|=3{,}20\ \text{m/s}}" variant="gold" />
-        <FormulaBox latex="E = \tfrac12(12{,}0)(200)^2 + \tfrac12(750)(3{,}20)^2" variant="blue" />
-        <FormulaBox latex="E = 2{,}40\times 10^{5} + 3{,}84\times 10^{3} \approx 2{,}44\times 10^{5}\ \text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{E\approx 2{,}44\times 10^{5}\ \text{J}}" variant="gold" />
-      </div>
-    ),
-    summary: <p>Merk: Selv om både båt og ball får KE, står mesteparten i det lettere objektet (ballen).</p>,
-  },
-
-  // ==========================================================================
-  // 8.69 — Fiskebåt og anker
-  // ==========================================================================
-  "8.69": {
-    title: "Dropping av anker fra fiskebåt",
-    difficulty: "middels",
-    pageRef: "s. 291",
-    problem: (
-      <p>
-        En 3500{"\u00A0"}kg båt triller på friksjonsfritt vann med 8,00{"\u00A0"}m/s.
-        Et 150{"\u00A0"}kg anker slippes vertikalt (ingen horisontal fart relativt
-        vannet). Hvordan endres båtens fart? Forklar.
-      </p>
-    ),
-    knowns: <p>båt 3500 kg, 8 m/s; anker 150 kg.</p>,
-    unknowns: <p>Ny fart for båt.</p>,
-    strategy: (
-      <p>
-        Ankeret har fortsatt båtens horisontale fart i øyeblikket det slippes
-        (samme fart som båten). Ingen endring i momentum-fordelingen ⇒ båtens fart endres ikke.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Hvilken horisontal fart har ankeret akkurat når det slippes?</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <p>
-          Akkurat når ankeret slippes, har det fart 8,00{"\u00A0"}m/s (samme som båten).
-          Ingen horisontal kraft mellom båt og anker ⇒ båten fortsetter med 8,00{"\u00A0"}m/s.
-        </p>
-        <FormulaBox latex="\boxed{v_\text{båt}=8{,}00\ \text{m/s (uendret)}}" variant="gold" />
-      </div>
-    ),
-    summary: (
-      <p>
-        Å «slippe» noe uten å gi det en ekstra horisontal impuls endrer ikke
-        farten — det er <em>kast</em> (impuls) som gir rekyl, ikke slipping.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.79 — Problem: to blokker med fjær
-  // ==========================================================================
-  "8.79": {
-    title: "Fjær-drevet system på friksjonsfritt plan",
-    difficulty: "vanskelig",
-    pageRef: "s. 292",
-    problem: (
-      <p>
-        To blokker <InlineLatex latex="m_A=2{,}00\ \text{kg}" /> og
-        <InlineLatex latex="m_B=3{,}00\ \text{kg}" /> er forbundet med en lett, sammentrykket
-        fjær og holdt sammen. På friksjonsfritt plan slippes de og fjæra gir A fart
-        <InlineLatex latex="v_A=6{,}00\ \text{m/s}" /> mot venstre. Finn (a) farten til B,
-        (b) energien lagret i fjæra.
-      </p>
-    ),
-    knowns: <p>Som gitt.</p>,
-    unknowns: <p><InlineLatex latex="v_B" /> og <InlineLatex latex="U_0" />.</p>,
-    strategy: <p>Momentum bevart fra ro; total KE etter = fjærenergi.</p>,
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p><InlineLatex latex="m_Av_A + m_Bv_B = 0" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p><InlineLatex latex="U_0 = \tfrac12 m_Av_A^2 + \tfrac12m_Bv_B^2" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="v_B = -\dfrac{m_A v_A}{m_B} = -\dfrac{(2{,}00)(-6{,}00)}{3{,}00} = +4{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_B = 4{,}00\ \text{m/s mot høyre}}" variant="gold" />
-        <FormulaBox latex="U_0 = \tfrac12(2{,}00)(6{,}00)^2 + \tfrac12(3{,}00)(4{,}00)^2" variant="blue" />
-        <FormulaBox latex="U_0 = 36{,}0 + 24{,}0 = 60{,}0\ \text{J}" variant="blue" />
-        <FormulaBox latex="\boxed{U_0 = 60{,}0\ \text{J}}" variant="gold" />
-      </div>
-    ),
-    summary: <p>Fjærenergien deles invers til massene — lett blokk får mer KE enn tung.</p>,
-  },
-
-  // ==========================================================================
-  // 8.81 — Slagball fra bil med konstant fart
-  // ==========================================================================
-  "8.81": {
-    title: "Skøyteløper skyver bort kasse",
-    difficulty: "middels",
-    pageRef: "s. 293",
-    problem: (
-      <p>
-        En 45,0{"\u00A0"}kg skøyteløper står i ro på is og skyver bort en 15,0{"\u00A0"}kg
-        kasse med fart 3,00{"\u00A0"}m/s. Etter hvor lang tid (etter at skyvet har sluttet)
-        er skøyteløperen 10,0{"\u00A0"}m fra kassen?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc list-inside">
-        <li><InlineLatex latex="M=45{,}0,\ m=15{,}0,\ v=3{,}00" /></li>
-        <li>Avstand 10,0 m</li>
-      </ul>
-    ),
-    unknowns: <p>Tid <InlineLatex latex="t" /> for 10 m relativ avstand.</p>,
-    strategy: <p>Først finn <InlineLatex latex="V" /> fra momentum; så summer farter, deretter tid.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>Relativ fart = <InlineLatex latex="v+|V|" />. Tid = 10 m / relativ fart.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = -\dfrac{(15{,}0)(3{,}00)}{45{,}0} = -1{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v_\text{rel} = 3{,}00 + 1{,}00 = 4{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="t = \dfrac{10{,}0}{4{,}00} = 2{,}50\ \text{s}" variant="blue" />
-        <FormulaBox latex="\boxed{t = 2{,}50\ \text{s}}" variant="gold" />
-      </div>
-    ),
-    summary: <p>Relativ fart er summen av fartene når legemene beveger seg fra hverandre.</p>,
-  },
-
-  // ==========================================================================
-  // 8.83 — Problem: Ballistisk pendel med vinkel
-  // ==========================================================================
-  "8.83": {
-    title: "Ballistisk pendel svinger opp i vinkel",
-    difficulty: "vanskelig",
-    pageRef: "s. 293",
-    problem: (
-      <p>
-        En 0,0500{"\u00A0"}kg kule treffer en 2,00{"\u00A0"}kg blokk som henger i
-        en 1,50{"\u00A0"}m lang snor, setter seg fast, og pendelen svinger opp til
-        maksimal snor-vinkel 25,0° med vertikal. Finn kulens opprinnelige fart.
-      </p>
-    ),
-    knowns: <p>Se tekst.</p>,
-    unknowns: <p><InlineLatex latex="v" /></p>,
-    strategy: (
-      <p>
-        Kombiner: (1) momentum-bevaring gjennom kollisjon, (2) energibevaring fra
-        etter kollisjon til max vinkel. Maks høyde: <InlineLatex latex="h=L(1-\cos\theta)" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p><InlineLatex latex="h=L(1-\cos\theta)=1{,}50(1-\cos 25^\circ)" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p><InlineLatex latex="V=\sqrt{2gh}" />, deretter <InlineLatex latex="v=\tfrac{m+M}{m}V" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="h = 1{,}50(1 - \cos 25^\circ) = 1{,}50(1-0{,}9063) = 0{,}1406\ \text{m}" variant="blue" />
-        <FormulaBox latex="V = \sqrt{2(9{,}80)(0{,}1406)} = 1{,}660\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v = \dfrac{0{,}0500+2{,}00}{0{,}0500}\cdot 1{,}660 = 41{,}0\cdot 1{,}660" variant="blue" />
-        <FormulaBox latex="\boxed{v \approx 68{,}1\ \text{m/s}}" variant="gold" />
-      </div>
-    ),
-    summary: <p>Klassisk to-trinns: momentum (kollisjon) + energi (sving). Maks-høyde via <InlineLatex latex="L(1-\cos\theta)" />.</p>,
-  },
-
-  // ==========================================================================
-  // 8.85 — Problem: Bil kjører inn i parkert bil
-  // ==========================================================================
-  "8.85": {
-    title: "Bil-parkering-kollisjon: bestem utgangsfart",
-    difficulty: "middels",
-    pageRef: "s. 294",
-    problem: (
-      <p>
-        En 1200{"\u00A0"}kg bil støter bakfra på en 1800{"\u00A0"}kg parkert bil. De
-        skyter avgårde sammen og glir til stopp etter 5,50{"\u00A0"}m, med
-        kinetisk friksjonskoeffisient 0,400. Finn den første bilens fart idet den traff.
-      </p>
-    ),
-    knowns: <p>Som gitt; <InlineLatex latex="\mu_k=0{,}400" />.</p>,
-    unknowns: <p><InlineLatex latex="v_1" />.</p>,
-    strategy: (
-      <p>
-        To-trinns: (1) uelastisk kollisjon bestemmer felles fart <InlineLatex latex="V" />.
-        (2) arbeid-energi: friksjon stanser på 5,50{"\u00A0"}m.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Fra stopp bakover: <InlineLatex latex="V=\sqrt{2\mu_k g d}" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Kollisjon: <InlineLatex latex="m_1v_1 = (m_1+m_2)V" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="V = \sqrt{2\cdot 0{,}400\cdot 9{,}80\cdot 5{,}50} = \sqrt{43{,}12} \approx 6{,}566\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v_1 = \dfrac{m_1+m_2}{m_1}V = \dfrac{3000}{1200}\cdot 6{,}566" variant="blue" />
-        <FormulaBox latex="v_1 = 2{,}5\cdot 6{,}566 \approx 16{,}4\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_1 \approx 16{,}4\ \text{m/s}}" variant="gold" />
-      </div>
-    ),
-    summary: (
-      <p>
-        To-stegs omvendt-arbeid: bruk friksjon til å finne fart <em>etter</em> kollisjon,
-        så momentum-bevaring til å finne fart <em>før</em>. Typisk rekonstruksjon i
-        trafikkanalyse.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.88 — Problem: Massesenter for stang med variabel tetthet
-  // ==========================================================================
-  "8.88": {
-    title: "COM for stang med lineær tetthet",
-    difficulty: "vanskelig",
-    pageRef: "s. 294",
-    problem: (
-      <p>
-        En 0,800{"\u00A0"}m lang stang har lineær tetthet
-        <InlineLatex latex="\lambda(x)=\lambda_0(1+x/L)" /> der
-        <InlineLatex latex="\lambda_0=2{,}00\ \text{kg/m}" /> og <InlineLatex latex="L=0{,}800\ \text{m}" />.
-        Finn (a) total masse og (b) <InlineLatex latex="x_\text{cm}" />.
-      </p>
-    ),
-    knowns: <p><InlineLatex latex="\lambda(x)=\lambda_0(1+x/L),\ L=0{,}800,\ \lambda_0=2{,}00" />.</p>,
-    unknowns: <p><InlineLatex latex="M" /> og <InlineLatex latex="x_\text{cm}" />.</p>,
-    strategy: (
-      <p>
-        Bruk integraler:
-        <InlineLatex latex="M=\int_0^L\lambda\,dx,\ x_\text{cm}=\tfrac1M\int_0^L x\lambda\,dx" />.
-      </p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Regn ut <InlineLatex latex="\int_0^L(1+x/L)\,dx = L + L/2 = 3L/2" />.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Regn ut <InlineLatex latex="\int_0^L x(1+x/L)\,dx = L^2/2 + L^2/3 = 5L^2/6" />.</p>,
-      },
-    ],
-    solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="M = \lambda_0\int_0^L\!\!(1+x/L)\,dx = \lambda_0\cdot \tfrac{3L}{2}" variant="blue" />
-        <FormulaBox latex="M = 2{,}00\cdot \tfrac{3\cdot 0{,}800}{2} = 2{,}40\ \text{kg}" variant="blue" />
-        <FormulaBox latex="\boxed{M = 2{,}40\ \text{kg}}" variant="gold" />
-        <FormulaBox latex="x_\text{cm} = \dfrac{\lambda_0}{M}\cdot\dfrac{5L^2}{6} = \dfrac{5L}{6}\cdot\dfrac{\lambda_0 L/2}{\lambda_0\cdot 3L/2}" variant="blue" />
-        <FormulaBox latex="x_\text{cm} = \dfrac{5L}{9} = \dfrac{5\cdot 0{,}800}{9} \approx 0{,}444\ \text{m}" variant="blue" />
-        <FormulaBox latex="\boxed{x_\text{cm}\approx 0{,}444\ \text{m}}" variant="gold" />
-      </div>
-    ),
-    summary: (
-      <p>
-        For kontinuerlig masse: <InlineLatex latex="x_\text{cm}=\tfrac1M\int x\,dm" /> der
-        <InlineLatex latex="dm=\lambda\,dx" />. COM trekkes mot tettere ende, som her er <InlineLatex latex="x>L/2" />.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 8.92 — Problem: To biler møtes og kleber
-  // ==========================================================================
-  "8.92": {
-    title: "To biler møter og kleber — vinkel etter",
+    title: "CALC: COM med variabel hastighet",
     difficulty: "vanskelig",
     pageRef: "s. 295",
     problem: (
       <p>
-        En 950{"\u00A0"}kg bil i 16,0{"\u00A0"}m/s nordover kolliderer i kryss med
-        en 1900{"\u00A0"}kg varebil i 12,0{"\u00A0"}m/s østover. De kleber. Finn
-        sluttfart og vinkel (fra øst, mot nord).
+        Et system består av to partikler. Ved <InlineLatex latex="t=0" /> er én i origo; den andre, med masse 0,50 kg,
+        er på y-aksen ved <InlineLatex latex="y=6{,}0\;\text{m}" />. Ved <InlineLatex latex="t=0" /> er COM på y-aksen
+        ved <InlineLatex latex="y=2{,}4\;\text{m}" />. Hastigheten til COM er
+        <InlineLatex latex="\;\vec v_\text{cm}=(0{,}75\;\text{m/s}^3)t^2\,\hat i" />.
+        (a) Finn total masse. (b) Akselerasjon av COM ved en gitt tid t. (c) Netto ytre kraft på systemet ved
+        <InlineLatex latex="\;t=3{,}0\;\text{s}" />.
       </p>
     ),
-    knowns: <p>som gitt.</p>,
-    unknowns: <p>sluttvektor.</p>,
-    strategy: <p>Helt uelastisk 2D: del totalmomentvektor på total masse.</p>,
-    hints: [
-      {
-        label: "Hint",
-        content: <p>
-          <InlineLatex latex="V_x = m_2 v_2/M" />, <InlineLatex latex="V_y = m_1 v_1/M" />.
-        </p>,
-      },
-    ],
+    knowns: <p>Som tekst.</p>,
+    unknowns: <p>(a) M. (b) <InlineLatex latex="\vec a_\text{cm}(t)" />. (c) <InlineLatex latex="\vec F(3)" />.</p>,
+    strategy: <p>Bruk COM-posisjon for masse, deriver v_cm for a_cm, og <InlineLatex latex="F=Ma" />.</p>,
+    hints: [{ label: "Hint", content: <p>Totalt y-momentum av COM: <InlineLatex latex="M y_\text{cm}=m_1 y_1+m_2 y_2" />.</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="M = 950 + 1900 = 2850\ \text{kg}" variant="blue" />
-        <FormulaBox latex="V_x = \dfrac{1900\cdot 12{,}0}{2850} = 8{,}00\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="V_y = \dfrac{950\cdot 16{,}0}{2850} = 5{,}333\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="V = \sqrt{8{,}00^2 + 5{,}333^2} \approx 9{,}61\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\theta = \arctan(5{,}333/8{,}00) \approx 33{,}7^\circ \text{ N av Ø}" variant="blue" />
-        <FormulaBox latex="\boxed{V\approx 9{,}61\ \text{m/s, }33{,}7^\circ \text{ N av Ø}}" variant="gold" />
+      <div>
+        <Step n={1} title="(a) Total masse">
+          <FormulaBox latex="2{,}4=\dfrac{m_1\cdot 0+(0{,}50)(6{,}0)}{m_1+0{,}50}\Rightarrow 2{,}4(m_1+0{,}50)=3{,}0" />
+          <FormulaBox latex="m_1=0{,}75\;\text{kg},\;M=1{,}25\;\text{kg}" />
+          <FormulaBox variant="gold" latex="M=1{,}25\;\text{kg}" />
+        </Step>
+        <Step n={2} title="(b) Akselerasjon av COM">
+          <FormulaBox latex="\vec a_\text{cm}=\dfrac{d\vec v_\text{cm}}{dt}=(0{,}75)\cdot 2t\,\hat i=(1{,}50t)\,\hat i\;\text{m/s}^2" />
+        </Step>
+        <Step n={3} title="(c) Netto kraft ved t=3 s">
+          <FormulaBox latex="\vec F=M\vec a_\text{cm}=1{,}25\cdot(1{,}50\cdot 3{,}0)\,\hat i=5{,}625\,\hat i\;\text{N}" />
+          <FormulaBox variant="gold" latex="\vec F\approx 5{,}63\,\hat i\;\text{N}" />
+        </Step>
       </div>
     ),
-    summary: <p>Helt uelastisk 2D: samme strategi uansett vinkler — del total vektor på total masse.</p>,
+    summary: <p>Newton 2 for systemer: <InlineLatex latex="\vec F_\text{ekst}=M\vec a_\text{cm}" />.</p>,
   },
 
   // ==========================================================================
-  // 8.96 — Problem: Raketten ignite-ignite sekvens
+  // 8.59 — CALC: model plane
   // ==========================================================================
-  "8.96": {
-    title: "To-trinns rakett: bestem sluttfart",
+  "8.59": {
+    title: "CALC: Modell­fly med tids­varierende p",
+    difficulty: "vanskelig",
+    pageRef: "s. 295",
+    problem: (
+      <p>
+        Et radio­styrt modell­fly har bevegelses­mengde gitt ved
+        <InlineLatex latex="\;\vec p=[(-0{,}75\;\text{kg·m/s}^3)t^2+(3{,}0\;\text{kg·m/s})]\hat i+(0{,}25\;\text{kg·m/s}^2)t\,\hat j" />.
+        Hva er x-, y- og z-komponentene av netto ytre kraft på flyet?
+      </p>
+    ),
+    knowns: <p>p(t) som angitt.</p>,
+    unknowns: <p>F(t).</p>,
+    strategy: <p>Newton 2: <InlineLatex latex="\vec F=d\vec p/dt" />.</p>,
+    hints: [{ label: "Hint", content: <p>Deriver hver komponent.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Deriver komponentvis">
+          <FormulaBox latex="F_x=\dfrac{d}{dt}\bigl[-0{,}75t^2+3{,}0\bigr]=-1{,}50t\;\text{N}" />
+          <FormulaBox latex="F_y=\dfrac{d}{dt}\bigl[0{,}25t\bigr]=0{,}25\;\text{N (konstant)}" />
+          <FormulaBox latex="F_z=0" />
+          <FormulaBox variant="gold" latex="\vec F=-1{,}50t\,\hat i+0{,}25\,\hat j\;\text{N}" />
+        </Step>
+      </div>
+    ),
+    summary: <p><InlineLatex latex="\vec F=d\vec p/dt" /> komponent for komponent.</p>,
+  },
+
+  // ==========================================================================
+  // 8.64 — Stålball faller, spretter
+  // ==========================================================================
+  "8.64": {
+    title: "Stålball faller, spretter — impuls",
+    difficulty: "middels",
+    pageRef: "s. 296",
+    problem: (
+      <p>
+        En 36,0 g stålball slippes fra en høyde 2,07 m ned på en horisontal stålplate. Ballen spretter til en
+        høyde 1,54 m. (a) Beregn impulsen som platen leverer på ballen under støtet. (b) Hvis kontakttiden er
+        2,50 ms, finn gjennomsnittlig kraft platen utøvde på ballen.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}036\;\text{kg},\;h_1=2{,}07\;\text{m},\;h_2=1{,}54\;\text{m},\;\Delta t=2{,}50\times 10^{-3}\;\text{s}" /></li>
+      </ul>
+    ),
+    unknowns: <p>(a) J. (b) <InlineLatex latex="F_\text{gj}" />.</p>,
+    strategy: <p>Finn fart før og etter via energi: <InlineLatex latex="v=\sqrt{2gh}" />.</p>,
+    hints: [{ label: "Hint", content: <p>Fart før er nedover (negativ y); fart etter er oppover (positiv y).</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Hastigheter">
+          <FormulaBox latex="v_1=-\sqrt{2gh_1}=-\sqrt{2(9{,}80)(2{,}07)}=-6{,}37\;\text{m/s}" />
+          <FormulaBox latex="v_2=+\sqrt{2gh_2}=+\sqrt{2(9{,}80)(1{,}54)}=+5{,}50\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Impuls">
+          <FormulaBox latex="J=m(v_2-v_1)=0{,}036\cdot[5{,}50-(-6{,}37)]=0{,}036\cdot 11{,}87" />
+          <FormulaBox variant="gold" latex="J\approx +0{,}427\;\text{kg·m/s (oppover)}" />
+        </Step>
+        <Step n={3} title="(b) Gjennomsnittlig kraft">
+          <FormulaBox latex="F_\text{gj}=\dfrac{J}{\Delta t}=\dfrac{0{,}427}{2{,}50\times 10^{-3}}\approx 171\;\text{N}" />
+          <FormulaBox variant="gold" latex="F_\text{gj}\approx 171\;\text{N}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          171 N for en 36 g ball er ~480× ballens vekt.
+        </p>
+      </div>
+    ),
+    summary: <p>Impuls fra sprett involverer <em>begge</em> fart­vektorer.</p>,
+  },
+
+  // ==========================================================================
+  // 8.65 — Tennis-racket impuls
+  // ==========================================================================
+  "8.65": {
+    title: "Tennisball — vektor­impuls fra konstant kraft",
     difficulty: "vanskelig",
     pageRef: "s. 296",
     problem: (
       <p>
-        En to-trinns rakett starter i ro. Trinn 1: brenner av 70% av total masse ved
-        utløpsfart 2500{"\u00A0"}m/s. Deretter kobles det tomme skallet av (ingen
-        endring i fart). Trinn 2: brenner av de siste 50% av gjenværende, også
-        ved 2500{"\u00A0"}m/s. Finn sluttfart (ignorer tyngdekraft).
+        Like før den treffer en racket har en tennisball som veier 0,560 N hastigheten
+        <InlineLatex latex="\;\vec v=(20{,}0\;\text{m/s})\hat i-(4{,}0\;\text{m/s})\hat j" />.
+        I løpet av 3,00 ms hvor ballen og racketen er i kontakt, virker en konstant netto kraft
+        <InlineLatex latex="\;\vec F=-(380\;\text{N})\hat i+(110\;\text{N})\hat j" /> på ballen.
+        Finn x- og y-komponentene av (a) impulsen, (b) sluttvelosit­eten.
       </p>
     ),
-    knowns: <p>to brennfaser, forholdstall oppgitt.</p>,
-    unknowns: <p>sluttfart.</p>,
-    strategy: (
-      <p>
-        Bruk Tsiolkovsky to ganger og summer <InlineLatex latex="\Delta v" />.
-      </p>
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>Vekt 0,560 N ⇒ <InlineLatex latex="m=W/g=0{,}0571\;\text{kg}" /></li>
+        <li><InlineLatex latex="\Delta t=3{,}00\times 10^{-3}\;\text{s}" /></li>
+      </ul>
     ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>La <InlineLatex latex="m_0=1" />. Etter trinn 1: masse = 0,30.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Etter å ha kastet skall: masse = 0,30 (antatt skall = 0). Etter trinn 2: 50% av 0,30 = 0,15.</p>,
-      },
-    ],
+    unknowns: <p>(a) <InlineLatex latex="\vec J" />. (b) <InlineLatex latex="\vec v_2" />.</p>,
+    strategy: <p><InlineLatex latex="\vec J=\vec F\Delta t" />, <InlineLatex latex="\vec v_2=\vec v_1+\vec J/m" />.</p>,
+    hints: [{ label: "Hint", content: <p>Vekt 0,560 N gir masse 0,0571 kg (deler på g).</p> }],
     solution: (
-      <div className="space-y-3">
-        <FormulaBox latex="\Delta v_1 = 2500\ln(1/0{,}30) = 2500\ln(3{,}333) = 2500\cdot 1{,}204 \approx 3010\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\Delta v_2 = 2500\ln(0{,}30/0{,}15) = 2500\ln 2 \approx 1733\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="v_\text{slutt} = \Delta v_1 + \Delta v_2 \approx 3010 + 1733 = 4743\ \text{m/s}" variant="blue" />
-        <FormulaBox latex="\boxed{v_\text{slutt} \approx 4{,}74\times 10^3\ \text{m/s}}" variant="gold" />
+      <div>
+        <Step n={1} title="(a) Impuls­komponenter">
+          <FormulaBox latex="J_x=F_x\Delta t=(-380)(3{,}00\times 10^{-3})=-1{,}14\;\text{N·s}" />
+          <FormulaBox latex="J_y=F_y\Delta t=(110)(3{,}00\times 10^{-3})=+0{,}330\;\text{N·s}" />
+          <FormulaBox variant="gold" latex="\vec J=(-1{,}14\,\hat i+0{,}330\,\hat j)\;\text{N·s}" />
+        </Step>
+        <Step n={2} title="(b) Slutt­fart">
+          <FormulaBox latex="v_{2x}=v_{1x}+\dfrac{J_x}{m}=20{,}0+\dfrac{-1{,}14}{0{,}0571}=20{,}0-19{,}96=+0{,}04\;\text{m/s}\approx 0" />
+          <FormulaBox latex="v_{2y}=-4{,}0+\dfrac{0{,}330}{0{,}0571}=-4{,}0+5{,}78=+1{,}78\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="\vec v_2\approx (0\,\hat i+1{,}78\,\hat j)\;\text{m/s}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Ballen er nesten stilt­stående i x-retning og driver svakt oppover etter racket­treffet.
+        </p>
       </div>
     ),
-    summary: (
+    summary: <p>Vektor­impuls = vektor­kraft × tid. Sett inn komponentvis.</p>,
+  },
+
+  // ==========================================================================
+  // 8.69 — Tre kuler kolliderer (Fig P8.69)
+  // ==========================================================================
+  "8.69": {
+    title: "Tre kuler stikker sammen i origo (Fig P8.69)",
+    difficulty: "vanskelig",
+    pageRef: "s. 296",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          Tre kuler A (0,020 kg), B (0,030 kg) og C (0,050 kg) nærmer seg origo samtidig på et
+          friksjons­fritt luft­bord. Innledningsvis har A og B hastigheter som vist i Fig. P8.69 — A går mot
+          +x med 1,50 m/s, B går i 60° over −x med 0,50 m/s. Kulene ankommer origo samtidig og kleber
+          sammen. (a) Hva er x- og y-komponentene av initial­hastigheten til C dersom alle tre beveger
+          seg sammen med 0,50 m/s i +x-retning etter kollisjonen? (b) Hvis C har den hastigheten i (a),
+          hva er endringen i kinetisk energi for systemet?
+        </p>
+        <svg viewBox="0 0 320 200" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          <line x1="20" y1="100" x2="300" y2="100" stroke="#6b7280" strokeWidth="1" />
+          <line x1="160" y1="20" x2="160" y2="180" stroke="#6b7280" strokeWidth="1" />
+          {/* A fra venstre mot origo */}
+          <circle cx="60" cy="100" r="6" fill="#ef4444" />
+          <line x1="68" y1="100" x2="150" y2="100" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrow-red-k8)" />
+          <text x="80" y="92" fontSize="9" fill="#ef4444">A 0,020</text>
+          {/* B fra øvre høyre, mot origo */}
+          <circle cx="260" cy="40" r="6" fill="#3b82f6" />
+          <line x1="254" y1="44" x2="170" y2="92" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k8)" />
+          <text x="220" y="35" fontSize="9" fill="#3b82f6">B 0,030, 60°</text>
+          {/* C ukjent */}
+          <circle cx="200" cy="160" r="6" fill="#10b981" />
+          <text x="180" y="180" fontSize="9" fill="#10b981">C 0,050 (?)</text>
+          <line x1="195" y1="155" x2="170" y2="115" stroke="#10b981" strokeWidth="2" strokeDasharray="2 2" markerEnd="url(#arrow-green-k8)" />
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>A: 0,020 kg, +x ved 1,50 m/s</li>
+        <li>B: 0,030 kg, 60° over −x ved 0,50 m/s</li>
+        <li>Etter: alle tre 0,50 m/s i +x</li>
+      </ul>
+    ),
+    unknowns: <p>(a) <InlineLatex latex="v_{Cx},v_{Cy}" />. (b) ΔK.</p>,
+    strategy: <p>Komponentvis momentum-bevaring.</p>,
+    hints: [
+      { label: "Hint", content: <p>B's komponenter: <InlineLatex latex="-0{,}50\cos 60°,\;+0{,}50\sin 60°" />.</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="x-momentum">
+          <FormulaBox latex="(0{,}020)(1{,}50)+(0{,}030)(-0{,}50\cos 60°)+(0{,}050)v_{Cx}=(0{,}100)(0{,}50)" />
+          <FormulaBox latex="0{,}030+(-0{,}0075)+0{,}050 v_{Cx}=0{,}050" />
+          <FormulaBox latex="v_{Cx}=\dfrac{0{,}0275}{0{,}050}=0{,}550\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="y-momentum">
+          <FormulaBox latex="0+(0{,}030)(0{,}50\sin 60°)+(0{,}050)v_{Cy}=0" />
+          <FormulaBox latex="0{,}01299+0{,}050 v_{Cy}=0\Rightarrow v_{Cy}=-0{,}260\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_{Cx}=+0{,}55\;\text{m/s},\;v_{Cy}=-0{,}26\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="(b) ΔK">
+          <FormulaBox latex="K_i=\tfrac12(0{,}020)(1{,}50)^2+\tfrac12(0{,}030)(0{,}50)^2+\tfrac12(0{,}050)(0{,}610)^2" />
+          <FormulaBox latex="K_i=0{,}0225+0{,}00375+0{,}0093=0{,}0356\;\text{J}" />
+          <FormulaBox latex="K_f=\tfrac12(0{,}100)(0{,}50)^2=0{,}0125\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta K=-0{,}0231\;\text{J (tap)}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Multi-objekt 2D: x og y separat. ΔK signaliserer hvor mye energi som forsvinner i kollisjonen.</p>,
+  },
+
+  // ==========================================================================
+  // 8.79 — Kule i blokk på fjær
+  // ==========================================================================
+  "8.79": {
+    title: "Kule treffer blokk koblet til fjær",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
       <p>
-        Flertrinnsraketter kaster vekk strukturell masse mellom brennfaser. Slik
-        opprettholder de høyt masseforhold for logaritmisk gevinst i Δv.
+        En 8,00 g rifle­kule treffer og setter seg fast i en 0,992 kg blokk som hviler på et friksjons­fritt
+        underlag og er festet til en ideell fjær. Sammen­presser fjæra 15,0 cm. Det måles at fjæra trenger
+        en kraft på 0,750 N for å sammen­presses 0,250 cm. Finn (a) hastigheten til blokk + kule rett etter
+        kollisjonen, (b) kulens initial­fart.
       </p>
     ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="m=0{,}008,\;M=0{,}992,\;x=0{,}150\;\text{m}" /></li>
+        <li>Fjær­data: 0,750 N for 0,00250 m ⇒ k = 300 N/m</li>
+      </ul>
+    ),
+    unknowns: <p>(a) V. (b) v.</p>,
+    strategy: <p>Energibevaring etter kollisjon: <InlineLatex latex="\tfrac12(m+M)V^2=\tfrac12 kx^2" />.</p>,
+    hints: [
+      { label: "Hint", content: <p>k = F/x, så V = x√(k/(m+M)).</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="Fjær­konstant">
+          <FormulaBox latex="k=\dfrac{F}{x}=\dfrac{0{,}750}{0{,}00250}=300\;\text{N/m}" />
+        </Step>
+        <Step n={2} title="(a) V etter kollisjon">
+          <FormulaBox latex="\tfrac12(m+M)V^2=\tfrac12 kx^2\Rightarrow V=x\sqrt{\dfrac{k}{m+M}}" />
+          <FormulaBox latex="V=0{,}150\sqrt{\dfrac{300}{1{,}000}}=0{,}150\cdot 17{,}32=2{,}60\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="V\approx 2{,}60\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="(b) Kulens fart">
+          <FormulaBox latex="v=\dfrac{(m+M)V}{m}=\dfrac{(1{,}000)(2{,}60)}{0{,}008}=325\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 325\;\text{m/s}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>To-trinns: momentum (kollisjon) + fjærenergi.</p>,
+  },
+
+  // ==========================================================================
+  // 8.81 — Stuntman med chandelier
+  // ==========================================================================
+  "8.81": {
+    title: "Stuntman på lysekrone — to-trinns",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        En film­stuntman (masse 80,0 kg) står på en vindus­karm 5,0 m over gulvet. Han griper et tau som
+        er festet til en lysekrone og svinger ned for å kollidere med filmens skurk (masse 70,0 kg) som står
+        rett under lysekronen. Stuntmanns massesenter beveger seg 5,0 m nedover. Han slipper tauet rett
+        når han når skurken. (a) Med hvilken fart begynner de to sammen­filtrede å gli over gulvet?
+        (b) Hvis friksjons­koeffisienten mellom dem og gulvet er 0,275, hvor langt sklir de før de stopper?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li><InlineLatex latex="M=80{,}0,\;h=5{,}0,\;m=70{,}0,\;\mu_k=0{,}275" /></li>
+      </ul>
+    ),
+    unknowns: <p>(a) Felles V. (b) Skliavstand.</p>,
+    strategy: (
+      <TheoryBox title="Tre­trinns: sving + kollisjon + friksjon">
+        <p>
+          (1) Energi: <InlineLatex latex="V_\text{før}=\sqrt{2gh}" />.
+          (2) Uelastisk kollisjon: <InlineLatex latex="V=MV_\text{før}/(M+m)" />.
+          (3) Friksjon: <InlineLatex latex="d=V^2/(2\mu_k g)" />.
+        </p>
+      </TheoryBox>
+    ),
+    hints: [{ label: "Hint", content: <p>Friksjons­arbeid stopper systemet helt: <InlineLatex latex="\mu_k(M+m)g\,d=\tfrac12(M+m)V^2" />.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Stuntmanns fart rett før kollisjon">
+          <FormulaBox latex="V_\text{før}=\sqrt{2gh}=\sqrt{2(9{,}80)(5{,}0)}=9{,}90\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Felles fart">
+          <FormulaBox latex="V=\dfrac{MV_\text{før}}{M+m}=\dfrac{80\cdot 9{,}90}{150}=5{,}28\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="V\approx 5{,}28\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="(b) Skliavstand">
+          <FormulaBox latex="d=\dfrac{V^2}{2\mu_k g}=\dfrac{(5{,}28)^2}{2(0{,}275)(9{,}80)}=\dfrac{27{,}88}{5{,}39}=5{,}17\;\text{m}" />
+          <FormulaBox variant="gold" latex="d\approx 5{,}17\;\text{m}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Tre-trinns klassikere: energi + momentum + friksjon. Aldri bland over trinnene.</p>,
+  },
+
+  // ==========================================================================
+  // 8.83 — 1D elastisk med α
+  // ==========================================================================
+  "8.83": {
+    title: "1D elastisk: finn massefor­holdet α",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        Objekter A og B gjennomgår en 1-dimensjonal elastisk kollisjon. Initial­fart for A er
+        <InlineLatex latex="\;v_{A1}" />, og initial­fart for B er null. Lign. 8.24 og 8.25 gir
+        slutt­fartene. La <InlineLatex latex="\;m_A=\alpha m_B" />, der α er en konstant.
+        (a) Hvilken verdi av α gjør at kinetisk energi til B etter kollisjon er lik kinetisk
+        energi til A før? (b) Hvilken verdi av α gjør at sluttenergiene til A og B er like?
+      </p>
+    ),
+    knowns: <p>Elastisk 1D, B i ro før, <InlineLatex latex="m_A=\alpha m_B" />.</p>,
+    unknowns: <p>(a) α slik at <InlineLatex latex="K_{Bf}=K_{Ai}" />. (b) α slik at <InlineLatex latex="K_{Af}=K_{Bf}" />.</p>,
+    strategy: (
+      <TheoryBox title="Elastiske formler">
+        <p>
+          <InlineLatex latex="v_{Af}=\dfrac{\alpha-1}{\alpha+1}v_{A1}" />,
+          <InlineLatex latex="\;v_{Bf}=\dfrac{2\alpha}{\alpha+1}v_{A1}" />.
+        </p>
+      </TheoryBox>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p><InlineLatex latex="K_{Bf}=\tfrac12 m_B v_{Bf}^2" /> — uttrykk via α.</p> },
+      { label: "Hint 2", content: <p>For (a): <InlineLatex latex="K_{Bf}=K_{Ai}=\tfrac12\alpha m_B v_{A1}^2" />.</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="(a) K_Bf = K_Ai">
+          <FormulaBox latex="\tfrac12 m_B\Bigl(\dfrac{2\alpha}{\alpha+1}\Bigr)^{\!2}v_{A1}^2=\tfrac12\alpha m_B v_{A1}^2" />
+          <FormulaBox latex="\dfrac{4\alpha^2}{(\alpha+1)^2}=\alpha\Rightarrow 4\alpha=(\alpha+1)^2" />
+          <FormulaBox latex="\alpha^2-2\alpha+1=0\Rightarrow \alpha=1" />
+          <FormulaBox variant="gold" latex="\alpha=1\;\text{(like masser)}" />
+        </Step>
+        <Step n={2} title="(b) K_Af = K_Bf">
+          <FormulaBox latex="\tfrac12 m_A v_{Af}^2=\tfrac12 m_B v_{Bf}^2" />
+          <FormulaBox latex="\alpha\Bigl(\dfrac{\alpha-1}{\alpha+1}\Bigr)^{\!2}=\Bigl(\dfrac{2\alpha}{\alpha+1}\Bigr)^{\!2}" />
+          <FormulaBox latex="\alpha(\alpha-1)^2=4\alpha^2" />
+          <FormulaBox latex="(\alpha-1)^2=4\alpha\Rightarrow \alpha^2-6\alpha+1=0" />
+          <FormulaBox latex="\alpha=3\pm 2\sqrt{2}" />
+          <FormulaBox variant="gold" latex="\alpha=3+2\sqrt 2\approx 5{,}83\;\text{eller}\;\alpha=3-2\sqrt 2\approx 0{,}172" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Elastiske 1D-relasjoner gir grunnlag for klassiske «sjekk-massefor­hold» problemer.</p>,
+  },
+
+  // ==========================================================================
+  // 8.85 — Kule passerer gjennom blokk
+  // ==========================================================================
+  "8.85": {
+    title: "Kule passerer gjennom blokk — friksjon stopper",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        En 4,00 g kule med horisontal hastighet 400 m/s skytes inn i en 0,800 kg trebloblok som hviler i ro.
+        Kulen går rett gjennom og forlater blokka med 190 m/s. Blokka glir 72,0 cm før den stopper. (a) Finn
+        kinetisk friksjons­koeffisient mellom blokk og underlag. (b) Finn nedgangen i kinetisk energi til
+        kulen. (c) Finn kinetisk energi til blokka rett etter at kulen har passert.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>m=0,004 kg, v=400 m/s, v'=190 m/s; M=0,800 kg, d=0,720 m</li>
+      </ul>
+    ),
+    unknowns: <p>(a) μ. (b) ΔK_kule. (c) K_blokk etter.</p>,
+    strategy: <p>Momentum: finn V av blokk. Energi: friksjons­arbeid = K_blokk. Da μ.</p>,
+    hints: [{ label: "Hint", content: <p><InlineLatex latex="V=\sqrt{2\mu g d}" /> for blokken.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Blokkens V etter kulen passerer">
+          <FormulaBox latex="mv=mv'+MV\Rightarrow V=\dfrac{m(v-v')}{M}=\dfrac{(0{,}004)(210)}{0{,}800}=1{,}05\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(c) K_blokk etter">
+          <FormulaBox latex="K_M=\tfrac12(0{,}800)(1{,}05)^2=0{,}441\;\text{J}" />
+          <FormulaBox variant="gold" latex="K_M\approx 0{,}441\;\text{J}" />
+        </Step>
+        <Step n={3} title="(a) Friksjons­koeffisient">
+          <FormulaBox latex="\mu_k Mgd=K_M\Rightarrow \mu_k=\dfrac{K_M}{Mgd}=\dfrac{0{,}441}{0{,}800\cdot 9{,}80\cdot 0{,}720}=0{,}0782" />
+          <FormulaBox variant="gold" latex="\mu_k\approx 0{,}0782" />
+        </Step>
+        <Step n={4} title="(b) ΔK_kule">
+          <FormulaBox latex="K_i-K_f=\tfrac12(0{,}004)(400)^2-\tfrac12(0{,}004)(190)^2=320-72{,}2=247{,}8\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta K_\text{kule}\approx 248\;\text{J tapt (av disse 0,4 J til blokka, 247,4 J til varme)}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Mesteparten av energien blir til varme i blokka, ikke til kinetisk energi.</p>,
+  },
+
+  // ==========================================================================
+  // 8.88 — Nøytron-decay
+  // ==========================================================================
+  "8.88": {
+    title: "Nøytron-desintegrasjon — energifordeling",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        Et nøytron i ro går spontant over til et proton og et elektron. Total energi som frigjøres er
+        kinetisk energi i de to partiklene. Massen til protonet er 1836 ganger massen til elektronet.
+        Hvilken brøkdel av total frigjort energi går til protonet?
+      </p>
+    ),
+    knowns: <p><InlineLatex latex="m_p=1836\,m_e" />, nøytron i ro.</p>,
+    unknowns: <p>Brøkdel av E som protonet får.</p>,
+    strategy: <p>Momentum-bevaring fra ro: <InlineLatex latex="m_p v_p=m_e v_e" />. Da <InlineLatex latex="K=p^2/(2m)\propto 1/m" />.</p>,
+    hints: [{ label: "Hint", content: <p>Lik momentum, så lavere masse får mer KE.</p> }],
+    solution: (
+      <div>
+        <Step n={1} title="Energifor­hold">
+          <FormulaBox latex="K_p=\dfrac{p^2}{2m_p},\;K_e=\dfrac{p^2}{2m_e}" />
+          <FormulaBox latex="\dfrac{K_p}{K_p+K_e}=\dfrac{1/m_p}{1/m_p+1/m_e}=\dfrac{m_e}{m_e+m_p}=\dfrac{1}{1+1836}" />
+          <FormulaBox variant="gold" latex="\dfrac{K_p}{K_\text{tot}}=\dfrac{1}{1837}\approx 5{,}44\times 10^{-4}\;\text{(ca. 0,054 %)}" />
+        </Step>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Det tyngre legemet får nesten ingenting av energien. Dette er hvorfor β-desintegrasjons­elektroner er så raske.
+        </p>
+      </div>
+    ),
+    summary: <p>Når momentum er likt: KE er invers med massen.</p>,
+  },
+
+  // ==========================================================================
+  // 8.92 — Kvinne går i kano
+  // ==========================================================================
+  "8.92": {
+    title: "Kvinne går i kano — kanoen sklir",
+    difficulty: "middels",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        En 45,0 kg kvinne reiser seg opp i en 60,0 kg, 5,00 m lang kano. Hun starter 1,00 m fra én ende
+        og går til 1,00 m fra den andre enden. Hvis vi ignorerer vannmotstand, hvor langt beveger kanoen
+        seg under prosessen?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>Kvinne 45,0 kg, kano 60,0 kg, kano 5,00 m, går mellom 1,00 og 4,00 m fra én ende ⇒ 3,00 m relativ vandring</li>
+      </ul>
+    ),
+    unknowns: <p>Kanoens forflytning Δ_k.</p>,
+    strategy: <p>COM beveger seg ikke (ingen ytre horisontal kraft). <InlineLatex latex="m\Delta_w+M\Delta_k=0" />, hvor Δw er kvinnes forflytning relativ vannet.</p>,
+    hints: [
+      { label: "Hint", content: <p>La <InlineLatex latex="\Delta_w" /> være kvinnes forskyvning, <InlineLatex latex="\Delta_k" /> kanoens. <InlineLatex latex="\Delta_w-\Delta_k=3{,}00" /> m (relativ til kano).</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="Sett opp ligningene">
+          <FormulaBox latex="m\Delta_w+M\Delta_k=0\Rightarrow \Delta_w=-\dfrac{M}{m}\Delta_k=-\dfrac{60}{45}\Delta_k" />
+          <FormulaBox latex="\Delta_w-\Delta_k=3{,}00\Rightarrow -\dfrac{60}{45}\Delta_k-\Delta_k=3{,}00" />
+          <FormulaBox latex="-\Delta_k\Bigl(\dfrac{60}{45}+1\Bigr)=3{,}00\Rightarrow -\Delta_k\cdot\dfrac{105}{45}=3{,}00" />
+          <FormulaBox latex="\Delta_k=-\dfrac{3{,}00\cdot 45}{105}=-1{,}29\;\text{m}" />
+          <FormulaBox variant="gold" latex="|\Delta_k|\approx 1{,}29\;\text{m (motsatt vei av kvinnen)}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>COM-bevaring i et lukket system: alle relative bevegelser balanseres.</p>,
+  },
+
+  // ==========================================================================
+  // 8.96 — Projektil eksploderer på topp
+  // ==========================================================================
+  "8.96": {
+    title: "Projektil eksploderer ved apex",
+    difficulty: "vanskelig",
+    pageRef: "s. 297",
+    problem: (
+      <p>
+        Et 20,0 kg projektil avfyres ved vinkel 60,0° over horisontal med fart 80,0 m/s. På banens høyeste
+        punkt eksploderer projektilet i to like fragmenter. Det ene fragmentet faller deretter rett ned med
+        null initial­fart. Ignorer luft­motstand. (a) Hvor langt fra avfyrings­punktet treffer det andre
+        fragmentet bakken (terreng er flatt)? (b) Hvor mye energi ble frigjort under eksplosjonen?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5">
+        <li>M=20,0 kg, v₀=80,0 m/s, θ=60°</li>
+        <li>Eksploderer ved apex, to like deler (10 kg hver)</li>
+        <li>Fragment 1 faller vertikalt (v=0 etter eksplosjon)</li>
+      </ul>
+    ),
+    unknowns: <p>(a) Lande­avstand for fragment 2. (b) Δ-energi.</p>,
+    strategy: (
+      <TheoryBox title="Skille horisontal og vertikal">
+        <p>
+          Etter eksplosjon: fragment 1 har v=0; fragment 2 må ha all horisontal momentum. COM lander der hele
+          projektilet ville landet (luft­motstand ignorert).
+        </p>
+      </TheoryBox>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Ved apex har projektilet bare horisontal fart <InlineLatex latex="\;v_x=v_0\cos\theta" />.</p> },
+      { label: "Hint 2", content: <p>Range uten eksplosjon: <InlineLatex latex="R=v_0^2\sin 2\theta/g" />.</p> },
+    ],
+    solution: (
+      <div>
+        <Step n={1} title="Bane uten eksplosjon">
+          <FormulaBox latex="R=\dfrac{v_0^2\sin 2\theta}{g}=\dfrac{(80)^2\sin 120°}{9{,}80}=\dfrac{6400\cdot 0{,}866}{9{,}80}=565{,}5\;\text{m}" />
+          <p>Apex er ved x = R/2 = 282,8 m.</p>
+        </Step>
+        <Step n={2} title="Fragment 1 faller rett ned ved apex">
+          <p>x₁ = 282,8 m. Tid for fall: <InlineLatex latex="t=\sqrt{2H/g}" /> hvor <InlineLatex latex="H=v_0^2\sin^2\theta/(2g)" />.</p>
+        </Step>
+        <Step n={3} title="(a) Fragment 2 lander">
+          <p>
+            COM lander ved R = 565,5 m. Fragment 1 ved x = 282,8 m. Like masser ⇒ COM er midten:
+            <InlineLatex latex="\;(x_1+x_2)/2=R" />.
+          </p>
+          <FormulaBox latex="x_2=2R-x_1=2(565{,}5)-282{,}8=848{,}2\;\text{m}" />
+          <FormulaBox variant="gold" latex="x_2\approx 848\;\text{m}" />
+        </Step>
+        <Step n={4} title="(b) Energi frigjort">
+          <p>Ved apex: KE = ½M·v_x² = ½(20)(40)² = 16 000 J.</p>
+          <p>Etter eksplosjon: fragment 1 har 0 KE. Fragment 2 har all horisontal momentum (M·v_x), så v_2 = 2v_x = 80 m/s.</p>
+          <FormulaBox latex="K_\text{frag 2}=\tfrac12(10)(80)^2=32\,000\;\text{J}" />
+          <FormulaBox latex="\Delta E=K_\text{etter}-K_\text{før}=32\,000-16\,000=16\,000\;\text{J}" />
+          <FormulaBox variant="gold" latex="\Delta E=1{,}60\times 10^{4}\;\text{J}" />
+        </Step>
+      </div>
+    ),
+    summary: <p>Eksplosjon i flukt: COM fortsetter parabolsk bane (intern kraft), men fragmentene fordeler seg.</p>,
   },
 };
