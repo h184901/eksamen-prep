@@ -1,13 +1,10 @@
 # DAT107 JPA januar 2022 - løsning
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-side 1 
- 
-Løsningsforslag 
 Oppgave n (20%~48 minutter) – ORM/JPA 
 Vi skal jobbe litt med en geografi-database med oversikt over land og byer. 
 Vi tenker oss at data om land er lagret i tabellen land: 
@@ -46,16 +43,17 @@ land (FK)
 ## Side 2
 
 ```text
-side 2 
- 
 Vi ønsker å jobbe med denne databasen i et Java-program. 
 a) (10% ~ 24 min) Skriv Java-klassene for entitetstypene Land og By som tilsvarer 
 databasetabellene vist over. Du trenger ikke å skrive metoder, kun instans-
 /objektvariabler og JPA-annoteringer. Vi ønsker toveis forbindelse mellom 
-entitetene for enklere å kunne liste opp byer i et gitt land.  
- 
-Løsningsforslag: 
- 
+entitetene for enklere å kunne liste opp byer i et gitt land.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 @Entity 
 public class Land { 
  
@@ -89,19 +87,30 @@ public class By {
 }
 ```
 
+</details>
+
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 3 
- 
 Vi antar at vi har en hjelpeklasse GeografiDAO. Du skal lage et par metoder i denne. 
 Du kan anta at det er opprettet og at du har tilgang til en EntityManagerFactory kalt 
-emf. 
- 
+emf.
+```
+
+</details>
+
+```text
 b) (3,3% ~ 8 min) Skriv en metode i GeografiDAO som henter ut et land med et gitt 
-navn fra databasen. 
-Løsningsforslag: 
- 
+navn fra databasen.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 2 public Land finnLandMedNavn(String navn) { 
  
 2 
@@ -123,15 +132,21 @@ em.close();
 } 
 2 
 return land; 
-} 
- 
- 
- 
+}
+```
+
+</details>
+
+```text
 c) (3,3% ~ 8 min) Skriv en main-metode som bruker metoden du laget i b) til å få 
 skrevet ut info om hovedstaden i Norge. Du kan anta at Land og By har get-, og 
-toString-metoder du kan bruke. 
-Løsningsforslag: 
- 
+toString-metoder du kan bruke.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Løsningen forutsetter at Land inneholder en korrekt kobling slik: 
     @OneToOne 
     @JoinColumn(name = "hovedstad") 
@@ -150,16 +165,20 @@ public static void main(String[] args) {
 }
 ```
 
+</details>
+
 ## Side 4
 
 ```text
-side 4 
- 
 d) (3,3% ~ 8 min) Skriv en metode i GeografiDAO som oppdaterer folketallet i en gitt 
 by. Parametere til metoden skal være navn på byen og nytt folketall. Hvis ingen by 
-med det gitte navnet finnes, skal metoden ikke gjøre noe. 
-Løsningsforslag: 
- 
+med det gitte navnet finnes, skal metoden ikke gjøre noe.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 public void oppdaterFolketallIBy(String navn, int nyttFolketall) { 
  
  
@@ -218,3 +237,5 @@ em.close();
 } 
 }
 ```
+
+</details>

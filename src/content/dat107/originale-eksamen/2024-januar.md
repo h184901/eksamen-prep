@@ -1,14 +1,10 @@
 # DAT107 2024 januar eksamenssett
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-side 1 
- 
- 
- 
 EKSAMENSOPPGAVE 
  
 Emnekode: 
@@ -70,8 +66,6 @@ på Vestlandet, sier om fusk og forsøk på fusk i § 12-1.
 ## Side 2
 
 ```text
-side 2 
- 
 Oppgave 1 (20%~48 minutter) – ORM/JPA 
 Vi skal jobbe litt med en database med oversikt over filmer og personer med tilknytning til 
 filmene. I første omgang tar vi bare med hvem som er regissør. 
@@ -147,8 +141,6 @@ fodselsaar nasjonalitet
 ## Side 3
 
 ```text
-side 3 
- 
 Vi ønsker å jobbe med denne databasen i et Java-program. 
 a) (8% ~ 18 min) Skriv Java-klassene for entitetstypene som trengs for å representere 
 eksempelet vist over. Du trenger ikke å skrive metoder, kun instans-/objektvariabler og 
@@ -172,8 +164,6 @@ det returneres en tom liste.
 ## Side 4
 
 ```text
-side 4 
- 
 Som en siste oppgave skal vi se på skuespillere i filmer. En person kan være skuespiller 
 (spille en rolle) i en film. Dette er et naturlig mange-til-mange forhold, siden en film kan ha 
 flere skuespillere og en person kan ha spilt i flere filmer. Det kan f.eks. modelleres slik. 
@@ -235,8 +225,6 @@ og at personen ikke er registrert som skuespiller i denne filmen tidligere.
 ## Side 5
 
 ```text
-side 5 
- 
 Oppgave 2 (40%~96 minutter) – Modellering/normalisering 
 Problembeskrivelse 
 En høgskole har flere campus. Hver campus har navn (for eksempel Kronstad), telefonnr, samt 
@@ -286,8 +274,6 @@ bestemme tabeller for databasen.)
 ## Side 6
 
 ```text
-side 6 
- 
 Oppgave 3 (20%~48 minutter) – SQL 
 Problembeskrivelse 
 Denne oppgaven er løst basert på problembeskrivelsen i Oppgave 2 – Modellering/normalisering. Du 
@@ -345,8 +331,6 @@ i en annen del av besvarelsen.
 ## Side 7
 
 ```text
-side 7 
- 
 Oppgave 4 (20%~48 minutter) – NoSQL 
 Problembeskrivelse 
 Ta utgangspunkt problembeskrivelsen i Oppgave 2 – Modellering/normalisering. Bare selve 

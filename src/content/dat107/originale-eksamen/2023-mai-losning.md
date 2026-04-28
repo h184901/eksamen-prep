@@ -1,12 +1,10 @@
 # DAT107 2023 mai eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-side 1 
- 
 Løsningsforslag eksamen DAT107 v2023 
 Oppgave 1 – JPA/ORM (20% - 48 min) 
 Vi skal jobbe litt med en database med oversikt over låter og spillelister. 
@@ -77,8 +75,6 @@ Del av sammensatt PK
 ## Side 2
 
 ```text
-side 2 
- 
 Vi ønsker å jobbe med denne databasen i et Java-program. 
 a) (8% ~ 18 min) Skriv Java-klassene for entitetstypene som trengs for å representere 
 eksempelet vist over. Du trenger ikke å skrive metoder, kun instans-/objektvariabler og 
@@ -87,9 +83,13 @@ klasse for koblingstabellen.
  
 Vi ønsker kun å tilrettelegge for enveis navigering i Java mellom låt og spilleliste slik at 
 en spilleliste inneholder de tilhørende låtene, mens en låt IKKE inneholder de 
-spillelistene den er med i. 
-Løsningsforslag: 
- 
+spillelistene den er med i.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 --- MERKNAD! --------------------------------------------------------------------- 
  
 Det var hintet ganske sterkt om at vi ikke trenger en egen klasse til 
@@ -108,12 +108,14 @@ Løsningsforslag (begynner på neste side) er vist for begge alternativer.
 ----------------------------------------------------------------------------------
 ```
 
+</details>
+
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 3 
- 
- 
 Alt.1 
  
 1   @Entity 
@@ -152,12 +154,14 @@ Alt.1
 }
 ```
 
+</details>
+
 ## Side 4
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 4 
- 
- 
 Alt.2 
  
 4   @Entity 
@@ -205,20 +209,32 @@ private int spilleliste;
     }
 ```
 
+</details>
+
 ## Side 5
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 5 
- 
 Du kan i de videre oppgavene anta at entitetsklassene inneholder de nødvendige 
 konstruktører, gettere og settere, etc. du trenger i løsningene dine.  
 Vi antar at vi har en hjelpeklasse LaatDAO. Du skal lage et par metoder i denne. Du kan anta 
-at en EntityManagerFactory kalt emf er opprettet og tilgjengelig. 
+at en EntityManagerFactory kalt emf er opprettet og tilgjengelig.
+```
+
+</details>
+
+```text
 b) (3% ~ 8 min) Skriv en metode hentSpillelisteMedId(int id) i LaatDAO som henter 
 ut en spilleliste med en gitt id. Alle låtene som hører til spillelisten skal også være med i 
-resultatet. Hvis ingen spilleliste med denne id-en finnes, skal det returneres null. 
-Løsningsforslag: 
- 
+resultatet. Hvis ingen spilleliste med denne id-en finnes, skal det returneres null.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 2   public Spilleliste hentSpillelisteMedId(int id) { 
  
  
@@ -255,15 +271,19 @@ automatisk lukkes når try-blokken er ferdig) kan løsningen forenkles slik:
 Dette gjelder også c) og d).
 ```
 
+</details>
+
 ## Side 6
 
 ```text
-side 6 
- 
 c) (4% ~ 10 min) Skriv en metode hentAlleLaaterForArtist(String artist) i LaatDAO 
-som henter ut en liste av låter for en gitt artist. 
-Løsningsforslag: 
- 
+som henter ut en liste av låter for en gitt artist.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 2   public List<Laat> hentAlleLaaterForArtist(String artist) { 
  
         EntityManager em = emf.createEntityManager(); 
@@ -285,18 +305,22 @@ return q.getResultList();
     }
 ```
 
+</details>
+
 ## Side 7
 
 ```text
-side 7 
- 
 d) (5% ~ 12 min) Skriv en metode opprettSpilleliste(String navn, String 
 beskrivelse, List<Laat> laater) i LaatDAO som oppretter og lagrer en ny spilleliste 
 med noen låter (gitt som parameter). Låtene inneholder id. Kun låter som finnes i 
 databasen skal legges inn i spillelisten. (De andre har ugyldig id). Metoden skal returnere 
-spillelisten som er opprettet og lagret i databasen. 
-Løsningsforslag: 
- 
+spillelisten som er opprettet og lagret i databasen.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public Spilleliste opprettSpilleliste( 
             String navn, String beskrivelse, List<Laat> laater)  { 
      
@@ -330,11 +354,11 @@ spilleliste.leggTilLaat(laat);
     }
 ```
 
+</details>
+
 ## Side 8
 
 ```text
-side 8 
- 
 Oppgave 2 – Modellering (20% - 48 min) 
 En skole har behov for et datasystem for å håndtere eksamener.  
 En eksamen gjelder et bestemt fag. Det kan arrangeres eksamen for samme fag et vilkårlig antall 
@@ -359,9 +383,13 @@ Sterke/svake entitetstyper og eksistensavhengighet/uavhengighet (kråkefot-notas
 type aggregering (UML-notasjon) 
 • 
 Redegjørelse for de valgene som er tatt. Det blir lagt vekt på både praktisk utførelse og 
-teoretisk forståelse 
-Løsningsforslag 
- 
+teoretisk forståelse
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Oppgaven kan løses på flere måter, men løsningen ovenfor er trolig den “enkleste” som fullt ut 
 tilfredsstiller kravene. 
 Student blir identifisert med studentnummer. Dette er en sterk entitetstype siden den ikke arver 
@@ -379,13 +407,13 @@ fagkode bruker man samme datatype som tidligere. Dato må opplagt være date, me
 passer trolig char(1) best hvis man tenker at disse alltid har et tegn (for eksempel A).
 ```
 
+</details>
+
 ![Eksamenmodell](/content/dat107/assets/originale-eksamen/2023-mai-eksamenmodell.png)
 
 ## Side 9
 
 ```text
-side 9 
- 
 Oppgave 3 – Normalisering (20% - 48 min) 
 Ta utgangspunkt i følgende unormaliserte (flate) tabell: 
 Eksamen(fagkode, fagnavn, beskrivelse, studentnummer, fornavn, etternavn, epost, karakter, dato) 
@@ -407,8 +435,13 @@ som opprinnelig tabell)
 Primær- og fremmed-nøkler for endelig samling tabeller (3. normalform) 
 • 
 Redegjørelse for de valgene som er tatt. Det blir lagt vekk på både praktisk utførelse og 
-teoretisk forståelse 
-Løsningsforslag 
+teoretisk forståelse
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Vi begynner med å bestemme egnet primærnøkkel. Vi ser at tabellen inneholder informasjon om 
 eksamener som en gitt person har tatt i et gitt fag. Primærnøkkel må derfor kunne skille disse ad. Det 
 virker naturlig at studentnummer skal kunne unikt bestemme studenten som har tatt eksamen, mens 
@@ -432,11 +465,11 @@ kolonner som ikke er del av primærnøkkel. Det ser ikke ut som at dette er tilf
 laget blir dermed stående.
 ```
 
+</details>
+
 ## Side 10
 
 ```text
-side 10 
- 
 Oppgave 4 – SQL (20% - 48 min) 
 Ta utgangspunkt i følgende tabeller: 
 Student(studentnummer, navn) 
@@ -468,8 +501,13 @@ Cube-gruppering (group by cube) av eksamener for både fagkode og studentnummer
 Opprette indeks på kolonnen Fagkode i tabellen Eksamen 
 • 
 Redegjørelse for de valgene som er tatt. Det blir lagt vekk på både praktisk utførelse og 
-teoretisk forståelse 
-Løsningsforslag 
+teoretisk forståelse
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Vi oppretter først tabellen eksamen. Studentnummer er en fremmednøkkel til tabellen student (som 
 vi antar allerede eksisterer). Vi bruker datatypen int, men kunne like godt brukt char(6). Vi bruker on 
 update cascade for å angi at endringer i studentnummer skal bli videreført til denne tabellen. Hvor 
@@ -493,11 +531,14 @@ Delete from student where studentnr=42;
 Delete from eksamen where studentnr=42;
 ```
 
+</details>
+
 ## Side 11
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 11 
- 
 Så skal vi legge til en ny kolonne epost for student. Varchar er en naturlig datatype her, og vi bruker 
 ikke not null siden vi ikke vil “kreve” at studenter skal ha epost, særlig hvis det er personlige epost-
 adresser vi tenker på her: 
@@ -531,11 +572,11 @@ uansett, vi kan gjøre det manuelt slik:
 Create index on eksamen (fagkode);
 ```
 
+</details>
+
 ## Side 12
 
 ```text
-side 12 
- 
 Oppgave 5 – NoSQL (20% - 48 min) 
 Ta utgangspunkt Oppgave 4 – SQL. 
 Implementer denne databasen som en “flat” (data blir gjentatt – ikke normalisert) NoSQL-database. 
@@ -559,8 +600,13 @@ Antall eksamener for hver fagkode
 Antall eksamener for hvert student-navn 
 • 
 Redegjørelse for de valgene som er tatt. Det blir lagt vekk på både praktisk utførelse og 
-teoretisk forståelse 
-Løsningsforslag 
+teoretisk forståelse
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Oppgaven tillater at ulike typer NoSQL kan blir brukt til å løse den. Vi vil her benytte JSON som et 
 eksempel, men de andre typene vil være like riktige å bruke. 
 Vi begynner med å opprette en tabell som kan lagre JSON-data. Kolonnen id er et løpenummer som 
@@ -588,11 +634,14 @@ Neste oppgave er å skrive ut alle eksamener med studentnavn. Dette er veldig en
 allerede har en flat struktur, og det ikke er behov for å kople sammen ulike tabeller. Vi kan for
 ```
 
+</details>
+
 ## Side 13
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-side 13 
- 
 eksempel gjøre dette slik: 
 Select data->’fagkode’, data->’karakter’, data->’navn’ 
 from eksamen; 
@@ -605,3 +654,5 @@ Select data->’navn’, count(*)
 from eksamen 
 group by data->’navn’;
 ```
+
+</details>

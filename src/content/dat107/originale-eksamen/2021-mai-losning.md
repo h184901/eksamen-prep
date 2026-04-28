@@ -1,12 +1,10 @@
 # DAT107 2021 mai eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1 
- 
 DAT107 løsningsforslag eksamen mai 2021 
 Oppgave 1 – flervalg 
 a) 
@@ -64,8 +62,6 @@ utvalgsspørringer mellom tabellene
 ## Side 2
 
 ```text
-2 
- 
 D 
 Har ikke betydning utover å synliggjøre at det er en fremmednøkkel 
 f) 
@@ -125,8 +121,6 @@ Enten A eller B, spiller ingen rolle hvilken
 ## Side 3
 
 ```text
-3 
- 
 D 
 Både A og B 
 k) 
@@ -185,8 +179,6 @@ Garanterer at vranglås ikke kan oppstå
 ## Side 4
 
 ```text
-4 
- 
 D 
 Algoritme for håndtering av ventegraf 
 Oppgave 2 – SQL 
@@ -228,8 +220,6 @@ postnummer finnes i tabellen for poststed.
 ## Side 5
 
 ```text
-5 
- 
 select navn, postnummer, poststed 
 from person left outer join poststed 
 on person.postnummer=poststed.postnummer; 
@@ -274,8 +264,6 @@ eksisterende kolonner. Kommenter mulige «problemer» med ulike kandidatn økler
 ## Side 6
 
 ```text
-6 
- 
 Innledningsvis kan vi nevne at postnummer ved ett uhell ble utlatt fra listen over kolonner. Skulle 
 vært: 
 Navn, kjønn, telefonnummer, postnummer, poststed, adresse, årskull, fordypningskode, 
@@ -320,8 +308,6 @@ fordypningsnavn.
 ## Side 7
 
 ```text
-7 
- 
 b) 
 Er tabellen på 1NF? Hvorfor/hvorfor ikke? Hvis ikke, modifiser den slik at den er på 1NF. 
 Tabellen er ikke på 1NF fordi kolonnen Telefonnummer ikke består av en atomær verdi. Vi må derfor 
@@ -362,8 +348,6 @@ Postnummer, poststed
 ## Side 8
 
 ```text
-8 
- 
 Oppgave 4 – modellering 
 Det er behov for et nytt system for håndtering av studenter ved en høgskole. 
 Det er flere campus (ulike studiesteder). Hver har et navn og en unik forkortelse. Hver har også en 
@@ -394,8 +378,6 @@ og disse vill være like riktige dersom de tilfredsstiller kravene i oppgaven p�
 ## Side 9
 
 ```text
-9 
- 
 Imidlertid bør ikke andre løsninger medføre en mer «komplisert» struktur uten at det er gode 
 grunner til dette. Det er brukt UML-notasjon her siden det støtter subtyper bedre enn kråkefot-
 notasjon. Begge disse notasjonene, samt Chen-notasjon kan bli brukt til å besvare oppgaven. 
@@ -473,8 +455,6 @@ public class Fag {
 ## Side 10
 
 ```text
-10 
- 
     @ManyToMany 1p (NB! Denne er symmetrisk og kan også settes opp andre veien) 
     @JoinTable( 
             name = "undervisning", 
@@ -508,9 +488,6 @@ public class Person {
 ## Side 11
 
 ```text
-11 
- 
- 
 En del besvarelser hadde brukt en alternativ løsning på d) med koblingsklasse og to 
 en-til-mange-forhold i stedet for ett mange-til-mange-forhold. 
  
@@ -576,8 +553,6 @@ skrevet inn som tekst i Word. Jeg tar forbehold om feil/bugs!
 ## Side 12
 
 ```text
-12 
- 
 a) Vi ønsker å kunne lagre et nytt fag i databasen. Brukeren av programmet gir inn 
 faget sin kode, navn, studiepoeng (stp), semester, og fagansvarlig sin id (den siste 
 f.eks. via valg fra nedtrekksliste). 
@@ -711,8 +686,6 @@ em.close(); 1p
 ## Side 13
 
 ```text
-13 
- 
 b) Nå tilbake til dette med lærere i fag. Et fag kan ha flere lærere, og en lærer kan 
 undervise i flere fag. 
  
@@ -769,10 +742,6 @@ at du må oppgi detaljerte steg for utregningene for å få full poengsum.
 ## Side 14
 
 ```text
-14 
- 
- 
- 
 Solutions 
 3: excellent answers with steps 
 2.5: good answer (one wrong solution, not output the final results but equation and steps are ok) 
@@ -788,8 +757,6 @@ Solutions
 ## Side 15
 
 ```text
-15 
- 
 0: no answers 
 Steps for calculation 
 7: excellent answers (detailed steps, don’t need to make all detailed progress but the idea is ok with 
@@ -839,8 +806,6 @@ Ta utgangspunkt i oppgave 2 (SQL). Skriv en "rad" fra hver av tabellene som JSON
 ## Side 16
 
 ```text
-16 
- 
         «adresse»: «Inndalsveien 28», 
         «telefonnummer»: «55667788» 
       } 

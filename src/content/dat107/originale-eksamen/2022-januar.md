@@ -1,15 +1,10 @@
 # DAT107 2022 januar eksamenssett
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1/22 
- 
- 
- 
- 
 EKSAMENSOPPGÅVE 
  
 Emnekode: 
@@ -75,8 +70,6 @@ på Vestlandet, seier om fusk og forsøk på fusk i § 12-1.
 ## Side 2
 
 ```text
-2/22 
- 
 Oppgåve 1 – Fleirval (30 poeng, ~72 min.) 
  
 Vel nøyaktig eit av alternativa for kvar oppgåve. 
@@ -117,8 +110,6 @@ d) Full outer join
 ## Side 3
 
 ```text
-3/22 
- 
 5) Kva gjer left outer join? 
 a) Viser alle linjer i begge tabellane. 
 b) Viser alle linjer frå første tabell, samen med matchende data frå andre 
@@ -160,8 +151,6 @@ framandnøkkel til tabellen på “ein-sidan”
 ## Side 4
 
 ```text
-4/22 
- 
 10) Korleis lager man eit hierarki i en database? 
 a) Man opprettar ein ny tabell. Den eksisterande tabellen har en 
 framandnøkkel til den nye tabellen, og den nye tabellen har ein 
@@ -202,8 +191,6 @@ d) Ein tabell kan berre ha indeks for en kolonne
 ## Side 5
 
 ```text
-5/22 
- 
 14) I ein tabell er det behov for en kolonne som lagrar tal på eksemplar av ein gitt 
 vare på lager.  Kva for datatype er som regel mest hensiktsmessig for dette? 
 (Du treng ikkje ta stilling til kor store verdiar det er behov for å lagre.)  
@@ -225,8 +212,6 @@ d) Låser sikrar referanseintegritet
 ## Side 6
 
 ```text
-6/22 
- 
 Oppgåve 2 – SQL (14 poeng, ~33,6 min.) 
  
 Ta utgangspunkt i følgande tabellar for registrering av biler som passerer en 
@@ -264,8 +249,6 @@ registreringsnummer (dvs., tal på passeringar vi ikkje får betalt for.)
 ## Side 7
 
 ```text
-7/22 
- 
 Oppgåve 3 – normalisering (10 poeng, ~24 min.) 
  
 En database har følgande tabell: 
@@ -292,8 +275,6 @@ Om ikkje, modifiser den slik at den er på 3NF.
 ## Side 8
 
 ```text
-8/22 
- 
 Oppgåve 4 – modellering (10 poeng, ~24 min.) 
  
 Ei foreining har behov for et system for å administrere medlemmer. Eit medlem har 
@@ -319,8 +300,6 @@ Kommenter vala du tar for å klargjere korleis du tenker/resonerar.
 ## Side 9
 
 ```text
-9/22 
- 
 Oppgåve 5 - ORM/JPA (20 poeng, ~48 min.) 
  
 Vi skal jobbe litt med ein geografi-database med oversyn over land og byar. Vi tenker 
@@ -377,9 +356,6 @@ toString-metodar du kan bruke.
 ## Side 10
 
 ```text
-10/22 
- 
- 
 d) (3,3% ~ 8 min) Skriv ein metode i GeografiDAO som oppdaterer folketalet i ein 
 gitt by. Parametrar til metoden skal vera namn på byen og nytt folketal. Viss 
 ingen by med det gitte namnet finst, skal metoden ikkje gjera noko. 
@@ -419,8 +395,6 @@ values” under “B’s conditional FP”-tre.
 ## Side 11
 
 ```text
-11/22 
- 
 Oppgåve 7 – NoSQL (6 poeng, - ~14,4 min.) 
  
 a) Ta utgangspunkt i oppgåve 2 (SQL). Skriv ein "rad" frå kvar av tabellane som 
@@ -438,10 +412,6 @@ databasesystem passer best? Diskuter/grunngi svaret.
 ## Side 12
 
 ```text
-12/22 
- 
- 
- 
 EKSAMENSOPPGAVE 
  
 Emnekode: 
@@ -505,8 +475,6 @@ på Vestlandet, sier om fusk og forsøk på fusk i § 12-1.
 ## Side 13
 
 ```text
-13/22 
- 
 Oppgave 1 – Flervalg (30 poeng, ~72 min.) 
  
 Velg nøyaktig et av alternativene for hver oppgave. 
@@ -547,8 +515,6 @@ d) Full outer join
 ## Side 14
 
 ```text
-14/22 
- 
 5) Hva gjør left outer join? 
 a) Viser alle linjer i begge tabellene. 
 b) Viser alle linjer fra første tabell, sammen med matchende data fra andre 
@@ -590,8 +556,6 @@ fremmednøkkel til tabellen på “en-siden”
 ## Side 15
 
 ```text
-15/22 
- 
 10) Hvordan lager man et hierarki i en database? 
 a) Man oppretter en ny tabell. Den eksisterende tabellen har en 
 fremmednøkkel til den nye tabellen, og den nye tabellen har en 
@@ -633,8 +597,6 @@ d) En tabell kan bare ha indeks for en kolonne
 ## Side 16
 
 ```text
-16/22 
- 
 14) I en tabell er det behov for en kolonne som lagrer antall eksemplarer av en gitt 
 vare på lager.  Hvilken datatype er som regel mest hensiktsmessig for dette? 
 (Du trenger ikke ta stilling til hvor store verdier det er behov for å lagre.)  
@@ -656,8 +618,6 @@ d) Låser sikrer referanseintegritet
 ## Side 17
 
 ```text
-17/22 
- 
 Oppgave 2 – SQL (14 poeng, ~33,6 min.) 
  
 Ta utgangspunkt i følgende tabeller for registrering av biler som passerer en 
@@ -695,8 +655,6 @@ registreringsnummer (dvs., antall passeringer vi ikke får betalt for.)
 ## Side 18
 
 ```text
-18/22 
- 
 Oppgave 3 – normalisering (10 poeng, ~24 min.) 
  
 En database har følgende tabell: 
@@ -723,8 +681,6 @@ ikke? Hvis ikke, modifiser den slik at den er på 3NF.
 ## Side 19
 
 ```text
-19/22 
- 
 Oppgave 4 – modellering (10 poeng, ~24 min.) 
  
 En forening har behov for et system for å administrere medlemmer. Et medlem har 
@@ -750,8 +706,6 @@ Kommenter valgene du tar for å klargjøre hvordan du tenker/resonerer.
 ## Side 20
 
 ```text
-20/22 
- 
 Oppgave 5 - ORM/JPA (20 poeng, ~48 min.) 
  
 Vi skal jobbe litt med en geografi-database med oversikt over land og byer. 
@@ -808,8 +762,6 @@ og toString-metoder du kan bruke.
 ## Side 21
 
 ```text
-21/22 
- 
 d) (3,3% ~ 8 min) Skriv en metode i GeografiDAO som oppdaterer folketallet i en 
 gitt by. Parametere til metoden skal være navn på byen og nytt folketall. Hvis 
 ingen by med det gitte navnet finnes, skal metoden ikke gjøre noe. 
@@ -850,8 +802,6 @@ b) Bygg “B’s conditional FP”-tre og list “B’s relevant patterns” med
 ## Side 22
 
 ```text
-22/22 
- 
 Oppgave 7 – NoSQL (6 poeng, - ~14,4 min.) 
  
 a) Ta utgangspunkt i oppgave 2 (SQL). Skriv en "rad" fra hver av tabellene som 

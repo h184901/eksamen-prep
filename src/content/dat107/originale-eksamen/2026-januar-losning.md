@@ -1,12 +1,10 @@
 # DAT107 2026 januar eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1 / 11 
- 
 Oppgave 1 – modellering (25%, ~1 time) 
 En bedrift har behov for å holde styr på hvilke ansatte som sitter på hvilke kontor. En 
 ansatt har navn, fødselsdato, epostadresse, samt et unikt ansattnummer. Et kontor har 
@@ -24,9 +22,10 @@ Lag et logisk (fullstendig) ER-diagram for denne databasen. Ikke glem å ha med:
 notasjon) eller eventuell type aggregering (UML-notasjon)  
 • Tilfredsstiller 1., 2., og 3. normalform (for alle tabeller) 
 Dersom du ikke er sikker på hvordan du skal løse en oppgave, forsøk å gjøre så mye 
-som du kan! 
-Løsningsforslag 
- 
+som du kan!
+```
+
+```text
 Oppgave 2 (25% ~1 time) – SQL  
 Oppgaven baserer seg løst på problembeskrivelsen til oppgave 1. Anta at en forenklet/ 
 redusert/ minimal løsning kan bestå av disse to tabellene: 
@@ -39,8 +38,6 @@ Tilordning(ansattnummer*, kontornummer)
 ## Side 2
 
 ```text
-2 / 11 
- 
 1. Skriv SQL-kode for å opprette tabellen Ansatt. Du kan anta at tabellen Tilordning 
 allerede eksisterer. Husk primærnøkkel, eventuelle fremmednøkler/ 
 referanseintegriteter, datatyper, null/ not null, osv. 
@@ -55,8 +52,13 @@ E408.
 9. Skriv SQL-kode som viser hvilke kontor det sitter flest ansatte på. 
 10. Skriv SQL-kode som viser hvilke ansatte som ikke sitter på noe kontor. 
 Dersom du ikke er sikker på hvordan du skal løse en oppgave, forsøk å gjøre så mye 
-som du kan! 
-Løsningsforslag 
+som du kan!
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 1. Create table ansatt( 
 ansattnummer int primary key, 
 navn varchar(25) not null); 
@@ -81,11 +83,14 @@ from tilordning
 group by kontornummer;
 ```
 
+</details>
+
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-3 / 11 
- 
 9. Select kontornummer, count(*) 
 from tilordning 
 group by kontornummer 
@@ -99,7 +104,12 @@ Select *
 from ansatt 
 where ansattnummer not in 
 (select ansattnummer from tilgang); 
-Andre muligheter finnes også. 
+Andre muligheter finnes også.
+```
+
+</details>
+
+```text
 Oppgave 3 (25% ~1 time) – ORM/JPA 
 Vi skal jobbe litt med en enkel database for personer. Siden en person kan ha flere 
 telefoner, har vi en egen tabell for disse. Siden postnr og navn for et poststed henger 
@@ -115,14 +125,21 @@ PK angir primærnøkler, og FK angir fremmednøkler. Her er tabeller med noen
 eksempeldata:
 ```
 
-![Person, telefon og poststed - modell](/content/dat107/assets/originale-eksamen/2026-januar-person-telefon-poststed-modell.png)
+> **Logisk ER-modell (gjengitt fra oppgavetekst)**
+>
+> | Tabell | Kolonner |
+> |---|---|
+> | `poststed` | `postnr` (PK), `navn` |
+> | `person` | `personnr` (PK), `fornavn`, `etternavn`, `gateadresse`, `bosted_pnr` (FK → poststed) |
+> | `telefon` | `nummer` (PK), `etikett`, `eier_pnr` (FK → person) |
+>
+> En-til-mange: `poststed` → `person` (bosted), `person` → `telefon` (eier).
+>
+> *Den ekstraherte modell-figuren fra PDF var uleselig og er erstattet med tabellen over.*
 
 ## Side 4
 
 ```text
-4 / 11 
- 
- 
 Alle data er av typen VARCHAR, med unntak av telefonnr og postnr, som er av typen 
 INTEGER. Man kan godt argumentere for at databasen burde vært bedre normalisert, men 
 dere får bruke det oppsettet som er beskrevet. 
@@ -134,9 +151,13 @@ forholdet mellom entitetene:
 ▪ Vi ønsker at en Person skal inneholde en liste over sine telefoner, slik at vi ved 
 behov enkelt kan få ut disse sammen med andre personopplysninger. 
 ▪ Vi ønsker IKKE at et Poststed skal ha en liste over alle personer som bor der. 
-Hvis det er behov for en liste over personer, må dette hentes via en spørring. 
-Løsningsforslag: 
- 
+Hvis det er behov for en liste over personer, må dette hentes via en spørring.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 1 @Entity 
   public class Poststed { 
 2 
@@ -151,15 +172,26 @@ private String navn;
 private String etikett;
 ```
 
-![Person, telefon og poststed - tabeller](/content/dat107/assets/originale-eksamen/2026-januar-person-telefon-poststed-tabeller.png)
+</details>
+
+> **Eksempeldata (tabellskjema fra oppgavetekst)**
+>
+> Alle data er av typen `VARCHAR`, med unntak av `nummer` og `postnr` som er `INTEGER`.
+>
+> | Tabell | Kolonner |
+> |---|---|
+> | `telefon` | `nummer (PK)`, `etikett`, `eier_pnr (FK)` |
+> | `person` | `personnr (PK)`, `fornavn`, `etternavn`, `gateadresse`, `bosted_pnr (FK)` |
+> | `poststed` | `postnr (PK)`, `navn` |
+>
+> *Det opprinnelige PDF-uttrekket av eksempeldataene var uleselig (svart bilde) og er erstattet med skjemaet over. Selve eksempelradene var bare i PDF-en.*
 
 ## Side 5
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-5 / 11 
- 
- 
-1 
 @ManyToOne @JoinColumn(name="eier_pnr") 
 1 
 private Person eier; 
@@ -191,13 +223,22 @@ Du kan i de videre oppgavene anta at entitetsklassene inneholder de nødvendige
 konstruktører, gettere og settere, etc. du trenger i løsningene dine.  
 Vi antar at vi har en hjelpeklasse PersonDAO for databaseoperasjoner. Du skal lage et par 
 metoder i denne. Du kan anta at en EntityManagerFactory kalt emf er opprettet og 
-tilgjengelig for bruk i metodene. 
+tilgjengelig for bruk i metodene.
+```
+
+</details>
+
+```text
 b) (4% ~ 10 min) Skriv en metode 
 Person finnPerson(String personnr)  
 i PersonDAO som henter ut personen med gitt personnr. Hvis ingen personer med dette 
-personnr finnes, skal det returneres null. 
-Løsningsforslag: 
- 
+personnr finnes, skal det returneres null.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     Person finnPerson(String personnr) { 
          
 1        EntityManager em = emf.createEntityManager(); 
@@ -211,18 +252,21 @@ return em.find(Person.class, personnr);
     }
 ```
 
+</details>
+
 ## Side 6
 
 ```text
-6 / 11 
- 
- 
 c) (4% ~ 15 min) Skriv en metode 
 List<Person> finnPersonerMedPostnr(int postnr) 
 i PersonDAO som henter ut alle personer som bor på gitt postnr. Tips: Her må det skrives 
-en JPQL-spørring. 
-Løsningsforslag: 
- 
+en JPQL-spørring.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     List<Person> finnPersonerMedPostnr(int postnr) { 
          
         EntityManager em = emf.createEntityManager(); 
@@ -247,9 +291,12 @@ return query.getResultList();
         } finally { 
 1           em.close(); 
         } 
-    } 
- 
- 
+    }
+```
+
+</details>
+
+```text
 d) (8% ~ 15 min) Skriv en metode 
 boolean leggTilTelefon( 
    
@@ -257,9 +304,13 @@ String personnr, int telefonnr, String etikett)
 i PersonDAO som legger til en telefon for personen med gitt personnr. Hvis ingen person 
 finnes i databasen med dette personnr, eller det allerede finnes en telefon i databasen 
 med gitt telefonnr, kan ikke telefonen legges til, og det skal returneres false. Ellers skal 
-telefonen legges til, og det returneres true.  
-Løsningsforslag: 
- 
+telefonen legges til, og det returneres true.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     boolean leggTilTelefon(String personnr, int telefonnr, String etikett) { 
  
         EntityManager em = emf.createEntityManager(); 
@@ -272,12 +323,14 @@ Person person = em.find(Person.class, personnr);
 //Hvis person ikke finnes ...
 ```
 
+</details>
+
 ## Side 7
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-7 / 11 
- 
-1         
 if (person == null) { 
          
  
@@ -337,8 +390,12 @@ return true;
         } finally { 
              em.close(); 
         } 
-    } 
- 
+    }
+```
+
+</details>
+
+```text
 Oppgave 4 (25% ~60 time) – XML, JSON og NoSQL 
 4.1 XML, XPath og JSON (ca 8,5% ~ 20 min) 
 I oppgavene under (a-e) skal du skrive XPath-uttrykk basert på XML-dokumentet i 
@@ -361,9 +418,6 @@ Svar:
 ## Side 8
 
 ```text
-8 / 11 
- 
- 
 b) Skriv et XPath-uttrykk for å finne all informasjon om alle programmer i kategorien 
 «Reality». 
 Svar:  
@@ -419,8 +473,6 @@ Svar:
 ## Side 9
 
 ```text
-9 / 11 
- 
     "kategori": "Nyheter", 
     "beskrivelse": "Bla bla." 
   } 
@@ -472,8 +524,6 @@ select="tittel"/>.
 ## Side 10
 
 ```text
-10 / 11 
- 
 4.3 NoSQL  (ca 2% ~ 5 min) 
 Nedenfor er det listet 6 databaser (ulike NoSQL-databaser og relasjons databaser), 
 samt en fakta setning om hver av de 6 databasene.  
@@ -532,8 +582,6 @@ samlingen som JSON dokumenter med nøklene:
 ## Side 11
 
 ```text
-11 / 11 
- 
 - 
 _id (objectId – generert av MongoDB databasen) 
 - 

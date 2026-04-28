@@ -1,6 +1,6 @@
 # DAT107 2022 mai eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
@@ -463,12 +463,13 @@ tilsvarer databasetabellene vist over. Du trenger ikke å skrive metoder, kun in
 /objektvariabler og JPA-annoteringer. Du kan videre anta at klassene inneholder de 
 nødvendige konstruktører og get- og set-metoder. 
 Vi ønsker IKKE toveis forbindelse mellom person og adresse, men vi ønsker det mellom 
-person og telefon. (Det blir poengtrekk om du annoterer "for mye" her) 
- 
-Løsningsforslag:
+person og telefon. (Det blir poengtrekk om du annoterer "for mye" her)
 ```
 
 ## Side 11
+
+<details>
+<summary>Vis løsningsforslag</summary>
 
 ```text
 1  @Entity 
@@ -532,13 +533,20 @@ private Person eier;
    } 
  
 Vi antar at vi har en hjelpeklasse PersonDAO. Du skal lage et par metoder i denne. Du kan 
-anta at en EntityManagerFactory kalt emf er opprettet og tilgjengelig. 
- 
+anta at en EntityManagerFactory kalt emf er opprettet og tilgjengelig.
+```
+
+</details>
+
+```text
 b) (3,5% ~ 8 min) Skriv en metode hentUtPersonMedId(int id) i PersonDAO som henter 
-ut en person med en gitt id. Hvis ingen finnes skal det returneres null. 
- 
-Løsningsforslag: 
- 
+ut en person med en gitt id. Hvis ingen finnes skal det returneres null.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 2 public Person hentUtPersonMedId(int id) { 
  
 1 
@@ -555,18 +563,29 @@ return em.find(Person.class, id);
 em.close();
 ```
 
+</details>
+
 ## Side 12
+
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
 
 ```text
 } 
-  } 
- 
- 
+  }
+```
+
+</details>
+
+```text
 c) (3,5% ~ 8 min) Skriv en metode hentUtAlleSomBorPaaAdresseId(int id) i PersonDAO 
-som henter ut en liste av personer som bor på adressen med en gitt id.  
- 
-Løsningsforslag: 
- 
+som henter ut en liste av personer som bor på adressen med en gitt id.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 2 public List<Person> hentUtAlleSomBorPaaAdresseId(int id) { 
  
  
@@ -605,18 +624,24 @@ p.adresse.id, ikke p.adresse_id.
  
 Merknad: Siden Adresse ikke inneholder en liste av Personer, jfr. oppgavetekst i 
 a), kan vi ikke gjøre en find() på adresse, og deretter hente listen derfra med 
-getBeboere(). Hvis man har valgt denne løsningen gis maks 5 poeng. 
- 
- 
+getBeboere(). Hvis man har valgt denne løsningen gis maks 5 poeng.
+```
+
+</details>
+
+```text
 d) (5% ~ 12 min) Skriv en metode personFlytterTilAdresse(int personId, String 
 gateadresse, int postnummer) i PersonDAO som registrerer flytting til ny adresse for 
 person med gitt personId. Hvis adressen finnes fra før i databasen skal denne brukes. Hvis 
 adressen ikke finnes fra før skal den opprettes. Du kan anta at PersonDAO har en 
 hjelpemetode hentUtAdresse(String gateadresse, int postnummer) som søker 
-opp og evt. returner en adresse om den finnes.  
- 
-Løsningsforslag: 
- 
+opp og evt. returner en adresse om den finnes.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 public void personFlytterTilAdresse( 
     int personId, String gateadresse, int postnummer) { 
  
@@ -632,11 +657,14 @@ try {
 tx.begin();
 ```
 
+</details>
+
 ## Side 13
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-2 
- 
 Adresse adresse = hentUtAdresse(gateadresse, postnummer); 
  
  
@@ -705,9 +733,12 @@ tx.rollback();
 em.close(); 
  
 } 
-} 
- 
- 
+}
+```
+
+</details>
+
+```text
 Oppgave 6 – data mining (10% ~24 min.) 
 Spørsmål a 
 Beskriv stegene for "k-item" set (k>=1) for å finne "the association rules" ved å benytte 

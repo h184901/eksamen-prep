@@ -1,12 +1,10 @@
 # DAT107 2024 mai eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1 / 21 
- 
 Oppgave 1 (25% ~1 time) – ORM/JPA 
 Vi skal jobbe litt med en database for et bibliotek. Databasen skal ha oversikt over bøker, 
 medlemmer (en person registrerer seg som medlem for å kunne låne bøker) og utlån.  
@@ -96,8 +94,6 @@ Returdato NULL betyr at boken ikke er returnert.
 ## Side 2
 
 ```text
-2 / 21 
- 
 I utlaan-tabellen ser vi f.eks. at bok med id=2 (1984 av George Orwell) er først lånt ut til 
 medlem nr 10003 (Per Viskelær) og returnert 15. februar, og deretter lånt ut til medlem nr 
 10001 (Atle Patle) og enda ikke returnert. 
@@ -111,9 +107,13 @@ forholdet mellom entitetene:
 • Vi ønsker å ha toveis navigering i Java mellom Medlem og Utlaan, slik at et 
 medlem har en liste over hvilke utlån han/hun har foretatt.  
 • Vi ønsker IKKE å ha toveis navigering i Java mellom Bok og Utlaan. Hvis vi ønsker 
-en oversikt over utlånene til en bok, må det lages en egen spørring for dette. 
-Løsningsforslag: 
- 
+en oversikt over utlånene til en bok, må det lages en egen spørring for dette.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 1   @Entity 
     public class Bok { 
  
@@ -151,13 +151,14 @@ Løsningsforslag:
     }
 ```
 
+</details>
+
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-3 / 21 
- 
- 
-     
     @Entity 
     public class Utlaan { 
  
@@ -181,12 +182,21 @@ Du kan i de videre oppgavene anta at entitetsklassene inneholder de nødvendige
 konstruktører, gettere og settere, etc. du trenger i løsningene dine.  
 Vi antar at vi har en hjelpeklasse BibliotekDAO for databaseoperasjoner. Du skal lage et par 
 metoder i denne. Du kan anta at en EntityManagerFactory kalt emf er opprettet og 
-tilgjengelig for bruk i metodene. 
+tilgjengelig for bruk i metodene.
+```
+
+</details>
+
+```text
 b) (4% ~ 10 min) Skriv en metode Medlem finnMedlemMedNr(int medlemnr) i BibliotekDAO 
 som henter ut medlemmet med gitt medlemnr. Hvis ingen medlemmer med dette 
-nummeret finnes, skal det returneres null. 
-Løsningsforslag: 
- 
+nummeret finnes, skal det returneres null.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public Medlem finnMedlemMedNr(int medlemnr) { 
  
 2       EntityManager em = emf.createEntityManager(); 
@@ -210,17 +220,28 @@ automatisk lukkes når try-blokken er ferdig) kan løsningen forenkles slik:
     }
 ```
 
+</details>
+
 ## Side 4
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-4 / 21 
- 
-Tilsvarende gjelder også c) og d). 
- 
+Tilsvarende gjelder også c) og d).
+```
+
+</details>
+
+```text
 c) (4% ~ 10 min) Skriv en metode List<Bok> finnBokerPaaForfatter(String forfatter) i 
-BibliotekDAO som henter ut alle bøkene til en gitt forfatter. 
-Løsningsforslag: 
- 
+BibliotekDAO som henter ut alle bøkene til en gitt forfatter.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public List<Bok> finnBokerPaaForfatter(String forfatter) { 
  
         String queryString  
@@ -261,8 +282,12 @@ return em.createQuery(queryString, Bok.class)
         } finally { 
   
  
-... 
- 
+...
+```
+
+</details>
+
+```text
 d) (8% ~ 20 min) Skriv en metode boolean leverTilbakeBok(int bokid) i BibliotekDAO som 
 markerer gitt bok som tilbakelevert med returdato lik dagens dato. Hvis alt går bra skal 
 metoden markere boken som tilbakelevert, og returnere true. Du skal gjøre feilhåndtering 
@@ -273,10 +298,13 @@ Litt hjelp til løsningen:
 ▪ query.getSingleResult() kaster hhv. NoResultException og 
 NonUniqueResultException ved ingen eller flere treff. 
 ▪ query.getResultList() inneholder 0 hhv. flere objekter ved ingen eller flere treff. 
-▪ Dagens dato fås ved å bruke LocalDate.now(). 
- 
-Løsningsforslag: 
- 
+▪ Dagens dato fås ved å bruke LocalDate.now().
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Et par viktige ting å merke seg: 
   
  - Informasjon om utlån ligger i utlaan-tabellen / Utlaan-klassen, 
@@ -286,12 +314,14 @@ Et par viktige ting å merke seg:
  - bokid er ikke primærnøkkel i utlaan / Utlaan. Vi kan derfor ikke
 ```
 
+</details>
+
 ## Side 5
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-5 / 21 
- 
-  
    bruke find(), men må gjøre en spørring! 
   
  - Etter setting av returdato for utlånet skal det ikke gjøres en 
@@ -347,11 +377,11 @@ query.executeUpdate()
 , og er egentlig mer beregnet på bulk-oppdatering !
 ```
 
+</details>
+
 ## Side 6
 
 ```text
-6 / 21 
- 
 Oppgave 2 (25% ~1 time) – modellering/normalisering 
 Problembeskrivelse 
 Et firma selger varer på Internett. De har behov for en database for å håndtere logistikken 
@@ -389,10 +419,10 @@ normalformene.)
 
 ## Side 7
 
+<details>
+<summary>Vis løsningsforslag</summary>
+
 ```text
-7 / 21 
- 
-Løsningsforslag 
 ER-modellen ovenfor er trolig den som er nærmest det som står i” kravspesifikasjonen”. Men også 
 andre løsninger kan bli godtatt hvis de kan løse oppgaven på en tilfredsstillende måte. Det er viktig å 
 merke seg at kravspesifikasjonen ikke krever i tabell for varelager. Det er tilstrekkelig med en tabell for 
@@ -421,13 +451,16 @@ at tabellen Vare dermed er en svak entitetstype siden den arver del av primærn�
 følgelig også eksistensavhengig av Ordre. Avrundede hjørner og heltrukken linje indikerer dette.
 ```
 
+</details>
+
 ![Nettbutikkmodell](/content/dat107/assets/originale-eksamen/2024-mai-nettbutikkmodell.png)
 
 ## Side 8
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-8 / 21 
- 
 For Poststed er Postnr en opplagt primærnøkkel. For Kunde har vi et løpenummer Kunde_id som 
 primærnøkkel, og ordre har på samme måte et løpenummer Ordre_id som primærnøkkel. For Vare er 
 primærnøkkelen som sagt sammensatt av Navn (kunne også vært fremmednøkkel til en “hypotetisk” 
@@ -458,11 +491,11 @@ det kan være avhengigheter her. Denne problemstillingen er imidlertid for omfat
 her. Vi konkluderer derfor med at databasen tilfredtiller til og med tredje normalform.
 ```
 
+</details>
+
 ## Side 9
 
 ```text
-9 / 21 
- 
 Oppgave 3 (25% ~1 time) – SQL 
 Problembeskrivelse 
 Denne oppgaven er løst basert på problembeskrivelsen i Oppgave 2 – 
@@ -504,10 +537,10 @@ normalformene.)
 
 ## Side 10
 
+<details>
+<summary>Vis løsningsforslag</summary>
+
 ```text
-10 / 21 
- 
-Løsningsforslag 
 a) Create table kunde( 
 kunde_id serial primary key, 
 navn varchar(50) not null, 
@@ -550,11 +583,14 @@ from kunde inner join ordre on kunde.kunde_id=ordre.kunde_id
 group by kunde.kunde_id;
 ```
 
+</details>
+
 ## Side 11
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-11 / 21 
- 
 Har har vi brukt en inner join for å koble sammen tabellene. Siden oppgaven ikke 
 setter noen spesielle krav til koblingen, kunne man også brukt en likekobling eller en 
 varient av left/right outer join (men ikke full outer joun) dersom de blir brukt riktg. Det 
@@ -575,11 +611,11 @@ ordre_id: serial (integer) 4 byte + kunde_id: integer 4 bye = 8 byte. Totalt få
 avhenger selvsagt av hva man valgte for datatyper i disse tabellene.
 ```
 
+</details>
+
 ## Side 12
 
 ```text
-12 / 21 
- 
 Oppgave 4 (25% ~ 1 time) – NoSQL 
 4.1 XML og JSON 
 I «vedlegg 4.1» er det definert et XML Schema dokument (fil: kunde-ordre.xsd) som 
@@ -629,8 +665,6 @@ definert i oppgaveteksen) eller «VareIdType» (som det egentlig er lagt opp til
 ## Side 13
 
 ```text
-13 / 21 
- 
 Løsningsforslag (vi benytter «VareIdType» for attributtet «VareId»): 
 <?xml version="1.0" encoding="utf-8" ?> 
 <Ordrer xmlns="http://eksamen.hvl.no/databaser" 
@@ -688,8 +722,6 @@ b) Max 10 poeng (JSON dokument som representerer samme data som fra oppgave b):
 ## Side 14
 
 ```text
-14 / 21 
- 
             "Epost": "ola.nordmann@gmail.com", 
             "PostAdresse": { 
                "Adresse": "Enebakkveien 12", 
@@ -727,8 +759,6 @@ Poeng (Max 10 poeng):
 ## Side 15
 
 ```text
-15 / 21 
- 
 4.2 NoSQL 
 Når vi snakker om NoSQL databaser så er disse ofte distribuerte systemer, som utgjør et 
 database kluster. Disse databasene bruker ofte teknikker som “Sharding” og “Replikering”. 
@@ -777,8 +807,6 @@ E. PostgreSQL
 ## Side 16
 
 ```text
-16 / 21 
- 
 7) Er et eksempel på et “CP”-design (CAP-teorem) 
 8) Er et eksempel på et “AP”-design (CAP-teorem) 
 9) Bruker spørrespråket “CQL” 
@@ -794,8 +822,6 @@ actor;
 ## Side 17
 
 ```text
-17 / 21 
- 
 Forslag til løsning: 
 a) Max 10 poeng 
  (1p) "Sharding" er en teknikk innen distribuerte database systemer hvor datasettet 
@@ -843,8 +869,6 @@ Andre ulemper (som vi godtar):
 ## Side 18
 
 ```text
-18 / 21 
- 
 (1p) Replikering over geografiske områder (nærhet til data) 
   
   
@@ -892,8 +916,6 @@ noder er inkonsistente.
 ## Side 19
 
 ```text
-19 / 21 
- 
 - 
 CA-design: Når data lagres sentralt, som ved relasjonsdatabaser, så unngår man 
 muligheten for partisjoner (og dermed partisjons toleranse). Neo4J er også en slik 
@@ -919,8 +941,6 @@ E: 5, 6, 12
 ## Side 20
 
 ```text
-20 / 21 
- 
 Vedlegg 4.1: (Filnavn: kunde-ordre.xsd) 
 <?xml version="1.0" encoding="UTF-8"?> 
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
@@ -962,8 +982,6 @@ Vedlegg 4.1: (Filnavn: kunde-ordre.xsd)
 ## Side 21
 
 ```text
-21 / 21 
- 
    <xs:simpleType name="VareIdType"> 
       <xs:restriction base="xs:integer"> 
          <xs:minInclusive value="100000" /> 

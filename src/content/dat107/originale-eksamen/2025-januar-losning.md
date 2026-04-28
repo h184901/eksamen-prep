@@ -1,12 +1,10 @@
 # DAT107 2025 januar eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1 
- 
 Oppgave 1 – Modellering (25%, ~1 time) 
 Problembeskrivelse 
 En restaurant har behov for en database for å lagre informasjon om matrettene som blir tilbudt 
@@ -27,18 +25,23 @@ Huskeliste (for hva besvarelsen minst skal inneholde)
 • Min/maks kardinalitet  
 • Sterke/svake entitetstyper og eksistensavhengighet/uavhengighet (kråkefot-notasjon) eller 
 eventuell type aggregering (UML-notasjon)  
-• Rettferdiggjøre at løsningen tilfredsstiller hver av 1., 2., og 3. normalform 
-Løsningsforslag 
+• Rettferdiggjøre at løsningen tilfredsstiller hver av 1., 2., og 3. normalform
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 Det må også være en fornuftig rettferdiggjøring for hvorfor databasen er minst på 3. normalform.
 ```
+
+</details>
 
 ![Restaurantmodell](/content/dat107/assets/originale-eksamen/2025-januar-restaurantmodell.png)
 
 ## Side 2
 
 ```text
-2 
- 
 Oppgave 2 – SQL (25%, ~1 time) 
 Problembeskrivelse 
 Oppgaven baserer seg løst på problembeskrivelsen til oppgave 1. Anta at en forenklet/ redusert/ 
@@ -64,10 +67,10 @@ j) Forklar de “praktiske” forskjellene mellom inner, left outer, right outer
 
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag</summary>
+
 ```text
-3 
- 
-Løsningsforslag 
 a) Create table rett( 
 navn varchar(25) primary key, 
 pris numeric(6,2) not null, 
@@ -91,11 +94,11 @@ Dvs., man vil få med både retter uten matchende kategori, og kategorier uten r
 har denne kategorien. Det er veldig sjelden man i praksis har bruk for en full outer join.
 ```
 
+</details>
+
 ## Side 4
 
 ```text
-4 
- 
 Oppgave 3 – ORM/JPA (25%, ~1 time) 
 Vi har ansvar for en liten kafé, og ønsker å holde oversikt over matretter og ingredienser, f.eks. 
 med tanke på å kunne liste allergener (= ingredienser som er allergifremkallende) for ulike 
@@ -180,8 +183,6 @@ Rundstykke m/ost inneholder hvitost
 ## Side 5
 
 ```text
-5 
- 
 … 
 …
 ```
@@ -189,8 +190,6 @@ Rundstykke m/ost inneholder hvitost
 ## Side 6
 
 ```text
-6 
- 
 Vi ønsker å jobbe med denne databasen i et Java-program. 
 a) (8% ~ 18 min) Skriv Java-klassene for entitetstypene som trengs for å representere 
 eksempelet vist over. Du trenger ikke å skrive metoder, kun instans-/objektvariabler og JPA-
@@ -237,8 +236,6 @@ Løsning, poeng og merknader:
 ## Side 7
 
 ```text
-7 
- 
 Du kan i de videre oppgavene anta at entitetsklassene inneholder de nødvendige konstruktører, 
 gettere og settere, etc. du trenger i løsningene dine.  
 Vi antar at vi har en hjelpeklasse KafeDAO. Du skal lage et par metoder i denne. Du kan anta at en 
@@ -275,8 +272,6 @@ Løsning, poeng og merknader:
 ## Side 8
 
 ```text
-8 
- 
 c) (4% ~ 10 min) Skriv en metode hentMatretterIKategori(String kategori) i 
 KafeDAO som henter ut en liste av matretter for en gitt kategori, f.eks. 'smørbrød'. Hvis 
 ingen matrett i denne kategorien finnes, skal det returneres en tom liste. 
@@ -308,8 +303,6 @@ Matrett.class);
 ## Side 9
 
 ```text
-9 
- 
 d) (4% ~ 10 min) Skriv en metode lagreIngrediens(String navn,String allergen) i 
 KafeDAO som lagrer en ny ingrediens i databasen. Metoden returnerer det lagrede 
 ingrediens-objektet. Hvis det allerede finnes en ingrediens i databasen med dette navnet, 
@@ -355,8 +348,6 @@ return nyIngrediens;
 ## Side 10
 
 ```text
-10 
- 
 Oppgave 4 – XML, JSON og NoSQL (25%, ~1 time) 
 4.1 XML og JSON – Flervalgsoppgaver (2% ~ 5  min) 
 a) Hvilken av følgende påstander er korrekt? 
@@ -398,8 +389,6 @@ nettadresse som eksisterer
 ## Side 11
 
 ```text
-11 
- 
 d) Hvilken av følgende er IKKE en innebygd datatype som kan benyttes i et XML Schema 
 dokument: 
 a. String 
@@ -415,8 +404,6 @@ schema dokument.
 ## Side 12
 
 ```text
-12 
- 
 4.2 XML og JSON – «Tenk og prøv selv» oppgaver 
  
 I «vedlegg 4.2» er det definert et XML Schema dokument (fil: menu.xsd) som spesifiserer hvordan 
@@ -442,8 +429,6 @@ samme navn)
 ## Side 13
 
 ```text
-13 
- 
 b) (6% ~ 15 min) Lag et eksempel på et velformet og gyldig XML dokument som referer til (kobles) 
 og følger XML Schema dokumentet “menu.xsd” (se vedlegg 4.2).  
 Eksemplet skal inneholde minst to forretter, to hovedretter og  to desserter. 
@@ -494,9 +479,6 @@ Løsning, poeng og merknader:
 ## Side 14
 
 ```text
-14 
- 
- 
 1 – Deklarasjon (linje 1) 
 1 – Rot element <menu> (linje 1) 
 2 – Default namespace og mapping til XML schema (linje 2-4) 
@@ -510,8 +492,6 @@ Løsning, poeng og merknader:
 ## Side 15
 
 ```text
-15 
- 
 c) (3% ~ 7 min) Hvordan kan vi utvide XML Schema dokumentet i vedlegg 4.2 slik at  
 - Gyldig pris på de ulike rettene må være fra 100 til og med 500 kroner 
 - Gyldige allergener må hentes fra listen: “Gluten”, “Nuts”, “Lactose” and “Shellfish”. 
@@ -557,8 +537,6 @@ Og legg til følgende:
 ## Side 16
 
 ```text
-16 
- 
 d) (3% ~ 7 min) Skriv ditt eksempel fra oppgave b) om til et JSON dokument. Bruk element- og 
 attributtnavn som nøkkelnavn (der det er behov for dette). 
 Løsning, poeng og merknader:  
@@ -606,17 +584,9 @@ Løsning, poeng og merknader:
 «mainCourse» og «dessert» (tar bare ekstra plass, gir ingen verdi)
 ```
 
-## Side 17
-
-```text
-17
-```
-
 ## Side 18
 
 ```text
-18 
- 
 4.3 NoSQL – Flervalgsoppgaver (2% ~ 5  min) 
 a) Hvilken av følgende påstander er korrekt med henhold til NoSQL databaser? 
 1. Datasett kan distribueres over flere noder/ datamaskiner (sharding) 
@@ -658,17 +628,9 @@ design
 toleranse.
 ```
 
-## Side 19
-
-```text
-19
-```
-
 ## Side 20
 
 ```text
-20 
- 
 d) Hvilken av følgende påstander er korrekt om NoSQL databasen Cassandra? 
 1. Cassandra er en kolonne basert database 
 2. Cassandra lagrer data fysisk i kolonner i stedet for rader 
@@ -682,8 +644,6 @@ d) Hvilken av følgende påstander er korrekt om NoSQL databasen Cassandra?
 ## Side 21
 
 ```text
-21 
- 
 4.4 NoSQL - «Tenk selv» oppgaver 
  
 a) (2% ~ 4 min) Forklar kort hva som menes med “Sharding” når vi snakker om distribuerte 
@@ -734,8 +694,6 @@ Node3
 ## Side 22
 
 ```text
-22 
- 
 Vedlegg 4.2:  (Filnavn: menu.xsd) 
  
 <?xml version="1.0" encoding="utf-8" ?> 
@@ -789,8 +747,6 @@ Vedlegg 4.2:  (Filnavn: menu.xsd)
 ## Side 23
 
 ```text
-23 
- 
       <xs:attribute name="name" type="xs:string" use="required"/> 
    </xs:complexType> 
  

@@ -1,12 +1,10 @@
 # DAT107 2025 mai eksamen - løsningsforslag
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-1 / 19 
- 
 Oppgave 1 – Modellering (25%, ~1 time) 
 Problembeskrivelse 
 Det er behov for en database for å håndtere passasjerer på flygninger. En flygning har avgang 
@@ -38,10 +36,10 @@ kan!
 
 ## Side 2
 
+<details>
+<summary>Vis løsningsforslag</summary>
+
 ```text
-2 / 19 
- 
-Løsningsforslag 
 Vi starter med tabellen Flygning. Her tenker vi på en flygning som en daglig “flyrute” mellom 
 to flyplasser. Som opplyst i problembeskrivelsen har den en unik kode, og følgelig bør dette 
 da være en god PK. Dette betyr også at det blir en sterk entitet, siden den ikke arver del av PK 
@@ -71,13 +69,16 @@ telefonnr. Til slutt trengs det epostadresse. Disse vil alltid ha forskjellig le
 varchar(50) kan virke fornuftig. For denne tabellen er spørsmålet om PK litt mer komplisert.
 ```
 
+</details>
+
 ![Flygningmodell](/content/dat107/assets/originale-eksamen/2025-mai-flygningmodell.png)
 
 ## Side 3
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-3 / 19 
- 
 Slik oppgaven er formulert, er det mulig å få inntrykk av at kombinasjonen av navn og 
 fødselsdato vil være unik. Dette er nok en noe optimistisk antagelse. Muligens kan det 
 argumenteres for at telefonnr eller epost enten aleine eller sammen med andre vil være en 
@@ -109,11 +110,11 @@ sammen. Videre vil en flygning kunne ha mange passasjerer, men kan i prinsippet 
 diskuteres, men vi tenker her at det er greit (det er heller ikke feil å si at det ikke gir mening).
 ```
 
+</details>
+
 ## Side 4
 
 ```text
-4 / 19 
- 
 Oppgave 2 – SQL (25%, ~1 time) 
 Problembeskrivelse 
 Oppgaven baserer seg løst på problembeskrivelsen til oppgave 1. Anta at en forenklet/ 
@@ -145,10 +146,10 @@ kan!
 
 ## Side 5
 
+<details>
+<summary>Vis løsningsforslag</summary>
+
 ```text
-5 / 19 
- 
-Løsningsforslag 
 a) Create table passasjer( 
 navn varchar(50) not null, 
 fødselsdato date not null, 
@@ -189,11 +190,11 @@ trolig den løsningen som er “enklest”. Andre løsninger blir generelt aksep
 de gir samme resultat.
 ```
 
+</details>
+
 ## Side 6
 
 ```text
-6 / 19 
- 
 Oppgave 3 (25% ~ 1 time) – ORM/JPA 
 Vi skal jobbe litt med en database for Avinor. Databasen har informasjon om norske 
 flyavganger (flights) og flyplasser.  
@@ -209,15 +210,31 @@ Alle data er av typen VARCHAR, med unntak av avgangstid og ankomsttid, som er av
 TIME.
 ```
 
-![Flyavgang ER-modell](/content/dat107/assets/originale-eksamen/2025-mai-flyavgang-er.png)
+> **Logisk ER-modell (gjengitt fra oppgavetekst)**
+>
+> | Tabell | Kolonner |
+> |---|---|
+> | `flyavgang` | `kode (PK)`, `flyselskap`, `fra_flyplass (FK)`, `avgangstid`, `til_flyplass (FK)`, `ankomsttid` |
+> | `flyplass` | `kode (PK)`, `navn`, `bynavn` |
+>
+> To en-til-mange-forhold mellom `flyavgang` og `flyplass` (én `fra_flyplass`, én `til_flyplass`).
+>
+> *Den ekstraherte ER-figuren fra PDF var uleselig og er erstattet med tabellen over.*
 
-![Flyavgang tabeller](/content/dat107/assets/originale-eksamen/2025-mai-flyavgang-tabeller.png)
+> **Tabellskjema (gjengitt fra oppgavetekst)**
+>
+> Alle data er av typen `VARCHAR`, med unntak av `avgangstid` og `ankomsttid` som er av typen `TIME`.
+>
+> | Tabell | Kolonner |
+> |---|---|
+> | `flyavgang` | `kode (PK)`, `flyselskap`, `fra_flyplass (FK)`, `avgangstid`, `til_flyplass (FK)`, `ankomsttid` |
+> | `flyplass` | `kode (PK)`, `navn`, `bynavn` |
+>
+> *Det opprinnelige PDF-uttrekket av eksempeldataene var uleselig og er erstattet med skjemaet over. Selve eksempelradene var bare i PDF-en.*
 
 ## Side 7
 
 ```text
-7 / 19 
- 
 Vi ønsker å jobbe med denne databasen i et Java-program. 
 a) (8% ~ 20 min) Skriv Java-klassene for entitetstypene Flyavgang og Flyplass som 
 tilsvarer tabellene i eksempelet vist over. Du trenger ikke å skrive metoder, kun instans-
@@ -226,10 +243,13 @@ forholdet mellom entitetene:
 ▪ Vi ønsker at en Flyplass skal ha en liste over flyavganger fra denne, slik at vi ved 
 behov enkelt kan få ut f.eks. alle avganger fra Bergen lufthavn, Flesland. 
 ▪ Vi ønsker IKKE at en Flyplass skal ha en liste over ankomster til denne. Hvis det er 
-behov for en liste over ankomster, må dette hentes via en spørring. 
- 
-Løsningsforslag m/merknader: 
- 
+behov for en liste over ankomster, må dette hentes via en spørring.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
 1  @Entity 
    public class Flyavgang { 
  
@@ -269,23 +289,34 @@ private List<Flyavgang> flyavganger;
    }
 ```
 
+</details>
+
 ## Side 8
 
+<details>
+<summary>Vis løsningsforslag (fortsetter)</summary>
+
 ```text
-8 / 19 
- 
 Du kan i de videre oppgavene anta at entitetsklassene inneholder de nødvendige 
 konstruktører, gettere og settere, etc. du trenger i løsningene dine.  
 Vi antar at vi har en hjelpeklasse FlyavgangDAO for databaseoperasjoner. Du skal lage et par 
 metoder i denne. Du kan anta at en EntityManagerFactory kalt emf er opprettet og 
-tilgjengelig for bruk i metodene. 
+tilgjengelig for bruk i metodene.
+```
+
+</details>
+
+```text
 b) (5% ~ 10 min) Skriv en metode 
 Flyplass finnFlyplass(String flyplasskode)  
 i FlyavgangDAO som henter ut flyplassen med gitt flyplasskode, f.eks. "BGO". Hvis ingen 
-flyplasser med denne flyplasskoden finnes, skal det returneres null. 
- 
-Løsningsforslag m/merknader: 
- 
+flyplasser med denne flyplasskoden finnes, skal det returneres null.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public Flyplass finnFlyplass(String flyplasskode) { 
          
 1       EntityManager em = emf.createEntityManager(); 
@@ -305,19 +336,22 @@ Alternativt, med try-with-resources:
     }
 ```
 
+</details>
+
 ## Side 9
 
 ```text
-9 / 19 
- 
 c) (6% ~ 15 min) Skriv en metode 
 List<Flyavgang> finnFlyavgangerMellom(String byFra, String byTil) 
 i FlyavgangDAO som henter ut alle flyavganger mellom to byer (altså mellom flyplasser 
 tilhørende by, oppgitt med bynavn), f.eks. alle flyavganger fra "Bergen" til "Oslo. Tips: Her 
-må det skrives en JPQL-spørring. 
- 
-Løsningsforslag m/merknader: 
- 
+må det skrives en JPQL-spørring.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public List<Flyavgang> finnFlyavgangerMellom(String byFra, String byTil) { 
          
 3     String q = """  
@@ -376,11 +410,11 @@ return em.createQuery(q, Flyavgang.class)
     }
 ```
 
+</details>
+
 ## Side 10
 
 ```text
-10 / 19 
- 
 d) (6% ~ 15 min) Skriv en metode 
 boolean endreTiderForFlyavgang(String flightkode, 
   
@@ -388,9 +422,13 @@ boolean endreTiderForFlyavgang(String flightkode,
 LocalTime nyAvgangstid, LocalTime nyAnkomsttid) 
 i FlyavgangDAO som endrer avgangstid og ankomsttid for en gitt flyavgang (flight). Hvis 
 oppdateringen går greit skal det returneres true. Hvis oppgitt kode for flyavgangen 
-(flightkode) ikke finnes i databasen, skal det returneres false. 
-Løsningsforslag m/merknader (med try-with-resources): 
- 
+(flightkode) ikke finnes i databasen, skal det returneres false.
+```
+
+<details>
+<summary>Vis løsningsforslag</summary>
+
+```text
     public boolean endreTiderForFlyavgang(String flightkode,  
      
  
@@ -455,11 +493,11 @@ ny flyavgang (mangler flyselskap, fra_flyplass og til_flyplass).
 Det trekkes poeng for dette.
 ```
 
+</details>
+
 ## Side 11
 
 ```text
-11 / 19 
- 
 Oppgave 4 – XML, JSON og NoSQL (25%, ~1 time) 
 4.1 XML og XPath (13% ~ 30 min) 
  
@@ -512,8 +550,6 @@ c) Skriv et Xpath uttrykk for å finne all informasjon om alle biler i klassen �
 ## Side 12
 
 ```text
-12 / 19 
- 
 Vi har lært: 
 /biler/bil[klasse="SUV"] 
  
@@ -553,8 +589,6 @@ Andre løsninger som også godkjennes:
 ## Side 13
 
 ```text
-13 / 19 
- 
 4.2 MongoDB Query API  (6% ~ 15  min) 
  
 Firmaet «Lekre Hus AS» har opprettet to samlinger (Eng: «collections») «ansatte» og 
@@ -591,8 +625,6 @@ En utvikler skriver følgende MongoDB spørring:
 ## Side 14
 
 ```text
-14 / 19 
- 
               etternavn: "Nordmann", 
               oppdatert: new ISODate() 
             }, 
@@ -711,8 +743,6 @@ spørringen over (svar på format vist over)?
 ## Side 15
 
 ```text
-15 / 19 
- 
 c) (2% ~ 5  min) Gitt at ansatte (representert ved _id: 1) ikke finnes og spørringen over 
 kjøres to ganger etter hverandre (med et minutts mellomrom), hva blir resultatet hvis vi 
 kjører følgende spørring? (Bruk dagens dato og et valgfritt klokkeslett) 
@@ -768,8 +798,6 @@ med innhold (nøkkel/verdi par) som gir poeng.
 ## Side 16
 
 ```text
-16 / 19 
- 
 4.3 MongoDB & Java (6% ~ 15  min) 
  
 En av utviklerne har skrevet følgende kode for å oppdatere informasjonen om en ansatt i 
@@ -807,8 +835,6 @@ For hver del oppgave (a, b og c) gies det score fra 0-10.
 ## Side 17
 
 ```text
-17 / 19 
- 
 a) (2% ~ 5  min) I koden over har utvikleren gjort en feil. Kodelinjen som inneholder 
 “Updates.setOnInsert” vil aldri bli utført. Hvorfor? Og hva må til for koden skal fungere 
 slik som utvikleren her har ment?  (Tips! Klassen “UpdateOptions”) 
@@ -844,8 +870,6 @@ collAnsatt.updateOne(filter, oppdateringer, options);
 ## Side 18
 
 ```text
-18 / 19 
- 
 b) (2% ~ 5  min) Fullfør “create” metoden under for å legge til en ny ansatt.  
 Sørg for at verdien for nøkkelen “opprettet” alltid blir satt til tidspunkt (dato og 
 klokkeslett) når metoden blir kjørt. 
@@ -889,8 +913,6 @@ public List<Ansatt> read(Bson filter) {
 ## Side 19
 
 ```text
-19 / 19 
- 
 Vedlegg 4.1:  (Filnavn: biler.xml) 
 <?xml version="1.0" encoding="UTF-8"?> 
 <biler> 

@@ -1,14 +1,10 @@
 # DAT107 2023 januar eksamenssett
 
-Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Utvalgte figurer er lagt inn etter siden de hører til.
+Kildetro sideutdrag fra original PDF. Oppgaverekkefølge, delspørsmål og løsningsforslag er bevart som originaltekst der uttrekket har tekst. Løsningsforslag er skjult bak en knapp ('Vis løsningsforslag') så du kan løse oppgavene først.
 
 ## Side 1
 
 ```text
-side 1 
- 
- 
- 
 EKSAMENSOPPGAVE 
  
 Emnekode: 
@@ -74,8 +70,6 @@ på Vestlandet, sier om fusk og forsøk på fusk i § 12-1.
 ## Side 2
 
 ```text
-side 2 
- 
 Oppgave 1 – Flervalg (30 poeng, ~72 min.) 
 Velg nøyaktig et av alternativene for hver oppgave. 
 1. Hva er sant om tofaselåsing 
@@ -122,8 +116,6 @@ d. En variant av XML for å lagre geografiske data
 ## Side 3
 
 ```text
-side 3 
- 
 8. Hva er sant om normalisering 
 a. En database som følger alle normaliseringsreglene er garantert å 
 tilfredsstille kravspesifikasjonene 
@@ -168,8 +160,6 @@ d. Verken rekkefølge av kolonner eller rader har betydning
 ## Side 4
 
 ```text
-side 4 
- 
 15. Hva er sant om views 
 a. Annet navn for tabell 
 b. Annet navn for nøstet spørring 
@@ -205,8 +195,6 @@ h) Skriv en spørring som finner antall ansatte i hver avdeling.
 ## Side 5
 
 ```text
-side 5 
- 
 Oppgave 3 – normalisering (10 poeng, ~24 min.) 
 En database har følgende tabell: 
 Kontorplass(bygning, etasje, rom, plass, bygningsansvarlig, fasttelefon, 
@@ -243,8 +231,6 @@ Kommenter valgene du tar for å klargjøre hvordan du tenker/resonerer.
 ## Side 6
 
 ```text
-side 6 
- 
 Oppgave 5 - ORM/JPA (20 poeng, ~48 min.) 
 Vi skal jobbe litt med en database med oversikt over biler og bileiere. 
 Vi tenker oss at data om biler er lagret i tabellen bil: 
@@ -319,8 +305,6 @@ mellom entitetene for enklere å kunne navigere mellom dem.
 ## Side 7
 
 ```text
-side 7 
- 
 Vi antar at vi har en hjelpeklasse BileierDAO. Du skal lage et par metoder i denne. Du 
 kan anta at det er opprettet og at du har tilgang til en EntityManagerFactory kalt emf. 
  
@@ -357,8 +341,6 @@ sette tildato på gammelt eierskap, og opprette et nytt eierskap fra oppgitt dat
 ## Side 8
 
 ```text
-side 8 
- 
 Oppgave 6 - datamining (10 poeng, ~24 min.) 
 a) Hva er resultatene av å anvende Apriori-algoritmen på datasettet i Tabell1 
 med følgende valg? 
@@ -395,8 +377,6 @@ Tabell 1 Transaksjonstabell
 ## Side 9
 
 ```text
-side 9 
- 
 b) Ta utgangspunkt i Figur 1 og besvar følgende spørsmål. 
 1) Hvordan vil “combinatorial explosions” påvirke “computational efficiency” 
 og tiden påkrevd for “high utility itemset mining”?  

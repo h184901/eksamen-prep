@@ -32,7 +32,8 @@ type Block =
   | { type: "hr" }
   | { type: "quote"; lines: string[] }
   | { type: "callout"; kind: CalloutKind; title?: string; blocks: Block[] }
-  | { type: "table"; head: string[]; rows: string[][] };
+  | { type: "table"; head: string[]; rows: string[][] }
+  | { type: "details"; summary: string; blocks: Block[] };
 
 function isTableSeparator(line: string): boolean {
   const s = line.trim();
@@ -117,6 +118,34 @@ function parseLines(
       }
       i++;
       blocks.push({ type: "code", lang, body: body.join("\n") });
+      continue;
+    }
+
+    if (/^\s*<details>\s*$/i.test(line)) {
+      i++;
+      let summary = "Vis løsningsforslag";
+      while (i < end && lines[i].trim() === "") i++;
+      if (i < end) {
+        const sm = lines[i].match(/^\s*<summary>(.*)<\/summary>\s*$/i);
+        if (sm) {
+          summary = sm[1].trim() || summary;
+          i++;
+        }
+      }
+      const innerStart = i;
+      let depth = 1;
+      while (i < end && depth > 0) {
+        if (/^\s*<details>\s*$/i.test(lines[i])) depth++;
+        else if (/^\s*<\/details>\s*$/i.test(lines[i])) {
+          depth--;
+          if (depth === 0) break;
+        }
+        i++;
+      }
+      const innerEnd = i;
+      i++;
+      const inner = parseLines(lines, innerStart, innerEnd).blocks;
+      blocks.push({ type: "details", summary, blocks: inner });
       continue;
     }
 
@@ -224,7 +253,9 @@ function parseLines(
       !/^\s*\d+[.)]\s+/.test(lines[i]) &&
       !parseImageLine(lines[i]) &&
       !parseComponentLine(lines[i]) &&
-      !/^>\s?/.test(lines[i])
+      !/^>\s?/.test(lines[i]) &&
+      !/^\s*<details>\s*$/i.test(lines[i]) &&
+      !/^\s*<\/details>\s*$/i.test(lines[i])
     ) {
       paraLines.push(lines[i]);
       i++;
@@ -572,6 +603,29 @@ function renderBlock(block: Block, bi: number, keyPrefix = ""): React.ReactNode 
         </div>
       );
     }
+    case "details":
+      return (
+        <details
+          key={key}
+          className="group rounded-xl border-2 border-amber-300/60 bg-amber-50/60 dark:border-amber-700/50 dark:bg-amber-950/30 overflow-hidden"
+        >
+          <summary className="cursor-pointer select-none list-none px-5 py-3 flex items-center gap-2 font-semibold text-amber-700 dark:text-amber-300 hover:bg-amber-100/60 dark:hover:bg-amber-900/30 transition-colors">
+            <svg
+              className="w-4 h-4 transition-transform group-open:rotate-90"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>{renderInline(block.summary, `details-summary-${key}`)}</span>
+          </summary>
+          <div className="px-5 py-4 space-y-3 border-t border-amber-300/40 dark:border-amber-700/40">
+            {block.blocks.map((b, i) => renderBlock(b, i, `det-${key}-`))}
+          </div>
+        </details>
+      );
     case "table":
       return (
         <div
