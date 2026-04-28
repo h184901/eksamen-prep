@@ -35,3 +35,7 @@ next-env.d.ts
 
 .obsidian/
 .vercel
+
+# local AI/editor state
+.codex/
+.codex
