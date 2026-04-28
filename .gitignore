@@ -39,3 +39,8 @@ next-env.d.ts
 # local AI/editor state
 .codex/
 .codex
+
+# local Playwright/Codex inspection artifacts
+.playwright-mcp/
+dat107-*.png
+dat109-*.png
