@@ -40,6 +40,8 @@ Kardinalitet beskriver hvor mange forekomster som kan delta i et forhold.
 | `1:N` | én forekomst kan kobles til mange på den andre siden |
 | `M:N` | mange på begge sider |
 
+::er-cardinality-diagram::
+
 ![Minimums- og maksimumskardinalitet](/content/dat107/assets/modellering/kardinalitet-min-maks.png)
 
 I kråkefotnotasjon viser symbolet nærmest entiteten maksimum: strek betyr én, kråkefot betyr mange. Symbolet innenfor viser minimum: sirkel betyr valgfri, strek betyr obligatorisk.

@@ -1,4 +1,5 @@
 import React from "react";
+import { ERCardinalityDiagram } from "@/components/dat107/ERCardinalityDiagram";
 
 type CalloutKind =
   | "info"
@@ -9,6 +10,8 @@ type CalloutKind =
   | "oppsummering"
   | "kjernen";
 
+type VisualComponentName = "er-cardinality-diagram";
+
 type Block =
   | { type: "h1"; text: string }
   | { type: "h2"; text: string }
@@ -18,6 +21,7 @@ type Block =
   | { type: "ol"; items: string[] }
   | { type: "code"; lang: string; body: string }
   | { type: "image"; alt: string; src: string; title?: string }
+  | { type: "component"; name: VisualComponentName }
   | { type: "hr" }
   | { type: "quote"; lines: string[] }
   | { type: "callout"; kind: CalloutKind; title?: string; blocks: Block[] }
@@ -61,6 +65,14 @@ function parseImageLine(
   }
 
   return { alt, src: target };
+}
+
+function parseComponentLine(line: string): VisualComponentName | null {
+  const normalized = line.trim().toLowerCase();
+  if (normalized === "::er-cardinality-diagram::") {
+    return "er-cardinality-diagram";
+  }
+  return null;
 }
 
 function parseLines(
@@ -121,6 +133,13 @@ function parseLines(
     const image = parseImageLine(line);
     if (image) {
       blocks.push({ type: "image", ...image });
+      i++;
+      continue;
+    }
+
+    const component = parseComponentLine(line);
+    if (component) {
+      blocks.push({ type: "component", name: component });
       i++;
       continue;
     }
@@ -188,6 +207,7 @@ function parseLines(
       !/^\s*[-*]\s+/.test(lines[i]) &&
       !/^\s*\d+[.)]\s+/.test(lines[i]) &&
       !parseImageLine(lines[i]) &&
+      !parseComponentLine(lines[i]) &&
       !/^>\s?/.test(lines[i])
     ) {
       paraLines.push(lines[i]);
@@ -455,6 +475,11 @@ function renderBlock(block: Block, bi: number, keyPrefix = ""): React.ReactNode 
         </figure>
       );
     }
+    case "component":
+      if (block.name === "er-cardinality-diagram") {
+        return <ERCardinalityDiagram key={key} />;
+      }
+      return null;
     case "hr":
       return <hr key={key} className="border-[var(--card-border)]" />;
     case "quote":
