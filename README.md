@@ -211,6 +211,26 @@ Markdown-rendereren (`src/components/Markdown.tsx`) støtter to måter å lage c
 > Kort gjentakelse på slutten av et tema.
 ```
 
+### DAT107-bilder og visuelle shortcodes
+
+Markdown-rendereren støtter vanlig bilde-syntaks. Bilder skal ligge i `public/content/dat107/assets/<area>/` og lenkes med public path:
+
+```markdown
+![Forklarende alt-tekst](/content/dat107/assets/modellering/eksempel.png)
+![Forklarende alt-tekst](/content/dat107/assets/modellering/eksempel.png "Valgfri bildetekst")
+```
+
+For forklaringer som bør være gjenbrukbare og responsive, bruk en React/SVG-komponent i `src/components/dat107/` og legg inn en kort Markdown-shortcode på egen linje. Støttede shortcodes:
+
+```markdown
+::er-cardinality-diagram::
+::sql-join-diagram::
+::jpa-relationship-diagram::
+::document-vs-relational-diagram::
+```
+
+Når en ny shortcode legges til, må den registreres i `src/components/Markdown.tsx` (`VisualComponentName`, `parseComponentLine` og `renderBlock`) og dokumenteres her. Hold shortcodes sjeldne og faglig begrunnet; bruk dem der en figur forklarer bedre enn tekst, ikke som pynt.
+
 ---
 
 ## Deploy

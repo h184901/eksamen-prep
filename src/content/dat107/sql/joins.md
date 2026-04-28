@@ -43,6 +43,8 @@ join ordre as o
 
 Koblingskolonnene må ha samme betydning, ikke bare samme datatype. `ansatt.ansnr = ordre.ordrenr` er meningsløst selv om begge er tall.
 
+::sql-join-diagram::
+
 ## Flere tabeller
 
 Hvilke kunder har kjøpt vare `10820`?

@@ -4,6 +4,8 @@
 
 Dette er den mest eksamensnære drøftingsdelen i NoSQL-stoffet: når bør du velge dokumentmodell, når bør du velge relasjonsmodell, og hva taper eller vinner du på valget?
 
+::document-vs-relational-diagram::
+
 ## Dette må du kunne
 
 - forklare forskjellen på relasjonell og dokumentorientert modell

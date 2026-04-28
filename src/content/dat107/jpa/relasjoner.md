@@ -4,6 +4,8 @@
 
 Relasjoner er sentralt på eksamen fordi de tester om du forstår både relasjonstype, fremmednøkkel, owning side og hvordan objektgrafen holdes konsistent i Java.
 
+::jpa-relationship-diagram::
+
 ## Dette må du kunne
 
 - forklare owning side og reverse side

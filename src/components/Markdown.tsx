@@ -1,5 +1,8 @@
 import React from "react";
+import { DocumentVsRelationalDiagram } from "@/components/dat107/DocumentVsRelationalDiagram";
 import { ERCardinalityDiagram } from "@/components/dat107/ERCardinalityDiagram";
+import { JPARelationshipDiagram } from "@/components/dat107/JPARelationshipDiagram";
+import { SQLJoinDiagram } from "@/components/dat107/SQLJoinDiagram";
 
 type CalloutKind =
   | "info"
@@ -10,7 +13,11 @@ type CalloutKind =
   | "oppsummering"
   | "kjernen";
 
-type VisualComponentName = "er-cardinality-diagram";
+type VisualComponentName =
+  | "document-vs-relational-diagram"
+  | "er-cardinality-diagram"
+  | "jpa-relationship-diagram"
+  | "sql-join-diagram";
 
 type Block =
   | { type: "h1"; text: string }
@@ -69,8 +76,17 @@ function parseImageLine(
 
 function parseComponentLine(line: string): VisualComponentName | null {
   const normalized = line.trim().toLowerCase();
+  if (normalized === "::document-vs-relational-diagram::") {
+    return "document-vs-relational-diagram";
+  }
   if (normalized === "::er-cardinality-diagram::") {
     return "er-cardinality-diagram";
+  }
+  if (normalized === "::jpa-relationship-diagram::") {
+    return "jpa-relationship-diagram";
+  }
+  if (normalized === "::sql-join-diagram::") {
+    return "sql-join-diagram";
   }
   return null;
 }
@@ -223,7 +239,38 @@ function splitRow(line: string): string[] {
   let s = line.trim();
   if (s.startsWith("|")) s = s.slice(1);
   if (s.endsWith("|")) s = s.slice(0, -1);
-  return s.split("|").map((c) => c.trim());
+
+  const cells: string[] = [];
+  let current = "";
+  let inCode = false;
+
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    const prev = i > 0 ? s[i - 1] : "";
+
+    if (char === "`" && prev !== "\\") {
+      inCode = !inCode;
+      current += char;
+      continue;
+    }
+
+    if (char === "\\" && s[i + 1] === "|") {
+      current += "|";
+      i++;
+      continue;
+    }
+
+    if (char === "|" && !inCode) {
+      cells.push(current.trim());
+      current = "";
+      continue;
+    }
+
+    current += char;
+  }
+
+  cells.push(current.trim());
+  return cells;
 }
 
 function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
@@ -476,8 +523,17 @@ function renderBlock(block: Block, bi: number, keyPrefix = ""): React.ReactNode 
       );
     }
     case "component":
+      if (block.name === "document-vs-relational-diagram") {
+        return <DocumentVsRelationalDiagram key={key} />;
+      }
       if (block.name === "er-cardinality-diagram") {
         return <ERCardinalityDiagram key={key} />;
+      }
+      if (block.name === "jpa-relationship-diagram") {
+        return <JPARelationshipDiagram key={key} />;
+      }
+      if (block.name === "sql-join-diagram") {
+        return <SQLJoinDiagram key={key} />;
       }
       return null;
     case "hr":
