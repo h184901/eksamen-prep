@@ -33,6 +33,17 @@ function TheoryBox({ title, children }: { title: string; children: React.ReactNo
   );
 }
 
+function Pitfall({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-amber-700 dark:text-amber-300 mb-1">
+        Vanlig feil
+      </p>
+      <div className="text-sm text-amber-900 dark:text-amber-100">{children}</div>
+    </div>
+  );
+}
+
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <div className="mt-3">
@@ -79,347 +90,925 @@ function Arrowheads() {
 
 export const exercises: Record<string, ExerciseContent> = {
   // ==========================================================================
-  // 29.1 — Faradays lov: enkelt sløyfe, varierende B
+  // 29.1 — Faradays lov + Ohms lov i én sløyfe
   // ==========================================================================
   "29.1": {
-    title: "Indusert EMF i sirkulær sløyfe",
+    title: "Indusert EMF og strøm i sløyfe med avtagende felt",
     difficulty: "lett",
-    pageRef: "s. 962",
+    pageRef: "s. 1008",
     problem: (
       <div className="space-y-2">
         <p>
-          En sirkulær sløyfe med radius <InlineLatex latex="r=12{,}0\;\text{cm}" /> ligger i et uniformt magnetfelt
-          som står vinkelrett på sløyfens plan. Feltet avtar fra <InlineLatex latex="B_1=1{,}50\;\text{T}" /> til
-          <InlineLatex latex="\;B_2=0{,}500\;\text{T}" /> i løpet av <InlineLatex latex="\Delta t=2{,}00\;\text{s}" />.
-          Finn størrelsen av indusert EMF.
+          En enkelt sløyfe med areal <InlineLatex latex="A=0{,}0900\;\text{m}^2" /> ligger i et uniformt magnetfelt
+          som har startverdi <InlineLatex latex="B=3{,}80\;\text{T}" /> vinkelrett på sløyfeplanet, og som avtar med
+          konstant rate <InlineLatex latex="0{,}190\;\text{T/s}" />. (a) Hva er indusert EMF i sløyfen?
+          (b) Hvis sløyfen har resistans <InlineLatex latex="R=0{,}600\;\Omega" />, finn strømmen i sløyfen.
         </p>
         <svg viewBox="0 0 260 140" className="w-full max-w-sm mx-auto">
           <Arrowheads />
-          <circle cx="130" cy="70" r="40" fill="none" stroke="#ef4444" strokeWidth="2" />
-          <text x="150" y="30" fontSize="10" fill="#ef4444">sløyfe r = 12 cm</text>
-          {[0, 1, 2, 3].map((i) => (
+          <rect x="80" y="35" width="100" height="70" fill="none" stroke="#ef4444" strokeWidth="2" />
+          <text x="180" y="30" fontSize="10" fill="#ef4444">A = 0,0900 m²</text>
+          {[0, 1, 2, 3, 4].map((i) => (
             <g key={i}>
-              <circle cx={100 + i * 20} cy="70" r="2" fill="#3b82f6" />
-              <circle cx={100 + i * 20} cy="70" r="5" fill="none" stroke="#3b82f6" />
+              <circle cx={100 + i * 18} cy="70" r="2" fill="#3b82f6" />
+              <circle cx={100 + i * 18} cy="70" r="5" fill="none" stroke="#3b82f6" />
             </g>
           ))}
-          <text x="80" y="130" fontSize="10" fill="#3b82f6">B ut av siden, avtagende</text>
+          <text x="80" y="130" fontSize="10" fill="#3b82f6">B vinkelrett på sløyfen, avtagende</text>
         </svg>
       </div>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="r=0{,}120\;\text{m}" /></li>
-        <li><InlineLatex latex="B_1=1{,}50\;\text{T},\;B_2=0{,}500\;\text{T}" /></li>
-        <li><InlineLatex latex="\Delta t=2{,}00\;\text{s}" /></li>
+        <li><InlineLatex latex="A=0{,}0900\;\text{m}^2" /></li>
+        <li><InlineLatex latex="B_0=3{,}80\;\text{T}" /> (startverdi, ikke nødvendig for utregningen)</li>
+        <li><InlineLatex latex="dB/dt=-0{,}190\;\text{T/s}" /> (avtagende, derav minus)</li>
+        <li><InlineLatex latex="R=0{,}600\;\Omega" /></li>
       </ul>
     ),
-    unknowns: <p>Størrelsen av indusert EMF <InlineLatex latex="|\varepsilon|" />.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Indusert EMF <InlineLatex latex="\varepsilon" /></li>
+        <li>(b) Strøm <InlineLatex latex="I" /> i sløyfen</li>
+      </ul>
+    ),
     strategy: (
-      <div>
-        <p>Fluksen <InlineLatex latex="\Phi_B=B\,A" /> (B er vinkelrett på A). Faradays lov gir <InlineLatex latex="\varepsilon=-d\Phi_B/dt" />. Med konstant A og lineær endring i B kan vi bruke <InlineLatex latex="|\varepsilon|=A\,|\Delta B/\Delta t|" />.</p>
-      </div>
+      <p>
+        Faradays lov gir <InlineLatex latex="\varepsilon=-d\Phi_B/dt" />. Med konstant areal og <InlineLatex latex="\vec B" /> vinkelrett på sløyfen er <InlineLatex latex="\Phi_B=BA" />, så <InlineLatex latex="|\varepsilon|=A\,|dB/dt|" />. Strømmen får vi deretter fra Ohms lov: <InlineLatex latex="I=\varepsilon/R" />.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p>Arealet av sløyfen er <InlineLatex latex="A=\pi r^2" />. Sett inn tall.</p>,
+        content: <p>Arealet er allerede gitt som tall — du trenger ikke radius. Sett rett inn <InlineLatex latex="|\varepsilon|=A\,|dB/dt|" />.</p>,
       },
       {
         label: "Hint 2",
-        content: <p><InlineLatex latex="\Delta B/\Delta t=(B_2-B_1)/\Delta t=-0{,}500\;\text{T/s}" />. EMF-størrelsen er <InlineLatex latex="A\cdot|\Delta B/\Delta t|" />.</p>,
+        content: <p>Når feltet avtar lineært, er momentan derivert lik konstant <InlineLatex latex="dB/dt" />. EMF blir konstant i tid.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Faradays induksjonslov — hvorfor en endring?">
+        <TheoryBox title="Faradays lov — størrelsen alene">
           <p>
-            Den eksperimentelle observasjonen (Faraday, 1831) er overraskende: et <em>statisk</em> magnetfelt gjennom en lukket sløyfe gir <strong>ingen</strong> strøm, uansett hvor sterkt feltet er. Det er kun <em>endringen</em> som teller. Faradays lov formaliserer dette:
+            Faradays induksjonslov sier at EMF rundt en lukket sløyfe er minus tidsderivert av magnetisk fluks gjennom sløyfen:
           </p>
-          <FormulaBox latex="\varepsilon=-\dfrac{d\Phi_B}{dt}" variant="blue" />
+          <FormulaBox latex="\varepsilon=-\dfrac{d\Phi_B}{dt},\quad \Phi_B=\int\vec B\cdot d\vec A" variant="blue" />
           <p>
-            Den generelle definisjonen av fluks er flate­integralet
-            <InlineLatex latex="\;\Phi_B=\int\vec B\cdot d\vec A" />. Prikk­produktet betyr at bare den komponenten av <InlineLatex latex="\vec B" /> som står vinkelrett på flaten teller. Fluks måles i weber: <InlineLatex latex="1\;\text{Wb}=1\;\text{T}\cdot\text{m}^2" />.
+            Når <InlineLatex latex="\vec B" /> er uniformt og vinkelrett på en flat sløyfe, blir prikkproduktet bare <InlineLatex latex="BA" />, og siden <InlineLatex latex="A" /> er konstant her, kan vi flytte den ut av deriverende:
           </p>
+          <FormulaBox latex="|\varepsilon|=A\left|\dfrac{dB}{dt}\right|" variant="blue" />
           <p>
-            Minustegnet er <em>Lenz&apos; lov</em>: den induserte strømmen velger retning slik at den magnetisk motsetter seg endringen. Dette er ikke en tilfeldig fortegns­konvensjon, men et direkte uttrykk for energibevaring — ellers kunne man fått energi fra ingenting.
-          </p>
-        </TheoryBox>
-        <TheoryBox title="Hvilken formel velger vi — og hvorfor?">
-          <p>
-            Flukses­endring kan i prinsippet komme fra tre kilder: (1) endring i B, (2) endring i A, eller (3) endring i vinkel θ mellom feltet og flaten. Her er A konstant (stiv sirkulær sløyfe) og θ = 0 hele tiden (feltet står fast vinkelrett på sløyfeplanet). Det er <em>bare B som endrer seg</em>.
-          </p>
-          <p>
-            Siden feltet er uniformt og vinkelrett på A, forenkles integralet til
-            <InlineLatex latex="\;\Phi_B=BA\cos(0)=BA" />. Vi bruker altså <em>ikke</em> den generelle <InlineLatex latex="\varepsilon=BLv" /> (ingen ledere beveger seg) og <em>ikke</em> <InlineLatex latex="\varepsilon=BA\omega\sin(\omega t)" /> (ingen rotasjon) — vi bruker den mest spesialiserte formen der A tas utenfor derivasjonen:
-          </p>
-          <FormulaBox latex="\varepsilon=-\dfrac{d(BA)}{dt}=-A\,\dfrac{dB}{dt}" variant="blue" />
-          <p>
-            Siden endringen er <em>lineær</em> i tiden, er den momentane deriverte <InlineLatex latex="dB/dt" /> lik den gjennomsnittlige raten <InlineLatex latex="\Delta B/\Delta t" />. Vi tar absoluttverdi fordi oppgaven ber kun om størrelsen; retningen behandles separat med Lenz&apos; lov.
+            Minustegnet er Lenz&apos; lov, og forteller bare at indusert strøm prøver å motvirke endringen. Vi tar absoluttverdien for å få selve <em>størrelsen</em> av EMF.
           </p>
         </TheoryBox>
-        <Step n={1} title="Beregn sløyfens areal">
-          <p>Sirkulær sløyfe med radius <InlineLatex latex="r=0{,}120\;\text{m}" />. Arealet av en sirkel:</p>
-          <FormulaBox latex="A=\pi r^2=\pi(0{,}120)^2=4{,}524\times 10^{-2}\;\text{m}^2" />
-          <p>Dette er den «flaten» fluksen går gjennom — dens geometriske størrelse er låst (ikke-deformerbar sløyfe).</p>
-        </Step>
-        <Step n={2} title="Endringsrate for B">
-          <p>Feltet avtar fra 1,50 T til 0,500 T på 2,00 s. Lineær endring betyr at <InlineLatex latex="dB/dt=\Delta B/\Delta t" />:</p>
-          <FormulaBox latex="\dfrac{\Delta B}{\Delta t}=\dfrac{B_2-B_1}{\Delta t}=\dfrac{0{,}500-1{,}50}{2{,}00}=-0{,}500\;\text{T/s}" />
-          <p>Negativt fortegn betyr at feltet minker. For å finne størrelsen av EMF bruker vi absoluttverdien 0,500 T/s.</p>
-        </Step>
-        <Step n={3} title="Indusert EMF via Faradays lov">
-          <p>Sett inn i <InlineLatex latex="|\varepsilon|=A\,|dB/dt|" />:</p>
-          <FormulaBox latex="|\varepsilon|=A\left|\dfrac{\Delta B}{\Delta t}\right|=4{,}524\times 10^{-2}\cdot 0{,}500" />
-          <FormulaBox latex="\boxed{|\varepsilon|\approx 2{,}26\times 10^{-2}\;\text{V}=22{,}6\;\text{mV}}" variant="gold" />
+        <Step n={1} title="(a) Indusert EMF">
+          <p>Sett inn <InlineLatex latex="A=0{,}0900\;\text{m}^2" /> og <InlineLatex latex="|dB/dt|=0{,}190\;\text{T/s}" />:</p>
+          <FormulaBox latex="|\varepsilon|=A\left|\dfrac{dB}{dt}\right|=0{,}0900\cdot 0{,}190" />
+          <FormulaBox latex="\boxed{|\varepsilon|=0{,}0171\;\text{V}=17{,}1\;\text{mV}}" variant="gold" />
           <p>
-            <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{m}^2\cdot\text{T/s}=\text{T}\cdot\text{m}^2/\text{s}=\text{Wb/s}=\text{V}" />. ✓
+            <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{m}^2\cdot\text{T/s}=\text{Wb/s}=\text{V}" />. ✓
           </p>
         </Step>
-        <Step n={4} title="Retnings­analyse med Lenz' lov">
-          <p>
-            Lenz brukes <em>separat</em> fra størrelsen: Faraday gir <strong>hvor mye</strong>, Lenz gir <strong>hvilken vei</strong>. Fluksen (ut av siden) minker. Indusert strøm må motvirke dette — altså prøve å opprettholde fluksen ut av siden. Indusert B må derfor også peke <em>ut av siden</em> inne i sløyfen.
-          </p>
-          <p>
-            Med høyrehåndsregel (tomlen ut av siden, fingrene krøller): strømmen går <em>mot urviseren</em> sett fra leseren.
-          </p>
+        <Step n={2} title="(b) Strøm i sløyfen — Ohms lov">
+          <p>EMF-en driver strøm gjennom sløyfens egen resistans:</p>
+          <FormulaBox latex="I=\dfrac{|\varepsilon|}{R}=\dfrac{0{,}0171}{0{,}600}" />
+          <FormulaBox latex="\boxed{I=0{,}0285\;\text{A}=28{,}5\;\text{mA}}" variant="gold" />
         </Step>
-        <p>
-          <strong>Fysisk tolkning / anvendelser:</strong> Dette er den generiske mekanismen bak induksjons­kokeplaten (AC-felt gir virvelstrømmer i kjelebunnen), metalldetektoren (metall i feltet endrer effektiv <InlineLatex latex="\Phi_B" />) og kortleseren som føler tilstedeværelse av metall i ID-kort. Jo raskere feltet endrer seg (jo større <InlineLatex latex="|dB/dt|" />), jo sterkere respons — derfor bruker induksjons­ovner høye frekvenser (20–100 kHz).
+        <Pitfall>
+          <strong>Ikke bruk B = 3,80 T direkte!</strong> Startverdien til B sier ingenting om EMF-en, fordi det er <em>endringen</em> i feltet som induserer spenning, ikke verdien selv. Et statisk felt på 100 T gir ingen EMF; et felt på 0,01 T som endrer seg raskt gir mye EMF.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: så lenge feltet avtar med konstant rate, har sløyfen en konstant EMF og en konstant strøm. Den lagrede magnetiske energien i området forsvinner ikke uten videre — den dissiperes som varme i sløyfemotstanden via <InlineLatex latex="P=I^2R\approx 0{,}49\;\text{mW}" />.
         </p>
       </div>
     ),
     summary: (
-      <p>Når feltet avtar uniformt, er EMF proporsjonal med <InlineLatex latex="A\,|dB/dt|" />. Jo større spole eller raskere endring, jo større indusert spenning.</p>
+      <p>EMF avhenger kun av <em>endringen</em> i fluks, ikke av selve verdien. Med konstant <InlineLatex latex="dB/dt" /> og konstant <InlineLatex latex="A" /> får man konstant EMF og dermed konstant likestrøm i sløyfen.</p>
     ),
   },
 
   // ==========================================================================
-  // 29.6 — Spole med N vindinger
+  // 29.6 — Tidsavhengig B (polynom), spole med N vindinger
   // ==========================================================================
   "29.6": {
-    title: "EMF i flerlagsspole",
-    difficulty: "lett",
-    pageRef: "s. 963",
+    title: "EMF og strøm fra tidsavhengig magnetfelt",
+    difficulty: "middels",
+    pageRef: "s. 1008",
     problem: (
       <p>
-        En spole har <InlineLatex latex="N=200" /> vindinger med radius
-        <InlineLatex latex="\;r=4{,}00\;\text{cm}" />. Spolen ligger i et magnetfelt vinkelrett på vindingsplanet.
-        Feltet endrer seg med konstant rate <InlineLatex latex="dB/dt=0{,}0350\;\text{T/s}" />. Finn indusert EMF.
+        En spole med radius <InlineLatex latex="r=4{,}00\;\text{cm}" /> og <InlineLatex latex="N=500" /> vindinger ligger i
+        et uniformt magnetfelt som varierer med tiden ifølge <InlineLatex latex="B=(0{,}0120\;\text{T/s})\,t+(3{,}00\times 10^{-5}\;\text{T/s}^4)\,t^4" />.
+        Spolen er koblet til en motstand <InlineLatex latex="R=600\;\Omega" />, og sløyfeplanet er vinkelrett på feltet.
+        Spolens egenresistans kan ses bort fra. (a) Finn størrelsen av indusert EMF som funksjon av tid.
+        (b) Hva er strømmen i motstanden ved <InlineLatex latex="t=5{,}00\;\text{s}" />?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="N=200" /></li>
         <li><InlineLatex latex="r=0{,}0400\;\text{m}" /></li>
-        <li><InlineLatex latex="dB/dt=0{,}0350\;\text{T/s}" /></li>
+        <li><InlineLatex latex="N=500" /></li>
+        <li><InlineLatex latex="B(t)=0{,}0120\,t+3{,}00\times 10^{-5}\,t^4" /> [T]</li>
+        <li><InlineLatex latex="R=600\;\Omega" /></li>
       </ul>
     ),
-    unknowns: <p>Størrelsen av <InlineLatex latex="\varepsilon" />.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) <InlineLatex latex="|\varepsilon(t)|" /></li>
+        <li>(b) <InlineLatex latex="I" /> ved <InlineLatex latex="t=5{,}00\;\text{s}" /></li>
+      </ul>
+    ),
     strategy: (
-      <p>For en spole med N vindinger gir Faradays lov <InlineLatex latex="\varepsilon=-N\,d\Phi_B/dt" />. Med <InlineLatex latex="\Phi_B=BA" /> blir <InlineLatex latex="|\varepsilon|=N A\,|dB/dt|" />.</p>
+      <p>
+        For en spole med N vindinger gir Faradays lov <InlineLatex latex="\varepsilon=-N\,d\Phi_B/dt=-NA\,dB/dt" />. Deriver
+        uttrykket for <InlineLatex latex="B(t)" /> for å få <InlineLatex latex="dB/dt" />, sett inn tall ved <InlineLatex latex="t=5{,}00\;\text{s}" />, og bruk Ohms lov for strømmen.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p>Hver vinding bidrar med samme fluks; derfor multipliseres med N.</p>,
+        content: <p>Areal: <InlineLatex latex="A=\pi r^2" />. Derivasjon: <InlineLatex latex="d(at+bt^4)/dt=a+4bt^3" />.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>Sløyfens egenresistans neglisjeres, så hele EMF-en faller over <InlineLatex latex="R" />: <InlineLatex latex="I=\varepsilon/R" />.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Faradays lov for N vindinger">
+        <TheoryBox title="Polynom i tid — derivasjon ledd for ledd">
           <p>
-            For én vinding er indusert EMF <InlineLatex latex="\varepsilon_1=-d\Phi_B/dt" />. I en spole med N vindinger som alle ser
-            <em> samme</em> fluks, er vindingene elektrisk koblet i <em>serie</em>, og seriespenningene summeres:
+            Når feltet er gitt som en eksplisitt funksjon <InlineLatex latex="B(t)" />, er strategien rett frem: deriver, sett inn i Faraday, multipliser med areal og antall vindinger:
           </p>
-          <FormulaBox latex="\varepsilon=\sum_{k=1}^{N}\varepsilon_k=-N\dfrac{d\Phi_B}{dt}" variant="blue" />
+          <FormulaBox latex="\varepsilon(t)=-N A\,\dfrac{dB(t)}{dt}" variant="blue" />
           <p>
-            En ekvivalent formulering bruker <em>koblet fluks</em> (flux linkage) <InlineLatex latex="\Psi=N\Phi_B" />:
-          </p>
-          <FormulaBox latex="\varepsilon=-\dfrac{d\Psi}{dt}" variant="blue" />
-          <p>
-            <strong>Analogi:</strong> Tenk på hver vinding som et lite batteri. Koblet i serie adderes spenningene — 200 «enkeltbatterier» som hver gir 0,176 mV gir 35,2 mV totalt. Samme prinsipp som at 4 AA-batterier i serie gir 6 V.
+            For <InlineLatex latex="B=at+bt^4" /> blir <InlineLatex latex="dB/dt=a+4bt^3" /> — første leddet (lineært) gir konstant bidrag, mens fjerdegrads leddet vokser kraftig med tiden.
           </p>
         </TheoryBox>
-        <TheoryBox title="Hvorfor ikke bevegelses-EMF eller rotasjons­formel?">
-          <p>
-            Vi har tre hovedformler for indusert EMF, og det er viktig å velge rett:
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li><InlineLatex latex="\varepsilon=BLv" />: kun når en <em>stav/ledning beveger seg</em> gjennom et statisk felt.</li>
-            <li><InlineLatex latex="\varepsilon=BA\omega\sin(\omega t)" />: kun når sløyfen <em>roterer</em> i et statisk felt.</li>
-            <li><InlineLatex latex="\varepsilon=-N\,dB/dt\cdot A" />: når <em>feltet</em> endrer seg, med fast sløyfe og fast areal (dette tilfellet).</li>
-          </ul>
-          <p>
-            Her står spolen stille og feltet endrer seg — altså siste variant. Siden A er konstant og <InlineLatex latex="\vec B\perp\text{spoleplan}" />, har vi <InlineLatex latex="\Phi_B=BA" />, og all tidsavhengigheten ligger i B:
-          </p>
-          <FormulaBox latex="|\varepsilon|=N\left|\dfrac{d(BA)}{dt}\right|=NA\left|\dfrac{dB}{dt}\right|" variant="blue" />
-        </TheoryBox>
-        <Step n={1} title="Areal per vinding">
-          <p>Hver vinding er en sirkel med radius 4,00 cm:</p>
+        <Step n={1} title="Areal og forhåndsberegning">
+          <p>Sirkulært tverrsnitt:</p>
           <FormulaBox latex="A=\pi r^2=\pi(0{,}0400)^2=5{,}027\times 10^{-3}\;\text{m}^2" />
-          <p>Samme areal for alle 200 vindingene — de ligger tett sammen og ser alle samme B.</p>
+          <p>Forhåndsfaktor som dukker opp i alle uttrykk:</p>
+          <FormulaBox latex="NA=500\cdot 5{,}027\times 10^{-3}=2{,}513\;\text{m}^2" />
         </Step>
-        <Step n={2} title="EMF fra Faradays lov">
-          <p>Sett inn <InlineLatex latex="N=200" />, <InlineLatex latex="A=5{,}027\times 10^{-3}\;\text{m}^2" /> og <InlineLatex latex="dB/dt=0{,}0350\;\text{T/s}" />:</p>
-          <FormulaBox latex="|\varepsilon|=NA\left|\dfrac{dB}{dt}\right|=200\cdot 5{,}027\times 10^{-3}\cdot 0{,}0350" />
-          <FormulaBox latex="\boxed{|\varepsilon|\approx 0{,}0352\;\text{V}=35{,}2\;\text{mV}}" variant="gold" />
-          <p>
-            <strong>Enhetssjekk:</strong> <InlineLatex latex="[\text{(ingen)}]\cdot[\text{m}^2]\cdot[\text{T/s}]=\text{Wb/s}=\text{V}" />. ✓
-          </p>
+        <Step n={2} title="(a) EMF som funksjon av tid">
+          <p>Deriver <InlineLatex latex="B(t)" /> ledd for ledd:</p>
+          <FormulaBox latex="\dfrac{dB}{dt}=0{,}0120+4\cdot 3{,}00\times 10^{-5}\,t^3=0{,}0120+1{,}20\times 10^{-4}\,t^3\;[\text{T/s}]" />
+          <p>Sett inn i Faraday med N vindinger:</p>
+          <FormulaBox latex="|\varepsilon(t)|=NA\left|\dfrac{dB}{dt}\right|=2{,}513\bigl(0{,}0120+1{,}20\times 10^{-4}\,t^3\bigr)" />
+          <FormulaBox latex="\boxed{|\varepsilon(t)|=0{,}03016+3{,}016\times 10^{-4}\,t^3\;\;[\text{V}]}" variant="gold" />
         </Step>
-        <Step n={3} title="Retnings­analyse (Lenz)">
-          <p>
-            Oppgaven sier ikke om B øker eller minker, kun at raten er <InlineLatex latex="+0{,}0350\;\text{T/s}" /> (positiv ⇒ økende). Lenz: hvis B øker vinkelrett inn i spoleplanet, vil indusert strøm skape et motsatt rettet B. Strøm­retningen velges slik at man ved høyrehåndsregel får det ønskede indusert-B.
-          </p>
+        <Step n={3} title="(b) Strøm ved t = 5,00 s">
+          <p>Sett inn <InlineLatex latex="t=5{,}00\;\text{s}" /> (slik at <InlineLatex latex="t^3=125" />):</p>
+          <FormulaBox latex="|\varepsilon(5)|=0{,}03016+3{,}016\times 10^{-4}\cdot 125=0{,}03016+0{,}03770=0{,}0679\;\text{V}" />
+          <p>Med Ohms lov, og siden spolens egenresistans neglisjeres:</p>
+          <FormulaBox latex="I=\dfrac{|\varepsilon|}{R}=\dfrac{0{,}0679}{600}" />
+          <FormulaBox latex="\boxed{I\approx 1{,}13\times 10^{-4}\;\text{A}=113\;\mu\text{A}}" variant="gold" />
         </Step>
-        <p>
-          <strong>Intuisjon — hvorfor N i formelen?</strong> Hadde vi hatt bare én vinding, ville EMF vært ca. 0,176 mV — mye svakere. Ved å pakke 200 vindinger oppå hverandre blir hver omdreining en ekstra «batteri-celle» i serie. Dette er hele grunnen til at ekte generatorer og transformatorer bruker hundrevis eller tusenvis av vindinger — man får mye spenning uten å trenge enormt sterke felt.
+        <Pitfall>
+          <strong>Ikke regn ut <InlineLatex latex="\varepsilon" /> ved kun å sette inn <InlineLatex latex="B(5)" /> i en formel.</strong> Faraday krever <em>raten</em> <InlineLatex latex="dB/dt" />, ikke verdien <InlineLatex latex="B" />. Glemmer du å derivere først, får du komplett feil svar.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: ved små tider dominerer det lineære leddet, og EMF-en er omtrent konstant 30 mV. Etter hvert som <InlineLatex latex="t^3" />-bidraget vokser, øker EMF-en raskt. Ved <InlineLatex latex="t=5\;\text{s}" /> har de to leddene samme størrelse — fjerdegrads leddet tar over for store t.
         </p>
       </div>
     ),
     summary: (
-      <p>N vindinger multipliserer EMF-bidraget — dette er hvorfor transformatorer bruker mange vindinger for å oppnå høye spenninger.</p>
+      <p>Når feltet er en eksplisitt funksjon av tid, er nøkkelen å derivere riktig — ikke bruke verdien. Polynomielle felt deriveres ledd for ledd.</p>
     ),
   },
 
   // ==========================================================================
-  // 29.8 — Roterende sløyfe (generator)
+  // 29.8 — Eksponentielt avtagende B, sløyfe i 60° vinkel
   // ==========================================================================
   "29.8": {
-    title: "Roterende sløyfe — vekselstrømgenerator",
-    difficulty: "middels",
-    pageRef: "s. 964",
+    title: "Eksponentielt avtagende felt, sløyfe i vinkel",
+    difficulty: "vanskelig",
+    pageRef: "s. 1008",
     problem: (
       <div className="space-y-2">
         <p>
-          En rektangulær sløyfe (<InlineLatex latex="a=20{,}0\;\text{cm}\times b=30{,}0\;\text{cm}" />) roterer med
-          vinkelhastighet <InlineLatex latex="\omega=100\;\text{rad/s}" /> i et uniformt magnetfelt
-          <InlineLatex latex="\;B=0{,}250\;\text{T}" />. Rotasjonsaksen er vinkelrett på B. Finn maksimal EMF.
+          En flat, sirkulær stålløkke med radius <InlineLatex latex="r=75\;\text{cm}" /> ligger i ro i et uniformt magnetfelt
+          som vist i kantsynet i Fig. E29.8. Feltet endrer seg med tiden ifølge
+          <InlineLatex latex="\;B(t)=(1{,}4\;\text{T})\,e^{-(0{,}057\;\text{s}^{-1})t}" />, og <InlineLatex latex="\vec B" /> danner en
+          vinkel på <InlineLatex latex="60^\circ" /> med sløyfens plan. (a) Finn EMF som funksjon av tid.
+          (b) Når er indusert EMF lik <InlineLatex latex="1/10" /> av startverdien? (c) Finn retningen til
+          den induserte strømmen, sett ovenfra.
         </p>
-        <svg viewBox="0 0 260 140" className="w-full max-w-md mx-auto">
+        <svg viewBox="0 0 260 140" className="w-full max-w-sm mx-auto">
           <Arrowheads />
-          <rect x="90" y="50" width="80" height="40" fill="none" stroke="#ef4444" strokeWidth="2" />
-          <line x1="70" y1="70" x2="190" y2="70" stroke="#6b7280" strokeDasharray="3 3" />
-          <text x="195" y="74" fontSize="10" fill="#6b7280">akse</text>
-          {[30, 50, 70, 90, 110].map((y, i) => (
-            <line key={i} x1="210" y1={y} x2="240" y2={y} stroke="#3b82f6" strokeWidth="1.5" markerEnd="url(#arrow-blue-k29)" />
-          ))}
-          <text x="212" y="125" fontSize="10" fill="#3b82f6">B</text>
-          <path d="M 110 50 A 20 12 0 0 1 110 90" fill="none" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrow-green-k29)" />
-          <text x="80" y="30" fontSize="10" fill="#10b981">ω</text>
+          <line x1="40" y1="80" x2="220" y2="80" stroke="#ef4444" strokeWidth="3" />
+          <text x="100" y="100" fontSize="10" fill="#ef4444">sløyfe (kantsynet)</text>
+          <line x1="200" y1="40" x2="130" y2="80" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k29)" />
+          <text x="200" y="35" fontSize="10" fill="#3b82f6">B</text>
+          <path d="M 175 80 A 25 25 0 0 0 165 60" fill="none" stroke="#6b7280" strokeWidth="1" />
+          <text x="172" y="68" fontSize="9" fill="#6b7280">60°</text>
         </svg>
       </div>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="a=0{,}200\;\text{m},\;b=0{,}300\;\text{m}" /></li>
-        <li><InlineLatex latex="\omega=100\;\text{rad/s}" /></li>
-        <li><InlineLatex latex="B=0{,}250\;\text{T}" /></li>
+        <li><InlineLatex latex="r=0{,}75\;\text{m}" /></li>
+        <li><InlineLatex latex="B(t)=1{,}4\,e^{-0{,}057\,t}" /> [T]</li>
+        <li>Vinkel mellom <InlineLatex latex="\vec B" /> og sløyfeplanet: <InlineLatex latex="60^\circ" /> ⇒ vinkel mot normal er <InlineLatex latex="\phi=30^\circ" /></li>
       </ul>
     ),
-    unknowns: <p>Maksimal indusert EMF <InlineLatex latex="\varepsilon_\mathrm{max}" />.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) <InlineLatex latex="\varepsilon(t)" /></li>
+        <li>(b) Tiden <InlineLatex latex="t_{1/10}" /> der <InlineLatex latex="\varepsilon=\varepsilon_0/10" /></li>
+        <li>(c) Retning på indusert strøm sett ovenfra</li>
+      </ul>
+    ),
     strategy: (
-      <p>For en roterende sløyfe er <InlineLatex latex="\Phi_B=BA\cos(\omega t)" />. Faradays lov gir <InlineLatex latex="\varepsilon=BA\omega\sin(\omega t)" />, og maksimumsverdien er <InlineLatex latex="\varepsilon_\mathrm{max}=BA\omega" />.</p>
+      <p>
+        Fluksen er <InlineLatex latex="\Phi_B=BA\cos\phi" /> der <InlineLatex latex="\phi" /> er vinkelen mellom <InlineLatex latex="\vec B" /> og normalen. Deriver eksponentielt B(t) — derivasjonen gir bare en faktor <InlineLatex latex="-k" /> tilbake. Lenz: når B avtar, induseres strøm som «opprettholder» fluks.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p>Areal: <InlineLatex latex="A=ab" />. Sett inn i <InlineLatex latex="\varepsilon_\mathrm{max}=BA\omega" />.</p>,
+        content: <p><InlineLatex latex="d(e^{-kt})/dt=-k\,e^{-kt}" />. EMF-en blir også eksponentielt avtagende, med samme tidskonstant.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>For (b): løs <InlineLatex latex="e^{-kt}=1/10" /> ⇒ <InlineLatex latex="t=\ln(10)/k" />.</p>,
+      },
+      {
+        label: "Hint 3",
+        content: <p>For (c): når B avtar, må indusert B sustaine samme retning som B. Bruk høyrehåndsregel.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Tredje kilde til flukses­endring: rotasjon">
+        <TheoryBox title="Skrå B — bare normalkomponenten teller">
           <p>
-            Fra 29.1 og 29.6 har vi sett at en endring i <em>B</em> gir EMF. Men fluksen kan også endres ved å vri selve sløyfen. Den generelle definisjonen er:
+            Når <InlineLatex latex="\vec B" /> ikke står vinkelrett på sløyfeplanet, må vi projisere på normalen:
           </p>
-          <FormulaBox latex="\Phi_B=\vec B\cdot\vec A=BA\cos\theta" variant="blue" />
+          <FormulaBox latex="\Phi_B=\vec B\cdot\vec A=BA\cos\phi" variant="blue" />
           <p>
-            Det er altså tre måter å endre fluksen på (og dermed tre måter å indusere EMF): (1) endre <em>B</em>, (2) endre <em>A</em>, eller (3) endre <em>θ</em>. Her er B og A konstante, og θ endres ved rotasjon:
-            <InlineLatex latex="\;\theta(t)=\omega t" />.
-          </p>
-          <FormulaBox latex="\Phi_B(t)=BA\cos(\omega t)" variant="blue" />
-          <p>
-            Dette er en sinusformet funksjon — og derfor blir den induserte EMF-en (dens tidsderiverte) også sinusformet, men 90° fase­forskjøvet.
+            Her er <InlineLatex latex="\phi" /> vinkelen mellom <InlineLatex latex="\vec B" /> og <em>normalen</em>. Fig. E29.8 viser <InlineLatex latex="60^\circ" /> mellom <InlineLatex latex="\vec B" /> og <em>sløyfens plan</em>, så vinkelen mot normalen er <InlineLatex latex="\phi=90^\circ-60^\circ=30^\circ" />, og <InlineLatex latex="\cos 30^\circ=\sqrt 3/2\approx 0{,}866" />.
           </p>
         </TheoryBox>
-        <TheoryBox title="Hvorfor denne formelen og ikke BLv?">
-          <p>
-            Begge formlene beskriver induksjon via bevegelse, men på forskjellig måte:
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li><InlineLatex latex="\varepsilon=BLv" />: for <em>translasjon</em> — en stav som beveger seg rett langs skinnene. Feies-arealet øker lineært.</li>
-            <li><InlineLatex latex="\varepsilon=BA\omega\sin(\omega t)" />: for <em>rotasjon</em> — sløyfen vrir seg på stedet. Arealet er fast, men <em>projeksjonen</em> av arealet på B-retningen endres.</li>
-          </ul>
-          <p>
-            Man kan i prinsippet beregne en generator med BLv på hver av de fire sidene i den rektangulære sløyfen, men rotasjons­formelen er langt enklere — derfor bruker vi den.
-          </p>
-          <p>Deriverer vi fluksen og bruker Faradays lov:</p>
-          <FormulaBox latex="\varepsilon=-\dfrac{d\Phi_B}{dt}=-BA\dfrac{d}{dt}\bigl[\cos(\omega t)\bigr]=BA\,\omega\sin(\omega t)" variant="blue" />
-          <p>
-            <InlineLatex latex="\sin(\omega t)" /> svinger mellom −1 og +1, så amplituden er:
-          </p>
-          <FormulaBox latex="\varepsilon_\mathrm{max}=BA\omega" variant="blue" />
-          <p>
-            Med N vindinger multipliseres resultatet med N: <InlineLatex latex="\varepsilon_\mathrm{max}=NBA\omega" />. Her har vi én vinding.
-          </p>
-        </TheoryBox>
-        <p>
-          <strong>Fysisk bilde — når er EMF maksimal?</strong> Paradoksalt nok: når fluksen er <em>null</em>. Dette skjer når sløyfen står parallelt med B (flatenormalen vinkelrett på B, <InlineLatex latex="\theta=90^\circ" />). Der er <InlineLatex latex="\cos\theta=0" /> (ingen fluks), men <InlineLatex latex="-\sin\theta=-1" /> (maksimal <em>endringsrate</em>). Motsatt: når fluksen er <em>maksimal</em> (<InlineLatex latex="\theta=0" />), er <InlineLatex latex="\sin\theta=0" /> — så EMF er null. Det er endringen, ikke verdien, som teller.
-        </p>
-        <Step n={1} title="Areal av rektangulær sløyfe">
-          <p>Rektangel med sider a og b:</p>
-          <FormulaBox latex="A=ab=0{,}200\cdot 0{,}300=0{,}0600\;\text{m}^2" />
+        <Step n={1} title="Areal og fluksuttrykk">
+          <FormulaBox latex="A=\pi r^2=\pi(0{,}75)^2=1{,}767\;\text{m}^2" />
+          <FormulaBox latex="\Phi_B(t)=B(t)\,A\cos 30^\circ=1{,}4\,e^{-0{,}057t}\cdot 1{,}767\cdot 0{,}866" />
+          <FormulaBox latex="\Phi_B(t)=2{,}142\,e^{-0{,}057t}\;\text{Wb}" />
         </Step>
-        <Step n={2} title="Maksimal EMF">
-          <p>Sett inn <InlineLatex latex="B=0{,}250\;\text{T}" />, <InlineLatex latex="A=0{,}0600\;\text{m}^2" /> og <InlineLatex latex="\omega=100\;\text{rad/s}" /> i amplitudeformelen:</p>
-          <FormulaBox latex="\varepsilon_\mathrm{max}=BA\omega=0{,}250\cdot 0{,}0600\cdot 100" />
-          <FormulaBox latex="\boxed{\varepsilon_\mathrm{max}=1{,}50\;\text{V}}" variant="gold" />
+        <Step n={2} title="(a) EMF som funksjon av tid">
+          <p>Deriver fluksen og bruk Faradays lov (én vinding):</p>
+          <FormulaBox latex="\varepsilon(t)=-\dfrac{d\Phi_B}{dt}=-\bigl(-0{,}057\bigr)\cdot 2{,}142\,e^{-0{,}057t}" />
+          <FormulaBox latex="\boxed{\varepsilon(t)=0{,}122\,e^{-0{,}057t}\;\text{V}}" variant="gold" />
           <p>
-            <strong>Enhetssjekk:</strong> <InlineLatex latex="\text{T}\cdot\text{m}^2\cdot\text{rad/s}=\text{Wb/s}=\text{V}" /> (rad er dimensjonsløs). ✓
+            Startverdien er <InlineLatex latex="\varepsilon_0=\varepsilon(0)=0{,}122\;\text{V}=122\;\text{mV}" />.
           </p>
         </Step>
-        <p>
-          <strong>Tolkning:</strong> Den faktiske spenningen varierer som <InlineLatex latex="1{,}50\sin(100t)\;\text{V}" /> — altså en sinusformet vekselspenning med frekvens <InlineLatex latex="f=\omega/(2\pi)\approx 15{,}9\;\text{Hz}" />. Retningen på strømmen snur hver gang <InlineLatex latex="\sin" /> bytter fortegn. Dette er eksakt hva en AC-generator produserer.
-        </p>
-        <p>
-          <strong>Energibetraktning:</strong> Siden <InlineLatex latex="\varepsilon_\mathrm{max}\propto\omega" /> må man rotere raskere for høyere spenning. Men raskere rotasjon krever mer mekanisk effekt (motordrevet rotor), og ved resistiv last forbruker spolen <InlineLatex latex="P=\varepsilon^2/R" />. Det er dette mekaniske arbeidet (ikke magnetfeltet) som omdannes til elektrisk energi. Norske vannkraftverk bruker samme prinsipp — bare med langt større spoler og sterkere felt.
+        <Step n={3} title="(b) Når har EMF falt til 1/10?">
+          <p>Krev at <InlineLatex latex="e^{-0{,}057\,t}=0{,}1" />, dvs. <InlineLatex latex="-0{,}057\,t=\ln(0{,}1)=-2{,}303" />:</p>
+          <FormulaBox latex="t=\dfrac{2{,}303}{0{,}057}\approx 40{,}4\;\text{s}" />
+          <FormulaBox latex="\boxed{t\approx 40{,}4\;\text{s}}" variant="gold" />
+        </Step>
+        <Step n={4} title="(c) Retning av indusert strøm">
+          <p>
+            Feltet avtar, så fluksen avtar. Lenz: indusert strøm prøver å <em>opprettholde</em> fluksen, dvs. lage et indusert B i samme retning som ytre B (komponent ut av sløyfeplanet i samme retning som ytre).
+          </p>
+          <p>
+            Sett ovenfra: ytre B har komponent oppover gjennom sløyfen (siden den gjør 60° med planet og lener seg ut). Indusert B må også peke oppover gjennom sløyfen. Med høyrehåndsregel (tomlen opp) krøller fingrene <em>mot urviseren</em>:
+          </p>
+          <FormulaBox latex="\boxed{\text{strømmen flyter mot urviseren sett ovenfra}}" variant="gold" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke bruk vinkelen 60° direkte i <InlineLatex latex="\cos\phi" /></strong>. Figuren angir vinkelen mellom <InlineLatex latex="\vec B" /> og <em>sløyfeplanet</em>; men i fluksformelen skal vi ha vinkelen mot <em>normalen</em>. Disse er komplementære. Riktig her: <InlineLatex latex="\cos 30^\circ" />, ikke <InlineLatex latex="\cos 60^\circ" />.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: en eksponentielt avtagende kilde (typisk for utlading av en stor elektromagnet) gir også eksponentielt avtagende EMF — med samme tidskonstant <InlineLatex latex="\tau=1/k\approx 17{,}5\;\text{s}" />. Etter ca. <InlineLatex latex="2{,}3\,\tau" /> har spenningen falt til 10 % av startverdien.
         </p>
       </div>
     ),
     summary: (
-      <p>Dette er prinsippet bak en vekselstrømgenerator: mekanisk rotasjon av en sløyfe i et B-felt gir sinusformet spenning. Legg merke til at <InlineLatex latex="\varepsilon_\mathrm{max}\propto \omega" />.</p>
+      <p>Eksponentielt B gir eksponentielt EMF med samme tidskonstant. Vinkelregningen krever at man bruker normalvinkelen <InlineLatex latex="\phi" />, ikke planvinkelen. Lenz gir retningen kvalitativt.</p>
     ),
   },
 
   // ==========================================================================
-  // 29.13 — Stav i magnetfelt (motional EMF)
+  // 29.13 — Vinkelhastighet i kvadratisk generatorspole
   // ==========================================================================
   "29.13": {
-    title: "Bevegelses-EMF i stav",
+    title: "Vinkelhastighet for kvadratisk generator",
     difficulty: "middels",
-    pageRef: "s. 966",
+    pageRef: "s. 1008",
+    problem: (
+      <p>
+        Ankeret i en liten generator består av en flat, kvadratisk spole med <InlineLatex latex="N=120" /> vindinger og
+        sider <InlineLatex latex="L=1{,}60\;\text{cm}" />. Spolen roterer i et magnetfelt på
+        <InlineLatex latex="\;B=0{,}0750\;\text{T}" />. Hva er vinkelhastigheten <InlineLatex latex="\omega" /> til spolen
+        hvis den maksimale induserte EMF er <InlineLatex latex="\varepsilon_{\max}=24{,}0\;\text{mV}" />?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li><InlineLatex latex="N=120" /></li>
+        <li><InlineLatex latex="L=0{,}0160\;\text{m}" /> ⇒ <InlineLatex latex="A=L^2=2{,}56\times 10^{-4}\;\text{m}^2" /></li>
+        <li><InlineLatex latex="B=0{,}0750\;\text{T}" /></li>
+        <li><InlineLatex latex="\varepsilon_{\max}=0{,}0240\;\text{V}" /></li>
+      </ul>
+    ),
+    unknowns: <p>Vinkelhastighet <InlineLatex latex="\omega" />.</p>,
+    strategy: (
+      <p>For en spole som roterer i uniformt B er <InlineLatex latex="\varepsilon_{\max}=NBA\omega" />. Løs for <InlineLatex latex="\omega" />.</p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p>Maksimal EMF oppstår når sløyfens plan er parallelt med <InlineLatex latex="\vec B" /> — der er fluksen null, men endringsraten størst.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Roterende spole — sinusformet EMF">
+          <p>
+            For en spole med N vindinger og areal A som roterer med <InlineLatex latex="\omega" /> rundt en akse vinkelrett på <InlineLatex latex="\vec B" />, blir fluksen:
+          </p>
+          <FormulaBox latex="\Phi_B(t)=BA\cos(\omega t)" variant="blue" />
+          <p>EMF blir tidsderivert ganget med N (vindinger i serie):</p>
+          <FormulaBox latex="\varepsilon(t)=-N\,d\Phi_B/dt=NBA\omega\sin(\omega t)" variant="blue" />
+          <p>Amplituden er det maksimale:</p>
+          <FormulaBox latex="\varepsilon_{\max}=NBA\omega" variant="blue" />
+        </TheoryBox>
+        <Step n={1} title="Areal av kvadratisk spole">
+          <FormulaBox latex="A=L^2=(0{,}0160)^2=2{,}56\times 10^{-4}\;\text{m}^2" />
+        </Step>
+        <Step n={2} title="Løs for ω">
+          <p>Omform <InlineLatex latex="\varepsilon_{\max}=NBA\omega" />:</p>
+          <FormulaBox latex="\omega=\dfrac{\varepsilon_{\max}}{NBA}=\dfrac{0{,}0240}{120\cdot 0{,}0750\cdot 2{,}56\times 10^{-4}}" />
+          <FormulaBox latex="\omega=\dfrac{0{,}0240}{2{,}304\times 10^{-3}}" />
+          <FormulaBox latex="\boxed{\omega\approx 10{,}4\;\text{rad/s}}" variant="gold" />
+          <p>
+            Tilsvarende frekvens: <InlineLatex latex="f=\omega/(2\pi)\approx 1{,}66\;\text{Hz}" /> (omtrent 100 omdreininger i minuttet).
+          </p>
+        </Step>
+        <Pitfall>
+          <strong>Ikke glem N i nevneren.</strong> Med 120 vindinger i serie blir EMF 120 ganger større enn for én vinding ved samme <InlineLatex latex="\omega" />. Glemmer man N, får man et svar som er 120 ganger for høyt.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: for å få mer EMF kan man øke <em>fire</em> ting: N (flere vindinger), B (sterkere felt), A (større areal) eller <InlineLatex latex="\omega" /> (raskere rotasjon). I praksis er N og B de billigste å skalere — derfor har generatorer hundrevis av vindinger og ferromagnetiske ankere som forsterker B.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>Maksimal EMF i roterende spole er <InlineLatex latex="\varepsilon_{\max}=NBA\omega" />. Dette er prinsippet bak alle vekselstrømgeneratorer.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.15 — Lenz' lov: tre kvalitative tilfeller
+  // ==========================================================================
+  "29.15": {
+    title: "Retning av indusert strøm — Lenz i tre situasjoner",
+    difficulty: "lett",
+    pageRef: "s. 1008",
     problem: (
       <div className="space-y-2">
         <p>
-          En metallstav med lengde <InlineLatex latex="L=0{,}800\;\text{m}" /> beveger seg med konstant fart
-          <InlineLatex latex="\;v=5{,}00\;\text{m/s}" /> vinkelrett på både stavens lengde og et uniformt magnetfelt
-          <InlineLatex latex="\;B=0{,}450\;\text{T}" /> rettet inn i siden. Stavens ender glir langs U-formede skinner
-          som lukker kretsen. Finn (a) indusert EMF, (b) strømmen om kretsresistansen er <InlineLatex latex="R=1{,}50\;\Omega" />,
-          (c) kraften som må til for å holde farten konstant.
+          En sirkulær lederløkke ligger i et område med uniformt magnetfelt, som vist i Fig. E29.15. Magnetfeltet er rettet
+          inn i sidens plan. Bestem retningen (med eller mot urviseren) til den induserte strømmen i sløyfen når
+          (a) <InlineLatex latex="B" /> øker, (b) <InlineLatex latex="B" /> avtar, og (c) <InlineLatex latex="B" /> er
+          konstant med verdi <InlineLatex latex="B_0" />. Begrunn svaret.
+        </p>
+        <svg viewBox="0 0 200 140" className="w-full max-w-xs mx-auto">
+          <circle cx="100" cy="70" r="42" fill="none" stroke="#374151" strokeWidth="2" />
+          {[{x:80,y:55},{x:120,y:55},{x:80,y:85},{x:120,y:85},{x:100,y:70}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
+          ))}
+          <text x="65" y="130" fontSize="10" fill="#3b82f6">B inn i siden (10,0 cm)</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Sirkulær sløyfe (radius 10,0 cm — ikke nødvendig for retning)</li>
+        <li>B rettet inn i siden</li>
+      </ul>
+    ),
+    unknowns: <p>Retning av indusert strøm i hvert av de tre tilfellene.</p>,
+    strategy: (
+      <p>
+        Lenz: indusert strøm motvirker endringen i fluks. Avgjør i hver case om fluksen øker, minker eller er konstant. Bruk høyrehåndsregelen for å oversette ønsket indusert B-retning til strømretning.
+      </p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p>Kun <em>endringer</em> i fluks gir EMF — konstant B gir 0.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>Indusert B inne i sløyfen skal peke <em>motsatt</em> av endringen, ikke motsatt av selve <InlineLatex latex="\vec B" />.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Lenz' lov i tre steg">
+          <ol className="list-decimal pl-5 space-y-0.5">
+            <li>Hvilken retning har <em>ytre</em> <InlineLatex latex="\vec B" />, og hva slags endring (øker/avtar/konstant)?</li>
+            <li>I hvilken retning må <em>indusert</em> <InlineLatex latex="\vec B" /> peke for å motvirke endringen?</li>
+            <li>Bruk høyrehåndsregelen til å finne strømretningen som gir den ønskede induserte <InlineLatex latex="\vec B" /> inne i sløyfen.</li>
+          </ol>
+          <p>
+            Husk regelen: tomlen i retning av indusert <InlineLatex latex="\vec B" />, fingrene krøller med strømmen.
+          </p>
+        </TheoryBox>
+        <Step n={1} title="(a) B inn, økende">
+          <p>
+            Ytre fluks er inn i siden og <em>øker</em>. Indusert B må peke <em>ut av siden</em> for å motvirke økningen. Tomlen ut av siden ⇒ fingrene mot urviseren:
+          </p>
+          <FormulaBox latex="\boxed{\text{strømmen flyter mot urviseren}}" variant="gold" />
+        </Step>
+        <Step n={2} title="(b) B inn, avtagende">
+          <p>
+            Ytre fluks er inn i siden og <em>avtar</em>. Indusert B må peke <em>inn i siden</em> for å støtte den avtagende fluksen. Tomlen inn i siden ⇒ fingrene med urviseren:
+          </p>
+          <FormulaBox latex="\boxed{\text{strømmen flyter med urviseren}}" variant="gold" />
+        </Step>
+        <Step n={3} title="(c) B konstant">
+          <p>Ingen flukses­endring ⇒ ingen EMF ⇒ ingen indusert strøm:</p>
+          <FormulaBox latex="\boxed{I=0}" variant="gold" />
+        </Step>
+        <Pitfall>
+          <strong>Indusert B er ikke alltid motsatt ytre B.</strong> Hvis ytre B avtar, peker indusert B i <em>samme</em> retning som ytre B (for å støtte den avtagende fluksen). Lenz handler om å motvirke <em>endringen</em>, ikke verdien.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: når magneten omkring sløyfen endres, virker sløyfen som en «magnetisk treghet» som prøver å holde fluksen konstant. Hadde indusert strøm forsterket endringen, ville energi blitt skapt fra ingenting — det er Lenz som er energibevaringens vakt.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>Tre-stegs Lenz: bestem retning på ytre B, hva endringen er, hva indusert B må gjøre, og bruk høyrehåndsregel for strømmen. Konstant B gir alltid <InlineLatex latex="I=0" />.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.19 — Lenz' lov: spolepar med bryter og kobling
+  // ==========================================================================
+  "29.19": {
+    title: "Bryter og koblede spoler — Lenz i tre tilfeller",
+    difficulty: "middels",
+    pageRef: "s. 1009",
+    problem: (
+      <p>
+        Bruk Lenz&apos; lov til å bestemme retningen til strømmen i motstanden <InlineLatex latex="ab" /> i Fig. E29.19 når
+        (a) bryter <InlineLatex latex="S" /> åpnes etter å ha vært lukket lenge, (b) spole <InlineLatex latex="B" /> bringes
+        nærmere spole <InlineLatex latex="A" /> med bryteren lukket, og (c) resistansen <InlineLatex latex="R" /> reduseres
+        mens bryteren forblir lukket. Forklar hvordan du finner svaret.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Spole A: batteri, motstand R og bryter S i serie</li>
+        <li>Spole B: lukket krets med motstand <InlineLatex latex="ab" /></li>
+        <li>Spolene er aksialt orientert mot hverandre</li>
+      </ul>
+    ),
+    unknowns: <p>Retning på strømmen gjennom motstand <InlineLatex latex="ab" /> (fra a til b eller fra b til a) i hver av de tre situasjonene.</p>,
+    strategy: (
+      <p>
+        Avgjør i hvert tilfelle om strømmen <InlineLatex latex="I_A" /> i spole A øker eller avtar. Det bestemmer om fluksen gjennom B øker eller avtar. Lenz gir retningen til indusert strøm i B.
+      </p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p>Bryter åpnes ⇒ <InlineLatex latex="I_A" /> faller raskt mot 0 ⇒ fluks i B avtar.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>B nærmere A ⇒ samme strøm i A, men sterkere kobling ⇒ fluks gjennom B øker.</p>,
+      },
+      {
+        label: "Hint 3",
+        content: <p>R reduseres ⇒ <InlineLatex latex="I_A=\mathcal E/R" /> øker ⇒ fluks gjennom B øker.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Gjensidig induktans — fluks fra A til B">
+          <p>
+            Strøm <InlineLatex latex="I_A" /> i spole A skaper et magnetfelt som penetrerer spole B. Den kobledede fluksen er proporsjonal med strømmen:
+          </p>
+          <FormulaBox latex="\Phi_{B\leftarrow A}=M\,I_A" variant="blue" />
+          <p>der M er gjensidig induktans. Faradays lov anvendt på spole B:</p>
+          <FormulaBox latex="\varepsilon_B=-M\,\dfrac{dI_A}{dt}-I_A\,\dfrac{dM}{dt}" variant="blue" />
+          <p>
+            Det første leddet beskriver endringer i strøm; det andre beskriver endringer i geometrisk kobling (avstand mellom spolene). Begge kan gi EMF, og Lenz brukes individuelt på hver effekt.
+          </p>
+        </TheoryBox>
+        <Step n={1} title="(a) Bryter S åpnes">
+          <p>
+            Når S har vært lukket lenge, er <InlineLatex latex="I_A" /> stabil. Når S åpnes, kollapser <InlineLatex latex="I_A" /> raskt mot null. Fluksen <InlineLatex latex="\Phi_B" /> gjennom B avtar brått.
+          </p>
+          <p>
+            Lenz: indusert strøm i B må prøve å <em>opprettholde</em> den fluksen som forsvinner — altså flyte i samme sirkulasjonsretning som <InlineLatex latex="I_A" /> hadde. Strømmen i motstanden <InlineLatex latex="ab" /> gir derfor en kort puls i retning <strong>fra b til a</strong> (samme retning som <InlineLatex latex="I_A" /> hadde).
+          </p>
+        </Step>
+        <Step n={2} title="(b) Spole B bringes nærmere A">
+          <p>
+            Bryter er lukket, så <InlineLatex latex="I_A" /> er konstant, men M øker når avstanden minker (dM/dt &gt; 0). Fluksen <InlineLatex latex="\Phi_B=MI_A" /> øker.
+          </p>
+          <p>
+            Lenz: indusert strøm i B må motvirke økningen — altså flyte motsatt av <InlineLatex latex="I_A" />. Gjennom motstand <InlineLatex latex="ab" /> går strømmen <strong>fra a til b</strong>.
+          </p>
+        </Step>
+        <Step n={3} title="(c) R reduseres med S lukket">
+          <p>
+            Med konstant batteri og lukket krets: <InlineLatex latex="I_A=\mathcal E/R" />. Når R minker, øker <InlineLatex latex="I_A" />, så <InlineLatex latex="\Phi_B" /> øker.
+          </p>
+          <p>
+            Som i (b) — Lenz krever motsatt sirkulasjon: gjennom <InlineLatex latex="ab" /> flyter strømmen <strong>fra a til b</strong>.
+          </p>
+        </Step>
+        <Pitfall>
+          <strong>Husk at strømmen i B varer kun mens noe endres.</strong> I tilfelle (a) er det en kort puls; så snart <InlineLatex latex="I_A=0" />, dør strømmen i B også. Et galvanometer ville registrert en utslag og deretter null.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: dette er nøyaktig prinsippet bak transformatorer. Med likestrøm gir kun bryterhandlinger eller geometriske endringer EMF i sekundærspolen. For kontinuerlig kobling brukes vekselstrøm, som garanterer <InlineLatex latex="dI_A/dt\neq 0" /> hele tiden.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>Lenz på spolepar: spør om <InlineLatex latex="\Phi_B" /> øker eller avtar, og finn strøm­retning som motvirker. Strømmen finnes kun mens endringen pågår.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.22 — B(t) = at³ inn i sløyfe, finn I når B = 1.33 T
+  // ==========================================================================
+  "29.22": {
+    title: "Strøm når B(t) = 0,380 t³ når 1,33 T",
+    difficulty: "middels",
+    pageRef: "s. 1009",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          En sirkulær lederløkke med radius <InlineLatex latex="r=0{,}0250\;\text{m}" /> og resistans
+          <InlineLatex latex="\;R=0{,}390\;\Omega" /> ligger i et område med uniformt magnetfelt rettet inn i sidens plan
+          (Fig. E29.22). Ved <InlineLatex latex="t=0" /> er <InlineLatex latex="B=0" />. Magnetfeltet begynner deretter å øke
+          ifølge <InlineLatex latex="B(t)=(0{,}380\;\text{T/s}^3)\,t^3" />. Hva er strømmen i sløyfen (størrelse og retning) i
+          øyeblikket når <InlineLatex latex="B=1{,}33\;\text{T}" />?
+        </p>
+        <svg viewBox="0 0 220 140" className="w-full max-w-xs mx-auto">
+          <Arrowheads />
+          <circle cx="110" cy="70" r="38" fill="none" stroke="#ef4444" strokeWidth="2" />
+          {[{x:90,y:55},{x:130,y:55},{x:90,y:85},{x:130,y:85},{x:110,y:70}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
+          ))}
+          <text x="60" y="130" fontSize="10" fill="#3b82f6">B inn, vokser som t³</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li><InlineLatex latex="r=0{,}0250\;\text{m}" /> ⇒ <InlineLatex latex="A=\pi r^2=1{,}963\times 10^{-3}\;\text{m}^2" /></li>
+        <li><InlineLatex latex="R=0{,}390\;\Omega" /></li>
+        <li><InlineLatex latex="B(t)=0{,}380\,t^3" /> [T]</li>
+        <li>Øyeblikket: <InlineLatex latex="B=1{,}33\;\text{T}" /></li>
+      </ul>
+    ),
+    unknowns: <p>Strøm <InlineLatex latex="I" /> (størrelse og retning) i sløyfen ved dette øyeblikket.</p>,
+    strategy: (
+      <p>
+        Finn først <InlineLatex latex="t" /> ved den gitte verdien <InlineLatex latex="B=1{,}33\;\text{T}" />. Beregn <InlineLatex latex="dB/dt=3\cdot 0{,}380\,t^2" /> ved samme <InlineLatex latex="t" />. EMF er <InlineLatex latex="A\,|dB/dt|" />, og strømmen <InlineLatex latex="I=\varepsilon/R" />. Lenz gir retning.
+      </p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p>Fra <InlineLatex latex="B=at^3=1{,}33" /> finn <InlineLatex latex="t^3=B/a=3{,}5\;\text{s}^3" />, så <InlineLatex latex="t=1{,}518\;\text{s}" />.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>I stedet for å regne <InlineLatex latex="t^2" /> direkte, kan man bruke at <InlineLatex latex="dB/dt=3B/t" /> i dette tilfellet.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Hvorfor dB/dt = 3B/t for t³-vekst">
+          <p>
+            Når <InlineLatex latex="B=at^3" />, så er <InlineLatex latex="dB/dt=3at^2=3(at^3)/t=3B/t" />. Dette er en nyttig snarvei når vi kjenner B og t i samme øyeblikk — vi trenger ikke regne ut <InlineLatex latex="a t^2" /> eksplisitt.
+          </p>
+        </TheoryBox>
+        <Step n={1} title="Finn tidspunktet t når B = 1,33 T">
+          <FormulaBox latex="t^3=\dfrac{B}{a}=\dfrac{1{,}33}{0{,}380}=3{,}500\;\text{s}^3" />
+          <FormulaBox latex="t=\sqrt[3]{3{,}500}=1{,}518\;\text{s}" />
+        </Step>
+        <Step n={2} title="Beregn dB/dt på samme tidspunkt">
+          <FormulaBox latex="\dfrac{dB}{dt}=3a\,t^2=3\cdot 0{,}380\cdot (1{,}518)^2=3\cdot 0{,}380\cdot 2{,}304" />
+          <FormulaBox latex="\dfrac{dB}{dt}=2{,}627\;\text{T/s}" />
+        </Step>
+        <Step n={3} title="EMF og strøm">
+          <p>Sløyfens areal:</p>
+          <FormulaBox latex="A=\pi(0{,}0250)^2=1{,}963\times 10^{-3}\;\text{m}^2" />
+          <p>EMF (én vinding, B vinkelrett på sløyfeplanet):</p>
+          <FormulaBox latex="|\varepsilon|=A\,\left|\dfrac{dB}{dt}\right|=1{,}963\times 10^{-3}\cdot 2{,}627=5{,}16\times 10^{-3}\;\text{V}" />
+          <p>Ohms lov:</p>
+          <FormulaBox latex="I=\dfrac{|\varepsilon|}{R}=\dfrac{5{,}16\times 10^{-3}}{0{,}390}" />
+          <FormulaBox latex="\boxed{I\approx 1{,}32\times 10^{-2}\;\text{A}=13{,}2\;\text{mA}}" variant="gold" />
+        </Step>
+        <Step n={4} title="Retning">
+          <p>
+            B inn i siden og <em>øker</em>. Lenz: indusert B må peke <em>ut av siden</em> inne i sløyfen. Med høyrehåndsregel (tomlen ut, fingrene krøller) ⇒ strøm <strong>mot urviseren</strong> sett fra leseren.
+          </p>
+          <FormulaBox latex="\boxed{\text{strøm mot urviseren}}" variant="gold" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke deriver <InlineLatex latex="B" />-verdien direkte.</strong> Faraday krever raten <InlineLatex latex="dB/dt" /> i akkurat det øyeblikket — ikke verdien <InlineLatex latex="B" /> selv. Med <InlineLatex latex="B\propto t^3" /> er raten <em>ikke</em> konstant; den endres som <InlineLatex latex="t^2" />.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: feltet vokser stadig raskere. Selv om B nettopp har nådd 1,33 T, øker det allerede med 2,63 T/s. EMF og strøm vil fortsette å øke kvadratisk i tiden så lenge <InlineLatex latex="t^3" />-loven gjelder.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>For polynomielle <InlineLatex latex="B(t)" />: deriver først, sett inn <em>i etterkant</em>. Snarveien <InlineLatex latex="dB/dt=3B/t" /> for t³-vekst sparer aritmetikk.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.24 — Rektangulær løkke trekkes ut av B-felt
+  // ==========================================================================
+  "29.24": {
+    title: "Magnetisk kraft på løkke som trekkes ut av felt",
+    difficulty: "middels",
+    pageRef: "s. 1009",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          En rektangulær lederløkke med dimensjoner <InlineLatex latex="1{,}50\;\text{cm}" /> (vertikal) og
+          <InlineLatex latex="\;8{,}00\;\text{cm}" /> (horisontal) og resistans <InlineLatex latex="R=0{,}600\;\Omega" />
+          trekkes mot høyre ut av et område med uniformt magnetfelt. Magnetfeltet har størrelse
+          <InlineLatex latex="\;B=2{,}40\;\text{T}" /> og er rettet inn i sidens plan i Fig. E29.24. I øyeblikket når
+          sløyfens fart er <InlineLatex latex="v=3{,}00\;\text{m/s}" /> og den fortsatt er delvis i feltet — hvilken kraft
+          (størrelse og retning) virker magnetfeltet på sløyfen?
+        </p>
+        <svg viewBox="0 0 320 120" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          {[{x:30,y:40},{x:60,y:40},{x:90,y:40},{x:30,y:80},{x:60,y:80},{x:90,y:80}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
+          ))}
+          <line x1="115" y1="20" x2="115" y2="100" stroke="#6b7280" strokeDasharray="3 3" />
+          <text x="118" y="14" fontSize="9" fill="#6b7280">feltgrense</text>
+          <rect x="80" y="50" width="160" height="20" fill="none" stroke="#ef4444" strokeWidth="2" />
+          <text x="130" y="46" fontSize="10" fill="#ef4444">8,00 cm</text>
+          <text x="245" y="64" fontSize="10" fill="#ef4444">1,50 cm</text>
+          <line x1="240" y1="60" x2="285" y2="60" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          <text x="290" y="64" fontSize="10" fill="#10b981">v</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Vertikal side <InlineLatex latex="L=0{,}0150\;\text{m}" /> (perpendikulært v)</li>
+        <li>Horisontal lengde 8,00 cm (langs v)</li>
+        <li><InlineLatex latex="R=0{,}600\;\Omega" /></li>
+        <li><InlineLatex latex="B=2{,}40\;\text{T}" /> inn i siden</li>
+        <li><InlineLatex latex="v=3{,}00\;\text{m/s}" /> mot høyre</li>
+      </ul>
+    ),
+    unknowns: <p>Magnetisk kraft <InlineLatex latex="\vec F" /> på løkken (størrelse og retning).</p>,
+    strategy: (
+      <p>
+        Bare den delen av sløyfen som ennå er i feltet «ser» magnetfeltet. EMF kommer fra den vertikale siden inne i feltet: <InlineLatex latex="\varepsilon=BLv" />. Strøm <InlineLatex latex="I=\varepsilon/R" />. Magnetisk kraft på den samme siden: <InlineLatex latex="F=BIL" />. Lenz gir retningen.
+      </p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p>Det er bare den vertikale siden av løkken som er <em>inne i feltet</em> som bidrar — den horisontale lengden 8 cm forsvinner ut av regnestykket.</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>Lenz: kraften virker <em>mot</em> bevegelsen. Sløyfens fluks (inn i siden) avtar; indusert strøm sustainer fluksen.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Hvorfor bare én side teller">
+          <p>
+            Lorentz-kraften <InlineLatex latex="qv\times B" /> driver ladninger langs <em>vertikal</em> retning (når <InlineLatex latex="\vec v" /> er horisontal og <InlineLatex latex="\vec B" /> er inn i siden). I:
+          </p>
+          <ul className="list-disc pl-5 space-y-0.5">
+            <li><strong>Venstre vertikal side</strong> (inne i feltet): EMF-bidrag <InlineLatex latex="BLv" />, driver ladninger oppover.</li>
+            <li><strong>Høyre vertikal side</strong> (utenfor feltet): <InlineLatex latex="\vec B=0" /> ⇒ ingen EMF.</li>
+            <li><strong>Topp/bunn (horisontale) sider</strong>: kraft på ladninger er vinkelrett på ledningen ⇒ ingen drivende EMF langs ledningen.</li>
+          </ul>
+          <p>Total EMF: <InlineLatex latex="\varepsilon=BLv" /> hvor L er den <em>vertikale</em> dimensjonen.</p>
+        </TheoryBox>
+        <Step n={1} title="EMF i venstre vertikalside (inne i feltet)">
+          <FormulaBox latex="\varepsilon=BLv=2{,}40\cdot 0{,}0150\cdot 3{,}00=0{,}108\;\text{V}" />
+        </Step>
+        <Step n={2} title="Strøm via Ohms lov">
+          <FormulaBox latex="I=\dfrac{\varepsilon}{R}=\dfrac{0{,}108}{0{,}600}=0{,}180\;\text{A}" />
+        </Step>
+        <Step n={3} title="Kraft på den strømførende siden">
+          <p>Magnetisk kraft på en strømførende leder med lengde L i felt B (når <InlineLatex latex="\vec L\perp\vec B" />):</p>
+          <FormulaBox latex="F=BIL=2{,}40\cdot 0{,}180\cdot 0{,}0150" />
+          <FormulaBox latex="\boxed{F\approx 6{,}48\times 10^{-3}\;\text{N}=6{,}48\;\text{mN}}" variant="gold" />
+        </Step>
+        <Step n={4} title="Retning via Lenz">
+          <p>
+            Når sløyfen trekkes mot høyre, minker arealet inne i feltet — fluksen (inn i siden) avtar. Indusert strøm må gjenopprette fluksen ⇒ flyte med urviseren sett fra leseren ⇒ strømmen i venstre vertikalside (inne i feltet) går <em>nedover</em>.
+          </p>
+          <p>Kraft på denne siden: <InlineLatex latex="\vec F=I\vec L\times\vec B" /> med strøm nedover og B inn i siden gir <strong>kraft mot venstre</strong> — altså mot bevegelsen, slik Lenz krever.</p>
+          <FormulaBox latex="\boxed{\vec F\;\text{peker mot venstre}\;(\text{mot bevegelsen})}" variant="gold" />
+        </Step>
+        <Pitfall>
+          <strong>Bruk riktig L i formelen.</strong> Den relevante lengden er sidens <em>høyde</em> (vinkelrett på <InlineLatex latex="\vec v" />), ikke løkkens lengde langs bevegelsen. Med vertikal side 1,50 cm gir vi <InlineLatex latex="L=0{,}0150\;\text{m}" />. Bytter du om, blir svaret en faktor 5,33 av.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: en ytre kraft må derfor virke <em>mot høyre</em> for å holde farten konstant. Effekten <InlineLatex latex="P=Fv\approx 19{,}4\;\text{mW}" /> tilsvarer dissipasjonen <InlineLatex latex="I^2R=(0{,}180)^2\cdot 0{,}600=19{,}4\;\text{mW}" /> — energien går fra mekanisk arbeid til varme i sløyfemotstanden.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>Bremse­kraften skalerer som <InlineLatex latex="B^2L^2v/R" />. Bare delen av sløyfen som krysser feltgrensen bidrar — derfor er det høyden L som teller, ikke totalt areal.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.25 — Bevegelses-EMF i stav: spenning, polaritet, E-felt
+  // ==========================================================================
+  "29.25": {
+    title: "Bevegelses-EMF: spenning, polaritet, E-felt og spesialtilfeller",
+    difficulty: "middels",
+    pageRef: "s. 1009",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          I Fig. E29.25 beveger en lederstav med lengde <InlineLatex latex="L=30{,}0\;\text{cm}" /> seg i et magnetfelt
+          <InlineLatex latex="\;B=0{,}450\;\text{T}" /> rettet inn i sidens plan. Staven beveger seg med fart
+          <InlineLatex latex="\;v=5{,}00\;\text{m/s}" /> i den viste retningen (mot høyre, vinkelrett på staven og B).
+          (a) Hva er potensialforskjellen mellom endene av staven? (b) Hvilket punkt, <InlineLatex latex="a" /> eller
+          <InlineLatex latex="\;b" />, har høyere potensial? (c) Når ladningene i staven er i likevekt — hva er
+          størrelse og retning av det elektriske feltet i staven? (d) Når ladningene er i likevekt — hvilket punkt har
+          overskudd av positiv ladning? (e) Hva er potensialforskjellen over staven hvis den i stedet beveger seg
+          (i) parallelt med <InlineLatex latex="ab" /> og (ii) rett ut av siden?
         </p>
         <svg viewBox="0 0 280 160" className="w-full max-w-md mx-auto">
           <Arrowheads />
-          <line x1="40" y1="30" x2="220" y2="30" stroke="#374151" strokeWidth="2" />
-          <line x1="40" y1="130" x2="220" y2="130" stroke="#374151" strokeWidth="2" />
+          {[{x:50,y:40},{x:90,y:40},{x:50,y:80},{x:90,y:80},{x:50,y:120},{x:90,y:120}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
+          ))}
+          <line x1="180" y1="40" x2="180" y2="120" stroke="#ef4444" strokeWidth="3" />
+          <text x="186" y="40" fontSize="11" fill="#ef4444">a</text>
+          <text x="186" y="125" fontSize="11" fill="#ef4444">b</text>
+          <line x1="180" y1="80" x2="240" y2="80" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          <text x="245" y="84" fontSize="11" fill="#10b981">v</text>
+          <text x="120" y="150" fontSize="10" fill="#3b82f6">B inn i siden</text>
+        </svg>
+      </div>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li><InlineLatex latex="L=0{,}300\;\text{m}" /> (a oppe, b nede)</li>
+        <li><InlineLatex latex="B=0{,}450\;\text{T}" /> inn i siden</li>
+        <li><InlineLatex latex="v=5{,}00\;\text{m/s}" /> mot høyre</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) <InlineLatex latex="\Delta V" /></li>
+        <li>(b) Hvilket punkt har høyere potensial</li>
+        <li>(c) <InlineLatex latex="\vec E" /> (størrelse og retning) i likevekt</li>
+        <li>(d) Hvilket punkt har positivt overskudd</li>
+        <li>(e) <InlineLatex latex="\Delta V" /> i to spesialtilfeller</li>
+      </ul>
+    ),
+    strategy: (
+      <p>
+        Staven har frie ladninger som opplever Lorentz-kraft <InlineLatex latex="q\vec v\times\vec B" />. Disse skyves mot én ende, og spenning bygges opp inntil et indre <InlineLatex latex="\vec E" />-felt balanserer Lorentz-kraften. Spenningsforskjellen er <InlineLatex latex="\varepsilon=BLv" />. Polariteten avgjøres av kryssproduktets retning.
+      </p>
+    ),
+    hints: [
+      {
+        label: "Hint 1",
+        content: <p><InlineLatex latex="\vec v\times\vec B" /> med v mot høyre og B inn i siden ⇒ peker oppover (positiv ladning skyves mot a).</p>,
+      },
+      {
+        label: "Hint 2",
+        content: <p>I likevekt: <InlineLatex latex="qE+qv\times B=0" /> ⇒ <InlineLatex latex="E=vB" />, retning fra + til −, dvs. fra a til b (nedover).</p>,
+      },
+      {
+        label: "Hint 3",
+        content: <p>(e) Hvis <InlineLatex latex="\vec v\parallel\vec L" /> eller <InlineLatex latex="\vec v\parallel\vec B" />, blir <InlineLatex latex="(\vec v\times\vec B)\cdot d\vec\ell=0" /> ⇒ ingen EMF.</p>,
+      },
+    ],
+    solution: (
+      <div>
+        <TheoryBox title="Bevegelses-EMF i en isolert stav (uten krets)">
+          <p>
+            Når en lederstav beveger seg gjennom B, virker Lorentz-kraften på frie ladninger og adskiller positive fra negative. Adskillelsen stopper når et innebygd <InlineLatex latex="\vec E" />-felt balanserer den magnetiske kraften:
+          </p>
+          <FormulaBox latex="qE=qvB\;\;\Rightarrow\;\;E=vB" variant="blue" />
+          <p>Integrerer vi <InlineLatex latex="E" /> over stavens lengde, får vi spenningen mellom endene:</p>
+          <FormulaBox latex="\Delta V=EL=BLv" variant="blue" />
+          <p>
+            Dette er ikke en EMF som driver strøm (det er ingen lukket krets), men en stasjonær spenningsforskjell — staven oppfører seg som et lite batteri.
+          </p>
+        </TheoryBox>
+        <Step n={1} title="(a) Potensialforskjell mellom endene">
+          <FormulaBox latex="\Delta V=BLv=0{,}450\cdot 0{,}300\cdot 5{,}00" />
+          <FormulaBox latex="\boxed{\Delta V=0{,}675\;\text{V}}" variant="gold" />
+        </Step>
+        <Step n={2} title="(b) Hvilket punkt har høyere potensial?">
+          <p>
+            Lorentz-kraft på en positiv ladning: <InlineLatex latex="\vec F=q\vec v\times\vec B" />. Med <InlineLatex latex="\vec v" /> mot høyre (+x) og <InlineLatex latex="\vec B" /> inn i siden (−z) blir <InlineLatex latex="\vec v\times\vec B=(+\hat x)\times(-\hat z)=+\hat y" /> (oppover).
+          </p>
+          <p>Positive ladninger akkumuleres øverst (ved a):</p>
+          <FormulaBox latex="\boxed{\text{a er på høyere potensial}}" variant="gold" />
+        </Step>
+        <Step n={3} title="(c) Indre E-felt i likevekt">
+          <FormulaBox latex="E=vB=5{,}00\cdot 0{,}450=2{,}25\;\text{V/m}" />
+          <p>Retning: fra a (høy potensial) mot b (lav potensial), dvs. <strong>nedover</strong>:</p>
+          <FormulaBox latex="\boxed{\vec E\;\text{peker fra a til b, } |\vec E|=2{,}25\;\text{V/m}}" variant="gold" />
+        </Step>
+        <Step n={4} title="(d) Hvilket punkt har positivt overskudd?">
+          <p>Positive ladninger har samlet seg øverst (steg 2):</p>
+          <FormulaBox latex="\boxed{\text{a har overskudd av positiv ladning}}" variant="gold" />
+        </Step>
+        <Step n={5} title="(e) To spesialtilfeller">
+          <p><strong>(i) v parallelt med ab</strong> (langs stavens lengde):</p>
+          <p>
+            <InlineLatex latex="\vec v\times\vec B" /> peker da vinkelrett på staven, så det integrerer seg ikke til noen netto EMF langs den:
+          </p>
+          <FormulaBox latex="\varepsilon=\int(\vec v\times\vec B)\cdot d\vec\ell=0" />
+          <FormulaBox latex="\boxed{\Delta V=0}" variant="gold" />
+          <p><strong>(ii) v rett ut av siden</strong> (parallelt med −B-aksen):</p>
+          <p>
+            Da er <InlineLatex latex="\vec v\parallel\vec B" /> ⇒ <InlineLatex latex="\vec v\times\vec B=0" />. Ingen Lorentz-kraft, ingen ladningsadskillelse:
+          </p>
+          <FormulaBox latex="\boxed{\Delta V=0}" variant="gold" />
+        </Step>
+        <Pitfall>
+          <strong>EMF krever <InlineLatex latex="\vec v" />, <InlineLatex latex="\vec B" /> og <InlineLatex latex="d\vec\ell" /> alle ulike retninger.</strong> Hvis to av dem er parallelle, blir kryssproduktet null. Det er bare den komponenten av <InlineLatex latex="\vec v\times\vec B" /> som peker langs staven som bidrar.
+          </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: spenningen på 0,675 V er stabil — ingen energi dissiperes (siden ingen strøm flyter i en åpen stav). Kobler du staven via skinner til en motstand, vil du derimot trekke energi fra mekanisk arbeid og dissipere den i motstanden.
+        </p>
+      </div>
+    ),
+    summary: (
+      <p>En isolert stav i B-felt får ladningsadskillelse <InlineLatex latex="\Delta V=BLv" /> uten å trekke strøm. Polaritet avgjøres av <InlineLatex latex="\vec v\times\vec B" />. Parallelle vektorer ⇒ ingen EMF.</p>
+    ),
+  },
+
+  // ==========================================================================
+  // 29.27 — Stav på skinner: EMF, retning, kraft, energibalanse
+  // ==========================================================================
+  "29.27": {
+    title: "Stav på skinner — EMF, retning, kraft, energibalanse",
+    difficulty: "middels",
+    pageRef: "s. 1010",
+    problem: (
+      <div className="space-y-2">
+        <p>
+          Lederstaven <InlineLatex latex="ab" /> i Fig. E29.27 har kontakt med metallskinnene <InlineLatex latex="ca" /> og
+          <InlineLatex latex="\;db" />. Apparatet ligger i et uniformt magnetfelt <InlineLatex latex="B=0{,}800\;\text{T}" />,
+          vinkelrett på sidens plan (inn i siden). Staven har lengde <InlineLatex latex="L=50{,}0\;\text{cm}" />.
+          (a) Finn størrelsen av indusert EMF når staven beveger seg mot høyre med fart <InlineLatex latex="v=7{,}50\;\text{m/s}" />.
+          (b) I hvilken retning flyter strømmen i staven? (c) Hvis kretsens resistans <InlineLatex latex="abdc" /> er
+          <InlineLatex latex="\;R=1{,}50\;\Omega" /> (antas konstant), finn kraften som trengs for å holde staven i jevn fart
+          (størrelse og retning). Friksjon kan ses bort fra. (d) Sammenlign mekanisk effekt <InlineLatex latex="Fv" /> med
+          dissipert effekt <InlineLatex latex="I^2R" />.
+        </p>
+        <svg viewBox="0 0 320 160" className="w-full max-w-md mx-auto">
+          <Arrowheads />
+          <line x1="40" y1="30" x2="270" y2="30" stroke="#374151" strokeWidth="2" />
+          <line x1="40" y1="130" x2="270" y2="130" stroke="#374151" strokeWidth="2" />
           <line x1="40" y1="30" x2="40" y2="130" stroke="#374151" strokeWidth="2" />
-          <line x1="160" y1="30" x2="160" y2="130" stroke="#ef4444" strokeWidth="3" />
-          <text x="165" y="80" fontSize="10" fill="#ef4444">stav L</text>
-          <line x1="160" y1="80" x2="210" y2="80" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
-          <text x="215" y="84" fontSize="10" fill="#10b981">v</text>
-          {[{x:70,y:60},{x:100,y:60},{x:130,y:60},{x:70,y:100},{x:100,y:100},{x:130,y:100}].map((p,i)=>(
-            <g key={i}><circle cx={p.x} cy={p.y} r="4" fill="none" stroke="#3b82f6" /><line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" /><line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" /></g>
+          <text x="22" y="34" fontSize="10" fill="#374151">c</text>
+          <text x="22" y="135" fontSize="10" fill="#374151">d</text>
+          <line x1="180" y1="30" x2="180" y2="130" stroke="#ef4444" strokeWidth="3" />
+          <text x="186" y="34" fontSize="11" fill="#ef4444">a</text>
+          <text x="186" y="135" fontSize="11" fill="#ef4444">b</text>
+          <line x1="180" y1="80" x2="240" y2="80" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          <text x="245" y="84" fontSize="11" fill="#10b981">v</text>
+          <text x="100" y="80" fontSize="10" fill="#ef4444">L = 50,0 cm</text>
+          {[{x:70,y:60},{x:110,y:60},{x:70,y:100},{x:110,y:100}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
           ))}
           <text x="50" y="150" fontSize="10" fill="#3b82f6">B inn i siden</text>
         </svg>
@@ -427,815 +1016,320 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="L=0{,}800\;\text{m}" /></li>
-        <li><InlineLatex latex="v=5{,}00\;\text{m/s}" /></li>
-        <li><InlineLatex latex="B=0{,}450\;\text{T}" /></li>
+        <li><InlineLatex latex="B=0{,}800\;\text{T}" /> inn i siden</li>
+        <li><InlineLatex latex="L=0{,}500\;\text{m}" /> (stavens lengde, vinkelrett på v)</li>
+        <li><InlineLatex latex="v=7{,}50\;\text{m/s}" /> mot høyre</li>
         <li><InlineLatex latex="R=1{,}50\;\Omega" /></li>
       </ul>
     ),
-    unknowns: <p>EMF, strøm I, og nødvendig dragkraft F.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Indusert EMF</li>
+        <li>(b) Strømretning i staven</li>
+        <li>(c) Påkrevd ytre kraft</li>
+        <li>(d) Sammenligning av <InlineLatex latex="Fv" /> og <InlineLatex latex="I^2R" /></li>
+      </ul>
+    ),
     strategy: (
-      <div>
-        <p>Bevegelses-EMF: <InlineLatex latex="\varepsilon=BLv" />. Strøm: <InlineLatex latex="I=\varepsilon/R" />. Kraften på strømstav i B-felt: <InlineLatex latex="F=BIL" />, som må motvirkes av en ytre kraft for konstant fart.</p>
-      </div>
+      <p>
+        Bevegelses-EMF: <InlineLatex latex="\varepsilon=BLv" />. Strømretning fra Lenz / <InlineLatex latex="\vec v\times\vec B" />. Magnetisk kraft motstand <InlineLatex latex="F=BIL" /> peker mot bevegelsen, så ytre kraft må peke med bevegelsen. Energibalansen følger automatisk når farten er konstant.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p><InlineLatex latex="\varepsilon=BLv" /> kommer fra at arealet øker med <InlineLatex latex="\Delta A=Lv\,\Delta t" />.</p>,
+        content: <p>Først EMF, så strøm via Ohm, så kraft via <InlineLatex latex="F=BIL" />.</p>,
       },
       {
         label: "Hint 2",
-        content: <p>Når strømmen flyter i staven, gir <InlineLatex latex="\vec F=I\vec L\times\vec B" /> en kraft som motsetter bevegelsen (Lenz' lov).</p>,
+        content: <p>Konstant fart ⇒ Newtons 1.: ytre kraft = magnetisk bremsekraft, motsatt rettet.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Bevegelses-EMF — Lorentz-kraft som opphav">
-          <p>
-            En fri positiv ladning <InlineLatex latex="q" /> <em>i</em> den bevegelige staven har hastighet <InlineLatex latex="\vec v" /> (staven drar den med seg) og befinner seg i feltet <InlineLatex latex="\vec B" />. Den opplever Lorentz-kraften:
-          </p>
-          <FormulaBox latex="\vec F=q\vec v\times\vec B" variant="blue" />
-          <p>
-            Denne kraften skyver positive ladninger til den ene enden av staven og negative til den andre — staven oppfører seg som et batteri med indre EMF. Den effektive EMF-en fås ved å integrere <InlineLatex latex="(\vec v\times\vec B)" /> langs stavens lengde:
-          </p>
-          <FormulaBox latex="\varepsilon=\int_0^L (\vec v\times\vec B)\cdot d\vec l=BLv" variant="blue" />
-          <p>
-            For <InlineLatex latex="\vec v\perp\vec B\perp\vec L" /> (som her) blir resultatet bare produktet <InlineLatex latex="BLv" />.
-          </p>
-        </TheoryBox>
-        <TheoryBox title="Hvorfor BLv og ikke Faraday direkte?">
-          <p>
-            Interessant nok gir <em>begge</em> samme svar — men de beskriver ulike perspektiver:
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li><strong>Bevegelses-EMF <InlineLatex latex="\varepsilon=BLv" />:</strong> tar utgangspunkt i <em>ladninger som skyves av Lorentz-kraften</em>. Fungerer i stavens referansesystem og er direkte å anvende.</li>
-            <li><strong>Faradays lov <InlineLatex latex="\varepsilon=-d\Phi_B/dt" />:</strong> tar utgangspunkt i at feies-arealet øker. Per tidsenhet feier staven over areal <InlineLatex latex="\Delta A=L\,v\,\Delta t" />, så <InlineLatex latex="d\Phi/dt=B\cdot Lv" />. Samme svar.</li>
-          </ul>
-          <p>
-            Vi velger bevegelses-EMF her fordi (1) staven er den eneste delen som beveger seg, (2) ingen felt endrer seg, og (3) <InlineLatex latex="\varepsilon=BLv" /> er én enkel multiplikasjon. Vi bruker <em>ikke</em> <InlineLatex latex="NBA\omega" /> (ingen rotasjon) og <em>ikke</em> <InlineLatex latex="-L\,dI/dt" /> (ingen selvinduktans involvert).
-          </p>
-        </TheoryBox>
-        <TheoryBox title="Kjedekoblingen: EMF → strøm → kraft">
-          <p>
-            Problemet har tre lover som må kombineres i kjede:
-          </p>
+        <TheoryBox title="Kjedereaksjon: EMF → strøm → kraft">
+          <p>Tre formler i kjede:</p>
           <ol className="list-decimal pl-5 space-y-0.5">
-            <li><strong>Faraday/Lorentz:</strong> <InlineLatex latex="\varepsilon=BLv" /> — bevegelse gir spenning.</li>
-            <li><strong>Ohms lov:</strong> <InlineLatex latex="I=\varepsilon/R" /> — spenning over motstand gir strøm.</li>
-            <li><strong>Lorentz-kraft på leder:</strong> <InlineLatex latex="\vec F=I\vec L\times\vec B" /> — strøm i felt gir kraft på selve staven.</li>
+            <li><InlineLatex latex="\varepsilon=BLv" /> (bevegelses-EMF)</li>
+            <li><InlineLatex latex="I=\varepsilon/R" /> (Ohms lov)</li>
+            <li><InlineLatex latex="F=BIL" /> (magnetisk kraft på leder)</li>
           </ol>
-          <p>
-            Lenz&apos; lov sier at kraften i punkt (3) peker <em>mot</em> bevegelsen — ellers ville man fått energi gratis. Derfor må en ytre kraft virke i bevegelsesretningen for å holde farten konstant.
-          </p>
+          <p>Setter vi alt sammen, får vi den lukkede formelen:</p>
+          <FormulaBox latex="F_\mathrm{magnet}=\dfrac{B^2L^2 v}{R}" variant="blue" />
         </TheoryBox>
-        <Step n={1} title="(a) Indusert EMF via bevegelses-EMF">
-          <p>Siden <InlineLatex latex="\vec v\perp\vec L\perp\vec B" /> (alle vinkelrett på hverandre), bruker vi den direkte formelen:</p>
-          <FormulaBox latex="\varepsilon=BLv=0{,}450\cdot 0{,}800\cdot 5{,}00=1{,}80\;\text{V}" />
-          <FormulaBox latex="\boxed{\varepsilon=1{,}80\;\text{V}}" variant="gold" />
-          <p><strong>Enhetssjekk:</strong> <InlineLatex latex="\text{T}\cdot\text{m}\cdot\text{m/s}=\text{Wb/s}=\text{V}" />. ✓</p>
+        <Step n={1} title="(a) EMF">
+          <FormulaBox latex="\varepsilon=BLv=0{,}800\cdot 0{,}500\cdot 7{,}50" />
+          <FormulaBox latex="\boxed{\varepsilon=3{,}00\;\text{V}}" variant="gold" />
         </Step>
-        <Step n={2} title="(b) Strøm i kretsen — Ohms lov">
-          <p>Staven er nå en spenningskilde med <InlineLatex latex="\varepsilon=1{,}80\;\text{V}" /> koblet til en ytre motstand R. Siden oppgaven bare oppgir én motstand (kretsens totale motstand), bruker vi Ohm:</p>
-          <FormulaBox latex="I=\dfrac{\varepsilon}{R}=\dfrac{1{,}80}{1{,}50}" />
-          <FormulaBox latex="\boxed{I=1{,}20\;\text{A}}" variant="gold" />
-        </Step>
-        <Step n={3} title="(c) Kraft på staven fra strømmen (Lenz-analyse)">
+        <Step n={2} title="(b) Strømretning i staven">
           <p>
-            Strømmen I i staven befinner seg i B-feltet og opplever Lorentz-kraft. For en rett leder med <InlineLatex latex="\vec L\perp\vec B" /> er størrelsen:
+            Lorentz på positiv ladning: <InlineLatex latex="\vec v\times\vec B" /> med v mot høyre og B inn i siden ⇒ peker oppover. Positive ladninger flyter fra b til a inne i staven:
           </p>
-          <FormulaBox latex="F=|\vec F|=|I\vec L\times\vec B|=BIL" variant="blue" />
-          <FormulaBox latex="F_\mathrm{motstand}=BIL=0{,}450\cdot 1{,}20\cdot 0{,}800=0{,}432\;\text{N}" />
-          <p>
-            <strong>Retning via Lenz:</strong> «Motsetter seg endringen» betyr her konkret at fluksen gjennom sløyfen øker når staven beveger seg (større areal), så indusert strøm må gi en kraft som <em>bremser</em> staven. Derfor peker F motsatt av <InlineLatex latex="\vec v" />. For å holde farten konstant krever Newtons 1. lov at nettokraften er null, så ytre drakraft må motvirke nøyaktig:
-          </p>
-          <FormulaBox latex="\boxed{F_\mathrm{drag}=0{,}432\;\text{N}}" variant="gold" />
+          <FormulaBox latex="\boxed{\text{strømmen i staven flyter fra b til a (oppover)}}" variant="gold" />
+          <p>I den ytre kretsen flyter den fra a → c → d → b og lukker dermed sløyfen.</p>
         </Step>
-        <Step n={4} title="Sjekk energibevaring">
-          <p>Tilført mekanisk effekt (ytre kraft × hastighet):</p>
-          <FormulaBox latex="P_\mathrm{mek}=F_\mathrm{drag}\,v=0{,}432\cdot 5{,}00=2{,}16\;\text{W}" />
-          <p>Dissipert elektrisk effekt (Joule-oppvarming i R):</p>
-          <FormulaBox latex="P_\mathrm{el}=I^2R=(1{,}20)^2\cdot 1{,}50=2{,}16\;\text{W}\;\checkmark" />
-          <p>All mekanisk effekt omdannes til varme via Joule-oppvarming — <em>ingen</em> energi forsvinner eller oppstår. Dette er en konsekvens av Lenz&apos; lov: hadde den induserte kraften hjulpet bevegelsen, ville man fått gratis energi.</p>
+        <Step n={3} title="(c) Strøm og påkrevd kraft">
+          <p>Strøm fra Ohm:</p>
+          <FormulaBox latex="I=\dfrac{\varepsilon}{R}=\dfrac{3{,}00}{1{,}50}=2{,}00\;\text{A}" />
+          <p>Magnetisk bremsekraft (mot bevegelsen):</p>
+          <FormulaBox latex="F_\mathrm{magnet}=BIL=0{,}800\cdot 2{,}00\cdot 0{,}500=0{,}800\;\text{N}" />
+          <p>For konstant fart må ytre kraft motvirke bremsekraften:</p>
+          <FormulaBox latex="\boxed{F_\mathrm{ytre}=0{,}800\;\text{N}\;\;\text{mot høyre (med bevegelsen)}}" variant="gold" />
         </Step>
-        <p>
-          <strong>Fysisk tolkning — skalering:</strong> Kombinerer vi kjeden <InlineLatex latex="\varepsilon=BLv" />, <InlineLatex latex="I=\varepsilon/R" /> og <InlineLatex latex="F=BIL" /> algebraisk, får vi:
-        </p>
-        <FormulaBox latex="F=\dfrac{B^2 L^2}{R}\,v" variant="blue" />
-        <p>
-          Bremskraften er <em>proporsjonal med farten</em> — jo fortere, jo sterkere brems. Dette gir en «myk» bremseopplevelse og er prinsippet bak virvelstrøm­bremser (eddy current brakes) i tog, trikker, heiser og treningssykler. Dessuten: bremsen fungerer uten mekanisk kontakt, så ingen slitasje.
+        <Step n={4} title="(d) Energibalanse">
+          <p>Mekanisk effekt levert av ytre kraft:</p>
+          <FormulaBox latex="P_\mathrm{mek}=F_\mathrm{ytre}\,v=0{,}800\cdot 7{,}50=6{,}00\;\text{W}" />
+          <p>Joule-dissipert effekt i motstanden:</p>
+          <FormulaBox latex="P_\mathrm{el}=I^2R=(2{,}00)^2\cdot 1{,}50=6{,}00\;\text{W}" />
+          <FormulaBox latex="\boxed{P_\mathrm{mek}=P_\mathrm{el}=6{,}00\;\text{W}\;\checkmark}" variant="gold" />
+          <p>All mekanisk effekt blir varme — energibevaring oppfylt.</p>
+        </Step>
+        <Pitfall>
+          <strong>Den ytre kraften er ikke null!</strong> Selv uten friksjon må man trekke staven — den magnetiske bremsekraften virker fortsatt. «Friksjonsfrie skinner» betyr bare at det ikke er <em>mekanisk</em> friksjon; magnetisk motstand finnes uansett.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: dette er den enkleste mulige modellen for en likestrømsgenerator. Den mekaniske energien som leveres til staven, blir ren elektrisk energi (her dissipert som varme i R, men kunne i prinsippet lade et batteri eller drive en pære).
         </p>
       </div>
     ),
     summary: (
-      <p>Dette er prinsippet bak elektrisk generering: mekanisk arbeid omdannes direkte til elektrisk energi via en bevegelses-EMF. Kraften er et resultat av Lenz' lov — induksjon motsetter seg alltid årsaken til endringen.</p>
+      <p>EMF → strøm → kraft kjeden gir bremsekraft <InlineLatex latex="B^2L^2v/R" />. Energi­balansen <InlineLatex latex="Fv=I^2R" /> bekrefter at ingen energi lekker — induksjon er en effektiv energi­omformer.</p>
     ),
   },
 
   // ==========================================================================
-  // 29.15 — Lenz' lov: retning
-  // ==========================================================================
-  "29.15": {
-    title: "Retning av indusert strøm — Lenz' lov",
-    difficulty: "lett",
-    pageRef: "s. 971",
-    problem: (
-      <div className="space-y-2">
-        <p>
-          En sirkulær leder ligger i planet på siden din. Et magnetfelt peker <em>ut av siden</em> og øker med tiden.
-          I hvilken retning flyter den induserte strømmen i lederen — med eller mot urviseren?
-        </p>
-        <svg viewBox="0 0 200 140" className="w-full max-w-xs mx-auto">
-          <circle cx="100" cy="70" r="45" fill="none" stroke="#374151" strokeWidth="2" />
-          {[{x:80,y:55},{x:120,y:55},{x:80,y:85},{x:120,y:85},{x:100,y:70}].map((p,i)=>(
-            <g key={i}><circle cx={p.x} cy={p.y} r="2" fill="#3b82f6" /><circle cx={p.x} cy={p.y} r="5" fill="none" stroke="#3b82f6" /></g>
-          ))}
-          <text x="70" y="130" fontSize="10" fill="#3b82f6">B ut, øker</text>
-        </svg>
-      </div>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="B" /> peker ut av siden</li>
-        <li><InlineLatex latex="dB/dt>0" /></li>
-      </ul>
-    ),
-    unknowns: <p>Retningen av indusert strøm.</p>,
-    strategy: (
-      <p>Lenz' lov: indusert strøm motsetter seg endringen i fluks. Siden fluksen ut av siden øker, må den induserte strømmen skape et B-felt inn i siden — dvs. strømmen flyter <em>med urviseren</em> sett fra leserens side (høyrehåndsregel).</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Høyrehåndsregel: peker tomlen i retningen til det induserte B, krøller fingrene i strømretningen.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Lenz&apos; lov — energi­bevaringens signatur">
-          <p>
-            Faradays lov <InlineLatex latex="\varepsilon=-d\Phi_B/dt" /> forteller oss at en endring i fluks induserer en EMF. <em>Minustegnet</em> inneholder all informasjonen om retning og er selve <strong>Lenz&apos; lov</strong>:
-          </p>
-          <FormulaBox latex="\vec B_\mathrm{indusert}\;\text{motvirker endring av}\;\Phi_B^{\,\mathrm{ytre}}" variant="blue" />
-          <p>
-            Her er ordet «motvirker» presist: det betyr at det <em>indusert-B-feltet inne i sløyfen</em> peker slik at den <em>induserte</em> fluks­bidraget motvirker <em>forandringen</em> — ikke den ytre fluksen selv.
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li>Hvis <InlineLatex latex="\Phi_B" /> <em>øker</em>: indusert B peker motsatt av ytre B (for å «trekke fra»).</li>
-            <li>Hvis <InlineLatex latex="\Phi_B" /> <em>minker</em>: indusert B peker samme retning som ytre B (for å «støtte opp»).</li>
-          </ul>
-          <p>
-            Dette er ingen tilfeldig konvensjon — det følger direkte av energibevaring. Hvis indusert strøm forsterket endringen, ville systemet få energi gratis (et magisk evighetsmaskineri).
-          </p>
-        </TheoryBox>
-        <TheoryBox title="Hvilken formel — og hvorfor ikke beregne størrelsen?">
-          <p>
-            Oppgaven spør <em>kun</em> om retning, ikke om størrelsen. Vi bruker derfor Lenz&apos; lov kvalitativt og <em>ikke</em> <InlineLatex latex="\varepsilon=-A\,dB/dt" />. Faradays lov ville gitt tall for <InlineLatex latex="|\varepsilon|" />, men retningen får vi uansett bare fra fortegnet, som er Lenz&apos; lov.
-          </p>
-          <p>
-            Rollefordeling:
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li><strong>Faradays lov:</strong> gir <em>størrelsen</em> av EMF.</li>
-            <li><strong>Lenz&apos; lov:</strong> gir <em>retningen</em> på indusert strøm.</li>
-            <li><strong>Høyrehåndsregel:</strong> oversetter fra retning på B til retning på strøm.</li>
-          </ul>
-        </TheoryBox>
-        <p>
-          <strong>Trestegsoppskrift for retning:</strong>
-        </p>
-        <ol className="list-decimal pl-5 space-y-1">
-          <li>Bestem retning på <em>ytre</em> B og hva slags endring (øker/minker).</li>
-          <li>Finn retning på <em>indusert</em> B: motsatt av endringen (øker → motsatt ytre; minker → samme som ytre).</li>
-          <li>Bruk høyrehåndsregel (tomlen i retning indusert B inne i sløyfen, fingrene krøller med strømmen) til å finne strøm­retning.</li>
-        </ol>
-        <Step n={1} title="Identifiser endringen i ytre fluks">
-          <p>Ytre B peker ut av siden og <em>øker</em>. Siden <InlineLatex latex="\Phi_B=BA" /> og A er konstant, øker også fluksen ut av siden: <InlineLatex latex="d\Phi_B/dt>0" />.</p>
-        </Step>
-        <Step n={2} title="Bestem retning på indusert B">
-          <p>
-            For å motsette seg en <em>økende fluks ut av siden</em>, må det induserte B-feltet inne i sløyfen peke <em>inn i siden</em>. Det induserte feltet prøver altså å kansellere den økningen som skjer, slik at netto­fluksen endrer seg mindre.
-          </p>
-        </Step>
-        <Step n={3} title="Høyrehåndsregel gir strømretning">
-          <p>
-            Peker du tomlen på høyre hånd <em>inn i siden</em> (retning av indusert B inne i sløyfen), krøller fingrene seg <em>med urviseren</em> sett fra leserens side. Strømretningen følger fingrenes krølleretning.
-          </p>
-          <FormulaBox latex="\boxed{\text{Strøm flyter med urviseren sett fra forsiden.}}" variant="gold" />
-        </Step>
-        <p>
-          <strong>Energi­perspektiv — tankeeksperiment:</strong> Hadde strømmen gått mot urviseren, ville indusert B peke <em>ut</em> og forsterke endringen. Da ville den eksterne kilden som skaper endringen få «hjelp» av systemet, og samtidig ville strømmen varme opp motstanden i kretsen — energi ut av intet. Lenz&apos; lov er altså ikke en lov i seg selv, men en konsekvens av at energi ikke kan skapes.
-        </p>
-        <p>
-          <strong>Analogi med mekanikk:</strong> Tenk på Lenz som Newtons tredje lov for induksjon — «for enhver virkning finnes en like stor motvirkning». Endrer du fluksen, «skyver systemet tilbake» med en strøm som vil gjenopprette den.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Lenz' lov er et kvalitativt verktøy som gir retning uten å regne på fortegn i integraler. Alltid: spør hva som endres, og hva indusert B må gjøre for å motvirke det.</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.19 — Magnet som beveges inn i spole
-  // ==========================================================================
-  "29.19": {
-    title: "Stangmagnet som stikkes inn i spole",
-    difficulty: "lett",
-    pageRef: "s. 971",
-    problem: (
-      <p>
-        Nordpolen på en stangmagnet beveges mot den åpne enden av en sirkulær spole. Sett fra magnetens side:
-        i hvilken retning (med/mot urviseren) flyter den induserte strømmen i spolen? Begrunn med Lenz' lov.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li>N-pol på magnet nærmer seg spolens ende</li>
-        <li>Fluksen gjennom spolen (fra magneten) øker i retning <em>bort fra</em> magneten (dvs. B-linjer går ut fra N-pol, gjennom spolen)</li>
-      </ul>
-    ),
-    unknowns: <p>Retning på indusert strøm sett fra magnetens side.</p>,
-    strategy: (
-      <p>Fluksen inn i spolen (fra N-polen) øker. Indusert strøm må skape motsatt B-felt ved enden vendt mot magneten — altså en nord-pol som avviser magneten. Høyrehåndsregel gir strømretning.</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Husk: når magneter nærmer seg hverandre med like poler, frastøter de hverandre. Induksjon skaper "like poler" for å motvirke bevegelsen.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Faradays lov for en innkommende magnet">
-          <p>
-            Fluksen gjennom en vinding i spolen er <InlineLatex latex="\Phi_B=\int\vec B\cdot d\vec A" />. Magnetfelt-linjer kommer ut av magnetens N-pol, så når N-polen nærmer seg spolen, øker <em>antallet</em> feltlinjer som treffer spolens åpning. Vi kan tegne det som:
-          </p>
-          <FormulaBox latex="\varepsilon=-N\dfrac{d\Phi_B}{dt},\quad \dfrac{d\Phi_B}{dt}>0\;\text{(økende)}" variant="blue" />
-          <p>
-            Lenz&apos; lov krever at den induserte strømmen motvirker denne økningen ved å sette opp et motsatt B-felt inne i spolen.
-          </p>
-        </TheoryBox>
-        <p>
-          <strong>Mekanisk analogi:</strong> Hadde den induserte strømmen hjulpet magneten, ville magneten akselerere inn i spolen uten ytre kraft, og samtidig ville strømmen varme opp motstanden i kretsen — energi ut av intet. Derfor må induksjonen motstå bevegelsen, og spolen oppfører seg som en «magnetisk fjær» som presser tilbake.
-        </p>
-        <Step n={1} title="Identifiser endringen i fluks">
-          <p>
-            Feltlinjene fra N-polen går inn i spolens nære ende og ut av den fjerne enden. Når magneten nærmer seg, blir feltet sterkere ved den nære enden, og fluksen gjennom spolen (i retning bort fra magneten) øker:
-            <InlineLatex latex="\;d\Phi_B/dt>0" />.
-          </p>
-        </Step>
-        <Step n={2} title="Bestem retning på indusert B">
-          <p>
-            For å motsette seg økningen må indusert B inne i spolen peke <em>mot magneten</em> (motsatt av ytre B-retningen inne i spolen). Dette gjør spolens nære ende til en <em>induserte N-pol</em> — og like poler frastøter hverandre.
-          </p>
-        </Step>
-        <Step n={3} title="Strømretning via høyrehåndsregel">
-          <p>
-            Sett fra magnetens posisjon ser du inn på spolens åpning. Indusert B peker <em>mot deg</em> (ut av spolens åpning). Tomlen peker mot deg → fingrene krøller <em>mot urviseren</em>. Altså:
-          </p>
-          <FormulaBox latex="\boxed{\text{Strømmen flyter mot urviseren sett fra magneten.}}" variant="gold" />
-        </Step>
-        <p>
-          <strong>Energibalanse:</strong> Det arbeidet du gjør når du skyver magneten mot den frastøtende spolen omdannes til elektrisk energi i kretsen, som igjen blir varme i motstanden. Jo raskere du skyver, jo større <InlineLatex latex="d\Phi/dt" />, jo større strøm, og jo større motstand du merker.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Lenz' lov gir en fysisk intuisjon: induksjon "forsvarer" status quo. Jo raskere du skyver magneten inn, jo større strøm — og jo mer motstand du må overvinne. Energi bevares.</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.22 — Sløyfe med varierende strøm i nabospole
-  // ==========================================================================
-  "29.22": {
-    title: "Spolepar — endring i nabostrøm",
-    difficulty: "middels",
-    pageRef: "s. 972",
-    problem: (
-      <p>
-        To koaksielle sirkulære spoler ligger nær hverandre. Spole 1 er tilkoblet en bryter og et batteri. Spole 2 er
-        lukket via et galvanometer. Beskriv retning og forløp av strømmen i spole 2 i (a) øyeblikket bryteren slås på,
-        (b) mens strømmen i spole 1 er konstant, og (c) øyeblikket bryteren slås av.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li>To spoler, aksialt plassert</li>
-        <li>Spole 1: batteri + bryter; Spole 2: galvanometer (lukket krets)</li>
-      </ul>
-    ),
-    unknowns: <p>Retning og varighet av strøm i spole 2 i de tre fasene.</p>,
-    strategy: (
-      <p>Kun <em>endringer</em> i fluks induserer EMF. Fasene (a) og (c) gir korte strømpulser; fase (b) gir null strøm.</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Tenk på fluks fra spole 1 gjennom spole 2. Hvor raskt endrer den seg i hver fase?</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Lenz: strøm i spole 2 motvirker endringen i ytre fluks.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Gjensidig induktans">
-          <p>
-            Når strøm <InlineLatex latex="I_1" /> går i spole 1, lager den et magnetfelt <InlineLatex latex="\vec B_1\propto I_1" />. En del av dette feltet penetrerer spole 2 og gir en fluks
-            <InlineLatex latex="\;\Phi_{21}" />, som også er proporsjonal med <InlineLatex latex="I_1" />. Forholdstallet kalles <em>gjensidig induktans</em> M:
-          </p>
-          <FormulaBox latex="\Phi_{21}=M\,I_1" variant="blue" />
-          <p>
-            Faradays lov anvendt på spole 2 blir da (med N2 vindinger inkludert i M):
-          </p>
-          <FormulaBox latex="\varepsilon_2=-\dfrac{d\Phi_{21}}{dt}=-M\,\dfrac{dI_1}{dt}" variant="blue" />
-          <p>
-            <strong>Nøkkelinnsikt:</strong> <InlineLatex latex="\varepsilon_2" /> avhenger kun av <em>hvor fort</em> <InlineLatex latex="I_1" /> endres, ikke av verdien av <InlineLatex latex="I_1" /> selv. Konstant strøm gir null EMF.
-          </p>
-        </TheoryBox>
-        <Step n={1} title="(a) Bryter slås på">
-          <p>
-            <InlineLatex latex="I_1" /> stiger raskt fra 0 til <InlineLatex latex="I_0" /> i løpet av kort tid <InlineLatex latex="\Delta t" />. <InlineLatex latex="dI_1/dt>0" /> og er stor — altså stor <InlineLatex latex="\varepsilon_2" />. Fluksen gjennom spole 2 øker, og ved Lenz motvirker indusert strøm i spole 2 denne økningen:
-          </p>
-          <p>Kort <em>puls</em> i spole 2 i <em>motsatt sirkulasjonsretning</em> av <InlineLatex latex="I_1" />.</p>
-        </Step>
-        <Step n={2} title="(b) Konstant strøm">
-          <p>Når <InlineLatex latex="I_1" /> er konstant, er fluksen <InlineLatex latex="\Phi_{21}" /> også konstant. Faradays lov:</p>
-          <FormulaBox latex="\varepsilon_2=-M\cdot 0=0" />
-          <p>Galvanometeret viser <strong>null strøm</strong> — selv om det renner stor likestrøm i spole 1.</p>
-        </Step>
-        <Step n={3} title="(c) Bryter slås av">
-          <p>
-            <InlineLatex latex="I_1" /> faller brått fra <InlineLatex latex="I_0" /> til 0, så <InlineLatex latex="dI_1/dt<0" /> (stor i absoluttverdi). Fluksen avtar, og Lenz sier at indusert strøm i spole 2 skal motvirke <em>nedgangen</em> — altså prøve å opprettholde fluksen. Derfor går indusert strøm i <em>samme</em> retning som <InlineLatex latex="I_1" /> gikk, og gir en kort puls <em>motsatt</em> av fase (a).
-          </p>
-        </Step>
-        <p>Samlet resultat (gjensidig-induktansformelen):</p>
-        <FormulaBox latex="\boxed{\varepsilon_2=-M\,\dfrac{dI_1}{dt}}" variant="gold" />
-        <p>
-          <strong>Hvorfor vekselstrøm i transformatorer?</strong> Dette forsøket er en mini-transformator. Likestrøm gir EMF kun i korte overgangsøyeblikk — helt ubrukelig til kontinuerlig drift. Vekselstrøm har derimot
-          <InlineLatex latex="\;dI_1/dt\neq 0" /> hele tiden, så sekundærkretsen får kontinuerlig spenning. Det er derfor strømnettet bruker AC.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Dette er transformator-prinsippet: <em>endring</em> i strøm i primærspolen induserer spenning i sekundærspolen. Med jevn likestrøm fungerer det ikke — derfor bruker transformatorer vekselstrøm.</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.24 — Selvinduktans: EMF i solenoide
-  // ==========================================================================
-  "29.24": {
-    title: "Selvinduktans — EMF ved strømendring",
-    difficulty: "lett",
-    pageRef: "s. 975",
-    problem: (
-      <p>
-        En spole har selvinduktans <InlineLatex latex="L=0{,}260\;\text{H}" />. Strømmen gjennom spolen endres med
-        rate <InlineLatex latex="dI/dt=0{,}0180\;\text{A/s}" />. Finn størrelsen og fortegn (retning) av indusert EMF.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="L=0{,}260\;\text{H}" /></li>
-        <li><InlineLatex latex="dI/dt=+0{,}0180\;\text{A/s}" /> (økende)</li>
-      </ul>
-    ),
-    unknowns: <p>Størrelse og retning av <InlineLatex latex="\varepsilon" />.</p>,
-    strategy: (
-      <p>Definisjon av selvinduktans: <InlineLatex latex="\varepsilon=-L\,dI/dt" />. Negativt fortegn betyr at EMF-en motvirker strømøkningen (Lenz).</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>L har enhet henry (H) = V·s/A. Sett inn tall direkte.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Selvinduktans — en spole som induserer seg selv">
-          <p>
-            Strømmen <InlineLatex latex="I" /> i en spole skaper sitt eget magnetfelt, som igjen gir en fluks <InlineLatex latex="\Phi_B" /> gjennom spolens egne vindinger. Denne egenfluksen er proporsjonal med strømmen:
-          </p>
-          <FormulaBox latex="N\Phi_B=L\,I" variant="blue" />
-          <p>
-            <InlineLatex latex="L" /> kalles <em>selvinduktansen</em> og måles i henry (H = V·s/A). Når <InlineLatex latex="I" /> endrer seg, endrer også egenfluksen seg, og Faradays lov gir:
-          </p>
-          <FormulaBox latex="\varepsilon=-\dfrac{d(N\Phi_B)}{dt}=-L\,\dfrac{dI}{dt}" variant="blue" />
-          <p>
-            Minustegnet er Lenz igjen: den induserte EMF-en peker slik at den motvirker endringen i strøm. En induktor er derfor «treg» — den prøver alltid å beholde strømmen uendret, akkurat slik masse er treg for endringer i hastighet.
-          </p>
-        </TheoryBox>
-        <Step n={1} title="Sett inn verdier">
-          <p>Direkte bruk av formelen med <InlineLatex latex="L=0{,}260\;\text{H}" /> og <InlineLatex latex="dI/dt=0{,}0180\;\text{A/s}" />:</p>
-          <FormulaBox latex="|\varepsilon|=L\left|\dfrac{dI}{dt}\right|=0{,}260\cdot 0{,}0180" />
-          <FormulaBox latex="\boxed{|\varepsilon|=4{,}68\times 10^{-3}\;\text{V}=4{,}68\;\text{mV}}" variant="gold" />
-        </Step>
-        <Step n={2} title="Retning og fortegn">
-          <p>
-            Siden <InlineLatex latex="dI/dt>0" /> (strømmen øker), gir <InlineLatex latex="\varepsilon=-L\,dI/dt" /> en <em>negativ</em> verdi. Dette tolkes fysisk som at mot-EMF-en er polarisert <em>motsatt</em> av strømmens retning — den prøver å bremse økningen.
-          </p>
-        </Step>
-        <p>
-          <strong>Mekanisk analogi:</strong> Tenk på L som «masse for strøm». Akkurat som Newtons 2. lov <InlineLatex latex="F=m\,dv/dt" /> beskriver kraft som trengs for å endre hastighet, beskriver
-          <InlineLatex latex="\;\varepsilon=L\,dI/dt" /> spenningen som trengs for å endre strøm. Induktorer motvirker raske endringer — derfor brukes de i filtre, strømforsyninger og støydempning.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Induktanser er tregheten i strømkretser — analogen til masse i mekanikk. Store induktanser motvirker raske strømendringer (brukes i filtre og strømforsyninger).</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.25 — Beregn L for solenoide
-  // ==========================================================================
-  "29.25": {
-    title: "Selvinduktans til solenoide",
-    difficulty: "middels",
-    pageRef: "s. 975",
-    problem: (
-      <p>
-        En solenoide med <InlineLatex latex="N=300" /> vindinger, lengde <InlineLatex latex="\ell=0{,}120\;\text{m}" /> og
-        tverrsnittsareal <InlineLatex latex="A=4{,}00\;\text{cm}^2" /> er fylt med luft. Finn selvinduktansen L.
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="N=300" /></li>
-        <li><InlineLatex latex="\ell=0{,}120\;\text{m}" /></li>
-        <li><InlineLatex latex="A=4{,}00\times 10^{-4}\;\text{m}^2" /></li>
-        <li><InlineLatex latex="\mu_0=4\pi\times 10^{-7}\;\text{T·m/A}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Selvinduktansen L.</p>,
-    strategy: (
-      <p>Inne i en solenoide er <InlineLatex latex="B=\mu_0 n I" /> med <InlineLatex latex="n=N/\ell" />. Fluks per vinding: <InlineLatex latex="\Phi=BA" />. Total fluks: <InlineLatex latex="N\Phi" />. Induktans: <InlineLatex latex="L=N\Phi/I=\mu_0 N^2 A/\ell" />.</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Utled formelen: <InlineLatex latex="L=\mu_0 N^2 A/\ell" />. Sett deretter inn tall.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Utledning av L for en solenoide">
-          <p>
-            Vi starter med Ampères lov anvendt på en lang solenoide (fra kap. 28). Inne i en ideell solenoide med <em>n</em> vindinger per lengdeenhet er feltet uniformt langs aksen:
-          </p>
-          <FormulaBox latex="B=\mu_0 n I,\quad n=\dfrac{N}{\ell}" variant="blue" />
-          <p>
-            Fluksen gjennom én vinding (med tverrsnittsareal A):
-          </p>
-          <FormulaBox latex="\Phi_B=BA=\mu_0\,\dfrac{N}{\ell}\,I\,A" variant="blue" />
-          <p>
-            Den <em>koblede fluksen</em> gjennom alle N vindinger er N ganger så stor:
-          </p>
-          <FormulaBox latex="N\Phi_B=\mu_0\,\dfrac{N^2 A}{\ell}\,I" variant="blue" />
-          <p>
-            Definisjonen <InlineLatex latex="N\Phi_B=LI" /> gir direkte:
-          </p>
-          <FormulaBox latex="L=\dfrac{\mu_0 N^2 A}{\ell}" variant="blue" />
-          <p>
-            <strong>Viktig:</strong> L avhenger <em>kun av geometri</em> (N, A, ℓ) og kjernemateriale (<InlineLatex latex="\mu_0" /> erstattes av <InlineLatex latex="\mu" /> for magnetiske kjerner) — ikke av strømmen.
-          </p>
-        </TheoryBox>
-        <Step n={1} title="Formel og innsetting">
-          <p>Sett inn <InlineLatex latex="N=300" />, <InlineLatex latex="A=4{,}00\times 10^{-4}\;\text{m}^2" />, <InlineLatex latex="\ell=0{,}120\;\text{m}" /> og <InlineLatex latex="\mu_0=4\pi\times 10^{-7}\;\text{T·m/A}" />:</p>
-          <FormulaBox latex="L=\dfrac{\mu_0 N^2 A}{\ell}=\dfrac{(4\pi\times 10^{-7})(300)^2(4{,}00\times 10^{-4})}{0{,}120}" />
-        </Step>
-        <Step n={2} title="Utregning">
-          <p>Beregn <InlineLatex latex="\mu_0=1{,}257\times 10^{-6}" /> og <InlineLatex latex="N^2=9{,}00\times 10^{4}" />:</p>
-          <FormulaBox latex="L=\dfrac{(1{,}257\times 10^{-6})(9{,}00\times 10^{4})(4{,}00\times 10^{-4})}{0{,}120}" />
-          <FormulaBox latex="L=\dfrac{4{,}524\times 10^{-5}}{0{,}120}" />
-          <FormulaBox latex="\boxed{L\approx 3{,}77\times 10^{-4}\;\text{H}=0{,}377\;\text{mH}}" variant="gold" />
-        </Step>
-        <p>
-          <strong>Hvorfor N², ikke bare N?</strong> To effekter multipliseres: (1) dobler du N, blir feltet <InlineLatex latex="B\propto N" /> dobbelt så sterkt, og (2) dobler du N, er det også dobbelt så mange vindinger som «ser» fluksen. Totalt får man en kvadratisk avhengighet. Dette er grunnen til at selv små solenoider med mange vindinger kan ha betydelig induktans, og at en ferromagnetisk kjerne (som øker effektiv <InlineLatex latex="\mu" />) kan gi 1000× forsterkning.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Solenoidens induktans vokser som <InlineLatex latex="N^2" /> (ikke N!), fordi både fluksen per vinding og antallet vindinger som ser fluksen øker med N. Å fylle med jernkjerne øker L typisk 1000-fold.</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.27 — Energi i induktor
-  // ==========================================================================
-  "29.27": {
-    title: "Lagret magnetisk energi",
-    difficulty: "lett",
-    pageRef: "s. 977",
-    problem: (
-      <p>
-        En induktor med <InlineLatex latex="L=2{,}50\;\text{H}" /> fører konstant strøm <InlineLatex latex="I=0{,}800\;\text{A}" />.
-        Hvor mye magnetisk energi er lagret i induktoren?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="L=2{,}50\;\text{H}" /></li>
-        <li><InlineLatex latex="I=0{,}800\;\text{A}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Magnetisk energi U.</p>,
-    strategy: (
-      <p>Energien lagret i en induktor er <InlineLatex latex="U=\tfrac{1}{2}L I^2" /> — analog med <InlineLatex latex="\tfrac{1}{2}mv^2" /> i mekanikk.</p>
-    ),
-    hints: [
-      {
-        label: "Hint 1",
-        content: <p>Sett inn direkte. Enhet: H·A² = J.</p>,
-      },
-    ],
-    solution: (
-      <div>
-        <TheoryBox title="Hvorfor ½LI²? — en utledning">
-          <p>
-            Effekten som leveres til en induktor mens strømmen bygges opp er <InlineLatex latex="P=\varepsilon I=L\,(dI/dt)\,I" />. Dette er ikke konstant — det avhenger av den momentane strømmen. For å finne total energi integrerer vi fra 0 til endelig strøm I:
-          </p>
-          <FormulaBox latex="U=\int_0^t P\,dt=\int_0^I L\,i\,di=\tfrac{1}{2}L I^2" variant="blue" />
-          <p>
-            Legg merke til at vi brukte <InlineLatex latex="i\,di=(dI/dt)\,I\,dt" /> for å bytte fra integral over tid til integral over strøm. Resultatet er:
-          </p>
-          <FormulaBox latex="U=\tfrac{1}{2}L I^2" variant="blue" />
-          <p>
-            Denne energien er ikke «tapt» — den er lagret i selve magnetfeltet, med energitetthet <InlineLatex latex="u=B^2/(2\mu_0)\;[\text{J/m}^3]" />. Hvis man slår av kretsen, kan energien utvinnes tilbake.
-          </p>
-        </TheoryBox>
-        <p>
-          <strong>Analogi med fjær og masse:</strong>
-        </p>
-        <ul className="list-disc pl-5 space-y-0.5">
-          <li>Fjær: <InlineLatex latex="U=\tfrac{1}{2}kx^2" /> (lagret i deformasjon)</li>
-          <li>Masse: <InlineLatex latex="K=\tfrac{1}{2}mv^2" /> (lagret i bevegelse)</li>
-          <li>Induktor: <InlineLatex latex="U=\tfrac{1}{2}L I^2" /> (lagret i magnetfelt)</li>
-        </ul>
-        <Step n={1} title="Innsetting">
-          <p>Direkte innsetting med <InlineLatex latex="L=2{,}50\;\text{H}" /> og <InlineLatex latex="I=0{,}800\;\text{A}" />:</p>
-          <FormulaBox latex="U=\tfrac{1}{2}L I^2=\tfrac{1}{2}(2{,}50)(0{,}800)^2" />
-          <FormulaBox latex="U=\tfrac{1}{2}(2{,}50)(0{,}640)=0{,}800\;\text{J}" />
-          <FormulaBox latex="\boxed{U=0{,}800\;\text{J}}" variant="gold" />
-        </Step>
-        <p>
-          <strong>Hva skjer hvis du brått åpner kretsen?</strong> Strømmen kan ikke forsvinne momentant (det ville gi uendelig <InlineLatex latex="dI/dt" /> og dermed uendelig EMF). De 0,800 J må gå <em>et sted</em> — derfor ser man gnister over bryteren når man åpner induktive kretser. Dette er prinsippet bak tenningsspoler i bilmotorer.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>Mekanisk analogi: induktor ↔ masse (treghet), strøm ↔ hastighet. Energien <InlineLatex latex="\tfrac{1}{2}L I^2" /> er perfekt analog til <InlineLatex latex="\tfrac{1}{2}mv^2" />.</p>
-    ),
-  },
-
-  // ==========================================================================
-  // 29.51 — Problem: R-L krets, transient
+  // 29.51 — Fleksibel sirkulær løkke kollapser til null areal
   // ==========================================================================
   "29.51": {
-    title: "RL-krets ved påslag",
-    difficulty: "vanskelig",
-    pageRef: "s. 990",
+    title: "Sirkulær løkke kollapser — gjennomsnittlig EMF",
+    difficulty: "middels",
+    pageRef: "s. 1012",
     problem: (
       <div className="space-y-2">
         <p>
-          En krets består av batteri <InlineLatex latex="\mathcal E=12{,}0\;\text{V}" /> i serie med motstand
-          <InlineLatex latex="\;R=4{,}00\;\Omega" /> og induktor <InlineLatex latex="\;L=0{,}250\;\text{H}" />.
-          Bryteren slås på ved <InlineLatex latex="t=0" />. Finn (a) endelig strøm, (b) tidskonstanten τ,
-          (c) strømmen ved <InlineLatex latex="t=0{,}100\;\text{s}" />, og (d) energien lagret i induktoren i stabil tilstand.
+          En fleksibel sirkulær løkke med diameter <InlineLatex latex="d=6{,}50\;\text{cm}" /> ligger i et magnetfelt med
+          størrelse <InlineLatex latex="B=1{,}35\;\text{T}" />, rettet inn i sidens plan, som vist i Fig. P29.51. Løkken
+          trekkes i punktene angitt med pilene slik at den danner en løkke med null areal i løpet av
+          <InlineLatex latex="\;\Delta t=0{,}250\;\text{s}" />. (a) Finn gjennomsnittlig indusert EMF i kretsen.
+          (b) Hva er retningen på strømmen i motstanden <InlineLatex latex="R" />: fra <InlineLatex latex="a" /> til
+          <InlineLatex latex="\;b" /> eller fra <InlineLatex latex="b" /> til <InlineLatex latex="a" />? Begrunn.
         </p>
-        <svg viewBox="0 0 260 120" className="w-full max-w-md mx-auto">
+        <svg viewBox="0 0 240 140" className="w-full max-w-xs mx-auto">
           <Arrowheads />
-          <line x1="30" y1="40" x2="30" y2="70" stroke="#374151" strokeWidth="2" />
-          <line x1="25" y1="40" x2="35" y2="40" stroke="#374151" strokeWidth="3" />
-          <line x1="20" y1="50" x2="40" y2="50" stroke="#374151" strokeWidth="2" />
-          <line x1="25" y1="60" x2="35" y2="60" stroke="#374151" strokeWidth="3" />
-          <line x1="20" y1="70" x2="40" y2="70" stroke="#374151" strokeWidth="2" />
-          <text x="5" y="58" fontSize="10" fill="#374151">ε</text>
-          <line x1="30" y1="30" x2="100" y2="30" stroke="#374151" strokeWidth="1.5" />
-          <rect x="100" y="25" width="40" height="10" fill="none" stroke="#374151" strokeWidth="1.5" />
-          <text x="110" y="22" fontSize="10" fill="#374151">R</text>
-          <line x1="140" y1="30" x2="180" y2="30" stroke="#374151" strokeWidth="1.5" />
-          <path d="M 180 30 q 5 -8 10 0 q 5 -8 10 0 q 5 -8 10 0 q 5 -8 10 0" fill="none" stroke="#374151" strokeWidth="1.5" />
-          <text x="210" y="22" fontSize="10" fill="#374151">L</text>
-          <line x1="220" y1="30" x2="230" y2="30" stroke="#374151" strokeWidth="1.5" />
-          <line x1="230" y1="30" x2="230" y2="80" stroke="#374151" strokeWidth="1.5" />
-          <line x1="230" y1="80" x2="30" y2="80" stroke="#374151" strokeWidth="1.5" />
+          <circle cx="120" cy="70" r="35" fill="none" stroke="#ef4444" strokeWidth="2" />
+          <line x1="80" y1="70" x2="60" y2="70" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          <line x1="160" y1="70" x2="180" y2="70" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          {[{x:105,y:55},{x:135,y:55},{x:105,y:85},{x:135,y:85}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
+          ))}
+          <text x="92" y="125" fontSize="10" fill="#ef4444">d = 6,50 cm, B inn</text>
         </svg>
       </div>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\mathcal E=12{,}0\;\text{V}" /></li>
-        <li><InlineLatex latex="R=4{,}00\;\Omega" /></li>
-        <li><InlineLatex latex="L=0{,}250\;\text{H}" /></li>
-        <li><InlineLatex latex="t=0{,}100\;\text{s}" /></li>
+        <li><InlineLatex latex="d=0{,}0650\;\text{m}" /> ⇒ <InlineLatex latex="r=0{,}0325\;\text{m}" /></li>
+        <li>Initielt areal: <InlineLatex latex="A_i=\pi r^2=3{,}318\times 10^{-3}\;\text{m}^2" /></li>
+        <li>Sluttareal: <InlineLatex latex="A_f=0" /></li>
+        <li><InlineLatex latex="B=1{,}35\;\text{T}" /> inn i siden</li>
+        <li><InlineLatex latex="\Delta t=0{,}250\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>(a) <InlineLatex latex="I_\infty" />, (b) τ, (c) <InlineLatex latex="I(0{,}100\;\text{s})" />, (d) U i stabil tilstand.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) <InlineLatex latex="\varepsilon_\text{snitt}" /></li>
+        <li>(b) Retning på strømmen i R</li>
+      </ul>
+    ),
     strategy: (
-      <p>Kirchhoffs spenningslov gir <InlineLatex latex="\mathcal E=IR+L\,dI/dt" />. Løsning: <InlineLatex latex="I(t)=(\mathcal E/R)(1-e^{-t/\tau})" /> med <InlineLatex latex="\tau=L/R" />.</p>
+      <p>
+        Gjennomsnittlig EMF er <InlineLatex latex="|\Delta\Phi_B|/\Delta t" />. Med konstant B og fallende areal blir <InlineLatex latex="\Delta\Phi_B=B\,\Delta A=B\,(0-A_i)" />. Lenz: indusert strøm motvirker tap av fluks, dvs. flyter slik at den lager B inn i siden inne i (det krympende) området.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p>Ved <InlineLatex latex="t\to\infty" /> er <InlineLatex latex="dI/dt=0" />, så <InlineLatex latex="I_\infty=\mathcal E/R" />.</p>,
+        content: <p>Gjennomsnittlig <InlineLatex latex="|\varepsilon|" /> trenger ingen integrasjon — bare differansene <InlineLatex latex="\Delta\Phi" /> og <InlineLatex latex="\Delta t" />.</p>,
       },
       {
         label: "Hint 2",
-        content: <p>Tidskonstant <InlineLatex latex="\tau=L/R" /> — etter τ har strømmen nådd ca. 63% av endelig verdi.</p>,
+        content: <p>Fluksen avtar (areal forsvinner). Lenz: strøm prøver å opprettholde fluksen ⇒ flyter med urviseren sett fra leseren.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Fra Kirchhoff til eksponensiell løsning">
+        <TheoryBox title="Gjennomsnittlig EMF — endelig differanse">
           <p>
-            Kirchhoffs spenningslov rundt kretsen (batteri − motstand − induktor) gir:
+            For ikke-momentane spørsmål («gjennomsnitt over Δt») kan vi bruke endelig differanse:
           </p>
-          <FormulaBox latex="\mathcal E - IR - L\,\dfrac{dI}{dt}=0" variant="blue" />
+          <FormulaBox latex="\varepsilon_\text{snitt}=-\dfrac{\Delta\Phi_B}{\Delta t}=-\dfrac{\Phi_f-\Phi_i}{\Delta t}" variant="blue" />
           <p>
-            Vi omformer til standardform for en førsteordens lineær ODE:
+            Vi trenger ikke vite <em>hvordan</em> arealet endrer seg i mellomtiden — kun start- og sluttverdier. Dette er en kraftig forenkling når deformasjonen er kompleks.
           </p>
-          <FormulaBox latex="L\,\dfrac{dI}{dt}+RI=\mathcal E" variant="blue" />
-          <p>
-            Dette er en separabel ligning. Med randbetingelsen <InlineLatex latex="I(0)=0" /> blir løsningen:
-          </p>
-          <FormulaBox latex="I(t)=\dfrac{\mathcal E}{R}\bigl(1-e^{-t/\tau}\bigr),\quad \tau=\dfrac{L}{R}" variant="blue" />
-          <p>
-            <strong>Fysisk tolkning:</strong>
-          </p>
-          <ul className="list-disc pl-5 space-y-0.5">
-            <li>Ved <InlineLatex latex="t=0" />: induktoren krever ubegrenset motstand mot endring, så <InlineLatex latex="I=0" /> og hele <InlineLatex latex="\mathcal E" /> ligger over induktoren.</li>
-            <li>Ved <InlineLatex latex="t\to\infty" />: <InlineLatex latex="dI/dt\to 0" />, induktoren oppfører seg som en ren leder, og all <InlineLatex latex="\mathcal E" /> ligger over R. Da er <InlineLatex latex="I_\infty=\mathcal E/R" />.</li>
-            <li>Etter én tidskonstant τ har strømmen nådd <InlineLatex latex="(1-e^{-1})\approx 63\%" /> av endelig verdi; etter 5τ er den over 99%.</li>
-          </ul>
         </TheoryBox>
-        <Step n={1} title="(a) Endelig strøm">
-          <p>I stabil tilstand er <InlineLatex latex="dI/dt=0" />, og induktoren er «usynlig». Ohm: <InlineLatex latex="\mathcal E=I_\infty R" />:</p>
-          <FormulaBox latex="I_\infty=\dfrac{\mathcal E}{R}=\dfrac{12{,}0}{4{,}00}=3{,}00\;\text{A}" />
-          <FormulaBox latex="\boxed{I_\infty=3{,}00\;\text{A}}" variant="gold" />
+        <Step n={1} title="(a) Initialfluks og endring">
+          <FormulaBox latex="A_i=\pi r^2=\pi(0{,}0325)^2=3{,}318\times 10^{-3}\;\text{m}^2" />
+          <FormulaBox latex="\Phi_i=B\,A_i=1{,}35\cdot 3{,}318\times 10^{-3}=4{,}479\times 10^{-3}\;\text{Wb}" />
+          <FormulaBox latex="\Phi_f=0,\quad \Delta\Phi_B=-4{,}479\times 10^{-3}\;\text{Wb}" />
         </Step>
-        <Step n={2} title="(b) Tidskonstant">
-          <p>Fra <InlineLatex latex="\tau=L/R" />:</p>
-          <FormulaBox latex="\tau=\dfrac{L}{R}=\dfrac{0{,}250}{4{,}00}=0{,}0625\;\text{s}" />
-          <FormulaBox latex="\boxed{\tau=62{,}5\;\text{ms}}" variant="gold" />
+        <Step n={2} title="Gjennomsnittlig EMF">
+          <FormulaBox latex="|\varepsilon_\text{snitt}|=\dfrac{|\Delta\Phi_B|}{\Delta t}=\dfrac{4{,}479\times 10^{-3}}{0{,}250}" />
+          <FormulaBox latex="\boxed{|\varepsilon_\text{snitt}|\approx 1{,}79\times 10^{-2}\;\text{V}=17{,}9\;\text{mV}}" variant="gold" />
         </Step>
-        <Step n={3} title="(c) Strøm ved t = 0,100 s">
-          <p>Bruk løsningen <InlineLatex latex="I(t)=I_\infty(1-e^{-t/\tau})" /> og regn ut dimensjonsløst forhold <InlineLatex latex="t/\tau" />:</p>
-          <FormulaBox latex="I(t)=I_\infty\bigl(1-e^{-t/\tau}\bigr)" />
-          <FormulaBox latex="t/\tau=0{,}100/0{,}0625=1{,}60" />
-          <FormulaBox latex="I=3{,}00\cdot(1-e^{-1{,}60})=3{,}00\cdot(1-0{,}2019)" />
-          <FormulaBox latex="\boxed{I\approx 2{,}39\;\text{A}}" variant="gold" />
-          <p>Altså ca. 79,8% av endelig verdi — konsistent med at 1,6τ ligger mellom 1τ (63%) og 2τ (86%).</p>
+        <Step n={3} title="(b) Retning på strømmen">
+          <p>
+            Fluksen (inn i siden) avtar. Lenz: indusert strøm må gjenopprette fluksen — altså lage et felt <em>inn i siden</em> i sløyfens plan. Med høyrehåndsregel (tomlen inn i siden, fingrene krøller med urviseren):
+          </p>
+          <FormulaBox latex="\boxed{\text{strømmen i R går fra a til b (med urviseren sett fra leseren)}}" variant="gold" />
+          <p>
+            <em>Merk:</em> «a til b» antar at a er øverst og b nederst i figuren slik at urviser-strøm gjennom R går nedover. Sjekk Fig. P29.51 i boken hvis a/b er motsatt orientert.
+          </p>
         </Step>
-        <Step n={4} title="(d) Lagret energi ved stabil tilstand">
-          <p>Når strømmen har stabilisert seg, er all energi i induktoren lagret i magnetfeltet. Bruk <InlineLatex latex="U=\tfrac{1}{2}LI^2" /> med <InlineLatex latex="I=I_\infty" />:</p>
-          <FormulaBox latex="U=\tfrac{1}{2}L I_\infty^2=\tfrac{1}{2}(0{,}250)(3{,}00)^2=1{,}125\;\text{J}" />
-          <FormulaBox latex="\boxed{U\approx 1{,}13\;\text{J}}" variant="gold" />
-        </Step>
-        <p>
-          <strong>Energibalanse i den transient fasen:</strong> Batteriet leverer total energi <InlineLatex latex="\int \mathcal E I\,dt" />. Av dette går 1,13 J til magnetfeltet (lagret i L), mens resten blir varme i R via Joule-oppvarming <InlineLatex latex="\int I^2 R\,dt" />. Alt regnskap stemmer — induksjon skaper ingen energi, den <em>forsinker</em> bare oppbyggingen av strøm.
+        <Pitfall>
+          <strong>Det er areal-endringen, ikke deformasjonsformen, som teller.</strong> Når sløyfen kollapser fra sirkel til null, kunne den ha gått gjennom mange mellomformer (oval, dråpe…) — men gjennomsnittlig EMF avhenger kun av initial og endelig fluks.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: en raskere kollaps gir høyere EMF (omvendt proporsjonal med Δt). Hadde Δt vært 1 ms i stedet for 250 ms, ville gjennomsnittlig EMF blitt 4,48 V — tilstrekkelig til å lyse opp en LED.
         </p>
       </div>
     ),
     summary: (
-      <p>RL-kretsens tidskonstant <InlineLatex latex="\tau=L/R" /> angir hvor raskt strømmen stiger. Etter <InlineLatex latex="5\tau" /> er den over 99% av endelig verdi. Stor L → treg respons; liten R → treg respons.</p>
+      <p>For gjennomsnittlig EMF: <InlineLatex latex="\overline{\varepsilon}=|\Delta\Phi|/\Delta t" />. Lenz gir retningen kvalitativt; deformasjonens vei spiller ingen rolle, kun start og slutt.</p>
     ),
   },
 
   // ==========================================================================
-  // 29.59 — Problem: stav trekkes ut av B-felt (energi)
+  // 29.59 — Glide-stav som bremses av Lenz, finn x(stopp)
   // ==========================================================================
   "29.59": {
-    title: "Motional EMF — stav med masse og friksjon",
+    title: "Glidestav i lukket sløyfe — kraft og stoppedistanse",
     difficulty: "vanskelig",
-    pageRef: "s. 991",
+    pageRef: "s. 1013",
     problem: (
       <div className="space-y-2">
         <p>
-          En stav med masse <InlineLatex latex="m=0{,}400\;\text{kg}" />, lengde <InlineLatex latex="L=0{,}500\;\text{m}" /> og
-          motstand <InlineLatex latex="R=0{,}800\;\Omega" /> hviler på to friksjonsfrie skinner i et uniformt magnetfelt
-          <InlineLatex latex="\;B=0{,}600\;\text{T}" /> rettet vertikalt oppover gjennom sløyfeplanet. Skinnenes ender er
-          kortsluttet. Staven blir gitt starthastighet <InlineLatex latex="v_0=4{,}00\;\text{m/s}" /> langs skinnene. Finn
-          (a) starthastighet-EMF, (b) startstrøm, (c) den bremskraften som virker på staven i det øyeblikket, og
-          (d) differensialligningen for <InlineLatex latex="v(t)" />, samt tidskonstanten.
+          En rektangulær løkke med bredde <InlineLatex latex="L" /> og en glidestav med masse <InlineLatex latex="m" /> er som
+          vist i Fig. P29.59. Et uniformt magnetfelt <InlineLatex latex="B" /> er rettet vinkelrett på sløyfeplanet, inn i
+          sidens plan. Glidestaven gis starthastighet <InlineLatex latex="v_0" /> og slippes deretter. Det er ingen friksjon
+          mellom glidestaven og løkken, og resistansen i løkken (ekskl. glidestaven) er neglisjerbar sammenlignet med
+          glidestavens resistans <InlineLatex latex="R" />. (a) Finn et uttrykk for kraften
+          <InlineLatex latex="\;F" /> som virker på staven mens den beveger seg med fart <InlineLatex latex="v" />. (b) Vis at
+          avstanden <InlineLatex latex="x" /> staven beveger seg før den stopper er
+          <InlineLatex latex="\;x=\dfrac{m v_0 R}{L^2 B^2}" />.
         </p>
-        <svg viewBox="0 0 280 140" className="w-full max-w-md mx-auto">
+        <svg viewBox="0 0 280 160" className="w-full max-w-md mx-auto">
           <Arrowheads />
           <line x1="40" y1="30" x2="240" y2="30" stroke="#374151" strokeWidth="2" />
-          <line x1="40" y1="110" x2="240" y2="110" stroke="#374151" strokeWidth="2" />
-          <line x1="40" y1="30" x2="40" y2="110" stroke="#374151" strokeWidth="2" />
-          <line x1="140" y1="30" x2="140" y2="110" stroke="#ef4444" strokeWidth="3" />
-          <text x="145" y="70" fontSize="10" fill="#ef4444">m, L</text>
-          <line x1="140" y1="70" x2="200" y2="70" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
-          <text x="205" y="74" fontSize="10" fill="#10b981">v₀</text>
-          {[{x:60,y:50},{x:90,y:50},{x:60,y:90},{x:90,y:90},{x:75,y:70}].map((p,i)=>(
-            <g key={i}><circle cx={p.x} cy={p.y} r="2" fill="#3b82f6" /><circle cx={p.x} cy={p.y} r="5" fill="none" stroke="#3b82f6" /></g>
+          <line x1="40" y1="130" x2="240" y2="130" stroke="#374151" strokeWidth="2" />
+          <line x1="40" y1="30" x2="40" y2="130" stroke="#374151" strokeWidth="2" />
+          <line x1="160" y1="30" x2="160" y2="130" stroke="#ef4444" strokeWidth="3" />
+          <text x="166" y="80" fontSize="10" fill="#ef4444">m, R, L</text>
+          <line x1="160" y1="80" x2="220" y2="80" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrow-green-k29)" />
+          <text x="225" y="84" fontSize="11" fill="#10b981">v₀</text>
+          {[{x:70,y:60},{x:100,y:60},{x:130,y:60},{x:70,y:100},{x:100,y:100},{x:130,y:100}].map((p,i)=>(
+            <g key={i}>
+              <line x1={p.x-3} y1={p.y-3} x2={p.x+3} y2={p.y+3} stroke="#3b82f6" strokeWidth="1.5" />
+              <line x1={p.x-3} y1={p.y+3} x2={p.x+3} y2={p.y-3} stroke="#3b82f6" strokeWidth="1.5" />
+            </g>
           ))}
-          <text x="50" y="130" fontSize="10" fill="#3b82f6">B ut av siden</text>
+          <text x="55" y="150" fontSize="10" fill="#3b82f6">B inn i siden</text>
         </svg>
       </div>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=0{,}400\;\text{kg}" /></li>
-        <li><InlineLatex latex="L=0{,}500\;\text{m}" /></li>
-        <li><InlineLatex latex="R=0{,}800\;\Omega" /></li>
-        <li><InlineLatex latex="B=0{,}600\;\text{T}" /></li>
-        <li><InlineLatex latex="v_0=4{,}00\;\text{m/s}" /></li>
+        <li>Stav: masse <InlineLatex latex="m" />, lengde <InlineLatex latex="L" />, resistans <InlineLatex latex="R" /></li>
+        <li>Sløyfens øvrige resistans neglisjerbar</li>
+        <li>Magnetfelt <InlineLatex latex="B" /> vinkelrett på sløyfen, inn i siden</li>
+        <li>Starthastighet <InlineLatex latex="v_0" />, deretter ingen ytre kraft</li>
+        <li>Friksjonsfri</li>
       </ul>
     ),
-    unknowns: <p>(a) <InlineLatex latex="\varepsilon_0" />, (b) <InlineLatex latex="I_0" />, (c) <InlineLatex latex="F_0" />, (d) <InlineLatex latex="v(t)" /> og tidskonstant.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) <InlineLatex latex="F(v)" /> — bremsekraft som funksjon av fart</li>
+        <li>(b) Total avstand <InlineLatex latex="x" /> til staven stopper</li>
+      </ul>
+    ),
     strategy: (
-      <p>Bruk <InlineLatex latex="\varepsilon=BLv" />, <InlineLatex latex="I=\varepsilon/R" />, <InlineLatex latex="F=BIL" />. Newton 2: <InlineLatex latex="m\,dv/dt=-F" />. Dette gir en eksponentiell avklingning.</p>
+      <p>
+        (a) Bruk EMF→I→F kjeden for å få <InlineLatex latex="F=B^2L^2 v/R" />. (b) Newton 2 gir en differensialligning. Bruk
+        kjederegelen <InlineLatex latex="dv/dt=v\,dv/dx" /> for å få en ligning i v og x, og integrer.
+      </p>
     ),
     hints: [
       {
         label: "Hint 1",
-        content: <p>Startverdier: sett inn <InlineLatex latex="v_0" /> i <InlineLatex latex="\varepsilon=BLv" />.</p>,
+        content: <p>Indusert EMF: <InlineLatex latex="\varepsilon=BLv" />. Strøm: <InlineLatex latex="I=\varepsilon/R" />. Kraft: <InlineLatex latex="F=BIL" />.</p>,
       },
       {
         label: "Hint 2",
-        content: <p>Bremskraften på staven er <InlineLatex latex="F=BIL=B^2L^2 v/R" /> — proporsjonal med v. Dette gir førsteordens ODE.</p>,
+        content: <p>Newton: <InlineLatex latex="m\,dv/dt=-F" />. Bytt variabel: <InlineLatex latex="dv/dt=(dv/dx)(dx/dt)=v\,dv/dx" />.</p>,
       },
       {
         label: "Hint 3",
-        content: <p>Løsningen blir <InlineLatex latex="v(t)=v_0 e^{-t/\tau}" /> med <InlineLatex latex="\tau=mR/(B^2L^2)" />.</p>,
+        content: <p>Integrer fra <InlineLatex latex="v_0" /> til 0 i v, og fra 0 til x i posisjon.</p>,
       },
     ],
     solution: (
       <div>
-        <TheoryBox title="Koblede lover: induksjon + Newton">
-          <p>
-            Problemet kobler sammen <em>tre</em> fysiske prinsipper til en kjede som gir en differensialligning:
-          </p>
+        <TheoryBox title="Bremsekraft fra induksjon">
+          <p>Tre lover i kjede gir den lukkede formelen:</p>
           <ol className="list-decimal pl-5 space-y-0.5">
-            <li>Bevegelses-EMF: <InlineLatex latex="\varepsilon=BLv" /> (stavens fart gir spenning)</li>
-            <li>Ohms lov: <InlineLatex latex="I=\varepsilon/R" /> (spenning driver strøm)</li>
-            <li>Kraft på strømleder: <InlineLatex latex="F=BIL" /> (strøm i felt gir kraft)</li>
+            <li><InlineLatex latex="\varepsilon=BLv" /> (bevegelses-EMF)</li>
+            <li><InlineLatex latex="I=\varepsilon/R=BLv/R" /> (Ohms lov)</li>
+            <li><InlineLatex latex="F=BIL=B^2L^2v/R" /> (Lorentz-kraft på leder)</li>
           </ol>
-          <p>Kjeder vi disse sammen får vi kraften direkte som funksjon av farten:</p>
-          <FormulaBox latex="F=BIL=B\cdot\dfrac{BLv}{R}\cdot L=\dfrac{B^2L^2}{R}\,v" variant="blue" />
+          <FormulaBox latex="F=\dfrac{B^2L^2}{R}\,v" variant="blue" />
           <p>
-            Dette kalles noen ganger «induktiv viskositet» — bremskraften er proporsjonal med farten, akkurat som luftmotstand ved lave farter.
+            Kraften er <em>proporsjonal med farten</em> — staven blir bremset hardere når den går raskt, mildere når den nesten har stoppet. Dette gir den karakteristiske eksponentielle avtagningen.
           </p>
         </TheoryBox>
-        <p>
-          Før vi løser ODE-en, bruker vi lukkede formler for å finne starttilstanden:
-        </p>
-        <Step n={1} title="(a) Starthastighet-EMF">
-          <p>Bruk bevegelses-EMF-formelen direkte med <InlineLatex latex="v=v_0" />:</p>
-          <FormulaBox latex="\varepsilon_0=BLv_0=0{,}600\cdot 0{,}500\cdot 4{,}00=1{,}20\;\text{V}" />
-          <FormulaBox latex="\boxed{\varepsilon_0=1{,}20\;\text{V}}" variant="gold" />
+        <Step n={1} title="(a) Uttrykk for F(v)">
+          <p>Fra kjederegningen over:</p>
+          <FormulaBox latex="\boxed{F(v)=\dfrac{B^2L^2}{R}\,v}" variant="gold" />
+          <p>Retning: <em>mot bevegelsen</em>, slik Lenz krever.</p>
         </Step>
-        <Step n={2} title="(b) Startstrøm">
-          <p>Ohms lov i den lukkede kretsen:</p>
-          <FormulaBox latex="I_0=\dfrac{\varepsilon_0}{R}=\dfrac{1{,}20}{0{,}800}=1{,}50\;\text{A}" />
-          <FormulaBox latex="\boxed{I_0=1{,}50\;\text{A}}" variant="gold" />
-        </Step>
-        <Step n={3} title="(c) Startbremskraft">
-          <p>Magnetisk kraft på strømførende stav i B-felt (Lenz gir retningen — mot bevegelsen):</p>
-          <FormulaBox latex="F_0=BI_0 L=0{,}600\cdot 1{,}50\cdot 0{,}500=0{,}450\;\text{N}" />
-          <FormulaBox latex="\boxed{F_0=0{,}450\;\text{N}}" variant="gold" />
-        </Step>
-        <Step n={4} title="(d) Differensialligning og tidskonstant">
+        <Step n={2} title="(b) Newton 2 og bytte til v(x)">
+          <p>Eneste kraft på staven (ingen friksjon):</p>
+          <FormulaBox latex="m\,\dfrac{dv}{dt}=-F=-\dfrac{B^2L^2}{R}\,v" />
           <p>
-            Siden skinnene er friksjonsfrie og det ikke er ytre drivkraft, er den magnetiske bremskraften <em>eneste</em> kraft på staven. Newtons 2. lov (med retning mot bevegelsen = negativ):
+            Vi kunne integrere i tid og få <InlineLatex latex="v(t)=v_0\,e^{-t/\tau}" />, men oppgaven spør om <em>distanse</em>. Bruk kjederegelen for å bytte variabel:
           </p>
-          <FormulaBox latex="m\dfrac{dv}{dt}=-F=-BIL=-\dfrac{B^2L^2}{R}v" />
+          <FormulaBox latex="\dfrac{dv}{dt}=\dfrac{dv}{dx}\cdot\dfrac{dx}{dt}=v\,\dfrac{dv}{dx}" />
+          <p>Sett inn:</p>
+          <FormulaBox latex="m\,v\,\dfrac{dv}{dx}=-\dfrac{B^2L^2}{R}\,v" />
+          <p>Del på v (gyldig så lenge v &gt; 0):</p>
+          <FormulaBox latex="m\,\dfrac{dv}{dx}=-\dfrac{B^2L^2}{R}" />
+        </Step>
+        <Step n={3} title="Integrer fra start til stopp">
+          <p>Separer og integrer fra <InlineLatex latex="(x=0,v=v_0)" /> til <InlineLatex latex="(x=x_\text{stopp},v=0)" />:</p>
+          <FormulaBox latex="\int_{v_0}^{0} m\,dv=-\int_0^{x_\text{stopp}}\dfrac{B^2L^2}{R}\,dx" />
+          <FormulaBox latex="-mv_0=-\dfrac{B^2L^2}{R}\,x_\text{stopp}" />
+          <FormulaBox latex="\boxed{x_\text{stopp}=\dfrac{m v_0 R}{B^2 L^2}}" variant="gold" />
+        </Step>
+        <Step n={4} title="Sjekk via energibevaring">
+          <p>Initial kinetisk energi:</p>
+          <FormulaBox latex="K_0=\tfrac{1}{2}m v_0^2" />
+          <p>Total dissipert energi i motstanden er all kinetisk energi (siden ingen annen sluk finnes):</p>
+          <FormulaBox latex="W_\text{dissipert}=\tfrac{1}{2}m v_0^2" />
           <p>
-            Dette er identisk i form med ODE-en for RL-krets (29.51), bare med andre symboler. Omforming gir:
-          </p>
-          <FormulaBox latex="\dfrac{dv}{v}=-\dfrac{B^2L^2}{mR}\,dt" />
-          <p>Integrering fra <InlineLatex latex="v_0" /> til <InlineLatex latex="v(t)" />:</p>
-          <FormulaBox latex="v(t)=v_0\,e^{-t/\tau},\quad \tau=\dfrac{mR}{B^2L^2}" />
-          <p>Sett inn tallene:</p>
-          <FormulaBox latex="\tau=\dfrac{mR}{B^2L^2}=\dfrac{0{,}400\cdot 0{,}800}{(0{,}600)^2(0{,}500)^2}" />
-          <FormulaBox latex="\tau=\dfrac{0{,}320}{0{,}0900}\approx 3{,}56\;\text{s}" />
-          <FormulaBox latex="\boxed{\tau\approx 3{,}56\;\text{s}}" variant="gold" />
-          <p>
-            Staven stopper aldri <em>helt</em> (eksponentiell avtagning), men etter <InlineLatex latex="5\tau\approx 18\;\text{s}" /> er farten under 1% av startverdien.
+            Alternativt kan man integrere effekten <InlineLatex latex="P(t)=Fv=B^2L^2v^2/R" /> over hele forløpet og få samme resultat — energien er entydig bevart.
           </p>
         </Step>
-        <Step n={5} title="Sjekk energibevaring">
-          <p>Kinetisk startenergi:</p>
-          <FormulaBox latex="K_0=\tfrac{1}{2}mv_0^2=\tfrac{1}{2}(0{,}400)(4{,}00)^2=3{,}20\;\text{J}" />
-          <p>Total dissipert elektrisk energi, ved direkte integral:</p>
-          <FormulaBox latex="W=\int_0^{\infty}I^2R\,dt=\int_0^{\infty}\dfrac{B^2L^2 v_0^2}{R}e^{-2t/\tau}\,dt=\dfrac{B^2L^2 v_0^2\,\tau}{2R}=\tfrac{1}{2}mv_0^2" />
-          <p>
-            Vi bruker at <InlineLatex latex="\tau=mR/(B^2L^2)" />. Resultatet blir eksakt <InlineLatex latex="\tfrac{1}{2}mv_0^2=3{,}20\;\text{J}" />. ✓ All kinetisk energi omdannes til varme i motstanden.
-          </p>
-        </Step>
-        <p>
-          <strong>Praktisk relevans:</strong> Dette er fysikken bak virvelstrømbremser (eddy-current brakes) som brukes i tog, trikker, heiser og treningssykler. Fordeler: ingen slitasje (ingen kontaktflater), bremskraften skalerer automatisk med fart, og energien kan om ønsket gjenvinnes (regenerativ bremsing). Ulempe: virker ikke på v = 0, så man trenger mekanisk sluttbrems.
+        <Pitfall>
+          <strong>Staven stopper aldri «fullstendig» i en ren eksponentiell avtagning</strong> — formelt sett kreves uendelig tid. Men i praksis oppfattes den som stoppet etter noen tidskonstanter <InlineLatex latex="\tau=mR/(B^2L^2)" />. Den endelige <em>distansen</em> er likevel velbestemt, fordi <InlineLatex latex="\int_0^\infty v\,dt" /> konvergerer.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: dette er nøyaktig prinsippet bak elektromagnetiske bremser i tog, trikker, heiser og treningssykler. Bremsen virker uten kontakt, krever ingen friksjons­materiale, og bremskraften skalerer automatisk med farten — kraftig ved høy fart, mild når man nærmer seg stillstand. Eneste ulempe: den virker ikke ved <InlineLatex latex="v=0" />, så man trenger en mekanisk parkerings­brems.
         </p>
       </div>
     ),
     summary: (
-      <p>Dette er en praktisk anvendelse: kollokvenesterke elektromagnetiske bremser på tog og heiser. Bremskraften er proporsjonal med fart — stor effekt ved høy fart, mild stopp. Tidskonstanten skalerer med masse og omvendt med <InlineLatex latex="B^2L^2/R" />.</p>
+      <p>Bremsekraft <InlineLatex latex="F\propto v" /> gir eksponentiell avtagning i tid, men endelig stoppedistanse <InlineLatex latex="x=mv_0R/(B^2L^2)" />. Hele <InlineLatex latex="\tfrac{1}{2}mv_0^2" /> blir varme i motstanden — energi er bevart.</p>
     ),
   },
 };

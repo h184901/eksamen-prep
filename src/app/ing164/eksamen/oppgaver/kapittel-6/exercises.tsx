@@ -18,21 +18,6 @@ export interface ExerciseContent {
   summary: React.ReactNode;
 }
 
-// ============================================================================
-// Gjenbrukbare pedagogiske blokker
-// ============================================================================
-
-function TheoryBox({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 p-3 my-2">
-      <p className="font-semibold text-xs uppercase tracking-wide text-indigo-700 dark:text-indigo-300 mb-1">
-        Teori: {title}
-      </p>
-      <div className="text-sm text-indigo-900 dark:text-indigo-100">{children}</div>
-    </div>
-  );
-}
-
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <div className="mt-3">
@@ -47,2510 +32,2054 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   );
 }
 
-// ============================================================================
-// SVG-helpere
-// ============================================================================
-
-function Arrowheads() {
+function TheoryBox({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <defs>
-      <marker id="arrow-red-k6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
-      </marker>
-      <marker id="arrow-blue-k6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
-      </marker>
-      <marker id="arrow-green-k6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#10b981" />
-      </marker>
-      <marker id="arrow-amber-k6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b" />
-      </marker>
-      <marker id="arrow-purple-k6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#a855f7" />
-      </marker>
-    </defs>
+    <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-indigo-700 dark:text-indigo-300 mb-1">
+        Teori: {title}
+      </p>
+      <div className="text-sm text-indigo-900 dark:text-indigo-100">{children}</div>
+    </div>
+  );
+}
+
+function Pitfall({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-rose-700 dark:text-rose-300 mb-1">
+        Vanlig feil
+      </p>
+      <div className="text-sm text-rose-900 dark:text-rose-100">{children}</div>
+    </div>
   );
 }
 
 // ============================================================================
-// OPPGAVESAMLING — KAPITTEL 6
+// OPPGAVESAMLING — KAPITTEL 6 (matcher University Physics 15. utg.)
 // ============================================================================
 
 export const exercises: Record<string, ExerciseContent> = {
-  // ==========================================================================
-  // 6.1 — Skyve bok på bord
-  // ==========================================================================
   "6.1": {
-    title: "Arbeid fra flere krefter på bok",
+    title: "Arbeid på fysikkbok som glir på bord",
     difficulty: "lett",
-    pageRef: "s. 198",
+    pageRef: "s. 221",
     problem: (
-      <div className="space-y-2">
-        <p>
-          Du skyver en fysikkbok 1,50{"\u00A0"}m langs et horisontalt bord med
-          en horisontal kraft på 2,40{"\u00A0"}N. Friksjonen motvirker bevegelsen
-          med 0,600{"\u00A0"}N. Hvor mye arbeid utfører (a) din kraft, (b)
-          friksjonen, (c) normalkraften, (d) gravitasjonen og (e) nettokraften?
-        </p>
-        <svg viewBox="0 0 360 140" className="w-full max-w-md mx-auto block">
-          <Arrowheads />
-          {/* floor */}
-          <line x1="20" y1="100" x2="340" y2="100" stroke="currentColor" strokeWidth="2" />
-          {/* book */}
-          <rect x="140" y="70" width="60" height="30" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
-          <text x="170" y="90" fontSize="10" textAnchor="middle" fill="#92400e">bok</text>
-          {/* push force */}
-          <line x1="210" y1="85" x2="260" y2="85" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrow-blue-k6)" />
-          <text x="265" y="82" fontSize="11" fill="#3b82f6">F = 2,40 N</text>
-          {/* friction */}
-          <line x1="140" y1="85" x2="105" y2="85" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrow-red-k6)" />
-          <text x="70" y="82" fontSize="11" fill="#ef4444">f = 0,60 N</text>
-          {/* displacement */}
-          <line x1="170" y1="115" x2="260" y2="115" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrow-green-k6)" />
-          <text x="215" y="130" fontSize="10" fill="#10b981" textAnchor="middle">d = 1,50 m</text>
-          {/* weight */}
-          <line x1="170" y1="70" x2="170" y2="45" stroke="#a855f7" strokeWidth="2" markerEnd="url(#arrow-purple-k6)" transform="rotate(180 170 57)" />
-          <text x="175" y="40" fontSize="10" fill="#a855f7">mg</text>
-        </svg>
-      </div>
+      <p>
+        Du skyver fysikk­boken din 1,10 m langs et horisontalt bord med en horisontal kraft 3,00 N
+        mens den motstående friksjons­kraften er 0,700 N. Hvor mye arbeid utfører hver av kreftene
+        på boken: (a) ditt 3,00 N skyv, (b) friksjons­kraften, (c) normal­kraften fra bordet, og
+        (d) gravitasjon? (e) Hva er total­arbeidet på boken?
+      </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Forskyvning: <InlineLatex latex="d=1{,}50\;\text{m}" /></li>
-        <li>Skyvekraft: <InlineLatex latex="F=2{,}40\;\text{N}" /> (horisontal)</li>
-        <li>Friksjon: <InlineLatex latex="f=0{,}600\;\text{N}" /></li>
-        <li>Bevegelse horisontalt, ingen vertikal bevegelse</li>
+        <li>Anvendt kraft: F = 3,00 N (horisontal)</li>
+        <li>Friksjon: f = 0,700 N (motsatt bevegelse)</li>
+        <li>Forflytning: d = 1,10 m (horisontal)</li>
       </ul>
     ),
     unknowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Arbeid utført av hver kraft: <InlineLatex latex="W_F,W_f,W_n,W_g,W_\text{tot}" /></li>
+        <li>Arbeid utført av fire krefter (skyv, friksjon, normal, gravitasjon)</li>
+        <li>Total arbeid</li>
       </ul>
     ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Bruk definisjonen av arbeid utført av en konstant kraft langs en rett
-          forskyvning. Vinkelen mellom kraft og forskyvning bestemmer om arbeidet
-          er positivt, negativt eller null.
-        </p>
-        <TheoryBox title="Arbeid utført av en konstant kraft">
-          <p>
-            Arbeid er skalarproduktet av kraft og forskyvning:
-          </p>
-          <FormulaBox latex="W = \vec F \cdot \vec s = F\,s\cos\phi" variant="gold" />
-          <p className="mt-1">
-            <InlineLatex latex="\phi" /> er vinkelen mellom kraftvektoren og
-            forskyvningsvektoren. Tre nyttige spesialtilfeller:
-          </p>
-          <ul className="list-disc pl-5 text-xs mt-1">
-            <li><InlineLatex latex="\phi=0^\circ" />: kraft i bevegelsesretning → <InlineLatex latex="W=Fs>0" /></li>
-            <li><InlineLatex latex="\phi=180^\circ" />: kraft mot bevegelsen → <InlineLatex latex="W=-Fs<0" /></li>
-            <li><InlineLatex latex="\phi=90^\circ" />: kraft vinkelrett på bevegelse → <InlineLatex latex="W=0" /></li>
-          </ul>
+        <TheoryBox title="Arbeids-definisjon">
+          <FormulaBox variant="gold" latex="W=Fd\cos\theta" />
+          <p className="text-xs">θ = vinkel mellom kraft og forflytning.</p>
+        </TheoryBox>
+        <TheoryBox title="Vinkelrett kraft = null arbeid">
+          <p>Når kraften er vinkelrett på bevegelsen (θ = 90°, cos = 0), gjør kraften ikke noe arbeid — uansett hvor stor den er.</p>
+          <p className="text-xs mt-1">Dette gjelder normal­kraft og tyngde for horisontal bevegelse.</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      {
-        label: "Hint 1",
-        content: <p>Den horisontale forskyvningen er <InlineLatex latex="s=1{,}50\;\text{m}" />. Alle vertikale krefter står vinkelrett på bevegelsen.</p>,
-      },
-      {
-        label: "Hint 2",
-        content: <p>Totalarbeidet kan enten finnes ved summen av alle arbeid, eller ved nettokraften: <InlineLatex latex="W_\text{tot}=F_\text{net}\cdot s" />.</p>,
-      },
+      { label: "Hint 1", content: <p>Skyv og friksjon er begge horisontale, men motsatt rettet. Tegn kreftene.</p> },
+      { label: "Hint 2", content: <p>Normal­kraft og tyngde er vertikale; bevegelsen er horisontal → cos 90° = 0.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Arbeid er et skalart mål på energioverføringen fra en
-          kraft til et objekt. Definisjonen for konstant kraft langs en rett forskyvning er
-          skalarproduktet mellom kraft- og forskyvningsvektoren. Bare komponenten av kraften
-          som er <em>parallell</em> med bevegelsen bidrar — vinkelrette komponenter gir
-          null arbeid.
-        </p>
-        <FormulaBox latex="W = \vec F \cdot \vec s = F\,s\cos\phi" variant="blue" />
-        <p>
-          Her er <InlineLatex latex="\phi" /> vinkelen mellom kraftvektoren og
-          forskyvningsvektoren. Tegnet på arbeidet forteller om kraften tilfører
-          energi (<InlineLatex latex="\phi<90^\circ" />) eller tapper energi
-          (<InlineLatex latex="\phi>90^\circ" />).
-        </p>
-
-        <p className="font-semibold">(a) Arbeid fra skyvekraften</p>
-        <p>
-          Skyvekraften peker i samme retning som bevegelsen, så{" "}
-          <InlineLatex latex="\phi=0^\circ" /> og <InlineLatex latex="\cos 0^\circ=1" />.
-          Dette er tilfellet der kraften tilfører maksimal energi per lengdeenhet.
-        </p>
-        <FormulaBox latex="W_F = F\,s\cos 0^\circ = (2{,}40\;\text{N})(1{,}50\;\text{m})(1) = 3{,}60\;\text{J}" variant="blue" />
-
-        <p className="font-semibold">(b) Arbeid fra friksjon</p>
-        <p>
-          Kinetisk friksjon virker alltid <em>mot</em> bevegelsen, så{" "}
-          <InlineLatex latex="\phi=180^\circ" /> og{" "}
-          <InlineLatex latex="\cos 180^\circ=-1" />. Friksjonen fjerner energi fra
-          boken (omgjør den til varme).
-        </p>
-        <FormulaBox latex="W_f = f\,s\cos 180^\circ = -(0{,}600\;\text{N})(1{,}50\;\text{m}) = -0{,}900\;\text{J}" variant="blue" />
-
-        <p className="font-semibold">(c, d) Arbeid fra normalkraft og tyngdekraft</p>
-        <p>
-          Begge kreftene er vertikale, mens forskyvningen er horisontal. Vinkelen er
-          <InlineLatex latex="\,\phi=90^\circ" /> og{" "}
-          <InlineLatex latex="\cos 90^\circ=0" />. Bevegelsen er <em>vinkelrett</em>{" "}
-          på kraftretningen, så disse kreftene overfører ingen energi til boken.
-        </p>
-        <FormulaBox latex="W_n = W_g = F\,s\cos 90^\circ = 0" variant="blue" />
-
-        <p className="font-semibold">(e) Totalt arbeid</p>
-        <p>
-          Siden arbeid er en skalar kan vi ganske enkelt <em>summere</em> bidragene.
-          Alternativt kan vi bruke at totalarbeidet også er lik nettokraften ganget
-          med forskyvningen, <InlineLatex latex="W_\text{tot}=F_\text{net}\cdot s" /> —
-          en konsekvens av at arbeidsbegrepet er lineært i kraften.
-        </p>
-        <FormulaBox latex="W_\text{tot} = W_F + W_f + W_n + W_g = 3{,}60 + (-0{,}900) + 0 + 0" variant="blue" />
-        <FormulaBox latex="W_\text{tot}=W_F+W_f+W_n+W_g=3{,}60-0{,}900=\boxed{2{,}70\;\text{J}}" variant="gold" />
-        <p>
-          <strong>Sjekk:</strong> Nettokraft horisontalt er{" "}
-          <InlineLatex latex="F_\text{net}=2{,}40-0{,}60=1{,}80\;\text{N}" />, og{" "}
-          <InlineLatex latex="(1{,}80)(1{,}50)=2{,}70\;\text{J}" /> ✓. Størrelsesorden
-          er rimelig for å skyve en bok et par meter.
+      <div>
+        <p className="mb-2">Hver kraft gir et arbeids­bidrag — beregnet uavhengig.</p>
+        <Step n={1} title="(a) Arbeid av skyv">
+          <FormulaBox latex="W_\text{skyv}=Fd\cos 0°=(3{,}00)(1{,}10)" />
+          <FormulaBox variant="gold" latex="W_\text{skyv}=+3{,}30\;\text{J}" />
+        </Step>
+        <Step n={2} title="(b) Arbeid av friksjon">
+          <p>Friksjon peker motsatt forflytningen (θ = 180°, cos = −1):</p>
+          <FormulaBox latex="W_f=fd\cos 180°=-(0{,}700)(1{,}10)" />
+          <FormulaBox variant="gold" latex="W_f=-0{,}770\;\text{J}" />
+        </Step>
+        <Step n={3} title="(c, d) Normal og tyngde">
+          <p>Begge er vinkelrette på bevegelsen:</p>
+          <FormulaBox variant="gold" latex="W_n=W_g=0" />
+        </Step>
+        <Step n={4} title="(e) Total arbeid">
+          <FormulaBox latex="W_\text{tot}=3{,}30-0{,}770+0+0" />
+          <FormulaBox variant="gold" latex="W_\text{tot}\approx +2{,}53\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Vinkelen er målt mellom kraft­vektor og bevegelsesretning.</strong> Mange mister
+          fortegnet på friksjons­arbeid (cos 180° = −1, ikke 0). Glem ikke negativt fortegn.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: positivt total­arbeid betyr at boken får økt kinetisk energi. Hvis du
+          akselererte (ikke konstant fart), gir 2,53 J = ½·m·Δv².
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Arbeid skilles fra kraft: bare komponenten <em>langs forskyvningen</em>
-        teller. Vertikale krefter på en horisontal bevegelse gjør aldri arbeid.
-        Totalarbeidet er lik nettokraft ganger forskyvning.
-      </p>
-    ),
+    summary: <p>W = Fd cos θ. Vinkelrette krefter gir null arbeid.</p>,
   },
 
-  // ==========================================================================
-  // 6.2 — Tauebilen
-  // ==========================================================================
   "6.2": {
-    title: "Arbeid fra taukraft under vinkel",
-    difficulty: "lett",
-    pageRef: "s. 199",
+    title: "Tau-truck drar bil",
+    difficulty: "middels",
+    pageRef: "s. 221",
     problem: (
-      <div className="space-y-2">
-        <p>
-          En tauebil trekker en bil 5,00{"\u00A0"}km horisontalt ved hjelp av
-          en kabel med strekk 850{"\u00A0"}N. (a) Hvor mye arbeid utfører kabelen
-          på bilen hvis den trekker horisontalt? (b) Hvis kabelen er 35° over
-          horisontalen? (c) Hvor mye arbeid utfører kabelen på tauebilen i (a)
-          og (b)? (d) Hvor mye arbeid utfører tyngdekraften på bilen i (a)?
-        </p>
-        <svg viewBox="0 0 360 140" className="w-full max-w-md mx-auto block">
-          <Arrowheads />
-          <line x1="20" y1="100" x2="340" y2="100" stroke="currentColor" strokeWidth="2" />
-          {/* tow truck */}
-          <rect x="30" y="60" width="70" height="40" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" />
-          <text x="65" y="85" fontSize="10" textAnchor="middle" fill="#1e40af">tauebil</text>
-          {/* car */}
-          <rect x="230" y="70" width="60" height="30" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
-          <text x="260" y="90" fontSize="10" textAnchor="middle" fill="#92400e">bil</text>
-          {/* cable at 35 deg */}
-          <line x1="100" y1="70" x2="230" y2="82" stroke="#ef4444" strokeWidth="2" strokeDasharray="4" />
-          <line x1="230" y1="82" x2="170" y2="60" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrow-red-k6)" />
-          <text x="160" y="55" fontSize="10" fill="#ef4444">T=850 N, 35°</text>
-        </svg>
-      </div>
+      <p>
+        Med et tau med spenning 1350 N drar en tau-truck en bil 5,00 km langs en motorvei. (a) Hvor
+        mye arbeid utfører kabelen på bilen hvis den drar horisontalt? Hvis den drar i 35,0° over
+        horisontalen? (b) Hvor mye arbeid utfører kabelen på tau-trucken i begge tilfeller i (a)?
+        (c) Hvor mye arbeid utfører gravitasjon på bilen i (a)?
+      </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="s=5{,}00\;\text{km}=5000\;\text{m}" /></li>
-        <li><InlineLatex latex="T=850\;\text{N}" /></li>
-        <li>Vinkler: 0° (a) og 35° (b)</li>
+        <li>Tau­spenning: T = 1350 N</li>
+        <li>Forflytning: d = 5,00 km = 5000 m mot forflytnings­retning</li>
+        <li>Vinkel for tilfelle (ii): 35,0° over horisontalen</li>
       </ul>
     ),
     unknowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Arbeid fra kabelen på bilen i (a) og (b)</li>
-        <li>Arbeid fra kabelen på tauebilen</li>
-        <li>Arbeid fra tyngdekraften på bilen</li>
+        <li>(a) Arbeid på bilen, horisontalt og ved 35°</li>
+        <li>(b) Arbeid på tau­trucken, begge tilfeller</li>
+        <li>(c) Gravitasjons­arbeid på bilen</li>
       </ul>
     ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Bruk <InlineLatex latex="W=Ts\cos\phi" />. Kabelen utøver motsatt
-          rettet kraft på tauebilen (Newtons 3. lov) — men bevegelsen er den
-          samme; tegnet på <InlineLatex latex="\cos\phi" /> endrer seg.
-        </p>
-        <TheoryBox title="Newtons 3. lov og arbeid">
-          <p>
-            En kabel trekker begge endene mot hverandre med samme strekk{" "}
-            <InlineLatex latex="T" />. På tauebilen peker strekket{" "}
-            <em>bakover</em> (mot bilen som taues), mens tauebilen beveger seg
-            fremover — altså motvirker kabelen bevegelsen til tauebilen.
-          </p>
+        <TheoryBox title="Arbeid med vinkel">
+          <FormulaBox variant="gold" latex="W=Fd\cos\theta" />
+          <p className="text-xs">Bare komponenten av F langs forflytningen gjør arbeid.</p>
+        </TheoryBox>
+        <TheoryBox title="Newtons tredje lov og arbeid">
+          <p>Tauet drar bilen fremover; ved Newton 3 drar bilen tauet (og dermed trucken) bakover med samme størrelse. Trucken beveger seg fremover, så kraften virker motsatt forflytning ⇒ negativt arbeid på trucken.</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      {
-        label: "Hint",
-        content: <p>På tauebilen er vinkelen 180° (horisontal drag) eller <InlineLatex latex="180^\circ-35^\circ=145^\circ" /> (med vinkel).</p>,
-      },
+      { label: "Hint 1", content: <p>For 35°-tilfellet er det fortsatt samme avstand d, men bare cos 35°-komponenten av spenningen virker langs bevegelsen.</p> },
+      { label: "Hint 2", content: <p>Selv om kreftene har samme størrelse, har "kraften fra bil på truck" og "kraften fra truck på bil" motsatt retning — så arbeidet endrer fortegn.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Grunnligningen er den samme som i 6.1 —{" "}
-          <InlineLatex latex="W = \vec F\cdot\vec s = F\,s\cos\phi" />. Her er den ene
-          subtiliteten at et tau virker med <em>samme</em> strekk i begge ender
-          (Newtons 3. lov), men fordi retningen kabelen trekker er ulik for tauebil
-          og bil, blir vinkelen <InlineLatex latex="\phi" /> forskjellig.
-        </p>
-        <FormulaBox latex="W = F\,s\cos\phi" variant="blue" />
-
-        <p className="font-semibold">(a) Horisontal kabel på bilen</p>
-        <p>
-          Kabelen trekker bilen fremover, samme retning som bevegelsen:{" "}
-          <InlineLatex latex="\phi=0^\circ" />, <InlineLatex latex="\cos\phi=1" />.
-        </p>
-        <FormulaBox latex="W = T\,s\cos 0^\circ = (850\;\text{N})(5000\;\text{m})(1)" variant="blue" />
-        <FormulaBox latex="W=Ts=850\cdot 5000=\boxed{4{,}25\times 10^6\;\text{J}}" variant="gold" />
-
-        <p className="font-semibold">(b) Kabel 35° over horisontalen</p>
-        <p>
-          Nå har strekket både en horisontal og en vertikal komponent, men bilen
-          beveger seg bare horisontalt. Bare den horisontale komponenten{" "}
-          <InlineLatex latex="T\cos 35^\circ" /> bidrar til arbeidet.
-        </p>
-        <FormulaBox latex="W = T\,s\cos 35^\circ = (850)(5000)(0{,}8192)" variant="blue" />
-        <FormulaBox latex="W=Ts\cos 35^\circ=850\cdot 5000\cdot 0{,}8192=\boxed{3{,}48\times 10^6\;\text{J}}" variant="gold" />
-        <p className="italic text-xs">
-          At <InlineLatex latex="\cos 35^\circ\approx 0{,}82" /> betyr at ca 18 % av
-          kraften "kastes bort" vertikalt — det bidrar bare til å presse bilen
-          oppover, ikke fremover.
-        </p>
-
-        <p className="font-semibold">(c) Arbeid på tauebilen</p>
-        <p>
-          Newtons 3. lov: hvis kabelen trekker bilen fremover med strekk{" "}
-          <InlineLatex latex="T" />, trekker den tauebilen <em>bakover</em> med samme
-          strekk. Men tauebilen beveger seg <em>fremover</em>. Vinkelen er derfor{" "}
-          <InlineLatex latex="180^\circ" /> i (a) og{" "}
-          <InlineLatex latex="180^\circ-35^\circ=145^\circ" /> i (b). Merk at{" "}
-          <InlineLatex latex="\cos 145^\circ=-\cos 35^\circ" />.
-        </p>
-        <FormulaBox latex="W_a=-4{,}25\times 10^6\;\text{J},\quad W_b=-3{,}48\times 10^6\;\text{J}" variant="blue" />
-
-        <p className="font-semibold">(d) Tyngdekraften på bilen i (a)</p>
-        <p>
-          Tyngdekraften er vertikal, forskyvningen horisontal →{" "}
-          <InlineLatex latex="\phi=90^\circ" />, og{" "}
-          <InlineLatex latex="\cos 90^\circ=0" />.
-        </p>
-        <FormulaBox latex="W_g=mg\cdot s\cdot\cos 90^\circ = 0" variant="blue" />
-        <p>
-          <strong>Fysisk tolkning:</strong> Det totale arbeidet kabelen gjør på{" "}
-          <em>systemet</em> (bil + tauebil) er null — energi overføres fra tauebilens
-          motor via kabelen til bilen, men kabelen i seg selv lagrer ikke energi.
+      <div>
+        <p className="mb-2">Vi bruker <InlineLatex latex="W=Fd\cos\theta" /> i alle delene og bruker fortegns­logikk for tau­truckens arbeid.</p>
+        <Step n={1} title="(a) Arbeid på bilen — horisontalt drag">
+          <FormulaBox latex="W=1350\cdot 5000\cdot\cos 0°=6{,}75\times 10^{6}\;\text{J}" />
+        </Step>
+        <Step n={2} title="(a) Arbeid på bilen — drag i 35°">
+          <FormulaBox latex="W=1350\cdot 5000\cdot\cos 35°=6{,}75\times 10^{6}\cdot 0{,}819=5{,}53\times 10^{6}\;\text{J}" />
+        </Step>
+        <Step n={3} title="(b) Arbeid på tau­trucken">
+          <p>Newton 3: tauet drar trucken bakover med 1350 N, men trucken beveger seg fremover. Vinkelen mellom kraft og forflytning er 180° i begge tilfeller på trucken (cos 180° = −1).</p>
+          <FormulaBox latex="W_\text{horisontal}=-6{,}75\times 10^{6}\;\text{J}" />
+          <FormulaBox latex="W_{35°}=-5{,}53\times 10^{6}\;\text{J}" />
+        </Step>
+        <Step n={4} title="(c) Gravitasjons­arbeid på bilen">
+          <p>Gravitasjon peker rett ned, bilen beveger seg horisontalt. Vinkelen mellom dem er 90°, og cos 90° = 0.</p>
+          <FormulaBox latex="W_g=mg\cdot d\cos 90°=0" />
+          <FormulaBox variant="gold" latex="(a)\,6{,}75/5{,}53\times 10^{6}\;\text{J};\;(b)\,-6{,}75/-5{,}53\times 10^{6}\;\text{J};\;(c)\,0" />
+        </Step>
+        <Pitfall>
+          <strong>Newton 3-arbeid er IKKE alltid likt og motsatt!</strong> Bare når begge objekter har samme forflytning. Generelt har de ulik forflytning og dermed ulikt arbeid. Her tilfeldigvis samme d ⇒ likt størrelses­messig, motsatt fortegn.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Arbeid er retnings­avhengig — å vinkle tauet 35° gir 18 % mindre arbeid for samme spenning, men kan være nødvendig for praktiske grunner. Gravitasjon gjør null arbeid på horisontal kjøring fordi kraften står vinkelrett på veien.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Arbeid fra en ekstern kraft avhenger av <em>vinkelen</em> mellom kraft og
-        forskyvning, ikke av hvilken gjenstand som "utfører" kraften. Kabler
-        gjør like mye og motsatt arbeid på begge ender (men på ulike objekter
-        som flytter seg ulikt).
-      </p>
-    ),
+    summary: <p>W = Fd cos θ — bare komponenten langs bevegelsen teller. Newton 3 gir motsatt fortegn på arbeid når begge har samme forflytning.</p>,
   },
 
-  // ==========================================================================
-  // 6.3 — Skyve kasse med friksjon
-  // ==========================================================================
   "6.3": {
-    title: "Arbeid på kasse ved konstant hastighet",
-    difficulty: "lett",
-    pageRef: "s. 199",
+    title: "Fabrikkarbeider drar 30 kg kasse",
+    difficulty: "middels",
+    pageRef: "s. 221",
     problem: (
       <p>
-        En fabrikkarbeider skyver en 30,0{"\u00A0"}kg kasse 4,5{"\u00A0"}m
-        langs et horisontalt gulv med konstant hastighet ved å skyve horisontalt.
-        Kinetisk friksjonskoeffisient er 0,25. (a) Hvor stor kraft må arbeideren
-        bruke? (b) Hvor mye arbeid utfører denne kraften? (c) Hvor mye arbeid
-        utfører friksjonen? (d) Normalkraften? Tyngdekraften? (e) Totalt arbeid?
+        En fabrikkarbeider skyver en 30,0 kg kasse en distanse 4,5 m langs et horisontalt gulv ved
+        konstant fart ved å skyve horisontalt på den. <InlineLatex latex="\mu_k=0{,}25" />.
+        (a) Hvor stor kraft må arbeideren bruke? (b) Arbeid F gjør? (c) Arbeid friksjon? (d) Arbeid
+        normal? (e) Arbeid gravitasjon? (f) Total arbeid?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=30{,}0\;\text{kg}" />, <InlineLatex latex="s=4{,}5\;\text{m}" />, <InlineLatex latex="\mu_k=0{,}25" /></li>
-        <li>Konstant hastighet: <InlineLatex latex="a=0" /></li>
+        <li>Masse: m = 30,0 kg</li>
+        <li>Forflytning: d = 4,5 m horisontalt</li>
+        <li>Kinetisk friksjons­koeffisient: μ<sub>k</sub> = 0,25</li>
+        <li>Konstant fart ⇒ akselerasjon = 0</li>
       </ul>
     ),
-    unknowns: <p>Nødvendig kraft og arbeid fra hver enkelt kraft samt totalt arbeid.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Anvendt kraft F</li>
+        <li>(b–e) Arbeid utført av F, friksjon, normal­kraft, tyngde</li>
+        <li>(f) Total arbeid på kassen</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Konstant hastighet betyr likevekt (<InlineLatex latex="\sum F=0" />).
-          Da balanserer skyvekraften friksjonen helt.
-        </p>
-        <TheoryBox title="Kinetisk friksjon">
-          <FormulaBox latex="f_k=\mu_k\,n" variant="blue" />
-          <p>
-            Normalkraften <InlineLatex latex="n=mg" /> på vannrett gulv.
-            Friksjonen virker <em>motsatt</em> bevegelsen og er{" "}
-            <em>uavhengig av hastighet</em> (så lenge objektet glir).
-          </p>
+        <TheoryBox title="Konstant fart ⇒ ΣF = 0">
+          <p>Når kassen beveger seg med konstant fart, må horisontal netto­kraft være null: anvendt kraft = friksjons­kraft.</p>
+          <FormulaBox variant="gold" latex="F=f_k=\mu_k N=\mu_k mg" />
         </TheoryBox>
-        <TheoryBox title="Hvorfor blir totalarbeid null?">
-          <p>
-            Fra arbeid-energi-teoremet:{" "}
-            <InlineLatex latex="W_\text{tot}=\Delta KE" />. Konstant hastighet{" "}
-            ⟹ <InlineLatex latex="\Delta KE=0" /> ⟹{" "}
-            <InlineLatex latex="W_\text{tot}=0" />. Dette er en kraftig
-            konsistenssjekk!
-          </p>
+        <TheoryBox title="Arbeid-energi-teoremet">
+          <FormulaBox variant="gold" latex="W_\text{tot}=\Delta K=0\;\text{(konstant fart)}" />
+          <p className="text-xs">Sjekk: W_F + W_f + W_n + W_g skal bli null.</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      {
-        label: "Hint",
-        content: <p>Finn først <InlineLatex latex="F=f_k=\mu_k mg" />, så regn ut arbeidene.</p>,
-      },
+      { label: "Hint 1", content: <p>Normal­kraften på horisontalt gulv er N = mg fordi det er ingen vertikal akselerasjon.</p> },
+      { label: "Hint 2", content: <p>Friksjon virker motsatt bevegelse ⇒ vinkelen mellom friksjon og forflytning er 180°, så friksjons­arbeid er negativt.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> "Konstant hastighet" er et kodeord fra Newtons 1.
-          lov: summen av alle krefter er null (<InlineLatex latex="\sum\vec F=\vec 0" />).
-          For kinetisk friksjon gjelder <InlineLatex latex="f_k=\mu_k n" />, der{" "}
-          <InlineLatex latex="n" /> er normalkraften. På horisontalt gulv uten andre
-          vertikale krefter er <InlineLatex latex="n=mg" />.
-        </p>
-        <FormulaBox latex="\sum F_x = 0,\quad f_k = \mu_k n,\quad n = mg" variant="blue" />
-
-        <p className="font-semibold">(a) Nødvendig skyvekraft</p>
-        <p>
-          Newton i x-retning: <InlineLatex latex="F - f_k = 0\;\Rightarrow\; F = f_k = \mu_k m g" />.
-          Denne sammenhengen sier at skyvekraften er <em>akkurat</em> lik friksjonen —
-          hverken mer eller mindre — ellers ville boksen akselerert.
-        </p>
-        <FormulaBox latex="F = \mu_k m g" variant="blue" />
-        <FormulaBox latex="F=\mu_k mg=(0{,}25)(30{,}0)(9{,}80)=\boxed{73{,}5\;\text{N}}" variant="gold" />
-
-        <p className="font-semibold">(b) Arbeid fra skyvekraften</p>
-        <p>
-          Kraften er horisontal og i bevegelsesretningen (<InlineLatex latex="\phi=0^\circ" />):
-        </p>
-        <FormulaBox latex="W_F = F\,s\cos 0^\circ = F\,s" variant="blue" />
-        <FormulaBox latex="W_F=Fs=(73{,}5)(4{,}5)=\boxed{331\;\text{J}}" variant="blue" />
-
-        <p className="font-semibold">(c) Arbeid fra friksjonen</p>
-        <p>
-          Friksjonen har samme størrelse som skyvekraften, men peker motsatt:{" "}
-          <InlineLatex latex="\phi=180^\circ" />.
-        </p>
-        <FormulaBox latex="W_f = f_k\,s\cos 180^\circ = -f_k\,s" variant="blue" />
-        <FormulaBox latex="W_f=-fs=-(73{,}5)(4{,}5)=\boxed{-331\;\text{J}}" variant="blue" />
-
-        <p className="font-semibold">(d) Normalkraft og tyngdekraft</p>
-        <p>
-          Begge er vinkelrette på den horisontale forskyvningen:{" "}
-          <InlineLatex latex="W_n=W_g=0" />.
-        </p>
-
-        <p className="font-semibold">(e) Totalt arbeid</p>
-        <p>
-          Arbeid-energi-teoremet sier at{" "}
-          <InlineLatex latex="W_\text{tot}=\Delta K" />. Konstant hastighet betyr{" "}
-          <InlineLatex latex="\Delta K=0" />, så vi <em>forventer</em> at totalarbeidet
-          er null. Dette er en kraftfull konsistenssjekk.
-        </p>
-        <FormulaBox latex="W_\text{tot}=331-331+0+0=\boxed{0\;\text{J}}" variant="gold" />
-        <p className="italic text-xs">
-          Selv om individuelle krefter gjør mye arbeid (±331 J), balanserer de hverandre
-          presist — skyvekraften tilfører 331 J som friksjonen umiddelbart omgjør til
-          varme.
+      <div>
+        <p className="mb-2">Konstant fart gir oss F via Newton 2, deretter beregner vi arbeid for hver kraft.</p>
+        <Step n={1} title="(a) Anvendt kraft">
+          <FormulaBox latex="F=\mu_k mg=0{,}25(30{,}0)(9{,}80)=73{,}5\;\text{N}" />
+        </Step>
+        <Step n={2} title="(b) Arbeid av F">
+          <FormulaBox latex="W_F=Fd\cos 0°=73{,}5(4{,}5)=+331\;\text{J}" />
+        </Step>
+        <Step n={3} title="(c) Arbeid av friksjon">
+          <FormulaBox latex="W_f=-f_k\cdot d=-73{,}5(4{,}5)=-331\;\text{J}" />
+        </Step>
+        <Step n={4} title="(d, e) Arbeid av normal og tyngde">
+          <p>Begge står vinkelrett på horisontal forflytning ⇒ cos 90° = 0.</p>
+          <FormulaBox latex="W_n=0,\quad W_g=0" />
+        </Step>
+        <Step n={5} title="(f) Total arbeid">
+          <FormulaBox latex="W_\text{tot}=331-331+0+0=0" />
+          <FormulaBox variant="gold" latex="F=73{,}5\;\text{N},\;W_\text{tot}=0" />
+        </Step>
+        <Pitfall>
+          <strong>Konstant fart betyr IKKE konstant kraft = 0!</strong> Det betyr netto­kraft = 0. Anvendt kraft og friksjon er begge 73,5 N, og deres arbeid er likt og motsatt — det er det som gjør netto­arbeid null.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: All energi du tilfører ved skyving (331 J) blir omdannet til varme via friksjon. Dette er en generell egenskap ved transport ved konstant fart — man "betaler" friksjons­tap kontinuerlig.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        "Konstant hastighet" er et kodeord for <InlineLatex latex="\sum F=0" />{" "}
-        <em>og</em> <InlineLatex latex="W_\text{tot}=0" />. Individuelle krefter kan gjøre
-        mye arbeid, men netto blir null når KE ikke endres.
-      </p>
-    ),
+    summary: <p>Konstant fart ⇒ ΣF = 0 og W_tot = 0. F = μ_k·mg, og W_F = −W_f kansellerer.</p>,
   },
 
-  // ==========================================================================
-  // 6.5 — Maler klatrer opp stige
-  // ==========================================================================
   "6.5": {
-    title: "Arbeid fra tyngdekraften på maler som klatrer",
+    title: "Maler klatrer opp stige",
     difficulty: "lett",
-    pageRef: "s. 199",
+    pageRef: "s. 221",
     problem: (
-      <div className="space-y-2">
-        <p>
-          En 75,0{"\u00A0"}kg maler klatrer opp en 2,75{"\u00A0"}m stige som
-          lener seg mot en vertikal vegg. Stigen danner 30,0° med veggen. (a)
-          Hvor mye arbeid utfører tyngdekraften på maleren? (b) Avhenger svaret
-          av om han klatrer med konstant fart eller akselererer?
-        </p>
-        <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto block">
-          <Arrowheads />
-          {/* floor & wall */}
-          <line x1="20" y1="180" x2="260" y2="180" stroke="currentColor" strokeWidth="2" />
-          <line x1="220" y1="180" x2="220" y2="40" stroke="currentColor" strokeWidth="2" />
-          {/* ladder */}
-          <line x1="70" y1="180" x2="220" y2="50" stroke="#f59e0b" strokeWidth="3" />
-          <text x="115" y="110" fontSize="10" fill="#f59e0b">L=2,75 m</text>
-          {/* height */}
-          <line x1="215" y1="180" x2="215" y2="50" stroke="#10b981" strokeWidth="1" strokeDasharray="4" />
-          <text x="235" y="120" fontSize="10" fill="#10b981">h</text>
-          {/* angle at top */}
-          <text x="200" y="65" fontSize="10" fill="#3b82f6">30°</text>
-          {/* painter */}
-          <circle cx="140" cy="120" r="6" fill="#a855f7" />
-        </svg>
-      </div>
+      <p>
+        En 73,0 kg maler klatrer en stige som er 2,70 m lang og som lener mot en vertikal vegg. Stigen
+        danner en vinkel 25,0° med veggen. (a) Hvor mye arbeid utfører gravitasjon på maleren? (b)
+        Avhenger svaret i (a) av om maleren klatrer ved konstant fart eller akselererer opp stigen?
+      </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=75{,}0\;\text{kg}" />, <InlineLatex latex="L=2{,}75\;\text{m}" /></li>
-        <li>Vinkel mellom stigen og veggen: 30°</li>
+        <li>Maler­masse: m = 73,0 kg</li>
+        <li>Stige­lengde: L = 2,70 m</li>
+        <li>Vinkel mellom stige og vegg: 25,0° (dvs. 65° med horisontal)</li>
       </ul>
     ),
-    unknowns: <p>Arbeid utført av tyngdekraften under hele oppstigningen.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Arbeid av tyngde på maleren mens han klatrer hele lengden</li>
+        <li>(b) Avhenger svaret av om farten er konstant eller akselerert?</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Tyngdekraften gir bare arbeid gjennom vertikal forskyvning. Stigen er
-          2,75 m lang og danner 30° med veggen (altså 60° med gulvet), så
-          høydeforskjellen er <InlineLatex latex="h=L\cos 30^\circ" />.
-        </p>
-        <TheoryBox title="Arbeid av tyngdekraften — kun vertikal forskyvning teller">
-          <p>
-            For en vertikal forskyvning <InlineLatex latex="\Delta y" /> (positivt
-            oppover):
-          </p>
-          <FormulaBox latex="W_g=-mg\,\Delta y" variant="gold" />
-          <p className="mt-1">
-            Minus fordi gravitasjonen peker nedover, mens forskyvningen er
-            oppover. Dette er en <em>konservativ kraft</em> — arbeidet
-            avhenger bare av endepunktene, ikke av banen eller farten.
-          </p>
+        <TheoryBox title="Gravitasjons­arbeid avhenger bare av høyde­endring">
+          <FormulaBox variant="gold" latex="W_g=-mg\,\Delta h" />
+          <p className="text-xs">Negativt fortegn fordi tyngden peker ned mens maleren beveger seg opp.</p>
+        </TheoryBox>
+        <TheoryBox title="Geometri">
+          <p>Når stigen lener mot veggen i 25° fra vertikalen, er den vertikale høyden langs hele stigen <InlineLatex latex="h=L\cos 25°" />.</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      {
-        label: "Hint",
-        content: <p>Vinkelen mellom stigen og <em>veggen</em> er 30°. Vertikal komponent av forskyvningen: <InlineLatex latex="L\cos 30^\circ" />.</p>,
-      },
+      { label: "Hint 1", content: <p>Vinkel med vegg = 25° betyr stigen er nesten vertikal. Den vertikale høyden er L·cos 25° (ikke sin), siden vinkelen er målt fra vertikal.</p> },
+      { label: "Hint 2", content: <p>Tyngden er en konservativ kraft — arbeid avhenger kun av start- og slutt­posisjon, aldri av vei eller fart.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Tyngdekraften <InlineLatex latex="\vec F_g = -mg\hat\jmath" />{" "}
-          peker rett nedover. Arbeidet fra en konstant kraft er{" "}
-          <InlineLatex latex="W = \vec F\cdot\vec s" />, og skalarproduktet gir at
-          bare komponenten av forskyvningen <em>parallell</em> med kraften teller.
-          For tyngdekraften betyr det at bare <em>vertikal</em> forskyvning bidrar —
-          horisontal bevegelse gir null arbeid.
-        </p>
-        <FormulaBox latex="W_g = \vec F_g\cdot\vec s = -mg\,\Delta y" variant="blue" />
-        <p>
-          Minustegnet kommer fra at kraft peker ned mens <InlineLatex latex="\Delta y" />{" "}
-          er positivt opp. Tyngdekraften er en <em>konservativ</em> kraft — arbeidet
-          avhenger kun av endepunktene, ikke av banen eller farten. Dette er
-          forspillet til potensiell energi i kapittel 7.
-        </p>
-
-        <p className="font-semibold">(a) Finn høydeendringen</p>
-        <p>
-          Stigen har lengde <InlineLatex latex="L=2{,}75\;\text{m}" /> og danner{" "}
-          <InlineLatex latex="30^\circ" /> med <em>veggen</em> (ikke gulvet). Da er
-          vinkelen til <em>vertikalen</em> lik <InlineLatex latex="30^\circ" />, så
-          den vertikale komponenten av stigen er{" "}
-          <InlineLatex latex="L\cos 30^\circ" />. Litt geometri løser dette for oss.
-        </p>
-        <FormulaBox latex="\Delta y = L\cos 30^\circ" variant="blue" />
-        <FormulaBox latex="\Delta y=L\cos 30^\circ=(2{,}75)(0{,}866)=2{,}382\;\text{m}" variant="blue" />
-
-        <p className="font-semibold">Arbeid av tyngdekraften</p>
-        <p>
-          Nå bruker vi formelen for arbeidet. Maleren <em>stiger</em>, så{" "}
-          <InlineLatex latex="\Delta y>0" /> og <InlineLatex latex="W_g<0" /> —
-          tyngdekraften motvirker bevegelsen og tar energi fra maleren.
-        </p>
-        <FormulaBox latex="W_g=-mg\,\Delta y=-(75{,}0)(9{,}80)(2{,}382)=\boxed{-1{,}75\times 10^3\;\text{J}}" variant="gold" />
-
-        <p className="font-semibold">(b) Avhengighet av bevegelsesmåte</p>
-        <p>
-          <strong>Nei.</strong> Fordi tyngdekraften er konservativ, avhenger{" "}
-          <InlineLatex latex="W_g" /> kun av høydedifferansen{" "}
-          <InlineLatex latex="\Delta y" />. Om maleren sprinter opp på 2 sekunder
-          eller kryper på 5 minutter — arbeidet er det samme{" "}
-          <InlineLatex latex="-1{,}75\;\text{kJ}" />. Dette er helt annerledes enn
-          f.eks. friksjon, der arbeidet avhenger av den totale banelengden.
-        </p>
-        <p className="italic text-xs">
-          Størrelsesorden: ~1,7 kJ for å løfte en person ~2,4 m er rimelig — ca
-          energien i en banan.
+      <div>
+        <p className="mb-2">Tyngdens arbeid er bare en funksjon av vertikal forflytning.</p>
+        <Step n={1} title="Vertikal høyde langs stigen">
+          <FormulaBox latex="h=L\cos 25°=2{,}70(0{,}9063)=2{,}45\;\text{m}" />
+        </Step>
+        <Step n={2} title="(a) Tyngdens arbeid">
+          <FormulaBox latex="W_g=-mgh=-(73{,}0)(9{,}80)(2{,}45)=-1{,}75\times 10^{3}\;\text{J}" />
+        </Step>
+        <Step n={3} title="(b) Avhengighet av fart?">
+          <p>Nei. Tyngden er konservativ; den «vet» bare om <InlineLatex latex="\Delta h" />, ikke hvor lang tid det tar eller om farten er konstant.</p>
+          <FormulaBox variant="gold" latex="W_g\approx -1{,}75\;\text{kJ};\;\text{uavhengig av fartsprofil}" />
+        </Step>
+        <Pitfall>
+          <strong>Sin eller cos?</strong> Vinkelen er gitt med veggen (vertikalen). Vertikal komponent av lengden L er L·cos(vinkel med vertikal) = L·cos 25°. Hvis vinkelen i stedet var målt mot bakken, ville det vært L·sin(vinkel med bakke).
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Maleren må tilføre +1,75 kJ med musklene for å overvinne tyngdens negative arbeid. Dette blir potensiell energi (mgh) i ham — uavhengig av om han spurter eller går rolig opp.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Gravitasjonen er en konservativ kraft —{" "}
-        <InlineLatex latex="W_g=-mg\,\Delta y" /> uavhengig av fart eller sti.
-        Dette blir sentralt i kapittel 7 (potensiell energi).
-      </p>
-    ),
+    summary: <p>W_g = −mgh; bare vertikal forflytning teller. Konservative krefter er fart-uavhengige.</p>,
   },
 
-  // ==========================================================================
-  // 6.6 — To taubåter
-  // ==========================================================================
   "6.6": {
-    title: "To taubåter trekker supertanker",
+    title: "To tau-båter drar supertanker",
     difficulty: "middels",
-    pageRef: "s. 199",
+    pageRef: "s. 221",
     problem: (
       <p>
-        To taubåter trekker en skadet supertanker. Hver båt utøver en konstant
-        kraft på 1,80 × 10⁶ N — den ene 14° vest for nord, den andre 14° øst
-        for nord — mens de trekker tankeren 0,75 km rett nord. Hva er det
-        totale arbeidet de utfører på tankeren?
+        To tau­båter drar en handikappet supertanker. Hver båt utøver en konstant kraft 1,80×10⁶ N,
+        én ved 14° vest for nord og den andre ved 14° øst for nord, mens de drar tankeren 0,63 km mot
+        nord. Hva er totalt arbeid på tankeren?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="F_1=F_2=1{,}80\times 10^6\;\text{N}" />, begge 14° fra nord</li>
-        <li><InlineLatex latex="s=750\;\text{m}" /> nord</li>
+        <li>Kraft per båt: F = 1,80×10⁶ N</li>
+        <li>Vinkler: ±14° fra nord (én øst, én vest)</li>
+        <li>Forflytning: d = 0,63 km = 630 m mot nord</li>
       </ul>
     ),
-    unknowns: <p>Totalt arbeid fra begge båter.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Total arbeid på tankeren</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Bevegelsen er rett nord. Øst/vest-komponentene av kraftene kansellerer
-          hverandre, nord-komponentene legger seg sammen.
-        </p>
-        <TheoryBox title="Arbeid er skalart — summér enten krefter eller arbeid">
-          <p>To ekvivalente strategier:</p>
-          <ul className="list-disc pl-5">
-            <li>Finn nettokraften i bevegelsesretningen, multipliser med s.</li>
-            <li>Regn ut arbeidet fra hver kraft separat, summer.</li>
-          </ul>
-          <p>Begge gir samme svar siden arbeid er en skalar.</p>
+        <TheoryBox title="Vektor­dekomponering">
+          <p>Hver krafts øst/vest-komponent er <InlineLatex latex="F\sin 14°" />, motsatt rettet ⇒ kansellerer. Bare nord-komponenten <InlineLatex latex="F\cos 14°" /> bidrar.</p>
+          <FormulaBox variant="gold" latex="W=2F\cos 14°\cdot d" />
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint", content: <p>Bruk <InlineLatex latex="W=Fs\cos 14^\circ" /> for hver båt, eller nettokraft.</p> },
+      { label: "Hint 1", content: <p>Tegn vektor­diagram. Symmetrien (lik og motsatt vinkel) gir gratis at sideveis kraft­komponenter kanselleres.</p> },
+      { label: "Hint 2", content: <p>Du kan også beregne arbeid for hver båt for seg som F·d·cos 14° og legge sammen — gir samme resultat.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Arbeidet fra flere krefter på samme objekt er en
-          skalar — det betyr vi enten (1) finner nettokraften og multipliserer med
-          forskyvningen, eller (2) regner ut arbeidet fra hver kraft separat og
-          summerer. Begge metoder gir samme svar siden både{" "}
-          <InlineLatex latex="W" /> og vektorkomponentene er lineære i kraften.
-        </p>
-        <FormulaBox latex="W_\text{tot} = \sum_i \vec F_i\cdot\vec s = \left(\sum_i \vec F_i\right)\cdot\vec s" variant="blue" />
-        <p>
-          Her har vi to symmetriske krefter 14° på hver side av bevegelsesretningen
-          (nord). Komponenten <em>på tvers</em> (øst/vest) kansellerer; bare
-          komponenten langs nord bidrar. Forskyvningen er 750 m nord.
-        </p>
-        <p>
-          Merk: <InlineLatex latex="s=0{,}75\;\text{km}=750\;\text{m}" /> (regn alltid
-          i SI-enheter — N × m gir joule direkte).
-        </p>
-
-        <p className="font-semibold">Arbeid per båt</p>
-        <p>
-          Hver kraft gjør arbeid <InlineLatex latex="W_i = F\,s\cos 14^\circ" />.
-          Kosinus for små vinkler er nær 1, så det meste av kraften går faktisk i
-          nord-retning — men ikke alt.
-        </p>
-        <FormulaBox latex="W_i = F\,s\cos 14^\circ" variant="blue" />
-        <FormulaBox latex="W_i=F\,s\cos 14^\circ=(1{,}80\times 10^6)(750)(0{,}9703)=1{,}310\times 10^9\;\text{J}" variant="blue" />
-
-        <p className="font-semibold">Totalt arbeid</p>
-        <p>
-          Siden begge båtene gjør identisk arbeid (identiske krefter, samme vinkel,
-          samme forskyvning), er totalen bare dobbelt så mye:
-        </p>
-        <FormulaBox latex="W_\text{tot}=2W_i=\boxed{2{,}62\times 10^9\;\text{J}}" variant="gold" />
-        <p className="italic text-xs">
-          Sjekk via nettokraft: øst/vest-komponentene kanselleres, nord-komponent
-          per båt er <InlineLatex latex="F\cos 14^\circ" />, nettokraft nord er{" "}
-          <InlineLatex latex="2F\cos 14^\circ" />, og multiplisert med 750 m gir
-          samme 2,62 × 10⁹ J ✓.
+      <div>
+        <p className="mb-2">Symmetri kansellerer øst-vest-komponentene. Bare nord-rettet komponent bidrar til arbeid.</p>
+        <Step n={1} title="Netto kraft i nord">
+          <FormulaBox latex="F_N=2F\cos 14°=2(1{,}80\times 10^{6})(0{,}9703)=3{,}493\times 10^{6}\;\text{N}" />
+        </Step>
+        <Step n={2} title="Total arbeid">
+          <FormulaBox latex="W=F_N\cdot d=(3{,}493\times 10^{6})(630)=2{,}20\times 10^{9}\;\text{J}" />
+          <FormulaBox variant="gold" latex="W\approx 2{,}20\times 10^{9}\;\text{J}=2{,}20\;\text{GJ}" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke glem at to båter bidrar.</strong> Hvis du regner én båt og glemmer å multiplisere med 2 (eller lar være å legge sammen), får du halvparten — 1,10×10⁹ J. Begge tau dras samtidig.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 2,2 GJ er enormt — tilsvarer ~600 kWh strøm. Tau­båt-vinkler er små (14°) for å maksimere fremover-komponent — store vinkler ville sløset bort kraft som sideveis spenning.
         </p>
       </div>
     ),
-    summary: (
-      <p>
-        Når kun én retning er interessant, bidrar bare den komponenten som er{" "}
-        <em>langs</em> forskyvningen. Vinkelrette komponenter gir ingen arbeid.
-      </p>
-    ),
+    summary: <p>Symmetri kansellerer transversale komponenter. W = 2F·d·cos θ for to like båter på hver sin side.</p>,
   },
 
-  // ==========================================================================
-  // 6.8 — Skyve skrått nedover
-  // ==========================================================================
   "6.8": {
-    title: "Kassa skjøvet ned skrått — effekt på friksjon",
+    title: "Konstant kraft på handlevogn",
     difficulty: "middels",
-    pageRef: "s. 199",
+    pageRef: "s. 221",
     problem: (
       <p>
-        Samme oppgave som 6.3, men arbeideren skyver 30° <em>under</em> horisontalen
-        (nedover inn i gulvet). (a) Hvilken kraft trengs nå for konstant
-        hastighet? (b) Hvor mye arbeid utfører denne kraften over 4,5 m?
-        (c) Friksjonen? (d) Normalkraft og tyngdekraft? (e) Totalt?
+        En lastet handle­vogn ruller over en parkerings­plass i sterk vind. Du anvender en konstant
+        kraft <InlineLatex latex="\;\vec F=(30\;\text{N})\hat i-(37\;\text{N})\hat j" /> på vogna mens
+        den gjennomgår en forflytning <InlineLatex latex="\;\vec s=(-8{,}6\;\text{m})\hat i-(3{,}8\;\text{m})\hat j" />.
+        Hvor mye arbeid utfører kraften du anvender på handle­vogna?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=30{,}0\;\text{kg}" />, <InlineLatex latex="\mu_k=0{,}25" />, <InlineLatex latex="s=4{,}5\;\text{m}" /></li>
-        <li>Kraften peker 30° under horisontal</li>
-        <li>Konstant hastighet</li>
+        <li>Kraft­vektor: <InlineLatex latex="\vec F=(30\,\hat i-37\,\hat j)\;\text{N}" /></li>
+        <li>Forflytnings­vektor: <InlineLatex latex="\vec s=(-8{,}6\,\hat i-3{,}8\,\hat j)\;\text{m}" /></li>
       </ul>
     ),
-    unknowns: <p>Kraften og alle arbeid.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Arbeid utført av kraften på vogna</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Når du skyver <em>nedover</em>, øker normalkraften fordi den vertikale
-          komponenten av skyvekraften presser ekstra mot gulvet. Da øker også
-          friksjonen → større kraft kreves.
-        </p>
-        <TheoryBox title="Normalkraft endrer seg når kraft har vertikal komponent">
-          <p>Newton i y-retning (ingen vertikal bevegelse):</p>
-          <FormulaBox latex="n=mg+F\sin\theta" variant="blue" />
-          <p>der <InlineLatex latex="\theta" /> er vinkelen under horisontalen. Så:</p>
-          <FormulaBox latex="f_k=\mu_k n=\mu_k(mg+F\sin\theta)" variant="blue" />
-          <p className="mt-1">
-            Konstant hastighet i x: <InlineLatex latex="F\cos\theta=f_k" />. Løs
-            for <InlineLatex latex="F" />.
-          </p>
+        <TheoryBox title="Skalar­produkt for arbeid">
+          <FormulaBox variant="gold" latex="W=\vec F\cdot\vec s=F_x s_x+F_y s_y" />
+          <p className="text-xs">Multipliser komponentvis og legg sammen — ikke bruk vinkler her.</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint 1", content: <p>Skriv opp Newtons 2. lov i begge retninger, med <InlineLatex latex="a=0" />.</p> },
-      { label: "Hint 2", content: <p>Løs for F fra <InlineLatex latex="F\cos\theta=\mu_k(mg+F\sin\theta)" />.</p> },
+      { label: "Hint 1", content: <p>Identifiser komponentene: F<sub>x</sub>=30, F<sub>y</sub>=−37, s<sub>x</sub>=−8,6, s<sub>y</sub>=−3,8.</p> },
+      { label: "Hint 2", content: <p>Negativ × negativ = positiv (i y-leddet). Fortegns­logikken er viktig.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Når en skyvekraft danner vinkel{" "}
-          <InlineLatex latex="\theta" /> <em>under</em> horisontalen, har den både en
-          horisontal komponent <InlineLatex latex="F\cos\theta" /> (som skyver
-          fremover) og en vertikal komponent <InlineLatex latex="F\sin\theta" /> (som
-          presser <em>nedover</em> i gulvet). Den vertikale komponenten øker
-          normalkraften, og siden <InlineLatex latex="f_k=\mu_k n" />, øker også
-          friksjonen — det blir tyngre å skyve. Dette er fundamentalt en bruk av
-          Newtons 2. lov i begge retninger.
+      <div>
+        <p className="mb-2">Når vektorene er gitt på komponentform er skalar­produktet rett frem.</p>
+        <Step n={1} title="Skalar­produkt">
+          <FormulaBox latex="W=F_x s_x+F_y s_y" />
+          <FormulaBox latex="W=(30)(-8{,}6)+(-37)(-3{,}8)" />
+          <FormulaBox latex="W=-258+140{,}6=-117{,}4\;\text{J}" />
+          <FormulaBox variant="gold" latex="W\approx -117\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke glem fortegnene!</strong> En vanlig feil er å miste minustegn på <InlineLatex latex="-37\cdot-3{,}8" /> — to negative gir positiv. Dobbel­sjekk: x-leddet er negativt (motsatt retning), y-leddet positivt (samme retning).
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Negativt arbeid betyr du tilfører negativ energi til vogna — men dette er litt misvisende fordi vogna er drevet av vinden. Du klarer ikke holde imot vinden, så kraften din virker mot total bevegelse i x, men med i y. Netto: vinden vinner.
         </p>
-
-        <p className="font-semibold">Sett opp Newton i begge retninger</p>
-        <p>
-          Konstant hastighet betyr <InlineLatex latex="a_x=a_y=0" />. Vi får to
-          ligninger:
-        </p>
-        <FormulaBox latex="\sum F_x = F\cos\theta - f_k = 0" variant="blue" />
-        <FormulaBox latex="\sum F_y = n - mg - F\sin\theta = 0 \;\Rightarrow\; n = mg + F\sin\theta" variant="blue" />
-        <p>
-          Kombinert med <InlineLatex latex="f_k=\mu_k n" /> får vi ett ukjent{" "}
-          <InlineLatex latex="F" /> i én ligning, som vi kan løse algebraisk.
-        </p>
-
-        <p className="font-semibold">(a) Algebraisk omforming</p>
-        <p>
-          Sett inn <InlineLatex latex="n" /> i friksjonsligningen, og løs for{" "}
-          <InlineLatex latex="F" />:
-        </p>
-        <FormulaBox latex="F\cos\theta = \mu_k(mg + F\sin\theta)" variant="blue" />
-        <FormulaBox latex="F(\cos\theta - \mu_k\sin\theta) = \mu_k m g" variant="blue" />
-        <FormulaBox latex="F=\frac{\mu_k mg}{\cos\theta-\mu_k\sin\theta}" variant="blue" />
-        <FormulaBox latex="F=\frac{(0{,}25)(30{,}0)(9{,}80)}{0{,}866-(0{,}25)(0{,}500)}=\frac{73{,}5}{0{,}741}=\boxed{99{,}2\;\text{N}}" variant="gold" />
-        <p className="italic text-xs">
-          Større enn 73,5 N i 6.3 — pga økt friksjon fra økt normalkraft (ca 35 %
-          ekstra kraft trengs).
-        </p>
-
-        <p className="font-semibold">(b) Arbeid fra skyvekraften</p>
-        <p>
-          Skyvekraften har vinkel <InlineLatex latex="\theta=30^\circ" /> under
-          horisontalen, men forskyvningen er horisontal. Det er altså vinkelen
-          mellom kraft og forskyvning som teller — så <InlineLatex latex="\phi=30^\circ" />:
-        </p>
-        <FormulaBox latex="W_F = F\,s\cos 30^\circ" variant="blue" />
-        <FormulaBox latex="W_F=Fs\cos 30^\circ=(99{,}2)(4{,}5)(0{,}866)=\boxed{386\;\text{J}}" variant="blue" />
-
-        <p className="font-semibold">(c) Arbeid fra friksjon</p>
-        <p>
-          Friksjonen motvirker bevegelsen. Fra likevekt vet vi at{" "}
-          <InlineLatex latex="f_k=F\cos\theta" />, altså lik den horisontale
-          komponenten av skyvekraften.
-        </p>
-        <FormulaBox latex="W_f=-f_k s=-(F\cos\theta)s=-(99{,}2)(0{,}866)(4{,}5)=\boxed{-386\;\text{J}}" variant="blue" />
-        <p className="italic text-xs">
-          Like stort som skyvekraftens arbeid (fordi bare horisontal komponent av F
-          bidrar), med motsatt fortegn — nødvendig for konstant hastighet.
-        </p>
-
-        <p className="font-semibold">(d) Normalkraft og tyngdekraft</p>
-        <p>Begge vinkelrett på den horisontale forskyvningen, altså null arbeid.</p>
-
-        <p className="font-semibold">(e) Totalt arbeid</p>
-        <p>
-          Arbeid-energi igjen: konstant hastighet{" "}
-          <InlineLatex latex="\Rightarrow W_\text{tot}=0" />.
-        </p>
-        <FormulaBox latex="W_\text{tot}=386-386=\boxed{0\;\text{J}}" variant="gold" />
       </div>
     ),
-    summary: (
-      <p>
-        Skyv skrått nedover → press ekstra mot gulvet → mer friksjon → mer kraft
-        kreves. Lærdom: <em>vinkelen på kraften påvirker normalkraften</em> og
-        dermed friksjonen.
-      </p>
-    ),
+    summary: <p>For 2D-arbeid: W = F<sub>x</sub>s<sub>x</sub> + F<sub>y</sub>s<sub>y</sub>. Komponentvis multiplikasjon er enklere enn å finne vinkel.</p>,
   },
 
-  // ==========================================================================
-  // 6.19 — Glidende bok (arbeid-energi)
-  // ==========================================================================
   "6.19": {
-    title: "Arbeid-energi på glidende bok",
-    difficulty: "lett",
-    pageRef: "s. 200",
+    title: "Chicxulub-meteor",
+    difficulty: "middels",
+    pageRef: "s. 222",
     problem: (
       <p>
-        En 1,50{"\u00A0"}kg bok glir langs en ru horisontal flate. I punkt A
-        har den farten 3,21 m/s, i punkt B er den nede i 1,25 m/s. (a) Hvor
-        mye arbeid ble gjort på boken fra A til B? (b) Dersom −0,750 J gjøres
-        fra B til C, hva er farten ved C? (c) Hva om det gjøres +0,750 J?
+        Chicxulub-impakt. For ca. 66 millioner år siden krasjet et asteroid nær dagens by Chicxulub
+        (Yucatán-halvøya). Krateret er ca. 180 km i diameter; nedslaget anses å ha forårsaket en
+        massiv utryddelse. I følge nyere estimater (2019) hadde asteroiden masse <InlineLatex latex="2{,}4\times 10^{15}" /> kg
+        og fart ca. 20 km/s. (a) Hvor mye kinetisk energi leverte denne meteoren til bakken? (b) Hvordan
+        sammenlignes denne energien med energien frigjort av en 1,0 mega­tonns kjernebombe?
+        (1 megatonn-bombe frigjør samme energi som en million tonn TNT, eller <InlineLatex latex="10^{9}" /> kg
+        TNT, <InlineLatex latex="4{,}184\times 10^{15}" /> J energi.)
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=1{,}50\;\text{kg}" /></li>
-        <li><InlineLatex latex="v_A=3{,}21\;\text{m/s},\; v_B=1{,}25\;\text{m/s}" /></li>
-        <li>Arbeid B→C: ±0,750 J</li>
+        <li>Asteroide-masse: m = 2,4×10¹⁵ kg</li>
+        <li>Asteroide-fart: v = 20 km/s = 2,0×10⁴ m/s</li>
+        <li>1 megatonn = 4,184×10¹⁵ J</li>
       </ul>
     ),
-    unknowns: <p><InlineLatex latex="W_{A\to B},\;v_C" /> i begge deloppgaver.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Kinetisk energi K</li>
+        <li>(b) Antall megatonn-ekvivalenter</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Kinetisk energi">
+          <FormulaBox variant="gold" latex="K=\tfrac12 mv^2" />
+          <p className="text-xs">Ved nedslag konverteres KE til varme, lyd, sjokkbølger og deformasjons­arbeid.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Pass på at v² gir 4×10⁸ (m/s)². Stort tall — dobbel­sjekk eksponenten.</p> },
+      { label: "Hint 2", content: <p>For sammenligning: del K på 4,184×10¹⁵ J for å finne hvor mange Mt-bomber meteoren tilsvarer.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Sett tallene rett inn — det er bare høyde­potens-aritmetikk.</p>
+        <Step n={1} title="(a) Kinetisk energi">
+          <FormulaBox latex="K=\tfrac12(2{,}4\times 10^{15})(2{,}0\times 10^{4})^2" />
+          <FormulaBox latex="K=\tfrac12(2{,}4\times 10^{15})(4{,}0\times 10^{8})=4{,}8\times 10^{23}\;\text{J}" />
+        </Step>
+        <Step n={2} title="(b) Sammenligning med Mt-bombe">
+          <FormulaBox latex="N=\dfrac{K}{4{,}184\times 10^{15}}=\dfrac{4{,}8\times 10^{23}}{4{,}184\times 10^{15}}\approx 1{,}15\times 10^{8}" />
+          <FormulaBox variant="gold" latex="K\approx 4{,}8\times 10^{23}\;\text{J}\sim 10^{8}\;\text{Mt-bomber}" />
+        </Step>
+        <Pitfall>
+          <strong>Eksponent­håndtering.</strong> Pass nøye på 10^15·10^8 = 10^23. Misser du én tier­potens, er svaret feil med en faktor 10. Kalkulator­vitenskap som dette er en typisk eksamensfelle.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 100 millioner Mt-bomber. Til sammenligning: hele jordens kjerne­arsenal er ~10 000 Mt. Chicxulub-nedslaget var ~10 000× kraftigere enn alle bomber på jorda samtidig — derfor masse­utryddelse.
+        </p>
+      </div>
+    ),
+    summary: <p>K = ½mv² for makro­objekter er eksponensielt store tall. Ved 20 km/s er KE per kg ≈ 2×10⁸ J — milliard­ganger en kjemisk bombe.</p>,
+  },
+
+  "6.20": {
+    title: "Vannmelon faller fra tak",
+    difficulty: "lett",
+    pageRef: "s. 222",
+    problem: (
+      <p>
+        En 5,10 kg vannmelon slippes fra ro fra taket til en 29,0 m høy bygning og kjenner ingen
+        merkbar luft­motstand. (a) Beregn arbeidet utført av gravitasjon på vannmelonen i løpet av
+        forflytningen fra taket til bakken. (b) Rett før den treffer bakken, hva er vannmelonen sin
+        (i) kinetisk energi og (ii) fart? (c) Hvilke av svarene i (a) og (b) ville være forskjellige
+        hvis det var merkbar luft­motstand?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Vannmelon-masse: m = 5,10 kg</li>
+        <li>Fall­høyde: h = 29,0 m</li>
+        <li>Slipper fra ro: v₀ = 0</li>
+        <li>Ingen luft­motstand</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Tyngdens arbeid W_g</li>
+        <li>(b) (i) KE og (ii) fart rett før bakken</li>
+        <li>(c) Hvilke svar endres med luft­motstand?</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Tyngdens arbeid ved fritt fall">
+          <FormulaBox variant="gold" latex="W_g=+mgh\;\text{(positivt fordi tyngd og fall samme retning)}" />
+        </TheoryBox>
+        <TheoryBox title="Arbeid-energi-teoremet">
+          <p>Med kun tyngd: W_g = ΔK = K − 0 = K.</p>
+          <FormulaBox variant="gold" latex="v=\sqrt{2gh}" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Tyngd og bevegelse er begge nedover ved fall ⇒ θ = 0°, cos = 1, W_g positivt.</p> },
+      { label: "Hint 2", content: <p>Med luft­motstand er W_g uendret (samme h), men KE og fart blir mindre fordi luft gir negativt arbeid som spiser energi.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Bruk arbeid-energi-teoremet med kun tyngd som virkende kraft.</p>
+        <Step n={1} title="(a) Tyngdens arbeid">
+          <FormulaBox latex="W_g=mgh=(5{,}10)(9{,}80)(29{,}0)=1450\;\text{J}" />
+        </Step>
+        <Step n={2} title="(b) (i) Kinetisk energi">
+          <FormulaBox latex="K=W_g=1450\;\text{J}" />
+        </Step>
+        <Step n={3} title="(b) (ii) Fart">
+          <FormulaBox latex="v=\sqrt{2gh}=\sqrt{2(9{,}80)(29{,}0)}=\sqrt{568{,}4}=23{,}8\;\text{m/s}" />
+        </Step>
+        <Step n={4} title="(c) Med luft­motstand">
+          <p>W_g er uendret — det avhenger bare av <InlineLatex latex="\Delta h" />. Men KE og fart blir mindre fordi luft­motstand utfører negativt arbeid: <InlineLatex latex="K=W_g+W_\text{luft}<W_g" />.</p>
+          <FormulaBox variant="gold" latex="W_g=1450\;\text{J},\;K=1450\;\text{J},\;v\approx 23{,}8\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>W_g er retnings­avhengig av <em>fall­retning</em>, ikke av kreftenes navn.</strong> Når noe faller ⇒ W_g positivt. Når noe stiger ⇒ W_g negativt. Forveksle dette med fortegns­konvensjonen for U_g (potensiell energi) som har motsatt fortegn.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 1450 J er omtrent energien i å løfte 150 kg én meter. All denne energien tilbakeføres som kinetisk energi rett før nedslag — derfor knuses vannmelonen.
+        </p>
+      </div>
+    ),
+    summary: <p>Fritt fall: W_g = mgh = K, så v = √(2gh). Tyngdens arbeid er konservativt — bare h teller.</p>,
+  },
+
+  "6.24": {
+    title: "Stein kastet rett opp",
+    difficulty: "middels",
+    pageRef: "s. 222",
+    problem: (
+      <p>
+        Du kaster en 3,00 N stein vertikalt opp fra bakke­nivå. Du observerer at når den er 15,0 m over
+        bakken, beveger den seg med 25,0 m/s oppover. Bruk arbeid-energi-teoremet til å finne (a)
+        steinens fart akkurat idet den forlot bakken og (b) maks høyde.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Steinens vekt: 3,00 N ⇒ m = 3,00/9,80 = 0,306 kg</li>
+        <li>Ved h₁ = 15,0 m er v₁ = 25,0 m/s oppover</li>
+        <li>Kastes fra bakke­nivå, ingen luft­motstand</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Initial fart v₀ ved bakke­nivå</li>
+        <li>(b) Maks høyde h_max</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Arbeid-energi mellom to punkter">
+          <FormulaBox variant="gold" latex="\tfrac12 mv_0^2=\tfrac12 mv^2+mgh" />
+          <p className="text-xs">Mellom bakke (v₀) og høyde h (v): KE som tapes blir til mgh.</p>
+        </TheoryBox>
+        <TheoryBox title="Topp­punkt: K = 0">
+          <p>På maks høyde står steinen stille (et øyeblikk). All KE har blitt til mgh ⇒ <InlineLatex latex="h_\text{max}=v_0^2/(2g)" />.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Massene kanselleres! Du trenger ikke regne ut m fra vekten — du kan bruke v₀² = v² + 2gh direkte.</p> },
+      { label: "Hint 2", content: <p>For (b): kvadrér ikke v₀ — du har allerede v₀² fra (a).</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Energi-bevaring mellom bakke og 15 m, deretter mellom bakke og topp.</p>
+        <Step n={1} title="(a) Initial fart">
+          <FormulaBox latex="\tfrac12 mv_0^2=\tfrac12 mv^2+mgh" />
+          <FormulaBox latex="v_0^2=v^2+2gh=(25{,}0)^2+2(9{,}80)(15{,}0)" />
+          <FormulaBox latex="v_0^2=625+294=919\;\text{m}^2/\text{s}^2" />
+          <FormulaBox latex="v_0=\sqrt{919}=30{,}3\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(b) Maks høyde">
+          <FormulaBox latex="0=\tfrac12 mv_0^2-mgh_\text{max}\Rightarrow h_\text{max}=\dfrac{v_0^2}{2g}" />
+          <FormulaBox latex="h_\text{max}=\dfrac{919}{2(9{,}80)}=\dfrac{919}{19{,}6}=46{,}9\;\text{m}" />
+          <FormulaBox variant="gold" latex="v_0\approx 30{,}3\;\text{m/s},\;h_\text{max}\approx 46{,}9\;\text{m}" />
+        </Step>
+        <Pitfall>
+          <strong>Massen avhenger av g!</strong> Vekt 3,00 N ÷ g gir massen — IKKE bruk 3,00 kg. I dette problemet kanselleres m uansett, men ved feilbruk kan man få helt andre tall.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Steinen mister halvparten av sin KE allerede ved 15 m (fra 919 til 625). Dette er ikke uventet — h_max ≈ 47 m, og kvadrering gjør at fart reduseres raskt med høyde.
+        </p>
+      </div>
+    ),
+    summary: <p>Energi-bevaring v₀² = v² + 2gh; topp gir h_max = v₀²/(2g). Massen kanselleres alltid i fritt fall.</p>,
+  },
+
+  "6.25": {
+    title: "Slede med fremoverrettet kraft",
+    difficulty: "middels",
+    pageRef: "s. 222",
+    problem: (
+      <p>
+        En slede med masse 8,50 kg beveger seg i en rett linje på en friksjons­fri horisontal overflate.
+        På et punkt er farten 4,20 m/s; etter at den har reist 2,30 m utenfor dette punktet, er farten
+        5,60 m/s. Bruk arbeid-energi-teoremet til å finne kraften som virker på sleden, antar at
+        kraften er konstant og virker i bevegelses­retningen.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Slede­masse: m = 8,50 kg</li>
+        <li>Initial fart: v₁ = 4,20 m/s</li>
+        <li>Slutt­fart: v₂ = 5,60 m/s</li>
+        <li>Distanse: d = 2,30 m</li>
+        <li>Friksjons­fritt; F konstant og parallell med bevegelsen</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Anvendt kraft F</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
         <TheoryBox title="Arbeid-energi-teoremet">
-          <p>
-            Nettoarbeidet på et objekt er lik endringen i kinetisk energi:
-          </p>
-          <FormulaBox latex="W_\text{tot}=\Delta KE = \tfrac12 m v_f^2 - \tfrac12 m v_i^2" variant="gold" />
-          <p className="mt-1">
-            Dette er det mest brukbare verktøyet i kapittel 6 — når du vet to av
-            tre størrelser (<InlineLatex latex="v_i,v_f,W" />), finner du den
-            tredje direkte.
-          </p>
+          <FormulaBox variant="gold" latex="W_\text{tot}=\Delta K=\tfrac12 m(v_2^2-v_1^2)" />
+        </TheoryBox>
+        <TheoryBox title="Konstant kraft langs vei">
+          <p>Med F konstant og parallell forflytning: W = F·d.</p>
+          <FormulaBox variant="gold" latex="F=\dfrac{\Delta K}{d}" />
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint", content: <p>(b) + (c): <InlineLatex latex="W_{BC}=\tfrac12 m v_C^2-\tfrac12 m v_B^2" />, løs for <InlineLatex latex="v_C" />.</p> },
+      { label: "Hint 1", content: <p>Friksjons­fritt ⇒ den eneste horisontale kraften er F. Total arbeid = F·d.</p> },
+      { label: "Hint 2", content: <p>Beregn ΔK = ½m(v₂² − v₁²). Ikke regn ½mv₂² − ½mv₁² hver for seg, det er identisk men gir flere arithmetiske trinn.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Arbeid-energi-teoremet er ett av de mest kraftfulle
-          verktøyene i mekanikken. Det sier at <em>nettoarbeidet</em> på et objekt er
-          lik endringen i kinetisk energi — uansett hvor mange krefter som virker og
-          hvor komplisert banen er. Vi trenger ikke å vite hver enkelt kraft, bare
-          sumvirkningen. Her bryr vi oss ikke om hvor lang tid det tok eller hvor
-          langt boken beveget seg — bare start- og sluttfarten.
-        </p>
-        <FormulaBox latex="W_\text{tot}=\Delta K = \tfrac12 m v_f^2 - \tfrac12 m v_i^2" variant="blue" />
-        <p>
-          <strong>Hvorfor denne formelen?</strong> Vi kunne prøvd Newton's 2. lov, men
-          vi kjenner verken akselerasjonen, kraften eller tiden separat. Arbeid-energi
-          omgår alt dette. Merk også fortegnskonvensjonen: positivt nettoarbeid øker
-          KE, negativt arbeid (som fra friksjon) fjerner KE.
-        </p>
-
-        <p className="font-semibold">(a) Arbeid fra A til B</p>
-        <p>
-          Boken går saktere i B enn i A — altså har KE minket, og nettoarbeidet må
-          være <em>negativt</em>. Dette stemmer med at friksjonen er den eneste
-          horisontale kraften som arbeider (den motvirker bevegelsen). Vi sett bare
-          inn i formelen.
-        </p>
-        <FormulaBox latex="W_{AB}=\tfrac12 m(v_B^2-v_A^2)" variant="blue" />
-        <FormulaBox latex="W_{AB}=\tfrac12(1{,}50)[(1{,}25)^2-(3{,}21)^2]=\tfrac12(1{,}50)(1{,}5625-10{,}304)=\boxed{-6{,}56\;\text{J}}" variant="gold" />
-        <p className="italic text-xs">
-          Enhet: kg·m²/s² = J ✓. Negativt tegn = friksjon fjerner energi, i tråd med
-          vår forventning.
-        </p>
-
-        <p className="font-semibold">(b) B → C med W = −0,750 J</p>
-        <p>
-          Vi kjenner nå <InlineLatex latex="v_B" /> og{" "}
-          <InlineLatex latex="W_{BC}" />. Omformer teoremet for{" "}
-          <InlineLatex latex="v_C" />: <InlineLatex latex="W_{BC}=\tfrac12 m v_C^2-\tfrac12 m v_B^2" />{" "}
-          gir <InlineLatex latex="v_C^2=v_B^2+2W_{BC}/m" />.
-        </p>
-        <FormulaBox latex="v_C=\sqrt{v_B^2+\tfrac{2W_{BC}}{m}}=\sqrt{1{,}5625+\tfrac{-1{,}50}{1{,}50}}=\sqrt{0{,}5625}=\boxed{0{,}750\;\text{m/s}}" variant="blue" />
-        <p className="italic text-xs">
-          Negativt W → redusert fart, som forventet. Merk: hvis{" "}
-          <InlineLatex latex="2W/m < -v_B^2" />, ville bok en stoppet før C.
-        </p>
-
-        <p className="font-semibold">(c) B → C med W = +0,750 J</p>
-        <p>
-          Samme formel, men nå med positivt arbeid — kanskje noen skyver bok en i
-          samme retning den beveger seg. Da øker KE og dermed farten.
-        </p>
-        <FormulaBox latex="v_C=\sqrt{1{,}5625+1{,}00}=\sqrt{2{,}5625}=\boxed{1{,}60\;\text{m/s}}" variant="blue" />
-        <p className="italic text-xs">
-          Fortegnsanalyse: samme mengde arbeid, motsatt tegn → veldig forskjellig
-          sluttfart. Det er <em>fortegnet</em> som bestemmer om energi tilføres eller
-          fjernes.
-        </p>
-      </div>
-    ),
-    summary: (
-      <p>
-        Arbeid-energi-teoremet lar deg hoppe over kinematikk når du ikke
-        bryr deg om tid eller forskyvning — bare energi-balansen teller.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 6.20 — Spark på fotball
-  // ==========================================================================
-  "6.20": {
-    title: "Kontaktavstand for fotballspark",
-    difficulty: "lett",
-    pageRef: "s. 201",
-    problem: (
-      <p>
-        En 0,420{"\u00A0"}kg fotball er i utgangspunktet i fart 2,00 m/s. En
-        spiller sparker ballen med en konstant kraft på 40,0 N i samme retning
-        som ballen beveger seg. Over hvor stor avstand må foten være i kontakt
-        med ballen for at farten skal øke til 6,00 m/s?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=0{,}420\;\text{kg}" /></li>
-        <li><InlineLatex latex="v_i=2{,}00\;\text{m/s},\;v_f=6{,}00\;\text{m/s}" /></li>
-        <li><InlineLatex latex="F=40{,}0\;\text{N}" /> i bevegelsesretningen</li>
-      </ul>
-    ),
-    unknowns: <p>Avstand <InlineLatex latex="d" /> som foten er i kontakt med ballen.</p>,
-    strategy: (
-      <p>
-        Arbeid-energi direkte: <InlineLatex latex="Fd=\Delta KE" />, siden F
-        og forskyvning er i samme retning.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p>Løs <InlineLatex latex="d=\Delta KE/F" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Her kombinerer vi to originalformler. Arbeid av en
-          konstant kraft som virker i bevegelsesretningen er{" "}
-          <InlineLatex latex="W=Fd\cos 0^\circ=Fd" />. Arbeid-energi-teoremet sier at
-          nettoarbeidet er lik endringen i kinetisk energi. Siden foten er eneste
-          kraft som gjør arbeid på ballen i denne modellen (vi neglisjerer tyngdekraft
-          — sparket er veldig kort), gjelder <InlineLatex latex="Fd=\Delta K" />.
-        </p>
-        <FormulaBox latex="W=Fd\cos\phi,\qquad W_\text{tot}=\Delta K = \tfrac12 m v_f^2-\tfrac12 m v_i^2" variant="blue" />
-        <p>
-          <strong>Hvorfor ikke Newton's 2. lov?</strong> Vi kunne i prinsippet brukt{" "}
-          <InlineLatex latex="F=ma" /> og <InlineLatex latex="v_f^2=v_i^2+2ad" />, men
-          arbeid-energi gir oss avstanden direkte fra energibalansen uten å gå veien
-          om akselerasjon.
-        </p>
-
+      <div>
+        <p className="mb-2">Friksjons­fri overflate ⇒ F er eneste horisontale kraft. Bruk arbeid-energi.</p>
         <Step n={1} title="Endring i kinetisk energi">
-          <p>
-            Ballen akselererer fra 2,00 m/s til 6,00 m/s under sparket. Bruk:{" "}
-            <InlineLatex latex="\Delta K=\tfrac12 m(v_f^2-v_i^2)" />. Merk at det er{" "}
-            <em>kvadratene</em> som teller — dobling av farten firedobler KE.
-          </p>
-          <FormulaBox latex="\Delta K=\tfrac12(0{,}420)(6^2-2^2)=\tfrac12(0{,}420)(32)=6{,}72\;\text{J}" variant="blue" />
+          <FormulaBox latex="\Delta K=\tfrac12(8{,}50)\bigl((5{,}60)^2-(4{,}20)^2\bigr)" />
+          <FormulaBox latex="\Delta K=\tfrac12(8{,}50)(31{,}36-17{,}64)=\tfrac12(8{,}50)(13{,}72)=58{,}31\;\text{J}" />
         </Step>
-        <Step n={2} title="Omform og løs for avstand">
-          <p>
-            Sett arbeidet lik <InlineLatex latex="\Delta K" /> og løs for d:
-          </p>
-          <FormulaBox latex="Fd=\Delta K\;\Rightarrow\;d=\frac{\Delta K}{F}" variant="blue" />
-          <FormulaBox latex="d=\frac{\Delta K}{F}=\frac{6{,}72}{40{,}0}=\boxed{0{,}168\;\text{m}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhetssjekk: J/N = (N·m)/N = m ✓. Størrelsesorden: 17 cm kontaktlengde er
-            realistisk for et ordentlig spark.
-          </p>
+        <Step n={2} title="Anvendt kraft">
+          <FormulaBox latex="F=\dfrac{\Delta K}{d}=\dfrac{58{,}31}{2{,}30}=25{,}35\;\text{N}" />
+          <FormulaBox variant="gold" latex="F\approx 25{,}4\;\text{N}" />
         </Step>
+        <Pitfall>
+          <strong>Glem ikke <em>kvadrat-differansen</em>!</strong> v₂² − v₁² ≠ (v₂ − v₁)². Her: (5,60−4,20)² = 1,96, men det riktige er 31,36 − 17,64 = 13,72 — syv ganger større.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Arbeid-energi-teoremet gir oss ofte snarvei i stedet for å bruke Newton 2 + kinematikk. Du slipper å beregne akselerasjon og tid.
+        </p>
       </div>
     ),
-    summary: <p>Kort kontaktavstand kan levere stor fart-endring med en stor kraft — og vice versa.</p>,
+    summary: <p>F = ΔK/d for konstant kraft langs forflytning. Snarveie via arbeid-energi-teoremet.</p>,
   },
 
-  // ==========================================================================
-  // 6.24 — Geparden
-  // ==========================================================================
-  "6.24": {
-    title: "Kinetisk energi av gepard",
-    difficulty: "lett",
-    pageRef: "s. 201",
-    problem: (
-      <p>
-        Voksne geparder, de raskeste av de store kattene, har masse ca 70{"\u00A0"}kg
-        og er målt til opptil 32 m/s. (a) Hvor mange joule er den kinetiske
-        energien til en slik gepard? (b) Med hvilken faktor vil KE endre seg
-        om farten ble doblet?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=70\;\text{kg},\;v=32\;\text{m/s}" /></li>
-      </ul>
-    ),
-    unknowns: <p>KE og skaleringsfaktor ved doblet fart.</p>,
-    strategy: (
-      <TheoryBox title="KE er kvadratisk i fart">
-        <FormulaBox latex="KE=\tfrac12 mv^2" variant="gold" />
-        <p>
-          Hvis farten dobles blir KE{" "}
-          <InlineLatex latex="2^2=4" /> ganger så stor. Hvis farten tredobles,
-          blir KE ni ganger så stor. Dette er hvorfor fartsgrenser reduserer
-          kollisjonsskader dramatisk.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [{ label: "Hint", content: <p>Sett bare inn tallene.</p> }],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Kinetisk energi er energien som et objekt har i
-          kraft av sin bevegelse. Grunnformelen kan utledes fra arbeid-energi-teoremet
-          ved å integrere <InlineLatex latex="F=ma" /> langs banen, og resultatet er
-          at kun masse og fart bestemmer KE — uansett retning eller sti.
-        </p>
-        <FormulaBox latex="K = \tfrac12 m v^2" variant="blue" />
-        <p>
-          <strong>Sentral innsikt:</strong> KE er <em>kvadratisk</em> i fart og
-          <em> lineær</em> i masse. Dette gir en asymmetri som dukker opp i mange
-          oppgaver: fartsendring er mye dyrere energisk enn masseendring. Enheten er
-          joule (<InlineLatex latex="\text{J}=\text{kg}\cdot\text{m}^2/\text{s}^2" />).
-        </p>
-
-        <Step n={1} title="(a) Kinetisk energi">
-          <p>
-            Ren innsetting i <InlineLatex latex="K=\tfrac12 mv^2" />. Regn ut{" "}
-            <InlineLatex latex="v^2" /> først for å unngå feil:{" "}
-            <InlineLatex latex="32^2=1024" />.
-          </p>
-          <FormulaBox latex="K=\tfrac12(70)(32)^2=\tfrac12(70)(1024)=\boxed{3{,}58\times 10^4\;\text{J}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhet: kg · (m/s)² = kg·m²/s² = J ✓. Størrelsesorden: ~36 kJ er
-            sammenlignbart med et lite personbil-sammenstøt ved lav fart, eller
-            energien i ~1 g sukker.
-          </p>
-        </Step>
-        <Step n={2} title="(b) Effekten av å doble farten">
-          <p>
-            Algebraisk omforming er nøkkelen her. Sett{" "}
-            <InlineLatex latex="v\to 2v" /> inn i formelen og sammenlign:
-          </p>
-          <FormulaBox latex="K'=\tfrac12 m(2v)^2=\tfrac12 m\cdot 4v^2=4\cdot\tfrac12 mv^2=4K" variant="blue" />
-          <p>
-            <strong>Faktor 4</strong>. Fortegn og tolkning: doblet fart = firedobbel
-            energi = lengre bremselengde og mer destruktiv kollisjon. Dette er den
-            fysiske begrunnelsen for fartsgrenser.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Dobler du farten, firedobles den kinetiske energien — en praktisk intuisjon.</p>,
-  },
-
-  // ==========================================================================
-  // 6.25 — Typiske kinetiske energier
-  // ==========================================================================
-  "6.25": {
-    title: "Sammenligning av kinetiske energier",
-    difficulty: "lett",
-    pageRef: "s. 201",
-    problem: (
-      <div className="space-y-2">
-        <p>Regn ut kinetisk energi av:</p>
-        <ul className="list-disc pl-5">
-          <li>(a) Elektron i hydrogenatomet: <InlineLatex latex="m=9{,}11\times 10^{-31}\;\text{kg},\;v=2{,}2\times 10^6\;\text{m/s}" /></li>
-          <li>(b) Jogger: <InlineLatex latex="m=55\;\text{kg},\;v=7{,}5\;\text{km/t}" /></li>
-          <li>(c) Tennisball: <InlineLatex latex="m=57\;\text{g},\;v=36\;\text{m/s}" /></li>
-        </ul>
-      </div>
-    ),
-    knowns: <p>Se oppgaveteksten.</p>,
-    unknowns: <p>KE i hver deloppgave.</p>,
-    strategy: (
-      <p>
-        Bruk <InlineLatex latex="KE=\tfrac12 mv^2" /> etter konvertering til
-        SI-enheter (m/s og kg).
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p>7,5 km/t = 2,083 m/s; 57 g = 0,057 kg.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Vi bruker samme originalformel{" "}
-          <InlineLatex latex="K=\tfrac12 mv^2" /> tre ganger, men oppgaven handler
-          egentlig om <em>enhetskonvertering</em> og <em>størrelsesordener</em>. En
-          vanlig fallgruve er å sette inn tall uten å først konvertere til SI-enheter
-          (kg og m/s). Joule er definert som <InlineLatex latex="1\;\text{J}=1\;\text{kg}\cdot\text{m}^2/\text{s}^2" />,
-          så innsetting i andre enheter gir gale tall.
-        </p>
-        <FormulaBox latex="K=\tfrac12 m v^2\quad\text{(alltid i kg og m/s)}" variant="blue" />
-        <p>
-          <strong>Konverteringer:</strong>{" "}
-          <InlineLatex latex="1\;\text{km/t}=\tfrac{1000}{3600}\;\text{m/s}=0{,}2778\;\text{m/s}" />,{" "}
-          <InlineLatex latex="1\;\text{g}=10^{-3}\;\text{kg}" />. Alltid gjør det før
-          innsetting.
-        </p>
-
-        <Step n={1} title="(a) Elektron i hydrogenatomet">
-          <p>
-            Masse og fart er allerede i SI. Kvadrer farten først:{" "}
-            <InlineLatex latex="(2{,}2\times 10^6)^2=4{,}84\times 10^{12}" />. Vær
-            nøye med eksponent-aritmetikk.
-          </p>
-          <FormulaBox latex="K=\tfrac12(9{,}11\times 10^{-31})(2{,}2\times 10^6)^2=\boxed{2{,}2\times 10^{-18}\;\text{J}}" variant="blue" />
-          <p className="italic text-xs">
-            Enhet: kg · (m/s)² = J ✓. Størrelsesorden: på kvantenivå er KE typisk{" "}
-            <InlineLatex latex="\sim 10^{-18}" /> J eller ~10 eV. Dette er den
-            naturlige energiskalaen for atomfysikk.
-          </p>
-        </Step>
-        <Step n={2} title="(b) Jogger">
-          <p>
-            Konverter først: <InlineLatex latex="7{,}5\;\text{km/t}=7{,}5/3{,}6=2{,}083\;\text{m/s}" />.
-            Hvis vi hadde satt inn 7,5 direkte, ville svaret blitt ca 1550 J — 13
-            ganger for stort!
-          </p>
-          <FormulaBox latex="K=\tfrac12(55)(2{,}083)^2=\boxed{119\;\text{J}}" variant="blue" />
-          <p className="italic text-xs">
-            Størrelsesorden: ~100 J er typisk for en voksen som går/jogger rolig.
-          </p>
-        </Step>
-        <Step n={3} title="(c) Tennisball">
-          <p>
-            Konverter: <InlineLatex latex="57\;\text{g}=0{,}057\;\text{kg}" />. Høy
-            fart kompenserer delvis for liten masse.
-          </p>
-          <FormulaBox latex="K=\tfrac12(0{,}057)(36)^2=\boxed{36{,}9\;\text{J}}" variant="blue" />
-          <p className="italic text-xs">
-            Fysisk tolkning: tennisballen har ca 1/3 av joggerens KE, men er over
-            1000 ganger lettere. Det er fartens kvadrat som kompenserer.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Få følelse for typiske KE-størrelser: atomer har ~10⁻¹⁸ J, menneskelige skalaer ~10²–10³ J.</p>,
-  },
-
-  // ==========================================================================
-  // 6.26 — Meteorkrater
-  // ==========================================================================
   "6.26": {
-    title: "Energien fra Meteor Crater",
-    difficulty: "lett",
-    pageRef: "s. 201",
-    problem: (
-      <p>
-        For ca 50 000 år siden traff en meteor jorden ved dagens Flagstaff,
-        Arizona. Anslag fra 2005: masse <InlineLatex latex="1{,}4\times 10^8\;\text{kg}" />, fart 12 km/s.
-        (a) Hvor mye KE traff bakken? (b) Hvordan sammenligner det med en 1,0
-        megatonn atombombe? (1 tonn TNT = <InlineLatex latex="4{,}184\times 10^9\;\text{J}" />)
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=1{,}4\times 10^8\;\text{kg},\;v=1{,}2\times 10^4\;\text{m/s}" /></li>
-        <li>1 megatonn TNT = <InlineLatex latex="10^6\times 4{,}184\times 10^9=4{,}184\times 10^{15}\;\text{J}" /></li>
-      </ul>
-    ),
-    unknowns: <p>KE og ratio til 1 megatonn bombe.</p>,
-    strategy: <p>Regn ut KE, deriver ratio.</p>,
-    hints: [{ label: "Hint", content: <p>Hold styr på eksponenter.</p> }],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Selv om meteoren hadde både stor masse og høy fart
-          er fremgangsmåten den samme som for en tennisball —{" "}
-          <InlineLatex latex="K=\tfrac12 mv^2" />. Denne oppgaven er en øvelse i
-          størrelsesordener: å bygge intuisjon for hvor stor energi bevegelige
-          himmellegemer har. Vi sammenligner så med en menneskeskalert
-          referanseenergi (1 megatonn TNT) for å ramme inn tallet.
-        </p>
-        <FormulaBox latex="K=\tfrac12 m v^2" variant="blue" />
-        <p>
-          <strong>Hvorfor joule og megatonn?</strong> Joule er SI-enheten, men
-          gigantiske energier rapporteres ofte i ekvivalente tonn TNT for å gi
-          menneskelig forståelig skala. Omregningsfaktoren{" "}
-          <InlineLatex latex="1\;\text{t TNT}=4{,}184\times 10^9\;\text{J}" /> er en
-          kjent konstant.
-        </p>
-
-        <Step n={1} title="(a) Kinetisk energi av meteoren">
-          <p>
-            Begge verdier er allerede i SI. Vær nøye med eksponenter:{" "}
-            <InlineLatex latex="(1{,}2\times 10^4)^2=1{,}44\times 10^8" />, så{" "}
-            <InlineLatex latex="\tfrac12\cdot 1{,}4\times 10^8\cdot 1{,}44\times 10^8=1{,}008\times 10^{16}" />.
-          </p>
-          <FormulaBox latex="K=\tfrac12(1{,}4\times 10^8)(1{,}2\times 10^4)^2=\boxed{1{,}01\times 10^{16}\;\text{J}}" variant="gold" />
-        </Step>
-        <Step n={2} title="(b) Sammenligning med 1 MT-bombe">
-          <p>
-            Først konverter 1 megatonn TNT til joule:{" "}
-            <InlineLatex latex="1\;\text{MT}=10^6\cdot 4{,}184\times 10^9=4{,}184\times 10^{15}\;\text{J}" />.
-            Deretter regner vi forholdet — ren divisjon.
-          </p>
-          <FormulaBox latex="\frac{K}{E_\text{1MT}}=\frac{1{,}01\times 10^{16}}{4{,}184\times 10^{15}}\approx\boxed{2{,}4}" variant="blue" />
-          <p>Altså ca 2,4 megatonn — mer enn dobbelt så mye som en 1 MT-bombe.</p>
-          <p className="italic text-xs">
-            Fysisk tolkning: Meteor Crater er 1,2 km bred og 170 m dyp — konsistent
-            med et nedslag på flere megatonn. Til sammenligning er Hiroshima-bomben
-            ~0,015 MT, altså meteoren var ~160× kraftigere.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Store masser × høy fart gir enorm KE — meteornedslag er atomvåpenlignende i energi.</p>,
-  },
-
-  // ==========================================================================
-  // 6.28 — Vannmelon fra tak
-  // ==========================================================================
-  "6.28": {
-    title: "Vannmelon i fritt fall",
-    difficulty: "lett",
-    pageRef: "s. 201",
-    problem: (
-      <p>
-        En 4,80 kg vannmelon slippes fra toppen av en 25,0 m høy bygning og
-        er i tilnærmet fritt fall. (a) Arbeid av gravitasjonen? (b) Like før
-        den treffer: (i) KE, (ii) fart? (c) Hvilke deler ville endret seg med
-        luftmotstand?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=4{,}80\;\text{kg},\;h=25{,}0\;\text{m}" /></li>
-        <li><InlineLatex latex="v_0=0" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="W_g,\;KE_f,\;v_f" /></p>,
-    strategy: (
-      <p>
-        Bare gravitasjonen arbeider (uten luftmotstand). Bruk arbeid-energi:{" "}
-        <InlineLatex latex="W_g=\Delta KE" />.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p><InlineLatex latex="W_g=mgh" /> (positivt siden kraft og forskyvning er ned).</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er en grunnmur-oppgave som kombinerer tre
-          ideer: arbeid av en konstant kraft (tyngdekraften), arbeid-energi-teoremet,
-          og konsekvensen for fart. Tyngdekraften er en konstant vektor nedover, så{" "}
-          <InlineLatex latex="W_g=\vec F_g\cdot\vec s" /> reduseres til{" "}
-          <InlineLatex latex="W_g=mg\Delta y" /> når forskyvningen er nedover (samme
-          retning som kraften gir positivt arbeid).
-        </p>
-        <FormulaBox latex="W_g = \vec F_g\cdot\vec s = mg\,h\quad(\text{fall nedover}),\qquad W_\text{tot}=\Delta K" variant="blue" />
-        <p>
-          <strong>Hvorfor arbeid-energi og ikke kinematikk?</strong> Vi kunne brukt{" "}
-          <InlineLatex latex="v_f^2=v_0^2+2gh" />, men arbeid-energi er mer generelt:
-          det fungerer også hvis banen ikke er rett ned (f.eks. en sklie).
-          Gravitasjonen er <em>konservativ</em>, så bare høydeforskjellen teller.
-        </p>
-
-        <Step n={1} title="(a) Arbeid av tyngdekraften">
-          <p>
-            Kraft og forskyvning peker begge nedover: vinkel 0°, cos 0° = 1, altså{" "}
-            <InlineLatex latex="W_g=+mgh" /> (positivt). Ren innsetting:
-          </p>
-          <FormulaBox latex="W_g=mgh=(4{,}80)(9{,}80)(25{,}0)=\boxed{1180\;\text{J}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhet: kg · m/s² · m = kg·m²/s² = J ✓. Størrelsesorden: ~1 kJ er energien
-            i en god sjokoladebit.
-          </p>
-        </Step>
-        <Step n={2} title="(b) KE og fart ved bakken">
-          <p>
-            Siden tyngdekraften er eneste kraft som gjør arbeid i fritt fall, er{" "}
-            <InlineLatex latex="W_\text{tot}=W_g" />. Vannmelonen starter fra ro, så{" "}
-            <InlineLatex latex="\Delta K=K_f-0=K_f" />. Dermed blir hele arbeidet
-            omgjort til KE.
-          </p>
-          <FormulaBox latex="K_f=W_g=1180\;\text{J}" variant="blue" />
-          <p>
-            For farten omformer vi <InlineLatex latex="K_f=\tfrac12 mv_f^2" /> til{" "}
-            <InlineLatex latex="v_f=\sqrt{2K_f/m}" />. Eller enklere: sett{" "}
-            <InlineLatex latex="\tfrac12 mv_f^2=mgh" /> og løs — massen faller ut, og
-            vi får <InlineLatex latex="v_f=\sqrt{2gh}" />.
-          </p>
-          <FormulaBox latex="v_f=\sqrt{2gh}=\sqrt{2(9{,}80)(25)}=\boxed{22{,}1\;\text{m/s}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhet: <InlineLatex latex="\sqrt{\text{m/s}^2\cdot\text{m}}=\text{m/s}" /> ✓.
-            22 m/s ≈ 80 km/t — ikke noe en vannmelon tåler.
-          </p>
-        </Step>
-        <Step n={3} title="(c) Hvordan endrer luftmotstand svarene?">
-          <p>
-            Med luftmotstand er det to krefter som gjør arbeid: tyngdekraften{" "}
-            (fortsatt positivt, <InlineLatex latex="+mgh" />) og luftmotstanden (alltid
-            motsatt bevegelsen, altså <em>negativt</em> arbeid).
-          </p>
-          <ul className="list-disc pl-5">
-            <li>(a) er <em>uendret</em> — <InlineLatex latex="W_g" /> avhenger bare av høydeforskjellen.</li>
-            <li>(b) KE blir <em>mindre</em> fordi <InlineLatex latex="W_\text{tot}=W_g+W_\text{luft}<W_g" />, og dermed blir farten også mindre.</li>
-          </ul>
-          <p className="italic text-xs">
-            Dette er et viktig skille: arbeid av enkeltkrefter er uavhengig, men{" "}
-            <em>nettoarbeidet</em> er summen og det er det som bestemmer ΔK.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: <p>I fritt fall: hele <InlineLatex latex="mgh" /> blir til KE. Luftmotstand "stjeler" energi og reduserer farten.</p>,
-  },
-
-  // ==========================================================================
-  // 6.31 — Stoppedistanse (utledning)
-  // ==========================================================================
-  "6.31": {
-    title: "Utledning av bremselengde",
+    title: "Fotball­spark — kontakt­avstand",
     difficulty: "middels",
-    pageRef: "s. 201",
+    pageRef: "s. 222",
     problem: (
       <p>
-        En bil kjører på flat vei med fart <InlineLatex latex="v_0" /> når
-        bremsene låser seg. Dekkene glir. (a) Bruk arbeid-energi til å finne
-        bremselengden i form av <InlineLatex latex="v_0,g,\mu_k" />. (b) Faktoren
-        bremselengden endrer seg med hvis: (i) <InlineLatex latex="\mu_k" />{" "}
-        dobles, (ii) <InlineLatex latex="v_0" /> dobles, (iii) begge dobles.
+        En fotball med masse 0,470 kg beveger seg først med fart 2,10 m/s. En fotballspiller sparker
+        ballen og utøver en konstant kraft 40,0 N i samme retning som ballens bevegelse. Over hvilken
+        avstand må spillerens fot være i kontakt med ballen for å øke ballens fart til 6,00 m/s?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Fart ved låsing: <InlineLatex latex="v_0" /></li>
-        <li>Kinetisk friksjonskoeffisient: <InlineLatex latex="\mu_k" /></li>
-      </ul>
-    ),
-    unknowns: <p>Minimum bremselengde <InlineLatex latex="d" /> og skaleringsfaktorer.</p>,
-    strategy: (
-      <div className="space-y-2">
-        <p>
-          Eneste kraft som gjør arbeid er kinetisk friksjon. Bilen starter med
-          KE og stopper (KE = 0), så <InlineLatex latex="W_f=-\Delta KE" />.
-        </p>
-        <TheoryBox title="Utledning">
-          <p>
-            Normalkraft på flat vei: <InlineLatex latex="n=mg" />. Kinetisk
-            friksjon: <InlineLatex latex="f=\mu_k mg" />. Friksjonen motvirker
-            bevegelsen, så:
-          </p>
-          <FormulaBox latex="W_f=-f\,d=-\mu_k m g\,d" variant="blue" />
-          <p>Arbeid-energi: <InlineLatex latex="W_f=0-\tfrac12 m v_0^2" />, altså:</p>
-          <FormulaBox latex="-\mu_k m g\,d = -\tfrac12 m v_0^2 \;\Rightarrow\; d=\frac{v_0^2}{2\mu_k g}" variant="gold" />
-          <p className="mt-1 italic">
-            Legg merke til: massen <em>faller ut</em>! En buss og en bil har
-            samme bremselengde (med samme <InlineLatex latex="\mu_k" />). Farten
-            går i <em>kvadratet</em> — dette er grunnen til at høy fart er så
-            farlig.
-          </p>
-        </TheoryBox>
-      </div>
-    ),
-    hints: [
-      { label: "Hint", content: <p>Bruk kun friksjonsarbeid; normalkraft og tyngdekraft står vinkelrett på bevegelsen.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Her utleder vi en symbolsk formel, ikke et tall. To
-          originalformler samspiller: arbeid-energi-teoremet og arbeid av konstant
-          kraft (friksjon). Friksjonen er eneste kraft som gjør arbeid (normalkraft
-          og tyngdekraft er vinkelrette på bevegelsen). Bilen stopper, så sluttfarten
-          er 0.
-        </p>
-        <FormulaBox latex="W_\text{tot}=\Delta K,\qquad f_k=\mu_k n,\qquad n=mg" variant="blue" />
-        <p>
-          <strong>Hvorfor arbeid-energi?</strong> Vi kunne brukt Newton's 2. lov med{" "}
-          <InlineLatex latex="a=-\mu_k g" /> og{" "}
-          <InlineLatex latex="v_f^2=v_0^2+2ad" />, men arbeid-energi gjør det samme
-          på færre linjer og ringer inn det viktige: <em>bilens KE må dissiperes av
-          friksjonens arbeid</em>.
-        </p>
-
-        <Step n={1} title="Arbeid av friksjon">
-          <p>
-            Friksjon virker i motsatt retning av bevegelsen —{" "}
-            <InlineLatex latex="\phi=180^\circ" />, <InlineLatex latex="\cos\phi=-1" />.
-            På flat vei er <InlineLatex latex="n=mg" /> (fra likevekt vertikalt).
-            Kombinert:
-          </p>
-          <FormulaBox latex="W_f=f_k\,d\cos 180^\circ=-\mu_k m g\,d" variant="blue" />
-        </Step>
-        <Step n={2} title="Arbeid-energi og algebraisk omforming">
-          <p>
-            Bilen starter med KE <InlineLatex latex="\tfrac12 mv_0^2" /> og ender med
-            0. Sett arbeidet lik ΔK og løs for d:
-          </p>
-          <FormulaBox latex="W_f=\Delta K \;\Rightarrow\; -\mu_k m g\,d=0-\tfrac12 m v_0^2" variant="blue" />
-          <FormulaBox latex="\mu_k m g\,d=\tfrac12 m v_0^2\;\Rightarrow\; d=\frac{v_0^2}{2\mu_k g}" variant="blue" />
-          <p>
-            <strong>Massen forsvant!</strong> En loaded 18-wheeler og en smart-bil har
-            samme bremselengde ved samme hastighet og samme{" "}
-            <InlineLatex latex="\mu_k" />. Et kontraintuitivt, men kraftfullt
-            resultat.
-          </p>
-          <FormulaBox latex="\boxed{d=\frac{v_0^2}{2\mu_k g}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhetssjekk:{" "}
-            <InlineLatex latex="\frac{(\text{m/s})^2}{\text{m/s}^2}=\text{m}" /> ✓.
-          </p>
-        </Step>
-        <Step n={3} title="(b) Skaleringsanalyse">
-          <p>
-            Vi ser direkte på formelen <InlineLatex latex="d\propto v_0^2/\mu_k" />:
-          </p>
-          <ul className="list-disc pl-5">
-            <li>(i) <InlineLatex latex="\mu_k\to 2\mu_k" />: <InlineLatex latex="d\to d/2" /> (halvparten). Lineær i nevner.</li>
-            <li>(ii) <InlineLatex latex="v_0\to 2v_0" />: <InlineLatex latex="d\to (2)^2 d=4d" /> (firedobles). Kvadratisk i teller.</li>
-            <li>(iii) Begge dobles: <InlineLatex latex="d\to \tfrac{4}{2}d=2d" /> (dobles).</li>
-          </ul>
-          <p className="italic text-xs">
-            Fysisk tolkning: dette er hvorfor våt vei (redusert{" "}
-            <InlineLatex latex="\mu_k" />) kombinert med høy fart er dobbelt farlig —
-            bremselengden eksploderer.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: (
-      <p>
-        Bremselengde <em>skalerer kvadratisk med fart</em> og lineært (invers)
-        med friksjon. Ett av fysikkens viktigste trafikkprinsipper.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 6.32 — Leg press (fjær)
-  // ==========================================================================
-  "6.32": {
-    title: "Arbeid på fjær — leg press",
-    difficulty: "middels",
-    pageRef: "s. 202",
-    problem: (
-      <p>
-        På treningen presser du mot en plattform som komprimerer to parallelle
-        fjærer. Du utfører 80,0 J når du komprimerer fjærene 0,200 m fra
-        ukomprimert lengde. (a) Hvor stor kraft må du holde i denne posisjonen?
-        (b) Hvor mye mer arbeid må du gjøre for å komprimere 0,200 m til, og
-        hvilken maksimal kraft må du utøve?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="W_1=80{,}0\;\text{J}" /> for <InlineLatex latex="x_1=0{,}200\;\text{m}" /></li>
-        <li>Totale fjærer virker med effektiv konstant <InlineLatex latex="k" /></li>
+        <li>Ball-masse: m = 0,470 kg</li>
+        <li>Initial fart: v₀ = 2,10 m/s</li>
+        <li>Mål­fart: v = 6,00 m/s</li>
+        <li>Konstant kraft fra fot: F = 40,0 N (samme retning som bevegelse)</li>
       </ul>
     ),
     unknowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="F" /> i <InlineLatex latex="x=0{,}200\;\text{m}" /></li>
-        <li>Ekstraarbeid til <InlineLatex latex="x=0{,}400\;\text{m}" />, og maksimal kraft</li>
+        <li>Kontakt­avstand d</li>
       </ul>
     ),
     strategy: (
       <div className="space-y-2">
-        <TheoryBox title="Arbeid på ideell fjær (Hookes lov)">
-          <p>Kraften fra fjæren er <InlineLatex latex="F=kx" /> (restkraft). For å komprimere brukeren må levere arbeid:</p>
-          <FormulaBox latex="W=\int_0^x F\,dx=\int_0^x k x'\,dx'=\tfrac12 k x^2" variant="gold" />
-          <p className="mt-1">
-            Arbeidet er <em>kvadratisk</em> i forskyvning — dobler du
-            kompresjonen, firedobler du den lagrede energien, men
-            <em> trenger dobbelt så mye kraft ved endepunktet</em>.
-          </p>
+        <TheoryBox title="Arbeid = ΔK">
+          <FormulaBox variant="gold" latex="F\cdot d=\tfrac12 m(v^2-v_0^2)\Rightarrow d=\dfrac{m(v^2-v_0^2)}{2F}" />
+          <p className="text-xs">Antar F er eneste horisontale kraft (luft­motstand neglisjeres).</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint 1", content: <p>Finn <InlineLatex latex="k" /> fra <InlineLatex latex="W_1=\tfrac12 k x_1^2" />.</p> },
-      { label: "Hint 2", content: <p>Ekstraarbeid: <InlineLatex latex="\tfrac12 k(x_2^2-x_1^2)" /> med <InlineLatex latex="x_2=0{,}400" />.</p> },
+      { label: "Hint 1", content: <p>Ballen er allerede i bevegelse — ikke fra ro. Bruk v² − v₀², ikke bare v².</p> },
+      { label: "Hint 2", content: <p>«Hvor lang tid» og «hvor langt» er forskjellige spørsmål. Her er det avstand, så bruk arbeid (ikke impuls F·t).</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> En ideell fjær følger Hookes lov —{" "}
-          <InlineLatex latex="F=kx" />, der x er fravik fra naturlig lengde.
-          Fjærkraften er <em>ikke konstant</em>, så vi kan <em>ikke</em> bruke{" "}
-          <InlineLatex latex="W=Fd" />. Vi må integrere:{" "}
-          <InlineLatex latex="W=\int_0^x F(x')\,dx'=\int_0^x kx'\,dx'=\tfrac12 kx^2" />.
-          Geometrisk: arbeidet er arealet av en trekant under F-x-linjen.
+      <div>
+        <p className="mb-2">Når kontakt­tid og fart er involvert, er arbeid-energi raskest fordi avstand er ukjent.</p>
+        <Step n={1} title="Endring i kinetisk energi">
+          <FormulaBox latex="\Delta K=\tfrac12(0{,}470)\bigl((6{,}00)^2-(2{,}10)^2\bigr)" />
+          <FormulaBox latex="\Delta K=\tfrac12(0{,}470)(36{,}00-4{,}41)=\tfrac12(0{,}470)(31{,}59)=7{,}42\;\text{J}" />
+        </Step>
+        <Step n={2} title="Kontakt­avstand">
+          <FormulaBox latex="d=\dfrac{\Delta K}{F}=\dfrac{7{,}42}{40{,}0}=0{,}186\;\text{m}" />
+          <FormulaBox variant="gold" latex="d\approx 18{,}6\;\text{cm}" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke regn ut akselerasjonen først.</strong> Det er en lengre vei: F = ma ⇒ a = F/m, så v² = v₀² + 2ad. Begge gir samme svar, men arbeid-energi er én ligning.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 18 cm er omtrent skoens lengde — sparkeren får mest energi inn i ballen mens kontakten varer noen titalls millisekunder. Mer kontakt­avstand = mer energi gitt til ballen ved samme kraft.
         </p>
-        <FormulaBox latex="F_\text{fjær}=kx,\qquad W_\text{bruker}=\tfrac12 k x^2" variant="blue" />
-        <p>
-          <strong>Hvorfor ikke F·d?</strong> Fordi kraften varierer lineært fra 0 til
-          kx mens du komprimerer fra 0 til x. Gjennomsnittlig kraft er{" "}
-          <InlineLatex latex="\tfrac12 kx" />, og arbeid = (gjsn. kraft) · (avstand) =
-          <InlineLatex latex="\tfrac12 kx\cdot x=\tfrac12 kx^2" />. Det er samme
-          resultat, bare utledet uten integrasjon.
-        </p>
-
-        <Step n={1} title="Finn fjærkonstanten">
-          <p>
-            Vi vet at <InlineLatex latex="W_1=80\;\text{J}" /> ved{" "}
-            <InlineLatex latex="x_1=0{,}200\;\text{m}" />. Omform{" "}
-            <InlineLatex latex="W=\tfrac12 kx^2" /> til{" "}
-            <InlineLatex latex="k=2W/x^2" />.
-          </p>
-          <FormulaBox latex="k=\frac{2W_1}{x_1^2}=\frac{2(80)}{(0{,}200)^2}=\frac{160}{0{,}04}=4000\;\text{N/m}" variant="blue" />
-          <p className="italic text-xs">
-            Enhet: J/m² = N·m/m² = N/m ✓.
-          </p>
-        </Step>
-        <Step n={2} title="(a) Kraft ved x = 0,200 m">
-          <p>
-            Nå bruker vi Hookes lov direkte — kraften fjæren utøver i akkurat dette
-            punktet. Dette er <em>øyeblikkelig</em> kraft, ikke gjennomsnitt.
-          </p>
-          <FormulaBox latex="F_1=kx_1=(4000)(0{,}200)=\boxed{800\;\text{N}}" variant="gold" />
-          <p className="italic text-xs">
-            Sjekk: arbeid pr. lengde bør være halve maks-kraften:{" "}
-            <InlineLatex latex="W/x=80/0{,}2=400\;\text{N}=F/2" /> ✓.
-          </p>
-        </Step>
-        <Step n={3} title="(b) Ekstraarbeid fra x=0,200 til x=0,400 m">
-          <p>
-            Ekstraarbeidet er arbeidet fra <InlineLatex latex="x_1" /> til{" "}
-            <InlineLatex latex="x_2=0{,}400\;\text{m}" />. Bruk enten{" "}
-            <InlineLatex latex="W=\tfrac12 k x_2^2-\tfrac12 k x_1^2" />, eller
-            integrer fra <InlineLatex latex="x_1" /> til <InlineLatex latex="x_2" />:{" "}
-            resultatet er det samme.
-          </p>
-          <FormulaBox latex="W_\text{ekstra}=\tfrac12 k(x_2^2-x_1^2)=\tfrac12(4000)(0{,}16-0{,}04)=\boxed{240\;\text{J}}" variant="gold" />
-          <p className="italic text-xs">
-            <strong>Pedagogisk viktig:</strong> De første 20 cm tok 80 J, de neste
-            20 cm tok 240 J — <em>tre ganger mer</em>. Det er den kvadratiske
-            avhengigheten: samme lengdeintervall, men ved høyere gjennomsnittlig
-            kraft.
-          </p>
-        </Step>
-        <Step n={4} title="Maksimal kraft">
-          <FormulaBox latex="F_\text{max}=kx_2=(4000)(0{,}400)=\boxed{1600\;\text{N}}" variant="gold" />
-          <p className="italic text-xs">
-            Fortegn/tolkning: nøyaktig dobbelt av <InlineLatex latex="F_1" /> fordi
-            vi har doblet kompresjonen — kraft er <em>lineær</em> i x mens arbeid er
-            kvadratisk.
-          </p>
-        </Step>
       </div>
     ),
-    summary: (
-      <p>
-        Fjærarbeid er kvadratisk: de siste 20 cm krever <em>tre ganger</em>{" "}
-        mer arbeid enn de første 20 cm. Bruk <InlineLatex latex="W=\tfrac12 kx^2" /> og Hookes
-        lov direkte.
-      </p>
-    ),
+    summary: <p>F·d = ΔK. Når avstand er ukjent og fart-endring er kjent, gir arbeid-energi-teoremet direkte svar.</p>,
   },
 
-  // ==========================================================================
-  // 6.33 — Tre masser på fjærer
-  // ==========================================================================
+  "6.28": {
+    title: "Isblokk på skråplan friksjons­fritt",
+    difficulty: "lett",
+    pageRef: "s. 222",
+    problem: (
+      <p>
+        En blokk med is med masse 2,00 kg slippes 1,35 m ned et skrå­plan som heller 36,9° under
+        horisontalen. Hvis blokken starter fra ro, hva er slutt­farten hvis vi kan ignorere friksjon?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Masse: m = 2,00 kg</li>
+        <li>Distanse langs skrå­plan: d = 1,35 m</li>
+        <li>Helningsvinkel: α = 36,9°</li>
+        <li>Friksjons­fritt; starter fra ro</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Slutt­fart v</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Vertikal høyde langs rampe">
+          <FormulaBox variant="gold" latex="h=d\sin\alpha" />
+          <p className="text-xs">Komponenten av forflytningen langs tyngde-retningen.</p>
+        </TheoryBox>
+        <TheoryBox title="Energi-bevaring">
+          <FormulaBox variant="gold" latex="\tfrac12 mv^2=mgh\Rightarrow v=\sqrt{2gh}" />
+          <p className="text-xs">All potensiell energi (mgh) blir kinetisk når friksjon er null.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Massen kanselleres! v avhenger bare av g og h, ikke m.</p> },
+      { label: "Hint 2", content: <p>sin 36,9° = 0,600 (et standard 3-4-5-trekant-vinkel — pugg dette).</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Energi-bevaring uten friksjon: mgh → ½mv².</p>
+        <Step n={1} title="Vertikal høyde">
+          <FormulaBox latex="h=d\sin 36{,}9°=1{,}35\cdot 0{,}600=0{,}810\;\text{m}" />
+        </Step>
+        <Step n={2} title="Slutt­fart">
+          <FormulaBox latex="v=\sqrt{2gh}=\sqrt{2(9{,}80)(0{,}810)}=\sqrt{15{,}88}=3{,}98\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 3{,}99\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>Sin eller cos?</strong> Vinkelen er målt fra horisontalen ⇒ vertikal komponent = d·sin α. Hadde vinkelen vært fra vertikalen, var det d·cos α. Tegn skissen alltid for å være sikker.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Det er kun den vertikale fall­høyden som teller, ikke avstand langs rampen. En lengre, slakkere rampe med samme h gir samme slutt­fart — bare lengre tid.
+        </p>
+      </div>
+    ),
+    summary: <p>Friksjons­fri rampe: v = √(2g·d sin α). Bare vertikal høyde h teller, ikke vinkel eller bane.</p>,
+  },
+
+  "6.31": {
+    title: "Bremse­avstand med arbeid-energi",
+    difficulty: "middels",
+    pageRef: "s. 223",
+    problem: (
+      <p>
+        En bil kjører på en flat vei med fart <InlineLatex latex="v_0" /> i øyeblikket bremsene låser,
+        slik at dekkene sklir i stedet for å rulle. (a) Bruk arbeid-energi-teoremet til å beregne
+        kortest stoppe­avstand for bilen i form av <InlineLatex latex="v_0" />, g, og kinetisk friksjons­koeffisient
+        <InlineLatex latex="\;\mu_k" /> mellom dekk og vei. (b) Med hvilken faktor endres minste stoppe­avstand
+        hvis (i) μk dobles, (ii) v0 dobles, (iii) både μk og v0 dobles?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Initial fart: v₀</li>
+        <li>Tyngde­akselerasjon: g</li>
+        <li>Kinetisk friksjons­koeffisient: μ<sub>k</sub></li>
+        <li>Bremsene er låst — kinetisk friksjon, ikke statisk</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Bremse­avstand d som funksjon av v₀, g, μ<sub>k</sub></li>
+        <li>(b) Hvordan d endres når (i) μ<sub>k</sub> dobles, (ii) v₀ dobles, (iii) begge dobles</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Friksjon på flat vei = eneste horisontale kraft">
+          <p>På flat vei er N = mg, friksjon f = μ<sub>k</sub>·mg. Ingen andre horisontale krefter.</p>
+        </TheoryBox>
+        <TheoryBox title="Arbeid-energi-teoremet">
+          <FormulaBox variant="gold" latex="\mu_k mg\cdot d=\tfrac12 mv_0^2\Rightarrow d=\dfrac{v_0^2}{2\mu_k g}" />
+          <p className="text-xs">Massen kanselleres — bremse­avstand er masse-uavhengig på flat vei.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Bilen stopper når all KE er omdannet til friksjons­varme. Sett ½mv₀² = friksjons­arbeid.</p> },
+      { label: "Hint 2", content: <p>For (b): bruk skala-argumenter. d ∝ v₀²/μ<sub>k</sub>. Endring i v₀ kvadreres, endring i μ<sub>k</sub> går invert.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">All initial KE blir spist av friksjon over distansen d.</p>
+        <Step n={1} title="(a) Bremse­avstand">
+          <FormulaBox latex="\mu_k mg\cdot d=\tfrac12 mv_0^2" />
+          <FormulaBox latex="d=\dfrac{v_0^2}{2\mu_k g}" />
+        </Step>
+        <Step n={2} title="(b) Skala-effekter">
+          <p>(i) μ<sub>k</sub> → 2μ<sub>k</sub>: d halveres (faktor ½).</p>
+          <p>(ii) v₀ → 2v₀: d firedobles (faktor 4) — kvadrert!</p>
+          <p>(iii) Begge dobles: d → (2v₀)²/(2·2μ<sub>k</sub>·g) = 4v₀²/(4μ<sub>k</sub>g)·½ = 2d (faktor 2).</p>
+          <FormulaBox variant="gold" latex="d=\dfrac{v_0^2}{2\mu_k g};\;\text{(i)}\,\tfrac12,\;(ii)\,4,\;(iii)\,2" />
+        </Step>
+        <Pitfall>
+          <strong>«Doble fart, doble bremse­avstand» — FEIL!</strong> Bremse­avstand vokser med <em>kvadratet</em> av fart. Doble fart = 4× lengre stopp. Dette er den viktigste sikkerhets­leksjonen i fysikk.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Massen kanselleres fordi både KE og friksjon er proporsjonale med m. Derfor bremser en lastebil og en bil i samme avstand — begge har samme μ<sub>k</sub>. Men i praksis er μ<sub>k</sub> ofte mindre for tyngre kjøretøy pga. dekk­slitasje.
+        </p>
+      </div>
+    ),
+    summary: <p>d = v₀²/(2μ<sub>k</sub>g). Massen kanselleres, fart kvadreres. Doble fart = 4× lengre stopp.</p>,
+  },
+
+  "6.32": {
+    title: "Strekk fjær — konstant og kraft",
+    difficulty: "middels",
+    pageRef: "s. 223",
+    problem: (
+      <p>
+        For å strekke en fjær 9,00 cm fra dens uutstrakte lengde må 19,0 J arbeid utføres. (a) Hva er
+        kraft­konstanten til denne fjæra? (b) Hvilken kraft er nødvendig for å strekke fjæra 9,00 cm?
+        (c) Hvor mye arbeid må utføres for å trykke sammen fjæra 4,00 cm fra uutstrakt lengde, og hvilken
+        kraft er nødvendig?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Strekk­avstand: x = 9,00 cm = 0,0900 m</li>
+        <li>Arbeid for å strekke: W = 19,0 J</li>
+        <li>Kompresjons­avstand: x' = 4,00 cm = 0,0400 m</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Fjær­konstant k</li>
+        <li>(b) Kraft F ved 9,00 cm</li>
+        <li>(c) Arbeid og kraft for kompresjon 4,00 cm</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Fjær­arbeid (Hooke)">
+          <FormulaBox variant="gold" latex="W=\tfrac12 kx^2" />
+          <p className="text-xs">Arbeidet er kvadratisk i x — så dobbel strekking gir 4× mer energi lagret.</p>
+        </TheoryBox>
+        <TheoryBox title="Hookes lov for kraft">
+          <FormulaBox variant="gold" latex="F=kx" />
+          <p className="text-xs">Lineær — dobbel strekking dobler kraften, ikke firedobler.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>For (a): løs W = ½kx² for k. For (c): bruk samme formler med x' = 4 cm.</p> },
+      { label: "Hint 2", content: <p>Symmetri: kompresjon og strekking gir samme kraft (i størrelse) og arbeid for samme |x|.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Bruk W = ½kx² først for å finne k, så Hookes lov.</p>
+        <Step n={1} title="(a) Fjær­konstant">
+          <FormulaBox latex="k=\dfrac{2W}{x^2}=\dfrac{2(19{,}0)}{(0{,}0900)^2}=\dfrac{38{,}0}{0{,}00810}=4691\;\text{N/m}" />
+        </Step>
+        <Step n={2} title="(b) Kraft ved 9 cm">
+          <FormulaBox latex="F=kx=4691(0{,}0900)=422\;\text{N}" />
+        </Step>
+        <Step n={3} title="(c) Arbeid og kraft ved 4 cm kompresjon">
+          <FormulaBox latex="W'=\tfrac12 k(x')^2=\tfrac12(4691)(0{,}0400)^2=3{,}75\;\text{J}" />
+          <FormulaBox latex="F'=k\cdot x'=4691(0{,}0400)=188\;\text{N}" />
+          <FormulaBox variant="gold" latex="k\approx 4690\;\text{N/m},\;F_9=422\;\text{N},\;W_4=3{,}75\;\text{J},\;F_4=188\;\text{N}" />
+        </Step>
+        <Pitfall>
+          <strong>Ikke bland kraft og arbeid.</strong> F = kx (lineær) — dobler du x, dobler du F. W = ½kx² (kvadratisk) — dobler du x, firedobler du W. Glem dette og du blander «4× kraft» med «4× energi».
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 9 cm strekking lagrer 19 J — samme størrelses­orden som å løfte en bok et par desimeter. Men for å strekke til 18 cm må man tilføre 76 J — fire ganger så mye for samme avstands­tillegg.
+        </p>
+      </div>
+    ),
+    summary: <p>k = 2W/x², F = kx (lineær), W = ½kx² (kvadratisk). Fjær­energi vokser raskt med utstrekkning.</p>,
+  },
+
   "6.33": {
-    title: "Tre masser hengt fra fjærer",
+    title: "Tre identiske masser på fjærer (Fig E6.33)",
     difficulty: "middels",
-    pageRef: "s. 202",
+    pageRef: "s. 223",
     problem: (
       <p>
-        Tre identiske 8,50 kg masser henger i tre identiske fjærer stablet
-        vertikalt over hverandre. Hver fjær har <InlineLatex latex="k=7{,}80\;\text{kN/m}" />{" "}
-        og naturlig lengde 12,0 cm. Hvor lange blir fjærene nå?
+        Tre identiske 8,50 kg masser er hengt fra tre identiske fjærer (Fig. E6.33). Hver fjær har
+        kraft­konstant 7,80 kN/m og var 12,0 cm lang før noen masser ble festet. (a) Tegn FBD for hver
+        masse. (b) Hvor lang er hver fjær når den henger som vist?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=8{,}50\;\text{kg}" />, tre stk</li>
-        <li><InlineLatex latex="k=7800\;\text{N/m}" />, naturlig lengde 0,120 m</li>
+        <li>Masse hver: m = 8,50 kg (tre stykker)</li>
+        <li>Fjær­konstant: k = 7,80 kN/m = 7800 N/m</li>
+        <li>Original lengde: L₀ = 12,0 cm = 0,120 m</li>
+        <li>Tre fjærer i serie, hver bærer massene under seg</li>
       </ul>
     ),
-    unknowns: <p>Lengden til hver fjær i likevekt.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Lengde av hver fjær når massene henger</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Isoler hver fjær: strekket i en fjær er lik vekten av alt som henger
-          under den. Så lengden er <InlineLatex latex="L_0+kx/k=L_0+F/k" /> der{" "}
-          <InlineLatex latex="F" /> er last.
-        </p>
-        <TheoryBox title="Hookes lov for fjærstrekk">
-          <FormulaBox latex="F=k\Delta L\;\Rightarrow\;\Delta L=F/k" variant="blue" />
-          <p>
-            Kritisk innsikt: <em>hver fjær bærer forskjellig last</em>. Den
-            nederste bærer bare én masse; den øverste bærer tre.
-          </p>
+        <TheoryBox title="Hver fjær bærer alle masser under seg">
+          <p>Topp­fjær holder alle 3 masser ⇒ T_topp = 3mg.<br />Mellom­fjær holder 2 masser ⇒ T_mellom = 2mg.<br />Nederst holder 1 ⇒ T_nederst = mg.</p>
+        </TheoryBox>
+        <TheoryBox title="Hookes lov i likevekt">
+          <FormulaBox variant="gold" latex="x=\dfrac{F}{k}=\dfrac{T}{k};\quad L=L_0+x" />
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint", content: <p>Sjekk: øverste fjær bærer tre masser, nederste bærer én.</p> },
+      { label: "Hint 1", content: <p>Tegn FBD for hver masse. Masse 1 (nederst) har bare nederste fjær opp og tyngd ned ⇒ T₁ = mg.</p> },
+      { label: "Hint 2", content: <p>For fjær mellom masse 1 og 2: må holde m1 + dens egen masse m2 (i Newton 3 sense) ⇒ 2mg.</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Oppgaven kombinerer Newton's 1. lov (likevekt) med
-          Hookes lov. Det kritiske grepet er å bruke <em>friksjonslegeme-analyse</em>{" "}
-          på hver fjær: snitt systemet og spør "hva henger under denne fjæren?". Den
-          nederste fjæren bærer bare én masse, den midterste to, og den øverste
-          tre. Dette stemmer med Newton's 3. lov: fjær og last trekker hverandre
-          med like store, motsatte krefter.
-        </p>
-        <FormulaBox latex="F_\text{fjær}=k\,\Delta L \quad(\text{Hookes lov}),\qquad \sum\vec F=0 \quad(\text{likevekt})" variant="blue" />
-        <p>
-          <strong>Hvorfor fungerer denne tankegangen?</strong> I likevekt må strekket
-          i hver fjær balansere vekten av alt som henger <em>under</em> den. Det gir
-          oss direkte kraften, og dermed strekket{" "}
-          <InlineLatex latex="\Delta L=F/k" />.
-        </p>
-
-        <Step n={1} title="Last på hver fjær (nedenfra og opp)">
-          <p>
-            Nummerer fjærene slik at 1 er øverst, 3 er nederst:
-          </p>
-          <ul className="list-disc pl-5">
-            <li>Fjær 3 (nederst) bærer én masse: <InlineLatex latex="F_3=mg=(8{,}50)(9{,}80)=83{,}3\;\text{N}" />.</li>
-            <li>Fjær 2 (midten) bærer to masser: <InlineLatex latex="F_2=2mg=166{,}6\;\text{N}" />.</li>
-            <li>Fjær 1 (øverst) bærer tre masser: <InlineLatex latex="F_1=3mg=249{,}9\;\text{N}" />.</li>
-          </ul>
-          <p className="italic text-xs">
-            Dette tilsvarer hvordan en mast holdes oppe av en kabel: jo lenger nede du
-            ser, jo mindre bærer elementet.
-          </p>
+      <div>
+        <p className="mb-2">Topp-fjær har størst belastning fordi den bærer alt under seg.</p>
+        <Step n={1} title="Spenning i hver fjær">
+          <FormulaBox latex="T_\text{topp}=3mg=3(8{,}50)(9{,}80)=249{,}9\;\text{N}" />
+          <FormulaBox latex="T_\text{mellom}=2mg=166{,}6\;\text{N}" />
+          <FormulaBox latex="T_\text{nederst}=mg=83{,}3\;\text{N}" />
         </Step>
-        <Step n={2} title="Hookes lov: fra kraft til strekk">
-          <p>
-            Omform <InlineLatex latex="F=k\Delta L" /> til{" "}
-            <InlineLatex latex="\Delta L=F/k" />. Lengden blir naturlig lengde pluss
-            strekket: <InlineLatex latex="L_i=L_0+\Delta L_i" />.
-          </p>
-          <FormulaBox latex="\Delta L_i=\frac{F_i}{k},\quad L_i=0{,}120+\Delta L_i" variant="blue" />
-          <ul className="list-disc pl-5">
-            <li>Nederste: <InlineLatex latex="0{,}120+83{,}3/7800=\boxed{0{,}131\;\text{m}}" /></li>
-            <li>Midterste: <InlineLatex latex="0{,}120+166{,}6/7800=\boxed{0{,}141\;\text{m}}" /></li>
-            <li>Øverste: <InlineLatex latex="0{,}120+249{,}9/7800=\boxed{0{,}152\;\text{m}}" /></li>
-          </ul>
-          <p className="italic text-xs">
-            Enhetssjekk: N/(N/m) = m ✓. Strekkene er 1,07 cm, 2,14 cm og 3,20 cm —
-            en aritmetisk progresjon, som forventet siden lasten vokser lineært.
-          </p>
+        <Step n={2} title="Forlengelse fra Hookes lov">
+          <FormulaBox latex="x_\text{topp}=249{,}9/7800=0{,}0320\;\text{m}=3{,}20\;\text{cm}" />
+          <FormulaBox latex="x_\text{mellom}=166{,}6/7800=0{,}0214\;\text{m}=2{,}14\;\text{cm}" />
+          <FormulaBox latex="x_\text{nederst}=83{,}3/7800=0{,}0107\;\text{m}=1{,}07\;\text{cm}" />
         </Step>
+        <Step n={3} title="Total lengde">
+          <FormulaBox latex="L_\text{topp}=12{,}0+3{,}20=15{,}2\;\text{cm}" />
+          <FormulaBox latex="L_\text{mellom}=12{,}0+2{,}14=14{,}1\;\text{cm}" />
+          <FormulaBox latex="L_\text{nederst}=12{,}0+1{,}07=13{,}1\;\text{cm}" />
+          <FormulaBox variant="gold" latex="L=15{,}2,\;14{,}1,\;13{,}1\;\text{cm (topp→bunn)}" />
+        </Step>
+        <Pitfall>
+          <strong>Topp-fjær er strukket mest, ikke nederst.</strong> Intuisjon kan lure deg: nederste fjær virker «mest belastet» (henger lavest), men det er topp-fjæren som må bære all vekten under den.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: I et serie­oppheng som dette er belastningen kumulativ oppover. Industrielle bærekonstruksjoner — bruer, kraner, kabel­heiser — må dimensjoneres etter dette prinsippet.
+        </p>
       </div>
     ),
-    summary: (
-      <p>
-        Øverste fjær strekkes mest siden den bærer hele stabelen.
-        Problemløsningsteknikken: isoler én bit om gangen nedenfra, eller
-        start som system — likeverdige svar.
-      </p>
-    ),
+    summary: <p>Topp-fjær bærer alt under seg ⇒ mest strekk. T_n = nmg for n masser hengende fra fjær.</p>,
   },
 
-  // ==========================================================================
-  // 6.34 — Variabel kraft, graf
-  // ==========================================================================
   "6.34": {
-    title: "Arbeid fra variabel kraft (graf)",
+    title: "Variabel kraft på slede (Fig E6.34)",
     difficulty: "middels",
-    pageRef: "s. 202",
+    pageRef: "s. 223",
     problem: (
-      <div className="space-y-2">
-        <p>
-          Et barn trekker en 10,0 kg slede på is med en kraft parallell med
-          x-aksen. Grafen viser <InlineLatex latex="F_x(x)" />: 10 N fra 0 til
-          8 m, lineær nedgang til 0 ved 12 m. Finn arbeidet når sleden beveger
-          seg (a) 0–8 m, (b) 8–12 m, (c) 0–12 m.
-        </p>
-        <svg viewBox="0 0 320 160" className="w-full max-w-sm mx-auto block">
-          <Arrowheads />
-          <line x1="30" y1="130" x2="300" y2="130" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="30" y1="130" x2="30" y2="20" stroke="currentColor" strokeWidth="1.5" />
-          <text x="310" y="135" fontSize="10">x (m)</text>
-          <text x="10" y="25" fontSize="10">F (N)</text>
-          {/* F = 10 from 0..8 */}
-          <line x1="30" y1="50" x2="190" y2="50" stroke="#3b82f6" strokeWidth="2.5" />
-          {/* linear down to 0 at x=12 */}
-          <line x1="190" y1="50" x2="270" y2="130" stroke="#3b82f6" strokeWidth="2.5" />
-          <text x="100" y="45" fontSize="10" fill="#3b82f6">F=10 N</text>
-          <text x="30" y="145" fontSize="9">0</text>
-          <text x="190" y="145" fontSize="9">8</text>
-          <text x="270" y="145" fontSize="9">12</text>
-          <text x="25" y="54" fontSize="9">10</text>
-        </svg>
-      </div>
-    ),
-    knowns: <p>Grafen over.</p>,
-    unknowns: <p>Arbeidet i hvert intervall og totalt.</p>,
-    strategy: (
-      <TheoryBox title="Arbeid = arealet under F-x-kurven">
-        <FormulaBox latex="W=\int_{x_1}^{x_2}F_x(x)\,dx" variant="gold" />
-        <p>
-          Geometrisk tolkning: areal under F-x-grafen. Rektangler, trekanter
-          og trapeser gir raske løsninger uten integrasjon.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint", content: <p>0–8 m: rektangel. 8–12 m: trekant med høyde 10 og bredde 4.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Den generelle definisjonen av arbeid for en kraft
-          som varierer med posisjonen er integralet{" "}
-          <InlineLatex latex="W=\int_{x_1}^{x_2}F_x(x)\,dx" />. Geometrisk tolkning:
-          arbeidet er arealet under <InlineLatex latex="F_x" />-x-grafen mellom
-          grensene. Hvis kraften er konstant, reduseres dette til rektangel-areal{" "}
-          <InlineLatex latex="F\cdot\Delta x" /> — det klassiske tilfellet.
-        </p>
-        <FormulaBox latex="W = \int_{x_1}^{x_2}F_x(x)\,dx \;=\;\text{areal under }F_x(x)" variant="blue" />
-        <p>
-          <strong>Hvorfor integral og ikke F·d?</strong> Fordi <InlineLatex latex="F_x" />{" "}
-          endrer seg med x. Kraft fra 0 til 8 m er konstant (rektangel), men fra 8
-          til 12 m avtar lineært til null (trekant). Vi slipper eksplisitt integrasjon
-          ved å bruke geometri — rektangel- og trekantareal er standardformler.
-        </p>
-
-        <Step n={1} title="(a) 0 til 8 m — rektangel">
-          <p>
-            F konstant 10 N over 8 m → rektangel med bredde 8 og høyde 10:
-          </p>
-          <FormulaBox latex="W_a=\int_0^8 10\,dx=10\cdot 8=(10)(8)=\boxed{80\;\text{J}}" variant="blue" />
-          <p className="italic text-xs">
-            Enhet: N·m = J ✓. Positivt arbeid → KE øker → sleden akselererer.
-          </p>
-        </Step>
-        <Step n={2} title="(b) 8 til 12 m — trekant">
-          <p>
-            F avtar lineært fra 10 N til 0 over 4 m. Dette er en rettvinklet trekant
-            med kateter 4 og 10. Areal = halvparten av basis gange høyde:
-          </p>
-          <FormulaBox latex="W_b=\tfrac12\cdot\text{basis}\cdot\text{høyde}=\tfrac12(4)(10)=\boxed{20\;\text{J}}" variant="blue" />
-          <p className="italic text-xs">
-            Alternativt: gjennomsnittskraften er (10+0)/2 = 5 N, × 4 m = 20 J. Samme
-            svar.
-          </p>
-        </Step>
-        <Step n={3} title="(c) Totalt arbeid 0 til 12 m">
-          <p>
-            Integralet er additivt over sammenhengende intervaller:{" "}
-            <InlineLatex latex="\int_0^{12}=\int_0^8+\int_8^{12}" />. Bare summer.
-          </p>
-          <FormulaBox latex="W_c=W_a+W_b=80+20=\boxed{100\;\text{J}}" variant="gold" />
-          <p className="italic text-xs">
-            Tolkning: sleden har fått 100 J kinetisk energi over 12 m. Hvis vi kjenner
-            massen (10 kg) kan vi finne sluttfarten:{" "}
-            <InlineLatex latex="v=\sqrt{2(100)/10}=4{,}47\;\text{m/s}" />.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: (
       <p>
-        For variable krefter: arbeid = areal under F-x-grafen. Ofte kan
-        du slippe unna integrasjon med enkel geometri.
+        Et barn anvender en kraft <InlineLatex latex="\vec F" /> parallelt med x-aksen på en 10,0 kg
+        slede som beveger seg over isen. x-komponenten av kraften varierer med x slik som vist i
+        Fig. E6.34: lineært opp til 10 N ved x=8 m, deretter lineært ned til 0 ved x=12 m. Beregn
+        arbeidet F utfører idet sleden beveger seg fra (a) x=0 til 8,0 m; (b) x=8,0 til 12,0 m;
+        (c) x=0 til 12,0 m.
       </p>
     ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Masse: m = 10,0 kg (irrelevant for arbeid hvis vi kun trenger W)</li>
+        <li>F(x) lineær 0 → 10 N over 0 → 8 m (trekant)</li>
+        <li>F(x) lineær 10 → 0 N over 8 → 12 m (trekant)</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Arbeid 0 → 8 m</li>
+        <li>(b) Arbeid 8 → 12 m</li>
+        <li>(c) Total arbeid 0 → 12 m</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Variabel kraft via integralet">
+          <FormulaBox variant="gold" latex="W=\int_{x_1}^{x_2}F(x)\,dx=\text{areal under F-x-grafen}" />
+        </TheoryBox>
+        <TheoryBox title="Geometriske formler">
+          <p>Trekant: <InlineLatex latex="A=\tfrac12\,b\,h" />.<br />Rektangel: A = b·h.<br />Trapes: <InlineLatex latex="A=\tfrac12(a+b)h" />.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Begge intervaller er trekanter. Bruk ½·base·høyde.</p> },
+      { label: "Hint 2", content: <p>Total arbeid er bare summen av (a) + (b). Du trenger ikke integrere på nytt.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">F-x-grafen er to trekanter. Beregn areal hver for seg.</p>
+        <Step n={1} title="(a) Arbeid 0 → 8 m">
+          <FormulaBox latex="W_{0-8}=\tfrac12(8\;\text{m})(10\;\text{N})=40\;\text{J}" />
+        </Step>
+        <Step n={2} title="(b) Arbeid 8 → 12 m">
+          <FormulaBox latex="W_{8-12}=\tfrac12(4\;\text{m})(10\;\text{N})=20\;\text{J}" />
+        </Step>
+        <Step n={3} title="(c) Total arbeid">
+          <FormulaBox latex="W_{0-12}=40+20=60\;\text{J}" />
+          <FormulaBox variant="gold" latex="(a)\,40\;\text{J},\;(b)\,20\;\text{J},\;(c)\,60\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Areal under graf, ikke under linje.</strong> En lineær F(x) fra 0 til F_max gir trekant. En konstant F gir rektangel. Pass på å bruke riktig formel — feil formel kan halvere eller doble svaret.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Variabel kraft ⇒ vi kan ikke bruke W = Fd direkte. Areal-metoden er en av de viktigste pedagogiske teknikkene i fysikk: enhver ikke-konstant størrelse kan håndteres med integraler/areal.
+        </p>
+      </div>
+    ),
+    summary: <p>W = areal under F-x. Trekanter: ½b·h. Bruk geometri når kraft varierer lineært.</p>,
   },
 
-  // ==========================================================================
-  // 6.37 — Boks inn i fjær
-  // ==========================================================================
   "6.37": {
-    title: "Boks presses mot fjær — maks kompresjon",
+    title: "Boks mot fjær",
     difficulty: "middels",
-    pageRef: "s. 202",
+    pageRef: "s. 223",
     problem: (
       <p>
-        En 6,0 kg boks med fart 3,0 m/s på en glatt horisontal flate støter
-        inn i en lett fjær med <InlineLatex latex="k=75\;\text{N/cm}=7500\;\text{N/m}" />.
-        Bruk arbeid-energi til å finne maksimal kompresjon.
+        En 6,0 kg boks beveger seg med 3,0 m/s på en horisontal, friksjons­fri overflate og kjører rett
+        inn i den ene enden av en lett horisontal fjær med kraft­konstant 75 N/cm som er festet i den
+        andre enden. Bruk arbeid-energi-teoremet til å finne maksimal kompresjon av fjæra.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=6{,}0\;\text{kg},\;v=3{,}0\;\text{m/s}" /></li>
-        <li><InlineLatex latex="k=7500\;\text{N/m}" />, glatt flate</li>
+        <li>Boks-masse: m = 6,0 kg</li>
+        <li>Initial fart: v = 3,0 m/s</li>
+        <li>Fjær­konstant: k = 75 N/cm = 7500 N/m</li>
+        <li>Friksjons­fritt; fjær har ubetydelig masse</li>
       </ul>
     ),
-    unknowns: <p>Maksimal kompresjon <InlineLatex latex="x_\text{max}" />.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Maksimal kompresjon x_max</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          Ved maksimal kompresjon er boksen i ro et øyeblikk. All KE er
-          "omgjort" til fjærarbeid.
-        </p>
-        <TheoryBox title="Energibevaring i fjær">
-          <p>Arbeid-energi med bare fjær som gjør arbeid:</p>
-          <FormulaBox latex="\tfrac12 mv^2=\tfrac12 k x_\text{max}^2\;\Rightarrow\;x_\text{max}=v\sqrt{\frac{m}{k}}" variant="gold" />
-          <p className="mt-1">
-            Denne formelen ser vi igjen i harmoniske svingninger — det er samme
-            fysikk.
-          </p>
+        <TheoryBox title="Energi­bevaring KE → fjær­energi">
+          <FormulaBox variant="gold" latex="\tfrac12 mv^2=\tfrac12 kx_\text{max}^2" />
+          <p className="text-xs">Ved maks kompresjon står boksen stille — all KE er midlertidig lagret som elastisk fjær­energi.</p>
         </TheoryBox>
       </div>
     ),
-    hints: [{ label: "Hint", content: <p>Sett <InlineLatex latex="KE_i=\tfrac12 k x^2" />.</p> }],
+    hints: [
+      { label: "Hint 1", content: <p>Pass på enheter for k! «N/cm» må konverteres til N/m før du regner med SI-enheter.</p> },
+      { label: "Hint 2", content: <p>Etter omforming: <InlineLatex latex="x_\text{max}=v\sqrt{m/k}" />.</p> },
+    ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er klassisk energioverføring KE → fjær.
-          Boksen starter med ren kinetisk energi <InlineLatex latex="\tfrac12 mv^2" />{" "}
-          og stopper et øyeblikk ved maks kompresjon — altså KE = 0 på det
-          tidspunktet. I mellomtiden har fjæren gjort negativt arbeid på boksen{" "}
-          <InlineLatex latex="W_\text{fjær}=-\tfrac12 k x_\text{max}^2" /> (negativt
-          fordi fjærkraft og bevegelse peker motsatt under kompresjonen).
-        </p>
-        <FormulaBox latex="W_\text{tot}=\Delta K,\qquad W_\text{fjær}=-\tfrac12 k x^2" variant="blue" />
-        <p>
-          <strong>Hvorfor fungerer dette?</strong> Glatt flate → ingen friksjon →
-          fjæren er eneste kraft som gjør arbeid (normalkraft og tyngdekraft står
-          vinkelrett på bevegelsen). Arbeid-energi gir da:{" "}
-          <InlineLatex latex="-\tfrac12 kx^2=0-\tfrac12 mv^2" />, som er ekvivalent
-          med energibevaring mellom KE og fjær-PE.
-        </p>
-
-        <Step n={1} title="Sett opp energibalansen">
-          <p>
-            Ved maks kompresjon er boksen i ro:{" "}
-            <InlineLatex latex="\Delta K=0-\tfrac12 mv^2=-\tfrac12 mv^2" />. Sett{" "}
-            <InlineLatex latex="W_\text{fjær}=\Delta K" />:
-          </p>
-          <FormulaBox latex="-\tfrac12 kx^2=-\tfrac12 mv^2 \;\Rightarrow\; \tfrac12 mv^2=\tfrac12 kx^2" variant="blue" />
-          <p>
-            Minustegnene kansellerer. Fysisk tolkning: all KE konverteres til elastisk
-            energi lagret i fjæren.
-          </p>
-          <FormulaBox latex="\tfrac12(6{,}0)(3{,}0)^2=\tfrac12(7500)x^2\;\Rightarrow\; 27=3750\,x^2" variant="blue" />
+      <div>
+        <p className="mb-2">Energi­bevaring: KE blir til fjær­energi. Boks stopper momentant ved maks kompresjon.</p>
+        <Step n={1} title="Konverter k til SI">
+          <FormulaBox latex="k=75\;\text{N/cm}\cdot\dfrac{100\;\text{cm}}{1\;\text{m}}=7500\;\text{N/m}" />
         </Step>
-        <Step n={2} title="Algebraisk omforming og tall">
-          <p>
-            Løs for <InlineLatex latex="x" />:{" "}
-            <InlineLatex latex="x=\sqrt{mv^2/k}=v\sqrt{m/k}" />. Denne formelen dukker
-            opp igjen i harmonisk svingning (vinkelfrekvens{" "}
-            <InlineLatex latex="\omega=\sqrt{k/m}" />).
-          </p>
-          <FormulaBox latex="x=\sqrt{27/3750}=\sqrt{0{,}0072}=\boxed{0{,}0849\;\text{m}=8{,}49\;\text{cm}}" variant="gold" />
-          <p className="italic text-xs">
-            Enhetssjekk: <InlineLatex latex="\sqrt{\text{kg}\cdot(\text{m/s})^2/(\text{N/m})}=\sqrt{\text{J/(N/m)}}=\sqrt{\text{m}^2}=\text{m}" /> ✓.
-            Størrelsesorden: 8,5 cm kompresjon er rimelig for en middels stiv fjær.
-          </p>
+        <Step n={2} title="Sett KE = fjær­energi">
+          <FormulaBox latex="\tfrac12 mv^2=\tfrac12 kx_\text{max}^2" />
+          <FormulaBox latex="x_\text{max}=v\sqrt{\dfrac{m}{k}}=3{,}0\sqrt{\dfrac{6{,}0}{7500}}=3{,}0\sqrt{8{,}0\times 10^{-4}}" />
+          <FormulaBox latex="x_\text{max}=3{,}0(0{,}02828)=0{,}0849\;\text{m}=8{,}49\;\text{cm}" />
+          <FormulaBox variant="gold" latex="x_\text{max}\approx 8{,}5\;\text{cm}" />
         </Step>
+        <Pitfall>
+          <strong>Enhets­feil med k.</strong> 75 N/cm vs. 75 N/m er en faktor 100 forskjell. Med feil enhet får du x_max ≈ 85 cm i stedet for 8,5 cm — én størrelses­orden feil!
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Etter maks kompresjon vil fjæra skyte boksen tilbake med samme fart 3,0 m/s — ideell elastisk støt mot fjær. Dette danner grunnlaget for harmonisk svingning.
+        </p>
       </div>
     ),
-    summary: <p>Energibevaring på ideell fjær: KE ↔ fjærarbeid. Glatt flate lar hele KE gå til fjæren.</p>,
+    summary: <p>KE = fjær­energi: x_max = v√(m/k). Pass på enheter — k på SI-form (N/m).</p>,
   },
 
-  // ==========================================================================
-  // 6.44 — Bil med variabel F
-  // ==========================================================================
   "6.44": {
-    title: "Fart av modellbil med F(x)",
-    difficulty: "middels",
-    pageRef: "s. 203",
+    title: "Glider mot fjær på skrå­plan (Fig)",
+    difficulty: "vanskelig",
+    pageRef: "s. 223",
     problem: (
       <p>
-        En 2,0 kg modellbil starter i ro ved <InlineLatex latex="x=0" />.
-        Nettokraften er gitt ved <InlineLatex latex="F(x)=k_1 x" /> med{" "}
-        <InlineLatex latex="k_1=0{,}5\;\text{N/m}" /> for <InlineLatex latex="0\le x\le 4" />{" "}
-        m, og deretter konstant <InlineLatex latex="F=2{,}0\;\text{N}" /> fra{" "}
-        <InlineLatex latex="x=4" /> til <InlineLatex latex="x=7\;\text{m}" />.
-        Finn farten ved (a) <InlineLatex latex="x=3\;\text{m}" />, (b){" "}
-        <InlineLatex latex="x=4\;\text{m}" />, (c) <InlineLatex latex="x=7\;\text{m}" />.
+        En liten glider plasseres mot en sammen­presset fjær i bunnen av et luft­spor som heller 40°
+        over horisontalen. Glideren har masse 0,0900 kg. Fjæra har <InlineLatex latex="k=640\;\text{N/m}" />
+        og neglisjerbar masse. Når fjæra slippes, reiser glideren maks 1,80 m langs sporet før den
+        glir tilbake. Glideren slutter å være i kontakt med fjæra etter at den er tilbake til uutstrakt
+        lengde. (a) Hvilken avstand var fjæra først sammen­presset? (b) Når glideren har reist 0,80 m
+        langs sporet fra initial posisjon, er den fortsatt i kontakt med fjæra? Hva er kinetisk energi
+        ved dette punktet?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=2{,}0\;\text{kg},\;v_0=0" /></li>
-        <li>Nettokraft F(x) variabel</li>
+        <li>Helningsvinkel: α = 40°</li>
+        <li>Glider­masse: m = 0,0900 kg</li>
+        <li>Fjær­konstant: k = 640 N/m</li>
+        <li>Maks reise opp: d_max = 1,80 m langs sporet</li>
+        <li>Friksjons­fritt luft­spor; fjæra slipper ved uutstrakt lengde</li>
       </ul>
     ),
-    unknowns: <p>Fart på tre punkter.</p>,
-    strategy: (
-      <p>
-        Arbeid-energi: <InlineLatex latex="\tfrac12 mv^2=\int_0^x F\,dx'" /> fra{" "}
-        0. Bruk passende integraler eller arealberegning.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p>For <InlineLatex latex="0..x\;(x<4)" />: areal av trekant <InlineLatex latex="\tfrac12 k_1 x^2" />. Så konstant.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Kraften endrer seg med posisjon —{" "}
-          <InlineLatex latex="F(x)=k_1 x" /> for <InlineLatex latex="x\le 4" /> og
-          konstant etterpå. Siden F ikke er konstant, må vi integrere for den første
-          delen. Arbeid-energi gir farten direkte fra totalarbeidet:{" "}
-          <InlineLatex latex="W_\text{tot}=\tfrac12 mv^2-0" />, slik at{" "}
-          <InlineLatex latex="v=\sqrt{2W/m}" />.
-        </p>
-        <FormulaBox latex="W=\int_{0}^{x}F(x')\,dx',\qquad \tfrac12 mv^2=W" variant="blue" />
-        <p>
-          <strong>Hvorfor arbeid-energi og ikke Newton?</strong> Vi kunne løst{" "}
-          <InlineLatex latex="ma=k_1 x" /> som en differensialligning, men det ville
-          vært lineær harmonisk fysikk — overkill. Arealmetoden er raskere og
-          visuelt intuitiv.
-        </p>
-
-        <Step n={1} title="(a) ved x = 3 m (i den lineære sonen)">
-          <p>
-            Kraften er <InlineLatex latex="F(x)=0{,}5\,x" /> i denne sonen. Integralet
-            fra 0 til 3 er trekant-arealet med basis 3 og høyde{" "}
-            <InlineLatex latex="0{,}5\cdot 3=1{,}5" />:
-          </p>
-          <FormulaBox latex="W=\int_0^3 k_1 x'\,dx'=\tfrac12 k_1 x^2=\tfrac12(0{,}5)(3)^2=2{,}25\;\text{J}" variant="blue" />
-          <FormulaBox latex="v=\sqrt{2W/m}=\sqrt{2(2{,}25)/2}=\sqrt{2{,}25}=\boxed{1{,}50\;\text{m/s}}" variant="blue" />
-          <p className="italic text-xs">
-            Samme struktur som fjærarbeid — fordi{" "}
-            <InlineLatex latex="F\propto x" /> gir trekant-areal.
-          </p>
-        </Step>
-        <Step n={2} title="(b) ved x = 4 m (slutten av lineær sone)">
-          <FormulaBox latex="W=\tfrac12(0{,}5)(4)^2=4{,}0\;\text{J}\;\Rightarrow\; v=\sqrt{2(4{,}0)/2}=\sqrt{4{,}0}=\boxed{2{,}00\;\text{m/s}}" variant="blue" />
-        </Step>
-        <Step n={3} title="(c) ved x = 7 m (ut av konstant-sone)">
-          <p>
-            Del integralet i to: fra 0 til 4 m (lineær, = 4 J) og fra 4 til 7 m
-            (konstant F = 2 N over 3 m, rektangel = 6 J). Summer:
-          </p>
-          <FormulaBox latex="W=4{,}0+(2{,}0)(3)=10{,}0\;\text{J}\;\Rightarrow\; v=\sqrt{2(10)/2}=\sqrt{10}=\boxed{3{,}16\;\text{m/s}}" variant="gold" />
-          <p className="italic text-xs">
-            Fartvekst: 1,5 → 2,0 → 3,16 m/s viser hvordan v skalerer med{" "}
-            <InlineLatex latex="\sqrt{W}" />, ikke W direkte.
-          </p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Strategi: del integralet opp etter regioner og summer arbeidet. Arbeid-energi gir farten umiddelbart.</p>,
-  },
-
-  // ==========================================================================
-  // 6.45 — Waterpark-slede
-  // ==========================================================================
-  "6.45": {
-    title: "Slede skutt av komprimert fjær",
-    difficulty: "middels",
-    pageRef: "s. 203",
-    problem: (
-      <p>
-        I en vannpark skytes sleder langs en glatt flate av en komprimert fjær
-        med <InlineLatex latex="k=40{,}0\;\text{N/cm}=4000\;\text{N/m}" />. En
-        slede med rytter (samlet masse 70,0 kg) presses mot fjæren og
-        komprimerer den 0,375 m. Fra ro — hvor rask er sleden når (a) fjæren
-        er tilbake til naturlig lengde, (b) fjæren fortsatt er komprimert 0,200 m?
-      </p>
-    ),
-    knowns: (
+    unknowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="k=4000\;\text{N/m},\;x_i=0{,}375\;\text{m}" /></li>
-        <li><InlineLatex latex="m=70{,}0\;\text{kg}" />, glatt flate</li>
+        <li>(a) Initial kompresjon x</li>
+        <li>(b) Er glider i kontakt med fjær ved 0,80 m? KE der?</li>
       </ul>
     ),
-    unknowns: <p>Fart i to posisjoner.</p>,
-    strategy: (
-      <p>
-        Arbeid-energi med fjær: KE = arbeid av fjæren. Arbeidet fra start til
-        kompresjon <InlineLatex latex="x" /> er{" "}
-        <InlineLatex latex="\tfrac12 k(x_i^2-x^2)" />.
-      </p>
-    ),
-    hints: [{ label: "Hint", content: <p>(b) fjæren er fortsatt komprimert — bare en del av PE er frigjort.</p> }],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="(a) Naturlig lengde (x=0)">
-          <FormulaBox latex="\tfrac12 k x_i^2=\tfrac12(4000)(0{,}375)^2=281{,}25\;\text{J}" variant="blue" />
-          <FormulaBox latex="v=\sqrt{2W/m}=\sqrt{2(281{,}25)/70}=\boxed{2{,}83\;\text{m/s}}" variant="gold" />
-        </Step>
-        <Step n={2} title="(b) Fortsatt komprimert 0,200 m">
-          <FormulaBox latex="W=\tfrac12 k(x_i^2-x^2)=\tfrac12(4000)(0{,}375^2-0{,}200^2)=201{,}25\;\text{J}" variant="blue" />
-          <FormulaBox latex="v=\sqrt{2(201{,}25)/70}=\boxed{2{,}40\;\text{m/s}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>En fjær som er delvis uthulet har enda PE igjen. Regn ut det arbeidet som <em>faktisk</em> er levert.</p>,
-  },
-
-  // ==========================================================================
-  // 6.47 — 100 W-pære
-  // ==========================================================================
-  "6.47": {
-    title: "Effekt, energi og fart for KE-ekvivalent",
-    difficulty: "lett",
-    pageRef: "s. 203",
-    problem: (
-      <p>
-        Hvor mange joule bruker en 100 W-lyspære per time? Hvor raskt må en
-        70 kg person løpe for å ha den samme kinetiske energien?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="P=100\;\text{W},\;t=3600\;\text{s}" /></li>
-        <li><InlineLatex latex="m=70\;\text{kg}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Energi og fart.</p>,
-    strategy: (
-      <TheoryBox title="Effekt og energi">
-        <FormulaBox latex="E=Pt,\quad v=\sqrt{2KE/m}" variant="gold" />
-      </TheoryBox>
-    ),
-    hints: [],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Energi på én time">
-          <FormulaBox latex="E=(100)(3600)=\boxed{3{,}6\times 10^5\;\text{J}}" variant="gold" />
-        </Step>
-        <Step n={2} title="Matchende fart">
-          <FormulaBox latex="v=\sqrt{2(3{,}6\times 10^5)/70}=\sqrt{10286}=\boxed{101\;\text{m/s}}" variant="gold" />
-          <p className="italic text-xs">Ca 364 km/t — langt over menneskelig fart. Et håndgripelig bevis for hvor mye energi en pære faktisk bruker.</p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Effekt × tid = energi. Lyspæren bruker like mye energi på én time som en menneskelig kropp ville hatt ved 101 m/s.</p>,
-  },
-
-  // ==========================================================================
-  // 6.50 — Magnetar
-  // ==========================================================================
-  "6.50": {
-    title: "Kraftforhold mellom magnetar og sol",
-    difficulty: "lett",
-    pageRef: "s. 204",
-    problem: (
-      <p>
-        En magnetar slapp i 0,20 s ut like mye energi som solen gjør på 250 000
-        år. Hvis P er solens gjennomsnittseffekt, hva er magnetarens
-        gjennomsnittseffekt (i termer av P)?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li>Magnetar: <InlineLatex latex="E=P\cdot t_\odot" /> med <InlineLatex latex="t_\odot=250\,000\;\text{år}" /></li>
-        <li>Utløpstid: <InlineLatex latex="\Delta t=0{,}20\;\text{s}" /></li>
-      </ul>
-    ),
-    unknowns: <p><InlineLatex latex="P_\text{mag}/P" /></p>,
-    strategy: (
-      <p>
-        Effekt = energi/tid. Magnetaren slipper solens 250 000 år av energi på
-        0,20 s.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p>Konverter år til sekunder: 1 år ≈ 3,156 × 10⁷ s.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Tid i sekunder">
-          <FormulaBox latex="t_\odot=(2{,}5\times 10^5)(3{,}156\times 10^7)=7{,}89\times 10^{12}\;\text{s}" variant="blue" />
-        </Step>
-        <Step n={2} title="Effektforhold">
-          <FormulaBox latex="\frac{P_\text{mag}}{P}=\frac{t_\odot}{\Delta t}=\frac{7{,}89\times 10^{12}}{0{,}20}=\boxed{3{,}9\times 10^{13}\,P}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>Effekt er <em>rate</em>: komprimer lik energi i kortere tid → stor effekt. Magnetarer er nær solens evigvarende effekt × 4 × 10¹³.</p>,
-  },
-
-  // ==========================================================================
-  // 6.54 — Heisens kapasitet
-  // ==========================================================================
-  "6.54": {
-    title: "Maks passasjerer i heis med effektgrense",
-    difficulty: "middels",
-    pageRef: "s. 204",
-    problem: (
-      <p>
-        En heis har masse 600 kg (uten passasjerer). Den skal stige 20,0 m
-        (5 etasjer) på 16,0 s med konstant fart. Motoren leverer maks 40 hp.
-        Hvor mange passasjerer (ca 65 kg hver) kan være med?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m_0=600\;\text{kg},\;h=20{,}0\;\text{m},\;t=16{,}0\;\text{s}" /></li>
-        <li><InlineLatex latex="P_\text{max}=40\;\text{hp}=40\cdot 746=29840\;\text{W}" /></li>
-        <li><InlineLatex latex="m_p=65\;\text{kg}" /> per passasjer</li>
-      </ul>
-    ),
-    unknowns: <p>Antall passasjerer <InlineLatex latex="N" />.</p>,
     strategy: (
       <div className="space-y-2">
-        <p>
-          Konstant fart → kraft fra motor = total vekt.
-        </p>
-        <TheoryBox title="Effekt og hastighet">
-          <FormulaBox latex="P=Fv" variant="gold" />
-          <p>For konstant fart: <InlineLatex latex="v=h/t" /> og <InlineLatex latex="F=(m_0+Nm_p)g" />.</p>
+        <TheoryBox title="Energi­bevaring langs hele banen">
+          <FormulaBox variant="gold" latex="\tfrac12 kx^2=mgd_\text{max}\sin\alpha" />
+          <p className="text-xs">All fjær­energi blir til høyde­energi mgh = mg·d_max·sin α på toppen.</p>
+        </TheoryBox>
+        <TheoryBox title="Energi ved mellom­punkt">
+          <FormulaBox variant="gold" latex="K(d)=mg(d_\text{max}-d)\sin\alpha" />
+          <p className="text-xs">Hvis glider er borte fra fjæra: KE + mgh = total energi (konstant).</p>
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint", content: <p>Fart <InlineLatex latex="v=20/16=1{,}25\;\text{m/s}" />.</p> },
+      { label: "Hint 1", content: <p>For (a): all initial fjær­energi blir til mgh på toppen. Ingen KE der (snur).</p> },
+      { label: "Hint 2", content: <p>For (b): sammenlign 0,80 m med fjær­kompresjonen x. Hvis 0,80 m &gt; x, er glider forbi fjær­kontakten.</p> },
     ],
     solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Sett opp ligningen">
-          <FormulaBox latex="P_\text{max}=(m_0+Nm_p)gv" variant="blue" />
+      <div>
+        <p className="mb-2">Energi­bevaring fra start (kun fjær­energi) til topp (kun gravitasjons­energi).</p>
+        <Step n={1} title="(a) Initial kompresjon">
+          <FormulaBox latex="\tfrac12 kx^2=mgd_\text{max}\sin\alpha" />
+          <FormulaBox latex="x^2=\dfrac{2mgd_\text{max}\sin 40°}{k}=\dfrac{2(0{,}0900)(9{,}80)(1{,}80)(0{,}6428)}{640}" />
+          <FormulaBox latex="x^2=\dfrac{2{,}041}{640}=3{,}19\times 10^{-3}\;\text{m}^2" />
+          <FormulaBox latex="x=0{,}0565\;\text{m}\approx 5{,}66\;\text{cm}" />
         </Step>
-        <Step n={2} title="Løs for N">
-          <FormulaBox latex="N=\frac{P_\text{max}/(gv)-m_0}{m_p}=\frac{29840/(9{,}80\cdot 1{,}25)-600}{65}" variant="blue" />
-          <FormulaBox latex="=\frac{2436{,}7-600}{65}=\frac{1836{,}7}{65}\approx 28{,}3" variant="blue" />
-          <p>Altså <strong>maks 28 passasjerer</strong>.</p>
+        <Step n={2} title="(b) Sjekk om i kontakt ved 0,80 m">
+          <p>Glider er kun i kontakt mens fjæra er sammen­presset, dvs. innenfor x = 5,66 cm. 0,80 m = 80 cm &gt; 5,66 cm ⇒ <strong>IKKE i kontakt</strong>.</p>
         </Step>
+        <Step n={3} title="(b) KE ved 0,80 m">
+          <p>Nå er kun gravitasjon virksom. Brukes energi­bevaring fra startens energi (= mg·d_max·sin α) til 0,80 m:</p>
+          <FormulaBox latex="K(0{,}80)+mg(0{,}80)\sin\alpha=mgd_\text{max}\sin\alpha" />
+          <FormulaBox latex="K=mg(d_\text{max}-0{,}80)\sin\alpha=0{,}0900(9{,}80)(1{,}00)(0{,}6428)" />
+          <FormulaBox latex="K=0{,}567\;\text{J}" />
+          <FormulaBox variant="gold" latex="x\approx 5{,}66\;\text{cm};\;\text{IKKE i kontakt};\;K\approx 0{,}567\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Fjær­energi gjelder kun mens i kontakt.</strong> Etter at glider passerer fjærens uutstrakte lengde, er det kun gravitasjon som virker. Mange studenter glemmer å sjekke om kontakt fortsatt er der.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Fjæra leverer energien sin på de første 5,66 cm; resten er bare gravitasjons­spilling. KE er størst rett etter fjær­frigjøring og minker monotont oppover.
+        </p>
       </div>
     ),
-    summary: <p>Effekt setter grenser: <InlineLatex latex="P=Fv" />. Konstant fart betyr kraft = samlet vekt.</p>,
+    summary: <p>Energi­bevaring start → topp gir kompresjon. KE ved mellompunkt: K = mg(d_max − d)sin α.</p>,
   },
 
-  // ==========================================================================
-  // 6.55 — Skitrekk
-  // ==========================================================================
-  "6.55": {
-    title: "Effektbehov for skitrekk",
-    difficulty: "middels",
-    pageRef: "s. 204",
+  "6.45": {
+    title: "CALC: F(x) = 18,0 N − (0,530 N/m)x",
+    difficulty: "vanskelig",
+    pageRef: "s. 223",
     problem: (
       <p>
-        En skitrekk går opp et 15° skråplan på 300 m. Tauet går med
-        12,0 km/t og drar 50 personer samtidig, med gjennomsnittlig masse 70,0 kg.
-        Estimer nødvendig effekt.
+        En kraft <InlineLatex latex="\vec F" /> i +x-retning med størrelse <InlineLatex latex="F(x)=18{,}0\;\text{N}-(0{,}530\;\text{N/m})x" />
+        anvendes på en 5,00 kg boks som hviler på det horisontale, friksjons­frie underlaget på en frossen
+        innsjø. F(x) er den eneste horisontale kraften på boksen. Hvis boksen først er i ro ved x=0,
+        hva er farten etter at den har reist 11,0 m?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\theta=15^\circ,\;v=12{,}0\;\text{km/t}=3{,}33\;\text{m/s}" /></li>
-        <li><InlineLatex latex="N=50,\;m=70\;\text{kg}" /></li>
+        <li>Kraft­funksjon: <InlineLatex latex="F(x)=18{,}0-0{,}530x" /> N</li>
+        <li>Boks-masse: m = 5,00 kg</li>
+        <li>Distanse: d = 11,0 m</li>
+        <li>Friksjons­fritt; starter i ro</li>
       </ul>
     ),
-    unknowns: <p>Nødvendig effekt.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Slutt­fart v ved x = 11 m</li>
+      </ul>
+    ),
     strategy: (
-      <p>
-        Konstant fart på skråplan: tauet må balansere vektens komponent ned
-        skråplanet. Effekt = kraft × fart.
-      </p>
+      <div className="space-y-2">
+        <TheoryBox title="Variabel kraft og arbeid">
+          <FormulaBox variant="gold" latex="W=\int_0^{d}F(x)\,dx" />
+          <p className="text-xs">For lineær F(x), integralet gir 18x − 0,265x² evaluert ved 11 m.</p>
+        </TheoryBox>
+        <TheoryBox title="Arbeid-energi-teoremet">
+          <FormulaBox variant="gold" latex="W=\tfrac12 mv^2\Rightarrow v=\sqrt{\dfrac{2W}{m}}" />
+        </TheoryBox>
+      </div>
     ),
     hints: [
-      { label: "Hint", content: <p>Kraft pr person: <InlineLatex latex="F_1=mg\sin\theta" />. Total kraft: <InlineLatex latex="NF_1" />.</p> },
+      { label: "Hint 1", content: <p>Integrer F(x) ledd for ledd: ∫18 dx = 18x; ∫0,530x dx = 0,265x².</p> },
+      { label: "Hint 2", content: <p>Ved x = 11 m sjekk: F(11) = 18 − 0,530(11) = 12,17 N. Fortsatt positiv ⇒ akselererer hele veien.</p> },
     ],
     solution: (
+      <div>
+        <p className="mb-2">Integrer F(x), så bruk arbeid-energi-teoremet for å finne slutt­fart.</p>
+        <Step n={1} title="Integrér kraften">
+          <FormulaBox latex="W=\int_0^{11}(18{,}0-0{,}530x)\,dx=\bigl[18{,}0x-0{,}265x^2\bigr]_0^{11}" />
+          <FormulaBox latex="W=18{,}0(11)-0{,}265(121)=198{,}0-32{,}07=165{,}9\;\text{J}" />
+        </Step>
+        <Step n={2} title="Slutt­fart">
+          <FormulaBox latex="v=\sqrt{\dfrac{2W}{m}}=\sqrt{\dfrac{2(165{,}9)}{5{,}00}}=\sqrt{66{,}36}=8{,}15\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 8{,}15\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>Pass på koeffisienten.</strong> ∫(0,530x) dx = 0,530·x²/2 = 0,265x². Glemmer du å dele på 2 i stam­funksjonen, blir svaret feil.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Kraften svekkes lineært over avstanden — fra 18 N i x = 0 til 12,17 N ved x = 11 m. Dette er typisk for f.eks. en spennings­fjær eller en magnetisk avstands­avhengig kraft.
+        </p>
+      </div>
+    ),
+    summary: <p>Variabel F(x): W = ∫F dx, så ½mv² = W. Lineær F gir kvadratisk integral.</p>,
+  },
+
+  "6.47": {
+    title: "100 W lyspære — energi og fart",
+    difficulty: "lett",
+    pageRef: "s. 224",
+    problem: (
+      <p>
+        Hvor mange joule med energi bruker en 100 watt lyspære per time? Hvor fort må en 75 kg person
+        løpe for å ha den mengden kinetisk energi?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Lyspære-effekt: P = 100 W</li>
+        <li>Tid: t = 1 time = 3600 s</li>
+        <li>Person-masse: m = 75 kg</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Energi forbruk E i joule</li>
+        <li>Fart v personen må ha for å ha tilsvarende KE</li>
+      </ul>
+    ),
+    strategy: (
       <div className="space-y-2">
-        <Step n={1} title="Kraft langs tauet">
-          <FormulaBox latex="F=Nmg\sin\theta=50(70)(9{,}80)\sin 15^\circ=50(70)(9{,}80)(0{,}2588)=8881\;\text{N}" variant="blue" />
+        <TheoryBox title="Energi = Effekt · tid">
+          <FormulaBox variant="gold" latex="E=P\cdot t" />
+        </TheoryBox>
+        <TheoryBox title="Kinetisk energi-tolkning">
+          <FormulaBox variant="gold" latex="K=\tfrac12 mv^2\Rightarrow v=\sqrt{\dfrac{2K}{m}}" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>1 watt = 1 joule per sekund. P·t gir energi i joule.</p> },
+      { label: "Hint 2", content: <p>Dobbelt så mye energi i KE krever bare √2 ≈ 1,41× fart — kvadratet i KE-formelen er kraftig.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Energi: P·t. Sammenlign med ½mv² for å finne ekvivalent fart.</p>
+        <Step n={1} title="Energi forbrukt">
+          <FormulaBox latex="E=Pt=100\;\text{W}\cdot 3600\;\text{s}=3{,}60\times 10^{5}\;\text{J}=360\;\text{kJ}" />
+        </Step>
+        <Step n={2} title="Tilsvarende fart">
+          <FormulaBox latex="v=\sqrt{\dfrac{2E}{m}}=\sqrt{\dfrac{720000}{75}}=\sqrt{9600}=97{,}98\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="E=3{,}60\times 10^{5}\;\text{J},\;v\approx 98\;\text{m/s}\,(\approx 352\;\text{km/t})" />
+        </Step>
+        <Pitfall>
+          <strong>kWh ≠ kJ direkte.</strong> 100 W i 1 time = 0,1 kWh = 360 kJ. Husk at 1 kWh = 3,6 MJ. Dette er ofte forvirret på regninger.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 98 m/s er over verdensrekord-fart (Bolt: 12 m/s). Det viser at en lyspære på en time inneholder enorm KE — derfor er elektrisitet praktisk for arbeid: liten effekt over lang tid akkumulerer mye energi.
+        </p>
+      </div>
+    ),
+    summary: <p>E = P·t. Tilsvarende fart for samme KE: v = √(2E/m). Tids-akkumulering gir store energier.</p>,
+  },
+
+  "6.50": {
+    title: "Stein på ru overflate — gjennomsnitts­effekt",
+    difficulty: "middels",
+    pageRef: "s. 224",
+    problem: (
+      <p>
+        En 20,0 kg stein glir på en ru, horisontal overflate ved 8,00 m/s og stopper etter hvert pga
+        friksjon. <InlineLatex latex="\mu_k=0{,}200" />. Hvor stor er gjennomsnitts­effekten produsert
+        av friksjon mens steinen stopper?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Stein-masse: m = 20,0 kg</li>
+        <li>Initial fart: v₀ = 8,00 m/s</li>
+        <li>μ<sub>k</sub> = 0,200</li>
+        <li>Steinen stopper helt under friksjon</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Gjennomsnitts­effekt fra friksjon mens den stopper</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Total arbeid av friksjon = total KE">
+          <FormulaBox variant="gold" latex="W_f=\tfrac12 mv_0^2" />
+        </TheoryBox>
+        <TheoryBox title="Stoppe­tid via Newton 2">
+          <p>Friksjons­akselerasjon a = μ<sub>k</sub>·g. Tid til v = 0:</p>
+          <FormulaBox variant="gold" latex="t=\dfrac{v_0}{\mu_k g}" />
+        </TheoryBox>
+        <TheoryBox title="Gjennomsnitts­effekt">
+          <FormulaBox variant="gold" latex="P_\text{avg}=\dfrac{W}{t}" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Beregn total energi (KE som blir spist) først, så tid det tar.</p> },
+      { label: "Hint 2", content: <p>Alternativ: P = ½(F·v_max + F·v_min) = ½F·v₀ siden farten avtar lineært.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Beregn total arbeid og total tid hver for seg, deretter del.</p>
+        <Step n={1} title="Total arbeid (= initial KE)">
+          <FormulaBox latex="W_f=K_0=\tfrac12 mv_0^2=\tfrac12(20{,}0)(8{,}00)^2=640\;\text{J}" />
+        </Step>
+        <Step n={2} title="Stoppe­tid">
+          <FormulaBox latex="a=\mu_k g=0{,}200(9{,}80)=1{,}96\;\text{m/s}^2" />
+          <FormulaBox latex="t=\dfrac{v_0}{a}=\dfrac{8{,}00}{1{,}96}=4{,}08\;\text{s}" />
+        </Step>
+        <Step n={3} title="Gjennomsnitts­effekt">
+          <FormulaBox latex="P_\text{avg}=\dfrac{W}{t}=\dfrac{640}{4{,}08}=157\;\text{W}" />
+          <FormulaBox variant="gold" latex="P_\text{avg}\approx 157\;\text{W}" />
+        </Step>
+        <Pitfall>
+          <strong>Gjennomsnitts­effekt vs. øyeblikks­effekt.</strong> Den øyeblikkelige effekten F·v varierer fra F·v₀ = 314 W ved start til 0 W ved stopp. Gjennomsnittet er midt imellom = 157 W.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 157 W tilsvarer en kraftig lyspære. Hele 640 J av kinetisk energi blir til varme på 4 sekunder — du ville kjent det hvis du tok på underlaget rett etter.
+        </p>
+      </div>
+    ),
+    summary: <p>P_avg = W/t. For konstant kraft og lineært avtagende fart: P_avg = ½P_maks = ½F·v₀.</p>,
+  },
+
+  "6.54": {
+    title: "Heis-design — maks passasjerer",
+    difficulty: "middels",
+    pageRef: "s. 224",
+    problem: (
+      <p>
+        En heis har masse 600 kg, passasjerer ikke inkludert. Heisen er designet til å stige med
+        konstant fart en vertikal avstand 20,0 m (fem etasjer) på 16,0 s, og er drevet av en motor som
+        kan levere opptil 30 kW til heisen. Hva er maks antall passasjerer som kan kjøre i heisen?
+        Anta gjennomsnitts passasjer­masse 65,0 kg.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Heis-masse (tom): m_h = 600 kg</li>
+        <li>Vertikal stigning: h = 20,0 m</li>
+        <li>Stigningstid: t = 16,0 s</li>
+        <li>Maks motor-effekt: P_max = 30 kW = 30000 W</li>
+        <li>Gjennomsnitts passasjer­masse: m_p = 65,0 kg</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Maks antall passasjerer N</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Effekt for konstant fart vertikalt">
+          <FormulaBox variant="gold" latex="P=F\cdot v=Mg\cdot v" />
+          <p className="text-xs">M er total masse heis + passasjerer. Konstant fart ⇒ kraft motor = vekt.</p>
+        </TheoryBox>
+        <TheoryBox title="Konstant fart">
+          <FormulaBox variant="gold" latex="v=\dfrac{h}{t}" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Vurder hvilken total masse motoren akkurat klarer å løfte ved P_max og v.</p> },
+      { label: "Hint 2", content: <p>Avrund <strong>nedover</strong> for antall passasjerer — du kan ikke ha 28,4 personer, og 29 ville overskride effekten.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Sett P = Mgv = P_max for å finne maksimal total masse.</p>
+        <Step n={1} title="Heisens fart">
+          <FormulaBox latex="v=\dfrac{h}{t}=\dfrac{20{,}0}{16{,}0}=1{,}25\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="Maks total masse">
+          <FormulaBox latex="M_\text{maks}=\dfrac{P_\text{max}}{gv}=\dfrac{30000}{9{,}80\cdot 1{,}25}=\dfrac{30000}{12{,}25}=2449\;\text{kg}" />
+        </Step>
+        <Step n={3} title="Maks passasjer­masse og antall">
+          <FormulaBox latex="M_\text{pass}=2449-600=1849\;\text{kg}" />
+          <FormulaBox latex="N=\dfrac{1849}{65{,}0}=28{,}4\Rightarrow N=28" />
+          <FormulaBox variant="gold" latex="N=28\;\text{passasjerer}" />
+        </Step>
+        <Pitfall>
+          <strong>Avrund alltid nedover for kapasitet.</strong> 28,4 betyr ikke 29 — den 29. passasjer ville overskride 30 kW. Heisen ville stoppet eller motoren ville brent.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Realistisk grunnlag for sikkerhet — heiser har ofte en sikkerhets­margin på 20–25 %. Med margin ville maks blitt ~22–23 passasjerer for å unngå overbelastning.
+        </p>
+      </div>
+    ),
+    summary: <p>P = Mgv. Avrund alltid nedover ved beregning av kapasitet — sikkerhet over alt.</p>,
+  },
+
+  "6.55": {
+    title: "Skitrekk — effekt­behov",
+    difficulty: "middels",
+    pageRef: "s. 224",
+    problem: (
+      <p>
+        En skitrekk opererer på en 14,0° skråning av lengde 340 m. Tauet beveger seg ved 11,5 km/h og
+        gir effekt for 55 ryttere om gangen, med en gjennomsnitts­masse per rytter 70,0 kg. Estimer
+        effekten som kreves for å drive trekket.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Helningsvinkel: α = 14,0°</li>
+        <li>Lengde: L = 340 m (ikke nødvendig for effekt-beregning)</li>
+        <li>Tau-fart: v = 11,5 km/h = 3,194 m/s</li>
+        <li>Antall ryttere: n = 55</li>
+        <li>Gjennomsnitts­masse per rytter: m = 70,0 kg</li>
+        <li>Konstant fart, friksjon antas neglisjerbar</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Effekt P som kreves</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Konstant fart oppover skråning">
+          <p>Tau­kraft = komponent av tyngd langs skråning = nm·g·sin α.</p>
+          <FormulaBox variant="gold" latex="F=nmg\sin\alpha" />
+        </TheoryBox>
+        <TheoryBox title="Effekt = kraft × fart">
+          <FormulaBox variant="gold" latex="P=Fv" />
+          <p className="text-xs">v er taufart langs skråningen.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Konverter km/h til m/s: 11,5/3,6 = 3,194 m/s.</p> },
+      { label: "Hint 2", content: <p>sin 14° ≈ 0,242. Total kraft: 55·70·9,80·0,242 ≈ 9123 N.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Tau må overvinne komponent av tyngd langs skråningen for hver rytter.</p>
+        <Step n={1} title="Total kraft langs tau">
+          <FormulaBox latex="F=nmg\sin\alpha=55(70{,}0)(9{,}80)\sin 14°" />
+          <FormulaBox latex="F=55(70{,}0)(9{,}80)(0{,}2419)=9123\;\text{N}" />
         </Step>
         <Step n={2} title="Effekt">
-          <FormulaBox latex="P=Fv=(8881)(3{,}33)=\boxed{2{,}96\times 10^4\;\text{W}\;\approx 29{,}6\;\text{kW}}" variant="gold" />
-          <p className="italic text-xs">Eller ~40 hp. Realistisk størrelse for en mellomstor skitrekk.</p>
+          <FormulaBox latex="P=Fv=9123(3{,}194)=29\,140\;\text{W}" />
+          <FormulaBox variant="gold" latex="P\approx 29{,}1\;\text{kW}" />
         </Step>
+        <Pitfall>
+          <strong>sin α, ikke cos α.</strong> Komponenten av tyngd <em>langs</em> skråningen (motkraft til tau) er mg·sin α. Komponenten <em>vinkelrett</em> (mot underlag) er mg·cos α. Forveksling = svar er ofte 4× for lav.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 29 kW er nok til å drive en mellomstor bil. Skitrekk er energi­krevende — jo flere ryttere, jo mer effekt.
+        </p>
       </div>
     ),
-    summary: <p>For oppadgående bevegelse på skråplan: trekker skal balansere <InlineLatex latex="mg\sin\theta" /> — den andre gravitasjonskomponenten bæres av underlaget.</p>,
+    summary: <p>P = nmg·sin α·v for konstant fart oppover skråning. Skala lineært med rytter­antall og fart.</p>,
   },
 
-  // ==========================================================================
-  // 6.58 — Fjærgevær
-  // ==========================================================================
   "6.58": {
-    title: "Kompresjon av fjær i leketøysgevær",
-    difficulty: "middels",
-    pageRef: "s. 205",
-    problem: (
-      <p>
-        Et fjærgevær har <InlineLatex latex="k=400\;\text{N/m}" />. Rettet rett
-        opp kaster det en 0,0600 kg pil 6,00 m opp (fra fjærens utlaste
-        endeposisjon). Neglisjer luftmotstand, friksjon og fjærmasse. Hva er
-        kompresjonen?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="k=400\;\text{N/m},\;m=0{,}0600\;\text{kg},\;h=6{,}00\;\text{m}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Kompresjon <InlineLatex latex="x" />.</p>,
-    strategy: (
-      <div className="space-y-2">
-        <p>
-          Energibevaring: fjærenergien → KE → potensiell energi oppe (men
-          husk at pilen også stiger <InlineLatex latex="x" /> mer enn fjærens
-          utløste lengde før den er fri).
-        </p>
-        <TheoryBox title="Energibevaring med fjær + gravitasjon">
-          <p>Fra start (komprimert, i ro) til toppunkt (i ro):</p>
-          <FormulaBox latex="\tfrac12 k x^2=mg(h+x)" variant="gold" />
-          <p className="mt-1">
-            Merk: høyden er fra utløst endeposisjon til toppunkt, men pilen
-            stiger også <InlineLatex latex="x" /> under utløsningen.
-          </p>
-        </TheoryBox>
-      </div>
-    ),
-    hints: [
-      { label: "Hint", content: <p>Kvadratisk ligning i x. Regn først ut mg og sett opp.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Sett opp ligningen">
-          <FormulaBox latex="\tfrac12(400)x^2=0{,}0600(9{,}80)(6+x)=0{,}588(6+x)" variant="blue" />
-          <FormulaBox latex="200x^2-0{,}588x-3{,}528=0" variant="blue" />
-        </Step>
-        <Step n={2} title="Løs med abc-formelen">
-          <FormulaBox latex="x=\frac{0{,}588+\sqrt{0{,}588^2+4(200)(3{,}528)}}{2(200)}=\frac{0{,}588+53{,}11}{400}=\boxed{0{,}134\;\text{m}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: (
-      <p>
-        Glem ikke å ta med <em>selve fjærkompresjonen</em> i total høydeendring.
-        Energibevaring er rask og trygg her.
-      </p>
-    ),
-  },
-
-  // ==========================================================================
-  // 6.59 — Isblokk på skråplan
-  // ==========================================================================
-  "6.59": {
-    title: "Sluttfart av isblokk ned friksjonsløst skråplan",
-    difficulty: "lett",
-    pageRef: "s. 205",
-    problem: (
-      <p>
-        En 2,00 kg isblokk glir 1,35 m ned et friksjonsløst skråplan
-        på 36,9°. Starter fra ro. Sluttfart?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=2{,}00\;\text{kg},\;s=1{,}35\;\text{m},\;\theta=36{,}9^\circ" /></li>
-      </ul>
-    ),
-    unknowns: <p>Sluttfart.</p>,
-    strategy: (
-      <p>
-        Kun gravitasjonen gjør arbeid (glatt skråplan). Høydeendringen er{" "}
-        <InlineLatex latex="h=s\sin\theta" />.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p><InlineLatex latex="\tfrac12 mv^2=mgs\sin\theta\Rightarrow v=\sqrt{2gs\sin\theta}" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Fart fra energi">
-          <FormulaBox latex="v=\sqrt{2(9{,}80)(1{,}35)\sin 36{,}9^\circ}=\sqrt{26{,}46\cdot 0{,}6}=\boxed{3{,}98\;\text{m/s}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>For glatte skråplan: <InlineLatex latex="v=\sqrt{2g h}" /> med <InlineLatex latex="h=s\sin\theta" />. Massen faller ut.</p>,
-  },
-
-  // ==========================================================================
-  // 6.60 — lagt som 6.59 alternativ (sjekk liste)
-  // ==========================================================================
-  // (problems)
-
-  // ==========================================================================
-  // 6.67 — Baseball-pitcher
-  // ==========================================================================
-  "6.67": {
-    title: "Arbeid pitcher utøver på ball",
-    difficulty: "lett",
-    pageRef: "s. 206",
-    problem: (
-      <p>
-        En trent pitcher kaster en baseball (masse 0,145 kg) i nær 100 mi/t
-        (44,7 m/s). Hvor mye arbeid gjør han på ballen (kroppsbevegelsene
-        neglisjeres)?
-      </p>
-    ),
-    knowns: <p><InlineLatex latex="m=0{,}145\;\text{kg},\;v=44{,}7\;\text{m/s}" />, starter fra ro.</p>,
-    unknowns: <p>Arbeid <InlineLatex latex="W" />.</p>,
-    strategy: <p>Arbeid-energi: <InlineLatex latex="W=\tfrac12 mv^2" />.</p>,
-    hints: [],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Beregning">
-          <FormulaBox latex="W=\tfrac12(0{,}145)(44{,}7)^2=\boxed{145\;\text{J}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>Arbeid-energi gir den enkleste utregningen når start- og sluttfart er kjent.</p>,
-  },
-
-  // ==========================================================================
-  // 6.71 — Pumpe
-  // ==========================================================================
-  "6.71": {
-    title: "Effektbehov for vannpumpe",
+    title: "CALC: Ku som dras inn",
     difficulty: "vanskelig",
-    pageRef: "s. 206",
+    pageRef: "s. 224",
     problem: (
       <p>
-        En pumpe løfter 800 kg vann per minutt fra en 14,0 m dyp brønn, og
-        slenger det ut med fart 18,0 m/s. (a) Arbeid pr. minutt for
-        løftet? (b) Arbeid pr. minutt for KE-delen? (c) Effektbehov?
+        En usamarbeids­villig ku forlater fjøset idet du prøver hardere og hardere å dytte henne tilbake.
+        I koordinater med origo ved fjøs­døra, går kua fra <InlineLatex latex="x=0" /> til <InlineLatex latex="x=6{,}9\;\text{m}" />
+        mens du anvender en kraft med x-komponent <InlineLatex latex="F_x=-[20{,}0\;\text{N}+(3{,}0\;\text{N/m})x]" />.
+        Hvor mye arbeid utfører kraften du anvender på kua under denne forflytningen?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\Delta m/\Delta t=800/60\;\text{kg/s}" /></li>
-        <li><InlineLatex latex="h=14{,}0\;\text{m},\;v=18{,}0\;\text{m/s}" /></li>
+        <li>Kraft­funksjon: <InlineLatex latex="F_x=-[20{,}0+3{,}0x]\;\text{N}" /></li>
+        <li>Forflytning: x = 0 til x = 6,9 m</li>
+        <li>Negativt fortegn: kraften peker i −x mens kua går i +x</li>
       </ul>
     ),
-    unknowns: <p>Arbeid per minutt (to deler) og effekt.</p>,
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Arbeid utført av personens kraft på kua</li>
+      </ul>
+    ),
     strategy: (
       <div className="space-y-2">
-        <p>
-          To arbeidsdeler: løftet mot gravitasjon og kinetisk energi ved utløp.
-          Effekt = total energi pr. tid.
-        </p>
-        <TheoryBox title="To oppgaver for pumpa">
-          <FormulaBox latex="W_\text{lift}=mgh,\quad W_\text{KE}=\tfrac12 m v^2" variant="blue" />
-          <p>Tidsgjennomsnittlig effekt: <InlineLatex latex="P=(W_\text{lift}+W_\text{KE})/\Delta t" />.</p>
+        <TheoryBox title="Variabel kraft og arbeid">
+          <FormulaBox variant="gold" latex="W=\int_0^{6{,}9}F_x\,dx=\int_0^{6{,}9}-(20+3x)\,dx" />
+        </TheoryBox>
+        <TheoryBox title="Stamfunksjon">
+          <FormulaBox variant="gold" latex="\int(20+3x)\,dx=20x+1{,}5x^2" />
         </TheoryBox>
       </div>
     ),
     hints: [
-      { label: "Hint", content: <p>Bruk <InlineLatex latex="\Delta t=60\;\text{s}" /> for "per minutt".</p> },
+      { label: "Hint 1", content: <p>Hold minustegnet utenfor integralet; det blir −[20x + 1,5x²] evaluert på 6,9.</p> },
+      { label: "Hint 2", content: <p>Sjekk: 20·6,9 = 138; 1,5·47,61 = 71,4. Sum = 209,4. Negativt: −209 J.</p> },
     ],
     solution: (
+      <div>
+        <p className="mb-2">Integrer den negative kraft­funksjonen over forflytningen.</p>
+        <Step n={1} title="Integrer">
+          <FormulaBox latex="W=-\int_0^{6{,}9}(20+3x)\,dx=-\bigl[20x+1{,}5x^2\bigr]_0^{6{,}9}" />
+          <FormulaBox latex="W=-\bigl[20(6{,}9)+1{,}5(6{,}9)^2\bigr]=-\bigl[138+71{,}4\bigr]" />
+          <FormulaBox latex="W=-209{,}4\;\text{J}" />
+          <FormulaBox variant="gold" latex="W\approx -209\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Kua «vinner» energetisk.</strong> Negativt arbeid betyr personen taper energi til kua (eller faktisk: at kua tar negativ energi fra mennesket). Person­kraft og forflytning peker motsatt vei.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Når «motstanden» øker med distansen, øker også energi­tapet. Lik en strikker som blir vanskeligere å strekke jo mer du har strukket den.
+        </p>
+      </div>
+    ),
+    summary: <p>W = ∫F dx der F er funksjon av x. Negativt arbeid = kraft og bevegelse motsatt.</p>,
+  },
+
+  "6.59": {
+    title: "Bagasje­handler drar koffert opp ramp",
+    difficulty: "middels",
+    pageRef: "s. 224",
+    problem: (
+      <p>
+        En bagasje­handler drar en 20,0 kg koffert opp en rampe som heller 32° over horisontalen ved
+        en kraft <InlineLatex latex="F=160\;\text{N}" /> som virker parallelt med rampen. Friksjons­koeffisient
+        kinetisk er <InlineLatex latex="\mu_k=0{,}300" />. Hvis kofferten reiser 3,80 m langs rampen,
+        beregn (a) arbeid F utfører; (b) arbeid gravitasjon utfører; (c) arbeid normal­kraft utfører;
+        (d) arbeid friksjon utfører; (e) total arbeid på kofferten. (f) Hvis hastigheten av kofferten
+        er null på bunnen, hva er farten etter 3,80 m?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Koffert-masse: m = 20,0 kg</li>
+        <li>Vinkel: α = 32°</li>
+        <li>Anvendt kraft (parallell med rampe): F = 160 N</li>
+        <li>μ<sub>k</sub> = 0,300</li>
+        <li>Distanse: d = 3,80 m langs rampen</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a–e) Arbeid av F, tyngd, normal, friksjon, total</li>
+        <li>(f) Slutt­fart hvis startet fra ro</li>
+      </ul>
+    ),
+    strategy: (
       <div className="space-y-2">
-        <Step n={1} title="(a) Løfte-arbeid">
-          <FormulaBox latex="W_\text{lift}=(800)(9{,}80)(14{,}0)=\boxed{1{,}098\times 10^5\;\text{J}}" variant="blue" />
+        <TheoryBox title="Krefter på rampe">
+          <p>Normal: <InlineLatex latex="N=mg\cos\alpha" /> (vinkelrett til underlag).<br />Tyngd-komponent langs rampe: <InlineLatex latex="mg\sin\alpha" /> (mot bevegelse).<br />Friksjon: <InlineLatex latex="f=\mu_k N=\mu_k mg\cos\alpha" />.</p>
+        </TheoryBox>
+        <TheoryBox title="Arbeid og energi">
+          <FormulaBox variant="gold" latex="W_\text{tot}=\Delta K=\tfrac12 mv^2" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Tegn FBD med rampen som x-akse. F+ langs rampe oppover, mg·sin α nedover, friksjon nedover (mot bevegelse).</p> },
+      { label: "Hint 2", content: <p>Total arbeid er knapt positivt — derfor lav slutt­fart selv etter 3,8 m.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Beregn arbeid for hver kraft, sum gir ΔK.</p>
+        <Step n={1} title="(a) Anvendt kraft">
+          <FormulaBox latex="W_F=Fd=160(3{,}80)=608\;\text{J}" />
+        </Step>
+        <Step n={2} title="(b) Tyngd­arbeid">
+          <FormulaBox latex="W_g=-mg(d\sin\alpha)=-20{,}0(9{,}80)(3{,}80)(\sin 32°)" />
+          <FormulaBox latex="W_g=-20{,}0(9{,}80)(3{,}80)(0{,}5299)=-394{,}5\;\text{J}" />
+        </Step>
+        <Step n={3} title="(c) Normal­kraft">
+          <FormulaBox latex="W_N=0\;(\text{vinkelrett til bevegelse})" />
+        </Step>
+        <Step n={4} title="(d) Friksjons­arbeid">
+          <FormulaBox latex="N=mg\cos\alpha=20{,}0(9{,}80)(0{,}8480)=166{,}2\;\text{N}" />
+          <FormulaBox latex="f=\mu_k N=0{,}300(166{,}2)=49{,}87\;\text{N}" />
+          <FormulaBox latex="W_f=-fd=-49{,}87(3{,}80)=-189{,}5\;\text{J}" />
+        </Step>
+        <Step n={5} title="(e) Total arbeid">
+          <FormulaBox latex="W_\text{tot}=608-394{,}5-189{,}5+0\approx 24{,}0\;\text{J}" />
+        </Step>
+        <Step n={6} title="(f) Slutt­fart">
+          <FormulaBox latex="\tfrac12 mv^2=W_\text{tot}\Rightarrow v=\sqrt{2W/m}=\sqrt{2{,}40}=1{,}55\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 1{,}55\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>Total arbeid ≠ kraftens arbeid.</strong> 608 J av kraften, men nesten alt spises av tyngd og friksjon ⇒ bare 24 J igjen som KE. Ikke et veldig effektivt system.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Med 160 N nås nesten balansen mellom de fremover- og bakover­rettede kreftene — bare litt overskudd for KE. Litt mindre F (~155 N) ville stoppet bevegelsen helt.
+        </p>
+      </div>
+    ),
+    summary: <p>Sum av alt arbeid = ΔK. På skråning: F oppover, mg·sin α + μ_k·mg·cos α nedover.</p>,
+  },
+
+  "6.67": {
+    title: "CALC: Variabel friksjons­koeffisient",
+    difficulty: "vanskelig",
+    pageRef: "s. 225",
+    problem: (
+      <p>
+        En boks glir med fart 4,50 m/s på et horisontalt underlag når den ved punkt P møter en ru
+        seksjon. Friksjons­koeffisienten er ikke konstant: den starter ved 0,100 ved P og øker lineært
+        med distanse forbi P, og når en verdi 0,600 etter 12,5 m. (a) Bruk arbeid-energi-teoremet til
+        å finne hvor langt boksen sklir før den stopper. (b) Hva er friksjons­koeffisienten ved stopp­punkt?
+        (c) Hvor langt ville boksen ha sklid hvis koeffisienten ikke hadde økt, men forblitt konstant 0,100?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Initial fart: v = 4,50 m/s</li>
+        <li>μ(x) = 0,100 ved P (x = 0)</li>
+        <li>μ(x) = 0,600 ved x = 12,5 m</li>
+        <li>Lineær: <InlineLatex latex="\mu(x)=0{,}100+0{,}040x" /> (helning 0,500/12,5 = 0,040/m)</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Stoppe­avstand d</li>
+        <li>(b) Verdi av μ ved stopp­punktet</li>
+        <li>(c) Stoppe­avstand hvis μ var konstant 0,100</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Variabel friksjon — integrasjon">
+          <FormulaBox variant="gold" latex="W_f=-\int_0^{d}\mu(x)mg\,dx=-mg\bigl(0{,}1d+0{,}02d^2\bigr)" />
+        </TheoryBox>
+        <TheoryBox title="Sett W_f = −½mv²">
+          <p>All initial KE blir spist av friksjon over distansen d. Resulterer i andregrads­ligning i d.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Sjekk: ∫(0,1+0,04x) dx = 0,1x + 0,02x². Sett mg·dette = ½mv² og forenkl ved å fjerne m.</p> },
+      { label: "Hint 2", content: <p>For (c): konstant μ gir d = v²/(2μg). Forventet at d_konst &gt; d_variabel siden μ vokser.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Variabel μ krever integrasjon. Resultat blir andregrads­ligning.</p>
+        <Step n={1} title="(a) Andregrads­ligning">
+          <FormulaBox latex="\tfrac12 v^2=g(0{,}1d+0{,}02d^2)" />
+          <FormulaBox latex="\tfrac12(20{,}25)=9{,}80(0{,}1d+0{,}02d^2)" />
+          <FormulaBox latex="10{,}125=0{,}980d+0{,}196d^2" />
+          <FormulaBox latex="0{,}196d^2+0{,}980d-10{,}125=0" />
+        </Step>
+        <Step n={2} title="(a) Løs">
+          <FormulaBox latex="d=\dfrac{-0{,}980+\sqrt{(0{,}980)^2+4(0{,}196)(10{,}125)}}{2(0{,}196)}" />
+          <FormulaBox latex="d=\dfrac{-0{,}980+\sqrt{0{,}960+7{,}938}}{0{,}392}=\dfrac{-0{,}980+2{,}983}{0{,}392}=5{,}11\;\text{m}" />
+        </Step>
+        <Step n={3} title="(b) μ ved stopp">
+          <FormulaBox latex="\mu=0{,}100+0{,}040(5{,}11)=0{,}304" />
+        </Step>
+        <Step n={4} title="(c) Konstant μ">
+          <FormulaBox latex="d_\text{konst}=\dfrac{v^2}{2\mu g}=\dfrac{(4{,}50)^2}{2(0{,}100)(9{,}80)}=\dfrac{20{,}25}{1{,}96}=10{,}3\;\text{m}" />
+          <FormulaBox variant="gold" latex="d\approx 5{,}11\;\text{m},\;\mu_\text{stopp}\approx 0{,}304,\;d_\text{konst}\approx 10{,}3\;\text{m}" />
+        </Step>
+        <Pitfall>
+          <strong>Variabel friksjon krever integrasjon.</strong> Hvis du bruker μ_avg = (0,1 + 0,304)/2 = 0,202, og setter d = v²/(2μ_avg g) = 5,11 m, får du tilfeldig riktig svar — men dette er sirkulær logikk; du brukte d som du regnet ut!
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Hvis veien blir mer ru jo lenger du sklir, stopper du i halvparten av distansen sammenlignet med konstant lav friksjon. Praktisk i bremse­design.
+        </p>
+      </div>
+    ),
+    summary: <p>Variabel μ ⇒ integrasjon ⇒ andregrads­ligning. Konstant μ er ofte langt mer optimistisk.</p>,
+  },
+
+  "6.71": {
+    title: "CP Liten blokk på snor gjennom hull (Fig P6.71)",
+    difficulty: "vanskelig",
+    pageRef: "s. 225",
+    problem: (
+      <p>
+        En liten blokk med masse 0,0600 kg er festet til en snor som passerer gjennom et hull i et
+        friksjons­fritt horisontalt underlag (Fig. P6.71). Blokken roterer i en sirkel med radius 0,40 m
+        rundt hullet, med tangentiell fart 0,70 m/s. Snora trekkes så ned, slik at radien til sirkelen
+        reduseres til 0,10 m. På denne nye distansen er farten 2,80 m/s. (a) Hva er spenningen i snora
+        i den opprinnelige situasjonen? (b) Hva er spenningen i snora i slutt­situasjonen? (c) Hvor mye
+        arbeid utførte personen som trakk i snora?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Blokk-masse: m = 0,0600 kg</li>
+        <li>Initial: r₁ = 0,40 m, v₁ = 0,70 m/s</li>
+        <li>Slutt: r₂ = 0,10 m, v₂ = 2,80 m/s</li>
+        <li>Friksjons­fritt underlag</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Spenning T₁ ved start</li>
+        <li>(b) Spenning T₂ etter</li>
+        <li>(c) Arbeid W av personen som drar</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Sirkulær bevegelse">
+          <FormulaBox variant="gold" latex="T=\dfrac{mv^2}{r}" />
+          <p className="text-xs">Spenning i snora gir sentripetal kraft som holder blokken i sirkel.</p>
+        </TheoryBox>
+        <TheoryBox title="Arbeid via energi-endring">
+          <FormulaBox variant="gold" latex="W=\Delta K=\tfrac12 m(v_2^2-v_1^2)" />
+          <p className="text-xs">Friksjons­fritt: bare arbeidet personen gjør endrer KE.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>For (a)/(b): bruk sirkulær­bevegelse-formelen direkte.</p> },
+      { label: "Hint 2", content: <p>For (c): Newton 2 hjelper oss ikke direkte; bruk arbeid-energi-teoremet.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Spenning gir sentripetal kraft. Arbeid kommer fra KE-endring.</p>
+        <Step n={1} title="(a) Initial spenning">
+          <FormulaBox latex="T_1=\dfrac{mv_1^2}{r_1}=\dfrac{0{,}0600(0{,}70)^2}{0{,}40}=\dfrac{0{,}0294}{0{,}40}=0{,}0735\;\text{N}" />
+        </Step>
+        <Step n={2} title="(b) Slutt­spenning">
+          <FormulaBox latex="T_2=\dfrac{mv_2^2}{r_2}=\dfrac{0{,}0600(2{,}80)^2}{0{,}10}=\dfrac{0{,}4704}{0{,}10}=4{,}70\;\text{N}" />
+        </Step>
+        <Step n={3} title="(c) Arbeid utført av person">
+          <FormulaBox latex="W=\tfrac12 m(v_2^2-v_1^2)=\tfrac12(0{,}0600)(7{,}84-0{,}49)=0{,}221\;\text{J}" />
+          <FormulaBox variant="gold" latex="T_1\approx 0{,}074\;\text{N},\;T_2\approx 4{,}70\;\text{N},\;W\approx 0{,}221\;\text{J}" />
+        </Step>
+        <Pitfall>
+          <strong>Selv om snora kan virke vinkelrett til hastigheten i sirkelen, gjør den arbeid radialt.</strong> Når radien minker, har snor­spenningen en komponent langs blokkens forflytning ⇒ ikke null arbeid.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Spenning øker med faktor 64 (4,70/0,074) når radien fjerdedeles. Dette er pga. v² i telleren og r i nevneren — bevaring av spinn-moment gir v ∝ 1/r ⇒ T ∝ 1/r³.
+        </p>
+      </div>
+    ),
+    summary: <p>Sirkulær: T = mv²/r. Arbeid fra radiell forflytning: W = ΔK på friksjons­fritt underlag.</p>,
+  },
+
+  "6.75": {
+    title: "Tekstbok mot fjær med friksjon",
+    difficulty: "vanskelig",
+    pageRef: "s. 225",
+    problem: (
+      <p>
+        En 2,90 kg lærebok presses mot en horisontal fjær med ubetydelig masse og kraft­konstant
+        290 N/m, og komprimerer fjæra 0,300 m. Når den slippes, glir læreboka på et horisontalt
+        bord med <InlineLatex latex="\mu_k=0{,}30" />. Bruk arbeid-energi-teoremet til å finne hvor
+        langt boka beveger seg fra dens initial­posisjon før den kommer til ro.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Bok-masse: m = 2,90 kg</li>
+        <li>Fjær­konstant: k = 290 N/m</li>
+        <li>Kompresjon: x = 0,300 m</li>
+        <li>μ<sub>k</sub> = 0,30</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Total reise­avstand fra start­punktet til boka stopper</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Energi­bevaring med friksjons­tap">
+          <FormulaBox variant="gold" latex="\tfrac12 kx^2=\mu_k mg\cdot d" />
+          <p className="text-xs">All fjær­energi blir spist av kinetisk friksjon over distansen d.</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Boka starter i ro, akselereres av fjæra, og friksjon bremser fra start.</p> },
+      { label: "Hint 2", content: <p>«Total avstand» = avstand fjæra strakk seg + glidende avstand etter at fjæra slipper. Eller bare bruk energi­bevaring direkte.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Fjær­energi = friksjons­arbeid over total distanse (energi­bevaring med tap).</p>
+        <Step n={1} title="Initial fjær­energi">
+          <FormulaBox latex="E=\tfrac12 kx^2=\tfrac12(290)(0{,}300)^2=\tfrac12(290)(0{,}0900)=13{,}05\;\text{J}" />
+        </Step>
+        <Step n={2} title="Friksjons­kraft">
+          <FormulaBox latex="f=\mu_k mg=0{,}30(2{,}90)(9{,}80)=8{,}53\;\text{N}" />
+        </Step>
+        <Step n={3} title="Total distanse">
+          <FormulaBox latex="d=\dfrac{E}{f}=\dfrac{13{,}05}{8{,}53}=1{,}530\;\text{m}" />
+          <FormulaBox variant="gold" latex="d\approx 1{,}53\;\text{m}" />
+        </Step>
+        <Pitfall>
+          <strong>Friksjon virker også mens fjæra puffer.</strong> Hvis du regner først «hvor mye energi når boka mister kontakt med fjær», må du trekke fra friksjon over kompresjons­avstanden 0,3 m. Med direkte energi­balanse over hele turen unngår du denne komplikasjonen.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Boka reiser ~5× lenger enn fjær­kompresjonen. Fjær­konstanten og kompresjonen bestemmer initial energi; friksjons­koeffisienten bestemmer hvor effektivt det «tappes».
+        </p>
+      </div>
+    ),
+    summary: <p>½kx² = μ_k·mg·d. Fjær­energi byttet i friksjons­varme. Direkte energi­balanse over hele turen.</p>,
+  },
+
+  "6.81": {
+    title: "To blokker pulley (Fig P6.81)",
+    difficulty: "vanskelig",
+    pageRef: "s. 226",
+    problem: (
+      <p>
+        Vurder systemet vist i Fig. P6.81. Tauet og trinsa har neglisjerbar masse, og trinsa er
+        friksjons­fri. Først glir 6,00 kg-blokken nedover og 8,00 kg-blokken til høyre, begge med
+        fart 0,600 m/s. Blokkene kommer til ro etter å ha beveget seg 7,00 m. Bruk arbeid-energi-teoremet
+        for å beregne <InlineLatex latex="\mu_k" /> mellom 8 kg-blokken og bordet.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>m₁ = 8,00 kg (på bord, beveger seg horisontalt)</li>
+        <li>m₂ = 6,00 kg (henger, beveger seg vertikalt nedover)</li>
+        <li>Initial fart: v = 0,600 m/s</li>
+        <li>Begge stopper etter d = 7,00 m</li>
+        <li>Kun m₁ har friksjon (mot bordet)</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Kinetisk friksjons­koeffisient μ<sub>k</sub></li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Energi­balanse for hele systemet">
+          <FormulaBox variant="gold" latex="\tfrac12(m_1+m_2)v^2+m_2gd=\mu_k m_1 g d" />
+          <p className="text-xs">Initial KE + lost PE (m₂ faller d) = friksjons­arbeid på m₁.</p>
+        </TheoryBox>
+        <TheoryBox title="Hvorfor begge masser i KE">
+          <p>Tauet kobler m₁ og m₂. Begge har samme fart |v| (snor­tvang) ⇒ total KE = ½(m₁+m₂)v².</p>
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>m₂ synker d = 7 m mens m₁ glir 7 m horisontalt — samme avstand pga. uutbart tau.</p> },
+      { label: "Hint 2", content: <p>Initial KE er liten (0,6 m/s er treg), så det meste av energi­tapet kommer fra fallende m₂.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Energi­balanse: alt initial KE + falle-PE må gå til friksjons­varme.</p>
+        <Step n={1} title="Sett opp ligningen">
+          <FormulaBox latex="\tfrac12(m_1+m_2)v^2+m_2 gd=\mu_k m_1 gd" />
+        </Step>
+        <Step n={2} title="Sett inn tall">
+          <FormulaBox latex="\tfrac12(14{,}0)(0{,}600)^2+6{,}00(9{,}80)(7{,}00)=\mu_k(8{,}00)(9{,}80)(7{,}00)" />
+          <FormulaBox latex="\tfrac12(14{,}0)(0{,}360)+411{,}6=\mu_k(548{,}8)" />
+          <FormulaBox latex="2{,}52+411{,}6=\mu_k\cdot 548{,}8" />
+          <FormulaBox latex="414{,}1=\mu_k\cdot 548{,}8" />
+        </Step>
+        <Step n={3} title="Løs for μ_k">
+          <FormulaBox latex="\mu_k=\dfrac{414{,}1}{548{,}8}=0{,}754" />
+          <FormulaBox variant="gold" latex="\mu_k\approx 0{,}754" />
+        </Step>
+        <Pitfall>
+          <strong>Begge masser har KE!</strong> Selv om bare m₂ taper PE, har begge fart 0,6 m/s og må stoppe. Glemmer du m₁'s KE, får du litt for høy μ_k.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: μ_k = 0,75 er svært høyt — typisk for tre på tre eller gummi på betong. Selv 6 kg fallende kunne ikke trekke 8 kg fritt over 7 m mot så mye friksjon.
+        </p>
+      </div>
+    ),
+    summary: <p>Initial KE av hele systemet + tapt PE = friksjons­arbeid på m₁. Begge masser bidrar til KE.</p>,
+  },
+
+  "6.82": {
+    title: "Samme blokker med μk=0,250 (Fig P6.81)",
+    difficulty: "vanskelig",
+    pageRef: "s. 226",
+    problem: (
+      <p>
+        Samme system som P6.81. <InlineLatex latex="\mu_k=0{,}250" /> mellom 8 kg-blokken og tabletop.
+        Blokkene slippes fra ro. Bruk arbeid-energi-teoremet til å beregne farten av 6 kg-blokken etter
+        at den har sunket 1,50 m.
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>m₁ = 8,00 kg (bord, friksjon)</li>
+        <li>m₂ = 6,00 kg (henger)</li>
+        <li>μ<sub>k</sub> = 0,250</li>
+        <li>Distanse: d = 1,50 m</li>
+        <li>Slippes fra ro</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Slutt­fart v av 6 kg-blokken etter 1,50 m fall</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="Energi­balanse">
+          <p>Tapt PE av m₂ minus friksjons­tap blir til KE av begge.</p>
+          <FormulaBox variant="gold" latex="m_2 gd-\mu_k m_1 gd=\tfrac12(m_1+m_2)v^2" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Sjekk at netto kraft er positiv: m₂g − μ_k·m₁g = 6·9,8 − 0,25·8·9,8 ≈ 58,8 − 19,6 &gt; 0 ⇒ akselererer.</p> },
+      { label: "Hint 2", content: <p>v² = 2·(netto energi)/(m₁+m₂). Ikke glem m₁ i KE-summen.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Tapt PE av m₂ minus friksjons­tap = KE av begge.</p>
+        <Step n={1} title="Energi-ligningen">
+          <FormulaBox latex="m_2 gd-\mu_k m_1 gd=\tfrac12(m_1+m_2)v^2" />
+        </Step>
+        <Step n={2} title="Sett inn">
+          <FormulaBox latex="6{,}00(9{,}80)(1{,}50)-0{,}250(8{,}00)(9{,}80)(1{,}50)=\tfrac12(14{,}0)v^2" />
+          <FormulaBox latex="88{,}2-29{,}4=7{,}00\,v^2" />
+          <FormulaBox latex="58{,}8=7{,}00\,v^2" />
+        </Step>
+        <Step n={3} title="Løs for v">
+          <FormulaBox latex="v^2=\dfrac{58{,}8}{7{,}00}=8{,}40\;\text{m}^2/\text{s}^2" />
+          <FormulaBox latex="v=\sqrt{8{,}40}=2{,}90\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 2{,}90\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>Sjekk om systemet beveger seg i det hele tatt.</strong> Hvis μ_k·m₁ &gt; m₂, ville hele systemet stå stille. Her er friksjon (μ_k·m₁ = 2,0) mindre enn m₂ = 6 ⇒ akselererer.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Friksjon stjeler 1/3 av tilgjengelig energi (29,4 av 88,2 J). Uten friksjon: v = √(2·9,8·1,5·6/14) = 3,55 m/s, ~22 % raskere.
+        </p>
+      </div>
+    ),
+    summary: <p>m₂gd − μ_k·m₁gd = ½(m₁+m₂)v². Sjekk alltid at netto kraft &gt; 0 før systemet beveges.</p>,
+  },
+
+  "6.85": {
+    title: "Pumpe — løfter og kaster ut vann",
+    difficulty: "vanskelig",
+    pageRef: "s. 226",
+    problem: (
+      <p>
+        En pumpe kreves for å løfte 790 kg vann per minutt fra en brønn 14,1 m dyp og kaste det ut med
+        fart 17,5 m/s. (a) Hvor mye arbeid utfører pumpen per minutt for å løfte vannet? (b) Hvor mye
+        for å gi vannet kinetisk energi det har når det kastes ut? (c) Hva må effekt­utgangen til
+        pumpa være?
+      </p>
+    ),
+    knowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>Vann­strøm: m = 790 kg/minutt</li>
+        <li>Brønn­dybde: h = 14,1 m</li>
+        <li>Eksjons­fart: v = 17,5 m/s</li>
+      </ul>
+    ),
+    unknowns: (
+      <ul className="list-disc pl-5 space-y-0.5">
+        <li>(a) Løfte­arbeid per minutt</li>
+        <li>(b) KE-arbeid per minutt</li>
+        <li>(c) Pumpe­effekt</li>
+      </ul>
+    ),
+    strategy: (
+      <div className="space-y-2">
+        <TheoryBox title="To energi­bidrag">
+          <p>Pumpa må:<br />1. Løfte vannet imot tyngd ⇒ <InlineLatex latex="W_\text{løft}=mgh" /><br />2. Gi vannet kinetisk energi ⇒ <InlineLatex latex="W_\text{KE}=\tfrac12 mv^2" /></p>
+        </TheoryBox>
+        <TheoryBox title="Effekt = total arbeid / tid">
+          <FormulaBox variant="gold" latex="P=\dfrac{W_\text{løft}+W_\text{KE}}{60\;\text{s}}" />
+        </TheoryBox>
+      </div>
+    ),
+    hints: [
+      { label: "Hint 1", content: <p>Massen er per minutt, så «per minutt» er allerede en flow-rate. Del totalt arbeid på 60 sekunder for watt.</p> },
+      { label: "Hint 2", content: <p>Vurder hvilket bidrag som dominerer: KE-leddet er ½m·v² = ½·790·306,25 = 121 kJ, mens mgh = 109 kJ. KE er litt større.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Pumpa gjør to typer arbeid: løfte vekt og akselerere strømmen.</p>
+        <Step n={1} title="(a) Løfte­arbeid">
+          <FormulaBox latex="W_\text{løft}=mgh=790(9{,}80)(14{,}1)=109\,160\;\text{J}\approx 109\;\text{kJ}" />
         </Step>
         <Step n={2} title="(b) KE-arbeid">
-          <FormulaBox latex="W_\text{KE}=\tfrac12(800)(18{,}0)^2=\boxed{1{,}296\times 10^5\;\text{J}}" variant="blue" />
+          <FormulaBox latex="W_\text{KE}=\tfrac12 mv^2=\tfrac12(790)(17{,}5)^2=\tfrac12(790)(306{,}25)=120\,969\;\text{J}\approx 121\;\text{kJ}" />
         </Step>
-        <Step n={3} title="(c) Effekt">
-          <FormulaBox latex="P=\frac{W_\text{lift}+W_\text{KE}}{60}=\frac{2{,}394\times 10^5}{60}=\boxed{3{,}99\times 10^3\;\text{W}\approx 4{,}0\;\text{kW}}" variant="gold" />
+        <Step n={3} title="(c) Pumpe­effekt">
+          <FormulaBox latex="P=\dfrac{W_\text{tot}}{t}=\dfrac{109\,160+120\,969}{60}=\dfrac{230\,129}{60}=3835\;\text{W}" />
+          <FormulaBox variant="gold" latex="P\approx 3{,}83\;\text{kW}" />
         </Step>
+        <Pitfall>
+          <strong>Glem ikke KE-bidraget.</strong> Mange tenker bare på mgh-løft, men hvis vannet kastes ut med høy fart krever det også energi — her tilsvarer det ~52 % av total effekt!
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Pumpe­motor må levere både statisk løft (mgh) og dynamisk akselerasjon (½mv²). I praktiske pumper med høy ut­fart, dominerer KE-leddet over løft.
+        </p>
       </div>
     ),
-    summary: <p>Når det flyter masse: fordel energien mellom løft (PE) og fart (KE), summer og del på tid.</p>,
-  },
-
-  // ==========================================================================
-  // 6.75 — Kloss med friksjon, dratt horisontalt
-  // ==========================================================================
-  "6.75": {
-    title: "Sluttfart av kloss dratt mot friksjon",
-    difficulty: "middels",
-    pageRef: "s. 207",
-    problem: (
-      <p>
-        En 4,00 kg treklosss på et stålbord har <InlineLatex latex="\mu_k=0{,}300" />.
-        Klossen er i ro. Du drar med en horisontal kraft 25,0 N i 3,00 s, langs
-        1,50 m. Hva er sluttfarten?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=4{,}00\;\text{kg},\;\mu_k=0{,}300,\;F=25{,}0\;\text{N}" /></li>
-        <li><InlineLatex latex="s=1{,}50\;\text{m},\;v_0=0" /></li>
-      </ul>
-    ),
-    unknowns: <p>Sluttfart.</p>,
-    strategy: (
-      <p>
-        Bruk arbeid-energi med begge horisontale krefter.{" "}
-        <InlineLatex latex="f_k=\mu_k mg" /> motvirker bevegelsen.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p><InlineLatex latex="W_\text{tot}=(F-f_k)s=\tfrac12 mv^2" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Krefter">
-          <FormulaBox latex="f_k=\mu_k mg=(0{,}300)(4{,}00)(9{,}80)=11{,}76\;\text{N}" variant="blue" />
-          <FormulaBox latex="F_\text{net}=F-f_k=25{,}0-11{,}76=13{,}24\;\text{N}" variant="blue" />
-        </Step>
-        <Step n={2} title="Fart">
-          <FormulaBox latex="v=\sqrt{\frac{2F_\text{net}s}{m}}=\sqrt{\frac{2(13{,}24)(1{,}50)}{4{,}00}}=\sqrt{9{,}93}=\boxed{3{,}15\;\text{m/s}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>For horisontal bevegelse med friksjon: bruk <em>nettokraft</em> × avstand i arbeid-energi-teoremet.</p>,
-  },
-
-  // ==========================================================================
-  // 6.81 — Fjær med friksjon etter
-  // ==========================================================================
-  "6.81": {
-    title: "Kloss på fjær → glidende friksjon",
-    difficulty: "vanskelig",
-    pageRef: "s. 207",
-    problem: (
-      <p>
-        En 2,50 kg kloss presser en fjær (<InlineLatex latex="k=250\;\text{N/m}" />)
-        0,150 m. Fjæren slipper. Etterpå glir klossen langs en horisontal flate
-        med <InlineLatex latex="\mu_k=0{,}300" />. Hvor langt beveger den seg
-        før den stopper (målt fra der fjæren er ukomprimert)?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=2{,}50\;\text{kg},\;k=250\;\text{N/m}" /></li>
-        <li><InlineLatex latex="x=0{,}150\;\text{m},\;\mu_k=0{,}300" /></li>
-      </ul>
-    ),
-    unknowns: <p>Avstand til stopp.</p>,
-    strategy: (
-      <p>
-        All fjærenergi blir dissippert av friksjonen:{" "}
-        <InlineLatex latex="\tfrac12 k x^2=\mu_k m g\,d" />.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p>Sett fjærarbeid lik friksjonsarbeid over avstanden d.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Energibalanse">
-          <FormulaBox latex="\tfrac12 k x^2=\mu_k m g d\;\Rightarrow\; d=\frac{k x^2}{2\mu_k m g}" variant="gold" />
-        </Step>
-        <Step n={2} title="Numerikk">
-          <FormulaBox latex="d=\frac{(250)(0{,}150)^2}{2(0{,}300)(2{,}50)(9{,}80)}=\frac{5{,}625}{14{,}7}=\boxed{0{,}383\;\text{m}}" variant="gold" />
-        </Step>
-      </div>
-    ),
-    summary: <p>Friksjon som dissipatør: lik all tilgjengelig energi med arbeidet friksjonen gjør over distansen.</p>,
-  },
-
-  // ==========================================================================
-  // 6.82 — Sykkel opp bakke
-  // ==========================================================================
-  "6.82": {
-    title: "Effektbehov for syklist opp bakke",
-    difficulty: "middels",
-    pageRef: "s. 207",
-    problem: (
-      <p>
-        En syklist (totalmasse 75,0 kg) kjører med 4,00 m/s opp en jevn bakke
-        som stiger 4,00°. Rullemotstand og luftmotstand tilsvarer en
-        konstant motkraft på 20,0 N. Hvilken effekt leverer syklisten?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=75{,}0\;\text{kg},\;v=4{,}00\;\text{m/s},\;\theta=4{,}00^\circ" /></li>
-        <li>Motstand: 20,0 N</li>
-      </ul>
-    ),
-    unknowns: <p>Effekt.</p>,
-    strategy: <p>Konstant fart → kraften fra syklisten er lik motstand + gravitasjonskomponent.</p>,
-    hints: [
-      { label: "Hint", content: <p><InlineLatex latex="F=mg\sin\theta+f" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="Nettokraft syklisten gir">
-          <FormulaBox latex="F=mg\sin\theta+20=(75)(9{,}80)(0{,}0698)+20=51{,}30+20=71{,}30\;\text{N}" variant="blue" />
-        </Step>
-        <Step n={2} title="Effekt">
-          <FormulaBox latex="P=Fv=(71{,}30)(4{,}00)=\boxed{285\;\text{W}}" variant="gold" />
-          <p className="italic text-xs">Ca 0,38 hp — realistisk for amatørsyklist.</p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Bakken og friksjon legger seg sammen i nødvendig kraft. P = Fv gir effekten.</p>,
-  },
-
-  // ==========================================================================
-  // 6.85 — Toutgange
-  // ==========================================================================
-  "6.85": {
-    title: "Effektbehov for akselererende bil",
-    difficulty: "vanskelig",
-    pageRef: "s. 208",
-    problem: (
-      <p>
-        En 1500 kg bil akselererer fra hvile til 25 m/s på 8,0 s. Neglisjer
-        friksjon/luftmotstand. (a) Arbeid som motoren må levere? (b) Gjennomsnittlig
-        effekt? (c) Øyeblikkelig effekt ved sluttfart, antatt konstant nettokraft?
-      </p>
-    ),
-    knowns: (
-      <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="m=1500\;\text{kg},\;v_0=0,\;v_f=25\;\text{m/s},\;t=8{,}0\;\text{s}" /></li>
-      </ul>
-    ),
-    unknowns: <p>Arbeid, gjennomsnitts-effekt, maks-effekt.</p>,
-    strategy: (
-      <p>
-        Arbeid-energi for (a). Gjennomsnittseffekt: arbeid/tid. Øyeblikkelig
-        effekt ved endelig fart: <InlineLatex latex="P=Fv_f" />, der{" "}
-        <InlineLatex latex="F=ma" />.
-      </p>
-    ),
-    hints: [
-      { label: "Hint", content: <p><InlineLatex latex="a=v_f/t" /> siden konstant akselerasjon fra hvile.</p> },
-    ],
-    solution: (
-      <div className="space-y-2">
-        <Step n={1} title="(a) Arbeid">
-          <FormulaBox latex="W=\tfrac12 mv_f^2=\tfrac12(1500)(25)^2=\boxed{4{,}69\times 10^5\;\text{J}}" variant="gold" />
-        </Step>
-        <Step n={2} title="(b) Gjennomsnittseffekt">
-          <FormulaBox latex="P_\text{gj}=W/t=4{,}69\times 10^5/8{,}0=\boxed{5{,}86\times 10^4\;\text{W}\approx 78{,}6\;\text{hp}}" variant="blue" />
-        </Step>
-        <Step n={3} title="(c) Øyeblikkelig effekt ved sluttfart">
-          <FormulaBox latex="a=25/8{,}0=3{,}125\;\text{m/s}^2" variant="blue" />
-          <FormulaBox latex="F=ma=(1500)(3{,}125)=4688\;\text{N}" variant="blue" />
-          <FormulaBox latex="P=Fv_f=(4688)(25)=\boxed{1{,}17\times 10^5\;\text{W}\approx 157\;\text{hp}}" variant="gold" />
-          <p className="italic text-xs">Merk: øyeblikkelig effekt ved sluttfart er <em>dobbelt</em> av gjennomsnittet — fordi effekten vokser lineært med farten under konstant akselerasjon.</p>
-        </Step>
-      </div>
-    ),
-    summary: <p>Under konstant akselerasjon: <InlineLatex latex="P_\text{øy}(t)=Fv(t)=F\cdot at" /> vokser lineært; gjennomsnittet er halvparten av toppen.</p>,
+    summary: <p>Pumpe­effekt = (mgh + ½mv²)/t. Begge bidrag teller; KE er ofte oversett.</p>,
   },
 };

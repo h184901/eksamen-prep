@@ -18,10 +18,6 @@ export interface ExerciseContent {
   summary: React.ReactNode;
 }
 
-// ============================================================================
-// Gjenbrukbare pedagogiske blokker
-// ============================================================================
-
 function TheoryBox({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 p-3 my-2">
@@ -29,6 +25,17 @@ function TheoryBox({ title, children }: { title: string; children: React.ReactNo
         Teori: {title}
       </p>
       <div className="text-sm text-indigo-900 dark:text-indigo-100">{children}</div>
+    </div>
+  );
+}
+
+function Pitfall({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-500 p-3 my-2">
+      <p className="font-semibold text-xs uppercase tracking-wide text-rose-700 dark:text-rose-300 mb-1">
+        Vanlig feil
+      </p>
+      <div className="text-sm text-rose-900 dark:text-rose-100">{children}</div>
     </div>
   );
 }
@@ -48,1697 +55,1325 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
 }
 
 // ============================================================================
-// SVG-helpere
-// ============================================================================
-
-function Arrowheads() {
-  return (
-    <defs>
-      <marker id="arrow-red-k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#ef4444" />
-      </marker>
-      <marker id="arrow-blue-k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
-      </marker>
-      <marker id="arrow-green-k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#10b981" />
-      </marker>
-      <marker id="arrow-amber-k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b" />
-      </marker>
-      <marker id="arrow-purple-k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6" />
-      </marker>
-    </defs>
-  );
-}
-
-// ============================================================================
-// OPPGAVESAMLING — KAPITTEL 3
+// OPPGAVESAMLING — KAPITTEL 3 (matcher University Physics 15. utg.)
 // ============================================================================
 
 export const exercises: Record<string, ExerciseContent> = {
   // ==========================================================================
-  // 3.1 — Ekornet
+  // 3.1 — Ekorn (1,5; 2,9) → (5,9; -0,6)
   // ==========================================================================
   "3.1": {
-    title: "Gjennomsnittshastighet som vektor",
+    title: "Ekorn — gjennomsnittshastighet (vektor)",
     difficulty: "lett",
-    pageRef: "s. 83",
+    pageRef: "s. 120",
     problem: (
       <p>
-        Et ekorn har koordinater <InlineLatex latex="(1{,}1\;\text{m},\; 3{,}4\;\text{m})" /> ved <InlineLatex latex="t_1=0" /> og
-        <InlineLatex latex="(5{,}3\;\text{m},\; -0{,}5\;\text{m})" /> ved <InlineLatex latex="t_2=2{,}0\;\text{s}" />.
-        Finn for dette tidsintervallet: (a) komponentene av gjennomsnittshastigheten,
-        (b) størrelsen og retningen til gjennomsnittshastigheten.
+        Et ekorn har x- og y-koordinater (1,5 m, 2,9 m) ved tid <InlineLatex latex="t_1=0" /> og koordinater
+        (5,9 m, −0,6 m) ved tid <InlineLatex latex="t_2=3{,}0\;\text{s}" />. For dette tids­intervallet, finn
+        (a) komponentene av gjennomsnittshastigheten, og (b) størrelsen og retningen til gjennomsnittshastigheten.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec r_1=(1{,}1\hat i+3{,}4\hat j)\;\text{m}" /></li>
-        <li><InlineLatex latex="\vec r_2=(5{,}3\hat i-0{,}5\hat j)\;\text{m}" /></li>
-        <li><InlineLatex latex="\Delta t = 2{,}0\;\text{s}" /></li>
+        <li><InlineLatex latex="\vec r_1=(1{,}5,\,2{,}9)\;\text{m},\;\vec r_2=(5{,}9,\,-0{,}6)\;\text{m}" /></li>
+        <li><InlineLatex latex="\Delta t=3{,}0\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Gjennomsnittshastighetens komponenter, størrelse og retning.</p>,
+    unknowns: <p>(a) Komponenter <InlineLatex latex="v_{\text{gj},x},v_{\text{gj},y}" />. (b) Størrelse og retning.</p>,
     strategy: (
-      <TheoryBox title="Gjennomsnittshastighet i 2D">
-        <p>
-          Hastighet er en vektor. Gjennomsnittshastigheten er forskyvningsvektoren delt på
-          tiden: <InlineLatex latex="\vec v_{\text{gj}}=\dfrac{\vec r_2-\vec r_1}{\Delta t}" />.
-          Komponentene behandles uavhengig: <InlineLatex latex="v_x=\Delta x/\Delta t" /> og <InlineLatex latex="v_y=\Delta y/\Delta t" />.
-          Størrelsen finnes via Pythagoras og retningen via arctangens.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Finn først forskyvningsvektoren <InlineLatex latex="\Delta \vec r=\vec r_2-\vec r_1" /> komponentvis.</p> },
-      { label: "Hint 2", content: <p>Del hver komponent på <InlineLatex latex="\Delta t" /> for å få <InlineLatex latex="v_{x,\text{gj}}" /> og <InlineLatex latex="v_{y,\text{gj}}" />.</p> },
-      { label: "Hint 3", content: <p>Vær forsiktig med fortegn på vinkelen: når <InlineLatex latex="v_y<0" /> ligger vektoren i fjerde kvadrant (under x-aksen).</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Posisjon i 2D beskrives av posisjonsvektoren <InlineLatex latex="\vec r = x\,\hat i + y\,\hat j" />.
-          Når partikkelen flytter seg fra <InlineLatex latex="\vec r_1" /> til <InlineLatex latex="\vec r_2" />, er
-          <em>forskyvningen</em> <InlineLatex latex="\Delta \vec r = \vec r_2 - \vec r_1" /> — en vektor som peker
-          rett fra start til slutt, uavhengig av hvilken vei partikkelen faktisk tok. Gjennomsnittshastigheten er
-          forskyvningen per tid.
-        </p>
-        <p>Originalformel fra læreboken (Young &amp; Freedman 3.2):</p>
-        <FormulaBox variant="blue" latex="\vec v_{\text{gj}} = \dfrac{\vec r_2 - \vec r_1}{t_2 - t_1} = \dfrac{\Delta \vec r}{\Delta t}" />
-        <p>
-          Siden vektorer legges til og skaleres komponentvis, blir dette to uavhengige skalarlikninger:
-          <InlineLatex latex="v_{x,\text{gj}} = \Delta x/\Delta t" /> og <InlineLatex latex="v_{y,\text{gj}} = \Delta y/\Delta t" />.
-        </p>
-
-        <Step n={1} title="Forskyvningsvektor">
-          <p>Vi trekker komponentvis:</p>
-          <FormulaBox variant="blue" latex="\Delta \vec r = (x_2 - x_1)\hat i + (y_2 - y_1)\hat j" />
+      <div className="space-y-2">
+        <TheoryBox title="Gjennomsnittshastighet i 2D — komponentvis">
           <p>
-            <InlineLatex latex="\Delta x = 5{,}3-1{,}1 = 4{,}2\;\text{m}" />,
-            <InlineLatex latex="\;\Delta y = -0{,}5-3{,}4 = -3{,}9\;\text{m}" />. Merk det negative y-fortegnet —
-            ekornet har beveget seg nedover i vårt koordinatsystem.
+            Gjennomsnittshastigheten i to dimensjoner er forskyvningsvektoren delt på tids­intervallet:
           </p>
-        </Step>
-        <Step n={2} title="Komponenter av gjennomsnittshastigheten">
-          <p>Del hver komponent på tidsintervallet <InlineLatex latex="\Delta t = 2{,}0\;\text{s}" />:</p>
-          <FormulaBox latex="v_{x,\text{gj}}=\dfrac{4{,}2}{2{,}0}=2{,}1\;\text{m/s},\quad v_{y,\text{gj}}=\dfrac{-3{,}9}{2{,}0}=-1{,}95\;\text{m/s}" />
-        </Step>
-        <Step n={3} title="Størrelse">
-          <p>Størrelsen (farten) får vi fra Pythagoras siden <InlineLatex latex="v_x" /> og <InlineLatex latex="v_y" /> er vinkelrette:</p>
-          <FormulaBox variant="blue" latex="|\vec v_{\text{gj}}| = \sqrt{v_{x,\text{gj}}^2 + v_{y,\text{gj}}^2}" />
-          <FormulaBox latex="|\vec v_{\text{gj}}|=\sqrt{2{,}1^2+1{,}95^2}=\sqrt{8{,}21}\approx 2{,}87\;\text{m/s}" />
-        </Step>
-        <Step n={4} title="Retning">
-          <p>Vinkelen mellom vektoren og +x-aksen finner vi ved arctangens:</p>
-          <FormulaBox variant="blue" latex="\theta = \arctan\!\left(\dfrac{v_{y,\text{gj}}}{v_{x,\text{gj}}}\right)" />
+          <FormulaBox variant="gold" latex="\vec v_\text{gj}=\dfrac{\Delta\vec r}{\Delta t}=\dfrac{\vec r_2-\vec r_1}{t_2-t_1}" />
           <p>
-            <InlineLatex latex="\theta=\arctan\!\left(\dfrac{-1{,}95}{2{,}1}\right)\approx -42{,}9^\circ" />,
-            dvs. 42,9° under +x-aksen (mot sørøst). Siden <InlineLatex latex="v_x>0" /> og <InlineLatex latex="v_y<0" />,
-            ligger vektoren i 4. kvadrant og arctangens gir riktig vinkel direkte.
+            I komponentform: <InlineLatex latex="v_{gj,x}=\Delta x/\Delta t" />, <InlineLatex latex="v_{gj,y}=\Delta y/\Delta t" />.
+            Til slutt sammenstilles størrelsen via Pythagoras og retningen via arctan.
           </p>
-          <FormulaBox variant="gold" latex="\boxed{\;|\vec v_{\text{gj}}|\approx 2{,}9\;\text{m/s},\;\theta\approx -43^\circ\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Ekornet har i snitt beveget seg 2,9 m for hvert sekund,
-            i en retning skrått nedover mot høyre. Vi vet ingenting om selve banen — den kan være krøllet —
-            men netto forskyvning delt på tiden gir denne gjennomsnittsvektoren.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Gjennomsnittshastighet i 2D får vi ved å behandle x- og y-komponenten hver for seg,
-        og så kombinere til størrelse og retning til slutt.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p><InlineLatex latex="\Delta x=x_2-x_1=5{,}9-1{,}5=4{,}4\;\text{m}" />, <InlineLatex latex="\;\Delta y=-0{,}6-2{,}9=-3{,}5\;\text{m}" />.</p> },
+      { label: "Hint 2", content: <p>Negative y-komponent ⇒ vektor peker under x-aksen (4. kvadrant). Bruk <InlineLatex latex="\theta=\arctan(v_y/v_x)" />.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponentvis subtraksjon, deretter samles vektoren med Pythagoras + arctan.</p>
+        <Step n={1} title="(a) Komponenter av gjennomsnittshastigheten">
+          <FormulaBox latex="v_{\text{gj},x}=\dfrac{\Delta x}{\Delta t}=\dfrac{5{,}9-1{,}5}{3{,}0}=+1{,}47\;\text{m/s}" />
+          <FormulaBox latex="v_{\text{gj},y}=\dfrac{\Delta y}{\Delta t}=\dfrac{-0{,}6-2{,}9}{3{,}0}=-1{,}17\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(b) Størrelse">
+          <FormulaBox latex="|\vec v_\text{gj}|=\sqrt{v_x^2+v_y^2}=\sqrt{1{,}47^2+1{,}17^2}=\sqrt{2{,}16+1{,}37}=\sqrt{3{,}53}=1{,}88\;\text{m/s}" />
+        </Step>
+        <Step n={3} title="Retning">
+          <FormulaBox latex="\theta=\arctan\!\left(\dfrac{v_y}{v_x}\right)=\arctan(-0{,}795)=-38{,}5°" />
+          <p>v_x &gt; 0 og v_y &lt; 0 plasserer vektoren i 4. kvadrant (38,5° under +x-aksen).</p>
+          <FormulaBox variant="gold" latex="|\vec v_\text{gj}|\approx 1{,}88\;\text{m/s},\;38{,}5°\;\text{under +x-aksen}" />
+        </Step>
+        <Pitfall>
+          <strong>Sjekk kvadrant før du tror på arctan.</strong> arctan gir alltid svar i (−90°, +90°),
+          så hvis v_x &lt; 0 må du legge til 180°. Her er v_x &gt; 0 og v_y &lt; 0, så vektoren er
+          i 4. kvadrant og svaret −38,5° er riktig (eller ekvivalent +321,5°).
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Ekornet beveger seg i en retning som hovedsakelig er østover (+x) men
+          litt sørover (−y). Gjennomsnittshastigheten er ikke samme som «gjennomsnittlig fart» —
+          den er en vektor som bare bryr seg om endepunkt­ene, ikke veien.
+        </p>
+      </div>
     ),
+    summary: <p>Gj.hastighet i 2D er Δr/Δt komponentvis; bruk Pythagoras og arctan for sluttvektor.</p>,
   },
 
   // ==========================================================================
-  // 3.3 — Animasjon med prikk
+  // 3.3 — CALC dot r = [4,4 + 2,8 t²] î + 5,5 t ĵ
   // ==========================================================================
   "3.3": {
-    title: "Gjennomsnittshastighet fra posisjonsfunksjon",
-    difficulty: "lett",
-    pageRef: "s. 83",
+    title: "CALC: animert prikk på skjerm",
+    difficulty: "middels",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En nettsidedesigner lager en animasjon av en prikk med posisjon <InlineLatex latex="\vec r(t)=\left[4{,}0\;\text{cm}+(2{,}5\;\text{cm/s}^2)\,t^2\right]\hat i + \left[(5{,}0\;\text{cm/s})\,t\right]\hat j" />.
-        (a) Finn størrelse og retning til gjennomsnittshastigheten mellom <InlineLatex latex="t=0" /> og <InlineLatex latex="t=2{,}0\;\text{s}" />.
-        (b) Finn uttrykket for momentanhastigheten <InlineLatex latex="\vec v(t)" />.
+        En web-designer animerer en prikk på en skjerm med posisjon
+        <InlineLatex latex="\;\vec r=[4{,}4\;\text{cm}+(2{,}8\;\text{cm/s}^2)t^2]\hat i+(5{,}5\;\text{cm/s})t\,\hat j" />.
+        (a) Finn størrelsen og retningen til prikkens gjennomsnitts­hastighet mellom <InlineLatex latex="t=0" /> og
+        <InlineLatex latex="\;t=2{,}0\;\text{s}" />. (b) Finn størrelsen og retningen til den momentane hastigheten ved
+        <InlineLatex latex="\;t=0,\;1{,}0,\;2{,}0\;\text{s}" />. (c) Skisser prikkens bane fra <InlineLatex latex="t=0" />
+        til <InlineLatex latex="t=2{,}0\;\text{s}" />.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec r(t)=(4{,}0+2{,}5t^2)\hat i+5{,}0t\,\hat j\;[\text{cm}]" /></li>
-        <li><InlineLatex latex="t_1=0,\;t_2=2{,}0\;\text{s}" /></li>
+        <li><InlineLatex latex="\vec r(t)=(4{,}4+2{,}8t^2)\,\hat i+(5{,}5t)\,\hat j" /> [cm]</li>
+        <li>Tider: 0 s, 1,0 s, 2,0 s</li>
       </ul>
     ),
-    unknowns: <p>Gjennomsnittshastighet og momentanhastighet.</p>,
+    unknowns: <p>(a) Gjennomsnittshastighet 0 til 2 s (vektor + størrelse + retning). (b) Momentanhastighet ved tre tider. (c) Skisse av banen.</p>,
     strategy: (
-      <TheoryBox title="Momentan- og gjennomsnittshastighet">
-        <p>
-          Gjennomsnittshastighet finnes ved å regne ut <InlineLatex latex="\vec r" /> i begge endepunkter og dele differansen på tiden.
-          Momentanhastighet er den deriverte: <InlineLatex latex="\vec v(t)=\dfrac{d\vec r}{dt}" />. Deriver hver komponent for seg.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Regn ut <InlineLatex latex="\vec r(0)" /> og <InlineLatex latex="\vec r(2)" /> med enheter i cm.</p> },
-      { label: "Hint 2", content: <p><InlineLatex latex="\dfrac{d}{dt}(at^2)=2at" /> og <InlineLatex latex="\dfrac{d}{dt}(bt)=b" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Det finnes to hastighetsbegreper i fysikken. <em>Gjennomsnittshastighet</em> er
-          forskyvning delt på tid — altså en endepunkt-til-endepunkt-størrelse. <em>Momentanhastighet</em> er
-          hastigheten akkurat nå og defineres som grensen når tidsintervallet går mot null — matematisk den
-          tidsderiverte av posisjonsvektoren.
-        </p>
-        <p>Originalformlene (Young &amp; Freedman 3.2 og 3.3):</p>
-        <FormulaBox variant="blue" latex="\vec v_{\text{gj}} = \dfrac{\Delta \vec r}{\Delta t}, \qquad \vec v(t) = \lim_{\Delta t\to 0}\dfrac{\Delta \vec r}{\Delta t} = \dfrac{d\vec r}{dt}" />
-        <p>
-          Vektorderivasjon gjøres komponentvis: deriver <InlineLatex latex="x(t)" /> og <InlineLatex latex="y(t)" /> hver for seg.
-          Her er <InlineLatex latex="x(t)=4{,}0+2{,}5t^2" /> og <InlineLatex latex="y(t)=5{,}0t" />.
-        </p>
-
-        <Step n={1} title="Posisjon i endepunkter">
-          <p>Setter vi inn <InlineLatex latex="t=0" /> og <InlineLatex latex="t=2{,}0" /> s:</p>
+      <div className="space-y-2">
+        <TheoryBox title="Gjennomsnitt vs. momentan i 2D">
           <p>
-            <InlineLatex latex="\vec r(0)=(4{,}0\,\hat i+0\,\hat j)\;\text{cm}" />,
-            <InlineLatex latex="\;\vec r(2)=(4{,}0+10)\hat i+10\hat j=(14\,\hat i+10\,\hat j)\;\text{cm}" />.
+            <strong>Gjennomsnitt:</strong> bruker bare endepunktene <InlineLatex latex="\;\vec v_\text{gj}=\Delta\vec r/\Delta t" />.<br />
+            <strong>Momentan:</strong> derivasjon komponentvis: <InlineLatex latex="\;\vec v(t)=d\vec r/dt" />.
           </p>
-        </Step>
-        <Step n={2} title="Gjennomsnittshastighet">
-          <p>Bruk originalformelen med forskyvningsvektoren:</p>
-          <FormulaBox latex="\vec v_{\text{gj}}=\dfrac{\vec r(2)-\vec r(0)}{2{,}0}=\dfrac{(10\hat i+10\hat j)\,\text{cm}}{2{,}0\,\text{s}}=(5{,}0\hat i+5{,}0\hat j)\;\text{cm/s}" />
-          <FormulaBox latex="|\vec v_{\text{gj}}|=\sqrt{5{,}0^2+5{,}0^2}\approx 7{,}1\;\text{cm/s},\quad \theta=45^\circ" />
-          <p>
-            Siden <InlineLatex latex="v_x=v_y" /> blir vinkelen akkurat 45° over +x-aksen.
-          </p>
-        </Step>
-        <Step n={3} title="Momentanhastighet (b)">
-          <p>
-            Vi bruker standard regneregler: <InlineLatex latex="\dfrac{d}{dt}(\text{konst.})=0" />,
-            <InlineLatex latex="\;\dfrac{d}{dt}(at^2)=2at" />, <InlineLatex latex="\;\dfrac{d}{dt}(bt)=b" />.
-          </p>
-          <FormulaBox variant="blue" latex="\vec v(t) = \dfrac{d\vec r}{dt} = \dfrac{dx}{dt}\hat i + \dfrac{dy}{dt}\hat j" />
-          <FormulaBox variant="gold" latex="\vec v(t)=\dfrac{d\vec r}{dt}=(5{,}0\,t)\hat i+5{,}0\,\hat j\;[\text{cm/s}]" />
-          <p>
-            <strong>Fysisk tolkning:</strong> x-komponenten vokser lineært med tiden (prikken akselererer i x),
-            mens y-komponenten er konstant på 5,0 cm/s. At gjennomsnittet mellom 0 og 2 s akkurat ble 5,0 cm/s i
-            x-retning er ingen tilfeldighet: for en lineært voksende hastighet er gjennomsnittet
-            midten av intervallet, altså verdien ved <InlineLatex latex="t=1" /> s.
-          </p>
-        </Step>
+          <FormulaBox variant="gold" latex="\vec v=v_x\hat i+v_y\hat j,\quad v_x=\dfrac{dx}{dt},\;v_y=\dfrac{dy}{dt}" />
+          <p>For en parabolsk r(t) ligger gj.fart-vektoren mellom de to ende­hastighetene.</p>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Gjennomsnittshastighet er en «endepunkt-til-endepunkt»-størrelse mens momentanhastighet
-        er den deriverte og beskriver bevegelsen akkurat nå. Generelt er de forskjellige
-        — og blir bare like om hastigheten er konstant.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Deriver komponentvis: <InlineLatex latex="\;dx/dt=2(2{,}8)t=5{,}6t" />, <InlineLatex latex="\;dy/dt=5{,}5" /> (cm/s).</p> },
+      { label: "Hint 2", content: <p>Banen følger fra <InlineLatex latex="\;y=5{,}5t" /> ⇒ <InlineLatex latex="t=y/5{,}5" />, sett inn i x: <InlineLatex latex="\;x=4{,}4+2{,}8(y/5{,}5)^2" /> — parabel åpnet mot +x.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Først gj.fart fra ende­punkter, så derivasjon for momentanfart, til slutt bane­analyse.</p>
+        <Step n={1} title="(a) Gjennomsnittshastighet 0–2 s">
+          <FormulaBox latex="\vec r(0)=(4{,}4,\,0)\;\text{cm},\quad\vec r(2)=(4{,}4+2{,}8\cdot 4,\,5{,}5\cdot 2)=(15{,}6,\,11{,}0)\;\text{cm}" />
+          <FormulaBox latex="\vec v_\text{gj}=\dfrac{\Delta\vec r}{\Delta t}=\dfrac{(11{,}2,\,11{,}0)}{2{,}0}=(5{,}6,\,5{,}5)\;\text{cm/s}" />
+          <FormulaBox latex="|\vec v_\text{gj}|=\sqrt{5{,}6^2+5{,}5^2}=\sqrt{31{,}36+30{,}25}=7{,}85\;\text{cm/s}" />
+          <FormulaBox latex="\theta=\arctan(5{,}5/5{,}6)=44{,}5°\;\text{over +x}" />
+          <FormulaBox variant="gold" latex="|\vec v_\text{gj}|\approx 7{,}85\;\text{cm/s},\;\theta\approx 44{,}5°" />
+        </Step>
+        <Step n={2} title="(b) Momentanfart">
+          <FormulaBox latex="\vec v(t)=5{,}6\,t\,\hat i+5{,}5\,\hat j\;[\text{cm/s}]" />
+          <FormulaBox latex="\vec v(0)=(0,\,5{,}5),\;|v|=5{,}5,\;\theta=90°" />
+          <FormulaBox latex="\vec v(1)=(5{,}6,\,5{,}5),\;|v|=7{,}85,\;\theta=44{,}5°" />
+          <FormulaBox latex="\vec v(2)=(11{,}2,\,5{,}5),\;|v|=12{,}5,\;\theta=26{,}2°" />
+          <FormulaBox variant="gold" latex="\text{Momentanfart roterer fra +y mot +x mens den vokser}" />
+        </Step>
+        <Step n={3} title="(c) Bane">
+          <p>
+            Banen er en parabel åpnet mot +x (siden x vokser kvadratisk i t mens y vokser lineært).
+            Starter loddrett (rent +y) og bøyer mer og mer mot +x.
+          </p>
+        </Step>
+        <Pitfall>
+          <strong>Gj.fart over et tidsintervall ≠ gjennomsnittet av momentanfartene.</strong> Det
+          ville bare vært riktig hvis a er konstant. Her gir nettopp denne oppgaven likt svar
+          (7,85 cm/s) fordi a er konstant — <InlineLatex latex="\;\vec a=5{,}6\,\hat i" /> cm/s² —
+          men det er en spesialvariant.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Animasjonen starter loddrett (kun +y) og bøyer av mot +x ettersom
+          v_x vokser med tiden. Det er som en partikkel under konstant horisontalkraft og
+          ingen vertikal akselerasjon (motsatt fritt fall: kraft mot +x i stedet).
+        </p>
+      </div>
     ),
+    summary: <p>Gj.fart bruker endepunkt-til-endepunkt; momentan­fart er kontinuerlig (deriver).</p>,
   },
 
   // ==========================================================================
-  // 3.4 — Når er vinkelen 45°?
+  // 3.4 — CALC ekorn r(t) (book version)
   // ==========================================================================
   "3.4": {
-    title: "Vinkel til hastighetsvektoren",
+    title: "CALC: ekorn r(t), avstand og fart ved t=5,74 s",
     difficulty: "middels",
-    pageRef: "s. 84",
+    pageRef: "s. 121",
     problem: (
       <p>
-        Hvis <InlineLatex latex="\vec r(t)=bt^2\hat i+ct^3\hat j" /> hvor <InlineLatex latex="b,c>0" /> er konstanter, ved
-        hvilket tidspunkt <InlineLatex latex="t" /> danner hastighetsvektoren en vinkel på 45° med <InlineLatex latex="+x" />-aksen?
+        Posisjonen til et ekorn som løper i en park er gitt av
+        <InlineLatex latex="\;\vec r=[(0{,}280\;\text{m/s})t+(0{,}0360\;\text{m/s}^2)t^2]\hat i+(0{,}0190\;\text{m/s}^3)t^3\hat j" />.
+        (a) Hva er <InlineLatex latex="v_x(t)" /> og <InlineLatex latex="v_y(t)" /> som funksjoner av tid?
+        (b) Ved <InlineLatex latex="\;t=5{,}74\;\text{s}" />, hvor langt er ekornet fra startposisjonen?
+        (c) Ved <InlineLatex latex="\;t=5{,}74\;\text{s}" />, hva er størrelsen og retningen til ekornets hastighet?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec r(t)=bt^2\hat i+ct^3\hat j" /></li>
-        <li><InlineLatex latex="b,c>0" /></li>
+        <li><InlineLatex latex="\vec r(t)=(0{,}280t+0{,}0360t^2)\,\hat i+(0{,}0190t^3)\,\hat j" /> [m]</li>
+        <li>Tid: <InlineLatex latex="t=5{,}74\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Tidspunktet <InlineLatex latex="t" /> hvor vinkelen er 45°.</p>,
+    unknowns: <p>(a) <InlineLatex latex="v_x(t),v_y(t)" />. (b) Avstand fra start. (c) Hastighetens størrelse og retning.</p>,
     strategy: (
-      <TheoryBox title="45°-vinkel betyr vx = vy">
-        <p>
-          Vinkelen <InlineLatex latex="\theta=\arctan(v_y/v_x)" />. 45° betyr <InlineLatex latex="v_x=v_y" /> (begge positive).
-          Finn <InlineLatex latex="\vec v=d\vec r/dt" />, sett komponentene like, og løs for <InlineLatex latex="t" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Deriver hver komponent: <InlineLatex latex="v_x=2bt" />, <InlineLatex latex="v_y=3ct^2" />.</p> },
-      { label: "Hint 2", content: <p>Sett <InlineLatex latex="v_x=v_y" /> og del på <InlineLatex latex="t" /> (siden <InlineLatex latex="t=0" /> er en triviell løsning).</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Retningen til en hastighetsvektor i 2D bestemmes av forholdet mellom komponentene,
-          ikke av størrelsene hver for seg. For vinkelen <InlineLatex latex="\theta" /> målt fra +x-aksen gjelder:
-        </p>
-        <FormulaBox variant="blue" latex="\tan\theta = \dfrac{v_y}{v_x}" />
-        <p>
-          En vinkel på 45° betyr at <InlineLatex latex="\tan 45^\circ = 1" />, altså <InlineLatex latex="v_y = v_x" />.
-          For å finne når dette skjer må vi først ha et uttrykk for <InlineLatex latex="\vec v(t)" />, som vi får ved
-          å derivere posisjonsvektoren komponentvis:
-        </p>
-        <FormulaBox variant="blue" latex="\vec v(t) = \dfrac{d\vec r}{dt}" />
-
-        <Step n={1} title="Deriver komponentene">
+      <div className="space-y-2">
+        <TheoryBox title="2D-kinematikk fra posisjons­funksjon">
           <p>
-            Med <InlineLatex latex="\dfrac{d}{dt}(bt^2)=2bt" /> og <InlineLatex latex="\dfrac{d}{dt}(ct^3)=3ct^2" />:
+            Hastigheten i to dimensjoner er gradienten i tid av posisjons­vektoren, komponent­vis:
           </p>
-          <FormulaBox latex="\vec v(t)=2bt\,\hat i+3ct^2\,\hat j" />
-        </Step>
-        <Step n={2} title="Sett komponentene like">
-          <p>
-            Fra betingelsen <InlineLatex latex="v_x=v_y" />:
-          </p>
-          <FormulaBox latex="2bt=3ct^2\;\Rightarrow\;3ct^2 - 2bt = 0 \;\Rightarrow\; t(3ct-2b)=0" />
-          <p>
-            Vi faktoriserte ut <InlineLatex latex="t" /> fordi likningen alltid er oppfylt ved <InlineLatex latex="t=0" />.
-            Men ved <InlineLatex latex="t=0" /> er både <InlineLatex latex="v_x" /> og <InlineLatex latex="v_y" /> null —
-            vektoren har ikke veldefinert retning, så dette er ikke en fysisk meningsfull løsning.
-          </p>
-        </Step>
-        <Step n={3} title="Ikke-triviell løsning">
-          <p>Den andre faktoren gir løsningen vi søker:</p>
-          <FormulaBox latex="3ct - 2b = 0 \;\Rightarrow\; t = \dfrac{2b}{3c}" />
-          <FormulaBox variant="gold" latex="\boxed{\;t=\dfrac{2b}{3c}\;}" />
-          <p className="italic text-[var(--muted)]">
-            Ved <InlineLatex latex="t=0" /> er hastigheten null (tvetydig retning). Den første
-            ikke-trivielle løsningen er <InlineLatex latex="t=2b/(3c)" />.
-          </p>
-          <p>
-            <strong>Fysisk tolkning:</strong> Før dette tidspunktet dominerer <InlineLatex latex="v_x\sim t" />
-            (partikkelen beveger seg mer horisontalt), og etter dette dominerer <InlineLatex latex="v_y\sim t^2" />
-            (kurven bøyer seg stadig brattere oppover). Sjekk enheter: <InlineLatex latex="[b]/[c]" /> har tidsenhet
-            fordi <InlineLatex latex="[b]=\text{m/s}^2" /> og <InlineLatex latex="[c]=\text{m/s}^3" />, så uttrykket er dimensjonelt riktig.
-          </p>
-        </Step>
+          <FormulaBox variant="gold" latex="\vec v(t)=\dfrac{d\vec r}{dt}=\dfrac{dx}{dt}\hat i+\dfrac{dy}{dt}\hat j" />
+          <p>Avstanden fra origo er <InlineLatex latex="|\vec r|=\sqrt{x^2+y^2}" />.</p>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Retningen til hastighetsvektoren endrer seg når komponentene vokser med ulike potenser av <InlineLatex latex="t" />.
-        Her vokser <InlineLatex latex="v_y\sim t^2" /> raskere enn <InlineLatex latex="v_x\sim t" />, så vinkelen øker over tid.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Deriver hver komponent: <InlineLatex latex="\;v_x=0{,}280+2(0{,}0360)t" />, <InlineLatex latex="\;v_y=3(0{,}0190)t^2" />.</p> },
+      { label: "Hint 2", content: <p>Sett inn tallene før du tar Pythagoras — det reduserer regnefeil.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponentvis derivasjon, deretter innsetting av t=5,74 s.</p>
+        <Step n={1} title="(a) Hastighets­komponenter">
+          <FormulaBox latex="v_x(t)=\dfrac{dx}{dt}=0{,}280+0{,}0720\,t" />
+          <FormulaBox latex="v_y(t)=\dfrac{dy}{dt}=0{,}0570\,t^2" />
+        </Step>
+        <Step n={2} title="(b) Posisjon ved t = 5,74 s">
+          <FormulaBox latex="x(5{,}74)=0{,}280(5{,}74)+0{,}0360(5{,}74)^2=1{,}607+1{,}186=2{,}79\;\text{m}" />
+          <FormulaBox latex="y(5{,}74)=0{,}0190(5{,}74)^3=0{,}0190\cdot 189{,}1=3{,}59\;\text{m}" />
+          <FormulaBox latex="r=\sqrt{2{,}79^2+3{,}59^2}=\sqrt{7{,}79+12{,}90}=\sqrt{20{,}68}=4{,}55\;\text{m}" />
+          <FormulaBox variant="gold" latex="r\approx 4{,}55\;\text{m}" />
+        </Step>
+        <Step n={3} title="(c) Hastighet ved t = 5,74 s">
+          <FormulaBox latex="v_x=0{,}280+0{,}0720(5{,}74)=0{,}693\;\text{m/s}" />
+          <FormulaBox latex="v_y=0{,}0570(5{,}74)^2=1{,}878\;\text{m/s}" />
+          <FormulaBox latex="|\vec v|=\sqrt{0{,}48+3{,}53}=2{,}00\;\text{m/s}" />
+          <FormulaBox latex="\theta=\arctan(1{,}878/0{,}693)=69{,}7°\;\text{over +x}" />
+          <FormulaBox variant="gold" latex="|\vec v|\approx 2{,}00\;\text{m/s},\;\theta\approx 69{,}7°" />
+        </Step>
+        <Pitfall>
+          <strong>Avstand fra start ≠ banens lengde.</strong> r er rett-linje-avstanden fra
+          (0,0). Banens totale lengde langs kurven er <InlineLatex latex="\;\int_0^t |\vec v|\,dt" /> —
+          ulik mengde.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Ekornet starter sakte i +x-retning (0,28 m/s), og y-bevegelsen tar over
+          etter hvert som t³ vokser raskere. Ved t≈5,7 s er hastigheten dominert av y-komponenten.
+        </p>
+      </div>
     ),
+    summary: <p>Komponentvis derivasjon ⇒ inst.fart i 2D. Avstand fra origo via Pythagoras.</p>,
   },
 
   // ==========================================================================
-  // 3.5 — Jetfly gjennomsnittsakselerasjon
+  // 3.5 — Jetfly v1 og v2
   // ==========================================================================
   "3.5": {
-    title: "Gjennomsnittsakselerasjon som vektor",
+    title: "Jetfly — gjennomsnittsakselerasjon",
     difficulty: "lett",
-    pageRef: "s. 85",
+    pageRef: "s. 121",
     problem: (
       <p>
-        Et jetfly flyr i konstant høyde. Ved <InlineLatex latex="t_1=0" /> har det hastighet <InlineLatex latex="\vec v_1=(90\hat i+110\hat j)\;\text{m/s}" />,
-        og ved <InlineLatex latex="t_2=30{,}0\;\text{s}" /> er hastigheten <InlineLatex latex="\vec v_2=(-170\hat i+40\hat j)\;\text{m/s}" />.
-        Finn komponentene, størrelsen og retningen til gjennomsnittsakselerasjonen i dette tidsintervallet.
+        Et jetfly flyr i konstant høyde. Ved <InlineLatex latex="t_1=0" /> har det komponenter
+        <InlineLatex latex="\;v_x=88\;\text{m/s},\;v_y=115\;\text{m/s}" />. Ved <InlineLatex latex="t_2=30{,}0\;\text{s}" />
+        er komponentene <InlineLatex latex="\;v_x=-175\;\text{m/s},\;v_y=35\;\text{m/s}" />. (a) Skisser
+        hastighets­vektorene ved <InlineLatex latex="t_1" /> og <InlineLatex latex="t_2" />. Hvordan skiller de seg?
+        For dette tids­intervallet, beregn (b) komponentene av gjennomsnitts­akselerasjonen, og
+        (c) størrelsen og retningen til gjennomsnitts­akselerasjonen.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec v_1=(90\hat i+110\hat j)\;\text{m/s}" /></li>
-        <li><InlineLatex latex="\vec v_2=(-170\hat i+40\hat j)\;\text{m/s}" /></li>
+        <li><InlineLatex latex="\vec v_1=(88,\,115)\;\text{m/s}" /></li>
+        <li><InlineLatex latex="\vec v_2=(-175,\,35)\;\text{m/s}" /></li>
         <li><InlineLatex latex="\Delta t=30{,}0\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Komponenter, størrelse og retning til <InlineLatex latex="\vec a_{\text{gj}}" />.</p>,
+    unknowns: <p>(a) Skisse. (b) Komponenter av <InlineLatex latex="\vec a_\text{gj}" />. (c) Størrelse og retning.</p>,
     strategy: (
-      <TheoryBox title="Gjennomsnittsakselerasjon">
-        <p>
-          <InlineLatex latex="\vec a_{\text{gj}}=\dfrac{\vec v_2-\vec v_1}{\Delta t}" />. Regn komponentvis.
-          Retning til akselerasjonen trenger ikke peke i samme retning som hastigheten —
-          faktisk er det avviket som krummer banen.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p><InlineLatex latex="\Delta v_x=v_{2x}-v_{1x}=-260\;\text{m/s}" /> (flyet bremser i x-retning og snur).</p> },
-      { label: "Hint 2", content: <p>Negativ x og positiv y gir vinkel i 2. kvadrant (over negativ x-akse).</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Akselerasjon er endringsraten til <em>hastighetsvektoren</em>. Siden hastighet har
-          både størrelse og retning, kan vi ha akselerasjon uten at farten endres — det er nok at retningen endrer seg.
-          Dette er helt analogt til hvordan <InlineLatex latex="\vec v = d\vec r/dt" /> defineres, bare én derivasjon til.
-        </p>
-        <p>Originalformelen fra læreboken (Young &amp; Freedman 3.8):</p>
-        <FormulaBox variant="blue" latex="\vec a_{\text{gj}} = \dfrac{\vec v_2 - \vec v_1}{t_2 - t_1} = \dfrac{\Delta \vec v}{\Delta t}" />
-        <p>
-          Som med hastighet regner vi komponentvis: <InlineLatex latex="a_{x,\text{gj}} = \Delta v_x/\Delta t" /> og
-          <InlineLatex latex="\;a_{y,\text{gj}} = \Delta v_y/\Delta t" />.
-        </p>
-
-        <Step n={1} title="Endring i hastighet">
-          <p>Trekk komponentene fra hverandre:</p>
-          <FormulaBox latex="\Delta \vec v=(-170-90)\hat i+(40-110)\hat j=(-260\hat i-70\hat j)\;\text{m/s}" />
+      <div className="space-y-2">
+        <TheoryBox title="Gjennomsnittsakselerasjon i 2D">
           <p>
-            Det negative x-tallet (−260) betyr at flyet har reversert horisontal retning i løpet av 30 s —
-            en enorm endring i bevegelse.
+            Gjennomsnittsakselerasjonen er endring i hastighet delt på tids­intervallet — komponentvis:
           </p>
-        </Step>
-        <Step n={2} title="Gjennomsnittsakselerasjon">
-          <p>Del på <InlineLatex latex="\Delta t = 30{,}0\;\text{s}" />:</p>
-          <FormulaBox latex="\vec a_{\text{gj}}=\dfrac{\Delta \vec v}{\Delta t}=\left(-\dfrac{260}{30}\hat i-\dfrac{70}{30}\hat j\right)\approx(-8{,}67\hat i-2{,}33\hat j)\;\text{m/s}^2" />
-        </Step>
-        <Step n={3} title="Størrelse og retning">
-          <p>Størrelse via Pythagoras:</p>
-          <FormulaBox variant="blue" latex="|\vec a_{\text{gj}}| = \sqrt{a_x^2 + a_y^2}" />
-          <FormulaBox latex="|\vec a_{\text{gj}}|=\sqrt{8{,}67^2+2{,}33^2}\approx 8{,}98\;\text{m/s}^2" />
+          <FormulaBox variant="gold" latex="\vec a_\text{gj}=\dfrac{\Delta\vec v}{\Delta t},\quad a_x=\dfrac{\Delta v_x}{\Delta t},\;a_y=\dfrac{\Delta v_y}{\Delta t}" />
           <p>
-            <strong>Obs på kvadranten:</strong> Både <InlineLatex latex="a_x" /> og <InlineLatex latex="a_y" /> er negative,
-            så vektoren ligger i 3. kvadrant. Arctangens alene (som gir svar i intervallet −90° til 90°) kan lure oss.
-            Regn ut arctangens av forholdet og legg til 180°:
+            Begge komponentene kan ha forskjellige fortegn — du må sjekke kvadrant før du tror på arctan.
           </p>
-          <p>
-            <InlineLatex latex="\theta=\arctan\!\left(\dfrac{-2{,}33}{-8{,}67}\right)=15^\circ" /> under <InlineLatex latex="-x" />-aksen,
-            dvs. <InlineLatex latex="180^\circ+15^\circ=195^\circ" /> fra <InlineLatex latex="+x" />-aksen.
-          </p>
-          <FormulaBox variant="gold" latex="\boxed{\;|\vec a_{\text{gj}}|\approx 9{,}0\;\text{m/s}^2\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> En akselerasjon på ~9 m/s² er nesten 1 g — en stor manøver.
-            Akselerasjonsretningen (195°) er veldig forskjellig fra hastighetsretningene, som nettopp er det som
-            gjør at flybanen krummer skarpt.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Akselerasjon trenger ikke være parallell med hastigheten: den er bare endringsraten
-        av hastighetsvektoren. Når retningen endrer seg, har vi en komponent vinkelrett på farten.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p><InlineLatex latex="\Delta v_x=-175-88=-263\;\text{m/s}" />, <InlineLatex latex="\;\Delta v_y=35-115=-80\;\text{m/s}" />.</p> },
+      { label: "Hint 2", content: <p>Begge komponenter er negative ⇒ vektoren ligger i 3. kvadrant. Legg til 180° til arctan-svaret.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponentvis. Sjekk kvadrant til slutt.</p>
+        <Step n={1} title="(a) Skisse av v₁ og v₂">
+          <p>
+            v₁ peker oppover-høyre (begge komponenter positive). v₂ peker oppover-venstre (v_x &lt; 0,
+            v_y &gt; 0). Flyet har snudd retning kraftig — det har endret kurs ca. 90°.
+          </p>
+        </Step>
+        <Step n={2} title="(b) Komponenter">
+          <FormulaBox latex="a_x=\dfrac{-175-88}{30{,}0}=\dfrac{-263}{30{,}0}=-8{,}77\;\text{m/s}^2" />
+          <FormulaBox latex="a_y=\dfrac{35-115}{30{,}0}=\dfrac{-80}{30{,}0}=-2{,}67\;\text{m/s}^2" />
+        </Step>
+        <Step n={3} title="(c) Størrelse og retning">
+          <FormulaBox latex="|\vec a_\text{gj}|=\sqrt{8{,}77^2+2{,}67^2}=\sqrt{76{,}9+7{,}1}=\sqrt{84{,}0}=9{,}17\;\text{m/s}^2" />
+          <FormulaBox latex="\theta=\arctan\!\left(\dfrac{-2{,}67}{-8{,}77}\right)=\arctan(0{,}305)=16{,}9°" />
+          <p>Begge negative ⇒ 3. kvadrant: <InlineLatex latex="\;\theta=180°+16{,}9°=196{,}9°" /> målt fra +x.</p>
+          <FormulaBox variant="gold" latex="|\vec a_\text{gj}|\approx 9{,}17\;\text{m/s}^2,\;16{,}9°\;\text{under -x-aksen}" />
+        </Step>
+        <Pitfall>
+          <strong>arctan vet ikke hvilken kvadrant.</strong> arctan(−/−) gir samme svar som arctan(+/+).
+          Sjekk fortegnet til v_x: hvis v_x &lt; 0, ligger vektoren i 2. eller 3. kvadrant — legg
+          til 180°.
+        </Pitfall>
+      </div>
     ),
+    summary: <p>Gj.akselerasjon: (Δv_x/Δt, Δv_y/Δt). Sjekk alltid kvadrant.</p>,
   },
 
   // ==========================================================================
-  // 3.7 — Prærieulven
+  // 3.7 — CALC fugl x=αt, y=3-βt²
   // ==========================================================================
   "3.7": {
-    title: "Hastighet og akselerasjon fra r(t)",
+    title: "CALC: fugl med x=αt, y=3,0−βt²",
     difficulty: "middels",
-    pageRef: "s. 87",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En prærieulv har posisjon (i meter når t er i sekunder): <InlineLatex latex="\vec r(t)=(-3{,}0\,t+5{,}0\,t^2)\hat i+(4{,}0\,t^2+t^3)\hat j" />.
-        Finn (a) <InlineLatex latex="\vec v(t)" /> og <InlineLatex latex="\vec a(t)" /> som generelle uttrykk,
-        (b) størrelsen og retningen til hastigheten ved <InlineLatex latex="t=2{,}0\;\text{s}" />.
+        Koordinatene til en fugl som flyr i xy-planet er gitt ved <InlineLatex latex="\;x(t)=\alpha t" /> og
+        <InlineLatex latex="\;y(t)=3{,}0\;\text{m}-\beta t^2" />, hvor <InlineLatex latex="\alpha=2{,}4\;\text{m/s}" />
+        og <InlineLatex latex="\beta=1{,}2\;\text{m/s}^2" />. (a) Skisser banen fra <InlineLatex latex="t=0" />
+        til <InlineLatex latex="t=2{,}0\;\text{s}" />. (b) Finn hastighets- og akselerasjons­vektorene som funksjoner
+        av tid. (c) Finn størrelse og retning av v og a ved <InlineLatex latex="\;t=2{,}0\;\text{s}" />.
+        (d) Ved <InlineLatex latex="\;t=2{,}0\;\text{s}" />, øker eller minker farten? Hvis fuglen bøyer av, hvilken vei?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec r(t)=(-3{,}0t+5{,}0t^2)\hat i+(4{,}0t^2+t^3)\hat j\;[\text{m}]" /></li>
+        <li><InlineLatex latex="x(t)=\alpha t" /> med <InlineLatex latex="\alpha=2{,}4\;\text{m/s}" /></li>
+        <li><InlineLatex latex="y(t)=3{,}0\;\text{m}-\beta t^2" /> med <InlineLatex latex="\beta=1{,}2\;\text{m/s}^2" /></li>
+        <li>Tid: <InlineLatex latex="t=2{,}0\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Generell <InlineLatex latex="\vec v(t),\vec a(t)" /> og fart/retning ved <InlineLatex latex="t=2" /> s.</p>,
+    unknowns: <p>(a) Bane. (b) <InlineLatex latex="\vec v(t),\vec a(t)" />. (c) Verdier ved t = 2 s. (d) Øker farten?</p>,
     strategy: (
-      <TheoryBox title="Komponentvis derivasjon">
-        <p>
-          Hastighet er første-deriverte, akselerasjon andre-deriverte, av posisjonen.
-          Deriver hver komponent for seg. Sett deretter inn verdien for <InlineLatex latex="t" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p><InlineLatex latex="\dfrac{d}{dt}(at+bt^2)=a+2bt" />, <InlineLatex latex="\;\dfrac{d}{dt}(ct^2+dt^3)=2ct+3dt^2" />.</p> },
-      { label: "Hint 2", content: <p>Ved <InlineLatex latex="t=2" /> s er <InlineLatex latex="v_x=-3+20=17" /> m/s og <InlineLatex latex="v_y=16+12=28" /> m/s.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Når posisjonen er gitt som en funksjon av tiden, får vi hastigheten ved å derivere
-          én gang og akselerasjonen ved å derivere to ganger. Dette er en direkte 2D-utvidelse av kinematikken fra kap. 2:
-        </p>
-        <FormulaBox variant="blue" latex="\vec v(t) = \dfrac{d\vec r}{dt}, \qquad \vec a(t) = \dfrac{d\vec v}{dt} = \dfrac{d^2\vec r}{dt^2}" />
-        <p>
-          Den viktigste regneregelen er potensregelen: <InlineLatex latex="\dfrac{d}{dt}(At^n) = nAt^{n-1}" />.
-          Vi deriverer komponentvis — <InlineLatex latex="\hat i" />- og <InlineLatex latex="\hat j" />-retningene er uavhengige.
-        </p>
-
-        <Step n={1} title="Hastighetsvektor">
+      <div className="space-y-2">
+        <TheoryBox title="Tegn på v · a — den eneste regelen du trenger">
           <p>
-            x-komponenten <InlineLatex latex="x(t)=-3{,}0t+5{,}0t^2" /> deriveres til <InlineLatex latex="-3{,}0 + 10{,}0t" />.
-            y-komponenten <InlineLatex latex="y(t)=4{,}0t^2+t^3" /> deriveres til <InlineLatex latex="8{,}0t + 3{,}0t^2" />.
+            Skalarproduktet av v og a forteller om farten øker eller minker:
           </p>
-          <FormulaBox latex="\vec v(t)=(-3{,}0+10{,}0\,t)\hat i+(8{,}0\,t+3{,}0\,t^2)\hat j\;[\text{m/s}]" />
-        </Step>
-        <Step n={2} title="Akselerasjonsvektor">
-          <p>Deriver hastighetskomponentene på nytt:</p>
-          <FormulaBox latex="\vec a(t)=10{,}0\,\hat i+(8{,}0+6{,}0\,t)\hat j\;[\text{m/s}^2]" />
+          <FormulaBox variant="gold" latex="\vec v\cdot\vec a>0\Rightarrow\;\text{fart øker};\quad\vec v\cdot\vec a<0\Rightarrow\;\text{fart minker};\quad\vec v\cdot\vec a=0\Rightarrow\;\text{fart konstant (rent svingbevegelse)}" />
           <p>
-            Merk: akselerasjonen i x-retning er konstant, men den i y-retning vokser lineært med tiden — altså er ikke
-            bevegelsen jevnt akselerert.
+            Komponenten av a langs v gir tangential­akselerasjonen (endrer fart). Komponenten
+            vinkelrett gir sentripetal-akselerasjonen (endrer retning).
           </p>
-        </Step>
-        <Step n={3} title="Ved t = 2,0 s">
-          <p>Sett inn <InlineLatex latex="t=2{,}0" /> s: <InlineLatex latex="v_x = -3+20 = 17" /> m/s, <InlineLatex latex="\;v_y = 16+12 = 28" /> m/s.</p>
-          <FormulaBox latex="\vec v(2)=(17\hat i+28\hat j)\;\text{m/s}" />
-          <FormulaBox variant="blue" latex="|\vec v| = \sqrt{v_x^2 + v_y^2}, \qquad \theta = \arctan(v_y/v_x)" />
-          <FormulaBox latex="|\vec v|=\sqrt{17^2+28^2}=\sqrt{1073}\approx 32{,}8\;\text{m/s}" />
-          <FormulaBox variant="gold" latex="\theta=\arctan(28/17)\approx 58{,}7^\circ\text{ over }+x" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Ved t = 2,0 s løper prærieulven med ca. 33 m/s (~118 km/t — urealistisk
-            men matematisk ok) i en retning nordøstlig skrått oppover. Siden både <InlineLatex latex="v_x" /> og <InlineLatex latex="v_y" /> er positive, ligger vektoren i 1. kvadrant og arctangens gir vinkelen direkte.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        For en gitt <InlineLatex latex="\vec r(t)" /> finner vi hastighet ved første-derivasjon og akselerasjon ved andre-derivasjon
-        — komponentvis. Tallverdier kommer til slutt.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Deriver komponentvis: <InlineLatex latex="\;v_x=\alpha,\;v_y=-2\beta t" />, <InlineLatex latex="\;a_x=0,\;a_y=-2\beta" /> (konstant).</p> },
+      { label: "Hint 2", content: <p>Eliminér t fra <InlineLatex latex="\;x=\alpha t" />: <InlineLatex latex="\;t=x/\alpha" />, og sett inn i y(t) for parabel-banen.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Derivasjon, deretter innsetting og skalarprodukt-test.</p>
+        <Step n={1} title="(a) Bane (eliminer t)">
+          <FormulaBox latex="t=x/\alpha\Rightarrow y=3{,}0-\beta(x/\alpha)^2=3{,}0-(0{,}208)x^2" />
+          <p>Bane er en omvendt parabel — fuglen flyr horisontalt mens den faller mer og mer.</p>
+        </Step>
+        <Step n={2} title="(b) v(t) og a(t)">
+          <FormulaBox latex="\vec v(t)=\alpha\,\hat i-2\beta t\,\hat j=2{,}4\,\hat i-2{,}4\,t\,\hat j" />
+          <FormulaBox latex="\vec a(t)=-2\beta\,\hat j=-2{,}4\,\hat j\;\text{m/s}^2\;\text{(konstant)}" />
+        </Step>
+        <Step n={3} title="(c) Ved t = 2,0 s">
+          <FormulaBox latex="\vec v(2)=(2{,}4,\,-4{,}8)\;\text{m/s}" />
+          <FormulaBox latex="|\vec v|=\sqrt{2{,}4^2+4{,}8^2}=\sqrt{5{,}76+23{,}04}=\sqrt{28{,}8}=5{,}37\;\text{m/s}" />
+          <FormulaBox latex="\theta_v=\arctan(-4{,}8/2{,}4)=-63{,}4°\;\text{(under +x)}" />
+          <FormulaBox latex="|\vec a|=2{,}4\;\text{m/s}^2,\;\text{rettet -y}" />
+        </Step>
+        <Step n={4} title="(d) Øker farten?">
+          <FormulaBox latex="\vec v\cdot\vec a=v_x a_x+v_y a_y=(2{,}4)(0)+(-4{,}8)(-2{,}4)=+11{,}52>0" />
+          <FormulaBox variant="gold" latex="\text{Farten ØKER}" />
+          <p>Banen bøyer mot −y (siden a er rent vertikalt nedover).</p>
+        </Step>
+        <Pitfall>
+          <strong>Konstant a betyr ikke konstant fart.</strong> Akselerasjonen er konstant
+          (−2,4 m/s² i y), men hastigheten endrer både retning og størrelse. Klassisk forveksling
+          fra 1D der konstant a ofte gir lineær v.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Fuglen er i et tilstandsbilde svært likt prosjektil­bevegelse —
+          horisontal v konstant, vertikal v vokser i negativ retning. Det er som om fuglen er i
+          fritt fall (men g=2,4 i stedet for 9,8).
+        </p>
+      </div>
     ),
+    summary: <p>v·a positiv ⇒ farten øker; negativ ⇒ minker; null ⇒ konstant fart.</p>,
   },
 
   // ==========================================================================
-  // 3.8 — Hund i friluft
+  // 3.8 — CALC bil v(t) = ...
   // ==========================================================================
   "3.8": {
-    title: "Hastighet etter gitt gjennomsnittsakselerasjon",
-    difficulty: "middels",
-    pageRef: "s. 87",
+    title: "CALC: fjernstyrt bil — akselerasjon og fart",
+    difficulty: "vanskelig",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En hund som løper i åpen mark har hastighetskomponenter <InlineLatex latex="v_x=2{,}6\;\text{m/s}" /> og
-        <InlineLatex latex="v_y=-1{,}8\;\text{m/s}" /> ved <InlineLatex latex="t_1=10{,}0\;\text{s}" />. I tidsintervallet fra
-        <InlineLatex latex="t_1" /> til <InlineLatex latex="t_2=20{,}0\;\text{s}" /> har gjennomsnittsakselerasjonen
-        størrelse <InlineLatex latex="0{,}45\;\text{m/s}^2" /> og retning 31° fra <InlineLatex latex="+x" />-aksen. Ved <InlineLatex latex="t_2" />,
-        finn komponentene, størrelsen og retningen til hastigheten.
+        En fjernstyrt bil i en tom parkerings­plass har hastighet
+        <InlineLatex latex="\;\vec v=[5{,}00\;\text{m/s}-(0{,}0180\;\text{m/s}^3)t^2]\hat i+[2{,}00\;\text{m/s}+(0{,}550\;\text{m/s}^2)t]\hat j" />.
+        (a) Hva er <InlineLatex latex="a_x(t)" /> og <InlineLatex latex="a_y(t)" />, x- og y-komponentene
+        av bilens akselerasjon, som funksjoner av tid? (b) Hva er størrelsen og retningen til bilens hastighet
+        ved <InlineLatex latex="\;t=6{,}87\;\text{s}" />? (c) Hva er størrelsen og retningen til bilens
+        akselerasjon ved <InlineLatex latex="\;t=6{,}87\;\text{s}" />?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\vec v_1=(2{,}6\hat i-1{,}8\hat j)\;\text{m/s}" /></li>
-        <li><InlineLatex latex="|\vec a_{\text{gj}}|=0{,}45\;\text{m/s}^2,\;\theta_a=31^\circ" /></li>
-        <li><InlineLatex latex="\Delta t=10{,}0\;\text{s}" /></li>
+        <li><InlineLatex latex="v_x(t)=5{,}00-0{,}0180\,t^2" /> [m/s]</li>
+        <li><InlineLatex latex="v_y(t)=2{,}00+0{,}550\,t" /> [m/s]</li>
+        <li>Tid: <InlineLatex latex="t=6{,}87\;\text{s}" /></li>
       </ul>
     ),
-    unknowns: <p>Hastighet <InlineLatex latex="\vec v_2" /> med komponenter, størrelse og retning.</p>,
+    unknowns: <p>(a) <InlineLatex latex="a_x(t),a_y(t)" />. (b) <InlineLatex latex="\vec v(6{,}87)" />. (c) <InlineLatex latex="\vec a(6{,}87)" />.</p>,
     strategy: (
-      <TheoryBox title="Endring = akselerasjon × tid">
-        <p>
-          Når <InlineLatex latex="\vec a_{\text{gj}}" /> er kjent: <InlineLatex latex="\vec v_2=\vec v_1+\vec a_{\text{gj}}\,\Delta t" />.
-          Først dekomponer <InlineLatex latex="\vec a_{\text{gj}}" /> i x- og y-komponenter via cosinus/sinus.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p><InlineLatex latex="a_x=0{,}45\cos 31^\circ" />, <InlineLatex latex="a_y=0{,}45\sin 31^\circ" />.</p> },
-      { label: "Hint 2", content: <p>Multiplisér med <InlineLatex latex="\Delta t=10" /> s for å få endringen i hastighet.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er «omvendt» oppgave av 3.5 — der fant vi akselerasjonen fra to hastigheter;
-          her er akselerasjonen kjent og vi skal finne den endelige hastigheten. Nøkkelen er å snu definisjonen
-          <InlineLatex latex="\vec a_{\text{gj}} = \Delta \vec v/\Delta t" /> om:
-        </p>
-        <FormulaBox variant="blue" latex="\vec v_2 = \vec v_1 + \vec a_{\text{gj}}\,\Delta t" />
-        <p>
-          Men før vi kan legge sammen vektorene må vi ha dem i samme form. Akselerasjonen er gitt i
-          polarform (størrelse + vinkel), mens hastigheten er i komponentform. Vi dekomponerer derfor
-          akselerasjonen til <InlineLatex latex="\hat i" />- og <InlineLatex latex="\hat j" />-komponenter:
-        </p>
-        <FormulaBox variant="blue" latex="a_x = |\vec a|\cos\theta, \qquad a_y = |\vec a|\sin\theta" />
-
-        <Step n={1} title="Komponenter av a">
-          <p>Med <InlineLatex latex="|\vec a|=0{,}45\;\text{m/s}^2" /> og <InlineLatex latex="\theta=31^\circ" />:</p>
-          <FormulaBox latex="a_x=0{,}45\cos 31^\circ\approx 0{,}386\;\text{m/s}^2,\quad a_y=0{,}45\sin 31^\circ\approx 0{,}232\;\text{m/s}^2" />
-        </Step>
-        <Step n={2} title="Endring i hastighet">
-          <p>Multiplisér hver akselerasjonskomponent med <InlineLatex latex="\Delta t = 10{,}0\;\text{s}" />:</p>
-          <FormulaBox latex="\Delta v_x=0{,}386\cdot 10=3{,}86\;\text{m/s},\quad \Delta v_y=0{,}232\cdot 10=2{,}32\;\text{m/s}" />
-        </Step>
-        <Step n={3} title="Endelig hastighet">
+      <div className="space-y-2">
+        <TheoryBox title="Inst.akselerasjon = deriver hastigheten">
+          <p>Akselerasjonen er hastighetens tids­derivasjon, komponentvis:</p>
+          <FormulaBox variant="gold" latex="\vec a(t)=\dfrac{d\vec v}{dt}=\dfrac{dv_x}{dt}\hat i+\dfrac{dv_y}{dt}\hat j" />
           <p>
-            Legg endringen til den opprinnelige hastigheten. Husk at <InlineLatex latex="v_{1y} = -1{,}8\;\text{m/s}" /> er negativ:
+            Konstant ledd i v gir 0 i a; lineært ledd gir konstant; kvadratisk ledd gir lineær.
           </p>
-          <FormulaBox latex="v_{2x}=2{,}6+3{,}86=6{,}46\;\text{m/s},\quad v_{2y}=-1{,}8+2{,}32=0{,}52\;\text{m/s}" />
-          <FormulaBox latex="|\vec v_2|=\sqrt{6{,}46^2+0{,}52^2}\approx 6{,}48\;\text{m/s}" />
-          <FormulaBox variant="gold" latex="\theta=\arctan(0{,}52/6{,}46)\approx 4{,}6^\circ\text{ over }+x" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Hunden akselererte skrått oppover til høyre, som var nok til å snu y-komponenten
-            fra negativ (−1,8) til svakt positiv (+0,52). Sluttretningen er derfor nesten rett mot +x.
-            Farten økte litt over det dobbelte — fra ~3,2 m/s til ~6,5 m/s.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Gjennomsnittsakselerasjon endrer <em>hele</em> hastighetsvektoren. Bruk komponentform:
-        finn <InlineLatex latex="a_x, a_y" />, multiplisér med tiden, og legg til opprinnelig hastighet.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p><InlineLatex latex="dv_x/dt=-2(0{,}0180)t=-0{,}0360\,t" />, <InlineLatex latex="\;dv_y/dt=0{,}550" /> (konstant).</p> },
+      { label: "Hint 2", content: <p>For (c): a_x &lt; 0 og a_y &gt; 0 ⇒ vektoren ligger i 2. kvadrant. Bruk <InlineLatex latex="\theta=180°-\arctan|a_y/a_x|" />.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Derivér hastighetens komponenter, sett inn t = 6,87 s.</p>
+        <Step n={1} title="(a) Akselerasjons­komponenter">
+          <FormulaBox latex="a_x(t)=\dfrac{dv_x}{dt}=-0{,}0360\,t\;[\text{m/s}^2]" />
+          <FormulaBox latex="a_y(t)=\dfrac{dv_y}{dt}=+0{,}550\;[\text{m/s}^2]\;\text{(konstant)}" />
+        </Step>
+        <Step n={2} title="(b) Hastighet ved t = 6,87 s">
+          <FormulaBox latex="v_x=5{,}00-0{,}0180(6{,}87)^2=5{,}00-0{,}0180(47{,}19)=4{,}15\;\text{m/s}" />
+          <FormulaBox latex="v_y=2{,}00+0{,}550(6{,}87)=5{,}779\;\text{m/s}" />
+          <FormulaBox latex="|\vec v|=\sqrt{4{,}15^2+5{,}78^2}=\sqrt{17{,}2+33{,}4}=\sqrt{50{,}6}=7{,}11\;\text{m/s}" />
+          <FormulaBox latex="\theta_v=\arctan(5{,}78/4{,}15)=54{,}3°\;\text{over +x}" />
+          <FormulaBox variant="gold" latex="|\vec v|\approx 7{,}11\;\text{m/s},\;\theta\approx 54{,}3°" />
+        </Step>
+        <Step n={3} title="(c) Akselerasjon ved t = 6,87 s">
+          <FormulaBox latex="a_x=-0{,}0360(6{,}87)=-0{,}247\;\text{m/s}^2,\quad a_y=+0{,}550\;\text{m/s}^2" />
+          <FormulaBox latex="|\vec a|=\sqrt{0{,}061+0{,}303}=\sqrt{0{,}364}=0{,}603\;\text{m/s}^2" />
+          <FormulaBox latex="\theta_a=180°-\arctan(0{,}550/0{,}247)=180°-65{,}8°=114°" />
+          <FormulaBox variant="gold" latex="|\vec a|\approx 0{,}603\;\text{m/s}^2,\;\theta\approx 114°" />
+        </Step>
+        <Pitfall>
+          <strong>Sjekk om farten øker eller minker:</strong> <InlineLatex latex="\;\vec v\cdot\vec a=(4{,}15)(-0{,}247)+(5{,}78)(0{,}550)=-1{,}03+3{,}18=+2{,}16>0" />,
+          så farten øker fortsatt. Hadde den vært negativ ville bilen vært i bremse­fase.
+        </Pitfall>
+      </div>
     ),
+    summary: <p>Inst.akselerasjon: deriver inst.hastighet. Vektor­regning per komponent.</p>,
   },
 
   // ==========================================================================
-  // 3.9 — Fysikkbok fra bord
+  // 3.9 — Bok glir av bord
   // ==========================================================================
   "3.9": {
-    title: "Horisontalt kast fra bord",
+    title: "Fysikkbok glir av bord — prosjektil",
     difficulty: "lett",
-    pageRef: "s. 91",
+    pageRef: "s. 121",
     problem: (
-      <div className="space-y-2">
-        <p>
-          En fysikkbok glir av et horisontalt bord med fart <InlineLatex latex="1{,}10\;\text{m/s}" />. Den treffer gulvet på
-          <InlineLatex latex="0{,}480\;\text{s}" />. Se bort fra luftmotstand. Finn (a) høyden på bordet,
-          (b) horisontal avstand fra bordkanten til nedslagspunktet,
-          (c) størrelsen til hastigheten rett før nedslag.
-        </p>
-        <svg viewBox="0 0 280 150" className="w-full max-w-sm mx-auto">
-          <Arrowheads />
-          <rect x="20" y="30" width="100" height="8" fill="#6b7280" />
-          <rect x="20" y="38" width="8" height="90" fill="#6b7280" />
-          <rect x="112" y="38" width="8" height="90" fill="#6b7280" />
-          <rect x="125" y="24" width="22" height="8" fill="#3b82f6" stroke="#1e40af" />
-          <line x1="146" y1="32" x2="195" y2="32" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrow-blue-k3)" />
-          <text x="165" y="24" textAnchor="middle" fontSize="10" fill="#3b82f6">v0 = 1,10 m/s</text>
-          <path d="M146,28 Q180,50 230,128" fill="none" stroke="#ef4444" strokeDasharray="3 2" />
-          <line x1="20" y1="130" x2="260" y2="130" stroke="#374151" strokeWidth="2" />
-          <line x1="20" y1="30" x2="20" y2="130" stroke="#10b981" strokeDasharray="2 2" />
-          <text x="10" y="85" fontSize="10" fill="#10b981" textAnchor="end">h</text>
-          <line x1="146" y1="138" x2="230" y2="138" stroke="#8b5cf6" strokeDasharray="2 2" />
-          <text x="188" y="148" fontSize="10" fill="#8b5cf6" textAnchor="middle">x</text>
-        </svg>
-      </div>
+      <p>
+        En fysikkbok glir av et horisontalt bord med fart 1,40 m/s. Den treffer gulvet 0,320 s senere.
+        Se bort fra luftmotstand. Finn (a) bordhøyden over gulvet, (b) horisontal avstand fra
+        bordkanten til der boken treffer gulvet, (c) horisontal og vertikal komponent av bokens fart
+        rett før den treffer gulvet. (d) Skisser x-t, y-t, v_x-t og v_y-t-grafer.
+      </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="v_{0x}=1{,}10\;\text{m/s}" /></li>
-        <li><InlineLatex latex="v_{0y}=0" /> (horisontalt kast)</li>
-        <li><InlineLatex latex="t=0{,}480\;\text{s}" /></li>
-        <li><InlineLatex latex="g=9{,}80\;\text{m/s}^2" /></li>
+        <li>Initial horisontal fart: <InlineLatex latex="v_{0x}=1{,}40\;\text{m/s}" /></li>
+        <li>Falltid: <InlineLatex latex="t=0{,}320\;\text{s}" /></li>
+        <li>g = 9,80 m/s², ingen luftmotstand</li>
       </ul>
     ),
-    unknowns: <p>Høyde <InlineLatex latex="h" />, horisontal avstand <InlineLatex latex="x" />, hastighet ved nedslag.</p>,
+    unknowns: <p>(a) Bordhøyden. (b) Horisontal avstand til landingspunkt. (c) <InlineLatex latex="v_x,v_y" /> rett før landing.</p>,
     strategy: (
-      <TheoryBox title="Prosjektil: x og y er uavhengige">
-        <p>
-          Ingen luftmotstand betyr <InlineLatex latex="a_x=0" /> og <InlineLatex latex="a_y=-g" />. Horisontal og vertikal bevegelse
-          er <em>helt</em> uavhengige, men de deler samme tid <InlineLatex latex="t" />.
-        </p>
-        <p className="mt-1">
-          Horisontalt: <InlineLatex latex="x=v_{0x}t" />. Vertikalt (fra hvile): <InlineLatex latex="h=\tfrac12 g t^2" />, <InlineLatex latex="v_y=gt" />.
-        </p>
-      </TheoryBox>
+      <div className="space-y-2">
+        <TheoryBox title="Horisontalt kast — uavhengighet i x og y">
+          <p>
+            Prosjektil­bevegelse uten luftmotstand: x- og y-bevegelser er <em>uavhengige</em> og deler
+            kun tids­variabel.
+          </p>
+          <FormulaBox variant="gold" latex="\text{horisontalt:}\;x=v_{0x}t,\;v_x=v_{0x}\;\text{(konstant)}" />
+          <FormulaBox variant="gold" latex="\text{vertikalt:}\;y=\tfrac12 gt^2,\;v_y=-gt\;\text{(fritt fall fra ro)}" />
+        </TheoryBox>
+      </div>
     ),
     hints: [
-      { label: "Hint 1", content: <p>Høyden er hvor mye boken har falt: <InlineLatex latex="h=\tfrac12 g t^2" />.</p> },
-      { label: "Hint 2", content: <p>Farten ved nedslag er Pythagoras av <InlineLatex latex="v_x" /> (konstant) og <InlineLatex latex="v_y=gt" />.</p> },
+      { label: "Hint 1", content: <p>Boken faller fra ro vertikalt. Bruk <InlineLatex latex="\;h=\tfrac12 gt^2" /> for høyden.</p> },
+      { label: "Hint 2", content: <p>Vertikal fart vokser lineært: <InlineLatex latex="\;v_y=gt" /> (med vår tegnkonvensjon nedover positivt eller negativt — vær konsistent).</p> },
     ],
     solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> I prosjektilbevegelse uten luftmotstand er x- og y-bevegelsen helt uavhengige, men
-          de deler den samme tiden <InlineLatex latex="t" />. Horisontalt virker ingen kraft, så farten er konstant:
-          <InlineLatex latex="\;a_x=0" />. Vertikalt virker bare tyngdekraften: <InlineLatex latex="a_y=-g" />.
-          Ved et horisontalt kast er <InlineLatex latex="v_{0y}=0" />, så boken starter med ren sidebevegelse og faller
-          som om den bare ble sluppet.
-        </p>
-        <p>Kinematiske likninger fra kap. 2 (konstant akselerasjon) gir:</p>
-        <FormulaBox variant="blue" latex="x(t) = v_{0x}\,t, \qquad y(t) = v_{0y}\,t - \tfrac{1}{2} g t^2, \qquad v_y(t) = v_{0y} - g t" />
-        <p>
-          Med <InlineLatex latex="v_{0y}=0" /> blir fallhøyden <InlineLatex latex="h = \tfrac{1}{2} g t^2" /> og vertikalfarten <InlineLatex latex="v_y = g t" />
-          (vi regner <InlineLatex latex="h" /> og <InlineLatex latex="v_y" /> som positive nedover).
-        </p>
-
-        <Step n={1} title="(a) Høyde på bordet">
-          <p>Høyden er akkurat det boken faller i løpet av 0,480 s:</p>
-          <FormulaBox latex="h=\tfrac12 g t^2 = 0{,}5\cdot 9{,}80\cdot 0{,}480^2\approx 1{,}13\;\text{m}" />
+      <div>
+        <p className="mb-2">x og y håndteres separat med samme t.</p>
+        <Step n={1} title="(a) Bordhøyde — fritt fall i tiden t">
+          <FormulaBox latex="h=\tfrac12 g t^2=\tfrac12(9{,}80)(0{,}320)^2=\tfrac12(9{,}80)(0{,}1024)=0{,}502\;\text{m}" />
+          <FormulaBox variant="gold" latex="h\approx 0{,}502\;\text{m}" />
         </Step>
         <Step n={2} title="(b) Horisontal avstand">
-          <p>
-            Horisontalt beveger boken seg med konstant fart <InlineLatex latex="v_{0x}=1{,}10\;\text{m/s}" /> i samme
-            tidsintervall:
-          </p>
-          <FormulaBox latex="x=v_{0x}\,t=1{,}10\cdot 0{,}480 = 0{,}528\;\text{m}" />
+          <FormulaBox latex="x=v_{0x}\,t=(1{,}40)(0{,}320)=0{,}448\;\text{m}" />
+          <FormulaBox variant="gold" latex="x\approx 0{,}448\;\text{m}" />
         </Step>
-        <Step n={3} title="(c) Hastighet ved nedslag">
+        <Step n={3} title="(c) Slutt­hastighet">
+          <FormulaBox latex="v_x=v_{0x}=1{,}40\;\text{m/s}\;\text{(uendret)}" />
+          <FormulaBox latex="v_y=-g\,t=-(9{,}80)(0{,}320)=-3{,}14\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="\vec v=(1{,}40,\,-3{,}14)\;\text{m/s}" />
+        </Step>
+        <Step n={4} title="(d) Skisse av grafer">
           <p>
-            Horisontal fart er fortsatt 1,10 m/s (uendret). Vertikal fart har økt fra 0 til <InlineLatex latex="gt" />:
-          </p>
-          <FormulaBox latex="v_y=gt=9{,}80\cdot 0{,}480=4{,}70\;\text{m/s}" />
-          <p>Total fart er vektorstørrelsen — bruk Pythagoras:</p>
-          <FormulaBox variant="blue" latex="|\vec v| = \sqrt{v_x^2 + v_y^2}" />
-          <FormulaBox latex="|\vec v|=\sqrt{1{,}10^2+4{,}70^2}\approx 4{,}83\;\text{m/s}" />
-          <FormulaBox variant="gold" latex="\boxed{\;h\approx 1{,}13\;\text{m},\;x\approx 0{,}528\;\text{m},\;|\vec v|\approx 4{,}83\;\text{m/s}\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Vertikal fart (4,70 m/s) er mye større enn horisontal fart (1,10 m/s) ved nedslag —
-            boken treffer gulvet nesten loddrett. Dette er typisk for lave startfarter: tyngdekraften dominerer raskt.
+            x-t: rett linje (helling 1,40). y-t: nedover­vendt parabel.
+            v_x-t: horisontal linje (1,40). v_y-t: rett linje med helling −9,80.
           </p>
         </Step>
+        <Pitfall>
+          <strong>Initial v_y er null, ikke v_x.</strong> Boken «glir av» — det betyr horisontal
+          fart ved start, og null vertikalt. Glemmer man v_{`{0y}`}=0, blir h-formelen feil.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Det er denne uavhengigheten som gjør at en kule skutt horisontalt og
+          en kule sluppet samtidig fra samme høyde treffer bakken samtidig. Klassisk demonstrasjon.
+        </p>
       </div>
     ),
-    summary: (
-      <p>
-        Horisontalt kast: vertikal bevegelse er fritt fall fra hvile, horisontal bevegelse er
-        konstant fart. Fallhøyden bestemmer fallotid, som igjen bestemmer horisontal rekkevidde.
-      </p>
-    ),
+    summary: <p>Horisontalt kast: x og y er uavhengige; tiden er felles. v_x = v₀, v_y vokser lineært.</p>,
   },
 
   // ==========================================================================
-  // 3.10 — Stuper fra klippe
+  // 3.10 — Svømmer hopper over hylle (Fig E3.10)
   // ==========================================================================
   "3.10": {
-    title: "Minimum horisontal fart over hylle",
-    difficulty: "middels",
-    pageRef: "s. 92",
+    title: "Svømmer over hylle (Fig E3.10)",
+    difficulty: "vanskelig",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En modig stuper hopper horisontalt ut fra en klippe. En hylle 9,00 m under og 1,75 m ut
-        må passeres. Hva må den minste farten være idet hun forlater kanten for å klare hyllen?
+        En modig 510 N svømmer dykker av en klippe med et løpe-horisontalt sprang, som vist i Fig. E3.10.
+        Hvilken minste fart må hun ha for å akkurat passere kanten på en hylle som er 1,75 m bred og
+        ligger 9,00 m under toppen av klippen?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="\Delta y=9{,}00\;\text{m}" /> (ned)</li>
-        <li>Må nå minst <InlineLatex latex="x_{\min}=1{,}75\;\text{m}" /> horisontalt</li>
-        <li><InlineLatex latex="v_{0y}=0" /></li>
+        <li>Hylle: 1,75 m horisontalt fra klipp­kanten, 9,00 m under toppen</li>
+        <li>Svømmerens vekt 510 N — <em>irrelevant</em> i frie­fall (kommer ikke inn i ligningene)</li>
+        <li>g = 9,80 m/s², ingen luftmotstand</li>
       </ul>
     ),
-    unknowns: <p>Minimum starthastighet <InlineLatex latex="v_0" />.</p>,
+    unknowns: <p>Minste horisontal initial­fart <InlineLatex latex="v_0" /> for å akkurat nå hylle­kanten.</p>,
     strategy: (
-      <TheoryBox title="Minimum betyr akkurat så vidt">
-        <p>
-          Den kritiske situasjonen er når stuperen lander akkurat ved kanten av hyllen.
-          Fallotiden bestemmes av vertikal høyde. Gitt denne tiden må horisontalfarten være
-          stor nok til å dekke 1,75 m.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Finn falltiden <InlineLatex latex="t=\sqrt{2\Delta y/g}" />.</p> },
-      { label: "Hint 2", content: <p>Deretter <InlineLatex latex="v_0=x/t" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Horisontalt kast-problem: <InlineLatex latex="v_{0y}=0" /> og
-          <InlineLatex latex="\;a_y=-g" />. Siden x- og y-bevegelse er uavhengige, er strategien nesten alltid å bruke
-          den vertikale likningen til å finne tiden, og så sette tiden inn i den horisontale likningen.
-        </p>
-        <p>Originalformler fra kinematikken (konstant akselerasjon, fra kap. 2 / ligning 3.20–3.21):</p>
-        <FormulaBox variant="blue" latex="\Delta y = \tfrac{1}{2} g t^2 \;\;(\text{for }v_{0y}=0), \qquad x = v_0\,t" />
-        <p>
-          «Minimum fart» betyr her at stuperen akkurat passerer hyllekanten. Dersom hun beveger seg litt fortere,
-          flyr hun litt lenger ut — men farten kan ikke være mindre, for da treffer hun hyllen. Så vi krever at
-          hun faller nøyaktig 9,00 m vertikalt mens hun beveger seg nøyaktig 1,75 m horisontalt.
-        </p>
-
-        <Step n={1} title="Falltid">
+      <div className="space-y-2">
+        <TheoryBox title="Minimum-spørsmål: «akkurat-så-vidt»">
           <p>
-            Vi løser den vertikale formelen for <InlineLatex latex="t" />:
+            For å akkurat nå hylle­kanten må svømmeren falle 9,00 m vertikalt mens hun går 1,75 m
+            horisontalt. Tiden er bestemt av fallhøyden:
           </p>
-          <FormulaBox variant="blue" latex="\Delta y = \tfrac{1}{2} g t^2 \;\Rightarrow\; t = \sqrt{\dfrac{2\,\Delta y}{g}}" />
-          <FormulaBox latex="t=\sqrt{\dfrac{2\Delta y}{g}}=\sqrt{\dfrac{2\cdot 9{,}00}{9{,}80}}\approx 1{,}355\;\text{s}" />
-          <p>
-            Dette er hvor lang tid fritt fall over 9 m tar — det samme for alle objekter, uavhengig av horisontalfart.
-          </p>
-        </Step>
-        <Step n={2} title="Nødvendig horisontalfart">
-          <p>
-            I samme tid må hun tilbakelegge minst 1,75 m horisontalt. Snu <InlineLatex latex="x = v_0 t" /> om til <InlineLatex latex="v_0 = x/t" />:
-          </p>
-          <FormulaBox variant="gold" latex="v_0=\dfrac{x_{\min}}{t}=\dfrac{1{,}75}{1{,}355}\approx 1{,}29\;\text{m/s}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> 1,29 m/s er knapt mer enn spasergang — overraskende lite. Grunnen er at
-            fallet på 9 m tar lang tid (~1,4 s), og da rekker selv en liten horisontalfart langt. Merk at tiden ikke avhenger
-            av <InlineLatex latex="v_0" /> — typisk tegn på et «kobling via tid»-problem.
-          </p>
-        </Step>
+          <FormulaBox variant="gold" latex="t=\sqrt{\dfrac{2h}{g}},\quad v_0=\dfrac{x}{t}" />
+          <p>Vekten m·g påvirker ikke fritt fall (alle objekter faller likt uten luftmotstand) — den oppgis bare som distraksjon.</p>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Typisk prosjektiloppgave: fallhøyden gir tiden, og tiden kobler vertikal og horisontal
-        bevegelse. Løs vertikalt først, så horisontalt.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Vertikal: <InlineLatex latex="\;9{,}00=\tfrac12 g t^2" /> ⇒ <InlineLatex latex="t=\sqrt{2(9)/g}" />.</p> },
+      { label: "Hint 2", content: <p>Horisontal: <InlineLatex latex="\;1{,}75=v_0 t" /> ⇒ <InlineLatex latex="\;v_0=1{,}75/t" />.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Falltid bestemmer alt — løs vertikalt først, deretter horisontalt.</p>
+        <Step n={1} title="Falltid">
+          <FormulaBox latex="h=\tfrac12 g t^2\Rightarrow t=\sqrt{\dfrac{2h}{g}}=\sqrt{\dfrac{2(9{,}00)}{9{,}80}}=\sqrt{1{,}837}=1{,}355\;\text{s}" />
+        </Step>
+        <Step n={2} title="Minste horisontal fart">
+          <FormulaBox latex="v_0=\dfrac{x}{t}=\dfrac{1{,}75\;\text{m}}{1{,}355\;\text{s}}=1{,}29\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_0\approx 1{,}29\;\text{m/s}" />
+        </Step>
+        <Pitfall>
+          <strong>Vekten 510 N er distraksjon.</strong> I prosjektil­bevegelse uten luftmotstand
+          kanselleres masse fra Newtons 2. lov: <InlineLatex latex="\;a=F/m=mg/m=g" />. Tunge og
+          lette svømmere faller likt — så vekten er irrelevant her.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 1,29 m/s er lett gangfart — fysisk realistisk for en stillestående
+          start. Hadde hylla vært lengre eller dybden mindre ville hun trengt mer fart.
+        </p>
+      </div>
     ),
+    summary: <p>Vekten irrelevant for prosjektil­bevegelse uten luftmotstand. t fra y, så v fra x/t.</p>,
   },
 
   // ==========================================================================
-  // 3.16 — Baseball
+  // 3.16 — Skall fra horisontalplan
   // ==========================================================================
   "3.16": {
-    title: "Rekkevidde og maks høyde for baseball",
+    title: "Granat avfyrt fra bakken — bane­analyse",
     difficulty: "middels",
-    pageRef: "s. 93",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En baseball forlater balltreet med vinkel 30,0° over horisontalen og fanges 115 m borte
-        i samme høyde. (a) Hva var starthastigheten? (b) Hvor høyt kom ballen?
+        På flat bakke avfyres et skall med initialfart 71,0 m/s ved en vinkel 55,9° over horisontalen, uten
+        merkbar luft­motstand. (a) Finn horisontal og vertikal komponent av skallets initial­fart.
+        (b) Hvor lang tid tar det skallet å nå sitt høyeste punkt? (c) Finn den maksimale høyden over bakken.
+        (d) Hvor langt fra utskytningen lander skallet? (e) Ved sitt høyeste punkt, finn de horisontale og
+        vertikale komponentene av akselerasjonen og hastigheten.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Rekkevidde <InlineLatex latex="R=115\;\text{m}" /> (samme høyde)</li>
-        <li>Vinkel <InlineLatex latex="\alpha_0=30{,}0^\circ" /></li>
+        <li>Initial fart: <InlineLatex latex="v_0=71{,}0\;\text{m/s}" /></li>
+        <li>Vinkel: <InlineLatex latex="\alpha=55{,}9°" /> over horisontalen</li>
+        <li>Avfyrt fra og lander på samme nivå (flat bakke)</li>
+        <li>g = 9,80 m/s², ingen luftmotstand</li>
       </ul>
     ),
-    unknowns: <p>Startfart <InlineLatex latex="v_0" /> og maks høyde <InlineLatex latex="h" />.</p>,
+    unknowns: <p>(a) Komponenter. (b) Tid til topp. (c) Maks høyde. (d) Rekkevidde. (e) v og a på toppen.</p>,
     strategy: (
-      <TheoryBox title="Rekkeviddeformelen (samme høyde)">
-        <p>
-          Når start- og landingshøyde er like: <InlineLatex latex="R=\dfrac{v_0^2\sin(2\alpha_0)}{g}" />.
-          Maksimal høyde over utgangspunktet:
-          <InlineLatex latex="\;h=\dfrac{(v_0\sin\alpha_0)^2}{2g}" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Løs <InlineLatex latex="v_0" /> fra rekkeviddeformelen, så sett inn i høydeformelen.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Et prosjektil som startes og lander i samme høyde følger en parabelbane.
-          Ved å skrive ned <InlineLatex latex="x(t)=v_0\cos\alpha_0\,t" /> og <InlineLatex latex="y(t)=v_0\sin\alpha_0\,t - \tfrac{1}{2}gt^2" />,
-          finner vi flygetiden ved å sette <InlineLatex latex="y=0" />: <InlineLatex latex="\;t = 2v_0\sin\alpha_0/g" />.
-          Setter vi denne tiden inn i x-likningen og bruker identiteten <InlineLatex latex="2\sin\alpha\cos\alpha = \sin(2\alpha)" />,
-          får vi <em>rekkeviddeformelen</em>:
-        </p>
-        <FormulaBox variant="blue" latex="R = \dfrac{v_0^{\,2}\sin(2\alpha_0)}{g}" />
-        <p>
-          For maks høyde bruker vi at <InlineLatex latex="v_y=0" /> på toppen og setter det inn i
-          <InlineLatex latex="\;v_y^2 = v_{0y}^2 - 2gh" />:
-        </p>
-        <FormulaBox variant="blue" latex="h = \dfrac{(v_0\sin\alpha_0)^2}{2g}" />
-        <p>
-          Her er rekkevidden kjent og vi skal finne <InlineLatex latex="v_0" />. Vi inverterer rekkeviddeformelen.
-        </p>
-
-        <Step n={1} title="(a) Startfart">
-          <p>Løs rekkeviddeformelen for <InlineLatex latex="v_0" />:</p>
-          <FormulaBox variant="blue" latex="R = \dfrac{v_0^{\,2}\sin(2\alpha_0)}{g} \;\Rightarrow\; v_0 = \sqrt{\dfrac{Rg}{\sin(2\alpha_0)}}" />
-          <p>
-            Sett inn <InlineLatex latex="R=115\;\text{m}" />, <InlineLatex latex="g=9{,}80\;\text{m/s}^2" />, <InlineLatex latex="2\alpha_0=60^\circ" />:
-          </p>
-          <FormulaBox latex="v_0=\sqrt{\dfrac{Rg}{\sin(2\alpha_0)}}=\sqrt{\dfrac{115\cdot 9{,}80}{\sin 60^\circ}}=\sqrt{1301}\approx 36{,}1\;\text{m/s}" />
-        </Step>
-        <Step n={2} title="(b) Maks høyde">
-          <p>
-            Sett <InlineLatex latex="v_0=36{,}1" /> m/s og <InlineLatex latex="\alpha_0=30^\circ" /> inn i høydeformelen.
-            Her er <InlineLatex latex="\sin 30^\circ = 0{,}5" /> og <InlineLatex latex="2g = 19{,}6" />:
-          </p>
-          <FormulaBox latex="h=\dfrac{(v_0\sin 30^\circ)^2}{2g}=\dfrac{(36{,}1\cdot 0{,}5)^2}{19{,}6}\approx 16{,}6\;\text{m}" />
-          <FormulaBox variant="gold" latex="\boxed{\;v_0\approx 36{,}1\;\text{m/s},\;h\approx 16{,}6\;\text{m}\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> 36,1 m/s er ca. 130 km/t — realistisk for en kraftig slagmann.
-            Ballen stiger til ca. 17 m, mer enn taket på en trippelbuss. Hadde man slått ballen med 45° i stedet (maks rekkevidde-vinkelen),
-            ville samme startfart gitt <InlineLatex latex="R=v_0^2/g \approx 133" /> m — enda lenger.
-          </p>
-        </Step>
+      <div className="space-y-2">
+        <TheoryBox title="Prosjektil­bevegelse — formelpakken">
+          <p>Standard utskytning fra og lander på samme høyde:</p>
+          <FormulaBox variant="gold" latex="v_{0x}=v_0\cos\alpha,\;v_{0y}=v_0\sin\alpha" />
+          <FormulaBox variant="gold" latex="t_\text{topp}=\dfrac{v_{0y}}{g},\;H=\dfrac{v_{0y}^2}{2g},\;R=\dfrac{v_0^2\sin 2\alpha}{g}" />
+          <p>På toppen er <InlineLatex latex="v_y=0" />, men <InlineLatex latex="v_x" /> er fortsatt <InlineLatex latex="v_{0x}" />. Akselerasjonen er hele tiden <InlineLatex latex="\vec a=(0,-g)" />.</p>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Rekkeviddeformelen <InlineLatex latex="R=v_0^2\sin(2\alpha)/g" /> gjelder kun når start- og landingshøyde er like.
-        Vinkel 45° gir maks rekkevidde, men 30° er vanligere i praksis.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Bryt v₀ i komponenter med cos/sin. Husk: cos for x, sin for y.</p> },
+      { label: "Hint 2", content: <p>Total tid = 2·t_topp (symmetri rundt toppen for samme start- og slutt­høyde).</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponenter først, så bruk symmetrien til parabolen.</p>
+        <Step n={1} title="(a) Initial-komponenter">
+          <FormulaBox latex="v_{0x}=v_0\cos\alpha=71{,}0\cos 55{,}9°=71{,}0(0{,}561)=39{,}8\;\text{m/s}" />
+          <FormulaBox latex="v_{0y}=v_0\sin\alpha=71{,}0\sin 55{,}9°=71{,}0(0{,}828)=58{,}8\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(b) Tid til topp (v_y = 0)">
+          <FormulaBox latex="t_\text{topp}=\dfrac{v_{0y}}{g}=\dfrac{58{,}8}{9{,}80}=6{,}00\;\text{s}" />
+        </Step>
+        <Step n={3} title="(c) Maks høyde">
+          <FormulaBox latex="H=\dfrac{v_{0y}^2}{2g}=\dfrac{(58{,}8)^2}{19{,}6}=176{,}5\;\text{m}" />
+          <FormulaBox variant="gold" latex="H\approx 177\;\text{m}" />
+        </Step>
+        <Step n={4} title="(d) Horisontal rekkevidde">
+          <p>Total flytid: <InlineLatex latex="\;t_\text{tot}=2t_\text{topp}=12{,}00" /> s.</p>
+          <FormulaBox latex="R=v_{0x}\,t_\text{tot}=39{,}8(12{,}00)=477{,}6\;\text{m}" />
+          <FormulaBox variant="gold" latex="R\approx 478\;\text{m}" />
+        </Step>
+        <Step n={5} title="(e) På toppen: v og a">
+          <FormulaBox latex="v_x=39{,}8\;\text{m/s},\;v_y=0\;\Rightarrow\;|\vec v|=39{,}8\;\text{m/s rent horisontalt}" />
+          <FormulaBox latex="a_x=0,\;a_y=-9{,}80\;\text{m/s}^2\;\text{(uendret hele banen)}" />
+        </Step>
+        <Pitfall>
+          <strong>Akselerasjonen er IKKE null på toppen.</strong> Bare den vertikale hastigheten er null
+          der. Akselerasjonen <InlineLatex latex="(0,-g)" /> er konstant gjennom hele banen — det er
+          den som tvinger v_y til å bytte fortegn ved toppen.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Vinkel 55,9° er relativt nær 45° (max-rekkevidde-vinkel for flat bakke).
+          Hadde vinkelen vært 45°, ville rekkevidden vært <InlineLatex latex="\;R_\text{max}=v_0^2/g=514\;\text{m}" /> —
+          litt mer enn vår 478 m.
+        </p>
+      </div>
     ),
+    summary: <p>Standard parabolsk bane: tid til topp = v_0y/g, rekkevidde = 2·v_0x·t_topp.</p>,
   },
 
   // ==========================================================================
-  // 3.17 — Kulestøt
+  // 3.17 — Major leaguer 33 m/s 38,5°
   // ==========================================================================
   "3.17": {
-    title: "Kulestøt fra hevet posisjon",
-    difficulty: "middels",
-    pageRef: "s. 94",
+    title: "Baseball ved 33,0 m/s, 38,5°",
+    difficulty: "vanskelig",
+    pageRef: "s. 121",
     problem: (
       <p>
-        En kulestøter kaster kulen (masse 7,26 kg) med fart 12,4 m/s i en vinkel på 51,0° over
-        horisontalen fra en høyde 1,83 m over bakken. Hvilken horisontal avstand tilbakelegger
-        kulen? Se bort fra luftmotstand.
+        En baseball-spiller treffer en ball slik at den forlater slag­treet i 33,0 m/s ved en vinkel 38,5°
+        over horisontalen. Se bort fra luftmotstand. (a) Ved hvilke <em>to</em> tider er ballen ved en høyde
+        10,7 m over punktet hvor den traff? (b) Beregn de horisontale og vertikale komponentene av ballens
+        hastighet ved hver av de to tidene. (c) Hva er størrelsen og retningen av ballens hastighet når den
+        returnerer til samme nivå som da den traff?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="v_0=12{,}4\;\text{m/s}" />, <InlineLatex latex="\alpha_0=51{,}0^\circ" /></li>
-        <li>Starthøyde <InlineLatex latex="h=1{,}83\;\text{m}" /></li>
+        <li><InlineLatex latex="v_0=33{,}0\;\text{m/s}" />, <InlineLatex latex="\alpha=38{,}5°" /></li>
+        <li>Høyde: 10,7 m over slag­punktet</li>
+        <li>Lander på samme høyde som den ble truffet</li>
       </ul>
     ),
-    unknowns: <p>Horisontal avstand <InlineLatex latex="x" /> når kulen treffer bakken.</p>,
+    unknowns: <p>(a) De to tidene da y=10,7 m. (b) Komponenter ved disse. (c) Retur­hastighet.</p>,
     strategy: (
-      <TheoryBox title="Start og landingshøyde er ulike">
-        <p>
-          Rekkeviddeformelen <InlineLatex latex="R=v_0^2\sin(2\alpha)/g" /> gjelder <em>ikke</em>.
-          Sett opp <InlineLatex latex="y(t)=h+v_{0y}t-\tfrac12 gt^2" />, sett <InlineLatex latex="y=0" /> og løs kvadratisk for <InlineLatex latex="t" />.
-          Deretter <InlineLatex latex="x=v_{0x}t" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p><InlineLatex latex="v_{0x}=v_0\cos 51^\circ" />, <InlineLatex latex="v_{0y}=v_0\sin 51^\circ" />.</p> },
-      { label: "Hint 2", content: <p>Bruk abc-formelen. Velg den positive roten for <InlineLatex latex="t" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Rekkeviddeformelen <InlineLatex latex="R = v_0^2\sin(2\alpha_0)/g" /> forutsetter at
-          start- og sluttpunkt ligger i samme høyde. Her starter kulen 1,83 m over bakken, så landingshøyden er annerledes
-          enn starthøyden. Vi må gå tilbake til de grunnleggende kinematiske likningene:
-        </p>
-        <FormulaBox variant="blue" latex="x(t) = v_{0x}\,t, \qquad y(t) = y_0 + v_{0y}\,t - \tfrac{1}{2} g t^2" />
-        <p>
-          Strategien er: (1) dekomponer <InlineLatex latex="v_0" /> i x- og y-komponenter, (2) finn tiden kulen treffer bakken
-          ved å sette <InlineLatex latex="y(t)=0" />, (3) sett denne tiden inn i x-likningen for å finne rekkevidden.
-          Fordi y-likningen er en annengradslikning i <InlineLatex latex="t" />, må vi bruke abc-formelen:
-        </p>
-        <FormulaBox variant="blue" latex="t = \dfrac{-B \pm \sqrt{B^2 - 4AC}}{2A}" />
-
-        <Step n={1} title="Komponenter">
-          <p>Standard dekomposisjon:</p>
-          <FormulaBox variant="blue" latex="v_{0x} = v_0\cos\alpha_0, \qquad v_{0y} = v_0\sin\alpha_0" />
-          <FormulaBox latex="v_{0x}=12{,}4\cos 51^\circ\approx 7{,}80\;\text{m/s},\quad v_{0y}=12{,}4\sin 51^\circ\approx 9{,}64\;\text{m/s}" />
-        </Step>
-        <Step n={2} title="Tid til nedslag">
+      <div className="space-y-2">
+        <TheoryBox title="To tider på samme høyde — symmetri">
           <p>
-            La nedslag være ved <InlineLatex latex="y=0" /> (bakken) med start <InlineLatex latex="y_0=1{,}83\;\text{m}" />:
+            En parabolsk bane krysser hver høyde nøyaktig <em>to</em> ganger: én på vei opp, én på
+            vei ned. Det gir andre­grads­ligning i t:
           </p>
-          <FormulaBox latex="0 = 1{,}83 + 9{,}64\,t - \tfrac{1}{2}(9{,}80)t^2" />
+          <FormulaBox variant="gold" latex="y(t)=v_{0y}t-\tfrac12 g t^2\Rightarrow \tfrac12 g\,t^2-v_{0y}t+y=0" />
           <p>
-            Setter <InlineLatex latex="1{,}83+9{,}64\,t-4{,}90\,t^2=0" />, dvs. <InlineLatex latex="4{,}90t^2-9{,}64t-1{,}83=0" />.
-            Her er <InlineLatex latex="A=4{,}90" />, <InlineLatex latex="B=-9{,}64" />, <InlineLatex latex="C=-1{,}83" />.
-            Vi tar den positive roten fordi tiden må være positiv:
+            Symmetri­regel: ved retur til samme nivå er v_y endret tegn, |v_y| er samme, og <InlineLatex latex="|\vec v|=v_0" />.
           </p>
-          <FormulaBox latex="t=\dfrac{9{,}64+\sqrt{9{,}64^2+4\cdot 4{,}90\cdot 1{,}83}}{2\cdot 4{,}90}=\dfrac{9{,}64+\sqrt{92{,}9+35{,}9}}{9{,}80}\approx 2{,}14\;\text{s}" />
-          <p>
-            Merk at leddet <InlineLatex latex="+4\cdot 4{,}90\cdot 1{,}83" /> under rottegnet kommer fra at <InlineLatex latex="C<0" />
-            (<InlineLatex latex="-4AC" /> blir positivt). Dette gjør at tiden blir litt <em>lenger</em> enn den ville vært
-            ved lik start- og slutthøyde.
-          </p>
-        </Step>
-        <Step n={3} title="Horisontal avstand">
-          <p>
-            Sett tiden inn i <InlineLatex latex="x=v_{0x}\,t" />:
-          </p>
-          <FormulaBox variant="gold" latex="x=v_{0x}\,t=7{,}80\cdot 2{,}14\approx 16{,}7\;\text{m}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Ekstra starthøyde på bare 1,83 m gir ikke mye ekstra rekkevidde her, men
-            det gjør at vi ikke kan bruke «rekkeviddeformelen» direkte. Generelt må man alltid sette opp
-            <InlineLatex latex="y(t)=0" /> eksplisitt når start- og landingshøyde er forskjellige.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Når starthøyden er over landingshøyden, må vi løse kvadratisk for tid. Rekkeviddeformelen
-        fungerer ikke direkte — den krever lik start- og slutthøyde.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Komponenter: <InlineLatex latex="\;v_{0x}=v_0\cos\alpha,\;v_{0y}=v_0\sin\alpha" />.</p> },
+      { label: "Hint 2", content: <p>Sett y=10,7 og løs <InlineLatex latex="\;4{,}90t^2-20{,}55t+10{,}7=0" /> med ABC-formelen.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponenter først, så annengradsligning for de to tidene.</p>
+        <Step n={1} title="Initial-komponenter">
+          <FormulaBox latex="v_{0x}=33{,}0\cos 38{,}5°=25{,}82\;\text{m/s},\quad v_{0y}=33{,}0\sin 38{,}5°=20{,}55\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Sett y(t) = 10,7 m">
+          <FormulaBox latex="10{,}7=20{,}55\,t-4{,}90\,t^2" />
+          <FormulaBox latex="4{,}90\,t^2-20{,}55\,t+10{,}7=0" />
+          <FormulaBox latex="t=\dfrac{20{,}55\pm\sqrt{422{,}3-209{,}7}}{9{,}80}=\dfrac{20{,}55\pm\sqrt{212{,}6}}{9{,}80}=\dfrac{20{,}55\pm 14{,}58}{9{,}80}" />
+          <FormulaBox latex="t_1=0{,}608\;\text{s}\;\text{(på vei opp)},\quad t_2=3{,}58\;\text{s}\;\text{(på vei ned)}" />
+        </Step>
+        <Step n={3} title="(b) Komponenter ved t₁ og t₂">
+          <FormulaBox latex="v_x=25{,}82\;\text{m/s\;(konstant)}" />
+          <FormulaBox latex="v_y(0{,}608)=20{,}55-9{,}80(0{,}608)=+14{,}59\;\text{m/s\;(oppover)}" />
+          <FormulaBox latex="v_y(3{,}58)=20{,}55-9{,}80(3{,}58)=-14{,}53\;\text{m/s\;(nedover)}" />
+          <FormulaBox variant="gold" latex="|v_y(t_1)|\approx |v_y(t_2)|\approx 14{,}5\;\text{m/s, motsatt fortegn}" />
+        </Step>
+        <Step n={4} title="(c) Retur­hastighet (y = 0 igjen)">
+          <p>Ved symmetri tilbake på utskytnings­nivå: <InlineLatex latex="\;v_x=v_{0x}" />, <InlineLatex latex="\;v_y=-v_{0y}" />.</p>
+          <FormulaBox latex="|\vec v|=\sqrt{v_{0x}^2+v_{0y}^2}=v_0=33{,}0\;\text{m/s}" />
+          <FormulaBox latex="\theta=-38{,}5°\;\text{(under +x)}" />
+          <FormulaBox variant="gold" latex="|\vec v_\text{retur}|=33{,}0\;\text{m/s ved 38,5° under +x}" />
+        </Step>
+        <Pitfall>
+          <strong>Kvadratiske <InlineLatex latex="t" />-løsninger har alltid en mening.</strong> Begge
+          tidene er fysiske — én når ballen klatrer forbi 10,7 m oppover, en når den faller forbi.
+          Sjekk fortegnet på v_y for å sortere.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Symmetrien rundt toppen er fundamental for prosjektil­bevegelse uten
+          luftmotstand — energi­bevaring betyr at samme høyde gir samme |v|. Med luftmotstand
+          brytes denne symmetrien og ballen lander tregere enn den ble kastet.
+        </p>
+      </div>
     ),
+    summary: <p>Annengrads­ligning gir to tider for samme høyde — én på vei opp, én på vei ned.</p>,
   },
 
   // ==========================================================================
-  // 3.21 — Myntkast på tivoli
+  // 3.21 — Mann på tak kaster stein
   // ==========================================================================
   "3.21": {
-    title: "Myntkast i skål",
-    difficulty: "middels",
-    pageRef: "s. 95",
+    title: "Mann på tak kaster stein — bane­analyse",
+    difficulty: "vanskelig",
+    pageRef: "s. 122",
     problem: (
       <p>
-        I et tivoliboots: kast en mynt ned i en liten skål på en hylle 2,1 m borte horisontalt og
-        i ukjent høyde over kastepunktet. Mynten kastes med <InlineLatex latex="v_0=6{,}4\;\text{m/s}" /> i 60° over horisontalen
-        og lander i skålen. Finn (a) høyden <InlineLatex latex="h" /> til skålen,
-        (b) vertikal fartkomponent idet mynten lander i skålen.
+        En mann står på taket av en 15,0 m høy bygning og kaster en stein med fart 30,0 m/s i en vinkel
+        33,0° over horisontalen. Se bort fra luftmotstand. Beregn (a) den maksimale høyden steinen når
+        over taket; (b) farten til steinen rett før den treffer bakken; (c) den horisontale rekkevidden
+        fra basen av bygningen til punktet der steinen treffer bakken. (d) Skisser x-t, y-t, v_x-t og
+        v_y-t-grafer.
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="v_0=6{,}4\;\text{m/s},\;\alpha_0=60^\circ" /></li>
-        <li>Horisontal avstand <InlineLatex latex="D=2{,}1\;\text{m}" /></li>
+        <li>Bygnings­høyde: <InlineLatex latex="h=15{,}0\;\text{m}" /></li>
+        <li><InlineLatex latex="v_0=30{,}0\;\text{m/s}" />, <InlineLatex latex="\alpha=33{,}0°" /></li>
+        <li>g = 9,80 m/s², ingen luftmotstand</li>
       </ul>
     ),
-    unknowns: <p>Skålens høyde <InlineLatex latex="h" /> og <InlineLatex latex="v_y" /> ved nedslag.</p>,
+    unknowns: <p>(a) Maks høyde over taket. (b) Slutt­fart ved bakken. (c) Horisontal rekkevidde fra basis. (d) Skisser.</p>,
     strategy: (
-      <TheoryBox title="Tid fra horisontal bevegelse">
-        <p>
-          Siden horisontalavstand og horisontalfart er kjent, finner vi tiden: <InlineLatex latex="t=D/v_{0x}" />.
-          Så bruker vi vertikale kinematiske likninger for å finne <InlineLatex latex="y" /> og <InlineLatex latex="v_y" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p><InlineLatex latex="v_{0x}=v_0\cos 60^\circ=3{,}20\;\text{m/s}" />.</p> },
-      { label: "Hint 2", content: <p><InlineLatex latex="h=v_{0y}\,t-\tfrac12 g t^2" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er et klassisk prosjektilproblem der vi vet <em>hvor</em> mynten skal lande
-          (horisontal avstand og høyde ukjent) men har startbetingelsene (v₀ og α₀). Siden x- og y-bevegelsen er
-          uavhengige, men deler den samme tiden <InlineLatex latex="t" />, er strategien: bruk x-likningen til å finne
-          tiden (fordi vi har alt vi trenger der), og sett så tiden inn i y-likningen for å finne høyden.
-        </p>
-        <p>Originalformlene (kinematikk for prosjektilbevegelse, Young &amp; Freedman 3.20–3.22):</p>
-        <FormulaBox variant="blue" latex="x(t) = v_{0x}\,t, \qquad y(t) = v_{0y}\,t - \tfrac{1}{2} g t^2, \qquad v_y(t) = v_{0y} - g t" />
-        <p>
-          <strong>Hvorfor denne formelen og ikke en annen?</strong> Vi bruker komponentligningene fordi prosjektiler
-          har <InlineLatex latex="a_x = 0" /> og <InlineLatex latex="a_y = -g" /> — to uavhengige 1D-bevegelser. Vi kan
-          ikke bruke «1D-kinematikk på total fart» fordi farten har to komponenter som oppfører seg helt ulikt.
-        </p>
-        <p>
-          <strong>Koordinatvalg:</strong> x-aksen peker horisontalt mot skålen, y-aksen peker opp. Med y-aksen opp blir
-          <InlineLatex latex="\;a_y = -g" /> (gravitasjonen peker motsatt y).
-        </p>
-
-        <Step n={1} title="Dekomponer starthastigheten">
+      <div className="space-y-2">
+        <TheoryBox title="Asymmetrisk fall — utskytning over og landing under">
           <p>
-            Startvektoren <InlineLatex latex="\vec v_0" /> har størrelse 6,4 m/s og vinkel 60° over horisontalen. Vi
-            dekomponerer med trigonometri — x-komponenten ligger langs hosliggende katet og y-komponenten langs motstående:
+            Når start- og slutt­høyde er <em>ulike</em>, brytes symmetrien rundt toppen. Bruk i stedet
+            energi-formelen for slutt­fart, og <em>total tid</em> = tid opp + tid ned (de to er ulike).
           </p>
-          <FormulaBox variant="blue" latex="v_{0x} = v_0\cos\alpha_0, \qquad v_{0y} = v_0\sin\alpha_0" />
-          <FormulaBox latex="v_{0x}=6{,}4\cos 60^\circ=6{,}4\cdot 0{,}5=3{,}20\;\text{m/s}" />
-          <FormulaBox latex="v_{0y}=6{,}4\sin 60^\circ=6{,}4\cdot 0{,}866\approx 5{,}54\;\text{m/s}" />
-        </Step>
-        <Step n={2} title="Finn tiden fra horisontal bevegelse">
+          <FormulaBox variant="gold" latex="v_f^2=v_0^2+2g\,h_\text{total}\;\text{(h er fall fra start til slutt)}" />
           <p>
-            Horisontalt er <InlineLatex latex="v_x = v_{0x}" /> konstant (ingen akselerasjon), så <InlineLatex latex="x = v_{0x}\,t" />.
-            Vi snur denne om til <InlineLatex latex="t = x/v_{0x}" />:
+            Tid opp: <InlineLatex latex="t_\text{opp}=v_{0y}/g" />. Tid ned (fra topp): finnes fra
+            total fall = H + h med <InlineLatex latex="\;t_\text{ned}=\sqrt{2(H+h)/g}" /> eller <InlineLatex latex="\;v_y(\text{slutt})/g" />.
           </p>
-          <FormulaBox variant="blue" latex="t = \dfrac{D}{v_{0x}}" />
-          <FormulaBox latex="t=\dfrac{2{,}1}{3{,}20}\approx 0{,}656\;\text{s}" />
-          <p>
-            Dette er flytiden. Den er felles for x- og y-bevegelsen. <strong>Enhetssjekk:</strong> m/(m/s) = s. OK.
-          </p>
-        </Step>
-        <Step n={3} title="(a) Høyde fra vertikal likning">
-          <p>
-            Med tiden kjent, setter vi den inn i y-likningen. Leddet <InlineLatex latex="v_{0y}t" /> er den vertikale
-            avstanden mynten ville steget uten tyngde; leddet <InlineLatex latex="-\tfrac12 g t^2" /> er hvor mye den
-            faller på grunn av tyngden. Differansen er den faktiske høyden:
-          </p>
-          <FormulaBox variant="blue" latex="h = v_{0y}\,t - \tfrac{1}{2} g t^2" />
-          <FormulaBox latex="h=5{,}54\cdot 0{,}656-\tfrac12\cdot 9{,}80\cdot 0{,}656^2\approx 3{,}63-2{,}11=1{,}53\;\text{m}" />
-          <p>
-            <strong>Enhetssjekk:</strong> (m/s)·s − (m/s²)·s² = m. OK.
-          </p>
-        </Step>
-        <Step n={4} title="(b) Vertikal fart ved nedslag">
-          <p>
-            Bruk <InlineLatex latex="v_y = v_{0y} - g t" /> — dette er rett og slett «startfart minus
-            akselerasjon·tid», direkte fra kinematikken med konstant akselerasjon:
-          </p>
-          <FormulaBox variant="blue" latex="v_y(t) = v_{0y} - g t" />
-          <FormulaBox variant="gold" latex="v_y=v_{0y}-gt=5{,}54-9{,}80\cdot 0{,}656\approx -0{,}89\;\text{m/s}" />
-          <p className="italic text-[var(--muted)]">
-            Negativt tegn betyr at mynten er på vei <em>nedover</em> når den lander —
-            altså har den allerede passert toppunktet.
-          </p>
-          <p>
-            <strong>Fysisk tolkning:</strong> Mynten når toppunktet ved <InlineLatex latex="t^\ast = v_{0y}/g \approx 0{,}566" /> s
-            (tidspunktet hvor <InlineLatex latex="v_y = 0" />). Nedslaget skjer ved <InlineLatex latex="t \approx 0{,}656" /> s,
-            altså like etter. Derfor er vertikalfarten bare svakt negativ (−0,89 m/s). Skålen er plassert nesten akkurat
-            i toppen av banen — en vanlig opplagt arkitektur for tivolispill: man sikter «oppover, ikke fremover».
-            Sammenlignet med å kaste en stein fra skulderhøyde (~1,5 m) er det fornuftig at skålen er ca. 1,5 m over
-            kastepunktet.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Nøkkelen er tidssambindingen: horisontal fart og avstand gir tiden, og tiden
-        bestemmer hva som skjer vertikalt. X og y er uavhengige bortsett fra felles tid.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Maks høyde over tak: <InlineLatex latex="\;H=v_{0y}^2/(2g)" />.</p> },
+      { label: "Hint 2", content: <p>Total energi-bevaring: <InlineLatex latex="\;|\vec v_f|^2=v_0^2+2gh" /> der h=15 m er bygnings­høyden.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponenter, så maksimum, så slutt­fart via energi, og rekkevidde via tid.</p>
+        <Step n={1} title="Initial-komponenter">
+          <FormulaBox latex="v_{0x}=30{,}0\cos 33°=30{,}0(0{,}8387)=25{,}16\;\text{m/s}" />
+          <FormulaBox latex="v_{0y}=30{,}0\sin 33°=30{,}0(0{,}5446)=16{,}34\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Maks høyde over taket">
+          <FormulaBox latex="H=\dfrac{v_{0y}^2}{2g}=\dfrac{(16{,}34)^2}{19{,}6}=\dfrac{266{,}9}{19{,}6}=13{,}62\;\text{m}" />
+          <FormulaBox variant="gold" latex="H\approx 13{,}6\;\text{m over taket}" />
+        </Step>
+        <Step n={3} title="(b) Slutt­fart ved bakken">
+          <p>Total høyde­forskjell fra start (taket) til slutt (bakken): −15 m.</p>
+          <FormulaBox latex="|\vec v_f|^2=v_0^2+2g(15{,}0)=900+294=1194" />
+          <FormulaBox latex="|\vec v_f|=\sqrt{1194}=34{,}6\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="|\vec v_f|\approx 34{,}6\;\text{m/s}" />
+        </Step>
+        <Step n={4} title="(c) Horisontal rekkevidde">
+          <p>Tid opp til topp:</p>
+          <FormulaBox latex="t_\text{opp}=\dfrac{v_{0y}}{g}=\dfrac{16{,}34}{9{,}80}=1{,}668\;\text{s}" />
+          <p>Tid fra topp til bakken (faller H + 15 = 28,62 m fra ro):</p>
+          <FormulaBox latex="t_\text{ned}=\sqrt{\dfrac{2(28{,}62)}{9{,}80}}=\sqrt{5{,}84}=2{,}418\;\text{s}" />
+          <FormulaBox latex="t_\text{tot}=t_\text{opp}+t_\text{ned}=4{,}086\;\text{s}" />
+          <FormulaBox latex="R=v_{0x}\,t_\text{tot}=25{,}16(4{,}086)=102{,}8\;\text{m}" />
+          <FormulaBox variant="gold" latex="R\approx 103\;\text{m}" />
+        </Step>
+        <Pitfall>
+          <strong>Når start- og slutt­høyde er ulike, brytes symmetrien.</strong> Du kan ikke bruke
+          R = 2·v_0x·t_topp her — det forutsetter at landing er på samme nivå. Bruk
+          v² = v_0² + 2gh for fart og total tid for rekkevidde.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Energi-bevaring sier at <InlineLatex latex="\;\tfrac12 m|\vec v_f|^2=\tfrac12 mv_0^2+mgh" />,
+          som gir <InlineLatex latex="\;|\vec v_f|^2=v_0^2+2gh" /> — uavhengig av kast­vinkel. Bare
+          størrelsen på sluttfart, ikke retning.
+        </p>
+      </div>
     ),
+    summary: <p>Energi­besparelse: <InlineLatex latex="v^2_f=v^2_0+2gh" /> for sluttfart. Tid og rekkevidde må regnes opp + ned hver for seg.</p>,
   },
 
   // ==========================================================================
-  // 3.25 — Jordens banehastighet
+  // 3.25 — Earth orbital
   // ==========================================================================
   "3.25": {
-    title: "Jordens fart og sentripetalakselerasjon",
+    title: "Jordens rotasjon — radial akselerasjon",
     difficulty: "lett",
-    pageRef: "s. 98",
+    pageRef: "s. 122",
     problem: (
       <p>
-        Radien til Jordens bane rundt sola (antatt sirkulær) er <InlineLatex latex="1{,}50\times 10^8" /> km,
-        og Jorden fullfører banen på 365 dager. (a) Hva er Jordens banehastighet i m/s?
-        (b) Hva er den radielle akselerasjonen mot sola?
+        Jorden har en radius på 6380 km og roterer rundt sin akse én gang i 24 timer. (a) Hva er den radielle
+        akselerasjonen til et objekt ved Jordens ekvator? Gi svaret i m/s² og som brøkdel av g.
+        (b) Hvis <InlineLatex latex="a_\text{rad}" /> ved ekvator var større enn g, ville objekter «fly» av
+        Jordens overflate ut i rommet. Hva ville rotasjons­perioden måtte være for at dette skulle skje?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="R=1{,}50\times 10^{11}\;\text{m}" /></li>
-        <li><InlineLatex latex="T=365\text{ d}\approx 3{,}154\times 10^{7}\;\text{s}" /></li>
+        <li>Jordens radius: <InlineLatex latex="R=6{,}38\times 10^6\;\text{m}" /></li>
+        <li>Rotasjonsperiode: <InlineLatex latex="T=24\;\text{t}=86\,400\;\text{s}" /></li>
+        <li>g = 9,80 m/s²</li>
       </ul>
     ),
-    unknowns: <p>Banehastighet <InlineLatex latex="v" /> og sentripetalakselerasjon <InlineLatex latex="a_{\text{rad}}" />.</p>,
+    unknowns: <p>(a) <InlineLatex latex="a_\text{rad}" /> og brøkdel av g. (b) Periode T som gir <InlineLatex latex="a_\text{rad}=g" />.</p>,
     strategy: (
-      <TheoryBox title="Jevn sirkelbevegelse">
-        <p>
-          Omløpstid <InlineLatex latex="T" />, radius <InlineLatex latex="R" />: fart <InlineLatex latex="v=2\pi R/T" />.
-          Radiell akselerasjon mot sentrum: <InlineLatex latex="a_{\text{rad}}=v^2/R=4\pi^2 R/T^2" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Sekunder i ett år: <InlineLatex latex="365\cdot 24\cdot 3600\approx 3{,}154\times 10^7" /> s.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Jevn sirkelbevegelse betyr at et objekt går rundt i sirkel med konstant <em>fart</em>
-          (størrelse av hastigheten), men ikke konstant <em>hastighet</em> — retningen endres kontinuerlig. Derfor
-          har det en akselerasjon som peker innover mot sentrum (sentripetalakselerasjon). Farten regnes ut ved
-          «omkrets delt på omløpstid», og akselerasjonen ved <InlineLatex latex="a = v^2/R" />.
-        </p>
-        <p>Originalformlene (Young &amp; Freedman 3.28–3.30):</p>
-        <FormulaBox variant="blue" latex="v = \dfrac{2\pi R}{T}, \qquad a_{\text{rad}} = \dfrac{v^2}{R} = \dfrac{4\pi^2 R}{T^2}" />
-        <p>
-          <strong>Hvorfor disse formlene?</strong> Per omløp tilbakelegger objektet omkretsen <InlineLatex latex="2\pi R" />
-          på tid <InlineLatex latex="T" />, så <InlineLatex latex="v = 2\pi R/T" /> følger direkte av definisjonen av
-          gjennomsnittsfart langs banen. Siden farten er konstant, er også momentanfarten lik dette. Akselerasjonen
-          <InlineLatex latex="v^2/R" /> utledes ved å se på hvor raskt hastighetsvektoren roterer — resultatet er uavhengig
-          av masse og peker alltid mot sentrum.
-        </p>
-
-        <Step n={1} title="Enhetssjekk og konvertering">
+      <div className="space-y-2">
+        <TheoryBox title="Sentripetal­akselerasjon ved jevn sirkulær bevegelse">
           <p>
-            Radien er gitt i km og må konverteres til m: <InlineLatex latex="1{,}50\times 10^8\;\text{km} = 1{,}50\times 10^{11}\;\text{m}" />.
-            Omløpstiden konverteres fra dager til sekunder:
+            Et objekt som beveger seg i sirkel med radius R og periode T, har akselerasjon rettet
+            mot sentrum med størrelsen:
           </p>
-          <FormulaBox latex="T = 365\cdot 24\cdot 3600\;\text{s}\approx 3{,}154\times 10^{7}\;\text{s}" />
-        </Step>
-        <Step n={2} title="(a) Banehastighet">
-          <p>Sett inn i originalformelen:</p>
-          <FormulaBox variant="blue" latex="v = \dfrac{2\pi R}{T}" />
-          <FormulaBox latex="v=\dfrac{2\pi\cdot 1{,}50\times 10^{11}}{3{,}154\times 10^{7}}\approx 2{,}99\times 10^{4}\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="a_\text{rad}=\dfrac{v^2}{R}=\omega^2 R=\dfrac{4\pi^2 R}{T^2}" />
           <p>
-            Det er ca. <strong>30 km/s</strong> — en enorm fart. Jorden tilbakelegger Oslo–Bergen-avstanden (~400 km)
-            hvert 13. sekund. Enhetssjekk: m/s = m/s. OK.
+            For at objekter skal «fly av» Jorden ved ekvator, må sentripetal­akselerasjonen overstige
+            tyngde­akselerasjonen g. Da kreves det ingen normalkraft fra bakken.
           </p>
-        </Step>
-        <Step n={3} title="(b) Sentripetalakselerasjon">
-          <p>
-            Med farten kjent setter vi inn i <InlineLatex latex="a_{\text{rad}} = v^2/R" />. Enheter:
-            <InlineLatex latex="\;(\text{m/s})^2/\text{m} = \text{m/s}^2" />. OK.
-          </p>
-          <FormulaBox variant="blue" latex="a_{\text{rad}} = \dfrac{v^2}{R}" />
-          <FormulaBox variant="gold" latex="a_{\text{rad}}=\dfrac{v^2}{R}=\dfrac{(2{,}99\times 10^4)^2}{1{,}50\times 10^{11}}\approx 5{,}95\times 10^{-3}\;\text{m/s}^2" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Akselerasjonen er bare ~6 mm/s² — over <em>1600 ganger mindre enn g</em>
-            på jordens overflate. Men det er nettopp denne lille akselerasjonen, opprettholdt hele tiden, som bøyer
-            jordens bane til en lukket sirkel rundt solen istedet for en rett linje. Akselerasjonen peker hele tiden
-            mot solen; det er solens gravitasjon som leverer den. Vi kan også uttrykke den som
-            <InlineLatex latex="\;a = 4\pi^2 R/T^2 \approx 5{,}95\cdot 10^{-3}\;\text{m/s}^2" /> — samme svar, viser konsistens.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Jevn sirkelbevegelse har konstant fart men konstant <em>akselerasjon</em> mot sentrum.
-        Selv om Jorden beveger seg med 30 km/s, er akselerasjonen svært liten fordi radien er så stor.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Konverter T til sekunder: 24 t × 3600 s/t = 86 400 s.</p> },
+      { label: "Hint 2", content: <p>For (b): løs <InlineLatex latex="\;g=4\pi^2 R/T^2" /> for T: <InlineLatex latex="\;T=2\pi\sqrt{R/g}" />.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Sett inn i formelen, så omformulér for (b).</p>
+        <Step n={1} title="(a) Radial akselerasjon ved ekvator">
+          <FormulaBox latex="a_\text{rad}=\dfrac{4\pi^2 R}{T^2}=\dfrac{4\pi^2(6{,}38\times 10^6)}{(86\,400)^2}=\dfrac{2{,}519\times 10^8}{7{,}465\times 10^9}=0{,}0337\;\text{m/s}^2" />
+          <FormulaBox latex="\dfrac{a_\text{rad}}{g}=\dfrac{0{,}0337}{9{,}80}=3{,}44\times 10^{-3}\approx 0{,}34\,\%" />
+          <FormulaBox variant="gold" latex="a_\text{rad}\approx 0{,}0337\;\text{m/s}^2\approx 0{,}34\,\%\;\text{av}\;g" />
+        </Step>
+        <Step n={2} title="(b) Kritisk periode for a = g">
+          <FormulaBox latex="g=\dfrac{4\pi^2 R}{T^2}\Rightarrow T=2\pi\sqrt{\dfrac{R}{g}}" />
+          <FormulaBox latex="T=2\pi\sqrt{\dfrac{6{,}38\times 10^6}{9{,}80}}=2\pi\sqrt{6{,}51\times 10^5}=2\pi(806{,}9)" />
+          <FormulaBox latex="T\approx 5070\;\text{s}\approx 84{,}5\;\text{min}" />
+          <FormulaBox variant="gold" latex="T_\text{kritisk}\approx 84{,}5\;\text{min}" />
+        </Step>
+        <Pitfall>
+          <strong>Bare ekvator har full sentripetal­akselerasjon.</strong> Ved breddegrad φ er
+          radien til rotasjonen R cos φ, ikke R. Polene har null sentripetal­akselerasjon, ekvator
+          har maks.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 84,5 min er omtrent omløpstiden til ISS — ikke tilfeldig. Det er
+          akkurat tiden et objekt i lav banehøyde trenger på sin omløp, fordi g leverer hele
+          sentripetal­kraften ved den hastigheten.
+        </p>
+      </div>
     ),
+    summary: <p>Sentripetal­akselerasjon ved Jordens ekvator er bare ~0,3 % av g; ville måtte rotere ~17× raskere for å «kaste» objekter av.</p>,
   },
 
   // ==========================================================================
-  // 3.28 — Pariserhjul
+  // 3.28 — Helikopter rotor
   // ==========================================================================
   "3.28": {
-    title: "Akselerasjon i pariserhjul",
+    title: "Helikopter­rotor — 4 blader 3,00 m",
     difficulty: "lett",
-    pageRef: "s. 99",
+    pageRef: "s. 122",
     problem: (
       <p>
-        Et pariserhjul med radius 14,0 m snurrer om en horisontal akse. Passasjerfarten langs
-        rim er konstant lik 6,00 m/s. Hva er størrelsen og retningen til passasjerens
-        akselerasjon idet hun passerer (a) laveste punkt, (b) høyeste punkt?
+        En modell av en helikopter­rotor har fire blader, hver 3,00 m langt fra sentral­akselen til bladtuppen.
+        Modellen roteres i en vind­tunnel ved 470 omdr/min. (a) Hva er linje­farten til bladtuppen i m/s?
+        (b) Hva er den radielle akselerasjonen til bladtuppen, uttrykt som et multiplum av g?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="R=14{,}0\;\text{m}" />, <InlineLatex latex="v=6{,}00\;\text{m/s}" /> (konstant)</li>
+        <li>Antall blader: 4 (irrelevant for kinematikk — bare for designkontekst)</li>
+        <li>Bladlengde: <InlineLatex latex="R=3{,}00\;\text{m}" /></li>
+        <li>Vinkelfart: <InlineLatex latex="\omega=470\;\text{omdr/min}" /></li>
+        <li>g = 9,80 m/s²</li>
       </ul>
     ),
-    unknowns: <p>Akselerasjon <InlineLatex latex="a" /> og retning på de to punktene.</p>,
+    unknowns: <p>(a) Linje­fart v ved bladtuppen. (b) Sentripetal­akselerasjon uttrykt som multiplum av g.</p>,
     strategy: (
-      <TheoryBox title="Jevn sirkelbevegelse: akselerasjon alltid mot sentrum">
-        <p>
-          Siden farten er konstant, er tangentiell akselerasjon null — kun radiell.
-          <InlineLatex latex="a_{\text{rad}}=v^2/R" /> peker alltid mot sentrum av sirkelen.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint", content: <p>På laveste punkt peker sentrum oppover, på høyeste peker sentrum nedover.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Akselerasjon er generelt en vektor med to komponenter i sirkelbevegelse: en
-          <em>tangentiell</em> del <InlineLatex latex="a_t = dv/dt" /> som endrer størrelsen av farten, og en
-          <em>radiell</em> (sentripetal) del <InlineLatex latex="a_{\text{rad}} = v^2/R" /> som endrer retningen og
-          peker mot sentrum av sirkelen.
-        </p>
-        <FormulaBox variant="blue" latex="\vec a = \vec a_{\text{tang}} + \vec a_{\text{rad}}, \qquad a_{\text{rad}} = \dfrac{v^2}{R}" />
-        <p>
-          <strong>Hvorfor bare radiell her?</strong> Oppgaven sier at farten langs rim er <em>konstant</em> (6,00 m/s).
-          Det betyr <InlineLatex latex="dv/dt = 0" />, så tangentialakselerasjonen er null. Hele akselerasjonen er radiell
-          og peker mot sentrum. Dette kalles «jevn sirkelbevegelse» — et spesialtilfelle.
-        </p>
-        <p>
-          <strong>Koordinatvalg/fortegnsanalyse:</strong> Siden akselerasjonen alltid peker mot sentrum, endrer dens
-          retning seg når passasjerens posisjon endrer seg, selv om <em>størrelsen</em> er konstant. Det er nettopp
-          denne endrende retningen som kjennetegner sirkelbevegelse.
-        </p>
-
-        <Step n={1} title="Størrelsen av akselerasjonen">
+      <div className="space-y-2">
+        <TheoryBox title="Vinkelfart, linje­fart og sentripetal­akselerasjon">
           <p>
-            Sett inn <InlineLatex latex="v = 6{,}00" /> m/s og <InlineLatex latex="R = 14{,}0" /> m. Enhetssjekk:
-            <InlineLatex latex="(\text{m/s})^2/\text{m} = \text{m/s}^2" />. OK.
+            For et punkt som beveger seg i sirkel med radius <InlineLatex latex="R" /> og vinkelfart
+            <InlineLatex latex="\;\omega" /> (i rad/s) gjelder de tre fundamentale relasjonene:
           </p>
-          <FormulaBox variant="blue" latex="a_{\text{rad}} = \dfrac{v^2}{R}" />
-          <FormulaBox latex="a_{\text{rad}}=\dfrac{v^2}{R}=\dfrac{6{,}00^2}{14{,}0}=\dfrac{36{,}0}{14{,}0}\approx 2{,}57\;\text{m/s}^2" />
+          <FormulaBox variant="gold" latex="v=\omega R,\quad a_\text{rad}=\dfrac{v^2}{R}=\omega^2 R" />
           <p>
-            Dette er <em>uavhengig</em> av hvor passasjeren befinner seg på rimen — størrelsen er konstant så lenge
-            farten og radien er konstant.
+            Konvertering fra omdr/min (rev/min) til rad/s: multiplisér med <InlineLatex latex="2\pi" />
+            (radianer per omdreining) og del med 60 (sekunder per minutt):
           </p>
-        </Step>
-        <Step n={2} title="Retning på hvert punkt">
-          <p>
-            Siden akselerasjonen alltid peker fra passasjeren og rett mot sentrum av pariserhjulet, avhenger selve
-            retningen av hvor passasjeren er:
-          </p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>(a) <strong>Laveste punkt:</strong> sentrum ligger rett ovenfor → akselerasjonen peker rett opp.</li>
-            <li>(b) <strong>Høyeste punkt:</strong> sentrum ligger rett under → akselerasjonen peker rett ned.</li>
-          </ul>
-          <FormulaBox variant="gold" latex="\boxed{\;a\approx 2{,}57\;\text{m/s}^2\;\text{mot sentrum på begge punkter}\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> 2,57 m/s² er ca. 0,26 g — knapt merkbart, men nok til å skape opplevelsen
-            av å «veies litt tyngre» på bunnen (der opplevd vekt er <InlineLatex latex="m(g + a_{\text{rad}})" />) og
-            «litt lettere» på toppen (<InlineLatex latex="m(g - a_{\text{rad}})" />). Vi kjenner dette igjen fra berg-
-            og dalbane-loops, der samme prinsipp gjelder bare med langt større <InlineLatex latex="a_{\text{rad}}" />.
-            Sammenlign med jorden rundt solen (3.25) hvor <InlineLatex latex="a_{\text{rad}} \sim 6\cdot 10^{-3}" /> m/s²
-            — pariserhjulet er ca. 400 ganger «raskere-svinget» til tross for at det går mye saktere. Nøkkelen er liten radius.
-          </p>
-        </Step>
+          <FormulaBox latex="\omega\;[\text{rad/s}]=\omega\;[\text{rev/min}]\cdot\dfrac{2\pi}{60}" />
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Selv om farten er konstant, har vi akselerasjon fordi retningen endres kontinuerlig.
-        Vektoren peker alltid mot sentrum — derfor navnet sentripetalakselerasjon.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Først konvertér ω til rad/s. Deretter er v = ωR det enkleste valget.</p> },
+      { label: "Hint 2", content: <p>For del (b): bruk a = v²/R eller a = ω²R — begge gir samme svar. Del på g for å få a som multiplum.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Først konvertér vinkelfart, så bruk de to formlene direkte.</p>
+        <Step n={1} title="Konvertér ω til rad/s">
+          <FormulaBox latex="\omega=470\cdot\dfrac{2\pi}{60}=470\cdot 0{,}10472=49{,}22\;\text{rad/s}" />
+        </Step>
+        <Step n={2} title="(a) Linje­fart ved bladtuppen">
+          <FormulaBox latex="v=\omega R=(49{,}22\;\text{rad/s})(3{,}00\;\text{m})=147{,}66\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v\approx 148\;\text{m/s}" />
+          <p className="text-sm">Det tilsvarer ca. 532 km/t — godt over halvparten av lydfarten ved havnivå.</p>
+        </Step>
+        <Step n={3} title="(b) Sentripetal­akselerasjon">
+          <FormulaBox latex="a_\text{rad}=\dfrac{v^2}{R}=\dfrac{(147{,}66)^2}{3{,}00}=\dfrac{21\,803}{3{,}00}=7268\;\text{m/s}^2" />
+          <FormulaBox latex="\dfrac{a_\text{rad}}{g}=\dfrac{7268}{9{,}80}=741{,}6" />
+          <FormulaBox variant="gold" latex="a_\text{rad}\approx 742\,g" />
+        </Step>
+        <Pitfall>
+          <strong>Glem aldri 2π-faktoren.</strong> En vanlig feil er å sette ω = 470/60 = 7,83 og glemme
+          omregning fra omdreininger til radianer. Da blir alle svarene ca. 6,3× for små. Husk:
+          1 omdreining = 2π rad.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: 742 g betyr at materialet i bladtuppen må tåle ekstreme sentripetal­krefter.
+          Dette er hovedgrunnen til at helikopter­rotorer er begrenset til en bestemt maksimal omdreinings­fart
+          — ved høyere fart vil sentrifugal­spenningen overstige strekkfastheten i bladene, og de vil rives
+          fra hverandre. Dette er også grunnen til at moderne høyfarts­rotorer bruker karbonfiber­komposit
+          med svært høy strekkfasthet/tetthet-forhold.
+        </p>
+      </div>
     ),
+    summary: <p>Sentripetal­akselerasjon vokser med <InlineLatex latex="\omega^2" /> — selv beskjedne radier gir flere hundre g ved typiske rotor­frekvenser.</p>,
   },
 
   // ==========================================================================
-  // 3.31 — Helikopterrotor
+  // 3.31 — Pariserhjul
   // ==========================================================================
   "3.31": {
-    title: "Helikopterblad ved 550 rpm",
+    title: "Pariserhjul — akselerasjon på topp og bunn (Fig E3.31)",
     difficulty: "middels",
-    pageRef: "s. 99",
+    pageRef: "s. 123",
     problem: (
       <p>
-        En modell av en helikopterrotor har fire blader, hver 3,40 m lang fra navet til bladspissen.
-        Rotoren spinner ved 550 rev/min. Finn (a) den lineære farten til bladspissen i m/s,
-        (b) den radielle akselerasjonen til bladspissen uttrykt i enheter av <InlineLatex latex="g" />.
+        Et pariserhjul med radius 14,0 m roterer om en horisontal akse gjennom sitt sentrum (Fig. E3.31).
+        Linje­farten til en passasjer på rim er konstant lik 7,13 m/s. Hva er størrelsen og retningen av
+        passasjerens akselerasjon når hun passerer (a) det laveste punktet i sin sirkulære bevegelse, og
+        (b) det høyeste punktet i sin sirkulære bevegelse? (c) Hvor lang tid bruker pariserhjulet på én
+        omdreining?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="R=3{,}40\;\text{m}" /></li>
-        <li><InlineLatex latex="f=550\text{ rpm}=9{,}167\text{ rev/s}" /></li>
+        <li>Radius til pariserhjul: <InlineLatex latex="R=14{,}0\;\text{m}" /></li>
+        <li>Konstant linje­fart: <InlineLatex latex="v=7{,}13\;\text{m/s}" /></li>
+        <li>Bevegelse: jevn sirkulær (uniform circular motion)</li>
       </ul>
     ),
-    unknowns: <p>Fart <InlineLatex latex="v" /> og akselerasjon (i <InlineLatex latex="g" />).</p>,
+    unknowns: <p>(a) <InlineLatex latex="\vec a" /> ved nederste punkt. (b) <InlineLatex latex="\vec a" /> ved øverste punkt. (c) Omløps­periode T.</p>,
     strategy: (
-      <TheoryBox title="rev/min → rev/s → rad/s">
-        <p>
-          <InlineLatex latex="v=2\pi R f" /> der <InlineLatex latex="f" /> er omdreininger per sekund.
-          <InlineLatex latex="\;a=v^2/R" />. Konverter til <InlineLatex latex="g" /> ved å dele på 9,80 m/s².
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Først: <InlineLatex latex="550/60\approx 9{,}17" /> rev/s.</p> },
-      { label: "Hint 2", content: <p><InlineLatex latex="v=2\pi R f" /> — eller bruk <InlineLatex latex="\omega=2\pi f" /> og <InlineLatex latex="v=\omega R" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> For et roterende objekt har ethvert punkt en lineær fart <InlineLatex latex="v = \omega R" />
-          der <InlineLatex latex="\omega" /> er vinkelhastigheten (rad/s) og <InlineLatex latex="R" /> er avstanden fra
-          rotasjonsaksen. Vi kan også skrive dette som <InlineLatex latex="v = 2\pi R f" /> der <InlineLatex latex="f" />
-          er frekvens i omdreininger per sekund. Akselerasjonen til ethvert slikt punkt er rent radiell siden farten er
-          konstant: <InlineLatex latex="\;a_{\text{rad}} = v^2/R" />.
-        </p>
-        <p>Originalformlene (Young &amp; Freedman 3.28, 9.14 for vinkelhastighet):</p>
-        <FormulaBox variant="blue" latex="\omega = 2\pi f, \qquad v = \omega R = 2\pi R f, \qquad a_{\text{rad}} = \dfrac{v^2}{R} = \omega^2 R" />
-        <p>
-          <strong>Hvorfor må vi konvertere rpm til rev/s?</strong> Formlene bruker SI-enheter: sekunder, ikke minutter.
-          «Omdreining per minutt» (rpm) må derfor deles på 60 før vi kan sette inn. Eventuelt konverterer vi helt til
-          rad/s, siden 1 omdreining = <InlineLatex latex="2\pi" /> rad.
-        </p>
-
-        <Step n={1} title="Enhetskonvertering">
-          <p>Konverter frekvensen fra rpm til rev/s:</p>
-          <FormulaBox latex="f = \dfrac{550\;\text{rev}}{1\;\text{min}}\cdot \dfrac{1\;\text{min}}{60\;\text{s}}=9{,}167\;\text{rev/s}" />
+      <div className="space-y-2">
+        <TheoryBox title="Akselerasjon ved jevn sirkulær bevegelse">
           <p>
-            Tilsvarende vinkelhastighet:
-            <InlineLatex latex="\;\omega = 2\pi\cdot 9{,}167\approx 57{,}6\;\text{rad/s}" />. Begge uttrykker det samme
-            tempoet, bare i ulike enheter.
+            Når farten er <em>konstant</em>, har akselerasjonen ingen tangentiell komponent — den er
+            ren <em>radial</em> (sentripetal). Den peker alltid mot sentrum av sirkelen, uavhengig av
+            hvor på sirkelen objektet befinner seg.
           </p>
-        </Step>
-        <Step n={2} title="(a) Lineær fart ved bladspissen">
+          <FormulaBox variant="gold" latex="a_\text{rad}=\dfrac{v^2}{R}\quad\text{(retning: mot sentrum)}" />
           <p>
-            Bladspissen ligger lengst fra aksen, <InlineLatex latex="R = 3{,}40" /> m. Originalformelen
-            <InlineLatex latex="v = 2\pi R f" /> gir:
+            Periode (omløpstid) henger sammen med fart og omkrets:
+            <InlineLatex latex="\;T=\dfrac{2\pi R}{v}" />.
           </p>
-          <FormulaBox variant="blue" latex="v = 2\pi R f" />
-          <FormulaBox latex="v=2\pi\cdot 3{,}40\cdot 9{,}167\approx 196\;\text{m/s}" />
-          <p className="italic text-[var(--muted)]">
-            Det er omtrent lydens hastighet (~343 m/s ved 20 °C) — bladspissen går faktisk i ca. Mach 0,57.
-            Dette er derfor ekte helikopterblader designes for å holde seg unna lydbarrieren: støy, turbulens og
-            belastning blir ekstreme når <InlineLatex latex="v \sim c_{\text{lyd}}" />.
-          </p>
-        </Step>
-        <Step n={3} title="(b) Radiell akselerasjon">
-          <p>
-            Sett inn i <InlineLatex latex="a = v^2/R" />. Enhetssjekk: <InlineLatex latex="(\text{m/s})^2/\text{m} = \text{m/s}^2" />. OK.
-          </p>
-          <FormulaBox variant="blue" latex="a_{\text{rad}} = \dfrac{v^2}{R}" />
-          <FormulaBox latex="a=\dfrac{v^2}{R}=\dfrac{196^2}{3{,}40}\approx 1{,}13\times 10^4\;\text{m/s}^2" />
-          <p>For å uttrykke i g-enheter deler vi på <InlineLatex latex="g = 9{,}80\;\text{m/s}^2" />:</p>
-          <FormulaBox variant="gold" latex="\dfrac{a}{g}=\dfrac{1{,}13\times 10^4}{9{,}80}\approx 1{,}15\times 10^{3}\;g\approx 1150\,g" />
-          <p>
-            <strong>Fysisk tolkning:</strong> 1150 g er en enorm akselerasjon — en astronaut tåler ca. 9 g i noen sekunder
-            før bevisstløshet. Bladmaterialet må tåle at hver gram ved spissen drar utover med 1150 ganger sin egen vekt
-            (via Newtons 3. lov). Dette er derfor rotorblader alltid er laget av sterke komposittfibre eller titan og ofte
-            kritisk belastede komponenter. Sammenlign med 3.25 (jordens bane, ~0,006 m/s²) og 3.28 (pariserhjul, ~2,57 m/s²):
-            små radier + høye farter gir eksplosjonsartet store akselerasjoner.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Høye rotasjonshastigheter gir enorme sentripetalakselerasjoner. 1150 g viser hvorfor
-        rotorblader må tåle kolossale krefter — de er under enorm strekk.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Størrelsen på akselerasjonen er den samme overalt på sirkelen — bare retningen endrer seg.</p> },
+      { label: "Hint 2", content: <p>For å finne retningen: ved nederste punkt ligger sentrum rett over, ved øverste punkt ligger sentrum rett under.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Konstant fart gir konstant <InlineLatex latex="|\vec a|" />; bare retning roterer.</p>
+        <Step n={1} title="Felles størrelse på akselerasjonen">
+          <FormulaBox latex="a_\text{rad}=\dfrac{v^2}{R}=\dfrac{(7{,}13)^2}{14{,}0}=\dfrac{50{,}84}{14{,}0}=3{,}63\;\text{m/s}^2" />
+          <FormulaBox variant="gold" latex="|\vec a|=3{,}63\;\text{m/s}^2" />
+        </Step>
+        <Step n={2} title="(a) Nederste punkt — retning">
+          <p>
+            Sentrum av hjulet ligger rett <strong>over</strong> passasjeren ⇒ akselerasjons­vektoren
+            peker <strong>oppover</strong>.
+          </p>
+          <FormulaBox variant="gold" latex="\vec a_\text{bunn}=3{,}63\;\text{m/s}^2\;\text{(opp)}" />
+        </Step>
+        <Step n={3} title="(b) Øverste punkt — retning">
+          <p>
+            Sentrum ligger rett <strong>under</strong> passasjeren ⇒ akselerasjons­vektoren peker
+            <strong> nedover</strong>.
+          </p>
+          <FormulaBox variant="gold" latex="\vec a_\text{topp}=3{,}63\;\text{m/s}^2\;\text{(ned)}" />
+        </Step>
+        <Step n={4} title="(c) Omløps­periode">
+          <FormulaBox latex="T=\dfrac{2\pi R}{v}=\dfrac{2\pi(14{,}0)}{7{,}13}=\dfrac{87{,}96}{7{,}13}=12{,}34\;\text{s}" />
+          <FormulaBox variant="gold" latex="T\approx 12{,}3\;\text{s}" />
+        </Step>
+        <Pitfall>
+          <strong>Sentripetal­akselerasjon er ikke tyngdekraft.</strong> En passasjer på pariserhjul
+          merker også normal­kraften fra setet, som varierer med posisjonen. Ved bunn:
+          <InlineLatex latex="\;N-mg=ma_\text{rad}" /> ⇒ N &gt; mg (føler seg «tyngre»). Ved topp:
+          <InlineLatex latex="\;mg-N=ma_\text{rad}" /> ⇒ N &lt; mg (føler seg «lettere»).
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Akselerasjonen er bare ~37 % av g, så følelsen av tyngde­endring i setet er
+          beskjeden — men reell. Hadde periode vært halvparten (6,2 s, dvs. samme R med dobbel fart),
+          ville sentripetal­akselerasjonen vært 4× så stor, dvs. ca. 1,5 g — passasjerene ville da
+          opplevd følbar press i bunn og lett-vekts-følelse i topp.
+        </p>
+      </div>
     ),
+    summary: <p>Ved jevn sirkulær bevegelse: <InlineLatex latex="|\vec a|=v^2/R" /> overalt; retningen er alltid mot sentrum.</p>,
   },
 
   // ==========================================================================
-  // 3.46 — Testrakett
+  // 3.46 — CALC faulty model rocket
   // ==========================================================================
   "3.46": {
-    title: "Rakett langs skråplan, deretter prosjektil",
+    title: "CALC: feilmodell­rakett i xy-planet",
     difficulty: "vanskelig",
-    pageRef: "s. 107",
+    pageRef: "s. 124",
     problem: (
       <p>
-        En testrakett starter fra hvile ved punkt A og akselereres langs et skråplan med
-        <InlineLatex latex="1{,}90\;\text{m/s}^2" /> i 22,0 s. Skråplanet stiger 35,0° over horisontalen.
-        Motoren slår av, og raketten fortsetter som et prosjektil. Finn (a) største høyde
-        over bakken, (b) største horisontal avstand fra A som raketten vil nå.
+        En feilmodell­rakett beveger seg i xy-planet (positiv y-retning er vertikalt oppover). Rakettens
+        akselerasjon har komponenter <InlineLatex latex="\;a_x(t)=\alpha t^2" /> og
+        <InlineLatex latex="\;a_y(t)=\beta-\gamma t" />, hvor <InlineLatex latex="\alpha=2{,}50\;\text{m/s}^4" />,
+        <InlineLatex latex="\;\beta=9{,}00\;\text{m/s}^2" /> og <InlineLatex latex="\gamma=1{,}40\;\text{m/s}^3" />.
+        Ved <InlineLatex latex="\;t=0" /> er raketten ved origo og har hastighet
+        <InlineLatex latex="\;\vec v_0=v_{0x}\hat i+v_{0y}\hat j" />, med <InlineLatex latex="v_{0x}=1{,}00" />
+        og <InlineLatex latex="v_{0y}=7{,}00\;\text{m/s}" />. (a) Beregn hastighets- og posisjons­vektorer
+        som funksjoner av tid. (b) Hva er den maksimale høyden raketten når? (c) Hva er den horisontale
+        forflytningen når raketten returnerer til <InlineLatex latex="\;y=0" />?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Fra hvile: <InlineLatex latex="v_A=0" />, <InlineLatex latex="a_1=1{,}90\;\text{m/s}^2" /> i <InlineLatex latex="t_1=22{,}0\;\text{s}" /></li>
-        <li>Langs skråplan med <InlineLatex latex="35^\circ" /></li>
+        <li><InlineLatex latex="a_x(t)=\alpha t^2,\;\alpha=2{,}50\;\text{m/s}^4" /></li>
+        <li><InlineLatex latex="a_y(t)=\beta-\gamma t" />, <InlineLatex latex="\;\beta=9{,}00\;\text{m/s}^2" />, <InlineLatex latex="\;\gamma=1{,}40\;\text{m/s}^3" /></li>
+        <li>Initial­hastighet: <InlineLatex latex="\vec v_0=(1{,}00,\,7{,}00)\;\text{m/s}" /></li>
+        <li>Initial­posisjon: <InlineLatex latex="\vec r_0=\vec 0" /></li>
       </ul>
     ),
-    unknowns: <p>Maksimal høyde og horisontal avstand.</p>,
+    unknowns: <p>(a) <InlineLatex latex="\vec v(t)" /> og <InlineLatex latex="\vec r(t)" />. (b) <InlineLatex latex="y_\text{max}" />. (c) <InlineLatex latex="x" /> når <InlineLatex latex="y" /> returnerer til 0.</p>,
     strategy: (
-      <TheoryBox title="To faser: drevet + fritt fall">
-        <p>
-          Fase 1 (0 til 22 s): rettlinjet bevegelse opp skråplanet. Ved t = 22 s kjenner vi
-          raketten sin posisjon (x₀, y₀) og hastighet (v₀ₓ, v₀ᵧ).
-          Fase 2: prosjektil fra det punktet, kun tyngdekraft.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Fase 1: <InlineLatex latex="s=\tfrac12 a_1 t_1^2" /> og <InlineLatex latex="v=a_1 t_1" /> langs skråplanet, så dekomponer.</p> },
-      { label: "Hint 2", content: <p>Maks høyde: der vertikalfart = 0. Ekstra høyde <InlineLatex latex="=v_{0y}^2/(2g)" />.</p> },
-      { label: "Hint 3", content: <p>Rekkevidde: finn total tid i luften ved å løse <InlineLatex latex="y(t)=0" />.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er et <em>toframsersproblem</em>: først en fase med motorakselerasjon langs
-          skråplanet (rettlinjet akselerasjon i skrå retning), så en fase med fritt fall (prosjektilbevegelse). Nøkkelen
-          er at sluttilstanden fra fase 1 (posisjon + hastighet) er starttilstanden for fase 2. Dermed må vi være nøye
-          med koordinatovergangen fra «langs skråplan» til «(x, y) i horisontalt/vertikalt koordinatsystem».
-        </p>
-        <p>
-          <strong>Koordinatvalg:</strong> x-aksen er horisontal, y-aksen er vertikal opp. Skråplanet lager vinkel
-          35° med +x-aksen. A ligger i origo.
-        </p>
-
-        <TheoryBox title="Originalformler">
-          <p>Fase 1 (konstant akselerasjon langs skråplanet, fra hvile):</p>
-          <FormulaBox variant="blue" latex="s = v_0 t + \tfrac{1}{2} a t^2, \qquad v = v_0 + a t" />
-          <p>Fase 2 (prosjektil, <InlineLatex latex="a_x=0,\;a_y=-g" />):</p>
-          <FormulaBox variant="blue" latex="x(t) = x_0 + v_{0x}\,t, \qquad y(t) = y_0 + v_{0y}\,t - \tfrac{1}{2} g t^2" />
+      <div className="space-y-2">
+        <TheoryBox title="Integrasjon når akselerasjon er tids­avhengig">
+          <p>
+            Når <InlineLatex latex="\vec a" /> ikke er konstant, kan du <em>ikke</em> bruke
+            <InlineLatex latex="\;v=v_0+at" />. I stedet integrér:
+          </p>
+          <FormulaBox variant="gold" latex="\vec v(t)=\vec v_0+\int_0^t \vec a(t')\,dt',\quad \vec r(t)=\vec r_0+\int_0^t \vec v(t')\,dt'" />
+          <p>
+            Maks høyde finnes når <InlineLatex latex="v_y=0" /> (kun da; ikke <InlineLatex latex="a_y=0" />).
+            Returtid finnes når <InlineLatex latex="y(t)=0" /> for <InlineLatex latex="t&gt;0" />.
+          </p>
         </TheoryBox>
-
-        <Step n={1} title="Fase 1: avstand og fart ved motorstans">
-          <p>
-            Raketten starter fra hvile (<InlineLatex latex="v_0=0" />) og har konstant akselerasjon
-            <InlineLatex latex="\;a_1 = 1{,}90" /> m/s² <em>langs skråplanet</em> i <InlineLatex latex="t_1=22{,}0" /> s.
-            Tilbakelagt avstand langs skråplanet:
-          </p>
-          <FormulaBox latex="s=\tfrac12 a_1 t_1^2=\tfrac12\cdot 1{,}90\cdot 22{,}0^2=460\;\text{m langs skråplan}" />
-          <FormulaBox latex="v=a_1 t_1=1{,}90\cdot 22{,}0=41{,}8\;\text{m/s}" />
-          <p>
-            <strong>Dekomponer til horisontalt/vertikalt:</strong> En vektor med størrelse <InlineLatex latex="s" /> som
-            peker 35° over horisontalen har komponenter <InlineLatex latex="s\cos 35^\circ" /> horisontalt og
-            <InlineLatex latex="s\sin 35^\circ" /> vertikalt. Samme gjelder for hastigheten:
-          </p>
-          <FormulaBox variant="blue" latex="x_0 = s\cos\theta, \qquad y_0 = s\sin\theta, \qquad v_{0x} = v\cos\theta, \qquad v_{0y} = v\sin\theta" />
-          <FormulaBox latex="x_0=460\cos 35^\circ\approx 377\;\text{m},\;y_0=460\sin 35^\circ\approx 264\;\text{m}" />
-          <FormulaBox latex="v_{0x}=41{,}8\cos 35^\circ\approx 34{,}2\;\text{m/s},\;v_{0y}=41{,}8\sin 35^\circ\approx 24{,}0\;\text{m/s}" />
-        </Step>
-        <Step n={2} title="(a) Maksimal høyde under fase 2">
-          <p>
-            Etter motorstans er det bare tyngdekraften. Vertikalt bremses raketten av g, og toppunktet er der
-            <InlineLatex latex="v_y = 0" />. Vi bruker 1D-likningen <InlineLatex latex="v_y^2 = v_{0y}^2 - 2g\,\Delta h" />
-            og løser for <InlineLatex latex="\Delta h" />:
-          </p>
-          <FormulaBox variant="blue" latex="v_y^2 = v_{0y}^2 - 2g\,\Delta h \;\Rightarrow\; \Delta h = \dfrac{v_{0y}^2}{2g}" />
-          <FormulaBox latex="\Delta h=\dfrac{v_{0y}^2}{2g}=\dfrac{24{,}0^2}{19{,}6}\approx 29{,}4\;\text{m}" />
-          <p>Total maksimal høyde over bakken er høyden ved motorstans pluss ekstra stigning:</p>
-          <FormulaBox variant="gold" latex="H_{\max}=y_0+\Delta h\approx 264+29{,}4\approx 293\;\text{m}" />
-        </Step>
-        <Step n={3} title="(b) Flytid fra motorstans til bakken">
-          <p>
-            Raketten faller fra <InlineLatex latex="y_0 = 264" /> m ned til <InlineLatex latex="y = 0" />. Med
-            <InlineLatex latex="\;y(t) = y_0 + v_{0y}t - \tfrac12 g t^2 = 0" />:
-          </p>
-          <FormulaBox latex="264 + 24{,}0\,t - 4{,}90\,t^2 = 0 \;\Rightarrow\; 4{,}90\,t^2-24{,}0\,t-264=0" />
-          <p>
-            Dette er en annengradslikning i <InlineLatex latex="t" /> med <InlineLatex latex="A=4{,}90,\;B=-24{,}0,\;C=-264" />.
-            Abc-formelen gir to røtter; vi velger den positive (fysisk tid):
-          </p>
-          <FormulaBox variant="blue" latex="t = \dfrac{-B + \sqrt{B^2 - 4AC}}{2A}" />
-          <FormulaBox latex="t=\dfrac{24{,}0+\sqrt{24{,}0^2+4\cdot 4{,}90\cdot 264}}{2\cdot 4{,}90}=\dfrac{24{,}0+\sqrt{576+5174}}{9{,}80}\approx 10{,}2\;\text{s}" />
-        </Step>
-        <Step n={4} title="(b) Horisontal rekkevidde">
-          <p>
-            I tiden <InlineLatex latex="t=10{,}2" /> s beveger raketten seg horisontalt med konstant fart
-            <InlineLatex latex="v_{0x}=34{,}2" /> m/s (ingen horisontal akselerasjon etter motorstans):
-          </p>
-          <FormulaBox latex="\Delta x=v_{0x}\,t=34{,}2\cdot 10{,}2\approx 349\;\text{m}" />
-          <p>Total horisontal avstand fra A er avstanden tilbakelagt i fase 1 pluss fase 2:</p>
-          <FormulaBox variant="gold" latex="\boxed{\;R=x_0+\Delta x\approx 377+349\approx 725\;\text{m}\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Raketten stiger til ~293 m (høyere enn Eiffeltårnet) og lander ca.
-            725 m unna skytepunktet — realistisk for en liten testrakett. Merk at det meste av den horisontale distansen
-            (377 m) skjer <em>under</em> motorfasen langs skråplanet; fase 2 (fritt fall) bidrar «bare» med 349 m til tross
-            for 10 s flytid. Dette er fordi horisontalfarten aldri ble veldig høy — vinkelen 35° går mye tapt på vertikal
-            stigning. En rakett avfyrt i flatere vinkel ville gått lenger.
-          </p>
-        </Step>
       </div>
     ),
-    summary: (
-      <p>
-        Flerfaseproblem: løs hver fase separat og bruk sluttilstanden fra fase 1 som
-        begynnelsestilstand for fase 2. Vær nøye med at posisjon og hastighet overføres riktig.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Integrér komponentvis. <InlineLatex latex="\int t^n\,dt=t^{n+1}/(n+1)" /> — ingen kjede­regel her, bare polynomer.</p> },
+      { label: "Hint 2", content: <p>For (b): løs <InlineLatex latex="v_y(t)=0" />. For (c): faktorisér ut t fra y(t) for å skille bort t=0-løsningen.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Integrér to ganger komponentvis, så bruk betingelsene for topp og retur.</p>
+        <Step n={1} title="(a) Hastighets­vektor">
+          <FormulaBox latex="v_x(t)=v_{0x}+\int_0^t \alpha t'^2\,dt'=1{,}00+\dfrac{\alpha}{3}t^3=1{,}00+0{,}833t^3" />
+          <FormulaBox latex="v_y(t)=v_{0y}+\int_0^t (\beta-\gamma t')\,dt'=7{,}00+9{,}00t-0{,}700t^2" />
+        </Step>
+        <Step n={2} title="(a) Posisjons­vektor">
+          <FormulaBox latex="x(t)=\int_0^t v_x(t')\,dt'=t+\dfrac{0{,}833}{4}t^4=t+0{,}208t^4" />
+          <FormulaBox latex="y(t)=\int_0^t v_y(t')\,dt'=7t+4{,}50t^2-\dfrac{0{,}700}{3}t^3=7t+4{,}50t^2-0{,}233t^3" />
+        </Step>
+        <Step n={3} title="(b) Maks høyde — finn t når v_y=0">
+          <FormulaBox latex="7+9t-0{,}700t^2=0\Rightarrow 0{,}700t^2-9t-7=0" />
+          <FormulaBox latex="t=\dfrac{9+\sqrt{81+19{,}6}}{1{,}4}=\dfrac{9+10{,}03}{1{,}4}=13{,}59\;\text{s}" />
+          <FormulaBox latex="y_\text{max}=7(13{,}59)+4{,}50(13{,}59)^2-0{,}233(13{,}59)^3" />
+          <FormulaBox latex="=95{,}1+831{,}3-585{,}1=341\;\text{m}" />
+          <FormulaBox variant="gold" latex="y_\text{max}\approx 341\;\text{m}" />
+        </Step>
+        <Step n={4} title="(c) Returtid og horisontal forflytning">
+          <p>Sett y=0 og faktorisér:</p>
+          <FormulaBox latex="0=t(7+4{,}50t-0{,}233t^2)" />
+          <p>Løsninger: t=0 (start) eller <InlineLatex latex="\;0{,}233t^2-4{,}50t-7=0" />.</p>
+          <FormulaBox latex="t=\dfrac{4{,}50+\sqrt{20{,}25+6{,}52}}{0{,}466}=\dfrac{4{,}50+5{,}17}{0{,}466}=20{,}77\;\text{s}" />
+          <FormulaBox latex="x(20{,}77)=20{,}77+0{,}208(20{,}77)^4=20{,}77+38\,710\approx 3{,}87\times 10^4\;\text{m}" />
+          <FormulaBox variant="gold" latex="x_\text{retur}\approx 3{,}87\times 10^4\;\text{m}=38{,}7\;\text{km}" />
+        </Step>
+        <Pitfall>
+          <strong>«Maks høyde når a_y=0» er en vanlig feil.</strong> Maks høyde inntreffer når
+          <InlineLatex latex="\;v_y=0" />. <InlineLatex latex="a_y=0" /> betyr bare at
+          <InlineLatex latex="\;v_y" /> akkurat når sin maksimums­verdi — ikke at posisjonen y når
+          maksimum. Test gjerne med konstant tyngde­akselerasjon: a_y = −g er aldri null, men y når
+          fortsatt et toppunkt.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Den horisontale akselerasjonen <InlineLatex latex="\;a_x=\alpha t^2" />
+          vokser hurtig med tid, så x-komponenten dominerer ved store t — derfor blir x_retur
+          ekstremt stor (38 km) selv om vertikal toppen bare er 341 m. En reell rakett ville aldri
+          oppføre seg slik; dette er en oppdiktet test­modell for å øve integrasjon med tids­avhengig
+          akselerasjon.
+        </p>
+      </div>
     ),
+    summary: <p>Tids­avhengig <InlineLatex latex="\vec a" />: integrér to ganger komponentvis. Topp når <InlineLatex latex="v_y=0" />, retur når <InlineLatex latex="y=0" />.</p>,
   },
 
   // ==========================================================================
-  // 3.48 — Stein fra tak (utledning)
+  // 3.48 — CALC dragonfly
   // ==========================================================================
   "3.48": {
-    title: "Prosjektil fra høyde — generell rekkevidde",
+    title: "CALC: øyenstikker — vinkel og akselerasjon",
     difficulty: "vanskelig",
-    pageRef: "s. 107",
+    pageRef: "s. 124",
     problem: (
       <p>
-        En stein kastes fra taket av en bygning med fart <InlineLatex latex="v_0" /> i en vinkel <InlineLatex latex="\alpha_0" /> over horisontalen.
-        Bygningens høyde er <InlineLatex latex="h" />. Vis at horisontal avstand fra bygningens fot
-        der steinen treffer bakken er:
+        Posisjonen til en øyenstikker som flyr parallelt med bakken er gitt som funksjon av tid ved
+        <InlineLatex latex="\;\vec r=[2{,}90\;\text{m}+(0{,}0900\;\text{m/s}^2)t^2]\hat i-(0{,}0150\;\text{m/s}^3)t^3\hat j" />.
+        (a) Ved hvilken verdi av t lager hastighets­vektoren en vinkel 32,0° med klokken (under +x)
+        fra +x-aksen? (b) Ved tidspunktet beregnet i (a), hva er størrelsen og retningen til øyenstikkers
+        akselerasjons­vektor?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li>Starthøyde <InlineLatex latex="h" /> over bakken</li>
-        <li><InlineLatex latex="v_0, \alpha_0" /> gitt symbolsk</li>
+        <li>Posisjon: <InlineLatex latex="\vec r(t)=[2{,}90+0{,}0900t^2]\hat i-0{,}0150t^3\hat j\;\text{m}" /></li>
+        <li>Vinkel for hastighets­retning: <InlineLatex latex="-32{,}0°" /> (under +x-aksen)</li>
+        <li>Bevegelsen er parallell med bakken (xy-plan)</li>
       </ul>
     ),
-    unknowns: <p>Uttrykk for horisontal avstand <InlineLatex latex="x" /> ved nedslag.</p>,
+    unknowns: <p>(a) Tid t hvor <InlineLatex latex="\vec v" /> peker 32° under +x. (b) <InlineLatex latex="|\vec a|" /> og retning ved den tid.</p>,
     strategy: (
-      <TheoryBox title="Vertikal abc-formel gir tiden">
-        <p>
-          Sett <InlineLatex latex="y(t)=h+v_0\sin\alpha_0\,t-\tfrac12 g t^2=0" /> og løs kvadratisk for <InlineLatex latex="t" />.
-          Multiplisér med <InlineLatex latex="v_0\cos\alpha_0" /> for å få <InlineLatex latex="x" />.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>abc-formelen: <InlineLatex latex="\tfrac12 g t^2-v_0\sin\alpha_0\,t-h=0" />.</p> },
-      { label: "Hint 2", content: <p>Velg den positive roten (tiden må være positiv).</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Dette er en generell <em>utledningsoppgave</em> — vi skal finne et symbolsk uttrykk,
-          ikke et tall. Oppgaven er viktig fordi den viser hvordan rekkeviddeformelen utvides når start- og landingshøyde
-          er ulike. Strategien er den samme som i 3.17 (kulestøt), men nå symbolsk. Vi setter opp
-          komponentligningene, løser y(t) = 0 for tiden, og setter tiden inn i x-likningen.
-        </p>
-        <p>Originalformlene (prosjektilbevegelse, Young &amp; Freedman 3.20–3.21):</p>
-        <FormulaBox variant="blue" latex="x(t) = v_0\cos\alpha_0\,t, \qquad y(t) = h + v_0\sin\alpha_0\,t - \tfrac{1}{2} g t^2" />
-        <p>
-          <strong>Koordinatvalg:</strong> Origo ved bygningens fot på bakken. x-aksen horisontalt, y-aksen opp. Derfor
-          starter steinen ved <InlineLatex latex="(0, h)" /> og lander ved <InlineLatex latex="y = 0" />. Initialvektoren
-          har komponenter <InlineLatex latex="v_{0x} = v_0\cos\alpha_0" />, <InlineLatex latex="\;v_{0y} = v_0\sin\alpha_0" />.
-        </p>
-        <p>
-          <strong>Hvorfor ikke rekkeviddeformelen direkte?</strong> <InlineLatex latex="R = v_0^2\sin(2\alpha_0)/g" /> antar
-          at steinen lander i samme høyde som den ble kastet. Her er <InlineLatex latex="h \neq 0" />, så den formelen er
-          ugyldig og vi må bruke abc-formelen.
-        </p>
-
-        <Step n={1} title="Sett opp likningen for nedslag">
+      <div className="space-y-2">
+        <TheoryBox title="Vinkel mellom vektor og akse">
           <p>
-            Steinen treffer bakken når <InlineLatex latex="y(t) = 0" />:
+            Vinkelen <InlineLatex latex="\theta" /> som en vektor <InlineLatex latex="\;\vec v=v_x\hat i+v_y\hat j" />
+            danner med +x-aksen er gitt ved
           </p>
-          <FormulaBox latex="h + v_0\sin\alpha_0\,t - \tfrac12 g t^2 = 0" />
+          <FormulaBox variant="gold" latex="\tan\theta=\dfrac{v_y}{v_x}" />
           <p>
-            Vi multipliserer med −1 og omarrangerer til standardform <InlineLatex latex="At^2 + Bt + C = 0" />:
+            Fortegnet på <InlineLatex latex="\tan\theta" /> avgjør kvadrant: positiv y-komponent →
+            over +x, negativ → under +x. «32° under +x» betyr <InlineLatex latex="\theta=-32°" />.
           </p>
-          <FormulaBox latex="\tfrac12 g\,t^2 - v_0\sin\alpha_0\,t - h = 0" />
-          <p>
-            Her er <InlineLatex latex="A = \tfrac12 g" />, <InlineLatex latex="\;B = -v_0\sin\alpha_0" />,
-            <InlineLatex latex="\;C = -h" />.
+          <p className="text-sm">
+            Hastighet: <InlineLatex latex="\vec v=d\vec r/dt" />. Akselerasjon: <InlineLatex latex="\vec a=d\vec v/dt" />.
           </p>
-        </Step>
-        <Step n={2} title="Løs med abc-formelen">
-          <p>Generell andregradsformel:</p>
-          <FormulaBox variant="blue" latex="t = \dfrac{-B \pm \sqrt{B^2 - 4AC}}{2A}" />
-          <p>Sett inn <InlineLatex latex="A, B, C" />:</p>
-          <FormulaBox latex="t = \dfrac{v_0\sin\alpha_0 \pm \sqrt{v_0^2\sin^2\alpha_0 + 2gh}}{g}" />
-          <p>
-            <strong>Fortegnsvalg:</strong> Tiden må være positiv. Siden <InlineLatex latex="h > 0" />, er
-            <InlineLatex latex="\;v_0^2\sin^2\alpha_0 + 2gh > v_0^2\sin^2\alpha_0" />, så kvadratroten er større enn
-            <InlineLatex latex="v_0\sin\alpha_0" />. Bare plusstegnet gir positiv t; minustegnet gir negativ tid som forkastes
-            (det ville tilsvart «når steinen var på bakken før kastet» — ikke fysisk).
-          </p>
-          <FormulaBox latex="t=\dfrac{v_0\sin\alpha_0+\sqrt{v_0^2\sin^2\alpha_0+2gh}}{g}" />
-        </Step>
-        <Step n={3} title="Horisontal avstand">
-          <p>
-            Horisontal bevegelse er uniform (ingen x-akselerasjon), så <InlineLatex latex="x = v_0\cos\alpha_0\,t" />.
-            Multipliser tiden med <InlineLatex latex="v_0\cos\alpha_0" />:
-          </p>
-          <FormulaBox variant="blue" latex="x = v_0\cos\alpha_0\,t" />
-          <FormulaBox variant="gold" latex="\boxed{\;x=\dfrac{v_0\cos\alpha_0}{g}\left(v_0\sin\alpha_0+\sqrt{v_0^2\sin^2\alpha_0+2gh}\right)\;}" />
-        </Step>
-        <Step n={4} title="Sannhetssjekk: h = 0 må gi rekkeviddeformelen">
-          <p>
-            Hvis <InlineLatex latex="h = 0" /> (samme start- og landingshøyde), skal uttrykket redusere til den kjente
-            rekkeviddeformelen. Sett <InlineLatex latex="h = 0" />:
-          </p>
-          <FormulaBox latex="x = \dfrac{v_0\cos\alpha_0}{g}\left(v_0\sin\alpha_0 + \sqrt{v_0^2\sin^2\alpha_0}\right) = \dfrac{v_0\cos\alpha_0}{g}\cdot 2v_0\sin\alpha_0" />
-          <p>Bruk identiteten <InlineLatex latex="2\sin\alpha\cos\alpha = \sin(2\alpha)" />:</p>
-          <FormulaBox latex="x=\dfrac{v_0^2\sin 2\alpha_0}{g}" />
-          <p>
-            <strong>Perfekt</strong> — rekkeviddeformelen for lik start- og slutthøyde. Dette gir oss en god tiltro
-            til at den generelle formelen er riktig.
-          </p>
-          <p>
-            <strong>Fysisk tolkning:</strong> Leddet <InlineLatex latex="2gh" /> under kvadratroten representerer det
-            «ekstra» fartstillegget steinen får ved å falle fra høyden <InlineLatex latex="h" />. Det tilsvarer kinetisk
-            energi fra energibevaring: en stein som faller fritt fra høyde <InlineLatex latex="h" /> har
-            <InlineLatex latex="v^2 = 2gh" />. Hvis <InlineLatex latex="h = 0" /> forsvinner leddet helt. Hvis
-            <InlineLatex latex="v_0 = 0" /> (steinen bare slippes), reduseres uttrykket — men x blir 0 siden
-            <InlineLatex latex="\cos\alpha_0" />-leddet også ganger hele.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Generelle formler med symboler gir innsikt i grenseverdier (som <InlineLatex latex="h\to 0" />) og viser
-        at tyngdekraft kombinert med kvadratisk likning gir den kvadratroten som dukker opp.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>Deriver komponentvis. <InlineLatex latex="d(t^n)/dt=nt^{n-1}" /> — ren polynom­derivasjon.</p> },
+      { label: "Hint 2", content: <p>Med <InlineLatex latex="v_x(t)=0{,}180t" /> og <InlineLatex latex="v_y(t)=-0{,}0450t^2" />, bør forholdet forenkle pent og gi en lineær ligning i t.</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Deriver, så bruk vinkel­betingelsen, så evaluér akselerasjonen.</p>
+        <Step n={1} title="Hastighet (deriver r(t))">
+          <FormulaBox latex="v_x(t)=\dfrac{d}{dt}[2{,}90+0{,}0900t^2]=0{,}180t\;\text{m/s}" />
+          <FormulaBox latex="v_y(t)=\dfrac{d}{dt}[-0{,}0150t^3]=-0{,}0450t^2\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="Akselerasjon (deriver v(t))">
+          <FormulaBox latex="a_x(t)=0{,}180\;\text{m/s}^2,\quad a_y(t)=-0{,}0900t\;\text{m/s}^2" />
+        </Step>
+        <Step n={3} title="(a) Finn t der vinkel = −32°">
+          <FormulaBox latex="\tan(-32°)=\dfrac{v_y}{v_x}=\dfrac{-0{,}0450t^2}{0{,}180t}=-0{,}250t" />
+          <FormulaBox latex="-0{,}6249=-0{,}250t\Rightarrow t=2{,}500\;\text{s}" />
+          <FormulaBox variant="gold" latex="t=2{,}50\;\text{s}" />
+        </Step>
+        <Step n={4} title="(b) Akselerasjons­vektor ved t=2,50 s">
+          <FormulaBox latex="a_x=0{,}180\;\text{m/s}^2,\;a_y=-0{,}0900(2{,}50)=-0{,}225\;\text{m/s}^2" />
+          <FormulaBox latex="|\vec a|=\sqrt{(0{,}180)^2+(0{,}225)^2}=\sqrt{0{,}0324+0{,}0506}=\sqrt{0{,}0830}=0{,}288\;\text{m/s}^2" />
+          <FormulaBox latex="\theta_a=\arctan\dfrac{-0{,}225}{0{,}180}=\arctan(-1{,}250)=-51{,}3°" />
+          <FormulaBox variant="gold" latex="|\vec a|\approx 0{,}288\;\text{m/s}^2,\;\theta\approx -51{,}3°\;\text{(under +x)}" />
+        </Step>
+        <Pitfall>
+          <strong>Hastighet- og akselerasjons­vinkler er ikke like.</strong> Ved samme tid t danner
+          <InlineLatex latex="\;\vec v" /> og <InlineLatex latex="\vec a" /> generelt forskjellige
+          vinkler med +x — bare ved jevn rettlinjet bevegelse ligger de parallelt. Her er forskjellen
+          51,3° − 32,0° = 19,3°, som tyder på at banen krummer i tillegg til å akselerere langs
+          bevegelses­retningen.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Vinkelen mellom <InlineLatex latex="\vec v" /> og <InlineLatex latex="\vec a" />
+          forteller om banens form: 90° gir ren sirkel­bevegelse (kun radial a), 0°/180° gir ren
+          rettlinjet aks/dec. Her ligger vi imellom — øyenstikkeren krumer banen <em>og</em> endrer
+          fart samtidig.
+        </p>
+      </div>
     ),
+    summary: <p>Vinkel­betingelse: <InlineLatex latex="\tan\theta=v_y/v_x" /> med fortegn-konvensjon. Polynom­derivering komponentvis.</p>,
   },
 
   // ==========================================================================
-  // 3.61 — Granat eksploderer
+  // 3.61 — Look Out! snowball
   // ==========================================================================
   "3.61": {
-    title: "Granat som eksploderer på toppen",
+    title: "Look Out! — snøball fra låvetak",
     difficulty: "vanskelig",
-    pageRef: "s. 108",
+    pageRef: "s. 125",
     problem: (
       <p>
-        En granat avfyres fra bakken med fart 75,0 m/s i 60,0° over horisontalen. På høyeste punkt
-        eksploderer granaten i to like store biter. Den ene biten har fart null rett etter
-        eksplosjonen og faller rett ned. Hvor langt fra kanonen lander den andre biten?
-        (Antar flat bakke.)
+        En snøball ruller av et låvetak som heller nedover med vinkel 40°. Kanten av taket er 14,0 m over
+        bakken, og snøballen har fart 7,00 m/s når den ruller av taket. Se bort fra luftmotstand.
+        (a) Hvor langt fra kanten av låven treffer snøballen bakken hvis den ikke treffer noe annet mens
+        den faller? (b) Skisser x-t, y-t, v_x-t og v_y-t-grafer. (c) En 1,9 m høy mann står 4,0 m fra kanten
+        av låven. Vil snøballen treffe ham?
       </p>
     ),
     knowns: (
       <ul className="list-disc pl-5 space-y-0.5">
-        <li><InlineLatex latex="v_0=75{,}0\;\text{m/s},\;\alpha_0=60{,}0^\circ" /></li>
-        <li>To like store biter etter eksplosjon; én har v = 0</li>
-        <li><InlineLatex latex="g=9{,}80\;\text{m/s}^2" /></li>
+        <li>Takvinkel: <InlineLatex latex="\alpha=40°" /> under horisontalen</li>
+        <li>Takhøyde over bakken: <InlineLatex latex="h=14{,}0\;\text{m}" /></li>
+        <li>Initial­fart: <InlineLatex latex="v_0=7{,}00\;\text{m/s}" /></li>
+        <li>Mann står 4,0 m fra låven, høyde 1,9 m</li>
+        <li>g = 9,80 m/s², ingen luftmotstand</li>
       </ul>
     ),
-    unknowns: <p>Hvor langt fra kanonen den bevegde biten lander.</p>,
+    unknowns: <p>(a) Horisontal avstand fra låven til nedslag. (c) Vil snøballen treffe mannen?</p>,
     strategy: (
-      <TheoryBox title="Bevegelsesmengdebevaring ved eksplosjon">
-        <p>
-          Indre krefter fra eksplosjonen bevarer total bevegelsesmengde. Ved toppunktet er
-          vertikal fart null og horisontal fart er <InlineLatex latex="v_{0x}=v_0\cos 60^\circ" />.
-          Om den ene biten stopper, må den andre bære <em>hele</em> horisontale bevegelsesmengden.
-        </p>
-      </TheoryBox>
-    ),
-    hints: [
-      { label: "Hint 1", content: <p>Fart ved topp: <InlineLatex latex="v_{\text{topp}}=v_0\cos 60^\circ" />.</p> },
-      { label: "Hint 2", content: <p>Bevegelsesmengde: <InlineLatex latex="2m\,v_{\text{topp}}=m\cdot 0+m\,v_2" />.</p> },
-      { label: "Hint 3", content: <p>Fra topp til bakke: samme tid som å stige, siden høyden er lik.</p> },
-    ],
-    solution: (
-      <div className="space-y-3 text-sm">
-        <p>
-          <strong>Teori:</strong> Oppgaven kombinerer prosjektilbevegelse med bevarelse av bevegelsesmengde (foregriper
-          kap. 8). Ideen er at eksplosjonen er en kort, <em>intern</em> kraft — krefter mellom de to bitene som
-          fragmenterer. Indre krefter kan ikke endre total bevegelsesmengde, selv om hver bit får helt nye hastigheter.
-          Det betyr at granat-systemets impuls like før = impuls like etter eksplosjonen.
-        </p>
-        <FormulaBox variant="blue" latex="\vec p_{\text{før}} = \vec p_{\text{etter}} \;\Rightarrow\; (2m)\vec v_{\text{topp}} = m\vec v_1 + m\vec v_2" />
-        <p>
-          Tyngdekraften er også til stede under eksplosjonen, men siden eksplosjonen antas kort, endres bevegelsesmengden
-          ubetydelig av gravitasjonen i selve eksplosjonsøyeblikket. Vi kan derfor analysere før/etter som om
-          eksplosjonen er øyeblikkelig.
-        </p>
-        <p>
-          <strong>Strategi i tre faser:</strong> (1) Bruk prosjektilkinematikk til å finne granatens posisjon og
-          hastighet på toppunktet. (2) Bruk bevarelse av bevegelsesmengde for å finne farten til den flyvende biten
-          etter eksplosjonen. (3) Bruk prosjektilkinematikk igjen for biten fra toppunktet til bakken.
-        </p>
-
-        <Step n={1} title="Fase 1 — granat opp til toppunktet">
+      <div className="space-y-2">
+        <TheoryBox title="Initial­hastighet rettet under horisontalen">
           <p>
-            Dekomponer startfarten. <InlineLatex latex="\cos 60^\circ = 0{,}5" /> og <InlineLatex latex="\sin 60^\circ \approx 0{,}866" />:
+            Når kastet skjer <em>under</em> horisontal­planet, blir y-komponenten <em>negativ</em> fra
+            start. Med +y opp:
           </p>
-          <FormulaBox variant="blue" latex="v_{0x} = v_0\cos\alpha_0, \qquad v_{0y} = v_0\sin\alpha_0" />
-          <FormulaBox latex="v_{0x}=75{,}0\cos 60^\circ=37{,}5\;\text{m/s},\;v_{0y}=75{,}0\sin 60^\circ\approx 64{,}95\;\text{m/s}" />
+          <FormulaBox variant="gold" latex="v_{0x}=v_0\cos\alpha,\quad v_{0y}=-v_0\sin\alpha" />
           <p>
-            Toppunktet er der <InlineLatex latex="v_y = 0" />. Fra <InlineLatex latex="v_y = v_{0y} - g t" /> får vi:
+            Bevegelses­ligningene:
+            <InlineLatex latex="\;x(t)=v_{0x}t" /> og <InlineLatex latex="\;y(t)=v_{0y}t-\tfrac12 gt^2" />.
+            Setter origo ved tak­kanten. Bakken ligger ved <InlineLatex latex="\;y=-h" />.
           </p>
-          <FormulaBox variant="blue" latex="t_{\text{opp}} = \dfrac{v_{0y}}{g}" />
-          <FormulaBox latex="t_{\text{opp}}=\dfrac{64{,}95}{9{,}80}\approx 6{,}63\;\text{s}" />
-          <p>
-            Horisontal avstand på toppen (kun <InlineLatex latex="v_{0x}" /> multiplisert med tid):
-          </p>
-          <FormulaBox latex="x_{\text{topp}}=v_{0x}\,t_{\text{opp}}\approx 37{,}5\cdot 6{,}63\approx 249\;\text{m}" />
-          <p>Høyde på toppen (fra <InlineLatex latex="v_y^2 = v_{0y}^2 - 2g\Delta y" />):</p>
-          <FormulaBox variant="blue" latex="h_{\text{topp}} = \dfrac{v_{0y}^2}{2g}" />
-          <FormulaBox latex="h_{\text{topp}}=\dfrac{64{,}95^2}{19{,}6}\approx 215\;\text{m}" />
-          <p>
-            <strong>Viktig observasjon:</strong> På toppunktet er granatens fart rent horisontal og lik
-            <InlineLatex latex="v_{\text{topp}} = v_{0x} = 37{,}5" /> m/s.
-          </p>
-        </Step>
-        <Step n={2} title="Fase 2 — bevarelse av bevegelsesmengde i eksplosjonen">
-          <p>
-            La granatens masse før eksplosjonen være <InlineLatex latex="2m" /> (deles i to <em>like</em> store biter hver med masse
-            <InlineLatex latex="m" />). Like før eksplosjonen beveger hele granaten seg med <InlineLatex latex="37{,}5" /> m/s horisontalt.
-            Like etter: bit 1 har <InlineLatex latex="v_1 = 0" /> (faller rett ned), bit 2 har ukjent fart <InlineLatex latex="v_2" />.
-          </p>
-          <p>
-            Bruk bevarelse horisontalt. Vertikalt bidrar eksplosjonen ikke siden eksplosjonens retning langs y ikke er
-            spesifisert, men symmetri/antagelse om at bit 1 faller rett ned (og derfor får like mye y-impuls ned som bit 2 får opp)
-            gjør at bit 2 beholder sin null-vertikalfart etter eksplosjonen:
-          </p>
-          <FormulaBox variant="blue" latex="(2m)\,v_{\text{topp}} = m\cdot 0 + m\,v_2" />
-          <FormulaBox latex="(2m)\cdot 37{,}5=m\cdot 0+m\,v_2\;\Rightarrow\; v_2=75{,}0\;\text{m/s}" />
-          <p>
-            Den bevegde biten flyr videre med <strong>75,0 m/s</strong> horisontalt fra toppen — akkurat dobbelt så
-            raskt som før, fordi den må bære hele granatens bevegelsesmengde alene.
-          </p>
-        </Step>
-        <Step n={3} title="Fase 3 — bit 2 faller 215 m ned">
-          <p>
-            Bit 2 starter på toppunktet (<InlineLatex latex="y_0 = 215" /> m) med horisontalfart 75 m/s og vertikalfart
-            0. Dette er et rent horisontalt kast! Tiden til bakken finner vi fra
-            <InlineLatex latex="\;h_{\text{topp}} = \tfrac12 g t_{\text{ned}}^2" />:
-          </p>
-          <FormulaBox variant="blue" latex="t_{\text{ned}} = \sqrt{\dfrac{2h_{\text{topp}}}{g}}" />
-          <FormulaBox latex="t_{\text{ned}}=\sqrt{\dfrac{2\cdot 215}{9{,}80}}\approx 6{,}63\;\text{s}" />
-          <p>
-            <strong>Symmetri:</strong> Dette er akkurat det samme som tiden opp fordi høyden er symmetrisk (det er
-            bare et speilbilde i tid). Horisontal avstand etter eksplosjonen:
-          </p>
-          <FormulaBox latex="\Delta x=v_2\,t_{\text{ned}}=75{,}0\cdot 6{,}63\approx 497\;\text{m}" />
-        </Step>
-        <Step n={4} title="Total avstand fra kanon">
-          <p>
-            Bit 2 har tilbakelagt <InlineLatex latex="x_{\text{topp}}" /> før eksplosjonen og <InlineLatex latex="\Delta x" />
-            etter. Summen er den totale horisontale avstanden fra kanonen til nedslaget:
-          </p>
-          <FormulaBox variant="gold" latex="\boxed{\;R=x_{\text{topp}}+\Delta x\approx 249+497\approx 746\;\text{m}\;}" />
-          <p>
-            <strong>Fysisk tolkning:</strong> Uten eksplosjon ville granaten landet på <InlineLatex latex="R_0 = v_0^2\sin 2\alpha_0/g \approx 497" /> m.
-            Eksplosjonen gir bit 2 ekstra horisontal fart og dermed ekstra rekkevidde: 746 m er ca. 50 % lenger enn uten
-            eksplosjon. Merk at bit 1 lander rett under toppunktet (249 m fra kanonen) — tyngdepunktet av systemet følger
-            fortsatt den opprinnelige parabelbanen og lander ved 497 m (midtpunktet mellom 249 og 746). Dette er et
-            eksempel på tyngdepunktets bevarelse under indre krefter.
-          </p>
-        </Step>
+        </TheoryBox>
       </div>
     ),
-    summary: (
-      <p>
-        Eksplosjoner endrer ikke total bevegelsesmengde. Ved å analysere toppunktet separat
-        får vi enkle tall (vy = 0) og kan overføre momentum direkte til den bevegde biten.
-        Husk også: uten motstand er tiden ned lik tiden opp.
-      </p>
+    hints: [
+      { label: "Hint 1", content: <p>For (a): finn tid t når y=−14,0 m, deretter x=v_0x·t.</p> },
+      { label: "Hint 2", content: <p>For (c): finn t når x=4,0 m, sjekk om snøballens y er over eller under mannens hode­høyde (snøball over hode = bommer).</p> },
+    ],
+    solution: (
+      <div>
+        <p className="mb-2">Komponenter, så falltid via 2.-grads, så posisjons­sjekk for mannen.</p>
+        <Step n={1} title="Initial­komponenter">
+          <FormulaBox latex="v_{0x}=v_0\cos 40°=7{,}00(0{,}766)=5{,}362\;\text{m/s}" />
+          <FormulaBox latex="v_{0y}=-v_0\sin 40°=-7{,}00(0{,}643)=-4{,}500\;\text{m/s}" />
+        </Step>
+        <Step n={2} title="(a) Falltid (y=−14,0 m)">
+          <FormulaBox latex="-14{,}0=v_{0y}t-\tfrac12 gt^2=-4{,}50t-4{,}90t^2" />
+          <FormulaBox latex="4{,}90t^2+4{,}50t-14{,}0=0" />
+          <FormulaBox latex="t=\dfrac{-4{,}50+\sqrt{(4{,}50)^2+4(4{,}90)(14{,}0)}}{2(4{,}90)}=\dfrac{-4{,}50+\sqrt{20{,}25+274{,}4}}{9{,}80}" />
+          <FormulaBox latex="t=\dfrac{-4{,}50+\sqrt{294{,}65}}{9{,}80}=\dfrac{-4{,}50+17{,}17}{9{,}80}=1{,}293\;\text{s}" />
+        </Step>
+        <Step n={3} title="(a) Horisontal avstand fra låven">
+          <FormulaBox latex="x=v_{0x}t=5{,}362(1{,}293)=6{,}93\;\text{m}" />
+          <FormulaBox variant="gold" latex="x\approx 6{,}93\;\text{m fra låven}" />
+        </Step>
+        <Step n={4} title="(c) Mann ved x=4,0 m, hode 1,9 m">
+          <p>Tid for at snøballen er ved x=4,0 m:</p>
+          <FormulaBox latex="t=\dfrac{4{,}0}{5{,}362}=0{,}746\;\text{s}" />
+          <p>Snøballens y-posisjon ved den tid (relativt tak­kanten):</p>
+          <FormulaBox latex="y(0{,}746)=-4{,}50(0{,}746)-4{,}90(0{,}746)^2=-3{,}357-2{,}727=-6{,}08\;\text{m}" />
+          <p>Snøballens høyde over bakken:</p>
+          <FormulaBox latex="h_\text{snøball}=14{,}0-6{,}08=7{,}92\;\text{m}" />
+          <p>Mannens hode er 1,9 m over bakken. Snøballen ligger <InlineLatex latex="\;7{,}92-1{,}9=6{,}02\;\text{m}" /> over hodet.</p>
+          <FormulaBox variant="gold" latex="\text{Mannen er trygg — snøballen flyr 6,0 m over hodet hans}" />
+        </Step>
+        <Pitfall>
+          <strong>Vinkel «under horisontal» betyr negativ v_0y.</strong> Hadde snøballen blitt kastet
+          oppover med samme vinkel og fart, ville falltiden vært betydelig lengre, og x_nedslag
+          større. Sjekk alltid fortegnet på v_0y eksplisitt — ikke anta retning.
+        </Pitfall>
+        <p className="mt-2 italic text-[var(--muted)]">
+          Fysisk tolkning: Mannen ville først bli truffet hvis han stod nærmere enn ~6,9 m fra låven —
+          og selv da bare hvis han var høy nok eller snøballen lav nok ved hans posisjon. Å løse
+          slike geometriske kollisjons­problemer er kjernen i ballistikk, og samme fremgangsmåte
+          brukes i alt fra basketball-skudd til artilleri-mål.
+        </p>
+      </div>
     ),
+    summary: <p>Vinkel under horisontal ⇒ negativ v_0y. Sammenlikn snøballens y mot mannens hode­høyde ved hans x for å avgjøre treff.</p>,
   },
 };
