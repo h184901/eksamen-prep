@@ -30,7 +30,7 @@ const sections = [
   {
     id: "problems",
     title: "Problems",
-    exercises: ["24.45", "24.47", "24.64"],
+    exercises: ["24.45", "24.47", "24.52"],
   },
 ];
 

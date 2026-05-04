@@ -460,7 +460,7 @@ export const exercises: Record<string, ExerciseContent> = {
     problem: (
       <div className="space-y-2">
         <p>
-          En <InlineLatex latex="10{,}0\;\mu\text{F}" /> platekondensator med sirkulære plater er koblet til et{" "}
+          En <InlineLatex latex="12{,}0\;\mu\text{F}" /> platekondensator med sirkulære plater er koblet til et{" "}
           <InlineLatex latex="12{,}0\;\text{V}" />-batteri.
         </p>
         <p>a) Hvor mye ladning er på hver plate?</p>
@@ -476,7 +476,7 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
     knowns: (
       <ul className="text-sm space-y-0.5 list-disc list-inside">
-        <li>Startkapasitans: <InlineLatex latex="C_0 = 10{,}0\;\mu\text{F} = 10{,}0 \cdot 10^{-6}\;\text{F}" /></li>
+        <li>Startkapasitans: <InlineLatex latex="C_0 = 12{,}0\;\mu\text{F} = 12{,}0 \cdot 10^{-6}\;\text{F}" /></li>
         <li>Spenning: <InlineLatex latex="V = 12{,}0\;\text{V}" /> (konstant — batteri tilkoblet)</li>
         <li>Sirkulære plater med areal <InlineLatex latex="A = \pi r^2" /></li>
       </ul>
@@ -521,11 +521,11 @@ export const exercises: Record<string, ExerciseContent> = {
         <p className="font-semibold mt-4">(a) Startladningen</p>
         <p>Standard bruk av <InlineLatex latex="Q=CV" /> — ingen omforming nødvendig:</p>
         <FormulaBox
-          latex="Q = C_0 V = (10{,}0 \cdot 10^{-6})(12{,}0) = 1{,}20 \cdot 10^{-4}\;\text{C} = 120\;\mu\text{C}"
+          latex="Q = C_0 V = (12{,}0 \cdot 10^{-6})(12{,}0) = 1{,}44 \cdot 10^{-4}\;\text{C} = 144\;\mu\text{C}"
           variant="blue"
         />
         <p>
-          Enhet: F · V = (C/V) · V = C ✓. 120 µC er en moderat ladning — for sammenligning frigjør et typisk lynnedslag
+          Enhet: F · V = (C/V) · V = C ✓. 144 µC er en moderat ladning — for sammenligning frigjør et typisk lynnedslag
           milliarder av ganger mer.
         </p>
 
@@ -539,13 +539,13 @@ export const exercises: Record<string, ExerciseContent> = {
           Intuisjon: plater lenger fra hverandre har svakere felt per V og dermed lavere ladningstetthet per V —
           altså mindre ladning lagret for samme V.
         </p>
-        <FormulaBox latex="C_b = \dfrac{C_0}{2} = 5{,}00\;\mu\text{F}" variant="blue" />
+        <FormulaBox latex="C_b = \dfrac{C_0}{2} = 6{,}00\;\mu\text{F}" variant="blue" />
         <p>
           Hvorfor endres Q? Fordi V <em>ikke</em> endres her (batteri låser den). Siden C halveres, må Q halveres
           for at <InlineLatex latex="Q=CV" /> fortsatt skal gjelde:
         </p>
         <FormulaBox
-          latex="Q_b = C_b V = (5{,}00 \cdot 10^{-6})(12{,}0) = 60{,}0\;\mu\text{C}"
+          latex="Q_b = C_b V = (6{,}00 \cdot 10^{-6})(12{,}0) = 72{,}0\;\mu\text{C}"
           variant="blue"
         />
         <p>
@@ -562,10 +562,10 @@ export const exercises: Record<string, ExerciseContent> = {
           C skalerer lineært med A, så C firedobles også:{" "}
           <InlineLatex latex="C_c = \varepsilon_0 (4A)/d = 4C_0" />.
         </p>
-        <FormulaBox latex="C_c = 4\,C_0 = 40{,}0\;\mu\text{F}" variant="blue" />
+        <FormulaBox latex="C_c = 4\,C_0 = 48{,}0\;\mu\text{F}" variant="blue" />
         <p>V fortsatt fast, så Q firedobles:</p>
         <FormulaBox
-          latex="Q_c = C_c V = (40{,}0 \cdot 10^{-6})(12{,}0) = 4{,}80 \cdot 10^{-4}\;\text{C} = 480\;\mu\text{C}"
+          latex="Q_c = C_c V = (48{,}0 \cdot 10^{-6})(12{,}0) = 5{,}76 \cdot 10^{-4}\;\text{C} = 576\;\mu\text{C}"
           variant="blue"
         />
         <p>
@@ -578,7 +578,7 @@ export const exercises: Record<string, ExerciseContent> = {
         </p>
 
         <FormulaBox
-          latex="Q = \boxed{120\;\mu\text{C}},\quad Q_b = \boxed{60{,}0\;\mu\text{C}},\quad Q_c = \boxed{480\;\mu\text{C}}"
+          latex="Q = \boxed{144\;\mu\text{C}},\quad Q_b = \boxed{72{,}0\;\mu\text{C}},\quad Q_c = \boxed{576\;\mu\text{C}}"
           variant="gold"
         />
       </div>
@@ -2016,8 +2016,8 @@ export const exercises: Record<string, ExerciseContent> = {
     ),
   },
 
-  "24.64": {
-    title: "Brokrets med fire kondensatorer",
+  "24.52": {
+    title: "Firekondensator-nettverk — finn alle spenninger",
     difficulty: "vanskelig",
     pageRef: "s. 836",
     problem: (

@@ -1776,21 +1776,21 @@ export const exercises: Record<string, ExerciseContent> = {
       <ul className="text-sm space-y-0.5 list-disc pl-5">
         <li>Strøm: <InlineLatex latex="I = 2{,}60\;\text{A}" /> (ned)</li>
         <li>Magnetfelt: <InlineLatex latex="B = 0{,}588\;\text{T}" /></li>
-        <li>Lengde: <InlineLatex latex="l = 1{,}00\cdot 10^{-2}\;\text{m}" /> (typisk valg — ikke eksplisitt gitt i all versjoner, men brukes for numerikk hvis oppgaven ikke spesifiserer; vi holder <em>per meter</em> ellers)</li>
+        <li>Lengde av seksjonen i feltet: <InlineLatex latex="l = 1{,}00\;\text{cm} = 1{,}00\cdot 10^{-2}\;\text{m}" /></li>
         <li className="text-xs text-[var(--muted)]">Koordinater: +x = øst, +y = nord, +z = opp</li>
       </ul>
     ),
     unknowns: (
       <ul className="text-sm space-y-0.5 list-disc pl-5">
-        <li>F (størrelse og retning) i tre B-retninger</li>
+        <li>F (størrelse og retning) på 1,00 cm-seksjonen i tre B-retninger</li>
       </ul>
     ),
     strategy: (
       <p className="text-sm">
         Strømmen er alltid vertikal (ned, <InlineLatex latex="\vec{l}=-l\hat{k}" />) og horisontal B er alltid vinkelrett,
-        så <InlineLatex latex="\sin\theta=1" />. Størrelsen av kraft per meter er{" "}
-        <InlineLatex latex="F/l = IB = (2{,}60)(0{,}588)=1{,}529\;\text{N/m}" />. Vi angir <em>total</em> kraft og retning
-        via kryssproduktet for hver B-retning.
+        så <InlineLatex latex="\sin\theta=1" />. Størrelsen på kraften på 1,00 cm-seksjonen er{" "}
+        <InlineLatex latex="F = IlB = (2{,}60)(0{,}0100)(0{,}588)=1{,}529\cdot 10^{-2}\;\text{N}" />.
+        Vi angir <em>total</em> kraft og retning via kryssproduktet for hver B-retning.
       </p>
     ),
     hints: [
@@ -1815,8 +1815,8 @@ export const exercises: Record<string, ExerciseContent> = {
           og <InlineLatex latex="\vec B" /> i xy, står de alltid perpendikulært. Det er derfor effektivt å jobbe
           vektorbasert: bare finn komponenten av <InlineLatex latex="\vec L\times\vec B" />.
         </p>
-        <p>Koordinatsystem: +x = øst, +y = nord, +z = opp. Størrelsen av kraft per meter:</p>
-        <FormulaBox latex="|F|/L = IB = (2{,}60)(0{,}588) = 1{,}529\;\text{N/m}" variant="blue" />
+        <p>Koordinatsystem: +x = øst, +y = nord, +z = opp. Størrelsen på kraften på 1,00 cm-seksjonen:</p>
+        <FormulaBox latex="|F| = IlB = (2{,}60)(0{,}0100)(0{,}588) = 1{,}529\cdot 10^{-2}\;\text{N}" variant="blue" />
 
         <p className="font-semibold mt-4">(a) B mot øst: <InlineLatex latex="\vec B = B\hat i" /></p>
         <p>
@@ -1824,20 +1824,20 @@ export const exercises: Record<string, ExerciseContent> = {
           <InlineLatex latex="\vec L = -L\hat k" />:
         </p>
         <FormulaBox
-          latex="\vec{F}=I(-L\hat{k})\times B\hat{i} = -ILB(\hat{k}\times\hat{i}) = -ILB\,\hat{j}\;(\text{mot sør})"
+          latex="\vec{F}=I(-l\hat{k})\times B\hat{i} = -IlB(\hat{k}\times\hat{i}) = -IlB\,\hat{j}\;(\text{mot sør})"
           variant="blue"
         />
-        <p><InlineLatex latex="F/L = \boxed{1{,}53\;\text{N/m, mot sør}}" />.</p>
+        <p><InlineLatex latex="F = \boxed{1{,}53\cdot 10^{-2}\;\text{N, mot sør}}" />.</p>
 
         <p className="font-semibold mt-4">(b) B mot sør: <InlineLatex latex="\vec B = -B\hat j" /></p>
         <p>
           <InlineLatex latex="\hat k\times\hat j = -\hat i" />. Med to minus (ett fra L, ett fra B) får vi netto:
         </p>
         <FormulaBox
-          latex="\vec{F}=I(-L\hat{k})\times(-B\hat{j}) = ILB(\hat{k}\times\hat{j}) = -ILB\,\hat{i}\;(\text{mot vest})"
+          latex="\vec{F}=I(-l\hat{k})\times(-B\hat{j}) = IlB(\hat{k}\times\hat{j}) = -IlB\,\hat{i}\;(\text{mot vest})"
           variant="blue"
         />
-        <p><InlineLatex latex="F/L = \boxed{1{,}53\;\text{N/m, mot vest}}" />.</p>
+        <p><InlineLatex latex="F = \boxed{1{,}53\cdot 10^{-2}\;\text{N, mot vest}}" />.</p>
 
         <p className="font-semibold mt-4">(c) B 30° sør for vest</p>
         <p>
@@ -1846,29 +1846,25 @@ export const exercises: Record<string, ExerciseContent> = {
         <FormulaBox latex="\vec{B}=B(-\cos 30°\,\hat{i}-\sin 30°\,\hat{j})" variant="blue" />
         <p>Nå kryssproduktet komponentvis:</p>
         <FormulaBox
-          latex="\vec{F} = I(-L\hat{k})\times B(-\cos 30°\hat{i}-\sin 30°\hat{j}) = ILB(\cos 30°\,\hat{j}-\sin 30°\,\hat{i})"
+          latex="\vec{F} = I(-l\hat{k})\times B(-\cos 30°\hat{i}-\sin 30°\hat{j}) = IlB(\cos 30°\,\hat{j}-\sin 30°\,\hat{i})"
           variant="blue"
         />
         <p>
-          <strong>Fortegn/retning:</strong> <InlineLatex latex="F_x=-ILB\sin 30° < 0" /> (mot vest),{" "}
-          <InlineLatex latex="F_y=+ILB\cos 30° > 0" /> (mot nord). Kraften har større y-komponent enn x-komponent.
+          <strong>Fortegn/retning:</strong> <InlineLatex latex="F_x=-IlB\sin 30° < 0" /> (mot vest),{" "}
+          <InlineLatex latex="F_y=+IlB\cos 30° > 0" /> (mot nord). Kraften har større y-komponent enn x-komponent.
           Vinkel fra +y-aksen (nord): <InlineLatex latex="\tan\alpha = \sin 30°/\cos 30° = \tan 30°" />, så{" "}
           α = 30° vest for nord.
         </p>
-        <p className="italic text-[var(--muted)]">
-          (Merk: Oppgaveteksten kan også leses som "30° øst for nord" avhengig av referanseretning; her holder vi oss
-          til komponentregningen over. Uansett: størrelsen per meter er IB = 1,53 N/m.)
-        </p>
         <FormulaBox
-          latex="|\vec{F}|/l = IB = \boxed{1{,}53\;\text{N/m, 30° øst for nord}}"
+          latex="|\vec{F}| = IlB = \boxed{1{,}53\cdot 10^{-2}\;\text{N, 30° vest for nord}}"
           variant="gold"
         />
         <p className="italic text-[var(--muted)]">
-          Enhetssjekk: <InlineLatex latex="\text{A}\cdot\text{T} = \text{A}\cdot\text{N/(A}\cdot\text{m)} = \text{N/m}" />. OK.
-          Fysisk tolkning: kraften per meter leder er om lag 1,5 N/m. For en 1 cm leder blir total kraft 0,015 N — lite.
-          Men i MRI-skannere og partikkelakseleratorer er I høyere og L langt lengre, slik at kreftene blir store nok til
-          å stivne strukturen mekanisk. Et generelt mønster: <InlineLatex latex="\vec F" /> står alltid vinkelrett på
-          både <InlineLatex latex="\vec L" /> og <InlineLatex latex="\vec B" />.
+          Enhetssjekk: <InlineLatex latex="\text{A}\cdot\text{m}\cdot\text{T} = \text{A}\cdot\text{m}\cdot\text{N/(A}\cdot\text{m)} = \text{N}" />. OK.
+          Fysisk tolkning: kraften på en 1,00 cm leder er ca. 1,5·10⁻² N — lite. Men i MRI-skannere og
+          partikkelakseleratorer er I høyere og L langt lengre, slik at kreftene blir store nok til å stivne strukturen
+          mekanisk. Et generelt mønster: <InlineLatex latex="\vec F" /> står alltid vinkelrett på både{" "}
+          <InlineLatex latex="\vec L" /> og <InlineLatex latex="\vec B" />.
         </p>
       </div>
     ),
