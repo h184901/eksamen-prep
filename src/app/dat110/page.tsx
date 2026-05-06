@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   dat110Chapters,
   categoryLabels,
@@ -10,6 +10,11 @@ import {
   SECTIONS_PER_CHAPTER,
   type DAT110Chapter,
 } from "@/lib/dat110-chapters";
+import { useProgress } from "@/components/ProgressProvider";
+import {
+  dat110ChapterTotals,
+  dat110GroupTotals,
+} from "@/lib/subject-progress";
 
 const categoryOrder: DAT110Chapter["category"][] = ["cn", "ds"];
 
@@ -47,66 +52,21 @@ const categoryStyles: Record<
   },
 };
 
-function useGroupProgress(chapterIds: number[]) {
-  const [progress, setProgress] = useState({ completed: 0, total: 0 });
-  const [mounted, setMounted] = useState(false);
-  const idsKey = chapterIds.join(",");
-
-  useEffect(() => {
-    setMounted(true);
-    const ids = idsKey.split(",").map(Number);
-    let totalCompleted = 0;
-    const totalSections = ids.reduce((sum, id) => {
-      const ch = dat110Chapters.find((c) => c.id === id);
-      return sum + (ch?.sectionCount ?? SECTIONS_PER_CHAPTER);
-    }, 0);
-
-    for (const id of ids) {
-      const stored = localStorage.getItem(`dat110-progress-ch${id}`);
-      if (stored) {
-        try {
-          const arr = JSON.parse(stored);
-          totalCompleted += Array.isArray(arr) ? arr.length : 0;
-        } catch {
-          // ignore
-        }
-      }
-    }
-
-    setProgress({ completed: totalCompleted, total: totalSections });
-  }, [idsKey]);
-
-  if (!mounted) return { completed: 0, total: 1, percent: 0, mounted: false };
-
-  const percent =
-    progress.total > 0
-      ? Math.round((progress.completed / progress.total) * 100)
-      : 0;
-  return { ...progress, percent, mounted: true };
+function useGroupProgress(cats: DAT110Chapter[]) {
+  const { ready, completed } = useProgress();
+  const slugs = cats.map((c) => ({
+    slug: c.slug,
+    sectionCount: c.sectionCount ?? SECTIONS_PER_CHAPTER,
+  }));
+  const totals = dat110GroupTotals(completed, slugs);
+  return { ...totals, mounted: ready };
 }
 
 function useChapterProgress(chapter: DAT110Chapter) {
-  const [completed, setCompleted] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const { ready, completed } = useProgress();
   const total = chapter.sectionCount ?? SECTIONS_PER_CHAPTER;
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem(`dat110-progress-ch${chapter.id}`);
-    if (stored) {
-      try {
-        const arr = JSON.parse(stored);
-        setCompleted(Array.isArray(arr) ? arr.length : 0);
-      } catch {
-        // ignore
-      }
-    }
-  }, [chapter.id]);
-
-  if (!mounted) return { completed: 0, total, percent: 0, mounted: false };
-
-  const percent = Math.round((completed / total) * 100);
-  return { completed, total, percent, mounted: true };
+  const totals = dat110ChapterTotals(completed, chapter.slug, total);
+  return { ...totals, mounted: ready };
 }
 
 function ChapterCard({ chapter }: { chapter: DAT110Chapter }) {
@@ -153,8 +113,7 @@ function CollapsibleSection({
 }) {
   const [open, setOpen] = useState(false);
   const styles = categoryStyles[category];
-  const chapterIds = cats.map((c) => c.id);
-  const { percent, completed, total, mounted } = useGroupProgress(chapterIds);
+  const { percent, completed, total, mounted } = useGroupProgress(cats);
 
   return (
     <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden">

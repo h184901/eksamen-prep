@@ -57,7 +57,7 @@ const temaer = [
 export default function DS5Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={progressSections} />
+      <ProgressTracker pageKeyPrefix={`dat110/${chapter.slug}`} sections={progressSections} />
 
       <p className="text-[var(--muted)] mb-8 max-w-2xl">
         I et distribuert system finnes det ingen global klokke — hvert noder har

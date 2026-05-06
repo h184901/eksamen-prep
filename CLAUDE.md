@@ -39,9 +39,15 @@ Next.js 16 App Router · React 18 · TypeScript · Tailwind 3.4 · KaTeX · Fram
   - `page_progress(user_id, page_key)` — én rad per fullført side
 - **Env** — `POSTGRES_URL` og `SESSION_SECRET` må være satt både lokalt i `.env.local` og i Vercel env vars.
 - **Progress-API** — `src/app/api/progress/route.ts` (les/oppdater) + `src/app/api/progress/migrate/` (engangs-migrering).
-- **Konvensjon for `page_key`** — `<fag>/<område>/<slug>` (f.eks. `dat107/sql/joins`). Schema er fag-agnostisk; nye fag adopteres uten endringer.
-- **`CompletionToggle`** (`src/components/dat107/`) er knappen som markerer en side fullført — kall i hver temaside som skal spores manuelt.
-- **`LegacyProgressMigrator`** (`src/components/dat107/`) leser gamle `progress-dat107-*`-nøkler fra localStorage ved første innlogging som `erlend` og upserter dem i Postgres. Markerer seg ferdig via `migrated-dat107-v1`-flagg.
+- **Konvensjon for `page_key`** — `<fag>/<område>/<slug>` (f.eks. `dat107/sql/joins`, `ing164/kapittel-2/teori`, `dat110/cn-1/oppgaver`, `dat109/modellering/brukstilfelle`). Schema er fag-agnostisk; nye fag adopteres uten endringer.
+- **Sporing per fag** — felles via `useProgress()` (Postgres-backed). Tre mønstre:
+  - **DAT107** — manuell merking via `CompletionToggle` på hver `[area]/[topic]`-side. Én page key per tema.
+  - **ING164 / DAT110** — manuell sjekkliste i `ProgressTracker` (4 seksjoner per kapittel: `teori`, `formler`, `oppgaver`, `visualiseringer`). Page key: `<fag>/<chapter-slug>/<seksjon>`.
+  - **DAT109** — automatisk `markCompleted` ved besøk via `DAT109SubNav`. Hver SubNav-segment teller som én page key. Page key: `dat109/<topic-id>/<segment>`.
+- **Felles helpers** — `src/lib/subject-progress.ts` har key-generatorer (`ing164ChapterPrefix`, `dat110ChapterPrefix`, `dat109TopicKey`) og totals-funksjoner (`ing164ChapterTotals`, `dat110GroupTotals`, `dat109TopicTotals` osv.). Dashboards leser fra `useProgress().completed` (Set) i stedet for localStorage.
+- **`CompletionToggle`** (`src/components/dat107/`) er knappen som markerer en side fullført — kall i hver DAT107-temaside.
+- **`ProgressTracker`** (`src/components/`) er sjekklistekomponenten som ING164/DAT110-kapittelsider bruker. Tar `pageKeyPrefix` (f.eks. `ing164/kapittel-2`) og `sections: string[]` (labels) og slugifier label til section slug.
+- **`LegacyProgressMigrator`** (`src/components/dat107/`) leser gamle localStorage-nøkler ved første innlogging som `erlend` og upserter dem i Postgres. To flagg: `migrated-dat107-v1` (DAT107) og `migrated-subjects-v1` (ING164 + DAT110). DAT109 hadde ingen reell localStorage-skriving, så ingen migrering.
 
 ### Ruteoppbygging per fag
 Hvert fag følger sitt eget mønster — ikke standardiser dem mot hverandre:

@@ -54,7 +54,7 @@ const temaer = [
 export default function Kapittel9Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={progressSections} />
+      <ProgressTracker pageKeyPrefix={`ing164/${chapter.slug}`} sections={progressSections} />
 
       <p className="text-[var(--muted)] mb-8 max-w-2xl">
         Kapittel 9 handler om <strong>rotasjon av stive legemer</strong> — den

@@ -56,7 +56,7 @@ const temaer = [
 export default function CN3Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={progressSections} />
+      <ProgressTracker pageKeyPrefix={`dat110/${chapter.slug}`} sections={progressSections} />
 
       <p className="text-[var(--muted)] mb-8 max-w-2xl">
         Transportlaget er bindeleddet mellom applikasjonen og nettverket. Her

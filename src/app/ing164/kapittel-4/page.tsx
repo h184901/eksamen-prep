@@ -59,7 +59,7 @@ const temaer = [
 export default function Kapittel4Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={sections} />
+      <ProgressTracker pageKeyPrefix={`ing164/${chapter.slug}`} sections={sections} />
 
       <p className="text-[var(--muted)] mt-4 mb-8 max-w-2xl">
         Kapittel 4 introduserer Newtons tre lover — selve grunnlaget for klassisk mekanikk.

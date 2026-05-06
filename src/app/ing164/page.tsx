@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   chapters,
   categoryLabels,
@@ -9,6 +9,11 @@ import {
   SECTIONS_PER_CHAPTER,
   type Chapter,
 } from "@/lib/chapters";
+import { useProgress } from "@/components/ProgressProvider";
+import {
+  ing164ChapterTotals,
+  ing164GroupTotals,
+} from "@/lib/subject-progress";
 
 const categoryOrder: Chapter["category"][] = [
   "bevegelse",
@@ -78,66 +83,21 @@ const categoryChapterRange: Record<Chapter["category"], string> = {
   em: "Kap 21–29",
 };
 
-function useGroupProgress(chapterIds: number[]) {
-  const [progress, setProgress] = useState({ completed: 0, total: 0 });
-  const [mounted, setMounted] = useState(false);
-  const idsKey = chapterIds.join(",");
-
-  useEffect(() => {
-    setMounted(true);
-    const ids = idsKey.split(",").map(Number);
-    let totalCompleted = 0;
-    const totalSections = ids.reduce((sum, id) => {
-      const ch = chapters.find((c) => c.id === id);
-      return sum + (ch?.sectionCount ?? SECTIONS_PER_CHAPTER);
-    }, 0);
-
-    for (const id of ids) {
-      const stored = localStorage.getItem(`progress-ch${id}`);
-      if (stored) {
-        try {
-          const arr = JSON.parse(stored);
-          totalCompleted += Array.isArray(arr) ? arr.length : 0;
-        } catch {
-          // ignore corrupted data
-        }
-      }
-    }
-
-    setProgress({ completed: totalCompleted, total: totalSections });
-  }, [idsKey]);
-
-  if (!mounted) return { completed: 0, total: 1, percent: 0, mounted: false };
-
-  const percent =
-    progress.total > 0
-      ? Math.round((progress.completed / progress.total) * 100)
-      : 0;
-  return { ...progress, percent, mounted: true };
+function useGroupProgress(cats: Chapter[]) {
+  const { ready, completed } = useProgress();
+  const slugs = cats.map((c) => ({
+    slug: c.slug,
+    sectionCount: c.sectionCount ?? SECTIONS_PER_CHAPTER,
+  }));
+  const totals = ing164GroupTotals(completed, slugs);
+  return { ...totals, mounted: ready };
 }
 
 function useChapterProgress(chapter: Chapter) {
-  const [completed, setCompleted] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const { ready, completed } = useProgress();
   const total = chapter.sectionCount ?? SECTIONS_PER_CHAPTER;
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem(`progress-ch${chapter.id}`);
-    if (stored) {
-      try {
-        const arr = JSON.parse(stored);
-        setCompleted(Array.isArray(arr) ? arr.length : 0);
-      } catch {
-        // ignore
-      }
-    }
-  }, [chapter.id]);
-
-  if (!mounted) return { completed: 0, total, percent: 0, mounted: false };
-
-  const percent = Math.round((completed / total) * 100);
-  return { completed, total, percent, mounted: true };
+  const totals = ing164ChapterTotals(completed, chapter.slug, total);
+  return { ...totals, mounted: ready };
 }
 
 function ChapterCard({ chapter }: { chapter: Chapter }) {
@@ -196,8 +156,7 @@ function CollapsibleSection({
 }) {
   const [open, setOpen] = useState(false);
   const styles = categoryStyles[category];
-  const chapterIds = cats.map((c) => c.id);
-  const { percent, completed, total, mounted } = useGroupProgress(chapterIds);
+  const { percent, completed, total, mounted } = useGroupProgress(cats);
 
   return (
     <section className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden">

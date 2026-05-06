@@ -8,7 +8,7 @@ const sections = ["Teori", "Formler", "Oppgaver", "Visualiseringer"];
 export default function Kapittel8Oversikt() {
   return (
     <div>
-      <ProgressTracker chapterId={8} sections={sections} />
+      <ProgressTracker pageKeyPrefix="ing164/kapittel-8" sections={sections} />
 
       <p className="text-[var(--muted)] text-lg leading-relaxed mb-8">
         Kapittel 8 handler om <strong>bevegelsesmengde og kollisjoner</strong>. Du lærer

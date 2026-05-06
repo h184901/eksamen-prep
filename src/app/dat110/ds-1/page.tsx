@@ -57,7 +57,7 @@ const temaer = [
 export default function DS1Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={progressSections} />
+      <ProgressTracker pageKeyPrefix={`dat110/${chapter.slug}`} sections={progressSections} />
 
       <p className="text-[var(--muted)] mb-8 max-w-2xl">
         Distribuerte systemer er datamaskiner som samarbeider over et nettverk

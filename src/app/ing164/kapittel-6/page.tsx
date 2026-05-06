@@ -8,7 +8,7 @@ const sections = ["Teori", "Formler", "Oppgaver", "Visualiseringer"];
 export default function Kapittel6Oversikt() {
   return (
     <div>
-      <ProgressTracker chapterId={6} sections={sections} />
+      <ProgressTracker pageKeyPrefix="ing164/kapittel-6" sections={sections} />
 
       <p className="text-[var(--muted)] mb-8 text-lg leading-relaxed">
         Kapittel 6 handler om arbeid og kinetisk energi — to av de mest grunnleggende

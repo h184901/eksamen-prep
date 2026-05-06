@@ -15,6 +15,7 @@ interface ProgressContextValue {
   completed: Set<string>;
   isCompleted: (pageKey: string) => boolean;
   toggle: (pageKey: string) => Promise<void>;
+  markCompleted: (pageKey: string) => Promise<void>;
   refresh: () => Promise<void>;
 }
 
@@ -98,9 +99,49 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     [completed],
   );
 
+  const markCompleted = useCallback(
+    async (pageKey: string) => {
+      if (!pageKey || pending.current.has(pageKey)) return;
+      if (completed.has(pageKey)) return;
+      pending.current.add(pageKey);
+
+      setCompleted((prev) => {
+        const n = new Set(prev);
+        n.add(pageKey);
+        return n;
+      });
+
+      try {
+        const res = await fetch("/api/progress", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ pageKey, completed: true }),
+        });
+        if (!res.ok) throw new Error("save failed");
+      } catch {
+        setCompleted((prev) => {
+          const n = new Set(prev);
+          n.delete(pageKey);
+          return n;
+        });
+      } finally {
+        pending.current.delete(pageKey);
+      }
+    },
+    [completed],
+  );
+
   return (
     <ProgressContext.Provider
-      value={{ ready, authed, completed, isCompleted, toggle, refresh }}
+      value={{
+        ready,
+        authed,
+        completed,
+        isCompleted,
+        toggle,
+        markCompleted,
+        refresh,
+      }}
     >
       {children}
     </ProgressContext.Provider>

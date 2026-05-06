@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useProgress } from "@/components/ProgressProvider";
 
 export interface SubPage {
   segment: string; // empty string = root/overview page
@@ -18,9 +20,26 @@ interface DAT109SubNavProps {
  * Sticky tabbed sub-navigation for DAT109 hovedområder.
  * Hver hovedside (modellering, ooa-ood, utviklingsmetode, oop, eksamen)
  * eksporterer sin egen pages-array og render denne komponenten øverst.
+ *
+ * Markerer automatisk inneværende underside som fullført når brukeren besøker
+ * den, så lenge den er en sporbar segment (ikke "oversikt").
  */
 export default function DAT109SubNav({ basePath, pages }: DAT109SubNavProps) {
   const pathname = usePathname();
+  const { ready, authed, markCompleted } = useProgress();
+
+  useEffect(() => {
+    if (!ready || !authed) return;
+    const topicId = basePath.replace(/^\/+|\/+$/g, "").split("/")[1];
+    if (!topicId) return;
+    if (pathname === basePath) return;
+    if (!pathname.startsWith(basePath + "/")) return;
+    const rest = pathname.slice(basePath.length + 1);
+    const segment = rest.split("/")[0];
+    if (!segment) return;
+    if (!pages.some((p) => p.segment === segment)) return;
+    void markCompleted(`dat109/${topicId}/${segment}`);
+  }, [pathname, basePath, ready, authed, markCompleted, pages]);
 
   return (
     <div className="sticky top-0 z-20 bg-[var(--background)]/95 backdrop-blur-sm border-b border-[var(--card-border)] -mx-4 px-4 mb-8">

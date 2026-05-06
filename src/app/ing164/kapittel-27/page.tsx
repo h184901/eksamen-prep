@@ -38,7 +38,7 @@ const sections = ["Teori", "Formler", "Oppgaver", "Visualiseringer"];
 export default function Kapittel27Oversikt() {
   return (
     <>
-      <ProgressTracker chapterId={chapter.id} sections={sections} />
+      <ProgressTracker pageKeyPrefix={`ing164/${chapter.slug}`} sections={sections} />
 
       <p className="text-[var(--muted)] mt-6 mb-6">
         Dette kapittelet dekker magnetisk felt og krefter. Du lærer om Lorentzkraften på ladede

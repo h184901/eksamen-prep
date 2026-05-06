@@ -55,7 +55,7 @@ const temaer = [
 export default function Kapittel10Page() {
   return (
     <div>
-      <ProgressTracker chapterId={chapter.id} sections={progressSections} />
+      <ProgressTracker pageKeyPrefix={`ing164/${chapter.slug}`} sections={progressSections} />
 
       <p className="text-[var(--muted)] mb-8 max-w-2xl">
         Kapittel 10 handler om <strong>dynamikk i rotasjonsbevegelse</strong> — kreftene og energien bak rotasjon. Du lærer å bruke kraftmoment og Newtons 2. lov for rotasjon, analysere rulling uten glidning, og forstå bevaring av angulært moment. Dette er direkte eksamensstoff!

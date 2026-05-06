@@ -1,32 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { topics, type Topic } from "@/lib/dat109-topics";
+import { useProgress } from "@/components/ProgressProvider";
+import { dat109TopicTotals } from "@/lib/subject-progress";
 
 function useTopicProgress(topic: Topic) {
-  const [completed, setCompleted] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const { ready, completed } = useProgress();
   const total = topic.sectionCount;
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem(`progress-dat109-${topic.id}`);
-    if (stored) {
-      try {
-        const arr = JSON.parse(stored);
-        setCompleted(Array.isArray(arr) ? arr.length : 0);
-      } catch {
-        // ignore
-      }
-    }
-  }, [topic.id]);
-
-  if (!mounted || total === 0)
-    return { completed: 0, total, percent: 0, mounted };
-
-  const percent = Math.round((completed / total) * 100);
-  return { completed, total, percent, mounted: true };
+  if (total === 0) return { completed: 0, total, percent: 0, mounted: ready };
+  const totals = dat109TopicTotals(completed, topic.id, total);
+  return { ...totals, mounted: ready };
 }
 
 const iconMap: Record<string, React.ReactNode> = {
