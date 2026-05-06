@@ -14,40 +14,40 @@ export const topics: Topic[] = [
     slug: "modellering",
     title: "Modellering",
     description:
-      "Brukstilfellemodell, domenemodell og sekvensdiagram — den viktigste delen av eksamen",
+      "Brukstilfelle, domenemodell og sekvensdiagram — den viktigste delen av eksamen. Inkluderer komplette case-studier av spillene fra eksamen.",
     weight: "~40%",
     icon: "diagram",
-    sectionCount: 4,
+    sectionCount: 5,
   },
   {
     id: "ooa-ood",
     slug: "ooa-ood",
     title: "OOA og OOD",
     description:
-      "SOLID-prinsippene og GRASP-mønstrene — gjenkjenn dem i kode og UML",
+      "SOLID, GRASP, OOP-fundamenter (de 7 OO-egenskapene), UML-grunnlag og utformingsprinsipper. Direkte koblet til oppgave 2 — fra V2024 også grunnleggende OOP.",
     weight: "~20%",
     icon: "layers",
-    sectionCount: 3,
+    sectionCount: 6,
   },
   {
     id: "utviklingsmetode",
     slug: "utviklingsmetode",
     title: "Utviklingsmetode",
     description:
-      "Scrum, XP, TDD, CI/CD, AUP og smidig utvikling",
+      "Scrum, XP, TDD, CI/CD, DevOps, AUP, Kanban og software arkitektur. Hvert tema har sin egen underside.",
     weight: "~20%",
     icon: "cycle",
-    sectionCount: 10,
+    sectionCount: 9,
   },
   {
     id: "oop",
     slug: "oop",
     title: "OOP — Java fra UML",
     description:
-      "Skriv Java-klasser fra klassediagram og sekvensdiagram",
+      "Skriv Java-klasser fra klassediagram og implementer metoder fra sekvensdiagram. Komplette løsningsforslag for alle eksamener 2020–2024.",
     weight: "~20%",
     icon: "code",
-    sectionCount: 4,
+    sectionCount: 5,
   },
   {
     id: "oppsummering",
@@ -64,7 +64,7 @@ export const topics: Topic[] = [
     slug: "eksamen",
     title: "Eksamen",
     description:
-      "Alle tidligere eksamener (2020–2024) med fullstendige løsningsforslag",
+      "Alle tidligere eksamener (2020–2024) sortert etter oppgavetype, med fullstendige løsningsforslag",
     weight: "",
     icon: "target",
     sectionCount: 0,

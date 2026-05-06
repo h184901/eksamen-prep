@@ -2,34 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
-/* ── Sub-navigation ── */
-function SubNav() {
-  return (
-    <div className="sticky top-0 z-20 -mx-4 px-4 py-2 mb-6 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--card-border)]">
-      <div className="flex gap-1 overflow-x-auto scrollbar-hide text-sm">
-        {[
-          { href: "/dat109/ooa-ood", label: "Oversikt" },
-          { href: "/dat109/ooa-ood/solid", label: "SOLID" },
-          { href: "/dat109/ooa-ood/grasp", label: "GRASP" },
-          { href: "/dat109/ooa-ood/eksamen", label: "Eksamen", active: true },
-        ].map((tab) => (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
-              tab.active
-                ? "bg-sysdev-500 text-white"
-                : "text-[var(--muted)] hover:bg-neutral-100 dark:hover:bg-neutral-800"
-            }`}
-          >
-            {tab.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
+import DAT109SubNav from "@/components/dat109/DAT109SubNav";
+import { ooaOodPages, dat109BasePaths } from "@/lib/dat109-subpages";
 
 /* ── Quiz question component ── */
 function QuizQuestion({
@@ -68,9 +42,12 @@ function QuizQuestion({
           <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-sysdev-100 dark:bg-sysdev-900/30 text-sysdev-700 dark:text-sysdev-400 text-sm font-bold shrink-0">
             {number}
           </span>
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
-            {principle}
-          </span>
+          {/* Prinsippet vises BARE etter at brukeren har svart — ellers leakes svaret. */}
+          {showAnswer && (
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+              {principle}
+            </span>
+          )}
         </div>
         {showAnswer && (
           <button
@@ -143,6 +120,8 @@ export default function EksamenPage() {
 
   return (
     <div>
+      <DAT109SubNav basePath={dat109BasePaths.ooaOod} pages={ooaOodPages} />
+
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
         <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
@@ -153,8 +132,6 @@ export default function EksamenPage() {
         <span>/</span>
         <span className="text-[var(--foreground)]">Eksamen</span>
       </div>
-
-      <SubNav />
 
       {/* Header */}
       <div className="mb-6">

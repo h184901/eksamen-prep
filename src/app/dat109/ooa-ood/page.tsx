@@ -2,8 +2,28 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import DAT109SubNav from "@/components/dat109/DAT109SubNav";
+import { ooaOodPages, dat109BasePaths } from "@/lib/dat109-subpages";
 
 const subPages = [
+  {
+    href: "/dat109/ooa-ood/oop-fundamenter",
+    title: "OOP-fundamenter",
+    count: "7 egenskaper",
+    description:
+      "De 7 OO-egenskapene (Booch): Abstraksjon, Innkapsling, Modularitet, Hierarki, Typing, Samtidighet, Persistens. Klasse vs objekt. Testet direkte i V2024.",
+    color: "rose",
+    badge: "NY",
+  },
+  {
+    href: "/dat109/ooa-ood/uml",
+    title: "UML-grunnlag",
+    count: "Diagrammer + formål",
+    description:
+      "Hva er UML? Strukturelle vs atferdsmessige diagrammer. Formålet med klassediagram, sekvensdiagram, brukstilfellediagram. V2024 testet flere av disse.",
+    color: "blue",
+    badge: "NY",
+  },
   {
     href: "/dat109/ooa-ood/solid",
     title: "SOLID-prinsippene",
@@ -21,9 +41,18 @@ const subPages = [
     color: "teal",
   },
   {
+    href: "/dat109/ooa-ood/utformingsprinsipper",
+    title: "Utformingsprinsipper",
+    count: "KISS, YAGNI, m.m.",
+    description:
+      "Utover SOLID/GRASP: KISS, YAGNI, komposisjon vs aggregering, arv vs komposisjon, tilstandshierarki. Brukes for å forsvare designvalg.",
+    color: "purple",
+    badge: "NY",
+  },
+  {
     href: "/dat109/ooa-ood/eksamen",
     title: "Eksamensdrilling",
-    count: "17+ spørsmål",
+    count: "25+ spørsmål",
     description:
       "Alle flervalgsoppgaver fra 2023 og 2024 med forklaringer og mental sjekkliste",
     color: "amber",
@@ -35,6 +64,8 @@ export default function OoaOodPage() {
 
   return (
     <div>
+      <DAT109SubNav basePath={dat109BasePaths.ooaOod} pages={ooaOodPages} />
+
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
         <Link href="/" className="hover:text-[var(--accent)]">
@@ -182,31 +213,48 @@ export default function OoaOodPage() {
 
       {/* Navigation cards */}
       <h2 className="text-xl font-bold mb-4">Velg tema</h2>
-      <div className="grid sm:grid-cols-3 gap-4 mb-10">
-        {subPages.map((page) => (
-          <Link
-            key={page.href}
-            href={page.href}
-            className="group rounded-xl border-2 border-sysdev-500/30 hover:border-sysdev-500/60 bg-[var(--card)] p-6 transition-all hover:shadow-md hover:-translate-y-0.5"
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div className="w-10 h-10 rounded-lg bg-sysdev-100 dark:bg-sysdev-900/30 text-sysdev-600 dark:text-sysdev-400 flex items-center justify-center text-lg font-bold">
-                {page.color === "emerald"
-                  ? "S"
-                  : page.color === "teal"
-                    ? "G"
-                    : "?"}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+        {subPages.map((page) => {
+          const iconLetter =
+            page.color === "emerald"
+              ? "S"
+              : page.color === "teal"
+                ? "G"
+                : page.color === "rose"
+                  ? "7"
+                  : page.color === "blue"
+                    ? "U"
+                    : page.color === "purple"
+                      ? "K"
+                      : "?";
+          return (
+            <Link
+              key={page.href}
+              href={page.href}
+              className="group rounded-xl border-2 border-sysdev-500/30 hover:border-sysdev-500/60 bg-[var(--card)] p-6 transition-all hover:shadow-md hover:-translate-y-0.5"
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div className="w-10 h-10 rounded-lg bg-sysdev-100 dark:bg-sysdev-900/30 text-sysdev-600 dark:text-sysdev-400 flex items-center justify-center text-lg font-bold">
+                  {iconLetter}
+                </div>
+                <div className="flex items-center gap-1.5">
+                  {page.badge && (
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                      {page.badge}
+                    </span>
+                  )}
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-sysdev-100 text-sysdev-700 dark:bg-sysdev-900/30 dark:text-sysdev-400">
+                    {page.count}
+                  </span>
+                </div>
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-sysdev-100 text-sysdev-700 dark:bg-sysdev-900/30 dark:text-sysdev-400">
-                {page.count}
-              </span>
-            </div>
-            <h3 className="font-bold text-lg mb-1 group-hover:text-sysdev-600 dark:group-hover:text-sysdev-400 transition-colors">
-              {page.title}
-            </h3>
-            <p className="text-sm text-[var(--muted)]">{page.description}</p>
-          </Link>
-        ))}
+              <h3 className="font-bold text-lg mb-1 group-hover:text-sysdev-600 dark:group-hover:text-sysdev-400 transition-colors">
+                {page.title}
+              </h3>
+              <p className="text-sm text-[var(--muted)]">{page.description}</p>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Mental sjekkliste */}

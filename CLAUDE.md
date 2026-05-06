@@ -1,321 +1,192 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Eksamensøving — Semester 4, HVL Bergen
 
-## KRITISK REGEL
-ALDRI kjør npm run dev, npm run build, npm start, eller next dev.
-ALDRI start dev-server eller prøv å teste i nettleser.
-Mac-en har 8 GB RAM og krasjer av dette.
-Vercel kjører build automatisk ved git push.
-Bruk kun npx tsc --noEmit for typesjekk.
+Skreddersydd eksamensøvingsside for fire fag (ING164, DAT110, DAT109, DAT107). Next.js 16 App Router, Tailwind, KaTeX. Deployes automatisk til Vercel ved push til `main`.
 
-## Brukerinnlogging og fremgangssporing
-Nettsiden krever login. Enkel identifisering via brukernavn uten passord — tilpasset en liten privat gruppe på ca. fem brukere.
+## KRITISK REGEL — kjøring og bygg
+- ALDRI kjør `npm run dev`, `npm run build`, `npm start` eller `next dev`. Mac-en har 8 GB RAM og krasjer.
+- ALDRI start dev-server eller test manuelt i nettleser.
+- Eneste lovlige lokale validering: `npx tsc --noEmit`.
+- Vercel kjører build automatisk ved `git push`. Byggfeil vises i Vercel-dashbordet og blokkerer deploy.
+- For å inspisere faktisk oppførsel: bruk Playwright MCP mot deployed URL — ikke lokal server.
 
-- **Login** — `/login` tar ett brukernavn-felt pluss quick-select med eksisterende brukere. Første gang et brukernavn brukes opprettes det automatisk.
-- **Session** — HMAC-signert cookie (`eksamen-auth`, 180 dager). Ingen session-tabell.
-- **Database** — Vercel Postgres. To tabeller: `users(id, username)` og `page_progress(user_id, page_key)`. Schema i `db/schema.sql` — kjør én gang mot databasen.
-- **Env** — `POSTGRES_URL` og `SESSION_SECRET` (minst 32 tegn, `openssl rand -hex 32`) må være satt både lokalt i `.env.local` og i Vercel env vars.
-- **Fremgangssporing** — første versjon sporer manuelt avhukede sider. En `CompletionToggle`-knapp på hver DAT107-temaside lar brukeren merke som fullført. DAT107 er første fokusområde; løsningen er bygget slik at andre fag kan adopteres uten schema-endring (bare bruk `<fag>/<område>/<slug>` som `page_key`).
-- **Migrering av erlends lokale fremgang** — `LegacyProgressMigrator` leser gamle `progress-dat107-*`-nøkler fra localStorage ved første innlogging som `erlend` og upserter dem som `page_key` i Postgres. Kjøres én gang, markert via `migrated-dat107-v1`-flagg.
-- **Avhengigheter** — krever `@vercel/postgres` i package.json. Kjør `npm install` lokalt og la Vercel håndtere install i deploy-build.
+## Materialer (utenfor repoet)
+Pensum/PDF-er ligger under `~/Downloads/Studiet/Semester4/materials/<fag>/` — UTENFOR prosjektmappen. Ikke flytt dem inn i `public/`.
 
-## Din rolle
-Du er en personlig Harvard-professor og verdensledende pedagog som underviser én student (Erlend) mot eksamen. Du er også ekspert på interaktive visualiseringer og forklarer fysikk, matematikk og informatikk med en klarhet som gjør at enhver student forstår det umiddelbart.
+Per fag finnes typisk:
+- `pdf_fra_professor/` — forelesningsnotater (PENSUM-indikator)
+- `bok/` — lærebok (stor; les bare relevante sider, ALDRI hele boken på en gang)
+- `obliger/` — obligatoriske innleveringer (oppgavetype-indikator)
+- `tidligere_eksamener/` — beste indikator på hva som faktisk kommer på eksamen
+- `semesterplan/` — kapitteloversikt og læringsmål
 
-### Pedagogiske prinsipper du ALLTID følger:
-- **Forklar HVORFOR**, ikke bare HVA — gi intuisjon bak formlene
-- **Bygg broer**: koble nytt stoff til noe studenten allerede kan
-- **Vis, ikke bare fortell**: bruk interaktive visualiseringer, diagrammer og animasjoner der det hjelper forståelsen
-- **Gi eksempler**: alltid minst 2-3 gjennomgåtte eksempler per tema, med steg-for-steg forklaring
-- **Generaliser**: etter eksempler, vis den generelle strategien for å løse lignende oppgaver
-- **Analogier**: bruk analogier aktivt (spesielt lineær ↔ rotasjon i mekanikk)
-- **Vanlige feil**: påpek typiske feil studenter gjør, og hvordan unngå dem
-- **Sammenhenger**: vis hvordan konsepter henger sammen på tvers av kapitler
+Regel: les kun materialet for kapittelet/temaet du jobber med akkurat nå.
 
-### Oppgaver og eksempler skal inneholde:
+## Arkitektur — det du må vite før du redigerer
+
+### Stack
+Next.js 16 App Router · React 18 · TypeScript · Tailwind 3.4 · KaTeX · Framer Motion · Recharts · Vercel Postgres (`@vercel/postgres`) · Anthropic SDK (AI-tutor).
+
+### Auth og fremgangssporing (Postgres, ikke localStorage)
+- **Login** — `/login` med ett brukernavn-felt + quick-select. Første gang et brukernavn brukes opprettes det automatisk. Ingen passord — privat gruppe på ~5 brukere.
+- **Session** — HMAC-signert cookie `eksamen-auth` (180 dager). Ingen session-tabell. Kode i `src/lib/auth.ts`. Krever `SESSION_SECRET` (≥ 32 tegn, generér med `openssl rand -hex 32`).
+- **Middleware** — `src/middleware.ts` redirecter alle ikke-autentiserte requests til `/login` (med `?next=...`), unntatt `/api/auth/*` og statiske ressurser. API-ruter får 401 i stedet for redirect.
+- **Database** — Vercel Postgres. To tabeller (`db/schema.sql`, idempotent):
+  - `users(id, username)`
+  - `page_progress(user_id, page_key)` — én rad per fullført side
+- **Env** — `POSTGRES_URL` og `SESSION_SECRET` må være satt både lokalt i `.env.local` og i Vercel env vars.
+- **Progress-API** — `src/app/api/progress/route.ts` (les/oppdater) + `src/app/api/progress/migrate/` (engangs-migrering).
+- **Konvensjon for `page_key`** — `<fag>/<område>/<slug>` (f.eks. `dat107/sql/joins`). Schema er fag-agnostisk; nye fag adopteres uten endringer.
+- **`CompletionToggle`** (`src/components/dat107/`) er knappen som markerer en side fullført — kall i hver temaside som skal spores manuelt.
+- **`LegacyProgressMigrator`** (`src/components/dat107/`) leser gamle `progress-dat107-*`-nøkler fra localStorage ved første innlogging som `erlend` og upserter dem i Postgres. Markerer seg ferdig via `migrated-dat107-v1`-flagg.
+
+### Ruteoppbygging per fag
+Hvert fag følger sitt eget mønster — ikke standardiser dem mot hverandre:
+
+- **ING164** (`src/app/ing164/`) — kapittelbasert (`kapittel-2`, `kapittel-3`, …, `kapittel-29`). Hver kapittelmappe har `page.tsx`, `teori/`, `formler/`, `oppgaver/`, `visualiseringer/`, `kilder/`. Eksamensoppgaver per kapittel ligger i `src/app/ing164/eksamen/oppgaver/kapittel-N/exercises.tsx` (egen `ExerciseContent`-struktur).
+- **DAT110** (`src/app/dat110/`) — kapittelspor `cn-*` (Computer Networking) og `ds-*` (Distributed Systems) + egne områder for `eksamen`, `obliger`, `oppsummering`.
+- **DAT109** (`src/app/dat109/`) — temabaserte toppdeler: `modellering`, `ooa-ood`, `oop`, `utviklingsmetode`, `oppsummering`, `eksamen`. DAT109 er referansen for pedagogisk kvalitet.
+- **DAT107** (`src/app/dat107/`) — én dynamisk rute `[area]/[topic]` renderer alle 58 tema fra Markdown. Sju områder: `sql`, `modellering`, `jpa`, `nosql`, `obliger`, `eksamen-gjengangere`, `originale-eksamen`. All metadata i `src/lib/dat107.ts`.
+
+### DAT107 innholdspipeline
+```
+DAT107-structured/<emne>/*.md    (kildegrunnlag — ikke endre fra siden)
+        │
+        ▼  ASCII-slug-normalisering (æøå → ASCII)
+src/content/dat107/<area>/<slug>.md
+        │
+        ▼
+src/components/Markdown.tsx     (avhengighetsfri renderer + pedagogiske callouts)
+        │
+        ▼
+[area]/[topic]/page.tsx         (dynamisk Next.js-rute)
+```
+- `src/lib/dat107.ts` er **ene kilden til sannhet** for navigasjon (slug, tittel, beskrivelse, filnavn, faser, mustKnow).
+- `Markdown.tsx` støtter h1-h3, paragrafer, lister, fenced code, inline `code`, `**bold**`, rørseparerte tabeller — uten npm-avhengighet. Auto-konverterer kjente h2-titler (`## Kjernen`, `## Vanlige feil` osv.) til fargede callouts og støtter GitHub `> [!VIKTIG]`-syntaks.
+- Visuelle shortcodes (`::er-cardinality-diagram::`, `::sql-join-diagram::`, `::jpa-relationship-diagram::`, `::document-vs-relational-diagram::`) registreres i `Markdown.tsx` (`VisualComponentName`, `parseComponentLine`, `renderBlock`).
+
+### Sentrale komponenter
+- `Markdown.tsx` — DAT107-renderer (over).
+- `TheorySummary.tsx` — strukturert teorisammendrag-komponent (referanse: DAT109/modellering). Brukes når Markdown blir for grunt.
+- `FormulaBox.tsx`, `InlineLatex.tsx` — KaTeX wrappers. **All matematikk bruker KaTeX**; aldri plaintext-formler. Inline: `\( ... \)`, blokk: `\[ ... \]`.
+- `OppgavetekstBox.tsx`, `ExerciseCard.tsx` — oppgavevisning med "Vis/skjul løsning".
+- `ChapterLayout.tsx`, `DAT110ChapterLayout.tsx`, `ChapterSubNav.tsx`, `OppgaveSubNav.tsx`, `SectionNav.tsx` — layout-skall per fag.
+- `ProgressProvider.tsx`, `ProgressTracker.tsx` — fremgangs-context og rendring.
+- `AITutor/` — Anthropic-basert sidepanel-tutor; backend i `src/app/api/chat/route.ts`, prompts i `src/lib/tutor-prompts.ts`, kontekst i `src/lib/page-context.ts`.
+- `ThemeToggle.tsx` — mørkt/lyst tema. Faste tema-tokens i `src/app/globals.css`.
+
+### Designidentitet og fargekoding
+- ING164 = rød/oransje · DAT110 = blå · DAT109 = grønn · DAT107 = lilla (Tailwind `dat107` 50–900, `a855f7` som 500-fargen).
+- Mørkt/lyst tema-toggle aktiv overalt; mobilresponsivt.
+- **Dark mode-regel**: gradient-kort må bruke sterk opasitet (`dark:from-*950/70 dark:to-*950/50` eller mer). Indre stats-kort: `bg-white/80 dark:bg-neutral-900/90` med eksplisitt `text-neutral-700 dark:text-neutral-200` for labels og `text-neutral-900 dark:text-neutral-50` for hovedtekst — ikke `text-[var(--muted)]` alene (gir for dårlig kontrast i dark mode).
+
+## Pedagogisk rolle og innholdskrav
+
+Du underviser én student (Erlend) mot eksamen. Stil: Harvard-professor + verdensledende pedagog + ekspert på interaktive visualiseringer.
+
+### Prinsipper du ALLTID følger
+- **HVORFOR, ikke bare HVA** — gi intuisjon bak formlene
+- **Bygg broer** — koble nytt stoff til noe studenten allerede kan
+- **Vis, ikke fortell** — interaktive visualiseringer / SVG / animasjoner der det hjelper forståelsen
+- **Eksempler** — alltid 2-3 gjennomgåtte eksempler per tema, steg for steg
+- **Generaliser** — etter eksempler, vis den generelle strategien
+- **Analogier** — særlig lineær ↔ rotasjon i mekanikk
+- **Vanlige feil** — påpek typiske feil og hvordan unngå dem
+- **Sammenhenger** — på tvers av kapitler
+
+### Oppgaver og eksempler skal ha (denne strukturen)
 1. Oppgavetekst
-2. "Hva vet vi?" — liste opp gitte størrelser
-3. "Hva skal vi finne?" — identifiser ukjente
-4. "Hvilke formler/prinsipper bruker vi?" — velg verktøy
+2. Hva vet vi? — gitte størrelser
+3. Hva skal vi finne? — ukjente
+4. Hvilke formler/prinsipper bruker vi? — verktøyvalg
 5. Steg-for-steg løsning med forklaring av hvert steg
 6. Svar med riktig enhet og antall gjeldende siffer
-7. "Hva lærte vi?" — kort oppsummering av teknikken
-
-### Interaktive visualiseringer skal:
-- La brukeren endre parametere og se resultatet live
-- Vise krefter, hastigheter, felt etc. som vektorer/piler
-- Animere dynamiske prosesser (rotasjon, kollisjoner, bølger)
-- Ha tydelige labels og farger
-- Være pedagogiske, ikke bare pene
-
-## Prosjekt
-Skreddersydd eksamensøvingsside.
-
-## Stack
-- Next.js 14 App Router
-- Tailwind CSS
-- KaTeX for matematisk notasjon (\( inline \) og \[ block \])
-- localStorage for fremgangssporing
-- Framer Motion for animasjoner der det gir pedagogisk verdi
-- Recharts for grafer der det er relevant
-
-## Fag
-1. **ING164 Fysikk** — PRIORITET NÅ
-2. DAT110 Nettverksteknologi — NÅ
-3. DAT109 Systemutvikling — PRIORITERT NÅ
-<<<<<<< HEAD
-4. DAT107 Database - PRIORITET NÅ
-=======
-4. DAT107 Databaser — IMPLEMENTERT som hovedfag på samme nivå som de andre fagene (lilla identitet)
->>>>>>> 51b5a2b (La til DAT107 som fag)
-
-DAT110 Nettverksteknologi og distribuerte systemer
-
-Pensum
-
-To bøker:
-
-
-
-
-
-CN — Computer Networking (tidligere versjon, supplér med nyere info der relevant)
-
-
-
-DS — Distributed Systems
-
-Materialer
-
-Alt ligger i ~/Downloads/Studiet/Semester4/materials/dat110/
-
-
-
-
-
-semesterplan/ — VIKTIG: Les denne FØRST for å se alle kapitler fra begge bøker
-
-
-
-pdf_fra_professor/ — Forelesningsnotater (finnes IKKE for alle kapitler)
-
-
-
-exercises/ — Øvingsoppgaver (finnes IKKE for alle kapitler)
-
-
-
-tidligere_eksamener/ — VIKTIGST: Viser eksamensstil og hva som forventes
-
-
-
-Bøker under relevante mapper (CN og DS)
-
-Viktige regler for DAT110
-
-
-
-
-
-Les semesterplanen FØRST for å se nøyaktig hvilke kapitler/seksjoner fra hver bok
-
-
-
-Professorens PDF-er dekker ikke alt — fyll inn med egen kunnskap
-
-
-
-Exercises finnes ikke for alt — lag egne øvingsoppgaver i eksamensstil
-
-
-
-CN-boken er en eldre versjon — supplér med oppdatert info der teknologien har endret seg
-
-
-
-Eksamenene har en TYPISK stil — analyser mønsteret og strukturer innholdet deretter
-
-
-
-Eksamensoppgavene er den viktigste kilden for hva studenten MÅ kunne. oppgave 2 kommer det alltid litt om en oblig, så se gjennom filene under materials/dat110/obliger/ og eksamen for å se andre typiske emner og oppgaver på eksamen.
-
-
-
-DAT109 Systemutvikling
-Eksamenformat
-Skriftlig eksamen med 4 deler:
-
-Modellering (~40%) — Brukstilfellemodell, domenemodell, sekvensdiagram
-OOA og OOD (~20%) — SOLID-prinsippene, GRASP-mønstrene
-Utviklingsmetode (~20%) — Scrum, XP, TDD, CI/CD, AUP, smidig utvikling
-OOP (~20%) — Java-kode fra UML-diagrammer
-
-Materialer
-Alt ligger i ~/Downloads/Studiet/Semester4/materials/dat109/
-
-pdf_fra_professor/ — Forelesningsslides og notater
-eksamensoppgaver/ — 7 filer med eksamener og fasit
-obliger/ — Obligatoriske innleveringer
-bøker/ — Lærebøker
-semesterplan/ — Fagplan og læringsmål
-tidligereoppsummeringer/ — Tidligere sammendrag
-
-Viktige regler for DAT109
-
-Noen filer er .docx — les dem med passende verktøy
-Professorens PDF-er viser HANS måte å gjøre ting på (kan avvike fra YouTube/nett)
-Eksempler i PDF-ene utvikles iterativt (monopol, stigespill) — tidlige versjoner er ikke fasit
-Sammenlign alltid med eksamens-fasit for å se hva som forventes
-Brukstilfellemodellen skal IKKE være et flytdiagram
-Domenemodellen skal ALDRI inneholde metoder
-Sekvensdiagram skal samsvare med brukstilfellebeskrivelsen
-Prioriter de nyeste eksamenene da de er mest representative
-
-DAT107 Databaser
-
-Status
-DAT107 er nå implementert som hovedfag på samme nivå som ING164, DAT110 og DAT109. Det har egen hovedinngang, egne delområder og to separate eksamensspor. Lilla fagidentitet er aktiv gjennom hele stacken.
-
-Implementert sidestruktur
-
-- `src/app/dat107/page.tsx` — dashboard med sju områdekort gruppert i Teori (SQL/Modellering/JPA/NoSQL), Praksis (Obliger) og Eksamen (Gjengangere + Originale).
-- `src/app/dat107/[area]/page.tsx` — dynamisk områdeside som lister alle tema i et delområde.
-- `src/app/dat107/[area]/[topic]/page.tsx` — dynamisk tema-/innholdsside som leser Markdown fra `src/content/dat107/<area>/<fil>.md`, rendrer via `src/components/Markdown.tsx`, og har prev/next-navigasjon + sidemeny.
-- `src/lib/dat107.ts` — metadata for alle sju områder og totalt 58 tema (slug, tittel, beskrivelse, filnavn). Dette er den ene kilden til sannhet for navigasjon.
-- `src/content/dat107/<area>/<slug>.md` — alt faglig innhold er kopiert fra `DAT107-structured/` med ASCII-slug-filnavn (`æøå` normalisert) slik at URL-er og statisk generering fungerer på Vercel.
-- `src/components/Markdown.tsx` — serversidig minimal Markdown-renderer (h1–h3, paragrafer, punkt- og nummerlister, fenced code blocks med språk, inline `code`, `**bold**`, rørseparerte tabeller). Ingen ekstra npm-avhengighet.
-
-Sju faste hoveddeler (nå implementert som slug-er)
-
-- `sql` — SQL (teori): spørringer, tabeller, joins, indekser, transaksjoner
-- `modellering` — Modellering (teori): relasjonsmodell, ER, mapping, 3NF (~25 % av eksamen)
-- `jpa` — JPA (teori)
-- `nosql` — NoSQL (teori)
-- `obliger` — Obliger (praksis)
-- `eksamen-gjengangere` — bearbeidet eksamensspor
-- `originale-eksamen` — kildetro eksamensspor
-
-Hvordan DAT107 skiller seg fra de andre fagene
-
-- `ing164` er kapittelbasert.
-- `dat110` er en blanding av kapittelspor (`cn-*`, `ds-*`) og egne områder for eksamen, obliger og oppsummering.
-- `dat109` er temabaserte toppdeler (`modellering`, `ooa-ood`, `oop`, `utviklingsmetode`, `oppsummering`, `eksamen`).
-- `dat107` er temabasert (som dat109) og bruker dynamiske ruter `[area]/[topic]` fremfor én mappe per side, fordi antallet tema er for stort til å duplisere.
-- Eksamensdelen er delt i to eksplisitt separate spor, og begge bevares.
-
-Viktig om de to eksamenssporene
-
-- `eksamen-gjengangere` og `originale-eksamen` skal ikke slås sammen og ikke beskrives som samme type innhold.
-- `eksamen-gjengangere` er bearbeidet analyse: mønstre, typiske oppgavetyper, strategi og øvingsoppgaver.
-- `originale-eksamen` er kildetro Markdown av originale PDF-sett og løsningsforslag.
-- Dashbordet skiller dem visuelt: gjengangere har ravgul aksent, originale har rød aksent.
-
-Kildegrunnlag
-
-- `DAT107-structured/` er fortsatt innholdskilden og skal ikke endres direkte.
-- `src/content/dat107/` er den versjonen nettsiden faktisk leser fra. Hvis kilden oppdateres, kopieres endringene over med slug-normaliserte filnavn.
-
-Design og identitet for DAT107
-
-- Lilla fagidentitet er aktiv i hele nettsiden (Tailwind-palett `dat107` 50–900, `a855f7` som 500-farge).
-- Samme komponentstil som de andre fagene: kort med fargebord, avrundede hjørner, hover-løft, mørkt/lyst tema.
-
-Pedagogisk mønster (skal bygges som DAT109)
-
-- DAT109 er referansen for pedagogisk kvalitet. DAT107 skal bygges i samme pedagogiske mønster — samme type teorisammendrag, eksempler, sjekklister, callout-bokser og progress-tracking.
-- Dashbordet (`src/app/dat107/page.tsx`) er client-komponent og viser progress per område basert på besøkte tema via `localStorage`-nøkkel `progress-dat107-<area>`.
-- Besøk registreres av `src/components/dat107/VisitTracker.tsx` som monteres på hver temaside.
-- Områdesiden `src/app/dat107/[area]/page.tsx` viser en "Dette må du kunne"-boks hentet fra `mustKnow`-feltet i `src/lib/dat107.ts`.
-- Teori-innhold er foreløpig rene Markdown-filer under `src/content/dat107/` og rendres med `src/components/Markdown.tsx`. Planen er å migrere viktige tema gradvis til egne React-sider med `TheorySummary` (som DAT109/modellering) når dybden krever det — ikke som big-bang.
-- SVG brukes til pedagogiske illustrasjoner og seksjonsikoner (f.eks. database-, diagram- og dokument-ikoner i dashbord). Ingen tung pynt eller tunge bibliotek — kun inline SVG.
-
-Dark mode-regler
-
-- Eksamensformat-boksen og andre gradient-kort skal bruke tilstrekkelig opasitet i dark mode (`dark:from-*950/70 dark:to-*950/50` eller sterkere) slik at tekst får kontrast.
-- Indre "stats"-kort skal bruke `bg-white/80 dark:bg-neutral-900/90` og eksplisitt `text-neutral-700 dark:text-neutral-200` for labels og `text-neutral-900 dark:text-neutral-50` for hovedtekst — ikke `text-[var(--muted)]` alene, som gir for dårlig kontrast i dark mode.
-
-## Materialer for ING164
-Alt pensum ligger i ~/Downloads/Studiet/Semester4/materials/ing164/
-(UTENFOR prosjektmappen — ikke flytt dem tilbake til public/)
-
-### Filstruktur:
-- `pdf_fra_professor/` — Professorens forelesningsnotater per kapittel. **LES DISSE** for å forstå hva læreren har fokusert på.
-- `bok/` — Lærebok (Young & Freedman University Physics). STOR fil. Les IKKE hele boken. Bruk kun spesifikke sider som referanse.
-- `obliger/` — Obligatoriske innleveringer. **GÅ GJENNOM DISSE** og inkluder lignende oppgaver med fullstendige løsninger.
-- `tidligere_eksamener/` — Tidligere eksamener. **GÅ GJENNOM ALLE** og inkluder oppgavene sortert etter kapittel/tema med fullstendige løsningsforslag.
-- `semesterplan/` — Semesterplan med kapitteloversikt og læringsmål.
-
-### Viktig om materialer:
-- Professorens PDF-er viser hva som er PENSUM og hva læreren legger vekt på
-- Obligene viser hva slags oppgaver som forventes
-- Tidligere eksamener er den BESTE indikatoren på hva som kommer på eksamen
-- Bruk ALT dette materialet aktivt når du lager innhold
-
-### Kapitler for ING164:
-**Bevegelse:** Kap 2 (rettlinjet bevegelse), Kap 3 (2D/3D bevegelse, Newtons lover)
-**Mekanikk:** Kap 4 (Newtons lover), Kap 5 (Anvendelse av Newtons lover), Kap 6 (Arbeid og kinetisk energi), Kap 7 (Potensiell energi og energibevaring), Kap 8 (Bevegelsesmengde, kraftimpuls og kollisjoner), Kap 9 (Rotasjon av stive legemer), Kap 10 (Dynamikk i rotasjonsbevegelse)
-**E&M:** Kap 21, 23, 24, 27, 28, 29
-
-## Kapittelside-mal
-Hver kapittelside skal inneholde disse seksjonene:
-
-### 1. Teorisammendrag
-- Konsepter forklart pedagogisk med intuisjon
-- Nøkkeldefinisjoner uthevet i bokser
-- Sammenhenger mellom konsepter (vis med diagrammer)
-- "Hva du MÅ kunne"-liste
-
-### 2. Formler
-- Alle relevante formler med KaTeX
-- Fargekodede formelbokser (viktigste = gull, sekundære = blå)
-- "Når bruker du hva"-guide (tabell eller flytskjema)
-- Forklaring av hva hver variabel betyr
-
-### 3. Interaktive visualiseringer
-- SVG/Canvas-diagrammer der brukeren kan endre parametere
-- Animasjoner for dynamiske prosesser
-- Eksempel: endre vinkelen på et skråplan og se kreftene oppdatere seg
-- Eksempel: dra en ladning og se E-feltet endre seg
-
-### 4. Gjennomgåtte eksempler
-- Steg-for-steg fra forelesning og bok
-- "Vis/skjul løsning"-funksjonalitet
-- Minst 2-3 eksempler per tema
-- Inkluder eksempler fra professorens forelesningsnotater
-
-### 5. Oppgavestrategier
-- Generelle oppskrifter for oppgavetyper
-- "Slik angriper du denne typen oppgave"-seksjoner
-- Sjekklister for vanlige feil
-
-### 6. Øvingsoppgaver
-- Oppgaver fra obligene (med fullstendig løsning)
-- Selvgenererte oppgaver i ulike vanskelighetsgrader
-- Hint-system: [Hint 1] → [Hint 2] → [Vis løsning]
-
-### 7. Eksamensoppgaver
-- Relevante oppgaver fra tidligere eksamener
-- Sortert etter tema/kapittel
-- Fullstendige løsningsforslag med forklaring
-- "Eksamenstips"-bokser
-
-## Tilpasning av denne malen for DAT107
-
-- DAT107 skal bruke samme overordnede sidemønster som kapittelside-malen der det er naturlig.
-- For DAT107 skal "kapittel" ofte forstås som "temaområde" eller "delområde".
-- Dette gjelder særlig `SQL`, `JPA` og `NoSQL`.
-- `Obliger`, `eksamen_gjengangere` og `Originale eksamen` vil være egne typer delområder og trenger ikke å se helt like ut som vanlige teorikapitler, men skal fortsatt følge samme helhetlige nettstedsmønster.
-- `Originale eksamen` skal ikke omformes til vanlige teorisider; det skal beholdes som et separat originaltro eksamensspor.
-
-## Design
-- Mørkt/lyst tema-toggle
-- Fargekoding: rød/oransje = fysikk, blå = nettverk, grønn = systemutvikling, lilla = DAT107
-- Profesjonelt, rent, pedagogisk, visuelt
-- Mobilresponsivt
-- Bruk UI/UX Pro Max skill for design der det er relevant
-
-## Regler
-- Bruk KaTeX for ALL matematikk, aldri plaintext-formler
-- Bruk norsk (bokmål) på alt innhold
-- Les kun materialet for kapittelet du jobber med akkurat nå
-- ALDRI les hele boken på en gang
-- Commit etter hvert ferdig kapittel
+7. Hva lærte vi? — kort oppsummering
+
+For ING164 i `src/app/ing164/eksamen/oppgaver/kapittel-N/exercises.tsx` finnes ferdig `ExerciseContent`-mal: `problem`, `knowns`, `unknowns`, `strategy`, `hints`, `solution`, `alternativeSolution`, `summary`, `difficulty`, `pageRef`.
+
+### Interaktive visualiseringer skal
+- la brukeren endre parametere og se resultatet live
+- vise krefter, hastigheter, felt etc. som vektorer/piler
+- animere dynamiske prosesser (rotasjon, kollisjoner, bølger)
+- ha tydelige labels og farger
+- være pedagogiske, ikke bare pene
+
+## Innholdsmal for kapittelside (typisk for ING164)
+1. **Teorisammendrag** — pedagogiske forklaringer, definisjons-bokser, "Hva du MÅ kunne"-liste
+2. **Formler** — KaTeX, fargekodet (gull = viktigst, blå = sekundær), "når bruker du hva"-guide, variabelforklaringer
+3. **Interaktive visualiseringer** — SVG/Canvas med parametere
+4. **Gjennomgåtte eksempler** — minst 2-3 per tema, fra forelesning og bok, med vis/skjul-løsning
+5. **Oppgavestrategier** — generelle oppskrifter, sjekklister
+6. **Øvingsoppgaver** — fra obliger og selvgenererte; hint-system [Hint 1] → [Hint 2] → [Vis løsning]
+7. **Eksamensoppgaver** — fra tidligere eksamener, sortert per tema, fullstendige løsningsforslag, "Eksamenstips"-bokser
+
+For DAT107 brukes dette mønsteret der det er naturlig; "kapittel" tolkes som "temaområde". `Originale eksamen` skal IKKE omformes til vanlige teorisider — bevares som kildetro spor.
+
+## Per-fag detaljer
+
+### ING164 Fysikk — PRIORITET
+**Kapitler:** Bevegelse (2, 3) · Mekanikk (4, 5, 6, 7, 8, 9, 10) · E&M (21, 23, 24, 27, 28, 29).
+Bok: Young & Freedman *University Physics* 15th ed.
+
+### DAT110 Nettverksteknologi og distribuerte systemer
+To bøker: **CN** (Computer Networking — eldre versjon, supplér med oppdatert info) og **DS** (Distributed Systems).
+Materialer: `~/Downloads/Studiet/Semester4/materials/dat110/`.
+- Les `semesterplan/` FØRST for å se hvilke kapitler/seksjoner fra hver bok som er pensum.
+- `pdf_fra_professor/` dekker ikke alt — fyll inn med egen kunnskap.
+- `exercises/` finnes ikke for alt — lag egne oppgaver i eksamensstil.
+- `tidligere_eksamener/` viser TYPISK eksamensstil — analyser mønsteret.
+- Eksamensoppgave 2 handler alltid om en oblig — gå gjennom `obliger/`.
+
+### DAT109 Systemutvikling
+Skriftlig eksamen, 4 deler:
+- Modellering ~40 % — brukstilfellemodell, domenemodell, sekvensdiagram
+- OOA og OOD ~20 % — SOLID, GRASP
+- Utviklingsmetode ~20 % — Scrum, XP, TDD, CI/CD, AUP
+- OOP ~20 % — Java fra UML
+
+Materialer: `~/Downloads/Studiet/Semester4/materials/dat109/` (`pdf_fra_professor/`, `eksamensoppgaver/` (7 sett), `obliger/`, `bøker/`, `semesterplan/`, `tidligereoppsummeringer/`). Noen filer er `.docx`.
+- Eksamen har flervalg på oppgave 2 og 3 (fra 2023+)
+- Professorens YouTube-spilleliste: https://www.youtube.com/playlist?list=PL5NmklOJ5QnwbqMHcERe9G6fVCE5vf6qq
+
+Regler:
+- Professorens PDF-er viser HANS måte (kan avvike fra YouTube/nett) — sammenlign alltid med eksamensfasit.
+- Iterative eksempler i PDF-ene (monopol, stigespill) — tidlige versjoner er IKKE fasit.
+- Brukstilfellemodellen skal IKKE være et flytdiagram.
+- Domenemodellen skal ALDRI inneholde metoder.
+- Sekvensdiagram skal samsvare med brukstilfellebeskrivelsen.
+- Prioriter de NYESTE eksamenene (mest representative).
+
+### DAT107 Databaser
+Implementert som hovedfag på samme nivå som de andre. Sju områder (i `src/lib/dat107.ts`), 58 tema:
+- **Teori**: `sql`, `modellering` (~25 % av eksamen), `jpa`, `nosql`
+- **Praksis**: `obliger`
+- **Eksamen** (to ADSKILTE spor — slå dem ALDRI sammen):
+  - `eksamen-gjengangere` — bearbeidet analyse (ravgul aksent)
+  - `originale-eksamen` — kildetro Markdown av originale PDF-sett (rød aksent)
+
+Pedagogisk: skal bygges i samme mønster som DAT109. Dashbordet (`src/app/dat107/page.tsx`) viser progress per område via `localStorage`-nøkkel `progress-dat107-<area>` (legacy) — migrert til Postgres via `LegacyProgressMigrator`. Besøk registreres av `VisitTracker.tsx` på hver temaside. Områdesiden viser "Dette må du kunne"-boks fra `mustKnow`-feltet.
+
+`DAT107-structured/` er innholdskilden og skal ikke endres direkte. Når kilden oppdateres kopieres endringene over til `src/content/dat107/` med slug-normaliserte filnavn.
+
+## Innholdsregler
+- Alt innhold er på **norsk (bokmål)**.
+- All matematikk bruker **KaTeX** — aldri plaintext-formler.
+- Komma-desimaler i norsk tekst (`12,0` ikke `12.0`).
+- Les KUN materialet for det kapittelet/temaet du jobber med nå. ALDRI hele boken på en gang.
+- Commit etter hvert ferdig kapittel/tema — små, gjennomtenkte commits.
+
+## Legge til nytt tema i DAT107
+1. Markdown-fil under `src/content/dat107/<area>/<slug>.md` (ASCII-slug).
+2. Metadata (slug, tittel, beskrivelse, filnavn) i rett `topics[]`-array i `src/lib/dat107.ts`.
+3. Evt. legg til i en `phase` for fasegruppering på områdesiden.
+4. `npx tsc --noEmit` for å verifisere.
+5. Commit og push — Vercel bygger automatisk.
+
+## Bilder og diagrammer
+- DAT107-bilder i `public/content/dat107/assets/<area>/`, lenkes med public path.
+- For gjenbrukbare/responsive forklaringer: lag React/SVG-komponent i `src/components/dat107/` og registrer som shortcode i `Markdown.tsx`.
+- Hold shortcodes sjeldne og faglig begrunnet — ikke pynt.

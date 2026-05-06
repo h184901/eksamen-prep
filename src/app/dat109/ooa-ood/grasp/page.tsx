@@ -2,34 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
-/* ── Sub-navigation ── */
-function SubNav() {
-  return (
-    <div className="sticky top-0 z-20 -mx-4 px-4 py-2 mb-6 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--card-border)]">
-      <div className="flex gap-1 overflow-x-auto scrollbar-hide text-sm">
-        {[
-          { href: "/dat109/ooa-ood", label: "Oversikt" },
-          { href: "/dat109/ooa-ood/solid", label: "SOLID" },
-          { href: "/dat109/ooa-ood/grasp", label: "GRASP", active: true },
-          { href: "/dat109/ooa-ood/eksamen", label: "Eksamen" },
-        ].map((tab) => (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
-              tab.active
-                ? "bg-sysdev-500 text-white"
-                : "text-[var(--muted)] hover:bg-neutral-100 dark:hover:bg-neutral-800"
-            }`}
-          >
-            {tab.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
+import DAT109SubNav from "@/components/dat109/DAT109SubNav";
+import { ooaOodPages, dat109BasePaths } from "@/lib/dat109-subpages";
 
 /* ── Collapsible section ── */
 function Section({
@@ -106,6 +80,8 @@ export default function GraspPage() {
 
   return (
     <div>
+      <DAT109SubNav basePath={dat109BasePaths.ooaOod} pages={ooaOodPages} />
+
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
         <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
@@ -116,8 +92,6 @@ export default function GraspPage() {
         <span>/</span>
         <span className="text-[var(--foreground)]">GRASP</span>
       </div>
-
-      <SubNav />
 
       {/* Header */}
       <div className="mb-6">
