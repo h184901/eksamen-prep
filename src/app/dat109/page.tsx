@@ -148,10 +148,44 @@ export default function DAT109Page() {
         ))}
       </div>
 
-      {/* Verktøy */}
-      <h2 className="text-xl font-bold mb-4">Verktøy</h2>
+      {/* Aktiv øving — øverst og uthevet */}
+      <h2 className="text-xl font-bold mb-4">🎯 Aktiv øving</h2>
+      <Link
+        href="/dat109/oving"
+        className="group block rounded-xl border-2 border-sysdev-500 bg-gradient-to-br from-sysdev-50 via-emerald-50 to-teal-50 dark:from-sysdev-950/40 dark:via-emerald-950/40 dark:to-teal-950/40 p-6 mb-10 transition-all hover:shadow-lg hover:-translate-y-0.5"
+      >
+        <div className="flex items-start gap-4">
+          <div className="text-4xl">🎯</div>
+          <div className="flex-1">
+            <h3 className="font-bold text-lg mb-1 group-hover:text-sysdev-600 dark:group-hover:text-sysdev-400 transition-colors">
+              Øving og drilling — hovedverktøy for de siste dagene
+            </h3>
+            <p className="text-sm text-neutral-700 dark:text-neutral-300 mb-3">
+              Flervalg-quiz, eksamenssimulering med tidtaker, flashcards og matching-øvelser.
+              Drillet fra V2023+V2024 + nytt innhold for pensum-temaer.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
+                🎯 Quiz
+              </span>
+              <span className="text-xs px-2 py-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400">
+                ⏱️ Eksamenssim
+              </span>
+              <span className="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                🃏 Flashcards
+              </span>
+              <span className="text-xs px-2 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400">
+                🔗 Matching
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+
+      {/* Verktøy — referansemateriell */}
+      <h2 className="text-xl font-bold mb-4">📚 Referansemateriell</h2>
       <div className="grid sm:grid-cols-2 gap-4">
-        {topics.slice(4).map((topic) => (
+        {topics.slice(4).filter((t) => t.id !== "oving").map((topic) => (
           <Link
             key={topic.id}
             href={`/dat109/${topic.slug}`}

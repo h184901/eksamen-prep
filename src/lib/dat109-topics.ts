@@ -69,4 +69,14 @@ export const topics: Topic[] = [
     icon: "target",
     sectionCount: 0,
   },
+  {
+    id: "oving",
+    slug: "oving",
+    title: "Øving og drilling",
+    description:
+      "Aktiv læring: flervalg-quiz, eksamenssimulering med tidtaker, flashcards og matching-øvelser. Drillet fra V2023+V2024.",
+    weight: "",
+    icon: "target",
+    sectionCount: 0,
+  },
 ];
