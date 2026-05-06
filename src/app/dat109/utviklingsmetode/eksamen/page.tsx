@@ -19,10 +19,14 @@ export default function EksamenDrillingPage() {
       </div>
       <h1 className="text-3xl font-bold mb-2">Eksamendrilling — Oppgave 3</h1>
       <p className="text-[var(--muted)] mb-6 max-w-2xl">
-        Alle flervalgsoppgaver fra eksamen 2023 (oppgave 3). Komplett V2024-drilling kommer i neste innholdsoppdatering.
+        Alle flervalgsoppgaver fra eksamen 2023 og 2024 (oppgave 3) om smidige metoder, Scrum, XP, TDD,
+        DevOps og continuous integration. Klikk på svaret du tror er riktig — du får umiddelbart tilbakemelding.
       </p>
 
-      {/* === EKSISTERENDE V2023-FLERVALG === */}
+      {/* ═══════ Eksamen vår 2023 ═══════ */}
+      <h2 className="text-2xl font-bold mb-2 mt-2">Eksamen vår 2023 — Oppgave 3</h2>
+      <p className="text-sm text-[var(--muted)] mb-4">Flervalgsoppgaver om Scrum, XP, smidige verdier, burndown, CI og DevOps.</p>
+
       <QuizQuestion
         id={1}
         question="Hva leveres på slutten av hver sprint i Scrum?"
@@ -207,6 +211,27 @@ export default function EksamenDrillingPage() {
         source="Eksamen 2023, oppgave 3.15"
       />
 
+      {/* ═══════ Eksamen vår 2024 ═══════ */}
+      <h2 className="text-2xl font-bold mb-2 mt-10">Eksamen vår 2024 — Oppgave 3</h2>
+      <p className="text-sm text-[var(--muted)] mb-4">
+        ~20 flervalgsoppgaver om smidige metoder, Scrum-roller og -hendelser, Kanban, TDD, DevOps,
+        continuous integration, parprogrammering og kundeinvolvering.
+      </p>
+
+      <QuizQuestion
+        id={101}
+        question="Hva er hovedmålet med smidige utviklingsmetoder?"
+        options={[
+          { label: "a", text: "Å levere fungerende programvare hyppig" },
+          { label: "b", text: "Å tilpasse seg endrede krav" },
+          { label: "c", text: "Å fremme samarbeid mellom utviklere og kunder" },
+          { label: "d", text: "Alle de nevnte punktene" },
+        ]}
+        correctIndex={3}
+        explanation="Smidige metoder har flere likestilte mål: hyppige leveranser, tilpasningsdyktighet og tett kundesamarbeid. Dette er kjernen i det agile manifestet — alle tre punktene er sentrale."
+        source="Eksamen 2024, oppgave 3a"
+      />
+
       <QuizQuestion
         id={14}
         question="Hvilken er IKKE et prinsipp i smidige metoder?"
@@ -235,9 +260,270 @@ export default function EksamenDrillingPage() {
         source="Eksamen 2024, oppgave 3c"
       />
 
-      <div className="mt-8 rounded-xl border-2 border-dashed border-amber-400/60 bg-amber-50/50 dark:bg-amber-950/20 p-6">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Mer drilling kommer</h3>
-        <p className="text-sm">~17 unike flervalgsoppgaver fra V2024 (om milestones, Scrum-faser, TDD-flyt, Kanban, kundeinvolvering, DevOps-mål, CI-fordeler, parprogrammering osv.) fylles inn i prompt 4.</p>
+      <QuizQuestion
+        id={104}
+        question="Hva er en sprint i Scrum?"
+        options={[
+          { label: "a", text: "En kort utviklingssyklus" },
+          { label: "b", text: "Et møte for å diskutere fremgang" },
+          { label: "c", text: "En type teamstruktur" },
+          { label: "d", text: "En milepæl i prosjektet" },
+        ]}
+        correctIndex={0}
+        explanation="En sprint er en tidsbokset utviklingssyklus (typisk 1-4 uker) der teamet leverer et potensielt utgivbart inkrement. Det er IKKE et møte og IKKE en milepæl — selve syklusen er sprinten."
+        source="Eksamen 2024, oppgave 3d"
+      />
+
+      <QuizQuestion
+        id={105}
+        question="Hva er en kanban-tavle?"
+        options={[
+          { label: "a", text: "En tavle der man visuelt kan se arbeidet som skal gjøres, pågår og er ferdig" },
+          { label: "b", text: "En tavle for å følge med på teamets ytelse" },
+          { label: "c", text: "En tavle for prosjektplanlegging" },
+          { label: "d", text: "En tavle for å holde oversikt over møter" },
+        ]}
+        correctIndex={0}
+        explanation="Kanban-tavlen visualiserer arbeidsflyten i kolonner (typisk: To Do, In Progress, Done). Hele poenget er å se status på alle oppgaver med ett blikk og begrense pågående arbeid (WIP)."
+        source="Eksamen 2024, oppgave 3e"
+      />
+
+      <QuizQuestion
+        id={106}
+        question="Hvilken metode bruker Burndown chart?"
+        options={[
+          { label: "a", text: "Scrum" },
+          { label: "b", text: "Kanban" },
+          { label: "c", text: "Lean" },
+          { label: "d", text: "Waterfall" },
+        ]}
+        correctIndex={0}
+        explanation="Burndown chart er et signaturverktøy i Scrum — det viser gjenstående arbeid mot tid i sprinten. Kanban bruker oftere kumulativ flyt-diagram (cumulative flow diagram)."
+        source="Eksamen 2024, oppgave 3f"
+      />
+
+      <QuizQuestion
+        id={107}
+        question="Hvor mange faser er det i Scrum?"
+        options={[
+          { label: "a", text: "3" },
+          { label: "b", text: "4" },
+          { label: "c", text: "5" },
+          { label: "d", text: "Scrum er en smidig metode, noe som betyr at den ikke har faser" },
+        ]}
+        correctIndex={3}
+        explanation="Scrum har IKKE tradisjonelle faser (som fossefall har: krav → design → koding → test). Scrum er iterativ — hver sprint inneholder alle aktiviteter. Dette er en lurespørsmål-favoritt på eksamen."
+        source="Eksamen 2024, oppgave 3g"
+      />
+
+      <QuizQuestion
+        id={108}
+        question="Hvordan måler man fremdrift i et smidig prosjekt?"
+        options={[
+          { label: "a", text: "Gjennom å følge opp antall fullførte oppgaver" },
+          { label: "b", text: "Gjennom antall linjer kode skrevet" },
+          { label: "c", text: "Gjennom antall møter holdt" },
+          { label: "d", text: "Gjennom antall dokumenter produsert" },
+        ]}
+        correctIndex={0}
+        explanation="Fremdrift måles ved fullført, fungerende programvare — typisk antall ferdige user stories eller story points. Linjer kode, møter og dokumenter er ANTI-mål i smidige metoder."
+        source="Eksamen 2024, oppgave 3h"
+      />
+
+      <QuizQuestion
+        id={109}
+        question="Hva er typisk flyt for å implementere TDD (Test-Driven Development)?"
+        options={[
+          { label: "a", text: "Skrive test → Skrive kode → Kjøre test → Fikse feil" },
+          { label: "b", text: "Skrive kode → Skrive test → Kjøre test" },
+          { label: "c", text: "Skrive kode → Kjøre test → Fikse feil" },
+          { label: "d", text: "Skrive test → Kjøre test → Skrive kode" },
+        ]}
+        correctIndex={0}
+        explanation="TDD følger Red-Green-Refactor: 1) Skriv en test som feiler (Red), 2) Skriv minimal kode for å få den til å passere (Green), 3) Kjør testen og verifiser, 4) Refaktorér/fiks. Test ALLTID først."
+        source="Eksamen 2024, oppgave 3i"
+      />
+
+      <QuizQuestion
+        id={110}
+        question="Hvordan fungerer et burndown chart?"
+        options={[
+          { label: "a", text: "Det viser hvor mye arbeid som gjenstår i løpet av en sprint" },
+          { label: "b", text: "Det viser hvor mye arbeid som er fullført" },
+          { label: "c", text: "Det viser teamets ytelse over tid" },
+          { label: "d", text: "Det viser antall feil funnet i koden" },
+        ]}
+        correctIndex={0}
+        explanation="Burndown viser GJENSTÅENDE arbeid (Y-akse) over tid (X-akse). Linjen 'brenner ned' mot null mot slutten av sprinten. Det er IKKE fullført arbeid (det ville vært et burnup chart)."
+        source="Eksamen 2024, oppgave 3j"
+      />
+
+      <QuizQuestion
+        id={111}
+        question="Hva er en milestone?"
+        options={[
+          { label: "a", text: "Et viktig tidspunkt, steg eller begivenhet" },
+          { label: "b", text: "Et møte i prosjektet" },
+          { label: "c", text: "En type oppgave i en sprint" },
+          { label: "d", text: "Et sprint-mål" },
+        ]}
+        correctIndex={0}
+        explanation="En milestone (milepæl) er et viktig kontrollpunkt i prosjektet — f.eks. fullført MVP, lansering av beta, eller fullført integrasjon. Det er IKKE et møte eller en oppgave."
+        source="Eksamen 2024, oppgave 3k"
+      />
+
+      <QuizQuestion
+        id={112}
+        question="Hva er hensikten med en sprint review?"
+        options={[
+          { label: "a", text: "Å vise frem og demonstrere det som er blitt utviklet i løpet av sprinten" },
+          { label: "b", text: "Å diskutere kommende oppgaver" },
+          { label: "c", text: "Å evaluere teamets ytelse" },
+          { label: "d", text: "Å diskutere kundens krav" },
+        ]}
+        correctIndex={0}
+        explanation="Sprint review er DEMOEN på slutten av sprinten — produkteier og interessenter får se det fungerende inkrementet. Retrospektivet (separat møte) er der teamet evaluerer egen ytelse."
+        source="Eksamen 2024, oppgave 3l"
+      />
+
+      <QuizQuestion
+        id={113}
+        question="Hva er hovedmålet med DevOps?"
+        options={[
+          { label: "a", text: "Fremskynde programvareutviklingsprosessen" },
+          { label: "b", text: "Forbedre kundekommunikasjonen" },
+          { label: "c", text: "Redusere kostnader" },
+          { label: "d", text: "Øke antall ansatte" },
+        ]}
+        correctIndex={0}
+        explanation="DevOps eksisterer for å akselerere leveranse — bryte ned siloer mellom utvikling og drift, automatisere bygg/test/deploy, og levere oftere. Kostnader og bemanning er bivirkninger, ikke målet."
+        source="Eksamen 2024, oppgave 3m"
+      />
+
+      <QuizQuestion
+        id={114}
+        question="Hva er fordelene med continuous integration (CI)?"
+        options={[
+          { label: "a", text: "Større fleksibilitet og hurtig utvikling" },
+          { label: "b", text: "Mindre behov for testing" },
+          { label: "c", text: "Færre møter" },
+          { label: "d", text: "Større team" },
+        ]}
+        correctIndex={0}
+        explanation="CI gir fleksibilitet (raske tilbakemeldinger på endringer) og hurtig utvikling (automatisert bygg/test). Det øker faktisk testing (alle endringer testes automatisk) — alternativ b) er feil."
+        source="Eksamen 2024, oppgave 3n"
+      />
+
+      <QuizQuestion
+        id={115}
+        question="Hva er hovedprinsippet bak parprogrammering?"
+        options={[
+          { label: "a", text: "To utviklere arbeider sammen for å skrive kode samtidig" },
+          { label: "b", text: "To team jobber parallelt på samme prosjekt" },
+          { label: "c", text: "En utvikler koder, en annen tester etterpå" },
+          { label: "d", text: "To utviklere jobber på hver sin del av koden" },
+        ]}
+        correctIndex={0}
+        explanation="Parprogrammering: to utviklere ved SAMME maskin og SAMME kode. Driver skriver, navigator ser strategisk fremover. Kontinuerlig kodegjennomgang i sanntid — XP-praksis."
+        source="Eksamen 2024, oppgave 3o"
+      />
+
+      <QuizQuestion
+        id={116}
+        question="Hvordan involveres kundene i smidige metoder?"
+        options={[
+          { label: "a", text: "Kundene er aktive deltakere gjennom hele prosessen" },
+          { label: "b", text: "Kundene involveres bare i begynnelsen" },
+          { label: "c", text: "Kundene involveres bare i slutten" },
+          { label: "d", text: "Kundene involveres ikke" },
+        ]}
+        correctIndex={0}
+        explanation="«Customer collaboration over contract negotiation» er en av de fire kjerneverdiene i det agile manifestet. Kunden deltar gjennom hele prosjektet — i sprint reviews, prioritering av backlog osv."
+        source="Eksamen 2024, oppgave 3p"
+      />
+
+      <QuizQuestion
+        id={117}
+        question="Hvordan organiseres team i smidige metoder?"
+        options={[
+          { label: "a", text: "Horisontalt med likeverdige teammedlemmer" },
+          { label: "b", text: "Hierarkisk med tydelig ledelse" },
+          { label: "c", text: "I store team for bedre samarbeid" },
+          { label: "d", text: "I små grupper med spesialiserte oppgaver" },
+        ]}
+        correctIndex={0}
+        explanation="Smidige team er selvstyrte og flate — alle medlemmer er likeverdige. Det er ingen tydelig ledelseshierarki innenfor teamet (Scrum Master er en fasilitator, ikke leder). Tverrfunksjonelt og horisontalt."
+        source="Eksamen 2024, oppgave 3q"
+      />
+
+      <QuizQuestion
+        id={118}
+        question="Hva er hensikten med daglige standup-møter (Daily Scrum)?"
+        options={[
+          { label: "a", text: "Å gi en kort oppdatering om hva hver person jobber med" },
+          { label: "b", text: "Å diskutere forbedringsmuligheter" },
+          { label: "c", text: "Å identifisere og løse hindringer i arbeidsflyten" },
+          { label: "d", text: "Alle de andre" },
+        ]}
+        correctIndex={3}
+        explanation="Daily Scrum (15 min) tjener flere formål samtidig: 1) synkronisere på fremdrift, 2) identifisere hindringer, 3) planlegge dagen og løse problemer raskt. Alle de tre andre alternativene er sanne."
+        source="Eksamen 2024, oppgave 3r"
+      />
+
+      <QuizQuestion
+        id={119}
+        question="Hva er hensikten med en produkt-backlog?"
+        options={[
+          { label: "a", text: "Å holde oversikt over alle funksjonene som skal implementeres" },
+          { label: "b", text: "Å holde oversikt over teamets ytelse" },
+          { label: "c", text: "Å holde oversikt over møter" },
+          { label: "d", text: "Å holde oversikt over feil" },
+        ]}
+        correctIndex={0}
+        explanation="Product Backlog er den prioriterte listen over ALT som skal lages — funksjoner, forbedringer, feilrettinger, krav. Den eies av Produkteier og er alltid sortert etter verdi."
+        source="Eksamen 2024, oppgave 3s"
+      />
+
+      <QuizQuestion
+        id={120}
+        question="Hvordan håndteres endringer i krav i Scrum?"
+        options={[
+          { label: "a", text: "Kravene kan endres når som helst i prosjektet" },
+          { label: "b", text: "Kravene kan ikke endres" },
+          { label: "c", text: "Kravene kan bare endres i begynnelsen av prosjektet" },
+          { label: "d", text: "Kravene kan bare endres i slutten av prosjektet" },
+        ]}
+        correctIndex={0}
+        explanation="Scrum omfavner endring — Product Backlog kan oppdateres når som helst. MEN: en aktiv sprint er beskyttet (sprint backlog endres ikke midt i sprinten). Mellom sprinter er alt åpent for re-prioritering."
+        source="Eksamen 2024, oppgave 3t"
+      />
+
+      {/* Tips */}
+      <div className="rounded-xl border-2 border-sysdev-400/40 bg-gradient-to-br from-sysdev-50 to-emerald-50 dark:from-sysdev-950/30 dark:to-emerald-950/20 p-6 mt-10 mb-4">
+        <h2 className="font-bold text-lg mb-3 text-sysdev-700 dark:text-sysdev-400">
+          Tips for eksamensdagen
+        </h2>
+        <ul className="text-sm space-y-2">
+          <li>
+            <strong>Scrum har ikke faser:</strong> Klassisk lurespørsmål — Scrum er iterativ, ikke fase-basert.
+            Hver sprint inneholder all aktivitet.
+          </li>
+          <li>
+            <strong>Burndown vs burnup:</strong> Burndown viser GJENSTÅENDE arbeid (mest brukt i Scrum).
+            Burnup viser FULLFØRT arbeid.
+          </li>
+          <li>
+            <strong>TDD-flyt:</strong> Test FØRST, så kode. Red → Green → Refactor.
+          </li>
+          <li>
+            <strong>Roller i Scrum:</strong> Bare tre — Produkteier (hva), Scrum Master (fasilitator),
+            Utviklingsteam (hvordan). Ingen prosjektleder, ingen testleder.
+          </li>
+          <li>
+            <strong>«Alle de nevnte»:</strong> Hvis flere alternativer ser riktige ut, er svaret ofte
+            «Alle de andre». Dette gjelder spesielt smidige fordeler/prinsipper.
+          </li>
+        </ul>
       </div>
     </div>
   );

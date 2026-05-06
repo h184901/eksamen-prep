@@ -277,6 +277,223 @@ public void spillTrekk(Kopp kopp, Brett brett) {
           </ul>
         </div>
       </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          AVANSERTE FRAGMENT-TYPER
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="Avanserte interaksjonsfragmenter"
+        defaultOpen={false}
+        mustKnow={[
+          "Foruten loop, alt, opt finnes par (parallel), ref (referanse), neg (negativ), critical, region",
+          "På DAT109-eksamen trenger du sjelden mer enn loop/alt/opt — men det er greit å kjenne til de andre",
+          "ref-fragmentet er nyttig for å unngå gjentakelse — referer til et annet sekvensdiagram",
+          "par brukes for parallelle aktiviteter (multitråd, asynkrone API-kall)",
+        ]}
+      >
+        <p>
+          UML-spesifikasjonen har en lang liste med interaksjonsfragmenter. På Atles eksamen
+          trenger du som regel bare <code>loop</code>, <code>alt</code> og <code>opt</code> —
+          men her er de andre du KAN se i forelesningseksempler eller industri:
+        </p>
+
+        <div className="overflow-x-auto my-4">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--card-border)]">
+                <th className="text-left py-2 pr-4 font-semibold">Fragment</th>
+                <th className="text-left py-2 pr-4 font-semibold">Tilsvarer i kode</th>
+                <th className="text-left py-2 font-semibold">Eksempel</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--card-border)]">
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">loop</td>
+                <td className="py-2 pr-4">for / while</td>
+                <td className="py-2"><code>loop [for alle spillere]</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">alt</td>
+                <td className="py-2 pr-4">if / else</td>
+                <td className="py-2"><code>alt [eid] / [ikke eid]</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">opt</td>
+                <td className="py-2 pr-4">if (uten else)</td>
+                <td className="py-2"><code>opt [har nok penger]</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">par</td>
+                <td className="py-2 pr-4">parallelle tråder / async</td>
+                <td className="py-2"><code>par { /* sjekk1 */ } { /* sjekk2 */ }</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">ref</td>
+                <td className="py-2 pr-4">funksjonskall til annet sekvensdiagram</td>
+                <td className="py-2"><code>ref BetalKortbetaling</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">neg</td>
+                <td className="py-2 pr-4">situasjon som IKKE skal skje</td>
+                <td className="py-2"><code>neg { /* dette er feil */ }</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">critical</td>
+                <td className="py-2 pr-4">atomisk seksjon (ikke avbrutt)</td>
+                <td className="py-2"><code>critical { /* trekk fra konto + sett inn */ }</code></td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-mono font-semibold">break</td>
+                <td className="py-2 pr-4">avbryt løkke</td>
+                <td className="py-2"><code>break [vinner funnet]</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 my-3 text-sm">
+          <strong>Eksamenstips:</strong> Bruk loop/alt/opt for det meste. Ref kan være nyttig for
+          komplekse spill der samme delprosess gjentas (f.eks. «Trill og flytt» som en
+          referanse). Hvis du bruker en avansert fragment-type på eksamen, forklar valget kort.
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          CREATE OG DESTROY MELDINGER
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="Create og destroy — opprette og fjerne objekter"
+        defaultOpen={false}
+        mustKnow={[
+          "Create-melding: stiplet pil med <<create>>-stereotype, peker på det nye objektet",
+          "Det opprettede objektet vises midt på diagrammet (ikke øverst)",
+          "Destroy-melding: pil til en X på objektets livslinje",
+          "I praksis brukes create ofte i konstruktør-flyt; destroy sjelden i Java (garbage collector)",
+        ]}
+      >
+        <p>
+          Av og til opprettes nye objekter MIDT i sekvensen — ikke alle objekter eksisterer fra
+          starten. Da bruker man <code>«create»</code>-meldinger:
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 my-4">
+          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+            <h4 className="font-semibold text-sm mb-3">Create-melding</h4>
+            <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto" role="img" aria-label="Create-melding">
+              {/* Eksisterende objekt */}
+              <rect x="20" y="10" width="80" height="22" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="60" y="25" textAnchor="middle" fontSize="10" fill="currentColor">: Monopol</text>
+              <line x1="60" y1="32" x2="60" y2="170" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+              <rect x="55" y="60" width="10" height="60" fill="#94a3b8" />
+
+              {/* Create-melding (skrå pil) */}
+              <line x1="65" y1="80" x2="190" y2="120" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4,2" />
+              <polygon points="190,120 184,116 184,124" fill="currentColor" />
+              <text x="120" y="95" fontSize="10" fontStyle="italic" fill="#a855f7">«create»</text>
+
+              {/* Nytt objekt MIDT på diagrammet */}
+              <rect x="190" y="110" width="80" height="22" fill="#22c55e" fillOpacity="0.25" stroke="#22c55e" strokeWidth="1.5" />
+              <text x="230" y="125" textAnchor="middle" fontSize="10" fill="currentColor">: Spiller</text>
+              <line x1="230" y1="132" x2="230" y2="170" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+            </svg>
+            <p className="text-xs text-[var(--muted)] mt-2 italic">
+              Det nye Spiller-objektet plasseres MIDT på diagrammet — på det punktet det ble opprettet.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+            <h4 className="font-semibold text-sm mb-3">Destroy-melding (sjelden i Java)</h4>
+            <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto" role="img" aria-label="Destroy-melding">
+              {/* Avsender */}
+              <rect x="20" y="10" width="80" height="22" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="60" y="25" textAnchor="middle" fontSize="10" fill="currentColor">: Spill</text>
+              <line x1="60" y1="32" x2="60" y2="190" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+              <rect x="55" y="50" width="10" height="100" fill="#94a3b8" />
+
+              {/* Mottaker */}
+              <rect x="180" y="10" width="80" height="22" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="1.5" />
+              <text x="220" y="25" textAnchor="middle" fontSize="10" fill="currentColor">: Tellelyst</text>
+              <line x1="220" y1="32" x2="220" y2="120" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+
+              {/* Destroy-melding */}
+              <line x1="65" y1="100" x2="210" y2="120" stroke="currentColor" strokeWidth="1.5" />
+              <polygon points="210,120 204,116 204,124" fill="currentColor" />
+              <text x="120" y="113" fontSize="10" fontStyle="italic" fill="#ef4444">«destroy»</text>
+
+              {/* Stort X */}
+              <line x1="210" y1="115" x2="230" y2="135" stroke="#ef4444" strokeWidth="3" />
+              <line x1="230" y1="115" x2="210" y2="135" stroke="#ef4444" strokeWidth="3" />
+            </svg>
+            <p className="text-xs text-[var(--muted)] mt-2 italic">
+              Stort X på livslinjen viser at objektet opphører. I Java er dette sjelden eksplisitt
+              — garbage collector tar seg av det.
+            </p>
+          </div>
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          GRASP-INFORMASJONSEKSPERT I SEKVENS
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="GRASP Informasjonsekspert i sekvensdiagrammet"
+        defaultOpen={false}
+        mustKnow={[
+          "Hvert objekt skal kun gjøre det som det HAR INFORMASJON til å gjøre",
+          "Brettet kjenner Ruter → Brettet finner ruter (ikke Spilleren)",
+          "Kopp kjenner Terninger → Kopp summer (ikke Brett)",
+          "Hvis du sender en melding feil sted, lager du Low Cohesion / High Coupling",
+        ]}
+      >
+        <p>
+          Det vanligste GRASP-prinsippet du bruker når du tegner sekvensdiagram er
+          <strong> Informasjonsekspert</strong>: gi ansvaret til klassen som har dataene som
+          trengs.
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 my-4">
+          <div className="rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-4">
+            <p className="font-bold text-red-700 dark:text-red-400 mb-2">DÅRLIG eksempel</p>
+            <pre className="text-xs font-mono leading-tight">{`spiller.finnNyRute(verdi)
+   spiller.???    ← Spilleren VET IKKE
+                     hvilke ruter brettet har!`}</pre>
+            <p className="text-xs mt-2">Spilleren prøver å finne en ny rute, men har ikke tilgang til ruter-listen.</p>
+          </div>
+          <div className="rounded-lg border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20 p-4">
+            <p className="font-bold text-green-700 dark:text-green-400 mb-2">BRA eksempel</p>
+            <pre className="text-xs font-mono leading-tight">{`brett.finnNyRute(rute, verdi)
+   brett.ruter ← Brettet HAR ruter-listen
+   returnerer Rute`}</pre>
+            <p className="text-xs mt-2">Brettet er informasjonsekspert — det har data, det får ansvaret.</p>
+          </div>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 my-3 text-sm">
+          <strong>Oppskrift når du tegner sekvensdiagram:</strong> for hver melding, spør «hvem
+          har informasjonen for å gjøre dette?». Send meldingen DIT. Hvis ingen har det, legg til
+          en parameter eller lag en hjelpeklasse (Pure Fabrication).
+        </div>
+      </TheorySummary>
+
+      {/* Navigation */}
+      <div className="grid sm:grid-cols-2 gap-3 mt-8">
+        <Link
+          href="/dat109/modellering/domene"
+          className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 hover:border-sysdev-400 transition-colors"
+        >
+          <p className="text-xs text-[var(--muted)]">← Domenemodell</p>
+          <p className="font-bold mt-1">Domenemodell</p>
+          <p className="text-xs text-[var(--muted)]">Konseptuelle klasser med spesialisering</p>
+        </Link>
+        <Link
+          href="/dat109/modellering/eksempler"
+          className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 hover:border-sysdev-400 transition-colors"
+        >
+          <p className="text-xs text-[var(--muted)]">Neste →</p>
+          <p className="font-bold mt-1">Case-studier</p>
+          <p className="text-xs text-[var(--muted)]">Komplette OOAD-eksempler — Monopol, Stigespill, Skyjo, Bilutleie</p>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,14 @@ import Link from "next/link";
 import TheorySummary from "@/components/TheorySummary";
 import DAT109SubNav from "@/components/dat109/DAT109SubNav";
 import { ComparisonTable } from "@/components/dat109/UtviklingsmetodeComponents";
+import {
+  SprintFlowSvg,
+  KanbanBoardSvg,
+  ProductBacklogVsSprintBacklog,
+  BurndownChartSvg,
+  ScrumRoles3DiagramSvg,
+  SprintTimelineSvg,
+} from "@/components/dat109/SmidigVisuals";
 import { utviklingsmetodePages, dat109BasePaths } from "@/lib/dat109-subpages";
 
 export default function ScrumPage() {
@@ -83,8 +91,26 @@ export default function ScrumPage() {
             </div>
           </div>
 
+          <div className="my-6">
+            <p className="text-sm text-[var(--muted)] mb-3">
+              Visualisering av samspillet mellom de tre rollene. Klikk på en rolle for å se
+              ansvarsområdene — legg merke til at PO mater Product Backlog, teamet trekker
+              arbeid fra toppen (pull) og leverer Inkrement, mens Scrum Master fjerner hindringer.
+            </p>
+            <ScrumRoles3DiagramSvg />
+          </div>
+
           {/* --- ARTEFAKTER --- */}
           <h3 className="text-lg font-bold mt-6 mb-3">Artefakter</h3>
+
+          <div className="my-4">
+            <p className="text-sm text-[var(--muted)] mb-3">
+              Product Backlog vs. Sprint Backlog. Teamet henter selv (pull) de øverste
+              prioriterte oppgavene fra Product Backlog inn i Sprint Backlog — Produkteier
+              dytter ikke oppgaver ned på teamet.
+            </p>
+            <ProductBacklogVsSprintBacklog />
+          </div>
 
           <div className="space-y-3">
             {[
@@ -101,8 +127,38 @@ export default function ScrumPage() {
             ))}
           </div>
 
+          <div className="my-6">
+            <h4 className="text-base font-bold mb-2">Scrum-tavle (Kanban-tavle)</h4>
+            <p className="text-sm text-[var(--muted)] mb-3">
+              Klikk på et kort for å flytte det til neste kolonne. Tavlen visualiserer
+              arbeidsflyten — og advarer hvis du bryter WIP-grensen i &quot;Doing&quot;
+              (Work In Progress). Mange samtidige oppgaver = ingenting blir ferdig.
+            </p>
+            <KanbanBoardSvg />
+          </div>
+
+          <div className="my-6">
+            <h4 className="text-base font-bold mb-2">Burndown Chart</h4>
+            <p className="text-sm text-[var(--muted)] mb-3">
+              Y-aksen viser <strong>gjenstående arbeid</strong> (story points), X-aksen
+              dagene i sprinten. Stiplet linje er ideallinjen, lilla linje er faktisk
+              progresjon. Hold over et punkt for å se nøyaktig dag og SP. Over ideallinjen
+              = bak skjema, under = foran skjema.
+            </p>
+            <BurndownChartSvg />
+          </div>
+
           {/* --- SEREMONIER --- */}
           <h3 className="text-lg font-bold mt-6 mb-3">Sprint-seremoniene</h3>
+
+          <div className="my-4">
+            <p className="text-sm text-[var(--muted)] mb-3">
+              Interaktiv sprintflyt: Sprint Planning → Daily Scrum (én per dag) → Sprint
+              Review → Sprint Retrospective. Klikk på en fase for å se tidsboks og hva
+              som faktisk skjer.
+            </p>
+            <SprintFlowSvg />
+          </div>
 
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4 rounded-lg">
             <p className="font-semibold text-blue-700 dark:text-blue-400 mb-3">Sprint-flyten</p>
@@ -146,6 +202,15 @@ export default function ScrumPage() {
               <li><strong>Burndown chart</strong> viser gjenstående arbeid vs. tid — IKKE prosjektfremdrift eller lagets hastighet.</li>
             </ul>
           </div>
+
+          <h3 className="text-lg font-bold mt-8 mb-3">Inkrementell utvikling over flere sprinter</h3>
+          <p className="text-sm text-[var(--muted)] mb-3">
+            Scrum bygger produktet ett inkrement av gangen. Hver sprint leverer fungerende
+            programvare — og inkrementet vokser sprint for sprint. Slik får kunden tidlig
+            verdi og kan justere kurs underveis i stedet for å vente til prosjektet er
+            &quot;ferdig&quot;.
+          </p>
+          <SprintTimelineSvg />
         </TheorySummary>
       </section>
     </div>

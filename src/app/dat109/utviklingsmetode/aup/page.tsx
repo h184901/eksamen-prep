@@ -995,6 +995,1020 @@ export default function AUPPage() {
           </div>
         </TheorySummary>
       </section>
+
+      {/* ============================================================ */}
+      {/*  RISIKOHÅNDTERING I DYBDEN (F09)                            */}
+      {/* ============================================================ */}
+      <section id="risikohandtering-dybde" className="scroll-mt-32">
+        <TheorySummary
+          title="Risikohåndtering i dybden — Inception og videre"
+          defaultOpen={false}
+          mustKnow={[
+            "Risiko = sannsynlighet × konsekvens — alltid begge faktorer",
+            "Risikoer angripes TIDLIG og KONTINUERLIG — ikke når de detoneres",
+            "Risikoliste oppdateres gjennom hele prosjektet, ikke bare i Inception",
+            "Kategorier: mennesker, planer, tredjepart, krav, arkitektur, kompetanse",
+            "&laquo;If you don't actively attack the risks, they will actively attack you&raquo;",
+          ]}
+        >
+          <p>
+            Atle bruker en hel forelesning (F09) på risikohåndtering fordi det er{" "}
+            <strong>kjernen i hvorfor Inception og Elaboration eksisterer</strong>. Hele poenget med
+            å bruke tid før Construction er å oppdage og avskaffe risikoer mens de er billige å
+            håndtere. Ordet <em>risiko</em> kommer fra italiensk <em>risicare</em> — &laquo;å utsette seg
+            for fare&raquo;. I programvareutvikling betyr det: muligheten for å feile på en oppgave.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Hvorfor risikohåndtering er så viktig i AUP</h3>
+          <p className="text-sm">
+            I utviklingsprosjekt må vi ofte gjøre ting som <strong>ikke har vært gjort før</strong> —
+            enten av oss eller noen andre. Det skaper usikkerhet. Noen risikoer er
+            &laquo;showstoppers&raquo; (prosjektet dør hvis de slår til), andre forsinker prosessen.
+            AUP-filosofien: angrip dem aktivt, eller de angriper deg.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Den overordnede risikohåndteringsprosessen</h3>
+          <ol className="list-decimal list-inside text-sm space-y-1 my-3">
+            <li><strong>Identifiser</strong> risikoer — &laquo;hva kan gå galt?&raquo; (brainstorming, sjekklister, erfaringer)</li>
+            <li><strong>Analyser</strong> risikoene — sannsynlighet og konsekvens for hver</li>
+            <li><strong>Prioriter</strong> risikoene — score fra sannsynlighet × konsekvens</li>
+            <li><strong>Kontroller</strong> risikoene — planlegg mottiltak, finn løsninger, monitorer</li>
+          </ol>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Vanlige risikofaktorer (Atles liste)</h3>
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Mennesker</strong>: nøkkelutvikler
+              slutter, sykdom, dårlig samarbeid, lave ferdigheter — den vanligste typen risiko.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Urealistisk plan</strong>: for
+              ambisiøst omfang, for korte tidsfrister, undervurdering av kompleksitet.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Tredjeparts programvare</strong>:
+              biblioteker som ikke fungerer som dokumentert, breaking changes, manglende støtte.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Misforståtte krav</strong>:
+              kunden mente noe annet enn det vi forsto. Demper med jevnlig demo og On-site customer.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Feil arkitektur</strong>:
+              arkitekturen tåler ikke produksjonslast, sikkerhetshull, dårlig skalering. Demper med PoC.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Overvurderte ferdigheter</strong>:
+              teamet trodde de kunne mer enn de faktisk kunne. Demper med pair programming og prototyper.
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Risikomatrise — slik prioriterer Atle</h3>
+          <p className="text-sm mb-3">
+            Hver risiko plottes i et 3×3-rutenett. Score fra 1 (lav) til 5 (svært høy). Risikoer
+            i øvre høyre hjørne er de farligste — angrip dem først.
+          </p>
+
+          <div className="overflow-x-auto my-4">
+            <svg viewBox="0 0 480 360" className="w-full max-w-xl mx-auto" role="img" aria-label="Risikomatrise 3×3">
+              <text x="240" y="20" textAnchor="middle" className="fill-current text-sm font-bold">
+                Risikomatrise — Sannsynlighet × Konsekvens
+              </text>
+
+              {/* Y-akse label */}
+              <text x="20" y="180" textAnchor="middle" className="fill-current text-xs font-bold" transform="rotate(-90 20 180)">
+                Sannsynlighet →
+              </text>
+
+              {/* X-akse label */}
+              <text x="280" y="350" textAnchor="middle" className="fill-current text-xs font-bold">
+                Konsekvens →
+              </text>
+
+              {/* Cells: 3 rows × 3 cols. Row 0 = Stor, Row 2 = Liten */}
+              {[
+                { r: 0, label: "Stor" },
+                { r: 1, label: "Middels" },
+                { r: 2, label: "Liten" },
+              ].map((row) => (
+                <text key={row.r} x={75} y={90 + row.r * 70} textAnchor="end" className="fill-current text-xs font-semibold">
+                  {row.label}
+                </text>
+              ))}
+              {[
+                { c: 0, label: "Lite" },
+                { c: 1, label: "Middels" },
+                { c: 2, label: "Stor" },
+              ].map((col) => (
+                <text key={col.c} x={130 + col.c * 100} y={325} textAnchor="middle" className="fill-current text-xs font-semibold">
+                  {col.label}
+                </text>
+              ))}
+
+              {/* Cells with color coding */}
+              {[
+                { r: 0, c: 0, score: "Middels 2", color: "#facc15" },
+                { r: 0, c: 1, score: "Høy 3", color: "#fb923c" },
+                { r: 0, c: 2, score: "Svært høy 5", color: "#ef4444" },
+                { r: 1, c: 0, score: "Lav 1", color: "#86efac" },
+                { r: 1, c: 1, score: "Middels 2", color: "#facc15" },
+                { r: 1, c: 2, score: "Høy 3", color: "#fb923c" },
+                { r: 2, c: 0, score: "Lav 1", color: "#86efac" },
+                { r: 2, c: 1, score: "Lav 1", color: "#86efac" },
+                { r: 2, c: 2, score: "Middels 2", color: "#facc15" },
+              ].map((cell) => (
+                <g key={`${cell.r}-${cell.c}`}>
+                  <rect
+                    x={80 + cell.c * 100}
+                    y={60 + cell.r * 70}
+                    width={100}
+                    height={70}
+                    fill={cell.color}
+                    fillOpacity="0.6"
+                    stroke="currentColor"
+                    strokeOpacity="0.3"
+                  />
+                  <text
+                    x={130 + cell.c * 100}
+                    y={100 + cell.r * 70}
+                    textAnchor="middle"
+                    className="fill-current text-[11px] font-bold"
+                  >
+                    {cell.score}
+                  </text>
+                </g>
+              ))}
+            </svg>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Risikolisten — fast format</h3>
+          <p className="text-sm mb-3">
+            Atle anbefaler en enkel tabell med fem kolonner. Holdes oppdatert sprint for sprint.
+          </p>
+          <div className="overflow-x-auto my-4">
+            <table className="w-full text-sm border border-[var(--card-border)]">
+              <thead className="bg-neutral-100 dark:bg-neutral-900">
+                <tr>
+                  <th className="text-left p-2 border-b border-[var(--card-border)]">Beskrivelse</th>
+                  <th className="text-left p-2 border-b border-[var(--card-border)]">Sannsynlighet</th>
+                  <th className="text-left p-2 border-b border-[var(--card-border)]">Konsekvens</th>
+                  <th className="text-left p-2 border-b border-[var(--card-border)]">Tiltak</th>
+                  <th className="text-left p-2 border-b border-[var(--card-border)]">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="p-2">Bookingsystem-API er ustabilt</td>
+                  <td className="p-2">Stor</td>
+                  <td className="p-2">Stor</td>
+                  <td className="p-2">PoC i Elaboration, fallback-løsning planlagt</td>
+                  <td className="p-2 text-amber-600">Aktiv</td>
+                </tr>
+                <tr className="border-b border-[var(--card-border)]">
+                  <td className="p-2">Designer slutter etter sprint 2</td>
+                  <td className="p-2">Middels</td>
+                  <td className="p-2">Middels</td>
+                  <td className="p-2">Designsystem dokumentert, andre team kan ta over</td>
+                  <td className="p-2 text-green-600">Avhjulpet</td>
+                </tr>
+                <tr>
+                  <td className="p-2">Krav om GDPR oversett</td>
+                  <td className="p-2">Liten</td>
+                  <td className="p-2">Stor</td>
+                  <td className="p-2">Sjekkliste i sprint review, jurist konsultert</td>
+                  <td className="p-2 text-green-600">Lukket</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+            <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Hvor passer dette inn i AUP-fasene?</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li><strong>Inception</strong>: opprett risikoliste, kategoriser, første prioritering. Tunge risikoer styrer hva Elaboration skal angripe.</li>
+              <li><strong>Elaboration</strong>: angriper de største tekniske risikoene gjennom PoC og arkitekturprototype.</li>
+              <li><strong>Construction</strong>: oppdater risikoliste hver sprint, ny risiko legges til, lukkede fjernes.</li>
+              <li><strong>Transition</strong>: fokus på drift- og sikkerhetsrisikoer (lisens, support, ytelse i produksjon).</li>
+            </ul>
+          </div>
+        </TheorySummary>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  ARKITEKTUR I AUP (F10)                                      */}
+      {/* ============================================================ */}
+      <section id="arkitektur-i-aup" className="scroll-mt-32">
+        <TheorySummary
+          title="Arkitektur i AUP — fra Elaboration til kjørbart system (F10)"
+          defaultOpen={false}
+          mustKnow={[
+            "Arkitektur = de strukturelle valgene som er DYRE å endre senere",
+            "Software Architecture Document (SAD) — sentralt arkitekturdokument",
+            "Arkitekten er knutepunktet mellom prosjektledelse, utviklere og interessenter",
+            "5 visninger på arkitekturen: brukstilfelle, logisk, prosess, implementasjon, utrulling",
+            "Arkitekturen MÅ valideres med en kjørbar prototype — ikke bare bokser på tavlen",
+          ]}
+        >
+          <p>
+            Arkitekturarbeidet i AUP konsentreres i Elaboration, men har konsekvenser gjennom hele
+            livssyklusen. Atle definerer arkitektur som <em>valgene rundt organiseringen av
+            systemet</em> — strukturelle elementer (pakker, klasser, grensesnitt), hvordan de
+            samarbeider, hvordan grupper settes sammen til delsystem, og hvilken{" "}
+            <strong>arkitektonisk stil</strong> systemet bygger på (lagdelt, mikroservices, hexagonal
+            osv.).
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Hva omfatter arkitektur?</h3>
+          <ul className="list-disc list-inside text-sm space-y-1 my-3">
+            <li><strong>Bruk</strong> av systemet — hvordan brukerne interagerer</li>
+            <li><strong>Funksjonalitet</strong> — hvilke kapabiliteter</li>
+            <li><strong>Ytelse</strong> — responstid, gjennomstrømning</li>
+            <li><strong>Smidighet</strong> — hvor lett er det å endre?</li>
+            <li><strong>Gjenbruk</strong> — eksisterende komponenter utnyttes</li>
+            <li><strong>Forståelse</strong> — kan nye utviklere sette seg inn?</li>
+            <li><strong>Økonomiske og teknologiske vurderinger</strong></li>
+            <li><strong>Estetiske hensyn</strong> — ja, også her</li>
+          </ul>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">De 5 visningene på arkitekturen</h3>
+          <p className="text-sm mb-3">
+            Arkitektur er kompleks og må sees fra flere vinkler. Atle bruker disse fem visningene
+            (basert på Kruchten 4+1):
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/20 p-4">
+              <p className="font-bold text-blue-700 dark:text-blue-400">1. Brukstilfelle-visning</p>
+              <p className="text-sm mt-1">
+                Binder bruken av systemet (kravene) sammen med hvordan ting er løst. Tar utgangspunkt
+                i et sentralt brukstilfelle og viser hvordan det realiseres gjennom alle lag.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-950/20 p-4">
+              <p className="font-bold text-purple-700 dark:text-purple-400">2. Logisk visning</p>
+              <p className="text-sm mt-1">
+                Den logiske oppbyggingen — lagdeling, pakker, klasser, designmønster. Dette er
+                klasse- og pakkediagrammer.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 p-4">
+              <p className="font-bold text-green-700 dark:text-green-400">3. Prosess-visning</p>
+              <p className="text-sm mt-1">
+                Parallellitet, synkronisering, tråder, asynkron kommunikasjon. Viktig for systemer
+                med høy last eller sanntidskrav.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-950/20 p-4">
+              <p className="font-bold text-amber-700 dark:text-amber-400">4. Implementasjons-visning</p>
+              <p className="text-sm mt-1">
+                Hvordan kildekoden er organisert i utviklingsmiljøet. Mappestruktur, byggskript,
+                modulgrenser. Nyttig for vedlikehold og videreutvikling.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-rose-500 bg-rose-50 dark:bg-rose-950/20 p-4 md:col-span-2">
+              <p className="font-bold text-rose-700 dark:text-rose-400">5. Utrullings-visning (Deployment)</p>
+              <p className="text-sm mt-1">
+                Den fysiske utrullingen — hvilke noder kjører hvilke komponenter, hvilke nettverk
+                snakker de over, hvor ligger databasene. Avgjørende for drift.
+              </p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Software Architecture Document (SAD)</h3>
+          <p className="text-sm">
+            SAD er det sentrale arkitekturdokumentet i AUP. Det beskriver hvilke løsninger man har
+            valgt for de arkitektonisk sentrale kravene — men det er <strong>kun et dokument</strong>.
+            Like viktig er at valg og retningslinjer omsettes til en <em>kjørbar
+            arkitekturprototype</em>, og at dokumentet til enhver tid er i samsvar med det realiserte
+            systemet.
+          </p>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Når lages SAD?</p>
+            <p className="text-sm">
+              Skissér tidlig i prosjektet — hvordan ting <em>skal</em> løses. Men <strong>full
+              ferdigstilling kan vente til litt senere</strong> for å unngå at man holder mange
+              artefakter i sync uten gevinst. Pragmatisk: skisseversjon fra Inception, første
+              komplette versjon ved slutten av Elaboration, oppdateres gjennom Construction.
+            </p>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Arkitekt-rollen</h3>
+          <p className="text-sm mb-3">
+            Arkitekten leder og koordinerer tekniske aktiviteter og artefakter. Mens andre roller
+            har spesifikt ansvar, har arkitekten <strong>stor bredde</strong> og deltar i mange
+            aktiviteter.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Erfaring</strong> — både i
+              problemdomenet og løsningsdomenet. Sterk teknisk kompetanse er en forutsetning.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Lederegenskaper</strong> —
+              utgjør lederteamet sammen med prosjektlederen, ansvar for tekniske problemstillinger.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Kommunikasjon</strong> — for å
+              få tillit, overtale, motivere, rettlede. Avhengig av naturlig respekt.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Målrettet og resultatorientert</strong>{" "}
+              — den drivende kraften teknisk. Må ofte ta sub-optimale valg for å komme videre.
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Arkitektens aktiviteter gjennom faser</h3>
+          <div className="space-y-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">I oppstarten (Inception)</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Få opp kandidatarkitektur(er)</li>
+                <li>Eventuelt små prototyper for å teste ut ting</li>
+                <li>Identifisere arkitektonisk sentrale krav</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">I forkant av utviklingen (Elaboration)</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Forfatte arkitektur-dokumentet (SAD)</li>
+                <li>Komme opp med gode løsninger på alle problemstillinger</li>
+                <li>Sørge for at arkitekturen valideres gjennom kjørbar prototype</li>
+                <li>Prioritere brukstilfeller basert på risiko</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">Under utviklingen (Construction)</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Holde et øye med og rettlede implementasjonen</li>
+                <li>Justere og forfine arkitekturen basert på erfaringer</li>
+                <li>Identifisere design-mekanismer og design-elementer</li>
+                <li>Strukturere implementasjonsmodellen (kildekodens organisering)</li>
+                <li>Utvikle og håndheve retningslinjer for design og programmering</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+            <p className="font-semibold text-blue-700 dark:text-blue-400 mb-2">Eksempel: Pensjonsprosjektet i NAV</p>
+            <p className="text-sm">
+              Atle nevner pensjonsprosjektet som Norges største utviklingsprosjekt. De brukte{" "}
+              <strong>wiki (Confluence) for arkitekturdokumentasjon</strong>, hadde formelle kurs for
+              opplæring av nye, og fulgte opp at arkitekturen ble fulgt gjennom både{" "}
+              <em>manuelle reviews</em>, <em>automatiserte sjekker</em> og <em>automatisert
+              testing</em>. Modellen er at arkitektur uten håndhevelse blir bare ord på papir.
+            </p>
+          </div>
+        </TheorySummary>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  SCRUM-ARTEFAKTER I AUP-BYGGEFASE (F11)                     */}
+      {/* ============================================================ */}
+      <section id="scrum-artefakter-i-aup" className="scroll-mt-32">
+        <TheorySummary
+          title="Scrum-artefakter i AUP-byggefase (F11)"
+          defaultOpen={false}
+          mustKnow={[
+            "Product backlog: alle oppgaver — prioritert rekkefølge — User Stories / Use Cases",
+            "Sprint backlog: oppgavene for kommende sprint — alle skal være SMÅ",
+            "Inkrement: det som er gjort i sprinten — verdi som er skapt",
+            "Burndown: brukt tid mot estimat (ikke virkelig tid)",
+            "Scrum-tavle: To do → Doing → Done — fysisk eller digitalt",
+          ]}
+        >
+          <p>
+            I AUPs byggefase er Scrum den valgte operasjonsmodellen. Atle (F11) understreker at
+            Scrum-artefaktene <strong>brukes i hele prosessen</strong> — ikke bare i et enkelt
+            møte. La oss gå gjennom de fire kjerne-artefaktene og hvordan de spiller sammen med
+            AUP-disiplinene.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">1. Product Backlog</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm mb-2">
+              <strong>Alle oppgavene</strong> i produktet, i <strong>prioritert rekkefølge</strong>.
+              Funksjoner formuleres ofte som <em>User Stories</em> eller <em>Use Cases</em>.
+            </p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Eies av Produkteier — han bestemmer prioritet</li>
+              <li>Kan inneholde funksjonelle krav, ikke-funksjonelle krav, feilrettinger, teknisk gjeld</li>
+              <li>Lever — endres når kunnskap øker, krav endres, ny innsikt kommer</li>
+              <li>I AUP-perspektiv: backloggen er output fra Modellering-disiplinen</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">2. Sprint Backlog</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm mb-2">
+              <strong>Alle oppgavene</strong> som teamet har forpliktet seg til i kommende sprint.
+              Oppgavene skal være <strong>små</strong> — typisk 1-8 timers arbeid hver.
+            </p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Eies av utviklerteamet — de bestemmer hva de kan klare</li>
+              <li>Tas fra toppen av Product Backlog</li>
+              <li>Brytes ned i konkrete tekniske oppgaver under Sprint Planning</li>
+              <li>Endres normalt ikke under sprinten</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">3. Inkrement</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm mb-2">
+              <strong>Det som er gjort</strong> — verdien som er skapt i sprinten. En potensielt
+              utrullbar versjon av produktet.
+            </p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Demonstreres for produkteier i Sprint Review</li>
+              <li>Skal følge &laquo;Definition of Done&raquo;</li>
+              <li>I AUP-perspektiv: dette er output fra Implementering + Testing-disiplinene</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">4. Burndown Chart</h3>
+          <p className="text-sm mb-3">
+            Viser <strong>brukt tid mot estimat</strong> — ikke mot virkelig tid. Når en oppgave
+            flyttes til Done, trekkes <em>de estimerte timene</em> fra grafen, uavhengig av hvor
+            mye tid som faktisk gikk med.
+          </p>
+          <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Atles eksempel — DAT109-prosjektet</p>
+            <ul className="text-sm space-y-1 list-disc list-inside">
+              <li>10 studiepoeng = 13 timer/uke per student</li>
+              <li>Minus forelesning (3 t) + essay (1 t) + møter (1 t) = <strong>8 timer reell utvikling</strong></li>
+              <li>Et team på 6 personer kan planlegge oppgaver tilsvarende <strong>48 timer/uke</strong></li>
+              <li>Hvis estimat var 2 t men faktisk gikk 1 t: trekk <strong>2 t</strong> fra grafen (vi måler estimat)</li>
+              <li>Hvis estimat var 1 t men faktisk gikk 2 t: trekk <strong>1 t</strong> fra grafen</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Scrum-tavla — flyt gjennom kolonner</h3>
+          <div className="overflow-x-auto my-4">
+            <svg viewBox="0 0 720 280" className="w-full max-w-3xl mx-auto" role="img" aria-label="Scrum-tavle">
+              <text x="360" y="22" textAnchor="middle" className="fill-current text-sm font-bold">
+                Scrum-tavle: flyten av oppgaver
+              </text>
+
+              {/* Product backlog */}
+              <rect x="20" y="50" width="140" height="200" fill="#a855f7" fillOpacity="0.15" stroke="#a855f7" />
+              <text x="90" y="72" textAnchor="middle" className="fill-current text-xs font-bold">Product Backlog</text>
+              <text x="90" y="88" textAnchor="middle" className="fill-current text-[10px]">(ikke alltid på tavlen)</text>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <rect key={i} x={30} y={100 + i * 28} width={120} height={20} fill="#a855f7" fillOpacity={0.4} />
+              ))}
+
+              {/* Sprint backlog: To do */}
+              <rect x="180" y="50" width="160" height="200" fill="#3b82f6" fillOpacity="0.15" stroke="#3b82f6" />
+              <text x="260" y="72" textAnchor="middle" className="fill-current text-xs font-bold">To do</text>
+              <text x="260" y="88" textAnchor="middle" className="fill-current text-[10px]">(Sprint backlog)</text>
+              {[0, 1, 2].map((i) => (
+                <rect key={i} x={195} y={100 + i * 28} width={130} height={20} fill="#3b82f6" fillOpacity={0.4} />
+              ))}
+
+              {/* Doing */}
+              <rect x="360" y="50" width="160" height="200" fill="#facc15" fillOpacity="0.15" stroke="#eab308" />
+              <text x="440" y="72" textAnchor="middle" className="fill-current text-xs font-bold">Doing</text>
+              {[0, 1].map((i) => (
+                <rect key={i} x={375} y={100 + i * 28} width={130} height={20} fill="#eab308" fillOpacity={0.5} />
+              ))}
+
+              {/* Done */}
+              <rect x="540" y="50" width="160" height="200" fill="#22c55e" fillOpacity="0.15" stroke="#22c55e" />
+              <text x="620" y="72" textAnchor="middle" className="fill-current text-xs font-bold">Done</text>
+              {[0, 1, 2, 3].map((i) => (
+                <rect key={i} x={555} y={100 + i * 28} width={130} height={20} fill="#22c55e" fillOpacity={0.5} />
+              ))}
+
+              {/* Arrows */}
+              <text x="170" y="160" textAnchor="middle" className="fill-current text-lg">→</text>
+              <text x="350" y="160" textAnchor="middle" className="fill-current text-lg">→</text>
+              <text x="530" y="160" textAnchor="middle" className="fill-current text-lg">→</text>
+
+              <text x="360" y="272" textAnchor="middle" className="fill-current text-[10px]">
+                Oppgaver flytter seg til høyre. Når alle er i Done, er sprinten ferdig.
+              </text>
+            </svg>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Sprint-prosessen</h3>
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">1. Sprint Planning</strong>: hva
+              tar vi inn fra Product Backlog? Estimering, breakdown.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">2. Daily Scrum</strong>: hver
+              dag, 15 min, &laquo;hva gjorde jeg, hva gjør jeg, har jeg hindringer?&raquo;
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">3. Utføring</strong>: koding,
+              testing, samarbeid. Tavla oppdateres kontinuerlig.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">4. Sprint Review</strong>:
+              demo for produkteier, inkrementet vurderes — er det verdi?
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm md:col-span-2">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">5. Sprint Retrospective</strong>:
+              hvordan gikk det? Hva fungerte? Hva kan vi gjøre annerledes? Konkrete tiltak til neste
+              sprint.
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Atles regler for kodeversjonering (F11)</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Velg et system som passer prosjektet (Git for de fleste)</li>
+              <li>Hold koden i versjonskontroll, men <strong>ikke genererte filer</strong></li>
+              <li>Forsikre deg om at filene du jobber på er <strong>siste versjon</strong></li>
+              <li>Ikke sjekk ut mer enn det du arbeider med</li>
+              <li><strong>Sjekk inn så fort som mulig</strong>, men ikke før koden kompilerer og testene er OK</li>
+              <li>Inspiser endringene før innsjekking — bruk <code>git diff</code></li>
+              <li><strong>Sjekk inn ofte</strong> — hver innsjekking gir en mulighet for tilbakerulling</li>
+              <li>Lag gode kommentarer, gjerne med referanse til oppgave-nummer</li>
+              <li>Utviklere skal kun sjekke inn <strong>sine egne</strong> endringer</li>
+              <li>Bruk <code>.gitignore</code> for filer som ikke skal sjekkes inn</li>
+              <li>Forsikre deg om at <strong>alle avhengigheter</strong> er med</li>
+            </ul>
+          </div>
+        </TheorySummary>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  AGILE MANIFESTET — VERDIER OG PRINSIPPER (F15)            */}
+      {/* ============================================================ */}
+      <section id="agile-manifest" className="scroll-mt-32">
+        <TheorySummary
+          title="Agile-manifestet — verdier og 12 prinsipper (F15)"
+          defaultOpen={false}
+          mustKnow={[
+            "4 verdier — venstresiden er viktigere enn høyresiden, men begge teller",
+            "12 prinsipper utdyper verdiene konkret",
+            "Manifestet kom i 2001 etter en lang utvikling: Spiralmodell (1988) → Scrum (1993) → XP (1999) → AUP (1999)",
+            "AUP er bygget direkte på disse verdiene og prinsippene",
+          ]}
+        >
+          <p>
+            AUP er smidig fordi den bygger på <strong>Manifestet for smidig
+            programvareutvikling</strong> (2001). Manifestet er foundation-en — Scrum, XP, AUP og
+            DA er <em>operasjonaliseringer</em> av det samme tankesettet. Atle dedikerer hele F15 til
+            å forankre AUP i manifestet.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">De 4 verdiene</h3>
+          <p className="text-sm mb-3">
+            Skrives som &laquo;X <strong>fremfor</strong> Y&raquo;. Begge sider har verdi, men venstresiden
+            har <em>mer</em> verdi.
+          </p>
+
+          <div className="space-y-3 my-4">
+            <div className="rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 p-4">
+              <p className="font-bold text-green-700 dark:text-green-400">
+                1. Personer og samspill <em>fremfor</em> prosesser og verktøy
+              </p>
+              <p className="text-sm mt-1">
+                Mennesker bygger programvare, ikke prosesser. Et godt team med dårlige verktøy slår
+                et dårlig team med beste verktøy.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 p-4">
+              <p className="font-bold text-green-700 dark:text-green-400">
+                2. Programvare som virker <em>fremfor</em> omfattende dokumentasjon
+              </p>
+              <p className="text-sm mt-1">
+                Dokumentasjon er bra, men det er ikke målet. Målet er fungerende programvare — det er
+                det kunden betaler for.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 p-4">
+              <p className="font-bold text-green-700 dark:text-green-400">
+                3. Samarbeid med kunden <em>fremfor</em> kontraktsforhandlinger
+              </p>
+              <p className="text-sm mt-1">
+                Kontrakter er nødvendige, men kan ikke erstatte dialog. Når noe går galt, løser
+                samarbeid — ikke jus.
+              </p>
+            </div>
+            <div className="rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 p-4">
+              <p className="font-bold text-green-700 dark:text-green-400">
+                4. Å reagere på endringer <em>fremfor</em> å følge en plan
+              </p>
+              <p className="text-sm mt-1">
+                Planer er nyttige, men virkeligheten endrer seg. Smidighet betyr å tilpasse planen
+                når ny informasjon kommer.
+              </p>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">De 12 prinsippene</h3>
+
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">1. Tilfredsstill kunden</strong>{" "}
+              gjennom tidlige og kontinuerlige leveranser av programvare som har verdi.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">2. Velkommen endringer</strong>{" "}
+              i krav, selv sent i utviklingen — bruk dem til konkurransefortrinn.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">3. Lever fungerende programvare hyppig</strong>{" "}
+              — uker, ikke måneder. Jo oftere, desto bedre.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">4. Forretning og utviklere</strong>{" "}
+              må arbeide sammen daglig gjennom hele prosjektet.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">5. Bygg rundt motiverte personer</strong>{" "}
+              — gi miljø og støtte, stol på at de får jobben gjort.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">6. Snakk ansikt til ansikt</strong>{" "}
+              — den mest effektive måten å formidle informasjon innad i et team.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">7. Fungerende programvare</strong>{" "}
+              er det primære målet på fremdrift — ikke linjer kode eller antall sider dokumentasjon.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">8. Bærekraftig tempo</strong>{" "}
+              — sponsorer, utviklere og brukere bør kunne opprettholde et jevnt tempo hele tiden.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">9. Teknisk kvalitet</strong>{" "}
+              og godt design fremmer smidighet — dårlig kode bremser endringer.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">10. Enkelhet</strong>{" "}
+              — kunsten å maksimere mengden arbeid som ikke blir gjort — er essensielt.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">11. Selvstyrte team</strong>{" "}
+              produserer de beste arkitekturer, krav og design.
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">12. Reflekter regelmessig</strong>{" "}
+              — teamet justerer adferden sin for å bli mer effektivt.
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Tidslinjen — fra spiralmodell til AUP</h3>
+          <div className="overflow-x-auto my-6">
+            <svg viewBox="0 0 760 200" className="w-full max-w-3xl mx-auto" role="img" aria-label="Smidige metoder gjennom tiden">
+              <line x1="40" y1="120" x2="720" y2="120" stroke="currentColor" strokeWidth="1.5" />
+
+              {[
+                { year: "1988", label: "Spiralmodell", x: 80 },
+                { year: "1991", label: "RAD", x: 160 },
+                { year: "1993", label: "Scrum", x: 250 },
+                { year: "1994", label: "DSDM", x: 320 },
+                { year: "1999", label: "XP / FDD", x: 420 },
+                { year: "1999", label: "RUP / AUP", x: 510 },
+                { year: "2001", label: "Manifestet", x: 600 },
+                { year: "2003", label: "Lean", x: 680 },
+              ].map((item) => (
+                <g key={`${item.year}-${item.label}`}>
+                  <circle cx={item.x} cy={120} r="6" fill="#a855f7" />
+                  <line x1={item.x} y1={114} x2={item.x} y2={70} stroke="currentColor" strokeOpacity={0.4} />
+                  <text x={item.x} y={62} textAnchor="middle" className="fill-current text-[11px] font-bold">
+                    {item.label}
+                  </text>
+                  <text x={item.x} y={145} textAnchor="middle" className="fill-current text-[10px]">
+                    {item.year}
+                  </text>
+                </g>
+              ))}
+
+              <text x="380" y="180" textAnchor="middle" className="fill-current text-xs font-bold">
+                AUP står på skuldrene av manifestet og alle metodene som kom før det
+              </text>
+            </svg>
+          </div>
+
+          <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4 my-4">
+            <p className="font-semibold text-purple-700 dark:text-purple-400 mb-2">
+              Hvordan AUP konkret operasjonaliserer manifestet
+            </p>
+            <ul className="text-sm space-y-1 list-disc list-inside">
+              <li>Verdi 1 (personer) → AUP fremmer pair programming, on-site customer, daily Scrum</li>
+              <li>Verdi 2 (fungerende programvare) → AUP gir <em>kjørbare leveranser</em> hver iterasjon</li>
+              <li>Verdi 3 (samarbeid) → Active Stakeholder Participation gjennom hele prosjektet</li>
+              <li>Verdi 4 (endringer) → Korte sprinter, prioritert backlog, jevnlig demo</li>
+              <li>Prinsipp 9 (teknisk kvalitet) → TDD, refaktorering, kodestandarder</li>
+              <li>Prinsipp 10 (enkelhet) → KISS, YAGNI, &laquo;den enkleste løsningen som fungerer akkurat nå&raquo;</li>
+            </ul>
+          </div>
+        </TheorySummary>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  TESTNIVÅER I AUP (F15)                                      */}
+      {/* ============================================================ */}
+      <section id="testnivaer-i-aup" className="scroll-mt-32">
+        <TheorySummary
+          title="Testnivåer i AUP — fra enhet til akseptanse (F15)"
+          defaultOpen={false}
+          mustKnow={[
+            "Testing er en disiplin som pågår GJENNOM HELE livssyklusen — ikke bare i Transition",
+            "Fire hovednivåer: enhet, integrasjon, system, akseptanse",
+            "Hvit boks (kjenner koden) vs svart boks (kjenner ikke koden)",
+            "Jo tidligere en feil finnes, desto billigere er den å fikse",
+            "Testbarhet er en arkitekturegenskap — designprinsipper (GRASP, SOLID) gir testbar kode",
+          ]}
+        >
+          <p>
+            Testing er en av AUPs syv disipliner, og Atle (F15) understreker at den er aktiv{" "}
+            <strong>gjennom alle fire faser</strong> — ikke bare i Transition. Forskjellen er hva
+            som testes når. Målet med testing er enkelt: <em>finne feil i programmet</em>. En feil
+            betyr at programmet ikke gjør det som kreves av det.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Strukturen på en test</h3>
+          <p className="text-sm mb-3">En test består vanligvis av tre deler:</p>
+          <ol className="list-decimal list-inside text-sm space-y-1 my-3">
+            <li><strong>Forventet resultat</strong> — hva skal vi få?</li>
+            <li><strong>Hva vi skal teste</strong> — testkode eller beskrivelse av hva vi gjør</li>
+            <li><strong>Resultat</strong> — det faktiske resultatet, som sammenlignes med forventet</li>
+          </ol>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Hvit boks vs svart boks</h3>
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/20 p-4">
+              <p className="font-bold text-blue-700 dark:text-blue-400">Hvit boks</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Tester <strong>kjenner</strong> koden</li>
+                <li>Prøver å teste mest mulig av <em>kodestiene</em></li>
+                <li><strong>Kodedekning</strong> er viktig metrikk</li>
+                <li>Brukes på enhets- og integrasjonsnivå</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-950/20 p-4">
+              <p className="font-bold text-purple-700 dark:text-purple-400">Svart boks</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Tester <strong>kjenner ikke</strong> koden</li>
+                <li>Sender input, sjekker output</li>
+                <li>Brukes på system- og akseptansenivå</li>
+                <li>Tar utgangspunkt i kravspesifikasjonen</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">De fire testnivåene</h3>
+
+          <div className="overflow-x-auto my-6">
+            <svg viewBox="0 0 480 360" className="w-full max-w-md mx-auto" role="img" aria-label="Testpyramide">
+              <text x="240" y="22" textAnchor="middle" className="fill-current text-sm font-bold">
+                Testpyramiden — fra mange små til få store
+              </text>
+
+              {/* Akseptanse — toppen */}
+              <polygon points="200,55 280,55 290,105 190,105" fill="#ef4444" fillOpacity="0.6" stroke="#ef4444" />
+              <text x="240" y="85" textAnchor="middle" className="fill-white text-xs font-bold">Akseptanse</text>
+
+              {/* System */}
+              <polygon points="170,105 310,105 320,165 160,165" fill="#fb923c" fillOpacity="0.6" stroke="#fb923c" />
+              <text x="240" y="140" textAnchor="middle" className="fill-white text-xs font-bold">System</text>
+
+              {/* Integrasjon */}
+              <polygon points="135,165 345,165 360,235 120,235" fill="#facc15" fillOpacity="0.6" stroke="#eab308" />
+              <text x="240" y="205" textAnchor="middle" className="fill-current text-xs font-bold">Integrasjon</text>
+
+              {/* Enhet */}
+              <polygon points="90,235 390,235 410,310 70,310" fill="#22c55e" fillOpacity="0.6" stroke="#22c55e" />
+              <text x="240" y="280" textAnchor="middle" className="fill-white text-sm font-bold">Enhet</text>
+
+              <text x="240" y="345" textAnchor="middle" className="fill-current text-[10px]">
+                Mange enhetstester (rask) → få akseptansetester (treig, viktig)
+              </text>
+            </svg>
+          </div>
+
+          <div className="space-y-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">Enhetstest</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Tester en <strong>isolert enhet</strong> i systemet (typisk en metode/klasse)</li>
+                <li>Omgivelsene mockes — eller bruker stabile, allerede testede enheter</li>
+                <li>Tar utgangspunkt i spesifikasjonen for enheten</li>
+                <li><strong>Hvit boks</strong>-testing</li>
+                <li><strong>Alltid automatisert</strong></li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">Integrasjonstest</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Tester en del av systemet — enheter integrert med omgivelsene</li>
+                <li>Tar utgangspunkt i spesifikasjonen for enheten</li>
+                <li><strong>Hvit boks</strong>-testing</li>
+                <li><strong>Nesten alltid automatisert</strong></li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">Systemtest</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>Tester hele systemet</li>
+                <li>Tar utgangspunkt i kravspesifikasjonen</li>
+                <li>I AUP: tester på <strong>brukstilfeller</strong> og <strong>ikke-funksjonelle krav</strong></li>
+                <li>Husk ikke-funksjonelle krav: belastning, oppetid, hastighet</li>
+                <li>Vanligvis <strong>svart boks</strong></li>
+                <li>Ofte manuelle, men stadig mer automatisering</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-4">
+              <p className="font-bold text-sysdev-600 dark:text-sysdev-400">Akseptansetest</p>
+              <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+                <li>En <strong>systemtest</strong> som viser om produktet aksepteres av kunden</li>
+                <li>Utføres vanligvis av en <strong>uavhengig part</strong></li>
+                <li>Kontraktsmessig viktig — bestått test = godkjent leveranse</li>
+                <li>Foregår i Transition-fasen</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Feilfinning og debugging</h3>
+          <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+            <p className="text-sm">
+              Når en feil oppdages, må den <strong>registreres</strong> — den er en ny oppgave i
+              backloggen som må prioriteres på linje med andre oppgaver. Det kan være vanskelig å
+              finne en feil; en <strong>debugger er et uvurderlig verktøy</strong>. Når feilen er
+              funnet, må den rettes — og <em>en regresjonstest legges til</em> så den ikke kommer
+              tilbake.
+            </p>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Testbarhet — en arkitekturegenskap</h3>
+          <p className="text-sm mb-3">
+            Testbarhet er ikke noe man legger til etterpå — det er et resultat av god arkitektur og
+            godt design. Atle anbefaler å tenke testbarhet allerede i:
+          </p>
+          <ul className="list-disc list-inside text-sm space-y-1 my-3">
+            <li><strong>Valg av arkitektur</strong> — kan komponentene testes isolert?</li>
+            <li><strong>Utforming av løsning</strong> — er ansvar adskilt? Kan vi mocke?</li>
+          </ul>
+
+          <p className="text-sm">
+            <strong>GRASP og SOLID</strong> er utformingsprinsippene som gir testbar kode. Krav til
+            enhetene som skal være lett å enhetsteste:
+          </p>
+          <div className="grid md:grid-cols-2 gap-3 my-4">
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Små</strong> — én ting om gangen
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Uavhengige</strong> — minimal
+              kobling
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Testbare</strong> — input → output
+              er forutsigbart
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Deterministiske</strong> —
+              oppfører seg likt hver gang
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Enkelt ansvar</strong> — har
+              kun én grunn til å endres
+            </div>
+            <div className="rounded-lg border border-[var(--card-border)] p-3 text-sm">
+              <strong className="text-sysdev-600 dark:text-sysdev-400">Veldefinerte avhengigheter</strong>{" "}
+              — ingen sirkulære
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+            <p className="font-semibold text-green-700 dark:text-green-400 mb-2">
+              Hva gode utformingsprinsipper gir oss
+            </p>
+            <ul className="text-sm space-y-1 list-disc list-inside">
+              <li>Mer <strong>forståelig</strong> kode</li>
+              <li>Mer <strong>fleksibel</strong> kode</li>
+              <li>Mer <strong>vedlikeholdbar</strong> kode</li>
+              <li>Mer <strong>testbar</strong> kode</li>
+              <li><strong>Enklere</strong> kode</li>
+            </ul>
+          </div>
+        </TheorySummary>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  EKSAMENSTRENING — TYPISKE AUP-SPØRSMÅL                      */}
+      {/* ============================================================ */}
+      <section id="aup-eksamenstrening" className="scroll-mt-32">
+        <TheorySummary
+          title="Eksamenstrening — typiske AUP-spørsmål"
+          defaultOpen={false}
+          mustKnow={[
+            "Atle elsker spørsmål om FASER vs DISIPLINER — vit forskjellen",
+            "Spørsmål om hvor i AUP en spesifikk aktivitet hører hjemme er vanlig",
+            "Spørsmål om Scrum + AUP koblingen kommer ofte",
+            "Risikohåndtering blir nesten alltid spurt om",
+          ]}
+        >
+          <p>
+            Eksamen i DAT109 har et eget oppgave (Oppg 3) for utviklingsmetode, og AUP er sentralt.
+            Her er typiske spørsmålstyper Erlend bør være forberedt på.
+          </p>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Spørsmålstype 1 — Fase vs disiplin</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Eksempelspørsmål:</p>
+            <p className="text-sm italic mb-3">
+              &laquo;Forklar forskjellen mellom faser og disipliner i AUP. Gi to eksempler på aktiviteter
+              under disiplinen Modellering, og angi i hvilken fase de er mest aktive.&raquo;
+            </p>
+            <p className="text-sm font-semibold mb-1">Mal for svar:</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li><strong>Faser</strong> = tidsmessige oppdelinger (Inception → Elaboration → Construction → Transition). En fase har en milepæl.</li>
+              <li><strong>Disipliner</strong> = aktivitetsområder som pågår <em>på tvers</em> av fasene, men med ulik intensitet.</li>
+              <li>Eksempel 1: <em>Overordnet kravspesifisering</em> — mest aktiv i <strong>Inception</strong>.</li>
+              <li>Eksempel 2: <em>Modellering av arkitektur</em> — mest aktiv i <strong>Elaboration</strong>.</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Spørsmålstype 2 — Plassering av aktivitet</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Eksempelspørsmål:</p>
+            <p className="text-sm italic mb-3">
+              &laquo;I hvilken fase i AUP ville du plassere arbeidet med å bygge en arkitekturprototype?
+              Begrunn svaret.&raquo;
+            </p>
+            <p className="text-sm font-semibold mb-1">Svar:</p>
+            <p className="text-sm">
+              <strong>Elaboration</strong>. Hovedmålet med Elaboration er å bevise at arkitekturen
+              fungerer gjennom en kjørbar prototype, slik at vi kan akseptere risiko og gå inn i
+              Construction med trygghet. Hvis arkitekturen ikke holder vann i Elaboration, koster
+              det titalls ganger mer å fikse i Construction — kostnadskurven flates ut.
+            </p>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Spørsmålstype 3 — Scrum + AUP koblingen</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Eksempelspørsmål:</p>
+            <p className="text-sm italic mb-3">
+              &laquo;Beskriv hvordan AUP og Scrum kombineres i et typisk prosjekt.&raquo;
+            </p>
+            <p className="text-sm font-semibold mb-1">Mal for svar:</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>AUP = <strong>strategisk</strong> rammeverk (måneder), gir faser og milepæler</li>
+              <li>Scrum = <strong>operativt</strong> rammeverk (uker/dager), styrer hverdagen</li>
+              <li>Inception/Elaboration kjøres som <em>lengre iterasjoner</em></li>
+              <li>Construction kjøres som en <em>serie Scrum-sprinter</em> (typisk 2 uker)</li>
+              <li>Transition kan være én avsluttende sprint + bug-fix</li>
+              <li>AUP-disiplinene fordeles naturlig på Scrum-seremoniene</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Spørsmålstype 4 — Risikohåndtering</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Eksempelspørsmål:</p>
+            <p className="text-sm italic mb-3">
+              &laquo;Forklar hvordan risikohåndtering håndteres i AUP, og hvilken rolle den spiller i
+              Inception-fasen.&raquo;
+            </p>
+            <p className="text-sm font-semibold mb-1">Mal for svar:</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Risiko = <strong>sannsynlighet × konsekvens</strong></li>
+              <li>Prosessen: identifiser → analyser → prioriter → kontroller</li>
+              <li>I Inception: kartlegging og første prioritering — risikoene styrer Elaboration</li>
+              <li>Tunge tekniske risikoer angripes med PoC i Elaboration</li>
+              <li>Risikolisten oppdateres sprint for sprint i Construction</li>
+              <li>&laquo;If you don&apos;t actively attack the risks, they will actively attack you&raquo;</li>
+            </ul>
+          </div>
+
+          <h3 className="text-lg font-bold mt-6 mb-3">Spørsmålstype 5 — Disipliner i en spesifikk fase</h3>
+          <div className="rounded-lg border border-[var(--card-border)] p-4 my-3">
+            <p className="text-sm font-semibold mb-2">Eksempelspørsmål:</p>
+            <p className="text-sm italic mb-3">
+              &laquo;Beskriv aktivitetene under disiplinen Implementering i Construction-fasen.&raquo;
+            </p>
+            <p className="text-sm font-semibold mb-1">Sjekkliste-svar:</p>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Test først (TDD) — Red → Green → Refactor</li>
+              <li>Bygg kontinuerlig — CI-server kjører tester ved hver commit</li>
+              <li>Videreutvikle domenemodellen i kode</li>
+              <li>Videreutvikle UI</li>
+              <li>Bygg dataskjema og migrasjonsskript</li>
+              <li>Lag grensesnitt til eksisterende system</li>
+              <li>Skriv skript for datakonvertering</li>
+            </ul>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 my-4">
+            <p className="font-semibold text-amber-700 dark:text-amber-400 mb-2">Atles favoritt-eksamenstema</p>
+            <p className="text-sm">
+              Erlend bør særlig være forberedt på spørsmål som kombinerer flere temaer:
+              &laquo;<em>Hvordan bidrar TDD til AUPs mål om å flate ut kostnadskurven?</em>&raquo; eller
+              &laquo;<em>Hvilken disiplin spiller størst rolle i Transition, og hvorfor?</em>&raquo;.
+              Slike kombinasjonsspørsmål belønner studenten som forstår <strong>sammenhengene</strong>
+              {" "}— ikke bare definisjonene.
+            </p>
+          </div>
+        </TheorySummary>
+      </section>
     </div>
   );
 }

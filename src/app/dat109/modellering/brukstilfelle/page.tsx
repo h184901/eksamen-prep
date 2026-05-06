@@ -273,6 +273,287 @@ export default function BrukstilfellePage() {
           </ul>
         </div>
       </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          AKTIVITETSDIAGRAM SOM ALTERNATIV
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="Aktivitetsdiagram — visuelt alternativ til tekstlig beskrivelse"
+        defaultOpen={false}
+        mustKnow={[
+          "Aktivitetsdiagram er ALTERNATIV til tekstlig brukstilfellebeskrivelse — du velger ett av de to",
+          "Tekst er raskere på eksamen, men aktivitetsdiagram er mer visuelt klart for komplekse flyter",
+          "Symboler: fylt sirkel (start), avrundet rektangel (aktivitet), rombe (valg), dobbelsirkel (slutt)",
+          "Atle nevner aktivitetsdiagram i F02/F06 — du SKAL kunne både formene",
+        ]}
+      >
+        <p>
+          Atle gir deg valget på eksamen: skriv brukstilfellebeskrivelsen <em>tekstlig</em> (nummerert
+          liste) ELLER tegn et <em>aktivitetsdiagram</em>. Begge er like riktig — men de fungerer
+          best for ulike typer flyter.
+        </p>
+
+        <h3 className="text-lg font-bold mt-4">Notasjon</h3>
+        <div className="grid sm:grid-cols-2 gap-4 my-4">
+          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+            <h4 className="font-semibold text-sm mb-3">Symbolene</h4>
+            <svg viewBox="0 0 240 360" className="w-full max-w-xs mx-auto" role="img" aria-label="UML aktivitetsdiagram-symboler">
+              {/* Start */}
+              <circle cx="60" cy="30" r="10" fill="currentColor" />
+              <text x="90" y="35" fontSize="11" fill="currentColor">Start (fylt sirkel)</text>
+
+              {/* Aktivitet */}
+              <rect x="20" y="70" width="80" height="32" rx="16" fill="#3b82f6" fillOpacity="0.3" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="60" y="91" textAnchor="middle" fontSize="10" fill="currentColor">Trill terning</text>
+              <text x="120" y="91" fontSize="11" fill="currentColor">Aktivitet (avrundet)</text>
+
+              {/* Decision */}
+              <polygon points="60,140 90,170 60,200 30,170" fill="#f59e0b" fillOpacity="0.3" stroke="#f59e0b" strokeWidth="1.5" />
+              <text x="60" y="175" textAnchor="middle" fontSize="9" fill="currentColor">verdi=6?</text>
+              <text x="100" y="175" fontSize="11" fill="currentColor">Valg (rombe)</text>
+
+              {/* Merge */}
+              <polygon points="60,240 90,270 60,300 30,270" fill="none" stroke="#22c55e" strokeWidth="1.5" />
+              <text x="60" y="275" textAnchor="middle" fontSize="9" fill="currentColor">Slå sammen</text>
+              <text x="100" y="275" fontSize="11" fill="currentColor">Merge (rombe uten guard)</text>
+
+              {/* End */}
+              <circle cx="60" cy="335" r="11" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="60" cy="335" r="6" fill="currentColor" />
+              <text x="90" y="340" fontSize="11" fill="currentColor">Slutt (dobbelsirkel)</text>
+            </svg>
+          </div>
+
+          <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4">
+            <h4 className="font-semibold text-sm mb-3">Eksempel: «Spill tur» som aktivitetsdiagram</h4>
+            <svg viewBox="0 0 240 460" className="w-full max-w-xs mx-auto" role="img" aria-label="Aktivitetsdiagram for Spill tur">
+              {/* Start */}
+              <circle cx="120" cy="20" r="9" fill="currentColor" />
+              <line x1="120" y1="29" x2="120" y2="50" stroke="currentColor" strokeWidth="1.5" />
+              <polygon points="120,50 116,44 124,44" fill="currentColor" />
+
+              {/* Trill terning */}
+              <rect x="60" y="55" width="120" height="30" rx="15" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="120" y="74" textAnchor="middle" fontSize="11" fill="currentColor">Trill terning</text>
+              <line x1="120" y1="85" x2="120" y2="105" stroke="currentColor" strokeWidth="1.5" />
+              <polygon points="120,105 116,99 124,99" fill="currentColor" />
+
+              {/* Flytt brikke */}
+              <rect x="60" y="110" width="120" height="30" rx="15" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="120" y="129" textAnchor="middle" fontSize="11" fill="currentColor">Flytt brikke</text>
+              <line x1="120" y1="140" x2="120" y2="160" stroke="currentColor" strokeWidth="1.5" />
+              <polygon points="120,160 116,154 124,154" fill="currentColor" />
+
+              {/* Take card */}
+              <rect x="60" y="165" width="120" height="30" rx="15" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+              <text x="120" y="184" textAnchor="middle" fontSize="11" fill="currentColor">Ta øverste kort</text>
+              <line x1="120" y1="195" x2="120" y2="218" stroke="currentColor" strokeWidth="1.5" />
+
+              {/* Decision: mangler? */}
+              <polygon points="120,218 158,250 120,282 82,250" fill="#f59e0b" fillOpacity="0.25" stroke="#f59e0b" strokeWidth="1.5" />
+              <text x="120" y="254" textAnchor="middle" fontSize="9" fill="currentColor">mangler?</text>
+              <text x="55" y="252" fontSize="9" fill="#22c55e" fontWeight="700">[ja]</text>
+              <text x="165" y="252" fontSize="9" fill="#ef4444" fontWeight="700">[nei]</text>
+
+              {/* Behold kort (left branch) */}
+              <line x1="82" y1="250" x2="35" y2="250" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="35" y1="250" x2="35" y2="295" stroke="currentColor" strokeWidth="1.5" />
+              <rect x="0" y="295" width="70" height="28" rx="14" fill="#22c55e" fillOpacity="0.25" stroke="#22c55e" strokeWidth="1.5" />
+              <text x="35" y="313" textAnchor="middle" fontSize="9" fill="currentColor">Behold</text>
+
+              {/* Legg tilbake (right branch) */}
+              <line x1="158" y1="250" x2="205" y2="250" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="205" y1="250" x2="205" y2="295" stroke="currentColor" strokeWidth="1.5" />
+              <rect x="170" y="295" width="70" height="28" rx="14" fill="#ef4444" fillOpacity="0.25" stroke="#ef4444" strokeWidth="1.5" />
+              <text x="205" y="313" textAnchor="middle" fontSize="9" fill="currentColor">Legg tilbake</text>
+
+              {/* Merge */}
+              <line x1="35" y1="323" x2="35" y2="350" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="205" y1="323" x2="205" y2="350" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="35" y1="350" x2="205" y2="350" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="120" y1="350" x2="120" y2="380" stroke="currentColor" strokeWidth="1.5" />
+              <polygon points="120,380 116,374 124,374" fill="currentColor" />
+
+              {/* Decision: 6? */}
+              <polygon points="120,380 158,410 120,440 82,410" fill="#f59e0b" fillOpacity="0.25" stroke="#f59e0b" strokeWidth="1.5" />
+              <text x="120" y="414" textAnchor="middle" fontSize="9" fill="currentColor">verdi=6?</text>
+
+              {/* End */}
+              <circle cx="120" cy="455" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="120" cy="455" r="5" fill="currentColor" />
+              <line x1="120" y1="440" x2="120" y2="446" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold mt-4">Når velger du hva?</h3>
+        <div className="grid sm:grid-cols-2 gap-3 my-3">
+          <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20 p-3 text-sm">
+            <p className="font-bold mb-2">Tekstlig beskrivelse — bedre for:</p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Lineære flyter med få valg</li>
+              <li>Når du har dårlig tid (raskere å skrive)</li>
+              <li>Brukstilfeller med kompliserte forutsetninger</li>
+              <li>Når du vil få med detaljer i hvert steg</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20 p-3 text-sm">
+            <p className="font-bold mb-2">Aktivitetsdiagram — bedre for:</p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Mange forgreninger (if/else, ja/nei)</li>
+              <li>Parallelle aktiviteter (synch bar)</li>
+              <li>Visuelt komplekse flyter</li>
+              <li>Når sensoren skal forstå raskt</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 text-sm">
+          <strong>Atles regel:</strong> Begge er gyldige. Velg det DU er mest komfortabel med —
+          på eksamen er tekstlig beskrivelse vanligvis raskere, men noen liker tegning bedre.
+          Pass på at du IKKE blander notasjon — én konsistent stil gjennom hele besvarelsen.
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          SUBSTANTIV/VERB-ANALYSE
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="Substantiv- og verb-analyse — slik finner du brukstilfellene"
+        defaultOpen={false}
+        mustKnow={[
+          "Verb i oppgaveteksten = brukstilfelle-kandidater",
+          "Substantiv i oppgaveteksten = klasse-kandidater (brukes i domenemodellen)",
+          "Atles metode: les oppgaven 2 ganger, understrek substantiv og verb",
+          "For spill: typisk 2-3 brukstilfeller — ikke overdriv",
+        ]}
+      >
+        <p>
+          Et av Atles favoritt-knep: når du leser oppgaveteksten, <strong>understrek
+          substantivene</strong> (de blir konseptuelle klasser i domenemodellen) og
+          <strong> verbene/handlingene</strong> (de blir brukstilfeller eller metoder).
+        </p>
+
+        <h3 className="text-lg font-bold mt-4">Eksempel: Skyjo (V2024)</h3>
+        <p className="text-sm">Original tekst (forkortet):</p>
+        <div className="rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--card-border)] p-4 my-3 text-sm leading-relaxed">
+          <p>
+            «<u className="text-blue-600 dark:text-blue-400">Spillet</u> er et{" "}
+            <u className="text-blue-600 dark:text-blue-400">kortspill</u> som spilles av 2 til 8{" "}
+            <u className="text-blue-600 dark:text-blue-400">spillere</u>.{" "}
+            <u className="text-blue-600 dark:text-blue-400">Spillet</u> går over flere{" "}
+            <u className="text-blue-600 dark:text-blue-400">omganger</u> og målet er å få minst
+            mulig <u className="text-blue-600 dark:text-blue-400">poeng</u>. Hver{" "}
+            <u className="text-blue-600 dark:text-blue-400">spiller</u>{" "}
+            <span className="text-orange-600 dark:text-orange-400 underline decoration-2">trekker et kort</span>{" "}
+            fra <u className="text-blue-600 dark:text-blue-400">kastehaugen</u> og kan{" "}
+            <span className="text-orange-600 dark:text-orange-400 underline decoration-2">bytte</span>{" "}
+            det med ett av sine <u className="text-blue-600 dark:text-blue-400">kort</u>.»
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-3 my-3">
+          <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20 p-3 text-sm">
+            <p className="font-bold mb-2 text-blue-700 dark:text-blue-400">Substantiv → klasser</p>
+            <ul className="list-disc list-inside space-y-0.5">
+              <li>Spill</li>
+              <li>Spiller</li>
+              <li>Kort, Kortstokk, Kastehaug</li>
+              <li>Omgang</li>
+              <li>Poengblokk</li>
+            </ul>
+            <p className="text-xs text-[var(--muted)] mt-2 italic">Brukes i domenemodell.</p>
+          </div>
+          <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20 p-3 text-sm">
+            <p className="font-bold mb-2 text-amber-700 dark:text-amber-400">Verb → brukstilfeller / metoder</p>
+            <ul className="list-disc list-inside space-y-0.5">
+              <li>Spilles av (= aktør Spiller utfører «Spill»)</li>
+              <li>Trekke kort, bytte (= deler av «Spill tur»)</li>
+            </ul>
+            <p className="text-xs text-[var(--muted)] mt-2 italic">
+              For et spill: typisk 2-3 brukstilfeller (Init, Spill, Spill tur). For
+              forretningssystemer: flere brukstilfeller fordi det er flere uavhengige funksjoner.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 text-sm">
+          <strong>Filtreringsregler:</strong> ikke alle substantiv blir klasser. Trivielle ting
+          som &laquo;tall&raquo;, &laquo;farge&raquo;, &laquo;tekst&raquo; er bedre som
+          attributter. Og verb som &laquo;er&raquo;, &laquo;har&raquo; er ikke handlinger — de
+          beskriver assosiasjoner.
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          INCLUDE VS EXTEND I DYBDEN
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="«include» vs «extends» — bruk dem riktig"
+        defaultOpen={false}
+        mustKnow={[
+          "<<include>> = brukstilfelle A bruker ALLTID brukstilfelle B (obligatorisk del)",
+          "<<extends>> = brukstilfelle B kan UTVIDE A (valgfri tilleggsfunksjonalitet)",
+          "Pil-retning: <<include>> peker FRA hovedbrukstilfellet TIL det inkluderte",
+          "Pil-retning: <<extends>> peker FRA utvidelsen TIL det utvidede",
+          "Atles regel: bruk dem SPARSOMT — ofte holder vanlig assosiasjon",
+        ]}
+      >
+        <p>
+          De to relasjonstypene <code className="bg-neutral-200 dark:bg-neutral-700 px-1 rounded">«include»</code> og{" "}
+          <code className="bg-neutral-200 dark:bg-neutral-700 px-1 rounded">«extends»</code> forvirrer mange. Her er forskjellen:
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-3 my-3">
+          <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20 p-4">
+            <p className="font-bold text-blue-700 dark:text-blue-400 mb-2">«include»</p>
+            <p className="text-sm mb-2"><strong>«Spill»</strong> includes <strong>«Init»</strong></p>
+            <p className="text-sm mb-2">→ Hver gang noen utfører «Spill», utføres ALLTID «Init» som del av det.</p>
+            <p className="text-xs text-[var(--muted)] italic">
+              Pil med stiplete linje fra «Spill» (basisbrukstilfellet) → «Init».
+            </p>
+            <p className="text-xs mt-2"><strong>Når bruke:</strong> obligatoriske underprosesser. F.eks. en logg-funksjon som ALLE oppgaver må kalle.</p>
+          </div>
+          <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20 p-4">
+            <p className="font-bold text-amber-700 dark:text-amber-400 mb-2">«extends»</p>
+            <p className="text-sm mb-2"><strong>«Lever besvarelse automatisk»</strong> extends <strong>«Besvar eksamen»</strong></p>
+            <p className="text-sm mb-2">→ KAN skje hvis tidsfrist utløper, men ikke alltid.</p>
+            <p className="text-xs text-[var(--muted)] italic">
+              Pil med stiplete linje fra utvidelsen → basisbrukstilfellet.
+            </p>
+            <p className="text-xs mt-2"><strong>Når bruke:</strong> betingede tilleggsflyter. F.eks. autopay som starter HVIS bruker har aktivert autopay.</p>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 text-sm">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Atles tips</p>
+          <p>
+            Bruk <code>«include»</code> og <code>«extends»</code> SPARSOMT. Hvis du er usikker —
+            la det være. En vanlig assosiasjon (rett strek) mellom aktør og brukstilfelle er
+            ofte nok. Atle har sett studenter «pynte» med include/extends der det ikke trengs,
+            og mister poeng for å overforklare.
+          </p>
+        </div>
+      </TheorySummary>
+
+      {/* Navigation */}
+      <div className="grid sm:grid-cols-2 gap-3 mt-8">
+        <Link
+          href="/dat109/modellering"
+          className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 hover:border-sysdev-400 transition-colors"
+        >
+          <p className="text-xs text-[var(--muted)]">← Modellering</p>
+          <p className="font-bold mt-1">Tilbake til modellering-oversikt</p>
+        </Link>
+        <Link
+          href="/dat109/modellering/domene"
+          className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 hover:border-sysdev-400 transition-colors"
+        >
+          <p className="text-xs text-[var(--muted)]">Neste →</p>
+          <p className="font-bold mt-1">Domenemodell</p>
+          <p className="text-xs text-[var(--muted)]">Konseptuelle klasser med spesialisering</p>
+        </Link>
+      </div>
     </div>
   );
 }
