@@ -334,9 +334,8 @@ export function DomainMonopol() {
       <text x={410} y={50} fontSize={9} fill={C.textFill}>1</text>
       <text x={465} y={85} fontSize={9} fill={C.textFill}>1</text>
 
-      {/* Brett → Rute (1:40, composition) */}
+      {/* Brett → Rute (1:40) — vanlig assosiasjon, IKKE komposisjon i domenemodell (Atles regel) */}
       <line x1={80} y1={114} x2={80} y2={200} stroke={C.classStroke} strokeWidth={1.5} />
-      <polygon points="80,114 74,126 86,126" fill={C.classStroke} /> {/* filled diamond = composition */}
       <text x={85} y={140} fontSize={9} fill={C.textFill}>1</text>
       <text x={85} y={195} fontSize={9} fill={C.textFill}>40</text>
 

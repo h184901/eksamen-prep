@@ -322,17 +322,29 @@ export function DomainStigespillIter2() {
       <ClassBox x={360} y={250} name="Slange" attrs={["fraNr", "tilNr"]} w={120} />
 
       <line x1={260} y1={28} x2={140} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={170} y={58} fontSize={9}>1</text>
+      <text x={140} y={86} fontSize={9}>1</text>
+
       <line x1={315} y1={42} x2={315} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={320} y={62} fontSize={9}>1</text>
       <text x={320} y={88} fontSize={9}>2..4</text>
+
       <line x1={365} y1={28} x2={440} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={395} y={50} fontSize={9}>1</text>
+      <text x={435} y={86} fontSize={9}>1</text>
 
       <line x1={95} y1={120} x2={95} y2={170} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={100} y={145} fontSize={9}>1</text>
       <text x={100} y={167} fontSize={9}>100</text>
 
       <line x1={320} y1={120} x2={445} y2={170} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={345} y={140} fontSize={9}>1</text>
+      <text x={440} y={167} fontSize={9}>1</text>
 
       <line x1={420} y1={195} x2={140} y2={195} stroke={C.classStroke} strokeWidth={1.5} />
       <text x={280} y={190} fontSize={9} textAnchor="middle">står på</text>
+      <text x={150} y={190} fontSize={9}>1</text>
+      <text x={415} y={190} fontSize={9}>1</text>
 
       {/* Brett → Stige */}
       <line x1={140} y1={130} x2={250} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
@@ -341,7 +353,8 @@ export function DomainStigespillIter2() {
 
       {/* Brett → Slange */}
       <line x1={140} y1={140} x2={400} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={260} y={205} fontSize={9}>0..*</text>
+      <text x={170} y={205} fontSize={9}>1</text>
+      <text x={395} y={245} fontSize={9}>0..*</text>
     </svg>
   );
 }
@@ -439,9 +452,14 @@ export function UseCaseBilutleie() {
       <UseCase cx={325} cy={275} label="Definer bil" w={130} />
       <UseCase cx={325} cy={325} label="Definer kontor" w={140} />
 
+      {/* Kunde-koblinger */}
       <line x1={85} y1={75} x2={257} y2={70} stroke={C.actorStroke} strokeWidth={1.5} />
+      <line x1={85} y1={80} x2={266} y2={120} stroke={C.actorStroke} strokeWidth={1.5} />
+      <line x1={85} y1={85} x2={252} y2={170} stroke={C.actorStroke} strokeWidth={1.5} />
+      {/* Utleier-koblinger */}
       <line x1={85} y1={195} x2={263} y2={120} stroke={C.actorStroke} strokeWidth={1.5} />
       <line x1={85} y1={205} x2={252} y2={170} stroke={C.actorStroke} strokeWidth={1.5} />
+      {/* Admin-koblinger */}
       <line x1={85} y1={325} x2={262} y2={275} stroke={C.actorStroke} strokeWidth={1.5} />
       <line x1={85} y1={328} x2={257} y2={325} stroke={C.actorStroke} strokeWidth={1.5} />
 
@@ -726,7 +744,8 @@ export function DomainGanzSchonClever() {
 
       {/* GSCSpill → Runde */}
       <line x1={355} y1={50} x2={315} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={350} y={75} fontSize={9}>1</text>
+      <text x={350} y={70} fontSize={9}>1</text>
+      <text x={295} y={96} fontSize={9}>1..*</text>
 
       {/* GSCSpill → Terning */}
       <line x1={400} y1={40} x2={490} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
@@ -735,7 +754,8 @@ export function DomainGanzSchonClever() {
 
       {/* Terning → JokerSide */}
       <line x1={570} y1={120} x2={600} y2={120} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={580} y={115} fontSize={9}>1</text>
+      <text x={575} y={115} fontSize={9}>1</text>
+      <text x={595} y={115} fontSize={9}>1</text>
 
       {/* Spiller → Spillebrett */}
       <line x1={120} y1={140} x2={120} y2={220} stroke={C.classStroke} strokeWidth={1.5} />
@@ -744,17 +764,18 @@ export function DomainGanzSchonClever() {
 
       {/* Spillebrett → Område */}
       <line x1={170} y1={240} x2={200} y2={240} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={175} y={235} fontSize={9}>1</text>
+      <text x={172} y={235} fontSize={9}>1</text>
       <text x={195} y={235} fontSize={9}>4</text>
 
       {/* Område → Rute */}
       <line x1={320} y1={240} x2={400} y2={240} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={325} y={235} fontSize={9}>1</text>
+      <text x={322} y={235} fontSize={9}>1</text>
       <text x={395} y={235} fontSize={9}>0..*</text>
 
       {/* Rute → EkstraEffekt */}
       <line x1={570} y1={240} x2={600} y2={240} stroke={C.classStroke} strokeWidth={1.5} />
-      <text x={575} y={235} fontSize={9}>0..1</text>
+      <text x={572} y={235} fontSize={9}>1</text>
+      <text x={595} y={235} fontSize={9}>0..1</text>
 
       {/* Område → spesialiseringer */}
       <line x1={260} y1={265} x2={260} y2={290} stroke={C.abstractStroke} strokeWidth={1.5} />
@@ -800,6 +821,400 @@ export function SequenceGanzSchonClever() {
       <SeqMessage x1={brettX} x2={omrX} y={220} label="finnRute(symbol)" />
       <SeqMessage x1={omrX} x2={ruteX} y={245} label="kryssAv()" />
       <SeqMessage x1={ruteX} x2={spillX} y={270} label="effekt?" isReturn />
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   MONOPOL — sekvensdiagrammer for iterasjon 2 og 3
+   ═══════════════════════════════════════════════ */
+
+/** Iterasjon 2: penger og polymorfi via landetPa() */
+export function SequenceMonopolIter2() {
+  const monopolX = 60;
+  const spillerX = 175;
+  const koppX = 290;
+  const brettX = 405;
+  const ruteX = 520;
+  const maxY = 380;
+
+  return (
+    <svg viewBox="0 0 580 390" className="w-full mx-auto" role="img" aria-label="Sekvensdiagram for Monopol iterasjon 2 — landetPa polymorfi">
+      <SeqObject x={monopolX} name=":Monopol" maxY={maxY} />
+      <SeqObject x={spillerX} name=":Spiller" maxY={maxY} />
+      <SeqObject x={koppX} name=":Kopp" maxY={maxY} />
+      <SeqObject x={brettX} name=":Brett" maxY={maxY} />
+      <SeqObject x={ruteX} name=":Rute" maxY={maxY} />
+
+      <SeqActivation x={monopolX} y={45} h={325} />
+      <SeqActivation x={spillerX} y={110} h={245} />
+
+      <SeqMessage x1={monopolX} x2={monopolX + 30} y={55} label="spill()" />
+
+      <SeqFragment x={30} y={65} w={540} h={305} label="loop" condition="20 runder × alle spillere" />
+
+      <SeqMessage x1={monopolX} x2={spillerX} y={115} label="spillTrekk()" />
+
+      <SeqMessage x1={spillerX} x2={koppX} y={150} label="trill()" />
+      <SeqMessage x1={koppX} x2={spillerX} y={170} label="sum" isReturn />
+
+      <SeqMessage x1={spillerX} x2={brettX} y={205} label="nyRute = flytt(rute, sum)" />
+      <SeqMessage x1={brettX} x2={spillerX} y={225} label="nyRute" isReturn />
+
+      {/* Polymorfi: Spiller kaller landetPa(spiller) på rute (uansett type) */}
+      <SeqFragment x={150} y={250} w={400} h={110} label="polymorf" condition="rute = StartRute|Vanlig|Skatt|Fengsel" />
+      <SeqMessage x1={spillerX} x2={ruteX} y={285} label="landetPa(this)" />
+      <SeqMessage x1={ruteX} x2={spillerX} y={315} label="leggTilPenger / trekkFra / flytt" isReturn />
+      <SeqMessage x1={spillerX} x2={spillerX + 30} y={345} label="oppdaterPenger()" />
+    </svg>
+  );
+}
+
+/** Iterasjon 3: kjøp og eie av eiendom */
+export function SequenceMonopolIter3() {
+  const monopolX = 50;
+  const spillerX = 170;
+  const koppX = 285;
+  const brettX = 395;
+  const skjoteX = 520;
+  const maxY = 410;
+
+  return (
+    <svg viewBox="0 0 600 420" className="w-full mx-auto" role="img" aria-label="Sekvensdiagram for Monopol iterasjon 3 — kjøp av eiendom">
+      <SeqObject x={monopolX} name=":Monopol" maxY={maxY} />
+      <SeqObject x={spillerX} name=":Spiller" maxY={maxY} />
+      <SeqObject x={koppX} name=":Kopp" maxY={maxY} />
+      <SeqObject x={brettX} name=":Brett" maxY={maxY} />
+      <SeqObject x={skjoteX} name=":SkjøteRute" maxY={maxY} />
+
+      <SeqActivation x={monopolX} y={45} h={355} />
+      <SeqActivation x={spillerX} y={110} h={285} />
+
+      <SeqMessage x1={monopolX} x2={monopolX + 30} y={55} label="spill()" />
+
+      <SeqFragment x={20} y={65} w={560} h={335} label="loop" condition="til vinner" />
+
+      <SeqMessage x1={monopolX} x2={spillerX} y={115} label="spillTrekk()" />
+      <SeqMessage x1={spillerX} x2={koppX} y={145} label="trill()" />
+      <SeqMessage x1={koppX} x2={spillerX} y={165} label="sum" isReturn />
+      <SeqMessage x1={spillerX} x2={brettX} y={195} label="nyRute = flytt(rute, sum)" />
+      <SeqMessage x1={brettX} x2={spillerX} y={215} label="nyRute" isReturn />
+
+      <SeqMessage x1={spillerX} x2={skjoteX} y={245} label="landetPa(this)" />
+
+      {/* alt: ledig eller eid */}
+      <SeqFragment x={140} y={270} w={430} h={120} label="alt" condition="ledig | eid av annen" />
+      <SeqMessage x1={skjoteX} x2={spillerX} y={305} label="kjøp?" isReturn />
+      <SeqMessage x1={spillerX} x2={skjoteX} y={335} label="settEier(this)" />
+      <SeqMessage x1={spillerX} x2={spillerX + 30} y={370} label="trekkFraPenger(pris)" />
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   STIGESPILL — domenemodell iter 3 (med sekserregler)
+   ═══════════════════════════════════════════════ */
+
+/** Iter 3 = iter 2 + Spiller får attributtet antallSekserePaaRad */
+export function DomainStigespillIter3() {
+  return (
+    <svg viewBox="0 0 640 320" className="w-full mx-auto" role="img" aria-label="Stigespill iter 3 med sekserregler">
+      <ClassBox x={250} y={5} name="Stigespill" attrs={["rundeNr"]} w={120} />
+      <ClassBox x={50} y={90} name="Brett" w={90} />
+      <ClassBox x={270} y={90} name="Spiller" attrs={["navn", "antallSekserePaaRad"]} w={170} />
+      <ClassBox x={490} y={90} name="Terning" attrs={["verdi"]} w={90} />
+      <ClassBox x={50} y={190} name="Rute" attrs={["nr"]} w={90} />
+      <ClassBox x={490} y={190} name="Brikke" w={90} />
+      <ClassBox x={210} y={250} name="Stige" attrs={["fraNr", "tilNr"]} w={120} />
+      <ClassBox x={360} y={250} name="Slange" attrs={["fraNr", "tilNr"]} w={120} />
+
+      <line x1={260} y1={28} x2={140} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={170} y={58} fontSize={9}>1</text>
+      <text x={140} y={86} fontSize={9}>1</text>
+
+      <line x1={325} y1={42} x2={325} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={330} y={62} fontSize={9}>1</text>
+      <text x={330} y={88} fontSize={9}>2..4</text>
+
+      <line x1={365} y1={28} x2={490} y2={90} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={395} y={50} fontSize={9}>1</text>
+      <text x={485} y={86} fontSize={9}>1</text>
+
+      <line x1={95} y1={134} x2={95} y2={190} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={100} y={160} fontSize={9}>1</text>
+      <text x={100} y={186} fontSize={9}>100</text>
+
+      <line x1={355} y1={134} x2={510} y2={190} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={400} y={160} fontSize={9}>1</text>
+      <text x={500} y={186} fontSize={9}>1</text>
+
+      <line x1={490} y1={210} x2={140} y2={210} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={300} y={205} fontSize={9} textAnchor="middle">står på</text>
+      <text x={150} y={205} fontSize={9}>1</text>
+      <text x={485} y={205} fontSize={9}>1</text>
+
+      {/* Brett → Stige */}
+      <line x1={140} y1={130} x2={250} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={160} y={185} fontSize={9}>1</text>
+      <text x={245} y={246} fontSize={9}>0..*</text>
+
+      {/* Brett → Slange */}
+      <line x1={140} y1={140} x2={400} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={250} y={205} fontSize={9}>0..*</text>
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   SKYJO — iterasjon 1 (uten Omgang/Poengblokk-separasjon)
+   ═══════════════════════════════════════════════ */
+
+/** Iter 1: én aktør, ett brukstilfelle (én omgang om gangen) */
+export function UseCaseSkyjoIter1() {
+  return (
+    <svg viewBox="0 0 460 200" className="w-full max-w-md mx-auto" role="img" aria-label="Skyjo use case iter 1">
+      <rect x={140} y={10} width={300} height={180} fill={C.systemFill} stroke={C.systemStroke} strokeWidth={2} rx={8} strokeDasharray="8 4" />
+      <text x={290} y={32} textAnchor="middle" fontSize={13} fontWeight={700}>Skyjo</text>
+
+      <StickFigure x={60} y={100} label="Spiller" />
+
+      <UseCase cx={290} cy={75} label="Start spill" />
+      <UseCase cx={290} cy={140} label="Spill tur" />
+
+      <line x1={85} y1={95} x2={235} y2={75} stroke={C.actorStroke} strokeWidth={1.5} />
+      <line x1={85} y1={105} x2={235} y2={140} stroke={C.actorStroke} strokeWidth={1.5} />
+    </svg>
+  );
+}
+
+/** Iter 1: domenemodell uten Omgang/Poengblokk — bare grunnleggende konsepter */
+export function DomainSkyjoIter1() {
+  return (
+    <svg viewBox="0 0 700 250" className="w-full mx-auto" role="img" aria-label="Skyjo iter 1 domene">
+      <ClassBox x={290} y={5} name="Skyjo" w={120} />
+
+      <ClassBox x={50} y={100} name="Spiller" attrs={["navn", "poeng"]} w={130} />
+      <ClassBox x={250} y={100} name="Kortstokk" w={110} />
+      <ClassBox x={400} y={100} name="Kastehaug" w={110} />
+      <ClassBox x={550} y={100} name="Spillebrett" attrs={["3x4 rutenett"]} w={140} />
+
+      <ClassBox x={300} y={195} name="Kort" attrs={["verdi: -2..12", "synlig: bool"]} w={150} />
+
+      {/* Skyjo → Spiller */}
+      <line x1={300} y1={40} x2={130} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={200} y={62} fontSize={9}>1</text>
+      <text x={140} y={96} fontSize={9}>2..8</text>
+
+      {/* Skyjo → Kortstokk */}
+      <line x1={335} y1={50} x2={310} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={325} y={75} fontSize={9}>1</text>
+      <text x={315} y={96} fontSize={9}>1</text>
+
+      {/* Skyjo → Kastehaug */}
+      <line x1={385} y1={50} x2={450} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={400} y={70} fontSize={9}>1</text>
+      <text x={445} y={96} fontSize={9}>1</text>
+
+      {/* Spiller → Spillebrett */}
+      <line x1={130} y1={140} x2={620} y2={140} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={155} y={134} fontSize={9}>1</text>
+      <text x={605} y={134} fontSize={9}>1</text>
+
+      {/* Spillebrett → Kort */}
+      <line x1={620} y1={150} x2={400} y2={210} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={605} y={170} fontSize={9}>1</text>
+      <text x={395} y={205} fontSize={9}>12</text>
+
+      {/* Kortstokk → Kort */}
+      <line x1={300} y1={150} x2={350} y2={195} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={310} y={175} fontSize={9}>1</text>
+      <text x={345} y={193} fontSize={9}>0..*</text>
+
+      {/* Kastehaug → Kort */}
+      <line x1={450} y1={150} x2={400} y2={195} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={445} y={170} fontSize={9}>1</text>
+      <text x={395} y={193} fontSize={9}>0..*</text>
+    </svg>
+  );
+}
+
+/** Iter 1: enkelt sekvensdiagram uten alt-fragment */
+export function SequenceSkyjoIter1() {
+  const spillerX = 60;
+  const sysX = 170;
+  const bunkeX = 280;
+  const brettX = 400;
+  const maxY = 280;
+
+  return (
+    <svg viewBox="0 0 480 290" className="w-full mx-auto" role="img" aria-label="Skyjo iter 1 sekvens">
+      <SeqObject x={spillerX} name=":Spiller" maxY={maxY} />
+      <SeqObject x={sysX} name=":Skyjo" maxY={maxY} />
+      <SeqObject x={bunkeX} name=":Kortstokk" maxY={maxY} />
+      <SeqObject x={brettX} name=":Spillebrett" maxY={maxY} />
+
+      <SeqActivation x={sysX} y={50} h={210} />
+
+      <SeqMessage x1={spillerX} x2={sysX} y={60} label="spillTur(pos)" />
+
+      <SeqMessage x1={sysX} x2={bunkeX} y={100} label="kort = trekk()" />
+      <SeqMessage x1={bunkeX} x2={sysX} y={120} label="kort" isReturn />
+
+      <SeqMessage x1={sysX} x2={brettX} y={155} label="gammelt = bytt(pos, kort)" />
+      <SeqMessage x1={brettX} x2={sysX} y={175} label="gammelt" isReturn />
+
+      <SeqMessage x1={sysX} x2={brettX} y={210} label="ferdig = alleÅpne()" />
+      <SeqMessage x1={brettX} x2={sysX} y={235} label="ferdig" isReturn />
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   GANZ SCHÖN CLEVER — iterasjon 1 (uten bonus/joker)
+   ═══════════════════════════════════════════════ */
+
+/** Iter 1: bare basis — uten EkstraEffekt og uten Joker */
+export function DomainGanzSchonCleverIter1() {
+  return (
+    <svg viewBox="0 0 660 300" className="w-full mx-auto" role="img" aria-label="GSC iter 1 uten bonus/joker">
+      <ClassBox x={270} y={5} name="GSCSpill" w={120} />
+
+      <ClassBox x={50} y={100} name="Spiller" attrs={["navn"]} w={120} />
+      <ClassBox x={220} y={100} name="Runde" attrs={["nr"]} w={100} />
+      <ClassBox x={370} y={100} name="Terning" attrs={["farge", "symbol"]} w={140} />
+
+      <ClassBox x={50} y={210} name="Spillebrett" w={120} />
+      <ClassBox x={210} y={210} name="Område" attrs={["farge"]} w={120} />
+      <ClassBox x={370} y={210} name="Rute" attrs={["symbol", "avkrysset"]} w={150} />
+
+      {/* GSCSpill → Spiller */}
+      <line x1={280} y1={40} x2={130} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={200} y={62} fontSize={9}>1</text>
+      <text x={135} y={96} fontSize={9}>2..4</text>
+
+      {/* GSCSpill → Runde */}
+      <line x1={310} y1={45} x2={275} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={300} y={75} fontSize={9}>1</text>
+      <text x={280} y={96} fontSize={9}>1..*</text>
+
+      {/* GSCSpill → Terning */}
+      <line x1={370} y1={40} x2={440} y2={100} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={385} y={62} fontSize={9}>1</text>
+      <text x={435} y={96} fontSize={9}>5</text>
+
+      {/* Spiller → Spillebrett */}
+      <line x1={110} y1={140} x2={110} y2={210} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={115} y={170} fontSize={9}>1</text>
+      <text x={115} y={206} fontSize={9}>1</text>
+
+      {/* Spillebrett → Område */}
+      <line x1={170} y1={240} x2={210} y2={240} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={175} y={235} fontSize={9}>1</text>
+      <text x={205} y={235} fontSize={9}>4</text>
+
+      {/* Område → Rute */}
+      <line x1={330} y1={240} x2={370} y2={240} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={335} y={235} fontSize={9}>1</text>
+      <text x={365} y={235} fontSize={9}>0..*</text>
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   STIGESPILL ITER 3 — sekvens med klassediagram-bilde
+   ═══════════════════════════════════════════════ */
+
+/** Klassediagram (utformingsmodell) for Stigespill — viser metoder som skiller fra domenemodell */
+export function ClassDiagramStigespill() {
+  return (
+    <svg viewBox="0 0 660 320" className="w-full mx-auto" role="img" aria-label="Klassediagram Stigespill med metoder">
+      <ClassBox
+        x={250}
+        y={5}
+        name="Stigespill"
+        attrs={[
+          "- rundeNr: int",
+          "+ start(): void",
+          "+ spillTrekk(s): Trekk",
+          "+ erFerdig(): bool",
+        ]}
+        w={170}
+      />
+      <ClassBox
+        x={50}
+        y={130}
+        name="Brett"
+        attrs={[
+          "- ruter: List<Rute>",
+          "+ getRute(n): Rute",
+          "+ finnNyRute(r,v): Rute",
+        ]}
+        w={150}
+      />
+      <ClassBox
+        x={260}
+        y={130}
+        name="Spiller"
+        attrs={[
+          "- navn: String",
+          "- sekserePaaRad: int",
+          "+ trill(): int",
+          "+ flyttTil(r): void",
+        ]}
+        w={170}
+      />
+      <ClassBox
+        x={490}
+        y={130}
+        name="Terning"
+        attrs={["- verdi: int", "+ trill(): int"]}
+        w={130}
+      />
+      <ClassBox
+        x={50}
+        y={250}
+        name="Rute"
+        attrs={["- nr: int", "- forflytning: int"]}
+        w={120}
+      />
+      <ClassBox
+        x={250}
+        y={250}
+        name="Brikke"
+        attrs={["- rute: Rute", "+ setRute(r)"]}
+        w={130}
+      />
+
+      {/* Stigespill → Brett */}
+      <line x1={260} y1={70} x2={150} y2={130} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={185} y={100} fontSize={9}>1</text>
+      <text x={150} y={126} fontSize={9}>1</text>
+
+      {/* Stigespill → Spiller */}
+      <line x1={335} y1={92} x2={335} y2={130} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={340} y={110} fontSize={9}>1</text>
+      <text x={340} y={128} fontSize={9}>2..4</text>
+
+      {/* Stigespill → Terning */}
+      <line x1={420} y1={70} x2={530} y2={130} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={460} y={92} fontSize={9}>1</text>
+      <text x={530} y={126} fontSize={9}>1</text>
+
+      {/* Brett → Rute */}
+      <line x1={120} y1={210} x2={120} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={125} y={230} fontSize={9}>1</text>
+      <text x={125} y={246} fontSize={9}>100</text>
+
+      {/* Spiller → Brikke */}
+      <line x1={310} y1={220} x2={310} y2={250} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={315} y={235} fontSize={9}>1</text>
+      <text x={315} y={246} fontSize={9}>1</text>
+
+      {/* Brikke → Rute */}
+      <line x1={250} y1={290} x2={170} y2={290} stroke={C.classStroke} strokeWidth={1.5} />
+      <text x={205} y={285} fontSize={9} textAnchor="middle">står på</text>
+      <text x={245} y={285} fontSize={9}>1</text>
+      <text x={175} y={285} fontSize={9}>1</text>
     </svg>
   );
 }

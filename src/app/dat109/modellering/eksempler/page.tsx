@@ -21,17 +21,25 @@ import {
   DomainMonopolIter2,
   DomainStigespillIter1,
   DomainStigespillIter2,
+  DomainStigespillIter3,
   UseCaseStigespillIter2,
   SequenceStigespillSeksere,
+  SequenceMonopolIter2,
+  SequenceMonopolIter3,
+  ClassDiagramStigespill,
   UseCaseBilutleie,
   DomainBilutleie,
   SequenceBilutleie,
   UseCaseSkyjo,
   DomainSkyjo,
   SequenceSkyjo,
+  UseCaseSkyjoIter1,
+  DomainSkyjoIter1,
+  SequenceSkyjoIter1,
   UseCaseGanzSchonClever,
   DomainGanzSchonClever,
   SequenceGanzSchonClever,
+  DomainGanzSchonCleverIter1,
 } from "@/components/dat109/UmlDiagramsExtra";
 
 /* ═══════════════════════════════════════════════════════════
@@ -169,6 +177,37 @@ function IterationBadge({ n, label }: { n: number; label: string }) {
         {n}
       </span>
       {label}
+    </div>
+  );
+}
+
+function ActivationBoxExplainer() {
+  return (
+    <div className="my-4 rounded-lg border border-blue-300 dark:border-blue-700 bg-blue-50/60 dark:bg-blue-950/30 p-4">
+      <h4 className="font-bold text-sm text-blue-700 dark:text-blue-300 mb-2">
+        Hva betyr de smale rektanglene (aktiveringsbokser)?
+      </h4>
+      <ul className="list-disc list-inside text-sm space-y-1 text-neutral-800 dark:text-neutral-100">
+        <li>
+          <strong>Aktiveringsboks (timebox):</strong> det smale rektangelet på en lifeline. Det
+          viser at objektet er <em>aktivt</em> akkurat da — det utfører noe (eller venter på
+          retur fra en annen).
+        </li>
+        <li>
+          <strong>Lengde:</strong> jo lenger boksen er, desto mer tid (eller desto flere meldinger)
+          går med til operasjonen. Det er <em>ikke</em> sann sanntid — bare visuell rekkefølge og
+          varighet.
+        </li>
+        <li>
+          <strong>Slutter når:</strong> metoden returnerer. På et godt sekvensdiagram ser du
+          tydelig hvor en aktiveringsboks åpner (ved en innkommende melding) og lukker (ved
+          retur).
+        </li>
+        <li>
+          <strong>Kontroller-objektet</strong> (f.eks. <code>:Monopol</code>, <code>:Skyjo</code>)
+          har vanligvis den lengste aktiveringsboksen, fordi det orchestrerer hele scenarioet.
+        </li>
+      </ul>
     </div>
   );
 }
@@ -314,6 +353,8 @@ export default function EksemplerPage() {
           </p>
         </Note>
 
+        <ActivationBoxExplainer />
+
         <h3 className="text-lg font-bold mt-4">Hvordan denne siden er bygget opp</h3>
         <p>De sju casene er rangert etter hvor sentrale de er for eksamen:</p>
         <ul className="list-disc list-inside space-y-1">
@@ -454,6 +495,8 @@ export default function EksemplerPage() {
           <SequenceMonopol />
         </DiagramFrame>
 
+        <ActivationBoxExplainer />
+
         <Note variant="tip" title="Nøkkelobservasjon: ansvarsfordeling">
           <p>
             <strong>Spiller</strong> får ansvaret for å koordinere sin egen tur (
@@ -481,6 +524,26 @@ export default function EksemplerPage() {
             2&nbsp;000 kr eller 10 % av verdien.
           </li>
         </ul>
+
+        <h3 className="text-lg font-bold mt-4">Brukstilfellebeskrivelse — utvidet</h3>
+        <UseCaseBeskrivelse
+          navn="Spill monopol (iterasjon 2)"
+          aktorer={["Observatør"]}
+          hovedflyt={[
+            "Initialiser spillet (alle spillere får 15 000 kr)",
+            "Start spillet",
+            "Hver av spillerne gjør et trekk (= runde)",
+            "Trill terninger og flytt brikken tilsvarende antall ruter",
+            "Reagér på rute-typen (start, vanlig, inntektsskatt eller fengsel)",
+            "Oppdater spillerens penger",
+            "Gjenta fra steg 3 til vi er ferdige (20 runder)",
+          ]}
+          alternativ={[
+            "Lander på StartRute → +2 000 kr",
+            "Lander på InntektsskattRute → trekk min(2 000, 10 % av verdi)",
+            "Lander på FengselRute → flytt til fengselsrute",
+          ]}
+        />
 
         <h3 className="text-lg font-bold mt-4">Domenemodell — spesialisering</h3>
         <p>
@@ -540,6 +603,27 @@ public class FengselRute extends Rute {
           Dette er en lærebok-anvendelse av GRASP-prinsippet <strong>Polymorphism</strong>: når
           oppførsel varierer med type, lar vi typene selv ta ansvar for variasjonen.
         </p>
+
+        <h3 className="text-lg font-bold mt-4">Sekvensdiagram — iter 2 med polymorfi</h3>
+        <p>
+          Etter at brikken har flyttet til ny rute, kaller <code>Spiller</code>{" "}
+          <code>landetPa(this)</code> på rute-objektet. Hvilken konkret subklasse rute-objektet er
+          (StartRute, VanligRute, InntektsskattRute, FengselRute), avgjør hva som skjer — uten at
+          Spiller trenger å vite det.
+        </p>
+        <DiagramFrame caption="Iter 2 sekvens: ny polymorfi-blokk hvor rute-typen avgjør oppførselen — Spiller vet ingenting om subklassene">
+          <SequenceMonopolIter2 />
+        </DiagramFrame>
+
+        <Note variant="tip" title="Sammenlign med iter 1">
+          <p>
+            I iter 1 stoppet sekvensdiagrammet etter <code>setRute(nyRute)</code>. I iter 2 har vi
+            lagt til <em>én</em> ekstra melding: <code>landetPa(this)</code>. Vi har <em>ikke</em>{" "}
+            lagt inn fire alternative grener (alt-fragment) — fordi det er nettopp det polymorfi
+            unngår. Sekvensdiagrammet blir <em>enklere</em>, ikke mer komplekst, når vi bruker
+            polymorfi.
+          </p>
+        </Note>
       </TheorySummary>
 
       <TheorySummary title="1.4 Iterasjon 3 — eiendom og Pure Fabrication" defaultOpen={false}>
@@ -575,6 +659,31 @@ public class FengselRute extends Rute {
           </p>
         </Note>
 
+        <h3 className="text-lg font-bold mt-4">Brukstilfellebeskrivelse — iter 3</h3>
+        <UseCaseBeskrivelse
+          navn="Spill monopol (iterasjon 3)"
+          aktorer={["Observatør"]}
+          hovedflyt={[
+            "Initialiser spillet (alle spillere får 15 000 kr)",
+            "Hver spiller gjør et trekk: trill, flytt, reager på rute",
+            "Hvis ruten er en SkjøteRute (eiendom/jernbane/offentlig): sjekk om den har eier",
+            "Ledig SkjøteRute → spiller kan kjøpe den (trekkes fra penger)",
+            "Eid av annen spiller → betal leie til eier",
+            "Eid av seg selv → ingen handling",
+            "Gjenta til vi er ferdige",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-4">Sekvensdiagram — iter 3 med kjøp</h3>
+        <p>
+          Når spilleren lander på en SkjøteRute, kaller han <code>landetPa(this)</code>. Inne i
+          SkjøteRute er det en <code>alt</code>-fragment for «ledig» vs «eid». I «ledig»-grenen
+          får spilleren tilbud om å kjøpe; «eid av annen» trekker leie automatisk.
+        </p>
+        <DiagramFrame caption="Iter 3 sekvens: SkjøteRute som mottaker — alt-fragment for «ledig | eid av annen»">
+          <SequenceMonopolIter3 />
+        </DiagramFrame>
+
         <h3 className="text-lg font-bold mt-4">Hva tar vi med oss?</h3>
         <ul className="list-disc list-inside space-y-1">
           <li>
@@ -585,6 +694,10 @@ public class FengselRute extends Rute {
             Spesialisering brukes når oppførselen varierer med type — ikke for «syns skyld».
           </li>
           <li>Pure Fabrication er din venn for å holde domeneklassene rene.</li>
+          <li>
+            Sekvensdiagrammet vokser med ett <em>alt</em>-fragment per ny regel — ikke med flere
+            grener av if/else.
+          </li>
         </ul>
       </TheorySummary>
 
@@ -728,6 +841,47 @@ public class FengselRute extends Rute {
           rad sender deg tilbake til rute 1, og du må trille 6 for å komme i gang igjen.
         </p>
 
+        <h3 className="text-lg font-bold mt-3">Brukstilfellebeskrivelse — iter 3</h3>
+        <UseCaseBeskrivelse
+          navn="Spill stigespill (iterasjon 3 med sekserregler)"
+          aktorer={["Spiller", "Admin"]}
+          hovedflyt={[
+            "Admin initialiserer brettet med slanger og stiger",
+            "Spillet starter, spillerne plasseres på rute 1",
+            "Aktiv spiller triller terning",
+            "Flytt brikken så mange ruter frem (uten å gå forbi 100)",
+            "Hvis ny rute har stige eller slange: følg den til endelig posisjon",
+            "Hvis terningen viste 6: triller om — gå til steg 3",
+            "Hvis spilleren har trillet 6 tre ganger på rad: tilbake til rute 1, nullstill teller",
+            "Hvis ny rute = 100: spilleren har vunnet, spillet er ferdig",
+            "Ellers: neste spiller får turen",
+          ]}
+          alternativ={[
+            "Triller en verdi som ville gått forbi 100: bli stående",
+            "Tre 6'ere på rad → tilbake til rute 1 og må trille 6 for å komme i gang igjen",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-3">Domenemodell — iter 3</h3>
+        <p>
+          Den eneste forskjellen fra iter 2 er at <code>Spiller</code> får attributtet{" "}
+          <code>antallSekserePaaRad: int</code>. Klassene Stige og Slange forblir uendret. Vi
+          legger ikke en metode-attributt eller flagg på Brett — antall 6'ere på rad er en
+          egenskap ved <em>spilleren</em>, ikke ved spillet eller brettet.
+        </p>
+        <DiagramFrame caption="Iter 3 domene: Spiller får antallSekserePaaRad — alt annet er uendret fra iter 2">
+          <DomainStigespillIter3 />
+        </DiagramFrame>
+
+        <Note variant="atle" title="Atles GRASP-vurdering: hvor hører telleren hjemme?">
+          <p>
+            Antall 6'ere på rad gjelder <em>per spiller</em>. Etter prinsippet om{" "}
+            <strong>informasjonsekspert</strong> skal dataen ligge der ansvaret naturlig hører
+            hjemme — på Spiller, ikke på Stigespill eller Brett. Dette er et godt eksempel på at
+            domenemodellen direkte styrer kodearkitekturen.
+          </p>
+        </Note>
+
         <h3 className="text-lg font-bold mt-3">Sekvensdiagram med sekserregler</h3>
         <p>
           Vi får en <code>loop</code>-fragment («triller om så lenge verdi=6 og &lt;3 ganger»),
@@ -737,6 +891,34 @@ public class FengselRute extends Rute {
         <DiagramFrame caption="Iter 3 sekvens: nestede loop og alt-fragmenter for sekserregler — kompleks, men hver melding samsvarer med beskrivelsen">
           <SequenceStigespillSeksere />
         </DiagramFrame>
+
+        <ActivationBoxExplainer />
+
+        <h3 className="text-lg font-bold mt-3">Klassediagram (utformingsmodell)</h3>
+        <p>
+          Domenemodellen viste konsepter uten metoder. Klassediagrammet (utformingsmodellen) er
+          det vi faktisk bygger i Java. Her er metoder, synlighet (private/public) og
+          datatyper på plass. Sammenlign hver klasse-attributt med entity-klassene under
+          JPA-eksemplet.
+        </p>
+        <DiagramFrame caption="Utformingsmodell for Stigespill iter 3 — samme klasser som domenemodellen, men med metoder og datatyper">
+          <ClassDiagramStigespill />
+        </DiagramFrame>
+
+        <Note variant="atle" title="Domenemodell vs klassediagram (utformingsmodell)">
+          <p>
+            <strong>Domenemodell:</strong> hva finnes i den virkelige verden? Bare attributter,
+            multiplisitet og spesialisering. Aldri metoder.
+          </p>
+          <p>
+            <strong>Klassediagram:</strong> hva skal vi faktisk programmere? Metoder, synlighet,
+            datatyper, designmønstre. Det er her metodene introduseres.
+          </p>
+          <p>
+            På eksamen i DAT109 spør Atle vanligvis om <em>domenemodell</em>, ikke
+            klassediagram. Men det er nyttig å vite forskjellen.
+          </p>
+        </Note>
 
         <Note variant="warn" title="Vanlig feil i sekvensdiagram">
           <p>
@@ -994,6 +1176,41 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
             "Bilen merkes som ledig på dette kontoret",
           ]}
         />
+
+        <UseCaseBeskrivelse
+          navn="Beregn pris"
+          aktorer={["Utleier (indirekte fra Lever tilbake)"]}
+          hovedflyt={[
+            "Hent reservasjonens fra/til-dato",
+            "Hent faktiske hente- og leveringsdato",
+            "Beregn antall dager × dagspris for bilkategorien",
+            "Hvis levering på annet kontor enn hente-kontoret → legg til returgebyr",
+            "Returner totalpris til kallende brukstilfelle",
+          ]}
+          alternativ={[
+            "Levering forsinket → legg til ekstradøgn etter samme dagspris",
+            "Skader registrert → marker for separat fakturering (utenfor scope)",
+          ]}
+        />
+
+        <UseCaseBeskrivelse
+          navn="Definer bil"
+          aktorer={["Admin"]}
+          hovedflyt={[
+            "Admin oppgir regnr, type, dagspris og hjemkontor",
+            "Systemet registrerer bilen og knytter den til hjemkontoret",
+            "Bilen markeres som tilgjengelig",
+          ]}
+        />
+
+        <UseCaseBeskrivelse
+          navn="Definer kontor"
+          aktorer={["Admin"]}
+          hovedflyt={[
+            "Admin oppgir kontorinformasjon (adresse, telefon, åpningstider)",
+            "Systemet oppretter Utleiekontor og knytter det til selskapet",
+          ]}
+        />
       </TheorySummary>
 
       <TheorySummary title="3.3 Domenemodell">
@@ -1039,6 +1256,8 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
         <DiagramFrame caption="Sekvens: kunde → selskap.reserver(...) → finnLedige på kontor → opprett Reservasjon → bekreftelse">
           <SequenceBilutleie />
         </DiagramFrame>
+
+        <ActivationBoxExplainer />
 
         <Note variant="tip" title="Hvorfor «Selskap» som hovedmottaker?">
           <p>
@@ -1248,6 +1467,8 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
           <SequenceMaxMummelmann />
         </DiagramFrame>
 
+        <ActivationBoxExplainer />
+
         <Note variant="tip" title="Studer dette som mal for din egen besvarelse">
           <p>
             Legg merke til hvordan <em>hver melding</em> har et formål og en tydelig avsender og
@@ -1304,22 +1525,105 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
         </ul>
       </TheorySummary>
 
-      <TheorySummary title="6.2 Foreslått brukstilfellediagram">
+      <TheorySummary title="6.2 Iterativ tilnærming — to iterasjoner">
         <p>
-          Tre brukstilfeller dekker hele spillet. Spilleren er eneste aktør (ingen
-          admin/observatør i denne oppgaven, fordi spillet starter umiddelbart).
+          Skyjo egner seg for iterativ modellering. Vi bygger først en basis-versjon der vi spiller
+          én omgang om gangen og bare summerer poengene per omgang. Så utvider vi modellen til å
+          håndtere flere omganger med kumulativ poengblokk og dobling-regelen.
         </p>
-        <DiagramFrame caption="Foreslått: 1 aktør (Spiller), 3 brukstilfeller (Start spill, Spill tur, Avslutt omgang)">
-          <UseCaseSkyjo />
+
+        <Note variant="atle" title="Hvorfor iterativ for Skyjo?">
+          <p>
+            På eksamen kan du fint nøye deg med <em>én</em> iterasjon hvis tiden er knapp — men
+            å vise at du behersker den iterative metoden gir Atle trygghet for at du forstår
+            modelleringen. Bygg ferdig den enkle versjonen før du legger til
+            poeng-akkumulering og dobling.
+          </p>
+        </Note>
+      </TheorySummary>
+
+      <TheorySummary title="6.3 Iterasjon 1 — basisversjon (én omgang)" defaultOpen={false}>
+        <IterationBadge n={1} label="Spiller én omgang om gangen" />
+
+        <h3 className="text-lg font-bold mt-3">Brukstilfellediagram</h3>
+        <DiagramFrame caption="Iter 1: 1 aktør (Spiller), 2 brukstilfeller (Start spill, Spill tur)">
+          <UseCaseSkyjoIter1 />
+        </DiagramFrame>
+
+        <UseCaseBeskrivelse
+          navn="Spill tur (iter 1)"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Spiller velger en posisjon (rad, kolonne) i sitt 3×4 rutenett",
+            "Trekk øverste kort fra bunken",
+            "Bytt det med kortet på valgt posisjon (snu det åpent samtidig)",
+            "Sjekk om alle 12 kortene er åpne — i så fall ferdig",
+            "Ellers: turen går videre til neste spiller",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-3">Domenemodell</h3>
+        <DiagramFrame caption="Iter 1: 6 konsepter (Skyjo, Spiller, Kortstokk, Kastehaug, Spillebrett, Kort) — ingen Omgang/Poengblokk">
+          <DomainSkyjoIter1 />
+        </DiagramFrame>
+
+        <h3 className="text-lg font-bold mt-3">Sekvensdiagram</h3>
+        <DiagramFrame caption="Iter 1: enkel sekvens — trekk fra bunke, bytt på brett, sjekk alle åpne">
+          <SequenceSkyjoIter1 />
         </DiagramFrame>
       </TheorySummary>
 
-      <TheorySummary title="6.3 Foreslått domenemodell">
+      <TheorySummary title="6.4 Iterasjon 2 — flere omganger og poengblokk" defaultOpen={false}>
+        <IterationBadge n={2} label="Omgang og kumulative poeng" />
+
+        <p>Hva som er nytt:</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Spillet går over flere omganger til en spiller når 100 poeng.</li>
+          <li>Hver omgang noteres separat i en poengblokk.</li>
+          <li>Spilleren kan velge mellom kastehaug og bunke — gir alt-fragment.</li>
+          <li>Den som avsluttet en omgang får poeng doblet hvis han ikke har færrest.</li>
+        </ul>
+
+        <h3 className="text-lg font-bold mt-3">Brukstilfellediagram</h3>
+        <DiagramFrame caption="Iter 2: 1 aktør (Spiller), 3 brukstilfeller (Start spill, Spill tur, Avslutt omgang)">
+          <UseCaseSkyjo />
+        </DiagramFrame>
+
+        <UseCaseBeskrivelse
+          navn="Spill tur (iter 2)"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Spiller velger kortkilde: kastehaug eller bunke",
+            "Hvis kastehaug: ta kortet, bytt med ett av sine kort, legg gammelt på kastehaug",
+            "Hvis bunke: trekk kort, bytt eller forkast (hvis forkast → snu et skjult kort)",
+            "Sjekk om spilleren har åpnet alle 12 kort",
+            "Hvis ja → triggrer «Avslutt omgang»",
+          ]}
+          alternativ={[
+            "Spilleren forkaster kort fra bunke → snu et skjult kort i stedet",
+            "Alle åpne → omgangen ender, alle får én tur til, så telles poeng",
+          ]}
+        />
+
+        <UseCaseBeskrivelse
+          navn="Avslutt omgang"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Tell poeng for hver spiller (sum av åpne + skjulte kort)",
+            "Hvis avsluttende spiller IKKE har færrest poeng: dobles hans poeng",
+            "Skriv poeng inn i hver spillers poengblokk",
+            "Hvis noen har 100+ poeng → spillet er ferdig, vinner = lavest poeng",
+            "Ellers → start ny omgang",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-3">Domenemodell — utvidet</h3>
         <p>
-          Vi finner konseptene ved substantivanalyse av oppgaveteksten: Skyjo, Spiller, Kort,
-          Kortstokk, Kastehaug, Omgang, Spillebrett, Poengblokk.
+          Vi legger til <code>Omgang</code> (egen klasse fordi spillet går over flere omganger
+          og poeng noteres etter hver omgang) og <code>Poengblokk</code> (én per spiller, med
+          kumulative poeng).
         </p>
-        <DiagramFrame caption="Foreslått: 8 konsepter, vanlige assosiasjoner med multiplisitet (ingen aggregering, ingen metoder)">
+        <DiagramFrame caption="Iter 2: 8 konsepter — Omgang og Poengblokk er nye">
           <DomainSkyjo />
         </DiagramFrame>
 
@@ -1342,12 +1646,13 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
             attributter på Spiller — det er et utformingsvalg.
           </p>
         </Note>
-      </TheorySummary>
 
-      <TheorySummary title="6.4 Foreslått sekvensdiagram — Spill tur">
-        <DiagramFrame caption="Spill tur: alt-fragment for valg av kortkilde, opt for behold/forkast, slutt med «alleÅpne?»-sjekk">
+        <h3 className="text-lg font-bold mt-3">Sekvensdiagram — Spill tur</h3>
+        <DiagramFrame caption="Iter 2: alt-fragment for valg av kortkilde, opt for behold/forkast, slutt med «alleÅpne?»-sjekk">
           <SequenceSkyjo />
         </DiagramFrame>
+
+        <ActivationBoxExplainer />
 
         <Note variant="tip" title="Hvorfor alt + opt?">
           <p>
@@ -1403,14 +1708,80 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
         </ul>
       </TheorySummary>
 
-      <TheorySummary title="7.2 Foreslått brukstilfellediagram">
-        <DiagramFrame caption="3 brukstilfeller: Start spill, Spill tur, Bruk ekstra (bonusregler)">
-          <UseCaseGanzSchonClever />
+      <TheorySummary title="7.2 Iterasjon 1 — basis (uten joker og bonus)" defaultOpen={false}>
+        <IterationBadge n={1} label="Bare farger og grunnregelen" />
+
+        <p>
+          Vi modellerer det enkleste mulige GSC-spillet først: trill 5 fargede terninger, velg
+          en, kryss av i fargeområdet. Ingen joker, ingen bonusregler, ingen regnbuestjerner.
+        </p>
+
+        <UseCaseBeskrivelse
+          navn="Spill tur (iter 1)"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Spiller triller alle terningene",
+            "Spilleren velger én terning (med farge og symbol)",
+            "Systemet finner det riktige fargeområdet på spillerens brett",
+            "Symbolet krysses av i området",
+            "Hvis et område er fullt → omgangen ender, spilleren har vunnet",
+            "Ellers → neste runde",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-3">Domenemodell — iter 1</h3>
+        <DiagramFrame caption="Iter 1: 7 konsepter (GSCSpill, Spiller, Runde, Terning, Spillebrett, Område, Rute) — uten joker, uten bonus, uten spesialisering av Område">
+          <DomainGanzSchonCleverIter1 />
         </DiagramFrame>
       </TheorySummary>
 
-      <TheorySummary title="7.3 Foreslått domenemodell">
-        <DiagramFrame caption="GSC domene: 9 konsepter inkludert spesialisering av Område (4 fargeområder)">
+      <TheorySummary title="7.3 Iterasjon 2 — joker, bonus og spesialisering" defaultOpen={false}>
+        <IterationBadge n={2} label="Spesialregler legges til" />
+
+        <p>Hva som er nytt:</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li><strong>JokerSide</strong> — egen klasse for joker-sidene på terningene.</li>
+          <li><strong>EkstraEffekt</strong> — bonusruter gir ekstra avkrysninger.</li>
+          <li>
+            <strong>Spesialisering</strong> av Område: GulOmrde, RødOmrde, GrønnOmrde, BlåOmrde
+            — fordi avkrysningsreglene varierer per farge.
+          </li>
+        </ul>
+
+        <h3 className="text-lg font-bold mt-3">Brukstilfellediagram</h3>
+        <DiagramFrame caption="Iter 2: 3 brukstilfeller — Start spill, Spill tur, Bruk ekstra (bonusregler)">
+          <UseCaseGanzSchonClever />
+        </DiagramFrame>
+
+        <UseCaseBeskrivelse
+          navn="Spill tur (iter 2)"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Trill alle 5 terninger",
+            "Velg én terning (eller en joker-side)",
+            "Få alle terninger med samme farge + alle joker",
+            "For hvert valg: kryss av i tilhørende fargeområde (per områdets regler)",
+            "Hvis ruten har EkstraEffekt → utløs den (kan trigge Bruk ekstra)",
+            "Sjekk om noe område er fullt → spillet ferdig",
+          ]}
+          alternativ={[
+            "Joker brukt som hvilken som helst farge/symbol — med restriksjoner",
+            "Bonus utløst → ekstra avkryssning eller terningkast",
+          ]}
+        />
+
+        <UseCaseBeskrivelse
+          navn="Bruk ekstra"
+          aktorer={["Spiller"]}
+          hovedflyt={[
+            "Spilleren velger en oppspart bonus-effekt",
+            "Systemet anvender effekten (ekstra terning, ekstra avkrysning, regnbuestjerne)",
+            "Oppdater spillerens regnbuestjerner ved behov",
+          ]}
+        />
+
+        <h3 className="text-lg font-bold mt-3">Domenemodell — iter 2 med spesialisering</h3>
+        <DiagramFrame caption="Iter 2: 9 konsepter inkludert spesialisering av Område (4 fargeområder), JokerSide og EkstraEffekt">
           <DomainGanzSchonClever />
         </DiagramFrame>
 
@@ -1436,12 +1807,22 @@ private Trekk loggTrekk(Spiller s, int kast, int fra, int til, EntityManager em)
             denne logikken naturlig å plassere.
           </p>
         </Note>
-      </TheorySummary>
 
-      <TheorySummary title="7.4 Foreslått sekvensdiagram — Spill tur">
+        <h3 className="text-lg font-bold mt-3">Sekvensdiagram — Spill tur (iter 2)</h3>
         <DiagramFrame caption="Spill tur GSC: trill alle, velg en, alt-fragment for enkel/farge/joker, kryss av i Område">
           <SequenceGanzSchonClever />
         </DiagramFrame>
+
+        <ActivationBoxExplainer />
+
+        <Note variant="tip" title="Konsistens-sjekk for GSC iter 2">
+          <p>
+            Mottakerne i sekvensdiagrammet — <code>:Spill</code>, <code>:Terninger</code>,{" "}
+            <code>:Brett</code>, <code>:Område</code>, <code>:Rute</code> — finnes alle som
+            klasser i domenemodellen. <code>:Spill</code> er kontrolleren (GRASP Controller)
+            som koordinerer turen.
+          </p>
+        </Note>
       </TheorySummary>
 
       {/* ═══════════════════════════════════════════

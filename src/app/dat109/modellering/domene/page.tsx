@@ -225,11 +225,17 @@ export default function DomenePage() {
             <p><strong>Klasser:</strong> Monopol, Brett, Spiller, Kopp, Terning, Brikke, Rute (abstrakt) med subklasser StartRute, VanligRute, InntektsskattRute, DeSettesIFengselRute, SkjøteRute (abstrakt) med subklasser EiendomRute, JernbaneRute, OffentligRute.</p>
             <p><strong>Nøkkelpunkter:</strong></p>
             <ul className="list-disc list-inside space-y-0.5 text-sm">
-              <li>Brett eier 40 Ruter (komposisjon, 1:40)</li>
-              <li>Kopp er «ren fabrikkering» — finnes ikke i virkeligheten</li>
-              <li>Arv brukt for rutetyper (de har ulik oppførsel)</li>
-              <li>SkjøteRute har ekstra assosiasjon Eier → Spiller (0..1:*)</li>
+              <li>Brett har 40 Ruter — vanlig assosiasjon med multiplisitet 1:40 (IKKE komposisjon i domenemodell, per Atles regel)</li>
+              <li>Kopp er «ren fabrikkering» — finnes ikke i virkeligheten, men gir koden lavere kobling</li>
+              <li>Spesialisering (arv) brukt for rutetyper fordi de <em>oppfører seg ulikt</em> — gyldig i domenemodell</li>
+              <li>SkjøteRute (abstrakt) er en konseptuell super-type med subklasser EiendomRute, JernbaneRute, OffentligRute</li>
+              <li>SkjøteRute har ekstra assosiasjon Eier → Spiller (0..1:*) som de andre rutetypene ikke har</li>
             </ul>
+            <div className="mt-2 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 text-xs">
+              <strong>Merk:</strong> Diagrammet over viser linjer med multiplisitet (uten diamanter) — komposisjons-/aggregerings-symboler hører hjemme i utformingsmodell (DCD), ikke domenemodell. Se{" "}
+              <a href="/dat109/ooa-ood/utformingsprinsipper" className="underline">Utformingsprinsipper</a>{" "}
+              for full forklaring.
+            </div>
           </div>
         </div>
 
@@ -439,6 +445,199 @@ export default function DomenePage() {
             <li><strong>Spesialisering (åpen trekant)</strong> — når subklassene er reelt ulike.</li>
             <li><strong>Aggregering/komposisjon (diamanter)</strong> — kun unntaksvis, og kun hvis levetid eller eierskap er <em>kritisk</em> for forståelsen. Hører normalt i utformingsmodell.</li>
           </ul>
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          ARV, ABSTRAKTE KLASSER OG GRENSESNITT I DOMENEMODELL
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="4. Arv, abstrakte klasser og grensesnitt i domenemodell"
+        defaultOpen={false}
+        mustKnow={[
+          "JA — domenemodell KAN ha arv (spesialisering) når subklassene er konseptuelt ulike",
+          "JA — domenemodell KAN ha abstrakte klasser når superklassen ikke skal instansieres direkte (f.eks. Rute, SkjøteRute i Monopol)",
+          "GRENSESNITT (interface) brukes svært sjelden i domenemodell — det er en design/utforming-konstruksjon som hører i DCD",
+          "Tegn abstrakt klasse med kursiv klassenavn ELLER med stereotype «abstract»",
+          "Atle BRUKER abstrakt klasse i domenemodell for Rute-hierarkiet i Monopol — det er gyldig",
+        ]}
+      >
+        <p>
+          Et vanlig spørsmål: &laquo;Kan domenemodellen ha arv? Abstrakte klasser? Grensesnitt?&raquo;
+          Atle har brukt alle disse i sine egne fasiter, så her er regelen:
+        </p>
+
+        {/* ────── Arv ────── */}
+        <h3 className="text-lg font-bold mt-6 mb-2">Arv (spesialisering) — JA, ofte gyldig</h3>
+        <p className="text-sm">
+          Allerede dekket over: bruk arv (spesialisering) når subklassene faktisk oppfører seg
+          ulikt eller har ulike attributter/assosiasjoner. Atles Monopol bruker arv for Rute →
+          StartRute, VanligRute, InntektsskattRute, SkjøteRute fordi alle ruter har ulik effekt
+          når en spiller lander på dem.
+        </p>
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 my-3 text-sm">
+          <strong>Notasjon i UML:</strong> Pil med åpen trekant fra subklassen til superklassen.
+          Subklassen ARVER alle attributter og assosiasjoner fra superklassen, og kan legge til
+          sine egne.
+        </div>
+
+        {/* ────── Abstrakt klasse ────── */}
+        <h3 className="text-lg font-bold mt-6 mb-2">Abstrakt klasse — JA, når superklassen ikke skal instansieres</h3>
+        <p className="text-sm">
+          En <strong>abstrakt klasse</strong> er en superklasse som ikke kan instansieres direkte
+          — det finnes ingen «rene» Rute-objekter i Monopol; det finnes alltid en konkret subklasse
+          (StartRute, VanligRute, etc.). Da markerer vi superklassen som abstrakt.
+        </p>
+        <p className="text-sm mt-2">
+          <strong>Atle bruker dette aktivt.</strong> I hans Monopol-fasit er både Rute og
+          SkjøteRute abstrakte klasser — det er meningsfullt fordi:
+        </p>
+        <ul className="text-sm list-disc list-inside ml-2 my-2">
+          <li>Rute er en samlebetegnelse — du har aldri «en Rute», men alltid en spesifikk type</li>
+          <li>SkjøteRute er en samlebetegnelse for Eiendom, Jernbane, Offentlig — de deler attributtene «pris»</li>
+        </ul>
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 my-3 text-sm">
+          <strong>Notasjon i UML:</strong> To muligheter — begge er gyldige:
+          <ul className="list-disc list-inside mt-1 space-y-0.5">
+            <li><strong>Kursiv klassenavn</strong> (foretrukket av Atle): <em>Rute</em></li>
+            <li><strong>Stereotype</strong>: «abstract» Rute</li>
+          </ul>
+          Og abstrakte metoder skrives også i kursiv (men husk: domenemodell har INGEN metoder).
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 my-3 text-sm">
+          <strong>Når BRUKER du abstrakt klasse i domenemodell?</strong>
+          <ol className="list-decimal list-inside mt-1 space-y-0.5">
+            <li>Når superklassen er en konseptuell paraply uten egen «forekomst» — som Rute eller SkjøteRute</li>
+            <li>Når subklassene må klassifisere ALLE objekter — det finnes ingen «vanlig Rute» uten å være StartRute, VanligRute, etc.</li>
+            <li>Når du ikke vil tillate at noen tilfeldigvis lager &laquo;new Rute()&raquo; i koden</li>
+          </ol>
+        </div>
+
+        {/* SVG-eksempel for abstract */}
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
+          <h4 className="font-semibold text-sm mb-3">Eksempel: Rute-hierarkiet (Monopol) med abstrakt klasse</h4>
+          <svg viewBox="0 0 480 220" className="w-full max-w-md mx-auto" role="img" aria-label="Abstract Rute med subklasser">
+            {/* Abstract Rute */}
+            <rect x={170} y={10} width={140} height={50} fill="#faf5ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+            <rect x={170} y={10} width={140} height={24} fill="#f3e8ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+            <line x1={170} y1={34} x2={310} y2={34} stroke="#a855f7" strokeWidth={1} />
+            <text x={240} y={26} textAnchor="middle" fontSize={11} fontStyle="italic" fontWeight={700} fill="currentColor">
+              <tspan fontSize={9} fontWeight={400}>{"«abstract» "}</tspan>Rute
+            </text>
+            <text x={176} y={50} fontSize={10} fill="currentColor">navn</text>
+
+            {/* Subklasser */}
+            <rect x={20} y={150} width={110} height={26} fill="#f0fdf4" stroke="#22c55e" strokeWidth={1.5} rx={3} />
+            <text x={75} y={168} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">StartRute</text>
+            <rect x={185} y={150} width={110} height={26} fill="#f0fdf4" stroke="#22c55e" strokeWidth={1.5} rx={3} />
+            <text x={240} y={168} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">VanligRute</text>
+            <rect x={350} y={150} width={110} height={50} fill="#faf5ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+            <rect x={350} y={150} width={110} height={24} fill="#f3e8ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+            <line x1={350} y1={174} x2={460} y2={174} stroke="#a855f7" strokeWidth={1} />
+            <text x={405} y={166} textAnchor="middle" fontSize={11} fontStyle="italic" fontWeight={700} fill="currentColor">
+              <tspan fontSize={9} fontWeight={400}>{"«abstract» "}</tspan>SkjøteRute
+            </text>
+            <text x={356} y={190} fontSize={10} fill="currentColor">pris</text>
+
+            {/* Arv-pil */}
+            <line x1={240} y1={60} x2={240} y2={95} stroke="#22c55e" strokeWidth={1.5} />
+            <polygon points="240,95 230,113 250,113" fill="white" stroke="#22c55e" strokeWidth={1.5} />
+            <line x1={240} y1={113} x2={240} y2={130} stroke="#22c55e" strokeWidth={1.5} />
+            <line x1={75} y1={130} x2={405} y2={130} stroke="#22c55e" strokeWidth={1.5} />
+            <line x1={75} y1={130} x2={75} y2={150} stroke="#22c55e" strokeWidth={1.5} />
+            <line x1={240} y1={130} x2={240} y2={150} stroke="#22c55e" strokeWidth={1.5} />
+            <line x1={405} y1={130} x2={405} y2={150} stroke="#22c55e" strokeWidth={1.5} />
+          </svg>
+          <p className="text-xs text-[var(--muted)] italic text-center mt-2">
+            Lilla = abstrakt (Rute, SkjøteRute kan ikke instansieres). Grønn = konkret (faktiske
+            ruter på brettet).
+          </p>
+        </div>
+
+        {/* ────── Grensesnitt ────── */}
+        <h3 className="text-lg font-bold mt-6 mb-2">Grensesnitt (interface) — som regel NEI</h3>
+        <p className="text-sm">
+          Et <strong>grensesnitt</strong> er en ren kontrakt — den definerer HVA en klasse må kunne
+          gjøre, uten å si HVORDAN. I Java: <code className="text-xs bg-neutral-200 dark:bg-neutral-700 px-1 rounded">interface Figur &#123; double areal(); &#125;</code>.
+        </p>
+        <p className="text-sm mt-2">
+          <strong>I domenemodell brukes interface SVÆRT SJELDEN.</strong> Domenemodellen
+          handler om virkelige konsepter, og «kontrakter for atferd» er en design-konstruksjon
+          (DCD/utformingsmodell) — ikke et begrep i den virkelige verden.
+        </p>
+        <p className="text-sm mt-2">
+          <strong>Mulige unntak (når interface KAN være gyldig i domenemodell):</strong>
+        </p>
+        <ul className="text-sm list-disc list-inside ml-2 my-2">
+          <li>Når flere ulike domeneklasser deler en rolle (f.eks. <em>Bestillbar</em> for både Hotellrom og Bil i et reisebyrå-domene)</li>
+          <li>Når domenet selv har konsepter som er «rolle» heller enn «type» (sjeldent)</li>
+        </ul>
+        <p className="text-sm mt-2">
+          <strong>I de fleste DAT109-eksamener trenger du IKKE interface i domenemodellen.</strong>{" "}
+          Hvis du er i tvil: dropp det. Bruk vanlig assosiasjon eller spesialisering i stedet.
+          Interface kommer naturlig på plass i utformingsmodell og oppgave 4 (Java-kode).
+        </p>
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 my-3 text-sm">
+          <strong>Notasjon i UML:</strong> Klasse merket med stereotype «interface», eller den
+          runde &laquo;lollipop&raquo;-notasjonen på et klassediagram. Implementasjon vises med
+          stiplet pil med åpen trekant fra implementerende klasse.
+        </div>
+
+        {/* ────── Sammenligning ────── */}
+        <h3 className="text-lg font-bold mt-6 mb-2">Hurtigreferanse</h3>
+        <div className="overflow-x-auto my-3">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--card-border)]">
+                <th className="text-left py-2 pr-4 font-semibold">Konstruksjon</th>
+                <th className="text-left py-2 pr-4 font-semibold">I domenemodell?</th>
+                <th className="text-left py-2 font-semibold">Notasjon</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--card-border)]">
+              <tr>
+                <td className="py-2 pr-4 font-medium">Vanlig klasse</td>
+                <td className="py-2 pr-4 text-green-700 dark:text-green-400">Ja, alltid</td>
+                <td className="py-2 text-xs">Grønn boks med navn + attributter (ingen metoder!)</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Vanlig assosiasjon</td>
+                <td className="py-2 pr-4 text-green-700 dark:text-green-400">Ja, standardvalget</td>
+                <td className="py-2 text-xs">Strek + multiplisitet i begge ender</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Spesialisering (arv)</td>
+                <td className="py-2 pr-4 text-green-700 dark:text-green-400">Ja, ved tydelige undertyper</td>
+                <td className="py-2 text-xs">Pil med åpen trekant fra subklasse til superklasse</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Abstrakt klasse</td>
+                <td className="py-2 pr-4 text-green-700 dark:text-green-400">Ja, når superklasse ikke skal instansieres</td>
+                <td className="py-2 text-xs">Kursiv klassenavn ELLER «abstract» stereotype</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Aggregering (◇)</td>
+                <td className="py-2 pr-4 text-amber-700 dark:text-amber-400">Sjelden — vanligvis i utformingsmodell</td>
+                <td className="py-2 text-xs">Åpen diamant ved &laquo;eier&raquo;-siden</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Komposisjon (◆)</td>
+                <td className="py-2 pr-4 text-amber-700 dark:text-amber-400">Sjelden — Atle bruker IKKE i domenemodell</td>
+                <td className="py-2 text-xs">Fylt diamant ved &laquo;eier&raquo;-siden</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Grensesnitt (interface)</td>
+                <td className="py-2 pr-4 text-red-700 dark:text-red-400">Nei, som regel ikke — hører i utformingsmodell</td>
+                <td className="py-2 text-xs">«interface» stereotype eller lollipop-notasjon</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Metoder</td>
+                <td className="py-2 pr-4 text-red-700 dark:text-red-400">ALDRI — domenemodell har bare attributter</td>
+                <td className="py-2 text-xs">—</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </TheorySummary>
     </div>
