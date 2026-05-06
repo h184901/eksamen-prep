@@ -470,7 +470,7 @@ export default function EksamenPage() {
           "En klasse er en referanse til et objekt",
         ]}
         correctIndex={1}
-        explanation="En klasse er malen/typen — den definerer hvilke attributter og metoder objekter av denne typen skal ha. Et objekt er en konkret forekomst av klassen. Eksempel: `Spiller s = new Spiller(\"Erlend\")` — Spiller er klassen, s er objektet."
+        explanation={`En klasse er malen/typen — den definerer hvilke attributter og metoder objekter av denne typen skal ha. Et objekt er en konkret forekomst av klassen. Eksempel: \`Spiller s = new Spiller("Erlend")\` — Spiller er klassen, s er objektet.`}
         principle="OOP-grunnlag"
       />
 
@@ -582,7 +582,7 @@ export default function EksamenPage() {
 
       <QuizQuestion
         number="B1"
-        question="I et UML-diagram bruker klassen 'StudentListe' grensesnittet 'OrdnetListe<E>' istedenfor den konkrete klassen 'TabellOrdnetListe<E>'. Hvilket GRASP-prinsipp demonstreres her?"
+        question={`I et UML-diagram bruker klassen 'StudentListe' grensesnittet 'OrdnetListe<E>' istedenfor den konkrete klassen 'TabellOrdnetListe<E>'. Hvilket GRASP-prinsipp demonstreres her?`}
         options={[
           "Information Expert",
           "Creator",
