@@ -416,6 +416,164 @@ export default function EksamenPage() {
         principle="High Cohesion"
       />
 
+      {/* ═══════ V2024 — OOP-fundamentale + UML ═══════ */}
+      <h2 className="text-2xl font-bold mb-2 mt-10">Eksamen vår 2024 — OOP-fundamenter og UML</h2>
+      <p className="text-sm text-[var(--muted)] mb-4">
+        Helt nye temaer fra V2024 som ikke var i tidligere eksamener: grunnleggende OOP-begreper og UML-diagrammer.
+      </p>
+
+      {/* Hvorfor-boks for OOP-fundamenter */}
+      <div className="rounded-xl border-2 border-purple-400/40 bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-950/30 dark:to-fuchsia-950/20 p-5 mb-6">
+        <h3 className="font-bold text-purple-700 dark:text-purple-400 mb-2">
+          Hvorfor du må kunne dette
+        </h3>
+        <p className="text-sm mb-3">
+          Tidligere eksamener fokuserte tungt på SOLID/GRASP. V2024 testet også <strong>grunnleggende
+          OOP-begreper</strong> og <strong>UML-formål</strong> direkte. Disse er enkle hvis du kan dem,
+          men knirkete hvis du blander dem sammen.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3 text-xs">
+          <div className="rounded-lg bg-white/70 dark:bg-neutral-900/60 border border-purple-200/60 dark:border-purple-800/40 p-3">
+            <strong className="text-purple-700 dark:text-purple-400">De 4 OOP-prinsippene:</strong>
+            <ul className="mt-1 space-y-0.5">
+              <li>• <strong>Abstraction</strong> — ignorer detaljer, behold det viktige</li>
+              <li>• <strong>Encapsulation</strong> — skjul HVORDAN bak grensesnitt</li>
+              <li>• <strong>Inheritance</strong> — gjenbruk via subklasser</li>
+              <li>• <strong>Polymorphism</strong> — én form, mange implementasjoner</li>
+            </ul>
+            <p className="mt-2 italic text-[var(--muted)]">
+              Generalization er en RELASJON i UML, ikke et OOP-prinsipp.
+            </p>
+          </div>
+          <div className="rounded-lg bg-white/70 dark:bg-neutral-900/60 border border-purple-200/60 dark:border-purple-800/40 p-3">
+            <strong className="text-purple-700 dark:text-purple-400">UML-diagrammer:</strong>
+            <ul className="mt-1 space-y-0.5">
+              <li>• <strong>Klassediagram</strong> — STRUKTUR (klasser + relasjoner)</li>
+              <li>• <strong>Sekvensdiagram</strong> — OBJEKTER over TID (meldinger)</li>
+              <li>• <strong>Brukstilfellediagram</strong> — aktører + funksjonalitet</li>
+              <li>• <strong>Domenemodell</strong> — begreper i problemområdet</li>
+            </ul>
+            <p className="mt-2 italic text-[var(--muted)]">
+              Klasse vs. objekt: klassen er malen, objektet er forekomsten.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <QuizQuestion
+        number="2h"
+        question="Hva er forskjellen mellom en klasse og et objekt?"
+        options={[
+          "En klasse er en spesifikk instans av et objekt",
+          "En klasse beskriver en samling av objekter som har like egenskaper og atferd, mens et objekt er en spesifikk instans av en klasse",
+          "En klasse er en metode for å initialisere et objekt",
+          "En klasse er en referanse til et objekt",
+        ]}
+        correctIndex={1}
+        explanation="En klasse er malen/typen — den definerer hvilke attributter og metoder objekter av denne typen skal ha. Et objekt er en konkret forekomst av klassen. Eksempel: `Spiller s = new Spiller(\"Erlend\")` — Spiller er klassen, s er objektet."
+        principle="OOP-grunnlag"
+      />
+
+      <QuizQuestion
+        number="2i"
+        question='"Allows us to consider complex ideas while ignoring irrelevant detail that would confuse us." Hvilket OOP-prinsipp beskrives?'
+        options={[
+          "Abstraction",
+          "Encapsulation",
+          "Generalisation",
+          "Polymorphism",
+          "Object",
+        ]}
+        correctIndex={0}
+        explanation="Dette er ordrett definisjonen av abstraksjon. Vi modellerer det viktige (f.eks. at en bil har hastighet og kan akselerere) og ignorerer detaljer (motorens indre kjemi). Abstraction = mental modell."
+        principle="Abstraction"
+      />
+
+      <QuizQuestion
+        number="2j"
+        question='"Allows us to focus on what something does without considering the complexities of how it works." Hvilket OOP-prinsipp beskrives?'
+        options={[
+          "Abstraction",
+          "Encapsulation",
+          "Generalisation",
+          "Polymorphism",
+          "Object",
+        ]}
+        correctIndex={1}
+        explanation="Innkapsling skjuler HVORDAN bak et grensesnitt. Du bruker `list.add(x)` uten å vite om det er en lenket liste eller tabell. Forskjellen fra abstraksjon: abstraksjon = velger HVA vi modellerer, encapsulation = skjuler HVORDAN det er implementert."
+        principle="Encapsulation"
+      />
+
+      <QuizQuestion
+        number="2k"
+        question="Hvilket av følgende er IKKE et av de essensielle OOP-prinsippene?"
+        options={[
+          "Abstraction",
+          "Inheritance",
+          "Polymorphism",
+          "Generalization",
+        ]}
+        correctIndex={3}
+        explanation="De 4 essensielle OOP-prinsippene er Abstraction, Encapsulation, Inheritance og Polymorphism. Generalization er en RELASJON i UML (subklasse → superklasse), ikke et grunnprinsipp."
+        principle="OOP-grunnlag"
+      />
+
+      <QuizQuestion
+        number="2l"
+        question="Et objekt har _________."
+        options={[
+          "Attributes",
+          "Behaviour",
+          "State",
+          "All of these",
+        ]}
+        correctIndex={3}
+        explanation="Et objekt har attributter (felt), oppførsel (metoder) og tilstand (verdiene i feltene på et gitt tidspunkt). Identitet kan også nevnes (objekter er forskjellige selv med samme tilstand). Fra F16 slide 6."
+        principle="OOP-grunnlag"
+      />
+
+      <QuizQuestion
+        number="2m"
+        question="Hva er formålet med et sekvensdiagram i UML?"
+        options={[
+          "Å vise strukturen til et system",
+          "Å vise hvordan objekter samhandler over tid",
+          "Å vise brukerinteraksjoner",
+          "Å vise organisasjonsstrukturen",
+        ]}
+        correctIndex={1}
+        explanation="Sekvensdiagram viser OBJEKTSAMHANDLING over TID — vertikale livslinjer for hvert objekt og horisontale meldingspiler mellom dem. STRUKTUR = klassediagram. BRUKERINTERAKSJON = brukstilfellediagram."
+        principle="UML"
+      />
+
+      <QuizQuestion
+        number="2n"
+        question="Hvilke av følgende er en fordel med å bruke UML?"
+        options={[
+          "Enklere kommunikasjon mellom utviklere",
+          "Bedre forståelse av systemets struktur og funksjonalitet",
+          "Hjelp til å identifisere feil og problemer tidlig i utviklingsfasen",
+          "Alle de ovennevnte",
+        ]}
+        correctIndex={3}
+        explanation="UML er et felles språk: alle utviklere forstår notasjonen (kommunikasjon), diagrammene viser system tydelig (forståelse), og man kan oppdage designfeil før koden skrives (tidlig feilavdekking). Alle tre er reelle fordeler."
+        principle="UML"
+      />
+
+      <QuizQuestion
+        number="2o"
+        question="Hva er formålet med et klassediagram i UML?"
+        options={[
+          "Å vise strukturen til et system og relaterte klasser",
+          "Å vise sekvensen av interaksjoner",
+          "Å vise brukergrensesnittet",
+          "Å vise hvordan data flyter",
+        ]}
+        correctIndex={0}
+        explanation="Klassediagram viser STRUKTUREN: hvilke klasser systemet har, hvilke attributter og metoder de har, og hvordan de er relatert (assosiasjon, generalisering, avhengighet). Sekvens av interaksjoner = sekvensdiagram."
+        principle="UML"
+      />
+
       {/* Ekstra drilling: Eldre eksamener */}
       <h2 className="text-2xl font-bold mb-2 mt-10">Bonusoppgaver — Eldre eksamener (2020-2022)</h2>
       <p className="text-sm text-[var(--muted)] mb-4">

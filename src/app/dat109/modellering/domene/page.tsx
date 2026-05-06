@@ -113,6 +113,16 @@ export default function DomenePage() {
 
         {/* Assosiasjonstyper */}
         <h3 className="text-lg font-bold">Assosiasjonstyper</h3>
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-800 p-3 my-3">
+          <p className="text-sm">
+            <strong>Atles regel:</strong> aggregering og komposisjon hører normalt
+            <strong> ikke</strong> hjemme i domenemodellen — disse hører til
+            <strong> utformingsmodell og DCD</strong>. I domenemodellen bruker du vanlig
+            assosiasjon (strek) med multiplisitet, og spesialisering der det er tydelige
+            undertyper. Tabellen under viser likevel alle fire — slik at du kjenner igjen
+            symbolene når du møter dem i utformingsmodeller.
+          </p>
+        </div>
         <div className="overflow-x-auto my-4">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -283,6 +293,203 @@ export default function DomenePage() {
           </ul>
         </div>
       </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
+          SPESIALISERING — ATLES REGEL
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="3. Spesialisering i domenemodellen — Atles regel"
+        mustKnow={[
+          "Domenemodell: bruk vanlig assosiasjon + multiplisitet, og spesialisering ved tydelige undertyper",
+          "IKKE bruk aggregering/komposisjon i domenemodell — det hører til utformingsmodell/DCD",
+          "Spesialisering brukes kun når subklassene faktisk er ulike (oppførsel, attributter, assosiasjoner)",
+          "Et størrelses-attributt (Small/Medium/Large) er IKKE en spesialisering",
+        ]}
+      >
+        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-2">
+          <h4 className="font-bold text-red-700 dark:text-red-400 text-sm mb-2">
+            KRITISK regel fra professor Atle Geitung
+          </h4>
+          <p className="text-sm">
+            Atle sier eksplisitt: i <strong>domenemodellen</strong> skal du normalt
+            <strong> IKKE bruke aggregering eller komposisjon</strong>. Disse hører til
+            <strong> utformingsmodell og DCD</strong>. I domenemodellen bruker du
+            <strong> vanlige assosiasjoner med multiplisitet</strong> og
+            <strong> SPESIALISERING (arv)</strong> der subklassene faktisk er ulike.
+          </p>
+          <p className="text-sm mt-2">
+            Bruker du komposisjon eller aggregering i domenemodellen uten klar grunn, kan
+            det <strong>koste deg poeng på eksamen</strong>.
+          </p>
+        </div>
+
+        <h3 className="text-lg font-bold mt-4">Hva er spesialisering?</h3>
+        <p>
+          <strong>Spesialisering</strong> (også kalt <em>generalisering</em> eller arv) er en
+          <strong> «er-en»-relasjon</strong>: subklassen ER en variant av superklassen, men har
+          noe ekstra eller annerledes. UML-symbolet er en
+          <strong> åpen trekant</strong> som peker fra subklassen mot superklassen.
+        </p>
+
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
+          <h4 className="font-semibold mb-3 text-sm">UML-symbol: åpen trekant peker mot superklassen</h4>
+          <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">
+            <SpesialiseringSvg />
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold">Når BRUKER du spesialisering i domenemodellen?</h3>
+        <p className="text-sm mb-2">
+          Atles retningslinjer fra F06 — bruk spesialisering hvis <strong>minst én</strong> av
+          disse stemmer:
+        </p>
+        <ul className="list-disc list-inside space-y-1 text-sm">
+          <li>Subklassen har <strong>ekstra attributter</strong> som superklassen ikke har.</li>
+          <li>Subklassen har <strong>ekstra assosiasjoner</strong> til andre klasser.</li>
+          <li>Subklassen <strong>oppfører seg annerledes</strong> (polymorfi — samme metode, ulik effekt).</li>
+          <li>Subklassen representerer noe <strong>konseptuelt ulikt</strong> i problemdomenet.</li>
+        </ul>
+
+        <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
+          <h4 className="font-bold text-green-700 dark:text-green-400 text-sm mb-2">
+            Klassisk eksempel — Monopol (RIKTIG bruk)
+          </h4>
+          <p className="text-sm mb-2">
+            <code>Rute</code> er abstrakt. Subklassene <code>StartRute</code>,
+            <code> VanligRute</code>, <code>InntektsskattRute</code>, <code>SkjøteRute</code>
+            er spesialiseringer — fordi de <strong>oppfører seg helt forskjellig</strong>
+            når en spiller lander på dem:
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-0.5">
+            <li><code>StartRute</code> → spilleren får 4000 kr.</li>
+            <li><code>InntektsskattRute</code> → spilleren betaler 10 % skatt.</li>
+            <li><code>SkjøteRute</code> → spilleren kan kjøpe eller betale leie.</li>
+            <li><code>VanligRute</code> → ingenting skjer.</li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Polymorfi-test:</strong> kan vi tenke oss en metode <code>landetPå(Spiller)</code> som
+            har <em>ulik kropp per subklasse</em>? Ja → spesialisering er riktig.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-4 my-4">
+          <h4 className="font-bold text-red-700 dark:text-red-400 text-sm mb-2">
+            Anti-eksempel — IKKE bruk spesialisering her
+          </h4>
+          <p className="text-sm mb-2">
+            Et kortspill der kort kan være «små», «mellomstore» eller «store». Det er
+            fristende å lage <code>SmallCard</code>, <code>MediumCard</code>,
+            <code> LargeCard</code> — men det er FEIL.
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-0.5">
+            <li>De har samme attributter.</li>
+            <li>De har ingen ulik oppførsel — størrelse er bare en verdi.</li>
+            <li>De er ikke konseptuelt ulike — det er samme type kort.</li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Riktig:</strong> én klasse <code>Kort</code> med attributtet
+            <code> størrelse: Størrelse</code> (enum eller verdi).
+          </p>
+        </div>
+
+        <h3 className="text-lg font-bold">Ja-bruk vs nei-bruk — sjekkliste</h3>
+        <div className="overflow-x-auto my-4">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--card-border)]">
+                <th className="text-left py-2 pr-4 font-semibold">Situasjon</th>
+                <th className="text-left py-2 font-semibold">Bruk spesialisering?</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--card-border)]">
+              <tr>
+                <td className="py-2 pr-4">Subklassen har et felt superklassen ikke har</td>
+                <td className="py-2 text-green-700 dark:text-green-400 font-semibold">JA</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Subklassen har en relasjon superklassen ikke har</td>
+                <td className="py-2 text-green-700 dark:text-green-400 font-semibold">JA</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Samme metode skal gjøre ulik ting per subtype</td>
+                <td className="py-2 text-green-700 dark:text-green-400 font-semibold">JA</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Forskjellen er bare en attributtverdi (str, farge, navn)</td>
+                <td className="py-2 text-red-700 dark:text-red-400 font-semibold">NEI — bruk attributt</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">Forskjellen er en tilstand objektet skifter mellom over tid</td>
+                <td className="py-2 text-red-700 dark:text-red-400 font-semibold">NEI — bruk tilstandshierarki/enum</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">«Det føles fint å ha mange klasser»</td>
+                <td className="py-2 text-red-700 dark:text-red-400 font-semibold">NEI (bryter KISS/YAGNI)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+          <h4 className="font-bold text-blue-700 dark:text-blue-400 text-sm mb-2">
+            Sammendrag — hva du tegner i domenemodell
+          </h4>
+          <ul className="text-sm list-disc list-inside space-y-1">
+            <li><strong>Vanlig assosiasjon (strek)</strong> + multiplisitet — standardvalget.</li>
+            <li><strong>Spesialisering (åpen trekant)</strong> — når subklassene er reelt ulike.</li>
+            <li><strong>Aggregering/komposisjon (diamanter)</strong> — kun unntaksvis, og kun hvis levetid eller eierskap er <em>kritisk</em> for forståelsen. Hører normalt i utformingsmodell.</li>
+          </ul>
+        </div>
+      </TheorySummary>
     </div>
+  );
+}
+
+/* ── SVG: Spesialisering — Rute med subklasser (illustrerer åpen trekant) ── */
+function SpesialiseringSvg() {
+  const stroke = "#22c55e";
+  return (
+    <svg viewBox="0 0 480 240" className="w-full max-w-md mx-auto" role="img" aria-label="Spesialisering — Rute med subklasser">
+      {/* Superklasse */}
+      <g>
+        <rect x={180} y={10} width={120} height={50} fill="#faf5ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+        <rect x={180} y={10} width={120} height={24} fill="#f3e8ff" stroke="#a855f7" strokeWidth={1.5} rx={3} />
+        <rect x={180.75} y={28} width={118.5} height={6} fill="#f3e8ff" />
+        <line x1={180} y1={34} x2={300} y2={34} stroke="#a855f7" strokeWidth={1} />
+        <text x={240} y={26} textAnchor="middle" fontSize={11} fontWeight={700} fontStyle="italic" fill="currentColor">
+          <tspan fontSize={9} fontWeight={400}>{"«abstract» "}</tspan>Rute
+        </text>
+        <text x={186} y={50} fontSize={10} fill="currentColor">navn</text>
+      </g>
+
+      {/* Subklasser */}
+      <g>
+        <rect x={20} y={170} width={120} height={26} fill="#f0fdf4" stroke={stroke} strokeWidth={1.5} rx={3} />
+        <text x={80} y={188} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">StartRute</text>
+      </g>
+      <g>
+        <rect x={180} y={170} width={120} height={26} fill="#f0fdf4" stroke={stroke} strokeWidth={1.5} rx={3} />
+        <text x={240} y={188} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">VanligRute</text>
+      </g>
+      <g>
+        <rect x={340} y={170} width={120} height={26} fill="#f0fdf4" stroke={stroke} strokeWidth={1.5} rx={3} />
+        <text x={400} y={188} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">FengselRute</text>
+      </g>
+
+      {/* Arv-pil med åpen trekant */}
+      <line x1={240} y1={60} x2={240} y2={95} stroke={stroke} strokeWidth={1.5} />
+      <polygon points="240,95 230,113 250,113" fill="white" stroke={stroke} strokeWidth={1.5} />
+      {/* Buss */}
+      <line x1={240} y1={113} x2={240} y2={135} stroke={stroke} strokeWidth={1.5} />
+      <line x1={80} y1={135} x2={400} y2={135} stroke={stroke} strokeWidth={1.5} />
+      <line x1={80} y1={135} x2={80} y2={170} stroke={stroke} strokeWidth={1.5} />
+      <line x1={240} y1={135} x2={240} y2={170} stroke={stroke} strokeWidth={1.5} />
+      <line x1={400} y1={135} x2={400} y2={170} stroke={stroke} strokeWidth={1.5} />
+
+      {/* Forklaring */}
+      <text x={240} y={222} textAnchor="middle" fontSize={10} fill="currentColor" fontStyle="italic">
+        Åpen trekant peker mot superklassen — leses som «er-en»
+      </text>
+    </svg>
   );
 }
