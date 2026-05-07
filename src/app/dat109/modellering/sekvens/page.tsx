@@ -35,6 +35,177 @@ export default function SekvensPage() {
       </div>
 
       {/* ═══════════════════════════════════════════
+          SSD vs SEKVENSDIAGRAM (Larman kap. 10)
+          ═══════════════════════════════════════════ */}
+      <TheorySummary
+        title="0. System Sequence Diagram (SSD) vs sekvensdiagram — VIKTIG distinksjon"
+        mustKnow={[
+          "SSD = system som black box. Viser system-events (eks. enterItem) fra aktør til SYSTEMET som ÉN boks.",
+          "Sekvensdiagram (interaction diagram) = inne i systemet. Viser meldinger MELLOM objekter.",
+          "Larman: SSD er input til design. Sekvensdiagram (objekt-til-objekt) er output av design.",
+          "Atle bruker BEGGE — SSD i analyse, vanlig sekvensdiagram i design (oppgave 1c).",
+          "Samme UML-notasjon (livslinjer, meldinger, loop). Forskjellen er ABSTRAKSJONSNIVÅ.",
+        ]}
+      >
+        <p>
+          Dette er en distinksjon mange studenter overser. Larman bruker hele <strong>kapittel 10</strong> i
+          <em> Applying UML and Patterns</em> bare på <strong>System Sequence Diagram (SSD)</strong> —
+          det er noe annet enn det &laquo;vanlige&raquo; sekvensdiagrammet du tegner i oppgave 1c.
+          UML-notasjonen er identisk; forskjellen er hva diagrammet viser.
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 my-4">
+          <div className="rounded-xl border-2 border-blue-300 dark:border-blue-700 bg-blue-50/60 dark:bg-blue-950/30 p-4">
+            <p className="font-bold text-blue-800 dark:text-blue-300 mb-2">SSD — System Sequence Diagram</p>
+            <p className="text-sm mb-2"><strong>Hva:</strong> Aktør sender system-events til SYSTEMET som ÉN black box.</p>
+            <p className="text-sm mb-2"><strong>Bokser:</strong> 1 aktør (venstre) + 1 system-boks (høyre, navngitt <code>:System</code>).</p>
+            <p className="text-sm mb-2"><strong>Meldinger:</strong> Abstrakte system-operasjoner: <code>enterItem(id, qty)</code>, <code>makePayment(beløp)</code>, <code>initialize(numOfPlayers)</code>, <code>playGame</code>.</p>
+            <p className="text-sm mb-2"><strong>Når i prosessen:</strong> Etter brukstilfellebeskrivelsen, FØR objektdesign. Brukes som <em>input</em> til design.</p>
+            <p className="text-sm"><strong>Larman 10.4:</strong> &laquo;UML har ikke noe som heter <em>system</em> sequence diagram — det er bare et sekvensdiagram brukt på systemet som black box.&raquo;</p>
+          </div>
+
+          <div className="rounded-xl border-2 border-green-300 dark:border-green-700 bg-green-50/60 dark:bg-green-950/30 p-4">
+            <p className="font-bold text-green-800 dark:text-green-300 mb-2">Sekvensdiagram (interaction diagram)</p>
+            <p className="text-sm mb-2"><strong>Hva:</strong> Detaljert interaksjon MELLOM objekter inne i systemet.</p>
+            <p className="text-sm mb-2"><strong>Bokser:</strong> Mange objekter (Spill, Spiller, Brett, Brikke, Terning ...).</p>
+            <p className="text-sm mb-2"><strong>Meldinger:</strong> Konkrete metodekall: <code>spiller.spillTrekk()</code>, <code>brett.flytt(rute, sum)</code>, <code>terning.trill()</code>.</p>
+            <p className="text-sm mb-2"><strong>Når i prosessen:</strong> I design (etter SSD). Realiserer system-operasjonene fra SSDen.</p>
+            <p className="text-sm"><strong>Eksamenoppgave 1c:</strong> Det er DETTE Atle ber om — interaction diagram med objekter, ansvarsfordeling (GRASP) og kobling til Java-koden i oppgave 4.</p>
+          </div>
+        </div>
+
+        {/* Visualisering: SSD (venstre) vs vanlig sekvensdiagram (høyre) */}
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
+          <h4 className="font-semibold mb-3">Sammenligning visuelt — Monopol</h4>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-3">
+              <p className="text-xs font-bold text-blue-700 dark:text-blue-400 mb-2">SSD (Larman 10.9)</p>
+              <svg viewBox="0 0 320 230" className="w-full" role="img" aria-label="SSD for Play Monopoly Game">
+                {/* Aktør */}
+                <circle cx="40" cy="20" r="7" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                <line x1="40" y1="27" x2="40" y2="42" stroke="currentColor" strokeWidth="1.4" />
+                <line x1="30" y1="32" x2="50" y2="32" stroke="currentColor" strokeWidth="1.4" />
+                <line x1="40" y1="42" x2="32" y2="55" stroke="currentColor" strokeWidth="1.4" />
+                <line x1="40" y1="42" x2="48" y2="55" stroke="currentColor" strokeWidth="1.4" />
+                <text x="40" y="70" textAnchor="middle" fontSize="9" fill="currentColor">:Observer</text>
+                <line x1="40" y1="73" x2="40" y2="220" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+
+                {/* System (ÉN boks) */}
+                <rect x="225" y="55" width="80" height="22" fill="#3b82f6" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" />
+                <text x="265" y="70" textAnchor="middle" fontSize="9" fill="currentColor">:System</text>
+                <line x1="265" y1="77" x2="265" y2="220" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+
+                {/* initialize */}
+                <line x1="40" y1="100" x2="260" y2="100" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="260,100 254,96 254,104" fill="currentColor" />
+                <text x="150" y="95" textAnchor="middle" fontSize="9" fill="currentColor">initialize(numOfPlayers)</text>
+
+                {/* playGame */}
+                <line x1="40" y1="135" x2="260" y2="135" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="260,135 254,131 254,139" fill="currentColor" />
+                <text x="150" y="130" textAnchor="middle" fontSize="9" fill="currentColor">playGame</text>
+
+                {/* loop fragment */}
+                <rect x="60" y="155" width="220" height="55" fill="none" stroke="#a855f7" strokeWidth="1.3" />
+                <rect x="60" y="155" width="50" height="14" fill="#a855f7" fillOpacity="0.15" stroke="#a855f7" strokeWidth="1.3" />
+                <text x="68" y="165" fontSize="9" fontWeight="700" fill="#a855f7">loop</text>
+                <text x="155" y="165" fontSize="9" fill="currentColor">[no winner]</text>
+                <line x1="265" y1="190" x2="50" y2="190" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4,2" />
+                <polygon points="50,190 56,186 56,194" fill="currentColor" />
+                <text x="155" y="185" textAnchor="middle" fontSize="8" fill="currentColor" fontStyle="italic">dice total, player, square</text>
+              </svg>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200 mt-2 italic">
+                Bare ÉN systemboks. Kun 2 system-events: <code>initialize</code> og{" "}
+                <code>playGame</code>. Sier INGENTING om interne objekter.
+              </p>
+            </div>
+
+            <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-3">
+              <p className="text-xs font-bold text-green-700 dark:text-green-400 mb-2">Vanlig sekvensdiagram (Atles oppgave 1c)</p>
+              <svg viewBox="0 0 320 230" className="w-full" role="img" aria-label="Detaljert sekvensdiagram">
+                {/* Mange objekter */}
+                {[
+                  { x: 30, name: ":Spill" },
+                  { x: 110, name: ":Spiller" },
+                  { x: 185, name: ":Kopp" },
+                  { x: 260, name: ":Brett" },
+                ].map((o) => (
+                  <g key={o.name}>
+                    <rect x={o.x - 25} y="10" width="55" height="20" fill="#22c55e" fillOpacity="0.2" stroke="#22c55e" strokeWidth="1.3" />
+                    <text x={o.x + 2} y="24" textAnchor="middle" fontSize="9" fill="currentColor">{o.name}</text>
+                    <line x1={o.x + 2} y1="30" x2={o.x + 2} y2="220" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+                  </g>
+                ))}
+
+                {/* spillTrekk fra Spill til Spiller */}
+                <line x1="32" y1="55" x2="110" y2="55" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="110,55 104,51 104,59" fill="currentColor" />
+                <text x="71" y="51" textAnchor="middle" fontSize="9" fill="currentColor">spillTrekk()</text>
+                <rect x="108" y="55" width="6" height="155" fill="#22c55e" fillOpacity="0.4" />
+
+                {/* trill fra Spiller til Kopp */}
+                <line x1="114" y1="80" x2="185" y2="80" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="185,80 179,76 179,84" fill="currentColor" />
+                <text x="149" y="76" textAnchor="middle" fontSize="9" fill="currentColor">trill()</text>
+
+                {/* getSum fra Spiller til Kopp */}
+                <line x1="114" y1="105" x2="185" y2="105" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="185,105 179,101 179,109" fill="currentColor" />
+                <text x="149" y="101" textAnchor="middle" fontSize="9" fill="currentColor">sum=getSum()</text>
+
+                {/* flytt fra Spiller til Brett */}
+                <line x1="114" y1="130" x2="260" y2="130" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="260,130 254,126 254,134" fill="currentColor" />
+                <text x="187" y="126" textAnchor="middle" fontSize="9" fill="currentColor">flytt(rute, sum)</text>
+
+                {/* return */}
+                <line x1="260" y1="160" x2="114" y2="160" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4,2" />
+                <polygon points="114,160 120,156 120,164" fill="currentColor" />
+                <text x="187" y="156" textAnchor="middle" fontSize="8" fill="currentColor" fontStyle="italic">nyRute</text>
+
+                {/* setRute fra Spiller til seg selv (forenklet) */}
+                <line x1="116" y1="190" x2="155" y2="190" stroke="currentColor" strokeWidth="1.3" />
+                <line x1="155" y1="190" x2="155" y2="200" stroke="currentColor" strokeWidth="1.3" />
+                <line x1="155" y1="200" x2="116" y2="200" stroke="currentColor" strokeWidth="1.3" />
+                <polygon points="116,200 122,196 122,204" fill="currentColor" />
+                <text x="160" y="200" fontSize="9" fill="currentColor">setRute(nyRute)</text>
+              </svg>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200 mt-2 italic">
+                FLERE objekter. Meldinger mellom dem (informasjonsekspert: Brettet finner ny rute).
+                Hver melding blir til en metode i Java.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
+          <h4 className="font-bold text-blue-700 dark:text-blue-400 text-sm mb-2">
+            Larmans flyt — fra brukstilfelle via SSD til design
+          </h4>
+          <ol className="text-sm list-decimal list-inside space-y-1">
+            <li><strong>Brukstilfellebeskrivelse</strong> — &laquo;Observer requests new game initialization, enters number of players. Observer starts play. System displays game trace ...&raquo;</li>
+            <li><strong>SSD</strong> — gjør stegene konkrete som system-events: <code>initialize(numOfPlayers)</code>, <code>playGame</code>. Systemet er én black box.</li>
+            <li><strong>Operation contracts</strong> (Larman kap. 11) — postcondition for hver system-operasjon (valgfritt — Atle bruker dette sjelden).</li>
+            <li><strong>Domenemodell</strong> — finner objektene (Spill, Spiller, Brett, Brikke, Rute, Terning ...).</li>
+            <li><strong>Sekvensdiagram (interaction diagram)</strong> — designer hvordan objektene samarbeider for å realisere én system-operasjon. Bruker GRASP for å fordele ansvar.</li>
+            <li><strong>Java-kode (oppgave 4)</strong> — meldingene blir til metoder.</li>
+          </ol>
+        </div>
+
+        <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-3 my-3 text-sm">
+          <p className="font-semibold text-amber-700 dark:text-amber-400 mb-1">Når trenger du å vite forskjellen?</p>
+          <p>
+            På DAT109-eksamen heter oppgave 1c &laquo;sekvensdiagram&raquo; uten kvalifikator —
+            Atle vil <strong>nesten alltid</strong> ha det detaljerte interaction diagram med
+            objekter (høyre side ovenfor). Men hvis oppgaveteksten bruker formuleringer som{" "}
+            <em>&laquo;system-events&raquo;</em>, <em>&laquo;system as black box&raquo;</em> eller{" "}
+            <em>&laquo;input/output events&raquo;</em>, er det SSD som er ønsket. Sjekk
+            forelesningsdraftene fra Atle hvor begge varianter brukes.
+          </p>
+        </div>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════
           SEKVENSDIAGRAM
           ═══════════════════════════════════════════ */}
       <TheorySummary
@@ -182,9 +353,66 @@ export default function SekvensPage() {
           </ol>
         </div>
 
+        {/* Larman Monopoly SSD (10.9) som referanse */}
+        <div className="rounded-xl border-2 border-purple-300 dark:border-purple-700 bg-purple-50/50 dark:bg-purple-950/20 p-5 my-4">
+          <div className="flex items-baseline gap-2 mb-2">
+            <h4 className="font-bold text-purple-800 dark:text-purple-300">Larmans Monopoly SSD (kap. 10.9)</h4>
+            <span className="text-xs text-[var(--muted)]">Applying UML and Patterns 3rd ed., Figure 10.5</span>
+          </div>
+          <p className="text-sm mb-3">
+            For sammenligning: dette er det Larman tegner som SSD for &laquo;Play Monopoly Game&raquo;.
+            Legg merke til hvor MINIMALT det er — bare to system-events, og en loop som returnerer
+            en trace.
+          </p>
+          <div className="bg-white/80 dark:bg-neutral-900/90 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+            <svg viewBox="0 0 360 250" className="w-full max-w-md mx-auto" role="img" aria-label="Larmans SSD for Play Monopoly Game">
+              {/* Aktør */}
+              <circle cx="50" cy="22" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="50" y1="30" x2="50" y2="48" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="38" y1="36" x2="62" y2="36" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="50" y1="48" x2="40" y2="62" stroke="currentColor" strokeWidth="1.5" />
+              <line x1="50" y1="48" x2="60" y2="62" stroke="currentColor" strokeWidth="1.5" />
+              <text x="50" y="80" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="600">:Observer</text>
+              <line x1="50" y1="84" x2="50" y2="240" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+
+              {/* System box */}
+              <rect x="265" y="65" width="80" height="26" fill="#a855f7" fillOpacity="0.2" stroke="#a855f7" strokeWidth="1.6" />
+              <text x="305" y="82" textAnchor="middle" fontSize="11" fill="currentColor" fontWeight="600">:System</text>
+              <line x1="305" y1="91" x2="305" y2="240" stroke="currentColor" strokeWidth="1" strokeDasharray="3,3" />
+
+              {/* initialize(numOfPlayers) */}
+              <line x1="50" y1="115" x2="300" y2="115" stroke="currentColor" strokeWidth="1.4" />
+              <polygon points="300,115 292,110 292,120" fill="currentColor" />
+              <text x="175" y="110" textAnchor="middle" fontSize="11" fill="currentColor">initialize(numOfPlayers)</text>
+
+              {/* playGame */}
+              <line x1="50" y1="150" x2="300" y2="150" stroke="currentColor" strokeWidth="1.4" />
+              <polygon points="300,150 292,145 292,155" fill="currentColor" />
+              <text x="175" y="145" textAnchor="middle" fontSize="11" fill="currentColor">playGame</text>
+
+              {/* Loop frame */}
+              <rect x="80" y="170" width="240" height="60" fill="none" stroke="#a855f7" strokeWidth="1.4" />
+              <rect x="80" y="170" width="55" height="16" fill="#a855f7" fillOpacity="0.18" stroke="#a855f7" strokeWidth="1.4" />
+              <text x="90" y="183" fontSize="10" fontWeight="700" fill="#a855f7">loop</text>
+              <text x="170" y="183" fontSize="10" fill="currentColor">[no winner]</text>
+
+              {/* return arrow */}
+              <line x1="305" y1="210" x2="58" y2="210" stroke="currentColor" strokeWidth="1.3" strokeDasharray="5,3" />
+              <polygon points="58,210 66,206 66,214" fill="currentColor" />
+              <text x="180" y="206" textAnchor="middle" fontSize="10" fill="currentColor" fontStyle="italic">dice total, player, square</text>
+            </svg>
+          </div>
+          <p className="text-xs italic text-purple-800 dark:text-purple-300 mt-3">
+            Legg merke til: ingen Spiller-objekt, ingen Brikke, ingen Terning — bare{" "}
+            <code>:System</code>. SSDen sier hva systemet gjør for Observer, ikke hvordan.
+            Sammenlign med Atles forelesningseksempel under, som er et detaljert sekvensdiagram
+            (interaction diagram) — DET viser hvilke objekter som samarbeider inne i systemet.
+          </p>
+        </div>
+
         {/* ── Eksempel: Monopol sekvensdiagram ── */}
         <h3 className="text-lg font-bold mt-6">Eksempel: Monopol — sekvensdiagram «spillTrekk»</h3>
-        <p className="text-sm text-[var(--muted)] mb-3">Fra F04–F05</p>
+        <p className="text-sm text-[var(--muted)] mb-3">Fra F04–F05 (interaction diagram, ikke SSD)</p>
 
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto">

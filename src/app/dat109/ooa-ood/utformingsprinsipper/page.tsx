@@ -422,6 +422,239 @@ class User {
       </TheorySummary>
 
       {/* ═══════════════════════════════════════════════════════
+          SEKSJON 2.5: LARMAN GRASP-KAPITTEL 25 — design-prinsippene
+          ═══════════════════════════════════════════════════════ */}
+      <TheorySummary
+        title="2.5 Larmans avanserte GRASP-prinsipper (kap. 25) — Polymorphism, Pure Fabrication, Indirection, Protected Variations"
+        mustKnow={[
+          "Polymorphism: når relaterte alternativer varierer på type, tilordne ansvar med polymorfe operasjoner",
+          "Pure Fabrication: fabrikker en kunstig klasse når domenebasert ansvar bryter kohesjon/kobling",
+          "Indirection: legg en mellomliggende klasse mellom to deler som ikke skal kobles direkte",
+          "Protected Variations: identifiser variasjons-/utviklingspunkter og pakk dem inn bak stabilt grensesnitt",
+        ]}
+      >
+        <p>
+          Larman deler GRASP i to grupper: de fem grunnleggende (Information Expert, Creator,
+          Controller, Low Coupling, High Cohesion) og fire mer avanserte (kap. 25). Disse fire
+          handler ikke om hvor du <em>først</em> legger ansvaret, men hvordan du{" "}
+          <strong>beskytter designet mot endring og variasjon</strong>. Du møter dem alle på
+          GRASP-siden — her ser du dem i lys av <em>utformingsprinsipper</em>.
+        </p>
+
+        {/* --- Polymorphism --- */}
+        <div className="mt-6 rounded-xl border-2 border-purple-300 dark:border-purple-700 bg-purple-50/40 dark:bg-purple-950/20 p-5">
+          <h3 className="text-lg font-bold text-purple-700 dark:text-purple-400 mb-2">
+            Polymorphism (Larman 25.1)
+          </h3>
+          <p className="text-sm">
+            <strong>Problem:</strong> hvordan håndtere relaterte alternativer eller
+            variasjoner basert på type, uten lange <code>if/else</code>-kjeder eller{" "}
+            <code>switch</code> på typenavn?
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Løsning (Larman):</strong> «When related alternatives or behaviors vary
+            by type, assign responsibility for the behavior — using polymorphic operations
+            — to the types for which the behavior varies.» Med andre ord: lag en abstrakt
+            superklasse eller et interface med en felles metode, og la hver subtype gi sin
+            egen implementasjon.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Larmans Monopoly-eksempel:</strong> ulike rute-typer (<code>GoSquare</code>,{" "}
+            <code>RegularSquare</code>, <code>IncomeTaxSquare</code>, <code>GoToJailSquare</code>)
+            har en felles polymorf <code>landedOn(Player)</code>. <code>RegularSquare</code>
+            sin metode er tom (en NO-OP) — det er <em>nettopp</em> denne tomme metoden som
+            lar magien fungere uten <code>if</code>-tester. Player kaller{" "}
+            <code>square.landedOn(this)</code>, og riktig oppførsel skjer av seg selv.
+          </p>
+          <div className="mt-3 rounded-lg bg-white/70 dark:bg-neutral-900/50 p-3 text-xs">
+            <strong>Når interface fremfor abstrakt klasse?</strong> Larman: «If there is a class
+            hierarchy with an abstract superclass C1, consider making an interface I1 that
+            corresponds to the public method signatures of C1.» Dette gir et fleksibelt
+            evolusjonspunkt selv om du i dag bare har én subklasse-greine.
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Beslektede GoF-mønstre:</strong> Adapter, Command, Composite, Proxy,
+            State, Strategy — alle bygger på polymorfi.
+          </p>
+        </div>
+
+        {/* --- Pure Fabrication --- */}
+        <div className="mt-4 rounded-xl border-2 border-emerald-300 dark:border-emerald-700 bg-emerald-50/40 dark:bg-emerald-950/20 p-5">
+          <h3 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-2">
+            Pure Fabrication (Larman 25.2)
+          </h3>
+          <p className="text-sm">
+            <strong>Problem:</strong> Information Expert sier «legg ansvaret der dataene er»
+            — men noen ganger gjør det at klassen blir lite kohesiv, høyt koblet eller
+            dårlig gjenbrukbar.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Løsning (Larman):</strong> Lag en{" "}
+            <em>fabrikkert</em> klasse som ikke representerer et domenekonsept, men som
+            bærer et sammenhengende sett ansvar for å holde kohesjon høy og kobling lav. Navnet
+            avslører at klassen er «funnet på» — derav «pure fabrication». Larman skriver:
+            «Such a class is a fabrication of the imagination.»
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Larmans NextGen-eksempel:</strong> Skal{" "}
+            <code>Sale</code> lagre seg selv i en database? Information Expert sier ja
+            (Sale har dataene). Men da blir <code>Sale</code> avhengig av JDBC, får
+            irrelevante metoder, og logikken kan ikke gjenbrukes for andre klasser. Løsningen er en
+            ny klasse <code>PersistentStorage</code> — ikke et domenekonsept, men en ren
+            tjenesteklasse. Sale forblir kohesiv, og PersistentStorage kan brukes for alle
+            persistente klasser.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Monopoly-eksempel:</strong> Larman foreslår klassen{" "}
+            <code>Cup</code> som holder terninger og kan trille dem og kjenne sum. Det
+            finnes ikke en virkelig kopp i Monopoly-reglene, men Cup er en pure fabrication
+            som flytter ansvaret bort fra Player og gir gjenbrukbar terning-logikk.
+          </p>
+          <div className="mt-3 rounded-lg bg-white/70 dark:bg-neutral-900/50 p-3 text-xs">
+            <strong>Larman skiller to måter å lage klasser på:</strong> (1) representasjons-
+            dekomposisjon (klassen er en ting i domenet — Sale, Customer), (2) atferds-
+            dekomposisjon (klassen samler sammenhengende oppførsel — TableOfContentsGenerator,
+            PersistentStorage). Pure Fabrication er den andre.{" "}
+            <strong>Faresignal:</strong> hvis nesten all data fyker fra ett objekt til et annet
+            for å gjøre jobb, har du sannsynligvis overdrevet pure fabrication og må bringe
+            ansvar tilbake til Information Expert.
+          </div>
+        </div>
+
+        {/* --- Indirection --- */}
+        <div className="mt-4 rounded-xl border-2 border-blue-300 dark:border-blue-700 bg-blue-50/40 dark:bg-blue-950/20 p-5">
+          <h3 className="text-lg font-bold text-blue-700 dark:text-blue-400 mb-2">
+            Indirection (Larman 25.3)
+          </h3>
+          <p className="text-sm">
+            <strong>Problem:</strong> hvordan unngå direkte kobling mellom to deler, og holde
+            kobling lav?
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Løsning (Larman):</strong> «Assign the responsibility to an intermediate
+            object to mediate between other components or services so that they are not
+            directly coupled.» Et mellomledd skaper en <em>indirection</em> mellom delene.
+          </p>
+          <p className="text-sm mt-2">
+            Larman siterer det klassiske utsagnet:{" "}
+            <em>«Most problems in computer science can be solved by another level of
+            indirection.»</em> (David Wheeler), med den humoristiske mot-aforismen «Most
+            problems in performance can be solved by removing another layer of indirection!»
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Sammenheng med GoF:</strong> Adapter, Facade og Observer er alle
+            spesialiseringer av Indirection. Mange Pure Fabrications dukker opp{" "}
+            <em>på grunn av</em> indirection.
+          </p>
+          <div className="mt-3 grid sm:grid-cols-3 gap-2 text-xs">
+            <div className="rounded bg-white/70 dark:bg-neutral-900/50 p-2">
+              <strong>Adapter:</strong> indirection som tilpasser et eksternt grensesnitt til
+              vårt eget.
+            </div>
+            <div className="rounded bg-white/70 dark:bg-neutral-900/50 p-2">
+              <strong>Facade:</strong> indirection som gir én forenklet inngang til et helt
+              undersystem.
+            </div>
+            <div className="rounded bg-white/70 dark:bg-neutral-900/50 p-2">
+              <strong>Proxy:</strong> indirection som står foran et reelt objekt og styrer
+              tilgang/lat opprettelse.
+            </div>
+          </div>
+        </div>
+
+        {/* --- Protected Variations --- */}
+        <div className="mt-4 rounded-xl border-2 border-amber-300 dark:border-amber-700 bg-amber-50/40 dark:bg-amber-950/20 p-5">
+          <h3 className="text-lg font-bold text-amber-700 dark:text-amber-400 mb-2">
+            Protected Variations (Larman 25.4)
+          </h3>
+          <p className="text-sm">
+            <strong>Problem:</strong> hvordan designe slik at variasjon eller ustabilitet ett
+            sted ikke forplanter seg til resten av systemet?
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Løsning (Larman):</strong> «Identify points of predicted variation or
+            instability; assign responsibilities to create a stable interface around them.»
+            Larman understreker: <em>«interface»</em> betyr her ikke nødvendigvis et Java-
+            interface, men et generelt &quot;tilgangsperspektiv&quot;.
+          </p>
+          <div className="mt-3 grid sm:grid-cols-2 gap-3 text-xs">
+            <div className="rounded-lg bg-white/70 dark:bg-neutral-900/50 p-3">
+              <strong>Variation point:</strong> variasjon som <em>finnes nå</em> i kravene
+              eller systemet (f.eks. ulike skattekalkulator-API-er som må støttes i dag).
+            </div>
+            <div className="rounded-lg bg-white/70 dark:bg-neutral-900/50 p-3">
+              <strong>Evolution point:</strong> spekulativ fremtidig variasjon som{" "}
+              <em>kan</em> komme, men som ikke er i dagens krav. Eksempel: «kan hende vi en dag
+              vil bytte database».
+            </div>
+          </div>
+          <p className="text-sm mt-3">
+            <strong>Larmans poeng om modenhet:</strong> Variation points er nesten alltid
+            verdt å beskytte. Evolution points krever modenhet — nybegynnere bygger sprø
+            design, mellomstadiet over-generaliserer for fremtiden, eksperter velger{" "}
+            <em>med innsikt</em> hvilke punkter som er reelle og hvilke som ikke er det.
+            Spekulativ &quot;future-proofing&quot; er en av de største kostnadsdriverne i
+            programvare.
+          </p>
+          <p className="text-sm mt-3">
+            <strong>Mekanismer som er PV-spesialiseringer (Larman):</strong> data-
+            innkapsling, polymorfi, interfaces, indirection, virtuelle maskiner,
+            konfigurasjonsfiler, regelmotorer, refleksjon, service lookup (JNDI/Jini), Liskov
+            Substitution Principle, Don&apos;t Talk to Strangers (Law of Demeter), Open-
+            Closed Principle. Alt sammen er ulike måter å lage stabile grensesnitt rundt
+            ustabile punkter.
+          </p>
+          <div className="mt-3 rounded-lg bg-amber-100/60 dark:bg-amber-900/30 p-3 text-xs">
+            <strong>Sammenheng:</strong> PV er nært beslektet med information hiding (Parnas
+            1972) og Open-Closed Principle (Meyer). Larman: «PV is essentially the same as
+            the information hiding and open-closed principles.» Forskjellen er bare hva man
+            legger vekt på — beskyttelse ved variasjons- og utviklingspunkter.
+          </div>
+        </div>
+
+        {/* Sammenheng-tabell */}
+        <h3 className="text-lg font-bold mt-6">Slik henger de fire sammen</h3>
+        <div className="overflow-x-auto my-3">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--card-border)]">
+                <th className="text-left py-2 pr-4 font-semibold">Prinsipp</th>
+                <th className="text-left py-2 pr-4 font-semibold">Hovedmål</th>
+                <th className="text-left py-2 font-semibold">Trigger</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--card-border)]">
+              <tr>
+                <td className="py-2 pr-4 font-medium">Polymorphism</td>
+                <td className="py-2 pr-4">Variere oppførsel etter type uten if/switch</td>
+                <td className="py-2">«Jeg har en if/else på typenavn»</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Pure Fabrication</td>
+                <td className="py-2 pr-4">Bevare kohesjon når domenebasert ansvar feiler</td>
+                <td className="py-2">«Domenklassen får irrelevante metoder»</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Indirection</td>
+                <td className="py-2 pr-4">Bryte direkte kobling med en mellomklasse</td>
+                <td className="py-2">«To deler kjenner hverandre for godt»</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4 font-medium">Protected Variations</td>
+                <td className="py-2 pr-4">Stabilt grensesnitt rundt et ustabilt punkt</td>
+                <td className="py-2">«Dette stedet kommer til å endre seg»</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-[var(--muted)]">
+          Kilde: Larman, <em>Applying UML and Patterns</em>, 3. utg., kap. 25.
+          De tre andre (Pure Fabrication, Indirection, Polymorphism) er ofte verktøyene man{" "}
+          <em>bruker</em> for å oppnå Protected Variations.
+        </p>
+      </TheorySummary>
+
+      {/* ═══════════════════════════════════════════════════════
           SEKSJON 3: KOMPOSISJON vs AGGREGERING vs SPESIALISERING
           ═══════════════════════════════════════════════════════ */}
       <TheorySummary
@@ -536,6 +769,45 @@ class User {
             <li>I <strong>oppgave 4 (OOP / utformingsmodell)</strong>: her kan komposisjon (fylt diamant) og aggregering brukes når levetid og eierskap er relevant.</li>
             <li>Hvis du <em>må</em> bruke komposisjon i domenemodell (svært tydelig fysisk eierskap, f.eks. Brett ◆— Rute), så <strong>begrunn det</strong> i en kommentar.</li>
           </ul>
+        </div>
+
+        {/* ── NY: Larman 16.13 — Composition Over Aggregation ── */}
+        <div className="rounded-xl border-2 border-indigo-300 dark:border-indigo-700 bg-indigo-50/40 dark:bg-indigo-950/20 p-5 my-5">
+          <h4 className="font-bold text-indigo-700 dark:text-indigo-400 text-sm mb-2">
+            Larman 16.13 — &quot;Composition Over Aggregation&quot; (i UML-notasjon)
+          </h4>
+          <p className="text-sm">
+            <strong>Viktig presisering:</strong> Larmans regel «Composition Over Aggregation»
+            i kapittel 16.13 handler om <strong>UML-notasjon</strong>, ikke om arv vs
+            komposisjon. Regelen betyr:{" "}
+            <em>«Foretrekk komposisjon (fylt diamant ◆) fremfor aggregering (åpen diamant ◇)
+            i UML-diagrammer.»</em>
+          </p>
+          <p className="text-sm mt-2">
+            Larman siterer Rumbaugh (en av UML-skaperne):{" "}
+            <em>«In spite of the few semantics attached to aggregation, everybody thinks it
+            is necessary (for different reasons). Think of it as a modeling placebo.»</em>
+          </p>
+          <p className="text-sm mt-2">
+            Aggregering har <strong>ingen klart definert semantikk</strong> i UML utover en
+            vag «helhet/del»-følelse. Komposisjon derimot betyr noe konkret:
+          </p>
+          <ol className="text-sm list-decimal list-inside space-y-1 mt-2">
+            <li>Delen tilhører kun ÉN helhet om gangen (Square hører til ett Board).</li>
+            <li>Delen må alltid tilhøre <em>en</em> helhet — ingen «free-floating fingers».</li>
+            <li>Helheten har ansvaret for å lage og slette delene (eller delegere det).</li>
+          </ol>
+          <p className="text-sm mt-2">
+            <strong>Praktisk:</strong> Bruk komposisjon (◆) når du har sterk eierskap og
+            klar levetidsavhengighet. Hvis du tenker «aggregering» — bruk heller bare en
+            vanlig assosiasjon med multiplisitet, eller komposisjon hvis eierskapet er
+            sterkt. Larman: «Don&apos;t bother to use aggregation in the UML; rather, use
+            composition when appropriate.»
+          </p>
+          <p className="text-sm mt-2 text-[var(--muted)] italic">
+            NB: Dette er noe annet enn neste seksjon (Arv vs komposisjon = «Favor
+            composition over inheritance» — der vi sammenligner arv med har-en-relasjon).
+          </p>
         </div>
       </TheorySummary>
 
@@ -769,6 +1041,11 @@ class User {
           <li>• F15 — AUP, overføring og testing og mer om utformingsprinsipper</li>
           <li>• F16 — Oppsummering og eksamen (slides 13, 17, 18 om KISS og YAGNI)</li>
           <li>• Atle Geitungs muntlige regel om aggregering/komposisjon i domenemodell</li>
+          <li>
+            • Larman, <em>Applying UML and Patterns</em>, 3. utg.: kap. 25
+            (Polymorphism, Pure Fabrication, Indirection, Protected Variations) og kap.
+            16.13 (Composition Over Aggregation)
+          </li>
         </ul>
       </div>
 

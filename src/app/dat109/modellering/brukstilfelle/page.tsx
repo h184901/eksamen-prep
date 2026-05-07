@@ -166,6 +166,64 @@ export default function BrukstilfellePage() {
           </p>
         </div>
 
+        {/* ── Larmans Monopoly use case fra 6.20 ── */}
+        <div className="rounded-xl border-2 border-purple-300 dark:border-purple-700 bg-purple-50/50 dark:bg-purple-950/20 p-5 my-4">
+          <div className="flex items-baseline gap-2 mb-2">
+            <h4 className="font-bold text-purple-800 dark:text-purple-300">Larmans variant — &laquo;Play Monopoly Game&raquo; (kap. 6.20)</h4>
+            <span className="text-xs text-[var(--muted)]">Applying UML and Patterns 3rd ed.</span>
+          </div>
+          <p className="text-sm mb-3">
+            Larman bruker akkurat samme spill som professoren. I boken finnes kun{" "}
+            <strong>ett eneste brukstilfelle</strong>: <em>Play Monopoly Game</em>. Aktøren er en
+            <em> Observer</em> — ikke en spiller — fordi spillet er en datamaskinsimulering som ett
+            menneske ser på.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4 mt-3">
+            <div className="rounded-lg bg-white/80 dark:bg-neutral-900/90 border border-purple-200 dark:border-purple-800 p-3 text-sm">
+              <p className="font-semibold mb-2 text-neutral-900 dark:text-neutral-50">Use Case UC1: Play Monopoly Game</p>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200"><strong>Scope:</strong> Monopoly application</p>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200"><strong>Level:</strong> user goal</p>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200"><strong>Primary Actor:</strong> Observer</p>
+              <p className="text-xs text-neutral-700 dark:text-neutral-200 mt-2"><strong>Main Success Scenario:</strong></p>
+              <ol className="list-decimal list-inside text-xs text-neutral-700 dark:text-neutral-200 space-y-0.5">
+                <li>Observer requests new game initialization, enters number of players.</li>
+                <li>Observer starts play.</li>
+                <li>System displays game trace for next player move.</li>
+              </ol>
+              <p className="text-xs italic text-neutral-700 dark:text-neutral-200 mt-1">Repeat step 3 until a winner or Observer cancels.</p>
+            </div>
+
+            <div className="rounded-lg bg-white/80 dark:bg-neutral-900/90 border border-purple-200 dark:border-purple-800 p-3 text-sm">
+              <p className="font-semibold mb-2 text-neutral-900 dark:text-neutral-50">Larmans innsikt</p>
+              <ul className="text-xs text-neutral-700 dark:text-neutral-200 list-disc list-inside space-y-1">
+                <li>
+                  Spillereglene fanges <strong>ikke</strong> som brukstilfellesteg — de hører til
+                  <em> domain rules</em> i Supplementary Specification.
+                </li>
+                <li>
+                  Use case-formen er &quot;awkward and unnatural&quot; for et simulert spill —
+                  Larman skriver eksplisitt at use cases ikke alltid er den beste formen for
+                  oppførselskrav.
+                </li>
+                <li>
+                  Brukstilfellet feiler &quot;the Boss Test&quot; (sjefen blir ikke imponert), men
+                  er likevel det eneste meningsfulle på dette nivået.
+                </li>
+                <li>
+                  Konklusjon: For en simulering — bare ETT brukstilfelle. Resten er domeneregler.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-xs text-purple-800 dark:text-purple-300 italic mt-3">
+            Atles 2 brukstilfeller (Init + Spill) er pedagogisk gunstig fordi det viser
+            <code> &lt;&lt;include&gt;&gt;</code>. Larman foretrekker å pakke initialisering inn som
+            steg 1 i hovedflyten. Begge er gyldige — bare vær konsistent.
+          </p>
+        </div>
+
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 my-4">
           <h4 className="font-semibold mb-3">Brukstilfellebeskrivelse — «Spill Monopol»</h4>
           <div className="text-sm space-y-1">
@@ -532,6 +590,21 @@ export default function BrukstilfellePage() {
             la det være. En vanlig assosiasjon (rett strek) mellom aktør og brukstilfelle er
             ofte nok. Atle har sett studenter «pynte» med include/extends der det ikke trengs,
             og mister poeng for å overforklare.
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-3 text-sm mt-3">
+          <p className="font-semibold text-purple-700 dark:text-purple-300 mb-1">
+            Larmans formulering (kap. 6.16, &laquo;Reasonable Violations&raquo;)
+          </p>
+          <p>
+            Larman forklarer <code>&lt;&lt;include&gt;&gt;</code> som mekanismen for
+            &laquo;subfunction-level use cases&raquo; — delprosesser som er for små til å være
+            EBP-er på egen hånd, men som gjentas i flere base-brukstilfeller (typisk
+            &laquo;Authenticate User&raquo; eller &laquo;Paying by credit&raquo;). Da skiller man
+            dem ut i et eget brukstilfelle og lenker dem inn med <code>&lt;&lt;include&gt;&gt;</code>{" "}
+            <em>for å unngå dupliseringen i teksten</em>. Det er hovedmotivasjonen — ikke å pynte
+            diagrammet.
           </p>
         </div>
       </TheorySummary>

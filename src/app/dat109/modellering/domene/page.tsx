@@ -89,12 +89,62 @@ export default function DomenePage() {
           </p>
         </div>
 
-        {/* Hvordan finne klasser */}
+        {/* Hvordan finne klasser — Larmans tre strategier */}
         <h3 className="text-lg font-bold">Hvordan finne konseptuelle klasser</h3>
         <p>
-          Professorens metode (fra Larman): <strong>finn substantivene</strong> i oppgaveteksten!
-          Understrek alle substantiver — disse er sterke kandidater for klasser.
+          Larman (kapittel 9.5) gir <strong>tre strategier</strong> for å finne konseptuelle
+          klasser. Substantiv-analyse er bare den siste — og Larman advarer mot mekanisk
+          substantiv-til-klasse-mapping. Bruk strategiene i kombinasjon.
         </p>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Larmans tre strategier (kap. 9.5)
+          </h4>
+          <ol className="list-decimal list-inside text-sm space-y-1.5">
+            <li>
+              <strong>Gjenbruk eksisterende modeller</strong> — best, men sjelden mulig på eksamen.
+              (Fowler «Analysis Patterns», Hay «Data Model Patterns».)
+            </li>
+            <li>
+              <strong>Bruk en kategoriliste</strong> — gå systematisk gjennom typiske kategorier
+              (transaksjoner, roller, fysiske objekter, beholdere, beskrivelser, hendelser …).
+            </li>
+            <li>
+              <strong>Substantiv-analyse</strong> — identifiser substantiv og substantivfraser i
+              brukstilfeller og oppgavetekst. <em>«Care must be applied; a mechanical noun-to-class
+              mapping isn&apos;t possible»</em> (Larman 9.5).
+            </li>
+          </ol>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 9.5 «Guideline: How to Find Conceptual Classes?»
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Larmans kategoriliste (utdrag, tilpasset spilldomene)
+          </h4>
+          <div className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-sm">
+            <div><strong>Transaksjoner</strong> — Sale, Reservation, Move</div>
+            <div><strong>Linjeposter</strong> — SalesLineItem</div>
+            <div><strong>Produkt/tjeneste</strong> — Item, Flight, Seat</div>
+            <div><strong>Hvor registreres transaksjonen</strong> — Register, Ledger</div>
+            <div><strong>Roller</strong> — Cashier, Customer, MonopolyPlayer</div>
+            <div><strong>Sted</strong> — Store, Airport</div>
+            <div><strong>Hendelser</strong> — Sale, Payment, MonopolyGame, Flight</div>
+            <div><strong>Fysiske objekter</strong> — Item, Board, Piece, Die</div>
+            <div><strong>Beskrivelser</strong> — ProductDescription, FlightDescription</div>
+            <div><strong>Kataloger</strong> — ProductCatalog</div>
+            <div><strong>Beholdere</strong> — Store, Bin, Board, Airplane</div>
+            <div><strong>Innhold i beholder</strong> — Item, Square, Passenger</div>
+            <div><strong>Andre samarbeidende systemer</strong> — CreditAuthorizationSystem</div>
+            <div><strong>Finansielle instrumenter</strong> — Cash, Check, LineOfCredit</div>
+          </div>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman tabell 9.1
+          </p>
+        </div>
 
         <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
           <h4 className="font-bold text-green-700 dark:text-green-400 text-sm mb-2">
@@ -111,16 +161,96 @@ export default function DomenePage() {
           </p>
         </div>
 
+        {/* Larman 9.12 — Attributt vs klasse */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Larmans regel: når attributt vs egen klasse? (kap. 9.12)
+          </h4>
+          <p className="text-sm italic mb-2">
+            «If we do not think of some conceptual class X as a number or text in the real world,
+            X is probably a conceptual class, not an attribute.»
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-1">
+            <li>
+              <strong>Store</strong> i et POS-domene — er ikke tall eller tekst i virkeligheten,
+              det er en juridisk enhet med plass i rommet → <strong>egen klasse</strong>.
+            </li>
+            <li>
+              <strong>Destinasjon</strong> for en flyreise — er ikke tall eller tekst, det er en
+              massiv flyplass → <strong>egen klasse Airport, ikke attributt</strong>.
+            </li>
+            <li>
+              <strong>navn</strong> på en spiller — er bare tekst → <strong>attributt</strong>.
+            </li>
+            <li>
+              <strong>poeng</strong> i et kortspill — er bare tall → <strong>attributt</strong>.
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Korollar (Larman 9.16):</strong> <em>«Relate conceptual classes with an
+            association, not with an attribute.»</em> Hvis Cashier «bruker» en Register, IKKE skriv
+            <code className="text-xs bg-neutral-200 dark:bg-neutral-700 px-1 rounded">currentRegister: Register</code> som
+            attributt — tegn en assosiasjonslinje.
+          </p>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 9.12 og 9.16
+          </p>
+        </div>
+
         {/* Assosiasjonstyper */}
         <h3 className="text-lg font-bold">Assosiasjonstyper</h3>
         <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-800 p-3 my-3">
           <p className="text-sm">
-            <strong>Atles regel:</strong> aggregering og komposisjon hører normalt
-            <strong> ikke</strong> hjemme i domenemodellen — disse hører til
-            <strong> utformingsmodell og DCD</strong>. I domenemodellen bruker du vanlig
-            assosiasjon (strek) med multiplisitet, og spesialisering der det er tydelige
-            undertyper. Tabellen under viser likevel alle fire — slik at du kjenner igjen
-            symbolene når du møter dem i utformingsmodeller.
+            <strong>Atle anbefaler:</strong> i domenemodellen brukes som regel <strong>vanlig
+            assosiasjon (strek)</strong> med multiplisitet, og <strong>spesialisering</strong>
+            der det er tydelige undertyper. Aggregering/komposisjon legger han normalt i
+            utformingsmodellen/DCD. Dette er en pedagogisk forenkling — Larman selv tillater
+            komposisjon i domenemodell når det er begrunnet (se sitatboksen «Hva sier Larman
+            faktisk» under). Tabellen under viser alle fire symbolene slik at du kjenner dem igjen.
+          </p>
+        </div>
+
+        {/* Larman 32.11 — sitatboks med presis kildebeskrivelse */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border-2 border-purple-300 dark:border-purple-700 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Hva sier Larman faktisk om aggregering og komposisjon i domenemodell? (kap. 32.11)
+          </h4>
+          <ul className="text-sm space-y-2">
+            <li>
+              <strong>Aggregering</strong> (åpen diamant): Larman siterer Rumbaugh (en av UMLs
+              skapere): <em>«Think of it as a modeling placebo.»</em> Hans guideline er klar:
+              <em> «don&apos;t bother to use aggregation in the UML; rather, use composition when
+              appropriate.»</em>
+            </li>
+            <li>
+              <strong>Komposisjon</strong> (fylt diamant): Larman bruker dette aktivt i sin egen
+              NextGen POS-domenemodell — <code>Sale</code> ◆— <code>SalesLineItem</code> og
+              <code> ProductCatalog</code> ◆— <code>ProductDescription</code>. Hans guideline:
+              <em> «If in doubt, leave it out»</em> — men IKKE «aldri bruk i domenemodell».
+            </li>
+            <li>
+              <strong>Eksklusjon er greit:</strong> Larman skriver eksplisitt: <em>«Identifying and
+              illustrating composition is not profoundly important; it is quite reasonable to
+              exclude it from a domain model.»</em>
+            </li>
+            <li>
+              <strong>Når Larman likevel anbefaler å vise komposisjon:</strong> levetiden til delen
+              er bundet til helheten (create-delete-avhengighet); det er en åpenbar fysisk eller
+              logisk hel-del-sammensetning; egenskaper eller operasjoner på helheten propagerer til
+              delene.
+            </li>
+          </ul>
+          <div className="mt-3 rounded bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 p-3 text-sm">
+            <strong>Konklusjon:</strong> Atles regel er strengere enn Larmans. Larman sier «hvis i
+            tvil, dropp det» og bruker selv komposisjon i domenemodell. Atle gjør dette om til en
+            absolutt regel for eksamen — sannsynligvis fordi det er enklere å lære og fordi Atles
+            fasiter konsekvent unngår komposisjon i domenemodellen. <strong>På eksamen: følg Atles
+            forenklede regel</strong>, men forstå at Larman tillater komposisjon i domenemodell
+            ved klar begrunnelse.
+          </div>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 32.11 «Aggregation and Composition» og kap. 16.13 «Composition
+            Over Aggregation»
           </p>
         </div>
         <div className="overflow-x-auto my-4">
@@ -304,28 +434,60 @@ export default function DomenePage() {
           SPESIALISERING — ATLES REGEL
           ═══════════════════════════════════════════ */}
       <TheorySummary
-        title="3. Spesialisering i domenemodellen — Atles regel"
+        title="3. Spesialisering i domenemodellen — Atles regel + Larmans rammeverk"
         mustKnow={[
           "Domenemodell: bruk vanlig assosiasjon + multiplisitet, og spesialisering ved tydelige undertyper",
-          "IKKE bruk aggregering/komposisjon i domenemodell — det hører til utformingsmodell/DCD",
-          "Spesialisering brukes kun når subklassene faktisk er ulike (oppførsel, attributter, assosiasjoner)",
+          "Atle anbefaler: ikke bruk aggregering/komposisjon i domenemodell — Larman tillater det med begrunnelse",
+          "Spesialisering brukes kun når subklassene faktisk er ulike (Larmans 100%-regel og Is-a-regel)",
           "Et størrelses-attributt (Small/Medium/Large) er IKKE en spesialisering",
+          "Abstrakte konseptuelle klasser er gyldig (Larman 32.7) — kursivt klassenavn",
         ]}
       >
         <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-800 p-4 my-2">
           <h4 className="font-bold text-red-700 dark:text-red-400 text-sm mb-2">
-            KRITISK regel fra professor Atle Geitung
+            Atles eksamensregel (forenkling av Larman)
           </h4>
           <p className="text-sm">
-            Atle sier eksplisitt: i <strong>domenemodellen</strong> skal du normalt
-            <strong> IKKE bruke aggregering eller komposisjon</strong>. Disse hører til
+            Atle anbefaler: i <strong>domenemodellen</strong> skal du normalt
+            <strong> IKKE bruke aggregering eller komposisjon</strong>. Disse legger han i
             <strong> utformingsmodell og DCD</strong>. I domenemodellen bruker du
             <strong> vanlige assosiasjoner med multiplisitet</strong> og
             <strong> SPESIALISERING (arv)</strong> der subklassene faktisk er ulike.
           </p>
           <p className="text-sm mt-2">
-            Bruker du komposisjon eller aggregering i domenemodellen uten klar grunn, kan
-            det <strong>koste deg poeng på eksamen</strong>.
+            <strong>Viktig:</strong> dette er strengere enn Larman selv (se sitatboksen «Hva sier
+            Larman faktisk» over). På eksamen: følg Atles regel — det matcher hans fasiter.
+            Bruker du komposisjon eller aggregering i domenemodellen uten klar grunn, kan det
+            <strong> koste deg poeng på eksamen</strong>.
+          </p>
+        </div>
+
+        {/* Larman 32.2 + 32.3 — generaliseringsdefinisjon og Is-a + 100% */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Larmans rammeverk for generalisering (kap. 32.2–32.3)
+          </h4>
+          <p className="text-sm mb-2">
+            Larman gir to formelle tester for at en subklasse er korrekt:
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-1.5">
+            <li>
+              <strong>100%-regelen</strong> (definisjonskonformitet): 100 % av superklassens
+              definisjon må gjelde for subklassen — alle attributter og alle assosiasjoner.
+            </li>
+            <li>
+              <strong>Is-a-regelen</strong> (mengdekonformitet): alle medlemmer av subklassens
+              mengde må også være medlemmer av superklassens mengde. Test: «Subklasse er en
+              Superklasse» skal gi mening (CreditPayment er en Payment).
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            Larman understreker også at i en domenemodell betyr generalisering <em>«superklassen
+            er en supersett, og subklassen er en subsett»</em> — ikke OOPL-arv. Det er først i
+            DCD/utformingsmodell at det blir kode-arv.
+          </p>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 32.2–32.3, kap. 16.10
           </p>
         </div>
 
@@ -346,15 +508,52 @@ export default function DomenePage() {
 
         <h3 className="text-lg font-bold">Når BRUKER du spesialisering i domenemodellen?</h3>
         <p className="text-sm mb-2">
-          Atles retningslinjer fra F06 — bruk spesialisering hvis <strong>minst én</strong> av
-          disse stemmer:
+          Atles retningslinjer fra F06 stemmer med Larman 32.4 — bruk spesialisering hvis
+          <strong> minst én</strong> av disse stemmer:
         </p>
         <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Subklassen har <strong>ekstra attributter</strong> som superklassen ikke har.</li>
-          <li>Subklassen har <strong>ekstra assosiasjoner</strong> til andre klasser.</li>
-          <li>Subklassen <strong>oppfører seg annerledes</strong> (polymorfi — samme metode, ulik effekt).</li>
-          <li>Subklassen representerer noe <strong>konseptuelt ulikt</strong> i problemdomenet.</li>
+          <li>Subklassen har <strong>ekstra attributter av interesse</strong> som superklassen ikke har.</li>
+          <li>Subklassen har <strong>ekstra assosiasjoner av interesse</strong> til andre klasser.</li>
+          <li>
+            Subklassen <strong>opereres på, håndteres, reageres på eller manipuleres annerledes</strong>
+            enn superklassen eller andre subklasser, på en måte som er av interesse.
+          </li>
+          <li>
+            Subklassen representerer noe <strong>animert</strong> (dyr, robot, agent) som
+            <strong> oppfører seg annerledes</strong> enn superklassen eller andre subklasser.
+          </li>
         </ul>
+        <p className="text-xs text-[var(--muted)] italic mt-1">
+          pensumRef: Larman kap. 32.4 «When to Define a Conceptual Subclass?»
+        </p>
+
+        {/* Larman 32.5 — superklasse-kriterier */}
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-4">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-2">
+            Når lage en superklasse? (Larman 32.5)
+          </h4>
+          <ul className="text-sm list-disc list-inside space-y-1">
+            <li>De potensielle subklassene representerer variasjoner av et likt konsept.</li>
+            <li>Subklassene oppfyller 100 %-regelen og Is-a-regelen.</li>
+            <li>
+              Alle subklassene har <strong>samme attributt</strong> som kan trekkes ut og uttrykkes
+              i superklassen.
+            </li>
+            <li>
+              Alle subklassene har <strong>samme assosiasjon</strong> som kan trekkes ut og knyttes
+              til superklassen.
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Eksempel fra Monopol (Larman 32.19):</strong> Larman definerer den abstrakte
+            superklassen <code>PropertySquare</code> nettopp fordi alle eiendomsruter har attributtet
+            <code> price</code> og en <code>Owns</code>-assosiasjon med <code>Player</code> — de
+            kan altså faktoriseres ut.
+          </p>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 32.5 og 32.19
+          </p>
+        </div>
 
         <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-4 my-4">
           <h4 className="font-bold text-green-700 dark:text-green-400 text-sm mb-2">
@@ -438,12 +637,15 @@ export default function DomenePage() {
 
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4 my-4">
           <h4 className="font-bold text-blue-700 dark:text-blue-400 text-sm mb-2">
-            Sammendrag — hva du tegner i domenemodell
+            Sammendrag — hva du tegner i domenemodell på eksamen
           </h4>
           <ul className="text-sm list-disc list-inside space-y-1">
-            <li><strong>Vanlig assosiasjon (strek)</strong> + multiplisitet — standardvalget.</li>
-            <li><strong>Spesialisering (åpen trekant)</strong> — når subklassene er reelt ulike.</li>
-            <li><strong>Aggregering/komposisjon (diamanter)</strong> — kun unntaksvis, og kun hvis levetid eller eierskap er <em>kritisk</em> for forståelsen. Hører normalt i utformingsmodell.</li>
+            <li><strong>Vanlig assosiasjon (strek)</strong> + multiplisitet — standardvalget. Larman: «need-to-remember»-assosiasjoner.</li>
+            <li><strong>Spesialisering (åpen trekant)</strong> — når subklassene er reelt ulike (Larman 32.4).</li>
+            <li><strong>Abstrakt klasse</strong> (kursivt navn) — når superklassen alltid er en av subklassene (Larman 32.7).</li>
+            <li><strong>Assosiasjonsklasse</strong> (Larman 32.10) — når en attributt hører til selve forholdet, ikke til én av klassene (typisk ved mange-til-mange).</li>
+            <li><strong>Aggregering</strong> (åpen diamant) — Larman: «modeling placebo», unngå.</li>
+            <li><strong>Komposisjon</strong> (fylt diamant) — Larman tillater når levetid/del er bundet til helheten. Atle dropper i domenemodell. På eksamen: følg Atle.</li>
           </ul>
         </div>
       </TheorySummary>
@@ -488,6 +690,29 @@ export default function DomenePage() {
           — det finnes ingen «rene» Rute-objekter i Monopol; det finnes alltid en konkret subklasse
           (StartRute, VanligRute, etc.). Da markerer vi superklassen som abstrakt.
         </p>
+
+        <div className="rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 my-3">
+          <h4 className="font-bold text-purple-700 dark:text-purple-300 text-sm mb-1">
+            Larmans formelle definisjon (kap. 32.7)
+          </h4>
+          <p className="text-sm italic mb-1">
+            «If every member of a class C must also be a member of a subclass, then class C is
+            called an abstract conceptual class.»
+          </p>
+          <p className="text-sm">
+            Larmans guideline: <em>«Identify abstract classes and illustrate them with an italicized
+            name in the Domain Model, or use the </em><code>{"{abstract}"}</code><em> keyword.»</em>
+          </p>
+          <p className="text-sm mt-2">
+            Test for Monopol: må enhver Rute samtidig være StartRute, VanligRute, InntektsskattRute
+            eller SkjøteRute? Ja → Rute er abstrakt. Tilsvarende for SkjøteRute (alltid Eiendom,
+            Jernbane eller Offentlig).
+          </p>
+          <p className="text-xs text-[var(--muted)] italic mt-2">
+            pensumRef: Larman kap. 32.7 «Abstract Conceptual Classes»
+          </p>
+        </div>
+
         <p className="text-sm mt-2">
           <strong>Atle bruker dette aktivt.</strong> I hans Monopol-fasit er både Rute og
           SkjøteRute abstrakte klasser — det er meningsfullt fordi:

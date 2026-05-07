@@ -1291,6 +1291,81 @@ public class InntektsskattRute extends Rute {
           superklassen brukes (LSP fra SOLID). Hvis ikke — bruk komposisjon.
         </VanligMisforstaelse>
 
+        {/* ── NY: Larman 16.10 — abstrakte klasser og operasjoner ── */}
+        <div className="my-4 rounded-xl border-2 border-purple-300 dark:border-purple-700 bg-purple-50/40 dark:bg-purple-950/20 p-5">
+          <h4 className="font-bold text-purple-700 dark:text-purple-400 text-sm mb-2">
+            Larman 16.10 — Generalization, Abstract Classes, Abstract Operations
+          </h4>
+          <p className="text-sm">
+            <strong>UML-notasjon:</strong> Generalisering tegnes med en{" "}
+            <strong>heltrukket linje og fylt trekant</strong> som peker fra
+            subklassen mot superklassen. Larman siterer offisielle UML:{" "}
+            <em>«A taxonomic relationship between a more general classifier and a more
+            specific classifier. Each instance of the specific classifier is also an
+            indirect instance of the general classifier.»</em>
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Viktig nyanse Larman trekker frem:</strong> generalisering betyr noe
+            ulikt avhengig av perspektivet:
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-1 mt-1">
+            <li>
+              I <strong>domenemodell</strong> (konseptuelt perspektiv): superklassen er
+              et <em>supersett</em>, subklassen et <em>subsett</em>. Det er IKKE
+              programmeringsarv — det er en taksonomisk relasjon.
+            </li>
+            <li>
+              I <strong>DCD (Design Class Diagram, programvare-perspektiv)</strong>:
+              generalisering betyr OOPL-arv (<code>extends</code> i Java).
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            <strong>Abstrakte klasser og operasjoner:</strong> i UML markeres de enten
+            med <code>{`{abstract}`}</code>-tag (greit ved skissering) eller ved å skrive
+            navnet i <em>kursiv</em>. Det motsatte (klasser/operasjoner som ikke kan
+            overstyres) markeres med <code>{`{leaf}`}</code>.
+          </p>
+          <div className="mt-2 rounded bg-white/70 dark:bg-neutral-900/50 p-2 text-xs">
+            <strong>Eksamenstips:</strong> Hvis du tegner Rute som abstrakt superklasse,
+            skriv navnet i kursiv (<em>Rute</em>) — eller legg til <code>{`{abstract}`}</code>.
+            Det samme for abstrakte operasjoner som <code>landetPaa()</code>.
+          </div>
+        </div>
+
+        {/* ── NY: Larman 16.12 — Interfaces ── */}
+        <div className="my-4 rounded-xl border-2 border-cyan-300 dark:border-cyan-700 bg-cyan-50/40 dark:bg-cyan-950/20 p-5">
+          <h4 className="font-bold text-cyan-700 dark:text-cyan-400 text-sm mb-2">
+            Larman 16.12 — Interfaces i UML
+          </h4>
+          <p className="text-sm">
+            Et UML-interface kan tegnes på flere måter. Larman lister tre hovednotasjoner:
+          </p>
+          <ul className="text-sm list-disc list-inside space-y-1 mt-2">
+            <li>
+              <strong>Lollipop-notasjon</strong> (forenklet):{" "}
+              <code>Klasse —○ INavn</code> — en sirkel knyttet til klassen viser at klassen{" "}
+              <em>realiserer</em> (implementerer) interfacet.
+            </li>
+            <li>
+              <strong>Interface-boks med stiplet linje:</strong> en egen «klasse»-boks
+              med <code>«interface»</code>-stereotyp øverst, koblet til implementerende
+              klasse med en <strong>stiplet linje med fylt trekant</strong>{" "}
+              (interface realization).
+            </li>
+            <li>
+              <strong>Socket-notasjon</strong> (ny i UML 2): en halvsirkel som indikerer at
+              «Klasse X krever (bruker) interface Y» — uten å tegne en linje til Y.
+            </li>
+          </ul>
+          <p className="text-sm mt-2">
+            I UML kalles det å implementere et interface formelt for{" "}
+            <strong>interface realization</strong>. Larman bruker selv konsekvent
+            interfaces som <code>ITaxCalculatorAdapter</code> for å oppnå
+            polymorfisme uten å låse seg til en bestemt klassehierarki — den klassiske
+            løsningen for Adapter, Strategy og lignende mønstre.
+          </p>
+        </div>
+
         {/* --- 5. Typing --- */}
         <h3 className="!mt-8">5. Typing (Typing)</h3>
         <p>
@@ -1687,6 +1762,10 @@ em.getTransaction().commit();
             object-state-behaviour-identity)
           </li>
           <li>• Grady Booch (1991): Object-Oriented Analysis and Design with Applications</li>
+          <li>
+            • Larman, <em>Applying UML and Patterns</em>, 3. utg.: kap. 16.10 (Generalization,
+            Abstract Classes, Abstract Operations) og 16.12 (Interfaces)
+          </li>
         </ul>
       </section>
     </div>
