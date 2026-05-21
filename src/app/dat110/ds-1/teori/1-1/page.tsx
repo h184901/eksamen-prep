@@ -172,7 +172,7 @@ export default function DS1_1Page() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-indigo-500 shrink-0 mt-0.5">&#8594;</span>
-                <span>En sluttbruker kan ikke se <em>hvor</em> en beregning utfores</span>
+                <span>En sluttbruker kan ikke se <em>hvor</em> en beregning utføres</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-indigo-500 shrink-0 mt-0.5">&#8594;</span>

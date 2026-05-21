@@ -135,7 +135,7 @@ export default function OppsummeringPage() {
         <RefCard title="4. IP, CIDR og ruting (Oppg 5-6)" color="blue">
           <Formula>CIDR: IP/prefiks → nettverksdel = første prefiks bits, hostdel = resten</Formula>
           <p className="text-xs font-bold">Longest Prefix Match:</p>
-          <p className="text-xs text-[var(--muted)] mb-2">Konverter IP til binar, match mot forwardingstabell, velg lengste prefiks som matcher.</p>
+          <p className="text-xs text-[var(--muted)] mb-2">Konverter IP til binær, match mot forwardingstabell, velg lengste prefiks som matcher.</p>
           <p className="text-xs font-bold">Avstandsvektor (Bellman-Ford):</p>
           <Formula>D_x(y) = min_v(c(x,v) + D_v(y))</Formula>
           <p className="text-xs text-[var(--muted)]">Initialiser: D_x(y) = c(x,y) for naboer, uendelig ellers. Oppdater iterativt til konvergens. Vis ALLE steg på eksamen!</p>
@@ -145,7 +145,7 @@ export default function OppsummeringPage() {
 
         {/* 5. Linklaget */}
         <RefCard title="5. Switch og ARP (Oppg 5-6)" color="blue">
-          <p className="text-xs font-bold">Switch-laringsalgoritme:</p>
+          <p className="text-xs font-bold">Switch-læringsalgoritme:</p>
           <ol className="text-xs text-[var(--muted)] list-decimal list-inside space-y-1">
             <li>Ramme ankommer på port X fra MAC-adr A</li>
             <li>Oppdater switch-tabell: A → port X</li>
@@ -170,7 +170,7 @@ export default function OppsummeringPage() {
           <p className="text-xs font-bold mt-2">5 RPC-feilklasser:</p>
           <ol className="text-xs text-[var(--muted)] list-decimal list-inside space-y-0.5">
             <li>Klient finner ikke server (server nede, feil versjon)</li>
-            <li>Foresporsel tapt (request lost)</li>
+            <li>Forespørsel tapt (request lost)</li>
             <li>Server krasjer etter mottak (at-least-once / at-most-once)</li>
             <li>Svar tapt (reply lost) — vanskeligst! Idempotente operasjoner hjelper</li>
             <li>Klient krasjer etter sending (orphan-håndtering)</li>
@@ -208,7 +208,7 @@ export default function OppsummeringPage() {
               ["Sequential", "Data-sentrert", "Alle ser SAMME rekkefølge (trenger global ordning)"],
               ["Causal", "Data-sentrert", "Kausalt relaterte operasjoner i riktig rekkefølge"],
               ["Monotonic reads", "Klient-sentrert", "Aldri se en eldre verdi etter en nyere"],
-              ["Monotonic writes", "Klient-sentrert", "Skrivinger utfores i rekkefølge"],
+              ["Monotonic writes", "Klient-sentrert", "Skrivinger utføres i rekkefølge"],
               ["Read-your-writes", "Klient-sentrert", "Ser alltid egne skrivinger"],
             ]}
           />
@@ -219,12 +219,12 @@ export default function OppsummeringPage() {
         {/* 9. Chord DHT */}
         <RefCard title="9. Chord DHT (Oppg 10, 15%)" color="red" defaultOpen={true}>
           <Formula>FT[i] = succ((n + 2^(i-1)) mod 2^m) &nbsp;&nbsp;for i = 1, 2, ..., m</Formula>
-          <Formula>Nøkkelansvar: pred(s) &lt; key &le; s (sirkulaert)</Formula>
+          <Formula>Nøkkelansvar: pred(s) &lt; key &le; s (sirkulært)</Formula>
           <p className="text-xs font-bold">Eksamen-oppskrift:</p>
           <ol className="text-xs text-[var(--muted)] list-decimal list-inside space-y-0.5">
             <li>Beregn fingertabell for ALLE servere: n + 2^(i-1) mod 2^m, deretter succ()</li>
             <li>Nøkkelansvar: for hver nøkkel, finn serveren der pred(s) &lt; key &le; s</li>
-            <li>Oppslag runde for runde: sjekk succ, sok FT baklengs, hopp til høyeste finger &lt; key</li>
+            <li>Oppslag runde for runde: sjekk succ, søk FT baklengs, hopp til høyeste finger &lt; key</li>
           </ol>
           <p className="text-xs text-[var(--muted)] mt-2">O(log N) hopp forventet. Replikering = feiltoleranse + ytelse.</p>
         </RefCard>
@@ -238,7 +238,7 @@ export default function OppsummeringPage() {
               ["Crash failure", "Stopper og responderer aldri mer"],
               ["Omission failure", "Dropper å sende eller motta meldinger"],
               ["Timing failure", "Responderer for sent (kun realtime-systemer)"],
-              ["Byzantine failure", "Sender vilkarlige/motstridende svar (verste)"],
+              ["Byzantine failure", "Sender vilkårlige/motstridende svar (verste)"],
             ]}
           />
           <p className="text-xs font-bold mt-2">Gruppe-organisering:</p>
@@ -255,7 +255,7 @@ export default function OppsummeringPage() {
               "Kan du beregne HTTP-tid (persistent vs ikke-persistent)?",
               "Kan du gjøre CIDR/subnetting og longest-prefix match?",
               "Kan du kjøre avstandsvektor-algoritmen steg for steg?",
-              "Kan du forklare ARP og switch-laringsalgoritmen?",
+              "Kan du forklare ARP og switch-læringsalgoritmen?",
               "Kan du navngi de 5 RPC-feilklassene?",
               "Kan du forklare MQTT QoS 0, 1 og 2?",
               "Kan du beregne RDP for en overlay-sti?",

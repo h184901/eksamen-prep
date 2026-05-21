@@ -169,7 +169,7 @@ const obliger = [
       },
       {
         front: "Hva gjør findSuccessor() og closestPrecedingNode()?",
-        back: "findSuccessor(id): finner noden ansvarlig for nøkkel id. closestPrecedingNode(id): finner den noden i fingertabellen som er nærmest foran id (uten å gå forbi). Brukes i kombinsjon for oppslag.",
+        back: "findSuccessor(id): finner noden ansvarlig for nøkkel id. closestPrecedingNode(id): finner den noden i fingertabellen som er nærmest foran id (uten å gå forbi). Brukes i kombinasjon for oppslag.",
       },
       {
         front: "Hva er distribuert mutex i prosjekt 3 og hva er Lamport-klokkers rolle?",

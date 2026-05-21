@@ -14,7 +14,7 @@ export default function Oppg1Page() {
       {/* Hva forvente deg */}
       <div className="rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-800 p-5 mb-8">
         <h3 className="font-bold text-sm text-emerald-700 dark:text-emerald-400 mb-3">
-          Hva forvente deg i oppgave 1
+          Hva du kan forvente på oppgave 1
         </h3>
         <ul className="text-sm text-emerald-900 dark:text-emerald-200 space-y-2 list-disc list-inside">
           <li>10 spørsmål × 1 poeng = 10% av eksamen</li>
