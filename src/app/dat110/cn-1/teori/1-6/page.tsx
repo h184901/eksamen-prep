@@ -39,7 +39,7 @@ DDoS (Distributed DoS) = tusenvis av infiserte maskiner (botnet) koordinerer ang
 Typer:
 - Bandwidth flooding: sender sA mye trafikk at linken til målet mettes
 - Connection flooding: fyller opp TCP-tilkoblingstabellen med halvferdige forbindelser (SYN flood)
-- Application-layer attacks: sender gyldige foresp\u00f8rsler som er dyre å behandle
+- Application-layer attacks: sender gyldige forespørsler som er dyre å behandle
 
 Forsvar: trafikkfiltrering, rate limiting, CDN, anycast routing.
 
@@ -81,7 +81,7 @@ Mulig fordi:
 - Hvem som helst kan konstruere en IP-pakke med vilkårlig kildeadresse
 
 Bruksområder:
-- DoS-amplifikasjon: send foresp\u00f8rsler med offer-IP som kilde, svar sendes til offeret
+- DoS-amplifikasjon: send forespørsler med offer-IP som kilde, svar sendes til offeret
 - Blind spoofing: omgA IP-baserte tilgangskontroller
 - Refleksjonsangrep: bruk internettservere som forsterker angrepsvolum
 
@@ -206,7 +206,7 @@ Forsvar:
       <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Sikkerhet i CN-1 er vanligvis bare flervalg (oppgave 1). Typiske sp\u00f8rsmAl:
+          Sikkerhet i CN-1 er vanligvis bare flervalg (oppgave 1). Typiske spørsmAl:
           hva er en orm (sprer seg automatisk), hva beskytter mot pakkebrylning (kryptering),
           hva er IP spoofing (forfalsket kilde-IP). Sikkerhetsemnet dekkes mer grundig
           i CN kapittel 8 (ikke del av dette kurset).

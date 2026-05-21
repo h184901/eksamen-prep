@@ -57,7 +57,7 @@ const LAYERS = [
     text: "text-orange-700 dark:text-orange-300",
     hvem: "Verter + Rutere + Svitsjer",
     hva: "Dataoverføring over EN enkelt kommunikasjonsforbindelse. MAC-adresser identifiserer enheter på linknivA. Feildeteksjon (CRC). Adressering med 48-bit MAC-adresser.",
-    service: "Overf\u00f8ring av rammer over en enkelt link (fra node til nabnode). PAlitelig ELLER upålitelig avhengig av protokoll.",
+    service: "Overføring av rammer over en enkelt link (fra node til nabnode). PAlitelig ELLER upålitelig avhengig av protokoll.",
     implementert: "Nettverkskort (NIC) og svitsjer",
   },
   {
@@ -167,18 +167,18 @@ export default function CN1_5Page() {
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-xs">Hva fysisk laget gir:</p>
-              <p className="text-xs text-[var(--muted)] mt-1">Upålitelig overf\u00f8ring av bits over en enkelt kobberleder, fiber eller radiob\u00f8lge.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Upålitelig overføring av bits over en enkelt kobberleder, fiber eller radiobølge.</p>
             </div>
           </div>
           <p className="text-[var(--muted)]">
             Lagdelingen <strong>bruer dette gapet</strong> med 5 lag, der hvert lag
-            l\u00f8ser ett problem og tilbyr en bedre tjeneste til laget over.
+            løser ett problem og tilbyr en bedre tjeneste til laget over.
           </p>
           <div className="grid sm:grid-cols-3 gap-2 text-xs">
             {[
               { fordel: "Modularitet", forklaring: "Hvert lag kan endres uavhengig (bytt ut WiFi med Ethernet uten å endre TCP)" },
               { fordel: "Abstrahering", forklaring: "Applikasjoner trenger ikke vite om kabler og signaler" },
-              { fordel: "Standardisering", forklaring: "Gj\u00f8r det mulig å bygge interoperable produkter fra ulike leverandorer" },
+              { fordel: "Standardisering", forklaring: "Gjør det mulig å bygge interoperable produkter fra ulike leverandorer" },
             ].map(({ fordel, forklaring }) => (
               <div key={fordel} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
                 <p className="font-bold">{fordel}</p>

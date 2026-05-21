@@ -87,7 +87,7 @@ const tidslinje = [
       "2013: ~2,7 milliarder internettbrukere. Edward Snowden-avsløringene",
       "2016: ~3,5 milliarder brukere. IoT (Internet of Things) eksploderer",
       "2020: COVID-19 tvinger historisk vekst i videokonferanse (Zoom, Teams)",
-      "2023: ChatGPT og AI-tjenester driver ny b\u00f8lge av internettbruk",
+      "2023: ChatGPT og AI-tjenester driver ny bølge av internettbruk",
       "2025: ~5 milliarder+ brukere. 5G, edge computing, AI-infrastruktur",
     ],
   },

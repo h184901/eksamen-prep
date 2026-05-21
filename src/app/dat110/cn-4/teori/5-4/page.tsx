@@ -40,7 +40,7 @@ function TracerouteVisualisering() {
         ))}
         <button
           onClick={() => setStep(0)}
-          className="px-3 py-1 rounded text-xs font-semibold bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-red-50"
+          className="px-3 py-1 rounded text-xs font-semibold bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-red-50 dark:hover:bg-red-950/20"
         >
           Reset
         </button>

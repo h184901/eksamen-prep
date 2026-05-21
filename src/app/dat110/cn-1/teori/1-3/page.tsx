@@ -125,7 +125,7 @@ export default function CN1_3Page() {
                   <p className="font-bold text-sm text-red-700 dark:text-red-400 mb-1">Pakketap</p>
                   <p className="text-xs text-[var(--muted)]">
                     Rutere har begrenset bufferplass. Hvis ko er full og nye pakker ankommer,
-                    droppes pakkene. H\u00f8y trafikkintensitet (La/R når 1) gir lang ko og potensielt tap.
+                    droppes pakkene. Høy trafikkintensitet (La/R når 1) gir lang ko og potensielt tap.
                     Se delkapittel 1.4 for beregning.
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function CN1_3Page() {
                 <div className="grid sm:grid-cols-2 gap-3">
                   <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800 p-3">
                     <p className="font-bold text-xs text-blue-700 dark:text-blue-400 mb-1">FDM (Frequency Division Multiplexing)</p>
-                    <p className="text-xs text-[var(--muted)]">Frekvensb\u00e5ndet deles opp i smale frekvensb\u00e5nd. Hver bruker får sitt eget frekvensb\u00e5nd for hele sesjonen. Brukes i AM/FM-radio og kabel-TV.</p>
+                    <p className="text-xs text-[var(--muted)]">Frekvensbåndet deles opp i smale frekvensbånd. Hver bruker får sitt eget frekvensbånd for hele sesjonen. Brukes i AM/FM-radio og kabel-TV.</p>
                   </div>
                   <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-purple-200 dark:border-purple-800 p-3">
                     <p className="font-bold text-xs text-purple-700 dark:text-purple-400 mb-1">TDM (Time Division Multiplexing)</p>
@@ -174,7 +174,7 @@ export default function CN1_3Page() {
                             </div>
                           ))}
                         </div>
-                        <p className="text-[var(--muted)] mt-1">Hvert b\u00e5nd er dedikert &mdash; selv om stille</p>
+                        <p className="text-[var(--muted)] mt-1">Hvert bånd er dedikert &mdash; selv om stille</p>
                       </div>
                       <div>
                         <p className="font-bold mb-2">TDM</p>
@@ -331,7 +331,7 @@ export default function CN1_3Page() {
         <div className="rounded-xl border-2 border-network-400/60 bg-network-50 dark:bg-network-950/20 p-4 text-sm">
           <h3 className="font-bold text-network-600 dark:text-network-400 mb-2">IXP &mdash; Internet Exchange Point</h3>
           <p className="text-[var(--muted)]">
-            Et noyt ralt m\u00f8tepunkt der ISPer kan koble seg direkte til hverandre (peering) uten å sende
+            Et noyt ralt møtepunkt der ISPer kan koble seg direkte til hverandre (peering) uten å sende
             trafikk gjennom en tredje part. Reduserer kostnader og forsinkelse. AMS-IX i Amsterdam er
             verdens storste. I Norge: NIX (Norwegian Internet Exchange) i Oslo og Bergen.
           </p>

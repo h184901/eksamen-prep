@@ -66,7 +66,7 @@ export default function CN1_1Page() {
               tittelfarge: "text-blue-700 dark:text-blue-400",
               innhold: [
                 "PCer, mobiltelefoner, servere, nettbrett, IoT-enheter (termostater, biler, osv.)",
-                "Kj\u00f8rer nettverksapplikasjoner ved kanten av internett (nettverkskanten)",
+                "Kjører nettverksapplikasjoner ved kanten av internett (nettverkskanten)",
                 "Produserer og konsumerer data \u2014 de er de egentlige brukerne av nettverket",
                 "Kalt 'endesystemer' fordi de sitter i kantene av nettverket, ikke i midten",
               ],
@@ -79,7 +79,7 @@ export default function CN1_1Page() {
                 "Rutere (routers): videresender pakker mellom nettverk (lag 3)",
                 "Link-layer-svitsjer (switches): kobler enheter innenfor et nettverk (lag 2)",
                 "Bruker videresendingstabeller (routing/forwarding tables) for å bestemme veien",
-                "Implementerer store-and-forward: pakken må mottas i sin helhet f\u00f8r den sendes videre",
+                "Implementerer store-and-forward: pakken må mottas i sin helhet før den sendes videre",
               ],
             },
             {
@@ -87,10 +87,10 @@ export default function CN1_1Page() {
               farge: "border-purple-400/60 bg-purple-50 dark:bg-purple-950/20",
               tittelfarge: "text-purple-700 dark:text-purple-400",
               innhold: [
-                "Fiber (optisk): sv\u00e6rt høy hastighet, typisk i ryggraden av internett",
+                "Fiber (optisk): svært høy hastighet, typisk i ryggraden av internett",
                 "Kobberkabel (twisted pair, koaks): i hjemmet og kontorer",
-                "Radiob\u00f8lger: WiFi, 4G/5G, satellitt",
-                "\u00d8verforing shastighet = b\u00e5ndbredde, m\u00e5les i bits per sekund (bps/Mbps/Gbps)",
+                "Radiobølger: WiFi, 4G/5G, satellitt",
+                "Øverforing shastighet = båndbredde, måles i bits per sekund (bps/Mbps/Gbps)",
               ],
             },
             {
@@ -165,7 +165,7 @@ export default function CN1_1Page() {
         </h2>
         <p className="text-sm text-[var(--muted)]">
           Fra applikasjonsutviklerens perspektiv er internett en <strong>infrastruktur som leverer tjenester
-          til applikasjoner</strong>. Dette perspektivet svarer på: <em>hva kan internett gj\u00f8re for meg?</em>
+          til applikasjoner</strong>. Dette perspektivet svarer på: <em>hva kan internett gjøre for meg?</em>
         </p>
 
         <div className="rounded-xl border-2 border-network-400/60 bg-network-50 dark:bg-network-950/20 p-4">
@@ -174,7 +174,7 @@ export default function CN1_1Page() {
           </h3>
           <div className="text-sm space-y-3">
             <p>
-              Distribuerte applikasjoner (web, e-post, video, IoT, sosiale medier) kj\u00f8rer på
+              Distribuerte applikasjoner (web, e-post, video, IoT, sosiale medier) kjører på
               <strong> endesystemer</strong> og kommuniserer med hverandre via internett.
               Internett gir disse applikasjonene et <strong>socket-API</strong> &mdash; et
               programmeringsgrensesnitt som lar applikasjoner sende og motta data.
@@ -205,15 +205,15 @@ export default function CN1_1Page() {
             <p><strong>Scenario:</strong> Du skriver inn www.example.com i nettleseren din.</p>
             <ol className="list-decimal list-inside space-y-1 text-[var(--muted)] ml-2">
               <li>Nettleseren (klient-app) lager en TCP-socket til port 80 på serveren</li>
-              <li>Sender en HTTP GET-foresp\u00f8rsel via socket-APIet</li>
-              <li>Internett transporterer foresp\u00f8rselen fra din PC til webserveren</li>
-              <li>Webserveren mottar foresp\u00f8rselen, finner siden, sender HTTP-svar</li>
+              <li>Sender en HTTP GET-forespørsel via socket-APIet</li>
+              <li>Internett transporterer forespørselen fra din PC til webserveren</li>
+              <li>Webserveren mottar forespørselen, finner siden, sender HTTP-svar</li>
               <li>Nettleseren din mottar HTML-koden og viser siden</li>
             </ol>
             <p className="text-[var(--muted)]">
               Applikasjonene (nettleser og webserver) trenger ikke vite <em>hvordan</em> pakkene
               reiser gjennom internett &mdash; det er internetts jobb. Det er nettopp derfor
-              lagdelingen er s\u00e5 viktig!
+              lagdelingen er så viktig!
             </p>
           </div>
         )}
@@ -238,7 +238,7 @@ export default function CN1_1Page() {
               { felt: "Meldingstyper", forklaring: "Hvilke typer meldinger som kan sendes (request, response, error)" },
               { felt: "Syntaks (format)", forklaring: "Strukturen og feltene i meldingene" },
               { felt: "Semantikk (mening)", forklaring: "Hva meldingsfeltene betyr" },
-              { felt: "Prosesseringslogikk", forklaring: "NAt og i hvilken rekkef\u00f8lge meldinger sendes/behandles" },
+              { felt: "Prosesseringslogikk", forklaring: "NAt og i hvilken rekkefølge meldinger sendes/behandles" },
             ].map(({ felt, forklaring }) => (
               <div key={felt} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-amber-200 dark:border-amber-800/40 p-3">
                 <p className="font-bold text-amber-700 dark:text-amber-400 text-xs">{felt}</p>
@@ -305,8 +305,8 @@ export default function CN1_1Page() {
               </div>
             </div>
             <p className="text-[var(--muted)] text-xs">
-              Begge protokollene spesifiserer hvem som sender f\u00f8rst, hva som er gyldige svar,
-              og hva man gj\u00f8r hvis noe går galt. Nettverksprotokoller er bare strengere og mer presise.
+              Begge protokollene spesifiserer hvem som sender først, hva som er gyldige svar,
+              og hva man gjør hvis noe går galt. Nettverksprotokoller er bare strengere og mer presise.
             </p>
           </div>
         )}
@@ -319,7 +319,7 @@ export default function CN1_1Page() {
           Oppgave 1 (flervalg) kan spørre om hva trafikkintensitet måler, hvilken tjeneste
           link-laget gir, eller hva transportlaget bruker for å identifisere endepunkter.
           Fra jan 2025: trafikkintensitet = forholdet mellom ankomstrate og sendekapasitet (La/R).
-          Link-laget gir upålit elig overf\u00f8ring av rammer over <em>en</em> link.
+          Link-laget gir upålit elig overføring av rammer over <em>en</em> link.
           Transportlaget bruker IP-adresse + portnummer.
         </span>
       </div>

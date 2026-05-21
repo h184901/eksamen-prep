@@ -272,7 +272,7 @@ export default function CN1_4Page() {
               formel: null,
               farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
               tfarge: "text-orange-700 dark:text-orange-400",
-              forklaring: "Tid pakken venter i utgangskov på å bli transmittert. Avhenger av trafikknivA. NAt mange pakker ankommer samtidig, m\u00e5 pakker vente. Best beskrevet av trafikkintensiteten La/R.",
+              forklaring: "Tid pakken venter i utgangskov på å bli transmittert. Avhenger av trafikknivA. NAt mange pakker ankommer samtidig, må pakker vente. Best beskrevet av trafikkintensiteten La/R.",
               husk: "d_queue er GITT i oppgaven eller angis via trafikkintensitet. Du beregner den ikke direkte.",
             },
             {
@@ -342,7 +342,7 @@ export default function CN1_4Page() {
               <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
                 <p className="font-bold text-green-700 dark:text-green-400 text-xs mb-1">d_prop = d/s (forplantningsforsinkelse)</p>
                 <p className="text-xs text-[var(--muted)]">
-                  <strong>d_prop</strong> = tid det tar for en bil å kj\u00f8re fra bomstasjonen
+                  <strong>d_prop</strong> = tid det tar for en bil å kjøre fra bomstasjonen
                   til destinasjonen (f.eks. Bergen til Oslo).
                   Avhenger av avstand og kjørehastigheten på motorveien.
                   Antall biler (pakkelengde) er irrelevant.

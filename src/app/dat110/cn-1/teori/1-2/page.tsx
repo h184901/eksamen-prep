@@ -36,7 +36,7 @@ export default function CN1_2Page() {
     },
     {
       id: "radio",
-      navn: "Radiob\u00f8lger (tradlost)",
+      navn: "Radiobølger (tradlost)",
       hastighet: "Variabel (54 Mbps – 10+ Gbps)",
       avstand: "Noen meter – hundrevis av km",
       bruk: "WiFi, 4G/5G, satellitt, Bluetooth",
@@ -70,16 +70,16 @@ export default function CN1_2Page() {
     {
       type: "WiFi / Ethernet (LAN)",
       hastighet: "WiFi: opp til 9.6 Gbps (WiFi 6). Ethernet: 1–100 Gbps",
-      medium: "Radiob\u00f8lger (WiFi) eller twisted pair (Ethernet)",
+      medium: "Radiobølger (WiFi) eller twisted pair (Ethernet)",
       struktur: "Kobler enheter til en access point eller svitsj i hjemmet/bedriften",
       egenskap: "WiFi er praktisk men delt medium med interferens. Ethernet er stabilt og raskt.",
     },
     {
       type: "4G/5G mobilnett",
       hastighet: "4G: 100 Mbps, 5G: opp til 20 Gbps",
-      medium: "Radiob\u00f8lger mellom mobil og basestasjoner",
+      medium: "Radiobølger mellom mobil og basestasjoner",
       struktur: "Mobil kobler til base station, videre via kjernenett til internett",
-      egenskap: "Bredt dekningsområde. 5G muliggj\u00f8r lav latens for IoT og autonom kj\u00f8ring.",
+      egenskap: "Bredt dekningsområde. 5G muliggjør lav latens for IoT og autonom kjøring.",
     },
   ];
 
