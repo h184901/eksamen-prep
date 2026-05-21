@@ -219,7 +219,7 @@ export default function CN1_3Page() {
               {[
                 ["Ressursallokering", "Dynamisk (statistisk multipleksing)", "Statisk (reservert for sesjonen)"],
                 ["Effektivitet", "Høy (ledig kapasitet kan brukes av andre)", "Lav (stille perioder sloser kapasitet)"],
-                ["QoS-garanti", "Ingen garanti (best-effort)", "Garantert bandbredde og forsinkelse"],
+                ["QoS-garanti", "Ingen garanti (best-effort)", "Garantert båndbredde og forsinkelse"],
                 ["Koforsinkelse", "Ja (variabel, avhenger av trafikk)", "Nei (dedikert kanal)"],
                 ["Pakketap", "Mulig ved overbelastning", "Ingen (reservert)"],
                 ["Kompleksitet", "Enkel (ingen oppsett)", "Krever call-setup-protokoll"],

@@ -194,7 +194,7 @@ export default function CN1VisualiseringerPage() {
     <div className="space-y-8">
       <h2 className="text-2xl font-bold">Visualiseringer: Nettverksmetrikker</h2>
       <p className="text-[var(--muted)] max-w-2xl">
-        Interaktive verktoy for å forstA forsinkelser og lagmodellen.
+        Interaktive verktøy for å forstå forsinkelser og lagmodellen.
       </p>
 
       <DelayCalculator />

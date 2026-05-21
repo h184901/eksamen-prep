@@ -77,7 +77,7 @@ export default function DS1_2Page() {
   const goals = [
     { id: "ressursdeling", label: "Ressursdeling" },
     { id: "transparens", label: "Transparens" },
-    { id: "appenhet", label: "Apenhet" },
+    { id: "appenhet", label: "Åpenhet" },
     { id: "skalerbarhet", label: "Skalerbarhet" },
   ];
 
@@ -96,7 +96,7 @@ export default function DS1_2Page() {
         <h1 className="text-2xl font-bold mb-2">1.2 Design-mål</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Bare fordi man <em>kan</em> bygge et distribuert system, betyr det ikke at man <em>bor</em> gjøre det.
-          Det må være verdt innsatsen. Her er de fire design-malene som gjør distribusjon meningsfull —
+          Det må være verdt innsatsen. Her er de fire design-målene som gjør distribusjon meningsfull —
           og de 7 transparenstypene du MÅ kunne på eksamen.
         </p>
       </div>
@@ -106,13 +106,13 @@ export default function DS1_2Page() {
         <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
-            "Ramse opp og forklare de 4 design-malene: ressursdeling, transparens, apenhet, skalerbarhet",
+            "Ramse opp og forklare de 4 design-målene: ressursdeling, transparens, åpenhet, skalerbarhet",
             "Forklare ALLE 7 transparenstyper med eksempler (failure, location, migration, osv.)",
             "Skille mellom location transparency og migration/relocation transparency",
             "Forklare IDL og hva interoperabilitet og portabilitet betyr",
             "Forklare de 3 skalerbarhetsdimensjonene: størrelse, geografisk, administrativ",
             "Kjenne de 3 teknikkene for skalerbarhet: partisjonering, replikering, caching",
-            "Forklare policy vs. mechanism-prinsippet i apne systemer",
+            "Forklare policy vs. mechanism-prinsippet i åpne systemer",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm">
               <span className="text-amber-500 mt-0.5 shrink-0">&#9733;</span>
@@ -122,13 +122,13 @@ export default function DS1_2Page() {
         </ul>
       </div>
 
-      {/* Oversikt over de 4 malene */}
+      {/* Oversikt over de 4 målene */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">
-          De fire design-malene
+          De fire design-målene
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Klikk på hvert mal for detaljer:
+          Klikk på hvert mål for detaljer:
         </p>
 
         {/* Faner */}
@@ -153,19 +153,19 @@ export default function DS1_2Page() {
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-3 text-sm">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Ressursdeling (Resource sharing)</h3>
             <p>
-              Et viktig mal er a gjøre det enkelt for brukere og applikasjoner a få tilgang til og dele
+              Et viktig mål er a gjøre det enkelt for brukere og applikasjoner a få tilgang til og dele
               ressurser på tvers av nettverket. Ressurser kan være alt: skrivere, lagring, data, filer,
               tjenester og nettverk.
             </p>
             <p className="text-[var(--muted)]">
-              <strong>Okonomisk motivasjon:</strong> Det er billigere a ha ett høykvalitets lagringsanlegg delt
-              av mange enn at alle må kjøpe sitt eget. Ressursdeling muliggjor også samarbeid på tvers av
+              <strong>Økonomisk motivasjon:</strong> Det er billigere å ha ett høykvalitets lagringsanlegg delt
+              av mange enn at alle må kjøpe sitt eget. Ressursdeling muliggjør også samarbeid på tvers av
               geografiske og organisatoriske grenser.
             </p>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
               <p className="font-bold text-xs mb-1">Eksempler:</p>
               <ul className="space-y-1 text-xs text-[var(--muted)]">
-                <li>&#8226; BitTorrent: alle deltakere deler bandbredde og lagring</li>
+                <li>&#8226; BitTorrent: alle deltakere deler båndbredde og lagring</li>
                 <li>&#8226; Dropbox/Google Drive: delt mappe tilgjengelig fra alle enheter</li>
                 <li>&#8226; AWS S3: delt objektlagring for millioner av applikasjoner</li>
                 <li>&#8226; Skriverdeling på et kontornettverk (klassisk eksempel)</li>
@@ -178,7 +178,7 @@ export default function DS1_2Page() {
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-3 text-sm">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Transparens (Distribution transparency)</h3>
             <p>
-              Et viktig mal er a skjule det faktum at prosesser og ressurser er fysisk distribuert på
+              Et viktig mål er a skjule det faktum at prosesser og ressurser er fysisk distribuert på
               tvers av mange maskiner. Distribusjonen skal være <strong>usynlig</strong> (transparent) for
               sluttbrukere og applikasjoner.
             </p>
@@ -191,10 +191,10 @@ export default function DS1_2Page() {
 
         {activeGoal === "appenhet" && (
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-3 text-sm">
-            <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Apenhet (Openness)</h3>
+            <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Åpenhet (Openness)</h3>
             <p>
-              Et apent distribuert system er et system som tilbyr komponenter som lett kan brukes av eller
-              integreres i andre systemer. Et apent system bor også selv bestå av komponenter som stammer
+              Et åpent distribuert system er et system som tilbyr komponenter som lett kan brukes av eller
+              integreres i andre systemer. Et åpent system bor også selv bestå av komponenter som stammer
               fra andre steder.
             </p>
             <div className="space-y-2">
@@ -271,7 +271,7 @@ export default function DS1_2Page() {
                   },
                   {
                     teknikk: "Replikering",
-                    forklaring: "Ha flere kopier av en ressurs. Oker tilgjengelighet og ytelse. Problemet: konsistens — når en kopi oppdateres må alle oppdateres, noe som er vanskelig og kostbart.",
+                    forklaring: "Ha flere kopier av en ressurs. Øker tilgjengelighet og ytelse. Problemet: konsistens — når en kopi oppdateres må alle oppdateres, noe som er vanskelig og kostbart.",
                   },
                   {
                     teknikk: "Caching",
@@ -350,7 +350,7 @@ export default function DS1_2Page() {
         </div>
       </section>
 
-      {/* Migration vs Relocation — klassisk eksamensfelfall */}
+      {/* Migration vs Relocation — klassisk eksamensfelle */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">
           Klassisk forvirring: Location vs. Migration vs. Relocation
@@ -395,10 +395,10 @@ export default function DS1_2Page() {
         </div>
       </section>
 
-      {/* Apenhet: IDL og policy/mechanism */}
+      {/* Åpenhet: IDL og policy/mechanism */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">
-          Apenhet i detalj: IDL og policy vs. mekanisme
+          Åpenhet i detalj: IDL og policy vs. mekanisme
         </h2>
 
         <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-4">

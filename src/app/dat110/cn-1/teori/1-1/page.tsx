@@ -265,7 +265,7 @@ export default function CN1_1Page() {
             </div>
           </div>
           <p className="text-xs text-[var(--muted)] mt-3">
-            Apen standardisering er kritisk for interoperabilitet: et program skrevet i Java
+            Åpen standardisering er kritisk for interoperabilitet: et program skrevet i Java
             skal kunne snakke med et program skrevet i Python, på en iPhone til en Android-telefon.
           </p>
         </div>

@@ -21,7 +21,7 @@ export default function DS1_3Page() {
       hvaFar: "Virtuelle maskiner (VM-er), lagring, nettverk, CPU og RAM",
       hvemStyrer: "Du installerer og konfigurerer alt selv — OS, runtime, applikasjoner",
       eksempler: ["Amazon EC2", "Amazon S3", "Google Compute Engine", "Microsoft Azure VMs"],
-      analogi: "Du leier en tom leilighet — du maler veggene og setter inn mobler selv",
+      analogi: "Du leier en tom leilighet — du måler veggene og setter inn møbler selv",
       eksamensnotat: "IaaS = cloud leier ut VM-er. Fra 2024-eksamen oppg 1h: svaret er IaaS.",
     },
     {
@@ -31,10 +31,10 @@ export default function DS1_3Page() {
       norsk: "Plattform som tjeneste",
       farge: "border-indigo-400/60 bg-indigo-50 dark:bg-indigo-950/20",
       tittelfarge: "text-indigo-700 dark:text-indigo-400",
-      hvaFar: "Programmeringsmiljo, runtimes, databaser, middleware, utviklingsverktoy",
+      hvaFar: "Programmeringsmiljø, runtimes, databaser, middleware, utviklingsverktøy",
       hvemStyrer: "Du skriver kode og deployer applikasjoner. Cloud håndterer OS, middleware og skalering.",
       eksempler: ["Microsoft Azure (App Service)", "Google App Engine", "Heroku"],
-      analogi: "Du leier en moblert leilighet — du kan bo der og innrede, men husvert eier alt annet",
+      analogi: "Du leier en møblert leilighet — du kan bo der og innrede, men husvert eier alt annet",
       eksamensnotat: "PaaS = du deployer kode, cloud håndterer alt under",
     },
     {
@@ -97,7 +97,7 @@ export default function DS1_3Page() {
       ),
       egenskaper: [
         "Klar rolledeling: server har ressurser, klient bruker dem",
-        "Enkel a forstå, implementere og feilsøke",
+        "Enkel å forstå, implementere og feilsøke",
         "Server kan bli flaskehalsen ved mange samtidige klienter",
         "Single point of failure hvis serveren krasjer",
         "Multi-tier: flere lag av servere (presentasjon, logikk, data)",
@@ -107,7 +107,7 @@ export default function DS1_3Page() {
     p2p: {
       tittel: "Peer-to-peer (P2P)",
       beskrivelse:
-        "Ingen sentralisert server. Alle noder (peers) er likeverdige — de er bade klienter og servere. Ressurser deles direkte mellom nodene. Svart skalerbar og robust mot feil.",
+        "Ingen sentralisert server. Alle noder (peers) er likeverdige — de er både klienter og servere. Ressurser deles direkte mellom nodene. Svart skalerbar og robust mot feil.",
       svg: (
         <svg viewBox="0 0 500 220" className="w-full max-w-xl mx-auto" aria-label="P2P diagram">
           {[
@@ -132,11 +132,11 @@ export default function DS1_3Page() {
           <line x1="350" y1="180" x2="240" y2="150" stroke="#6366f1" strokeWidth="1" strokeDasharray="4,2" opacity="0.7"/>
           <line x1="90" y1="100" x2="240" y2="150" stroke="#6366f1" strokeWidth="1" strokeDasharray="4,2" opacity="0.5"/>
           <line x1="390" y1="100" x2="240" y2="150" stroke="#6366f1" strokeWidth="1" strokeDasharray="4,2" opacity="0.5"/>
-          <text x="250" y="210" textAnchor="middle" fontSize="10" fill="#94a3b8">Alle er bade klient og server — ingen sentral autoritet</text>
+          <text x="250" y="210" textAnchor="middle" fontSize="10" fill="#94a3b8">Alle er både klient og server — ingen sentral autoritet</text>
         </svg>
       ),
       egenskaper: [
-        "Alle noder er bade klient og server (symmetrisk)",
+        "Alle noder er både klient og server (symmetrisk)",
         "Ingen sentral flaskehals — svart skalerbar",
         "Robust: feil i en node pavirker ikke systemet i stor grad",
         "Vanskeligere a administrere og sikre",
@@ -403,7 +403,7 @@ export default function DS1_3Page() {
                 Beregning (VM-er), lagring (blokk, fil) — Amazon S3, Amazon EC2
               </div>
               <div className="rounded bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 px-3 py-2 text-gray-700 dark:text-gray-300">
-                CPU, minne, disk, bandbredde — Datasentre
+                CPU, minne, disk, båndbredde — Datasentre
               </div>
             </div>
           </div>

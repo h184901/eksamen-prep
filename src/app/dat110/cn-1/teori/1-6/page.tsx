@@ -56,7 +56,7 @@ Internett gir INGEN innebygd forsvar mot DoS. IP spesifiserer beste-innsats og h
 
 Mulig fordi:
 - WiFi og Ethernet (i eldre huber) er delt medium: alle enheter ser all trafikk
-- Wireshark er et populaert (legitimt) verktoy for nettverksanalyse og feilsøking
+- Wireshark er et populært (legitimt) verktøy for nettverksanalyse og feilsøking
 
 Risiko:
 - Ukrypterte protokoller (HTTP, Telnet, FTP) sender passord i klartekst

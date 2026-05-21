@@ -173,13 +173,13 @@ export default function CN3Teori36Page() {
               <p>• DECbit: ett metnings-bit settes i pakken</p>
             </div>
             <div className="mt-2 rounded bg-blue-100 dark:bg-blue-900/30 p-2 text-xs">
-              <strong>Fordel:</strong> Raskt og presis. Ulempe: krever ruter-stotte, kompleksitet.
+              <strong>Fordel:</strong> Raskt og presis. Ulempe: krever ruter-støtte, kompleksitet.
             </div>
           </Card>
 
           <Card color="network">
             <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2">Ende-til-ende (End-to-end)</h4>
-            <p className="text-sm">Endepunktene <em>infererer</em> metning fra observert oppforsel (tap, forsinkelse). Ingen ruter-stotte nødvendig.</p>
+            <p className="text-sm">Endepunktene <em>infererer</em> metning fra observert oppforsel (tap, forsinkelse). Ingen ruter-støtte nødvendig.</p>
             <div className="mt-2 space-y-1 text-xs text-[var(--muted)]">
               <p><strong>Slik gjør TCP det:</strong></p>
               <p>• Pakketap (timeout / 3 duplikat-ACKer) = metningssignal</p>
@@ -196,7 +196,7 @@ export default function CN3Teori36Page() {
           <h4 className="font-bold mb-2">TCP bruker ende-til-ende</h4>
           <p className="text-sm">Standard TCP (Reno, Tahoe) bruker utelukkende ende-til-ende metningskontroll. IP-protokollen er "dum" — rutere teller ikke, annonserer ikke. TCP tolker tap som metning og reduserer senderate. Dette er prinsippet bak AIMD og slow start (se 3.7).</p>
           <div className="mt-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 p-2 text-xs">
-            <strong>ECN er et unntak:</strong> Nyere implementasjoner bruker ECN (RFC 3168) der rutere setter bits for å signalere metning proaktivt, men dette krever stotte i bade nettverksutstyr og OS.
+            <strong>ECN er et unntak:</strong> Nyere implementasjoner bruker ECN (RFC 3168) der rutere setter bits for å signalere metning proaktivt, men dette krever støtte i både nettverksutstyr og OS.
           </div>
         </Card>
       </Section>

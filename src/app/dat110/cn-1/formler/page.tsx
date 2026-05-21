@@ -50,7 +50,7 @@ export default function CN1FormlerPage() {
       <h3 className="text-lg font-bold mt-6">Variabler</h3>
       <VarTable vars={[
         { symbol: "L", name: "Pakkelengde", unit: "bits" },
-        { symbol: "R", name: "Linjekapasitet (bandbredde)", unit: "bits/s (bps)" },
+        { symbol: "R", name: "Linjekapasitet (båndbredde)", unit: "bits/s (bps)" },
         { symbol: "d", name: "Fysisk avstand mellom noder", unit: "meter (m)" },
         { symbol: "s", name: "Signalhastighet i mediet", unit: "m/s" },
         { symbol: "a", name: "Gjennomsnittlig ankomstrate", unit: "pakker/s" },

@@ -211,7 +211,7 @@ export default function CN1_7Page() {
               konsekvens: "Maks ~4,3 milliarder unike adresser. Oppbrukt i 2011. Krever IPv6-overgang (128-bit adresser) som fortsatt pågår.",
             },
             {
-              beslutning: "Apne standarder via IETF",
+              beslutning: "Åpne standarder via IETF",
               konsekvens: "Internett ble tilgjengelig for alle, ikke båret av ett selskap. Fremmet innovasjon og global vekst.",
             },
           ].map(({ beslutning, konsekvens }) => (

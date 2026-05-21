@@ -150,7 +150,7 @@ export default function DS1_1Page() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
-                <span><strong>Gruppemedlemskap</strong>: apent eller lukket system, med adgangskontroll og autentisering</span>
+                <span><strong>Gruppemedlemskap</strong>: åpent eller lukket system, med adgangskontroll og autentisering</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
@@ -351,7 +351,7 @@ export default function DS1_1Page() {
           </table>
         </div>
         <p className="text-xs text-[var(--muted)] bg-blue-50 dark:bg-blue-950/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800/40">
-          <strong>Bokas poeng:</strong> Desentralisering er aldri et mal i seg selv. Vi bor spre prosesser og ressurser
+          <strong>Bokas poeng:</strong> Desentralisering er aldri et mål i seg selv. Vi bor spre prosesser og ressurser
           bare i den grad det er <em>tilstrekkelig</em> for formålet. Jo mindre spredning, jo bedre. Unntaket er når
           spredning er strengt nødvendig (federated learning, blockchain, geografisk overvaking).
         </p>
