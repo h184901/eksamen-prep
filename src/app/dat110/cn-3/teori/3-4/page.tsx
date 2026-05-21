@@ -74,7 +74,7 @@ export default function CN3Teori34Page() {
         "ACK-nummer = neste forventede byte fra motparten",
         "3-veis handshake: SYN → SYN-ACK → ACK (og hvorfor 3 trinn)",
         "Timeout-beregning: SampleRTT, EstimatedRTT (EWMA), DevRTT, TimeoutInterval",
-        "TCP-mekanismer: checksum, timer, sekvensummer, ACK (som rdt 3.0 i praksis)",
+        "TCP-mekanismer: checksum, timer, sekvensnummer, ACK (som rdt 3.0 i praksis)",
         "TCP = full-duplex, connection-oriented, pålitelig, point-to-point",
       ]} />
 
@@ -328,7 +328,7 @@ export default function CN3Teori34Page() {
             <thead className="bg-neutral-100 dark:bg-neutral-800">
               <tr>
                 <th className="px-3 py-2 text-left">Mekanisme</th>
-                <th className="px-3 py-2 text-left">Formal</th>
+                <th className="px-3 py-2 text-left">Formål</th>
                 <th className="px-3 py-2 text-left">TCP-implementasjon</th>
               </tr>
             </thead>
@@ -340,10 +340,10 @@ export default function CN3Teori34Page() {
                 ["Acknowledgement", "Bekrefte mottak", "Kumulativ ACK = neste forventede byte"],
                 ["Pipelining", "Effektivitet", "Sendervindu (min av cwnd og rwnd)"],
                 ["Fast retransmit", "Raskt svar på tap", "3 duplikat-ACKer → retransmitter"],
-              ].map(([mek, formal, impl], i) => (
+              ].map(([mek, formål, impl], i) => (
                 <tr key={mek} className={i % 2 === 0 ? "bg-white dark:bg-neutral-900/40" : "bg-neutral-50 dark:bg-neutral-800/30"}>
                   <td className="px-3 py-2 font-bold text-xs text-cyan-600 dark:text-cyan-400">{mek}</td>
-                  <td className="px-3 py-2 text-xs">{formal}</td>
+                  <td className="px-3 py-2 text-xs">{formål}</td>
                   <td className="px-3 py-2 text-xs text-[var(--muted)]">{impl}</td>
                 </tr>
               ))}

@@ -83,7 +83,7 @@ export default function CN3Teori33Page() {
         <h1 className="text-2xl font-bold mb-2">Pålitelig dataoverføring (rdt)</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
           rdt-protokollene viser steg-for-steg hvordan man bygger pålitelig kommunikasjon over
-          en upalagtelig kanal. Dette er grunnlaget for TCP. Når du forstår rdt, forstår du TCP.
+          en upålitelig kanal. Dette er grunnlaget for TCP. Når du forstår rdt, forstår du TCP.
           Dette temaet tester eksamen alltid.
         </p>
       </div>
@@ -91,9 +91,9 @@ export default function CN3Teori33Page() {
       <MustKnow items={[
         "rdt 1.0: perfekt kanal — sender sender, mottaker mottar, ingen feil",
         "rdt 2.0: bit-feil håndteres med checksum + ACK/NAK. Problemet: korrupt ACK/NAK",
-        "rdt 2.1: sekvensummer (0/1) loser problemet med korrupte ACK/NAK",
+        "rdt 2.1: sekvensnummer (0/1) løser problemet med korrupte ACK/NAK",
         "rdt 2.2: som rdt 2.1 men uten NAK — bruker ACK(seqnum) istedenfor NAK",
-        "rdt 3.0: loser tap med timeout og retransmisjon. Alternating-bit protokoll",
+        "rdt 3.0: løser tap med timeout og retransmisjon. Alternating-bit protokoll",
         "Go-Back-N (GBN) vs Selective Repeat (SR): vindusmekanisme for parallelitet",
         "FSM-notasjon: tilstander (sirkler), overganger (piler), hendelse/aksjon",
       ]} />
@@ -101,7 +101,7 @@ export default function CN3Teori33Page() {
       <Section title="0. Oversikt — RDT-rammeverket" defaultOpen={true}>
         <Card color="network">
           <h4 className="font-bold mb-3">Hva er rdt?</h4>
-          <p className="text-sm">Malet er a bygge en pålitelig datatransporttjeneste over en UPALITELIG kanal. Kanalens problemer:</p>
+          <p className="text-sm">Målet er å bygge en pålitelig datatransporttjeneste over en UPÅLITELIG kanal. Kanalens problemer:</p>
           <div className="grid sm:grid-cols-2 gap-2 mt-3">
             {[
               { problem: "Bit-feil", icon: "B", desc: "Bits kan flippes under overføringen (støy på linken)" },
@@ -124,7 +124,7 @@ export default function CN3Teori33Page() {
           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
             {[
               { fn: "rdt_send(data)", besk: "Applikasjonen vil sende data pålitelig" },
-              { fn: "udt_send(segment)", besk: "Send segment upalagtelig over nettverket" },
+              { fn: "udt_send(segment)", besk: "Send segment upålitelig over nettverket" },
               { fn: "rdt_recv(segment)", besk: "Segment ankommer fra nettverkslaget" },
               { fn: "deliver_data(data)", besk: "Lever data til applikasjonslaget" },
             ].map(({ fn, besk }) => (
@@ -204,7 +204,7 @@ export default function CN3Teori33Page() {
             <Card color="red">
               <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Problemet med rdt 2.0: Korrupte ACK/NAK!</h4>
               <p className="text-sm">Hva skjer hvis ACK/NAK-meldingen selv blir korrupt? Senderen vet ikke om pakken kom frem. Senderen kan ikke bare sende på nytt (mottakeren vet ikke om det er ny pakke eller duplikat).</p>
-              <p className="text-sm mt-2 font-bold text-red-700 dark:text-red-400">Løsning: sekvensummer → rdt 2.1</p>
+              <p className="text-sm mt-2 font-bold text-red-700 dark:text-red-400">Løsning: sekvensnummer → rdt 2.1</p>
             </Card>
           </div>
         )}
@@ -212,7 +212,7 @@ export default function CN3Teori33Page() {
         {activeRdt === "rdt21" && (
           <div className="space-y-3">
             <Card color="purple">
-              <h4 className="font-bold text-purple-700 dark:text-purple-400 mb-2">rdt 2.1 — Sekvensummer loser duplikatproblemet</h4>
+              <h4 className="font-bold text-purple-700 dark:text-purple-400 mb-2">rdt 2.1 — Sekvensnummer løser duplikatproblemet</h4>
               <p className="text-sm"><strong>Ny mekanisme:</strong> Legg til et <strong>sekvensnummer</strong> (0 eller 1 — "alternating bit") i hver pakke.</p>
               <div className="mt-3 space-y-2 text-sm">
                 <p>Nå kan mottakeren skille mellom ny pakke og retransmisjon:</p>
@@ -260,7 +260,7 @@ export default function CN3Teori33Page() {
               <ul className="list-disc list-inside text-sm text-[var(--muted)] space-y-1 mt-1">
                 <li>Senderen starter en <strong>timer</strong> etter hver sendt pakke</li>
                 <li>Hvis ACK ikke mottas innen timeout → retransmitter pakken</li>
-                <li>Sekvensummer (0/1) håndterer duplikater fra retransmisjon</li>
+                <li>Sekvensnummer (0/1) håndterer duplikater fra retransmisjon</li>
               </ul>
             </Card>
 
@@ -281,7 +281,7 @@ export default function CN3Teori33Page() {
 
             <Card color="gold">
               <h4 className="font-bold mb-2">rdt 3.0 = Alternating-bit protokollen</h4>
-              <p className="text-sm">rdt 3.0 er også kjent som <strong>alternating-bit protokollen</strong> fordi sekvensnummeret veksler mellom 0 og 1. Det er en stop-and-wait protokoll: sender venter på ACK for pakke 0 for den sender pakke 1. <strong>Ulempe: ineffektiv</strong> — senderen er idle mesteparten av tiden på linker med høy forsinkelse.</p>
+              <p className="text-sm">rdt 3.0 er også kjent som <strong>alternating-bit protokollen</strong> fordi sekvensnummeret veksler mellom 0 og 1. Det er en stop-and-wait protokoll: sender venter på ACK for pakke 0 før den sender pakke 1. <strong>Ulempe: ineffektiv</strong> — senderen er idle mesteparten av tiden på linker med høy forsinkelse.</p>
             </Card>
           </div>
         )}
@@ -302,7 +302,7 @@ export default function CN3Teori33Page() {
               {[
                 ["rdt 1.0", "Ingen", "Ingen", "Ingen — perfekt"],
                 ["rdt 2.0", "Bitfeil", "Checksum, ACK, NAK", "Korrupt ACK/NAK"],
-                ["rdt 2.1", "Bitfeil + korrupt ACK", "Sekvensummer (0/1)", "Mange tilstander"],
+                ["rdt 2.1", "Bitfeil + korrupt ACK", "Sekvensnummer (0/1)", "Mange tilstander"],
                 ["rdt 2.2", "Bitfeil + korrupt ACK", "ACK med seqnum (ingen NAK)", "Lite"],
                 ["rdt 3.0", "Bitfeil + pakketap", "Timer + retransmisjon", "Lav effektivitet (stop-and-wait)"],
               ].map(([v, k, m, p], i) => (
@@ -319,7 +319,7 @@ export default function CN3Teori33Page() {
       </Section>
 
       <Section title="3. Go-Back-N (GBN) og Selective Repeat (SR)" defaultOpen={true}>
-        <p className="text-sm text-[var(--muted)] mb-3">Stop-and-wait (rdt 3.0) er ineffektiv. Litt: <strong>utnyttelse U = (L/R) / (RTT + L/R)</strong>. Løsning: tillat N ubekreftede pakker i "flyet" (pipelining).</p>
+        <p className="text-sm text-[var(--muted)] mb-3">Stop-and-wait (rdt 3.0) er ineffektiv: <strong>utnyttelse U = (L/R) / (RTT + L/R)</strong>. Løsning: tillat N ubekreftede pakker i &laquo;flyet&raquo; samtidig (pipelining).</p>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <Card color="blue">
@@ -412,11 +412,11 @@ export default function CN3Teori33Page() {
           <div className="space-y-3 text-sm">
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
               <p className="font-bold text-xs">Q: Hva er problemet med rdt 2.0?</p>
-              <p className="text-xs text-[var(--muted)] mt-1">A: ACK/NAK-meldinger kan selv bli korrupte. Senderen vet ikke om retransmisjon er nødvendig. Løsning: sekvensummer (rdt 2.1).</p>
+              <p className="text-xs text-[var(--muted)] mt-1">A: ACK/NAK-meldinger kan selv bli korrupte. Senderen vet ikke om retransmisjon er nødvendig. Løsning: sekvensnummer (rdt 2.1).</p>
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
-              <p className="font-bold text-xs">Q: Hva er formalet med checksum / timer / sekvensummer / acknowledgement?</p>
-              <p className="text-xs text-[var(--muted)] mt-1">Checksum: detektere bitfeil. Timer: detektere tap. Sekvensummer: skille ny pakke fra retransmisjon. Acknowledgement: bekrefte at pakke ble mottatt.</p>
+              <p className="font-bold text-xs">Q: Hva er formålet med checksum / timer / sekvensnummer / acknowledgement?</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Checksum: detektere bitfeil. Timer: detektere tap. Sekvensnummer: skille ny pakke fra retransmisjon. Acknowledgement: bekrefte at pakke ble mottatt.</p>
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
               <p className="font-bold text-xs">Q: Hva slags pakke innkapsler TCP-segmentet seg i?</p>

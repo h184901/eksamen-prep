@@ -28,14 +28,14 @@ export default function DS1_1Page() {
       tittel: "BitTorrent",
       kategori: "Peer-to-peer system",
       beskrivelse:
-        "Ingen sentral server eier filene. Alle deltakere (peers) er bade klienter og servere. Når du laster ned en fil, henter du ulike deler fra ulike maskiner rundt om i verden — men det framstar som en enkelt nedlasting.",
+        "Ingen sentral server eier filene. Alle deltakere (peers) er både klienter og servere. Når du laster ned en fil, henter du ulike deler fra ulike maskiner rundt om i verden — men det framstår som en enkelt nedlasting.",
     },
     {
       id: "iot",
       tittel: "Smart hjem / IoT",
       kategori: "Pervasivt system",
       beskrivelse:
-        "En smart termostat, lyskontroller, sikkerhetskamera og dørlas kommuniserer med hverandre og med skyen. Systemet oppforer seg som ett samlet hjem-automatiseringssystem, selv om det er dusinvis av autonome enheter involvert.",
+        "En smart termostat, lyskontroller, sikkerhetskamera og dørlås kommuniserer med hverandre og med skyen. Systemet oppfører seg som ett samlet hjem-automatiseringssystem, selv om det er dusinvis av autonome enheter involvert.",
     },
   ];
 
@@ -90,7 +90,7 @@ export default function DS1_1Page() {
             Van Steen &amp; Tanenbaum, 4. utgave
           </p>
           <blockquote className="text-lg font-bold text-blue-900 dark:text-blue-100 leading-relaxed italic">
-            &ldquo;å distributed system is a collection of autonomous computing elements that appears
+            &ldquo;A distributed system is a collection of autonomous computing elements that appears
             to its users as a single coherent system.&rdquo;
           </blockquote>
           <p className="text-xs text-blue-600 dark:text-blue-400 mt-3">
@@ -101,7 +101,7 @@ export default function DS1_1Page() {
         </div>
 
         <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/10 px-4 py-3 text-sm">
-          <span className="font-bold text-blue-700 dark:text-blue-400">Leslie Lamports beromte sitat: </span>
+          <span className="font-bold text-blue-700 dark:text-blue-400">Leslie Lamports berømte sitat: </span>
           <button
             onClick={() => setShowLamport(!showLamport)}
             className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -110,7 +110,7 @@ export default function DS1_1Page() {
           </button>
           {showLamport && (
             <p className="mt-2 italic text-[var(--muted)]">
-              &ldquo;å distributed system is one in which the failure of a computer you didn&apos;t even know
+              &ldquo;A distributed system is one in which the failure of a computer you didn&apos;t even know
               existed can render your own computer unusable.&rdquo; — Dette fanger essensen av utfordringen:
               skjulte avhengigheter og partielle feil.
             </p>
@@ -336,7 +336,7 @@ export default function DS1_1Page() {
             </thead>
             <tbody className="divide-y divide-[var(--card-border)]">
               {[
-                ["Hvorfor spredt?", "Tilstrekkelig (sufficiency) — nok til formalet", "Nødvendig (necessity) — må være spredt"],
+                ["Hvorfor spredt?", "Tilstrekkelig (sufficiency) — nok til formålet", "Nødvendig (necessity) — må være spredt"],
                 ["Eksempel", "Google Mail: spredt for skalerbarhet", "Blockchain: spredt av tillit-arsaker"],
                 ["Typisk driver", "Ekspansivt syn: service som må skalere", "Integrativt syn: eksisterende systemer kobles"],
                 ["Kompleksitet", "Kan være enkel der det er mulig", "Alltid kompleks pga. krav om spredning"],
@@ -352,7 +352,7 @@ export default function DS1_1Page() {
         </div>
         <p className="text-xs text-[var(--muted)] bg-blue-50 dark:bg-blue-950/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800/40">
           <strong>Bokas poeng:</strong> Desentralisering er aldri et mal i seg selv. Vi bor spre prosesser og ressurser
-          bare i den grad det er <em>tilstrekkelig</em> for formalet. Jo mindre spredning, jo bedre. Unntaket er når
+          bare i den grad det er <em>tilstrekkelig</em> for formålet. Jo mindre spredning, jo bedre. Unntaket er når
           spredning er strengt nødvendig (federated learning, blockchain, geografisk overvaking).
         </p>
       </section>

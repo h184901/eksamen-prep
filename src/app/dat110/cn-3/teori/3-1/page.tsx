@@ -235,7 +235,7 @@ export default function CN3Teori31Page() {
       <Section title="4. Gjennomgått eksempel — hva skjer når du besøker nrk.no?">
         <div className="space-y-3">
           {[
-            { steg: "1", tittel: "Nettleser genererer HTTP-foresporsel", tekst: "Prosessen (nettleseren) kaller rdt_send(). OS velger en ephemeral klientport, f.eks. 54321." },
+            { steg: "1", tittel: "Nettleser genererer HTTP-forespørsel", tekst: "Prosessen (nettleseren) kaller rdt_send(). OS velger en ephemeral klientport, f.eks. 54321." },
             { steg: "2", tittel: "Multipleksing på avsendersiden", tekst: "Transportlaget lager et TCP-segment med src-port=54321, dst-port=80, src-IP=din-IP, dst-IP=nrk.no-IP." },
             { steg: "3", tittel: "Nettverkslaget sender IP-datagram", tekst: "IP-datagrammet med TCP-segmentet inne sendes hopp-for-hopp mot nrk.no sin server." },
             { steg: "4", tittel: "Demultipleksing på mottakersiden", tekst: "Serveren mottar datagrammet. Transportlaget sjekker 4-tuple: dst-port=80 → leverer til HTTP-prosessen sin socket." },

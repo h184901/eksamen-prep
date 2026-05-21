@@ -77,7 +77,7 @@ export default function CN3Teori35Page() {
 
       <Section title="1. Flytkontroll (Flow Control)" defaultOpen={true}>
         <Card color="blue">
-          <h4 className="font-bold mb-2">Problemet flytkontroll loser</h4>
+          <h4 className="font-bold mb-2">Problemet flytkontroll løser</h4>
           <p className="text-sm">Senderen kan sende raskere enn mottakeren kan behandle. Mottakerens TCP-buffer (mottaksvindu) kan bli full. Uten flytkontroll: mottakerens buffer overflommer, data mistes.</p>
         </Card>
 

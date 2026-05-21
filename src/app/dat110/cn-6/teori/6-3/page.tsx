@@ -8,8 +8,8 @@ const CSMA_CD_TIMELINE = [
   { tid: "t=1", hendelse: "Node A begynner å sende ramme X.", status: "sender", forklaring: "A starter overføringen av ramme X. Signalet brer seg ut i mediet." },
   { tid: "t=2", hendelse: "Node B lytter — kanalen virker ledig (As signal er ikke fremme ennå).", status: "ledig", forklaring: "Signalet fra A har ikke nådd B ennå. B ser kanalen som ledig (propagasjonsforsinkelse!)." },
   { tid: "t=3", hendelse: "B begynner å sende ramme Y — KOLLISJON!", status: "kollisjon", forklaring: "B starter sending. Kollisjon oppstår fordi to noder sender samtidig." },
-  { tid: "t=4", hendelse: "å og B oppdager kollisjon (CD). Sender JAM-signal (48 bits).", status: "kollisjon", forklaring: "Collision Detection: Begge detekterer kollisjonen ved å sammenligne sendt/mottatt signal. JAM-signal varsler alle om kollisjonen." },
-  { tid: "t=5", hendelse: "å og B avbryter sending. Trekker tilbake-off tid fra Binary Exponential Backoff.", status: "venter", forklaring: "Binary Exponential Backoff: Første gang → venter 0 eller 1 slot. Andre gang → 0,1,2 eller 3. Osv." },
+  { tid: "t=4", hendelse: "A og B oppdager kollisjon (CD). Sender JAM-signal (48 bits).", status: "kollisjon", forklaring: "Collision Detection: Begge detekterer kollisjonen ved å sammenligne sendt/mottatt signal. JAM-signal varsler alle om kollisjonen." },
+  { tid: "t=5", hendelse: "A og B avbryter sending. Trekker tilbake-off tid fra Binary Exponential Backoff.", status: "venter", forklaring: "Binary Exponential Backoff: Første gang → venter 0 eller 1 slot. Andre gang → 0,1,2 eller 3. Osv." },
   { tid: "t=6", hendelse: "A venter 1 slot, B venter 3 slots. A sjekker kanalen — ledig. A sender igjen.", status: "sender", forklaring: "A 'vant' tilbake-off og sender igjen. B venter fremdeles. Nå er det bare A på kanalen." },
   { tid: "t=7", hendelse: "Ramme X leveres korrekt! Ingen ny kollisjon.", status: "suksess", forklaring: "Overføringen lykkes. CSMA/CD gjør at kollisjoner ikke ødelegger kommunikasjonen permanent." },
 ];

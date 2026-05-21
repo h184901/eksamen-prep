@@ -56,7 +56,7 @@ export default function DS1_3Page() {
     "klient-server": {
       tittel: "Klient-server-arkitektur",
       beskrivelse:
-        "Den klassiske og mest brukte arkitekturen. En sentral server tilbyr tjenester; klienter sender foresporsler og mottar svar. Serveren har ressursene, klienten bruker dem.",
+        "Den klassiske og mest brukte arkitekturen. En sentral server tilbyr tjenester; klienter sender forespørsler og mottar svar. Serveren har ressursene, klienten bruker dem.",
       svg: (
         <svg viewBox="0 0 500 220" className="w-full max-w-xl mx-auto" aria-label="Klient-server diagram">
           {/* Server */}
@@ -655,9 +655,9 @@ export default function DS1_3Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Fra 2024-eksamen oppgave 1h: &ldquo;å cloud service model where cloud providers rent out virtual machines
+          Fra 2024-eksamen oppgave 1h: &ldquo;A cloud service model where cloud providers rent out virtual machines
           to customers is known as: Infrastructure as a Service.&rdquo; — Dette er et typisk flervalgsspørsmål.
-          IaaS = VM-utleie er den absolutt viktigste cloud-fakten a huske.
+          IaaS = VM-utleie er den absolutt viktigste cloud-fakten å huske.
           Fra 2025-eksamen oppgave 1g: &ldquo;Rapid elasticity is a cloud computing characteristic that relates to: Scalability.&rdquo;
         </span>
       </div>
