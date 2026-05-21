@@ -33,7 +33,7 @@ function Section({ title, children, defaultOpen = false }: { title: string; chil
 function MustKnow({ items }: { items: string[] }) {
   return (
     <Card color="gold">
-      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="flex items-start gap-2 text-sm">
@@ -232,7 +232,7 @@ export default function CN3Teori31Page() {
         </Card>
       </Section>
 
-      <Section title="4. Gjennomgatt eksempel — hva skjer når du besokter nrk.no?">
+      <Section title="4. Gjennomgått eksempel — hva skjer når du besøker nrk.no?">
         <div className="space-y-3">
           {[
             { steg: "1", tittel: "Nettleser genererer HTTP-foresporsel", tekst: "Prosessen (nettleseren) kaller rdt_send(). OS velger en ephemeral klientport, f.eks. 54321." },

@@ -29,9 +29,9 @@ export default function CN1_1Page() {
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "Forklare internett fra nott-og-bolt-perspektivet: hosts, pakkeswitcher, linker, ISPer",
@@ -186,7 +186,7 @@ export default function CN1_1Page() {
               <p>String respons = s.receive();</p>
             </div>
             <p className="text-[var(--muted)]">
-              Internett tilbyr to transporttjenester: <strong>pAlitelig</strong> (TCP &mdash; garantert
+              Internett tilbyr to transporttjenester: <strong>pålitelig</strong> (TCP &mdash; garantert
               levering, riktig rekkefølge) og <strong>upålitelig</strong> (UDP &mdash; raskere, men ingen
               garanti). Applikasjonen velger selv hvilken den vil bruke.
             </p>
@@ -306,7 +306,7 @@ export default function CN1_1Page() {
             </div>
             <p className="text-[var(--muted)] text-xs">
               Begge protokollene spesifiserer hvem som sender f\u00f8rst, hva som er gyldige svar,
-              og hva man gj\u00f8r hvis noe gAr galt. Nettverksprotokoller er bare strengere og mer presise.
+              og hva man gj\u00f8r hvis noe går galt. Nettverksprotokoller er bare strengere og mer presise.
             </p>
           </div>
         )}
@@ -319,7 +319,7 @@ export default function CN1_1Page() {
           Oppgave 1 (flervalg) kan spørre om hva trafikkintensitet måler, hvilken tjeneste
           link-laget gir, eller hva transportlaget bruker for å identifisere endepunkter.
           Fra jan 2025: trafikkintensitet = forholdet mellom ankomstrate og sendekapasitet (La/R).
-          Link-laget gir upAlit elig overf\u00f8ring av rammer over <em>en</em> link.
+          Link-laget gir upålit elig overf\u00f8ring av rammer over <em>en</em> link.
           Transportlaget bruker IP-adresse + portnummer.
         </span>
       </div>

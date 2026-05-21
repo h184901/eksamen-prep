@@ -183,7 +183,7 @@ function TrafikkintensitetVis() {
       <div className="text-sm space-y-1 text-[var(--muted)]">
         <p><strong className="text-green-700 dark:text-green-400">La/R &lt; 1:</strong> Ko er stabil og liten. Gjennomsnittlig forsinkelse er liten.</p>
         <p><strong className="text-orange-700 dark:text-orange-400">La/R &rarr; 1:</strong> Ko vokser eksponentielt. Forsinkelse mot uendelig.</p>
-        <p><strong className="text-red-700 dark:text-red-400">La/R &gt; 1:</strong> Pakker ankommer raskere enn de kan sendes. <em>Tap er uunngAelig.</em></p>
+        <p><strong className="text-red-700 dark:text-red-400">La/R &gt; 1:</strong> Pakker ankommer raskere enn de kan sendes. <em>Tap er uunngåelig.</em></p>
       </div>
     </div>
   );
@@ -215,19 +215,19 @@ export default function CN1_4Page() {
         <p className="text-[var(--muted)] max-w-2xl">
           Dette er det viktigste delkapittelet i hele CN-1. Forsinkelsesberegning er
           <strong> oppgave 3 på ALLE eksamener</strong> (jan 2025, mai 2024, alle tidligere).
-          Du MA kunne alle fire formler, nAr du bruker dem, og typiske fallgruver.
+          Du MÅ kunne alle fire formler, når du bruker dem, og typiske fallgruver.
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne (eksamen)</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne (eksamen)</h3>
         <ul className="space-y-1">
           {[
             "Alle fire forsinkelsestyper: d_proc, d_queue, d_trans = L/R, d_prop = d/s",
             "Total nodalforsinkelse: d_nodal = d_proc + d_queue + d_trans + d_prop",
             "Ende-til-ende forsinkelse over N hopp med ulike linker",
-            "Trafikkintensitet La/R og hva som skjer nAr den nArmer seg 1",
+            "Trafikkintensitet La/R og hva som skjer når den nærmer seg 1",
             "Gjennomstrømning (throughput) og flaskehals-konseptet",
             "Forskjellen mellom sendingsforsinkelse og forplantningsforsinkelse!",
             "Maksimalt antall pakker per sekund = R/L",
@@ -292,7 +292,7 @@ export default function CN1_4Page() {
               formel: "d_{prop} = \\frac{d}{s}",
               farge: "border-green-400/60 bg-green-50 dark:bg-green-950/20",
               tfarge: "text-green-700 dark:text-green-400",
-              forklaring: "Tid det tar for ett bit å reise fra kilde til mAl. Avhenger kun av den fysiske avstanden d og signalhastigheten s i mediet. Linjekapasiteten R spiller INGEN rolle.",
+              forklaring: "Tid det tar for ett bit å reise fra kilde til mål. Avhenger kun av den fysiske avstanden d og signalhastigheten s i mediet. Linjekapasiteten R spiller INGEN rolle.",
               husk: "d_prop = d/s. d i meter, s typisk 2\u00d710\u2078 m/s. Pakkelengde spiller INGEN rolle.",
             },
           ].map((type) => (
@@ -369,7 +369,7 @@ export default function CN1_4Page() {
       {/* Eksamenseksempler */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          Gjennomgatte eksempler
+          Gjennomgåtte eksempler
         </h2>
 
         {/* Eksempel 1: Fra forelesning */}

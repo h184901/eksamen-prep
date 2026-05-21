@@ -22,23 +22,23 @@ const obliger = [
   {
     id: 1,
     title: "Prosjekt 1: Socket Programming og RPC Middleware",
-    description: "Implementer et IoT-system med temperatursensor, kontroller og display. Bygger RPC-middleware oppA TCP-sockets.",
+    description: "Implementer et IoT-system med temperatursensor, kontroller og display. Bygger RPC-middleware på toppen av TCP-sockets.",
     concepts: ["TCP-sockets", "RPC (Remote Procedure Call)", "Marshalling/unmarshalling", "Klient-server arkitektur", "Lagdelt arkitektur", "Kapsling/dekapsling"],
     examRelevance: "Oppg 2 spør ofte om RPC-arkitekturen fra dette prosjektet. Forstå lagdelingen: Connection-layer, Messaging-layer, RPC-layer.",
     keyPoints: [
       "IoT-system: sensor -> kontroller -> display via RPC",
       "Tre lag: Connection (TCP sockets), Messaging (send/receive), RPC (metode-kall)",
-      "Stubs: klient-stub serialiserer kall, server-stub deserialiserer og utforer",
+      "Stubs: klient-stub serialiserer kall, server-stub deserialiserer og utfører",
       "Marshalling: konverter Java-objekter til byte-array for sending",
       "Unmarshalling: konverter byte-array tilbake til Java-objekter",
-      "Sensor.read() og Display.write() ser ut som lokale kall, men utfores remote",
+      "Sensor.read() og Display.write() ser ut som lokale kall, men utføres remote",
     ],
   },
   {
     id: 2,
     title: "Prosjekt 2: Publish-Subscribe Messaging Middleware",
-    description: "Implementer PB-MOM (Publish-Subscribe Message-Oriented Middleware) med broker, topics og subscribers oppA messaging-laget fra prosjekt 1.",
-    concepts: ["Publish-subscribe monster", "Broker", "Topics", "MQTT-konsepter", "Message-oriented middleware", "Event-drevet arkitektur"],
+    description: "Implementer PB-MOM (Publish-Subscribe Message-Oriented Middleware) med broker, topics og subscribers på messaging-laget fra prosjekt 1.",
+    concepts: ["Publish-subscribe-mønster", "Broker", "Topics", "MQTT-konsepter", "Message-oriented middleware", "Event-drevet arkitektur"],
     examRelevance: "Oppg 2 kan spørre om pub/sub-arkitekturen. Forstå broker-rollen, topic-håndtering og hvordan meldinger distribueres til subscribers.",
     keyPoints: [
       "Publisher sender melding til topic via broker",
@@ -80,7 +80,7 @@ export default function ObligerPage() {
       <h1 className="text-3xl font-bold mb-2">Obligatoriske prosjekter</h1>
       <p className="text-[var(--muted)] max-w-2xl mb-8">
         Tre prosjekter som bygger på hverandre: sockets og RPC, publish-subscribe, og DHT.
-        Oppgave 2 på eksamen handler alltid om obliger — forstA konseptene bak koden.
+        Oppgave 2 på eksamen handler alltid om obliger — forstå konseptene bak koden.
       </p>
 
       <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 p-4 mb-8">
@@ -91,7 +91,7 @@ export default function ObligerPage() {
           Oppgave 2 (~10%) handler alltid om det obligatoriske prosjektet.
           Typiske spørsmål: &ldquo;Forklar arkitekturen i prosjektet&rdquo;,
           &ldquo;Hva er fordelen med RPC?&rdquo;, &ldquo;Beskriv publish-subscribe&rdquo;.
-          Fokuser på a forstA <strong>konseptene og arkitekturen</strong>, ikke implementasjonsdetaljene.
+          Fokuser på å forstå <strong>konseptene og arkitekturen</strong>, ikke implementasjonsdetaljene.
         </p>
       </div>
 

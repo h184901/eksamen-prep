@@ -5,15 +5,15 @@ import Link from "next/link";
 const tidslinje = [
   {
     ar: "1961–1972",
-    tittel: "Pakkeswitching oppstAr",
+    tittel: "Pakkeswitching oppstår",
     farge: "bg-purple-500",
     lightBg: "bg-purple-50 dark:bg-purple-950/20",
     border: "border-purple-300 dark:border-purple-700",
     hendelser: [
-      "1961: Kleinrock viser at pakkeswitching er effektivt (koskingsteori)",
-      "1964: Baran foreslAr pakkeswitchet nettverk for militær kommunikasjon",
+      "1961: Kleinrock viser at pakkeswitching er effektivt (køteori)",
+      "1964: Baran foreslår pakkeswitchet nettverk for militær kommunikasjon",
       "1967: ARPA (US Defense) planlegger ARPAnet",
-      "1969: Første ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsok på 'LOGIN')",
+      "1969: Første ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsøk på 'LOGIN')",
       "1972: Første offentlige demo av ARPAnet. NCP (Network Control Protocol) er første host-to-host-protokoll",
     ],
   },
@@ -62,7 +62,7 @@ const tidslinje = [
   },
   {
     ar: "2000–2010",
-    tittel: "BredbAndseksplosjon og nye tjenester",
+    tittel: "Bredbåndseksplosjon og nye tjenester",
     farge: "bg-yellow-500",
     lightBg: "bg-yellow-50 dark:bg-yellow-950/20",
     border: "border-yellow-300 dark:border-yellow-700",
@@ -84,7 +84,7 @@ const tidslinje = [
     border: "border-red-300 dark:border-red-700",
     hendelser: [
       "2011: IPv4-adresser offisielt oppbrukt (IANA). IPv6-utrulling begynner",
-      "2013: ~2,7 milliarder internettbrukere. Edward Snowden-avsloringene",
+      "2013: ~2,7 milliarder internettbrukere. Edward Snowden-avsløringene",
       "2016: ~3,5 milliarder brukere. IoT (Internet of Things) eksploderer",
       "2020: COVID-19 tvinger historisk vekst i videokonferanse (Zoom, Teams)",
       "2023: ChatGPT og AI-tjenester driver ny b\u00f8lge av internettbruk",
@@ -114,9 +114,9 @@ export default function CN1_7Page() {
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "Vite at ARPAnet (1969) var forgjengeren til internett",
@@ -200,19 +200,19 @@ export default function CN1_7Page() {
           {[
             {
               beslutning: "Beste-innsats (best-effort) levering",
-              konsekvens: "Internett ble enkelt og skalerbart, men uten innebygde QoS-garantier. Apnet for mange applikasjoner men krevde at applikasjonene hAndterte feil selv (TCP).",
+              konsekvens: "Internett ble enkelt og skalerbart, men uten innebygde QoS-garantier. Apnet for mange applikasjoner men krevde at applikasjonene håndterte feil selv (TCP).",
             },
             {
               beslutning: "Ingen innebygd sikkerhet i IP",
-              konsekvens: "Rask utvikling men Apnet for DoS, spoofing og avlytting. Sikkerhet mAtte legges til som tillegg (TLS, HTTPS, VPN).",
+              konsekvens: "Rask utvikling men Apnet for DoS, spoofing og avlytting. Sikkerhet måtte legges til som tillegg (TLS, HTTPS, VPN).",
             },
             {
               beslutning: "IPv4 med 32-bit adresser",
-              konsekvens: "Maks ~4,3 milliarder unike adresser. Oppbrukt i 2011. Krever IPv6-overgAng (128-bit adresser) som fortsatt pAgAr.",
+              konsekvens: "Maks ~4,3 milliarder unike adresser. Oppbrukt i 2011. Krever IPv6-overgang (128-bit adresser) som fortsatt pågår.",
             },
             {
               beslutning: "Apne standarder via IETF",
-              konsekvens: "Internett ble tilgjengelig for alle, ikke bAret av ett selskap. Fremmet innovasjon og global vekst.",
+              konsekvens: "Internett ble tilgjengelig for alle, ikke båret av ett selskap. Fremmet innovasjon og global vekst.",
             },
           ].map(({ beslutning, konsekvens }) => (
             <div key={beslutning} className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-3">
@@ -230,7 +230,7 @@ export default function CN1_7Page() {
         </h3>
         <p className="text-[var(--muted)]">
           Professoren anbefaler denne korte animasjonsfilmen (11 min) som illustrerer
-          TCP/IP-internetworking-konsepter på en morsom mAte. Se den på YouTube:
+          TCP/IP-internetworking-konsepter på en morsom måte. Se den på YouTube:
           <strong> "Warriors of the Net"</strong> (Telia 1999). En klassiker i nettverksfaget.
         </p>
         <p className="text-xs text-[var(--muted)] mt-2">

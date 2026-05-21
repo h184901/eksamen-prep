@@ -28,7 +28,7 @@ const LAYERS = [
     border: "border-blue-400",
     text: "text-blue-700 dark:text-blue-300",
     hvem: "Verter (hosts)",
-    hva: "Prosess-til-prosess dataoverføring. TCP: pAlitelig, ordnet, flytkontroll, feiloppretting. UDP: rask, upålitelig, ingen tilkobling. Porter identifiserer prosesser (0-65535).",
+    hva: "Prosess-til-prosess dataoverføring. TCP: pålitelig, ordnet, flytkontroll, feiloppretting. UDP: rask, upålitelig, ingen tilkobling. Porter identifiserer prosesser (0-65535).",
     service: "PAlitelig (TCP) eller upålitelig (UDP) end-to-end levering av segmenter mellom prosesser.",
     implementert: "Operativsystemets nettverksstakk (kjernen)",
   },
@@ -130,9 +130,9 @@ export default function CN1_5Page() {
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "TCP/IP 5-lagsmodellen: navn, PDU og protokoller for hvert lag",
@@ -167,7 +167,7 @@ export default function CN1_5Page() {
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-xs">Hva fysisk laget gir:</p>
-              <p className="text-xs text-[var(--muted)] mt-1">UpAlitelig overf\u00f8ring av bits over en enkelt kobberleder, fiber eller radiob\u00f8lge.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Upålitelig overf\u00f8ring av bits over en enkelt kobberleder, fiber eller radiob\u00f8lge.</p>
             </div>
           </div>
           <p className="text-[var(--muted)]">
@@ -408,7 +408,7 @@ export default function CN1_5Page() {
           Oblig 1 implementerte tre protokollag (applikasjon, RPC-lag og socket/TCP-lag).
           Eksamen spør ofte: "List opp de tre protokollagene og forklar kort hvordan de henger sammen."
           Svaret: applikasjonslaget bruker RPC-mellomvaren (som er et hjemmelaget applikasjonslags-protokoll),
-          som igjen bruker TCP-transporttjenesten for pAlitelig levering.
+          som igjen bruker TCP-transporttjenesten for pålitelig levering.
           TCP er identifisert ved IP-adresse + portnummer.
         </p>
       </div>

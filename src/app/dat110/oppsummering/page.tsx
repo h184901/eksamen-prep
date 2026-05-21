@@ -213,7 +213,7 @@ export default function OppsummeringPage() {
             ]}
           />
           <Formula>Quorum: N_R + N_W &gt; N (sikrer at read og write overlapper)</Formula>
-          <p className="text-xs text-[var(--muted)]">Primary-based: en master hAndterer skrivinger. Replikerte write: alle replikaer kan ta skrivinger.</p>
+          <p className="text-xs text-[var(--muted)]">Primary-based: en master håndterer skrivinger. Replikerte write: alle replikaer kan ta skrivinger.</p>
         </RefCard>
 
         {/* 9. Chord DHT */}
@@ -231,7 +231,7 @@ export default function OppsummeringPage() {
 
         {/* 10. Feiltoleranse */}
         <RefCard title="10. Feiltoleranse og Byzantine (Oppg 9)" color="red">
-          <Formula>Byzantine feiltoleranse: trenger minst 3k + 1 noder for å tAle k feil</Formula>
+          <Formula>Byzantine feiltoleranse: trenger minst 3k + 1 noder for å tåle k feil</Formula>
           <MiniTable
             headers={["Feiltype", "Beskrivelse"]}
             rows={[

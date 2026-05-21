@@ -21,7 +21,7 @@ Typer:
 - Orm (worm): sprer seg automatisk over nettverk uten brukerinteraksjon
 - Trojan: ser ut som legitim programvare men skjuler skadelig kode
 - Ransomware: krypterer filer og krever betaling for å gjenopprette dem
-- Spyware/botnet: overvAker eller kontrollerer enheten eksternt
+- Spyware/botnet: overvåker eller kontrollerer enheten eksternt
 
 Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplæring.`,
     },
@@ -32,12 +32,12 @@ Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplæring
       farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
       tfarge: "text-orange-700 dark:text-orange-400",
       kortbeskrivelse: "Overvelmer tjenester med trafikk sA legitime brukere ikke kommer inn.",
-      detaljer: `DoS (Denial of Service) = ett angrepspunkt sender enorme mengder trafikk for å overbelaste et mAl.
+      detaljer: `DoS (Denial of Service) = ett angrepspunkt sender enorme mengder trafikk for å overbelaste et mål.
 
-DDoS (Distributed DoS) = tusenvis av infiserte maskiner (botnet) koordinerer angrep mot ett mAl.
+DDoS (Distributed DoS) = tusenvis av infiserte maskiner (botnet) koordinerer angrep mot ett mål.
 
 Typer:
-- Bandwidth flooding: sender sA mye trafikk at linken til mAlet mettes
+- Bandwidth flooding: sender sA mye trafikk at linken til målet mettes
 - Connection flooding: fyller opp TCP-tilkoblingstabellen med halvferdige forbindelser (SYN flood)
 - Application-layer attacks: sender gyldige foresp\u00f8rsler som er dyre å behandle
 
@@ -78,7 +78,7 @@ Forsvar:
 
 Mulig fordi:
 - IP-protokollen har ingen autentiseringsmekanisme for kildeadressen
-- Hvem som helst kan konstruere en IP-pakke med vilkArlig kildeadresse
+- Hvem som helst kan konstruere en IP-pakke med vilkårlig kildeadresse
 
 Bruksområder:
 - DoS-amplifikasjon: send foresp\u00f8rsler med offer-IP som kilde, svar sendes til offeret
@@ -130,9 +130,9 @@ Forsvar:
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "Forklare hva malware er og de ulike typene (virus, orm, ransomware)",

@@ -103,9 +103,9 @@ export default function CN1_2Page() {
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "Forklare hva et aksessnettverk er og dets rolle",
@@ -143,7 +143,7 @@ export default function CN1_2Page() {
             <div className="flex items-center text-[var(--muted)] text-xs">&#8594;</div>
             <div className="flex-1 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 border border-green-200 dark:border-green-800">
               <p className="font-bold text-green-700 dark:text-green-400">Nettverkskjernen (core)</p>
-              <p className="text-xs text-[var(--muted)] mt-1">Nett av rutere. Videresender pakker fra kilde til mAl. Internetts ryggrad.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Nett av rutere. Videresender pakker fra kilde til mål. Internetts ryggrad.</p>
             </div>
           </div>
         </div>

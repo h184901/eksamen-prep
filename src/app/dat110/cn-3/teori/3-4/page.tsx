@@ -33,7 +33,7 @@ function Section({ title, children, defaultOpen = false }: { title: string; chil
 function MustKnow({ items }: { items: string[] }) {
   return (
     <Card color="gold">
-      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="flex items-start gap-2 text-sm">
@@ -215,11 +215,11 @@ export default function CN3Teori34Page() {
 
         <Card color="blue">
           <h4 className="font-bold mb-2">Hva er SampleRTT?</h4>
-          <p className="text-sm">SampleRTT er tid fra et segment sendes til ACK mottas. TCP maler KUN for ett segment om gangen (Karn-algoritmen: mal ikke retransmitterte segmenter — kan ikke vite om ACK tilhorer orginalen eller retransmisjonen).</p>
+          <p className="text-sm">SampleRTT er tid fra et segment sendes til ACK mottas. TCP måler KUN for ett segment om gangen (Karn-algoritmen: mål ikke retransmitterte segmenter — kan ikke vite om ACK tilhører originalen eller retransmisjonen).</p>
         </Card>
 
         <Card color="gold">
-          <h4 className="font-bold mb-2">Gjennomgatt eksempel — RTT-beregning</h4>
+          <h4 className="font-bold mb-2">Gjennomgått eksempel — RTT-beregning</h4>
           <div className="text-sm space-y-2">
             <p><strong>Gitt:</strong> EstimatedRTT = 100 ms, DevRTT = 5 ms, ny SampleRTT = 120 ms (alfa=0.125, beta=0.25)</p>
             <div className="rounded-lg bg-amber-100 dark:bg-amber-900/30 p-3 space-y-1 text-xs font-mono">

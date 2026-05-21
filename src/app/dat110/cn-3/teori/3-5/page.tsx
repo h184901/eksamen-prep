@@ -33,7 +33,7 @@ function Section({ title, children, defaultOpen = false }: { title: string; chil
 function MustKnow({ items }: { items: string[] }) {
   return (
     <Card color="gold">
-      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="flex items-start gap-2 text-sm">

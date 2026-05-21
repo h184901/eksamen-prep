@@ -107,7 +107,7 @@ export default function CN1OppgaverPage() {
         <Answer>
           <p className="font-mono">a) I = La/R = (10000 * 100) / (2x10^6) = 1 000 000 / 2 000 000 = 0.5</p>
           <p className="mt-2">b) I = 0.5 betyr moderat belastning. Koforsinkelsen er merkbar men
-          ikke kritisk. Forsinkelsen øker ikke-lineært — nAr I nærmer seg 1.0 eksploderer den.</p>
+          ikke kritisk. Forsinkelsen øker ikke-lineært — når I nærmer seg 1.0 eksploderer den.</p>
         </Answer>
       </ExerciseCard>
 

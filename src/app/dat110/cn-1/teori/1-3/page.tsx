@@ -30,9 +30,9 @@ export default function CN1_3Page() {
         </p>
       </div>
 
-      {/* Hva du MA kunne */}
+      {/* Hva du MÅ kunne */}
       <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4">
-        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+        <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
         <ul className="space-y-1">
           {[
             "Forklare pakkeswitching og store-and-forward-prinsippet",
@@ -53,7 +53,7 @@ export default function CN1_3Page() {
       {/* Pakkeswitching vs kretsswitching tabs */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          To mAter å videresende data
+          To måter å videresende data
         </h2>
 
         <div className="flex gap-2">
@@ -125,7 +125,7 @@ export default function CN1_3Page() {
                   <p className="font-bold text-sm text-red-700 dark:text-red-400 mb-1">Pakketap</p>
                   <p className="text-xs text-[var(--muted)]">
                     Rutere har begrenset bufferplass. Hvis ko er full og nye pakker ankommer,
-                    droppes pakkene. H\u00f8y trafikkintensitet (La/R nAmr 1) gir lang ko og potensielt tap.
+                    droppes pakkene. H\u00f8y trafikkintensitet (La/R når 1) gir lang ko og potensielt tap.
                     Se delkapittel 1.4 for beregning.
                   </p>
                 </div>
@@ -141,7 +141,7 @@ export default function CN1_3Page() {
               <div className="text-sm space-y-3">
                 <p>
                   Ressurser (b Andbredde, buffere) <strong>reserveres for hele sesjonen</strong>
-                  fra kilde til mAl. Slik fungerer tradisjonelt telefonnett: nr. du ringer,
+                  fra kilde til mål. Slik fungerer tradisjonelt telefonnett: nr. du ringer,
                   etableres en dedikert krets som holder alle linker bundet hele samtalen.
                 </p>
 
@@ -247,7 +247,7 @@ export default function CN1_3Page() {
         {showExempel && (
           <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4 text-sm space-y-3">
             <p className="font-bold">Oppgave:</p>
-            <p>En link på 1 Mbps. 35 brukere, hver aktiv 10% av tiden og trenger 100 kbps nAr aktiv.</p>
+            <p>En link på 1 Mbps. 35 brukere, hver aktiv 10% av tiden og trenger 100 kbps når aktiv.</p>
 
             <div className="space-y-2">
               <p><strong>Kretsswitching:</strong></p>
@@ -274,8 +274,8 @@ export default function CN1_3Page() {
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-sm mb-1">Intuisjon: bursty trafikk</p>
               <p className="text-xs text-[var(--muted)]">
-                Internetttrafikk er bursty: du sender mye i korte perioder (nAr du klikker på en lenke),
-                men er stille ellers (nAr du leser siden). Pakkeswitching utnytter disse stille periodene
+                Internetttrafikk er bursty: du sender mye i korte perioder (når du klikker på en lenke),
+                men er stille ellers (når du leser siden). Pakkeswitching utnytter disse stille periodene
                 ved å la andre sende. Kretsswitching reserverer kapasitet og sloser den under stille perioder.
               </p>
             </div>
@@ -337,7 +337,7 @@ export default function CN1_3Page() {
           </p>
           <p className="text-[var(--muted)] mt-2">
             <strong>Innholdsleverandornettverk (CDN):</strong> Google, Netflix og Akamai har sine
-            egne private nettverk og plasserer servere nAr brukerne for å redusere forsinkelse.
+            egne private nettverk og plasserer servere når brukerne for å redusere forsinkelse.
             De kobler seg til ISPer via IXP-er eller direkte tilkoblinger.
           </p>
         </div>

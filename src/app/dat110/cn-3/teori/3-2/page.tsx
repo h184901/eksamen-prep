@@ -33,7 +33,7 @@ function Section({ title, children, defaultOpen = false }: { title: string; chil
 function MustKnow({ items }: { items: string[] }) {
   return (
     <Card color="gold">
-      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
+      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MÅ kunne</h3>
       <ul className="space-y-1">
         {items.map(item => (
           <li key={item} className="flex items-start gap-2 text-sm">
@@ -78,7 +78,7 @@ export default function CN3Teori32Page() {
       ]} />
 
       <Section title="1. UDP-segmentformat" defaultOpen={true}>
-        <p className="text-sm text-[var(--muted)] mb-3">UDP-headeren er kun <strong>8 bytes</strong> (4 felt a 2 bytes = 16 bit hver). Dette er en stor fordel over TCP sin 20+ bytes header.</p>
+        <p className="text-sm text-[var(--muted)] mb-3">UDP-headeren er kun <strong>8 bytes</strong> (4 felt à 2 bytes = 16 bit hver). Dette er en stor fordel over TCP sin 20+ bytes header.</p>
 
         {/* Visuelt segmentformat */}
         <div className="overflow-x-auto">
@@ -92,7 +92,7 @@ export default function CN3Teori32Page() {
                 </div>
                 <div className="border-b border-cyan-400/40 bg-cyan-100 dark:bg-cyan-900/30 p-3 text-center">
                   <p className="font-bold text-cyan-700 dark:text-cyan-400">Destination Port</p>
-                  <p className="text-xs text-[var(--muted)]">16 bit — malporten</p>
+                  <p className="text-xs text-[var(--muted)]">16 bit — målporten</p>
                 </div>
               </div>
               <div className="grid grid-cols-2">
@@ -151,9 +151,9 @@ export default function CN3Teori32Page() {
           </div>
         </Card>
 
-        {/* Gjennomgatt eksempel */}
+        {/* Gjennomgått eksempel */}
         <Card color="gold">
-          <h4 className="font-bold mb-3">Gjennomgatt eksempel (fra forelesning)</h4>
+          <h4 className="font-bold mb-3">Gjennomgått eksempel (fra forelesning)</h4>
           <p className="text-sm mb-3">Beregn checksum for to 16-bit ord:</p>
           <div className="space-y-2 font-mono text-sm">
             <div className="rounded bg-white/60 dark:bg-neutral-900/40 p-3">
