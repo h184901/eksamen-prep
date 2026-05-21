@@ -373,23 +373,23 @@ export default function CN3Teori37Page() {
         </Card>
       </Section>
 
-      <Section title="6. TCP Gjennomstromning (throughput)">
+      <Section title="6. TCP Gjennomstrømning (throughput)">
         <FormulaBox
           latex="\text{throughput} \approx \frac{0.75 \cdot W}{RTT}"
-          title="TCP gjennomstromning (forenklet)"
+          title="TCP gjennomstrømning (forenklet)"
           variant="gold"
-          description="W = maksimal vindusstørrelse (MSS). Gjennomstromningen varierer mellom W/2 og W grunnet saktedansen."
+          description="W = maksimal vindusstørrelse (MSS). Gjennomstrømningen varierer mellom W/2 og W grunnet saktedansen."
         />
 
         <FormulaBox
           latex="\text{throughput} = \frac{1.22 \cdot MSS}{RTT \cdot \sqrt{L}}"
-          title="TCP gjennomstromning — Mathis-formel (mer presis)"
+          title="TCP gjennomstrømning — Mathis-formel (mer presis)"
           variant="blue"
-          description="L = pakketap-sannsynlighet. Høyere tap → lavere gjennomstromning. Basis for kapasitetsplanlegging."
+          description="L = pakketap-sannsynlighet. Høyere tap → lavere gjennomstrømning. Basis for kapasitetsplanlegging."
         />
 
         <Card color="network">
-          <h4 className="font-bold mb-2">Hva begrenser TCP-gjennomstromning i praksis?</h4>
+          <h4 className="font-bold mb-2">Hva begrenser TCP-gjennomstrømning i praksis?</h4>
           <div className="space-y-1 text-sm">
             <p>Effektivt sendervindu = min(cwnd, rwnd)</p>
             <p><strong>cwnd</strong> begrenses av: metningskontroll (AIMD)</p>

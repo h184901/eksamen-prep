@@ -88,7 +88,7 @@ export default function OppsummeringPage() {
         {/* 1. Forsinkelser og metrikker */}
         <RefCard title="1. Forsinkelser og metrikker (Oppg 3)" color="network" defaultOpen={true}>
           <Formula>d_trans = L / R &nbsp;&nbsp;|&nbsp;&nbsp; d_prop = d / s &nbsp;&nbsp;|&nbsp;&nbsp; d_nodal = d_proc + d_queue + d_trans + d_prop</Formula>
-          <Formula>Trafikkintensitet = La/R &nbsp;&nbsp;|&nbsp;&nbsp; Gjennomstromning = min(R_1, R_2, ..., R_N)</Formula>
+          <Formula>Trafikkintensitet = La/R &nbsp;&nbsp;|&nbsp;&nbsp; Gjennomstrømning = min(R_1, R_2, ..., R_N)</Formula>
           <MiniTable
             headers={["Forsinkelse", "Formel", "Avhenger av"]}
             rows={[
@@ -107,7 +107,7 @@ export default function OppsummeringPage() {
             headers={["HTTP-type", "Tid per objekt", "Totalt for N objekter"]}
             rows={[
               ["Ikke-persistent", "2 RTT + L/R", "N x (2 RTT + L/R)"],
-              ["Persistent uten pipeline", "RTT + L/R (etter forste)", "RTT + N x (RTT + L/R)"],
+              ["Persistent uten pipeline", "RTT + L/R (etter første)", "RTT + N x (RTT + L/R)"],
               ["Persistent med pipeline", "~1 RTT for alle", "2 RTT + N x L/R"],
             ]}
           />
@@ -133,7 +133,7 @@ export default function OppsummeringPage() {
 
         {/* 4. Nettverkslaget */}
         <RefCard title="4. IP, CIDR og ruting (Oppg 5-6)" color="blue">
-          <Formula>CIDR: IP/prefiks → nettverksdel = forste prefiks bits, hostdel = resten</Formula>
+          <Formula>CIDR: IP/prefiks → nettverksdel = første prefiks bits, hostdel = resten</Formula>
           <p className="text-xs font-bold">Longest Prefix Match:</p>
           <p className="text-xs text-[var(--muted)] mb-2">Konverter IP til binar, match mot forwardingstabell, velg lengste prefiks som matcher.</p>
           <p className="text-xs font-bold">Avstandsvektor (Bellman-Ford):</p>

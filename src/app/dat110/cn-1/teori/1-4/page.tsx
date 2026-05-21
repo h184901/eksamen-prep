@@ -204,12 +204,12 @@ export default function CN1_4Page() {
           &larr; Alle delkapitler
         </Link>
         <span>/</span>
-        <span className="text-[var(--foreground)]">1.4 Forsinkelse, tap og gjennomstromning</span>
+        <span className="text-[var(--foreground)]">1.4 Forsinkelse, tap og gjennomstrømning</span>
       </div>
 
       <div>
         <div className="flex items-center gap-3 mb-2">
-          <h1 className="text-2xl font-bold">1.4 Forsinkelse, tap og gjennomstromning</h1>
+          <h1 className="text-2xl font-bold">1.4 Forsinkelse, tap og gjennomstrømning</h1>
           <span className="px-2 py-0.5 rounded text-xs font-bold bg-red-600 text-white">EKSAMEN ALLTID</span>
         </div>
         <p className="text-[var(--muted)] max-w-2xl">
@@ -228,7 +228,7 @@ export default function CN1_4Page() {
             "Total nodalforsinkelse: d_nodal = d_proc + d_queue + d_trans + d_prop",
             "Ende-til-ende forsinkelse over N hopp med ulike linker",
             "Trafikkintensitet La/R og hva som skjer nAr den nArmer seg 1",
-            "Gjennomstromning (throughput) og flaskehals-konseptet",
+            "Gjennomstrømning (throughput) og flaskehals-konseptet",
             "Forskjellen mellom sendingsforsinkelse og forplantningsforsinkelse!",
             "Maksimalt antall pakker per sekund = R/L",
           ].map((item) => (
@@ -462,7 +462,7 @@ export default function CN1_4Page() {
 
               <p className="font-bold">d) Hvem er flaskehalsen? H1/H2&rarr;R1: 50 Mbps, R1&rarr;R2: 100 Mbps, R2&rarr;H3: 10 Mbps.</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
-                <p>Gjennomstromning = min(50 Mbps, 100 Mbps, 10 Mbps)</p>
+                <p>Gjennomstrømning = min(50 Mbps, 100 Mbps, 10 Mbps)</p>
                 <p className="text-green-600 dark:text-green-400 font-bold">= 10 Mbps</p>
                 <p className="text-[var(--muted)]">Flaskehalsen er R2&rarr;H3-linken (10 Mbps).</p>
               </div>
@@ -493,12 +493,12 @@ export default function CN1_4Page() {
           </div>
         )}
 
-        {/* Eksempel 4: Gjennomstromning med delt link */}
+        {/* Eksempel 4: Gjennomstrømning med delt link */}
         <button
           onClick={() => setShowEksempel4(!showEksempel4)}
           className="w-full text-left px-4 py-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] hover:bg-neutral-50 dark:hover:bg-neutral-800/50 flex items-center justify-between text-sm font-medium"
         >
-          <span>Eksempel 4: Gjennomstromning med delt flaskehalsnett (eksamen mai 2024)</span>
+          <span>Eksempel 4: Gjennomstrømning med delt flaskehalsnett (eksamen mai 2024)</span>
           <span>{showEksempel4 ? "▲" : "▼"}</span>
         </button>
         {showEksempel4 && (
@@ -510,10 +510,10 @@ export default function CN1_4Page() {
             </div>
 
             <div className="space-y-2">
-              <p className="font-bold">a) Maks ende-til-ende gjennomstromning:</p>
+              <p className="font-bold">a) Maks ende-til-ende gjennomstrømning:</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
                 <p className="text-[var(--muted)]">// Delt midtlink: R/4 = 100/4 = 25 Mbps per tilkobling</p>
-                <p>Gjennomstromning per par = min(R_S, R/4, R_C)</p>
+                <p>Gjennomstrømning per par = min(R_S, R/4, R_C)</p>
                 <p>= min(80 Mbps, 25 Mbps, 40 Mbps)</p>
                 <p className="text-green-600 dark:text-green-400 font-bold">= 25 Mbps per tilkobling</p>
               </div>
@@ -525,13 +525,13 @@ export default function CN1_4Page() {
 
               <p className="font-bold">c) Linkutnyttelse for serverlinker (R_S):</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
-                <p>Serverne sender med maks gjennomstromning = 25 Mbps</p>
+                <p>Serverne sender med maks gjennomstrømning = 25 Mbps</p>
                 <p>Utnyttelse = 25 / 80 = 0,3125 &approx; 31,25%</p>
               </div>
 
               <p className="font-bold">d) Linkutnyttelse for klientlinker (R_C):</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
-                <p>Klientene mottar med maks gjennomstromning = 25 Mbps</p>
+                <p>Klientene mottar med maks gjennomstrømning = 25 Mbps</p>
                 <p>Utnyttelse = 25 / 40 = 0,625 = 62,5%</p>
               </div>
             </div>
@@ -555,17 +555,17 @@ export default function CN1_4Page() {
         <TrafikkintensitetVis />
       </section>
 
-      {/* Gjennomstromning */}
+      {/* Gjennomstrømning */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          Gjennomstromning og flaskehals
+          Gjennomstrømning og flaskehals
         </h2>
 
         <FormulaBox
-          latex="\text{Gjennomstromning} = \min(R_1, R_2, \ldots, R_N)"
-          title="Ende-til-ende gjennomstromning"
+          latex="\text{Gjennomstrømning} = \min(R_1, R_2, \ldots, R_N)"
+          title="Ende-til-ende gjennomstrømning"
           variant="blue"
-          description="Gjennomstromningen begrenses av den smaleste linken på hele stien (flaskehalsen)."
+          description="Gjennomstrømningen begrenses av den smaleste linken på hele stien (flaskehalsen)."
         />
 
         <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4 text-sm space-y-3">
@@ -576,7 +576,7 @@ export default function CN1_4Page() {
           </p>
           <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
             <p>N tilkoblinger deler link R bps</p>
-            <p>Gjennomstromning per tilkobling = min(R_s, R/N, R_c)</p>
+            <p>Gjennomstrømning per tilkobling = min(R_s, R/N, R_c)</p>
           </div>
           <p className="text-[var(--muted)] text-xs">
             I praksis er flaskehalsen oftest enten server-linken (R_s) eller klient-linken (R_c),
@@ -599,7 +599,7 @@ export default function CN1_4Page() {
             },
             {
               feil: "Glemmer at alle bits mA sendes for sendingsforsinkelsen er ferdig",
-              løsning: "d_trans er tiden for å pumpe ALLE L bits ut på linken. Det er ikke tid til forste bit, men tid til siste bit.",
+              løsning: "d_trans er tiden for å pumpe ALLE L bits ut på linken. Det er ikke tid til første bit, men tid til siste bit.",
             },
             {
               feil: "Multipliserer bare d_trans med N hopp og glemmer d_prop",
@@ -626,8 +626,8 @@ export default function CN1_4Page() {
       <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Oppgave 3 er alltid forsinkelse/gjennomstromning. Typisk struktur: a) beregn d_trans,
-          b) beregn nodalforsinkelse, c) beregn ende-til-ende, d) finn flaskehals/gjennomstromning.
+          Oppgave 3 er alltid forsinkelse/gjennomstrømning. Typisk struktur: a) beregn d_trans,
+          b) beregn nodalforsinkelse, c) beregn ende-til-ende, d) finn flaskehals/gjennomstrømning.
           Skriv alltid alle mellomregninger. Feil i del a) bor ikke spre seg til b)-d) hvis du
           bruker riktig metode. Se også: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensovingsseksjon</Link>.
         </span>

@@ -23,7 +23,7 @@ Typer:
 - Ransomware: krypterer filer og krever betaling for å gjenopprette dem
 - Spyware/botnet: overvAker eller kontrollerer enheten eksternt
 
-Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplaering.`,
+Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplæring.`,
     },
     {
       id: "dos",
@@ -56,7 +56,7 @@ Internett gir INGEN innebygd forsvar mot DoS. IP spesifiserer beste-innsats og h
 
 Mulig fordi:
 - WiFi og Ethernet (i eldre huber) er delt medium: alle enheter ser all trafikk
-- Wireshark er et populaert (legitimt) verktoy for nettverksanalyse og feilsoking
+- Wireshark er et populaert (legitimt) verktoy for nettverksanalyse og feilsøking
 
 Risiko:
 - Ukrypterte protokoller (HTTP, Telnet, FTP) sender passord i klartekst

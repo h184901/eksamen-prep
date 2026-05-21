@@ -131,9 +131,9 @@ export default function CN3Teori36Page() {
           </table>
         </div>
 
-        {/* Visualisering av gjennomstromning vs last */}
+        {/* Visualisering av gjennomstrømning vs last */}
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-          <h4 className="font-bold text-sm mb-3">Gjennomstromning vs tilbud — metningseffekten</h4>
+          <h4 className="font-bold text-sm mb-3">Gjennomstrømning vs tilbud — metningseffekten</h4>
           <svg viewBox="0 0 300 160" className="w-full max-w-[400px] mx-auto">
             {/* Akser */}
             <line x1="40" y1="130" x2="280" y2="130" stroke="#94a3b8" strokeWidth="1.5"/>
@@ -157,7 +157,7 @@ export default function CN3Teori36Page() {
             <circle cx="180" cy="50" r="4" fill="#f59e0b"/>
             <text x="175" y="38" fontSize="9" fill="#f59e0b" textAnchor="middle">Metning</text>
           </svg>
-          <p className="text-xs text-[var(--muted)] text-center mt-2">Når sendt rate overskrider kapasiteten, kollapser gjennomstromningen</p>
+          <p className="text-xs text-[var(--muted)] text-center mt-2">Når sendt rate overskrider kapasiteten, kollapser gjennomstrømningen</p>
         </div>
       </Section>
 

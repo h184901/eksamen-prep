@@ -366,7 +366,7 @@ export default function CN1_3Page() {
           href="/dat110/cn-1/teori/1-4"
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-network-600 text-white text-sm font-medium hover:bg-network-700 transition-colors"
         >
-          1.4 Forsinkelse og gjennomstromning &rarr;
+          1.4 Forsinkelse og gjennomstrømning &rarr;
         </Link>
       </div>
     </div>

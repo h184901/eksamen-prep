@@ -138,7 +138,7 @@ export default function CN1_2Page() {
             <div className="flex items-center text-[var(--muted)] text-xs">&#8594;</div>
             <div className="flex-1 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 border border-orange-200 dark:border-orange-800">
               <p className="font-bold text-orange-700 dark:text-orange-400">Aksessnettverk</p>
-              <p className="text-xs text-[var(--muted)] mt-1">Kobler hosts til forste ruter (edge router). DSL, kabel, fiber, WiFi, mobilnett.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Kobler hosts til første ruter (edge router). DSL, kabel, fiber, WiFi, mobilnett.</p>
             </div>
             <div className="flex items-center text-[var(--muted)] text-xs">&#8594;</div>
             <div className="flex-1 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 border border-green-200 dark:border-green-800">

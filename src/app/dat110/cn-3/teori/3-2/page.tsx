@@ -230,7 +230,7 @@ export default function CN3Teori32Page() {
           {[
             { tittel: "DNS (port 53)", desc: "Korte spørrings-/svarpar. Raskere uten tilkoblingsoppsett. Klienten sender på nytt selv ved tap.", color: "text-green-600 dark:text-green-400" },
             { tittel: "Streaming (video/lyd)", desc: "Noen tapte pakker godtas. Forsinkelse er verre enn tap. Applikasjonen kan selv håndtere gjenoppretting.", color: "text-blue-600 dark:text-blue-400" },
-            { tittel: "Online gaming", desc: "Lav latens er kritisk. Eldre tilstandsdata er uinteressant. Applikasjonen håndterer tap sin måten.", color: "text-purple-600 dark:text-purple-400" },
+            { tittel: "Online gaming", desc: "Lav latens er kritisk. Eldre tilstandsdata er uinteressant. Applikasjonen håndterer tap på sin egen måte.", color: "text-purple-600 dark:text-purple-400" },
             { tittel: "IoT-sensorer", desc: "Enkle enheter med lite minne. Trenger ikke garantert levering av hvert målepunkt.", color: "text-orange-600 dark:text-orange-400" },
           ].map(({ tittel, desc, color }) => (
             <div key={tittel} className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">

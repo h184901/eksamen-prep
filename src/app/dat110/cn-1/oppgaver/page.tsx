@@ -51,7 +51,7 @@ export default function CN1OppgaverPage() {
         <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">Oppgavestrategi</h3>
         <ol className="text-sm space-y-1 text-amber-900 dark:text-amber-200 list-decimal list-inside">
           <li>Les oppgaven nøyaktig. List opp alle gitte verdier med riktig enhet.</li>
-          <li>Identifiser hva du skal finne (total forsinkelse? gjennomstromning? tid for N pakker?).</li>
+          <li>Identifiser hva du skal finne (total forsinkelse? gjennomstrømning? tid for N pakker?).</li>
           <li>Tegn topologien: host — ruter — ruter — host.</li>
           <li>Beregn d_trans = L/R og d_prop = d/s for HVER link.</li>
           <li>Legg sammen. Husk d_proc og d_queue hvis oppgitt.</li>
@@ -121,9 +121,9 @@ export default function CN1OppgaverPage() {
           Link 3: R = 10 Mbps, d = 50 km. s = 2 x 10^8 m/s for alle.
           d_proc = 1 ms per ruter. Ignorer koforsinkelse.
           a) Beregn total ende-til-ende forsinkelse.
-          b) Hva er gjennomstromningen?
+          b) Hva er gjennomstrømningen?
         </p>
-        <Hint>Husk: ulike R-verdier på hver link! Gjennomstromning = min(alle R).</Hint>
+        <Hint>Husk: ulike R-verdier på hver link! Gjennomstrømning = min(alle R).</Hint>
         <Answer>
           <p><strong>L = 1000 * 8 = 8000 bits</strong></p>
           <p className="font-mono mt-1">Link 1: d_trans = 8000/(10x10^6) = 0.0008 s, d_prop = 100000/(2x10^8) = 0.0005 s</p>
@@ -133,7 +133,7 @@ export default function CN1OppgaverPage() {
           <p className="font-mono">Sum d_prop = 0.0005 + 0.001 + 0.00025 = 0.00175 s</p>
           <p className="font-mono">Sum d_proc = 2 * 0.001 = 0.002 s (2 rutere)</p>
           <p className="font-mono font-bold">d_e2e = 0.0032 + 0.00175 + 0.002 = 0.00695 s = 6.95 ms</p>
-          <p className="font-mono mt-2 font-bold">b) Gjennomstromning = min(10, 5, 10) = 5 Mbps</p>
+          <p className="font-mono mt-2 font-bold">b) Gjennomstrømning = min(10, 5, 10) = 5 Mbps</p>
         </Answer>
       </ExerciseCard>
 
@@ -143,7 +143,7 @@ export default function CN1OppgaverPage() {
           en ruter. Begge linker: R = 1 Mbps. Ignorer forplantning, prosessering og ko.
           Når er siste bit av siste pakke levert hos mottaker?
         </p>
-        <Hint>Forste pakke: 2 x L/R (store-and-forward over 2 linker). Neste pakker overlappes (pipelining).</Hint>
+        <Hint>Første pakke: 2 x L/R (store-and-forward over 2 linker). Neste pakker overlappes (pipelining).</Hint>
         <Answer>
           <p><strong>d_trans per pakke per link = 2000 / 10^6 = 0.002 s = 2 ms</strong></p>
           <p className="mt-1">Med store-and-forward og pipelining:</p>
@@ -156,17 +156,17 @@ export default function CN1OppgaverPage() {
         </Answer>
       </ExerciseCard>
 
-      <ExerciseCard num={6} title="Gjennomstromning med delt kjernelink" difficulty="middels">
+      <ExerciseCard num={6} title="Gjennomstrømning med delt kjernelink" difficulty="middels">
         <p className="text-sm text-[var(--muted)] mb-3">
           4 klienter laster ned fra 4 servere. Hver klient har aksesslink R_c = 10 Mbps.
           Hver server har aksesslink R_s = 20 Mbps. Alle data går gjennom en felles
           kjernelink med R_core = 30 Mbps.
-          Hva er gjennomstromningen per tilkobling?
+          Hva er gjennomstrømningen per tilkobling?
         </p>
         <Answer>
           <p>Kjernelinken deles: R_core/4 = 30/4 = 7.5 Mbps per tilkobling.</p>
           <p className="mt-1">Per tilkobling: min(R_c, R_s, R_core/4) = min(10, 20, 7.5)</p>
-          <p className="font-mono font-bold">Gjennomstromning = 7.5 Mbps per tilkobling</p>
+          <p className="font-mono font-bold">Gjennomstrømning = 7.5 Mbps per tilkobling</p>
           <p className="text-[var(--muted)] mt-1">Kjernelinken er flaskehalsen.</p>
         </Answer>
       </ExerciseCard>

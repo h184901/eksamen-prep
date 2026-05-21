@@ -97,7 +97,7 @@ export default function DS1_3Page() {
       ),
       egenskaper: [
         "Klar rolledeling: server har ressurser, klient bruker dem",
-        "Enkel a forstå, implementere og feilsoke",
+        "Enkel a forstå, implementere og feilsøke",
         "Server kan bli flaskehalsen ved mange samtidige klienter",
         "Single point of failure hvis serveren krasjer",
         "Multi-tier: flere lag av servere (presentasjon, logikk, data)",

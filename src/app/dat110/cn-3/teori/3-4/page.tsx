@@ -70,7 +70,7 @@ export default function CN3Teori34Page() {
 
       <MustKnow items={[
         "TCP-segmentets header-felt og hva hvert betyr (20 bytes minimum)",
-        "Sekvensnummer = byte-offset til forste byte i segmentet",
+        "Sekvensnummer = byte-offset til første byte i segmentet",
         "ACK-nummer = neste forventede byte fra motparten",
         "3-veis handshake: SYN → SYN-ACK → ACK (og hvorfor 3 trinn)",
         "Timeout-beregning: SampleRTT, EstimatedRTT (EWMA), DevRTT, TimeoutInterval",
@@ -96,7 +96,7 @@ export default function CN3Teori34Page() {
               </div>
               <div className="border-b border-blue-300/40 bg-amber-50 dark:bg-amber-950/20 p-2 text-center">
                 <p className="font-bold text-amber-700 dark:text-amber-400">Sequence Number (32)</p>
-                <p className="text-[var(--muted)] font-sans text-xs">Byte-offset til forste data-byte i segmentet</p>
+                <p className="text-[var(--muted)] font-sans text-xs">Byte-offset til første data-byte i segmentet</p>
               </div>
               <div className="border-b border-blue-300/40 bg-amber-50 dark:bg-amber-950/20 p-2 text-center">
                 <p className="font-bold text-amber-700 dark:text-amber-400">Acknowledgement Number (32)</p>
@@ -136,7 +136,7 @@ export default function CN3Teori34Page() {
         <div className="grid sm:grid-cols-2 gap-3 mt-3">
           {[
             { felt: "Source/Dest Port", farge: "text-blue-600 dark:text-blue-400", besk: "16-bit. Kildeport og destinasjonsport. Brukes til multipleksing/demultipleksing (4-tuple)." },
-            { felt: "Sequence Number", farge: "text-amber-600 dark:text-amber-400", besk: "32-bit. Byte-nummeret til forste dataByte i dette segmentet. Ikke pakkenummer — byte-stream!" },
+            { felt: "Sequence Number", farge: "text-amber-600 dark:text-amber-400", besk: "32-bit. Byte-nummeret til første dataByte i dette segmentet. Ikke pakkenummer — byte-stream!" },
             { felt: "Acknowledgement Number", farge: "text-amber-600 dark:text-amber-400", besk: "32-bit. Neste forventede byte fra motparten. Eks: ACK=1001 betyr 'Jeg har mottatt byte 0-1000, send 1001 neste'." },
             { felt: "Header Length", farge: "text-purple-600 dark:text-purple-400", besk: "4-bit. Headerens lengde i 32-bit ord. Nødvendig fordi Options-feltet er variabelt." },
             { felt: "Flagg (SYN, FIN, ACK, RST...)", farge: "text-red-600 dark:text-red-400", besk: "SYN=tilkoblingsoppsett, FIN=avslutning, ACK=kvittering aktiv, RST=tilbakestill, PSH=push data opp." },
@@ -155,7 +155,7 @@ export default function CN3Teori34Page() {
       <Section title="2. Sekvensnummer og ACK — byte-stream-modellen" defaultOpen={true}>
         <Card color="gold">
           <h4 className="font-bold mb-3">Viktig: TCP er en byte-stream!</h4>
-          <p className="text-sm">TCP nummererer <em>bytes</em>, ikke segmenter. Sekvensnummeret er byte-offsetet til forste databyte i segmentet.</p>
+          <p className="text-sm">TCP nummererer <em>bytes</em>, ikke segmenter. Sekvensnummeret er byte-offsetet til første databyte i segmentet.</p>
           <div className="mt-3 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-sm">
             <p className="text-xs font-bold text-[var(--muted)] mb-2">Eksempel: A sender 10 bytes til B, MSS=5</p>
             <div className="space-y-1 text-xs">

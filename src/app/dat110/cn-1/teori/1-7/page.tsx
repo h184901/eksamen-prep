@@ -13,8 +13,8 @@ const tidslinje = [
       "1961: Kleinrock viser at pakkeswitching er effektivt (koskingsteori)",
       "1964: Baran foreslAr pakkeswitchet nettverk for militær kommunikasjon",
       "1967: ARPA (US Defense) planlegger ARPAnet",
-      "1969: Forste ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsok på 'LOGIN')",
-      "1972: Forste offentlige demo av ARPAnet. NCP (Network Control Protocol) er forste host-to-host-protokoll",
+      "1969: Første ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsok på 'LOGIN')",
+      "1972: Første offentlige demo av ARPAnet. NCP (Network Control Protocol) er første host-to-host-protokoll",
     ],
   },
   {
@@ -40,8 +40,8 @@ const tidslinje = [
     hendelser: [
       "1983: TCP/IP erstatter NCP på ARPAnet. 'Flag Day' - alle hopper over samtidig",
       "1983: DNS (Domain Name System) oppfunnet av Mockapetris",
-      "1985: NSFnet etableres for å kople amerikansdke universiteter",
-      "1988: TCP-kop-kontrollmekanismer lagt til etter Internets forste storkolaps",
+      "1985: NSFnet etableres for å koble amerikanske universiteter",
+      "1988: TCP-metningskontroll lagt til (Van Jacobson) etter Internets første storkollaps i 1986",
       "Slutten av 80-tall: ~100 000 hosts på internett",
     ],
   },
@@ -53,9 +53,9 @@ const tidslinje = [
     border: "border-orange-300 dark:border-orange-700",
     hendelser: [
       "1991: Tim Berners-Lee ved CERN lager World Wide Web (HTML, HTTP, URL)",
-      "1993: Mosaic-nettleseren (forste grafiske nettleser) utgis",
+      "1993: Mosaic-nettleseren (første grafiske nettleser) utgis",
       "1994: Netscape Navigator lanseres. Netthandel begynner",
-      "1995: NSFnet privatiseres. Internett Apnes for kommersiell bruk",
+      "1995: NSFnet privatiseres. Internett åpnes for kommersiell bruk",
       "1996: ~40 millioner hosts. Internett-boomen er i gang",
       "1999: ~200 millioner brukere",
     ],
@@ -172,14 +172,14 @@ export default function CN1_7Page() {
         </div>
       </section>
 
-      {/* Nokkelperoner */}
+      {/* Nøkkelpersoner */}
       <section className="space-y-3">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          Nokkelperoner
+          Nøkkelpersoner
         </h2>
         <div className="grid sm:grid-cols-3 gap-3">
           {[
-            { navn: "Leonard Kleinrock", bidrag: "Pakkeswitching-teori (1961). Professor ved UCLA. Sendte den forste ARPAnet-meldingen i 1969." },
+            { navn: "Leonard Kleinrock", bidrag: "Pakkeswitching-teori (1961). Professor ved UCLA. Sendte den første ARPAnet-meldingen i 1969." },
             { navn: "Vint Cerf & Bob Kahn", bidrag: "Skapte TCP/IP-protokollen (1973). Kjent som 'grunnleggerne av internett'. Kahn var ved DARPA, Cerf ved Stanford." },
             { navn: "Tim Berners-Lee", bidrag: "Oppfant World Wide Web ved CERN i 1991. Skapte HTML, HTTP og URL. Ga bort alt gratis." },
           ].map(({ navn, bidrag }) => (

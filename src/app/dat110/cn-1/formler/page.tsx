@@ -84,7 +84,7 @@ export default function CN1FormlerPage() {
         level="secondary"
       />
 
-      <h3 className="text-lg font-bold mt-8">Trafikkintensitet og gjennomstromning</h3>
+      <h3 className="text-lg font-bold mt-8">Trafikkintensitet og gjennomstrømning</h3>
 
       <FormulaBox
         title="Trafikkintensitet"
@@ -93,13 +93,13 @@ export default function CN1FormlerPage() {
       />
 
       <FormulaBox
-        title="Gjennomstromning (throughput)"
+        title="Gjennomstrømning (throughput)"
         formula="Throughput = min(R_1, R_2, ..., R_N)"
-        desc="Gjennomstromningen bestemmes av flaskehalsen — den smaleste linken på stien."
+        desc="Gjennomstrømningen bestemmes av flaskehalsen — den smaleste linken på stien."
       />
 
       <FormulaBox
-        title="Gjennomstromning med delt link"
+        title="Gjennomstrømning med delt link"
         formula="Per tilkobling = R_delt / N_tilkoblinger"
         desc="Når N tilkoblinger deler en kjernelink med kapasitet R, far hver R/N (rettferdig deling)."
         level="secondary"
@@ -122,7 +122,7 @@ export default function CN1FormlerPage() {
           </div>
           <div className="flex items-start gap-3">
             <span className="text-amber-500 font-bold min-w-[160px]">Flere pakker:</span>
-            <span>Forste pakke: alle d_trans + alle d_prop. Neste pakker: + L/R per pakke (pipelining).</span>
+            <span>Første pakke: alle d_trans + alle d_prop. Neste pakker: + L/R per pakke (pipelining).</span>
           </div>
         </div>
       </div>
