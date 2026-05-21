@@ -122,7 +122,7 @@ function ForsinkelsesKalkulator() {
 
       <p className="text-xs text-[var(--muted)]">
         Prototip: endre parametrene og se hvordan hver forsinkelsestype bidrar til totalen.
-        Legg merke til at hoy avstand dominerer forplantningsforsinkelsen, mens
+        Legg merke til at høy avstand dominerer forplantningsforsinkelsen, mens
         lav linjekapasitet dominerer sendingsforsinkelsen.
       </p>
     </div>
@@ -143,7 +143,7 @@ function TrafikkintensitetVis() {
   const getQueueDescription = (val: number) => {
     if (val < 0.3) return "Svart lite ko. Lav forsinkelse.";
     if (val < 0.7) return "Moderat ko. Merkbar forsinkelse.";
-    if (val < 0.95) return "Stor ko! Hoy forsinkelse.";
+    if (val < 0.95) return "Stor ko! Høy forsinkelse.";
     if (val < 1.0) return "KRITISK: Ko vokser mot uendelig!";
     return "OVERSKUDD: Pakker tapes! La/R > 1 er uakseptabelt.";
   };
@@ -214,7 +214,7 @@ export default function CN1_4Page() {
         </div>
         <p className="text-[var(--muted)] max-w-2xl">
           Dette er det viktigste delkapittelet i hele CN-1. Forsinkelsesberegning er
-          <strong> oppgave 3 pA ALLE eksamener</strong> (jan 2025, mai 2024, alle tidligere).
+          <strong> oppgave 3 på ALLE eksamener</strong> (jan 2025, mai 2024, alle tidligere).
           Du MA kunne alle fire formler, nAr du bruker dem, og typiske fallgruver.
         </p>
       </div>
@@ -262,7 +262,7 @@ export default function CN1_4Page() {
               formel: null,
               farge: "border-purple-400/60 bg-purple-50 dark:bg-purple-950/20",
               tfarge: "text-purple-700 dark:text-purple-400",
-              forklaring: "Tid rutere bruker pA A undersoke pakke-headeren, sjekke for bitfeil og bestemme hvilken utgangslink pakken skal sendes pA. Typisk mikrosekunder. Oftest neglisjerbar eller gitt direkte i oppgaven.",
+              forklaring: "Tid rutere bruker på å undersoke pakke-headeren, sjekke for bitfeil og bestemme hvilken utgangslink pakken skal sendes på. Typisk mikrosekunder. Oftest neglisjerbar eller gitt direkte i oppgaven.",
               husk: "d_proc er GITT i oppgaven, du trenger ikke beregne den.",
             },
             {
@@ -272,7 +272,7 @@ export default function CN1_4Page() {
               formel: null,
               farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
               tfarge: "text-orange-700 dark:text-orange-400",
-              forklaring: "Tid pakken venter i utgangskov pA A bli transmittert. Avhenger av trafikknivA. NAt mange pakker ankommer samtidig, m\u00e5 pakker vente. Best beskrevet av trafikkintensiteten La/R.",
+              forklaring: "Tid pakken venter i utgangskov på å bli transmittert. Avhenger av trafikknivA. NAt mange pakker ankommer samtidig, m\u00e5 pakker vente. Best beskrevet av trafikkintensiteten La/R.",
               husk: "d_queue er GITT i oppgaven eller angis via trafikkintensitet. Du beregner den ikke direkte.",
             },
             {
@@ -282,7 +282,7 @@ export default function CN1_4Page() {
               formel: "d_{trans} = \\frac{L}{R}",
               farge: "border-blue-400/60 bg-blue-50 dark:bg-blue-950/20",
               tfarge: "text-blue-700 dark:text-blue-400",
-              forklaring: "Tid det tar A skyve ALLE bits av pakken ut pA linken. Tenk pA det som 'pumping' av bits ut pA kabelen. Avhenger kun av pakkelengden L og linjekapasiteten R, IKKE av avstand.",
+              forklaring: "Tid det tar å skyve ALLE bits av pakken ut på linken. Tenk på det som 'pumping' av bits ut på kabelen. Avhenger kun av pakkelengden L og linjekapasiteten R, IKKE av avstand.",
               husk: "d_trans = L/R. L i bits, R i bits/sekund. Avstand spiller INGEN rolle.",
             },
             {
@@ -292,7 +292,7 @@ export default function CN1_4Page() {
               formel: "d_{prop} = \\frac{d}{s}",
               farge: "border-green-400/60 bg-green-50 dark:bg-green-950/20",
               tfarge: "text-green-700 dark:text-green-400",
-              forklaring: "Tid det tar for ett bit A reise fra kilde til mAl. Avhenger kun av den fysiske avstanden d og signalhastigheten s i mediet. Linjekapasiteten R spiller INGEN rolle.",
+              forklaring: "Tid det tar for ett bit å reise fra kilde til mAl. Avhenger kun av den fysiske avstanden d og signalhastigheten s i mediet. Linjekapasiteten R spiller INGEN rolle.",
               husk: "d_prop = d/s. d i meter, s typisk 2\u00d710\u2078 m/s. Pakkelengde spiller INGEN rolle.",
             },
           ].map((type) => (
@@ -317,24 +317,24 @@ export default function CN1_4Page() {
           ))}
         </div>
 
-        {/* Analogi: karavane pA motorvei */}
+        {/* Analogi: karavane på motorvei */}
         <button
           onClick={() => setShowAnalogi(!showAnalogi)}
           className="w-full text-left px-4 py-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] hover:bg-neutral-50 dark:hover:bg-neutral-800/50 flex items-center justify-between text-sm font-medium"
         >
-          <span>Analogi: karavane pA motorvei (forklarer d_trans vs d_prop)</span>
+          <span>Analogi: karavane på motorvei (forklarer d_trans vs d_prop)</span>
           <span>{showAnalogi ? "▲" : "▼"}</span>
         </button>
         {showAnalogi && (
           <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-3">
-            <p className="font-bold">Tenk pA en karavane pA motorvei:</p>
+            <p className="font-bold">Tenk på en karavane på motorvei:</p>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3">
                 <p className="font-bold text-blue-700 dark:text-blue-400 text-xs mb-1">d_trans = L/R (sendingsforsinkelse)</p>
                 <p className="text-xs text-[var(--muted)]">
-                  Tenk deg en bompstasjon der biler stopper for A betale.
+                  Tenk deg en bompstasjon der biler stopper for å betale.
                   <strong> d_trans</strong> = tid det tar for ALLE bilene i karavanen
-                  A kjore gjennom bomstasjonen.
+                  å kjøre gjennom bomstasjonen.
                   Avhenger av antall biler (L = pakkelengde) og hastigheten bomstasjonen
                   betjener dem (R = linjekapasitet). Avstand til destinasjon er irrelevant.
                 </p>
@@ -342,9 +342,9 @@ export default function CN1_4Page() {
               <div className="rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 p-3">
                 <p className="font-bold text-green-700 dark:text-green-400 text-xs mb-1">d_prop = d/s (forplantningsforsinkelse)</p>
                 <p className="text-xs text-[var(--muted)]">
-                  <strong>d_prop</strong> = tid det tar for en bil A kj\u00f8re fra bomstasjonen
+                  <strong>d_prop</strong> = tid det tar for en bil å kj\u00f8re fra bomstasjonen
                   til destinasjonen (f.eks. Bergen til Oslo).
-                  Avhenger av avstand og kjorehasigheten pA motorveien.
+                  Avhenger av avstand og kjørehastigheten på motorveien.
                   Antall biler (pakkelengde) er irrelevant.
                 </p>
               </div>
@@ -352,7 +352,7 @@ export default function CN1_4Page() {
             <p className="text-[var(--muted)] text-xs bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-700 rounded p-2">
               <strong>Viktig:</strong> d_trans og d_prop avhenger av HELT ULIKE parametere!
               d_trans: L og R (ingen avstand). d_prop: d og s (ingen pakkelengde eller kapasitet).
-              Dette er den vanligste konfundereringen pA eksamen.
+              Dette er den vanligste konfundereringen på eksamen.
             </p>
           </div>
         )}
@@ -421,7 +421,7 @@ export default function CN1_4Page() {
           onClick={() => setShowEksempel2(!showEksempel2)}
           className="w-full text-left px-4 py-3 rounded-lg border-2 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-950/20 hover:bg-red-100 dark:hover:bg-red-950/30 flex items-center justify-between text-sm font-medium"
         >
-          <span>Eksempel 2: Eksamen januar 2025, oppgave 3 (fullstendig losning)</span>
+          <span>Eksempel 2: Eksamen januar 2025, oppgave 3 (fullstendig løsning)</span>
           <span>{showEksempel2 ? "▲" : "▼"}</span>
         </button>
         {showEksempel2 && (
@@ -438,7 +438,7 @@ export default function CN1_4Page() {
             </div>
 
             <div className="space-y-3">
-              <p className="font-bold">a) L = 1000 bits. Hva er sendingsforsinkelsen pA R1&rarr;R2?</p>
+              <p className="font-bold">a) L = 1000 bits. Hva er sendingsforsinkelsen på R1&rarr;R2?</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
                 <p>d_trans = L/R = 1000 / 10&sup6; = 0,001 s = 1 ms</p>
               </div>
@@ -488,7 +488,7 @@ export default function CN1_4Page() {
               <p className="text-green-600 dark:text-green-400 font-bold">= 250 pakker/s</p>
             </div>
             <p className="text-[var(--muted)] text-xs">
-              Generell formel: maks pakker/s = R/L. Dette er linjekapasiteten delt pA pakkelengden.
+              Generell formel: maks pakker/s = R/L. Dette er linjekapasiteten delt på pakkelengden.
             </p>
           </div>
         )}
@@ -565,13 +565,13 @@ export default function CN1_4Page() {
           latex="\text{Gjennomstromning} = \min(R_1, R_2, \ldots, R_N)"
           title="Ende-til-ende gjennomstromning"
           variant="blue"
-          description="Gjennomstromningen begrenses av den smaleste linken pA hele stien (flaskehalsen)."
+          description="Gjennomstromningen begrenses av den smaleste linken på hele stien (flaskehalsen)."
         />
 
         <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4 text-sm space-y-3">
           <h3 className="font-bold text-blue-700 dark:text-blue-400">Delt flaskehalsnett</h3>
           <p className="text-[var(--muted)]">
-            NAt N tilkoblinger deler en flaskehalsnett med kapasitet R, fAr hver tilkobling R/N
+            NAt N tilkoblinger deler en flaskehalsnett med kapasitet R, får hver tilkobling R/N
             (forutsatt rettferdig deling). Dette er kjernen i eksamensoppgave 3b-d.
           </p>
           <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
@@ -589,34 +589,34 @@ export default function CN1_4Page() {
       {/* Vanlige feil */}
       <section className="space-y-3">
         <h2 className="text-xl font-bold text-red-600 dark:text-red-400">
-          Vanlige feil pA eksamen
+          Vanlige feil på eksamen
         </h2>
         <div className="space-y-2">
           {[
             {
               feil: "Blander d_trans og d_prop",
-              losning: "d_trans = L/R avhenger av pakkelengde og kapasitet, IKKE avstand. d_prop = d/s avhenger av avstand, IKKE pakkelengde eller kapasitet.",
+              løsning: "d_trans = L/R avhenger av pakkelengde og kapasitet, IKKE avstand. d_prop = d/s avhenger av avstand, IKKE pakkelengde eller kapasitet.",
             },
             {
               feil: "Glemmer at alle bits mA sendes for sendingsforsinkelsen er ferdig",
-              losning: "d_trans er tiden for A pumpe ALLE L bits ut pA linken. Det er ikke tid til forste bit, men tid til siste bit.",
+              løsning: "d_trans er tiden for å pumpe ALLE L bits ut på linken. Det er ikke tid til forste bit, men tid til siste bit.",
             },
             {
               feil: "Multipliserer bare d_trans med N hopp og glemmer d_prop",
-              losning: "Ende-til-ende forsinkelse inkluderer ALLE fire typer for HVERT hopp: d_e2e = sum over alle noder av (d_proc + d_queue + d_trans + d_prop).",
+              løsning: "Ende-til-ende forsinkelse inkluderer ALLE fire typer for HVERT hopp: d_e2e = sum over alle noder av (d_proc + d_queue + d_trans + d_prop).",
             },
             {
-              feil: "Glemmer A dele midtlink pA N tilkoblinger",
-              losning: "NAr N tilkoblinger deler et felles linksegment, fAr hver forbindelse kun R/N av kapasiteten.",
+              feil: "Glemmer å dele midtlink på N tilkoblinger",
+              løsning: "Når N tilkoblinger deler et felles linksegment, får hver forbindelse kun R/N av kapasiteten.",
             },
             {
               feil: "Glemmer enhetskonvertering",
-              losning: "Sjekk alltid at L er i bits (ikke bytes!), R er i bps, d er i meter. 1 byte = 8 bits. 1 Mbps = 10\u2076 bps.",
+              løsning: "Sjekk alltid at L er i bits (ikke bytes!), R er i bps, d er i meter. 1 byte = 8 bits. 1 Mbps = 10\u2076 bps.",
             },
-          ].map(({ feil, losning }) => (
+          ].map(({ feil, løsning }) => (
             <div key={feil} className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-3 text-sm">
               <p className="font-bold text-red-700 dark:text-red-400">&#9747; Feil: {feil}</p>
-              <p className="text-[var(--muted)] mt-1">&#10003; Riktig: {losning}</p>
+              <p className="text-[var(--muted)] mt-1">&#10003; Riktig: {løsning}</p>
             </div>
           ))}
         </div>
@@ -629,7 +629,7 @@ export default function CN1_4Page() {
           Oppgave 3 er alltid forsinkelse/gjennomstromning. Typisk struktur: a) beregn d_trans,
           b) beregn nodalforsinkelse, c) beregn ende-til-ende, d) finn flaskehals/gjennomstromning.
           Skriv alltid alle mellomregninger. Feil i del a) bor ikke spre seg til b)-d) hvis du
-          bruker riktig metode. Se ogsa: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensovingsseksjon</Link>.
+          bruker riktig metode. Se også: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensovingsseksjon</Link>.
         </span>
       </div>
 

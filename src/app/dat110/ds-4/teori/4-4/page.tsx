@@ -21,20 +21,20 @@ export default function DS4_4Page() {
   // Gossip simulation data
   const gossipStates: Record<string, { informed: NodeId[]; desc: string }[]> = {
     push: [
-      { informed: ["A"], desc: "Start: Kun A har oppdateringen (er 'infisert')" },
-      { informed: ["A", "C"], desc: "Runde 1: A velger tilfeldig nabo C og pusher oppdateringen" },
-      { informed: ["A", "B", "C"], desc: "Runde 2: A velger B, C velger nabo (B). B er nå infisert" },
+      { informed: ["A"], desc: "Start: Kun å har oppdateringen (er 'infisert')" },
+      { informed: ["A", "C"], desc: "Runde 1: å velger tilfeldig nabo C og pusher oppdateringen" },
+      { informed: ["A", "B", "C"], desc: "Runde 2: å velger B, C velger nabo (B). B er nå infisert" },
       { informed: ["A", "B", "C", "D"], desc: "Runde 3: Alle noder er infisert. Epidemien er fullstendig!" },
     ],
     pull: [
-      { informed: ["A"], desc: "Start: Kun A har oppdateringen" },
+      { informed: ["A"], desc: "Start: Kun å har oppdateringen" },
       { informed: ["A", "B"], desc: "Runde 1: B puller fra A og får oppdateringen" },
       { informed: ["A", "B", "C"], desc: "Runde 2: C puller fra A (eller B) og får oppdateringen" },
       { informed: ["A", "B", "C", "D"], desc: "Runde 3: D puller fra en informert node. Ferdig!" },
     ],
     pushpull: [
-      { informed: ["A"], desc: "Start: Kun A har oppdateringen" },
-      { informed: ["A", "D"], desc: "Runde 1: A velger D, de utveksler — D får oppdatering, A kan få D's info" },
+      { informed: ["A"], desc: "Start: Kun å har oppdateringen" },
+      { informed: ["A", "D"], desc: "Runde 1: å velger D, de utveksler — D får oppdatering, å kan få D's info" },
       { informed: ["A", "B", "C", "D"], desc: "Runde 2: A og D sprer til B og C. Push-pull er raskeste varianten!" },
       { informed: ["A", "B", "C", "D"], desc: "Alle noder konvergert. Push-pull krever færre runder enn push alene." },
     ],

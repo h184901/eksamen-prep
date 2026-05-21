@@ -458,7 +458,7 @@ export default function DS7_2Page() {
         <ol className="text-sm text-[var(--muted)] space-y-2 list-decimal list-inside">
           <li>
             <strong>Programrekkefølge bevares:</strong> Operasjonene til hver enkelt prosess skjer i den rekkefølgen de er spesifisert.
-            P1 gjør A deretter B — alle ser A før B fra P1.
+            P1 gjør å deretter B — alle ser å før B fra P1.
           </li>
           <li>
             <strong>Alle prosesser ser den SAMME interleaving:</strong> Selv om to prosesser skriver på omtrent samme tid,

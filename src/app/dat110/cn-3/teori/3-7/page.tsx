@@ -225,8 +225,8 @@ export default function CN3Teori37Page() {
         <h1 className="text-2xl font-bold mb-2">TCP Metningskontroll</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
           TCP-metningskontroll er en av de mest elegante algoritmene i datanettverk. AIMD,
-          slow start og congestion avoidance jobber sammen for a finne maksimal senderate
-          uten a overmette nettverket. Grafen over cwnd over tid er eksamensklassiker.
+          slow start og congestion avoidance jobber sammen for å finne maksimal senderate
+          uten å overmette nettverket. Grafen over cwnd over tid er eksamensklassiker.
         </p>
       </div>
 
@@ -236,7 +236,7 @@ export default function CN3Teori37Page() {
         "ssthresh: terskel mellom Slow Start og Congestion Avoidance",
         "Tre metningssignaler: timeout (alvorlig), 3 duplikat-ACKer (mildere)",
         "TCP Reno vs Tahoe: Reno har Fast Recovery ved 3 dup-ACK, Tahoe tilbake til SS",
-        "Fast Retransmit: retransmitter ved 3 dup-ACKer UTEN a vente pa timeout",
+        "Fast Retransmit: retransmitter ved 3 dup-ACKer UTEN a vente på timeout",
         "Tegn cwnd-grafen med riktige faser og hendelser",
       ]} />
 
@@ -251,7 +251,7 @@ export default function CN3Teori37Page() {
           </Card>
           <Card color="blue">
             <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-1">Congestion Avoidance (CA)</h4>
-            <p className="text-xs text-[var(--muted)]">Nar cwnd &ge; ssthresh. Lineaer vekst (+1 MSS per RTT). Forsiktig probing av nettverkskapasitet.</p>
+            <p className="text-xs text-[var(--muted)]">Når cwnd &ge; ssthresh. Lineaer vekst (+1 MSS per RTT). Forsiktig probing av nettverkskapasitet.</p>
             <div className="mt-2 rounded bg-blue-100 dark:bg-blue-900/30 p-1 text-xs font-mono text-center">
               cwnd += 1/cwnd per ACK<br/>(= +1 MSS per RTT)
             </div>
@@ -280,7 +280,7 @@ export default function CN3Teori37Page() {
             </div>
             <div>
               <p className="font-bold text-sm text-red-700 dark:text-red-400">Multiplicative Decrease (MD)</p>
-              <p className="text-sm mt-1">Ved metningsdeteksjon: halver cwnd (eller nullstill til 1 ved timeout). Halvering er raskere nedregulering enn lineaer.</p>
+              <p className="text-sm mt-1">Ved metningsdeteksjon: halver cwnd (eller nullstill til 1 ved timeout). Halvering er raskere nedregulering enn lineær.</p>
               <div className="mt-2 font-mono text-xs bg-red-100 dark:bg-red-900/30 p-2 rounded">
                 3 dup-ACK: cwnd = cwnd/2<br/>
                 timeout: cwnd = 1
@@ -339,7 +339,7 @@ export default function CN3Teori37Page() {
         <div className="grid sm:grid-cols-2 gap-4">
           <Card color="blue">
             <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-2">TCP Tahoe (eldre)</h4>
-            <p className="text-sm font-bold">Reaksjon pa 3 duplikat-ACKer:</p>
+            <p className="text-sm font-bold">Reaksjon på 3 duplikat-ACKer:</p>
             <ul className="text-sm text-[var(--muted)] mt-2 space-y-1 list-disc list-inside">
               <li>ssthresh = cwnd / 2</li>
               <li>cwnd = 1 MSS</li>
@@ -351,12 +351,12 @@ export default function CN3Teori37Page() {
           </Card>
           <Card color="network">
             <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2">TCP Reno (moderne)</h4>
-            <p className="text-sm font-bold">Reaksjon pa 3 duplikat-ACKer:</p>
+            <p className="text-sm font-bold">Reaksjon på 3 duplikat-ACKer:</p>
             <ul className="text-sm text-[var(--muted)] mt-2 space-y-1 list-disc list-inside">
               <li>ssthresh = cwnd / 2</li>
               <li>cwnd = ssthresh + 3 (Fast Recovery)</li>
               <li>Retransmitter tapt segment umiddelbart</li>
-              <li>Nar ny ACK ankommer: cwnd = ssthresh → CA</li>
+              <li>Når ny ACK ankommer: cwnd = ssthresh → CA</li>
             </ul>
             <div className="mt-2 rounded bg-cyan-100 dark:bg-cyan-900/30 p-2 text-xs">
               Bedre ytelse: Fast Recovery unngaar full Slow Start ved mildt tap. Standard i de fleste OS.
@@ -365,8 +365,8 @@ export default function CN3Teori37Page() {
         </div>
 
         <Card color="gold">
-          <h4 className="font-bold mb-2">Fast Retransmit — ikke vent pa timeout!</h4>
-          <p className="text-sm">Nar senderen mottar <strong>3 duplikat-ACKer</strong> (d.v.s. 4 ACKer med samme sekvensnummer), tolkes dette som at et spesifikt segment er tapt. Senderen retransmitterer det umiddelbart uten a vente pa timeout-intervallet.</p>
+          <h4 className="font-bold mb-2">Fast Retransmit — ikke vent på timeout!</h4>
+          <p className="text-sm">Når senderen mottar <strong>3 duplikat-ACKer</strong> (d.v.s. 4 ACKer med samme sekvensnummer), tolkes dette som at et spesifikt segment er tapt. Senderen retransmitterer det umiddelbart uten å vente på timeout-intervallet.</p>
           <div className="mt-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 p-2 text-xs">
             <strong>Hvorfor 3 duplikat-ACKer?</strong> Mottakeren sender ACK(n) for hvert segment som ankommer etter n. 3 duplikater indikerer at segmentet etter det forventede er tapt. Timeout indikerer typisk mer alvorlig metning (mange pakker tapt).
           </div>
@@ -378,14 +378,14 @@ export default function CN3Teori37Page() {
           latex="\text{throughput} \approx \frac{0.75 \cdot W}{RTT}"
           title="TCP gjennomstromning (forenklet)"
           variant="gold"
-          description="W = maksimal vindusstorrelse (MSS). Gjennomstromningen varierer mellom W/2 og W grunnet saktedansen."
+          description="W = maksimal vindusstørrelse (MSS). Gjennomstromningen varierer mellom W/2 og W grunnet saktedansen."
         />
 
         <FormulaBox
           latex="\text{throughput} = \frac{1.22 \cdot MSS}{RTT \cdot \sqrt{L}}"
           title="TCP gjennomstromning — Mathis-formel (mer presis)"
           variant="blue"
-          description="L = pakketap-sannsynlighet. Hoyere tap → lavere gjennomstromning. Basis for kapasitetsplanlegging."
+          description="L = pakketap-sannsynlighet. Høyere tap → lavere gjennomstromning. Basis for kapasitetsplanlegging."
         />
 
         <Card color="network">
@@ -394,17 +394,17 @@ export default function CN3Teori37Page() {
             <p>Effektivt sendervindu = min(cwnd, rwnd)</p>
             <p><strong>cwnd</strong> begrenses av: metningskontroll (AIMD)</p>
             <p><strong>rwnd</strong> begrenses av: mottakerens buffer</p>
-            <p className="text-[var(--muted)] text-xs mt-1">Pa moderne raskt LAN med stor rwnd er cwnd typisk bindende. Pa trege WAN-linker kan rwnd vaere bindende.</p>
+            <p className="text-[var(--muted)] text-xs mt-1">På moderne raskt LAN med stor rwnd er cwnd typisk bindende. På trege WAN-linker kan rwnd være bindende.</p>
           </div>
         </Card>
       </Section>
 
-      <Section title="7. Eksamen — klassiske sporsmaal">
+      <Section title="7. Eksamen — klassiske spørsmål">
         <div className="space-y-3">
           <Card color="red">
             <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Typisk eksamensoppgave: Trace cwnd</h4>
             <div className="text-sm space-y-2">
-              <p><strong>Oppgave:</strong> TCP Reno starter med cwnd=1, ssthresh=8. Beskriv cwnd for RTT 1-10 om alt gar bra til RTT 7 der 3 dup-ACKer mottas.</p>
+              <p><strong>Oppgave:</strong> TCP Reno starter med cwnd=1, ssthresh=8. Beskriv cwnd for RTT 1-10 om alt går bra til RTT 7 der 3 dup-ACKer mottas.</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
                 <p>RTT 1: cwnd=1 (SS, &lt;ssthresh=8)</p>
                 <p>RTT 2: cwnd=2 (SS)</p>

@@ -53,16 +53,16 @@ export default function CN3Teori35Page() {
       <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
         <Link href="/dat110/cn-3/teori" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">CN-3 Teori</Link>
         <span>/</span>
-        <span className="text-[var(--foreground)] font-medium">3.5 Flytkontroll og tilkoblingshaandtering</span>
+        <span className="text-[var(--foreground)] font-medium">3.5 Flytkontroll og tilkoblingshåndtering</span>
       </div>
 
       <div>
         <p className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wide mb-1">CN 3.5</p>
-        <h1 className="text-2xl font-bold mb-2">TCP — Flytkontroll og tilkoblingshaandtering</h1>
+        <h1 className="text-2xl font-bold mb-2">TCP — Flytkontroll og tilkoblingshåndtering</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
           Flytkontroll sikrer at senderen ikke overveldder mottakerens buffer.
-          Tilkoblingshaandtering viser hvordan TCP etablerer og avslutter forbindelser.
-          Forstaa forskjellen mellom flytkontroll (mottaker) og metningskontroll (nettverk).
+          Tilkoblingshåndtering viser hvordan TCP etablerer og avslutter forbindelser.
+          Forstå forskjellen mellom flytkontroll (mottaker) og metningskontroll (nettverk).
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export default function CN3Teori35Page() {
           <div className="mt-2 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 p-3 font-mono text-sm">
             <p>rwnd = RcvBuffer - [LastByteRcvd - LastByteRead]</p>
           </div>
-          <p className="text-xs text-[var(--muted)] mt-2">RcvBuffer = total bufferkapasitet (typisk 4096 bytes standard, kan vaere mye storre med window scaling). Formelen gir ledig plass.</p>
+          <p className="text-xs text-[var(--muted)] mt-2">RcvBuffer = total bufferkapasitet (typisk 4096 bytes standard, kan være mye storre med window scaling). Formelen gir ledig plass.</p>
         </Card>
 
         <FormulaBox
@@ -128,7 +128,7 @@ export default function CN3Teori35Page() {
 
         <Card color="gold">
           <h4 className="font-bold mb-2">Spesialtilfelle: rwnd = 0</h4>
-          <p className="text-sm">Nar mottakeren annonserer rwnd=0 (buffer full), stopper senderen. Men: for a unnga deadlock, sender TCP fortsatt 1-byte "probe"-segmenter for a sjekke om buffer har blitt ledig.</p>
+          <p className="text-sm">Når mottakeren annonserer rwnd=0 (buffer full), stopper senderen. Men: for å unnga deadlock, sender TCP fortsatt 1-byte "probe"-segmenter for å sjekke om buffer har blitt ledig.</p>
         </Card>
       </Section>
 
@@ -162,12 +162,12 @@ export default function CN3Teori35Page() {
           <div className="mt-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 p-3 font-mono text-sm text-center">
             Effektivt vindu = min(cwnd, rwnd)
           </div>
-          <p className="text-xs text-[var(--muted)] mt-2">I praksis: pa raskt LAN er rwnd vanligvis den bindende begrensningen. Pa tregt WAN er cwnd vanligvis bindende.</p>
+          <p className="text-xs text-[var(--muted)] mt-2">I praksis: på raskt LAN er rwnd vanligvis den bindende begrensningen. På tregt WAN er cwnd vanligvis bindende.</p>
         </Card>
       </Section>
 
       <Section title="3. TCP tilkoblingsavslutning (4-trinns FIN)">
-        <p className="text-sm text-[var(--muted)] mb-3">Siden TCP er full-duplex maa <strong>begge sider</strong> avslutte sin sending-retning uavhengig. Dette gjoeres med 4 trinn (eller 3 hvis FIN og ACK kombineres).</p>
+        <p className="text-sm text-[var(--muted)] mb-3">Siden TCP er full-duplex må <strong>begge sider</strong> avslutte sin sending-retning uavhengig. Dette gjøres med 4 trinn (eller 3 hvis FIN og ACK kombineres).</p>
 
         {/* Sekvensdiagram FIN */}
         <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 overflow-x-auto">
@@ -179,9 +179,9 @@ export default function CN3Teori35Page() {
             </div>
 
             {[
-              { fra: "klient", til: "server", msg: "FIN", detail: "FIN=1, seq=x", info: "Klient er ferdig med a sende", farge: "border-blue-300 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400" },
+              { fra: "klient", til: "server", msg: "FIN", detail: "FIN=1, seq=x", info: "Klient er ferdig med å sende", farge: "border-blue-300 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400" },
               { fra: "server", til: "klient", msg: "ACK", detail: "ACK=x+1", info: "Server bekrefter FIN", farge: "border-green-300 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400" },
-              { fra: "server", til: "klient", msg: "FIN", detail: "FIN=1, seq=y", info: "Server er ferdig med a sende", farge: "border-green-300 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400" },
+              { fra: "server", til: "klient", msg: "FIN", detail: "FIN=1, seq=y", info: "Server er ferdig med å sende", farge: "border-green-300 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400" },
               { fra: "klient", til: "server", msg: "ACK", detail: "ACK=y+1", info: "Klient bekrefter. Vent 2*MSL", farge: "border-blue-300 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400" },
             ].map(({ fra, til, msg, detail, info, farge }, i) => (
               <div key={i} className="relative flex items-center my-3">
@@ -223,24 +223,24 @@ export default function CN3Teori35Page() {
 
         <Card color="network">
           <h4 className="font-bold mb-2">TIME-WAIT tilstand</h4>
-          <p className="text-sm">Etter siste ACK venter klienten i <strong>TIME-WAIT</strong> (2 x MSL = Maximum Segment Lifetime, typisk 2 min). Grunnen: sikre at den siste ACKen ankommer serveren (ellers ville serveren sende FIN pa nytt). Etter TIME-WAIT er tilkoblingen virkelig lukket.</p>
+          <p className="text-sm">Etter siste ACK venter klienten i <strong>TIME-WAIT</strong> (2 x MSL = Maximum Segment Lifetime, typisk 2 min). Grunnen: sikre at den siste ACKen ankommer serveren (ellers ville serveren sende FIN på nytt). Etter TIME-WAIT er tilkoblingen virkelig lukket.</p>
         </Card>
 
         <Card color="gold">
           <h4 className="font-bold mb-2">Half-close</h4>
-          <p className="text-sm">TCP tillater "half-close": en side kan sende FIN (ferdig med a sende) mens den andre fortsatt sender. Begge retninger av den full-duplex tilkoblingen avsluttes uavhengig.</p>
+          <p className="text-sm">TCP tillater "half-close": en side kan sende FIN (ferdig med å sende) mens den andre fortsatt sender. Begge retninger av den full-duplex tilkoblingen avsluttes uavhengig.</p>
         </Card>
       </Section>
 
       <Section title="4. Oppsummering — TCP tjenester">
         <div className="grid sm:grid-cols-2 gap-3">
           {[
-            { egenskap: "Palitelig overfoering", besk: "Checksummer, timer, retransmisjon, sekvensnumre, ACKer sikrer at data ankommer korrekt." },
-            { egenskap: "Ordnet levering", besk: "TCP sorterer segmenter via sekvensnumre og leverer i riktig rekkefolge til applikasjonen." },
+            { egenskap: "Pålitelig overføring", besk: "Checksummer, timer, retransmisjon, sekvensnumre, ACKer sikrer at data ankommer korrekt." },
+            { egenskap: "Ordnet levering", besk: "TCP sorterer segmenter via sekvensnumre og leverer i riktig rekkefølge til applikasjonen." },
             { egenskap: "Flytkontroll", besk: "rwnd fra mottaker hindrer overflom av mottakerens buffer." },
-            { egenskap: "Metningskontroll", besk: "cwnd justeres dynamisk basert pa nettverkets tilstand (se 3.7)." },
+            { egenskap: "Metningskontroll", besk: "cwnd justeres dynamisk basert på nettverkets tilstand (se 3.7)." },
             { egenskap: "Full-duplex", besk: "Data flyter i begge retninger over en enkelt tilkobling." },
-            { egenskap: "Connection-oriented", besk: "3-veis handshake etablerer tilstand begge steder for dataoverforing." },
+            { egenskap: "Connection-oriented", besk: "3-veis handshake etablerer tilstand begge steder for dataoverføring." },
           ].map(({ egenskap, besk }) => (
             <div key={egenskap} className="rounded-lg bg-[var(--card)] border border-cyan-400/40 p-3">
               <p className="font-bold text-sm text-cyan-600 dark:text-cyan-400 mb-1">{egenskap}</p>

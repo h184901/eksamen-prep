@@ -136,10 +136,10 @@ function LayerModel() {
   const [hover, setHover] = useState<number | null>(null);
   const layers = [
     { id: 5, name: "Applikasjon", color: "bg-purple-100 dark:bg-purple-900/30 border-purple-400", proto: "HTTP, DNS, FTP, SMTP", pdu: "Melding", detail: "Brukerdata. Prosess-til-prosess kommunikasjon via porter." },
-    { id: 4, name: "Transport", color: "bg-blue-100 dark:bg-blue-900/30 border-blue-400", proto: "TCP, UDP", pdu: "Segment", detail: "Multipleksing, palitelig levering (TCP), sekvensnummer, flytkontroll." },
+    { id: 4, name: "Transport", color: "bg-blue-100 dark:bg-blue-900/30 border-blue-400", proto: "TCP, UDP", pdu: "Segment", detail: "Multipleksing, pålitelig levering (TCP), sekvensnummer, flytkontroll." },
     { id: 3, name: "Nettverk", color: "bg-green-100 dark:bg-green-900/30 border-green-400", proto: "IP, ICMP", pdu: "Datagram", detail: "IP-adresser, rutevalg, fragmentering. Beste-innsats, ingen garanti." },
     { id: 2, name: "Link", color: "bg-orange-100 dark:bg-orange-900/30 border-orange-400", proto: "Ethernet, WiFi", pdu: "Ramme", detail: "MAC-adresser, feildeteksjon (CRC), tilgang til delt medium." },
-    { id: 1, name: "Fysisk", color: "bg-red-100 dark:bg-red-900/30 border-red-400", proto: "Fiber, kopper, radio", pdu: "Bits", detail: "Spenningsniva, modulasjon, bitrate pA det fysiske mediet." },
+    { id: 1, name: "Fysisk", color: "bg-red-100 dark:bg-red-900/30 border-red-400", proto: "Fiber, kopper, radio", pdu: "Bits", detail: "Spenningsniva, modulasjon, bitrate på det fysiske mediet." },
   ];
 
   return (
@@ -194,7 +194,7 @@ export default function CN1VisualiseringerPage() {
     <div className="space-y-8">
       <h2 className="text-2xl font-bold">Visualiseringer: Nettverksmetrikker</h2>
       <p className="text-[var(--muted)] max-w-2xl">
-        Interaktive verktoy for a forstA forsinkelser og lagmodellen.
+        Interaktive verktoy for å forstA forsinkelser og lagmodellen.
       </p>
 
       <DelayCalculator />

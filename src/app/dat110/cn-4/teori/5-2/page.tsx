@@ -183,7 +183,7 @@ export default function CN5_2Page() {
                 </p>
                 <div className="rounded-lg bg-[var(--card-bg)] border border-[var(--card-border)] p-4">
                   <p className="text-sm font-bold mb-2">Eksempel:</p>
-                  <p className="text-sm text-[var(--foreground)]">AS A ønsker å sende trafikk til prefiks P annonsert av AS C. AS A har to exit-punkter til AS C: via ruter R1 (OSPF-kost 50) og ruter R2 (OSPF-kost 10). Hot potato: send via R2 (lavere intra-AS kostnad), selv om den totale veien til P via R1 kanskje er kortere.</p>
+                  <p className="text-sm text-[var(--foreground)]">AS å ønsker å sende trafikk til prefiks P annonsert av AS C. AS å har to exit-punkter til AS C: via ruter R1 (OSPF-kost 50) og ruter R2 (OSPF-kost 10). Hot potato: send via R2 (lavere intra-AS kostnad), selv om den totale veien til P via R1 kanskje er kortere.</p>
                 </div>
                 <h4 className="font-bold text-blue-600 dark:text-blue-300 mt-2">BGP-attributter (beslutningsrekkefølge)</h4>
                 <ol className="text-sm space-y-1 text-[var(--foreground)] list-decimal list-inside">

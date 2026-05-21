@@ -14,13 +14,13 @@ export default function CN1_6Page() {
       farge: "border-red-400/60 bg-red-50 dark:bg-red-950/20",
       tfarge: "text-red-700 dark:text-red-400",
       kortbeskrivelse: "Virus, ormer, ransomware, spyware som infiserer enheter.",
-      detaljer: `Malware er programvare designet for A skade, stjele data eller ta kontroll over en maskin.
+      detaljer: `Malware er programvare designet for å skade, stjele data eller ta kontroll over en maskin.
 
 Typer:
-- Virus: krevet menneskelig interaksjon for A spre seg (e-postvedlegg, USB)
+- Virus: krevet menneskelig interaksjon for å spre seg (e-postvedlegg, USB)
 - Orm (worm): sprer seg automatisk over nettverk uten brukerinteraksjon
 - Trojan: ser ut som legitim programvare men skjuler skadelig kode
-- Ransomware: krypterer filer og krever betaling for A gjenopprette dem
+- Ransomware: krypterer filer og krever betaling for å gjenopprette dem
 - Spyware/botnet: overvAker eller kontrollerer enheten eksternt
 
 Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplaering.`,
@@ -32,14 +32,14 @@ Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplaering
       farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
       tfarge: "text-orange-700 dark:text-orange-400",
       kortbeskrivelse: "Overvelmer tjenester med trafikk sA legitime brukere ikke kommer inn.",
-      detaljer: `DoS (Denial of Service) = ett angrepspunkt sender enorme mengder trafikk for A overbelaste et mAl.
+      detaljer: `DoS (Denial of Service) = ett angrepspunkt sender enorme mengder trafikk for å overbelaste et mAl.
 
 DDoS (Distributed DoS) = tusenvis av infiserte maskiner (botnet) koordinerer angrep mot ett mAl.
 
 Typer:
 - Bandwidth flooding: sender sA mye trafikk at linken til mAlet mettes
 - Connection flooding: fyller opp TCP-tilkoblingstabellen med halvferdige forbindelser (SYN flood)
-- Application-layer attacks: sender gyldige foresp\u00f8rsler som er dyre A behandle
+- Application-layer attacks: sender gyldige foresp\u00f8rsler som er dyre å behandle
 
 Forsvar: trafikkfiltrering, rate limiting, CDN, anycast routing.
 
@@ -51,7 +51,7 @@ Internett gir INGEN innebygd forsvar mot DoS. IP spesifiserer beste-innsats og h
       type: "Avlytting",
       farge: "border-blue-400/60 bg-blue-50 dark:bg-blue-950/20",
       tfarge: "text-blue-700 dark:text-blue-400",
-      kortbeskrivelse: "Passiv avlytting av nettverkstrafikk pA delt medium.",
+      kortbeskrivelse: "Passiv avlytting av nettverkstrafikk på delt medium.",
       detaljer: `En pakkebrylner (sniffer) fanger opp og leser alle pakker som passerer et nettverkspunkt.
 
 Mulig fordi:
@@ -80,14 +80,14 @@ Mulig fordi:
 - IP-protokollen har ingen autentiseringsmekanisme for kildeadressen
 - Hvem som helst kan konstruere en IP-pakke med vilkArlig kildeadresse
 
-Bruksomrader:
+Bruksområder:
 - DoS-amplifikasjon: send foresp\u00f8rsler med offer-IP som kilde, svar sendes til offeret
 - Blind spoofing: omgA IP-baserte tilgangskontroller
 - Refleksjonsangrep: bruk internettservere som forsterker angrepsvolum
 
 Forsvar:
 - Ingress filtering: ISPer bor blokkere pakker med umulige kildeadresser
-- Autentisering pA hoyere lag (TCP syn-cookies, TLS)`,
+- Autentisering på høyere lag (TCP syn-cookies, TLS)`,
     },
     {
       id: "mitm",
@@ -118,11 +118,11 @@ Forsvar:
           &larr; Alle delkapitler
         </Link>
         <span>/</span>
-        <span className="text-[var(--foreground)]">1.6 Angrep pA nettverk</span>
+        <span className="text-[var(--foreground)]">1.6 Angrep på nettverk</span>
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold mb-2">1.6 Angrep pA nettverk</h1>
+        <h1 className="text-2xl font-bold mb-2">1.6 Angrep på nettverk</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Internett ble designet uten sikkerhet som grunnleggende krav &mdash; det var et
           liten, tillitsbasert forskningsmiljo. I dag er sikkerhet et kritisk tema.
@@ -137,7 +137,7 @@ Forsvar:
           {[
             "Forklare hva malware er og de ulike typene (virus, orm, ransomware)",
             "Forklare DoS og DDoS og hvorfor de er mulige",
-            "Forklare pakkebrylning og hvorfor kryptering er nodvendig",
+            "Forklare pakkebrylning og hvorfor kryptering er nødvendig",
             "Forklare IP spoofing og hvorfor IP ikke er autentisert",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm">
@@ -153,8 +153,8 @@ Forsvar:
         <h3 className="font-bold text-red-700 dark:text-red-400">Grunnleggende sikkerhetstemaer</h3>
         <div className="grid sm:grid-cols-3 gap-3 mt-2">
           {[
-            { tema: "Konfidensialitet", forklaring: "Kun avsender og mottaker skal lese dataen. Losning: kryptering (TLS, VPN)." },
-            { tema: "Integritet", forklaring: "Data skal ikke kunne endres under transport. Losning: digital signatur, MAC." },
+            { tema: "Konfidensialitet", forklaring: "Kun avsender og mottaker skal lese dataen. Løsning: kryptering (TLS, VPN)." },
+            { tema: "Integritet", forklaring: "Data skal ikke kunne endres under transport. Løsning: digital signatur, MAC." },
             { tema: "Tilgjengelighet", forklaring: "Tjenester skal vare tilgjengelige. Trussel: DoS/DDoS." },
           ].map(({ tema, forklaring }) => (
             <div key={tema} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
@@ -165,7 +165,7 @@ Forsvar:
         </div>
         <p className="text-xs text-[var(--muted)] mt-2">
           Internett ble opprinnelig designet uten disse kravene. Sikkerhet er retroaktivt lagt til
-          pA hoyre lag (TLS, HTTPS, VPN) &mdash; ikke innebygd i IP-protokollen.
+          på hoyre lag (TLS, HTTPS, VPN) &mdash; ikke innebygd i IP-protokollen.
         </p>
       </div>
 
@@ -174,7 +174,7 @@ Forsvar:
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
           Angrepsoversikt
         </h2>
-        <p className="text-sm text-[var(--muted)]">Klikk pA et angrep for A se detaljer.</p>
+        <p className="text-sm text-[var(--muted)]">Klikk på et angrep for å se detaljer.</p>
 
         {angrep.map((a) => (
           <div key={a.id}>

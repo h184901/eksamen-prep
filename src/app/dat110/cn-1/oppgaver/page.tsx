@@ -6,7 +6,7 @@ function Answer({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(false);
   return !show ? (
     <button onClick={() => setShow(true)} className="text-xs px-3 py-1 rounded-full border border-network-400/50 text-network-600 dark:text-network-400 hover:bg-network-50 dark:hover:bg-network-900/20 mt-2">
-      Vis losning
+      Vis løsning
     </button>
   ) : (
     <div className="rounded-lg bg-network-50 dark:bg-network-900/20 border border-network-200 dark:border-network-800/40 p-4 text-sm mt-3 space-y-2">{children}</div>
@@ -43,14 +43,14 @@ export default function CN1OppgaverPage() {
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Oppgaver: Nettverksmetrikker</h2>
       <p className="text-[var(--muted)] max-w-2xl">
-        Forsinkelsesberegning er oppgave 3 pa ALLE eksamener. Ov til du kan gjore det
+        Forsinkelsesberegning er oppgave 3 på ALLE eksamener. Øv til du kan gjøre det
         i sovne. Oppgavene er sortert etter vanskelighetsgrad.
       </p>
 
       <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 p-4">
         <h3 className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">Oppgavestrategi</h3>
         <ol className="text-sm space-y-1 text-amber-900 dark:text-amber-200 list-decimal list-inside">
-          <li>Les oppgaven noyaktig. List opp alle gitte verdier med riktig enhet.</li>
+          <li>Les oppgaven nøyaktig. List opp alle gitte verdier med riktig enhet.</li>
           <li>Identifiser hva du skal finne (total forsinkelse? gjennomstromning? tid for N pakker?).</li>
           <li>Tegn topologien: host — ruter — ruter — host.</li>
           <li>Beregn d_trans = L/R og d_prop = d/s for HVER link.</li>
@@ -64,7 +64,7 @@ export default function CN1OppgaverPage() {
 
       <ExerciseCard num={1} title="Grunnleggende forsinkelse" difficulty="lett">
         <p className="text-sm text-[var(--muted)] mb-3">
-          En pakke pA L = 1000 bits sendes over en link med kapasitet R = 10^6 bits/s.
+          En pakke på L = 1000 bits sendes over en link med kapasitet R = 10^6 bits/s.
           Avstanden er d = 10 000 m og signalhastigheten er s = 5 x 10^8 m/s.
           Behandlingsforsinkelse d_proc = 0.002 s, koforsinkelse d_queue = 0.01 s.
           Beregn total nodalforsinkelse.
@@ -107,7 +107,7 @@ export default function CN1OppgaverPage() {
         <Answer>
           <p className="font-mono">a) I = La/R = (10000 * 100) / (2x10^6) = 1 000 000 / 2 000 000 = 0.5</p>
           <p className="mt-2">b) I = 0.5 betyr moderat belastning. Koforsinkelsen er merkbar men
-          ikke kritisk. Forsinkelsen oker ikke-lineert — nAr I narmer seg 1.0 eksploderer den.</p>
+          ikke kritisk. Forsinkelsen øker ikke-lineært — nAr I nærmer seg 1.0 eksploderer den.</p>
         </Answer>
       </ExerciseCard>
 
@@ -116,14 +116,14 @@ export default function CN1OppgaverPage() {
 
       <ExerciseCard num={4} title="Eksamen 2025 - Oppg 3 (forenklet)" difficulty="middels">
         <p className="text-sm text-[var(--muted)] mb-3">
-          Host A sender en pakke pA 1000 bytes til Host B via to rutere (3 linker).
+          Host A sender en pakke på 1000 bytes til Host B via to rutere (3 linker).
           Link 1: R = 10 Mbps, d = 100 km. Link 2: R = 5 Mbps, d = 200 km.
           Link 3: R = 10 Mbps, d = 50 km. s = 2 x 10^8 m/s for alle.
           d_proc = 1 ms per ruter. Ignorer koforsinkelse.
           a) Beregn total ende-til-ende forsinkelse.
           b) Hva er gjennomstromningen?
         </p>
-        <Hint>Husk: ulike R-verdier pa hver link! Gjennomstromning = min(alle R).</Hint>
+        <Hint>Husk: ulike R-verdier på hver link! Gjennomstromning = min(alle R).</Hint>
         <Answer>
           <p><strong>L = 1000 * 8 = 8000 bits</strong></p>
           <p className="font-mono mt-1">Link 1: d_trans = 8000/(10x10^6) = 0.0008 s, d_prop = 100000/(2x10^8) = 0.0005 s</p>
@@ -139,16 +139,16 @@ export default function CN1OppgaverPage() {
 
       <ExerciseCard num={5} title="Store-and-forward med flere pakker" difficulty="vanskelig">
         <p className="text-sm text-[var(--muted)] mb-3">
-          En fil pA 10 000 bits sendes som 5 pakker (hver 2000 bits) over 2 linker via
+          En fil på 10 000 bits sendes som 5 pakker (hver 2000 bits) over 2 linker via
           en ruter. Begge linker: R = 1 Mbps. Ignorer forplantning, prosessering og ko.
-          Nar er siste bit av siste pakke levert hos mottaker?
+          Når er siste bit av siste pakke levert hos mottaker?
         </p>
         <Hint>Forste pakke: 2 x L/R (store-and-forward over 2 linker). Neste pakker overlappes (pipelining).</Hint>
         <Answer>
           <p><strong>d_trans per pakke per link = 2000 / 10^6 = 0.002 s = 2 ms</strong></p>
           <p className="mt-1">Med store-and-forward og pipelining:</p>
           <p className="font-mono">Pakke 1 levert: 2 * 2 ms = 4 ms (to linker)</p>
-          <p className="font-mono">Pakke 2 levert: 4 + 2 = 6 ms (overlapper med pakke 1 pa link 2)</p>
+          <p className="font-mono">Pakke 2 levert: 4 + 2 = 6 ms (overlapper med pakke 1 på link 2)</p>
           <p className="font-mono">Pakke 3 levert: 6 + 2 = 8 ms</p>
           <p className="font-mono">Pakke 4 levert: 8 + 2 = 10 ms</p>
           <p className="font-mono font-bold">Pakke 5 levert: 10 + 2 = 12 ms</p>
@@ -159,7 +159,7 @@ export default function CN1OppgaverPage() {
       <ExerciseCard num={6} title="Gjennomstromning med delt kjernelink" difficulty="middels">
         <p className="text-sm text-[var(--muted)] mb-3">
           4 klienter laster ned fra 4 servere. Hver klient har aksesslink R_c = 10 Mbps.
-          Hver server har aksesslink R_s = 20 Mbps. Alle data gar gjennom en felles
+          Hver server har aksesslink R_s = 20 Mbps. Alle data går gjennom en felles
           kjernelink med R_core = 30 Mbps.
           Hva er gjennomstromningen per tilkobling?
         </p>
@@ -173,7 +173,7 @@ export default function CN1OppgaverPage() {
 
       <ExerciseCard num={7} title="Pakkeswitching vs kretsswitching" difficulty="lett">
         <p className="text-sm text-[var(--muted)] mb-3">
-          En link har kapasitet 1 Mbps. Hver bruker bruker 200 kbps nar aktiv, og er
+          En link har kapasitet 1 Mbps. Hver bruker bruker 200 kbps når aktiv, og er
           aktiv 20% av tiden.
           a) Hvor mange brukere stotter kretsswitching?
           b) Med 8 brukere og pakkeswitching — hva er sannsynligheten for at mer enn

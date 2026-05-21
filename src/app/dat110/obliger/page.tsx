@@ -24,7 +24,7 @@ const obliger = [
     title: "Prosjekt 1: Socket Programming og RPC Middleware",
     description: "Implementer et IoT-system med temperatursensor, kontroller og display. Bygger RPC-middleware oppA TCP-sockets.",
     concepts: ["TCP-sockets", "RPC (Remote Procedure Call)", "Marshalling/unmarshalling", "Klient-server arkitektur", "Lagdelt arkitektur", "Kapsling/dekapsling"],
-    examRelevance: "Oppg 2 spor ofte om RPC-arkitekturen fra dette prosjektet. Forstaa lagdelingen: Connection-layer, Messaging-layer, RPC-layer.",
+    examRelevance: "Oppg 2 spør ofte om RPC-arkitekturen fra dette prosjektet. Forstå lagdelingen: Connection-layer, Messaging-layer, RPC-layer.",
     keyPoints: [
       "IoT-system: sensor -> kontroller -> display via RPC",
       "Tre lag: Connection (TCP sockets), Messaging (send/receive), RPC (metode-kall)",
@@ -39,10 +39,10 @@ const obliger = [
     title: "Prosjekt 2: Publish-Subscribe Messaging Middleware",
     description: "Implementer PB-MOM (Publish-Subscribe Message-Oriented Middleware) med broker, topics og subscribers oppA messaging-laget fra prosjekt 1.",
     concepts: ["Publish-subscribe monster", "Broker", "Topics", "MQTT-konsepter", "Message-oriented middleware", "Event-drevet arkitektur"],
-    examRelevance: "Oppg 2 kan sporre om pub/sub-arkitekturen. Forstaa broker-rollen, topic-handtering og hvordan meldinger distribueres til subscribers.",
+    examRelevance: "Oppg 2 kan spørre om pub/sub-arkitekturen. Forstå broker-rollen, topic-håndtering og hvordan meldinger distribueres til subscribers.",
     keyPoints: [
       "Publisher sender melding til topic via broker",
-      "Subscriber registrerer seg pA topics og mottar meldinger",
+      "Subscriber registrerer seg på topics og mottar meldinger",
       "Broker: mellommann som styrer topics, subscriptions og meldingsdistribusjon",
       "Create/delete topics, subscribe/unsubscribe, publish meldinger",
       "ChApp: chat-applikasjon som demonstrerer pub/sub i praksis",
@@ -54,11 +54,11 @@ const obliger = [
     title: "Prosjekt 3: DHT Cooperative Mirroring",
     description: "Implementer distribuert hash-tabell (DHT) med Chord-lignende ring, konsistensprotokoll og distribuert gjensidig utelukkelse.",
     concepts: ["DHT (Chord)", "Konsistent hashing", "Replikering", "Distribuert mutex", "Konsistensprotokoll", "Fingertabell"],
-    examRelevance: "Sterkt knyttet til Oppg 10 (Chord DHT, 15%). Prosjektet gir hands-on erfaring med nokkelansvar, fingertabeller og oppslag.",
+    examRelevance: "Sterkt knyttet til Oppg 10 (Chord DHT, 15%). Prosjektet gir hands-on erfaring med nøkkelansvar, fingertabeller og oppslag.",
     keyPoints: [
-      "Chord-ring med konsistent hashing for nokkelplassering",
-      "Noder har ansvar for nokkelintervall: pred(n) < key <= n",
-      "Replikering: data lagres pA flere noder for feiltoleranse",
+      "Chord-ring med konsistent hashing for nøkkelplassering",
+      "Noder har ansvar for nøkkelintervall: pred(n) < key <= n",
+      "Replikering: data lagres på flere noder for feiltoleranse",
       "Konsistensprotokoll: sikrer at replikaene er oppdaterte",
       "Distribuert mutex: koordinerer tilgang til delte ressurser",
       "Fingertabell: FT[i] = succ(n + 2^(i-1) mod 2^m) for O(log N) oppslag",
@@ -79,8 +79,8 @@ export default function ObligerPage() {
 
       <h1 className="text-3xl font-bold mb-2">Obligatoriske prosjekter</h1>
       <p className="text-[var(--muted)] max-w-2xl mb-8">
-        Tre prosjekter som bygger pA hverandre: sockets og RPC, publish-subscribe, og DHT.
-        Oppgave 2 pA eksamen handler alltid om obliger — forstA konseptene bak koden.
+        Tre prosjekter som bygger på hverandre: sockets og RPC, publish-subscribe, og DHT.
+        Oppgave 2 på eksamen handler alltid om obliger — forstA konseptene bak koden.
       </p>
 
       <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 p-4 mb-8">
@@ -89,9 +89,9 @@ export default function ObligerPage() {
         </h3>
         <p className="text-sm text-amber-900 dark:text-amber-200">
           Oppgave 2 (~10%) handler alltid om det obligatoriske prosjektet.
-          Typiske sporsmal: &ldquo;Forklar arkitekturen i prosjektet&rdquo;,
+          Typiske spørsmål: &ldquo;Forklar arkitekturen i prosjektet&rdquo;,
           &ldquo;Hva er fordelen med RPC?&rdquo;, &ldquo;Beskriv publish-subscribe&rdquo;.
-          Fokuser pA a forstA <strong>konseptene og arkitekturen</strong>, ikke implementasjonsdetaljene.
+          Fokuser på a forstA <strong>konseptene og arkitekturen</strong>, ikke implementasjonsdetaljene.
         </p>
       </div>
 
@@ -121,7 +121,7 @@ export default function ObligerPage() {
                 </p>
               </div>
 
-              <Collapsible title="Nokkelkonsepter for eksamen" defaultOpen={oblig.id === 1}>
+              <Collapsible title="Nøkkelkonsepter for eksamen" defaultOpen={oblig.id === 1}>
                 <ul className="space-y-2">
                   {oblig.keyPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">

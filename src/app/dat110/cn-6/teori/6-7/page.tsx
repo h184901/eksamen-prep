@@ -184,7 +184,7 @@ export default function CN6_7Page() {
       </div>
 
       <div>
-        <h1 className="text-3xl font-bold mb-2">6.7 Et webforespørsel-scenario fra A til Å</h1>
+        <h1 className="text-3xl font-bold mb-2">6.7 Et webforespørsel-scenario fra å til Å</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Hva skjer egentlig når du skriver www.google.com og trykker Enter? Alle protokollene — DHCP, ARP, DNS, TCP, HTTP — aktiveres i rekkefølge. Dette scenariet binder sammen alt du har lært i kurset.
         </p>

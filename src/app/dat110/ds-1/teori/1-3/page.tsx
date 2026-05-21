@@ -32,10 +32,10 @@ export default function DS1_3Page() {
       farge: "border-indigo-400/60 bg-indigo-50 dark:bg-indigo-950/20",
       tittelfarge: "text-indigo-700 dark:text-indigo-400",
       hvaFar: "Programmeringsmiljo, runtimes, databaser, middleware, utviklingsverktoy",
-      hvemStyrer: "Du skriver kode og deployer applikasjoner. Cloud haandterer OS, middleware og skalering.",
+      hvemStyrer: "Du skriver kode og deployer applikasjoner. Cloud håndterer OS, middleware og skalering.",
       eksempler: ["Microsoft Azure (App Service)", "Google App Engine", "Heroku"],
       analogi: "Du leier en moblert leilighet — du kan bo der og innrede, men husvert eier alt annet",
-      eksamensnotat: "PaaS = du deployer kode, cloud haandterer alt under",
+      eksamensnotat: "PaaS = du deployer kode, cloud håndterer alt under",
     },
     {
       id: "saas",
@@ -45,9 +45,9 @@ export default function DS1_3Page() {
       farge: "border-cyan-400/60 bg-cyan-50 dark:bg-cyan-950/20",
       tittelfarge: "text-cyan-700 dark:text-cyan-400",
       hvaFar: "Ferdige applikasjoner tilgjengelig via nettleseren eller API",
-      hvemStyrer: "Du bruker bare applikasjonen. Cloud haandterer ALT — inkl. innholdet og dataene dine.",
+      hvemStyrer: "Du bruker bare applikasjonen. Cloud håndterer ALT — inkl. innholdet og dataene dine.",
       eksempler: ["Google Docs / Gmail", "YouTube", "Flickr", "Salesforce", "Microsoft 365"],
-      analogi: "Du bor pa hotell — alt er klart for deg, ingenting administrerer du selv",
+      analogi: "Du bor på hotell — alt er klart for deg, ingenting administrerer du selv",
       eksamensnotat: "SaaS = du bruker bare appen, ingenting under er synlig",
     },
   ];
@@ -92,7 +92,7 @@ export default function DS1_3Page() {
             </marker>
           </defs>
 
-          <text x="250" y="200" textAnchor="middle" fontSize="10" fill="#94a3b8">Sentralisert kontroll — enkel a forsta og styre</text>
+          <text x="250" y="200" textAnchor="middle" fontSize="10" fill="#94a3b8">Sentralisert kontroll — enkel å forstå og styre</text>
         </svg>
       ),
       egenskaper: [
@@ -147,7 +147,7 @@ export default function DS1_3Page() {
     "multi-tier": {
       tittel: "Multi-tier (flerlagsarkitektur)",
       beskrivelse:
-        "En utvidelse av klient-server der logikken deles pa flere lag. Typisk: presentasjonslag, applikasjonslogikk-lag, og datalag. Gir bedre skalerbarhet og separasjon av ansvar.",
+        "En utvidelse av klient-server der logikken deles på flere lag. Typisk: presentasjonslag, applikasjonslogikk-lag, og datalag. Gir bedre skalerbarhet og separasjon av ansvar.",
       svg: (
         <svg viewBox="0 0 500 240" className="w-full max-w-xl mx-auto" aria-label="Multi-tier arkitektur diagram">
           {/* Klienter */}
@@ -185,8 +185,8 @@ export default function DS1_3Page() {
       egenskaper: [
         "Klar separasjon av ansvar mellom lagene",
         "Hvert lag kan skaleres uavhengig av de andre",
-        "Presentasjonslaget kjorer pa klienten eller webserveren",
-        "Applikasjonslogikken kan kjore pa mange servere parallelt",
+        "Presentasjonslaget kjører på klienten eller webserveren",
+        "Applikasjonslogikken kan kjøre på mange servere parallelt",
         "Datalaget er gjerne en databaseklynge med replikering",
       ],
       eksempler: ["Moderne nettapper (React + REST API + PostgreSQL)", "Amazon.com (mange tier)", "Storskala enterprise-systemer"],
@@ -251,11 +251,11 @@ export default function DS1_3Page() {
             <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-3">Cluster computing</h3>
             <div className="space-y-2 text-sm text-[var(--muted)]">
               <p>
-                En samling av <strong>homogene</strong> maskiner koblet via et hoyhastighets-LAN.
-                Alle noder kjoer det samme OS. Et master-node styrer beregningene.
+                En samling av <strong>homogene</strong> maskiner koblet via et høyhastighets-LAN.
+                Alle noder kjør det samme OS. Et master-node styrer beregningene.
               </p>
               <ul className="space-y-1 mt-2">
-                <li className="flex gap-2"><span className="text-blue-500 shrink-0">&#8594;</span><span>Homogent: same OS, naermest identisk hardware</span></li>
+                <li className="flex gap-2"><span className="text-blue-500 shrink-0">&#8594;</span><span>Homogent: same OS, nærmest identisk hardware</span></li>
                 <li className="flex gap-2"><span className="text-blue-500 shrink-0">&#8594;</span><span>Koblet via LAN (lavlatens)</span></li>
                 <li className="flex gap-2"><span className="text-blue-500 shrink-0">&#8594;</span><span>Single managing node kontrollerer alt</span></li>
                 <li className="flex gap-2"><span className="text-blue-500 shrink-0">&#8594;</span><span>Brukes til parallell programmering</span></li>
@@ -276,9 +276,9 @@ export default function DS1_3Page() {
               </p>
               <ul className="space-y-1 mt-2">
                 <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Heterogent: ulikt OS, hardware, nettverk</span></li>
-                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Spredt pa tvers av organisasjoner</span></li>
-                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Koblet via WAN (hoyere latens)</span></li>
-                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Krever middleware for ressurshaandtering</span></li>
+                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Spredt på tvers av organisasjoner</span></li>
+                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Koblet via WAN (høyere latens)</span></li>
+                <li className="flex gap-2"><span className="text-indigo-500 shrink-0">&#8594;</span><span>Krever middleware for ressurshåndtering</span></li>
               </ul>
               <p className="text-xs mt-2 font-mono bg-white/60 dark:bg-neutral-900/40 rounded p-2">
                 Eksempel: CERN grid, SETI@home (distributed computing)
@@ -300,9 +300,9 @@ export default function DS1_3Page() {
             <tbody className="divide-y divide-[var(--card-border)] text-xs">
               {[
                 ["Heterogenitet", "Homogen (like maskiner)", "Heterogen (ulike maskiner)"],
-                ["Kobling", "LAN — hoy hastighet, lav latens", "WAN — lavere hastighet, hoyere latens"],
+                ["Kobling", "LAN — høy hastighet, lav latens", "WAN — lavere hastighet, høyere latens"],
                 ["Organisasjon", "En enkelt organisasjon", "Mange uavhengige organisasjoner"],
-                ["Bruk", "Parallell programmering, HPC", "Vitenskapelige beregninger pa tvers av land"],
+                ["Bruk", "Parallell programmering, HPC", "Vitenskapelige beregninger på tvers av land"],
                 ["Eksempel", "Beowulf-klynge, AWS HPC Cluster", "CERN LHC Grid, SETI@home"],
               ].map(([egenskap, cluster, grid]) => (
                 <tr key={egenskap}>
@@ -323,7 +323,7 @@ export default function DS1_3Page() {
         </h2>
         <p className="text-sm text-[var(--muted)]">
           Cloud computing er en form for <strong>utility computing</strong>: ressurser provisjoneres
-          og betales etter behov. Tre servicmodeller — klikk pa hver for full forklaring:
+          og betales etter behov. Tre servicmodeller — klikk på hver for full forklaring:
         </p>
 
         {/* Cloud-modell-knapper */}
@@ -414,11 +414,11 @@ export default function DS1_3Page() {
           <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-2">Cloud-egenskap: Elastisitet</h3>
           <p className="text-sm text-[var(--muted)]">
             <strong>Rapid elasticity</strong> betyr at skyressurser kan provisjoneres og frigis hurtig —
-            ideelt sett automatisk — for a matche ettersporselen. Fra eksamensoppgave 2025:
+            ideelt sett automatisk — for å matche ettersporselen. Fra eksamensoppgave 2025:
             &ldquo;Rapid elasticity is a cloud computing characteristic that relates to: Scalability.&rdquo;
           </p>
           <div className="mt-3 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 text-xs text-[var(--muted)]">
-            Eksempel: Nettbutikken din skalerer fra 10 servere til 500 servere automatisk pa Black Friday.
+            Eksempel: Nettbutikken din skalerer fra 10 servere til 500 servere automatisk på Black Friday.
             Etter rushet skalerer den ned igjen til 10. Du betaler kun for det du faktisk brukte.
           </div>
         </div>
@@ -430,15 +430,15 @@ export default function DS1_3Page() {
           2. Distribuerte informasjonssystemer
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Tradisjonelle bedriftssystemer: banker, flybestillinger, lagersystemer. Fokus er pa
-          datakonsistens og transaksjoner pa tvers av noder.
+          Tradisjonelle bedriftssystemer: banker, flybestillinger, lagersystemer. Fokus er på
+          datakonsistens og transaksjoner på tvers av noder.
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-3">Transaksjoner og ACID</h3>
             <p className="text-sm text-[var(--muted)] mb-3">
-              En transaksjon er en atomaer gruppering av operasjoner som enten alle lykkes eller alle feiler.
+              En transaksjon er en atomær gruppering av operasjoner som enten alle lykkes eller alle feiler.
             </p>
             <div className="space-y-2">
               {[
@@ -464,7 +464,7 @@ export default function DS1_3Page() {
               <div>
                 <p className="font-bold text-[var(--foreground)]">TP-monitor (Transaction Processing Monitor)</p>
                 <p className="mt-1">
-                  Mellomvare som koordinerer transaksjoner pa tvers av flere ressurser. Sikrer at en
+                  Mellomvare som koordinerer transaksjoner på tvers av flere ressurser. Sikrer at en
                   transaksjon som involverer flere databaser enten lykkes i sin helhet (commit) eller
                   rulles tilbake (rollback). Eksempel: Tuxedo, IBM CICS.
                 </p>
@@ -473,7 +473,7 @@ export default function DS1_3Page() {
                 <p className="font-bold text-[var(--foreground)]">EAI (Enterprise Application Integration)</p>
                 <p className="mt-1">
                   Integration mellom uavhengige applikasjoner i en bedrift. Eksempel: bestillingssystem,
-                  lagersystem og regnskapssystem ma snakke sammen. Typisk via meldingskø (MOM/ESB).
+                  lagersystem og regnskapssystem må snakke sammen. Typisk via meldingskø (MOM/ESB).
                 </p>
               </div>
             </div>
@@ -496,7 +496,7 @@ export default function DS1_3Page() {
         {showPervasive && (
           <div className="space-y-4">
             <p className="text-sm text-[var(--muted)]">
-              Pervasive systemer er allestedsnaevarende systemer som er integrert i omgivelsene.
+              Pervasive systemer er allestedsnærværende systemer som er integrert i omgivelsene.
               Enheter er ofte resurssvake (batteridrevet, lav CPU) og kommuniserer tradslos.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -543,7 +543,7 @@ export default function DS1_3Page() {
           Arkitekturmonstre: Klient-server, P2P og Multi-tier
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Bytt mellom arkitekturene for a se diagram, egenskaper og eksempler:
+          Bytt mellom arkitekturene for å se diagram, egenskaper og eksempler:
         </p>
 
         {/* Toggle-knapper */}
@@ -615,7 +615,7 @@ export default function DS1_3Page() {
               <p className="font-bold text-xs mb-1">Klient-server-delen</p>
               <p className="text-xs text-[var(--muted)]">
                 En sentral <em>tracker</em>-server holder oversikt over hvilke peers som har hvilke filer.
-                Ny peer kobler seg til tracker for a fa liste over swarm-deltakere.
+                Ny peer kobler seg til tracker for å få liste over swarm-deltakere.
               </p>
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
@@ -627,7 +627,7 @@ export default function DS1_3Page() {
             </div>
           </div>
           <p className="text-xs text-[var(--muted)]">
-            Hybrid-losninger er vanlig fordi ren P2P er vanskelig a administrere og sikre,
+            Hybrid-løsninger er vanlig fordi ren P2P er vanskelig å administrere og sikre,
             mens ren klient-server ikke skalerer tilstrekkelig for enorme brukervolum.
           </p>
         </div>
@@ -635,10 +635,10 @@ export default function DS1_3Page() {
 
       {/* Vanlige feil */}
       <div className="rounded-xl border-2 border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-4">
-        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil pa eksamen</h3>
+        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil på eksamen</h3>
         <ul className="space-y-2 text-sm">
           {[
-            "Blande IaaS og PaaS: IaaS = du far VM-er (du installerer OS), PaaS = du deployerer kode (cloud haandterer OS)",
+            "Blande IaaS og PaaS: IaaS = du far VM-er (du installerer OS), PaaS = du deployerer kode (cloud håndterer OS)",
             "Glemme at cluster er homogent og grid er heterogent",
             "Tro at P2P er uten sentral komponent — mange P2P-systemer har en hybrid tracker/indeksserver",
             'Si at cloud "er" IaaS — cloud er paraplybegrepet, IaaS/PaaS/SaaS er servicemodellene under',
@@ -655,8 +655,8 @@ export default function DS1_3Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Fra 2024-eksamen oppgave 1h: &ldquo;A cloud service model where cloud providers rent out virtual machines
-          to customers is known as: Infrastructure as a Service.&rdquo; — Dette er et typisk flervalgssporsmal.
+          Fra 2024-eksamen oppgave 1h: &ldquo;å cloud service model where cloud providers rent out virtual machines
+          to customers is known as: Infrastructure as a Service.&rdquo; — Dette er et typisk flervalgsspørsmål.
           IaaS = VM-utleie er den absolutt viktigste cloud-fakten a huske.
           Fra 2025-eksamen oppgave 1g: &ldquo;Rapid elasticity is a cloud computing characteristic that relates to: Scalability.&rdquo;
         </span>

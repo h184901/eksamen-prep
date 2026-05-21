@@ -62,7 +62,7 @@ const quizQuestions = [
     explanation: "RDP = overlay / fysisk-best = 30 / 20 = 1.5. Overlayet er 50% tregere enn optimalt for dette paret.",
   },
   {
-    question: "Fysisk nettverk: Ra–Rb=5, Rb–Rc=10, Rc–Rd=5, Rd–Re=5. Hva er overlay-kantforsinkelsen A–C (A på Ra, C på Rc)?",
+    question: "Fysisk nettverk: Ra–Rb=5, Rb–Rc=10, Rc–Rd=5, Rd–Re=5. Hva er overlay-kantforsinkelsen A–C (å på Ra, C på Rc)?",
     options: ["10 ms", "15 ms", "20 ms", "5 ms"],
     correctIndex: 1,
     explanation: "Beste fysiske sti Ra→Rc = Ra→Rb→Rc = 5+10 = 15 ms. Overlay-kanten A–C = 15 ms.",

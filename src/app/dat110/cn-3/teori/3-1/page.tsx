@@ -60,7 +60,7 @@ export default function CN3Teori31Page() {
         <p className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wide mb-1">CN 3.1</p>
         <h1 className="text-2xl font-bold mb-2">Transportlagstjenester og multipleksing</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
-          Transportlaget er broen mellom applikasjonsprosesser og nettverket. Her laerer du
+          Transportlaget er broen mellom applikasjonsprosesser og nettverket. Her lærer du
           hvordan mange prosesser kan dele ett nettverkslag via multipleksing og demultipleksing,
           og hva som skiller transportlaget fra nettverkslaget.
         </p>
@@ -72,7 +72,7 @@ export default function CN3Teori31Page() {
         "Hva en socket er og hvordan portnummer brukes til demultipleksing",
         "De tre kategoriene av port-numre: well-known (0-1023), registered (1024-49151), ephemeral (49152-65535)",
         "Hvordan TCP demultipleksing bruker 4-tuple vs UDP sin 2-tuple",
-        "Eksempler pa well-known porter: HTTP=80, HTTPS=443, DNS=53, SSH=22",
+        "Eksempler på well-known porter: HTTP=80, HTTPS=443, DNS=53, SSH=22",
       ]} />
 
       <Section title="1. Transportlaget vs nettverkslaget" defaultOpen={true}>
@@ -93,7 +93,7 @@ export default function CN3Teori31Page() {
             <ul className="text-sm text-[var(--muted)] space-y-1 mt-2 list-disc list-inside">
               <li>Sender segmenter mellom applikasjonsprosesser</li>
               <li>Bruker portnummer for adressering</li>
-              <li>TCP: palitelig, ordnet levering</li>
+              <li>TCP: pålitelig, ordnet levering</li>
               <li>Kun implementert i endesystemer (ikke rutere)</li>
             </ul>
           </Card>
@@ -102,7 +102,7 @@ export default function CN3Teori31Page() {
         <Card color="gold">
           <h4 className="font-bold mb-2">Den viktige distinksjonen</h4>
           <div className="text-sm space-y-2">
-            <p>Tenk pa det slik: Du og en venn bor i hvert sitt hus (verter). Brev mellom husene er <strong>nettverkslaget</strong>. Men inni hvert hus bor det mange familiemedlemmer (prosesser). Hvert familiemedlem har sin egen "postboks" (port/socket). Det a sortere brev til riktig familiemedlem er <strong>transportlaget</strong>.</p>
+            <p>Tenk på det slik: Du og en venn bor i hvert sitt hus (verter). Brev mellom husene er <strong>nettverkslaget</strong>. Men inni hvert hus bor det mange familiemedlemmer (prosesser). Hvert familiemedlem har sin egen "postboks" (port/socket). Det å sortere brev til riktig familiemedlem er <strong>transportlaget</strong>.</p>
             <div className="rounded-lg bg-amber-100 dark:bg-amber-900/30 p-3 mt-2">
               <p className="font-bold text-xs">Oppsummert:</p>
               <p className="text-xs mt-1">Nettverkslaget = vert-til-vert (IP-adresse). Transportlaget = prosess-til-prosess (IP-adresse + portnummer = socket).</p>
@@ -128,7 +128,7 @@ export default function CN3Teori31Page() {
                 <p className="text-xs text-[var(--muted)] mt-1">4-tuple. Unik per tilkobling.</p>
               </div>
             </div>
-            <p className="text-xs text-[var(--muted)] mt-2">Portnummer er 16-bit tall (0–65535). Transportlaget bruker portnummeret til a levere segmentet til riktig socket/prosess.</p>
+            <p className="text-xs text-[var(--muted)] mt-2">Portnummer er 16-bit tall (0–65535). Transportlaget bruker portnummeret til å levere segmentet til riktig socket/prosess.</p>
           </div>
         </Card>
 
@@ -212,7 +212,7 @@ export default function CN3Teori31Page() {
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <p className="font-bold text-sm text-amber-700 dark:text-amber-400 mb-2">UDP (2-tuple)</p>
-              <p className="text-xs text-[var(--muted)]">UDP-socket identifiseres kun av <strong>(dst-IP, dst-port)</strong>. To UDP-segmenter med same maal-port, men ulik kildeport/IP, leveres til SAMME socket.</p>
+              <p className="text-xs text-[var(--muted)]">UDP-socket identifiseres kun av <strong>(dst-IP, dst-port)</strong>. To UDP-segmenter med same mål-port, men ulik kildeport/IP, leveres til SAMME socket.</p>
               <div className="mt-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 p-2 text-xs font-mono">
                 UDP demux: dst-port → socket
               </div>
@@ -227,18 +227,18 @@ export default function CN3Teori31Page() {
           </div>
           <div className="mt-3 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
             <p className="text-xs font-bold">Praktisk konsekvens:</p>
-            <p className="text-xs text-[var(--muted)] mt-1">En webserver (port 80) kan betjene tusenvis av samtidige TCP-tilkoblinger fordi hver tilkobling far sin unike socket basert pa 4-tuple. Med UDP matte alle klienter dele samme socket.</p>
+            <p className="text-xs text-[var(--muted)] mt-1">En webserver (port 80) kan betjene tusenvis av samtidige TCP-tilkoblinger fordi hver tilkobling far sin unike socket basert på 4-tuple. Med UDP matte alle klienter dele samme socket.</p>
           </div>
         </Card>
       </Section>
 
-      <Section title="4. Gjennomgatt eksempel — hva skjer nar du besokter nrk.no?">
+      <Section title="4. Gjennomgatt eksempel — hva skjer når du besokter nrk.no?">
         <div className="space-y-3">
           {[
             { steg: "1", tittel: "Nettleser genererer HTTP-foresporsel", tekst: "Prosessen (nettleseren) kaller rdt_send(). OS velger en ephemeral klientport, f.eks. 54321." },
-            { steg: "2", tittel: "Multipleksing pa avsendersiden", tekst: "Transportlaget lager et TCP-segment med src-port=54321, dst-port=80, src-IP=din-IP, dst-IP=nrk.no-IP." },
+            { steg: "2", tittel: "Multipleksing på avsendersiden", tekst: "Transportlaget lager et TCP-segment med src-port=54321, dst-port=80, src-IP=din-IP, dst-IP=nrk.no-IP." },
             { steg: "3", tittel: "Nettverkslaget sender IP-datagram", tekst: "IP-datagrammet med TCP-segmentet inne sendes hopp-for-hopp mot nrk.no sin server." },
-            { steg: "4", tittel: "Demultipleksing pa mottakersiden", tekst: "Serveren mottar datagrammet. Transportlaget sjekker 4-tuple: dst-port=80 → leverer til HTTP-prosessen sin socket." },
+            { steg: "4", tittel: "Demultipleksing på mottakersiden", tekst: "Serveren mottar datagrammet. Transportlaget sjekker 4-tuple: dst-port=80 → leverer til HTTP-prosessen sin socket." },
             { steg: "5", tittel: "Svar tilbake", tekst: "Serveren sender svar med src-port=80, dst-port=54321. Din maskin demultiplekserer til nettleserprosessen din." },
           ].map(({ steg, tittel, tekst }) => (
             <div key={steg} className="flex gap-3 rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
@@ -252,7 +252,7 @@ export default function CN3Teori31Page() {
         </div>
       </Section>
 
-      <Section title="5. Vanlige feil studenter gjor">
+      <Section title="5. Vanlige feil studenter gjør">
         <Card color="red">
           <div className="space-y-3 text-sm">
             <div>

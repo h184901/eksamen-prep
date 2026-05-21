@@ -24,7 +24,7 @@ export default function CN1_1Page() {
         <h1 className="text-2xl font-bold mb-2">1.1 Hva er internett?</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Internett kan beskrives fra to perspektiver: den tekniske nott-og-bolt-beskrivelsen
-          (hva er det laget av?) og tjenesteperspektivet (hva gjor det for applikasjoner?).
+          (hva er det laget av?) og tjenesteperspektivet (hva gjør det for applikasjoner?).
           Begge er viktige for eksamen.
         </p>
       </div>
@@ -54,8 +54,8 @@ export default function CN1_1Page() {
           Nott-og-bolt-perspektivet
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Tenk pa internett som et enormt sett med fysiske komponenter koblet sammen.
-          Dette perspektivet svarer pa: <em>hva er internett faktisk laget av?</em>
+          Tenk på internett som et enormt sett med fysiske komponenter koblet sammen.
+          Dette perspektivet svarer på: <em>hva er internett faktisk laget av?</em>
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
@@ -78,8 +78,8 @@ export default function CN1_1Page() {
               innhold: [
                 "Rutere (routers): videresender pakker mellom nettverk (lag 3)",
                 "Link-layer-svitsjer (switches): kobler enheter innenfor et nettverk (lag 2)",
-                "Bruker videresendingstabeller (routing/forwarding tables) for a bestemme veien",
-                "Implementerer store-and-forward: pakken ma mottas i sin helhet f\u00f8r den sendes videre",
+                "Bruker videresendingstabeller (routing/forwarding tables) for å bestemme veien",
+                "Implementerer store-and-forward: pakken må mottas i sin helhet f\u00f8r den sendes videre",
               ],
             },
             {
@@ -87,7 +87,7 @@ export default function CN1_1Page() {
               farge: "border-purple-400/60 bg-purple-50 dark:bg-purple-950/20",
               tittelfarge: "text-purple-700 dark:text-purple-400",
               innhold: [
-                "Fiber (optisk): sv\u00e6rt hoy hastighet, typisk i ryggraden av internett",
+                "Fiber (optisk): sv\u00e6rt høy hastighet, typisk i ryggraden av internett",
                 "Kobberkabel (twisted pair, koaks): i hjemmet og kontorer",
                 "Radiob\u00f8lger: WiFi, 4G/5G, satellitt",
                 "\u00d8verforing shastighet = b\u00e5ndbredde, m\u00e5les i bits per sekund (bps/Mbps/Gbps)",
@@ -152,8 +152,8 @@ export default function CN1_1Page() {
             </div>
           </div>
           <p className="text-xs text-[var(--muted)] mt-3">
-            IXP = Internet Exchange Point. Et noytralt punkt der ISPer kobler seg direkte til hverandre
-            for a sende trafikk uten a gA gjennom en tredje ISP. Bergen har <strong>NIX</strong> (Norwegian Internet Exchange).
+            IXP = Internet Exchange Point. Et nøytralt punkt der ISPer kobler seg direkte til hverandre
+            for å sende trafikk uten å gå gjennom en tredje ISP. Bergen har <strong>NIX</strong> (Norwegian Internet Exchange).
           </p>
         </div>
       </section>
@@ -165,7 +165,7 @@ export default function CN1_1Page() {
         </h2>
         <p className="text-sm text-[var(--muted)]">
           Fra applikasjonsutviklerens perspektiv er internett en <strong>infrastruktur som leverer tjenester
-          til applikasjoner</strong>. Dette perspektivet svarer pa: <em>hva kan internett gj\u00f8re for meg?</em>
+          til applikasjoner</strong>. Dette perspektivet svarer på: <em>hva kan internett gj\u00f8re for meg?</em>
         </p>
 
         <div className="rounded-xl border-2 border-network-400/60 bg-network-50 dark:bg-network-950/20 p-4">
@@ -174,7 +174,7 @@ export default function CN1_1Page() {
           </h3>
           <div className="text-sm space-y-3">
             <p>
-              Distribuerte applikasjoner (web, e-post, video, IoT, sosiale medier) kj\u00f8rer pa
+              Distribuerte applikasjoner (web, e-post, video, IoT, sosiale medier) kj\u00f8rer på
               <strong> endesystemer</strong> og kommuniserer med hverandre via internett.
               Internett gir disse applikasjonene et <strong>socket-API</strong> &mdash; et
               programmeringsgrensesnitt som lar applikasjoner sende og motta data.
@@ -187,7 +187,7 @@ export default function CN1_1Page() {
             </div>
             <p className="text-[var(--muted)]">
               Internett tilbyr to transporttjenester: <strong>pAlitelig</strong> (TCP &mdash; garantert
-              levering, riktig rekkefolge) og <strong>upAlitelig</strong> (UDP &mdash; raskere, men ingen
+              levering, riktig rekkefølge) og <strong>upålitelig</strong> (UDP &mdash; raskere, men ingen
               garanti). Applikasjonen velger selv hvilken den vil bruke.
             </p>
           </div>
@@ -204,7 +204,7 @@ export default function CN1_1Page() {
           <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-2">
             <p><strong>Scenario:</strong> Du skriver inn www.example.com i nettleseren din.</p>
             <ol className="list-decimal list-inside space-y-1 text-[var(--muted)] ml-2">
-              <li>Nettleseren (klient-app) lager en TCP-socket til port 80 pa serveren</li>
+              <li>Nettleseren (klient-app) lager en TCP-socket til port 80 på serveren</li>
               <li>Sender en HTTP GET-foresp\u00f8rsel via socket-APIet</li>
               <li>Internett transporterer foresp\u00f8rselen fra din PC til webserveren</li>
               <li>Webserveren mottar foresp\u00f8rselen, finner siden, sender HTTP-svar</li>
@@ -266,7 +266,7 @@ export default function CN1_1Page() {
           </div>
           <p className="text-xs text-[var(--muted)] mt-3">
             Apen standardisering er kritisk for interoperabilitet: et program skrevet i Java
-            skal kunne snakke med et program skrevet i Python, pa en iPhone til en Android-telefon.
+            skal kunne snakke med et program skrevet i Python, på en iPhone til en Android-telefon.
           </p>
         </div>
 
@@ -316,8 +316,8 @@ export default function CN1_1Page() {
       <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Oppgave 1 (flervalg) kan sporre om hva trafikkintensitet mAler, hvilken tjeneste
-          link-laget gir, eller hva transportlaget bruker for A identifisere endepunkter.
+          Oppgave 1 (flervalg) kan spørre om hva trafikkintensitet måler, hvilken tjeneste
+          link-laget gir, eller hva transportlaget bruker for å identifisere endepunkter.
           Fra jan 2025: trafikkintensitet = forholdet mellom ankomstrate og sendekapasitet (La/R).
           Link-laget gir upAlit elig overf\u00f8ring av rammer over <em>en</em> link.
           Transportlaget bruker IP-adresse + portnummer.

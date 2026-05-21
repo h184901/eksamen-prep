@@ -44,7 +44,7 @@ export default function CN1FormlerPage() {
       <h2 className="text-2xl font-bold">Formler: Nettverksmetrikker</h2>
       <p className="text-[var(--muted)] max-w-2xl">
         Disse formlene er de viktigste i hele CN-delen av faget. Forsinkelsesberegning
-        kommer pa ALLE eksamener.
+        kommer på ALLE eksamener.
       </p>
 
       <h3 className="text-lg font-bold mt-6">Variabler</h3>
@@ -54,7 +54,7 @@ export default function CN1FormlerPage() {
         { symbol: "d", name: "Fysisk avstand mellom noder", unit: "meter (m)" },
         { symbol: "s", name: "Signalhastighet i mediet", unit: "m/s" },
         { symbol: "a", name: "Gjennomsnittlig ankomstrate", unit: "pakker/s" },
-        { symbol: "N", name: "Antall linker pa stien", unit: "stk" },
+        { symbol: "N", name: "Antall linker på stien", unit: "stk" },
       ]} />
 
       <h3 className="text-lg font-bold mt-8">Forsinkelsesformler</h3>
@@ -62,7 +62,7 @@ export default function CN1FormlerPage() {
       <FormulaBox
         title="Sendingsforsinkelse (transmission delay)"
         formula="d_trans = L / R"
-        desc="Tid for a presse alle bits i pakken ut pa linken. L i bits, R i bits/s."
+        desc="Tid for å presse alle bits i pakken ut på linken. L i bits, R i bits/s."
       />
 
       <FormulaBox
@@ -89,35 +89,35 @@ export default function CN1FormlerPage() {
       <FormulaBox
         title="Trafikkintensitet"
         formula="I = La / R"
-        desc="L = pakkelengde, a = ankomstrate, R = linjekapasitet. Nar I → 1 eksploderer koforsinkelsen. I > 1 betyr pakketap."
+        desc="L = pakkelengde, a = ankomstrate, R = linjekapasitet. Når I → 1 eksploderer koforsinkelsen. I > 1 betyr pakketap."
       />
 
       <FormulaBox
         title="Gjennomstromning (throughput)"
         formula="Throughput = min(R_1, R_2, ..., R_N)"
-        desc="Gjennomstromningen bestemmes av flaskehalsen — den smaleste linken pa stien."
+        desc="Gjennomstromningen bestemmes av flaskehalsen — den smaleste linken på stien."
       />
 
       <FormulaBox
         title="Gjennomstromning med delt link"
         formula="Per tilkobling = R_delt / N_tilkoblinger"
-        desc="Nar N tilkoblinger deler en kjernelink med kapasitet R, far hver R/N (rettferdig deling)."
+        desc="Når N tilkoblinger deler en kjernelink med kapasitet R, far hver R/N (rettferdig deling)."
         level="secondary"
       />
 
-      <h3 className="text-lg font-bold mt-8">Nar bruker du hva?</h3>
+      <h3 className="text-lg font-bold mt-8">Når bruker du hva?</h3>
       <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5">
         <div className="space-y-3 text-sm">
           <div className="flex items-start gap-3">
-            <span className="text-amber-500 font-bold min-w-[160px]">Spor om tid:</span>
+            <span className="text-amber-500 font-bold min-w-[160px]">Spør om tid:</span>
             <span>Bruk d_trans = L/R og d_prop = d/s. Legg sammen over alle hopp.</span>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-amber-500 font-bold min-w-[160px]">Spor om hastighet:</span>
+            <span className="text-amber-500 font-bold min-w-[160px]">Spør om hastighet:</span>
             <span>Bruk throughput = min(alle R-verdier). Sjekk om delt link.</span>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-amber-500 font-bold min-w-[160px]">Spor om pakketap:</span>
+            <span className="text-amber-500 font-bold min-w-[160px]">Spør om pakketap:</span>
             <span>Beregn La/R. Hvis &gt; 1 → pakketap.</span>
           </div>
           <div className="flex items-start gap-3">
@@ -128,13 +128,13 @@ export default function CN1FormlerPage() {
       </div>
 
       <div className="rounded-xl border border-red-300 bg-red-50 dark:bg-red-950/20 dark:border-red-800 p-5 mt-6">
-        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil pa eksamen</h3>
+        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil på eksamen</h3>
         <ul className="text-sm space-y-1 text-red-900 dark:text-red-200">
-          <li>* Glemmer a konvertere enheter (KB til bits: gang med 8000 eller 8192)</li>
+          <li>* Glemmer å konvertere enheter (KB til bits: gang med 8000 eller 8192)</li>
           <li>* Blander d_trans og d_prop — helt ulike ting!</li>
           <li>* Glemmer at det er N linker, ikke N-1, mellom sender og mottaker via N-1 rutere</li>
-          <li>* Glemmer store-and-forward: pakken ma mottas HELT for den videresendes</li>
-          <li>* Mangler enhet pa svaret (s, ms, us)</li>
+          <li>* Glemmer store-and-forward: pakken må mottas HELT for den videresendes</li>
+          <li>* Mangler enhet på svaret (s, ms, us)</li>
         </ul>
       </div>
     </div>

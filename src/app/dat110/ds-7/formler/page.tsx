@@ -316,7 +316,7 @@ export default function DS7FormlerPage() {
         <div className="rounded-xl border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-950/20 p-5">
           <ul className="space-y-3 text-sm">
             {[
-              "CAP: man velger 2 av 3, men P (partition tolerance) er i praksis alltid nødvendig i ekte distribuerte systemer — valget er egentlig mellom C og A ved partisjon.",
+              "CAP: man velger 2 av 3, men P (partition tolerance) er i praksis alltid nødvendig i ekte distribuerte systemer — valget er egentlig mellom C og å ved partisjon.",
               "NW > N/2 er et EGET krav, ikke avledet fra NR + NW > N. Begge må kontrolleres separat.",
               "Eventual consistency garanterer IKKE at replika er synkroniserte til enhver tid — bare at de vil bli det gitt ingen nye skrivinger.",
               "Monotone Reads (MR) og Read-Your-Writes (RYW) er klient-sentrerte — de gjelder per klient, ikke globalt.",

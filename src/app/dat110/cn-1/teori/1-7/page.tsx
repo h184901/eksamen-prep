@@ -11,9 +11,9 @@ const tidslinje = [
     border: "border-purple-300 dark:border-purple-700",
     hendelser: [
       "1961: Kleinrock viser at pakkeswitching er effektivt (koskingsteori)",
-      "1964: Baran foreslAr pakkeswitchet nettverk for militaer kommunikasjon",
+      "1964: Baran foreslAr pakkeswitchet nettverk for militær kommunikasjon",
       "1967: ARPA (US Defense) planlegger ARPAnet",
-      "1969: Forste ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsok pA 'LOGIN')",
+      "1969: Forste ARPAnet-melding sendt mellom UCLA og Stanford. Systemet krasjet etter 'LO' (forsok på 'LOGIN')",
       "1972: Forste offentlige demo av ARPAnet. NCP (Network Control Protocol) er forste host-to-host-protokoll",
     ],
   },
@@ -38,11 +38,11 @@ const tidslinje = [
     lightBg: "bg-green-50 dark:bg-green-950/20",
     border: "border-green-300 dark:border-green-700",
     hendelser: [
-      "1983: TCP/IP erstatter NCP pA ARPAnet. 'Flag Day' - alle hopper over samtidig",
+      "1983: TCP/IP erstatter NCP på ARPAnet. 'Flag Day' - alle hopper over samtidig",
       "1983: DNS (Domain Name System) oppfunnet av Mockapetris",
-      "1985: NSFnet etableres for A kople amerikansdke universiteter",
+      "1985: NSFnet etableres for å kople amerikansdke universiteter",
       "1988: TCP-kop-kontrollmekanismer lagt til etter Internets forste storkolaps",
-      "Slutten av 80-tall: ~100 000 hosts pA internett",
+      "Slutten av 80-tall: ~100 000 hosts på internett",
     ],
   },
   {
@@ -67,7 +67,7 @@ const tidslinje = [
     lightBg: "bg-yellow-50 dark:bg-yellow-950/20",
     border: "border-yellow-300 dark:border-yellow-700",
     hendelser: [
-      "2000: Dot-com-boblen sprekker, men internett fortsetter A vokse",
+      "2000: Dot-com-boblen sprekker, men internett fortsetter å vokse",
       "2001: Wikipedia lanseres",
       "2004: Facebook, Gmail, VoIP-tjenester (Skype) masseutbredt",
       "2005: YouTube, Reddit, Ajax-teknologier",
@@ -108,7 +108,7 @@ export default function CN1_7Page() {
       <div>
         <h1 className="text-2xl font-bold mb-2">1.7 Internettets historie</h1>
         <p className="text-[var(--muted)] max-w-2xl">
-          Fra et lite militaert forskningsprosjekt pA 1960-tallet til en global infrastruktur
+          Fra et lite militært forskningsprosjekt på 1960-tallet til en global infrastruktur
           med 5 milliarder brukere. Historien er fascinerende og gir kontekst for
           hvorfor internett er designet slik det er i dag.
         </p>
@@ -145,7 +145,7 @@ export default function CN1_7Page() {
           <div className="space-y-6">
             {tidslinje.map((periode) => (
               <div key={periode.ar} className="flex gap-4 sm:gap-6 relative">
-                {/* Dot pA tidslinjen */}
+                {/* Dot på tidslinjen */}
                 <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full ${periode.farge} flex items-center justify-center shrink-0 z-10 ring-4 ring-[var(--background)]`}>
                   <span className="text-white text-xs font-bold hidden sm:block">{periode.ar.split('–')[0].slice(-2)}</span>
                   <span className="text-white text-xs font-bold sm:hidden">&#9679;</span>
@@ -230,7 +230,7 @@ export default function CN1_7Page() {
         </h3>
         <p className="text-[var(--muted)]">
           Professoren anbefaler denne korte animasjonsfilmen (11 min) som illustrerer
-          TCP/IP-internetworking-konsepter pA en morsom mAte. Se den pA YouTube:
+          TCP/IP-internetworking-konsepter på en morsom mAte. Se den på YouTube:
           <strong> "Warriors of the Net"</strong> (Telia 1999). En klassiker i nettverksfaget.
         </p>
         <p className="text-xs text-[var(--muted)] mt-2">
@@ -242,7 +242,7 @@ export default function CN1_7Page() {
       <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Historikk er sjelden direkte eksamenstema i oppgave 3, men flervalg kan sporre om
+          Historikk er sjelden direkte eksamenstema i oppgave 3, men flervalg kan spørre om
           ARPAnet, TCP/IP-standardiseringen, eller IPv4-utmattingen.
           Prioriter forsinkelsesberegning (1.4) og protokolllag (1.5) foran historikk.
         </span>
@@ -254,7 +254,7 @@ export default function CN1_7Page() {
           href="/dat110/cn-1/teori/1-6"
           className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--card-border)] text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors"
         >
-          &larr; 1.6 Angrep pA nettverk
+          &larr; 1.6 Angrep på nettverk
         </Link>
         <Link
           href="/dat110/cn-1/teori"

@@ -29,7 +29,7 @@ const subPages = [
     href: "/dat110/ds-5/oppgaver",
     title: "Oppgaver",
     description:
-      "Spor Lamport-klokker gjennom en meldingsutveksling, sammenlign vektorklokker, simuler mutex-forespørsler og kjør ledervalg for hånd.",
+      "Spør Lamport-klokker gjennom en meldingsutveksling, sammenlign vektorklokker, simuler mutex-forespørsler og kjør ledervalg for hånd.",
     color: "border-green-400",
     icon: "✏️",
   },

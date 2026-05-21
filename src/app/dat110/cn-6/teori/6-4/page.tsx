@@ -570,7 +570,7 @@ export default function CN6_4Page() {
             <p className="text-sm font-semibold text-green-600 dark:text-green-400 mb-2">Logikk for å løse slike oppgaver:</p>
             <ol className="text-sm text-[var(--muted)] space-y-1 list-decimal list-inside">
               <li>Finn hvilke enheter er koblet til hvilke porter på switchen</li>
-              <li>Spor hvilke rammer som passerer gjennom switchen</li>
+              <li>Spør hvilke rammer som passerer gjennom switchen</li>
               <li>For HVER ramme som passerer: noter kilde-MAC og innkommende port i switch-tabellen</li>
               <li>Floodede rammer (ARP-forespørsler) lærer kilde-MAC, ikke destinasjon</li>
               <li>Bare noder som SENDER noe vil havne i switch-tabellen</li>

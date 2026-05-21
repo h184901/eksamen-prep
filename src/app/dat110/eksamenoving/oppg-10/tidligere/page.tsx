@@ -339,7 +339,7 @@ export default function Oppg10Tidligere() {
 
           <div>
             <p className="font-semibold text-sm">
-              c) Spor oppslaget for nøkkel 12, startet fra node 0.
+              c) Spør oppslaget for nøkkel 12, startet fra node 0.
             </p>
             <Answer>
               <p>Fingertabell for node 0 (relevante oppføringer):</p>
@@ -439,7 +439,7 @@ export default function Oppg10Tidligere() {
 
           <div>
             <p className="font-semibold text-sm">
-              c) Spor oppslag for nøkkel 26, startet fra node 1.
+              c) Spør oppslag for nøkkel 26, startet fra node 1.
             </p>
             <Answer>
               <p>Ansvarlig node: succ(26) = 29.</p>

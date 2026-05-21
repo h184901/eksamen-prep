@@ -8,10 +8,10 @@ const transparensTyper = [
     id: "access",
     navn: "Access transparency",
     norsk: "Aksess-transparens",
-    beskrivelse: "Skjuler forskjeller i datarepresentasjon og maten objekter tilgjengeliggjores pa",
+    beskrivelse: "Skjuler forskjeller i datarepresentasjon og måten objekter tilgjengeliggjores på",
     eksempel:
-      "En Windows-klient og en Linux-server kan utveksle data uten a maatte haandtere endianness, tegnkoding eller filnavnkonvensjoner manuelt. Middleware haandterer konverteringen.",
-    hukommelse: "ACCESS = skjuler HOW du faar tilgang (format og representasjon)",
+      "En Windows-klient og en Linux-server kan utveksle data uten å måtte håndtere endianness, tegnkoding eller filnavnkonvensjoner manuelt. Middleware håndterer konverteringen.",
+    hukommelse: "ACCESS = skjuler HOW du får tilgang (format og representasjon)",
   },
   {
     id: "location",
@@ -19,7 +19,7 @@ const transparensTyper = [
     norsk: "Lokasjon-transparens",
     beskrivelse: "Skjuler hvor et objekt befinner seg fysisk",
     eksempel:
-      "URL-en https://www.example.com avslorer ingenting om hvilken server (eller hvilket land) innholdet er lagret pa. Du vet ikke om serveren er i Oslo, Dublin eller Singapore.",
+      "URL-en https://www.example.com avslører ingenting om hvilken server (eller hvilket land) innholdet er lagret på. Du vet ikke om serveren er i Oslo, Dublin eller Singapore.",
     hukommelse: "LOCATION = skjuler WHERE — du vet ikke stedet",
   },
   {
@@ -35,7 +35,7 @@ const transparensTyper = [
     id: "migration",
     navn: "Migration transparency",
     norsk: "Migrasjon-transparens",
-    beskrivelse: "Skjuler at et objekt kan flytte seg til en annen lokasjon pa brukerens initiativ",
+    beskrivelse: "Skjuler at et objekt kan flytte seg til en annen lokasjon på brukerens initiativ",
     eksempel:
       "Mobiltelefoni: du vandrer fra en basestasjon til en annen mens du snakker. Samtalen avbrytes ikke. Ogsa: sporings- og sporingssystemer der enheten bevisst er mobile.",
     hukommelse: "MIGRATION = BRUKEREN (eller enheten) initierer flytten — skjult for motparten",
@@ -46,7 +46,7 @@ const transparensTyper = [
     norsk: "Replikering-transparens",
     beskrivelse: "Skjuler at et objekt er replikert (finnes i flere kopier)",
     eksempel:
-      "En distribuert database kan ha 5 kopier av en tabell pa forskjellige servere. Applikasjonen leser og skriver som om det bare er en database. Replikeringen er usynlig.",
+      "En distribuert database kan ha 5 kopier av en tabell på forskjellige servere. Applikasjonen leser og skriver som om det bare er en database. Replikeringen er usynlig.",
     hukommelse: "REPLICATION = skjuler at det finnes FLERE KOPIER av ressursen",
   },
   {
@@ -95,9 +95,9 @@ export default function DS1_2Page() {
       <div>
         <h1 className="text-2xl font-bold mb-2">1.2 Design-mål</h1>
         <p className="text-[var(--muted)] max-w-2xl">
-          Bare fordi man <em>kan</em> bygge et distribuert system, betyr det ikke at man <em>bor</em> gjore det.
-          Det ma vaere verdt innsatsen. Her er de fire design-malene som gjor distribusjon meningsfull —
-          og de 7 transparenstypene du MÅ kunne pa eksamen.
+          Bare fordi man <em>kan</em> bygge et distribuert system, betyr det ikke at man <em>bor</em> gjøre det.
+          Det må være verdt innsatsen. Her er de fire design-malene som gjør distribusjon meningsfull —
+          og de 7 transparenstypene du MÅ kunne på eksamen.
         </p>
       </div>
 
@@ -110,7 +110,7 @@ export default function DS1_2Page() {
             "Forklare ALLE 7 transparenstyper med eksempler (failure, location, migration, osv.)",
             "Skille mellom location transparency og migration/relocation transparency",
             "Forklare IDL og hva interoperabilitet og portabilitet betyr",
-            "Forklare de 3 skalerbarhetsdimensjonene: storrelse, geografisk, administrativ",
+            "Forklare de 3 skalerbarhetsdimensjonene: størrelse, geografisk, administrativ",
             "Kjenne de 3 teknikkene for skalerbarhet: partisjonering, replikering, caching",
             "Forklare policy vs. mechanism-prinsippet i apne systemer",
           ].map((item) => (
@@ -128,7 +128,7 @@ export default function DS1_2Page() {
           De fire design-malene
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Klikk pa hvert mal for detaljer:
+          Klikk på hvert mal for detaljer:
         </p>
 
         {/* Faner */}
@@ -153,13 +153,13 @@ export default function DS1_2Page() {
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-3 text-sm">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Ressursdeling (Resource sharing)</h3>
             <p>
-              Et viktig mal er a gjore det enkelt for brukere og applikasjoner a fa tilgang til og dele
-              ressurser pa tvers av nettverket. Ressurser kan vaere alt: skrivere, lagring, data, filer,
+              Et viktig mal er a gjøre det enkelt for brukere og applikasjoner a få tilgang til og dele
+              ressurser på tvers av nettverket. Ressurser kan være alt: skrivere, lagring, data, filer,
               tjenester og nettverk.
             </p>
             <p className="text-[var(--muted)]">
-              <strong>Okonomisk motivasjon:</strong> Det er billigere a ha ett hoykvalitets lagringsanlegg delt
-              av mange enn at alle ma kjope sitt eget. Ressursdeling muliggjor ogsa samarbeid pa tvers av
+              <strong>Okonomisk motivasjon:</strong> Det er billigere a ha ett høykvalitets lagringsanlegg delt
+              av mange enn at alle må kjøpe sitt eget. Ressursdeling muliggjor også samarbeid på tvers av
               geografiske og organisatoriske grenser.
             </p>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
@@ -168,7 +168,7 @@ export default function DS1_2Page() {
                 <li>&#8226; BitTorrent: alle deltakere deler bandbredde og lagring</li>
                 <li>&#8226; Dropbox/Google Drive: delt mappe tilgjengelig fra alle enheter</li>
                 <li>&#8226; AWS S3: delt objektlagring for millioner av applikasjoner</li>
-                <li>&#8226; Skriverdeling pa et kontornettverk (klassisk eksempel)</li>
+                <li>&#8226; Skriverdeling på et kontornettverk (klassisk eksempel)</li>
               </ul>
             </div>
           </div>
@@ -178,8 +178,8 @@ export default function DS1_2Page() {
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-5 space-y-3 text-sm">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Transparens (Distribution transparency)</h3>
             <p>
-              Et viktig mal er a skjule det faktum at prosesser og ressurser er fysisk distribuert pa
-              tvers av mange maskiner. Distribusjonen skal vaere <strong>usynlig</strong> (transparent) for
+              Et viktig mal er a skjule det faktum at prosesser og ressurser er fysisk distribuert på
+              tvers av mange maskiner. Distribusjonen skal være <strong>usynlig</strong> (transparent) for
               sluttbrukere og applikasjoner.
             </p>
             <p className="text-[var(--muted)]">
@@ -194,7 +194,7 @@ export default function DS1_2Page() {
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Apenhet (Openness)</h3>
             <p>
               Et apent distribuert system er et system som tilbyr komponenter som lett kan brukes av eller
-              integreres i andre systemer. Et apent system bor ogsa selv bestå av komponenter som stammer
+              integreres i andre systemer. Et apent system bor også selv bestå av komponenter som stammer
               fra andre steder.
             </p>
             <div className="space-y-2">
@@ -208,10 +208,10 @@ export default function DS1_2Page() {
               </div>
               <div className="grid sm:grid-cols-2 gap-2">
                 {[
-                  { begrep: "Interoperabilitet", forklaring: "To implementasjoner fra ulike leverandorer kan samarbeide ved a folge en felles standard" },
-                  { begrep: "Portabilitet", forklaring: "En applikasjon laget for system A kan kjores uten endringer pa system B som implementerer samme grensesnitt" },
-                  { begrep: "Utvidbarhet", forklaring: "Nye komponenter kan lett legges til eller gamle byttes ut uten a pavirke resten av systemet" },
-                  { begrep: "Policy vs. mekanisme", forklaring: "Systemet tilbyr mekanismer (HVA det kan gjore); brukeren velger policy (HVORDAN det brukes)" },
+                  { begrep: "Interoperabilitet", forklaring: "To implementasjoner fra ulike leverandorer kan samarbeide ved å folge en felles standard" },
+                  { begrep: "Portabilitet", forklaring: "En applikasjon laget for system å kan kjøres uten endringer på system B som implementerer samme grensesnitt" },
+                  { begrep: "Utvidbarhet", forklaring: "Nye komponenter kan lett legges til eller gamle byttes ut uten å pavirke resten av systemet" },
+                  { begrep: "Policy vs. mekanisme", forklaring: "Systemet tilbyr mekanismer (HVA det kan gjøre); brukeren velger policy (HVORDAN det brukes)" },
                 ].map((b) => (
                   <div key={b.begrep} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-2">
                     <p className="font-bold text-xs text-blue-700 dark:text-blue-400">{b.begrep}</p>
@@ -267,19 +267,19 @@ export default function DS1_2Page() {
                 {[
                   {
                     teknikk: "Partisjonering og distribusjon",
-                    forklaring: "Del opp en stor komponent i mindre deler og spre dem. Eksempel: DNS deler navnerommet inn i soner. Internettets web-dokumenter er spredt pa hundrevis av millioner av servere.",
+                    forklaring: "Del opp en stor komponent i mindre deler og spre dem. Eksempel: DNS deler navnerommet inn i soner. Internettets web-dokumenter er spredt på hundrevis av millioner av servere.",
                   },
                   {
                     teknikk: "Replikering",
-                    forklaring: "Ha flere kopier av en ressurs. Oker tilgjengelighet og ytelse. Problemet: konsistens — nar en kopi oppdateres ma alle oppdateres, noe som er vanskelig og kostbart.",
+                    forklaring: "Ha flere kopier av en ressurs. Oker tilgjengelighet og ytelse. Problemet: konsistens — når en kopi oppdateres må alle oppdateres, noe som er vanskelig og kostbart.",
                   },
                   {
                     teknikk: "Caching",
-                    forklaring: "En form for replikering, men beslutningen tas av klienten (ikke eieren). En kopi lagres naer brukeren. Problem: foreldet data (stale data) hvis originalen endres.",
+                    forklaring: "En form for replikering, men beslutningen tas av klienten (ikke eieren). En kopi lagres nær brukeren. Problem: foreldet data (stale data) hvis originalen endres.",
                   },
                   {
                     teknikk: "Skjule kommunikasjonslatens",
-                    forklaring: "Bruk asynkron kommunikasjon. Klienten sender foresprsel og gjor annet arbeid mens den venter pa svar. Alternativt: flytt deler av beregningen til klienten (JavaScript, form-validering).",
+                    forklaring: "Bruk asynkron kommunikasjon. Klienten sender forespørsel og gjør annet arbeid mens den venter på svar. Alternativt: flytt deler av beregningen til klienten (JavaScript, form-validering).",
                   },
                 ].map((t) => (
                   <div key={t.teknikk} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
@@ -299,7 +299,7 @@ export default function DS1_2Page() {
           De 7 transparenstypene — interaktiv gjennomgang
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Dette er det viktigste du ma pugge fra kapittel 1. Klikk pa hver type for full forklaring og
+          Dette er det viktigste du må pugge fra kapittel 1. Klikk på hver type for full forklaring og
           eksempel. Tabellen viser ISO-definisjonen (samme som boka).
         </p>
 
@@ -359,7 +359,7 @@ export default function DS1_2Page() {
         <div className="grid sm:grid-cols-3 gap-4">
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4">
             <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-2 text-sm">Location</h3>
-            <p className="text-xs text-[var(--muted)] mb-2">Skjuler <strong>HVOR</strong> objektet er akkurat na.</p>
+            <p className="text-xs text-[var(--muted)] mb-2">Skjuler <strong>HVOR</strong> objektet er akkurat nå.</p>
             <p className="text-xs font-mono bg-white/60 dark:bg-neutral-900/40 rounded p-2">
               URL: https://example.com<br/>
               → Ingen ide om server er i Oslo eller Tokyo
@@ -389,7 +389,7 @@ export default function DS1_2Page() {
           <h3 className="font-bold text-red-700 dark:text-red-400 mb-2 text-sm">Vanlige feil</h3>
           <ul className="space-y-1 text-sm text-[var(--muted)]">
             <li><span className="text-red-500 font-bold">!</span> Blander migration og relocation: huske at migration = brukeren/enheten beveges, relocation = ressursen flyttes av systemet</li>
-            <li><span className="text-red-500 font-bold">!</span> Glemme at failure transparency er umulig a oppna fullt ut (nettverkspartisjon, CAP-teoremet)</li>
+            <li><span className="text-red-500 font-bold">!</span> Glemme at failure transparency er umulig å oppna fullt ut (nettverkspartisjon, CAP-teoremet)</li>
             <li><span className="text-red-500 font-bold">!</span> Tro at "persistence transparency" er en av de 7 — boka nevner 7, ikke 8 (persistence er ikke i ISO-listen i boka)</li>
           </ul>
         </div>
@@ -405,7 +405,7 @@ export default function DS1_2Page() {
           <div>
             <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-2">IDL — Interface Definition Language</h3>
             <p className="text-sm text-[var(--muted)] mb-3">
-              Et IDL lar deg beskrive et grensesnitt pa en sprak-uavhengig mate. Enhver som implementerer
+              Et IDL lar deg beskrive et grensesnitt på en sprak-uavhengig mate. Enhver som implementerer
               grensesnittet kan snakke med enhver som bruker det — uavhengig av programmeringssprak,
               OS eller arkitektur.
             </p>
@@ -425,7 +425,7 @@ export default function DS1_2Page() {
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
                 <p className="font-bold text-xs text-blue-600 dark:text-blue-400 mb-1">MEKANISME (mechanism)</p>
                 <p className="text-xs text-[var(--muted)]">
-                  HVA systemet kan gjore. F.eks. en nettleser kan lagre dokumenter i cache — det er mekanismen.
+                  HVA systemet kan gjøre. F.eks. en nettleser kan lagre dokumenter i cache — det er mekanismen.
                 </p>
               </div>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-3">
@@ -438,7 +438,7 @@ export default function DS1_2Page() {
             </div>
             <p className="text-xs text-[var(--muted)] mt-2">
               Et godt eksempel: Web-caching i nettlesere. Nettleseren tilbyr <em>mekanismen</em> (lagre dokumenter);
-              brukeren setter <em>policy</em> (cache i 24 timer, max 50 MB, aldri krypterte sider). Dette gjor systemet fleksibelt.
+              brukeren setter <em>policy</em> (cache i 24 timer, max 50 MB, aldri krypterte sider). Dette gjør systemet fleksibelt.
             </p>
           </div>
         </div>
@@ -448,10 +448,10 @@ export default function DS1_2Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          De 7 transparenstypene er et klassisk eksamenssporsmal. Du bor kunne ramse opp alle 7 og gi
-          et eksempel pa hver. Vanskeligst a skille: location (objektet er pa ukjent sted), relocation
+          De 7 transparenstypene er et klassisk eksamensspørsmål. Du bor kunne ramse opp alle 7 og gi
+          et eksempel på hver. Vanskeligst a skille: location (objektet er på ukjent sted), relocation
           (systemet flytter objektet, skjult for deg), migration (enheten/brukeren beger seg, skjult for motparten).
-          Pa 2025-eksamen spurte oppgave 1g om &ldquo;rapid elasticity&rdquo; — det er en cloud-egenskap relatert til
+          På 2025-eksamen spurte oppgave 1g om &ldquo;rapid elasticity&rdquo; — det er en cloud-egenskap relatert til
           skalerbarhet.
         </span>
       </div>

@@ -170,7 +170,7 @@ export default function Oppg8TidligerePage() {
           </div>
 
           <div>
-            <p className="font-semibold text-sm">b) Tree 1: stjerne med A som rot (A→B, A→C, A→D, A→E). Beregn RDP for A→E og total trekkostnad.</p>
+            <p className="font-semibold text-sm">b) Tree 1: stjerne med å som rot (A→B, A→C, A→D, A→E). Beregn RDP for A→E og total trekkostnad.</p>
             <Answer>
               <Formula>
                 Overlay-sti A→E i Tree 1 = direkte kant A–E = 25 ms<br/>
@@ -244,12 +244,12 @@ export default function Oppg8TidligerePage() {
                 RDP(B→E, Tree 1) = 30 / 20 = 1.5
               </Formula>
               <p><strong>RDP = 1.5</strong> — overlayet er 50% tregere enn optimal fysisk sti for dette paret.</p>
-              <p className="text-xs text-[var(--muted)]">Forklaring: treet tvinger ruten via A som er i feil retning fra B mot E.</p>
+              <p className="text-xs text-[var(--muted)]">Forklaring: treet tvinger ruten via å som er i feil retning fra B mot E.</p>
             </Answer>
           </div>
 
           <div>
-            <p className="font-semibold text-sm">c) Tree 2: A er rot, stjerne A→B, A→C, A→D, A→E. Beregn RDP for B→E.</p>
+            <p className="font-semibold text-sm">c) Tree 2: å er rot, stjerne A→B, A→C, A→D, A→E. Beregn RDP for B→E.</p>
             <Answer>
               <Formula>
                 Overlay-sti B→E i Tree 2 (gjennom roten A) = B→A→E<br/>

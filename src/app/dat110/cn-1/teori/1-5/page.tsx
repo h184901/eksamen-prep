@@ -15,7 +15,7 @@ const LAYERS = [
     text: "text-purple-700 dark:text-purple-300",
     hvem: "Verter (hosts)",
     hva: "Kommunikasjon mellom applikasjonsprosesser. Brukerne av nettverket. HTTP henter websider, SMTP sender e-post, DNS oversetter navn til IP-adresser.",
-    service: "Tilbyr meldingsutveksling mellom applikasjoner pA ulike verter.",
+    service: "Tilbyr meldingsutveksling mellom applikasjoner på ulike verter.",
     implementert: "Applikasjonsprogrammer (nettlesere, e-postklienter)",
   },
   {
@@ -28,8 +28,8 @@ const LAYERS = [
     border: "border-blue-400",
     text: "text-blue-700 dark:text-blue-300",
     hvem: "Verter (hosts)",
-    hva: "Prosess-til-prosess dataoverforing. TCP: pAlitelig, ordnet, flytkontroll, feiloppretting. UDP: rask, upAlitelig, ingen tilkobling. Porter identifiserer prosesser (0-65535).",
-    service: "PAlitelig (TCP) eller upAlitelig (UDP) end-to-end levering av segmenter mellom prosesser.",
+    hva: "Prosess-til-prosess dataoverføring. TCP: pAlitelig, ordnet, flytkontroll, feiloppretting. UDP: rask, upålitelig, ingen tilkobling. Porter identifiserer prosesser (0-65535).",
+    service: "PAlitelig (TCP) eller upålitelig (UDP) end-to-end levering av segmenter mellom prosesser.",
     implementert: "Operativsystemets nettverksstakk (kjernen)",
   },
   {
@@ -56,8 +56,8 @@ const LAYERS = [
     border: "border-orange-400",
     text: "text-orange-700 dark:text-orange-300",
     hvem: "Verter + Rutere + Svitsjer",
-    hva: "Dataoverforing over EN enkelt kommunikasjonsforbindelse. MAC-adresser identifiserer enheter pA linknivA. Feildeteksjon (CRC). Adressering med 48-bit MAC-adresser.",
-    service: "Overf\u00f8ring av rammer over en enkelt link (fra node til nabnode). PAlitelig ELLER upAlitelig avhengig av protokoll.",
+    hva: "Dataoverføring over EN enkelt kommunikasjonsforbindelse. MAC-adresser identifiserer enheter på linknivA. Feildeteksjon (CRC). Adressering med 48-bit MAC-adresser.",
+    service: "Overf\u00f8ring av rammer over en enkelt link (fra node til nabnode). PAlitelig ELLER upålitelig avhengig av protokoll.",
     implementert: "Nettverkskort (NIC) og svitsjer",
   },
   {
@@ -70,8 +70,8 @@ const LAYERS = [
     border: "border-red-400",
     text: "text-red-700 dark:text-red-300",
     hvem: "Verter + Rutere + Svitsjer",
-    hva: "Overforing av individuelle bits over det fysiske mediet. Ingen adressering, ingen struktur &mdash; bare bits. Definerer elektriske/optiske signaler, pinnekonnektorer og fysisk topologi.",
-    service: "Overforing av bits over en kommunikasjonsforbindelse (ledning, fiber, radio).",
+    hva: "Overføring av individuelle bits over det fysiske mediet. Ingen adressering, ingen struktur &mdash; bare bits. Definerer elektriske/optiske signaler, pinnekonnektorer og fysisk topologi.",
+    service: "Overføring av bits over en kommunikasjonsforbindelse (ledning, fiber, radio).",
     implementert: "Fysisk maskinvare (kabler, sendere, mottakere)",
   },
 ];
@@ -136,7 +136,7 @@ export default function CN1_5Page() {
         <ul className="space-y-1">
           {[
             "TCP/IP 5-lagsmodellen: navn, PDU og protokoller for hvert lag",
-            "Hva hvert lag gjor og hvilken tjeneste det tilbyr laget over",
+            "Hva hvert lag gjør og hvilken tjeneste det tilbyr laget over",
             "Hvilke lag verter, rutere og svitsjer implementerer",
             "Kapsling (encapsulation): hvordan headere legges til nedover stakken",
             "Dekapsling (decapsulation): hvordan headere fjernes oppover stakken",
@@ -163,7 +163,7 @@ export default function CN1_5Page() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-xs">Det applikasjoner trenger:</p>
-              <p className="text-xs text-[var(--muted)] mt-1">Utveksle meldinger mellom prosesser pA ulike hosts over hele verden, palitelig og effektivt.</p>
+              <p className="text-xs text-[var(--muted)] mt-1">Utveksle meldinger mellom prosesser på ulike hosts over hele verden, pålitelig og effektivt.</p>
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-xs">Hva fysisk laget gir:</p>
@@ -176,9 +176,9 @@ export default function CN1_5Page() {
           </p>
           <div className="grid sm:grid-cols-3 gap-2 text-xs">
             {[
-              { fordel: "Modularitet", forklaring: "Hvert lag kan endres uavhengig (bytt ut WiFi med Ethernet uten A endre TCP)" },
+              { fordel: "Modularitet", forklaring: "Hvert lag kan endres uavhengig (bytt ut WiFi med Ethernet uten å endre TCP)" },
               { fordel: "Abstrahering", forklaring: "Applikasjoner trenger ikke vite om kabler og signaler" },
-              { fordel: "Standardisering", forklaring: "Gj\u00f8r det mulig A bygge interoperable produkter fra ulike leverandorer" },
+              { fordel: "Standardisering", forklaring: "Gj\u00f8r det mulig å bygge interoperable produkter fra ulike leverandorer" },
             ].map(({ fordel, forklaring }) => (
               <div key={fordel} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
                 <p className="font-bold">{fordel}</p>
@@ -194,7 +194,7 @@ export default function CN1_5Page() {
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
           TCP/IP 5-lagsmodell
         </h2>
-        <p className="text-sm text-[var(--muted)]">Klikk pA et lag for A se detaljer.</p>
+        <p className="text-sm text-[var(--muted)]">Klikk på et lag for å se detaljer.</p>
 
         <div className="grid sm:grid-cols-2 gap-4">
           <ProtocolStackDiagram activeLayer={activeLayer} onSelect={setActiveLayer} />
@@ -221,7 +221,7 @@ export default function CN1_5Page() {
                     </div>
                   </div>
                   <div>
-                    <p className="font-bold text-xs mb-1">Hva det gjor:</p>
+                    <p className="font-bold text-xs mb-1">Hva det gjør:</p>
                     <p className="text-xs text-[var(--muted)]">{selectedLayer.hva}</p>
                   </div>
                   <div>
@@ -240,7 +240,7 @@ export default function CN1_5Page() {
               </div>
             ) : (
               <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 h-full flex items-center justify-center text-sm text-[var(--muted)]">
-                Klikk pA et lag for A se detaljer
+                Klikk på et lag for å se detaljer
               </div>
             )}
           </div>
@@ -322,11 +322,11 @@ export default function CN1_5Page() {
             <p className="text-xs text-[var(--muted)]">
               Prosessen reverses. Hvert lag leser og fjerner sin header, sjekker for feil,
               og sender den resterende dataen oppover til neste lag. Applikasjonslaget
-              fAr til slutt den originale meldingen M.
+              får til slutt den originale meldingen M.
             </p>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-700 p-2 text-xs">
-              <strong>Viktig:</strong> Rutere mA dekapsulere til lag 3 for A lese IP-adressen og bestemme
+              <strong>Viktig:</strong> Rutere mA dekapsulere til lag 3 for å lese IP-adressen og bestemme
               neste hopp. De re-kapsulerer sA med ny lag-2-header for neste link.
             </div>
           </div>
@@ -394,8 +394,8 @@ export default function CN1_5Page() {
             </div>
             <div className="text-xs text-[var(--muted)] space-y-1">
               <p>OSI deler TCP/IPs applikasjonslag i tre: applikasjon, presentasjon (kryptering, komprimering) og sesjon (dialogstyring).</p>
-              <p>I praksis brukes TCP/IP. OSI brukes som referansemodell for A forklare konsepter.</p>
-              <p className="font-bold">For eksamen: bruk TCP/IP 5-lag med mindre oppgaven eksplisitt spor om OSI.</p>
+              <p>I praksis brukes TCP/IP. OSI brukes som referansemodell for å forklare konsepter.</p>
+              <p className="font-bold">For eksamen: bruk TCP/IP 5-lag med mindre oppgaven eksplisitt spør om OSI.</p>
             </div>
           </div>
         )}
@@ -406,7 +406,7 @@ export default function CN1_5Page() {
         <h3 className="font-bold text-network-600 dark:text-network-400 mb-2">Koblingen til oblig 1</h3>
         <p className="text-[var(--muted)]">
           Oblig 1 implementerte tre protokollag (applikasjon, RPC-lag og socket/TCP-lag).
-          Eksamen spor ofte: "List opp de tre protokollagene og forklar kort hvordan de henger sammen."
+          Eksamen spør ofte: "List opp de tre protokollagene og forklar kort hvordan de henger sammen."
           Svaret: applikasjonslaget bruker RPC-mellomvaren (som er et hjemmelaget applikasjonslags-protokoll),
           som igjen bruker TCP-transporttjenesten for pAlitelig levering.
           TCP er identifisert ved IP-adresse + portnummer.
@@ -417,7 +417,7 @@ export default function CN1_5Page() {
       <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-700 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Oppgave 1 (flervalg) spor ofte: "Hvilken tjeneste gir link-laget?" (svar: upAlitelig overforing
+          Oppgave 1 (flervalg) spør ofte: "Hvilken tjeneste gir link-laget?" (svar: upålitelig overføring
           av rammer over EN link). "Hvordan identifiseres kommunikasjonsendepunkter i transportlaget?"
           (svar: IP-adresse + portnummer). "Hvem implementerer nettverkslaget?" (verter OG rutere).
         </span>
@@ -435,7 +435,7 @@ export default function CN1_5Page() {
           href="/dat110/cn-1/teori/1-6"
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-network-600 text-white text-sm font-medium hover:bg-network-700 transition-colors"
         >
-          1.6 Angrep pA nettverk &rarr;
+          1.6 Angrep på nettverk &rarr;
         </Link>
       </div>
     </div>

@@ -134,7 +134,7 @@ function HTTPCalculator() {
       <div className="rounded-lg bg-white dark:bg-neutral-900/50 border border-network-200 dark:border-network-800/40 p-4">
         <div className="grid sm:grid-cols-3 gap-3 text-sm mb-3">
           <div>
-            <p className="text-xs text-[var(--muted)]">Overforingstid L/R</p>
+            <p className="text-xs text-[var(--muted)]">Overføringstid L/R</p>
             <p className="font-mono font-bold text-lg">{(transmitTime * 1000).toFixed(1)} ms</p>
           </div>
           <div>
@@ -202,7 +202,7 @@ export default function CN2FormlerPage() {
             { symbol: "RTT", meaning: "Round-Trip Time — tid for liten pakke fra klient til server og tilbake" },
             { symbol: "L", meaning: "Objektstørrelse i bits" },
             { symbol: "R", meaning: "Linkkapasitet / båndbredde i bits per sekund (bps)" },
-            { symbol: "L/R", meaning: "Overforingstid — tid for å skyve alle L bits ut på linken" },
+            { symbol: "L/R", meaning: "Overføringstid — tid for å skyve alle L bits ut på linken" },
             { symbol: "2·RTT", meaning: "1 RTT for TCP-handshake (SYN+SYN-ACK) + 1 RTT for HTTP request/response" },
           ]}
         />
@@ -235,7 +235,7 @@ export default function CN2FormlerPage() {
           color="network"
           when="Klienten sender alle forespørsler uten å vente på svar — parallell overføring (HTTP/1.1)"
           vars={[
-            { symbol: "RTT + N·L_obj/R", meaning: "Én RTT for alle forespørsler + overforingstid for alle N objekter" },
+            { symbol: "RTT + N·L_obj/R", meaning: "Én RTT for alle forespørsler + overføringstid for alle N objekter" },
           ]}
         />
 
@@ -246,7 +246,7 @@ export default function CN2FormlerPage() {
           <p>
             TCP er tilkoblingsorientert — det kreves ett «håndtrykk» (SYN → SYN-ACK) før data kan sendes.
             Dette koster 1 RTT. Deretter koster selve HTTP-forespørselen og responsen (GET → headers + data)
-            ytterligere 1 RTT (pluss overforingstiden L/R). Derav <strong>2RTT + L/R</strong>.
+            ytterligere 1 RTT (pluss overføringstiden L/R). Derav <strong>2RTT + L/R</strong>.
           </p>
           <p className="mt-2">
             Med persistent HTTP sparer vi 1 RTT per etterfølgende objekt siden TCP-tilkoblingen er allerede opprettet.

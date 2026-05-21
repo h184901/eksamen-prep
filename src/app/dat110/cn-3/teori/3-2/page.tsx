@@ -62,8 +62,8 @@ export default function CN3Teori32Page() {
         <p className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wide mb-1">CN 3.2</p>
         <h1 className="text-2xl font-bold mb-2">UDP — Connectionless Transport</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
-          UDP er det enkle, raske, forbindelseslase transportprotokollen. Den legger til minimalt
-          med overhead pa toppen av IP. Forsta segmentformatet og checksumberegningen — begge
+          UDP er det enkle, raske, forbindelsesløse transportprotokollen. Den legger til minimalt
+          med overhead på toppen av IP. Forstå segmentformatet og checksumberegningen — begge
           er eksamensklassikere.
         </p>
       </div>
@@ -71,9 +71,9 @@ export default function CN3Teori32Page() {
       <MustKnow items={[
         "UDP-segmentets fire felt og hva hvert felt betyr",
         "Checksum-beregning med 1s komplement (steg for steg)",
-        "Hva mottakeren gjor ved checksum-verifisering (forventer 1111 1111 1111 1111)",
+        "Hva mottakeren gjør ved checksum-verifisering (forventer 1111 1111 1111 1111)",
         "Fordeler og ulemper med UDP sammenlignet med TCP",
-        "Typiske bruksomrader for UDP: DNS, streaming, gaming, IoT",
+        "Typiske bruksområder for UDP: DNS, streaming, gaming, IoT",
         "UDP er connectionless: ingen handshake, ingen garanti for levering eller orden",
       ]} />
 
@@ -115,10 +115,10 @@ export default function CN3Teori32Page() {
 
         <div className="grid sm:grid-cols-2 gap-3 mt-3">
           {[
-            { felt: "Source Port", bits: "16", besk: "Avsenderens port. Brukes av mottakeren for a svare tilbake. Kan vaere 0 hvis svar ikke er nodvendig." },
-            { felt: "Destination Port", bits: "16", besk: "Mottakerens port. KRITISK for demultipleksing — OS leverer til prosessen som lytter pa denne porten." },
+            { felt: "Source Port", bits: "16", besk: "Avsenderens port. Brukes av mottakeren for å svare tilbake. Kan være 0 hvis svar ikke er nødvendig." },
+            { felt: "Destination Port", bits: "16", besk: "Mottakerens port. KRITISK for demultipleksing — OS leverer til prosessen som lytter på denne porten." },
             { felt: "Length", bits: "16", besk: "Total lengde i bytes av UDP-segmentet (header + data). Minimumverdi = 8 (kun header, ingen data)." },
-            { felt: "Checksum", bits: "16", besk: "1s komplement-sum av header og data. Brukes til a detektere bitfeil. Svakt, men rask feildeteksjon." },
+            { felt: "Checksum", bits: "16", besk: "1s komplement-sum av header og data. Brukes til å detektere bitfeil. Svakt, men rask feildeteksjon." },
           ].map(({ felt, bits, besk }) => (
             <div key={felt} className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
               <div className="flex items-center gap-2 mb-1">
@@ -136,15 +136,15 @@ export default function CN3Teori32Page() {
           <h4 className="font-bold mb-2">Algoritmen steg for steg</h4>
           <div className="space-y-2 text-sm">
             <div className="flex gap-2"><span className="font-bold text-blue-600 dark:text-blue-400 w-6">1.</span><span>Del dataen opp i 16-bit ord</span></div>
-            <div className="flex gap-2"><span className="font-bold text-blue-600 dark:text-blue-400 w-6">2.</span><span>Adder alle 16-bit ordene med <strong>1s komplement-addisjon</strong> (normal binaeraddering, men carry-out fra MSB legges tilbake)</span></div>
+            <div className="flex gap-2"><span className="font-bold text-blue-600 dark:text-blue-400 w-6">2.</span><span>Adder alle 16-bit ordene med <strong>1s komplement-addisjon</strong> (normal binæraddering, men carry-out fra MSB legges tilbake)</span></div>
             <div className="flex gap-2"><span className="font-bold text-blue-600 dark:text-blue-400 w-6">3.</span><span>Ta 1s komplementet av summen (flip alle bits)</span></div>
             <div className="flex gap-2"><span className="font-bold text-blue-600 dark:text-blue-400 w-6">4.</span><span>Resultatet er checksum-verdien som legges i checksum-feltet</span></div>
           </div>
         </Card>
 
         <Card color="network">
-          <h4 className="font-bold mb-2">Verifisering pa mottakersiden</h4>
-          <p className="text-sm">Mottakeren adderer alle mottatte 16-bit ord <strong>inkludert checksum-feltet</strong> (1s komplement-addisjon). Hvis ingen feil: resultatet skal vaere <code className="font-mono bg-cyan-100 dark:bg-cyan-900/30 px-1 rounded">1111 1111 1111 1111</code> (alle 1-ere).</p>
+          <h4 className="font-bold mb-2">Verifisering på mottakersiden</h4>
+          <p className="text-sm">Mottakeren adderer alle mottatte 16-bit ord <strong>inkludert checksum-feltet</strong> (1s komplement-addisjon). Hvis ingen feil: resultatet skal være <code className="font-mono bg-cyan-100 dark:bg-cyan-900/30 px-1 rounded">1111 1111 1111 1111</code> (alle 1-ere).</p>
           <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 mt-2 text-sm">
             <p className="font-bold text-xs text-cyan-700 dark:text-cyan-400">Hvorfor?</p>
             <p className="text-xs text-[var(--muted)] mt-1">Checksum er komplementet av summen. Sum + komplement = alle 1-ere i 1s komplement-aritmetikk.</p>
@@ -187,7 +187,7 @@ export default function CN3Teori32Page() {
               </div>
             </div>
             <div className="rounded bg-amber-100 dark:bg-amber-900/30 p-2 text-xs">
-              <strong>Viktig!</strong> Checksum er SVAK beskyttelse: hvis to bit-feil kansellerer hverandre (ett bit flippes i hvert ord pa samme posisjon), endres ikke checksum. Dette kalles "weak protection".
+              <strong>Viktig!</strong> Checksum er SVAK beskyttelse: hvis to bit-feil kansellerer hverandre (ett bit flippes i hvert ord på samme posisjon), endres ikke checksum. Dette kalles "weak protection".
             </div>
           </div>
         </Card>
@@ -206,13 +206,13 @@ export default function CN3Teori32Page() {
             <tbody>
               {[
                 ["Tilkoblingsoppsett", "Ingen (connectionless)", "3-veis handshake"],
-                ["Levering garantert?", "Nei — pakker kan gaa tapt", "Ja — retransmisjon ved tap"],
-                ["Rekkefolgekontroll", "Nei — pakker kan komme ute av orden", "Ja — ordnet levering"],
+                ["Levering garantert?", "Nei — pakker kan gå tapt", "Ja — retransmisjon ved tap"],
+                ["Rekkefølgekontroll", "Nei — pakker kan komme ute av orden", "Ja — ordnet levering"],
                 ["Flytkontroll", "Nei", "Ja (rwnd)"],
                 ["Metningskontroll", "Nei", "Ja (AIMD, slow start)"],
-                ["Header-storrelsec", "8 bytes (fast)", "20+ bytes (variabel)"],
-                ["Forsinkelse", "Lav (ingen handshake, ingen ko-mekanisme)", "Hoyere (handshake, retransmisjon)"],
-                ["Bruksomrader", "DNS, streaming, VoIP, gaming, IoT", "HTTP, e-post, filoverforing"],
+                ["Header-størrelse", "8 bytes (fast)", "20+ bytes (variabel)"],
+                ["Forsinkelse", "Lav (ingen handshake, ingen ko-mekanisme)", "Høyere (handshake, retransmisjon)"],
+                ["Bruksområder", "DNS, streaming, VoIP, gaming, IoT", "HTTP, e-post, filoverføring"],
               ].map(([egenskap, udp, tcp], i) => (
                 <tr key={egenskap} className={i % 2 === 0 ? "bg-white dark:bg-neutral-900/40" : "bg-neutral-50 dark:bg-neutral-800/30"}>
                   <td className="px-3 py-2 font-medium text-xs">{egenskap}</td>
@@ -225,13 +225,13 @@ export default function CN3Teori32Page() {
         </div>
       </Section>
 
-      <Section title="4. Fordeler med UDP og typiske bruksomrader">
+      <Section title="4. Fordeler med UDP og typiske bruksområder">
         <div className="grid sm:grid-cols-2 gap-3">
           {[
-            { tittel: "DNS (port 53)", desc: "Korte sporrings-/svarpar. Raskere uten tilkoblingsoppsett. Klienten sender pa nytt selv ved tap.", color: "text-green-600 dark:text-green-400" },
-            { tittel: "Streaming (video/lyd)", desc: "Noen tapte pakker godtas. Forsinkelse er verre enn tap. Applikasjonen kan selv haandtere gjenoppretting.", color: "text-blue-600 dark:text-blue-400" },
-            { tittel: "Online gaming", desc: "Lav latens er kritisk. Eldre tilstandsdata er uinteressant. Applikasjonen haandterer tap sin maten.", color: "text-purple-600 dark:text-purple-400" },
-            { tittel: "IoT-sensorer", desc: "Enkle enheter med lite minne. Trenger ikke garantert levering av hvert malepunkt.", color: "text-orange-600 dark:text-orange-400" },
+            { tittel: "DNS (port 53)", desc: "Korte spørrings-/svarpar. Raskere uten tilkoblingsoppsett. Klienten sender på nytt selv ved tap.", color: "text-green-600 dark:text-green-400" },
+            { tittel: "Streaming (video/lyd)", desc: "Noen tapte pakker godtas. Forsinkelse er verre enn tap. Applikasjonen kan selv håndtere gjenoppretting.", color: "text-blue-600 dark:text-blue-400" },
+            { tittel: "Online gaming", desc: "Lav latens er kritisk. Eldre tilstandsdata er uinteressant. Applikasjonen håndterer tap sin måten.", color: "text-purple-600 dark:text-purple-400" },
+            { tittel: "IoT-sensorer", desc: "Enkle enheter med lite minne. Trenger ikke garantert levering av hvert målepunkt.", color: "text-orange-600 dark:text-orange-400" },
           ].map(({ tittel, desc, color }) => (
             <div key={tittel} className="rounded-lg bg-[var(--card)] border border-[var(--card-border)] p-3">
               <p className={`font-bold text-sm ${color} mb-1`}>{tittel}</p>
@@ -241,12 +241,12 @@ export default function CN3Teori32Page() {
         </div>
 
         <Card color="network">
-          <h4 className="font-bold mb-2">Kan applikasjoner fa palitelig overf&oslash;ring over UDP?</h4>
-          <p className="text-sm">Ja! Applikasjonen kan selv implementere palitelighetsfunksjoner pa toppen av UDP (f.eks. QUIC-protokollen fra Google). Dette gir mer kontroll enn TCP. QUIC er grunnlaget for HTTP/3.</p>
+          <h4 className="font-bold mb-2">Kan applikasjoner få pålitelig overføring over UDP?</h4>
+          <p className="text-sm">Ja! Applikasjonen kan selv implementere pålitelighetsfunksjoner på toppen av UDP (f.eks. QUIC-protokollen fra Google). Dette gir mer kontroll enn TCP. QUIC er grunnlaget for HTTP/3.</p>
         </Card>
 
         <Card color="red">
-          <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Eksamenssporsmal: Velg UDP eller TCP</h4>
+          <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Eksamensspørsmål: Velg UDP eller TCP</h4>
           <div className="space-y-2 text-sm">
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
               <p className="font-bold text-xs">Sensor som kontinuerlig rapporterer temperatur:</p>
@@ -254,7 +254,7 @@ export default function CN3Teori32Page() {
             </div>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
               <p className="font-bold text-xs">Kontrollsystem som apner/lukker ventil:</p>
-              <p className="text-xs text-[var(--muted)]">TCP. Tap av kommandoen kan ha alvorlige konsekvenser. Palitelig levering er kritisk.</p>
+              <p className="text-xs text-[var(--muted)]">TCP. Tap av kommandoen kan ha alvorlige konsekvenser. Pålitelig levering er kritisk.</p>
             </div>
           </div>
         </Card>
@@ -266,7 +266,7 @@ export default function CN3Teori32Page() {
           ← 3.1 Multipleksing
         </Link>
         <Link href="/dat110/cn-3/teori/3-3" className="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium transition-colors">
-          3.3 Palitelig dataoverforing →
+          3.3 Pålitelig dataoverføring →
         </Link>
       </div>
     </div>

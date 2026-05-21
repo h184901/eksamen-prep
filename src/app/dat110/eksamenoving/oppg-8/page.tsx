@@ -44,7 +44,7 @@ export default function Oppg8Page() {
             },
             {
               label: "Sammenligne trær",
-              desc: "To ulike multicast-trær fra A til {B,C,D,E}: summer totalforsinkelse for hvert tre. Lavest sum = mest effektivt tre.",
+              desc: "To ulike multicast-trær fra å til {B,C,D,E}: summer totalforsinkelse for hvert tre. Lavest sum = mest effektivt tre.",
             },
             {
               label: "Overlay-typer",

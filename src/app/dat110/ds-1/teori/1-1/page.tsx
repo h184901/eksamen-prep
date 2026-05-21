@@ -14,21 +14,21 @@ export default function DS1_1Page() {
       tittel: "Google Mail (Gmail)",
       kategori: "Nettverksbasert system",
       beskrivelse:
-        "Bak kulissene kjorer Gmail pa titusenvis av servere spredt over hele verden. Nar du logger inn ser du ett enkelt grensesnitt — du vet ikke hvilken server som lagrer e-postene dine, eller om det er 10 kopier av dem. Det er distribuert transparens i praksis.",
+        "Bak kulissene kjører Gmail på titusenvis av servere spredt over hele verden. Når du logger inn ser du ett enkelt grensesnitt — du vet ikke hvilken server som lagrer e-postene dine, eller om det er 10 kopier av dem. Det er distribuert transparens i praksis.",
     },
     {
       id: "cdn",
       tittel: "Akamai CDN (400 000+ servere)",
       kategori: "Nettverksbasert system",
       beskrivelse:
-        "Nar du besøker nytimes.com, leveres bildene fra en server naer deg — kanskje i Oslo. Akamai har kopiert innholdet til servere over hele verden. Du ser ett nettsted, men faktisk snakker du med den naermeste av hundretusener av servere.",
+        "Når du besøker nytimes.com, leveres bildene fra en server nær deg — kanskje i Oslo. Akamai har kopiert innholdet til servere over hele verden. Du ser ett nettsted, men faktisk snakker du med den nærmeste av hundretusener av servere.",
     },
     {
       id: "bittorrent",
       tittel: "BitTorrent",
       kategori: "Peer-to-peer system",
       beskrivelse:
-        "Ingen sentral server eier filene. Alle deltakere (peers) er bade klienter og servere. Nar du laster ned en fil, henter du ulike deler fra ulike maskiner rundt om i verden — men det framstar som en enkelt nedlasting.",
+        "Ingen sentral server eier filene. Alle deltakere (peers) er bade klienter og servere. Når du laster ned en fil, henter du ulike deler fra ulike maskiner rundt om i verden — men det framstar som en enkelt nedlasting.",
     },
     {
       id: "iot",
@@ -54,8 +54,8 @@ export default function DS1_1Page() {
         <h1 className="text-2xl font-bold mb-2">1.1 Definisjon og eksempler</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Hva er egentlig et distribuert system? Van Steen og Tanenbaum gir oss en presis definisjon,
-          og vi ser pa de to grunnleggende kjennetegnene — autonome noder og enhetlig framtoning — samt
-          middleware-laget som gjor det hele mulig.
+          og vi ser på de to grunnleggende kjennetegnene — autonome noder og enhetlig framtoning — samt
+          middleware-laget som gjør det hele mulig.
         </p>
       </div>
 
@@ -64,11 +64,11 @@ export default function DS1_1Page() {
         <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Hva du MA kunne</h3>
         <ul className="space-y-1">
           {[
-            "Gjengi Tanenbaums definisjon pa distribuerte systemer ord for ord",
+            "Gjengi Tanenbaums definisjon på distribuerte systemer ord for ord",
             "Forklare de to kjennetegnene: autonome noder og enhetlig framtoning",
             "Forklare hva middleware er og hvilken rolle det spiller",
-            "Gi konkrete eksempler pa distribuerte systemer og klassifisere dem",
-            "Forklare forskjellen pa et distribuert og et desentralisert system",
+            "Gi konkrete eksempler på distribuerte systemer og klassifisere dem",
+            "Forklare forskjellen på et distribuert og et desentralisert system",
             "Forklare hvorfor distribuerte systemer er vanskelige (partielle feil, ingen global klokke)",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm">
@@ -90,13 +90,13 @@ export default function DS1_1Page() {
             Van Steen &amp; Tanenbaum, 4. utgave
           </p>
           <blockquote className="text-lg font-bold text-blue-900 dark:text-blue-100 leading-relaxed italic">
-            &ldquo;A distributed system is a collection of autonomous computing elements that appears
+            &ldquo;å distributed system is a collection of autonomous computing elements that appears
             to its users as a single coherent system.&rdquo;
           </blockquote>
           <p className="text-xs text-blue-600 dark:text-blue-400 mt-3">
             Coulouris et al. (2012) definerer det litt annerledes: &ldquo;One in which hardware or software
             components located at networked computers communicate and coordinate their actions only by
-            passing messages.&rdquo; — Begge definisjoner er gyldige pa eksamen.
+            passing messages.&rdquo; — Begge definisjoner er gyldige på eksamen.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function DS1_1Page() {
           </button>
           {showLamport && (
             <p className="mt-2 italic text-[var(--muted)]">
-              &ldquo;A distributed system is one in which the failure of a computer you didn&apos;t even know
+              &ldquo;å distributed system is one in which the failure of a computer you didn&apos;t even know
               existed can render your own computer unusable.&rdquo; — Dette fanger essensen av utfordringen:
               skjulte avhengigheter og partielle feil.
             </p>
@@ -138,7 +138,7 @@ export default function DS1_1Page() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
-                <span>Nodene kan vaere alt: PC-er, mobiltelefoner, smartklokker, sensorer, servere</span>
+                <span>Nodene kan være alt: PC-er, mobiltelefoner, smartklokker, sensorer, servere</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
@@ -146,7 +146,7 @@ export default function DS1_1Page() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
-                <span>Ingen <strong>global klokke</strong>: noder ma synkronisere og koordinere seg via meldinger</span>
+                <span>Ingen <strong>global klokke</strong>: noder må synkronisere og koordinere seg via meldinger</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
@@ -154,7 +154,7 @@ export default function DS1_1Page() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 shrink-0 mt-0.5">&#8594;</span>
-                <span>Noder kan vaere organisert i <strong>overlay-nettverk</strong>: strukturerte (trad, ring) eller ustrukturerte</span>
+                <span>Noder kan være organisert i <strong>overlay-nettverk</strong>: strukturerte (trad, ring) eller ustrukturerte</span>
               </li>
             </ul>
           </div>
@@ -184,7 +184,7 @@ export default function DS1_1Page() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-indigo-500 shrink-0 mt-0.5">&#8594;</span>
-                <span>Nokkelord: <strong>distribusjonstransparens</strong> — skjule distribusjonen</span>
+                <span>Nøkkelord: <strong>distribusjonstransparens</strong> — skjule distribusjonen</span>
               </li>
             </ul>
           </div>
@@ -261,7 +261,7 @@ export default function DS1_1Page() {
             {[
               {
                 tittel: "Ressursstyring",
-                innhold: "Administrerer og gir tilgang til delte ressurser pa tvers av noder",
+                innhold: "Administrerer og gir tilgang til delte ressurser på tvers av noder",
                 ikon: "&#9881;",
               },
               {
@@ -276,7 +276,7 @@ export default function DS1_1Page() {
               },
               {
                 tittel: "Sikkerhetstjenester",
-                innhold: "Autentisering, autorisasjon og kryptering pa tvers av noder",
+                innhold: "Autentisering, autorisasjon og kryptering på tvers av noder",
                 ikon: "&#128274;",
               },
             ].map((t) => (
@@ -294,17 +294,17 @@ export default function DS1_1Page() {
           onClick={() => setShowMiddlewareDetails(!showMiddlewareDetails)}
           className="w-full text-left px-4 py-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] hover:bg-neutral-50 dark:hover:bg-neutral-800/50 flex items-center justify-between text-sm font-medium"
         >
-          <span>Eksempler pa kjente middleware-systemer</span>
+          <span>Eksempler på kjente middleware-systemer</span>
           <span>{showMiddlewareDetails ? "▲" : "▼"}</span>
         </button>
         {showMiddlewareDetails && (
           <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-3">
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                { navn: "gRPC / REST APIs", type: "RPC-middleware", beskr: "Lar prosesser kalle funksjoner pa fjerne servere som om de var lokale" },
+                { navn: "gRPC / REST APIs", type: "RPC-middleware", beskr: "Lar prosesser kalle funksjoner på fjerne servere som om de var lokale" },
                 { navn: "Apache Kafka", type: "Meldingskø (MOM)", beskr: "Asynkron meldingsutveksling mellom tjenester — produsenter og konsumenter er frakoblet" },
-                { navn: "CORBA / Java RMI", type: "Objektmiddleware", beskr: "Eksponerer objekter over nettverket — klienten kaller metoder pa fjerne objekter" },
-                { navn: "Kubernetes / Docker Swarm", type: "Orkestreringsmiddleware", beskr: "Administrerer containere pa tvers av mange noder som ett system" },
+                { navn: "CORBA / Java RMI", type: "Objektmiddleware", beskr: "Eksponerer objekter over nettverket — klienten kaller metoder på fjerne objekter" },
+                { navn: "Kubernetes / Docker Swarm", type: "Orkestreringsmiddleware", beskr: "Administrerer containere på tvers av mange noder som ett system" },
               ].map((m) => (
                 <div key={m.navn} className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/40 p-3">
                   <p className="font-bold text-sm">{m.navn}</p>
@@ -323,7 +323,7 @@ export default function DS1_1Page() {
           Distribuert vs. desentralisert system
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Van Steen &amp; Tanenbaum gjor et viktig skille som mange blander:
+          Van Steen &amp; Tanenbaum gjør et viktig skille som mange blander:
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
@@ -336,10 +336,10 @@ export default function DS1_1Page() {
             </thead>
             <tbody className="divide-y divide-[var(--card-border)]">
               {[
-                ["Hvorfor spredt?", "Tilstrekkelig (sufficiency) — nok til formalet", "Nodvendig (necessity) — ma vaere spredt"],
+                ["Hvorfor spredt?", "Tilstrekkelig (sufficiency) — nok til formalet", "Nødvendig (necessity) — må være spredt"],
                 ["Eksempel", "Google Mail: spredt for skalerbarhet", "Blockchain: spredt av tillit-arsaker"],
-                ["Typisk driver", "Ekspansivt syn: service som ma skalere", "Integrativt syn: eksisterende systemer kobles"],
-                ["Kompleksitet", "Kan vaere enkel der det er mulig", "Alltid kompleks pga. krav om spredning"],
+                ["Typisk driver", "Ekspansivt syn: service som må skalere", "Integrativt syn: eksisterende systemer kobles"],
+                ["Kompleksitet", "Kan være enkel der det er mulig", "Alltid kompleks pga. krav om spredning"],
               ].map(([rad, dist, desent]) => (
                 <tr key={rad}>
                   <td className="py-2 pr-4 font-medium text-xs text-[var(--muted)]">{rad}</td>
@@ -352,17 +352,17 @@ export default function DS1_1Page() {
         </div>
         <p className="text-xs text-[var(--muted)] bg-blue-50 dark:bg-blue-950/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800/40">
           <strong>Bokas poeng:</strong> Desentralisering er aldri et mal i seg selv. Vi bor spre prosesser og ressurser
-          bare i den grad det er <em>tilstrekkelig</em> for formalet. Jo mindre spredning, jo bedre. Unntaket er nar
-          spredning er strengt nodvendig (federated learning, blockchain, geografisk overvaking).
+          bare i den grad det er <em>tilstrekkelig</em> for formalet. Jo mindre spredning, jo bedre. Unntaket er når
+          spredning er strengt nødvendig (federated learning, blockchain, geografisk overvaking).
         </p>
       </section>
 
       {/* Eksempler interaktivt */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">
-          Eksempler pa distribuerte systemer
+          Eksempler på distribuerte systemer
         </h2>
-        <p className="text-sm text-[var(--muted)]">Klikk pa et eksempel for a se hvordan det oppfyller definisjonen:</p>
+        <p className="text-sm text-[var(--muted)]">Klikk på et eksempel for å se hvordan det oppfyller definisjonen:</p>
         <div className="grid sm:grid-cols-2 gap-3">
           {examples.map((ex) => (
             <button
@@ -403,21 +403,21 @@ export default function DS1_1Page() {
               farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
               tittelfarge: "text-orange-700 dark:text-orange-400",
               innhold:
-                "Noder har sine egne klokker som avviker fra hverandre. Nar skjedde hendelse A — for eller etter hendelse B? Dette krevet egne koordineringsprotokoller (Lamport-klokker, vektorklokker).",
+                "Noder har sine egne klokker som avviker fra hverandre. Når skjedde hendelse A — for eller etter hendelse B? Dette krevet egne koordineringsprotokoller (Lamport-klokker, vektorklokker).",
             },
             {
               tittel: "Uforutsette avhengigheter",
               farge: "border-purple-400/60 bg-purple-50 dark:bg-purple-950/20",
               tittelfarge: "text-purple-700 dark:text-purple-400",
               innhold:
-                "Nodene er programmatisk koblet sammen pa mater som kan vaere umulige a forutse. En feil i en tjeneste kan a kaste ned en annen tjeneste som tilsynelatende er urelatert.",
+                "Nodene er programmatisk koblet sammen på mater som kan være umulige a forutse. En feil i en tjeneste kan å kaste ned en annen tjeneste som tilsynelatende er urelatert.",
             },
             {
               tittel: "Sikkerhet",
               farge: "border-gray-400/60 bg-gray-50 dark:bg-gray-950/20",
               tittelfarge: "text-gray-700 dark:text-gray-400",
               innhold:
-                "Systemet krysser administrative grenser og er tilgjengelig fra hele verden. Autentisering og autorisasjon ma haandteres pa tvers av noder som kanskje ikke stoler pa hverandre.",
+                "Systemet krysser administrative grenser og er tilgjengelig fra hele verden. Autentisering og autorisasjon må håndteres på tvers av noder som kanskje ikke stoler på hverandre.",
             },
           ].map((k) => (
             <div key={k.tittel} className={`rounded-xl border-2 p-4 ${k.farge}`}>
@@ -430,13 +430,13 @@ export default function DS1_1Page() {
 
       {/* Vanlige feil */}
       <div className="rounded-xl border-2 border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/20 p-4">
-        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil pa eksamen</h3>
+        <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil på eksamen</h3>
         <ul className="space-y-2 text-sm">
           {[
-            "Blander distribuert og desentralisert: distribuert = tilstrekkelig spredning, desentralisert = nodvendig spredning",
+            "Blander distribuert og desentralisert: distribuert = tilstrekkelig spredning, desentralisert = nødvendig spredning",
             'Si at internett "er" et distribuert system — internett er infrastrukturen UNDER distribuerte systemer',
-            "Glemme at middleware er det som gjor ett-system-illusjonen mulig — det er ikke bare et nett",
-            "Tro at sentraliserte losninger alltid er darlige — DNS er logisk sentralisert men fysisk distribuert og fungerer utmerket",
+            "Glemme at middleware er det som gjør ett-system-illusjonen mulig — det er ikke bare et nett",
+            "Tro at sentraliserte løsninger alltid er darlige — DNS er logisk sentralisert men fysisk distribuert og fungerer utmerket",
           ].map((feil) => (
             <li key={feil} className="flex items-start gap-2">
               <span className="text-red-500 shrink-0 mt-0.5 font-bold">!</span>
@@ -450,9 +450,9 @@ export default function DS1_1Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Oppgave 1 (flervalg) tester gjerne definisjoner. Du bor kunne gjengi definisjonen pa distribuerte systemer
+          Oppgave 1 (flervalg) tester gjerne definisjoner. Du bor kunne gjengi definisjonen på distribuerte systemer
           nesten ord for ord. Legg merke til begge delene: <em>autonome noder</em> OG <em>framstar som ett system</em>.
-          Pa 2024-eksamen spurte oppgave 1h om IaaS (Infrastructure as a Service) — cloud-klassifisering er
+          På 2024-eksamen spurte oppgave 1h om IaaS (Infrastructure as a Service) — cloud-klassifisering er
           sentralt for DS-1.
         </span>
       </div>

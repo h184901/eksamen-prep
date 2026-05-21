@@ -59,26 +59,26 @@ export default function CN3Teori36Page() {
         <p className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wide mb-1">CN 3.6</p>
         <h1 className="text-2xl font-bold mb-2">Metningskontroll: prinsipper</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
-          Metning (congestion) oppstar nar for mange avsendere prover a sende for mye data
-          gjennom nettverket. Forst forstaar du problemet og kostnaden — sa kommer TCPs
-          losning i 3.7.
+          Metning (congestion) oppstar når for mange avsendere prover å sende for mye data
+          gjennom nettverket. Først forstår du problemet og kostnaden — så kommer TCPs
+          løsning i 3.7.
         </p>
       </div>
 
       <MustKnow items={[
-        "Hva metning (congestion) er: ruterkoe overfylt, pakker gaar tapt",
+        "Hva metning (congestion) er: ruterkoe overfylt, pakker går tapt",
         "Forskjell mellom flytkontroll (mottaker) og metningskontroll (nettverk)",
-        "To arsaker til metning: burstete trafikk og for hoy samlet senderate",
-        "Kostnader ved metning: lang forsinkelse, tapte pakker, unodvendig retransmisjon",
-        "To tilnaerminger: nettverksassistert vs ende-til-ende metningskontroll",
+        "To arsaker til metning: burstete trafikk og for høy samlet senderate",
+        "Kostnader ved metning: lang forsinkelse, tapte pakker, unødvendig retransmisjon",
+        "To tilnærminger: nettverksassistert vs ende-til-ende metningskontroll",
         "TCP bruker ende-til-ende: infererer metning fra tap/forsinkelse",
       ]} />
 
       <Section title="1. Hva er metning?" defaultOpen={true}>
         <Card color="red">
           <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Definisjon</h4>
-          <p className="text-sm"><strong>Metning</strong> oppstar nar ankomstraten av pakker ved en ruter overstiger raterens kapasitet til a videresende dem. Resultatet: ruterkoen vokser, pakker dropes.</p>
-          <p className="text-sm mt-2">Dette er ulikt flytkontroll: flytkontroll beskytter <em>mottakerens</em> buffer. Metningskontroll beskytter <em>nettverket</em> (ruternes koekapasitet).</p>
+          <p className="text-sm"><strong>Metning</strong> oppstar når ankomstraten av pakker ved en ruter overstiger raterens kapasitet til å videresende dem. Resultatet: ruterkoen vokser, pakker dropes.</p>
+          <p className="text-sm mt-2">Dette er ulikt flytkontroll: flytkontroll beskytter <em>mottakerens</em> buffer. Metningskontroll beskytter <em>nettverket</em> (ruternes køkapasitet).</p>
         </Card>
 
         {/* Analogi */}
@@ -86,12 +86,12 @@ export default function CN3Teori36Page() {
           <h4 className="font-bold mb-2">Analogi: Motorvei i rush-trafikk</h4>
           <p className="text-sm">Se for deg en motorvei med ett felt som innsnevres til ett smalere kryss:</p>
           <ul className="text-sm text-[var(--muted)] space-y-1 mt-2 list-disc list-inside">
-            <li>Lav trafikk: alle kjorer flytende, ingen ko</li>
+            <li>Lav trafikk: alle kjører flytende, ingen ko</li>
             <li>Moderat trafikk: noe ko ved innsnevringen, men data (biler) kommer frem</li>
-            <li>Hoy trafikk: ko vokser eksponentielt, biler (pakker) gar tapt</li>
-            <li>Ekstremt: jo mer bilister prover a kompensere, jo verre blir det</li>
+            <li>Høy trafikk: ko vokser eksponentielt, biler (pakker) går tapt</li>
+            <li>Ekstremt: jo mer bilister prover å kompensere, jo verre blir det</li>
           </ul>
-          <p className="text-sm mt-2 font-bold">Metningskontroll = trafikkregulering pa motorveien</p>
+          <p className="text-sm mt-2 font-bold">Metningskontroll = trafikkregulering på motorveien</p>
         </Card>
       </Section>
 
@@ -99,11 +99,11 @@ export default function CN3Teori36Page() {
         <div className="grid sm:grid-cols-2 gap-4">
           <Card color="network">
             <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2">Arsak 1: Begrenset ruterbufferkapasitet</h4>
-            <p className="text-sm">Nettverket har endelig bufferkapasitet i ruterne. Nar koen er full → pakker droppes. Sender maa retransmittere → enda mer trafikk.</p>
+            <p className="text-sm">Nettverket har endelig bufferkapasitet i ruterne. Når køen er full → pakker droppes. Sender må retransmittere → enda mer trafikk.</p>
           </Card>
           <Card color="network">
             <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2">Arsak 2: For mange samtidige avsendere</h4>
-            <p className="text-sm">Mange TCP-flyt deler en flaskehals-link. Hver sender "tror" linken er ledig og oker sin rate → kollektiv overbelastning.</p>
+            <p className="text-sm">Mange TCP-flyt deler en flaskehals-link. Hver sender "tror" linken er ledig og øker sin rate → kollektiv overbelastning.</p>
           </Card>
         </div>
 
@@ -117,10 +117,10 @@ export default function CN3Teori36Page() {
             </thead>
             <tbody>
               {[
-                ["Lang koforsinkelse", "Pakker venter lenge i ruterkoen. Selv om pakker ikke tapes, oker RTT dramatisk."],
+                ["Lang koforsinkelse", "Pakker venter lenge i ruterkoen. Selv om pakker ikke tapes, øker RTT dramatisk."],
                 ["Pakketap (drop)", "Fylt ruterbuffer → pakker kastes. TCP tolker dette som metningssignal."],
-                ["Unodvendig retransmisjon", "Timeout for pakker som er i koen (ikke tapt) → sender retransmitterer → mer trafikk = verre metning."],
-                ["Kastet arbeid oppstroms", "Ressursene brukt pa pakker som slipper gjennom N-1 rutere og droppes i den N-te er bortkastet. Verre i multihopp-nettverk."],
+                ["Unødvendig retransmisjon", "Timeout for pakker som er i køen (ikke tapt) → sender retransmitterer → mer trafikk = verre metning."],
+                ["Kastet arbeid oppstroms", "Ressursene brukt på pakker som slipper gjennom N-1 rutere og droppes i den N-te er bortkastet. Verre i multihopp-nettverk."],
               ].map(([kostnad, forkl], i) => (
                 <tr key={kostnad} className={i % 2 === 0 ? "bg-white dark:bg-neutral-900/40" : "bg-neutral-50 dark:bg-neutral-800/30"}>
                   <td className="px-3 py-2 font-bold text-xs text-red-600 dark:text-red-400">{kostnad}</td>
@@ -157,11 +157,11 @@ export default function CN3Teori36Page() {
             <circle cx="180" cy="50" r="4" fill="#f59e0b"/>
             <text x="175" y="38" fontSize="9" fill="#f59e0b" textAnchor="middle">Metning</text>
           </svg>
-          <p className="text-xs text-[var(--muted)] text-center mt-2">Nar sendt rate overskrider kapasiteten, kollapser gjennomstromningen</p>
+          <p className="text-xs text-[var(--muted)] text-center mt-2">Når sendt rate overskrider kapasiteten, kollapser gjennomstromningen</p>
         </div>
       </Section>
 
-      <Section title="3. To tilnaerminger til metningskontroll" defaultOpen={true}>
+      <Section title="3. To tilnærminger til metningskontroll" defaultOpen={true}>
         <div className="grid sm:grid-cols-2 gap-4">
           <Card color="blue">
             <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-2">Nettverksassistert (Network-assisted)</h4>
@@ -179,11 +179,11 @@ export default function CN3Teori36Page() {
 
           <Card color="network">
             <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2">Ende-til-ende (End-to-end)</h4>
-            <p className="text-sm">Endepunktene <em>infererer</em> metning fra observert oppforsel (tap, forsinkelse). Ingen ruter-stotte nodvendig.</p>
+            <p className="text-sm">Endepunktene <em>infererer</em> metning fra observert oppforsel (tap, forsinkelse). Ingen ruter-stotte nødvendig.</p>
             <div className="mt-2 space-y-1 text-xs text-[var(--muted)]">
-              <p><strong>Slik gjor TCP det:</strong></p>
+              <p><strong>Slik gjør TCP det:</strong></p>
               <p>• Pakketap (timeout / 3 duplikat-ACKer) = metningssignal</p>
-              <p>• Hoyere RTT-variasjon kan indikere kofylt</p>
+              <p>• Høyere RTT-variasjon kan indikere kofylt</p>
               <p>• TCP CUBIC bruker RTT-basert deteksjon</p>
             </div>
             <div className="mt-2 rounded bg-cyan-100 dark:bg-cyan-900/30 p-2 text-xs">
@@ -196,7 +196,7 @@ export default function CN3Teori36Page() {
           <h4 className="font-bold mb-2">TCP bruker ende-til-ende</h4>
           <p className="text-sm">Standard TCP (Reno, Tahoe) bruker utelukkende ende-til-ende metningskontroll. IP-protokollen er "dum" — rutere teller ikke, annonserer ikke. TCP tolker tap som metning og reduserer senderate. Dette er prinsippet bak AIMD og slow start (se 3.7).</p>
           <div className="mt-2 rounded-lg bg-amber-100 dark:bg-amber-900/30 p-2 text-xs">
-            <strong>ECN er et unntak:</strong> Nyere implementasjoner bruker ECN (RFC 3168) der rutere setter bits for a signalere metning proaktivt, men dette krever stotte i bade nettverksutstyr og OS.
+            <strong>ECN er et unntak:</strong> Nyere implementasjoner bruker ECN (RFC 3168) der rutere setter bits for å signalere metning proaktivt, men dette krever stotte i bade nettverksutstyr og OS.
           </div>
         </Card>
       </Section>
@@ -218,7 +218,7 @@ export default function CN3Teori36Page() {
                 ["Kontrollert av", "Mottaker", "Sender"],
                 ["Variabel", "rwnd", "cwnd"],
                 ["Mekanisme", "Mottaker annonserer ledig plass", "AIMD, slow start"],
-                ["Nodvendig for", "Ende-til-ende data integrity", "Nettverksstabilitet"],
+                ["Nødvendig for", "Ende-til-ende data integrity", "Nettverksstabilitet"],
               ].map(([dim, flyt, metning], i) => (
                 <tr key={dim} className={i % 2 === 0 ? "bg-white dark:bg-neutral-900/40" : "bg-neutral-50 dark:bg-neutral-800/30"}>
                   <td className="px-3 py-2 font-medium text-xs">{dim}</td>

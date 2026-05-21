@@ -58,7 +58,7 @@ export default function Oppg10Oversikt() {
                 "Nøkkel k tilhører node n = succ(k) — første node i klokkeretning slik at k ≤ n. Formelt: node n er ansvarlig for intervallet (pred(n), n].",
             },
             {
-              step: "Spor oppslaget",
+              step: "Spør oppslaget",
               detail:
                 "Start på kildenoden. Finn største FT-oppføring ≤ nøkkel. Hopp dit. Gjenta til den noden du er på sin successor har nøkkelen.",
             },

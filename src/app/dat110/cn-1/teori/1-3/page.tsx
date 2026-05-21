@@ -26,7 +26,7 @@ export default function CN1_3Page() {
         <p className="text-[var(--muted)] max-w-2xl">
           Nettverkskjernen er nettverket av rutere som kobler aksessnettverkene sammen.
           Her videresender pakker gjennom millioner av rutere over hele verden.
-          Dette delkapittelet gir grunnlaget for A forsta forsinkelsesberegningene i 1.4.
+          Dette delkapittelet gir grunnlaget for å forstå forsinkelsesberegningene i 1.4.
         </p>
       </div>
 
@@ -53,7 +53,7 @@ export default function CN1_3Page() {
       {/* Pakkeswitching vs kretsswitching tabs */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          To mAter A videresende data
+          To mAter å videresende data
         </h2>
 
         <div className="flex gap-2">
@@ -93,12 +93,12 @@ export default function CN1_3Page() {
                 <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4 my-2">
                   <h4 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Store-and-forward</h4>
                   <p className="text-sm">
-                    Rutere mA motta <strong>hele pakken</strong> for de kan begynne A sende den videre pA neste link.
+                    Rutere mA motta <strong>hele pakken</strong> for de kan begynne å sende den videre på neste link.
                     Dette er forskjellig fra en ror der man sender bit for bit kontinuerlig.
                   </p>
                   <div className="mt-3 font-mono text-xs text-[var(--muted)] bg-white/60 dark:bg-neutral-900/40 rounded p-2">
                     <p>Kilde ----[link 1, R bps]---&gt; Ruter A ----[link 2, R bps]---&gt; Mottaker</p>
-                    <p className="mt-1">t=0: Kilde begynner A sende pakke (L bits)</p>
+                    <p className="mt-1">t=0: Kilde begynner å sende pakke (L bits)</p>
                     <p>t=L/R: Siste bit av pakken ankommer Ruter A. Ruter A starter sending.</p>
                     <p>t=2L/R: Siste bit ankommer Mottaker.</p>
                     <p className="text-green-600 dark:text-green-400 mt-1">Ende-til-ende tid = 2L/R (2 hopp, ingen forsinkelse ellers)</p>
@@ -109,7 +109,7 @@ export default function CN1_3Page() {
                   latex="d_{e2e} = N \cdot \frac{L}{R}"
                   title="Store-and-forward over N linker"
                   variant="blue"
-                  description="N = antall linker, L = pakkelengde (bits), R = linjekapasitet (bps). Forutsetter lik kapasitet pA alle linker og ingen ko/prosessering."
+                  description="N = antall linker, L = pakkelengde (bits), R = linjekapasitet (bps). Forutsetter lik kapasitet på alle linker og ingen ko/prosessering."
                 />
 
                 <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-green-200 dark:border-green-800 p-3">
@@ -148,11 +148,11 @@ export default function CN1_3Page() {
                 <div className="grid sm:grid-cols-2 gap-3">
                   <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800 p-3">
                     <p className="font-bold text-xs text-blue-700 dark:text-blue-400 mb-1">FDM (Frequency Division Multiplexing)</p>
-                    <p className="text-xs text-[var(--muted)]">Frekvensb\u00e5ndet deles opp i smale frekvensb\u00e5nd. Hver bruker fAr sitt eget frekvensb\u00e5nd for hele sesjonen. Brukes i AM/FM-radio og kabel-TV.</p>
+                    <p className="text-xs text-[var(--muted)]">Frekvensb\u00e5ndet deles opp i smale frekvensb\u00e5nd. Hver bruker får sitt eget frekvensb\u00e5nd for hele sesjonen. Brukes i AM/FM-radio og kabel-TV.</p>
                   </div>
                   <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-purple-200 dark:border-purple-800 p-3">
                     <p className="font-bold text-xs text-purple-700 dark:text-purple-400 mb-1">TDM (Time Division Multiplexing)</p>
-                    <p className="text-xs text-[var(--muted)]">Tiden deles i rammer (frames) som igjen deles i tidsluker (slots). Hver bruker fAr en bestemt tidsluke i hver ramme. Brukes i ISDN og eldre mobilnett.</p>
+                    <p className="text-xs text-[var(--muted)]">Tiden deles i rammer (frames) som igjen deles i tidsluker (slots). Hver bruker får en bestemt tidsluke i hver ramme. Brukes i ISDN og eldre mobilnett.</p>
                   </div>
                 </div>
 
@@ -218,7 +218,7 @@ export default function CN1_3Page() {
             <tbody>
               {[
                 ["Ressursallokering", "Dynamisk (statistisk multipleksing)", "Statisk (reservert for sesjonen)"],
-                ["Effektivitet", "Hoy (ledig kapasitet kan brukes av andre)", "Lav (stille perioder sloser kapasitet)"],
+                ["Effektivitet", "Høy (ledig kapasitet kan brukes av andre)", "Lav (stille perioder sloser kapasitet)"],
                 ["QoS-garanti", "Ingen garanti (best-effort)", "Garantert bandbredde og forsinkelse"],
                 ["Koforsinkelse", "Ja (variabel, avhenger av trafikk)", "Nei (dedikert kanal)"],
                 ["Pakketap", "Mulig ved overbelastning", "Ingen (reservert)"],
@@ -247,7 +247,7 @@ export default function CN1_3Page() {
         {showExempel && (
           <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4 text-sm space-y-3">
             <p className="font-bold">Oppgave:</p>
-            <p>En link pA 1 Mbps. 35 brukere, hver aktiv 10% av tiden og trenger 100 kbps nAr aktiv.</p>
+            <p>En link på 1 Mbps. 35 brukere, hver aktiv 10% av tiden og trenger 100 kbps nAr aktiv.</p>
 
             <div className="space-y-2">
               <p><strong>Kretsswitching:</strong></p>
@@ -274,9 +274,9 @@ export default function CN1_3Page() {
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-sm mb-1">Intuisjon: bursty trafikk</p>
               <p className="text-xs text-[var(--muted)]">
-                Internetttrafikk er bursty: du sender mye i korte perioder (nAr du klikker pA en lenke),
+                Internetttrafikk er bursty: du sender mye i korte perioder (nAr du klikker på en lenke),
                 men er stille ellers (nAr du leser siden). Pakkeswitching utnytter disse stille periodene
-                ved A la andre sende. Kretsswitching reserverer kapasitet og sloser den under stille perioder.
+                ved å la andre sende. Kretsswitching reserverer kapasitet og sloser den under stille perioder.
               </p>
             </div>
           </div>
@@ -331,13 +331,13 @@ export default function CN1_3Page() {
         <div className="rounded-xl border-2 border-network-400/60 bg-network-50 dark:bg-network-950/20 p-4 text-sm">
           <h3 className="font-bold text-network-600 dark:text-network-400 mb-2">IXP &mdash; Internet Exchange Point</h3>
           <p className="text-[var(--muted)]">
-            Et noyt ralt m\u00f8tepunkt der ISPer kan koble seg direkte til hverandre (peering) uten A sende
+            Et noyt ralt m\u00f8tepunkt der ISPer kan koble seg direkte til hverandre (peering) uten å sende
             trafikk gjennom en tredje part. Reduserer kostnader og forsinkelse. AMS-IX i Amsterdam er
             verdens storste. I Norge: NIX (Norwegian Internet Exchange) i Oslo og Bergen.
           </p>
           <p className="text-[var(--muted)] mt-2">
             <strong>Innholdsleverandornettverk (CDN):</strong> Google, Netflix og Akamai har sine
-            egne private nettverk og plasserer servere nAr brukerne for A redusere forsinkelse.
+            egne private nettverk og plasserer servere nAr brukerne for å redusere forsinkelse.
             De kobler seg til ISPer via IXP-er eller direkte tilkoblinger.
           </p>
         </div>
@@ -350,7 +350,7 @@ export default function CN1_3Page() {
           Sammenligning av pakkeswitching og kretsswitching er et klassisk eksamenstema.
           Husk at pakkeswitching er effektivt for bursty trafikk, og at store-and-forward gir
           ende-til-ende forsinkelse N*L/R. Trafikkintensitet La/R er koblingen til koforsinkelse.
-          Se delkapittel 1.4 for de detaljerte beregningene som eksamen spor om.
+          Se delkapittel 1.4 for de detaljerte beregningene som eksamen spør om.
         </span>
       </div>
 

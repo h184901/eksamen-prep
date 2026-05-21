@@ -353,7 +353,7 @@ export default function EksamenovingOppsummeringPage() {
             <p>Init A: D_A(A)=0, D_A(B)=1, D_A(C)=5</p>
             <p>Init B: D_B(A)=1, D_B(B)=0, D_B(C)=2</p>
             <p>Init C: D_C(A)=5, D_C(B)=2, D_C(C)=0</p>
-            <p className="mt-1">Runde 1 — A oppdaterer D_A(C):</p>
+            <p className="mt-1">Runde 1 — å oppdaterer D_A(C):</p>
             <p className="ml-2">via B: c(A,B)+D_B(C) = 1+2 = 3 ← lavere enn 5!</p>
             <p className="ml-2">via C: c(A,C)+D_C(C) = 5+0 = 5</p>
             <p className="ml-2">→ D_A(C) = min(3,5) = 3. Neste hopp: B</p>

@@ -65,7 +65,7 @@ export default function Oppg7TidligerePage() {
         <div className="mt-4 space-y-2">
           <QA
             q="a) Forklar to måter å implementere en RPC-server som håndterer mange klienter samtidig: multithreading og asynkrone (callback-baserte) servere."
-            a="En multithreaded server bruker en dispatcher-tråd som mottar innkommende forespørsler og tildeler dem til worker-tråder fra et trådpøl. Dette gir høy parallellitet, men krever synkronisering for delte ressurser. En asynkron (callback-basert) server bruker én enkelt tråd med ikke-blokkerende I/O og event-loop: når en operasjon er ferdig, kalles en registrert callback-funksjon. Dette unngår overhead fra trådadministrasjon og er effektivt for I/O-intensive oppgaver."
+            a="En multithreaded server bruker en dispatcher-tråd som mottar innkommende forespørsler og tildeler dem til worker-tråder fra et trådpøl. Dette gir høy parallellitet, men krever synkronisering for delte ressurser. En asynkron (callback-basert) server bruker én enkelt tråd med ikke-blokkerende I/ø og event-loop: når en operasjon er ferdig, kalles en registrert callback-funksjon. Dette unngår overhead fra trådadministrasjon og er effektivt for I/O-intensive oppgaver."
           />
           <QA
             q="b) Hva menes med failure transparency i distribuerte systemer?"

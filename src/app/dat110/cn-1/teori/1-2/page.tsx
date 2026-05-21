@@ -14,7 +14,7 @@ export default function CN1_2Page() {
       avstand: "100 m (Ethernet)",
       bruk: "LAN, DSL",
       farge: "border-yellow-400 bg-yellow-50 dark:bg-yellow-950/20",
-      detaljer: "Den billigste og mest utbredte typen kabel. To isolerte kobbertradere er tvunnet rundt hverandre for A redusere elektrisk stoy. Kategori 5e/6 brukes til Gigabit Ethernet. DSL bruker eksisterende telefonlinjer av denne typen til A levere bredbAnd.",
+      detaljer: "Den billigste og mest utbredte typen kabel. To isolerte kobbertråder er tvunnet rundt hverandre for å redusere elektrisk støy. Kategori 5e/6 brukes til Gigabit Ethernet. DSL bruker eksisterende telefonlinjer av denne typen til å levere bredbånd.",
     },
     {
       id: "koaks",
@@ -23,7 +23,7 @@ export default function CN1_2Page() {
       avstand: "Flere km (med forsterkning)",
       bruk: "Kabel-TV (HFC), eldre nettverk",
       farge: "border-orange-400 bg-orange-50 dark:bg-orange-950/20",
-      detaljer: "En sentral kobberleder omgitt av skjermende metall. Mye bedre stoyimmunitet enn tvunnet parkabel. HFC (Hybrid Fiber Coax) bruker fiber mellom hovednoder og koaks i det siste leddet til husstanden. Delt medium: alle naboer i kabelnettet deler kapasitet.",
+      detaljer: "En sentral kobberleder omgitt av skjermende metall. Mye bedre støyimmunitet enn tvunnet parkabel. HFC (Hybrid Fiber Coax) bruker fiber mellom hovednoder og koaks i det siste leddet til husstanden. Delt medium: alle naboer i kabelnettet deler kapasitet.",
     },
     {
       id: "fiber",
@@ -32,7 +32,7 @@ export default function CN1_2Page() {
       avstand: "Hundrevis av km",
       bruk: "Ryggraden, FTTH, transatlantisk",
       farge: "border-blue-400 bg-blue-50 dark:bg-blue-950/20",
-      detaljer: "Sender lyspulser gjennom et glassror. Ekstremt hoy kapasitet, lav attenuation (signalsvekking), immun mot elektromagnetisk stoy og avlytting. FTTH (Fiber to the Home) gir dedikert fiberforbindelse helt til husstanden. Dyrere A installere enn kopper.",
+      detaljer: "Sender lyspulser gjennom et glassror. Ekstremt høy kapasitet, lav attenuation (signalsvekking), immun mot elektromagnetisk støy og avlytting. FTTH (Fiber to the Home) gir dedikert fiberforbindelse helt til husstanden. Dyrere å installere enn kopper.",
     },
     {
       id: "radio",
@@ -41,7 +41,7 @@ export default function CN1_2Page() {
       avstand: "Noen meter – hundrevis av km",
       bruk: "WiFi, 4G/5G, satellitt, Bluetooth",
       farge: "border-green-400 bg-green-50 dark:bg-green-950/20",
-      detaljer: "Signalet propagerer gjennom elektromagnetisk spektrum. PAviriket av forstyrrelser, multipath-propagasjon (signalet reflekteres) og halvdupleks (kan ikke sende og motta samtidig pa samme frekvens). WiFi (802.11) = lokalt. 4G/5G = mobilnett. Satellitt = global dekning men hoy forsinkelse (spesielt GEO ~600ms RTT).",
+      detaljer: "Signalet propagerer gjennom elektromagnetisk spektrum. Påvirket av forstyrrelser, multipath-propagasjon (signalet reflekteres) og halvdupleks (kan ikke sende og motta samtidig på samme frekvens). WiFi (802.11) = lokalt. 4G/5G = mobilnett. Satellitt = global dekning men høy forsinkelse (spesielt GEO ~600ms RTT).",
     },
   ];
 
@@ -57,7 +57,7 @@ export default function CN1_2Page() {
       type: "Kabel-HFC (Hybrid Fiber Coax)",
       hastighet: "Ned: 40 Mbps – 1.2 Gbps, Opp: 30 Mbps",
       medium: "Fiber til noden, koaks til husstanden",
-      struktur: "Delt medium: alle i nabolaget deler kapasitet pA koaks-segmentet",
+      struktur: "Delt medium: alle i nabolaget deler kapasitet på koaks-segmentet",
       egenskap: "Hastigheten varierer med belastning (peak hours = tregere). CMTS styrer tilgangen.",
     },
     {
@@ -65,7 +65,7 @@ export default function CN1_2Page() {
       hastighet: "Symmetrisk 1 Gbps – 10 Gbps",
       medium: "Optisk fiber helt til husstanden",
       struktur: "Dedikert eller delt via PON (Passive Optical Network)",
-      egenskap: "Beste ytelse, men kostbart A installere. Vokser raskt i Norge.",
+      egenskap: "Beste ytelse, men kostbart å installere. Vokser raskt i Norge.",
     },
     {
       type: "WiFi / Ethernet (LAN)",
@@ -79,7 +79,7 @@ export default function CN1_2Page() {
       hastighet: "4G: 100 Mbps, 5G: opp til 20 Gbps",
       medium: "Radiob\u00f8lger mellom mobil og basestasjoner",
       struktur: "Mobil kobler til base station, videre via kjernenett til internett",
-      egenskap: "Bredt dekningsomrAde. 5G muliggj\u00f8r lav latens for IoT og autonom kj\u00f8ring.",
+      egenskap: "Bredt dekningsområde. 5G muliggj\u00f8r lav latens for IoT og autonom kj\u00f8ring.",
     },
   ];
 
@@ -98,8 +98,8 @@ export default function CN1_2Page() {
         <h1 className="text-2xl font-bold mb-2">1.2 Nettverkskanten</h1>
         <p className="text-[var(--muted)] max-w-2xl">
           Nettverkskanten er der brukerne og applikasjonene befinner seg. Her kobles
-          endesystemer til internett via aksessnettverk, og vi ser pa de fysiske mediene
-          som brukes for A transportere bitene.
+          endesystemer til internett via aksessnettverk, og vi ser på de fysiske mediene
+          som brukes for å transportere bitene.
         </p>
       </div>
 
@@ -178,7 +178,7 @@ export default function CN1_2Page() {
         <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4">
           <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-2">DSL i detalj</h3>
           <div className="text-sm space-y-2">
-            <p>DSL bruker den eksisterende telefoninfrastrukturen til A levere internett. Dataene sendes pa hoyere frekvenser enn det som brukes til tale.</p>
+            <p>DSL bruker den eksisterende telefoninfrastrukturen til å levere internett. Dataene sendes på høyere frekvenser enn det som brukes til tale.</p>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
               <p>Hjem &#8594; [DSLAM hos ISP] &#8594; Internett</p>
               <p className="text-[var(--muted)]">Frekvensfordeling:</p>
@@ -197,7 +197,7 @@ export default function CN1_2Page() {
           Fysiske medier
         </h2>
         <p className="text-sm text-[var(--muted)]">
-          Klikk pa et medium for A se detaljer. Fysiske medier er det som faktisk transporterer bitene
+          Klikk på et medium for å se detaljer. Fysiske medier er det som faktisk transporterer bitene
           fra sender til mottaker.
         </p>
 
@@ -243,7 +243,7 @@ export default function CN1_2Page() {
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
           Dette delkapittelet er sjelden direkte eksamensstoff i oppgave 3, men flervalgsoppgaver
-          kan sporre om egenskaper ved ulike aksessnettverk eller fysiske medier.
+          kan spørre om egenskaper ved ulike aksessnettverk eller fysiske medier.
           Husk: kabel-HFC er delt medium, DSL er dedikert, fiber er det raskeste og dyreste.
         </span>
       </div>

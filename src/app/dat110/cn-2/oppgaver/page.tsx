@@ -140,7 +140,7 @@ export default function CN2OppgaverPage() {
         <Collapsible title="Strategi: HTTP-tidberegning" color="hint">
           <ol className="space-y-2 list-decimal list-inside">
             <li><strong>Identifiser modus:</strong> Er det ikke-persistent eller persistent? Med/uten pipelining?</li>
-            <li><strong>Finn L/R:</strong> Konverter filstørrelse til bits, konverter båndbredde til bps. L/R = overforingstid i sekunder.</li>
+            <li><strong>Finn L/R:</strong> Konverter filstørrelse til bits, konverter båndbredde til bps. L/R = overføringstid i sekunder.</li>
             <li><strong>Tell TCP-handshakes:</strong> Ikke-persistent = 1 ny handshake (1 RTT) per objekt. Persistent = kun 1 handshake totalt.</li>
             <li><strong>Legg sammen:</strong> Ikke-persistent: (N+1)·(2RTT + L/R). Persistent: 2RTT + L_html/R + N·(RTT + L_obj/R).</li>
             <li><strong>Kontrollsjekk:</strong> Er svaret rimelig? Persistent bør alltid være raskere enn ikke-persistent.</li>

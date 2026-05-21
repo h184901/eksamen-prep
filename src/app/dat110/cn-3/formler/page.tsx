@@ -150,7 +150,7 @@ export default function CN3FormlerPage() {
             <VarRow sym="U" meaning="Utnyttelsesgrad — andel av linken som faktisk brukes (0–1)" />
             <VarRow sym="L" meaning="Pakkestørrelse i bits" />
             <VarRow sym="R" meaning="Linkkapasitet / båndbredde i bps" />
-            <VarRow sym="L/R" meaning="Overforingstid — tid for å sende pakken" />
+            <VarRow sym="L/R" meaning="Overføringstid — tid for å sende pakken" />
             <VarRow sym="RTT" meaning="Round-trip time" />
           </div>
           <div className="rounded-lg bg-green-100 dark:bg-green-900/30 px-3 py-2 text-xs">
@@ -337,7 +337,7 @@ export default function CN3FormlerPage() {
               "TCP Tahoe vs Reno: Tahoe setter cwnd=1 ved 3 duplikat ACK. Reno setter cwnd=ssthresh (fast recovery).",
               "DevRTT er EWMA av absoluttverdien — aldri negativ. |SampleRTT − EstimatedRTT|, ikke signed.",
               "TimeoutInterval = EstimatedRTT + 4·DevRTT. Faktoren er 4, ikke 2 eller 3.",
-              "Utnyttelsesgrad: tell overforingstid L/R i TELLER og i NEVNER. U = (L/R) / (RTT + L/R).",
+              "Utnyttelsesgrad: tell overføringstid L/R i TELLER og i NEVNER. U = (L/R) / (RTT + L/R).",
               "RTT-estimering: α=0.125, β=0.25 — lær disse to konstantene utenat.",
             ].map((feil, i) => (
               <li key={i} className="flex items-start gap-2">

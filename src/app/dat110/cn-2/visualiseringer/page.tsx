@@ -454,7 +454,7 @@ function ArchitectureComparator() {
           {D_p2p < D_cs ? (
             <p>P2P er <strong>{(D_cs / D_p2p).toFixed(1)}x raskere</strong> enn klient-server med disse parameterne!</p>
           ) : (
-            <p>Med lavt N og høy server-upload kan klient-server matche P2P. Okt N for a se self-scalability.</p>
+            <p>Med lavt N og høy server-upload kan klient-server matche P2P. Økt N for å se self-scalability.</p>
           )}
         </div>
       )}
@@ -469,8 +469,8 @@ function SocketDiagram() {
   const [proto, setProto] = useState<"tcp" | "udp">("tcp");
 
   const tcpSteps = [
-    { side: "server", step: "ServerSocket(port)", desc: "Server oppretter socket og lytter pa port" },
-    { side: "server", step: "accept()", desc: "Server blokkerer og venter pa klient" },
+    { side: "server", step: "ServerSocket(port)", desc: "Server oppretter socket og lytter på port" },
+    { side: "server", step: "accept()", desc: "Server blokkerer og venter på klient" },
     { side: "client", step: "new Socket(host, port)", desc: "Klient initierer tilkobling" },
     { side: "both", step: "TCP 3-veis handshake", desc: "SYN, SYN-ACK, ACK automatisk" },
     { side: "server", step: "accept() returnerer Socket", desc: "Ny tilkoblingssocket opprettes for klienten" },
@@ -479,7 +479,7 @@ function SocketDiagram() {
   ];
 
   const udpSteps = [
-    { side: "server", step: "DatagramSocket(port)", desc: "Server oppretter socket pa port" },
+    { side: "server", step: "DatagramSocket(port)", desc: "Server oppretter socket på port" },
     { side: "client", step: "DatagramSocket()", desc: "Klient oppretter socket (ingen port nodv.)" },
     { side: "client", step: "DatagramPacket(data, addr, port)", desc: "Klient pakker data med serveradresse" },
     { side: "client", step: "cs.send(packet)", desc: "Klient sender datagram" },

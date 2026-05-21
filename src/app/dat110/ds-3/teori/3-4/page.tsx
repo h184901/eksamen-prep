@@ -96,7 +96,7 @@ export default function DS3_4Page() {
                 <text x="400" y="60" textAnchor="middle" fill="#991b1b" fontSize="10" fontWeight="bold">Problem:</text>
                 <text x="400" y="78" textAnchor="middle" fill="#991b1b" fontSize="9">B og C må</text>
                 <text x="400" y="93" textAnchor="middle" fill="#991b1b" fontSize="9">vente selv</text>
-                <text x="400" y="108" textAnchor="middle" fill="#991b1b" fontSize="9">om A er lang</text>
+                <text x="400" y="108" textAnchor="middle" fill="#991b1b" fontSize="9">om å er lang</text>
                 <defs>
                   <marker id="arrs" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
                     <path d="M0,0 L5,2.5 L0,5 Z" fill="#6b7280"/>
@@ -145,7 +145,7 @@ export default function DS3_4Page() {
                 <line x1="240" y1="65" x2="298" y2="27" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrs2)"/>
                 <line x1="240" y1="75" x2="298" y2="70" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrs2)"/>
                 <line x1="240" y1="85" x2="298" y2="113" stroke="#10b981" strokeWidth="1.5" markerEnd="url(#arrs2)"/>
-                <text x="345" y="148" textAnchor="middle" fill="#10b981" fontSize="9" fontWeight="bold">Alle kjorer parallelt!</text>
+                <text x="345" y="148" textAnchor="middle" fill="#10b981" fontSize="9" fontWeight="bold">Alle kjører parallelt!</text>
                 <defs>
                   <marker id="arrs2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
                     <path d="M0,0 L5,2.5 L0,5 Z" fill="#6b7280"/>
