@@ -179,3 +179,55 @@ export interface DAT110VaultMeta {
     exams?: number;
   };
 }
+
+// ---- ExamPattern (P1.E gjengangere-side) ----------------------------------
+// Hand-curated dataset i src/data/dat110-vault/exam-patterns.json — IKKE
+// regenerert av sync-skriptet. Driver /dat110/eksamen/gjengangere.
+
+export interface ExamPatternExampleLink {
+  label: string;
+  href: string;
+}
+
+export interface ExamPatternLearnMoreLink {
+  label: string;
+  href: string;
+}
+
+export interface ExamPatternQSlot {
+  number: number;
+  title: string;
+  weightPercent: number;
+  stability: string;
+  topicFocus: string;
+  description: string;
+  examples: ExamPatternExampleLink[];
+}
+
+export interface ExamPatternTopConcept {
+  rank: number;
+  slug: string;
+  label: string;
+  kind: "concept" | "topic";
+  tier: 1 | 2 | 3 | 4 | 5;
+  note: string;
+  href: string | null;
+}
+
+export interface ExamPatternCard {
+  slug: string;
+  title: string;
+  weightHint: string;
+  stabilityTag: string;
+  description: string;
+  examples: ExamPatternExampleLink[];
+  learnMore: ExamPatternLearnMoreLink[];
+  practiceHref?: string;
+}
+
+export interface ExamPatternsDataset {
+  _doc?: string;
+  qslots: ExamPatternQSlot[];
+  topConcepts: ExamPatternTopConcept[];
+  patterns: ExamPatternCard[];
+}

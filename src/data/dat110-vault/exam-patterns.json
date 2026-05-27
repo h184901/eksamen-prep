@@ -1,0 +1,314 @@
+{
+  "_doc": "Hand-curated DAT110 exam-pattern dataset for /dat110/eksamen/gjengangere. Aggregert fra vault-notater exam-patterns/recurring-questions.md, exam-patterns/concept-frequency.md, exam-patterns/sensorveiledning-themes.md. Dekker 5 komplette eksamen-par (2022, 2023, 2024-01, 2024-05, 2025-01).",
+  "qslots": [
+    {
+      "number": 1,
+      "title": "MCQ-mix (a–j)",
+      "weightPercent": 10,
+      "stability": "format-stabilt, innhold roterer",
+      "topicFocus": "Cross-tema (Canvas-quiz-mapping)",
+      "description": "10 sub-questions (a–j), hver dekker ett tema. Sub-svar er praktisk talt rett-kopiert fra Canvas-quiz-fasitene. Strategien er full quiz-dekning.",
+      "examples": [
+        { "label": "Januar 2024", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-1" },
+        { "label": "Januar 2025", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-1" },
+        { "label": "Mai 2022", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-1" },
+        { "label": "Mai 2023", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-1" },
+        { "label": "Mai 2024", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1" }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Prosjekt-spesifikk dypdykk",
+      "weightPercent": 10,
+      "stability": "tema roterer per prosjekt",
+      "topicFocus": "Roterer (RPC/MOM/Chord/IoT)",
+      "description": "Knyttet til ett av prosjektene (RPC, MOM, Chord DHT, IoT). Chord DHT er mest brukt (3/6 historisk).",
+      "examples": [
+        { "label": "2024-01 — MOM/pub-sub", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-2" },
+        { "label": "2025-01 — Socket+RPC", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-2" },
+        { "label": "2022-05 — IoT", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-2" },
+        { "label": "2023-05 — Chord DHT", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-2" },
+        { "label": "2024-05 — Chord DHT", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-2" }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Metrics / delay-beregning",
+      "weightPercent": 10,
+      "stability": "HØY (4/5)",
+      "topicFocus": "Delay-decomposition (variant: IP-fragmentering)",
+      "description": "Variant 1 (4/5): dtrans = L/R, dprop = d/s, dnodal = proc + queue, end-to-end = sum. Variant 2 (2022): IP-fragmentering med MTU, identifier, offset.",
+      "examples": [
+        { "label": "Januar 2024 — delay", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-3" },
+        { "label": "Januar 2025 — delay", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-3" },
+        { "label": "Mai 2023 — delay", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-3" },
+        { "label": "Mai 2024 — throughput-variant", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-3" },
+        { "label": "Mai 2022 — IP-fragmentering", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-3" }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Protokoll-lag",
+      "weightPercent": 10,
+      "stability": "MIDDELS — roterer",
+      "topicFocus": "UDP / IP / HTTP / TCP-IP-stack",
+      "description": "Tre cluster: (a) UDP-tjenester, (b) IP-protokoll med TTL/fragmentation-felter, (c) HTTP-request/respons-fields. 2024-05 spør om hele TCP/IP-stacken.",
+      "examples": [
+        { "label": "2024-01 — UDP", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-4" },
+        { "label": "2025-01 — IP-protokoll", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-4" },
+        { "label": "Mai 2023 — HTTP", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-4" },
+        { "label": "Mai 2024 — TCP/IP-stack", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-4" }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Routing / Link-layer",
+      "weightPercent": 10,
+      "stability": "MIDDELS — to varianter",
+      "topicFocus": "Distance-vector (Bellman-Ford) / Hub-vs-Switch+ARP",
+      "description": "Variant A (3/5): 4-router DV-tabell med iterasjoner k=0, k=1, ... Variant B (2/5): hub = broadcast-domain vs switch = MAC-tabell.",
+      "examples": [
+        { "label": "2024-01 — DV", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-5" },
+        { "label": "2025-01 — DV", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-5" },
+        { "label": "Mai 2024 — DV", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-5" },
+        { "label": "Mai 2022 — Hub vs Switch", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-5" },
+        { "label": "Mai 2023 — ARP + Switch", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-5" }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "IP / Forwarding / Subnetting",
+      "weightPercent": 10,
+      "stability": "HØY (5/5)",
+      "topicFocus": "ARP + DHCP + CIDR + longest-prefix",
+      "description": "Konsistent: DHCP-flyt + ARP-lookup + IP-encapsulation + subnetting med longest-prefix. 2022 har forwarding-table-lookup som hovedfokus.",
+      "examples": [
+        { "label": "Januar 2024", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-6" },
+        { "label": "Januar 2025", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-6" },
+        { "label": "Mai 2022", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-6" },
+        { "label": "Mai 2023", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-6" },
+        { "label": "Mai 2024", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-6" }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "DS-fundamentals kortsvar",
+      "weightPercent": 5,
+      "stability": "HØY",
+      "topicFocus": "Threading + transparency + RPC",
+      "description": "Alltid 2 sub-questions (a, b). Konsept-trio: multithreading, distribution-transparency (6 typer), RPC sync/async. Sensor godtar 2–4 setninger med konsept-presisjon.",
+      "examples": [
+        { "label": "2024-01 — threads + access-trans.", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-7" },
+        { "label": "2025-01 — stateful/async RPC", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-7" },
+        { "label": "Mai 2022 — RPC vs MOM + threads", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-7" },
+        { "label": "Mai 2023 — transparency-typer", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-7" },
+        { "label": "Mai 2024 — RPC-callback + threads", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-7" }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Overlay-multicast",
+      "weightPercent": 10,
+      "stability": "HØY (5/5)",
+      "topicFocus": "Application-layer multicast",
+      "description": "Identisk format alle år: 5–6 overlay-prosesser, fully-connected overlay-graf, beregn RDP (Relative Delay Penalty) og tree-cost.",
+      "examples": [
+        { "label": "Januar 2024 (6 prosesser)", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-8" },
+        { "label": "Januar 2025 (A–E)", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-8" },
+        { "label": "Mai 2022 (A–E)", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-8" },
+        { "label": "Mai 2023 (A–F)", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-8" },
+        { "label": "Mai 2024 (A–F)", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-8" }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Distribuert-tema",
+      "weightPercent": 10,
+      "stability": "LAV–MIDDELS — roterer mest",
+      "topicFocus": "Replication / RPC-failure / DNS / VC / fault",
+      "description": "Roterer mest av alle: async RPC + vector clocks, reliable group multicast, primary-vs-replicated-write, DNS iterative vs recursive, RPC-failure-handling.",
+      "examples": [
+        { "label": "2024-01 — async RPC + VC", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-9" },
+        { "label": "2025-01 — reliable multicast", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-9" },
+        { "label": "Mai 2022 — primary-based", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-9" },
+        { "label": "Mai 2023 — DNS iter/rec", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-9" },
+        { "label": "Mai 2024 — flat/hierarchical group", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-9" }
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Chord DHT",
+      "weightPercent": 15,
+      "stability": "HØYEST (5/5) — tyngste enkelt-oppgave",
+      "topicFocus": "Chord ring, finger-table, key-resolution",
+      "description": "Identisk struktur 5/5 år: m=5 ring (0..31), 4–6 server-replikaer, finger-table beregning succ(n + 2^(i-1)) mod 2^m, key-resolution-trace, fault-tolerance + scalability-resonnement.",
+      "examples": [
+        { "label": "Januar 2024 (6 replikaer)", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-10" },
+        { "label": "Januar 2025 (4 replikaer)", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-10" },
+        { "label": "Mai 2022 (5 replikaer)", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-10" },
+        { "label": "Mai 2023 (6 replikaer)", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-10" },
+        { "label": "Mai 2024", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-10" }
+      ]
+    }
+  ],
+  "topConcepts": [
+    { "rank": 1, "slug": "tcp-ip-stack", "label": "TCP/IP-stack", "kind": "concept", "tier": 1, "note": "Kursens skjelett — cross-tema", "href": null },
+    { "rank": 2, "slug": "chord-ring", "label": "Chord ring", "kind": "concept", "tier": 1, "note": "Q10 i alle 5 år (15%)", "href": "/dat110/begreper/chord-ring" },
+    { "rank": 3, "slug": "dht-fundamentals", "label": "DHT-fundamentals", "kind": "concept", "tier": 1, "note": "Q10 (15%)", "href": "/dat110/begreper/dht-fundamentals" },
+    { "rank": 4, "slug": "key-resolution", "label": "Key resolution", "kind": "concept", "tier": 1, "note": "Q10 lookup-trace", "href": "/dat110/begreper/key-resolution" },
+    { "rank": 5, "slug": "application-layer-multicast", "label": "Application-layer multicast", "kind": "concept", "tier": 1, "note": "Q8 i alle 5 år (10%)", "href": "/dat110/begreper/application-layer-multicast" },
+    { "rank": 6, "slug": "delays", "label": "Delays", "kind": "concept", "tier": 1, "note": "Q3 i 4/5 år", "href": "/dat110/begreper/delays" },
+    { "rank": 7, "slug": "throughput", "label": "Throughput", "kind": "concept", "tier": 2, "note": "Q3 (4/5)", "href": "/dat110/begreper/throughput" },
+    { "rank": 8, "slug": "ipv4-addressing", "label": "IPv4-adressering", "kind": "concept", "tier": 1, "note": "Q5/Q6 i alle år", "href": "/dat110/begreper/ipv4-addressing" },
+    { "rank": 9, "slug": "subnetting", "label": "Subnetting", "kind": "concept", "tier": 1, "note": "Q6 (CIDR + longest-prefix)", "href": "/dat110/begreper/subnetting" },
+    { "rank": 10, "slug": "arp-and-mac-addressing", "label": "ARP + MAC", "kind": "concept", "tier": 1, "note": "Q5/Q6 i alle år", "href": "/dat110/begreper/arp-and-mac-addressing" },
+    { "rank": 11, "slug": "routing-algorithms", "label": "Routing-algoritmer (DV)", "kind": "concept", "tier": 1, "note": "Q5 (3/5)", "href": "/dat110/begreper/routing-algorithms" },
+    { "rank": 12, "slug": "rpc", "label": "RPC", "kind": "concept", "tier": 2, "note": "Q7 + Q9 (4/5)", "href": "/dat110/begreper/rpc" },
+    { "rank": 13, "slug": "distribution-transparency", "label": "Distribution-transparency", "kind": "concept", "tier": 2, "note": "Q7 (sensor krever 6 typer)", "href": "/dat110/begreper/distribution-transparency" },
+    { "rank": 14, "slug": "replication-strategies", "label": "Replication-strategier", "kind": "concept", "tier": 2, "note": "Q9 (3/5)", "href": "/dat110/begreper/replication-strategies" },
+    { "rank": 15, "slug": "network-layer-services", "label": "Network-layer services", "kind": "concept", "tier": 2, "note": "Q4/Q6 (4/5)", "href": "/dat110/begreper/network-layer-services" }
+  ],
+  "patterns": [
+    {
+      "slug": "chord-dht-finger-table",
+      "title": "Chord DHT med m=5 ring",
+      "weightHint": "Q10 — 15% (HØYEST verdi)",
+      "stabilityTag": "5/5 år",
+      "description": "Identisk oppsett 5/5 år: m=5 bit ring (32 noder maks), 4–6 server-replikaer. Beregn finger-table med formelen succ(n + 2^(i-1)) mod 2^m, gjør key-resolution-trace, og diskuter fault-tolerance + scalability. Sensor-template er stabil i alle 6 sensorveiledninger.",
+      "examples": [
+        { "label": "2024-01 — m=5, 6 replikaer", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-10" },
+        { "label": "2025-01 — m=5, 4 replikaer", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-10" },
+        { "label": "2022 — m=5, 5 replikaer", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-10" },
+        { "label": "2023 — m=5, 6 replikaer", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-10" }
+      ],
+      "learnMore": [
+        { "label": "Tema: Chord DHT", "href": "/dat110/temaer/chord-dht" },
+        { "label": "Begrep: Chord ring", "href": "/dat110/begreper/chord-ring" },
+        { "label": "Begrep: Key resolution", "href": "/dat110/begreper/key-resolution" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "overlay-multicast-rdp",
+      "title": "Overlay-multicast (RDP + tree-cost)",
+      "weightHint": "Q8 — 10%",
+      "stabilityTag": "5/5 år",
+      "description": "Standard-oppsett 5/5 år: 5–6 overlay-prosesser, fully-connected overlay-graf, fysisk delay-tabell. Beregn RDP (Relative Delay Penalty) og tree-cost-summering. Sensor-strukturen er identisk på tvers av eksamener.",
+      "examples": [
+        { "label": "2024-01 — 6 prosesser", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-8" },
+        { "label": "2025-01 — 5 prosesser", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-8" },
+        { "label": "2023 — A–F", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-8" }
+      ],
+      "learnMore": [
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip" },
+        { "label": "Begrep: Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "delay-decomposition",
+      "title": "Delay-decomposition (dtrans + dprop + ...)",
+      "weightHint": "Q3 — 10%",
+      "stabilityTag": "4/5 år (1 variant)",
+      "description": "Variant 1 (4/5): bryt end-to-end-delay i dtrans = L/R, dprop = d/s, dnodal = proc + queue. Bottleneck = minimums-R i pathen. Variant 2 (kun 2022): IP-fragmentering med MTU, identifier, offset. Sensor godtar både formelbruk og forklaring.",
+      "examples": [
+        { "label": "2024-01 — delay", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-3" },
+        { "label": "2025-01 — delay", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-3" },
+        { "label": "Mai 2023 — delay", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-3" },
+        { "label": "Mai 2022 — fragmentering (variant)", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-3" }
+      ],
+      "learnMore": [
+        { "label": "Begrep: Delays", "href": "/dat110/begreper/delays" },
+        { "label": "Begrep: Throughput", "href": "/dat110/begreper/throughput" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "ip-forwarding-subnetting",
+      "title": "IP / forwarding / subnetting (CIDR + longest-prefix)",
+      "weightHint": "Q6 — 10%",
+      "stabilityTag": "5/5 år",
+      "description": "Konsistent 5/5 år: DHCP-tildeling + ARP-lookup + IP-encapsulation + subnetting med longest-prefix-match. Spørsmål om CIDR-blokker, bit-mønstre og forwarding-tabeller. Quiz Task 12 Q6 (/23 = 512) er identisk regneklasse.",
+      "examples": [
+        { "label": "2024-01", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-6" },
+        { "label": "2025-01", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-6" },
+        { "label": "Mai 2022", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-6" },
+        { "label": "Mai 2023", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-6" }
+      ],
+      "learnMore": [
+        { "label": "Tema: Network layer", "href": "/dat110/temaer/network-layer" },
+        { "label": "Begrep: IPv4-adressering", "href": "/dat110/begreper/ipv4-addressing" },
+        { "label": "Begrep: Subnetting", "href": "/dat110/begreper/subnetting" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "rpc-sync-async",
+      "title": "RPC — synkron vs asynkron",
+      "weightHint": "Q7 og Q9 — 5–10%",
+      "stabilityTag": "4/5 år",
+      "description": "Sensor skiller eksplisitt mellom sync RPC og 3-type-async-taksonomi: one-way / callback / future-based. Q7 spør kort (2–4 setninger), Q9 går dypere i feilhåndtering ved tap av request/respons.",
+      "examples": [
+        { "label": "2025-01 Q7 — sync/async", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-7" },
+        { "label": "Mai 2024 Q7 — callback", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-7" },
+        { "label": "Januar 2024 Q9 — async + replication", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-9" }
+      ],
+      "learnMore": [
+        { "label": "Begrep: RPC", "href": "/dat110/begreper/rpc" },
+        { "label": "Tema: Logical clocks", "href": "/dat110/temaer/logical-clocks" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "vector-clocks-ordering",
+      "title": "Vector clocks og kausal-ordering",
+      "weightHint": "Q9 — 10% (rotation slot)",
+      "stabilityTag": "Sjelden men høy vekt når den kommer",
+      "description": "Når Q9 dreier seg om vector clocks: kandidaten må kunne oppdatere VC ved send/receive, og resonnere om happens-before / kausal-ordering. 2024-01 og 2023 dekker dette.",
+      "examples": [
+        { "label": "Januar 2024 — async RPC + VC", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-9" },
+        { "label": "Mai 2023 — FIFO + VC", "href": "/dat110/eksamen/dat110-eksamen-05-2023#oppg-9" }
+      ],
+      "learnMore": [
+        { "label": "Begrep: Vector clocks", "href": "/dat110/begreper/vector-clocks" },
+        { "label": "Begrep: Lamport clocks", "href": "/dat110/begreper/lamport-clocks" },
+        { "label": "Tema: Logical clocks", "href": "/dat110/temaer/logical-clocks" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "consistency-replication",
+      "title": "Konsistens og replikering",
+      "weightHint": "Q9 — 10%",
+      "stabilityTag": "3/5 år (rotation slot)",
+      "description": "Sensor varierer mellom primary-based vs replicated-write, og flat group vs hierarchical group. Krever konkrete eksempler og forklaring av write-propagation.",
+      "examples": [
+        { "label": "Mai 2022 — primary-based", "href": "/dat110/eksamen/dat110-eksamen-05-2022#oppg-9" },
+        { "label": "Mai 2024 — flat/hierarchical", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-9" }
+      ],
+      "learnMore": [
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication" },
+        { "label": "Begrep: Replication-strategier", "href": "/dat110/begreper/replication-strategies" },
+        { "label": "Begrep: Konsistens-modeller", "href": "/dat110/begreper/consistency-models" }
+      ],
+      "practiceHref": "/dat110/oving"
+    },
+    {
+      "slug": "fault-tolerance",
+      "title": "Fault-tolerance (failure-modeller, gruppe-feiltoleranse)",
+      "weightHint": "Q1.g + Q9 — 5–10%",
+      "stabilityTag": "Recurring (3/5 år)",
+      "description": "Sub-question i Q1 om failure-typer (crash/omission/timing/response/byzantine) og hovedspørsmål i Q9 om reliable group multicast eller RPC-failure-handling. Byzantine agreement krever 3k+1 prosesser.",
+      "examples": [
+        { "label": "Januar 2024 Q1.g — omission", "href": "/dat110/eksamen/dat110-eksamen-01-2024#oppg-1" },
+        { "label": "Januar 2025 Q9 — reliable multicast", "href": "/dat110/eksamen/dat110-eksamen-01-2025#oppg-9" }
+      ],
+      "learnMore": [
+        { "label": "Tema: Fault-tolerance", "href": "/dat110/temaer/fault-tolerance" },
+        { "label": "Begrep: Failure-modeller", "href": "/dat110/begreper/fault-models" },
+        { "label": "Begrep: Failure-deteksjon", "href": "/dat110/begreper/failure-detection" }
+      ],
+      "practiceHref": "/dat110/oving"
+    }
+  ]
+}
