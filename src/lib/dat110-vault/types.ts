@@ -133,11 +133,16 @@ export interface ExamQuestion {
   topic: DAT110QuizTopic;
   conceptSlugs: string[];
   prompt: string;
+  // When subquestions[] is present, each subquestion carries its own solution,
+  // and the question-level `solution` is optional (synthesis/preamble only).
   subquestions?: ExamSubquestion[];
-  solution: ExamSolution;
+  solution?: ExamSolution;
   learnMoreLinks: LearnMoreLink[];
   sourceRefs: SourceRef[];
   relatedExamPatterns: string[];
+  // Note when a figure/diagram from the PDF could not be reproduced losslessly
+  // in text/Markdown form. Rendered as a caveat under the question prompt.
+  figureNote?: string;
 }
 
 export interface DAT110Exam {
@@ -170,5 +175,7 @@ export interface DAT110VaultMeta {
     sourcesScanned: number;
     sourcesFilteredLocalOnly: number;
     wikilinkRoutes: number;
+    unmappedWikilinksInBodies?: number;
+    exams?: number;
   };
 }

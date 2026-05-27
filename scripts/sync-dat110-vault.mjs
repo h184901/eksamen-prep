@@ -43,6 +43,13 @@ const TIER1_CONCEPTS = [
 ];
 const TIER1_TOPICS = ["chord-dht", "overlay-and-gossip"];
 
+// Hand-curated exam JSONs (P0b: one exam; P1+: more added here).
+// Each entry's slug becomes the dynamic route /dat110/eksamen/<slug> and
+// registers in _wikilink-index.json so learnMoreLinks can target it.
+const EXAM_DATA_FILES = [
+  { slug: "dat110-eksamen-05-2024", file: "exams/dat110-eksamen-05-2024.json" },
+];
+
 // Known local-only / copyright-sensitive sources from vault inventory.
 // Filtering rule: any source with frontmatter local_only: true OR with a slug in
 // this allow-list is excluded from web output. This allow-list is a safety net
@@ -142,13 +149,16 @@ function isTruthyFlag(v) {
 
 // ---- Wikilink resolver (build-time) --------------------------------------
 
-function buildWikilinkIndex(conceptSlugs, topicSlugs) {
+function buildWikilinkIndex(conceptSlugs, topicSlugs, examSlugs) {
   const index = {};
   for (const slug of conceptSlugs) {
     index[`concepts/${slug}`] = `/dat110/begreper/${slug}`;
   }
   for (const slug of topicSlugs) {
     index[`topics/${slug}`] = `/dat110/temaer/${slug}`;
+  }
+  for (const slug of examSlugs) {
+    index[`eksamen/${slug}`] = `/dat110/eksamen/${slug}`;
   }
   return index;
 }
@@ -320,6 +330,103 @@ function determineSupportedByFiltered(rawEntries, allSources) {
   return filtered;
 }
 
+// ---- Exam loading + structural validation -------------------------------
+// Exam JSONs are hand-curated (not generated from vault frontmatter).
+// Sync verifies each declared exam exists + has required structural fields.
+// learnMoreLinks are validated by scripts/validate-learnmore-links.mjs.
+
+function loadAndValidateExams() {
+  const exams = [];
+  const errors = [];
+
+  for (const { slug, file } of EXAM_DATA_FILES) {
+    const path = join(process.cwd(), "src/data/dat110-vault", file);
+    if (!existsSync(path)) {
+      errors.push(`Exam file missing: ${file}`);
+      continue;
+    }
+    let data;
+    try {
+      data = JSON.parse(readFileSync(path, "utf-8"));
+    } catch (e) {
+      errors.push(`Exam JSON parse failed: ${file} — ${e.message}`);
+      continue;
+    }
+
+    // Required top-level fields
+    const required = [
+      "slug",
+      "year",
+      "session",
+      "displayLabel",
+      "pairStatus",
+      "sensorSlug",
+      "totalWeight",
+      "questions",
+    ];
+    for (const k of required) {
+      if (!(k in data)) errors.push(`${file}: missing field '${k}'`);
+    }
+
+    if (data.slug !== slug) {
+      errors.push(`${file}: slug mismatch — file says '${data.slug}', declared '${slug}'`);
+    }
+
+    // Reconstructed-banner safety: if reconstructedFromSensor:true, bannerWarning must be set
+    if (data.reconstructedFromSensor === true) {
+      if (!data.bannerWarning || String(data.bannerWarning).trim() === "") {
+        errors.push(
+          `${file}: reconstructedFromSensor=true but bannerWarning is missing/empty`
+        );
+      }
+      if (data.pairStatus !== "reconstructed_from_incomplete_pair") {
+        errors.push(
+          `${file}: reconstructedFromSensor=true but pairStatus is '${data.pairStatus}' (expected 'reconstructed_from_incomplete_pair')`
+        );
+      }
+    }
+
+    // Each question must have at least one solution (top-level OR per-subquestion)
+    if (Array.isArray(data.questions)) {
+      for (const q of data.questions) {
+        const hasTopSolution =
+          q.solution && typeof q.solution.expectedAnswer === "string" &&
+          q.solution.expectedAnswer.trim() !== "";
+        const subsHaveSolutions =
+          Array.isArray(q.subquestions) && q.subquestions.length > 0 &&
+          q.subquestions.every(
+            (s) => s.solution && typeof s.solution.expectedAnswer === "string" &&
+              s.solution.expectedAnswer.trim() !== ""
+          );
+        if (!hasTopSolution && !subsHaveSolutions) {
+          errors.push(
+            `${file}: Q${q.number} has no solution (neither top-level nor per-subquestion)`
+          );
+        }
+      }
+    }
+
+    exams.push(data);
+  }
+
+  return { exams, errors };
+}
+
+function buildExamsIndex(exams) {
+  return {
+    exams: exams.map((e) => ({
+      slug: e.slug,
+      year: e.year,
+      session: e.session,
+      displayLabel: e.displayLabel,
+      pairStatus: e.pairStatus,
+      reconstructedFromSensor: e.reconstructedFromSensor ?? false,
+      questionCount: Array.isArray(e.questions) ? e.questions.length : 0,
+      totalWeight: e.totalWeight,
+    })),
+  };
+}
+
 // ---- Main ----------------------------------------------------------------
 
 function main() {
@@ -344,10 +451,11 @@ function main() {
     ...loadVaultEntry("topics", slug),
   }));
 
-  // Build wikilink-index (P0a covers only Tier 1)
+  // Build wikilink-index (P0a covers only Tier 1; P0b adds exam routes)
   const eligibleConceptSlugs = new Set(TIER1_CONCEPTS);
   const eligibleTopicSlugs = new Set(TIER1_TOPICS);
-  const wikiIndex = buildWikilinkIndex(TIER1_CONCEPTS, TIER1_TOPICS);
+  const examSlugs = EXAM_DATA_FILES.map((e) => e.slug);
+  const wikiIndex = buildWikilinkIndex(TIER1_CONCEPTS, TIER1_TOPICS, examSlugs);
 
   // Track unmapped wikilinks across all entries for reporting
   const unmappedWikilinks = [];
@@ -367,6 +475,14 @@ function main() {
     allSources
   );
 
+  // Load + validate hand-curated exam JSONs (P0b: V2024)
+  const { exams, errors: examErrors } = loadAndValidateExams();
+  if (examErrors.length > 0) {
+    console.error("Exam structural validation failed:");
+    for (const e of examErrors) console.error(`  ✗ ${e}`);
+    process.exit(1);
+  }
+
   // Write output
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(
@@ -380,6 +496,12 @@ function main() {
   writeFileSync(
     join(OUT_DIR, "_wikilink-index.json"),
     JSON.stringify({ routes: wikiIndex }, null, 2) + "\n"
+  );
+  // exams-index.json: list of all exam slugs + summary metadata (loader uses this
+  // to build generateStaticParams for the dynamic /dat110/eksamen/[slug] route).
+  writeFileSync(
+    join(OUT_DIR, "exams-index.json"),
+    JSON.stringify(buildExamsIndex(exams), null, 2) + "\n"
   );
   // Sanitize vault path in meta (avoid leaking $HOME / per-user paths into committed JSON)
   const sanitizedVaultPath = VAULT_REVIEWED.includes("ObsidianVault")
@@ -396,6 +518,7 @@ function main() {
       sourcesFilteredLocalOnly: allLocalOnlySources.length,
       wikilinkRoutes: Object.keys(wikiIndex).length,
       unmappedWikilinksInBodies: unmappedWikilinks.length,
+      exams: exams.length,
     },
   };
   writeFileSync(join(OUT_DIR, "_meta.json"), JSON.stringify(meta, null, 2) + "\n");
@@ -475,9 +598,22 @@ function main() {
   }
   log("");
 
+  log(`Exams loaded + validated: ${exams.length}`);
+  for (const e of exams) {
+    const qCount = Array.isArray(e.questions) ? e.questions.length : 0;
+    const subTotal = (e.questions || []).reduce(
+      (sum, q) => sum + (Array.isArray(q.subquestions) ? q.subquestions.length : 0),
+      0
+    );
+    const recon = e.reconstructedFromSensor === true ? " ⚠ RECONSTRUCTED" : "";
+    log(`  ✓ ${e.slug}${recon}  (${qCount} oppgaver, ${subTotal} subspørsmål, totalWeight=${e.totalWeight}%)`);
+  }
+  log("");
+
   log("Output files:");
   log("  - concepts-tier1.json");
   log("  - topics-tier1.json");
+  log("  - exams-index.json");
   log("  - _wikilink-index.json");
   log("  - _meta.json");
 }
