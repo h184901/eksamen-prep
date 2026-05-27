@@ -1518,6 +1518,1192 @@
       "relatedConcepts": ["arp-and-mac-addressing"],
       "relatedExamPatterns": [],
       "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-047",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 2, "questionNumber": 6 },
+      "question": "Hva måler trafikk-intensitet (traffic intensity) på en utgående lenke i en pakkesvitsj?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Antall bit per sekund som mottas på inngangs-lenken til pakkesvitsjen",
+        "Forholdet mellom innkommende bit-rate og lenkens utgående overførings-rate",
+        "Total mengde bit som er overført siden lenken ble aktivert",
+        "Antall pakker per sekund som blir kastet på grunn av buffer-overflow"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Trafikk-intensitet defineres som La/R: ankomstrate av bit (L bit per pakke × a pakker per sekund) delt på utgangslenkens kapasitet R. Når forholdet nærmer seg 1 vokser køen uendelig.",
+      "explanationIncorrect": "Den vanligste fellen er å forveksle trafikk-intensitet med absolutt ankomstrate — det er nettopp forholdet som er informativt.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Dette er bare telleren (La). Trafikk-intensitet inkluderer også nevneren R for å gi et dimensjonsløst forhold." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: La/R. Et forhold som beskriver hvor nær mettings-grensen lenken er." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Akkumulert bit-mengde er en helt annen metrikk og uavhengig av belastning per tidsenhet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tap er et resultat av høy trafikk-intensitet, ikke selve definisjonen." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-048",
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 2, "questionNumber": 9 },
+      "question": "Påstand: «En tjeneste levert av et lag fastsetter også hvilken protokoll som må brukes for å implementere tjenesten.» Er dette sant eller usant?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Sant — service-definisjon er bindende for valg av protokoll",
+        "Usant — service og protokoll er to ortogonale begreper i lag-modellen",
+        "Sant — fordi grensesnitt og implementasjon alltid er sammenkoplet",
+        "Usant — men kun fordi TCP/IP-stakken har flere protokoller per lag"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "En tjeneste er hva et lag tilbyr (interface mellom lag), mens protokollen er hvordan likestilte lag-instanser snakker med hverandre. Samme tjeneste kan realiseres av flere ulike protokoller.",
+      "explanationIncorrect": "Service og protokoll separeres i lag-design nettopp for å gjøre implementasjoner utskiftbare uten å endre brukere over.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Dette bryter med selve poenget med lag-arkitektur. Service-grensesnittet er stabilt; protokoll-implementasjon kan byttes." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: service = vertical interface oppover; protokoll = horizontal peer-to-peer-konvensjon." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Tvert imot — separasjonen av interface fra implementasjon er kjernen i lag-design." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Riktig svar, men begrunnelsen er for snever — separasjonen er en generell prinsipp, ikke en TCP/IP-spesifikk artefakt." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-049",
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": ["network-layer-services"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 4, "questionNumber": 2 },
+      "question": "Hvilken tjeneste tilbyr nettverkslaget i TCP/IP-stakken?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Pålitelig toveis-overføring av en byte-strøm mellom to hosts",
+        "Pålitelig punkt-til-punkt-levering av datagrammer over en enkelt lenke",
+        "Upålitelig multi-hop-levering av datagrammer mellom ende-punkter",
+        "Pålitelig kringkasting av datagrammer til alle hosts i samme subnett"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "IP-laget tilbyr best-effort multi-hop datagram-levering — uten garantier om pålitelighet, rekkefølge eller leveranse. Pålitelighet bygges på over (TCP).",
+      "explanationIncorrect": "Pålitelighet tilhører transport-laget (TCP); link-laget håndterer én lenke; broadcast er ikke en standard nettverkslags-tjeneste i TCP/IP.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Dette beskriver TCP — som ligger over IP. Nettverkslaget gir ingen pålitelighet av seg selv." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Dette er link-lags-omfang. Nettverkslaget kjeder sammen flere lenker (multi-hop)." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: upålitelig, multi-hop, ende-til-ende datagram-levering. Klassisk definisjon (STUDIEPLAN-rødt)." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Broadcast finnes (f.eks. i IPv4 subnet-broadcast), men er ikke selve nettverkslags-tjenesten i TCP/IP." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Nettverkslags-tjenester", "href": "/dat110/begreper/network-layer-services", "kind": "concept", "slug": "network-layer-services" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/network-layer-services", "title": "Concept: Network-layer services", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["network-layer-services"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-050",
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 4, "questionNumber": 6 },
+      "question": "Hvordan identifiseres et kommunikasjons-endepunkt på transport-laget?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Med IP-adresse og et TCP/UDP port-nummer",
+        "Med IP-adresse og OS-prosessens lokale PID",
+        "Med kun IP-adresse på destinasjons-host",
+        "Med IP-adresse og link-lagets MAC-adresse"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Et transport-endepunkt identifiseres av paret (IP, port). IP velger host, port velger hvilken socket/applikasjon på den hosten.",
+      "explanationIncorrect": "PID er internt OS-konsept og ikke synlig over nettverk; bare IP gir ikke nok info til å demultipleksere til riktig applikasjon; MAC tilhører link-laget.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: (IP, port) er det universelle transport-endepunktet i TCP/IP." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "PID er lokalt OS-begrep — ikke tilgjengelig på tvers av nettverk." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Uten port-info kan transport-laget ikke skille hvilken applikasjon segmentet skal til." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "MAC brukes på link-laget; transport-laget bruker port, ikke MAC." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-051",
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": ["tcp"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 4, "questionNumber": 9 },
+      "question": "Hvilken tjeneste tilbyr TCP til applikasjons-laget?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Pålitelig overføring av datagrammer på en enkelt link",
+        "Pålitelig toveis-overføring av byte-strøm mellom to hosts",
+        "Upålitelig ende-til-ende-sending av en sekvens av byte mellom hosts",
+        "Pålitelig multicast-distribusjon av meldinger til en gruppe mottakere"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "TCP gir pålitelig, in-order, toveis byte-strøm-leveranse mellom to ende-punkter. Pålitelighet realiseres med sekvensnumre, ACKs og retransmisjon.",
+      "explanationIncorrect": "TCP er byte-stream, ikke message-oriented eller multicast; UDP er upåliteligheten; link-laget håndterer enkeltlink.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Enkelt-link-pålitelighet er link-lagets område, ikke TCP." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: pålitelig, toveis, byte-strøm — kanonisk TCP-tjeneste-definisjon." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Upålitelig sekvens er nærmere UDP-semantikk; TCP gir nettopp pålitelighet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "TCP er unicast point-to-point. Multicast bygges på over (eller IP-multicast)." }
+      ],
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp", "kind": "concept", "slug": "tcp" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/tcp", "title": "Concept: TCP", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["tcp"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-052",
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 4, "questionNumber": 12 },
+      "question": "Hva er hoved-formålet med Domain Name System (DNS)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Oversette IP-adresser til MAC-adresser på link-laget",
+        "Oversette host-navn til IP-adresser",
+        "Oversette URI-er til komplette HTML-sider",
+        "Oversette portnumre til applikasjons-protokoller"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "DNS er en distribuert hierarkisk database som mapper menneskelig lesbare host-navn (f.eks. www.uib.no) til IP-adresser slik at sockets kan koble seg opp.",
+      "explanationIncorrect": "IP→MAC er ARP; URI→HTML er HTTP/web-server; port→protokoll er bare et statisk register (IANA).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Dette beskriver ARP (Address Resolution Protocol), ikke DNS." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: navn → IP. Kanonisk DNS-formål." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "URI-resolving og innholds-henting er HTTP, ikke DNS." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Standard port-mappinger (port 80 → HTTP osv.) er konvensjoner, ikke DNS-tjeneste." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-053",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 6 },
+      "question": "Hvilken egenskap stemmer for flooding-basert multicast i et overlay-nettverk?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Antall meldinger som genereres avhenger av antall kanter (edges) i overlayet",
+        "Et fully-connected overlay er alltid billigere enn et tre-formet overlay",
+        "Routing-kostnaden i ustrukturert overlay er identisk med strukturert overlay",
+        "Meldinger leveres bare til noden som har lavest ID i overlayet"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Hver flooding-melding sendes over hver overlay-kant (eller en delmengde med probabilistisk flooding). Totale meldinger ≈ antall kanter, derfor blir tre (N−1 kanter) mye billigere enn fully-connected (N(N−1)/2 kanter).",
+      "explanationIncorrect": "Fully-connected har flest kanter og er dyrest, ikke billigst; ustrukturert routing er normalt dyrere fordi det mangler shortcuts; multicast leverer til ALLE noder per definisjon.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: cost(flooding) skaleres med #edges. Tre = N−1, full = N(N−1)/2." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Motsatt: tre minimerer kanter (N−1) og er billigst; full er dyrest." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Strukturert overlay (f.eks. Chord) gir O(log N) lookup; ustrukturert kan kreve O(N) flooding." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Multicast er definert som levering til ALLE medlemmer av gruppen, ikke kun ett." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/application-layer-multicast", "title": "Concept: Application-layer multicast", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-054",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 7 },
+      "question": "I et overlay med 10 000 noder har 99 % allerede mottatt en oppdatering. Hvilken gossip-strategi er mest effektiv for å nå de siste prosentene?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Push — oppdaterte noder sender ut til tilfeldige noder",
+        "Pull — uoppdaterte noder spør tilfeldige noder",
+        "Push-Pull — par av noder utveksler oppdateringer begge veier",
+        "Reset — start ny flooding-runde fra opprinnelses-noden"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Når smitten er nær mettet, finner push sjelden uoppdaterte mottakere, og pull sjelden oppdaterte kilder. Push-Pull kombinerer begge: hver utveksling lærer begge parter, så restingen lukkes raskt.",
+      "explanationIncorrect": "Ren push er svak i mettet fase (få nye mottakere); ren pull er svak i tidlig fase (få oppdaterte kilder); reset er ikke en standard gossip-strategi.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Push er svak når nesten alle allerede er oppdaterte — mottakerne lærer ingenting nytt." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Pull alene fungerer godt i mettet fase, men Push-Pull er enda mer robust." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: Push-Pull balanserer best både i tidlig og sen fase av gossip-spredning." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Re-flooding er sløsende og garanterer ikke at gjenværende 1 % blir nådd." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-055",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 10 },
+      "question": "Hvilken modus av anti-entropy gir best konvergens når både kilden og mottakeren kan ha nye oppdateringer å bidra med?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Bare push — P sender sine oppdateringer til Q",
+        "Bare pull — P henter Q sine oppdateringer",
+        "Push-Pull — P og Q utveksler oppdateringer i begge retninger",
+        "Reset — begge prosessene gjenoppretter til tom tilstand"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Push-Pull er den standard anti-entropy-modusen som lar to noder synkronisere fullt i én runde uavhengig av hvem som har de nyeste verdiene.",
+      "explanationIncorrect": "Ensidige modi (push eller pull alene) krever flere runder og kan miste oppdateringer hvis kilden ikke har dem.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Push alene oppdaterer kun én side per runde; informasjon Q har lekker ikke til P." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Pull alene har samme begrensning men i motsatt retning." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: Push-Pull er den symmetriske anti-entropy-modusen som maksimerer info-utveksling per kontakt." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Reset er ikke en anti-entropy-modus; det ville slette alle data, ikke synkronisere dem." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-056",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 2 },
+      "question": "Hva er hoved-utfordringen med home-based naming-tilnærming (slik den brukes for mobil-IP)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Dårlig geografisk skalerbarhet når entiteten flytter langt fra home-adressen",
+        "Home-adressen kan ikke registreres i et navne-tjeneste-hierarki",
+        "Brutte lenker oppstår fordi det dannes lange peker-kjeder mellom noder",
+        "Home-adressen krever konstant kryptering av all kommunikasjon"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Hvis entiteten flytter langt unna home-noden, må alle pakker fortsatt innom home først — det gir suboptimal triangle-routing og høy latency proporsjonalt med avstanden.",
+      "explanationIncorrect": "Home-based bruker korte peker-kjeder (én indireksjon), ikke lange; registrering og kryptering er ikke selve problemet.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: triangle-routing gir høyere RTT desto lenger fra home-noden mottakeren er." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Home-adresser KAN registreres i naming-tjeneste — det er nettopp slik clients finner dem." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Det er forwarding-pointer-skjemaer (Distinguished from home-based) som lider av lange kjeder, ikke home-based." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Kryptering er ortogonal — ikke en iboende utfordring i home-based naming." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-057",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 4 },
+      "question": "Hvilken påstand er korrekt om iterative versus recursive DNS-oppløsning?",
+      "qtype": "multiple_choice",
+      "options": [
+        "I recursive resolving kan kommunikasjons-avstand være mindre kritisk fordi sekvensen skjules for klienten",
+        "I iterative resolving kan høyere-nivå-servere bli overbelastet med rekursive forespørsler",
+        "I recursive resolving ser klienten alle navne-servere underveis i hierarkiet",
+        "Iterative og recursive resolving er identiske i ytelse uansett nettverkstopologi"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "I recursive modus delegerer en server jobben videre internt og returnerer endelig svar. Klienten ser kun én RTT, så geografisk avstand mellom mellom-servere blir mindre synlig fra klientens perspektiv.",
+      "explanationIncorrect": "Overlast oppstår nettopp i recursive (servere må holde state), ikke iterative; iterative er der klienten ser hver server.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: recursive skjuler intern-RTT bak én klient-server-forespørsel." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Overlasten er på recursive-servere (de bærer state), ikke iterative." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Det er iterative modus der klienten kontakter hver server selv." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Ytelse avhenger sterkt av topologi — recursive vinner ofte når mellom-servere er langt fra klienten." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-058",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 1 },
+      "question": "Påstand: «Tråder deler adresserommet med andre tråder i samme prosess.» Er dette sant eller usant?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Sant — tråder deler heap, kode og globale variabler i prosessen",
+        "Usant — hver tråd har sitt eget komplette adresserom",
+        "Sant — men kun for kjerne-tråder, ikke bruker-tråder",
+        "Usant — tråder deler kun sin egen stack, ikke heap"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Tråder innenfor samme prosess deler heap, globale variabler og kode-segment. Hver tråd har sin egen stack og register-tilstand, men ikke et eget adresserom.",
+      "explanationIncorrect": "Det er prosesser (ikke tråder) som har isolerte adresserom. Tråd vs prosess-distinksjonen er hele poenget.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: shared address space er definisjons-egenskapen til tråder. Lavere kontekst-bytte-kostnad enn prosesser." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Adresserom-isolasjon karakteriserer PROSESSER, ikke tråder." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Både kjerne- og bruker-tråder deler samme adresserom som sin host-prosess." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Det er motsatt — hver tråd har sin EGNE stack, men heap deles." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-059",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 5 },
+      "question": "Hva betyr det at en server er «iterativ» (iterative server)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Den behandler kun én klient-forespørsel om gangen og venter til den er ferdig før neste tas inn",
+        "Den oppretter en ny tråd eller prosess per ankommende forespørsel for parallell behandling",
+        "Den itererer over en intern køstruktur og prioriterer forespørsler basert på lateness",
+        "Den bruker rekursive funksjonskall internt for å behandle hver forespørsel"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "En iterativ server behandler forespørsler sekvensielt: aksepter, behandle, svar, lukk — så aksepter neste. Concurrent servere (motsatte) starter en tråd/prosess per forespørsel.",
+      "explanationIncorrect": "Iterativ vs concurrent er om samtidighet i server-arkitekturen, ikke om kø-prioritering eller intern rekursjon.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: én klient om gangen, sekvensielt. Enkel implementasjon, men dårlig under last." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Dette er CONCURRENT server — motsetningen til iterativ." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Iterativ refererer til behandlings-modell, ikke kø-strategi. Ordet «iterate» peker på sekvensiell tilgang av tilkoblinger." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Intern rekursjon i kode er irrelevant for server-arkitektur-klassifisering." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-060",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 8 },
+      "question": "Hvilken egenskap er en typisk fordel ved stateless servere fremfor stateful servere?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Serveren kan krasje og restarte med svært lav overhead fordi ingen session-tilstand må gjenopprettes",
+        "Serveren kan garantere sterkere konsistens fordi all tilstand ligger sentralt",
+        "Klienten trenger ikke å sende noen identifikator i forespørslene sine",
+        "Serveren kan optimalisere svar basert på klientens tidligere forespørsler"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Stateless servere holder ingen klient-state mellom forespørsler. Det gjør krasj-recovery triviell (start ny instans), forenkler horisontal skalering, og passer godt til load-balancere.",
+      "explanationIncorrect": "Stateless gir VANSKELIGERE personalisering og krever at klienten sender identifikator i hver forespørsel (f.eks. session-cookie). Konsistens-fordeler er ikke standard argument.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: lett recovery + lett horizontal scaling. Klassisk REST/HTTP-fordel." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Konsistens er ortogonal til stateless/stateful — handler om replikerings-modell, ikke session-state." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Tvert imot: stateless KREVER at klient sender identifikator (token, cookie) hver gang." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tidligere-forespørsel-optimalisering krever nettopp at server husker — det er stateful." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-061",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["reliable-communication"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 2 },
+      "question": "Hva kalles det at transport-laget leverer mottatt segment-data til riktig socket på destinasjons-hosten?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Multiplexing — flere segmenter samles fra mange sockets på sender-siden",
+        "Demultiplexing — header-felter velger hvilken applikasjon som mottar",
+        "Encapsulation — segment-data pakkes inn i header for transmisjon",
+        "Fragmentation — segmenter deles opp i mindre biter for transport"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Demultiplexing er motsatt operasjon av multiplexing: transport-laget bruker (src IP, src port, dst IP, dst port) for å avgjøre hvilken socket et innkommende segment hører til.",
+      "explanationIncorrect": "Multiplexing er den motsatte siden (sender); encapsulation handler om header-tillegg, ikke ruting; fragmentation hører til IP-laget.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Multiplexing er sender-siden — å kombinere data fra mange sockets til transport-segmenter." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: demux = ruting av innkommende segment til riktig socket via (port, IP)-oppslag." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Encapsulation = legge på header (transport-header rundt nyttelast); ikke socket-ruting." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Fragmentation utføres på nettverkslaget (IP), ikke transport." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Pålitelig kommunikasjon", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" },
+        { "label": "Tema: Transport-lag", "href": "/dat110/temaer/transport-layer", "kind": "topic", "slug": "transport-layer" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/reliable-communication", "title": "Concept: Reliable communication", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["reliable-communication"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-062",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["reliable-communication"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 7 },
+      "question": "Nettverket kan duplisere datagrammer (uten transmisjons-feil). Hvilken mekanisme må RDT-protokollen ha for å håndtere dette?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Checksum — slik at mottakeren oppdager bit-feil i nyttelasten",
+        "Sekvensnumre — slik at mottakeren kan kjenne igjen og forkaste dubletter",
+        "Retransmisjons-timer — slik at sender resender tapte segmenter",
+        "Acknowledgement-fragmenter — slik at mottakeren bekrefter hvert segment"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Duplikat-deteksjon krever at mottakeren kan se «dette segmentet har jeg allerede mottatt». Sekvensnumre på segmenter gjør dette mulig — mottakeren forkaster segmenter med sekvensnummer den allerede har levert opp.",
+      "explanationIncorrect": "Checksum oppdager bit-feil (ikke duplikater); timer + ACK håndterer tap (ikke duplisering); ren ACK uten seq-nr lar ikke mottakeren skille duplikat fra original.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Checksum sjekker integritet, ikke om data har blitt mottatt før." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: seq-nr lar mottaker identifisere og avvise repetert leveranse." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Timer + retransmisjon håndterer tap. Når data dupliseres er duplikatet ALLEREDE der." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "ACK alene mangler info om hvilken sending som bekreftes — derfor behov for seq-nr." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Pålitelig kommunikasjon", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/reliable-communication", "title": "Concept: Reliable communication", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["reliable-communication"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-063",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["tcp"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 11 },
+      "question": "Hvordan identifiseres en TCP-tilkobling (socket-par) i den fulle TCP/IP-stakken?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Med kun en kombinasjon av destinasjons-IP og destinasjons-port",
+        "Med en tuple av kilde-port og destinasjons-port alene",
+        "Med en 4-tuple: kilde-IP, kilde-port, destinasjons-IP, destinasjons-port",
+        "Med en tuple av kilde-IP og kilde-MAC for klient-identifisering"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "TCP-tilkoblinger identifiseres unikt av 4-tupelet (src IP, src port, dst IP, dst port). Det er forskjellig fra UDP der kun (dst IP, dst port) holder for socket-demux.",
+      "explanationIncorrect": "TCP trenger 4-tupel for å skille flere samtidige tilkoblinger fra forskjellige klienter til samme server-port (f.eks. mange browsere mot samme web-server).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Det er UDP-modellen. TCP skiller per tilkobling (per klient), ikke per port." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Mangler IP-adressene — to klienter på forskjellige hosts kan bruke samme port-par." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: 4-tuple unikt identifiserer hver TCP-tilkobling i operativsystemets socket-tabell." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "MAC tilhører link-laget og er ikke synlig for TCP. TCP bruker IP+port." }
+      ],
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp", "kind": "concept", "slug": "tcp" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/tcp", "title": "Concept: TCP", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["tcp"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-064",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["reliable-communication"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 12 },
+      "question": "I hvilken sliding-window-protokoll er acknowledgements kumulative (én ACK dekker alle segmenter opp til et gitt sekvensnummer)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Stop-and-wait — én ACK per segment, ingen overlapp",
+        "Go-back-N — ACK n bekrefter alle segmenter opptil og inkludert n",
+        "Selective-repeat — hvert segment bekreftes individuelt med egen ACK",
+        "Random-ACK — mottaker velger tilfeldig hvilke segmenter den bekrefter"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Go-back-N bruker kumulative ACK-er: ACK n betyr at alle segmenter opp til n er mottatt korrekt. Hvis ACK m kommer tapt, men ACK n (n > m) kommer, dekker den fortsatt alt opp til n.",
+      "explanationIncorrect": "Selective-repeat bruker selektive (individuelle) ACK-er; stop-and-wait har én ACK om gangen men ikke kumulativ-konsept; «random-ACK» er ikke en reell protokoll.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Stop-and-wait har bare ett utstående segment om gangen, så kumulativ-begrepet er ikke meningsfullt." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: GBN = kumulativ ACK; en enkelt ACK kan bekrefte mange segmenter." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Selective-repeat bekrefter hvert segment for seg — motsatsen til kumulativ." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tilfeldig ACK-strategi finnes ikke i pensum — distraktor for å lure." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Pålitelig kommunikasjon", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/reliable-communication", "title": "Concept: Reliable communication", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["reliable-communication"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-065",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["tcp"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 13 },
+      "question": "Hva er hoved-formålet med flow control (flyt-kontroll) i TCP?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å forhindre at sender oversvømmer mottakers buffer med data",
+        "Å redusere antall tapte segmenter forårsaket av nettverks-kongestion",
+        "Å sikre at segmenter ankommer i samme rekkefølge som de ble sendt",
+        "Å garantere fast minimal båndbredde for hver tilkobling"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Flow control regulerer sender-rate basert på mottakers ledige buffer-plass (rwnd). Det handler om mottaker-kapasitet, ikke nettverks-kapasitet.",
+      "explanationIncorrect": "Nettverks-overbelastning håndteres av congestion control (cwnd); rekkefølge løses av sekvensnumre; båndbredde-garantier hører til QoS.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: flow control = sender-versus-mottaker, basert på rwnd-feltet i TCP-header." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er congestion control som adresserer nettverks-belastning, ikke flow control." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Rekkefølge sikres av sekvensnumre og mottakers buffer-reassembly." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "TCP gir ikke båndbredde-garantier — best-effort over IP." }
+      ],
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp", "kind": "concept", "slug": "tcp" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/tcp", "title": "Concept: TCP", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["tcp"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-066",
+      "topic": "06-transport-services",
+      "conceptSlugs": ["reliable-communication"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 8, "questionNumber": 15 },
+      "question": "I selective-repeat: hvilken relasjon må holde mellom størrelsen på sekvensnummer-rommet og sender-vindusstørrelsen?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Sekvensnummer-rommet må være nøyaktig like stort som vinduet",
+        "Sender-vinduet kan høyst være halvparten av seq-ID-arealet",
+        "Sekvensnummer-rommet må være minst kvadrat-roten av vindusstørrelsen",
+        "Det finnes ingen påkrevet relasjon — protokollen fungerer alltid"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "I selective-repeat må |seq-space| ≥ 2 × window for å unngå at gamle og nye sekvensnumre overlapper etter wrap-around. Hvis vinduet er N, må sekvensrommet ha minst 2N verdier.",
+      "explanationIncorrect": "Ellers kan mottakeren ikke skille en duplisert gammel pakke fra en ny pakke med samme (wrappede) sekvensnummer.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Lik størrelse er for liten — gir ambiguitet ved sekvensnummer-wrap." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: seq-space ≥ 2 × window. Standard SR-resultat fra Kurose/Ross." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Kvadratrot-relasjonen finnes ikke i pensum — distraktor." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Uten relasjon kan SR feile på wrap-around — derfor finnes denne kondisjonen." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Pålitelig kommunikasjon", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/reliable-communication", "title": "Concept: Reliable communication", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["reliable-communication"],
+      "relatedExamPatterns": [],
+      "difficulty": "hard"
+    },
+    {
+      "id": "dat110-q-067",
+      "topic": "07-coordination",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 5 },
+      "question": "Påstand: «Sentralisert mutual-exclusion-algoritme kan lide av skalerings-problemer.» Er dette sant eller usant?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Sant — koordinatoren blir en flaskehals når antall klienter vokser",
+        "Usant — sentralisert algoritme har konstant tid uavhengig av klient-antall",
+        "Sant — men kun fordi krypterings-overhead vokser med klient-antallet",
+        "Usant — sentralisert er nettopp det mest skalerbare alternativet"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Sentralisert mutex har én koordinator som håndterer alle forespørsler om critical section. Det gir korrekt eksklusjon med få meldinger, men koordinatoren blir flaskehals (og single point of failure) ved høy belastning.",
+      "explanationIncorrect": "Sentralisert er enkelt å implementere men har dårlig skalerbarhet — derfor finnes distribuerte alternativer (Ricart-Agrawala, token-ring).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: sentral koordinator → flaskehals + SPOF ved mange klienter." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Latency vokser med belastning når koordinator må kø-håndtere; ikke konstant." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Kryptering er ortogonalt — skalerings-problemet er strukturelt, ikke krypto-relatert." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tvert imot — sentralisert er det MINST skalerbare av mutex-alternativene." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-068",
+      "topic": "07-coordination",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 6 },
+      "question": "Hva er forskjellen mellom accuracy og precision i klokke-synkronisering?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Accuracy = riktighet mot UTC; precision = innbyrdes avvik blant interne tider",
+        "Accuracy = avvik mellom to klokker i samme system; precision = avstand til UTC",
+        "Accuracy og precision er to navn på samme mål for klokke-kvalitet",
+        "Accuracy = drift over tid; precision = oppløsning i nanosekunder"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Accuracy måler hvor nær en klokke er en ekstern absolutt tids-referanse (UTC). Precision måler hvor godt klokker innenfor et system er synkronisert med hverandre — uavhengig av om de er nær UTC eller ikke.",
+      "explanationIncorrect": "Forveksling mellom de to er vanlig — accuracy er «mot ekstern referanse», precision er «mot hverandre».",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: accuracy = vs UTC; precision = mellom interne klokker. Klassisk Tanenbaum-distinksjon." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Definisjonene er ombyttet — accuracy går mot ekstern referanse, ikke intern." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "De er to ulike mål med ulike formål; viktig å holde dem fra hverandre." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Drift og oppløsning er separate egenskaper, ikke definisjonen på accuracy/precision." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-069",
+      "topic": "07-coordination",
+      "conceptSlugs": ["lamport-clocks"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 7 },
+      "question": "Hva er kjerne-ideen bak Lamports logiske klokker?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Prosesser bruker rekkefølgen av observerte hendelser i stedet for absolutt tid",
+        "Prosesser bruker den absolutte UTC-tids-stempelet for å ordne hendelser globalt",
+        "Prosesser bruker fysisk klokke-synkronisering via NTP-protokollen",
+        "Prosesser velger en leder som tildeler tidsstempler til alle hendelser"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Lamport-klokker tildeler hver hendelse et logisk tidsstempel som respekterer happened-before-relasjonen. Absolutt tid trengs ikke — kun en konsistent ordnings-regel mellom prosesser.",
+      "explanationIncorrect": "Hele poenget med Lamport er nettopp at fysisk tid kan ignoreres. Lamport bruker ikke NTP eller leder-valg.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: logisk ordning over hendelser, uten fysisk klokke-grunnlag." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Lamport unngår nettopp avhengighet av absolutt tid — det er motivasjonen for logiske klokker." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "NTP synkroniserer fysiske klokker; Lamport er en helt annen mekanisme." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Lamport er fullstendig desentralisert; ingen koordinator eller leder." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks", "kind": "concept", "slug": "lamport-clocks" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/lamport-clocks", "title": "Concept: Lamport clocks", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["lamport-clocks"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-070",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["replication-strategies"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 1 },
+      "question": "Hvilken av påstandene under er en gyldig grunn til å bruke replikering i distribuerte systemer?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Forbedre ytelse — klienter kan lese fra nærmeste replika",
+        "Garantere global sterk konsistens uten ekstra koordinering",
+        "Redusere total lagrings-plass forbrukt av systemet",
+        "Eliminere behovet for nettverks-kommunikasjon mellom noder"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Replikering plasserer kopier nær klientene (lavere latency) og spres ut for å håndtere mer last parallelt. Det forbedrer både ytelse og tilgjengelighet.",
+      "explanationIncorrect": "Replikering ØKER lagrings-bruk og krever MER koordinering for konsistens. Det fjerner ikke nettverks-trafikk; tvert imot kreves replikerings-protokoller.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: lavere lese-latency er en standard motivasjon for replikering." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Sterk konsistens KREVER ekstra koordinering (quorum, primary-back) — det er nettopp avveiingen." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Replikering bruker MER plass per replika; det er en kostnad, ikke en gevinst." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Replikering krever oppdaterings-trafikk mellom replikaer; reduserer ikke nettverk." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Replikerings-strategier", "href": "/dat110/begreper/replication-strategies", "kind": "concept", "slug": "replication-strategies" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/replication-strategies", "title": "Concept: Replication strategies", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["replication-strategies"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-071",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["consistency-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 3 },
+      "question": "Hva er kjerne-bidraget fra «continuous consistency»-modellen i distribuert lagring?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Den definerer hvilken rekkefølge av operasjoner som må garanteres ved replikaer",
+        "Den fjerner helt behovet for replikering ved å bruke én sentral kopi",
+        "Den gir sterk konsistens uten kostnad i ytelse eller tilgjengelighet",
+        "Den krever at alle replikaer alltid har nøyaktig samme verdi til enhver tid"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Continuous consistency lar applikasjonen spesifisere tre dimensjoner: numerisk avvik, ordnings-avvik og staleness. Den definerer akseptabel avvik i ordning av operasjoner over replikaer.",
+      "explanationIncorrect": "Modellen er en RAMME for å beskrive akseptabel inkonsistens — ikke en fjerning av replikering eller gratis-sterk-konsistens.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: ordning av operasjoner er én av de tre dimensjonene continuous consistency beskriver." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Modellen omhandler nettopp REPLIKERTE data — ikke fjerning av replikering." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Sterk konsistens uten kostnad bryter CAP-teoremet; ikke modellens bidrag." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tvert imot — continuous consistency lar replikaer avvike kontrollert, ikke perfekt synkroniseres." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Konsistens-modeller", "href": "/dat110/begreper/consistency-models", "kind": "concept", "slug": "consistency-models" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/consistency-models", "title": "Concept: Consistency models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["consistency-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "hard"
+    },
+    {
+      "id": "dat110-q-072",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["quorum"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 8 },
+      "question": "Hva kalles en replikerings-skrive-protokoll basert på majoritets-stemmegivning blant replikaer?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Quorum-voting — Nw + Nr > N gir overlapp mellom lese- og skrive-sett",
+        "Aktiv replikering — alle replikaer kjører hver operasjon uavhengig",
+        "Local-write — primary flytter til klientens lokale node før skrivning",
+        "Coherence-basert — bruker invalidering av cache for å holde replikaer like"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Quorum-protokoller krever at hver skrivning bekreftes av Nw replikaer og hver lesning konsulterer Nr, der Nw + Nr > N (total replikaer). Dette gir konsistens via majoritets-overlapp.",
+      "explanationIncorrect": "Aktiv replikering ordner operasjoner deterministisk på alle replikaer; local-write flytter primary, ikke quorum-stemmer; coherence er cache-mekanisme.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: quorum = majoritets-overlapp mellom lese- og skrive-sett. Klassisk Gifford-modell." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Aktiv replikering bruker deterministisk ordning (f.eks. via total-order multicast), ikke voting." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Local-write er en primary-based-variant uten quorum-stemmegivning." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Cache-coherence (invalidate/update) er en distinkt mekanisme, ikke majoritets-voting." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Quorum", "href": "/dat110/begreper/quorum", "kind": "concept", "slug": "quorum" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/quorum", "title": "Concept: Quorum", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["quorum"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-073",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["replication-strategies"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 12 },
+      "question": "I primary-based replikerings-protokoller — hvor utføres oppdaterings-operasjoner?",
+      "qtype": "multiple_choice",
+      "options": [
+        "På kun én replika — primary-noden — som så propagerer endringer til de andre",
+        "På alle replikaer parallelt — hver håndterer sin egen skrive-strøm",
+        "På den replikaen klienten tilfeldigvis treffer først",
+        "På en dynamisk valgt minoritet av replikaene for hver enkelt skrivning"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Primary-based betyr at én utvalgt replika (primary) håndterer alle skrivninger og deretter sprer endringene til backup-replikaer. Det gir enkel konsistens men har SPOF og potensiell flaskehals.",
+      "explanationIncorrect": "Parallell skriving på alle (uten koordinering) eller på tilfeldig replika gir ikke konsistens; minoritets-skrivning bryter med quorum-prinsippene.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: én primary serializer skrivninger; backups følger etter. Standard primary-backup-modell." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er aktiv replikering eller multi-master, ikke primary-based." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Vilkårlig replika-skrive åpner for konflikter; ikke det primary-based-modellen tilbyr." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Minoritets-skrivning gir ikke holdbar konsistens — bryter quorum-overlapp." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Replikerings-strategier", "href": "/dat110/begreper/replication-strategies", "kind": "concept", "slug": "replication-strategies" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/replication-strategies", "title": "Concept: Replication strategies", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["replication-strategies"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-074",
+      "topic": "09-fault-tolerance",
+      "conceptSlugs": ["failure-detection"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 11, "questionNumber": 3 },
+      "question": "Hva er hoved-problemet med pålitelig multicast som bruker direkte feedback-meldinger (ACK) fra alle mottakere?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Feedback-implosjon — sender overveldes av samtidige ACK-er fra mange mottakere",
+        "ACK-er kommer i feil rekkefølge og må kø-sorteres på sender-siden",
+        "Mottakere kan ikke skille pålitelige fra upålitelige multicast-meldinger",
+        "Senderen mister opprinnelig multicast-melding etter første retransmisjon"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Når mange mottakere alle sender ACK samtidig, blir sender-noden overveldet (feedback implosion). Løsninger inkluderer hierarkisk feedback (lokale aggregatorer) eller NACK-basert tilbakemelding kun ved tap.",
+      "explanationIncorrect": "ACK-ordning og sender-melding-tap er ikke kjerne-problemet; feedback-mengden er det.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: ACK fra N mottakere skaler dårlig — feedback implosion er klassisk problem." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Ordning av ACK-er er triviell; mengden er problemet, ikke rekkefølgen." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Multicast-pålitelighet er en sender-protokoll-egenskap, ikke noe mottaker «skiller» mellom." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Sender beholder meldingen i buffer til den er ACK-et — ikke et tap-problem." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Failure detection", "href": "/dat110/begreper/failure-detection", "kind": "concept", "slug": "failure-detection" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/failure-detection", "title": "Concept: Failure detection", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["failure-detection"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-075",
+      "topic": "09-fault-tolerance",
+      "conceptSlugs": ["fault-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 11, "questionNumber": 7 },
+      "question": "Hva er en generell, mye brukt teknikk for å oppnå prosess-resiliens i distribuerte systemer?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Organisere flere identiske prosesser i en gruppe slik at noen kan ta over ved feil",
+        "Fjerne feilkilden ved statisk analyse av kildekoden i forkant",
+        "Forutsi feil med maskinlæring og iverksette tiltak før de skjer",
+        "Slå av tjenesten ved minste tegn til feil for å unngå skade"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Prosess-grupper (replikering) er hovedteknikken: flere identiske prosesser kjører samtidig, og hvis én feiler, kan resten fortsette tjenesten. Quorum og primary-based er underklasser.",
+      "explanationIncorrect": "Statisk analyse og prediksjon hjelper i utvikling/drift, men er ikke kjernen i runtime-resiliens; å slå av er ikke resiliens.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: replikerte prosess-grupper er den kanoniske runtime-teknikken for fault tolerance." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Statisk analyse er fault avoidance, ikke fault tolerance. Forskjellige stadier i fault-management." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Prediksjon kan komplementere replikering, men er ikke selve den generelle teknikken for resiliens." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Fail-stop er en feil-modell, ikke en resiliens-teknikk — det fjerner tilgjengelighet." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Feil-modeller", "href": "/dat110/begreper/fault-models", "kind": "concept", "slug": "fault-models" },
+        { "label": "Tema: Feiltoleranse", "href": "/dat110/temaer/fault-tolerance", "kind": "topic", "slug": "fault-tolerance" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/fault-models", "title": "Concept: Fault models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["fault-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-076",
+      "topic": "09-fault-tolerance",
+      "conceptSlugs": ["fault-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 11, "questionNumber": 10 },
+      "question": "Hvor mange prosesser kreves totalt for å oppnå majoritets-stemme-konsensus i en leaderless protokoll som tolererer k crash-feil?",
+      "qtype": "multiple_choice",
+      "options": [
+        "k + 1 prosesser — bare en mer enn antall mulige feil",
+        "2k + 1 prosesser — slik at majoriteten alltid er korrekte",
+        "3k + 1 prosesser — for å sikre Byzantine-toleranse",
+        "k × 2 prosesser — nøyaktig dobbelt så mange som feil"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "For crash-feil holder 2k+1 prosesser: hvis k krasjer, er det fortsatt k+1 (majoritet) igjen som kan ta beslutning. Byzantine-feil krever derimot 3k+1 fordi de feilende kan aktivt lyve.",
+      "explanationIncorrect": "k+1 er for få (kan miste majoriteten); 3k+1 er for byzantine; «k×2» er bare 2k, en mindre enn nødvendig.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Hvis k feiler og bare 1 er igjen, har vi ikke majoritet til å fatte beslutning." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: 2k+1 → majoritet (k+1) overlever crash av k. Standard crash-tolerant konsensus." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "3k+1 brukes for Byzantine-feil der noder kan oppføre seg vilkårlig — overkill for ren crash." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "2k er for få: hvis k feiler, blir det 2k − k = k igjen — likt antall, ikke majoritet." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Feil-modeller", "href": "/dat110/begreper/fault-models", "kind": "concept", "slug": "fault-models" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/fault-models", "title": "Concept: Fault models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["fault-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-077",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["ipv4-addressing"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 2 },
+      "question": "Hvordan brukes IP-adresser i Internet-arkitekturens nettverkslag?",
+      "qtype": "multiple_choice",
+      "options": [
+        "IP-adresser tildeles hvert nettverks-interface på både hosts og rutere",
+        "IP-adresser tildeles kun til hosts; rutere bruker MAC-adresser internt",
+        "IP-adresser tildeles én per host og én per ruter, uavhengig av interface-antall",
+        "IP-adresser tildeles kun til subnett som helhet, ikke til enkeltnoder"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Det er nettverks-INTERFACET (ikke noden) som har en IP-adresse. En ruter med tre interfacer har tre IP-adresser. En host med både Wi-Fi og kablet har to.",
+      "explanationIncorrect": "Per-host eller per-ruter-adressering er feil; rutere bruker IP for forwarding (ikke bare MAC); subnett er nettverk-prefiks, ikke selve adressen.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: IP per interface. En multi-homed host eller ruter har flere IP-adresser." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Rutere bruker IP til forwarding av datagrammer — ikke kun MAC-adresser." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Per-host-adressering finnes ikke i IPv4-arkitekturen; per-interface er normen." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Subnett-prefiks identifiserer en gruppe interfacer, men individuelle adresser tildeles likevel." }
+      ],
+      "learnMoreLinks": [
+        { "label": "IPv4-adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/ipv4-addressing", "title": "Concept: IPv4 addressing", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["ipv4-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-078",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["routing-algorithms"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 4 },
+      "question": "Hvilken type informasjon finnes i en typisk forwarding-tabell hos en ruter?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Kort-stier mellom alle par av rutere i hele nettverket",
+        "Mapping mellom destinasjons-adresse-prefiks og utgående lenke",
+        "Mapping mellom kilde-adresse og inn-kommende lenke",
+        "Liste over hvilke lenker ruteren fysisk er koblet til"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Forwarding-tabellen mapper destinasjons-prefiks til utgående grensesnitt. Ruteren bruker longest-prefix-match for å avgjøre hvor et innkommende datagram skal sendes videre.",
+      "explanationIncorrect": "Globale stier eller kilde-baserte mappings er ikke standard forwarding-table-innhold; lenke-liste alene gir ikke nok info til å forwarde.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Stier-mellom-alle-par-info hører til routing-algoritmer (control plane), ikke per-pakke-forwarding-tabell." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: (destinasjons-prefiks → utgangs-lenke). Brukes med longest-prefix-match." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Forwarding bestemmes av DESTINASJON, ikke kilde. Kilde-routing er en sjelden spesialvariant." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Lenker er det FYSISKE; forwarding krever logisk mapping fra adresser til lenker." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/routing-algorithms", "title": "Concept: Routing algorithms", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["routing-algorithms"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-079",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["subnetting"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 6 },
+      "question": "Hvor mange IP-adresser inneholder subnettet 223.1.1.0/23?",
+      "qtype": "multiple_choice",
+      "options": [
+        "128 adresser — 2^7 verdier under /25",
+        "256 adresser — én oktett står åpen",
+        "512 adresser — to oktetter under /23 maske-grensen",
+        "1024 adresser — 2^10 verdier under /22"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "/23 betyr 23 fastsatte prefiks-bits og 32 − 23 = 9 host-bits. 2^9 = 512 adresser i blokken. To /24-blokker pakket sammen.",
+      "explanationIncorrect": "Vanlig fellen er å lese /23 som /24 (256) eller blande med andre prefikslengder; husk formelen 2^(32 − prefix).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "/25 ville gitt 128 adresser. /23 er en mye større blokk." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "256 hører til /24. /23 er nøyaktig dobbelt så stort." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: 2^(32−23) = 2^9 = 512 adresser." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "1024 hører til /22 (én bit kortere prefiks)." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Subnetting", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["subnetting"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-080",
+      "topic": "10-network-layer",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 8 },
+      "question": "Hva brukes DHCP (Dynamic Host Configuration Protocol) til?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å mappe host-navn til IP-adresser via spørringer mot navne-server",
+        "Å utveksle ruting-informasjon mellom rutere i samme autonomous system",
+        "Å automatisk konfigurere en hosts nettverks-interface med IP-adresse og oppsett",
+        "Å oppdage MAC-adressen som tilhører en gitt IP-adresse på samme subnett"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "DHCP lar en host få tildelt IP-adresse, subnet-maske, default gateway og DNS-server-adresse dynamisk ved oppstart, uten manuell konfigurasjon.",
+      "explanationIncorrect": "Host→IP er DNS; ruting-info er rutings-protokoller (RIP, OSPF); IP→MAC er ARP.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Det er DNS som mapper navn til IP, ikke DHCP." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Rutings-protokoller (RIP/OSPF/BGP) deler ruting-info; DHCP er host-konfigurasjon." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: dynamisk host-konfigurasjon — IP, mask, gateway, DNS. Klassisk DHCP-rolle." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "IP→MAC-oppløsning er ARP, ikke DHCP." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-081",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["routing-algorithms"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 1 },
+      "question": "I et nettverk med 10 rutere — hvor mange Dijkstra-kjøringer trengs for at hver enkelt ruter skal finne sine least-cost-paths til alle andre?",
+      "qtype": "multiple_choice",
+      "options": [
+        "1 kjøring — sentralt på konfigurasjons-server",
+        "10 kjøringer — én per ruter, hver beregner sine egne korteste stier",
+        "3 kjøringer — én per nettverk-segment i topologien",
+        "100 kjøringer — én per (kilde, destinasjon)-par i full mesh"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Hver ruter må kjøre Dijkstra fra seg selv som kilde for å bygge sin lokale forwarding-tabell. Med 10 rutere blir det 10 kjøringer (én per ruter).",
+      "explanationIncorrect": "Sentralt er ikke standard link-state-modell (distributed Dijkstra); per-par er O(N^2) og overflødig.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "I link-state-protokoller kjører hver ruter Dijkstra LOKALT etter å ha mottatt topologien." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: én Dijkstra-kjøring per ruter = 10 kjøringer for 10 rutere." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Antall kjøringer er bestemt av antall rutere, ikke antall segmenter." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Hver Dijkstra-kjøring fra én kilde finner stier til ALLE destinasjoner — ikke per par." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/routing-algorithms", "title": "Concept: Routing algorithms", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["routing-algorithms"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-082",
+      "topic": "11-link-layer",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 3 },
+      "question": "Hvilken tjeneste tilbyr link-laget?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Upålitelig transmisjon av frames over én enkelt kommunikasjons-lenke",
+        "Pålitelig multi-hop forwarding av frames mellom hosts",
+        "Pålitelig ende-til-ende byte-strøm mellom applikasjons-prosesser",
+        "Ruting-beregning på tvers av flere subnett-grenser"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Link-laget håndterer overføring av frames over én lenke (samme broadcast-domene). Pålitelighet kan tilbys i noen link-lag-protokoller (WiFi gjør det), men er ikke universelt.",
+      "explanationIncorrect": "Multi-hop er nettverkslaget; ende-til-ende byte-strøm er TCP; ruting tilhører nettverk-lagets kontroll-plan.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: link-lag = én lenke, frame-orientert, vanligvis best-effort (Ethernet)." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Multi-hop er nettverkslaget. Link-laget kjenner kun til den ene fysiske lenken." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Byte-strøm tilbys av transport-laget (TCP), ikke link-laget." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Ruting er nettverkslag-funksjonalitet — link-laget bryr seg ikke om subnett." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-083",
+      "topic": "11-link-layer",
+      "conceptSlugs": ["arp-and-mac-addressing"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 5 },
+      "question": "Hva er formålet med Address Resolution Protocol (ARP)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å finne MAC-adressen til en host eller ruter som har en gitt IP-adresse på samme subnett",
+        "Å tildele en IP-adresse til et nettverks-interface ved oppstart",
+        "Å tildele en MAC-adresse til et nettverks-kort under produksjon",
+        "Å oversette domain-navn til IP-adresser via spørring mot navne-server"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "ARP sender ut en broadcast på lokalt subnett som spør «hvem har IP X?». Eieren svarer med sin MAC. Resultatet caches lokalt i ARP-tabellen.",
+      "explanationIncorrect": "IP-tildeling er DHCP; MAC settes på fabrikken; navn → IP er DNS.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: ARP løser IP → MAC innenfor ett broadcast-domene." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Dynamisk IP-tildeling er DHCP. ARP forutsetter at IP allerede er kjent." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "MAC-adresser brennes inn på nettverkskortet av produsenten, ikke via protokoll." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "DNS gjør navn → IP. ARP er ett trinn lavere (IP → MAC)." }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/arp-and-mac-addressing", "title": "Concept: ARP and MAC Addressing", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["arp-and-mac-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-084",
+      "topic": "11-link-layer",
+      "conceptSlugs": ["arp-and-mac-addressing"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 10 },
+      "question": "Hva slags informasjon lagres i en hosts ARP-tabell?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Sammenheng mellom IP-adresser og MAC-adresser for noder på samme subnett",
+        "Sammenheng mellom port-numre og prosess-id for åpne sockets",
+        "Sammenheng mellom interface-nummer og MAC-adresse for hostens egne kort",
+        "En liste over hvilke hosts som skal tildeles hvilke IP-adresser ved oppstart"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "ARP-tabellen er en cache som lagrer (IP, MAC, TTL)-tripler. Hosts slår opp her før de sender; ved cache-miss utløses en ARP-spørring.",
+      "explanationIncorrect": "Port-PID-mapping er OS-sockets-tabell; interface→MAC er statisk lokal info; IP-tildeling er DHCP-server-domene.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: (IP → MAC)-cache for lokalt subnett, med tidsbegrensning." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Port↔PID er OS-internt socket-state, ikke ARP-domene." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Lokal interface → MAC er ikke ARP-tabell; det er host-konfigurasjon." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "IP-tildeling ligger på DHCP-server, ikke i klientens ARP-tabell." }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/arp-and-mac-addressing", "title": "Concept: ARP and MAC Addressing", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["arp-and-mac-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-085",
+      "topic": "11-link-layer",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 12 },
+      "question": "På hvilken type kommunikasjons-lenke trengs en link access-protokoll for å koordinere tilgang?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Broadcast-lenke — der flere noder deler samme medium",
+        "Point-to-point-lenke — der nøyaktig to noder er koblet sammen",
+        "Optisk fiber-lenke — uavhengig av antall endepunkter",
+        "Wireless-lenke — kun fordi den bruker radio-frekvenser"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "På broadcast-lenker (Ethernet hub, WiFi, satellitt) kan flere noder forsøke å sende samtidig. En MAC-protokoll (CSMA/CD, CSMA/CA, TDMA, FDMA) trengs for å koordinere og unngå/håndtere kollisjoner.",
+      "explanationIncorrect": "Point-to-point trenger ingen koordinering (kun to parter); fiber/wireless-distinksjonen er fysisk, ikke logisk hvis kun to ende-punkter.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: delt medium → mulig samtidighet → MAC-protokoll trengs." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Med kun to parter er det ingen kollisjonsfare; full-duplex eller tur-veksling holder." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Fiber kan være både point-to-point og delt; det er topologien som avgjør, ikke mediet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Wireless trenger MAC fordi det er broadcast — ikke fordi det er radio per se." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
     }
   ]
 }

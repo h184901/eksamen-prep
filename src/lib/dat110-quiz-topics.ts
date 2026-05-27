@@ -76,6 +76,17 @@ export const QUIZ_TOPICS_DAT110: DAT110QuizTopicInfo[] = [
     tier: 1,
   },
   {
+    id: "06-transport-services",
+    label: "Transport (TCP/UDP/RDT)",
+    description: "Transport-tjenester, reliable data transfer, flow control, demultiplexing.",
+    emoji: "📦",
+    color: "blue",
+    examQuestionNumber: 4,
+    examWeight: "10%",
+    chapterTag: "CN 3",
+    tier: 1,
+  },
+  {
     id: "07-coordination",
     label: "Klokker og koordinering",
     description: "Lamport, vector clocks, mutual exclusion-algoritmer.",
