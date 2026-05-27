@@ -1,0 +1,96 @@
+{
+  "topics": [
+    {
+      "slug": "chord-dht",
+      "tema": "04-naming-og-chord-dht",
+      "status": "drafted",
+      "title": "Topic: Chord DHT",
+      "sections": [],
+      "supportedBy": [
+        {
+          "slug": "dat110-l9-naming-i",
+          "title": "Source: DAT110 L9 — Naming I (Flat Naming og Chord DHT)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Chord m=5)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises-partial-answers",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Partial Answers)",
+          "role": "exercise-solutions",
+          "visibility": "public"
+        },
+        {
+          "slug": "chord-dht-key-resolution",
+          "title": "Source: Chord DHT — Key Resolution (visuell supplement, håndskreven)",
+          "role": "lecture-supplement-visual",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "dht-fundamentals",
+          "route": "/dat110/begreper/dht-fundamentals"
+        },
+        {
+          "slug": "chord-ring",
+          "route": "/dat110/begreper/chord-ring"
+        },
+        {
+          "slug": "key-resolution",
+          "route": "/dat110/begreper/key-resolution"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Topic: Chord DHT\n\n> Paraply for Chord-spesifikt stoff i tema 04: hvorfor flat-naming-skalering motiverer DHT, hvordan Chord realiserer DHT som logisk ring med O(log N) finger-table-lookup, og hvordan scalable lookup-algoritmen kjøres stegvis. **Kjernen i Prosjekt 3**. Naming-konteksten ligger i *naming-systems*.\n\n## Hvorfor DHT\n\nL9 s. 12 motiverer DHT som svar på flat-name-lookup-skalering med en kompakt sammenligning:\n\n| Tilnærming | Eksempel | Lookup-kostnad |\n|---|---|---|\n| **Sentralisert directory** | Napster | O(N) — flaskehals |\n| **Flooding** | Gnutella | O(N²) meldinger — kollapser |\n| **DHT** | Chord, Pastry, Kademlia | **O(log N)** hopp |\n\nDistribuert hash table-prinsippet (*dat110-l9-naming-i* s. 13): `key = Hash(name)`, og operasjonene `put(key, value)` / `get(key) → value` partisjonerer data over noder uten sentralisert indeks. Egenskapene som DHT gir er listet på s. 15 og utdypet i [dht-fundamentals](/dat110/begreper/dht-fundamentals).\n\n## Chord som logisk ring\n\nL9 sidene 17–19 introduserer Chord-modellen:\n\n- **m-bit ID-space** (*dat110-l9-naming-i* s. 17): adresserommet er `{0, 1, ..., 2^m − 1}`. Eksempel: m=128 i real-world (s. 18), m=3 i lecture-eksempel (s. 19), m=5 i alle øvinger.\n- **Successor-regel**: nøkkel `k` håndteres av node med minste id ≥ k, kalt `successor(k)` eller `succ(k)`. Formelt: `id ≥ k > pred(id)` (*dat110-l9-naming-i* s. 19).\n- Ringen er sirkulær — modulo-aritmetikk wrap'er ved `2^m`. Se *dat110-l9-exercises-partial-answers* s. 3 Node=17 eksempel: `succ(17+16) = succ(33 mod 32) = succ(1) = 1`.\n\nDetaljer om ring-strukturen ligger i [chord-ring](/dat110/begreper/chord-ring).\n\n## Hvorfor naiv lookup ikke skalerer\n\nL9 s. 20 lister to naive tilnærminger og forkaster begge:\n\n1. **Følg successor-pointer rundt ringen** — O(N) hopp i verste fall.\n2. **Hver node holder pointer til alle andre** — O(N²) state totalt, dårlig under join/leave.\n\n> \"Both not scalable!\" (*dat110-l9-naming-i* s. 20)\n\nLøsningen er **finger table** — et begrenset (m-stort) sett pointers per node som muliggjør binær-søk-aktig lookup. Se [chord-ring#finger-table](/dat110/begreper/chord-ring#finger-table) og [key-resolution](/dat110/begreper/key-resolution).\n\n## Finger-table-prinsippet\n\nL9 s. 21:\n\n> \"FTp[i] = succ(p + 2^(i−1)). The i-th entry's finger points to the first node succeeding p by at least 2^(i−1). [...] each node then keeps pointer to nodes exponentially farther away. O(log N).\"\n\nDet betyr at hver node har **m entries**, der entry `i` peker til den noden som er minst `2^(i−1)` skritt frem på ringen. For m=5 gir det 5 entries med avstander 1, 2, 4, 8, 16 — som dekker hele ringen med O(log N) hopp per lookup.\n\nKonkret eksempel for node 0 (m=3, 5 noder) på L9 s. 22:\n\n- `succ(0+1) = succ(1) = 1`\n- `succ(0+2) = succ(2) = 3`\n- `succ(0+4) = succ(4) = 6`\n\nDetaljerte utregninger og full m=5-tabell ligger i [chord-ring#finger-table](/dat110/begreper/chord-ring#finger-table) og *dat110-l9-exercises-partial-answers* s. 3 (komplette FT for Node=1, 5, 17).\n\n## Scalable lookup-algoritmen\n\nL9 s. 23 viser pseudo-koden i to deler:\n\n```\nn.find_successor(k):\n  if k ∈ (n, successor(n)]:\n    return successor(n)\n  else:\n    n' = closest_preceding_node(k)\n    return n'.find_successor(k)\n\nn.closest_preceding_node(k):\n  for i = m downto 1:\n    if finger[i] ∈ (n, k):\n      return finger[i]\n  return n\n```\n\nAlgoritmen er rekursiv (eller iterativ via meldingsutveksling i prosjekt-implementasjonen). Per hopp halveres avstanden i verste fall → O(log N).\n\nStegvise utregninger:\n\n- **k=23 fra Node=1** (3 hopp): *dat110-l9-exercises-partial-answers* s. 4 — `1 → 17 → 19 → 25` (svar 25). \n- **k=26 fra n=1** (3 hopp): *chord-dht-key-resolution* sidene 3–5 — `1 → 18 → 20 → 21 → 28` (svar 28). Håndskreven trace med finger-table-illustrasjon per besøkt node.\n\nDetaljerte stegvise traces ligger i [key-resolution](/dat110/begreper/key-resolution).\n\n## Visual-supplement: chord-dht-key-resolution.pdf\n\n*chord-dht-key-resolution* er en 5-siders **håndskreven supplement-PDF** som spores k=26-lookup steg-for-steg. Per `manual_transcription: false`-flag i source-noten er innholdet ikke transkribert til tekst — page renders er primær kilde for de visuelle detaljene. Den brukes for visuell intuisjon på `closest_preceding_node`-iterasjons-mekanikken — særlig hvordan algoritmen itererer ned finger-table fra `i=m` til `i=1` ved hvert hopp.\n\n**qa_pending_consistency:** PDFens s. 3 viser `fingers[5]=18` for Node=1, mens *dat110-l9-exercises-partial-answers* s. 3 Q3-Node=1-løsning viser `fingers[5]=17`. Dette skyldes trolig at supplement-PDFen bruker et annet node-oppsett (introduserer n=18 utenfor Q3-settet `{1,5,17,19,25}`), ikke en feil i en av kildene. Se [key-resolution#k-26-trace-via-supplement](/dat110/begreper/key-resolution#k-26-trace-via-supplement) og [chord-ring#finger-table-discrepancy-flag](/dat110/begreper/chord-ring#finger-table-discrepancy-flag) for håndtering. Pågående visuell QA forventes å bekrefte dette.\n\n## Chord-egenskaper\n\nL9 s. 15 lister DHT-egenskaper som Chord realiserer:\n\n- **Global view** — alle noder ser samme ID-space.\n- **Common address space** — `{0, 2^m − 1}` (uavhengig av antall noder).\n- **Små rutings-tabeller** — m entries per node, ikke N.\n- **Skalering** — `put/get` koster O(log N) hopp.\n- **Load balancing** — uniform hash sprer keys jevnt.\n- **Fault tolerance** — replikering og successor-list-rebuilding (utdypet i Prosjekt 3 og forward-ref til *09-fault-tolerance*).\n\nUse cases (L9 s. 14): cooperative mirroring, BitTorrent DHT-tracker, Cassandra.\n\n## Sources\n\n| Source-note | Sider | Bidrag |\n|---|---|---|\n| *dat110-l9-naming-i* | 12–24 | Motivasjon, ring-modell, finger-table-prinsipp, scalable lookup |\n| *dat110-l9-exercises* | 1–4 | 4 øvinger med m=5, 5 noder (id=1,5,17,19,25) |\n| *dat110-l9-exercises-partial-answers* | 1–4 | Fullstendige FT for Node=1, 5, 17; k=23 fra Node=1 stegvis |\n| *chord-dht-key-resolution* | 1–5 | Håndskreven k=26-trace; visuell intuisjon for closest_preceding_node-iterasjon |\n\n## Eksamen-relevans\n\n- ***Task 6* (87 % grønt)** — DHT/Chord-spørsmål forventes spesielt på FT-konstruksjon og lookup-stegene.\n- STUDIEPLAN markerer L9–L10 som **\"ofte\"** på eksamen, og DHT/Chord som egen fasit-blokk.\n- ***dat110-project3-dht-startcode*** — finger-table-lookup-mekanikken er kjernen i implementasjonen.\n- Adresserom-formelen `2^bits` er kompakt fasit (STUDIEPLAN: 8 bit → 256, 16 bit → 65536); denne forventes spurt i muntlig.\n\n## Manuelt overlap (Strategi B coexistence)\n\n- `Begreper.md#DHT / Chord` har 1-linje-stubs (`DHT`, `Chord`, `Adresserom`, `Finger table`, `Successor-rule`) — concept-pages utvider med utledninger.\n- `STUDIEPLAN-EKSAMEN.md#DHT / Chord` har den kompakte fasit ordrett; denne paraplyen og concept-pagene er rikere prosa.\n- `STUDIEPLAN-EKSAMEN.md#Prosjektrelatert pensum` rad P3 lister forventede eksamens-emner — denne topic-paraplyen dekker alle.\n\n## Kobling til andre temaer\n\n- ***02-protocol-layering-og-sockets*** — Chord-noder kommuniserer over TCP/UDP-sockets (Prosjekt 3-detaljer).\n- ***08-consistency-replication*** — DHT-replikering for fault tolerance.\n- ***09-fault-tolerance*** — Chord stabilization, successor-list, failure recovery.\n- ***dat110-project3-dht-startcode*** — implementasjonen av algoritmene som vises stegvis i [key-resolution](/dat110/begreper/key-resolution).\n\n## Provenance\n\n- Bygget fra 4 source-notes (L9-lecture + L9-exercises-paret + chord-dht-key-resolution visual supplement).\n- chord-dht-key-resolution behandlet som visuell supplement per source-note `manual_transcription: false` — referert som intuisjons-kilde, ikke transkribert.\n- qa_pending_consistency-flag på `fingers[5]=18` vs `fingers[5]=17`-diskrepans dokumentert; venter på parallell visuell QA.\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "overlay-and-gossip",
+      "tema": "03-rpc-og-communication",
+      "status": "drafted",
+      "title": "Topic: Overlay-nettverk og Gossip",
+      "sections": [],
+      "supportedBy": [
+        {
+          "slug": "dat110-l8-communication-iii",
+          "title": "Source: DAT110 L8 — Communication III (Overlay Networks + ALM + Gossip)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l8-exercises-general",
+          "title": "Source: DAT110 L8 — Communication III Exercises (general)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l8-exercises-alm-costs",
+          "title": "Source: DAT110 L8 — Exercise: ALM Costs (image-only, manuelt transkribert)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l8-exercises-anti-entropy",
+          "title": "Source: DAT110 L8 — Exercise: Anti-Entropy (image-only, manuelt transkribert)",
+          "role": "exercises",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "application-layer-multicast",
+          "route": "/dat110/begreper/application-layer-multicast"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Topic: Overlay-nettverk og Gossip\n\n> Halvdel 2 av tema 03 (L8): hvordan distribuerte noder organiserer seg i et **application-layer overlay** for å disseminere data, og hvilke **multicast-modeller** (flooding-based, gossip-based) som finnes. Direkte Task 5-rødt-treff: push/pull/push-pull-formler i *anti-entropy* er kursets høyest-prioriterte svake punkt.\n\n## Hva temaet dekker\n\nL8 har fire goals (*dat110-l8-communication-iii* s. 2):\n\n1. Hva er **application-layer overlay**?\n2. Hvordan måles **ytelse** i overlay-nettverk?\n3. **Flooding-based multicasting** — strukturert, ustrukturert, probabilistisk.\n4. **Gossip-based** — anti-entropy (pull/push/push-pull) + rumor spreading.\n\nDisse organiserer seg som tre concept-pages: [application-layer-multicast](/dat110/begreper/application-layer-multicast) (overlay-modellen + ALM cost-metrikkene), *flooding-and-gossip* (multicast-modellene), og *anti-entropy* (push/pull/push-pull med formler).\n\n## Application-layer overlay\n\nEt **overlay** er et logisk nettverk av prosesser oppå det fysiske nettverket (*dat110-l8-communication-iii* s. 3, 6). Brukes for å disseminere informasjon (P2P-fildeling, Windows Update Delivery Optimization, replikert backup mellom WAN-spredte datasentere). Overlay-grafen kan struktureres som **tre** (unike paths mellom alle par) eller **mesh** (multiple paths, krever routing).\n\nRouting i overlay er ikke nødvendigvis optimalt vs network-level routing (*dat110-l8-communication-iii* s. 7). Derfor må man måle ytelse — ALM cost-modeller (se under).\n\n## ALM cost-modeller\n\nL8 introduserer **tre cost-metrikker** (*dat110-l8-communication-iii* s. 8–12) som testes direkte i Task 5-rødt:\n\n| Metrikk | Hva den måler | Formel/eksempel |\n|---|---|---|\n| **Link stress** | Hvor ofte krysser en ALM-melding samme fysiske link? | Eks: A→D krysser ⟨Ra,Rb⟩ to ganger → stress 2 |\n| **Stretch / RDP** | Ratio mellom overlay-delay og network-delay for én path | Eks: B→C overlay=73, network=47 → 73/47=1.55 |\n| **Tree cost** | Sum av link-delays i spanning tree (global metrikk) | Søk minimum spanning tree |\n\nStretch/RDP er per **par av noder**; tree-cost er **global**. Praktisk øvelse (*dat110-l8-exercises-alm-costs* s. 1) gir en konkret network-topologi (A, B, C, D, E + 5 routere) og ber studenten tegne overlay-grafen, velge tre trees, beregne alle tre metrikkene.\n\nDetaljer + utregningseksempler ligger i [application-layer-multicast](/dat110/begreper/application-layer-multicast).\n\n## Multicast-modeller\n\nTo høynivå-modeller (*dat110-l8-communication-iii* s. 15):\n\n- **Flooding-based** — node forwarder melding til alle naboer (ekskl. avsender) hvis ikke sett før. Kostnad varierer med graf-strukturen:\n  - Tree: M = N−1 (optimalt)\n  - Fully-connected mesh: M = ½N(N−1) (worst-case)\n  - Random graph: M = ½N(N−1)·p_edge\n  - Probabilistisk: forward med sannsynlighet `p_flood` per nabo (reduserer meldinger, men risiko for å ikke nå alle)\n- **Gossip-based / epidemic** — modellert som sykdomsspredning med tilstandene infective/susceptible/removed (`s + i + r = 1`). To varianter: anti-entropy (random pair-utveksling) og rumor spreading (kontaminerte noder sprer videre, stopper med `p_stop`).\n\nFlooding-formlene og gossip-grunnvokabularet er i *flooding-and-gossip*.\n\n## Anti-entropy (Task 5-rødt)\n\nDen enkeltkonseptet som treffer eksamen-svakheten hardest (*dat110-l8-communication-iii* s. 24–27). Tre varianter av tilfeldig pair-utveksling mellom replikker:\n\n| Variant | Hvem oppdaterer hvem | `p_{i+1}` (sannsynlighet susceptible etter runde i+1) |\n|---|---|---|\n| **Pull** | P puller updates fra Q | `(p_i)²` |\n| **Push** | P pusher egne updates til Q | `p_i · (1 − 1/n)^{n(1−p_i)}` |\n| **Push-pull** | Begge sender til hverandre | push · pull |\n\nObservasjoner (*dat110-l8-communication-iii* s. 27): pull konvergerer raskere enn push når mange noder er infective; push-pull tar O(log N) rundes for å nå alle.\n\nKonkret beregningseksempel (1000 noder, infective=400, susceptible=600 → `p_i = 0.6`) gir Pull = 0.36, Push ≈ 0.40, Push-pull ≈ 0.144. Se *anti-entropy* for utregning + håndskrevet løsning med `[?]`-flagging fra *dat110-l8-exercises-anti-entropy*.\n\n## Eksamen-relevans\n\n- ***Task 5* (Comm+MOM+Overlay, 69 % — rødt)**: sidene 17–27 i L8 dekker direkte de røde temaene. Push/pull/push-pull-formler er den primære eksamen-svakheten per STUDIEPLAN-EKSAMEN.\n- STUDIEPLAN-EKSAMEN har de tre formlene som huskeregler: tree `n−1`, fully-connected `n(n−1)/2`, stretch `overlay_delay / underlying_delay`.\n\n## Manuelt overlap (Strategi B coexistence)\n\n- `STUDIEPLAN-EKSAMEN.md#Overlay networks` har huskeregler-tabell; concept-pagene utvider med utledninger og eksempler.\n- `Begreper.md#Overlay-nettverk / Multicast` har 1-linje-stubs for Gossip protocol, Flooding, Tree multicast, Stretch, Fully-connected — concept-pagene er den rikere versjonen, manuelle stubs er bevart som hurtigslag.\n\n## Kobling til andre temaer\n\n- **Tema 04 (Naming og Chord DHT)** — Chord er en strukturert overlay (kobles til ALM-grunnlaget her).\n- **Tema 08 (Consistency + Replication)** — anti-entropy er **mekanismen** som propagerer updates i eventual-konsistente systemer. *consistency-and-replication* eier *hva* (konvergens); denne topic-en eier *hvordan*. Se cross-references i *eventual-consistency* og *data-centric-vs-client-centric*.\n- **Tema 09 (Fault tolerance)** — gossip-protokoller som FT-mekanisme for failure detection og state-spredning.\n\n## Sources\n\n| Source-note | Sider | Bidrag |\n|---|---|---|\n| *dat110-l8-communication-iii* | 3–30 | Kanonisk lecture for overlay + ALM-cost + flooding + gossip + anti-entropy |\n| *dat110-l8-exercises-general* | 1–4 | Tekst-tilgjengelig variant av samtlige L8-øvelser |\n| *dat110-l8-exercises-alm-costs* | 1 | Image-only handout, manuelt transkribert — network-topologi + ALM-cost-løsning (`[?]`-flagging) |\n| *dat110-l8-exercises-anti-entropy* | 1 | Image-only handout, manuelt transkribert — Pull/Push/Push-pull konkret utregning (`[?]`-flagging) |\n\n## Provenance\n\n- Bygget fra L8-kjernen pluss tre øvelses-PDFer; to av disse er manuelt transkribert (image-only) og har `transcription_qa: pending` — håndskrevne verdier er flagget `[?]`-bevart i *anti-entropy* og [application-layer-multicast](/dat110/begreper/application-layer-multicast).\n- PDF-metadata-anomali (*dat110-l8-communication-iii* open question 2): filnavn er L8 mens `pdf_title` sier \"L9\" — antas renummerering mellom kursår, ikke kritisk for innholdet.\n",
+      "created": "2026-05-26"
+    }
+  ]
+}

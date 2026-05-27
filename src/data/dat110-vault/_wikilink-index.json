@@ -1,0 +1,17 @@
+{
+  "routes": {
+    "concepts/chord-ring": "/dat110/begreper/chord-ring",
+    "concepts/dht-fundamentals": "/dat110/begreper/dht-fundamentals",
+    "concepts/key-resolution": "/dat110/begreper/key-resolution",
+    "concepts/application-layer-multicast": "/dat110/begreper/application-layer-multicast",
+    "concepts/ipv4-addressing": "/dat110/begreper/ipv4-addressing",
+    "concepts/subnetting": "/dat110/begreper/subnetting",
+    "concepts/arp-and-mac-addressing": "/dat110/begreper/arp-and-mac-addressing",
+    "concepts/delays": "/dat110/begreper/delays",
+    "concepts/throughput": "/dat110/begreper/throughput",
+    "concepts/distribution-transparency": "/dat110/begreper/distribution-transparency",
+    "concepts/rpc": "/dat110/begreper/rpc",
+    "topics/chord-dht": "/dat110/temaer/chord-dht",
+    "topics/overlay-and-gossip": "/dat110/temaer/overlay-and-gossip"
+  }
+}

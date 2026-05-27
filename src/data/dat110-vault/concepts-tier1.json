@@ -1,0 +1,466 @@
+{
+  "concepts": [
+    {
+      "slug": "chord-ring",
+      "tema": "04-naming-og-chord-dht",
+      "status": "drafted",
+      "title": "Concept: Chord Ring",
+      "sections": [
+        "structure",
+        "successor",
+        "finger-table",
+        "finger-table-example",
+        "modulo-wraparound",
+        "finger-table-two-examples"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l9-naming-i",
+          "title": "Source: DAT110 L9 — Naming I (Flat Naming og Chord DHT)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Chord m=5)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises-partial-answers",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Partial Answers)",
+          "role": "exercise-solutions",
+          "visibility": "public"
+        },
+        {
+          "slug": "chord-dht-key-resolution",
+          "title": "Source: Chord DHT — Key Resolution (visuell supplement, håndskreven)",
+          "role": "lecture-supplement-visual",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "dht-fundamentals",
+          "route": "/dat110/begreper/dht-fundamentals"
+        },
+        {
+          "slug": "key-resolution",
+          "route": "/dat110/begreper/key-resolution"
+        }
+      ],
+      "relatedTopics": [
+        {
+          "slug": "chord-dht",
+          "route": "/dat110/temaer/chord-dht"
+        }
+      ],
+      "body": "\n# Concept: Chord Ring\n\n> Chord realiserer DHT-prinsippet via en logisk ring med m-bit ID-space og en `successor`-regel som mapper nøkler til noder. Finger-table gir O(log N) lookup. Sidereferanser: lecture L9 sidene 17–22.\n\n## structure\n\nL9 sidene 17–18 definerer ringen:\n\n- **m-bit ID-space**: alle noder og keys tildeles en `m`-bit identifier. Adresserommet er `{0, 1, ..., 2^m − 1}`. STUDIEPLAN: \"Adresserom: `2^bits`\".\n- **Ringen er sirkulær**: id `2^m − 1` følges av id `0`. Modulo-aritmetikk er underforstått overalt.\n- **Noder plasseres på ringen** ved sin ID. Eksempel (*dat110-l9-exercises* s. 1): m=5, 5 noder med id `{1, 5, 17, 19, 25}` i ringen `{0..31}`.\n\nReal-world Chord bruker m=128 (*dat110-l9-naming-i* s. 18). DAT110-pensumets eksempler er m=3 (L9 s. 19 — 5 noder fra Stoica et al. 2001) og m=5 (alle øvinger). Liten m gjør at man kan tegne ringen for hånd og se alle finger-tables.\n\n## successor\n\nDen fundamentale Chord-regelen (*dat110-l9-naming-i* s. 17):\n\n> \"Entity with key k is managed by node with smallest id ≥ k (called its successor succ(k)).\"\n\nDet betyr:\n\n- Hver nøkkel `k` \"hører hjemme\" hos den noden hvis id er minst lik k og samtidig minst.\n- Hvis k er større enn alle node-IDene, wrap'er det rundt — succ(k) = noden med minste id i ringen.\n- Hver node er ansvarlig for **alle keys i intervallet `(pred(id), id]`** — fra forrige nodes id (eksklusivt) til sin egen id (inklusivt).\n\nFormelt (*dat110-l9-naming-i* s. 19):\n\n> \"id ≥ k > pred(id)\"\n\n**Konkret eksempel** (*dat110-l9-exercises* s. 2): m=5, noder `{1, 5, 17, 19, 25}`, key k. Regel: `k ≤ id`.\n\n- k=1 → succ(1) = 1 (Node1)\n- k=23 → succ(23) = 25 (Node5)\n- k=4 → succ(4) = 5 (Node2)\n- k=11 → succ(11) = 17 (Node3)\n- k=28 → succ(28) = wrap → 1 (Node1)\n- k=3 → succ(3) = 5 (Node2)\n\n## finger-table\n\nNaiv lookup (følg successor-pointer rundt ringen) koster O(N) — ikke skalerbart. **Finger-table** er Chord's løsning (*dat110-l9-naming-i* s. 21):\n\n> \"FTp[i] = succ(p + 2^(i−1)). The i-th entry's finger points to the first node succeeding p by at least 2^(i−1). [...] each node then keeps pointer to nodes exponentially farther away. O(log N).\"\n\nHver node `p` har **m entries** i sin finger-table. Entry `i` (1 ≤ i ≤ m) peker til den første noden som ligger minst `2^(i−1)` skritt frem fra `p`:\n\n```\nFTp[1] = succ(p + 1)      ← naboen\nFTp[2] = succ(p + 2)\nFTp[3] = succ(p + 4)\n...\nFTp[m] = succ(p + 2^(m−1)) ← halvveis rundt ringen\n```\n\nDistanseskaleringen er **eksponentiell** — det er nøkkelen til O(log N): hvert finger-oppslag halverer avstanden til target i verste fall.\n\n## finger-table-example\n\nL9 s. 22 viser node 0 i m=3-ringen med noder `{0, 1, 3, 6}`:\n\n- `FT0[1] = succ(0+1) = succ(1) = 1`\n- `FT0[2] = succ(0+2) = succ(2) = 3`\n- `FT0[3] = succ(0+4) = succ(4) = 6`\n\nFor DAT110-øvingen (m=5, noder `{1, 5, 17, 19, 25}`) gir *dat110-l9-exercises-partial-answers* s. 3 tre fullstendige FT:\n\n**Node = 1:**\n\n| i | p + 2^(i-1) | succ() |\n|---|---|---|\n| 1 | 2 | 5 |\n| 2 | 3 | 5 |\n| 3 | 5 | 5 |\n| 4 | 9 | 17 |\n| 5 | 17 | 17 |\n\n**Node = 5:**\n\n| i | p + 2^(i-1) | succ() |\n|---|---|---|\n| 1 | 6 | 17 |\n| 2 | 7 | 17 |\n| 3 | 9 | 17 |\n| 4 | 13 | 17 |\n| 5 | 21 | 25 |\n\n**Node = 17:**\n\n| i | p + 2^(i-1) | succ() |\n|---|---|---|\n| 1 | 18 | 19 |\n| 2 | 19 | 19 |\n| 3 | 21 | 25 |\n| 4 | 25 | 25 |\n| 5 | 33 mod 32 = 1 | 1 |\n\nMerk Node=17, i=5: `17 + 16 = 33`, som wrap'er via modulo til `1`. Se *#modulo-wraparound*.\n\nNode=19 og Node=25 sine FT er ikke fanget i ekstrahert tekst fra solution-PDFen (*dat110-l9-exercises-partial-answers* open questions) — page render `pages/dat110-l9-exercises-partial-answers/p003.png` er autoritativ.\n\n## modulo-wraparound\n\nSirkulariteten håndteres med modulo 2^m. *dat110-l9-exercises-partial-answers* s. 3 viser det eksplisitt:\n\n> \"Node = 17: i=5, succ(17+16) = succ(33 mod 32) = succ(1) = 1\"\n\nI implementasjon betyr det at alle finger-table-beregninger gjør `(p + 2^(i−1)) mod 2^m` før successor-lookup. Likeledes gjør successor-regelen rundt-wrap når k er større enn alle node-IDer.\n\nI prosjektet (Prosjekt 3) håndteres dette typisk via BigInteger eller bit-masking når m=128.\n\n## finger-table-two-examples\n\nTo forskjellige node-oppsett brukes på tvers av DAT110-materialet for å illustrere finger-table-mekanikken — begge er korrekte transkripsjoner, hver for sin egen ring:\n\n| Kilde | Node-oppsett | m | `fingers[5]` for node 1 |\n|---|---|---|---|\n| **L9 Exercises Partial Answers** (kanonisk) — *dat110-l9-exercises-partial-answers* s. 3 | `{1, 5, 17, 19, 25}` | 5 | `succ(1+16) = succ(17) = 17` |\n| **chord-dht-key-resolution** (visual supplement) — *chord-dht-key-resolution* s. 3 | inkluderer `{1, 4, 18, 20, 21, 28, ...}` | 5 | `succ(1+16) = succ(17) = 18` |\n\n> **Kanonisk node-oppsett for dette concept-page:** `{1, 5, 17, 19, 25}` fra *dat110-l9-exercises-partial-answers*. Alle finger-tabeller under *#finger-table-example* og alle eksamen-orienterte spørsmål antar dette oppsettet.\n\n**Hvorfor to oppsett?** Visuell QA 2026-05-26 bekreftet via direkte sammenligning av `pages/chord-dht-key-resolution/p003.png` mot `pages/dat110-l9-exercises-partial-answers/p003.png` at supplementen bruker en ring som inkluderer node `n=18`, mens L9 Exercises bruker `n=17, 19` uten `n=18`. I supplementens ring blir `succ(17) = 18` (fordi 18 er smaleste id ≥ 17 i den ringen), mens i L9-ringen blir `succ(17) = 17` (fordi 17 selv er i settet). Begge transkripsjoner er korrekte for sin egen ring — ikke en transkripsjonsfeil.\n\nSupplementens k=26-trace i [key-resolution#k-26-trace-via-supplement](/dat110/begreper/key-resolution#k-26-trace-via-supplement) bruker eksplisitt sitt eget oppsett (begynner på n=1, hopper via finger-tabellene til n=18, 20, 21, 28 før den lander på key 26's successor).\n\n## Eksamen-relevans\n\n- ***Task 6*** — FT-konstruksjon er typisk eksamen-format.\n- STUDIEPLAN-EKSAMEN: \"Adresserom: `2^bits`. Finger table lookup: O(log N) hops. Successor-rule: key k tildeles første node ID ≥ k (klokkeretning)\" — kunne dette ordrett er kompakt eksamen-svar.\n- *dat110-project3-dht-startcode* krever FT-konstruksjon i kode.\n\n## Provenance\n\n- Primær: *dat110-l9-naming-i* sidene 17–22 (ring-modell, successor-regelen, FT-formel + node-0-eksempel).\n- Sekundær: *dat110-l9-exercises-partial-answers* s. 3 (komplette FT for Node=1, 5, 17 — operasjonalisering).\n- Tertiær: *dat110-l9-exercises* s. 1–2 (oppsett-formulering).\n- Visual supplement: *chord-dht-key-resolution* referert i discrepancy-flagget (ikke transkribert; manual_transcription: false).\n- Tabellverdiene over er transkribert direkte fra ekstrahert tekst i *dat110-l9-exercises-partial-answers* — verifisert ord-for-ord mot source-noten.\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "dht-fundamentals",
+      "tema": "04-naming-og-chord-dht",
+      "status": "drafted",
+      "title": "Concept: DHT Fundamentals",
+      "sections": [
+        "motivation",
+        "principle",
+        "properties",
+        "use-cases"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l9-naming-i",
+          "title": "Source: DAT110 L9 — Naming I (Flat Naming og Chord DHT)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "chord-ring",
+          "route": "/dat110/begreper/chord-ring"
+        },
+        {
+          "slug": "key-resolution",
+          "route": "/dat110/begreper/key-resolution"
+        }
+      ],
+      "relatedTopics": [
+        {
+          "slug": "chord-dht",
+          "route": "/dat110/temaer/chord-dht"
+        }
+      ],
+      "body": "\n# Concept: DHT Fundamentals\n\n> Generelle prinsipper bak distribuerte hash-tabeller — uavhengig av konkret realisering. Chord er den case-implementasjonen DAT110 dybde-dekker (se [chord-ring](/dat110/begreper/chord-ring)), men prinsippene her gjelder også Pastry, Kademlia, CAN, osv.\n\n## motivation\n\nL9 s. 12 motiverer DHT som **det eneste skalerbare alternativet** for flat-name-lookup i peer-to-peer-systemer:\n\n| Tilnærming | Eksempel | Lookup-kostnad | Problem |\n|---|---|---|---|\n| Sentralisert directory | **Napster** | O(N) | Flaskehals, single point of failure |\n| Unstructured flooding | **Gnutella** | O(N²) meldinger | Kollapser ved skala |\n| **DHT** | Chord, Pastry, Kademlia | **O(log N)** | (Krever struktur og join/leave-håndtering) |\n\nSentralisert directory feiler av samme grunner som sentralisert DNS gjør (*dns#centralized-design-failure*). Flooding feiler fordi hver lookup berører alle noder. DHT-prinsippet er å gi systemet en **struktur** som garanterer O(log N) hopp uten sentralisert state.\n\n## principle\n\nDHT-API (*dat110-l9-naming-i* s. 13):\n\n```\nkey = Hash(name)\nput(key, value)\nvalue = get(key)\n```\n\n- `Hash` produserer en m-bit identifier som er injective (med høy sannsynlighet) og **uniform** — keys spres jevnt over hele ID-space `{0, ..., 2^m − 1}`.\n- `put(k, v)` lagrer paret `(k, v)` på en av nodene i systemet — hvilken bestemmes av en **mapping-regel** som hver implementasjon definerer (Chord: `successor(k)`-regelen, se [chord-ring#successor](/dat110/begreper/chord-ring#successor)).\n- `get(k)` finner samme node og returnerer verdien.\n\nAvgjørende: ingen node trenger global kjennskap til hvilke keys andre noder holder. Hver node lærer kun en **liten rutings-tabell** (i Chord: m entries — finger-table) og bruker den til å videresende lookups mot riktig destinasjon.\n\n## properties\n\nL9 s. 15 lister DHT-egenskapene som gjør prinsippet attraktivt:\n\n- **Global view** — alle noder ser samme logiske ID-space (selv om hver kun holder en liten del).\n- **Common address space** — `{0, ..., 2^m − 1}` er fastsatt av m, ikke av antall noder N.\n- **Små rutings-tabeller** — typisk O(log N) eller m entries per node (m=128 i real-world Chord — uavhengig av N).\n- **Skalering** — `put/get` koster O(log N) hopp.\n- **Load balancing** — uniform hash sprer keys jevnt; ingen node blir hotspot.\n- **Fault tolerance** — replikering på naboer i ID-space (typisk successor-list) og rebuild av rutings-tabeller når noder feiler eller joiner.\n\nDisse egenskapene er kollektivt grunnen til at DHT er valgt i moderne peer-to-peer-systemer.\n\n## use-cases\n\nL9 s. 14 lister tre konkrete use cases:\n\n- **Cooperative mirroring** — distribuert objekt-lagring hvor klienter både konsumerer og bidrar diskplass (eks. CFS).\n- **BitTorrent DHT-tracker** — Mainline DHT brukes til å finne peers uten sentralisert tracker.\n- **Cassandra** — Apaches distribuerte database bruker en Chord-inspirert ring for partisjonering.\n\nL9 s. 16 har en eksplisitt **hjemmeoppgave**: bygg DHT-system for cooperative mirroring. Det er forløperen til **Prosjekt 3** (*dat110-project3-dht-startcode*) som operasjonaliserer Chord-mekanikken i kode.\n\n## DHT vs Chord — hva som er hva\n\nDenne page'n dekker **generelle DHT-prinsipper**; Chord er DAT110-implementasjonen som dybde-dekkes i [chord-ring](/dat110/begreper/chord-ring) og [key-resolution](/dat110/begreper/key-resolution). Skillet:\n\n| Ligger her | Ligger i [chord-ring](/dat110/begreper/chord-ring) / [key-resolution](/dat110/begreper/key-resolution) |\n|---|---|\n| Hvorfor DHT (motivasjon) | Ring-struktur og m-bit ID-space |\n| API (put/get/hash) | Successor-regelen |\n| Generelle egenskaper | Finger-table-konstruksjon |\n| Use cases (cooperative mirroring, BitTorrent, Cassandra) | Scalable lookup-algoritmen |\n\nDet betyr at andre DHT-er (Pastry, Kademlia) ikke trenger egen concept-page i DAT110 — de deler **motivation** og **principle** med Chord, men har andre **realiseringer** som ikke er pensum.\n\n## Eksamen-relevans\n\n- ***Task 6* (87 % grønt)** — generelle DHT-fordeler vs sentralisert (O(N)) og flooding (O(N²)) er typisk eksamen-format.\n- STUDIEPLAN nevner DHT/Chord som egen fasit-blokk.\n- ***dat110-project3-dht-startcode*** — bygger på DHT-API'et `put/get` operasjonalisert via Chord.\n\n## Provenance\n\n- Primær: *dat110-l9-naming-i* sidene 12–16 (motivasjon, prinsipp, egenskaper, use cases).\n- Splitt fra Chord-spesifikk dybde: ring-strukturen, finger-table, og lookup-algoritmen ligger i [chord-ring](/dat110/begreper/chord-ring) og [key-resolution](/dat110/begreper/key-resolution) hvor de operasjonaliseres med konkrete utregninger.\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "key-resolution",
+      "tema": "04-naming-og-chord-dht",
+      "status": "drafted",
+      "title": "Concept: Key Resolution (Chord Scalable Lookup)",
+      "sections": [
+        "pseudo-code",
+        "algorithm-walkthrough",
+        "k-23-trace",
+        "k-26-trace-via-supplement",
+        "complexity",
+        "project3-relevance"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l9-naming-i",
+          "title": "Source: DAT110 L9 — Naming I (Flat Naming og Chord DHT)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Chord m=5)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l9-exercises-partial-answers",
+          "title": "Source: DAT110 L9 — Naming I Exercises (Partial Answers)",
+          "role": "exercise-solutions",
+          "visibility": "public"
+        },
+        {
+          "slug": "chord-dht-key-resolution",
+          "title": "Source: Chord DHT — Key Resolution (visuell supplement, håndskreven)",
+          "role": "lecture-supplement-visual",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "chord-ring",
+          "route": "/dat110/begreper/chord-ring"
+        },
+        {
+          "slug": "dht-fundamentals",
+          "route": "/dat110/begreper/dht-fundamentals"
+        }
+      ],
+      "relatedTopics": [
+        {
+          "slug": "chord-dht",
+          "route": "/dat110/temaer/chord-dht"
+        }
+      ],
+      "body": "\n# Concept: Key Resolution (Chord Scalable Lookup)\n\n> Algoritmen som finner riktig node for en gitt nøkkel `k` i Chord-ringen. Bygger på finger-table for å hoppe med eksponentielt avtagende avstand (O(log N) hopp). Underlag for Prosjekt 3-lookup-implementasjonen.\n\n## pseudo-code\n\nL9 s. 23 gir pseudo-koden i to deler (*dat110-l9-naming-i* s. 23):\n\n```\nn.find_successor(k):\n  if k ∈ (n, successor(n)]:\n    return successor(n)\n  else:\n    n' = closest_preceding_node(k)\n    return n'.find_successor(k)\n\nn.closest_preceding_node(k):\n  for i = m downto 1:\n    if finger[i] ∈ (n, k):\n      return finger[i]\n  return n\n```\n\n**Hva de to funksjonene gjør:**\n\n- `find_successor(k)` er entry-point: spør \"hvilken node er ansvarlig for k?\". Hvis `k` ligger i intervallet `(n, successor(n)]`, så er svaret `successor(n)`. Ellers må vi finne en nærmere node og delegere videre.\n- `closest_preceding_node(k)` itererer **fra topp av finger-table** (i=m, største avstand) **ned til 1**, og returnerer den første finger som ligger mellom `n` og `k`. Det er finger som er nærmest k uten å passere det.\n\nVisuell supplement i *chord-dht-key-resolution* s. 2 viser akkurat samme pseudokode i håndskreven form.\n\n## algorithm-walkthrough\n\nIntuisjonen er **eksponentiell halvering**: ved hvert hopp velger `closest_preceding_node` det fingeret som tar oss \"halvveis\" mot k uten å passere det. Etter O(log N) slike halveringer er vi i samme intervall som k → vi har fått successor(k).\n\nTrinn-for-trinn (kall fra node n=p):\n\n1. Sjekk om k ligger i `(p, succ(p)]`. Hvis ja: ferdig, returner succ(p).\n2. Ellers: itererer finger-table fra `i=m` til `i=1`. Den **første** finger[i] som ligger i `(p, k)` velges som neste hopp.\n3. Send `find_successor(k)`-kall til den noden. Gjenta fra 1.\n\nDet at vi itererer **fra m ned til 1** er kritisk: vi vil ha det **største** hoppet som ikke passerer k, fordi det reduserer gjenstående avstand mest.\n\n## k-23-trace\n\n*dat110-l9-exercises-partial-answers* s. 4 viser k=23 fra Node1 (id=1) stegvis. Settup: m=5, ring `{0..31}`, noder `{1, 5, 17, 19, 25}`.\n\n**Steg 1 — Node n=1:**\n\n- Sjekk: er `k=23 ≤ succ(1) = 5`? Nei.\n- Bruk closest_preceding_node: itererer FT fra bunn (note: solution-PDF-en formulerer det som \"from bottom of FT\" — som matematisk er det samme som fra `i=m` ned til `i=1`).\n- FT[5] = 17. Er `1 < 17 < 23`? **Ja** → velg 17 som neste hopp.\n- Route to 17.\n\n**Steg 2 — Node n=17:**\n\n- Sjekk: er `k=23 ≤ succ(17) = 19`? Nei.\n- Iterer FT: FT[5]=1, `17 < 1 < 23`? Nei (1 er bak 17 i ringen). FT[4]=25, `17 < 25 < 23`? Nei. FT[3]=25, samme. FT[2]=19, `17 < 19 < 23`? **Ja** → velg 19.\n- Route to 19.\n\n**Steg 3 — Node n=19:**\n\n- Sjekk: er `k=23 ≤ succ(19) = 25`? **Ja!**\n- Route to 25. **Answer!**\n\nTotalt 3 hopp (1 → 17 → 19 → 25) for ring med 5 noder. Konsistent med O(log N) — for N=5 forventes ~log₂(5) ≈ 2.3 hopp, vi fikk 3.\n\nSitat fra solution (*dat110-l9-exercises-partial-answers* s. 4):\n\n> \"Is k ≤ succ(1) = 5? No. Use FT: start from bottom of FT. FT[5]: 1 < 17 < 23 = true. Route to 17.\"\n\n> \"Is k ≤ succ(19) = 25? YES. Route to 25. Answer!\"\n\n*dat110-l9-exercises* s. 4 inneholder 3 andre lookups (k=11 fra 17, k=28 fra 25, k=4 fra 1) som ikke er løst i ekstrahert tekst — kan gjøres som øvelse.\n\n## k-26-trace-via-supplement\n\n*chord-dht-key-resolution* er en 5-siders håndskreven supplement som sporer **k=26 fra n=1** stegvis. Sluttsvar: 28. Per-side-summary fra source-note (siden PDFen er `manual_transcription: false` — page renders er primær kilde):\n\n- **Side 3 — Steg A:** start n=1, sjekk intervallet, itererer FT, finner finger[5]=18, returnerer 18 som current node. (Merk: supplementens FT for n=1 viser fingers[5]=18, ikke 17 som i *dat110-l9-exercises-partial-answers* s. 3. Indikerer ulikt node-oppsett — se [chord-ring#finger-table-discrepancy-flag](/dat110/begreper/chord-ring#finger-table-discrepancy-flag). qa_pending_consistency.)\n- **Side 4 — Steg B og C:** n=18 → returnerer 20 (via finger[2]=20); n=20 → returnerer 21 (via finger[2]=21).\n- **Side 5 — Steg D:** n=21, succ(21)=28, sjekk `21 < 26 ≤ 28`? **Ja** → **Return 28 (Answer)**.\n\nHele sekvensen: `1 → 18 → 20 → 21 → 28` — 4 hopp.\n\n**Bruksområde:** Visuell intuisjon for hvordan `closest_preceding_node` itererer ned fingertabellen. Solution-PDFens k=23-trace (*dat110-l9-exercises-partial-answers*) er fragmentert i ekstrahert tekst (overlay-layout); supplementen viser stegene mer eksplisitt med finger-table tegnet ved hver besøkt node.\n\n**Note:** supplementens setup gir antagelig en ulik ring enn øvingens (fingers[5]=18 vs 17). Bruk supplementens trace for å forstå **algoritmen**, ikke for å verifisere øvings-fasit. Pågående visuell QA forventes å bekrefte node-oppsettet.\n\n## complexity\n\n- Hver hopp halverer (i verste fall) avstanden mellom current node og k → **O(log N) hopp**.\n- Hver node holder kun m entries (uavhengig av N) → liten rutings-state.\n- Total state i systemet: O(N · m) entries (vs O(N²) for \"alle holder all-pointer\"-naiv tilnærming).\n\nL9 s. 20 og 21 oppsummerer trade-off mellom naiv (O(N) per lookup, O(N) state) og finger-table (O(log N) per lookup, O(m·N) total state). Den eksponentielle reduksjonen i lookup-kostnad er hovedgrunnen til at Chord er attraktiv.\n\n## project3-relevance\n\n***dat110-project3-dht-startcode*** implementerer disse pseudokode-funksjonene i Java. Sentrale operasjonelle detaljer:\n\n- Implementasjonen er **iterativ med meldingsutveksling**, ikke rekursiv via funksjonskall — `find_successor(k)`-kallet over nettverket gjøres som ny request.\n- m=128 i prosjektet (matchet med Chord-paperets reelle parameter).\n- Finger-table-vedlikehold ved join/leave krever **stabilization** — ikke pensum i lecture L9, men dekket i prosjekt-koden.\n\n## Eksamen-relevans\n\n- ***Task 6* (87 % grønt)** — stegvise lookups med konkret k og startnode er typisk eksamen-spørsmål.\n- STUDIEPLAN: \"Finger table lookup: O(log N) hops\" — minimumssvar i muntlig.\n- Prosjekt 3-koden følger nøyaktig denne algoritmen; muntlig-spørsmål om prosjektet kan teste forståelse av `closest_preceding_node`-iterasjonen.\n\n## Provenance\n\n- Primær: *dat110-l9-naming-i* s. 23 (pseudo-koden).\n- Operasjonalisering: *dat110-l9-exercises-partial-answers* s. 4 (k=23-trace, ord-for-ord verifisert).\n- Visual supplement: *chord-dht-key-resolution* sidene 2–5 (k=26-trace, ikke transkribert per manual_transcription: false; per-side-summarier hentet fra source-noten).\n- Forward-ref: *dat110-l9-exercises* s. 4 har 3 ulokeyde lookups (k=11, k=28, k=4) som ikke er detaljert her — kan dekkes av annet pass etter visuell QA.\n- qa_pending_consistency på supplementens setup vs øvingens dokumentert i [chord-ring#finger-table-discrepancy-flag](/dat110/begreper/chord-ring#finger-table-discrepancy-flag).\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "application-layer-multicast",
+      "tema": "03-rpc-og-communication",
+      "status": "drafted",
+      "title": "Concept: Application-Layer Multicast (ALM)",
+      "sections": [
+        "overlay-vs-network",
+        "topology",
+        "link-stress",
+        "stretch-rdp",
+        "tree-cost",
+        "exercise-example"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l8-communication-iii",
+          "title": "Source: DAT110 L8 — Communication III (Overlay Networks + ALM + Gossip)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l8-exercises-general",
+          "title": "Source: DAT110 L8 — Communication III Exercises (general)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l8-exercises-alm-costs",
+          "title": "Source: DAT110 L8 — Exercise: ALM Costs (image-only, manuelt transkribert)",
+          "role": "exercises",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [],
+      "relatedTopics": [
+        {
+          "slug": "overlay-and-gossip",
+          "route": "/dat110/temaer/overlay-and-gossip"
+        }
+      ],
+      "body": "\n# Concept: Application-Layer Multicast (ALM)\n\n> Logisk overlay-nettverk av prosesser som disseminerer informasjon på toppen av det fysiske nettverket. Tre cost-metrikker — link stress, stretch/RDP, tree cost — brukes for å evaluere ytelse. Direkte Task 5-rødt-relevant.\n\n## overlay-vs-network\n\nEt **overlay** er et logisk nettverk av prosesser oppå det fysiske nettverket (*dat110-l8-communication-iii* s. 3, 6):\n\n- **Fysisk nettverk** = switches, routere, fysiske linker. Underliggende infrastruktur som applikasjonen ikke kan endre.\n- **Overlay** = noder (prosesser) + virtuelle linker (TCP-tilkoblinger over flere fysiske hops). Applikasjonen designer overlay-strukturen selv.\n\nBruks-eksempler (*dat110-l8-communication-iii* s. 4–5):\n\n- **P2P fildeling** — peers deler filer up/down.\n- **Windows Update Delivery Optimization** — peers deler oppdateringer.\n- **WAN-replicated backup** — overlay disseminerer updates mellom geografisk spredte servere.\n\nOverlay-routing er **ikke nødvendigvis optimalt** vs network-level routing (*dat110-l8-communication-iii* s. 7) — det er nettopp derfor man trenger cost-metrikker.\n\n## topology\n\nTo grunnformer (*dat110-l8-communication-iii* s. 6, 16):\n\n| Type | Egenskap | Trade-off |\n|---|---|---|\n| **Tree** | Unike paths mellom alle par av noder | Færre meldinger, men single point of failure i interne noder |\n| **Mesh** | Multiple paths | Mer robust, men krever routing-algoritme |\n\nStrukturert vs ustrukturert (*dat110-l8-communication-iii* s. 16):\n\n- **Strukturert** — explicit topology (tree, ring, hyperkube). Eks: Chord-DHT (*04-naming-og-chord-dht*).\n- **Ustrukturert** — random graph; sannsynlighet `p_edge` for kant mellom to vilkårlige noder.\n\n## link-stress\n\n> \"Link stress: How often does an ALM message cross the same physical link?\" — *dat110-l8-communication-iii* s. 9\n\n**Per-link-metrikk**. Hvis en ALM-melding ruter over fysisk link L flere ganger (fordi overlay-grafen er ineffektiv), gir det høy link stress på L.\n\n**Eksempel** (*dat110-l8-communication-iii* s. 9): A sender melding til D via overlay. Overlay-pathen ruter A→B→C→D, men fysisk passerer den ⟨Ra, Rb⟩-linken to ganger (en gang i A→B-hopet, en gang i C→D-hopet hvis de fysiske rutene krysses). Da er link stress på ⟨Ra, Rb⟩ lik 2.\n\nIdealet er link stress = 1 for alle linker.\n\n## stretch-rdp\n\n> \"Stretch/RDP: Ratio in delay between ALM-level path and network-level path.\" — *dat110-l8-communication-iii* s. 10\n\n**Per-par-metrikk**. RDP = \"Relative Delay Penalty\".\n\n```\nstretch(A, B) = overlay_delay(A, B) / network_delay(A, B)\n```\n\n**Eksempel** (*dat110-l8-communication-iii* s. 10):\n\n- Overlay-path fra B til C går B → ? → ? → C med samlet delay 73.\n- Network-shortest-path fra B til C har delay 47.\n- Stretch = 73/47 ≈ **1.55**.\n\nStretch ≥ 1 alltid (overlay kan ikke være kortere enn det optimale i nettverket). Stretch = 1 betyr overlay følger network-shortest-path.\n\nSTUDIEPLAN-EKSAMEN har dette som huskeregel: `Stretch = overlay_delay / underlying_delay`.\n\n## tree-cost\n\n> \"Tree cost: minimize aggregate link cost (global metric).\" — *dat110-l8-communication-iii* s. 11\n\n**Global metrikk**. Sum av delays for alle linker i et **spanning tree** over overlay-nodene. Søk: finn minimum spanning tree (MST) — det treet som minimerer totalsummen.\n\n**Eksempel fra L8 s. 12**: tre spanning trees over samme overlay-graf har costs 70, 82, 112. MST-en ville være den med cost 70 (lavest).\n\nTree-cost måler \"samlet ressursbruk\" på overlayen — relevant for broadcast/multicast der hver link brukes minst en gang.\n\n**Visuell QA-flagg (2026-05-26):** ALMCosts-handout-eksempelet (se *#exercise-example*) inneholder en edge-label-ambiguitet på `Rb–Rc` — det fysiske diagrammet kan leses som \"25\" eller \"27\" på 200 DPI page render. Tree-cost-utregningen `82 + 32 + 62 + 27` er **bekreftet lesbar** (rødt blekk, p001-renderen), men kant-tallet 25/27 forblir `qa_pending_visual` — ingen gjetning er gjort. Page render `pages/dat110-l8-exercises-alm-costs/p001.png` er autoritativ.\n\n## exercise-example\n\nPraktisk øvelse fra image-only handout (*dat110-l8-exercises-alm-costs* s. 1, manuelt transkribert) og parallel tekst-PDF (*dat110-l8-exercises-general* s. 2):\n\n**Network-topologi** (avlest fra trykt diagram, *dat110-l8-exercises-alm-costs*):\n\n- Noder (overlay): A, B, C, D, E\n- Routere (fysiske): Ra, Rb, Rc, Rd, Re + 1 sentral Router-cloud\n- Edges med delays:\n  - A — Ra : 1\n  - Ra — Re : 80\n  - Ra — Rb : 25\n  - Rb — B : 1\n  - Re — Rd : 30\n  - Re — E : 1\n  - Rb — Rc : 25\n  - Rc — Rd : 10\n  - Rc — C : 1\n  - Rd — D : 1\n\n**Oppgavene** (*dat110-l8-exercises-alm-costs* og *dat110-l8-exercises-general* s. 2):\n\n1. Tegn complete overlay graph med delays som weights.\n2. Velg 3 trees fra grafen. For hvert tre: beregn link-stress + stretch/RDP + tree-cost.\n3. Hvilket tree er mest effektivt for E→B? Begrunn.\n\n**Håndskrevet løsning** (rødt blekk, fragmentarisk lesbar — *dat110-l8-exercises-alm-costs* s. 1):\n\n- Q1 overlay-graf med synlige distanser: 82, 62, 32, 27, 52, 37, 12 [?]\n- Q3 RDP-utregning for A→C: `Overlay delay = 27 + 27 = 54`, `Network cost = 52`, `RDP = 54/52`.\n- Q2 tree-cost-eksempel: `Tree cost = 82 + 32 + 62 + 27` (visuelt verifisert 2026-05-26 — rødt blekk fullt lesbart på p001-renderen).\n\n> Q1-overlay-graf-distansene 82, 62, 32, 27 er verifisert. Verdiene 52, 37, 12 forblir `[?]` inntil full visuell verifikasjon. Edge-label-ambiguitet `Rb–Rc` = 25 eller 27 forblir `qa_pending_visual` etter 2026-05-26 (200 DPI begrenset). Konsistent med mirror-edge `Ra–Rb = 25` antas 25 men ikke verifisert. Se *#tree-cost* for flagg-detaljer.\n\n> Q3-konseptuelt poeng (LLM-hypotese, ikke i originalen): for E→B over overlay, korteste tree-path avhenger av hvilke 3 trees som velges. Minimum-spanning-tree gir minst total ressursbruk, men ikke nødvendigvis korteste path mellom et spesifikt par. Se *dat110-l8-exercises-alm-costs* open question 4.\n\n## Eksamen-relevans\n\n- ***Task 5* (Comm+MOM+Overlay, 69 % — rødt)** — ALM-cost-spørsmål er innen Task 5-pensum.\n- Klassisk eksamen-spørsmål: \"Beregn link-stress / stretch / tree-cost for følgende overlay\" (gitt en network-topologi).\n- STUDIEPLAN-EKSAMEN huskeregler:\n  - Tree-multicast: `n − 1` kanter / meldinger\n  - Fully-connected: `n(n−1)/2` kanter\n  - Stretch: `overlay_delay / underlying_delay`\n\n## Provenance\n\n- Primær: *dat110-l8-communication-iii* sidene 3–14 (ALM-modell + tre cost-metrikker), *dat110-l8-exercises-alm-costs* (image-only, manuelt transkribert konkret eksempel — `transcription_qa: pending`), *dat110-l8-exercises-general* s. 2 (tekst-tilgjengelig variant av oppgaven).\n- Sekundær: Cost-eksempel-tallene fra *dat110-l8-communication-iii* s. 12 (tree costs 70, 82, 112) er fra et **annet** overlay-graf-eksempel enn øvelsens — ikke kombiner. Per *dat110-l8-exercises-alm-costs* open question 6.\n- Visual flag: graf-diagrammer på L8 s. 11–12 og ALM-costs s. 1 inneholder tall som er fragmentert i tekst-ekstraksjon (`52, 32, 22, 27` osv. er røffet). Page renders er autoritative.\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "ipv4-addressing",
+      "tema": "10-network-layer",
+      "status": "drafted",
+      "title": "Concept: IPv4 Addressing",
+      "sections": [
+        "dotted-decimal-32-bit",
+        "interface-binding",
+        "datagram-format",
+        "address-allocation"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l22-network-layer-a-data-plane",
+          "title": "Source: DAT110 L22 — Network Layer A: Data Plane",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-network-layer-i-prelecture",
+          "title": "Source: DAT110 Network Layer I — Prelecture Slides (pre-reading for L22)",
+          "role": "lecture-prelecture",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "subnetting",
+          "route": "/dat110/begreper/subnetting"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Concept: IPv4 Addressing\n\n> Hva en IP-adresse er, hva en interface er, hvordan datagrammet er bygget opp, og hvordan adresser blir tildelt globalt (ICANN → APNIC/ARIN/RIPE → ISP → kunde). Fragmentation er kort prose-omtalt — ikke eget anker per Stage 5A D3.\n\n## dotted-decimal-32-bit\n\nEn IPv4-adresse er **32 bit** skrevet som fire desimaltall 0–255 separert med punktum (*dat110-l22-network-layer-a-data-plane* s. 8–9, *dat110-network-layer-i-prelecture* s. 22):\n\n```\n223.1.1.1     →   11011111 00000001 00000001 00000001\n200.23.16.0   →   11001000 00010111 00010000 00000000\n```\n\nHver oktett (8 bit) er ett desimaltall. Teoretisk adresserom: 2³² ≈ 4 milliarder adresser. Praktisk grense iflg. prelecture-I er ~240 millioner adresser pga reserverte blokker, subnet-overhead og NAT-skjuling (*dat110-network-layer-i-prelecture* s. 43) — dette motiverer overgangen til *ipv6*.\n\n## interface-binding\n\n**IP-adressen er knyttet til et interface, ikke til en host eller router** (*dat110-l22-network-layer-a-data-plane* s. 9, *dat110-network-layer-i-prelecture* s. 22):\n\n> \"IP addresses are bound to network interfaces - hosts and routers will normally have several network interfaces.\"\n\nKonsekvenser:\n\n- En router har **én IP pr interface** (typisk én pr port). Ulike interfaces på samme router kan være på ulike subnets.\n- En multi-homed host (f.eks. en laptop med både wireless og kabel-NIC) har **flere IP-er samtidig**.\n- En **loopback**-interface på alle hosts har konvensjonelt IP `127.0.0.1` for intern testing.\n\nVerktøy for å inspisere interface-konfigurasjon (*dat110-network-layer-i-prelecture* s. 7, 23):\n\n- Linux/macOS: `ifconfig`\n- Windows: `ipconfig`\n\nBegge viser hver interface med IP, netmask, broadcast-adresse, og link-layer-adresse (MAC).\n\n## datagram-format\n\nIPv4-datagrammet er definert i **RFC 791** (*dat110-l22-network-layer-a-data-plane* s. 8). Header er minimum 20 bytes med felter (oversikt — pensum krever ikke bit-for-bit-detaljer):\n\n| Felt | Bredde | Funksjon |\n|---|---|---|\n| Version | 4 bit | IPv4 = 4 |\n| Header length (IHL) | 4 bit | header-størrelse i 32-bits ord |\n| Type of Service | 8 bit | QoS/precedence |\n| Total length | 16 bit | datagram-størrelse i bytes |\n| Identification, Flags, Fragment offset | 16+3+13 bit | fragmentation-støtte |\n| TTL (Time To Live) | 8 bit | hop-limit; dekrementeres pr router; ved 0 droppes + ICMP TTL-expired |\n| Protocol | 8 bit | next-layer-protokoll (6=TCP, 17=UDP, 1=ICMP) |\n| Header checksum | 16 bit | integritet av header |\n| Source IP, Destination IP | 32+32 bit | adresser |\n| Options + data | variabel | payload |\n\nDatagrammet leveres til *11-link-layer* for innkapsling i frame (*dat110-l22-network-layer-a-data-plane* s. 19). L22 s. 19 viser figur av IPv4-datagram-i-Ethernet-frame, men teksten refererer \"IEEE 802.11\" — dette er en **bekreftet typo** i original-PDF: kablet Ethernet er IEEE 802.3 (802.11 er Wi-Fi). Dokumentert i source-noten under Open questions.\n\n### Fragmentation (kort prose-omtale)\n\nIPv4 støtter **fragmentation** av store datagrammer ved MTU-mismatch mellom links (*dat110-l22-network-layer-a-data-plane* s. 18–22):\n\n- Hvis et datagram er større enn neste links MTU (Maximum Transmission Unit, typisk 1500 bytes for Ethernet), deles det i flere fragmenter.\n- Hvert fragment er selv et IPv4-datagram med felles `Identification`, `Flags` (more-fragments-bit), og `Fragment offset`.\n- Reassembly skjer **på destination host**, ikke underveis — routere fragmenterer videre om nødvendig men reassemblerer ikke.\n\nEksempel (*dat110-l22-network-layer-a-data-plane* s. 21): 4000-byte datagram med ID 777 over MTU 1500 deles i 3 fragmenter (1500 + 1500 + 1000 bytes header-inkludert). Lab-øvelse på s. 22 (3000 bytes, MTU 1620, ID 888).\n\nPer Stage 5A D3: fragmentation er ikke spesielt eksamen-pensum per *STUDIEPLAN-EKSAMEN*, så håndteres som prose her uten eget section-anker.\n\n## address-allocation\n\nGlobalt allokeres IP-adresser hierarkisk (*dat110-network-layer-i-prelecture* s. 32):\n\n1. **ICANN** (Internet Corporation for Assigned Names and Numbers) — øverste autoritet.\n2. Fem **regionale registries (RIRs)**:\n   - **APNIC** — Asia / Pacific\n   - **ARIN** — Nord-Amerika\n   - **LACNIC** — Latin-Amerika / Karibien\n   - **RIPE NCC** — Europa / Midt-Østen / Sentral-Asia\n   - **AfriNIC** — Afrika\n3. RIRs deler ut **store CIDR-blokker** til ISPs.\n4. ISPs deler videre i **mindre delblokker** til kunder.\n\nEksempel (*dat110-l22-network-layer-a-data-plane* s. 14 — Exercise P14): ISP får `128.119.40.128/26` (64 adresser). Deler i fire delblokker `/28` (16 adresser hver) til fire kunder. Strukturen følger CIDR-prefiks-hierarkiet — se [subnetting](/dat110/begreper/subnetting).\n\nKonfigurasjon av nye hosts inn på et nettverk skjer typisk dynamisk via **DHCP** — se *dhcp*. Når en host trenger å nå utenfor sitt private subnet via begrenset offentlig IP-rom, brukes **NAT** — se *network-address-translation*.\n\n## Eksamen-relevans\n\n- IP-adresse-format og interface-binding er grunnleggende — ofte forutsatt uten å spørres eksplisitt.\n- Datagram-format-detaljer (alle 14 header-felter) spørres sjelden bit-for-bit, men TTL, Protocol, Source/Dest IP og Identification (for fragmentation) er pensum.\n- Fragmentation: ikke prioritert per *STUDIEPLAN-EKSAMEN*; lav-prioritet \"mindre ofte\"-stoff.\n- Global allokering (ICANN/RIR-hierarkiet) er bakgrunnskunnskap, ikke kjernepensum.\n\n## Kobling til andre temaer\n\n- [subnetting](/dat110/begreper/subnetting) — hvordan en CIDR-blokk deles i mindre subnets via lengre prefiks.\n- *dhcp* — hvordan en host får tildelt IP automatisk når den kobles på et nettverk.\n- *network-address-translation* — hvordan private adresse-blokker (`10.0.0.0/8`, `192.168.0.0/16`) deler én offentlig IP.\n- *ipv6* — neste generasjons adressering motivert av IPv4-exhaustion.\n- *11-link-layer* — ARP kobler IP-adresser til link-layer-adresser for next-hop (*dat110-network-layer-i-prelecture* s. 33).\n\n## Provenance\n\n- Primær: *dat110-l22-network-layer-a-data-plane* s. 8 (datagram-format/RFC 791), s. 9 (32-bit, interface), s. 14 (allokering-eksempel), s. 18–22 (fragmentation).\n- Primær: *dat110-network-layer-i-prelecture* s. 22–24 (adresse-format), s. 32 (global allokering), s. 43 (IPv4-grenser).\n- Fragmentation foldet som prose (Stage 5A D3 alt. A — ingen eget anker; ikke høyt prioritert per STUDIEPLAN).\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "subnetting",
+      "tema": "10-network-layer",
+      "status": "drafted",
+      "title": "Concept: Subnetting",
+      "sections": [
+        "cidr-notation",
+        "network-mask",
+        "address-block-size",
+        "address-aggregation",
+        "longest-prefix-match"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l22-network-layer-a-data-plane",
+          "title": "Source: DAT110 L22 — Network Layer A: Data Plane",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-network-layer-i-prelecture",
+          "title": "Source: DAT110 Network Layer I — Prelecture Slides (pre-reading for L22)",
+          "role": "lecture-prelecture",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "ipv4-addressing",
+          "route": "/dat110/begreper/ipv4-addressing"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Concept: Subnetting\n\n> **CIDR** (Classless InterDomain Routing) styrer hvordan IPv4-adresserommet deles i hierarkiske blokker av variable størrelser. Network mask isolerer subnet-prefiks fra host-del; address-block-size `2^(32-x)` er den faste utregningen. **Longest prefix match** styrer hvilken entry i forwarding-tabellen som vinner. Sentralt eksamen-stoff per *STUDIEPLAN-EKSAMEN*.\n\n## cidr-notation\n\n**CIDR** uttales \"cider\" og skrives `a.b.c.d/x` der `x` er antall bit i subnet-prefiksen (*dat110-l22-network-layer-a-data-plane* s. 10):\n\n> \"CIDR: Classless InterDomain Routing (pronounced 'cider'). subnet portion of address of arbitrary length. address format: a.b.c.d/x, where x is # bits in subnet portion of address.\" — L22 s. 10\n\nDe `x` mest signifikante bitene utgjør **subnet-delen** (felles for alle adresser i blokken). De resterende `32-x` bitene er **host-delen** (unik pr interface i blokken).\n\nEksempel (*dat110-l22-network-layer-a-data-plane* s. 10):\n\n```\n200.23.16.0/23  →  11001000 00010111 0001000 | 0 00000000\n                   |---- 23 bit subnet -----| |- 9 bit host -|\n```\n\nCIDR erstatter den eldre **classful** addressing (Klasse A/B/C med faste 8/16/24-bit prefiks). Variabel prefiks-lengde gjør at adresserommet kan deles fleksibelt — store ISPs får korte prefiks (få subnet-bit, mange host-bit), små kunder får lange prefiks (mange subnet-bit, få host-bit).\n\n## network-mask\n\n**Network mask** er en 32-bit verdi der subnet-bitene er 1 og host-bitene er 0 (*dat110-l22-network-layer-a-data-plane* s. 11). For `/24`:\n\n```\nmask: 255.255.255.0  →  11111111 11111111 11111111 00000000\n```\n\nMask brukes til **bitvis AND** mot en host-adresse for å hente ut subnet-delen:\n\n```\nhost    223.1.1.42  →  11011111 00000001 00000001 00101010\nmask   255.255.255.0  →  11111111 11111111 11111111 00000000\nAND    223.1.1.0       →  11011111 00000001 00000001 00000000   (subnet)\n```\n\n**Broadcast-adressen** for et subnet er all-ones i host-delen (*dat110-l22-network-layer-a-data-plane* s. 11). For `223.1.1.0/24`: broadcast = `223.1.1.255`. Sendes til alle interfaces på dette subnet.\n\n## address-block-size\n\nSentral STUDIEPLAN-formel (*dat110-l22-network-layer-a-data-plane* s. 10–12):\n\n> Antall adresser i en `/x`-blokk = **2^(32-x)**\n\nKonkrete verdier:\n\n| Prefiks | Adresser i blokken | Eksempel |\n|---|---|---|\n| `/8` | 16 777 216 | klassisk Klasse A |\n| `/16` | 65 536 | klassisk Klasse B |\n| `/24` | 256 | klassisk Klasse C / typisk LAN |\n| `/26` | 64 | ISP-delblokk |\n| `/28` | 16 | liten kundeblokk |\n| `/30` | 4 | point-to-point-link (2 brukbare + nett + broadcast) |\n| `/32` | 1 | enkelt-host |\n\n**Eksempler fra L22:**\n\n- `200.23.16.0/23` → 2^9 = 512 adresser (*dat110-l22-network-layer-a-data-plane* s. 10).\n- `223.1.1.0/24` → 256 adresser (*dat110-l22-network-layer-a-data-plane* s. 11).\n- `224.192.40.0/22` → 2^10 = 1024 adresser (*dat110-l22-network-layer-a-data-plane* s. 13, Exercise 7).\n- `128.119.40.128/26` → 64 adresser, ISP-delblokk delt i fire `/28` (16 hver) (*dat110-l22-network-layer-a-data-plane* s. 14, Exercise P14).\n\nEksamen-typisk: gi en CIDR-blokk og spør hvor mange adresser den inneholder, eller hvilke første/siste adresse, eller hvordan dele i N like delblokker.\n\n## address-aggregation\n\nMotpolen til subnetting: **flere små blokker kombineres til én større** i forwarding-tabellen (*dat110-network-layer-i-prelecture* s. 27, 31). Hvis en router har en samling kunde-blokker som alle deler felles prefiks, kan den **annonsere kun den felles prefiksen** oppover til Internett — i stedet for hver enkelt delblokk.\n\nEksempel (*dat110-network-layer-i-prelecture* s. 27): R9 har 4 kunder med blokker `1.6.0.0/24`, `1.6.1.0/24`, `1.6.2.0/24`, `1.6.3.0/24`. Disse aggregeres som **`1.6.0.0/22`** (4 × 256 = 1024 adresser) og R9 annonserer kun `/22` oppover. Reduserer størrelsen på forwarding-tabeller i kjernen av Internett dramatisk.\n\nAggregering er motivasjonen for CIDR — uten variabel prefiks-lengde ville den klassiske A/B/C-modellen ha gitt en eksplosjon av forwarding-tabell-entries.\n\n## longest-prefix-match\n\nForwarding-tabell-oppslag bruker **longest prefix match** for å velge riktig entry (*dat110-l22-network-layer-a-data-plane* s. 9–11, *dat110-network-layer-i-prelecture* s. 29):\n\n> \"Longest prefix matching is used to determine the entry to be used for forwarding - most specific entry is used.\" — prelecture-I s. 29\n\nNår en destination-IP slås opp i forwarding-tabellen kan **flere entries matche** (en kort prefiks og en lengre overlappende prefiks dekker ofte samme adresse). Regel: **den entry med lengst matchende prefiks vinner** — den mest spesifikke regelen.\n\nEksempel (*dat110-l22-network-layer-a-data-plane* s. 13, Exercise 7):\n\n| Forwarding-tabell | Destination prefix | Link interface |\n|---|---|---|\n|  | `224.192.40.0/22` | A |\n|  | `224.192.42.0/24` | B |\n\nDestination `224.192.42.5`:\n\n- Matcher `224.192.40.0/22` (de første 22 bit stemmer).\n- Matcher også `224.192.42.0/24` (de første 24 bit stemmer).\n- **Vinneren** er `/24` (lengst) → forward til link B.\n\nDette gjør at en ISP kan annonsere en grov aggregert blokk for det meste av trafikken, men ha **spesifikke unntak** for noen kunder som skal nås en annen vei.\n\nLongest prefix match er motivasjonen for at moderne routere har spesialisert hardware (TCAM — Ternary CAM) for å gjøre oppslaget i konstant tid uavhengig av tabell-størrelse. Pensum krever ikke detalj-kunnskap om TCAM.\n\n## Eksamen-relevans\n\n- *STUDIEPLAN-EKSAMEN* markerer **IP addressing (CIDR, subnetting)** som klassisk eksamen-stoff. CIDR-utregning står ofte (gitt en blokk, hvor mange adresser? hvordan dele?).\n- Longest prefix match er typisk multiple-choice (gitt en tabell med 3-4 entries og en destination, hvilken vinner?).\n- *Task 12* er 100 % grønt i quiz — disse mekanikkene er sittende. Likevel forventes spørsmål om dem på eksamen.\n- Address aggregation er bakgrunnsmotivasjon — sjelden direkte spurt om, men forklarer hvorfor CIDR eksisterer.\n\n## Manuelt overlap (Strategi B coexistence)\n\n- *STUDIEPLAN-EKSAMEN* har eksempel-format for CIDR-utregning som er kompatibelt med eksempel-strukturen her.\n- *Begreper* har 1-linje-stub for \"CIDR\" — konkretiseres her som CIDR-notasjon + mask + block-size-formel + longest prefix match.\n\n## Kobling til andre temaer\n\n- [ipv4-addressing](/dat110/begreper/ipv4-addressing) — adressering på basisformat-nivå; CIDR er hvordan blokker organiseres.\n- *network-layer-services#forwarding-vs-routing* — forwarding bruker forwarding-tabellen som longest prefix match opererer på.\n- *routing-algorithms#inter-as-bgp* — BGP bærer CIDR-prefiks-reachability mellom autonomous systems.\n\n## Provenance\n\n- Primær: *dat110-l22-network-layer-a-data-plane* s. 10–14 (CIDR, mask, block-size, longest prefix match, Exercise 7 + P14).\n- Primær: *dat110-network-layer-i-prelecture* s. 27–31 (aggregation, prefix matching).\n- `longest-prefix-match` foldet som section-anker per Stage 5A (henger uløselig sammen med CIDR-blokker).\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "arp-and-mac-addressing",
+      "tema": "11-link-layer",
+      "status": "drafted",
+      "title": "Concept: ARP and MAC Addressing",
+      "sections": [
+        "mac-format",
+        "binary-to-hex",
+        "ifconfig",
+        "arp-protocol",
+        "arp-table"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l23-link-layer",
+          "title": "Source: DAT110 L23 — Link Layer (Lecture)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l24-link-layer-pre-lecture",
+          "title": "Source: DAT110 L24 — Link Layer (Pre-Lecture, 2020-versjon)",
+          "role": "prelecture-supplement",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [],
+      "relatedTopics": [],
+      "body": "\n# Concept: ARP and MAC Addressing\n\n> To halvdeler av link-lagets identitets-mekanisme: **MAC-adresser** (IEEE 48-bit, globalt unike, hardware-burned-in per NIC) er link-lagets identitet; **ARP** (Address Resolution Protocol) oversetter IP-adresse til MAC-adresse innenfor samme broadcast-link via broadcast-query og unicast-reply, og cacher resultatet i en ARP-tabell per node. Merget concept-page (Stage 5A D2-beslutning, godkjent av bruker): MAC-format og ARP-mekanikken er tett sammenflettet i lecture-narrativet.\n\n## mac-format\n\nHver NIC har en **48-bit MAC-adresse** (*dat110-l23-link-layer* s. 5, *dat110-l24-link-layer-pre-lecture* s. 31):\n\n- **Globalt unik** — adresse-rommet administreres av IEEE; ingen to NIC-er har samme MAC.\n- **Hardware-burned-in** — del av selve nettverkskort-chipen, satt ved produksjon.\n- **Uendret ved nettverksbytte** — i motsetning til IP-adresse, som endres når node flytter til nytt nettverk.\n- **Hexadecimal notasjon** — 48 bits = 6 bytes = 12 hex-sifre, vanligvis skrevet med kolon eller bindestrek mellom hver byte.\n\nSitat fra *dat110-l24-link-layer-pre-lecture* s. 31:\n\n> \"The MAC address space is managed by IEEE and the MAC address of a NIC is a globally unique. The MAC address of a NIC does not change - independently of which network the node is connected to (unlike IP addresses)\"\n\nEksempel-MAC-adresser fra L23 (link layer) s. 14: `88-B2-2F-54-1A-0F`, `1A-23-F9-CD-06-9B`. **Broadcast-MAC** er all-ones: `FF:FF:FF:FF:FF:FF` — frames addressert til denne mottas av alle noder på linken (brukt av ARP-query, DHCP-discover, etc.).\n\n## binary-to-hex\n\n*dat110-l24-link-layer-pre-lecture* s. 32 viser konvertering fra 48-bit binær til hex-notasjon. **Eksempel** (konkret fra L24 s. 32):\n\n```\n60          F8          1C          C1          7F          EE\n0110 0000   1111 1000   0001 1100   1100 0001   0111 1111   1110 1110\n```\n\nHver byte (8 bits) konverteres til to hex-sifre (4 bits hver), og bytene separeres typisk med kolon eller bindestrek: `60:F8:1C:C1:7F:EE`. Dette er kun en notasjons-konvensjon — selve adressen er 48 binære bits på linken.\n\nL23 (link layer) dekker ikke binary-to-hex-konvertering konkret; L24 s. 32 er **primær kilde** for denne mekanikken (relevant for eksamen-spørsmål der en binær MAC skal oversettes manuelt).\n\n## ifconfig\n\nPå Unix/Linux/macOS bruker man `ifconfig` for å vise NIC-informasjon (inkludert MAC); på Windows er det `ipconfig /all` (*dat110-l24-link-layer-pre-lecture* s. 32). Typisk output viser:\n\n- Interface-navn (`en0`, `eth0`, `wlan0`)\n- **MAC-adresse** (\"HWaddr\" eller \"ether\")\n- IP-adresse (IPv4 + IPv6)\n- Subnet mask + broadcast-adresse\n\nDette er det praktiske verktøyet for å verifisere hvilken MAC en faktisk NIC har — relevant for VINE-lab-miljøet (*dat110-l24-link-layer-pre-lecture* s. 12) og for å koble lecture-eksempel til reell host-konfigurasjon.\n\n## arp-protocol\n\n**Problemet**: Når en node skal sende et IP-datagram over en link, må link-frame-headeren ha **dest-MAC** for next-hop. IP-adressen til next-hop er kjent (fra forwarding-tabellen, jf. *network-layer*), men dens MAC er ikke nødvendigvis kjent. **ARP** løser dette IP→MAC-oppslaget innenfor samme broadcast-link (*dat110-l23-link-layer* s. 15, *dat110-l24-link-layer-pre-lecture* s. 33–35).\n\n**Protokollen**:\n\n1. **ARP-query** — broadcast (`dest-MAC = FF:FF:FF:FF:FF:FF`): \"Hvem har IP-adresse X? Hva er din MAC?\"\n2. **ARP-reply** — unicast fra noden som har IP X, tilbake til spørrer-MAC, med X's MAC.\n3. Spørrer cacher (IP, MAC)-paret i sin **ARP-tabell** (se neste seksjon).\n\nSitat fra *dat110-l23-link-layer* s. 15:\n\n> \"Uses the link-layer broadcast address of the link to send an ARP query for a target IP address to all nodes on the network. The node with the targeted IP address responds with a unicast ARP reply containing its MAC address\"\n\n*dat110-l24-link-layer-pre-lecture* s. 35 viser konkret eksempel: query om `222.222.222.223` → reply med MAC `5C-66-AB-90-75-B1`.\n\n**Wireshark-evidens** (*dat110-l24-link-layer-pre-lecture* s. 37–38, visuelt verifisert pre-skriving fra `pages/dat110-l24-link-layer-pre-lecture/p037.png` og `p038.png`):\n\n- **ARP query** (p037): Source MAC `Apple_d1:bf:be` (`60:f8:1d:d1:bf:be`), Destination `Broadcast` (`ff:ff:ff:ff:ff:ff`). Sender IP `10.0.0.37`, Target IP `10.0.0.138`, Target MAC `00:00:00:00:00:00` (ukjent). Opcode `request (1)`. Hardware type `Ethernet (1)`, Protocol type `IPv4 (0x0800)`, Hardware size `6`, Protocol size `4`.\n- **ARP reply** (p038): Source MAC `ZyxelCom_02:7f:78` (`e8:37:7a:02:7f:78`), Destination `Apple_d1:bf:be` (unicast direkte til spørrer). Sender IP `10.0.0.138`, Target IP `10.0.0.37`. Opcode `reply (2)`. **Target MAC nå utfylt** med spørrer-MAC.\n\nL23 (link layer) har ikke Wireshark-skjermbilder; L24 s. 37–38 er primær for visuelt protokoll-eksempel.\n\n## arp-table\n\nHver node holder en **ARP-tabell** (cache) av kjente (IP, MAC)-par for noder på samme link (*dat110-l23-link-layer* s. 22–23, *dat110-l24-link-layer-pre-lecture* s. 36):\n\n- Oppslag i tabellen før hver send → unngår ARP-query hver gang.\n- Entries har **TTL** (typisk 20 min) — fjernes automatisk hvis ikke fornyet.\n- Kommando-line: `arp` (eller `arp -a`) lister cache-innholdet.\n\n**Konkret eksempel** fra *dat110-l23-link-layer* s. 22–23 (exam-like-exercise, visuelt verifisert fra `pages/dat110-l23-link-layer/p022.png`):\n\n```\nLAN-topologi (3 hosts via switch):\n  192.168.0.1 / 1A-23-F9-CD-06-9B   ── port 3 ──┐\n  192.168.0.2 / 5C-66-AB-CD-06-B1   ── port 2 ──┤ switch\n  192.168.0.3 / 49-BD-D2-C7-56-2A   ── port 1 ──┘\n\nSpørsmål: hva er ARP-tabellen på 192.168.0.1 etter at\nen IP-datagram er sendt fra .0.1 til .0.3?\n\nLøsning (L23 s. 23):\n  ARP-tabell på 192.168.0.1: { 192.168.0.3 → 49-BD-D2-C7-56-2A }\n  Switch-tabell:             { 1A-23-F9-CD-06-9B → 3,\n                                49-BD-D2-C7-56-2A → 1 }\n```\n\nMerk: **ARP-tabellen på .0.1 har kun ett entry** (mappingen for .0.3) — fordi den ikke har sendt noe til .0.2 ennå. ARP-tabeller er **on-demand**, ikke proaktivt fylte. Switch-tabellen kommer fra switch-learning, ikke ARP — det er en separat mekanisme (se *switched-ethernet#switch-learning*).\n\n**Router-hop eksempel** (*dat110-l23-link-layer* s. 16–17, visuelt verifisert fra `pages/dat110-l23-link-layer/p017.png`): et IP-datagram som sendes fra node B til node A via en router har **forskjellige MAC-adresser i frame-headeren per hop** (mellom B og router, så mellom router og A), mens **IP-adressene er uendret** (kilde-IP = B's IP, dest-IP = A's IP gjennom hele veien). Dette er kjerneinnsikten om hvordan MAC-adressering er **link-lokal** og ARP brukes på nytt for hver link i en multi-hop-rute.\n\n## Eksamen-relevans\n\n- *Task 13* (Link layer — 100 % grønt). ARP-mekanikken (broadcast query + unicast reply), ARP-tabell-resonnement, og forskjellen IP-adresse (kan endres ved nettverksbytte) vs MAC-adresse (uendret) er klassiske eksamen-spørsmål.\n- Question coverage: kunne rekonstruere src/dest MAC per hop ved router-traversal (L23 (link layer) s. 16–17 type-spørsmål) er konsept-test som typisk dukker opp på eksamen — concept coverage her dekker dette.\n- L24's konkrete eksempler (binary-to-hex på s. 32, Wireshark-evidens på s. 37–38) gir praktisk forankring som L23 mangler.\n\n## Provenance\n\n- Primær for MAC-formatet og ARP-mekanikken på lecture-nivå: *dat110-l23-link-layer* s. 5, 14–16, 22–23.\n- **Primær for konkret binary-to-hex, ifconfig, og Wireshark ARP-evidens**: *dat110-l24-link-layer-pre-lecture* s. 31–38. Disse er ikke i L23.\n- Visuell QA av `p017.png`, `p022.png`, `p037.png`, `p038.png` ble gjennomført pre-skriving og bekreftet at tall-eksemplene i prosaen samsvarer med figurene. Ingen `qa_pending` på denne concept-pagen.\n- Merget concept (Stage 5A D2, godkjent): mac-addressing + arp slått sammen fordi lecture-narrativet (L23 (link layer) s. 5+14+22, L24 s. 31–38) behandler dem som én sammenhengende identitets-historie.\n",
+      "created": "2026-05-26"
+    },
+    {
+      "slug": "delays",
+      "tema": "01-introduksjon-og-metrics",
+      "status": "drafted",
+      "title": "Concept: Delays",
+      "sections": [
+        "transmission-delay",
+        "propagation-delay",
+        "processing-delay",
+        "queuing-delay",
+        "nodal-delay"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l2-metrics-layering",
+          "title": "Source: DAT110 L2 — Communication Metrics and Protocol Layering",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "exercises-l2-metrics-layering",
+          "title": "Source: Exercises L2 — Network Metrics & Protocol Layering",
+          "role": "exercises (paired with solution)",
+          "visibility": "public"
+        },
+        {
+          "slug": "exercises-l2-metrics-layering-solution",
+          "title": "Source: Exercises L2 — Solutions (Network Metrics & Protocol Layering)",
+          "role": "exercise-solutions",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "throughput",
+          "route": "/dat110/begreper/throughput"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Concept: Delays\n\n> Fire delay-kilder ved en pakke-svitsj eller node, og hvordan de summeres til nodal delay. Formler hentet fra L2-forelesningen.\n\n**Hovedformel** (L2 s. 8):\n\n```\ndnodal = dproc + dqueue + dtrans + dprop\n```\n\n## transmission-delay\n\n`dtrans = L / R` der `L` er pakkestørrelse (bits) og `R` er link-rate (bps).\n\nTiden det tar å pushe alle bits ut på linken. Et 10 Kbit pakke over 100 Mbps-link gir `dtrans = 0.1 ms` (L2 s. 5).\n\nKrever **store-and-forward**: hele pakken må ankomme en router før den kan sendes videre (L2 s. 5). End-to-end-delay over ett hop med null propagation = `2L/R`.\n\n## propagation-delay\n\n`dprop = d / s` der `d` er link-lengde (meter) og `s` er signal-utbredelseshastighet (~`2×10^8` m/s for elektromagnetisk signal i kobber/fiber) (L2 s. 8).\n\n`dtrans` og `dprop` er fundamentalt forskjellige: `dtrans` avhenger av pakkestørrelse, `dprop` ikke (L2 s. 8). Øvingsoppgavene tester eksplisitt forskjellen (*exercises-l2-metrics-layering* s. 4 — \"P6\": hvor er første/siste bit ved `t = dtrans`?).\n\n## processing-delay\n\n`dproc` — tid en router bruker på å undersøke header, ta forwarding-beslutning, sjekksum-validere. Konstant i denne kursmodellen (typisk ~0.1 ms i øvingseksempel, *exercises-l2-metrics-layering* s. 2).\n\n## queuing-delay\n\n`dqueue` — tid pakken venter i utgående kø. **Variabel og dominerende** under last. Styres av trafikkintensitet — se *traffic-intensity*.\n\nPakker kan **droppes (loss)** hvis router-buffer fylles opp før de kan sendes (L2 s. 6).\n\n## nodal-delay\n\nSum av de fire over (L2 s. 8). I øvingseksempel (*exercises-l2-metrics-layering-solution* s. 2): med `R=100Mbps, L=10000 bits, d=5000m, s=2·10^8, dproc=0.1ms, dqueue=20ms`:\n\n- `dtrans = 10000/10^8 = 0.1 ms`\n- `dprop = 5000/(2·10^8) = 0.025 ms`\n- Sum: **20.225 ms** (`0.1 + 0.025 + 20 + 0.1`). _Note: solution-PDFens utskrevne etikett sier \"20.255ms\" — bekreftet typo i original (visuell QA 2026-05-25); håndskreven utregning på samme slide er korrekt. Se *exercises-l2-metrics-layering-solution* risiko-notater._\n\n## Eksamen-relevans\n\n- *Task 4* (Layering+Sockets) tester layer-tilhørighet, men forutsetter delay-modellen.\n- *Task 8* (Transport Layer) bygger på dette for RDT-timeout-beregninger.\n- STUDIEPLAN-EKSAMEN sin \"Sentrale formler\"-tabell gjengir `L/R` og `d/s` som huskeregler.\n\n## Provenance\n\n- Primær kilde: *dat110-l2-metrics-layering* sidene 5, 6, 8.\n- Sekundær kilde: *exercises-l2-metrics-layering* sidene 2, 4; *exercises-l2-metrics-layering-solution* sidene 2, 4.\n- Manuelt overlap: Begreper.md har 1-linje-stub for transmission-delay og propagation-delay; STUDIEPLAN-EKSAMEN har samme formler i sitt formelhefte. Denne page er ment som rikere canonical for definisjonen.\n",
+      "created": "2026-05-25"
+    },
+    {
+      "slug": "throughput",
+      "tema": "01-introduksjon-og-metrics",
+      "status": "drafted",
+      "title": "Concept: Throughput",
+      "sections": [
+        "throughput",
+        "bottleneck-link",
+        "fair-share",
+        "link-utilization",
+        "store-and-forward",
+        "packet-switching",
+        "file-transfer-time"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-l2-metrics-layering",
+          "title": "Source: DAT110 L2 — Communication Metrics and Protocol Layering",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "exercises-l2-metrics-layering",
+          "title": "Source: Exercises L2 — Network Metrics & Protocol Layering",
+          "role": "exercises (paired with solution)",
+          "visibility": "public"
+        },
+        {
+          "slug": "exercises-l2-metrics-layering-solution",
+          "title": "Source: Exercises L2 — Solutions (Network Metrics & Protocol Layering)",
+          "role": "exercise-solutions",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [
+        {
+          "slug": "delays",
+          "route": "/dat110/begreper/delays"
+        }
+      ],
+      "relatedTopics": [],
+      "body": "\n# Concept: Throughput\n\n> Hvor mye data per sekund som faktisk når mottakeren — begrenset av det minste leddet i kjeden.\n\n## throughput\n\nRaten data ankommer destinasjonen (bps). To mål: **instantaneous** og **average** (*dat110-l2-metrics-layering* s. 4).\n\n## bottleneck-link\n\nDet minste leddet i kjeden — det som \"prevents an increase in throughput\" (*dat110-l2-metrics-layering* s. 4). Når flere lenker på rad har ulike rater, bestemmer minimum-raten throughput.\n\n## fair-share\n\nFor `N` connections som deler en backbone-link `R`:\n\n```\nper-connection throughput = min(Rc, Rs, R/N)\n```\n\nder `Rs` er server-link-rate og `Rc` er client-link-rate (*dat110-l2-metrics-layering* s. 9). \"Backbone\" antas \"fairly shared\".\n\nØvingsoppgavene tester dette i ulike R/Rs/Rc-konfigurasjoner (*exercises-l2-metrics-layering* s. 5–9, *exercises-l2-metrics-layering-solution* s. 5–9). Eksempel: `R=100, Rs=70, Rc=50, N=4` → throughput = `R/4 = 25 Mbps` (mindre enn Rs og Rc).\n\n## link-utilization\n\n```\nutilization = actual_rate / link_capacity\n```\n\nReturneres som desimal. Eksempel (*exercises-l2-metrics-layering-solution* s. 6 og s. 9): når `R` er bottleneck og `actual = 25 Mbps` mens `Rs = 80`, blir `Rs-utilization = 25/80`.\n\n## store-and-forward\n\nPakke-svitsjings-modellen: en router/switch må motta **hele** pakken før den kan begynne å sende den videre på neste link (*dat110-l2-metrics-layering* s. 5). Dette er hvorfor end-to-end-delay over ett hop er `2L/R` (ikke `L/R`) når propagation er 0.\n\n## packet-switching\n\nInternet-arkitekturen sender data i diskrete pakker, ikke kontinuerlige strømmer. Router forwarder hver pakke uavhengig (L2 s. 3). Konsekvens: køer kan dannes på utgående link når flere pakker kommer samtidig (se *delays#queuing-delay* og *traffic-intensity*).\n\n## file-transfer-time\n\n```\noverføringstid = filstørrelse / throughput\n```\n\nHvor throughput er bottleneck-rate. Eksempel (*exercises-l2-metrics-layering-solution* s. 10): 4 MB fil over `min(500k, 2M, 1M) = 500 kbps` tar 64 sekunder.\n\n## Eksamen-relevans\n\n- *Task 4* (Layering+Sockets, 92 %) og *Task 8* (Transport, 87 %) bygger begge på throughput-modellen.\n- Eksamen 2024-vår spurte eksplisitt om throughput + bottleneck + utilization i ett spørsmål (*exercises-l2-metrics-layering-solution* s. 9).\n\n## Provenance\n\n- Primær: *dat110-l2-metrics-layering* sidene 4, 5, 6, 9.\n- Sekundær: *exercises-l2-metrics-layering-solution* sidene 5–10 (alle har konkrete numeriske throughput-/utilization-spørsmål).\n- Manuelt overlap: Begreper.md har ingen direkte throughput-stub for tema 01. STUDIEPLAN-EKSAMEN nevner ikke throughput-formler eksplisitt i sin \"Sentrale formler\"-tabell, men eksamen-trening dekker det.\n",
+      "created": "2026-05-25"
+    },
+    {
+      "slug": "distribution-transparency",
+      "tema": "01-introduksjon-og-metrics",
+      "status": "drafted",
+      "title": "Concept: Distribution Transparency",
+      "sections": [
+        "umbrella",
+        "access",
+        "location",
+        "relocation",
+        "migration",
+        "replication",
+        "concurrency",
+        "failure"
+      ],
+      "supportedBy": [
+        {
+          "slug": "ds-introduction-l1",
+          "title": "Source: DS Introduction L1 (van Steen & Tanenbaum kap. 1)",
+          "role": "book-chapter-summary (DS Ch. 1)",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [],
+      "relatedTopics": [],
+      "body": "\n# Concept: Distribution Transparency\n\n> Paraply-begrep i DS: hvordan skjule at systemet er distribuert, slik at det fremstår som ett sammenhengende system.\n\n## umbrella\n\nHovedmål for DS-design: et \"single coherent system\" — brukere/applikasjoner skal ikke se at noder er separate maskiner (*ds-introduction-l1* s. 4).\n\nEksempler på hva som skal skjules (*ds-introduction-l1* s. 4):\n- \"An end user cannot tell where a computation is taking place\"\n- \"Where data is exactly stored should be irrelevant to an application\"\n- \"If or not data has been replicated is completely hidden\"\n\nKonkret innholdsmessig består paraplyen av 7 underkategorier (*ds-introduction-l1* s. 12):\n\n## access\n\nSkjul forskjeller i datarepresentasjon og **hvordan** et objekt aksesseres. Et objekt på en Linux-maskin og en Windows-maskin ser likt ut for klienten.\n\n## location\n\nSkjul **hvor** et objekt befinner seg. URL → DNS-oppslag skjuler IP-adresse.\n\n## relocation\n\nSkjul at et objekt kan **flyttes mens det er i bruk** uten avbrudd for klienter.\n\n## migration\n\nSkjul **at objekt flyttes** til ny lokasjon (relatert til relocation; forskjellen er om klienten har aktiv tilkobling under flyttet).\n\n## replication\n\nSkjul at objektet er **kopiert** til flere noder. Klient ser ett objekt; systemet håndterer hvilken kopi som svarer.\n\n## concurrency\n\nSkjul at flere **uavhengige brukere** deler objektet samtidig. Konsistens-mekanismer (låser, transaksjoner) holdes internt.\n\n## failure\n\nSkjul at noder kan **feile og restartes**. Klient ser kontinuerlig tjeneste mens systemet maskerer/recover'er ved hjelp av redundans.\n\n## Hvorfor 7 (ikke 5 eller 9)\n\nDisse er kanonisk fra Van Steen & Tanenbaum kap. 1, ikke et naturlig sett ellers. Eksamen-stil-spørsmål spør gjerne om å nevne 3–4 og forklare med eksempel (*ds-introduction-l1* s. 12).\n\n## Trade-off mot performance\n\nTransparency er ikke gratis. Replication transparency krever ekstra koordinering (se *scalability#horizontal-scaling*). Failure transparency krever failure detection + recovery-mekanismer (se senere tema 09 fault tolerance).\n\n## Eksamen-relevans\n\n- *Task 10* (Consistency+Replication, 89 %) tester replication transparency implisitt.\n- STUDIEPLAN-EKSAMEN nevner ikke transparency direkte i prioritetstabellen, men dette er typisk forklarings-spørsmål i muntlig/eksamen.\n- \"Sentral DS-konsept\" — sannsynlig dukker det opp ett spørsmål per eksamen om å definere eller eksemplifisere.\n\n## Provenance\n\n- Primær: *ds-introduction-l1* sidene 4 og 12 (definisjon + alle 7 typer på samme slide).\n- Tilsvarende: Van Steen-Tanenbaum kap. 1 (samme kanoniske liste).\n- Manuelt overlap: ingen. Begreper.md har ikke transparency-stubs.\n",
+      "created": "2026-05-25"
+    },
+    {
+      "slug": "rpc",
+      "tema": "03-rpc-og-communication",
+      "status": "drafted",
+      "title": "Concept: Remote Procedure Call (RPC)",
+      "sections": [
+        "access-transparency",
+        "stub-marshalling",
+        "protocol-format",
+        "endianness",
+        "idl",
+        "synchronous",
+        "asynchronous",
+        "deferred-synchronous",
+        "multicast-rpc",
+        "java-rmi",
+        "project1-implementation"
+      ],
+      "supportedBy": [
+        {
+          "slug": "dat110-rpc-intro",
+          "title": "Source: DAT110 — Remote Procedure Call (Intro)",
+          "role": "lecture-overview",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l7-communication-ii-2026",
+          "title": "Source: DAT110 L7 — Communication II (RPC review + MOM + MQTT intro)",
+          "role": "lecture-canonical",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-l7-communication-ii-exercises",
+          "title": "Source: DAT110 L7 — Communication II Lab Exercises (Java RMI + MOM/MQTT)",
+          "role": "exercises",
+          "visibility": "public"
+        },
+        {
+          "slug": "dat110-project1-spec",
+          "title": "Source: DAT110 — Project 1 — Socket Programming and RPC Middleware (intro PDF)",
+          "role": "project-spec",
+          "visibility": "public"
+        }
+      ],
+      "relatedConcepts": [],
+      "relatedTopics": [],
+      "body": "\n# Concept: Remote Procedure Call (RPC)\n\n> Kall til en remote prosedyre som *ser ut som lokalt kall* fra både caller- og callee-siden. Kursets prosjekt 1 implementerer en custom RPC-stack over sockets. Eksamensspørsmål i *Task 7* (92 % — grønt) tester typisk stub/marshall/IDL-vokabularet; async/multicast-variantene berører *Task 5* (rødt).\n\n## access-transparency\n\nKjernemålet med RPC (*dat110-rpc-intro* s. 2):\n\n> \"RPC is a call to a remote method but it should be like local procedure call from the viewpoint of both the caller and the callee (Access Transparency)\"\n\nKlient-koden kaller `update(sensorid, temp)` uten å vite at den faktiske prosedyren kjører på en remote maskin. Middleware-laget (stubs + transport) gjemmer alle nettverks-detaljer (*dat110-l7-communication-ii-2026* s. 5).\n\nTre heterogenitets-utfordringer som måtte løses for at illusjonen skal holde (*dat110-rpc-intro* s. 3–5):\n\n1. **Address-spaces** — caller og callee i ulike prosesser/maskiner; ingen felles minne, så `pass by reference` krever spesielle løsninger (default er by-value-marshalling).\n2. **Byte-ordering** — big- vs little-endian, se *#endianness*.\n3. **Språk/plattform-forskjeller** — løses via IDL, se *#idl*.\n\n## stub-marshalling\n\nStubs er kode-fragmenter som **gjemmer kompleksiteten i remote-kallet** (*dat110-rpc-intro* s. 9):\n\n- **Client stub**: marshall parametre → byte-stream → send. Vent på reply → unmarshall return-verdi.\n- **Server stub (skeleton)**: motta byte-stream → unmarshall parametre → kall lokal impl → marshall resultat → send.\n\n**Marshalling** = konvertering av structured data (int, string, struct) til en serialisert byte-stream. **Unmarshalling** er motsatt. Project 1 implementerer dette manuelt (*dat110-project1-spec* s. 5): `RPCUtils.marshallInteger(temp)` returnerer `byte[]`; `RPCUtils.unmarshallInteger(bytes)` reverserer.\n\nL7 utvider med konkret bit-format-eksempel (*dat110-l7-communication-ii-2026* s. 6, gjentatt i *dat110-rpc-intro* s. 11):\n\n```\nBit  0–15: message length\nBit 16–31: method-id\nBit 32–47: sensorid\nBit 48–63: temp\nBit 64–79: response slot\n```\n\nVerdier sendes som big-endian over TCP, strings som UTF-16.\n\n## protocol-format\n\nFor at RPC skal virke må caller og callee enes om (*dat110-rpc-intro* s. 7–8):\n\n1. **Message-format** — funcID + parameter-encoding (eksempel s. 7: `void someFunction(char x; float y; int z[5])` → funcID + char rightmost byte + float whole word + array som length-prefiks + N words).\n2. **Data-representasjon** — integers som two's complement, characters som 16-bit Unicode, floats som IEEE 754, byte-ordering eksplisitt valgt.\n3. **Transport** — TCP eller UDP.\n\nProject 1 har en to-lags encapsulation-modell (*dat110-project1-spec* s. 3–4) som er direkte analogi til TCP/IP-stackens header-on-header:\n\n- **Messaging layer** (`MessageUtils`): 1-byte length-header + payload. `encapsulate` = create segment; `decapsulate` = extract payload via header-length.\n- **RPC layer** (`RPCUtils`): 1-byte rpcid (method-ID) + parameter-bytes. Påføres oppå messaging-payload.\n\nMottakeren strippe header-laget for header — symmetrisk dekapsulering. Konseptuell bro til *tcp-ip-stack#encapsulation* fra tema 01.\n\n## endianness\n\nByte-ordering er den klassiske inter-host-fellen (*dat110-rpc-intro* s. 5):\n\n> \"Big-endian vs. Little-endian memory addressing. Data value on host1 is not the same on host2 because of the difference in byte ordering\"\n\nBig-endian = MSB først i minne (Java/network byte order); little-endian = LSB først (x86). RPC-protokollen må enten:\n- Fastlegge én konvensjon (typisk network byte order = big-endian), eller\n- Inkludere endianness-flag i header.\n\nProject 1 og L7 fastlegger **big-endian** som RPC-protokollens konvensjon (*dat110-l7-communication-ii-2026* s. 6).\n\n## idl\n\n**Interface Description Language** — språk-uavhengig spesifikasjon av remote-prosedyrene som *automatisk genererer* stubs (*dat110-rpc-intro* s. 10):\n\n> \"Stubs can be generated in two ways: Manually: the RPC implementer provides a set of translation functions from which a user can construct his or her own stubs. Automatically: uses an interface description language (IDL) to define the interface between client and server.\"\n\nEksempler på IDL-baserte RPC-systemer: gRPC (Protocol Buffers), CORBA (OMG IDL), Thrift. Java RMI er en spesiell variant der Java-interfacet selv fungerer som IDL (samme språk på begge sider) — se *#java-rmi*.\n\nProject 1 går den **manuelle** ruten (ingen IDL) — det er pedagogisk poenget.\n\n## synchronous\n\nTraditional RPC — klient blokkerer til reply er mottatt (*dat110-l7-communication-ii-2026* s. 8):\n\n> \"In traditional RPC, process blocks until the operation is completed — i.e the processes are synchronised in time.\"\n\nREQ/REP-mønster: klient sender request → venter → server prosesserer → server svarer → klient fortsetter. Begge prosesser må kjøre samtidig (tids-koblet). Project 1s `sensor.read()` er et eksempel — kallet returnerer ikke før serveren har gitt et heltall.\n\nDette er den enkleste varianten og standard for Prosjekt 1 + L7-exercises-grunnopplegg (*dat110-l7-communication-ii-exercises* s. 8).\n\n## asynchronous\n\nKlienten venter ikke på server-reply — kun en **ack** kreves for at meldingen er mottatt (*dat110-l7-communication-ii-2026* s. 9). Også kalt \"one-way RPC\". Klient fortsetter umiddelbart med eget arbeid.\n\nImplementasjons-skissen (*dat110-l7-communication-ii-exercises* s. 12–16) bruker callback-mønster:\n\n- ServerInterface har `doOperation(a, b)` + `register(clientcallback)`.\n- ClientCallback-interface har `notify(String result)`.\n- Klient registrerer callback hos server (initialt-RPC), starter en egen tråd, fortsetter med annet arbeid.\n- Når server er ferdig, kaller den klientens `notify(...)` (det er en *omvendt* RPC, klient er nå \"server\" for callback).\n\n> \"The client provides unblocking mechanism by spawning a new thread to wait for the result via a callback function from the server while the client continues its work.\" — *dat110-l7-communication-ii-exercises* s. 16\n\nKrever multi-threading på klient-siden (*05-processes* forutsetning).\n\n## deferred-synchronous\n\nTo async-kall + callback gir en \"ad-hoc synchronous\" stil (*dat110-l7-communication-ii-2026* s. 10):\n\n1. Klient starter prosedyren via første async-kall.\n2. Klient kan beregne andre ting i mellomtiden.\n3. Server kaller tilbake med resultat via andre async-kall (callback).\n\nForskjellen fra ren asynchronous: klient *forventer* et resultat (det andre kallet), bare ikke umiddelbart. Mønsteret krever multiple tråder for å koordinere ventingen.\n\n## multicast-rpc\n\nEtt RPC-kall til **flere servere parallelt** (*dat110-l7-communication-ii-2026* s. 12). Access transparency dekker også over hvor mange servere som svarer. Use-cases nevnt i forelesningen: password cracking, krypto-brute-force (RSA-nøkkelsøk), prime-number-søk — alle der søkerommet kan deles og kjøres på flere noder samtidig.\n\nKonkret øvelse (*dat110-l7-communication-ii-exercises* s. 17–18): password-cracker over 2 noder, søkerom 62⁵ + 62⁶ tegn-kombinasjoner, distribueres ved at hver node tar halvparten.\n\n## java-rmi\n\nJava RMI er Java-implementasjonen av RPC (*dat110-l7-communication-ii-exercises* s. 2–8) — krever JVM på begge sider, bruker object registry for remote references, transport via **JRMP** (Java Remote Method Protocol).\n\nTre-stegs-server:\n1. Definer `Remote`-interface (eks. `ComputeInterface`).\n2. Implementer interface (eks. `ComputeImpl extends UnicastRemoteObject`).\n3. `LocateRegistry.createRegistry(9000)` → `registry.bind(\"ComputeInterface\", stub)`.\n\nTo-stegs-klient:\n1. `LocateRegistry.getRegistry(9000)` → `(ComputeInterface) registry.lookup(\"ComputeInterface\")`.\n2. Vanlig method call — `ci.addNumbers(a, b)`.\n\n> \"Server: Defines interface and implements interface methods; Creates server object and registers object with 'remote object' registry. Client: Looks up reference to server object in the remote object registry; Uses normal method call syntax for remote methods.\" — *dat110-l7-communication-ii-exercises* s. 3\n\nStubs genereres dynamisk runtime — ingen separat IDL-fil. Java RMI er **ikke** det Project 1 implementerer; Project 1 bygger custom RPC over sockets uten Java RMI for at studentene skal se mekanikken.\n\nL7-exercises bruker GitHub-eksempler fra `selabhvl/dat110public/tree/master/week5–week7` (*dat110-l7-communication-ii-exercises* s. 7, 16, 18) som referanse-implementasjoner.\n\n## project1-implementation\n\nProject 1 implementerer en custom RPC-stack uten Java RMI (*dat110-project1-spec* s. 3–10). Lag-for-lag fra topp til bunn:\n\n| Lag | Klasser | Ansvar |\n|---|---|---|\n| **Application** | `Controller`, `SensorImpl`, `DisplayImpl` | Forretningslogikk (temp-sensor + display) |\n| **RPC client** | `SensorStub`, `DisplayStub`, `RPCClient` | Marshall/unmarshall parametre, `RPCClient.call(rpcid, byte[])` |\n| **RPC server** | `RPCServer`, `RPCRemoteImpl` | `register(id, impl)`, dispatch på rpcid, services-map |\n| **Messaging** | `MessageConnection`, `MessageUtils`, `MessagingClient`, `MessagingServer` | 1-byte length-header + payload, encapsulate/send + receive/decapsulate |\n| **Transport** | `Socket`, `welcomeSocket` | TCP-tilkobling |\n\nMessage-størrelse: 128 bytes (*dat110-project1-spec* s. 7).\n\nKonkret kode for SensorImpl (*dat110-project1-spec* s. 9):\n\n```java\npublic int read() {\n    long seconds = System.currentTimeMillis();\n    double temp = RANGE * Math.sin(seconds / 1000);\n    return (int) Math.ceil(temp);\n}\n```\n\n`Common.SENSORPORT` og `Common.READ_RPCID` er konstanter definert i startkoden (`prosjekter/dat110-project1-rpc-startcode/Common.java`). Stage 5B-konsept-page peker til startkoden — gjetter ikke verdier.\n\n> Visual flag (*dat110-project1-spec* open questions): side 2 \"YOUR TASKS\"-banner og side 6 arkitektur-diagram er bilde-tunge; page renders er autoritative for konkret klasse-struktur.\n\n## Eksamen-relevans\n\n- ***Task 7* (Processes+RPC, 92 % — grønt)** — stub/marshall/IDL-vokabular fra *#stub-marshalling* og *#idl* testes typisk; async RPC fra *#asynchronous* også.\n- ***Task 5* (Comm+MOM+Overlay, 69 % — rødt)** — multicast RPC fra *#multicast-rpc* er Task 5-relevant.\n- STUDIEPLAN-EKSAMEN markerer Prosjekt 1 (RPC-implementasjon) som direkte Task-7-prep; pensum-bullets: \"Sockets, marshalling, stubs, layering, request-reply\".\n\n## Provenance\n\n- Primær: *dat110-rpc-intro* (grunnvokabular), *dat110-l7-communication-ii-2026* (RPC-aksen async/multicast), *dat110-project1-spec* (Project 1 stub-mekanikk).\n- Sekundær: *dat110-l7-communication-ii-exercises* (Java RMI-grunnopplegg + async callback + multicast øvelse).\n- Bit-format-diagrammet på L7 s. 6 og rpc-intro s. 11 er identisk (*dat110-rpc-intro* open question 2 — gjenbruk bekreftet). Project 1 s. 6 har samme arkitektur-diagram en gang til.\n- Visual flag: arkitektur-diagram på Project 1 s. 6 og RPC-stack-illustrasjonene på rpc-intro s. 2, 3, 11 har fragmentert text-extraksjon; page renders er sannhetskilden hvis konkret klassediagram skal siteres.\n",
+      "created": "2026-05-26"
+    }
+  ]
+}
