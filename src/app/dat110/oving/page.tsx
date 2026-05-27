@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { getAllQuizQuestions } from "@/lib/dat110-vault/loader";
+import { getAllQuizQuestions, getExamSummaries } from "@/lib/dat110-vault/loader";
 import { sourceKindOf } from "@/lib/dat110-quiz-types";
+import flashcardsData from "@/data/dat110-vault/flashcards.json";
+import matchingData from "@/data/dat110-vault/matching.json";
+import calculationData from "@/data/dat110-vault/calculation-drills.json";
 
 export const metadata = {
   title: "Øving og drilling — DAT110",
@@ -11,87 +14,114 @@ interface ModusCard {
   emoji: string;
   title: string;
   description: string;
+  count: string;
   // Tailwind classes (statiske strings — Tailwind JIT-vennlig).
   borderActive: string;
   bgActive: string;
   iconBg: string;
+  accentText: string;
   status: "active" | "P1" | "P2";
 }
 
-const MODUSER: ModusCard[] = [
-  {
-    href: "/dat110/oving/quiz",
-    emoji: "🎯",
-    title: "Flervalg-quiz",
-    description:
-      "Velg temaer og kilder. Forklaringer + 'Les mer'-lenker til konseptsider etter hvert svar. Multiple-answer-støtte.",
-    borderActive: "border-network-400 hover:border-network-500",
-    bgActive:
-      "bg-network-50/50 dark:bg-network-950/20 hover:bg-network-50 dark:hover:bg-network-950/30",
-    iconBg:
-      "bg-network-100 dark:bg-network-900/40 text-network-700 dark:text-network-300",
-    status: "active",
-  },
-  {
-    href: "#",
-    emoji: "⏱️",
-    title: "Eksamenssimulering",
-    description:
-      "Ta en hel tidligere eksamen under tidspress med automatisk innlevering. Inkluderer fasit og selvvurdering.",
-    borderActive: "border-rose-400",
-    bgActive: "bg-rose-50/50 dark:bg-rose-950/20",
-    iconBg: "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300",
-    status: "P1",
-  },
-  {
-    href: "#",
-    emoji: "🃏",
-    title: "Flashcards",
-    description:
-      "Begrep på forsiden, forklaring på baksiden. Spaced repetition for definisjoner og formler.",
-    borderActive: "border-amber-400",
-    bgActive: "bg-amber-50/50 dark:bg-amber-950/20",
-    iconBg:
-      "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300",
-    status: "P1",
-  },
-  {
-    href: "#",
-    emoji: "🔗",
-    title: "Matching-øvelse",
-    description:
-      "Koble begreper til riktige definisjoner. Nyttig for par som vector clocks vs Lamport eller primary-based vs quorum.",
-    borderActive: "border-violet-400",
-    bgActive: "bg-violet-50/50 dark:bg-violet-950/20",
-    iconBg:
-      "bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300",
-    status: "P2",
-  },
-  {
-    href: "#",
-    emoji: "🧮",
-    title: "Regneøving",
-    description:
-      "Tren på delay-beregning, FT-konstruksjon, subnetting og vektor-klokker med fri-tekst-svar mot fasit.",
-    borderActive: "border-blue-400",
-    bgActive: "bg-blue-50/50 dark:bg-blue-950/20",
-    iconBg:
-      "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
-    status: "P2",
-  },
-  {
-    href: "#",
-    emoji: "🔥",
-    title: "Eksamensdrill",
-    description:
-      "Kuratert sett med gjengangere på tvers av 2022–2025. Fokus på det som ofte testes.",
-    borderActive: "border-orange-400",
-    bgActive: "bg-orange-50/50 dark:bg-orange-950/20",
-    iconBg:
-      "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300",
-    status: "P2",
-  },
-];
+function buildModuser(
+  quizCount: number,
+  flashcardCount: number,
+  matchingCount: number,
+  calculationCount: number,
+  examCount: number,
+): ModusCard[] {
+  return [
+    {
+      href: "/dat110/oving/quiz",
+      emoji: "🎯",
+      title: "Flervalg-quiz",
+      description:
+        "Velg temaer og kilder. Forklaringer + 'Les mer'-lenker til konseptsider etter hvert svar. Multiple-answer-støtte.",
+      count: `${quizCount} spørsmål`,
+      borderActive: "border-network-400 hover:border-network-500",
+      bgActive:
+        "bg-network-50/50 dark:bg-network-950/20 hover:bg-network-50 dark:hover:bg-network-950/30",
+      iconBg:
+        "bg-network-100 dark:bg-network-900/40 text-network-700 dark:text-network-300",
+      accentText: "text-network-700 dark:text-network-300",
+      status: "active",
+    },
+    {
+      href: "/dat110/oving/eksamen-sim",
+      emoji: "⏱️",
+      title: "Eksamenssimulering",
+      description:
+        "Velg en eksamen, ta 4 timer uten fasit, og kryss-sjekk svarene etterpå. Studie-modus med løsninger skjult.",
+      count: `${examCount} eksamener`,
+      borderActive: "border-rose-400 hover:border-rose-500",
+      bgActive:
+        "bg-rose-50/50 dark:bg-rose-950/20 hover:bg-rose-50 dark:hover:bg-rose-950/30",
+      iconBg: "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300",
+      accentText: "text-rose-700 dark:text-rose-300",
+      status: "active",
+    },
+    {
+      href: "/dat110/oving/flashcards",
+      emoji: "🃏",
+      title: "Flashcards",
+      description:
+        "Begrep på forsiden, definisjon på baksiden. Filter etter tema. Flip for å vise svaret.",
+      count: `${flashcardCount} kort`,
+      borderActive: "border-amber-400 hover:border-amber-500",
+      bgActive:
+        "bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-50 dark:hover:bg-amber-950/30",
+      iconBg:
+        "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300",
+      accentText: "text-amber-700 dark:text-amber-300",
+      status: "active",
+    },
+    {
+      href: "/dat110/oving/matching",
+      emoji: "🔗",
+      title: "Matching-øvelse",
+      description:
+        "Drill forvekslingsbare begreper: Lamport vs vector, TCP vs UDP, primary-backup vs quorum, Chord successor vs finger.",
+      count: `${matchingCount} par`,
+      borderActive: "border-violet-400 hover:border-violet-500",
+      bgActive:
+        "bg-violet-50/50 dark:bg-violet-950/20 hover:bg-violet-50 dark:hover:bg-violet-950/30",
+      iconBg:
+        "bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300",
+      accentText: "text-violet-700 dark:text-violet-300",
+      status: "active",
+    },
+    {
+      href: "/dat110/oving/beregning",
+      emoji: "🧮",
+      title: "Regneøving",
+      description:
+        "Delay-beregning, throughput, Chord-FT, subnetting, vektor-klokker. Selvgradert med 'Vis løsning'-accordion.",
+      count: `${calculationCount} drills`,
+      borderActive: "border-blue-400 hover:border-blue-500",
+      bgActive:
+        "bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+      iconBg:
+        "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
+      accentText: "text-blue-700 dark:text-blue-300",
+      status: "active",
+    },
+    {
+      href: "/dat110/eksamen/gjengangere",
+      emoji: "🔥",
+      title: "Eksamensdrill — gjengangere",
+      description:
+        "Kuratert oversikt over gjengangere på tvers av 2022–2025: Q-slot-tabell + mønster-kort med eksempler.",
+      count: "Q-slot-analyse",
+      borderActive: "border-orange-400 hover:border-orange-500",
+      bgActive:
+        "bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-50 dark:hover:bg-orange-950/30",
+      iconBg:
+        "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300",
+      accentText: "text-orange-700 dark:text-orange-300",
+      status: "active",
+    },
+  ];
+}
 
 const STUDIEPLAN = [
   {
@@ -100,7 +130,7 @@ const STUDIEPLAN = [
   },
   {
     label: "Dag 2",
-    plan: "Delay/throughput + IP/subnetting. Regn 5–10 delay-eksempler og 3–5 CIDR-blokker for hånd.",
+    plan: "Delay/throughput + IP/subnetting. Regneøving 5–10 delay-eksempler og 3–5 CIDR-blokker.",
   },
   {
     label: "Dag 3",
@@ -108,15 +138,15 @@ const STUDIEPLAN = [
   },
   {
     label: "Dag 4",
-    plan: "Vector clocks + consistency/replikering. Skriv ut Lamport vs vector-eksempler for hånd.",
+    plan: "Vector clocks + consistency/replikering. Matching-øvelse på begrepspar.",
   },
   {
     label: "Dag 5",
-    plan: "Ta V2024 eksamen med åpne løsninger på siden — selvvurdér når du blir stuck.",
+    plan: "Eksamenssimulering V2024 (4 timer uten fasit). Kryss-sjekk svarene etterpå.",
   },
   {
     label: "Dag 6 (kvelden før)",
-    plan: "Drill bare feil fra tidligere økter. Flashcards (P1) når de kommer. Ikke prøv å lære noe nytt.",
+    plan: "Drill bare feil fra tidligere økter. Flashcards. Ikke prøv å lære noe nytt.",
   },
 ];
 
@@ -125,13 +155,13 @@ const TIPS = [
   "Når du bommer på en quiz, klikk på 'Les mer'-lenken — det er der konseptet sitter.",
   "Drill gjengangere: Chord-FT, delay-formler, CIDR-blokker dukker opp år etter år.",
   "Regn delay/DHT/vector clocks for hånd minst én gang per uke — ikke bare lese.",
-  "Tidligere eksamener er hovedkilden — Canvas-quizene og genererte spørsmål er supplement.",
+  "Eksamenssimulering 2 ganger: første viser hva du ikke kan, andre viser om du har lært det.",
 ];
 
 function statusBadge(status: ModusCard["status"]) {
   if (status === "active") {
     return (
-      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-network-100 dark:bg-network-900/40 text-network-700 dark:text-network-300">
+      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">
         Aktiv
       </span>
     );
@@ -145,7 +175,7 @@ function statusBadge(status: ModusCard["status"]) {
 
 export default function DAT110OvingHubPage() {
   const allQuestions = getAllQuizQuestions();
-  const totalCount = allQuestions.length;
+  const quizCount = allQuestions.length;
 
   const bySource = { exam: 0, canvas: 0, generated: 0 } as Record<
     "exam" | "canvas" | "generated",
@@ -153,11 +183,23 @@ export default function DAT110OvingHubPage() {
   >;
   for (const q of allQuestions) bySource[sourceKindOf(q.source)] += 1;
 
-  const activeSources: string[] = [];
-  if (bySource.exam > 0) activeSources.push("Eksamen");
-  if (bySource.generated > 0) activeSources.push("genererte");
-  const canvasNote =
-    bySource.canvas === 0 ? "Canvas-quizer kommer i P1" : null;
+  const sourceLine: string[] = [];
+  if (bySource.exam > 0) sourceLine.push(`${bySource.exam} eksamen`);
+  if (bySource.canvas > 0) sourceLine.push(`${bySource.canvas} Canvas`);
+  if (bySource.generated > 0) sourceLine.push(`${bySource.generated} generert`);
+
+  const flashcardCount = flashcardsData.cards.length;
+  const matchingCount = matchingData.pairs.length;
+  const calculationCount = calculationData.drills.length;
+  const examCount = getExamSummaries().length;
+
+  const moduser = buildModuser(
+    quizCount,
+    flashcardCount,
+    matchingCount,
+    calculationCount,
+    examCount,
+  );
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -183,10 +225,10 @@ export default function DAT110OvingHubPage() {
           Øving og drilling — DAT110
         </h1>
         <p className="text-neutral-700 dark:text-neutral-200 max-w-3xl">
-          Aktiv læring slår passiv lesing. Tre planlagte kilder:{" "}
-          <strong>tidligere DAT110-eksamener</strong>, <strong>Canvas-quizer</strong>{" "}
-          (kommer i P1) og <strong>genererte spørsmål</strong> basert på pensum.
-          Alle moduser har feedback og «Les mer»-lenker til konseptsidene.
+          Aktiv læring slår passiv lesing. Seks moduser, tre kilder for
+          quizspørsmål — <strong>tidligere DAT110-eksamener</strong>,{" "}
+          <strong>Canvas-quizer</strong> og <strong>genererte spørsmål</strong>{" "}
+          basert på pensum. Alle moduser har feedback og «Les mer»-lenker.
         </p>
       </header>
 
@@ -195,7 +237,7 @@ export default function DAT110OvingHubPage() {
         Velg modus
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-        {MODUSER.map((m) => {
+        {moduser.map((m) => {
           const isActive = m.status === "active";
           const cardClasses = isActive
             ? `group block rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 ${m.borderActive} ${m.bgActive}`
@@ -232,26 +274,12 @@ export default function DAT110OvingHubPage() {
               {isActive && (
                 <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-neutral-200 dark:border-neutral-800">
                   <span className="text-xs font-medium text-neutral-700 dark:text-neutral-200">
-                    {totalCount} spørsmål
+                    {m.count}
                   </span>
-                  <span className="text-xs text-neutral-400 dark:text-neutral-500">
-                    ·
-                  </span>
-                  <span className="text-xs text-neutral-700 dark:text-neutral-200">
-                    Kilder: {activeSources.join(" + ")}
-                  </span>
-                  {canvasNote && (
-                    <>
-                      <span className="text-xs text-neutral-400 dark:text-neutral-500">
-                        ·
-                      </span>
-                      <span className="text-xs italic text-neutral-500 dark:text-neutral-400">
-                        {canvasNote}
-                      </span>
-                    </>
-                  )}
-                  <span className="ml-auto inline-flex items-center gap-1 text-xs font-bold text-network-700 dark:text-network-300">
-                    Start quiz →
+                  <span
+                    className={`ml-auto inline-flex items-center gap-1 text-xs font-bold ${m.accentText}`}
+                  >
+                    Åpne →
                   </span>
                 </div>
               )}
@@ -260,11 +288,7 @@ export default function DAT110OvingHubPage() {
 
           if (!isActive) {
             return (
-              <div
-                key={m.title}
-                aria-disabled
-                className={cardClasses}
-              >
+              <div key={m.title} aria-disabled className={cardClasses}>
                 {inner}
               </div>
             );
@@ -275,6 +299,16 @@ export default function DAT110OvingHubPage() {
             </Link>
           );
         })}
+      </div>
+
+      {/* Quiz-kilde-sammendrag */}
+      <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-4 mb-12">
+        <p className="text-xs uppercase tracking-wider font-semibold text-neutral-500 dark:text-neutral-400 mb-1">
+          Flervalg-quiz fordeling
+        </p>
+        <p className="text-sm text-neutral-700 dark:text-neutral-200">
+          {quizCount} spørsmål totalt · {sourceLine.join(" · ")}
+        </p>
       </div>
 
       {/* Anbefalt studieplan */}
