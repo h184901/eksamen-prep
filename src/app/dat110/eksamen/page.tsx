@@ -43,11 +43,9 @@ function examPeriodCaption(year: number, session: string): string {
   return `${sessionLabel(session)} ${year}`;
 }
 
-// Hardkodet rekkefølge på upcoming-eksamener vi vet vi vil legge til i P1.B.2 og P1.C.
+// Hardkodet rekkefølge på upcoming-eksamener vi vet vi vil legge til i P1.C.
 // Brukes til å vise "kommer i P1"-cards så brukeren skjønner roadmap-en.
 const UPCOMING_EXAMS = [
-  { period: "Januar 2024", note: "Kommer i P1.B.2" },
-  { period: "Januar 2025", note: "Kommer i P1.B.2" },
   { period: "Juni 2025 (rekonstruert)", note: "Kommer i P1.C — kun sensor-PDF finnes" },
 ];
 

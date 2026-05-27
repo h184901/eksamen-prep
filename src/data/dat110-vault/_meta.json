@@ -1,13 +1,13 @@
 {
-  "syncedAt": "2026-05-27T21:58:51.116Z",
+  "syncedAt": "2026-05-27T22:16:58.216Z",
   "vaultPath": "ObsidianVault/DAT110/processed/reviewed",
   "counts": {
     "conceptsTier1": 23,
     "topicsTier1": 8,
     "sourcesScanned": 87,
     "sourcesFilteredLocalOnly": 6,
-    "wikilinkRoutes": 34,
+    "wikilinkRoutes": 36,
     "unmappedWikilinksInBodies": 629,
-    "exams": 3
+    "exams": 5
   }
 }
