@@ -1,0 +1,446 @@
+{
+  "_doc": "Hand-curated regneøvinger (calculation drills) for DAT110. Paraphrased from public exam solutions (V2022–V2025). Use 'Vis løsning'-accordion — selvvurdering, ingen autograder. learnMoreLinks bruker kun ruter som finnes i _wikilink-index.json.",
+  "drills": [
+    {
+      "id": "drill-delay-trans-basic",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "Transmission delay (grunnformel)",
+      "difficulty": "easy",
+      "prompt": "Lenken R1–R2 har transmission-rate R = 1 Mbps (10^6 bps). Du sender en pakke med lengde L = 1000 bit (10^3 bit). Hva er transmission delay d_trans?",
+      "expectedSteps": [
+        "Skriv opp formel: d_trans = L / R.",
+        "Sett inn verdier: d_trans = 10^3 bit / 10^6 bps.",
+        "Forkort: d_trans = 10^(-3) s = 1 ms."
+      ],
+      "finalAnswer": "d_trans = 0,001 s = 1 ms",
+      "learnMoreLinks": [
+        { "label": "Les mer: Network delays", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ]
+    },
+    {
+      "id": "drill-delay-nodal-sum",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "Nodal delay — fire komponenter",
+      "difficulty": "easy",
+      "prompt": "På ruter R1 er processing delay 0,002 s, queuing delay 0,01 s, transmission delay 0,001 s, og propagation delay 20 μs (= 0,00002 s). Beregn total nodal delay for pakken.",
+      "expectedSteps": [
+        "Skriv opp formel: d_nodal = d_proc + d_queue + d_trans + d_prop.",
+        "Sett inn: 0,002 + 0,01 + 0,001 + 0,00002.",
+        "Summer: 0,01302 s."
+      ],
+      "finalAnswer": "d_nodal ≈ 0,01302 s ≈ 13 ms",
+      "learnMoreLinks": [
+        { "label": "Les mer: Network delays", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ]
+    },
+    {
+      "id": "drill-delay-end-to-end-3-nodes",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "End-to-end delay over flere noder",
+      "difficulty": "medium",
+      "prompt": "En pakke går fra H1 via R1 og R2 til H3 (totalt 3 noder pakken pådrar seg nodal delay på). Hver node har samme nodal delay = 0,01302 s. Beregn end-to-end delay.",
+      "expectedSteps": [
+        "Identifiser hvor mange noder pakken passerer der nodal delay påløper: sender + 2 routere = 3.",
+        "Multipliser: 3 × 0,01302 s.",
+        "Resultat: 0,03906 s ≈ 39 ms."
+      ],
+      "finalAnswer": "End-to-end delay ≈ 0,039 s ≈ 39 ms",
+      "learnMoreLinks": [
+        { "label": "Les mer: Network delays", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ]
+    },
+    {
+      "id": "drill-traffic-intensity",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "Traffic intensity og queuing",
+      "difficulty": "medium",
+      "prompt": "Lenken har R = 10^8 bps. Det ankommer a = 10 pakker/sekund, hver på L = 100 000 bit. Beregn trafikkintensiteten ρ og avgjør om queuing delay blir merkbar.",
+      "expectedSteps": [
+        "Formel: ρ = L · a / R.",
+        "Sett inn: ρ = (100 000 × 10) / 10^8 = 10^6 / 10^8.",
+        "Forenkle: ρ = 0,01.",
+        "Tolk: ρ << 1 → buffer fylles ikke opp → kø-forsinkelse forblir tilnærmet 0."
+      ],
+      "finalAnswer": "ρ = 0,01 → ingen merkbar queuing delay",
+      "learnMoreLinks": [
+        { "label": "Les mer: Network delays", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" },
+        { "label": "Les mer: Throughput og bottleneck", "href": "/dat110/begreper/throughput", "kind": "concept", "slug": "throughput" }
+      ]
+    },
+    {
+      "id": "drill-throughput-bottleneck-share",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "Throughput med delt flaskehals",
+      "difficulty": "medium",
+      "prompt": "Fire klient–server-par deler én felles mellomlenke med rate R = 100 Mbps. Server-lenker har Rs = 80 Mbps og klient-lenker har Rc = 40 Mbps. R-lenken deles likt mellom de 4 parene. Hva er maksimal end-to-end-throughput per par, og hvilken lenke er flaskehalsen?",
+      "expectedSteps": [
+        "Andelen av R hver par får: 100 / 4 = 25 Mbps.",
+        "Per-par-throughput = min(Rs, R-andel, Rc) = min(80, 25, 40) = 25 Mbps.",
+        "Flaskehals = den lenken som setter grensen → R (mellomhoppet)."
+      ],
+      "finalAnswer": "Per-par-throughput = 25 Mbps. Flaskehalsen er mellomlenken R.",
+      "learnMoreLinks": [
+        { "label": "Les mer: Throughput og bottleneck", "href": "/dat110/begreper/throughput", "kind": "concept", "slug": "throughput" }
+      ]
+    },
+    {
+      "id": "drill-link-utilization",
+      "topic": "01-introduksjon-og-metrics",
+      "title": "Link utilization",
+      "difficulty": "easy",
+      "prompt": "Faktisk throughput per par er 25 Mbps (begrenset av flaskehalsen). Klient-lenkene er Rc = 40 Mbps og server-lenkene er Rs = 80 Mbps. Beregn link-utilization for både Rc og Rs.",
+      "expectedSteps": [
+        "Formel: utilization = throughput / link-kapasitet.",
+        "For Rc: 25 / 40 = 0,625 = 62,5 %.",
+        "For Rs: 25 / 80 = 0,3125 ≈ 31 %."
+      ],
+      "finalAnswer": "Rc-utilization ≈ 62,5 % · Rs-utilization ≈ 31 %",
+      "learnMoreLinks": [
+        { "label": "Les mer: Throughput og bottleneck", "href": "/dat110/begreper/throughput", "kind": "concept", "slug": "throughput" }
+      ]
+    },
+    {
+      "id": "drill-cidr-block-size",
+      "topic": "10-network-layer",
+      "title": "CIDR-blokk: antall adresser",
+      "difficulty": "easy",
+      "prompt": "Hvor mange IP-adresser inneholder CIDR-blokken 223.1.1.0/23?",
+      "expectedSteps": [
+        "Tell host-bit: 32 − 23 = 9 frie bit.",
+        "Antall adresser = 2^host-bit = 2^9.",
+        "Beregn: 2^9 = 512."
+      ],
+      "finalAnswer": "512 adresser",
+      "learnMoreLinks": [
+        { "label": "Les mer: Subnetting (CIDR)", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "Les mer: IPv4-adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+      ]
+    },
+    {
+      "id": "drill-cidr-block-range",
+      "topic": "10-network-layer",
+      "title": "CIDR-blokk: adresse-intervall",
+      "difficulty": "medium",
+      "prompt": "Hvilket adresse-intervall dekker CIDR-blokken 224.192.40.0/22?",
+      "expectedSteps": [
+        "/22 har 10 host-bit → 2^10 = 1024 adresser totalt.",
+        "Behold 22 prefiks-bit fast. Bit-mønster start: 11100000.11000000.00101000.00000000.",
+        "Bit-mønster slutt: 11100000.11000000.00101011.11111111.",
+        "Konverter til dotted decimal: start 224.192.40.0, slutt 224.192.43.255."
+      ],
+      "finalAnswer": "224.192.40.0 – 224.192.43.255 (1024 adresser)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Subnetting (CIDR)", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" }
+      ]
+    },
+    {
+      "id": "drill-ip-to-binary",
+      "topic": "10-network-layer",
+      "title": "IPv4 → 32-bit bit-mønster",
+      "difficulty": "easy",
+      "prompt": "Hva er det 32-bits bit-mønsteret til IP-adressen 200.193.57.14?",
+      "expectedSteps": [
+        "Konverter hver oktett til 8 bit binær: 200 = 11001000.",
+        "193 = 11000001.",
+        "57 = 00111001.",
+        "14 = 00001110.",
+        "Sett sammen alle fire oktetter."
+      ],
+      "finalAnswer": "11001000.11000001.00111001.00001110",
+      "learnMoreLinks": [
+        { "label": "Les mer: IPv4-adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+      ]
+    },
+    {
+      "id": "drill-longest-prefix-match",
+      "topic": "10-network-layer",
+      "title": "Forwarding: longest-prefix-match",
+      "difficulty": "medium",
+      "prompt": "Ruter R2 har følgende forwarding-tabell:\n\n| Destination prefix | Next-hop |\n|---|---|\n| 11011101 11000110 (/16) | 3 |\n| 11011101 11000110 11001001 (/24) | 2 |\n| otherwise | 4 |\n\nEn pakke ankommer med destinasjon 221.198.201.1. På hvilken interface forwardes den?",
+      "expectedSteps": [
+        "Konverter destinasjon til binær: 221.198.201.1 = 11011101.11000110.11001001.00000001.",
+        "Sjekk match: /16-prefiks matcher (de 16 første bit).",
+        "Sjekk match: /24-prefiks matcher også (de 24 første bit).",
+        "Longest-prefix-match velger lengste match → /24 vinner → interface 2."
+      ],
+      "finalAnswer": "Interface 2 (longest-prefix-match velger /24-entry)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Les mer: IPv4-adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+      ]
+    },
+    {
+      "id": "drill-cidr-range-prefix",
+      "topic": "10-network-layer",
+      "title": "Lag CIDR-prefiks fra adresse-intervall",
+      "difficulty": "hard",
+      "prompt": "Du vil ha en forwarding-entry som matcher alle IP-adresser i intervallet 221.198.201.64 – 221.198.201.127. Hvilket bit-prefiks setter du opp?",
+      "expectedSteps": [
+        "Skriv start og slutt-oktett binært: 64 = 01000000, 127 = 01111111.",
+        "Finn felles ledende bit: begge starter med 01 (de første 2 bit av siste oktett).",
+        "Antall faste bit: 24 (de tre første oktetter) + 2 (nye) = 26.",
+        "CIDR-prefiks: 11011101 11000110 11001001 01 → /26."
+      ],
+      "finalAnswer": "Prefiks 11011101 11000110 11001001 01 — altså 221.198.201.64/26",
+      "learnMoreLinks": [
+        { "label": "Les mer: Subnetting (CIDR)", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" }
+      ]
+    },
+    {
+      "id": "drill-chord-finger-table",
+      "topic": "04-naming-og-chord-dht",
+      "title": "Chord finger-tabell (m=5)",
+      "difficulty": "medium",
+      "prompt": "I en Chord-ring med m = 5 (32 ID-rom) er server-replikaene plassert på ID-er {1, 7, 15, 19, 29}. Beregn finger-tabellen FT for server 7. (Formel: FT[i] = succ((n + 2^(i−1)) mod 2^m).)",
+      "expectedSteps": [
+        "i=1: succ((7 + 1) mod 32) = succ(8) = 15.",
+        "i=2: succ((7 + 2) mod 32) = succ(9) = 15.",
+        "i=3: succ((7 + 4) mod 32) = succ(11) = 15.",
+        "i=4: succ((7 + 8) mod 32) = succ(15) = 15.",
+        "i=5: succ((7 + 16) mod 32) = succ(23) = 29."
+      ],
+      "finalAnswer": "FT[7] = [15, 15, 15, 15, 29]",
+      "learnMoreLinks": [
+        { "label": "Les mer: Chord-ringen", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "Tema: Chord DHT", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" }
+      ],
+      "figureNote": "Chord-ringer regnes med modulo 2^m. Husk wrap-around når n + 2^(i−1) ≥ 32."
+    },
+    {
+      "id": "drill-chord-key-assignment",
+      "topic": "04-naming-og-chord-dht",
+      "title": "Chord nøkkel → ansvarlig server",
+      "difficulty": "easy",
+      "prompt": "Chord-ring med m = 5 og servere på {1, 7, 15, 19, 29}. Hvilke server-replikaer er ansvarlige for nøklene {1, 12, 17, 20, 31}? Successor-regelen: pred(server) < k ≤ server.",
+      "expectedSteps": [
+        "k = 1: minste server-ID ≥ 1 er 1 → server 1.",
+        "k = 12: minste server-ID ≥ 12 er 15 → server 15.",
+        "k = 17: minste server-ID ≥ 17 er 19 → server 19.",
+        "k = 20: minste server-ID ≥ 20 er 29 → server 29.",
+        "k = 31: ingen server-ID ≥ 31 → wrap → minste server totalt = 1 → server 1."
+      ],
+      "finalAnswer": "{1→1, 12→15, 17→19, 20→29, 31→1 (wrap)}",
+      "learnMoreLinks": [
+        { "label": "Les mer: Key resolution", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" },
+        { "label": "Les mer: Chord-ringen", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ]
+    },
+    {
+      "id": "drill-chord-lookup-hops",
+      "topic": "04-naming-og-chord-dht",
+      "title": "Chord-lookup med finger-table-hopp",
+      "difficulty": "hard",
+      "prompt": "Chord-ring m = 5 med servere {1, 7, 15, 19, 29}. Finger-tabell for server 7 er [15, 15, 15, 15, 29]. Slå opp nøkkelen k = 17 startende fra server 7. Vis hopp-sekvensen.",
+      "expectedSteps": [
+        "Runde 1: n = 7, k = 17. Sjekk om succ(7) er ansvarlig: 7 < 17 ≤ 15? Nei (15 < 17).",
+        "Bruk closest-preceding-finger: gå nedover FT, finn høyeste finger som ligger strengt mellom n=7 og k=17. Finger(4) = 15 → 7 < 15 < 17 → hopp til server 15.",
+        "Runde 2: n = 15, k = 17. succ(15) = 19. Sjekk: 15 < 17 ≤ 19? Ja → returner 19.",
+        "Totalt 2 hopp: 7 → 15 → returner 19."
+      ],
+      "finalAnswer": "Lookup returnerer server 19 (etter 2 hopp via server 15)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Key resolution", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" },
+        { "label": "Les mer: Chord-ringen", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ]
+    },
+    {
+      "id": "drill-chord-lookup-wrap",
+      "topic": "04-naming-og-chord-dht",
+      "title": "Chord-lookup over wrap-around",
+      "difficulty": "hard",
+      "prompt": "Chord-ring m = 5 med servere {3, 12, 21, 31}. Finger-tabell for server 31 er [3, 3, 3, 12, 21]. Slå opp k = 15 startende fra server 31. Vis hopp.",
+      "expectedSteps": [
+        "Runde 1: n = 31, k = 15. succ(31) = 3. Sjekk: 31 < 15 ≤ 3? Nei (k < n, må wrap).",
+        "Closest-preceding-finger: gå nedover FT. Finger(5) = 21. Er 21 strengt mellom 31 og 15 (med wrap)? Nei (21 > 15). Finger(4) = 12. Er 12 mellom 31 og 15 med wrap? Ja → hopp til 12.",
+        "Runde 2: n = 12, k = 15. succ(12) = 21. Sjekk: 12 < 15 ≤ 21? Ja → returner 21.",
+        "Totalt 2 hopp: 31 → 12 → returner 21."
+      ],
+      "finalAnswer": "Lookup returnerer server 21 (etter 2 hopp inkl. wrap-around)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Key resolution", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" }
+      ]
+    },
+    {
+      "id": "drill-vector-clocks",
+      "topic": "07-coordination",
+      "title": "Vektor-klokker — 3 prosesser",
+      "difficulty": "medium",
+      "prompt": "Tre prosesser P1, P2, P3 har følgende hendelses-sekvenser (s = send, r = mottak, a/b/c = lokal hendelse). En melding s1 går fra P1 til P2.\n\nP1: a, s1\nP2: r1, b\nP3: c\n\nBeregn vektor-klokken etter hver event. Initial: alle vektorer = [0,0,0].",
+      "expectedSteps": [
+        "Regler: lokal og send → inkrementer egen komponent. Receive → V = komponentvis max(V_lokal, V_received), så inkrementer egen.",
+        "P1: a → [1,0,0]; s1 → [2,0,0], piggyback [2,0,0].",
+        "P2: r1 → max([0,0,0],[2,0,0]) = [2,0,0], så inkrement → [2,1,0]; b → [2,2,0].",
+        "P3: c → [0,0,1]."
+      ],
+      "finalAnswer": "P1: [1,0,0],[2,0,0] · P2: [2,1,0],[2,2,0] · P3: [0,0,1]",
+      "learnMoreLinks": [
+        { "label": "Les mer: Vector clocks", "href": "/dat110/begreper/vector-clocks", "kind": "concept", "slug": "vector-clocks" },
+        { "label": "Les mer: Lamport-klokker", "href": "/dat110/begreper/lamport-clocks", "kind": "concept", "slug": "lamport-clocks" },
+        { "label": "Tema: Logiske klokker", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ]
+    },
+    {
+      "id": "drill-vector-clocks-4-procs",
+      "topic": "07-coordination",
+      "title": "Vektor-klokker — 4 prosesser",
+      "difficulty": "hard",
+      "prompt": "Fire prosesser. Meldinger: s1 fra P1→P2, s2 fra P1→P2, s3 fra P3→P4.\n\nP1: s1, s2, a\nP2: r1, b, r2\nP3: c, s3, d\nP4: r3, e, f\n\nBeregn vektor-klokke etter hver event. Initial: alle = [0,0,0,0].",
+      "expectedSteps": [
+        "P1: s1 → [1,0,0,0]; s2 → [2,0,0,0]; a → [3,0,0,0].",
+        "P2: r1 mottar [1,0,0,0] → max([0,0,0,0],[1,0,0,0]) + inkrement P2 = [1,1,0,0]; b → [1,2,0,0]; r2 mottar [2,0,0,0] → max([1,2,0,0],[2,0,0,0]) + inkrement P2 = [2,3,0,0].",
+        "P3: c → [0,0,1,0]; s3 → [0,0,2,0]; d → [0,0,3,0].",
+        "P4: r3 mottar [0,0,2,0] → max + inkrement P4 = [0,0,2,1]; e → [0,0,2,2]; f → [0,0,2,3]."
+      ],
+      "finalAnswer": "P1 slutter på [3,0,0,0] · P2 på [2,3,0,0] · P3 på [0,0,3,0] · P4 på [0,0,2,3]",
+      "learnMoreLinks": [
+        { "label": "Les mer: Vector clocks", "href": "/dat110/begreper/vector-clocks", "kind": "concept", "slug": "vector-clocks" },
+        { "label": "Tema: Logiske klokker", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ]
+    },
+    {
+      "id": "drill-overlay-rdp",
+      "topic": "03-mom-overlay",
+      "title": "Overlay multicast: RDP",
+      "difficulty": "medium",
+      "prompt": "I et overlay-multicast-tre rutes en melding fra A til D via path A→B→C→D med edge-vekter 7 + 12 + 22 = 41. Den korteste fysiske stien fra A til D har delay 22. Beregn Relative Delay Penalty (RDP).",
+      "expectedSteps": [
+        "Formel: RDP = (overlay-rute-delay) / (best fysisk delay).",
+        "Overlay-delay A→D = 7 + 12 + 22 = 41.",
+        "Best fysisk delay A→D = 22.",
+        "RDP = 41 / 22 ≈ 1,86."
+      ],
+      "finalAnswer": "RDP ≈ 1,86 (overlay er ~86 % dyrere enn fysisk best-sti)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ]
+    },
+    {
+      "id": "drill-overlay-tree-cost",
+      "topic": "03-mom-overlay",
+      "title": "Overlay multicast: tree cost",
+      "difficulty": "easy",
+      "prompt": "Et multicast-tre består av kantene A–B (vekt 7), B–C (vekt 12), C–E (vekt 12), E–D (vekt 7). Beregn total tree-cost.",
+      "expectedSteps": [
+        "Tree-cost = sum av alle edges som er en del av treet.",
+        "Sum: 7 + 12 + 12 + 7.",
+        "Resultat: 38."
+      ],
+      "finalAnswer": "Tree-cost = 38",
+      "learnMoreLinks": [
+        { "label": "Les mer: Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" }
+      ]
+    },
+    {
+      "id": "drill-overlay-tree-choice",
+      "topic": "03-mom-overlay",
+      "title": "Velg beste multicast-tre",
+      "difficulty": "medium",
+      "prompt": "To kandidat-multicast-trær for å sende fra A til D:\n\nTree 1: A→E→D, overlay-delay = 27 + 7 = 34.\nTree 2: A→B→C→E→D, overlay-delay = 7 + 12 + 12 + 7 = 38.\n\nBest fysisk delay A→D = 22.\n\nHvilket tre er mest effektivt for ruting A→D? Begrunn med RDP.",
+      "expectedSteps": [
+        "Tree 1 RDP = 34 / 22 ≈ 1,55.",
+        "Tree 2 RDP = 38 / 22 ≈ 1,73.",
+        "Lavest RDP vinner → Tree 1.",
+        "Tolkning: Tree 1 legger til ~55 % overhead vs Tree 2 sine ~73 %."
+      ],
+      "finalAnswer": "Tree 1 er best for A→D (RDP ≈ 1,55 < 1,73)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ]
+    },
+    {
+      "id": "drill-dv-init",
+      "topic": "10-network-layer",
+      "title": "Distance Vector — initialisering",
+      "difficulty": "easy",
+      "prompt": "Nettverk med 4 rutere. R3 har direkte lenker til R1 (kost 5), R2 (kost 2), R4 (kost 1). Spesifiser R3 sin distance-vektor D_R3 etter initialisering.",
+      "expectedSteps": [
+        "Regel: D[seg selv] = 0, D[direkte nabo] = lenke-kost, D[ikke-nabo] = ∞.",
+        "D_R3[R3] = 0.",
+        "D_R3[R1] = 5 (direkte).",
+        "D_R3[R2] = 2 (direkte).",
+        "D_R3[R4] = 1 (direkte)."
+      ],
+      "finalAnswer": "D_R3 = [R1=5, R2=2, R3=0, R4=1]",
+      "learnMoreLinks": [
+        { "label": "Les mer: Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Routing", "href": "/dat110/temaer/routing", "kind": "topic", "slug": "routing" }
+      ]
+    },
+    {
+      "id": "drill-dv-update",
+      "topic": "10-network-layer",
+      "title": "Distance Vector — Bellman-Ford-oppdatering",
+      "difficulty": "hard",
+      "prompt": "R4 har D_R4 = [R1=6, R2=3, R3=1, R4=0]. R4 mottar nye vektorer fra naboene:\n\n- D_R2 = [R1=7, R2=0, R3=2, R4=3] (R4 til R2 har lenke-kost 8)\n- D_R3 = [R1=5, R2=2, R3=0, R4=1] (R4 til R3 har lenke-kost 1)\n\nOppdater D_R4 med Bellman-Ford.",
+      "expectedSteps": [
+        "Formel: D_R4[x] = min( eksisterende, kost(R4→nabo) + D_nabo[x] ).",
+        "Via R2 (kost 8): R1: 8+7=15, R2: 8+0=8, R3: 8+2=10, R4: 8+3=11.",
+        "Via R3 (kost 1): R1: 1+5=6, R2: 1+2=3, R3: 1+0=1, R4: 1+1=2.",
+        "Ta min over alle: R1=min(6,15,6)=6, R2=min(3,8,3)=3, R3=min(1,10,1)=1, R4=0.",
+        "Ingen endring — vektoren er allerede konvergert."
+      ],
+      "finalAnswer": "D_R4 = [6, 3, 1, 0] (uendret — konvergert)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Routing", "href": "/dat110/temaer/routing", "kind": "topic", "slug": "routing" }
+      ]
+    },
+    {
+      "id": "drill-ip-fragmentation",
+      "topic": "10-network-layer",
+      "title": "IP-fragmentering: antall fragmenter",
+      "difficulty": "medium",
+      "prompt": "En link har MTU 1500 byte (IP-header 20 byte → max payload per fragment = 1480 byte). En IP-payload på 5180 byte skal sendes. Hvor mange fragmenter trengs?",
+      "expectedSteps": [
+        "Maks payload per fragment = MTU − IP-header = 1500 − 20 = 1480 byte (multiplum av 8 — OK).",
+        "Del payload på fragment-størrelsen: 5180 / 1480 = 3,5.",
+        "Tre fulle fragmenter à 1480 byte = 4440 byte.",
+        "Resten: 5180 − 4440 = 740 byte → ett ekstra fragment.",
+        "Totalt: 3 + 1 = 4 fragmenter."
+      ],
+      "finalAnswer": "4 fragmenter (3 × 1480 byte + 1 × 740 byte)",
+      "learnMoreLinks": [
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
+      ]
+    },
+    {
+      "id": "drill-ip-fragment-offsets",
+      "topic": "10-network-layer",
+      "title": "IP-fragmentering: identifier og offset",
+      "difficulty": "hard",
+      "prompt": "Samme situasjon: 4 fragmenter, payload-størrelser [1480, 1480, 1480, 740] byte. IP-identifier = 110. Spesifiser identifier og 13-bit fragmentation offset for hvert fragment. (Offset måles i 8-byte-enheter.)",
+      "expectedSteps": [
+        "Identifier er konstant for alle fragmenter av samme datagram: 110.",
+        "Offset for fragment 1: 0 (start av payload).",
+        "Offset for fragment 2: 1480 / 8 = 185.",
+        "Offset for fragment 3: 2960 / 8 = 370.",
+        "Offset for fragment 4: 4440 / 8 = 555."
+      ],
+      "finalAnswer": "Fragment 1: id=110, off=0 · Fragment 2: id=110, off=185 · Fragment 3: id=110, off=370 · Fragment 4: id=110, off=555",
+      "learnMoreLinks": [
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
+      ]
+    },
+    {
+      "id": "drill-quorum-constraint",
+      "topic": "08-consistency-replication",
+      "title": "Quorum-betingelse for konsistens",
+      "difficulty": "medium",
+      "prompt": "Et replikert datastore har N = 7 replikaer. Du vil garantere read-your-write-konsistens via quorum-protokoll. Velg N_w (write-kvorum) og N_r (read-kvorum) slik at både `N_r + N_w > N` og `N_w > N/2` er oppfylt med minst mulig N_r.",
+      "expectedSteps": [
+        "Krav 1: N_w > N/2 = 3,5 → N_w ≥ 4.",
+        "Velg minste N_w som tilfredsstiller krav 1: N_w = 4.",
+        "Krav 2: N_r + N_w > 7 → N_r > 7 − 4 = 3 → N_r ≥ 4.",
+        "Minste N_r = 4."
+      ],
+      "finalAnswer": "N_w = 4, N_r = 4 (begge kvorum trenger flertall)",
+      "learnMoreLinks": [
+        { "label": "Les mer: Quorum", "href": "/dat110/begreper/quorum", "kind": "concept", "slug": "quorum" },
+        { "label": "Les mer: Konsistens-modeller", "href": "/dat110/begreper/consistency-models", "kind": "concept", "slug": "consistency-models" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" }
+      ]
+    }
+  ]
+}
