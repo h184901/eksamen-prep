@@ -35,7 +35,7 @@ const SOURCE_LABELS: Record<
   { label: string; comingNote?: string }
 > = {
   exam: { label: "📋 Tidligere DAT110-eksamener" },
-  canvas: { label: "📋 Canvas-quizer", comingNote: "kommer i P1" },
+  canvas: { label: "📋 Canvas-quizer" },
   generated: { label: "✏️ Genererte spørsmål" },
 };
 

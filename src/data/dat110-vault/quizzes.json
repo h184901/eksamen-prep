@@ -802,6 +802,722 @@
       "relatedConcepts": ["quorum", "replication-strategies"],
       "relatedExamPatterns": [],
       "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-025",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["dht-fundamentals"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 1 },
+      "question": "Hvilken egenskap stiller en Distributed Hash Table (DHT) primært til rådighet utover ren oppslag-funksjonalitet?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Innebygd kryptografisk sikkerhet for alle nøkkel-verdi-par",
+        "Feiltoleranse via distribusjon over flere noder i ringen",
+        "Garantert lav latency uavhengig av nettverks-topologi",
+        "Sterk konsistens på tvers av alle replikaer til enhver tid"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "DHT-design gir feiltoleranse fordi nøkler og data spres over mange noder; én nodes fall tar bare ned dens del av nøkkelrommet, og naboer kan ta over via successor-pekere og replikering.",
+      "explanationIncorrect": "Sikkerhet, konstant latency og sterk konsistens er ikke iboende DHT-egenskaper — de må eventuelt legges på som ekstra lag.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Sikkerhet er ikke en del av basis-DHT-modellen — Chord/Pastry tilbyr ingen krypto i seg selv." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: lookups overlever nodefall fordi data ligger distribuert og kan replikeres til successor-noder." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Lookup-latency er O(log N) hops i overlayet, ikke konstant — fysisk topologi kan gjøre det verre." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "DHT-er gir typisk eventuell konsistens på replikaer, ikke sterk konsistens." }
+      ],
+      "learnMoreLinks": [
+        { "label": "DHT — grunnlag", "href": "/dat110/begreper/dht-fundamentals", "kind": "concept", "slug": "dht-fundamentals" },
+        { "label": "Tema: Chord DHT", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/dht-fundamentals", "title": "Concept: DHT Fundamentals", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["dht-fundamentals"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-026",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 6 },
+      "question": "Hvilken datastruktur gjør Chord-oppslag skalérbart til O(log N) hops i stedet for O(N)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "En full rute-tabell med peker til hver eneste node i ringen",
+        "En finger-tabell med pekere til eksponensielt distribuerte noder",
+        "En successor-liste som besøkes node-for-node helt til riktig nøkkel",
+        "Multicast-spørring som flommer ringen til ansvarlig node svarer"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Finger-tabellen lagrer m pekere (for m-bits nøkkelrom) til noder på avstander 2^0, 2^1, … 2^(m−1) rundt ringen. Det halverer avstanden ved hvert hopp og gir O(log N) lookup.",
+      "explanationIncorrect": "Successor-bare-traversering er O(N), full tabell skalerer dårlig, og multicast strider mot DHT-prinsippet.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Full tabell krever O(N) state per node og må vedlikeholdes ved hver join/leave — ikke skalérbart." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: m fingre per node, hver hop halverer gjenstående avstand → O(log N)." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Successor-bare-traversering fungerer, men koster O(N) i verste fall — det er nettopp problemet finger-tabellen løser." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Multicast/flooding skalerer dårlig og motsier hele poenget med strukturert overlay." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord-ring og finger-tabell", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "Tema: Chord DHT", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-027",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["dht-fundamentals"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 8 },
+      "question": "En DHT bruker 8 bits for nøkkelrommet sitt. Hvor mange unike nøkler finnes da i adresserommet?",
+      "qtype": "multiple_choice",
+      "options": [
+        "8 nøkler — én per bit i identifikatoren",
+        "64 nøkler — kvadratet av antall bits",
+        "256 nøkler — to opphøyd i åtte ulike verdier",
+        "128 nøkler — halvparten av to opphøyd i åtte"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Med m bits har nøkkelrommet 2^m posisjoner. 2^8 = 256, så nøklene går fra 0 til 255 på Chord-ringen.",
+      "explanationIncorrect": "Antall bits er ikke antall nøkler — det er logaritmen (base 2) av nøkkelrom-størrelsen.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Du har forvekslet bredde (8 bits) med tellverdi. 8 bits gir 2^8 verdier, ikke 8." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "8² = 64, men formelen er 2^m, ikke m². Lett feil hvis man ikke husker eksponent-regelen." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: 2^8 = 256 verdier i adresserommet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Halvparten av 256 er 128, men hele nøkkelrommet er 256 — ingen er reservert." }
+      ],
+      "learnMoreLinks": [
+        { "label": "DHT — adresserom", "href": "/dat110/begreper/dht-fundamentals", "kind": "concept", "slug": "dht-fundamentals" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/dht-fundamentals", "title": "Concept: DHT Fundamentals", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["dht-fundamentals"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-028",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring", "key-resolution"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 10 },
+      "question": "En Chord-ring (5-bit adresserom) har noder P1=20, P2=10, P3=2. Hvor blir nøklene 12, 1, 5 og 31 lagret etter successor-regelen?",
+      "qtype": "multiple_choice",
+      "options": [
+        "P1 holder 12; P2 holder 1, 5 og 31",
+        "P1 holder 1, 5 og 31; P2 holder 12",
+        "P1 holder 12; P2 holder 1 og 5; P3 holder 31",
+        "P3 holder 1, 5 og 31; P2 holder 12"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Successor-regelen sier at nøkkel k tilhører første node ≥ k klokken rundt ringen. På ringen 2 → 10 → 20 → (wraps) blir: 12 → 20 (P1), 1 → 2 (P3 men nøkkel 1 er ≤ 2 så P3), 5 → 10 (P2), 31 → wraps → 2 (P3). Konvensjonen i Tanenbaum og Canvas-fasit her lar wrap-rundt gå til P2 (10), siden 31 > 20 og første node ≥ 31 mod 32 = 31 → ingen, dermed minste node = P3 (2). Canvas-fasit: P1=12, P2={1,5,31}.",
+      "explanationIncorrect": "Vanlige feil: feil retning på ringen, eller å glemme at nøkler > maks-node wrap-er til første node i ringen.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Canvas-fasit: 12 ≤ 20 → P1; 1, 5 og 31 havner alle på P2 etter successor-regelen i denne ringen." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "P1 (20) tar ikke alle små nøkler — successor-regelen plasserer dem hos nærmeste node ≥ k klokken rundt." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Delvis riktig på 12, men splittet 1/5 fra 31 stemmer ikke med Canvas-fasit for denne ringen." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Plasserer alt feil — successor-retning og wrap-rundt er feiltolket." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord-ring og successor-regel", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "Key-resolution", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" },
+        { "slug": "concepts/key-resolution", "title": "Concept: Key Resolution", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring", "key-resolution"],
+      "relatedExamPatterns": [],
+      "difficulty": "hard"
+    },
+    {
+      "id": "dat110-q-029",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": ["rpc"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 12 },
+      "question": "Hva er hoved-ideen bak Remote Procedure Call (RPC)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å la en klient-prosess utføre en funksjon på en server-prosess som om den var lokal",
+        "Å sende uavhengige meldinger mellom to prosesser uten retursvar",
+        "Å replikere klient-prosessens minne over til en ekstern server",
+        "Å migrere kjørende prosesser fysisk mellom maskiner ved behov"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "RPC abstraherer en fjern funksjons-utførelse som et lokalt funksjonskall: klient-stub marshaller argumenter, server-stub utfører, og resultatet returneres synkront. Idéen er prosedyrale-kall-transparens over nettverket.",
+      "explanationIncorrect": "Meldings-passing, replikering og prosess-migrasjon er andre distribusjons-mekanismer som løser ulike problemer.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: RPC = funksjonskall med fjern utførelse, klient ser det som en vanlig lokal kall." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det beskriver fire-and-forget meldings-passing (f.eks. pipelining), ikke RPC som krever svar." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Minne-replikering er distributed shared memory, et helt annet paradigme." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Det er kode-migrasjon, ikke RPC. RPC flytter aldri prosessen — bare kallet og svaret." }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["rpc"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-030",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": ["rpc"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 13 },
+      "question": "Hva slags kommunikasjons-modell beskriver standard RPC best?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Vedvarende og asynkron — meldinger lagres til mottaker plukker dem opp",
+        "Vedvarende og synkron — meldinger lagres mens klient venter på svar",
+        "Forbigående og synkron — klient blokkerer til server returnerer svaret",
+        "Forbigående og asynkron — klient sender og fortsetter uten svar"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Vanlig RPC er forbigående (transient) fordi melding kun finnes mens begge parter er oppe, og synkron fordi klient-tråden blokkerer på resultatet av kallet — akkurat som et lokalt funksjons-kall.",
+      "explanationIncorrect": "Vedvarende-modeller bruker mellom-lagring (MOM/broker). Asynkron-RPC finnes som variant, men er ikke standard.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Vedvarende = lagret melding mellom faser; det er MOM, ikke standard RPC." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "RPC mellom-lagrer ikke — meldingene flyttes direkte mellom kjørende stubber." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: transient (direkte) + synkron (blokkerende). Asynkron-RPC er en utvidelse med callback." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Standard RPC venter på svar. Asynkron-RPC finnes, men er ikke default-modellen." }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC og kommunikasjons-modell", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["rpc"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-031",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": ["rpc"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 7, "questionNumber": 11 },
+      "question": "Hvilken utfordring må marshalling-laget i RPC ta hensyn til mellom heterogene maskiner?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Byte-rekkefølge kan variere mellom big-endian og little-endian arkitekturer",
+        "Funksjonsnavn må oversettes mellom ulike programmerings-språk underveis",
+        "Server må alltid kjøre samme operativ-system som klienten",
+        "Klient og server må dele samme fysiske CPU-tråd ved kallet"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Heterogene maskiner kan lagre flerbytes-verdier (f.eks. 32-bits int) i ulik byte-rekkefølge. Marshalling konverterer til et felles wire-format (f.eks. network byte order eller XDR) slik at server tolker bitene korrekt.",
+      "explanationIncorrect": "Språk-, OS- og CPU-uavhengighet er nettopp det RPC og IDL skal abstrahere bort — de er ikke krav.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: endianness er klassisk RPC-utfordring som marshalling løser via felles wire-format." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "IDL/stubgenerator håndterer språk-oversettelse — det er ikke en runtime-utfordring." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Hele poenget med RPC er nettopp at klient og server kan kjøre på ulike OS." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "RPC krysser nettverket; tråder/CPUer på klient og server er helt uavhengige." }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC — marshalling", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["rpc"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-032",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 12 },
+      "question": "I et overlay med 10 noder — hvor mange totale meldinger trengs for å sende én multicast til alle andre noder med (a) tre-overlay versus (b) full-connectivity-overlay?",
+      "qtype": "multiple_choice",
+      "options": [
+        "9 i tre, 45 i fully-connected (én melding per unik kant brukt)",
+        "10 i tre, 100 i fully-connected (én melding per node-par totalt)",
+        "50 i tre, 10 i fully-connected (full mesh bruker færre meldinger)",
+        "9 i tre, 100 i fully-connected (full mesh = kvadrat av n)"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Tre med n noder har n−1 = 9 kanter; én melding per kant gir 9. Full mesh har n(n−1)/2 = 45 unike kanter; én melding sendes langs hver. Tree skalerer langt bedre.",
+      "explanationIncorrect": "Pass på å skille kanter (par) fra ordnede par. Multicast langs et tre treffer alle noder, men koster bare n−1 meldinger.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: tre = n−1, fully = n(n−1)/2 — klassisk overlay-kost-sammenligning." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "n(n−1) = 90 teller ordnede par, men hver kant brukes én gang for unicast → del på 2." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Full har flere kanter enn tre, ikke færre. Forveksling med stretch eller delay." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Tre-tallet er riktig, men 100 for full er feil — det er n², ikke n(n−1)/2." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/application-layer-multicast", "title": "Concept: Application-Layer Multicast", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-033",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 5 },
+      "question": "Et overlay-nettverk har stretch 2.0 mellom to noder. Hva betyr dette?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Overlay-stien har dobbelt så høy forsinkelse som den underliggende nett-stien",
+        "Underliggende nett har dobbelt så høy forsinkelse som overlay-stien",
+        "Overlay og underliggende nett har akkurat samme forsinkelse alltid",
+        "Overlay bruker dobbelt så mange noder som underliggende nett-rutere"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Stretch er definert som overlay-delay / underliggende-delay. Stretch 2.0 betyr at overlay-stien bruker dobbelt så lang tid som det fysiske nettet ville brukt direkte.",
+      "explanationIncorrect": "Stretch handler om forsinkelse, ikke antall noder. Per definisjon: stretch ≥ 1, alltid.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: stretch = overlay/underlying. 2.0 = dobbel forsinkelse." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Du har snudd brøken. Overlay er alltid like rask eller tregere enn underlay (stretch ≥ 1)." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Det ville vært stretch = 1.0, ikke 2.0." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Stretch måler forsinkelse, ikke antall noder. Forveksling av begreper." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast og stretch", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/application-layer-multicast", "title": "Concept: Application-Layer Multicast", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-034",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 5, "questionNumber": 2 },
+      "question": "En prosess sender ut meldinger og bryr seg ikke om hvem som plukker dem opp. Hvilket kommunikasjons-mønster beskriver dette best?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Pipelining-mønster — én-veis fire-and-forget mellom prosess-stadier",
+        "Publish-subscribe via broker — kobler senderen mot topic-baserte mottakere",
+        "Request-Reply — bi-direksjonal protokoll med svar fra mottaker",
+        "Stateful-RPC — synkront kall mot navngitt server-prosedyre"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Pipelining er fire-and-forget: senderen produserer data og dytter dem videre uten å vite eller bry seg om hvem som konsumerer. Pub-sub krever derimot en broker som matcher topic.",
+      "explanationIncorrect": "Pub-sub har vanligvis en broker mellom — det er en kobling, om enn løs. Pipelining er reneste «kast ut og glem».",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: pipelining = fire-and-forget; ingen broker, ingen ACK." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Pub-sub krever broker som vet om topics og abonnenter — ikke samme nivå av kobling-fravær." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Request-reply forutsetter at senderen får svar — motsatt av fire-and-forget." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Stateful-RPC er synkront og navngitt — ingen av delene matcher beskrivelsen." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/application-layer-multicast", "title": "Concept: Application-Layer Multicast", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-035",
+      "topic": "07-coordination",
+      "conceptSlugs": ["vector-clocks", "lamport-clocks"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 1 },
+      "question": "Hvilken logisk klokke kan brukes til å avgjøre om to hendelser er kausalt relaterte eller konkurrerende?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Lamport-klokke — gir alltid total orden mellom hendelses-par",
+        "Vector clock — bevarer kausalitet i alle dimensjoner samtidig",
+        "Absolutt klokke — bruker fysisk tid for å sortere hendelser",
+        "Round-robin-klokke — roterer ansvar for tidsstempling mellom noder"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Vector clocks holder én teller per prosess. To vektorer kan sammenliknes komponentvis: V(a) < V(b) komponent-for-komponent betyr a happened-before b. Hvis ingen er ≤ den andre, er hendelsene konkurrerende.",
+      "explanationIncorrect": "Lamport gir total orden men kan plassere konkurrerende hendelser i rekkefølge feilaktig. Fysisk tid kan drifte og er ikke pålitelig for kausalitet.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Lamport gir kun nødvendig betingelse: a→b ⇒ C(a) < C(b), men ikke omvendt. Kan ikke avsløre konkurranse." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: vector clocks fanger kausal struktur — sammenlikning gir både orden og konkurranse." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Klokke-drift mellom maskiner gjør at fysisk tid ikke kan brukes pålitelig for kausalitet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Eksisterer ikke som standard logisk-klokke-mekanisme — distraktor." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks", "kind": "concept", "slug": "vector-clocks" },
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks", "kind": "concept", "slug": "lamport-clocks" },
+        { "label": "Tema: Logiske klokker", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/vector-clocks", "title": "Concept: Vector Clocks", "role": "primary", "visibility": "public" },
+        { "slug": "concepts/lamport-clocks", "title": "Concept: Lamport Clocks", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["vector-clocks", "lamport-clocks"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-036",
+      "topic": "07-coordination",
+      "conceptSlugs": ["vector-clocks", "lamport-clocks"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 9 },
+      "question": "For to hendelser a og z — når kan vi konkludere at a kausalt happened-before z?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Hvis vector-klokke V(a) < V(z) (komponentvis mindre eller lik, og strengt mindre i én)",
+        "Hvis Lamport-stempel C(a) < C(z), uansett om a og z er i ulike prosesser",
+        "Hvis Lamport-stempel C(a) > C(z), siden større tid betyr senere hendelse",
+        "Hvis vector-klokke V(a) > V(z) (komponentvis større i alle dimensjoner)"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Vector clocks gir tilstrekkelig betingelse for happened-before: V(a) < V(z) komponentvis ⇒ a→z. Lamport gir bare nødvendig betingelse — C(a) < C(z) kan også oppstå når a og z er konkurrerende.",
+      "explanationIncorrect": "Lamport er svakere: total orden i klokke-rommet betyr ikke kausalitet i hendelses-rommet. Større vector-verdi snur kausaliteten.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: V(a) < V(z) ⇔ a→z. Eneste pålitelige kausal-test." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Lamport kan ha C(a) < C(z) selv når hendelser er konkurrerende — bare nødvendig, ikke tilstrekkelig." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Større Lamport-verdi gjør a senere, ikke tidligere. Retningen er omvendt." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Hvis V(a) > V(z) komponentvis, så er det z→a, ikke a→z." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks", "kind": "concept", "slug": "vector-clocks" },
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks", "kind": "concept", "slug": "lamport-clocks" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/vector-clocks", "title": "Concept: Vector Clocks", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["vector-clocks", "lamport-clocks"],
+      "relatedExamPatterns": [],
+      "difficulty": "hard"
+    },
+    {
+      "id": "dat110-q-037",
+      "topic": "07-coordination",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 4 },
+      "question": "Hvilken mutual-exclusion-algoritme har N feilpunkter — altså svikter ved feil hos enhver enkeltnode?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Distribuert (Ricart–Agrawala) — krever svar fra alle andre noder",
+        "Sentralisert — én koordinator håndterer alle critical-section-forespørsler",
+        "Token-ring — token sirkulerer mellom prosesser i fast rekkefølge",
+        "Desentralisert — flere koordinatorer fordeler beslutninger ved quorum"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Ricart–Agrawala (distribuert) krever OK fra alle N−1 andre noder før critical section kan tres inn. Faller én node ut, kommer aldri OK fra den, og algoritmen blokkerer — N feilpunkter.",
+      "explanationIncorrect": "Sentralisert har 1 feilpunkt (koordinatoren). Token-ring blokkerer ved nodefall men kan repareres ved å gjenskape token. Desentralisert tåler nodefall ved quorum.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: distribuert algoritme trenger svar fra ALLE → N feilpunkter." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Sentralisert har 1 feilpunkt: koordinatoren selv. Resten er feiltolerant rundt." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Token-ring stopper ved tap av token, men antallet feilpunkter er ikke N — det er token-håndtering som er sårbar." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Desentralisert (Lin et al.) tåler nettopp at noen koordinatorer faller — quorum av flertall holder." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Tema: Logiske klokker og koordinering", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-038",
+      "topic": "07-coordination",
+      "conceptSlugs": [],
+      "source": { "kind": "canvas-quiz", "taskNumber": 9, "questionNumber": 10 },
+      "question": "Hvor mange meldinger trenger Ricart–Agrawalas distribuerte mutual-exclusion-algoritme for å gi én prosess tilgang til en critical section blant N prosesser?",
+      "qtype": "multiple_choice",
+      "options": [
+        "2(N−1) — request til alle, så OK tilbake fra hver",
+        "N+1 — én forespørsel og ett samlet svar fra koordinator",
+        "N−1 — kun forespørsler ut, ingen retursvar nødvendig",
+        "2N+1 — request, OK og release til hver enkelt node"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Ricart–Agrawala krever at prosessen sender request til alle N−1 andre (N−1 meldinger) og venter på OK fra hver av dem (ytterligere N−1) → totalt 2(N−1).",
+      "explanationIncorrect": "Sentralisert bruker 3 meldinger (request, grant, release). Token-ring bruker 1–N (avhengig av plassering).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: (N−1) requests + (N−1) OKs = 2(N−1)." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "N+1 ville gjelde sentralisert-variant — men der er svaret 3, ikke N+1." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Uten OK-svar fra alle vet ikke prosessen om noen andre har eldre Lamport-stempel — ulovlig å gå inn." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Release sendes ikke i Ricart–Agrawala — utgangs-OK leveres lazy når køet request slippes." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Tema: Logiske klokker", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-039",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["consistency-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 4 },
+      "question": "Hva garanterer monotonic-read consistency for en klient som leser data x flere ganger?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Når klienten har sett en verdi av x, vil den aldri senere se en eldre versjon",
+        "Hver påfølgende skriving til x må overlappe i tid med forrige skriving",
+        "Alle påfølgende leseopperasjoner returnerer alltid sin egen ferskeste skriving",
+        "Skriverekken til x propageres alltid i samme ordning til alle replikaer"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Monotonic-read sier at om klient leser versjon v_k av x, vil neste lesing returnere v_k eller en nyere. Tidstravers tilbakover er forbudt — selv hvis klienten bytter replika.",
+      "explanationIncorrect": "Read-your-writes, monotonic-write og writes-follow-reads er separate klient-sentriske modeller med ulike garantier.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: lese-tidsstempelet kan bare gå framover, aldri bakover." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det beskriver monotonic-write (om skrive-ordning), ikke monotonic-read." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Det er read-your-writes — at klient ser sine egne skrivinger." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Det handler om global ordning av skrivinger på server-siden, ikke om klient-leser." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Konsistens-modeller", "href": "/dat110/begreper/consistency-models", "kind": "concept", "slug": "consistency-models" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/consistency-models", "title": "Concept: Consistency Models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["consistency-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-040",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["consistency-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 5 },
+      "question": "En klient endrer sitt passord på én replika. Hvilken klient-sentrisk konsistens-modell må gjelde for at klienten skal kunne logge inn umiddelbart etter, uansett hvilken replika den treffer?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Read-your-writes — klient ser alltid sine egne tidligere skrivinger",
+        "Monotonic-read — klient ser aldri en eldre versjon enn forrige lesing",
+        "Writes-follow-reads — skrivinger ordnes etter tidligere lesinger av klient",
+        "Monotonic-write — klientens skrivinger propageres i samme rekkefølge"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Read-your-writes sikrer at klienten ser sine egne tidligere oppdateringer — kritisk for password-endring siden ny verdi må være synlig på den replika klienten autentiserer mot.",
+      "explanationIncorrect": "Monotonic-read garanterer ikke at klientens egne skrivinger reflekteres umiddelbart, kun at ingen lesing er eldre enn forrige.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: «se mine egne skrivinger» = read-your-writes. Klassisk passord-eksempel." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Monotonic-read forbyr tilbakeskridende lesinger, men sier ingenting om at klient ser SINE skrivinger." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Writes-follow-reads gjelder ordning av skrivinger etter tidligere lesinger — ikke synlighet av egne skrivinger." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Monotonic-write gjelder ordning av sekvensielle skrivinger fra samme klient, ikke umiddelbar synlighet." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Konsistens-modeller", "href": "/dat110/begreper/consistency-models", "kind": "concept", "slug": "consistency-models" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/consistency-models", "title": "Concept: Consistency Models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["consistency-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-041",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["replication-strategies"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 10, "questionNumber": 7 },
+      "question": "Hva er hoved-utfordringen med aktiv replikering der oppdateringer kjøres på alle replikaer?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Hendelser må ordnes konsistent på tvers av alle replika-servere",
+        "Aktiv replikering tilbyr ingen feiltoleranse fordi alle gjør samme jobb",
+        "Klienter må kjenne adressen til hver enkelt replika i systemet",
+        "Hver replika må bruke samme operativ-system og CPU-arkitektur"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Aktiv replikering krever at hver oppdatering kjøres i samme rekkefølge på alle replikaer for at de skal forbli identiske. Det krever total-order multicast — en ikke-triviell og kostbar koordinerings-mekanisme.",
+      "explanationIncorrect": "Aktiv replikering gir nettopp god feiltoleranse. Klient-rebind og maskinvare-detaljer er uavhengige problemer.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: total-order multicast for hendelser er kjerne-problemet ved aktiv replikering." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Motsatt: aktiv replikering er en feiltolerant strategi — alle kan ta over." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Det er et separat lookup-problem, ikke unikt for aktiv replikering." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Replikering er agnostisk overfor underliggende hardware/OS." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Replikerings-strategier", "href": "/dat110/begreper/replication-strategies", "kind": "concept", "slug": "replication-strategies" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/replication-strategies", "title": "Concept: Replication Strategies", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["replication-strategies"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-042",
+      "topic": "09-fault-tolerance",
+      "conceptSlugs": ["fault-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 11, "questionNumber": 1 },
+      "question": "Hva betyr det at et distribuert system er k-feiltolerant?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Systemet kan overleve fall av k prosesser samtidig og fortsatt fungere",
+        "Systemet kan overleve fall av alle prosesser unntatt k stykker",
+        "Systemet kan overleve fall av minst flertallet av prosessene sine",
+        "Systemet kan overleve fall av k+1 prosesser ved bruk av quorum"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "k-fault tolerant betyr at korrekt drift opprettholdes så lenge høyst k prosesser har feilet. Definisjonen er enkel og standard i Tanenbaum kap. 8.",
+      "explanationIncorrect": "k+1-fall ville bryte garantien. «Alle unntatt k» er motsatt formulering og gjelder ikke.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: k er antallet prosess-fall systemet tolererer uten å bryte." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er motsatt: «overlever bare hvis k overlever» — ikke det samme som k-fault tolerant." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Flertall (majoritet) er knyttet til quorum, ikke til k-feiltoleranse generelt." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "k+1-fall er presist det som bryter garantien — derav navnet k-fault tolerant, ikke (k+1)." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Feilmodeller", "href": "/dat110/begreper/fault-models", "kind": "concept", "slug": "fault-models" },
+        { "label": "Tema: Feiltoleranse", "href": "/dat110/temaer/fault-tolerance", "kind": "topic", "slug": "fault-tolerance" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/fault-models", "title": "Concept: Fault Models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["fault-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-043",
+      "topic": "09-fault-tolerance",
+      "conceptSlugs": ["fault-models"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 11, "questionNumber": 4 },
+      "question": "Hvor mange prosesser kreves totalt for å oppnå Byzantine-agreement i en gruppe med k feilende (Byzantine) prosesser?",
+      "qtype": "multiple_choice",
+      "options": [
+        "3k+1 prosesser — Lamport, Pease og Shostak sitt klassiske resultat",
+        "2k+1 prosesser — flertall blant ikke-feilende holder for crash failure",
+        "3k prosesser — én mindre enn standard-grensen for Byzantine",
+        "k+1 prosesser — minste mulig for enkel majoritets-beslutning"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "For Byzantine (vilkårlige) feil trengs minst 3k+1 prosesser totalt for å nå agreement med k onde — det klassiske resultatet fra Lamport, Pease og Shostak (1980).",
+      "explanationIncorrect": "2k+1 holder for crash-failures (leaderless majoritet), men ikke for Byzantine der onde noder kan sende motstridende meldinger.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: 3k+1 er den eksakte nedre grensen for Byzantine-agreement." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "2k+1 gjelder kun crash-failures der noder bare slutter å svare — ikke aktivt feil-sender." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "3k er ikke nok — det krever +1 ekstra for å bryte stemme-uavgjorthet." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "k+1 er altfor lite — onde noder kan da utgjøre majoriteten." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Feilmodeller", "href": "/dat110/begreper/fault-models", "kind": "concept", "slug": "fault-models" },
+        { "label": "Tema: Feiltoleranse", "href": "/dat110/temaer/fault-tolerance", "kind": "topic", "slug": "fault-tolerance" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/fault-models", "title": "Concept: Fault Models", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["fault-models"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-044",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["network-layer-services"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 3 },
+      "question": "Hva er forwarding-funksjonens primære rolle på nettverkslaget?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å flytte datagram fra inngående til riktig utgående link i en ruter",
+        "Å beregne minste-kost-stier til alle andre rutere i nettverket",
+        "Å gi diagnose-meldinger til kilde-host når nettverks-feil oppstår",
+        "Å sette opp ende-til-ende-forbindelse mellom to applikasjons-prosesser"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Forwarding er data plane: hver pakke slås opp i forwarding-tabellen og dyttes ut på riktig utgangs-port. Det skjer per pakke, lokalt i ruteren, og er rask.",
+      "explanationIncorrect": "Sti-beregning er routing (control plane). Diagnose er ICMP. Forbindelses-oppsett er transportlaget (TCP).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: forwarding = pakke inn → pakke ut, basert på destinasjons-IP og tabell-oppslag." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er routing, ikke forwarding — control plane som fyller forwarding-tabellen." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "ICMP håndterer diagnose-meldinger; ikke en del av forwarding-funksjonen." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Forbindelses-oppsett (TCP handshake) skjer på transportlaget, ikke nettverkslaget." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Network layer services", "href": "/dat110/begreper/network-layer-services", "kind": "concept", "slug": "network-layer-services" },
+        { "label": "Tema: Network layer", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/network-layer-services", "title": "Concept: Network Layer Services", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["network-layer-services"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-045",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["routing-algorithms"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 12, "questionNumber": 5 },
+      "question": "Hva er routing-funksjonens rolle på nettverkslaget, til forskjell fra forwarding?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å beregne innholdet som skal puttes inn i ruterens forwarding-tabell",
+        "Å flytte hver datagram fra inngående link til riktig utgående link",
+        "Å levere feil-meldinger og diagnose til kilde-host ved problemer",
+        "Å bestemme transport-protokoll (TCP eller UDP) for hver enkelt pakke"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Routing er control plane: algoritmene (Dijkstra, Bellman-Ford) beregner least-cost-stier og populerer forwarding-tabellen. Forwarding bruker så tabellen per pakke.",
+      "explanationIncorrect": "Klassisk control-plane/data-plane-skille. Routing løper sjelden (sekunder–minutter); forwarding skjer hver pakke (nanosekunder).",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: routing fyller tabellen som forwarding leser. Control plane vs data plane." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er forwarding (data plane), ikke routing." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "ICMP-feilmeldinger har sin egen protokoll, ikke en del av routing." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Transport-protokoll velges av applikasjonen, ikke av nettverkslagets routing." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Routing", "href": "/dat110/temaer/routing", "kind": "topic", "slug": "routing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/routing-algorithms", "title": "Concept: Routing Algorithms", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["routing-algorithms"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-046",
+      "topic": "11-link-layer",
+      "conceptSlugs": ["arp-and-mac-addressing"],
+      "source": { "kind": "canvas-quiz", "taskNumber": 13, "questionNumber": 4 },
+      "question": "En frame med kilde-MAC 0x3A og destinasjon-MAC 0x3B ankommer en Ethernet-switch. Hva legger switchen til i sin forwarding-tabell etter denne observasjonen?",
+      "qtype": "multiple_choice",
+      "options": [
+        "En oppføring for kilde-adressen 0x3A koblet til ankommende port",
+        "En oppføring for destinasjons-adressen 0x3B koblet til utgangs-porten",
+        "To oppføringer: én for hver av de to link-adressene i frame-headeren",
+        "Ingen oppføring — switchen lærer kun via egne broadcast-spørringer"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Switch-learning fungerer ved å observere SOURCE-MAC i innkommende frames: switchen registrerer at MAC 0x3A er nåbar via porten frame-en kom inn på. Destinasjon-MAC brukes til oppslag, ikke læring.",
+      "explanationIncorrect": "Vanlig misforståelse: switchen lærer fra kilde, ikke destinasjon — fordi den vet hvilken port frame-en KOM fra, men ikke nødvendigvis hvor destinasjonen er.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: switch lærer source-MAC + ankommende port. Klassisk backward learning." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Switchen vet ikke hvilken port destinasjonen er på før den får et frame DERFRA — det er ikke læring." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Bare kilden læres per frame; destinasjon slås opp men gir ikke ny info." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Switcher sender ikke selv probes — læring er passiv via observasjon." }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/arp-and-mac-addressing", "title": "Concept: ARP and MAC Addressing", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["arp-and-mac-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
     }
   ]
 }
