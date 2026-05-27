@@ -1,0 +1,673 @@
+{
+  "slug": "dat110-eksamen-05-2022",
+  "year": 2022,
+  "session": "05",
+  "displayLabel": "DAT110 Eksamen — mai 2022",
+  "pairStatus": "complete",
+  "reconstructedFromSensor": false,
+  "sensorSlug": "dat110-eksamen-05-2022-sensorveiledning",
+  "totalWeight": 100,
+  "questions": [
+    {
+      "number": 1,
+      "weightPercent": 10,
+      "topic": "02-protocol-layering-og-sockets",
+      "conceptSlugs": ["arp-and-mac-addressing", "rpc", "subnetting"],
+      "prompt": "Flervalg — 10 underspørsmål om nettverk, TCP/IP-lagene, sikkerhet og cloud.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Hvilke av disse situasjonene kan føre til tap av datagrammer/pakker i et pakkesvitsjet nettverk?\n\n1. Interferens på en kommunikasjonslenke endrer bits under transmisjon\n2. En vert informerer en pakkesvitsj om at den likevel ikke skal sende pakken\n3. Bufferne overflyter fordi for mange pakker ankommer for transmisjon på en lenke",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**1 og 3.** Bit-feil under transmisjon og buffer-overflow er klassiske årsaker til pakketap i pakkesvitsjede nettverk.",
+            "shortReasoning": "Alternativ 2 beskriver ikke pakketap — pakken ble aldri sendt. Bare 1 og 3 representerer reell paket-loss."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Hvilke av følgende protokoller hører til applikasjonslaget i TCP/IP-stakken?\n\n1. UDP\n2. IP\n3. DNS\n4. HTTP\n5. ARP",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**3 og 4.** DNS og HTTP er applikasjonslagsprotokoller. UDP er transportlag, IP er nettverkslag, ARP er link-lag.",
+            "shortReasoning": "Husk lagenes ansvar: applikasjon (DNS, HTTP, SMTP), transport (TCP, UDP), nettverk (IP), link (ARP, Ethernet)."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Hvordan identifiseres kommunikasjons-endepunkter på transportlaget i TCP/IP-stakken?\n\n1. Med IP-adresser og link-lag-adresser\n2. Bare med IP-adresser\n3. Med IP-adresser og portnumre\n4. Med IP-adresser og prosess-ID-er",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**3.** IP-adresse + portnummer (kombinasjonen er kjent som en socket-endepunkt).",
+            "shortReasoning": "IP identifiserer verten, port identifiserer prosess/socket på verten. Sammen danner de et globalt unikt endepunkt."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Hvilken tjeneste tilbyr link-laget i TCP/IP-stakken generelt?\n\n1. Multi-hop forwarding av rammer mellom verter\n2. Pålitelig transmisjon av rammer over én lenke\n3. Upålitelig transmisjon av rammer over én lenke",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**3.** Link-laget gir typisk en upålitelig én-hop ramme-overføring. Pålitelighet håndteres oftest høyere oppe (TCP).",
+            "shortReasoning": "Multi-hop hører til nettverkslaget (IP). Reliabilitet er ikke link-lagets garanti — det leveres best-effort over én fysisk lenke."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "For hvilken type media access-protokoll kan ramme-kollisjon oppstå?\n\n1. Frequency division multiplexing (FDM)\n2. Carrier Sense with Multiple Access (CSMA)\n3. Time-division multiplexing (TDM)",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**2.** CSMA — flere noder kan forsøke å sende samtidig på samme delt media og forårsake kollisjon.",
+            "shortReasoning": "FDM og TDM gir hver node dedikerte ressurser (frekvens hhv. tidsslot), så kollisjoner er definert vekk."
+          }
+        },
+        {
+          "letter": "f",
+          "prompt": "Hovedidéen bak RPC er å:\n\n1. Sende meldinger via TCP til en fjern prosess\n2. La en klientprosess kalle sin egen funksjon og videresende resultatet til serveren\n3. La en klientprosess kalle en funksjon på en fjern server-prosess",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**3.** RPC abstraherer fjern-kall slik at klienten kan kalle en funksjon som om den var lokal.",
+            "shortReasoning": "Hele poenget med RPC er gjennomsiktighet — klienten skal slippe å håndtere meldings-marshalling og transport selv."
+          }
+        },
+        {
+          "letter": "g",
+          "prompt": "Et ustrukturert p2p overlay-nettverk har 500 noder med sannsynlighet p = 0.4 for at to noder er forbundet. Hvor mange meldinger kan estimeres å rutes i nettverket?\n\na) 50 000\nb) 125 000\nc) 200\nd) 500",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**a) 50 000.** Antall forventede kanter i en Erdős-Rényi-graf er p × N(N−1)/2. For p=0.4 og N=500: 0.4 × 500 × 499 / 2 ≈ 49 900 ≈ 50 000.",
+            "shortReasoning": "Formelen E[kanter] = p · C(N, 2) ≈ p · N²/2. Hver kant kan bære én melding."
+          }
+        },
+        {
+          "letter": "h",
+          "prompt": "Hvilken mutual exclusion-algoritme krever 2·(N−1) meldinger for at en prosess skal kunne entre kritisk region?\n\n1. Distributed\n2. Centralized\n3. Token Ring\n4. Decentralized",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**1. Distributed.** Ricart-Agrawala-stilen sender forespørsel til alle N−1 andre prosesser og venter på like mange OK-svar.",
+            "shortReasoning": "Centralized krever 2-3 meldinger (request, grant, release). Token Ring sender token rundt. Decentralized har coordinator-replicas."
+          }
+        },
+        {
+          "letter": "i",
+          "prompt": "Hva er sikkerhetsløsningen for å motvirke spoofing av distribuerte system-servere?\n\n1. Kryptering\n2. Digital signatur\n3. Hashing",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**2. Digital signatur.** Signaturen verifiserer at meldingen faktisk kommer fra den påståtte avsenderen.",
+            "shortReasoning": "Kryptering gir konfidensialitet (ingen kan lese), hashing gir integritet (ingen kan endre). Bare digital signatur gir autentisering."
+          }
+        },
+        {
+          "letter": "j",
+          "prompt": "Rapid elasticity er en cloud-egenskap som relaterer til:\n\n1. Personvern\n2. Sikkerhet\n3. Skalerbarhet",
+          "qtype": "mcq",
+          "solution": {
+            "expectedAnswer": "**3. Skalerbarhet.** Rapid elasticity er evnen til å skalere ressurser opp/ned på sekunder etter behov.",
+            "shortReasoning": "NIST-definisjonen av elasticity er eksplisitt om dynamisk skalering."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" },
+        { "label": "RPC", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" },
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": []
+    },
+    {
+      "number": 2,
+      "weightPercent": 10,
+      "topic": "12-iot-mqtt",
+      "conceptSlugs": [],
+      "prompt": "IoT og Project 4 — access control-enheten.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Forklar kort hva som karakteriserer en IoT-enhet.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "En IoT-enhet har en innebygd mikrokontroller med dedikert programvare, et spesifikt formål og grensesnitt, samt sensorer og aktuatorer for å samhandle med omgivelsene.",
+            "shortReasoning": "Sentrale trekk: ressursbegrenset hardware, embedded software, sensor/aktuator-grensesnitt, ofte koblet til nett."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Spesifisér hvilke sensorer og aktuatorer som ble brukt på access control IoT-enheten i Project 4.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Sensorer: PIR-bevegelsessensor, trykkknapper (push buttons). Aktuatorer: LED-lys.",
+            "shortReasoning": "Direkte fra Project 4-spec — PIR detekterer bevegelse, knapper gir brukerinput, LED gir feedback."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Forklar kort hovedformålet til setup()-funksjonen og loop()-funksjonen i et Arduino-program.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**setup()** kjøres én gang ved oppstart/boot og brukes typisk til initialisering (sette opp pins, starte seriell kommunikasjon, koble til nett). **loop()** kjøres gjentatte ganger og inneholder typisk lesing av sensorer, prosessering av data, og styring av aktuatorer.",
+            "shortReasoning": "Den klassiske event-loop-strukturen for embedded-programmering."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Hvilken hardware-komponent på en IoT-enhet er ansvarlig for å utføre programvaren?",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Mikroprosessoren/mikrokontrolleren.",
+            "shortReasoning": "Sensorer leser, aktuatorer skriver, men det er CPU-en som kjører koden."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "Cloud-tjenesten implementert i Project 4 med Spark/Java tillot at access control-enheten kunne sende HTTP DELETE-request til URL /accessdevice/log/ for å slette alle entries i access-loggen. Forklar hvordan du ville utvide cloud-tjenesten slik at det også går an å slette en spesifikk entry i loggen.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Legg til en Spark-rute som tar imot DELETE-request med en path-parameter `:id`, finn entry i hash-mappet basert på id-en, og fjern den. Eksempel:\n\n```java\ndelete(\"/accessdevice/log/:id\", (request, response) -> {\n    int id = Integer.parseInt(request.params(\":id\"));\n    AccessEntry entry = accesslog.delete(id);\n    Gson gson = new Gson();\n    return gson.toJson(entry, AccessEntry.class);\n});\n```\n\nMetoden `accesslog.delete(id)` finner og fjerner én entry og returnerer den til klienten.",
+            "shortReasoning": "REST-konvensjonen: kollektiv URL = bulk-operasjon, /:id-URL = single-resource-operasjon. Parsing av path-param og lookup i datastore."
+          }
+        }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": [],
+      "figureNote": "Oppgaven viser til Project 4 (access control IoT device). IoT-konseptsider er ikke ferdige på web — se Project 4 spec lokalt."
+    },
+    {
+      "number": 3,
+      "weightPercent": 10,
+      "topic": "10-network-layer",
+      "conceptSlugs": ["ipv4-addressing", "subnetting"],
+      "prompt": "IP-datagram-fragmentering. Forutsetning: et IP-datagram med 5180 byte data skal sendes over en lenke hvor Ethernet-rammen kan inneholde maks 1500 byte data, og dermed kan hver IP-fragment-payload være maks 1480 byte (Ethernet header trekkes fra). PDF-utdraget mangler subspørsmål a–c i oppgave-filen; svaret på c (antall fragmenter = 4) er kun synlig i sensorveiledningen.",
+      "subquestions": [
+        {
+          "letter": "c",
+          "prompt": "Hvor mange fragmenter må IP-datagrammet deles i før det sendes over lenken fra R1 til R2? Begrunn svaret.",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "**4 fragmenter.** Hver fragment-payload kan være maks 1480 byte. 5180 byte data / 1480 = 3,5 → 3 fulle fragmenter à 1480 byte (totalt 4440 byte) + 1 fragment à 5180 − 4440 = 740 byte = 4 fragmenter totalt.",
+            "shortReasoning": "Standard fragmenterings-regning: divider opp dataen i biter på 1480 byte (multiplum av 8), den siste blir restoen."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Forklar formålet til det 13-bit fragmentation offset-feltet i et IP-datagram.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Fragmentation offset angir hvor i det originale IP-datagrammet denne fragment-datadelen begynner. Mottakeren bruker offsetene til å rekonstruere det opprinnelige datagrammet ved å sortere fragmentene i riktig rekkefølge.",
+            "shortReasoning": "Offset måles i 8-byte-enheter (oktetter), derav 13 bit som dekker 64 KB max payload."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "Anta at 16-bit identifier-feltet har verdien 110. Spesifisér 16-bit identifier og 13-bit fragmentation offset for hvert fragment.",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "Alle fragmenter får samme identifier = 110. Offset (i 8-byte-enheter):\n\n- Fragment 1: identifier 110, offset 0\n- Fragment 2: identifier 110, offset 185 (= 1480/8)\n- Fragment 3: identifier 110, offset 370 (= 2960/8)\n- Fragment 4: identifier 110, offset 555 (= 4440/8)",
+            "shortReasoning": "Identifier er fast for alle fragmenter av samme datagram. Offset er kumulativ payload i oktetter."
+          }
+        },
+        {
+          "letter": "f",
+          "prompt": "Anta at alle IP-fragmentene ankommer H2. Forklar hvordan H2 reassemblerer det originale datagrammet.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "H2 bruker 16-bit identifier til å gruppere fragmenter som hører til samme originaldatagram, deretter sorterer den dem via fragmentation offset for å sette dataen sammen i riktig rekkefølge. More-Fragments-flagget i siste fragment indikerer at gjenkomst er komplett.",
+            "shortReasoning": "Tre felter samarbeider om reassembly: identifier (gruppering), offset (rekkefølge), MF-flag (slutt-detektor)."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": [],
+      "figureNote": "Oppgavens innledende scenario og subspørsmål a, b mangler i PDF-ekstraksjonen. Forutsetning rekonstruert fra sensor-svaret på c. Original PDF tilgjengelig lokalt."
+    },
+    {
+      "number": 4,
+      "weightPercent": 10,
+      "topic": "10-network-layer",
+      "conceptSlugs": ["ipv4-addressing"],
+      "prompt": "IP-protokollen og IP-header-felter.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Forklar kort hvilken tjeneste IP-protokollen tilbyr.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Upålitelig multi-hop end-to-end overføring av datagrammer.",
+            "shortReasoning": "IP gir ingen garantier (ingen retransmisjon, ingen ordning, ingen flytkontroll) — det er TCP's jobb høyere oppe."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Forklar kort formålet til feltene: Time-to-live, 32-bit Source IP, 32-bit Destination IP, og Data.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "- **Time-to-live**: dekrementeres ved hver hop for å oppdage og kutte rute-løkker (pakken kastes når TTL=0).\n- **Source IP**: senderens IP, brukes av mottaker til å svare tilbake.\n- **Destination IP**: mottakerens IP, brukes av rutere til forwarding.\n- **Data**: nyttelast (typisk TCP- eller UDP-segment).",
+            "shortReasoning": "TTL = loop-vern. Source = retur-adresse. Destination = forwarding-mål. Data = nyttelast."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Både UDP- og TCP-segmenter kan transporteres i et IP-datagram. Hvordan spesifiserer senderen om datagrammet bærer UDP eller TCP?",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Via «Upper-layer protocol»-feltet i IP-headeren (i IPv4 kalt «Protocol», 8 bit). Verdiene er standardisert (TCP = 6, UDP = 17).",
+            "shortReasoning": "Det er en demultiplexor-nøkkel — mottakerens IP-stack bruker feltet til å rute datagrammet til riktig transport-protokoll-handler."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Når et IPv4-datagram rutes brukes kun destinasjonsadressen. Hvorfor inkluderes source-IP da i datagrammet?",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Source-IP brukes av mottakeren til å sende svar (ACK, response, error) tilbake. Den brukes også til adgangskontroll, logging, og ICMP-feilmeldinger.",
+            "shortReasoning": "Forwarding bruker destination, men retur-svar bruker source — pakken må vite begge adressene for kommunikasjon i begge retninger."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" },
+        { "label": "Network-layer services", "href": "/dat110/begreper/network-layer-services", "kind": "concept", "slug": "network-layer-services" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": []
+    },
+    {
+      "number": 5,
+      "weightPercent": 10,
+      "topic": "11-link-layer",
+      "conceptSlugs": ["arp-and-mac-addressing"],
+      "prompt": "Nettverkstopologi med hub Hb, switch Sw, hosts H1–H4 og router R. ARP- og switch-spørsmål.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "På hvilket lag i TCP/IP-stakken opererer en hub (som Hb)?",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Fysisk lag (lag 1).",
+            "shortReasoning": "Hub er en repeater — den videresender bits, ikke rammer."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "På hvilket lag i TCP/IP-stakken opererer en switch (som Sw)?",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Fysisk og link-lag (lag 1 og 2).",
+            "shortReasoning": "Switch leser MAC-adresser i rammer (link-lag) og videresender til riktig port."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Forklar hvorfor ARP er nødvendig i et IP-nettverk.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "For å sende et IP-datagram over en lenke må det innkapsles i en link-lag-ramme med MAC-source og MAC-destination. Senderen kjenner kun neste-hop-IP fra rute-tabellen, ikke neste-hops MAC-adresse. ARP løser oversettelsen IP → MAC på samme link.",
+            "shortReasoning": "ARP er broen mellom nettverkslaget (IP) og link-laget (Ethernet/MAC)."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "H1 sender en ARP-query med target IP 132.200.1.3. Hvilke hosts og routere mottar query-en, og hvilken vil sende reply? Begrunn.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "H2 og R mottar query-en (hub-en forwarder på alle porter siden den opererer i lag 1). Bare R svarer — fordi det er R som har IP 132.200.1.3.",
+            "shortReasoning": "ARP broadcaster query-en; bare den som matcher target-IP responderer (unicast)."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "Når H1 mottar ARP-replyen, hvilken oppføring opprettes i ARP-tabellen til H1? Begrunn.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "H1 oppretter oppføringen (132.200.1.3, 6A:6B:6C:6D:6E:6F) — IP-en som ble spurt etter, mappet til MAC-en som ble returnert.",
+            "shortReasoning": "ARP-tabellen lagrer (IP → MAC)-par for fremtidige sendinger til samme destination."
+          }
+        },
+        {
+          "letter": "f",
+          "prompt": "Switch-tabellen har oppføringen (1, 5A:5B:5C:5D:5E:5F). H4 sender en ramme med destination 5A:5B:5C:5D:5E:5F. På hvilke porter videresendes rammen? Begrunn.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Kun port 1. Tabellen sier at MAC-en 5A:5B:5C:5D:5E:5F er nådbar via port 1, så rammen unicastes dit — ikke flooded.",
+            "shortReasoning": "Switch unicaster når destinasjons-MAC er kjent i tabellen. Flooder bare når ukjent."
+          }
+        },
+        {
+          "letter": "g",
+          "prompt": "H3 sender en ramme til H4. Hvilken oppføring opprettes i switch-tabellen til Sw? Begrunn.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Switchen ser kilde-MAC 3A:3B:3C:3D:3E:3F (H3) ankomme på port 2 og lærer at H3 ligger på port 2. Oppføringen (2, 3A:3B:3C:3D:3E:3F) legges til tabellen.",
+            "shortReasoning": "Switch-learning: skriv source-MAC-port-par til tabellen ved hver ankomne ramme."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" },
+        { "label": "V2024 Oppg 6", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-6", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": [],
+      "figureNote": "Oppgavens nettverkstopologi (hub Hb, switch Sw, hosts H1–H4, router R med spesifikke IP-/MAC-adresser) er kun i original PDF. Adressene refereres direkte i sensor-svarene."
+    },
+    {
+      "number": 6,
+      "weightPercent": 10,
+      "topic": "10-network-layer",
+      "conceptSlugs": ["subnetting", "ipv4-addressing", "routing-algorithms"],
+      "prompt": "CIDR-blokker, 32-bit bit-mønstre, og forwarding-tabeller med longest-prefix-match.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Sub-nettet med H2 og R4 har adresseprefiks 221.198.0.0/16. Spesifisér intervallet av IP-adresser i blokken.",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "221.198.0.0 til 221.198.255.255 (totalt 65 536 adresser).",
+            "shortReasoning": "/16 betyr 16 prefiks-bits + 16 host-bits = 2^16 = 65 536 adresser."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Hva er 32-bit bit-mønsteret til IP-adressen 221.198.201.1?",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "11011101.11000110.11001001.00000001",
+            "shortReasoning": "Konverter hver oktett til 8 bit: 221=11011101, 198=11000110, 201=11001001, 1=00000001."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "R2 har følgende forwarding-tabell:\n\n| Destination prefix | Next-hop interface |\n|---|---|\n| 10000100 11001010 | 1 |\n| 11011101 11000110 | 3 |\n| otherwise | 2 |\n\nPå hvilken interface videresendes 221.198.201.1?",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "**Interface 3.** Bit-mønsteret 11011101.11000110... matcher den andre entry-en (11011101 11000110), så pakken sendes via interface 3.",
+            "shortReasoning": "Sjekk hvilken prefiks som matcher start-bits — andre entry matcher første 16 bits."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Forwarding-tabellen er modifisert til å inneholde en ny entry:\n\n| Destination prefix | Next-hop interface |\n|---|---|\n| 10000100 11001010 | 1 |\n| 11011101 11000110 | 3 |\n| 11011101 11000110 11001001 | 2 |\n| otherwise | 2 |\n\nPå hvilken interface videresendes 221.198.201.1 nå?",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "**Interface 2.** Bit-mønsteret matcher både den andre (/16) og den tredje (/24) entry-en. Longest-prefix-match velger den lengste, altså /24-entry-en → interface 2.",
+            "shortReasoning": "Longest-prefix-match-regelen: mer-spesifikk vinner over mindre-spesifikk."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "Anta at kostnaden av en sti er antall lenker. Spesifisér en korteste sti mellom H1 og H2 i nettverket.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "H1 → R1 → R2 → R4 → H2, total kostnad 4.",
+            "shortReasoning": "Standard sti via nettverkets ruter-rygg."
+          }
+        },
+        {
+          "letter": "f",
+          "prompt": "Forklar forskjellen mellom routing-funksjonen og forwarding-funksjonen i nettverkslaget.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**Forwarding** (data-plan): per-pakke beslutning om hvilken utgående interface en ankommende pakke skal sendes på, basert på forwarding-tabellen. **Routing** (kontroll-plan): periodisk beregning av selve forwarding-tabellen, typisk via algoritmer som Distance-Vector eller Link-State.",
+            "shortReasoning": "Forwarding skjer per pakke. Routing skjer per topologi-endring. Forwarding bruker tabellen som routing bygger."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "Subnetting og CIDR", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Routing", "href": "/dat110/temaer/routing", "kind": "topic", "slug": "routing" },
+        { "label": "V2024 Oppg 5", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-5", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": []
+    },
+    {
+      "number": 7,
+      "weightPercent": 5,
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": ["rpc"],
+      "prompt": "RPC vs MOM og multi-threading i server-design.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Forklar kort forskjellen mellom tradisjonell RPC og message-oriented communication.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**RPC**: synkron, blokkerende modell — både avsender og mottaker må kjøre samtidig for at kallet skal lykkes. **MOM**: asynkron, ikke-blokkerende modell — kommunikasjon kan være løs-koblet i tid via meldingsbroker (queue/topic).",
+            "shortReasoning": "Tightness vs looseness i koblingen mellom prosesser — RPC = tight, MOM = loose."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Forklar kort hovedbruken av multi-threading i server-design.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "I en multi-threaded server delegeres hver klient-forespørsel til en separat tråd som prosesserer requesten parallelt. Det gir høyere throughput (server håndterer flere klienter samtidig) og utnyttelse av multi-prosessor-arkitekturer.",
+            "shortReasoning": "Konkurransekonseptet: I/O-bundne operasjoner blokkerer ikke andre klienter; CPU-bundne operasjoner kan kjøre på flere kjerner."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" },
+        { "label": "Reliable communication", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" },
+        { "label": "V2024 Oppg 7", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-7", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": []
+    },
+    {
+      "number": 8,
+      "weightPercent": 10,
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "prompt": "Overlay multicast med fem prosesser A-E. Sensorens fysiske nettverk har delay-tall mellom prosessene. Beste fysiske sti A→D = 67.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Tegn den fullstendig sammenhengende overlay-grafen formet av de fem prosessene og merk kantene med minste delay. Hint: E = N(N−1)/2.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "Full mesh med 5 noder gir 10 kanter (N(N−1)/2 = 10). Hver kant merkes med minste fysiske delay mellom prosess-paret. Sensor-figuren viser typisk delay-verdier som 17, 22, 32, 42, 47, 52, 62, 67, 72, 77 ms (forutsatt at fysisk nettverk og delay-tabeller er gitt).",
+            "shortReasoning": "Overlay-graf er et komplett undirected-grah; vektingen kommer fra fysisk laveste-delay-sti."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Beregn Relative Delay Penalty (RDP) når en melding multicastes fra A til D via tre alternative multicast-trær:\n\n1. C – B – A – E – D\n2. B – A – E – C – D\n3. E – A – B – C – D\n\nForutsetning: beste fysiske sti A→D = 67. Anta at fysiske rutere bruker beste sti.",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "Sensor-svaret (parafrasert fra grafens delay-tall):\n\n1. Tree 1 (C–B–A–E–D): overlay path A→D via E = 77 + 22 = 99 → RDP = 99/67 ≈ **1.48**\n2. Tree 2 (B–A–E–C–D): overlay path A→D = 77 + 42 + 22 = 141 → RDP = 141/67 ≈ **2.10**\n3. Tree 3 (E–A–B–C–D): overlay path A→D via C = 17 + 32 + 22 = 71 → RDP = 71/67 ≈ **1.05**",
+            "shortReasoning": "RDP = (sum av overlay-edges fra A til D) / (fysisk korteste sti A→D)."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Basert på beregningen i b), hvilket tre er mest effektivt for å rute en melding fra A til D? Forklar.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**Tree 3 (E – A – B – C – D)** er mest effektivt, med RDP ≈ 1.05 — nesten lik det fysiske nettverkets ideal. RDP nær 1 betyr at overlay-treet legger til minimalt med ekstra delay sammenlignet med direkte fysisk ruting.",
+            "shortReasoning": "Lavest RDP vinner. Tree 3 er kun 5% dyrere enn fysisk ideal."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Tema: Overlay og gossip", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" },
+        { "label": "V2024 Oppg 8", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-8", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": [],
+      "figureNote": "Det fysiske nettverket og delay-verdiene mellom prosesser A-E er gitt i original PDF. Sensorveiledningen har en håndtegnet grafversjon med delay-tall."
+    },
+    {
+      "number": 9,
+      "weightPercent": 10,
+      "topic": "08-consistency-replication",
+      "conceptSlugs": ["replication-strategies", "consistency-models", "rpc"],
+      "prompt": "Replikering, konsistens og RPC-feilhåndtering.",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Forklar kort forskjellen mellom primary-based og replicated-write protokoller.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**Primary-based**: skrivinger til en data-item kan kun gjøres av én prosess (single-leader). **Replicated-write**: skrivinger kan gjøres av flere prosesser (multi-leader).",
+            "shortReasoning": "Hvilken-prosess-skriver-først-spørsmålet skiller dem. Single-leader er enklere, multi-leader gir høyere skrivetilgjengelighet."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "Gi ett eksempel hver av en primary-based og en replicated-write protokoll.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "- **Primary-based**: local-write eller remote-write protokoller.\n- **Replicated-write**: active-replication eller quorum-baserte protokoller.",
+            "shortReasoning": "Pensum-eksempler — flere mulige svar er akseptable."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "I figuren under, forklar kort om datalagret bryter kausal konsistens eller ikke.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**Bryter kausal konsistens.** Data-item b er kausalt avhengig av a (b ble skrevet etter at a ble lest). Derfor må alle prosesser se a før b. I figuren ser P3 b før a — det bryter kausalitet.",
+            "shortReasoning": "Kausal konsistens: hvis A → B (happens-before), så må enhver observatør se A før B."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Forklar kort forskjellen mellom data-centric og client-centric konsistens.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "**Data-centric**: opprettholder system-wide konsistens for alle replikaer (alle prosesser ser samme orden av oppdateringer). **Client-centric**: gir konsistens-garantier for én klient som flytter mellom replikaer (eksempel: monotonic-read, read-your-writes).",
+            "shortReasoning": "Data-centric = system-perspektiv. Client-centric = bruker-perspektiv. Sistnevnte er svakere men ofte mer praktisk i praksis."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "I figuren under ble RPC-replyen tapt og nådde aldri klienten. Forklar hvordan klienten skal håndtere denne «lost reply failure».",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "To løsninger må vurderes:\n\n1. **Timer + retransmisjon**: klienten starter timer ved sending. Hvis timer utløper før reply eller ACK kommer tilbake, sendes requesten på nytt.\n2. **Idempotens-håndtering**: for ikke-idempotente operasjoner (write, update, delete) brukes sekvens-nummer:\n   - Klienten gir hver request et unikt sekvens-nummer.\n   - Serveren tracker siste sekvens-nummer fra hver klient.\n   - Serveren kan skille original request fra retransmisjon og nekter å utføre samme operasjon to ganger.",
+            "shortReasoning": "At-most-once-semantikk via sekvens-ID + retransmisjon med timer. Forhindrer dobbeltskriving ved retry."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "Replikerings-strategier", "href": "/dat110/begreper/replication-strategies", "kind": "concept", "slug": "replication-strategies" },
+        { "label": "Konsistens-modeller", "href": "/dat110/begreper/consistency-models", "kind": "concept", "slug": "consistency-models" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" },
+        { "label": "RPC", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": [],
+      "figureNote": "Oppgavens figurer (kausal konsistens-eksempel og RPC lost-reply scenario) er i original PDF."
+    },
+    {
+      "number": 10,
+      "weightPercent": 15,
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring", "key-resolution", "dht-fundamentals"],
+      "prompt": "Chord DHT med m = 5 (adresserom 0..31) og fem server-replikaer på {1, 7, 15, 19, 29}. Finger-tabeller bruker FT[i] = succ(n + 2^(i−1)).",
+      "subquestions": [
+        {
+          "letter": "a",
+          "prompt": "Beregn finger-tabellene for hver av de fem server-replikaene (vis steg).",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "**Server 1**: FT[1]=succ(2)=7, FT[2]=succ(3)=7, FT[3]=succ(5)=7, FT[4]=succ(9)=15, FT[5]=succ(17)=19.\n\n**Server 7**: FT[1]=succ(8)=15, FT[2]=succ(9)=15, FT[3]=succ(11)=15, FT[4]=succ(15)=15, FT[5]=succ(23)=29.\n\n**Server 15**: FT[1]=succ(16)=19, FT[2]=succ(17)=19, FT[3]=succ(19)=19, FT[4]=succ(23)=29, FT[5]=succ(31)=1.\n\n**Server 19**: FT[1]=succ(20)=29, FT[2]=succ(21)=29, FT[3]=succ(23)=29, FT[4]=succ(27)=29, FT[5]=succ(35 mod 32)=succ(3)=7.\n\n**Server 29**: FT[1]=succ(30)=1, FT[2]=succ(31)=1, FT[3]=succ(33 mod 32)=succ(1)=1, FT[4]=succ(37 mod 32)=succ(5)=7, FT[5]=succ(45 mod 32)=succ(13)=15.",
+            "shortReasoning": "Formelen FT[i] = succ((n + 2^(i−1)) mod 2^m) anvendt på m=5. Wrap-around via mod 32 når n + 2^(i−1) ≥ 32."
+          }
+        },
+        {
+          "letter": "b",
+          "prompt": "En fil er replikert 5 ganger med nøkler {1, 12, 17, 20, 31}. Hvilke server-replikaer er ansvarlige? Vis formelen.",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "Formel: `pred(server) < k ≤ server`.\n\n| Nøkkel | Ansvarlig server |\n|---|---|\n| 1 | 1 |\n| 12 | 15 |\n| 17 | 19 |\n| 20 | 29 |\n| 31 | 1 (wrap rundt fra 29 til 1) |",
+            "shortReasoning": "Successor-regelen: minste server-ID ≥ k. For k=31 finnes ingen server ≥31, så wrap til minste server-ID totalt = 1."
+          }
+        },
+        {
+          "letter": "c",
+          "prompt": "Finn filen med nøkkel k = 17 fra server-replika 7 (vis steg).",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "Algoritme:\n- Steg 1: Sjekk om succ(n) er ansvarlig (n < k ≤ succ(n)).\n- Steg 2: Ellers, gå til closest-preceding-finger.\n\n**Runde 1**: n=7, k=17. succ(7)=15. Er 7 < 17 ≤ 15? Nei (15 < 17). Gå til steg 2: Finger(5)=29. Er 7 < 29 < 17? Nei (29 > 17). Sjekk Finger(4)=15. Er 7 < 15 < 17? Ja. Hopp til server 15.\n\n**Runde 2**: n=15, k=17. succ(15)=19. Er 15 < 17 ≤ 19? Ja. Returner 19.\n\n**Svar: Server = 19.**",
+            "shortReasoning": "Standard Chord-lookup. To hopp (7 → 15 → svar 19)."
+          }
+        },
+        {
+          "letter": "d",
+          "prompt": "Finn filen med nøkkel k = 12 fra server-replika 15 (vis steg).",
+          "qtype": "calculation",
+          "solution": {
+            "expectedAnswer": "**Runde 1**: n=15, k=12. succ(15)=19. Er 15 < 12 ≤ 19? Nei (k < n, må wrap). Gå til steg 2: Finger(5)=1. Er 15 < 1 < 12? Ja (med wrap-around). Hopp til server 1.\n\n**Runde 2**: n=1, k=12. succ(1)=7. Er 1 < 12 ≤ 7? Nei. Finger(5)=19. Er 1 < 19 < 12? Nei. Finger(4)=15. Er 1 < 15 < 12? Nei. Finger(3)=7. Er 1 < 7 < 12? Ja. Hopp til server 7.\n\n**Runde 3**: n=7, k=12. succ(7)=15. Er 7 < 12 ≤ 15? Ja. Returner 15.\n\n**Svar: Server = 15.**",
+            "shortReasoning": "Tre hopp (15 → 1 → 7 → svar 15). Lookup over wrap-around-grensen i ringen."
+          }
+        },
+        {
+          "letter": "e",
+          "prompt": "Forklar (én setning) hvilke egenskaper i DHT som gir skalerbarhet.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "DHT distribuerer last/data over mange replikaer, og finger-tabellen gir lookup i O(log N) tids-kompleksitet — uavhengig av antall noder.",
+            "shortReasoning": "Last-distribusjon + logaritmisk lookup-kostnad."
+          }
+        },
+        {
+          "letter": "f",
+          "prompt": "Forklar (én setning) hvilke egenskaper i DHT som gir fault-toleranse.",
+          "qtype": "short-answer",
+          "solution": {
+            "expectedAnswer": "DHT replikerer både data og prosesser over flere noder, slik at single-node-feil ikke fører til data-tap eller tjeneste-stans.",
+            "shortReasoning": "Data-replikering + prosess-replikering = robusthet mot enkeltfeil."
+          }
+        }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "Key resolution", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" },
+        { "label": "DHT fundamentals", "href": "/dat110/begreper/dht-fundamentals", "kind": "concept", "slug": "dht-fundamentals" },
+        { "label": "Tema: Chord DHT", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" },
+        { "label": "V2024 Oppg 10", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-10", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2022", "title": "DAT110 Eksamen — mai 2022", "role": "exam-source", "visibility": "public" },
+        { "slug": "eksamen/dat110-eksamen-05-2022-sensorveiledning", "title": "DAT110 Eksamen — mai 2022 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
+      ],
+      "relatedExamPatterns": []
+    }
+  ]
+}

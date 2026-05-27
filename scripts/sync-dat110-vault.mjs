@@ -72,6 +72,8 @@ const TIER1_TOPICS = [
 // Each entry's slug becomes the dynamic route /dat110/eksamen/<slug> and
 // registers in _wikilink-index.json so learnMoreLinks can target it.
 const EXAM_DATA_FILES = [
+  { slug: "dat110-eksamen-05-2022", file: "exams/dat110-eksamen-05-2022.json" },
+  { slug: "dat110-eksamen-05-2023", file: "exams/dat110-eksamen-05-2023.json" },
   { slug: "dat110-eksamen-05-2024", file: "exams/dat110-eksamen-05-2024.json" },
 ];
 

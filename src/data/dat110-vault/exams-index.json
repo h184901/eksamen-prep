@@ -1,6 +1,26 @@
 {
   "exams": [
     {
+      "slug": "dat110-eksamen-05-2022",
+      "year": 2022,
+      "session": "05",
+      "displayLabel": "DAT110 Eksamen — mai 2022",
+      "pairStatus": "complete",
+      "reconstructedFromSensor": false,
+      "questionCount": 10,
+      "totalWeight": 100
+    },
+    {
+      "slug": "dat110-eksamen-05-2023",
+      "year": 2023,
+      "session": "05",
+      "displayLabel": "DAT110 Eksamen — mai 2023",
+      "pairStatus": "complete",
+      "reconstructedFromSensor": false,
+      "questionCount": 10,
+      "totalWeight": 100
+    },
+    {
       "slug": "dat110-eksamen-05-2024",
       "year": 2024,
       "session": "05",
