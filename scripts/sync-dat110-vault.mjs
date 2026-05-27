@@ -29,6 +29,7 @@ const VAULT_REVIEWED = join(VAULT_ROOT, "processed/reviewed");
 const OUT_DIR = join(process.cwd(), "src/data/dat110-vault");
 
 const TIER1_CONCEPTS = [
+  // P0a
   "chord-ring",
   "dht-fundamentals",
   "key-resolution",
@@ -40,8 +41,32 @@ const TIER1_CONCEPTS = [
   "throughput",
   "distribution-transparency",
   "rpc",
+  // P1.A additions
+  "vector-clocks",
+  "lamport-clocks",
+  "quorum",
+  "consistency-models",
+  "replication-strategies",
+  "fault-models",
+  "routing-algorithms",
+  "network-layer-services",
+  "tcp",
+  "udp",
+  "reliable-communication",
+  "failure-detection",
 ];
-const TIER1_TOPICS = ["chord-dht", "overlay-and-gossip"];
+const TIER1_TOPICS = [
+  // P0a
+  "chord-dht",
+  "overlay-and-gossip",
+  // P1.A additions
+  "logical-clocks",
+  "consistency-and-replication",
+  "fault-tolerance",
+  "network-layer",
+  "transport-layer",
+  "routing",
+];
 
 // Hand-curated exam JSONs (P0b: one exam; P1+: more added here).
 // Each entry's slug becomes the dynamic route /dat110/eksamen/<slug> and

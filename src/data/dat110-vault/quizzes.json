@@ -254,13 +254,15 @@
       ],
       "learnMoreLinks": [
         { "label": "RPC og failure-semantikk", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" },
+        { "label": "Fault-modeller", "href": "/dat110/begreper/fault-models", "kind": "concept", "slug": "fault-models" },
+        { "label": "Tema: Fault tolerance", "href": "/dat110/temaer/fault-tolerance", "kind": "topic", "slug": "fault-tolerance" },
         { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
       ],
       "sourceRefs": [
         { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
         { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "supporting", "visibility": "public" }
       ],
-      "relatedConcepts": ["rpc"],
+      "relatedConcepts": ["rpc", "fault-models"],
       "relatedExamPatterns": [],
       "difficulty": "easy"
     },
@@ -287,12 +289,13 @@
         { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Asynkroni handler om når kallet returnerer, ikke hvor mange ganger det kjøres." }
       ],
       "learnMoreLinks": [
-        { "label": "RPC — failure-semantikk", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+        { "label": "RPC — failure-semantikk", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" },
+        { "label": "Reliable communication", "href": "/dat110/begreper/reliable-communication", "kind": "concept", "slug": "reliable-communication" }
       ],
       "sourceRefs": [
         { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "primary", "visibility": "public" }
       ],
-      "relatedConcepts": ["rpc"],
+      "relatedConcepts": ["rpc", "reliable-communication"],
       "relatedExamPatterns": [],
       "difficulty": "medium"
     },
@@ -580,13 +583,15 @@
       ],
       "learnMoreLinks": [
         { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" },
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" },
         { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
       ],
       "sourceRefs": [
         { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
         { "slug": "concepts/ipv4-addressing", "title": "Concept: IPv4 Addressing", "role": "supporting", "visibility": "public" }
       ],
-      "relatedConcepts": ["ipv4-addressing"],
+      "relatedConcepts": ["ipv4-addressing", "routing-algorithms"],
       "relatedExamPatterns": [],
       "difficulty": "easy"
     },
@@ -614,6 +619,7 @@
       ],
       "learnMoreLinks": [
         { "label": "Subnetting — CIDR-blokker", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" },
         { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
       ],
       "sourceRefs": [
@@ -647,7 +653,8 @@
         { "optionIndex": 3, "isCorrect": false, "shortExplanation": "/27 gir 30 brukbare hosts, langt fra nok." }
       ],
       "learnMoreLinks": [
-        { "label": "Subnetting — prefiks og host-bits", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" }
+        { "label": "Subnetting — prefiks og host-bits", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
       ],
       "sourceRefs": [
         { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "primary", "visibility": "public" }
@@ -680,12 +687,14 @@
       ],
       "learnMoreLinks": [
         { "label": "Subnetting og forwarding", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
-        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" },
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms", "kind": "concept", "slug": "routing-algorithms" },
+        { "label": "Tema: Nettverkslag", "href": "/dat110/temaer/network-layer", "kind": "topic", "slug": "network-layer" }
       ],
       "sourceRefs": [
         { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "primary", "visibility": "public" }
       ],
-      "relatedConcepts": ["subnetting", "ipv4-addressing"],
+      "relatedConcepts": ["subnetting", "ipv4-addressing", "routing-algorithms"],
       "relatedExamPatterns": [],
       "difficulty": "hard"
     },
@@ -745,9 +754,16 @@
         { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Rekkefølgen er omvendt: Lamport (1978) kom først, vector clocks (1988) bygger på dem." },
         { "optionIndex": 3, "isCorrect": false, "shortExplanation": "De løser ulike problemer og er ikke utskiftbare. Vector clocks krever mer state per node." }
       ],
-      "learnMoreLinks": [],
-      "sourceRefs": [],
-      "relatedConcepts": [],
+      "learnMoreLinks": [
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks", "kind": "concept", "slug": "lamport-clocks" },
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks", "kind": "concept", "slug": "vector-clocks" },
+        { "label": "Tema: Logiske klokker", "href": "/dat110/temaer/logical-clocks", "kind": "topic", "slug": "logical-clocks" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/lamport-clocks", "title": "Concept: Lamport Clocks", "role": "primary", "visibility": "public" },
+        { "slug": "concepts/vector-clocks", "title": "Concept: Vector Clocks", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["lamport-clocks", "vector-clocks"],
       "relatedExamPatterns": [],
       "difficulty": "medium"
     },
@@ -774,12 +790,16 @@
         { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Koherens-baserte protokoller er CPU-cache-konsepter, ikke en kategori i replikeringsfamilien." }
       ],
       "learnMoreLinks": [
+        { "label": "Quorum-protokoller", "href": "/dat110/begreper/quorum", "kind": "concept", "slug": "quorum" },
+        { "label": "Replikerings-strategier", "href": "/dat110/begreper/replication-strategies", "kind": "concept", "slug": "replication-strategies" },
+        { "label": "Tema: Konsistens og replikering", "href": "/dat110/temaer/consistency-and-replication", "kind": "topic", "slug": "consistency-and-replication" },
         { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
       ],
       "sourceRefs": [
-        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" }
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/quorum", "title": "Concept: Quorum", "role": "supporting", "visibility": "public" }
       ],
-      "relatedConcepts": [],
+      "relatedConcepts": ["quorum", "replication-strategies"],
       "relatedExamPatterns": [],
       "difficulty": "medium"
     }
