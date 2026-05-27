@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "generatedNote": "Hand-curated DAT110 flashcards for active recall — kuratert mot tidligere eksamener (2022-2025) og Tier-1 konsepter. Hvert kort kobler til en eksisterende /dat110/begreper- eller /dat110/temaer-side.",
+  "cards": [
+    {
+      "id": "fc-001",
+      "topic": "chord-dht",
+      "front": "Chord successor-regelen: hvilken node er ansvarlig for nøkkel k?",
+      "back": "succ(k) = noden med minste id som er ≥ k. Hvis k er større enn alle nodeIDer wrap'es det rundt ringen. Hver node er ansvarlig for keys i intervallet (pred(id), id].",
+      "learnMoreLinks": [
+        { "label": "Chord-ring", "href": "/dat110/begreper/chord-ring" },
+        { "label": "Key-resolution", "href": "/dat110/begreper/key-resolution" }
+      ],
+      "sourceRef": "concepts/chord-ring#successor"
+    },
+    {
+      "id": "fc-002",
+      "topic": "chord-dht",
+      "front": "Formelen for finger-table entry FTp[i] i Chord?",
+      "back": "FTp[i] = succ((p + 2^(i−1)) mod 2^m) for 1 ≤ i ≤ m. Avstandene dobler seg eksponentielt — det er det som gir O(log N) lookup.",
+      "learnMoreLinks": [
+        { "label": "Chord-ring", "href": "/dat110/begreper/chord-ring" }
+      ],
+      "sourceRef": "concepts/chord-ring#finger-table"
+    },
+    {
+      "id": "fc-003",
+      "topic": "chord-dht",
+      "front": "Hva er ID-rommets størrelse i Chord med m bits?",
+      "back": "Adresserommet er {0, 1, ..., 2^m − 1}, totalt 2^m identifiers. DAT110-pensum bruker m=5 (32 ID-er) for håndregning og m=128 for real-world Chord.",
+      "learnMoreLinks": [
+        { "label": "DHT fundamentals", "href": "/dat110/begreper/dht-fundamentals" }
+      ]
+    },
+    {
+      "id": "fc-004",
+      "topic": "chord-dht",
+      "front": "I en m=5 Chord-ring med noder {1, 5, 17, 19, 25}: hva er succ(11)?",
+      "back": "succ(11) = 17. Regelen er smaleste node-id ≥ k, og 17 er minste id i settet som er ≥ 11.",
+      "learnMoreLinks": [
+        { "label": "Key-resolution", "href": "/dat110/begreper/key-resolution" }
+      ],
+      "sourceRef": "exercises L9"
+    },
+    {
+      "id": "fc-005",
+      "topic": "chord-dht",
+      "front": "I en m=5 ring med noder {1, 5, 17, 19, 25}: hva er succ(28)?",
+      "back": "succ(28) = 1. 28 er større enn alle nodeIDer, så lookup'en wrap'er rundt ringen og finner noden med minste id (= 1).",
+      "learnMoreLinks": [
+        { "label": "Key-resolution", "href": "/dat110/begreper/key-resolution" }
+      ]
+    },
+    {
+      "id": "fc-006",
+      "topic": "chord-dht",
+      "front": "Hvor mange entries har finger-table per node, og hva er worst-case lookup-kost?",
+      "back": "Hver node har m entries (én per bit i ID-rommet). Worst-case lookup er O(log N) hops fordi hver finger halverer avstanden til target.",
+      "learnMoreLinks": [
+        { "label": "Chord-ring", "href": "/dat110/begreper/chord-ring" }
+      ]
+    },
+    {
+      "id": "fc-007",
+      "topic": "chord-dht",
+      "front": "Hvorfor sier vi at Chord lookup er O(log N)?",
+      "back": "Fingrene peker eksponentielt lengre rundt ringen (2^0, 2^1, ..., 2^(m−1)). Ved hvert hopp velges fingeren som ikke overskyter target — så avstanden minst halveres hver iterasjon.",
+      "learnMoreLinks": [
+        { "label": "Chord-DHT tema", "href": "/dat110/temaer/chord-dht" }
+      ]
+    },
+    {
+      "id": "fc-008",
+      "topic": "chord-dht",
+      "front": "I m=5-ringen {1, 5, 17, 19, 25}: hva blir FT[5] for node 17 (i=5 betyr p + 2^4)?",
+      "back": "FT17[5] = succ((17 + 16) mod 32) = succ(33 mod 32) = succ(1) = 1. Wraparound via modulo 2^m.",
+      "learnMoreLinks": [
+        { "label": "Chord-ring", "href": "/dat110/begreper/chord-ring" }
+      ],
+      "sourceRef": "L9 exercises partial answers s.3"
+    },
+    {
+      "id": "fc-009",
+      "topic": "overlay-and-gossip",
+      "front": "Hva er forskjellen mellom IP-multicast og application-layer multicast (ALM)?",
+      "back": "IP-multicast replikerer i ruterne (krever ruter-støtte). ALM bygger et overlay-tre mellom endenodene; ruterne ser bare unicast. ALM er enklere å deploye men mindre effektivt på nett-nivå.",
+      "learnMoreLinks": [
+        {
+          "label": "Application-layer multicast",
+          "href": "/dat110/begreper/application-layer-multicast"
+        }
+      ]
+    },
+    {
+      "id": "fc-010",
+      "topic": "overlay-and-gossip",
+      "front": "Hva er link stress og link stretch i et overlay-multicast-tre?",
+      "back": "Link stress = antall ganger samme melding går over én fysisk lenke (ideelt 1). Link stretch = forholdet mellom overlay-path-lengde og unicast-shortest-path (ideelt 1). ALM gir alltid stress/stretch > 1.",
+      "learnMoreLinks": [
+        {
+          "label": "Application-layer multicast",
+          "href": "/dat110/begreper/application-layer-multicast"
+        }
+      ]
+    },
+    {
+      "id": "fc-011",
+      "topic": "overlay-and-gossip",
+      "front": "Hva er distribution transparency, og hvilke fire vanlige former finnes?",
+      "back": "Transparency skjuler distribuerte aspekter fra brukeren. Fire kjerneformer: access (skjul format-forskjeller), location (skjul hvor), migration (skjul flytting), replication (skjul flere kopier).",
+      "learnMoreLinks": [
+        {
+          "label": "Distribution transparency",
+          "href": "/dat110/begreper/distribution-transparency"
+        }
+      ]
+    },
+    {
+      "id": "fc-012",
+      "topic": "overlay-and-gossip",
+      "front": "RPC vs lokal funksjonskall — to ting som er fundamentalt forskjellig?",
+      "back": "(1) Parametere må marshalles/unmarshalles fordi adresserommene er adskilte. (2) Kallet kan feile på nye måter (nettverk, server-død) — derfor trenger RPC failure-semantikk.",
+      "learnMoreLinks": [
+        { "label": "RPC", "href": "/dat110/begreper/rpc" }
+      ]
+    },
+    {
+      "id": "fc-013",
+      "topic": "overlay-and-gossip",
+      "front": "Definér de tre RPC failure-semantikkene: at-least-once, at-most-once, exactly-once.",
+      "back": "At-least-once: klient retransmitterer ved timeout; ikke-idempotente kall kan kjøre flere ganger. At-most-once: server dedupliserer; et kall kjøres 0 eller 1 gang. Exactly-once: krever transaksjoner/loggføring og er vanskelig i praksis.",
+      "learnMoreLinks": [
+        { "label": "RPC", "href": "/dat110/begreper/rpc" },
+        { "label": "Reliable communication", "href": "/dat110/begreper/reliable-communication" }
+      ]
+    },
+    {
+      "id": "fc-014",
+      "topic": "overlay-and-gossip",
+      "front": "Hva er stubs (proxy) i en RPC-implementasjon?",
+      "back": "Klient-stub marshaller argumenter og sender request; server-stub unmarshaller, kaller faktisk prosedyre og returnerer resultat. Stubs gjør at klientkode kan se ut som et lokalt kall.",
+      "learnMoreLinks": [
+        { "label": "RPC", "href": "/dat110/begreper/rpc" }
+      ]
+    },
+    {
+      "id": "fc-015",
+      "topic": "logical-clocks",
+      "front": "Hva er Lamport-klokkens to grunnregler?",
+      "back": "(1) Før en lokal hendelse: L = L + 1. (2) Ved mottak av melding med tidstempel L_m: L = max(L, L_m) + 1. Garanterer: hvis a → b (happens-before) så er L(a) < L(b).",
+      "learnMoreLinks": [
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks" }
+      ]
+    },
+    {
+      "id": "fc-016",
+      "topic": "logical-clocks",
+      "front": "Hvorfor er Lamport-klokker ikke nok for å avgjøre kausal sammenheng?",
+      "back": "Lamport gir bare L(a) < L(b) hvis a → b, men ikke omvendt — to konkurrerende hendelser kan ha L(a) < L(b) uten å være kausalt relaterte. Vector clocks løser dette.",
+      "learnMoreLinks": [
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks" },
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks" }
+      ]
+    },
+    {
+      "id": "fc-017",
+      "topic": "logical-clocks",
+      "front": "Vector clock-regelen ved lokal hendelse på node i?",
+      "back": "V_i[i] = V_i[i] + 1. Bare egen entry i vektoren økes; alle andre entries forblir uendret.",
+      "learnMoreLinks": [
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks" }
+      ]
+    },
+    {
+      "id": "fc-018",
+      "topic": "logical-clocks",
+      "front": "Vector clock-regelen ved mottak av melding med tidstempel V_m?",
+      "back": "Først merge: V_i[k] = max(V_i[k], V_m[k]) for alle k. Deretter øker du egen entry: V_i[i] = V_i[i] + 1.",
+      "learnMoreLinks": [
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks" }
+      ]
+    },
+    {
+      "id": "fc-019",
+      "topic": "logical-clocks",
+      "front": "Hvordan avgjør du om to vector clock-stempler V og W er konkurrerende?",
+      "back": "V < W betyr V[k] ≤ W[k] for alle k OG strikt mindre i minst én. Hvis verken V < W eller W < V holder er hendelsene konkurrerende (parallelle).",
+      "learnMoreLinks": [
+        { "label": "Vector clocks", "href": "/dat110/begreper/vector-clocks" }
+      ]
+    },
+    {
+      "id": "fc-020",
+      "topic": "logical-clocks",
+      "front": "Hva betyr 'happens-before'-relasjonen (a → b) i et distribuert system?",
+      "back": "a → b gjelder hvis: (1) a og b er på samme node og a kommer før b, eller (2) a er en send og b er tilhørende receive, eller (3) det finnes c slik at a → c → b (transitivitet).",
+      "learnMoreLinks": [
+        { "label": "Lamport-klokker", "href": "/dat110/begreper/lamport-clocks" }
+      ]
+    },
+    {
+      "id": "fc-021",
+      "topic": "consistency-and-replication",
+      "front": "Definér sequential consistency.",
+      "back": "Resultatet av enhver eksekvering er det samme som om alle operasjoner ble utført i en eller annen sekvensiell rekkefølge, og operasjonene fra hver enkelt prosess fremstår i denne sekvensen i samme rekkefølge som programmet spesifiserer.",
+      "learnMoreLinks": [
+        { "label": "Consistency-modeller", "href": "/dat110/begreper/consistency-models" }
+      ]
+    },
+    {
+      "id": "fc-022",
+      "topic": "consistency-and-replication",
+      "front": "Hva er forskjellen på sequential og strict (linearizability) consistency?",
+      "back": "Linearizability krever i tillegg at operasjoner respekterer real-time-rekkefølge: hvis op A fullføres før op B starter (wall-clock), må A komme før B i historikken. Sequential har ingen real-time-krav.",
+      "learnMoreLinks": [
+        { "label": "Consistency-modeller", "href": "/dat110/begreper/consistency-models" }
+      ]
+    },
+    {
+      "id": "fc-023",
+      "topic": "consistency-and-replication",
+      "front": "Hva er kvorum-regelen for read (NR) og write (NW) i et system med N replikaer?",
+      "back": "For å unngå write-write-konflikter: NW > N/2. For å garantere at en read ser nyeste write: NR + NW > N. Vanlige valg: NR=1, NW=N (read-heavy) eller NR=NW=⌈(N+1)/2⌉ (majority).",
+      "learnMoreLinks": [
+        { "label": "Quorum", "href": "/dat110/begreper/quorum" }
+      ]
+    },
+    {
+      "id": "fc-024",
+      "topic": "consistency-and-replication",
+      "front": "Primary-backup-replikering: hvordan håndteres en write?",
+      "back": "Klient sender write til primary. Primary propagerer til alle backups, venter på ack, deretter committer og svarer klient. Reads kan serveres av enhver replika hvis konsistens-kravet er svakt; ellers fra primary.",
+      "learnMoreLinks": [
+        { "label": "Replikeringsstrategier", "href": "/dat110/begreper/replication-strategies" }
+      ]
+    },
+    {
+      "id": "fc-025",
+      "topic": "consistency-and-replication",
+      "front": "Hva er eventual consistency, og når er det akseptabelt?",
+      "back": "Hvis ingen nye writes skjer, vil alle replikaer til slutt konvergere til samme verdi. Akseptabelt for use-cases hvor stale reads er greie (DNS, sosiale feeds, handlekurver).",
+      "learnMoreLinks": [
+        { "label": "Consistency-modeller", "href": "/dat110/begreper/consistency-models" }
+      ]
+    },
+    {
+      "id": "fc-026",
+      "topic": "consistency-and-replication",
+      "front": "Hva er forskjellen mellom data-centric og client-centric consistency-modeller?",
+      "back": "Data-centric (sequential, causal, linearizable) gir garantier på tvers av ALLE klienter. Client-centric (monotonic reads/writes, read-your-writes) gir garantier kun for en enkelt klient sin sesjon.",
+      "learnMoreLinks": [
+        { "label": "Consistency-modeller", "href": "/dat110/begreper/consistency-models" }
+      ]
+    },
+    {
+      "id": "fc-027",
+      "topic": "fault-tolerance",
+      "front": "Nevn de fem klassiske failure-modellene fra Tanenbaum.",
+      "back": "Crash (node stopper, fail-stop), omission (drop meldinger), timing (svarer for sent/tidlig), response (feil verdi/sekvens), arbitrary/Byzantine (vilkårlig oppførsel, inkl. ondsinnet).",
+      "learnMoreLinks": [
+        { "label": "Fault-modeller", "href": "/dat110/begreper/fault-models" }
+      ]
+    },
+    {
+      "id": "fc-028",
+      "topic": "fault-tolerance",
+      "front": "Forskjellen på fail-stop og fail-silent?",
+      "back": "Fail-stop: noden stopper OG andre noder kan detektere det (typisk via timeout + announce). Fail-silent: noden stopper, men ingen vet det — andre må gjette via timeout, kan ikke skille fra langsom node.",
+      "learnMoreLinks": [
+        { "label": "Fault-modeller", "href": "/dat110/begreper/fault-models" },
+        { "label": "Failure detection", "href": "/dat110/begreper/failure-detection" }
+      ]
+    },
+    {
+      "id": "fc-029",
+      "topic": "fault-tolerance",
+      "front": "Hvorfor er failure detection fundamentalt umulig å gjøre korrekt i et asynkront nettverk?",
+      "back": "Du kan ikke skille en død node fra en langsom node uten øvre tidsbound på meldingstid. Praktiske detektorer bruker timeouts (heartbeats) og aksepterer enten false positives eller misset failures.",
+      "learnMoreLinks": [
+        { "label": "Failure detection", "href": "/dat110/begreper/failure-detection" }
+      ]
+    },
+    {
+      "id": "fc-030",
+      "topic": "fault-tolerance",
+      "front": "Hva er k-fault-tolerance, og hvor mange replikaer trengs for å tolerere k crash-feil vs k Byzantine-feil?",
+      "back": "k-fault-tolerant = systemet fungerer korrekt selv om k komponenter feiler. For crash-failures trengs k+1 replikaer; for Byzantine trengs 3k+1 (BFT).",
+      "learnMoreLinks": [
+        { "label": "Fault-modeller", "href": "/dat110/begreper/fault-models" }
+      ]
+    },
+    {
+      "id": "fc-031",
+      "topic": "fault-tolerance",
+      "front": "Hva er hovedforskjellen på en perfect og en eventually-perfect failure detector?",
+      "back": "Perfect: ingen false positives og ingen missed (krever synkrone antakelser). Eventually-perfect: kan ta feil i begynnelsen, men til slutt stabiliseres til kun korrekte mistanker — realistisk for asynkrone systemer.",
+      "learnMoreLinks": [
+        { "label": "Failure detection", "href": "/dat110/begreper/failure-detection" }
+      ]
+    },
+    {
+      "id": "fc-032",
+      "topic": "network-layer",
+      "front": "De fire delay-komponentene i en pakkesvitsj?",
+      "back": "d_proc (prosessering, ~µs), d_queue (kø, varierer med last), d_trans = L/R (overføring, pakke ut på lenke), d_prop = d/s (forplantning gjennom mediet).",
+      "learnMoreLinks": [
+        { "label": "Delays", "href": "/dat110/begreper/delays" }
+      ]
+    },
+    {
+      "id": "fc-033",
+      "topic": "network-layer",
+      "front": "Hvilken delay-komponent er L/R, og hva betyr L og R?",
+      "back": "d_trans = L/R, hvor L er pakkestørrelse (bits) og R er link-båndbredde (bits/sek). Dette er tiden for å 'klokke ut' alle bits på lenken — uavhengig av fysisk avstand.",
+      "learnMoreLinks": [
+        { "label": "Delays", "href": "/dat110/begreper/delays" }
+      ]
+    },
+    {
+      "id": "fc-034",
+      "topic": "network-layer",
+      "front": "Hva er end-to-end throughput langs en sti med flere lenker?",
+      "back": "Throughput = min(R_1, R_2, ..., R_n) — bottleneck-link-prinsippet. Lenken med minst kapasitet bestemmer hele stiens gjennomstrømning.",
+      "learnMoreLinks": [
+        { "label": "Throughput", "href": "/dat110/begreper/throughput" }
+      ]
+    },
+    {
+      "id": "fc-035",
+      "topic": "network-layer",
+      "front": "Forklar CIDR-notasjonen 192.168.1.0/24.",
+      "back": "/24 betyr at de første 24 bitene er network-prefix og de siste 8 er host. Subnett har 2^8 − 2 = 254 brukbare host-adresser (192.168.1.1 til .254); .0 er network address og .255 er broadcast.",
+      "learnMoreLinks": [
+        { "label": "Subnetting", "href": "/dat110/begreper/subnetting" },
+        { "label": "IPv4 addressing", "href": "/dat110/begreper/ipv4-addressing" }
+      ]
+    },
+    {
+      "id": "fc-036",
+      "topic": "network-layer",
+      "front": "Hvor mange host-adresser har et /26-subnett?",
+      "back": "/26 gir 32 − 26 = 6 host-bits, altså 2^6 = 64 totale adresser, hvorav 2 reserveres (network + broadcast) → 62 brukbare host-adresser.",
+      "learnMoreLinks": [
+        { "label": "Subnetting", "href": "/dat110/begreper/subnetting" }
+      ]
+    },
+    {
+      "id": "fc-037",
+      "topic": "network-layer",
+      "front": "Hva er ARP og hvilken oppgave løser den?",
+      "back": "Address Resolution Protocol mapper en IP-adresse til en MAC-adresse innenfor samme broadcast-domain. Sender broadcaster 'who-has IP?', eier svarer unicast med sin MAC.",
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing" }
+      ]
+    },
+    {
+      "id": "fc-038",
+      "topic": "network-layer",
+      "front": "Hvilke services gir network layer ifølge pensum?",
+      "back": "Network layer flytter pakker fra source til destination over flere hop. Hovedoppgavene: forwarding (lokal beslutning i hver ruter) og routing (global path-bestemmelse). IP gir best-effort, connectionless levering.",
+      "learnMoreLinks": [
+        { "label": "Network layer services", "href": "/dat110/begreper/network-layer-services" }
+      ]
+    },
+    {
+      "id": "fc-039",
+      "topic": "transport-layer",
+      "front": "Hovedforskjell mellom TCP og UDP?",
+      "back": "TCP: connection-oriented, pålitelig (ack + retransmit), in-order, flow- og congestion-control. UDP: connectionless, ingen pålitelighetsgarantier, ingen rekkefølge-garantier — bare en tynn header over IP.",
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp" },
+        { "label": "UDP", "href": "/dat110/begreper/udp" }
+      ]
+    },
+    {
+      "id": "fc-040",
+      "topic": "transport-layer",
+      "front": "Hva er TCPs three-way handshake?",
+      "back": "(1) Klient → SYN. (2) Server → SYN-ACK. (3) Klient → ACK. Etablerer initielle sekvensnumre i begge retninger og bekrefter at begge sider kan sende og motta.",
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp" }
+      ]
+    },
+    {
+      "id": "fc-041",
+      "topic": "transport-layer",
+      "front": "Hva er flow control vs congestion control i TCP?",
+      "back": "Flow control hindrer at sender overvelder mottakeren (via receive window). Congestion control hindrer at sender overvelder nettverket (via congestion window, slow start, AIMD).",
+      "learnMoreLinks": [
+        { "label": "TCP", "href": "/dat110/begreper/tcp" }
+      ]
+    },
+    {
+      "id": "fc-042",
+      "topic": "transport-layer",
+      "front": "Hvilke mekanismer gjør TCP 'reliable'?",
+      "back": "Sekvensnumre (rekkefølge + deteksjon av tap), kumulative ACKs, retransmit ved timeout, checksum (oppdager bit-feil), duplicate-detection. UDP har ingen av disse.",
+      "learnMoreLinks": [
+        { "label": "Reliable communication", "href": "/dat110/begreper/reliable-communication" },
+        { "label": "TCP", "href": "/dat110/begreper/tcp" }
+      ]
+    },
+    {
+      "id": "fc-043",
+      "topic": "transport-layer",
+      "front": "Når foretrekker man UDP over TCP?",
+      "back": "Sanntidsapplikasjoner (VoIP, video-streaming, online-spill) hvor tap er bedre enn forsinkelse, korte transaksjoner (DNS-lookup), og når applikasjonen selv håndterer pålitelighet.",
+      "learnMoreLinks": [
+        { "label": "UDP", "href": "/dat110/begreper/udp" }
+      ]
+    },
+    {
+      "id": "fc-044",
+      "topic": "routing",
+      "front": "Forskjellen mellom forwarding og routing?",
+      "back": "Forwarding: lokal beslutning i én ruter — slå opp destinasjons-prefix i forwarding-tabellen og send pakken ut riktig interface. Routing: distribuert algoritme som bygger forwarding-tabellene globalt.",
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms" },
+        { "label": "Network layer services", "href": "/dat110/begreper/network-layer-services" }
+      ]
+    },
+    {
+      "id": "fc-045",
+      "topic": "routing",
+      "front": "Distance-vector vs link-state routing — kjerneforskjell?",
+      "back": "Distance-vector (Bellman-Ford, RIP): hver ruter vet bare distansen til naboer og deler sin tabell periodisk. Link-state (Dijkstra, OSPF): hver ruter floodet sitt lokale lenke-bilde, alle bygger fullt nettverkskart og kjører shortest-path lokalt.",
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms" }
+      ]
+    },
+    {
+      "id": "fc-046",
+      "topic": "routing",
+      "front": "Hva er 'count-to-infinity'-problemet i distance-vector?",
+      "back": "Ved link-failure kan rutere oppdatere sine tabeller sirkulært via hverandre og øke metric uendelig sakte. Avhjelpes med poison-reverse, split-horizon, eller å sette en 'infinity'-grense (RIP=16).",
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms" }
+      ]
+    },
+    {
+      "id": "fc-047",
+      "topic": "routing",
+      "front": "Hvordan finner en forwarding-tabell riktig utgang ved 'longest-prefix match'?",
+      "back": "Ruter sjekker destinasjons-IP mot alle prefiks i tabellen og velger det som matcher flest bits. Mer spesifikke prefiks vinner over default-route (0.0.0.0/0).",
+      "learnMoreLinks": [
+        { "label": "Subnetting", "href": "/dat110/begreper/subnetting" },
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms" }
+      ]
+    },
+    {
+      "id": "fc-048",
+      "topic": "routing",
+      "front": "Hvilken algoritme bruker link-state-protokoller for shortest-path?",
+      "back": "Dijkstra — kjøres lokalt i hver ruter på det fullstendige nettverkstopologi-bildet som er flooded fra alle andre rutere. Gir konsistent shortest-path-tre fra hver ruter.",
+      "learnMoreLinks": [
+        { "label": "Routing-algoritmer", "href": "/dat110/begreper/routing-algorithms" }
+      ]
+    }
+  ]
+}
