@@ -7,11 +7,11 @@ import UserBadge from "./UserBadge";
 import { useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Hjem" },
-  { href: "/ing164", label: "ING164 Fysikk" },
-  { href: "/dat109", label: "DAT109 Systemutvikling" },
-  { href: "/dat110", label: "DAT110 Nettverk" },
-  { href: "/dat107", label: "DAT107 Databaser" },
+  { href: "/", label: "Hjem", short: "Hjem" },
+  { href: "/ing164", label: "ING164 Fysikk", short: "ING164" },
+  { href: "/dat109", label: "DAT109 Systemutvikling", short: "DAT109" },
+  { href: "/dat110", label: "DAT110 Nettverk", short: "DAT110" },
+  { href: "/dat107", label: "DAT107 Databaser", short: "DAT107" },
 ];
 
 export default function Navigation() {
@@ -28,8 +28,8 @@ export default function Navigation() {
           <span>Eksamensøving</span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Desktop nav — appears at lg (1024px+) so 768–1023 zone uses compact menu */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-6">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -40,15 +40,17 @@ export default function Navigation() {
                   : "text-[var(--muted)]"
               }`}
             >
-              {item.label}
+              {/* Short labels (DAT110 etc.) at lg–xl, full labels at xl+ */}
+              <span className="xl:hidden">{item.short}</span>
+              <span className="hidden xl:inline">{item.label}</span>
             </Link>
           ))}
           <UserBadge />
           <ThemeToggle />
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile/tablet menu button — visible up to lg */}
+        <div className="flex lg:hidden items-center gap-2">
           <UserBadge />
           <ThemeToggle />
           <button
@@ -67,9 +69,9 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile/tablet menu — also covers 768–1023 cropped-laptop zone */}
       {menuOpen && (
-        <div className="md:hidden border-t border-[var(--card-border)] bg-[var(--background)] px-4 py-3 space-y-2">
+        <div className="lg:hidden border-t border-[var(--card-border)] bg-[var(--background)] px-4 py-3 space-y-2">
           {navItems.map((item) => (
             <Link
               key={item.href}

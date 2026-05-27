@@ -102,7 +102,7 @@ export default async function HomePage() {
     <div>
       {/* Hero */}
       <section className="text-center py-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-[clamp(2rem,5vw,3rem)] font-bold mb-4 leading-tight tracking-tight">
           Eksamensøving
         </h1>
         <p className="text-lg text-[var(--muted)] mb-2">
@@ -114,8 +114,8 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* Subject cards */}
-      <section className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-16">
+      {/* Subject cards — 1/2/3/5 instead of 1/2/4/5 to avoid orphaned card at lg (1024–1279) */}
+      <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16">
         {subjects.map((subject) => (
           <Link
             key={subject.id}
