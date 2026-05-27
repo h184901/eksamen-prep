@@ -1,0 +1,14 @@
+{
+  "exams": [
+    {
+      "slug": "dat110-eksamen-05-2024",
+      "year": 2024,
+      "session": "05",
+      "displayLabel": "DAT110 Eksamen — mai 2024",
+      "pairStatus": "complete",
+      "reconstructedFromSensor": false,
+      "questionCount": 10,
+      "totalWeight": 100
+    }
+  ]
+}
