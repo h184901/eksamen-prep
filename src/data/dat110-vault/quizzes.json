@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "generatedNote": "Hand-curated for P0c.1. All learnMoreLinks point to existing P0a routes (concepts/topics) or the V2024 exam page; gaps (vector clocks, quorum, 3k+1) use empty learnMoreLinks per policy.",
+  "questions": [
+    {
+      "id": "dat110-q-001",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": ["delays"],
+      "source": { "kind": "generated", "basedOn": "concepts/delays sections processing/transmission/propagation", "manuallyReviewed": true },
+      "question": "Hvilken av forsinkelses-komponentene i en pakkesvitsj avhenger direkte av forholdet L/R (pakkelengde delt på lenkebåndbredde)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "d_proc — prosesseringsforsinkelse",
+        "d_queue — køforsinkelse",
+        "d_trans — overføringsforsinkelse",
+        "d_prop — forplantningsforsinkelse"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Overføringsforsinkelsen er tiden det tar å klokke alle bitene i pakken ut på lenken og er nøyaktig L/R. Den er uavhengig av fysisk avstand.",
+      "explanationIncorrect": "Bare overføringsforsinkelsen er definert som L/R. De øvrige tre komponentene har egne definisjoner som ikke involverer pakkestørrelsen direkte.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "d_proc er tiden ruter bruker på header-lookup og feilsjekk — typisk mikrosekunder, uavhengig av L og R." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "d_queue er ventetid i utgangsbufferet og avhenger av trafikkbelastning, ikke pakkestørrelse alene." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "d_trans = L/R per definisjon. Mest sannsynlig den komponenten øvinger ber deg regne ut." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "d_prop = d/s der d er fysisk avstand og s er forplantningshastighet — ikke L eller R." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Delays — fire komponenter", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/delays", "title": "Concept: Delays", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["delays"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-002",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": ["delays"],
+      "source": { "kind": "generated", "basedOn": "concepts/delays — transmission delay computation", "manuallyReviewed": true },
+      "question": "En 1000-byte pakke skal sendes over en 1 Mbit/s lenke. Hva er overføringsforsinkelsen?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Omtrent 1 millisekund",
+        "Omtrent 8 millisekunder",
+        "Omtrent 1 sekund",
+        "Omtrent 8 mikrosekunder"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "L = 1000 × 8 = 8000 bit. R = 10^6 bit/s. d_trans = L/R = 8000 / 10^6 = 0,008 s = 8 ms. Husk å konvertere bytes til bits før divisjon.",
+      "explanationIncorrect": "Den vanligste feilen er å glemme byte→bit-konvertering (×8) eller å bytte mellom Mbit/s og MB/s.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Du har trolig glemt ×8-faktoren mellom byte og bit. 1000 byte = 8000 bit, ikke 1000 bit." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: 8000 bit / 1 Mbit/s = 8 ms." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "1 sekund ville krevd en lenke på ~8 kbit/s, ikke 1 Mbit/s. Sjekk størrelsesorden." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "8 mikrosekunder ville krevd en lenke på ~1 Gbit/s. For 1 Mbit/s er svaret tusen ganger tregere." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Delays — overføringsforsinkelse", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/delays", "title": "Concept: Delays", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["delays"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-003",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": ["throughput"],
+      "source": { "kind": "generated", "basedOn": "concepts/throughput — bottleneck-link analysis", "manuallyReviewed": true },
+      "question": "En sti fra avsender til mottaker passerer tre lenker med kapasitet 10, 2 og 5 Mbit/s. Hva blir end-to-end throughput i mettet tilstand?",
+      "qtype": "multiple_choice",
+      "options": [
+        "17 Mbit/s — summen av alle lenker",
+        "5 Mbit/s — siste lenke før mottaker",
+        "2 Mbit/s — flaskehalslenken",
+        "10 Mbit/s — første lenke etter avsender"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "End-to-end throughput er begrenset av den treigeste lenken (bottleneck) på stien. Selv om de andre lenkene kan flytte mer data, må alt gjennom 2 Mbit/s-leddet.",
+      "explanationIncorrect": "Throughput summeres aldri langs en seriell sti, og det er ikke første eller siste lenke som setter taket, men minimum.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Lenkekapasitet i serie summeres ikke. Tenk vann gjennom rør: røret med minst diameter setter strømmen." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Siste lenke er bare relevant hvis den faktisk er treigst — her er 2 Mbit/s treigere." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Bottleneck = min over alle lenker. Standard formel: throughput = min(R_i)." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Første lenke er like irrelevant som siste hvis ikke den er flaskehalsen." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Throughput og bottleneck-link", "href": "/dat110/begreper/throughput", "kind": "concept", "slug": "throughput" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/throughput", "title": "Concept: Throughput", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["throughput"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-004",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": ["throughput", "delays"],
+      "source": { "kind": "generated", "basedOn": "concepts/throughput vs delays distinction", "manuallyReviewed": true },
+      "question": "Hva er hovedforskjellen mellom throughput og forsinkelse?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Throughput måler datarate; forsinkelse måler tidspunkt eller varighet",
+        "Throughput og forsinkelse er to ord for samme ting",
+        "Throughput måles i sekunder; forsinkelse måles i bit per sekund",
+        "Throughput gjelder bare TCP; forsinkelse gjelder bare UDP"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Throughput beskriver hvor mye data som flyttes per tidsenhet (bit/s), mens forsinkelse beskriver hvor lang tid en enkelt pakke bruker (sekunder). De er separate metrikker — du kan ha høy throughput med høy forsinkelse, eller omvendt.",
+      "explanationIncorrect": "Forveksling skjer ofte fordi begge brukes til å beskrive 'rask nettverk', men de måler ulike egenskaper.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: rate (bit/s) vs tid (s) — komplementære, ikke utskiftbare." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Helt feil — du kan ha høy throughput med høy forsinkelse, og motsatt." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Du har snudd enhetene. Throughput er bit/s, forsinkelse er sekunder." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Begge gjelder uavhengig av transportprotokoll." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Throughput", "href": "/dat110/begreper/throughput", "kind": "concept", "slug": "throughput" },
+        { "label": "Delays", "href": "/dat110/begreper/delays", "kind": "concept", "slug": "delays" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/throughput", "title": "Concept: Throughput", "role": "primary", "visibility": "public" },
+        { "slug": "concepts/delays", "title": "Concept: Delays", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["throughput", "delays"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-005",
+      "topic": "01-introduksjon-og-metrics",
+      "conceptSlugs": ["distribution-transparency"],
+      "source": { "kind": "generated", "basedOn": "concepts/distribution-transparency types", "manuallyReviewed": true },
+      "question": "En bruker logger på en filtjener uten å vite hvor filen fysisk er lagret. Hvilken type transparens er primært i bruk?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Tilgangstransparens (access)",
+        "Lokasjonstransparens (location)",
+        "Feiltransparens (failure)",
+        "Konkurransetransparens (concurrency)"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Lokasjonstransparens skjuler den fysiske plasseringen av en ressurs. Brukeren refererer til ressursen ved et logisk navn, ikke en maskin- eller diskadresse.",
+      "explanationIncorrect": "De fire typene i Tanenbaum er nært beslektede, men hver dekker en spesifikk dimensjon av distribusjon.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Access-transparens handler om at samme operasjoner brukes for lokale og fjerne ressurser (uniformt API), ikke om hvor de ligger." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: brukeren bruker logisk navn, systemet løser opp til fysisk plassering." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Failure-transparens skjuler feil og recovery, ikke geografisk plassering." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Concurrency-transparens skjuler at flere brukere deler ressursen." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Distribution transparency", "href": "/dat110/begreper/distribution-transparency", "kind": "concept", "slug": "distribution-transparency" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/distribution-transparency", "title": "Concept: Distribution Transparency", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["distribution-transparency"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-006",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "generated", "basedOn": "concepts/application-layer-multicast vs IP-multicast comparison", "manuallyReviewed": true },
+      "question": "Hva er hovedforskjellen mellom IP-multicast og application-layer multicast (ALM)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "IP-multicast krever ruter-støtte; ALM dupliserer pakker hos endenodene",
+        "IP-multicast bruker TCP; ALM bruker UDP utelukkende",
+        "ALM er en delmengde av IP-multicast med bedre ytelse",
+        "Det er kun en navne-forskjell; mekanismen er identisk"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "IP-multicast bygger duplikering inn i nettverket (rutere replikerer datagrammer). ALM flytter ansvaret opp til endenodene som bygger et overlay-tre og dupliserer pakker selv. Det gjør ALM enklere å rulle ut, men gir høyere bandbreddebruk og forsinkelse.",
+      "explanationIncorrect": "ALM ble laget nettopp fordi IP-multicast har dårlig oppslutning i internett-rutere. Mekanismen flyttes til applikasjonslaget.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: rutere vs endenoder som duplikerer." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Transportprotokoll er uavhengig — begge kan kjøre over UDP, og ALM-overlays brukes av ulike applikasjoner." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "ALM har typisk lavere ytelse fordi pakker krysser samme lenke flere ganger. Den er likevel mer praktisk." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Mekanismen er ulik på et fundamentalt nivå: hvor duplikeringen skjer." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Overlay og gossip — tema", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/application-layer-multicast", "title": "Concept: Application-Layer Multicast", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-007",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["application-layer-multicast"],
+      "source": { "kind": "generated", "basedOn": "topics/overlay-and-gossip ALM properties", "manuallyReviewed": true },
+      "question": "Hvilke utsagn om application-layer multicast (ALM) er korrekte? Velg alle som passer.",
+      "qtype": "multiple_answers",
+      "options": [
+        "Endenodene bygger og vedlikeholder et overlay-tre seg imellom",
+        "Hver melding kan krysse den samme fysiske lenken flere ganger",
+        "ALM krever at alle internett-rutere har multicast-støtte aktivert",
+        "ALM kan rulles ut uten endringer i nettverkslaget"
+      ],
+      "correctIndices": [0, 1, 3],
+      "explanationCorrect": "ALM kjører i applikasjonslaget: endenodene bygger overlay-treet og dupliserer pakker. Det betyr at samme fysiske lenke kan bære duplikater (én per overlay-gren), men det betyr også at ALM kan brukes på dagens internett uten ruter-endringer.",
+      "explanationIncorrect": "ALM ble nettopp designet for å unngå behovet for ruter-multicast. Den krever ingen endringer på nettverkslaget.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: endenodene er ansvarlige for treet og duplikering." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: stress/duplikat-bandbredde er en kjent ALM-kostnad." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Tvert imot — ALM ble laget fordi rutere typisk ikke har multicast aktivert." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: applikasjonsbasert duplikering krever ingen nettverks-endringer." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Application-layer multicast", "href": "/dat110/begreper/application-layer-multicast", "kind": "concept", "slug": "application-layer-multicast" },
+        { "label": "Overlay og gossip — tema", "href": "/dat110/temaer/overlay-and-gossip", "kind": "topic", "slug": "overlay-and-gossip" }
+      ],
+      "sourceRefs": [
+        { "slug": "topics/overlay-and-gossip", "title": "Topic: Overlay-nettverk og Gossip", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["application-layer-multicast"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-008",
+      "topic": "05-processes-and-threads",
+      "conceptSlugs": ["rpc"],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 1 },
+      "question": "Typen feil hvor en tjener ikke responderer på en innkommende forespørsel kalles:",
+      "qtype": "multiple_choice",
+      "options": [
+        "Responsfeil (response failure)",
+        "Tidsfeil (timing failure)",
+        "Krasjfeil (crash failure)",
+        "Utelatelsesfeil (omission failure)"
+      ],
+      "correctIndices": [3],
+      "explanationCorrect": "Utelatelsesfeil oppstår når tjeneren ikke svarer på en forespørsel, men er ellers i live. Det skiller seg fra krasj (tjeneren har stoppet helt) og tidsfeil (svar kom, men for sent).",
+      "explanationIncorrect": "Tanenbaum's failure-taksonomi har fem hovedklasser. Omission er bevisst skilt fra crash fordi feilmodusen er ulik for klienten.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Responsfeil = tjeneren svarer, men med feil verdi eller tilstand. Her er det ikke noe svar i det hele tatt." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Tidsfeil = svaret kommer, men utenfor avtalt tidsvindu. Også feil i denne konteksten." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Krasj betyr at tjeneren har stoppet permanent og må startes på nytt. Spørsmålet beskriver en mildere variant." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: omission failure = tjener er levende, men responderer ikke." }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC og failure-semantikk", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" },
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["rpc"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-009",
+      "topic": "03-mom-overlay",
+      "conceptSlugs": ["rpc"],
+      "source": { "kind": "generated", "basedOn": "concepts/rpc semantikk-typer", "manuallyReviewed": true },
+      "question": "I et RPC-kall implementeres «at-most-once»-semantikk. Hva betyr det i praksis?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Kallet kjøres minst én gang og kan duplisere effekten",
+        "Kallet kjøres nøyaktig én gang, alltid",
+        "Kallet kjøres null eller én gang; aldri to ganger",
+        "Kallet kjøres asynkront uten å returnere verdi"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "At-most-once garanterer at duplikering unngås (typisk via request-ID som tjeneren kjenner igjen), men gir ingen garanti for at kallet ble utført. Hvis svaret går tapt vet klienten ikke om operasjonen ble fullført.",
+      "explanationIncorrect": "Forvekslingen mellom at-most-once og at-least-once er klassisk i RPC-litteraturen. Bare exactly-once gir begge deler — og er teoretisk umulig med crashes.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Det er at-least-once-semantikk, ikke at-most-once. At-least-once kan duplisere ved retry." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Det er exactly-once, som er umulig å garantere med vilkårlige krasj." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: enten 0 eller 1 utførelser, ingen duplisering." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Asynkroni handler om når kallet returnerer, ikke hvor mange ganger det kjøres." }
+      ],
+      "learnMoreLinks": [
+        { "label": "RPC — failure-semantikk", "href": "/dat110/begreper/rpc", "kind": "concept", "slug": "rpc" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/rpc", "title": "Concept: RPC", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["rpc"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-010",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["dht-fundamentals"],
+      "source": { "kind": "generated", "basedOn": "concepts/dht-fundamentals — DHT vs Napster vs Gnutella", "manuallyReviewed": true },
+      "question": "Hvilke egenskaper kjennetegner en distribuert hash-tabell (DHT) sammenlignet med sentralisert oppslag og flooding? Velg alle som passer.",
+      "qtype": "multiple_answers",
+      "options": [
+        "Oppslag koster O(log N) hopp under normal drift",
+        "Hver node trenger global oversikt over alle andre nodene",
+        "Last fordeles jevnt over nodene via uniform hash",
+        "Nodene holder en liten rutings-tabell (typisk O(log N) entries)"
+      ],
+      "correctIndices": [0, 2, 3],
+      "explanationCorrect": "DHT bytter ut sentralisert state (Napster: O(N) flaskehals) og flooding (Gnutella: O(N²) meldinger) med en strukturert rutings-tabell på hver node. Resultatet: O(log N)-oppslag, jevn lastfordeling og kompakt state per node.",
+      "explanationIncorrect": "Behovet for global oversikt er nettopp det DHT unngår — det er grunnen til at strukturen skalerer.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: DHT-design garanterer O(log N) hopp, kjernen av skaleringen." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Tvert imot — DHT unngår global state. Hver node kjenner bare en liten tabell." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: uniform hash sprer nøkler jevnt, ingen hotspot-node." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: i Chord m entries per node, der m typisk er 128 — uavhengig av N." }
+      ],
+      "learnMoreLinks": [
+        { "label": "DHT fundamentals", "href": "/dat110/begreper/dht-fundamentals", "kind": "concept", "slug": "dht-fundamentals" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/dht-fundamentals", "title": "Concept: DHT Fundamentals", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["dht-fundamentals", "chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-011",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "generated", "basedOn": "concepts/chord-ring — m-bit ID-space", "manuallyReviewed": true },
+      "question": "I en Chord-ring med m = 5, hvor mange unike identifikatorer (ID-er) inneholder adresserommet?",
+      "qtype": "multiple_choice",
+      "options": [
+        "5 ID-er",
+        "10 ID-er",
+        "25 ID-er",
+        "32 ID-er"
+      ],
+      "correctIndices": [3],
+      "explanationCorrect": "Adresserommet i Chord er {0, 1, …, 2^m − 1}. For m = 5 gir det 2^5 = 32 unike ID-er, fra 0 til 31.",
+      "explanationIncorrect": "m er antall bits, ikke antall ID-er. Den lille formelen 2^bits er kjernen.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Du har trolig forvekslet m med antall ID-er. m angir antall bits." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Ingen kjent Chord-formel gir 10 fra m=5. Sjekk 2^m." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Du har trolig brukt m² = 25, men formelen er 2^m." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: 2^5 = 32 ID-er." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — adresserom og successor", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-012",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "generated", "basedOn": "concepts/chord-ring — successor rule example", "manuallyReviewed": true },
+      "question": "I en Chord-ring med m = 5 og noder {1, 5, 17, 19, 25}, hvilken node er ansvarlig for nøkkel k = 11?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Node 5",
+        "Node 17",
+        "Node 19",
+        "Node 25"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Successor-regelen: succ(k) er den minste node-ID som er ≥ k. For k = 11 er nodene over k {17, 19, 25}, og den minste er 17.",
+      "explanationIncorrect": "Det er lett å peke på naboen på feil side. Husk: ≥ k, ikke ≤ k.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "5 < 11, så Node 5 er ikke ansvarlig. Du har trolig lest succ som «forrige node»." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: 17 er minste ID ≥ 11." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "19 er ≥ 11, men 17 er mindre og oppfyller også betingelsen. Successor er den minste." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "25 er ≥ 11, men ikke den minste. Det er 17." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — successor", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-013",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 10 },
+      "question": "En Chord-ring med m = 5 har replikaer på {0, 9, 17, 30}. På hvilken replika lagres nøkkel k = 19?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Replika 9",
+        "Replika 17",
+        "Replika 30",
+        "Replika 0"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "succ(19) er minste node-ID ≥ 19. Av {0, 9, 17, 30} er 30 minste ID ≥ 19. Nøkkel 19 hører altså hjemme på replika 30.",
+      "explanationIncorrect": "17 er nær 19, men 17 < 19. Successor må være ≥ k.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "9 < 19, så 9 er ikke ≥ k. Den noden er ikke ansvarlig." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "17 < 19. Successor må være ≥ 19, og 17 oppfyller ikke det." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: minste ID ≥ 19 er 30." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Wrap-around brukes bare hvis ingen node-ID er ≥ k. Her finnes 30." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — successor", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "V2024 Oppg 10 — DHT", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-10", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-014",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "generated", "basedOn": "concepts/chord-ring — finger-table size", "manuallyReviewed": true },
+      "question": "Hvor mange entries har finger-tabellen til en node i en Chord-ring med m bits?",
+      "qtype": "multiple_choice",
+      "options": [
+        "log(N) entries, der N er antall noder",
+        "m entries, en per bit i adresserommet",
+        "2^m entries, en per mulig ID",
+        "N entries, en peker til hver annen node"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Hver node har nøyaktig m entries. Entry i peker til succ(p + 2^(i−1)). Antallet entries bestemmes av antall bits, ikke av antall noder N — det er nettopp det som gjør Chord skalerbart.",
+      "explanationIncorrect": "log(N) er antall hopp under lookup, ikke størrelsen på tabellen.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "log(N) er antall hopp en lookup koster, ikke antall finger-entries." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: m entries, fast tall uavhengig av N." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "2^m er størrelsen på ID-rommet, ikke på finger-tabellen. Det ville vært en katastrofal lagringsbruk." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "N entries ville krevd global oversikt — det Chord designet bort fra." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — finger-table", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },
+        { "label": "Chord DHT — tema", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-015",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "generated", "basedOn": "concepts/chord-ring — FT[i] formula", "manuallyReviewed": true },
+      "question": "I node p sin finger-tabell, hvilken regel definerer entry FT[i]?",
+      "qtype": "multiple_choice",
+      "options": [
+        "FT[i] = succ(p + 2^(i−1))",
+        "FT[i] = succ(p + i)",
+        "FT[i] = succ(p × 2^i)",
+        "FT[i] = pred(p − 2^(i−1))"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Avstanden dobles for hver entry: i=1 er nabo (avstand 1), i=2 har avstand 2, i=3 har avstand 4, og så videre opp til 2^(m−1). Eksponentiell avstand er kjernen til O(log N).",
+      "explanationIncorrect": "Lineær eller multiplikativ avstand ville gitt enten O(N) eller meningsløs dekning. Chord trenger eksponentiell distribusjon.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: eksponentiell avstand 2^(i−1) gir O(log N) hopp." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Lineær avstand i ville gitt FT[m] = succ(p+m), bare m skritt totalt — dårlig skalering." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "p × 2^i skalerer med p og dekker ikke ringen systematisk fra p." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Chord bruker successor framover, ikke predecessor bakover." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — finger-table", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-016",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["key-resolution"],
+      "source": { "kind": "generated", "basedOn": "concepts/key-resolution — lookup-egenskaper", "manuallyReviewed": true },
+      "question": "Hvilke egenskaper har Chord-lookup-algoritmen under normal drift? Velg alle som passer.",
+      "qtype": "multiple_answers",
+      "options": [
+        "Antall hopp er O(log N) i verste fall",
+        "Hver node bruker bare sin egen finger-tabell",
+        "Lookup må alltid starte fra node 0",
+        "Algoritmen halverer avstanden til target per hopp"
+      ],
+      "correctIndices": [0, 1, 3],
+      "explanationCorrect": "Lookup kan starte fra hvilken som helst node. Hver besøkt node bruker sin egen finger-tabell til å velge closest-preceding-finger til target, som halverer avstanden — derav O(log N) hopp totalt.",
+      "explanationIncorrect": "Tvang om startnode ville bryte desentraliseringen. Chord lar enhver node være lookup-initiator.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: O(log N) er den teoretiske worst case for Chord-lookup." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: hver node er autonom — den trenger ikke global oversikt for videresending." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Lookup er desentralisert — start hvor som helst, alltid samme worst case." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: closest-preceding-finger gir omtrent halvering av gjenstående distanse per hopp." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Key resolution — scalable lookup", "href": "/dat110/begreper/key-resolution", "kind": "concept", "slug": "key-resolution" },
+        { "label": "Chord DHT — tema", "href": "/dat110/temaer/chord-dht", "kind": "topic", "slug": "chord-dht" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/key-resolution", "title": "Concept: Key Resolution", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["key-resolution", "chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-017",
+      "topic": "04-naming-og-chord-dht",
+      "conceptSlugs": ["chord-ring"],
+      "source": { "kind": "generated", "basedOn": "concepts/chord-ring — modulo-wraparound section", "manuallyReviewed": true },
+      "question": "I en Chord-ring med m = 5 (ID-rom 0–31), node p = 17 beregner finger-tabell-entry for i = 5. Hva blir target før successor-oppslag?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Target er 33",
+        "Target er 1",
+        "Target er 17",
+        "Target er 32"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "p + 2^(i−1) = 17 + 16 = 33. Siden ringen er sirkulær brukes modulo 2^m: 33 mod 32 = 1. Successor-oppslaget gjøres derfor på ID = 1.",
+      "explanationIncorrect": "Den vanligste feilen er å glemme wrap-around og oppgi 33 direkte.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "33 er rett før modulo. Ringen wrap'er via mod 2^m, så det riktige target-tallet er 33 mod 32 = 1." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: 33 mod 32 = 1." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "17 er startnoden, ikke target. Target ligger 2^(i−1) = 16 skritt frem." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "32 finnes ikke i ID-rommet {0, 1, ..., 31}. Modulo 32 gir bare verdier 0–31." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Chord ring — modulo-wraparound", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/chord-ring", "title": "Concept: Chord Ring", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["chord-ring"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-018",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["ipv4-addressing"],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 1 },
+      "question": "Hva er hovedoppgaven til forwarding-funksjonen som utføres på nettverkslaget i en ruter?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å beregne minste-kostnads-stier gjennom nettet",
+        "Å sende datagrammer fra innkommende til utgående lenke",
+        "Å gi diagnostisk info om nettverkets problemer",
+        "Å oversette mellom IP-adresser og MAC-adresser"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "Forwarding er den lokale per-pakke-beslutningen om hvilken utgående lenke en pakke skal sendes på, basert på destinasjons-IP og videresendingstabellen. Det er en data-plan-funksjon som skjer ved hvert hopp.",
+      "explanationIncorrect": "Det er lett å forveksle forwarding med routing. Routing beregner tabellene; forwarding bruker dem.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Det er routing (kontroll-plan), ikke forwarding (data-plan). Routing setter opp tabellene som forwarding leser." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: forwarding er per-pakke videresending basert på tabellen." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Diagnostikk er rolle for ICMP og verktøy som ping/traceroute, ikke forwarding." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "IP-til-MAC-oppslag er ARP, som ligger i link-laget — ikke forwarding på nettverkslaget." }
+      ],
+      "learnMoreLinks": [
+        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" },
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/ipv4-addressing", "title": "Concept: IPv4 Addressing", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["ipv4-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-019",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["subnetting"],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 1 },
+      "question": "Hvor mange IP-adresser inneholder CIDR-blokken 223.1.1.0/23?",
+      "qtype": "multiple_choice",
+      "options": [
+        "1 adresse",
+        "23 adresser",
+        "256 adresser",
+        "512 adresser"
+      ],
+      "correctIndices": [3],
+      "explanationCorrect": "I /23 er 23 bits prefiks og 32 − 23 = 9 bits host-del. Antall adresser er 2^9 = 512.",
+      "explanationIncorrect": "Vanlig feil er å regne 2^(32−24) = 256 ved å anta /24, eller å oppgi prefiks-tallet selv som svar.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "1 ville bety /32 (kun én adresse). /23 dekker mye mer." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "23 er prefiks-lengden, ikke antall adresser." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "256 = 2^8 er for /24, ikke /23. /23 er én bit større blokk." },
+        { "optionIndex": 3, "isCorrect": true, "shortExplanation": "Riktig: 2^(32−23) = 2^9 = 512 adresser." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Subnetting — CIDR-blokker", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["subnetting"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-020",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["subnetting"],
+      "source": { "kind": "generated", "basedOn": "concepts/subnetting — CIDR størrelse", "manuallyReviewed": true },
+      "question": "Et selskap trenger et IPv4-subnett som rommer minst 100 brukbare host-adresser. Hvilken prefiks-lengde er den minste som dekker behovet?",
+      "qtype": "multiple_choice",
+      "options": [
+        "/24 — gir 256 adresser",
+        "/25 — gir 128 adresser",
+        "/26 — gir 64 adresser",
+        "/27 — gir 32 adresser"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "/25 har 32 − 25 = 7 host-bits → 128 adresser totalt. Etter at nettverks- og kringkastingsadressene er trukket fra, gir det 126 brukbare hosts — det første alternativet som dekker 100.",
+      "explanationIncorrect": "/26 gir 64 adresser totalt, som ikke når 100. /24 er korrekt for behovet, men ikke det minste alternativet.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "/24 dekker behovet (254 brukbare), men er ikke det minste alternativet." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: 126 brukbare hosts, minste prefiks som dekker 100-grensen." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "/26 gir bare 62 brukbare hosts, for lite." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "/27 gir 30 brukbare hosts, langt fra nok." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Subnetting — prefiks og host-bits", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["subnetting"],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-021",
+      "topic": "10-network-layer",
+      "conceptSlugs": ["subnetting"],
+      "source": { "kind": "generated", "basedOn": "concepts/subnetting — longest prefix match", "manuallyReviewed": true },
+      "question": "En ruter har følgende videresendingstabell. Hvilken oppføring brukes for pakke til 10.0.5.7?\n\n| Prefiks | Lenke |\n|---|---|\n| 10.0.0.0/8 | A |\n| 10.0.0.0/16 | B |\n| 10.0.4.0/22 | C |\n| 0.0.0.0/0 | D |",
+      "qtype": "multiple_choice",
+      "options": [
+        "A — første matchende oppføring i tabellen",
+        "B — /16 dekker hele 10.0-prefiksblokken",
+        "C — /22 er den smaleste matchen som dekker IP-en",
+        "D — default brukes når flere kandidater finnes"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "Forwarding bruker longest-prefix match: blant oppføringer som matcher destinasjonen, velges den med lengst prefiks. 10.0.5.7 matcher /8, /16 og /22 — /22 er lengst, så lenke C brukes.",
+      "explanationIncorrect": "Default-ruten brukes bare når ingen spesifikk match finnes. Først-treff er ikke regelen for IP-forwarding.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Først-treff er en ACL-regel, ikke IP-forwarding. IP bruker lengst prefiks." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "/16 matcher, men /22 er mer spesifikk og vinner." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: /22 er den lengste matchende prefiksen." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Default brukes bare når intet annet matcher. Her finnes tre konkrete match-er." }
+      ],
+      "learnMoreLinks": [
+        { "label": "Subnetting og forwarding", "href": "/dat110/begreper/subnetting", "kind": "concept", "slug": "subnetting" },
+        { "label": "IPv4 adressering", "href": "/dat110/begreper/ipv4-addressing", "kind": "concept", "slug": "ipv4-addressing" }
+      ],
+      "sourceRefs": [
+        { "slug": "concepts/subnetting", "title": "Concept: Subnetting", "role": "primary", "visibility": "public" }
+      ],
+      "relatedConcepts": ["subnetting", "ipv4-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "hard"
+    },
+    {
+      "id": "dat110-q-022",
+      "topic": "11-link-layer",
+      "conceptSlugs": ["arp-and-mac-addressing"],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 1 },
+      "question": "Hva er hovedformålet med Address Resolution Protocol (ARP)?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Å konfigurere et nettverkskort med en IP-adresse",
+        "Å oversette en IP-adresse til den tilhørende link-lag-adressen (MAC)",
+        "Å konfigurere et nettverkskort med en link-lag-adresse (MAC)",
+        "Å rute datagrammer mellom forskjellige subnett"
+      ],
+      "correctIndices": [1],
+      "explanationCorrect": "ARP løser en IP-adresse til en MAC-adresse på samme link. Det er nødvendig fordi link-laget (Ethernet) bruker MAC, mens applikasjoner og nettverkslaget bruker IP.",
+      "explanationIncorrect": "ARP konfigurerer ingenting — den oversetter. IP-adresser tildeles via DHCP eller statisk; MAC er brent inn i hardware.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Det er DHCP eller manuell konfigurasjon, ikke ARP." },
+        { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: ARP løser IP → MAC på samme link." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "MAC tildeles av kortprodusenten (brent inn), ikke via ARP." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Det er ruting på nettverkslaget. ARP jobber på link-laget." }
+      ],
+      "learnMoreLinks": [
+        { "label": "ARP og MAC-adressering", "href": "/dat110/begreper/arp-and-mac-addressing", "kind": "concept", "slug": "arp-and-mac-addressing" },
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" },
+        { "slug": "concepts/arp-and-mac-addressing", "title": "Concept: ARP and MAC Addressing", "role": "supporting", "visibility": "public" }
+      ],
+      "relatedConcepts": ["arp-and-mac-addressing"],
+      "relatedExamPatterns": [],
+      "difficulty": "easy"
+    },
+    {
+      "id": "dat110-q-023",
+      "topic": "07-coordination",
+      "conceptSlugs": [],
+      "source": { "kind": "generated", "basedOn": "pensum: Lamport vs vector clocks (gap — no P0a concept page)", "manuallyReviewed": true },
+      "question": "Hva skiller Lamport-klokker fra vector clocks?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Total orden hos den ene; kausal delvis orden hos den andre",
+        "Den ene bruker fysisk tid, den andre bruker logisk tid",
+        "Den ene er en eldre algoritme erstattet av den andre",
+        "De er ekvivalente algoritmer med ulike navn"
+      ],
+      "correctIndices": [0],
+      "explanationCorrect": "Lamport-klokker gir en konsistent total ordning av hendelser, men kan tilskrive orden mellom hendelser som faktisk er konkurrerende. Vector clocks holder én teller per prosess og kan derfor avgjøre om to hendelser er kausalt relaterte eller konkurrerende.",
+      "explanationIncorrect": "Begge er logiske klokker — fysisk tid spiller ingen rolle. Vector clocks ble utviklet etter Lamport for å fange kausalitet mer presist.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: total orden vs partiell orden som bevarer kausal struktur." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Begge ignorerer fysisk tid og opererer kun med logiske tellere." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Rekkefølgen er omvendt: Lamport (1978) kom først, vector clocks (1988) bygger på dem." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "De løser ulike problemer og er ikke utskiftbare. Vector clocks krever mer state per node." }
+      ],
+      "learnMoreLinks": [],
+      "sourceRefs": [],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    },
+    {
+      "id": "dat110-q-024",
+      "topic": "08-consistency-replication",
+      "conceptSlugs": [],
+      "source": { "kind": "exam", "year": 2024, "session": "05", "questionNumber": 1 },
+      "question": "Hva kalles en replikerings-protokoll der skrive-operasjoner baseres på majoritets-stemmegivning?",
+      "qtype": "multiple_choice",
+      "options": [
+        "Local-write-protokoll",
+        "Aktiv replikering",
+        "Quorum-basert protokoll",
+        "Koherens-basert protokoll"
+      ],
+      "correctIndices": [2],
+      "explanationCorrect": "I quorum-baserte protokoller må en operasjon samle inn nok stemmer fra replikaene (typisk flertall, eller en kombinasjon der lese-quorum + skrive-quorum > N) før den anses som gyldig. Det gir konsistens uten å kreve at alle replikaer er tilgjengelige.",
+      "explanationIncorrect": "Aktiv replikering og local-write er andre familier som ikke avhenger av stemmegivning.",
+      "optionExplanations": [
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Local-write betyr at klienten skriver lokalt og synker tilbake senere — ingen flertallsavstemning." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Aktiv replikering kjører hver oppdatering på alle replikaer i samme orden, men uten stemmegivning per operasjon." },
+        { "optionIndex": 2, "isCorrect": true, "shortExplanation": "Riktig: quorum = majoritets-stemming." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Koherens-baserte protokoller er CPU-cache-konsepter, ikke en kategori i replikeringsfamilien." }
+      ],
+      "learnMoreLinks": [
+        { "label": "V2024 Oppg 1 — flervalg", "href": "/dat110/eksamen/dat110-eksamen-05-2024#oppg-1", "kind": "eksamen", "slug": "dat110-eksamen-05-2024" }
+      ],
+      "sourceRefs": [
+        { "slug": "eksamen/dat110-eksamen-05-2024", "title": "DAT110 Eksamen — mai 2024", "role": "exam-source", "visibility": "public" }
+      ],
+      "relatedConcepts": [],
+      "relatedExamPatterns": [],
+      "difficulty": "medium"
+    }
+  ]
+}

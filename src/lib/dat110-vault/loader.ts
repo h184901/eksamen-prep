@@ -7,9 +7,11 @@ import topicsData from "@/data/dat110-vault/topics-tier1.json";
 import examsIndex from "@/data/dat110-vault/exams-index.json";
 import wikilinkIndex from "@/data/dat110-vault/_wikilink-index.json";
 import metaData from "@/data/dat110-vault/_meta.json";
+import quizzesData from "@/data/dat110-vault/quizzes.json";
 import type {
   DAT110Concept,
   DAT110Exam,
+  DAT110QuizQuestion,
   DAT110Topic,
   DAT110VaultMeta,
 } from "./types";
@@ -18,6 +20,13 @@ const concepts = (conceptsData as { concepts: DAT110Concept[] }).concepts;
 const topics = (topicsData as { topics: DAT110Topic[] }).topics;
 const routes = (wikilinkIndex as { routes: Record<string, string> }).routes;
 const meta = metaData as DAT110VaultMeta;
+const quizzes = (
+  quizzesData as unknown as { questions: DAT110QuizQuestion[] }
+).questions;
+
+export function getAllQuizQuestions(): DAT110QuizQuestion[] {
+  return quizzes;
+}
 
 // Exams are loaded lazily per slug to avoid bundling all exam JSONs into every
 // page. Each exam JSON is ~30-40 KB, so we read it from src/data/dat110-vault/exams/
