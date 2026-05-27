@@ -49,6 +49,16 @@
       "reconstructedFromSensor": false,
       "questionCount": 10,
       "totalWeight": 100
+    },
+    {
+      "slug": "dat110-eksamen-06-2025",
+      "year": 2025,
+      "session": "06",
+      "displayLabel": "DAT110 Eksamen — juni 2025",
+      "pairStatus": "reconstructed_from_incomplete_pair",
+      "reconstructedFromSensor": true,
+      "questionCount": 10,
+      "totalWeight": 100
     }
   ]
 }

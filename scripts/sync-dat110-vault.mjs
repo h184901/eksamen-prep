@@ -77,6 +77,7 @@ const EXAM_DATA_FILES = [
   { slug: "dat110-eksamen-05-2023", file: "exams/dat110-eksamen-05-2023.json" },
   { slug: "dat110-eksamen-05-2024", file: "exams/dat110-eksamen-05-2024.json" },
   { slug: "dat110-eksamen-01-2025", file: "exams/dat110-eksamen-01-2025.json" },
+  { slug: "dat110-eksamen-06-2025", file: "exams/dat110-eksamen-06-2025.json" },
 ];
 
 // Known local-only / copyright-sensitive sources from vault inventory.
