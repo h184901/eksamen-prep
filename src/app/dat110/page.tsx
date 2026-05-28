@@ -306,8 +306,8 @@ function AktivOvingBanner() {
             Aktiv øving — hovedverktøy mot eksamen
           </h3>
           <p className="text-sm text-neutral-700 dark:text-neutral-200 mb-3">
-            Flervalg-quiz med feedback og «Les mer»-lenker. Eksamenssim, flashcards,
-            matching, regneøving og eksamensdrill kommer i P1/P2.
+            Flervalg-quiz med feedback og «Les mer»-lenker — pluss eksamenssim,
+            flashcards, matching, regneøving og eksamensdrill. Alle modusene er klare å bruke.
           </p>
           <div className="flex flex-wrap gap-2">
             <span className="text-xs px-2 py-1 rounded-full bg-network-100 dark:bg-network-900/40 text-network-800 dark:text-network-200">
@@ -424,8 +424,8 @@ const NOKKELTEMAER: NokkelTema[] = [
     weight: "10%",
     oppgRef: "Oppg 9",
     chapterTag: "DS 5, 7",
-    conceptHref: null,
-    conceptLabel: "Konseptside kommer i P1",
+    conceptHref: "/dat110/temaer/logical-clocks",
+    conceptLabel: "Tema: Logiske klokker",
     examOppgNumber: 9,
     color: "amber",
   },
@@ -436,8 +436,8 @@ const NOKKELTEMAER: NokkelTema[] = [
     weight: "—",
     oppgRef: "Oppg 9",
     chapterTag: "DS 8",
-    conceptHref: null,
-    conceptLabel: "Konseptside kommer i P1",
+    conceptHref: "/dat110/temaer/fault-tolerance",
+    conceptLabel: "Tema: Fault tolerance",
     examOppgNumber: 9,
     color: "rose",
   },
@@ -460,7 +460,7 @@ function NokkelTemaer() {
           Nøkkeltemaer — dette gir mest poeng
         </h2>
         <p className="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
-          Tier 1-temaer kalibrert mot eksamen-mønsteret fra 2022–2025. Vekt-prosent og kapittel-referanser per tema.
+          Sentrale temaer kalibrert mot eksamen-mønsteret fra 2022–2025. Vekt-prosent og kapittel-referanser per tema.
         </p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -528,7 +528,7 @@ function NokkelTemaer() {
                   href="/dat110/oving/quiz"
                   className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg bg-network-500 hover:bg-network-600 text-white transition-colors"
                 >
-                  🎯 Øv på dette →
+                  🎯 Åpne quiz →
                 </Link>
                 <Link
                   href={`/dat110/eksamen/dat110-eksamen-05-2024#oppg-${t.examOppgNumber}`}
@@ -568,7 +568,7 @@ function ReferanseMateriell() {
             </h3>
           </div>
           <p className="text-sm text-neutral-700 dark:text-neutral-200">
-            V2024 ligger ute med komplette løsninger fra sensorveiledning. Flere år kommer i P1.
+            Seks eksamener (2022–2025) ligger ute med komplette løsninger fra sensorveiledningene.
           </p>
         </Link>
 
@@ -603,7 +603,7 @@ function ReferanseMateriell() {
               Pensum og rammeverk
             </h3>
             <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
-              Kommer i P1
+              Kommer senere
             </span>
           </div>
           <p className="text-sm text-neutral-600 dark:text-neutral-300">

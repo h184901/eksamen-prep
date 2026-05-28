@@ -15,6 +15,10 @@ export interface QuizStartOptions {
 interface Props {
   questionCountByTopic: Record<string, number>;
   questionCountBySource: Record<DAT110QuizSourceKind, number>;
+  questionCountByTopicSource: Record<
+    string,
+    Record<DAT110QuizSourceKind, number>
+  >;
   onStart: (opts: QuizStartOptions) => void;
 }
 
@@ -42,6 +46,7 @@ const SOURCE_LABELS: Record<
 export default function TopicSelector({
   questionCountByTopic,
   questionCountBySource,
+  questionCountByTopicSource,
   onStart,
 }: Props) {
   const [selectedTopics, setSelectedTopics] = useState<Set<VaultTema>>(
@@ -73,12 +78,17 @@ export default function TopicSelector({
       .map(([oppg, temaer]) => ({ oppg, temaer }));
   }, []);
 
+  // Count only questions matching BOTH the selected topics AND the selected
+  // sources — so the number matches the actual quiz pool the engine builds.
   const totalAvailable = useMemo(() => {
-    return [...selectedTopics].reduce(
-      (sum, t) => sum + (questionCountByTopic[t] || 0),
-      0
-    );
-  }, [selectedTopics, questionCountByTopic]);
+    let sum = 0;
+    for (const t of selectedTopics) {
+      const bySrc = questionCountByTopicSource[t];
+      if (!bySrc) continue;
+      for (const k of sourceFilter) sum += bySrc[k] || 0;
+    }
+    return sum;
+  }, [selectedTopics, sourceFilter, questionCountByTopicSource]);
 
   const [targetCount, setTargetCount] = useState(10);
 
@@ -160,7 +170,7 @@ export default function TopicSelector({
           onClick={selectTier1}
           className="px-3 py-1.5 rounded-lg text-sm border border-blue-400 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30"
         >
-          Tier 1
+          Kjernetemaer
         </button>
         {groups.map(({ oppg }) => (
           <button
@@ -259,7 +269,7 @@ export default function TopicSelector({
             Antall spørsmål:{" "}
             <span className="font-bold">{effectiveCount}</span>
             <span className="text-xs text-neutral-500 dark:text-neutral-400 ml-2">
-              (av {totalAvailable} tilgjengelige fra valgte temaer)
+              (av {totalAvailable} tilgjengelige fra valgte temaer og kilder)
             </span>
           </label>
           <input

@@ -185,7 +185,7 @@
         { "slug": "eksamen/dat110-eksamen-01-2024-sensorveiledning", "title": "DAT110 Eksamen — januar 2024 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
       ],
       "relatedExamPatterns": [],
-      "figureNote": "Refererer til prosjekt 2 (publish-subscribe broker). Project 2 README ligger lokalt som dat110-project2-mom-readme. Ingen learnMoreLinks ennå — egen pub-sub concept-side er P1-kandidat."
+      "figureNote": "Refererer til Prosjekt 2 (publish-subscribe broker)."
     },
     {
       "number": 3,

@@ -74,6 +74,18 @@ export default function QuizRunner({ allQuestions }: Props) {
     return m;
   }, [allQuestions]);
 
+  // Per-topic × per-source counts so the selector can show the count that
+  // matches the actual filtered pool (topic ∩ source), not just the topic sum.
+  const questionCountByTopicSource = useMemo(() => {
+    const m: Record<string, Record<DAT110QuizSourceKind, number>> = {};
+    for (const q of allQuestions) {
+      const row = m[q.topic] ?? { exam: 0, canvas: 0, generated: 0 };
+      row[sourceKindOf(q.source)] += 1;
+      m[q.topic] = row;
+    }
+    return m;
+  }, [allQuestions]);
+
   const handleStart = (opts: QuizStartOptions) => {
     const topicSet = new Set<VaultTema>(opts.selectedTopics);
     let pool = allQuestions.filter(
@@ -144,6 +156,7 @@ export default function QuizRunner({ allQuestions }: Props) {
       <TopicSelector
         questionCountByTopic={questionCountByTopic}
         questionCountBySource={questionCountBySource}
+        questionCountByTopicSource={questionCountByTopicSource}
         onStart={handleStart}
       />
     );

@@ -43,12 +43,6 @@ function examPeriodCaption(year: number, session: string): string {
   return `${sessionLabel(session)} ${year}`;
 }
 
-// Hardkodet rekkefølge på upcoming-eksamener vi vet vi vil legge til i P1.C.
-// Brukes til å vise "kommer i P1"-cards så brukeren skjønner roadmap-en.
-const UPCOMING_EXAMS = [
-  { period: "Juni 2025 (rekonstruert)", note: "Kommer i P1.C — kun sensor-PDF finnes" },
-];
-
 export const metadata = {
   title: "Eksamen — DAT110",
 };
@@ -119,25 +113,6 @@ export default function EksamenPage() {
             </Link>
           );
         })}
-
-        {/* Upcoming-cards (disabled) */}
-        {UPCOMING_EXAMS.map((u) => (
-          <div
-            key={u.period}
-            aria-disabled
-            className="rounded-xl border-2 border-neutral-200 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-900/30 p-5 opacity-70 cursor-not-allowed"
-          >
-            <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
-              <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
-                Kommer senere
-              </span>
-            </div>
-            <h3 className="font-bold text-lg mb-1 text-neutral-600 dark:text-neutral-300">
-              {u.period}
-            </h3>
-            <p className="text-sm text-[var(--muted)]">{u.note}</p>
-          </div>
-        ))}
       </div>
 
       {/* Bla per oppgavetype (eksisterende seksjon — beholdes som alternativ inngang) */}

@@ -139,7 +139,7 @@ export default function BegreperPage() {
         Begreper
       </h1>
       <p className="text-neutral-700 dark:text-neutral-200 max-w-2xl mb-2">
-        Alle {total} Tier&nbsp;1-begreper i DAT110 — atomiske konsepter med
+        Alle {total} sentrale begreper i DAT110 — atomiske konsepter med
         utledninger, eksempler og kilder fra forelesningsnotatene. Sortert etter
         tema. Se også{" "}
         <Link

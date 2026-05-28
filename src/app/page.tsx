@@ -352,7 +352,9 @@ export default async function HomePage() {
       </section>
 
       {/* ───── Footer stripe ───── */}
-      <footer className="border-t border-[var(--card-border)] pt-6 pb-4">
+      {/* pb clears the global floating Tutor-FAB (fixed bottom-5 right-5) so it
+          doesn't cover the fag-nav links. */}
+      <footer className="border-t border-[var(--card-border)] pt-6 pb-4 mb-20 sm:mb-16">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-[var(--muted)]">
           <p>
             Bygget for HVL Bergen-eksamen · Lokalt lagret framgang · Ingen tracking

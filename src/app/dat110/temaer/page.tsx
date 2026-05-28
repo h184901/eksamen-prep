@@ -107,7 +107,7 @@ export default function TemaerPage() {
       </h1>
       <p className="text-neutral-700 dark:text-neutral-200 max-w-2xl mb-8">
         Paraply-sider som binder flere begreper sammen rundt et felles tema —
-        motivasjon, sammenhenger og lecture-referanser. {total} Tier&nbsp;1-temaer
+        motivasjon, sammenhenger og lecture-referanser. {total} sentrale temaer
         kalibrert mot eksamen-mønsteret. Klikk et tema for å se utdypning og
         relaterte begreper. Se også{" "}
         <Link
