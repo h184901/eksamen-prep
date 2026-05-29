@@ -74,7 +74,8 @@ button {
   animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* AI tutor textarea — manual vertical resize handle always visible */
+/* AI tutor textarea — vertical resize beholdt, men den native resizer-gripen
+   skjules (den ble malt som en synlig mørk boks ved siden av send-knappen). */
 .tutor-textarea {
   resize: vertical;
   min-height: 2rem;
@@ -83,8 +84,7 @@ button {
   line-height: 1.5;
 }
 .tutor-textarea::-webkit-resizer {
-  background-color: var(--muted);
-  opacity: 0.3;
+  display: none;
 }
 
 /* Markdown styling for tutor responses */

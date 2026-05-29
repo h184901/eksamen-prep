@@ -353,6 +353,20 @@ function WelcomeCard() {
   const { context } = useTutor();
   const ctxText = describeContext(context);
   const isOppgaver = context.pageType === "oppgaver";
+  // Hent innlogget brukernavn fra samme kilde som Header (UserBadge): /api/auth/me.
+  const [username, setUsername] = useState<string | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/auth/me", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled) setUsername(d?.user?.username ?? null);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-4 text-sm space-y-2">
@@ -360,7 +374,7 @@ function WelcomeCard() {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z" />
         </svg>
-        Hei Erlend!
+        {username ? `Hei ${username}!` : "Hei der!"}
       </div>
       <p className="text-[var(--muted)]">
         Jeg er din personlige eksamens-tutor. Jeg vet at du er på{" "}
