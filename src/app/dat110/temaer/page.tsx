@@ -1,6 +1,8 @@
 import Link from "next/link";
 import topicsData from "@/data/dat110-vault/topics-tier1.json";
 import type { DAT110Topic } from "@/lib/dat110-vault/types";
+import Dat110PageHeader from "@/components/dat110/Dat110PageHeader";
+import Dat110Badge from "@/components/dat110/Dat110Badge";
 
 // Human-readable labels for vault `tema` codes. Kept in sync with begreper/page.tsx.
 const TEMA_LABELS: Record<string, string> = {
@@ -87,37 +89,29 @@ export default function TemaerPage() {
 
   return (
     <div>
-      <nav
-        aria-label="Brødsmuler"
-        className="mb-6 text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-2 flex-wrap"
-      >
-        <Link href="/" className="hover:text-[var(--accent)]">
-          Hjem
-        </Link>
-        <span aria-hidden>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">
-          DAT110
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-neutral-700 dark:text-neutral-200">Temaer</span>
-      </nav>
-
-      <h1 className="text-3xl font-bold mb-2 text-neutral-900 dark:text-neutral-50">
-        Temaer
-      </h1>
-      <p className="text-neutral-700 dark:text-neutral-200 max-w-2xl mb-8">
-        Paraply-sider som binder flere begreper sammen rundt et felles tema —
-        motivasjon, sammenhenger og lecture-referanser. {total} sentrale temaer
-        kalibrert mot eksamen-mønsteret. Klikk et tema for å se utdypning og
-        relaterte begreper. Se også{" "}
-        <Link
-          href="/dat110/begreper"
-          className="text-blue-700 dark:text-blue-300 hover:underline"
-        >
-          Begreper
-        </Link>{" "}
-        for atomiske konsept-sider.
-      </p>
+      <Dat110PageHeader
+        crumbs={[
+          { label: "Hjem", href: "/" },
+          { label: "DAT110", href: "/dat110" },
+          { label: "Temaer" },
+        ]}
+        eyebrow="DAT110 · Pensum"
+        title="Temaer"
+        lead={
+          <>
+            {total} sentrale paraply-sider som binder flere begreper sammen rundt
+            et felles tema — motivasjon, sammenhenger og lecture-referanser,
+            kalibrert mot eksamen-mønsteret. Se også{" "}
+            <Link
+              href="/dat110/begreper"
+              className="text-network-700 dark:text-network-300 font-medium hover:underline"
+            >
+              Begreper
+            </Link>{" "}
+            for atomiske konsept-sider.
+          </>
+        }
+      />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {orderedTopics.map((t) => {
@@ -128,21 +122,19 @@ export default function TemaerPage() {
             <Link
               key={t.slug}
               href={`/dat110/temaer/${t.slug}`}
-              className="group rounded-xl border-2 border-teal-300/40 dark:border-teal-700/40 hover:border-teal-400 dark:hover:border-teal-600 bg-[var(--card)] p-5 transition-all hover:shadow-md hover:-translate-y-0.5"
+              className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-300 dark:hover:border-teal-700"
             >
               <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-100 uppercase tracking-wide">
-                  Tema
-                </span>
+                <Dat110Badge tone="topic">Tema</Dat110Badge>
                 <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200">
                   {temaLabel}
                 </span>
               </div>
-              <h3 className="font-semibold mb-2 text-neutral-900 dark:text-neutral-50 group-hover:text-[var(--accent)] transition-colors">
+              <h3 className="font-semibold mb-1.5 text-neutral-900 dark:text-neutral-50 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">
                 {title}
               </h3>
               {desc && (
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-4">
+                <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-4 leading-relaxed">
                   {desc}
                 </p>
               )}

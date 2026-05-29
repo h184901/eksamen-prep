@@ -1,6 +1,8 @@
 import Link from "next/link";
 import conceptsData from "@/data/dat110-vault/concepts-tier1.json";
 import type { DAT110Concept } from "@/lib/dat110-vault/types";
+import Dat110PageHeader from "@/components/dat110/Dat110PageHeader";
+import Dat110Badge from "@/components/dat110/Dat110Badge";
 
 // Human-readable labels for vault `tema` codes used in concept frontmatter.
 // Order mirrors the curriculum sequence (01 → 14).
@@ -120,51 +122,41 @@ export default function BegreperPage() {
 
   return (
     <div>
-      <nav
-        aria-label="Brødsmuler"
-        className="mb-6 text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-2 flex-wrap"
-      >
-        <Link href="/" className="hover:text-[var(--accent)]">
-          Hjem
-        </Link>
-        <span aria-hidden>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">
-          DAT110
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-neutral-700 dark:text-neutral-200">Begreper</span>
-      </nav>
+      <Dat110PageHeader
+        crumbs={[
+          { label: "Hjem", href: "/" },
+          { label: "DAT110", href: "/dat110" },
+          { label: "Begreper" },
+        ]}
+        eyebrow="DAT110 · Pensum"
+        title="Begreper"
+        lead={
+          <>
+            Alle {total} sentrale begreper på tvers av {groups.length} tema —
+            atomiske konsepter med utledninger, eksempler og kilder fra
+            forelesningsnotatene. Se også{" "}
+            <Link
+              href="/dat110/temaer"
+              className="text-network-700 dark:text-network-300 font-medium hover:underline"
+            >
+              Temaer
+            </Link>{" "}
+            for paraply-sider som binder flere begreper sammen.
+          </>
+        }
+      />
 
-      <h1 className="text-3xl font-bold mb-2 text-neutral-900 dark:text-neutral-50">
-        Begreper
-      </h1>
-      <p className="text-neutral-700 dark:text-neutral-200 max-w-2xl mb-2">
-        Alle {total} sentrale begreper i DAT110 — atomiske konsepter med
-        utledninger, eksempler og kilder fra forelesningsnotatene. Sortert etter
-        tema. Se også{" "}
-        <Link
-          href="/dat110/temaer"
-          className="text-blue-700 dark:text-blue-300 hover:underline"
-        >
-          Temaer
-        </Link>{" "}
-        for paraply-sider som binder flere begreper sammen.
-      </p>
-      <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-8">
-        {groups.length} tema · {total} begreper
-      </p>
-
-      <div className="space-y-10">
+      <div className="space-y-12">
         {groups.map((group) => (
           <section key={group.tema} aria-labelledby={`tema-${group.tema}`}>
-            <div className="mb-4 flex items-baseline justify-between gap-3 flex-wrap">
+            <div className="mb-4 flex items-baseline justify-between gap-3 flex-wrap border-b border-[var(--card-border)] pb-2">
               <h2
                 id={`tema-${group.tema}`}
-                className="text-xl font-bold text-neutral-900 dark:text-neutral-50"
+                className="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50"
               >
                 {group.label}
               </h2>
-              <span className="text-xs text-neutral-500 dark:text-neutral-400">
+              <span className="text-xs font-medium text-[var(--muted)]">
                 {group.items.length}{" "}
                 {group.items.length === 1 ? "begrep" : "begreper"}
               </span>
@@ -177,18 +169,16 @@ export default function BegreperPage() {
                   <Link
                     key={c.slug}
                     href={`/dat110/begreper/${c.slug}`}
-                    className="group rounded-xl border-2 border-blue-300/40 dark:border-blue-700/40 hover:border-blue-400 dark:hover:border-blue-600 bg-[var(--card)] p-5 transition-all hover:shadow-md hover:-translate-y-0.5"
+                    className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 shadow-sm transition-all hover:shadow-md hover:border-network-300 dark:hover:border-network-700"
                   >
-                    <div className="flex items-center gap-2 mb-2 flex-wrap">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-100 uppercase tracking-wide">
-                        Begrep
-                      </span>
+                    <div className="mb-2">
+                      <Dat110Badge tone="concept">Begrep</Dat110Badge>
                     </div>
-                    <h3 className="font-semibold mb-2 text-neutral-900 dark:text-neutral-50 group-hover:text-[var(--accent)] transition-colors">
+                    <h3 className="font-semibold mb-1.5 text-neutral-900 dark:text-neutral-50 group-hover:text-network-700 dark:group-hover:text-network-300 transition-colors">
                       {title}
                     </h3>
                     {desc && (
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3">
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
                         {desc}
                       </p>
                     )}

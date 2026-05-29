@@ -4,6 +4,9 @@ import { sourceKindOf } from "@/lib/dat110-quiz-types";
 import flashcardsData from "@/data/dat110-vault/flashcards.json";
 import matchingData from "@/data/dat110-vault/matching.json";
 import calculationData from "@/data/dat110-vault/calculation-drills.json";
+import Dat110PageHeader from "@/components/dat110/Dat110PageHeader";
+import Dat110Section from "@/components/dat110/Dat110Section";
+import Dat110Badge from "@/components/dat110/Dat110Badge";
 
 export const metadata = {
   title: "Øving og drilling — DAT110",
@@ -16,8 +19,7 @@ interface ModusCard {
   description: string;
   count: string;
   // Tailwind classes (statiske strings — Tailwind JIT-vennlig).
-  borderActive: string;
-  bgActive: string;
+  band: string;
   iconBg: string;
   accentText: string;
   status: "active" | "P1" | "P2";
@@ -38,9 +40,7 @@ function buildModuser(
       description:
         "Velg temaer og kilder. Forklaringer + 'Les mer'-lenker til konseptsider etter hvert svar. Multiple-answer-støtte.",
       count: `${quizCount} spørsmål`,
-      borderActive: "border-network-400 hover:border-network-500",
-      bgActive:
-        "bg-network-50/50 dark:bg-network-950/20 hover:bg-network-50 dark:hover:bg-network-950/30",
+      band: "bg-network-500",
       iconBg:
         "bg-network-100 dark:bg-network-900/40 text-network-700 dark:text-network-300",
       accentText: "text-network-700 dark:text-network-300",
@@ -53,9 +53,7 @@ function buildModuser(
       description:
         "Velg en eksamen, ta 4 timer uten fasit, og kryss-sjekk svarene etterpå. Studie-modus med løsninger skjult.",
       count: `${examCount} eksamener`,
-      borderActive: "border-rose-400 hover:border-rose-500",
-      bgActive:
-        "bg-rose-50/50 dark:bg-rose-950/20 hover:bg-rose-50 dark:hover:bg-rose-950/30",
+      band: "bg-rose-500",
       iconBg: "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300",
       accentText: "text-rose-700 dark:text-rose-300",
       status: "active",
@@ -67,9 +65,7 @@ function buildModuser(
       description:
         "Begrep på forsiden, definisjon på baksiden. Filter etter tema. Flip for å vise svaret.",
       count: `${flashcardCount} kort`,
-      borderActive: "border-amber-400 hover:border-amber-500",
-      bgActive:
-        "bg-amber-50/50 dark:bg-amber-950/20 hover:bg-amber-50 dark:hover:bg-amber-950/30",
+      band: "bg-amber-500",
       iconBg:
         "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300",
       accentText: "text-amber-700 dark:text-amber-300",
@@ -82,9 +78,7 @@ function buildModuser(
       description:
         "Drill forvekslingsbare begreper: Lamport vs vector, TCP vs UDP, primary-backup vs quorum, Chord successor vs finger.",
       count: `${matchingCount} par`,
-      borderActive: "border-violet-400 hover:border-violet-500",
-      bgActive:
-        "bg-violet-50/50 dark:bg-violet-950/20 hover:bg-violet-50 dark:hover:bg-violet-950/30",
+      band: "bg-violet-500",
       iconBg:
         "bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300",
       accentText: "text-violet-700 dark:text-violet-300",
@@ -97,9 +91,7 @@ function buildModuser(
       description:
         "Delay-beregning, throughput, Chord-FT, subnetting, vektor-klokker. Selvgradert med 'Vis løsning'-accordion.",
       count: `${calculationCount} drills`,
-      borderActive: "border-blue-400 hover:border-blue-500",
-      bgActive:
-        "bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+      band: "bg-blue-500",
       iconBg:
         "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
       accentText: "text-blue-700 dark:text-blue-300",
@@ -112,9 +104,7 @@ function buildModuser(
       description:
         "Kuratert oversikt over gjengangere på tvers av 2022–2025: Q-slot-tabell + mønster-kort med eksempler.",
       count: "Q-slot-analyse",
-      borderActive: "border-orange-400 hover:border-orange-500",
-      bgActive:
-        "bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-50 dark:hover:bg-orange-950/30",
+      band: "bg-orange-500",
       iconBg:
         "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300",
       accentText: "text-orange-700 dark:text-orange-300",
@@ -159,17 +149,10 @@ const TIPS = [
 ];
 
 function statusBadge(status: ModusCard["status"]) {
-  if (status === "active") {
-    return (
-      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">
-        Aktiv
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
-      Kommer senere
-    </span>
+  return status === "active" ? (
+    <Dat110Badge tone="active">Aktiv</Dat110Badge>
+  ) : (
+    <Dat110Badge tone="neutral">Kommer senere</Dat110Badge>
   );
 }
 
@@ -203,107 +186,114 @@ export default function DAT110OvingHubPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      {/* Breadcrumb */}
-      <nav
-        aria-label="Brødsmuler"
-        className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-6 flex-wrap"
+      <Dat110PageHeader
+        crumbs={[
+          { label: "Hjem", href: "/" },
+          { label: "DAT110", href: "/dat110" },
+          { label: "Øving" },
+        ]}
+        eyebrow="DAT110 · Øving og drilling"
+        title="Øving og drilling"
+        lead={
+          <>
+            Aktiv læring slår passiv lesing. Seks moduser med tre kilder for
+            quizspørsmål —{" "}
+            <strong className="font-semibold text-neutral-800 dark:text-neutral-100">
+              tidligere eksamener
+            </strong>
+            ,{" "}
+            <strong className="font-semibold text-neutral-800 dark:text-neutral-100">
+              Canvas-quizer
+            </strong>{" "}
+            og{" "}
+            <strong className="font-semibold text-neutral-800 dark:text-neutral-100">
+              genererte spørsmål
+            </strong>{" "}
+            fra pensum. Alle moduser har feedback og «Les mer»-lenker.
+          </>
+        }
+      />
+
+      <Dat110Section
+        eyebrow="Start her"
+        title="Velg modus"
+        description="Alle seks modusene er klare å bruke. Begynn med quiz for bredde, eller gå rett på en spesifikk drill."
       >
-        <Link href="/" className="hover:text-[var(--accent)]">
-          Hjem
-        </Link>
-        <span aria-hidden>/</span>
-        <Link href="/dat110" className="hover:text-[var(--accent)]">
-          DAT110
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-neutral-700 dark:text-neutral-200">Øving</span>
-      </nav>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {moduser.map((m) => {
+            const isActive = m.status === "active";
+            const cardClasses = isActive
+              ? "group flex flex-col rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+              : "flex flex-col rounded-xl border border-[var(--card-border)] bg-[var(--card)] overflow-hidden opacity-60 cursor-not-allowed";
 
-      {/* Hero */}
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold mb-3 text-neutral-900 dark:text-neutral-50">
-          Øving og drilling — DAT110
-        </h1>
-        <p className="text-neutral-700 dark:text-neutral-200 max-w-3xl">
-          Aktiv læring slår passiv lesing. Seks moduser, tre kilder for
-          quizspørsmål — <strong>tidligere DAT110-eksamener</strong>,{" "}
-          <strong>Canvas-quizer</strong> og <strong>genererte spørsmål</strong>{" "}
-          basert på pensum. Alle moduser har feedback og «Les mer»-lenker.
-        </p>
-      </header>
-
-      {/* Velg modus */}
-      <h2 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">
-        Velg modus
-      </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-        {moduser.map((m) => {
-          const isActive = m.status === "active";
-          const cardClasses = isActive
-            ? `group block rounded-xl border-2 p-5 transition-all hover:shadow-md hover:-translate-y-0.5 ${m.borderActive} ${m.bgActive}`
-            : "block rounded-xl border-2 p-5 border-neutral-200 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-900/30 opacity-70 cursor-not-allowed";
-
-          const inner = (
-            <>
-              <div className="flex items-start justify-between mb-3 gap-2">
+            const inner = (
+              <>
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
-                    isActive
-                      ? m.iconBg
-                      : "bg-neutral-200 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
-                  }`}
+                  className={`h-1 ${isActive ? m.band : "bg-neutral-300 dark:bg-neutral-700"}`}
                   aria-hidden
-                >
-                  {m.emoji}
-                </div>
-                {statusBadge(m.status)}
-              </div>
-              <h3
-                className={`font-bold text-lg mb-1 ${
-                  isActive
-                    ? "text-neutral-900 dark:text-neutral-50 group-hover:underline"
-                    : "text-neutral-600 dark:text-neutral-300"
-                }`}
-              >
-                {m.title}
-              </h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-3">
-                {m.description}
-              </p>
-
-              {isActive && (
-                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-neutral-200 dark:border-neutral-800">
-                  <span className="text-xs font-medium text-neutral-700 dark:text-neutral-200">
-                    {m.count}
-                  </span>
-                  <span
-                    className={`ml-auto inline-flex items-center gap-1 text-xs font-bold ${m.accentText}`}
+                />
+                <div className="p-5">
+                  <div className="flex items-start justify-between mb-3 gap-2">
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                        isActive
+                          ? m.iconBg
+                          : "bg-neutral-200 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
+                      }`}
+                      aria-hidden
+                    >
+                      {m.emoji}
+                    </div>
+                    {statusBadge(m.status)}
+                  </div>
+                  <h3
+                    className={`font-bold text-lg mb-1 ${
+                      isActive
+                        ? "text-neutral-900 dark:text-neutral-50 group-hover:underline"
+                        : "text-neutral-600 dark:text-neutral-300"
+                    }`}
                   >
-                    Åpne →
-                  </span>
-                </div>
-              )}
-            </>
-          );
+                    {m.title}
+                  </h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-3 leading-relaxed">
+                    {m.description}
+                  </p>
 
-          if (!isActive) {
-            return (
-              <div key={m.title} aria-disabled className={cardClasses}>
-                {inner}
-              </div>
+                  {isActive && (
+                    <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-[var(--card-border)]">
+                      <span className="text-xs font-medium text-neutral-700 dark:text-neutral-200">
+                        {m.count}
+                      </span>
+                      <span
+                        className={`ml-auto inline-flex items-center gap-1 text-xs font-bold ${m.accentText}`}
+                      >
+                        Åpne →
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </>
             );
-          }
-          return (
-            <Link key={m.title} href={m.href} className={cardClasses}>
-              {inner}
-            </Link>
-          );
-        })}
-      </div>
+
+            if (!isActive) {
+              return (
+                <div key={m.title} aria-disabled className={cardClasses}>
+                  {inner}
+                </div>
+              );
+            }
+            return (
+              <Link key={m.title} href={m.href} className={cardClasses}>
+                {inner}
+              </Link>
+            );
+          })}
+        </div>
+      </Dat110Section>
 
       {/* Quiz-kilde-sammendrag */}
-      <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-4 mb-12">
-        <p className="text-xs uppercase tracking-wider font-semibold text-neutral-500 dark:text-neutral-400 mb-1">
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4 mb-12 shadow-sm">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--muted)] mb-1">
           Flervalg-quiz fordeling
         </p>
         <p className="text-sm text-neutral-700 dark:text-neutral-200">
@@ -311,34 +301,36 @@ export default function DAT110OvingHubPage() {
         </p>
       </div>
 
-      {/* Anbefalt studieplan */}
-      <h2 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">
-        Anbefalt studieplan (6 dager til eksamen)
-      </h2>
-      <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-5 mb-8">
-        <div className="space-y-3">
-          {STUDIEPLAN.map((d, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-4 pb-3 border-b border-neutral-200 dark:border-neutral-800 last:border-b-0 last:pb-0"
-            >
-              <span className="flex-shrink-0 w-32 text-sm font-bold text-network-700 dark:text-network-300">
-                {d.label}
-              </span>
-              <span className="text-sm text-neutral-800 dark:text-neutral-100">
-                {d.plan}
-              </span>
-            </div>
-          ))}
+      <Dat110Section
+        eyebrow="Plan"
+        title="Anbefalt studieplan"
+        description="Seks dager til eksamen — en konkret rekkefølge fra bredde til repetisjon."
+      >
+        <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 shadow-sm">
+          <div className="space-y-3">
+            {STUDIEPLAN.map((d, i) => (
+              <div
+                key={i}
+                className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 pb-3 border-b border-[var(--card-border)] last:border-b-0 last:pb-0"
+              >
+                <span className="flex-shrink-0 sm:w-40 text-sm font-bold text-network-700 dark:text-network-300">
+                  {d.label}
+                </span>
+                <span className="text-sm text-neutral-700 dark:text-neutral-200 leading-relaxed">
+                  {d.plan}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </Dat110Section>
 
       {/* Tips */}
-      <div className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50/50 dark:bg-amber-950/20 p-5">
-        <h3 className="font-bold text-amber-800 dark:text-amber-200 mb-2">
-          💡 Slik bruker du øvingsmodulene best
+      <div className="rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/60 dark:bg-amber-950/20 p-5">
+        <h3 className="font-bold text-amber-900 dark:text-amber-200 mb-2 flex items-center gap-2">
+          <span aria-hidden>💡</span> Slik bruker du øvingsmodulene best
         </h3>
-        <ul className="text-sm space-y-1.5 list-disc list-inside text-neutral-800 dark:text-neutral-100">
+        <ul className="text-sm space-y-1.5 list-disc list-inside text-neutral-700 dark:text-neutral-100 leading-relaxed">
           {TIPS.map((t, i) => (
             <li key={i}>{t}</li>
           ))}
