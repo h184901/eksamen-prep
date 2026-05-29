@@ -124,7 +124,7 @@ export default function ExamPageLayout({ exam }: Props) {
 
       <div>
         {exam.questions.map((q) => (
-          <ExamQuestionCard key={q.number} question={q} />
+          <ExamQuestionCard key={q.number} question={q} examSlug={exam.slug} />
         ))}
       </div>
 

@@ -8,10 +8,20 @@ interface Props {
   content: string;
 }
 
+// Skjuler inline kilde-/note-referanser fra brukervendt prosa, dvs. parenteser
+// som inneholder et internt vault-slug, f.eks. "(*dat110-l9-naming-i* s. 18)"
+// eller "(basert på *dat110-l13-transport-a-2026* s. 5–7)". Faglig tekst,
+// "(L18 s. 12)"-forelesningsrefs, dedikert "## Provenance"-seksjon og
+// "Kilder og grunnlag"-accordion (egen sourceRefs-kilde) beholdes.
+function stripInlineSourceRefs(md: string): string {
+  return md.replace(/[ \t]*\([^()]*dat110-[a-z0-9-]+[^()]*\)/g, "");
+}
+
 // Renders DAT110 vault concept/topic body markdown.
 // Wikilinks have been pre-resolved at build-time in scripts/sync-dat110-vault.mjs
 // to either markdown links (for resolvable targets) or *italic stubs* (for everything else).
 export default function VaultMarkdown({ content }: Props) {
+  const cleaned = stripInlineSourceRefs(content);
   return (
     <div className="vault-markdown text-neutral-800 dark:text-neutral-100 leading-relaxed">
       <ReactMarkdown
@@ -128,7 +138,7 @@ export default function VaultMarkdown({ content }: Props) {
           hr: () => <hr className="my-8 border-t border-neutral-200 dark:border-neutral-800" />,
         }}
       >
-        {content}
+        {cleaned}
       </ReactMarkdown>
     </div>
   );

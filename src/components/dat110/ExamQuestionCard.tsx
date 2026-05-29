@@ -2,9 +2,42 @@ import type { ExamQuestion } from "@/lib/dat110-vault/types";
 import VaultMarkdown from "./VaultMarkdown";
 import SolutionAccordion from "./SolutionAccordion";
 import LearnMoreLinks from "./LearnMoreLinks";
+import ExamChordRingFigure from "./diagrams/ExamChordRingFigure";
 
 interface Props {
   question: ExamQuestion;
+  examSlug?: string;
+}
+
+// Pedagogiske figurer KUN for oppgaver der ring-strukturen er fullt spesifisert
+// i oppgavetekst/sensorveiledning (ikke gjettet). Originaltopologier som bare
+// finnes i PDF beholder sin tekstlige figur-merknad — se ExamQuestionCard.
+function ExamQuestionFigure({
+  examSlug,
+  number,
+}: {
+  examSlug: string;
+  number: number;
+}) {
+  if (examSlug === "dat110-eksamen-06-2025" && number === 10) {
+    return (
+      <ExamChordRingFigure
+        m={5}
+        nodes={[5, 15, 23, 27]}
+        caption="Chord-ring (m = 5, id-rom 0–31) med server-replikaer på 5, 15, 23 og 27."
+      />
+    );
+  }
+  if (examSlug === "dat110-eksamen-05-2024" && number === 10) {
+    return (
+      <ExamChordRingFigure
+        m={5}
+        nodes={[0, 9, 17, 30]}
+        caption="Chord-ring (id-rom 0–31) med fire noder på 0, 9, 17 og 30."
+      />
+    );
+  }
+  return null;
 }
 
 // One exam question card. Renders the question prompt, optional figureNote
@@ -13,7 +46,7 @@ interface Props {
 //
 // SourceRefs are NEVER shown inline — they live in the data for grounding only
 // and can surface via expandable "Kilder og grunnlag" on concept/topic pages.
-export default function ExamQuestionCard({ question }: Props) {
+export default function ExamQuestionCard({ question, examSlug }: Props) {
   const hasSubs = Array.isArray(question.subquestions) && question.subquestions.length > 0;
 
   return (
@@ -45,6 +78,11 @@ export default function ExamQuestionCard({ question }: Props) {
           <strong className="font-semibold">Figur-merknad:</strong>{" "}
           {question.figureNote}
         </aside>
+      )}
+
+      {/* Pedagogisk figur der strukturen er trygt utledbar fra data. */}
+      {examSlug && (
+        <ExamQuestionFigure examSlug={examSlug} number={question.number} />
       )}
 
       {/* Question-level solution (only when no subquestions). */}

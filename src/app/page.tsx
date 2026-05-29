@@ -129,8 +129,12 @@ const baseSubjects: Subject[] = [
       "SQL, JPA/ORM, NoSQL, modellering og normalisering.",
     color: "dat107",
     href: "/dat107",
-    // Ingen chips: eneste relevante under-rute er /dat107 selv — duplikat av kort-tittelen.
-    highlights: [],
+    highlights: [
+      { label: "SQL", href: "/dat107/sql" },
+      { label: "Modellering", href: "/dat107/modellering" },
+      { label: "JPA", href: "/dat107/jpa" },
+      { label: "NoSQL", href: "/dat107/nosql" },
+    ],
   },
 ];
 
