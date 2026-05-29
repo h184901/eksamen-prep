@@ -37,7 +37,7 @@ export default function CN1_3Page() {
           {[
             "Forklare pakkeswitching og store-and-forward-prinsippet",
             "Beregne ende-til-ende forsinkelse med store-and-forward",
-            "Forklare koforsinkelse og pakketap ved overbelastning",
+            "Forklare køforsinkelse og pakketap ved overbelastning",
             "Forklare kretsswitching og FDM/TDM-multipleksing",
             "Sammenligne pakkeswitching og kretsswitching (effektivitet, garantier)",
             "Forklare ISP-hierarkiet og rollen til IXP-er",
@@ -220,7 +220,7 @@ export default function CN1_3Page() {
                 ["Ressursallokering", "Dynamisk (statistisk multipleksing)", "Statisk (reservert for sesjonen)"],
                 ["Effektivitet", "Høy (ledig kapasitet kan brukes av andre)", "Lav (stille perioder sloser kapasitet)"],
                 ["QoS-garanti", "Ingen garanti (best-effort)", "Garantert båndbredde og forsinkelse"],
-                ["Koforsinkelse", "Ja (variabel, avhenger av trafikk)", "Nei (dedikert kanal)"],
+                ["Køforsinkelse", "Ja (variabel, avhenger av trafikk)", "Nei (dedikert kanal)"],
                 ["Pakketap", "Mulig ved overbelastning", "Ingen (reservert)"],
                 ["Kompleksitet", "Enkel (ingen oppsett)", "Krever call-setup-protokoll"],
                 ["Egnet for", "Bursty trafikk (web, e-post)", "Kontinuerlig trafikk (tale, video)"],
@@ -349,7 +349,7 @@ export default function CN1_3Page() {
         <span className="text-amber-800 dark:text-amber-300">
           Sammenligning av pakkeswitching og kretsswitching er et klassisk eksamenstema.
           Husk at pakkeswitching er effektivt for bursty trafikk, og at store-and-forward gir
-          ende-til-ende forsinkelse N*L/R. Trafikkintensitet La/R er koblingen til koforsinkelse.
+          ende-til-ende forsinkelse N*L/R. Trafikkintensitet La/R er koblingen til køforsinkelse.
           Se delkapittel 1.4 for de detaljerte beregningene som eksamen spør om.
         </span>
       </div>

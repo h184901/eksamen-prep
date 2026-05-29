@@ -95,7 +95,7 @@ export default function OppsummeringPage() {
               ["Sending (d_trans)", "L / R", "Pakkelengde og linjekapasitet"],
               ["Forplantning (d_prop)", "d / s", "Fysisk avstand og signalhastighet"],
               ["Behandling (d_proc)", "~us", "Ruterens prosessorkraft"],
-              ["Ko (d_queue)", "Variabel", "Trafikkintensitet La/R"],
+              ["Kø (d_queue)", "Variabel", "Trafikkintensitet La/R"],
             ]}
           />
           <p className="text-xs text-[var(--muted)]">Husk: La/R &gt; 1 = pakketap. Ende-til-ende = sum over alle linker.</p>

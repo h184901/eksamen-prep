@@ -12,7 +12,7 @@ function ForsinkelsesKalkulator() {
   const [d, setD] = useState(10000);      // avstand i meter
   const [s, setS] = useState(2e8);        // signalhastighet m/s
   const [dproc, setDproc] = useState(0.002); // behandlingsforsinkelse s
-  const [dqueue, setDqueue] = useState(0.01); // koforsinkelse s
+  const [dqueue, setDqueue] = useState(0.01); // køforsinkelse s
 
   const dtrans = L / R;
   const dprop = d / s;
@@ -29,7 +29,7 @@ function ForsinkelsesKalkulator() {
   const maxBar = Math.max(dtrans, dprop, dproc, dqueue, 0.0001);
   const bars = [
     { label: "d_proc", val: dproc, color: "bg-purple-500", tooltip: "Behandlingsforsinkelse" },
-    { label: "d_queue", val: dqueue, color: "bg-orange-500", tooltip: "Koforsinkelse" },
+    { label: "d_queue", val: dqueue, color: "bg-orange-500", tooltip: "Køforsinkelse" },
     { label: "d_trans", val: dtrans, color: "bg-blue-500", tooltip: "Sendingsforsinkelse = L/R" },
     { label: "d_prop", val: dprop, color: "bg-green-500", tooltip: "Forplantningsforsinkelse = d/s" },
   ];
@@ -89,7 +89,7 @@ function ForsinkelsesKalkulator() {
           </div>
           <div>
             <label className="block text-xs font-medium mb-1">
-              d_queue: Ko = <strong>{(dqueue*1000).toFixed(1)} ms</strong>
+              d_queue: Kø = <strong>{(dqueue*1000).toFixed(1)} ms</strong>
             </label>
             <input type="range" min="0" max="0.1" step="0.001" value={dqueue}
               onChange={e => setDqueue(Number(e.target.value))}
@@ -267,7 +267,7 @@ export default function CN1_4Page() {
             },
             {
               nr: "2",
-              navn: "Koforsinkelse",
+              navn: "Køforsinkelse",
               symbol: "d_queue",
               formel: null,
               farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
@@ -411,7 +411,7 @@ export default function CN1_4Page() {
             </div>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-700 p-2 text-xs">
-              <strong>Observasjon:</strong> Koforsinkelsen (20 ms) dominerer fullstendig! Dette er typisk i virkelige nettverk under last.
+              <strong>Observasjon:</strong> Køforsinkelsen (20 ms) dominerer fullstendig! Dette er typisk i virkelige nettverk under last.
             </div>
           </div>
         )}
@@ -542,7 +542,7 @@ export default function CN1_4Page() {
       {/* Trafikkintensitet */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-network-600 dark:text-network-400">
-          Trafikkintensitet og koforsinkelse
+          Trafikkintensitet og køforsinkelse
         </h2>
 
         <FormulaBox

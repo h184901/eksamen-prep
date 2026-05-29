@@ -66,7 +66,7 @@ export default function CN1OppgaverPage() {
         <p className="text-sm text-[var(--muted)] mb-3">
           En pakke på L = 1000 bits sendes over en link med kapasitet R = 10^6 bits/s.
           Avstanden er d = 10 000 m og signalhastigheten er s = 5 x 10^8 m/s.
-          Behandlingsforsinkelse d_proc = 0.002 s, koforsinkelse d_queue = 0.01 s.
+          Behandlingsforsinkelse d_proc = 0.002 s, køforsinkelse d_queue = 0.01 s.
           Beregn total nodalforsinkelse.
         </p>
         <Hint>Bruk d_trans = L/R og d_prop = d/s, deretter summer alle fire.</Hint>
@@ -83,7 +83,7 @@ export default function CN1OppgaverPage() {
         <p className="text-sm text-[var(--muted)] mb-3">
           H1 sender til H2 via 3 rutere (dvs. 4 linker). Alle linker: R = 100 Mbps,
           d = 5 km, s = 2 x 10^8 m/s. Pakkelengde L = 1500 bytes.
-          Ignorer behandlings- og koforsinkelse.
+          Ignorer behandlings- og køforsinkelse.
           Hva er total ende-til-ende forsinkelse?
         </p>
         <Hint>Husk: 1 byte = 8 bits. 4 linker betyr 4 x (d_trans + d_prop).</Hint>
@@ -102,11 +102,11 @@ export default function CN1OppgaverPage() {
           En ruter har en utgangslink med R = 2 Mbps. Pakker ankommer med rate a = 100 pakker/s,
           og gjennomsnittlig pakkelengde er L = 10 000 bits.
           a) Beregn trafikkintensiteten.
-          b) Hva skjer med koforsinkelsen?
+          b) Hva skjer med køforsinkelsen?
         </p>
         <Answer>
           <p className="font-mono">a) I = La/R = (10000 * 100) / (2x10^6) = 1 000 000 / 2 000 000 = 0.5</p>
-          <p className="mt-2">b) I = 0.5 betyr moderat belastning. Koforsinkelsen er merkbar men
+          <p className="mt-2">b) I = 0.5 betyr moderat belastning. Køforsinkelsen er merkbar men
           ikke kritisk. Forsinkelsen øker ikke-lineært — når I nærmer seg 1.0 eksploderer den.</p>
         </Answer>
       </ExerciseCard>
@@ -119,7 +119,7 @@ export default function CN1OppgaverPage() {
           Host A sender en pakke på 1000 bytes til Host B via to rutere (3 linker).
           Link 1: R = 10 Mbps, d = 100 km. Link 2: R = 5 Mbps, d = 200 km.
           Link 3: R = 10 Mbps, d = 50 km. s = 2 x 10^8 m/s for alle.
-          d_proc = 1 ms per ruter. Ignorer koforsinkelse.
+          d_proc = 1 ms per ruter. Ignorer køforsinkelse.
           a) Beregn total ende-til-ende forsinkelse.
           b) Hva er gjennomstrømningen?
         </p>

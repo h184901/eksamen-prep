@@ -89,7 +89,7 @@ export default function CN1FormlerPage() {
       <FormulaBox
         title="Trafikkintensitet"
         formula="I = La / R"
-        desc="L = pakkelengde, a = ankomstrate, R = linjekapasitet. Når I → 1 eksploderer koforsinkelsen. I > 1 betyr pakketap."
+        desc="L = pakkelengde, a = ankomstrate, R = linjekapasitet. Når I → 1 eksploderer køforsinkelsen. I > 1 betyr pakketap."
       />
 
       <FormulaBox

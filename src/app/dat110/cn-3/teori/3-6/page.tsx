@@ -117,7 +117,7 @@ export default function CN3Teori36Page() {
             </thead>
             <tbody>
               {[
-                ["Lang koforsinkelse", "Pakker venter lenge i ruterkoen. Selv om pakker ikke tapes, øker RTT dramatisk."],
+                ["Lang køforsinkelse", "Pakker venter lenge i ruterkøen. Selv om pakker ikke tapes, øker RTT dramatisk."],
                 ["Pakketap (drop)", "Fylt ruterbuffer → pakker kastes. TCP tolker dette som metningssignal."],
                 ["Unødvendig retransmisjon", "Timeout for pakker som er i køen (ikke tapt) → sender retransmitterer → mer trafikk = verre metning."],
                 ["Kastet arbeid oppstroms", "Ressursene brukt på pakker som slipper gjennom N-1 rutere og droppes i den N-te er bortkastet. Verre i multihopp-nettverk."],
