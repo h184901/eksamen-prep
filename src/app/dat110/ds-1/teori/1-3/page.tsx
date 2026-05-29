@@ -137,9 +137,9 @@ export default function DS1_3Page() {
       ),
       egenskaper: [
         "Alle noder er både klient og server (symmetrisk)",
-        "Ingen sentral flaskehals — svart skalerbar",
-        "Robust: feil i en node pavirker ikke systemet i stor grad",
-        "Vanskeligere a administrere og sikre",
+        "Ingen sentral flaskehals — svært skalerbar",
+        "Robust: feil i en node påvirker ikke systemet i stor grad",
+        "Vanskeligere å administrere og sikre",
         "To typer overlay: strukturert (Chord DHT) og ustrukturert",
       ],
       eksempler: ["BitTorrent (fildeling)", "Bitcoin/Ethereum (blockchain)", "Gnutella (tidlig P2P)", "ChordDHT (oblig i DAT110)"],
@@ -354,7 +354,7 @@ export default function DS1_3Page() {
               </div>
               <div className="grid sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="font-bold text-xs mb-1">Hva far kunden?</p>
+                  <p className="font-bold text-xs mb-1">Hva får kunden?</p>
                   <p className="text-[var(--muted)]">{m.hvaFar}</p>
                 </div>
                 <div>
@@ -638,7 +638,7 @@ export default function DS1_3Page() {
         <h3 className="font-bold text-red-700 dark:text-red-400 mb-2">Vanlige feil på eksamen</h3>
         <ul className="space-y-2 text-sm">
           {[
-            "Blande IaaS og PaaS: IaaS = du far VM-er (du installerer OS), PaaS = du deployerer kode (cloud håndterer OS)",
+            "Blande IaaS og PaaS: IaaS = du får VM-er (du installerer OS), PaaS = du deployerer kode (cloud håndterer OS)",
             "Glemme at cluster er homogent og grid er heterogent",
             "Tro at P2P er uten sentral komponent — mange P2P-systemer har en hybrid tracker/indeksserver",
             'Si at cloud "er" IaaS — cloud er paraplybegrepet, IaaS/PaaS/SaaS er servicemodellene under',

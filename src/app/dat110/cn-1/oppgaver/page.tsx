@@ -140,7 +140,7 @@ export default function CN1OppgaverPage() {
       <ExerciseCard num={5} title="Store-and-forward med flere pakker" difficulty="vanskelig">
         <p className="text-sm text-[var(--muted)] mb-3">
           En fil på 10 000 bits sendes som 5 pakker (hver 2000 bits) over 2 linker via
-          en ruter. Begge linker: R = 1 Mbps. Ignorer forplantning, prosessering og ko.
+          en ruter. Begge linker: R = 1 Mbps. Ignorer forplantning, prosessering og kø.
           Når er siste bit av siste pakke levert hos mottaker?
         </p>
         <Hint>Første pakke: 2 x L/R (store-and-forward over 2 linker). Neste pakker overlappes (pipelining).</Hint>

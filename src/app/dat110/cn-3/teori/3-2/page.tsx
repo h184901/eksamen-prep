@@ -211,7 +211,7 @@ export default function CN3Teori32Page() {
                 ["Flytkontroll", "Nei", "Ja (rwnd)"],
                 ["Metningskontroll", "Nei", "Ja (AIMD, slow start)"],
                 ["Header-størrelse", "8 bytes (fast)", "20+ bytes (variabel)"],
-                ["Forsinkelse", "Lav (ingen handshake, ingen ko-mekanisme)", "Høyere (handshake, retransmisjon)"],
+                ["Forsinkelse", "Lav (ingen handshake, ingen kø-mekanisme)", "Høyere (handshake, retransmisjon)"],
                 ["Bruksområder", "DNS, streaming, VoIP, gaming, IoT", "HTTP, e-post, filoverføring"],
               ].map(([egenskap, udp, tcp], i) => (
                 <tr key={egenskap} className={i % 2 === 0 ? "bg-white dark:bg-neutral-900/40" : "bg-neutral-50 dark:bg-neutral-800/30"}>

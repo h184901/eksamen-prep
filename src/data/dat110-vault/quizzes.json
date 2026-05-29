@@ -909,19 +909,19 @@
       "question": "En Chord-ring (5-bit adresserom) har noder P1=20, P2=10, P3=2. Hvor blir nøklene 12, 1, 5 og 31 lagret etter successor-regelen?",
       "qtype": "multiple_choice",
       "options": [
-        "P1 holder 12; P2 holder 1, 5 og 31",
-        "P1 holder 1, 5 og 31; P2 holder 12",
-        "P1 holder 12; P2 holder 1 og 5; P3 holder 31",
-        "P3 holder 1, 5 og 31; P2 holder 12"
+        "P3 (id 2) holder 1 og 31; P2 (id 10) holder 5; P1 (id 20) holder 12",
+        "P1 (id 20) holder 12; P2 (id 10) holder 1, 5 og 31",
+        "P3 (id 2) holder 1 og 5; P2 (id 10) holder 31; P1 (id 20) holder 12",
+        "P1 (id 20) holder 1, 5 og 31; P2 (id 10) holder 12"
       ],
       "correctIndices": [0],
-      "explanationCorrect": "Successor-regelen sier at nøkkel k tilhører første node ≥ k klokken rundt ringen. På ringen 2 → 10 → 20 → (wraps) blir: 12 → 20 (P1), 1 → 2 (P3 men nøkkel 1 er ≤ 2 så P3), 5 → 10 (P2), 31 → wraps → 2 (P3). Konvensjonen i Tanenbaum og Canvas-fasit her lar wrap-rundt gå til P2 (10), siden 31 > 20 og første node ≥ 31 mod 32 = 31 → ingen, dermed minste node = P3 (2). Canvas-fasit: P1=12, P2={1,5,31}.",
-      "explanationIncorrect": "Vanlige feil: feil retning på ringen, eller å glemme at nøkler > maks-node wrap-er til første node i ringen.",
+      "explanationCorrect": "Successor-regelen: nøkkel k lagres på succ(k) = noden med minste id ≥ k, og wrap-er rundt ringen hvis ingen node er ≥ k. Ringen har noder 2 (P3), 10 (P2), 20 (P1). k=12 → minste id ≥ 12 er 20 → P1. k=5 → minste id ≥ 5 er 10 → P2. k=1 → minste id ≥ 1 er 2 → P3. k=31 → ingen node ≥ 31 (høyeste er 20), så wrap rundt → minste id i ringen er 2 → P3. Altså P1={12}, P2={5}, P3={1, 31}. Kontroll med intervaller (pred, id]: P3 dekker (20, 2] = {21..31, 0, 1, 2} og fanger både 31 og 1; P2 dekker (2, 10] og fanger 5; P1 dekker (10, 20] og fanger 12.",
+      "explanationIncorrect": "Vanlige feil: å la nøkler større enn høyeste node-id (her 31) gå til feil node i stedet for å wrap-e rundt til den minste noden (P3 = 2), eller å bruke predecessor i stedet for successor (feil retning på ringen).",
       "optionExplanations": [
-        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Canvas-fasit: 12 ≤ 20 → P1; 1, 5 og 31 havner alle på P2 etter successor-regelen i denne ringen." },
-        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "P1 (20) tar ikke alle små nøkler — successor-regelen plasserer dem hos nærmeste node ≥ k klokken rundt." },
-        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Delvis riktig på 12, men splittet 1/5 fra 31 stemmer ikke med Canvas-fasit for denne ringen." },
-        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Plasserer alt feil — successor-retning og wrap-rundt er feiltolket." }
+        { "optionIndex": 0, "isCorrect": true, "shortExplanation": "Riktig: succ(12)=20 (P1), succ(5)=10 (P2), succ(1)=2 (P3), og succ(31) wrap-er rundt til 2 (P3). P3 er ansvarlig for intervallet (20, 2]." },
+        { "optionIndex": 1, "isCorrect": false, "shortExplanation": "Feil: 1 og 31 havner ikke på P2. succ(1)=2 og succ(31)=wrap→2 — begge på P3 (id 2), ikke P2 (id 10)." },
+        { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Feil: succ(5)=10 er P2, ikke P3; og succ(31) wrap-er til P3 (2), ikke P2." },
+        { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Feil retning: dette tilsvarer predecessor-regelen. Successor går klokken rundt til første node med id ≥ k." }
       ],
       "learnMoreLinks": [
         { "label": "Chord-ring og successor-regel", "href": "/dat110/begreper/chord-ring", "kind": "concept", "slug": "chord-ring" },

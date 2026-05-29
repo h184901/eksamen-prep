@@ -477,7 +477,7 @@
           "prompt": "Beregn stretch/relative delay penalty (RDP) når en melding multicastes fra B til E ved å bruke de to multicast-trærne:\n\n1) B – C – A – D – E (med edges 22, 37, 47, 17)\n2) A – B – C – E – D (med edges 17, 22, 27, 17)\n\nHvilket tre er mer effektivt for å rute fra B til E? Forklar.",
           "qtype": "calculation",
           "solution": {
-            "expectedAnswer": "**Best fysisk sti B → E** har delay **47** (gitt).\n\n**Tree 1** (B–C–A–D–E): sti for B→E = B–C–A–D–E = 22+37+47+17 = 123. Hmm, sensor oppgir delayen som 123, så RDP = 123/47 ≈ **2,62**.\n\n*(Mer sannsynlig tolkning fra sensor: stien i tree-er sammenlignet med fysisk best-sti.)*\n\n**Tree 2** (A–B–C–E–D): sti B → C → E = 22+27 = 49. RDP = 49/47 ≈ **1,04**.\n\n**Tree 2 er mer effektiv** — RDP ≈ 1 betyr at overlay-stien er nesten like kort som fysisk beste sti.",
+            "expectedAnswer": "**Best fysisk sti B → E** har delay **47** (gitt).\n\n**Tree 1** (B–C–A–D–E): sti for B→E = B–C–A–D–E = 22+37+47+17 = 123. RDP = 123/47 ≈ **2,62**.\n\n**Tree 2** (A–B–C–E–D): sti B → C → E = 22+27 = 49. RDP = 49/47 ≈ **1,04**.\n\n**Tree 2 er mer effektiv** — RDP ≈ 1 betyr at overlay-stien er nesten like kort som fysisk beste sti.",
             "shortReasoning": "RDP = (delay i overlay-tre) / (delay i fysisk best-sti). RDP → 1 er optimalt; >> 1 betyr at overlay-treet legger til betydelig forsinkelse."
           }
         },

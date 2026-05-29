@@ -64,7 +64,7 @@ const transparensTyper = [
     norsk: "Feil-transparens",
     beskrivelse: "Skjuler feil og gjenoppretting i et objekt",
     eksempel:
-      "En webserver krasjer, en annen overtar umiddelbart. Brukeren opplever et lite forsinkelse, men far til slutt svar — ingen synlig feil. Vanskeligst a oppna i praksis.",
+      "En webserver krasjer, en annen overtar umiddelbart. Brukeren opplever et lite forsinkelse, men får til slutt svar — ingen synlig feil. Vanskeligst å oppnå i praksis.",
     hukommelse: "FAILURE = skjuler at noe GIKK GALT og ble fikset",
   },
 ];
@@ -95,7 +95,7 @@ export default function DS1_2Page() {
       <div>
         <h1 className="text-2xl font-bold mb-2">1.2 Design-mål</h1>
         <p className="text-[var(--muted)] max-w-2xl">
-          Bare fordi man <em>kan</em> bygge et distribuert system, betyr det ikke at man <em>bor</em> gjøre det.
+          Bare fordi man <em>kan</em> bygge et distribuert system, betyr det ikke at man <em>bør</em> gjøre det.
           Det må være verdt innsatsen. Her er de fire design-målene som gjør distribusjon meningsfull —
           og de 7 transparenstypene du MÅ kunne på eksamen.
         </p>
@@ -194,7 +194,7 @@ export default function DS1_2Page() {
             <h3 className="font-bold text-blue-700 dark:text-blue-400 text-base">Åpenhet (Openness)</h3>
             <p>
               Et åpent distribuert system er et system som tilbyr komponenter som lett kan brukes av eller
-              integreres i andre systemer. Et åpent system bor også selv bestå av komponenter som stammer
+              integreres i andre systemer. Et åpent system bør også selv bestå av komponenter som stammer
               fra andre steder.
             </p>
             <div className="space-y-2">
@@ -202,15 +202,15 @@ export default function DS1_2Page() {
                 <p className="font-bold text-xs mb-1">IDL — Interface Definition Language</p>
                 <p className="text-xs text-[var(--muted)]">
                   Komponenter eksponerer grensesnitt definert i et IDL. Et IDL beskriver <em>syntaksen</em>
-                  (funksjoner, parametre, returverdier) — men sjelden semantikken (naturlig sprak).
+                  (funksjoner, parametre, returverdier) — men sjelden semantikken (naturlig språk).
                   Eksempel: Protobuf (gRPC), WSDL (SOAP), OpenAPI/Swagger.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-2">
                 {[
-                  { begrep: "Interoperabilitet", forklaring: "To implementasjoner fra ulike leverandorer kan samarbeide ved å folge en felles standard" },
-                  { begrep: "Portabilitet", forklaring: "En applikasjon laget for system å kan kjøres uten endringer på system B som implementerer samme grensesnitt" },
-                  { begrep: "Utvidbarhet", forklaring: "Nye komponenter kan lett legges til eller gamle byttes ut uten å pavirke resten av systemet" },
+                  { begrep: "Interoperabilitet", forklaring: "To implementasjoner fra ulike leverandører kan samarbeide ved å følge en felles standard" },
+                  { begrep: "Portabilitet", forklaring: "En applikasjon laget for system A kan kjøres uten endringer på system B som implementerer samme grensesnitt" },
+                  { begrep: "Utvidbarhet", forklaring: "Nye komponenter kan lett legges til eller gamle byttes ut uten å påvirke resten av systemet" },
                   { begrep: "Policy vs. mekanisme", forklaring: "Systemet tilbyr mekanismer (HVA det kan gjøre); brukeren velger policy (HVORDAN det brukes)" },
                 ].map((b) => (
                   <div key={b.begrep} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-blue-200 dark:border-blue-800/40 p-2">
@@ -389,7 +389,7 @@ export default function DS1_2Page() {
           <h3 className="font-bold text-red-700 dark:text-red-400 mb-2 text-sm">Vanlige feil</h3>
           <ul className="space-y-1 text-sm text-[var(--muted)]">
             <li><span className="text-red-500 font-bold">!</span> Blander migration og relocation: huske at migration = brukeren/enheten beveges, relocation = ressursen flyttes av systemet</li>
-            <li><span className="text-red-500 font-bold">!</span> Glemme at failure transparency er umulig å oppna fullt ut (nettverkspartisjon, CAP-teoremet)</li>
+            <li><span className="text-red-500 font-bold">!</span> Glemme at failure transparency er umulig å oppnå fullt ut (nettverkspartisjon, CAP-teoremet)</li>
             <li><span className="text-red-500 font-bold">!</span> Tro at "persistence transparency" er en av de 7 — boka nevner 7, ikke 8 (persistence er ikke i ISO-listen i boka)</li>
           </ul>
         </div>
@@ -405,8 +405,8 @@ export default function DS1_2Page() {
           <div>
             <h3 className="font-bold text-blue-700 dark:text-blue-400 mb-2">IDL — Interface Definition Language</h3>
             <p className="text-sm text-[var(--muted)] mb-3">
-              Et IDL lar deg beskrive et grensesnitt på en sprak-uavhengig mate. Enhver som implementerer
-              grensesnittet kan snakke med enhver som bruker det — uavhengig av programmeringssprak,
+              Et IDL lar deg beskrive et grensesnitt på en språk-uavhengig måte. Enhver som implementerer
+              grensesnittet kan snakke med enhver som bruker det — uavhengig av programmeringsspråk,
               OS eller arkitektur.
             </p>
             <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 font-mono text-xs p-3 border border-blue-200 dark:border-blue-800/40">
@@ -448,8 +448,8 @@ export default function DS1_2Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          De 7 transparenstypene er et klassisk eksamensspørsmål. Du bor kunne ramse opp alle 7 og gi
-          et eksempel på hver. Vanskeligst a skille: location (objektet er på ukjent sted), relocation
+          De 7 transparenstypene er et klassisk eksamensspørsmål. Du bør kunne ramse opp alle 7 og gi
+          et eksempel på hver. Vanskeligst å skille: location (objektet er på ukjent sted), relocation
           (systemet flytter objektet, skjult for deg), migration (enheten/brukeren beger seg, skjult for motparten).
           På 2025-eksamen spurte oppgave 1g om &ldquo;rapid elasticity&rdquo; — det er en cloud-egenskap relatert til
           skalerbarhet.

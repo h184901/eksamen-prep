@@ -101,7 +101,7 @@ export default function CN1FormlerPage() {
       <FormulaBox
         title="Gjennomstrømning med delt link"
         formula="Per tilkobling = R_delt / N_tilkoblinger"
-        desc="Når N tilkoblinger deler en kjernelink med kapasitet R, far hver R/N (rettferdig deling)."
+        desc="Når N tilkoblinger deler en kjernelink med kapasitet R, får hver R/N (rettferdig deling)."
         level="secondary"
       />
 

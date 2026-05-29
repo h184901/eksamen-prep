@@ -56,7 +56,7 @@ const LAYERS = [
     border: "border-orange-400",
     text: "text-orange-700 dark:text-orange-300",
     hvem: "Verter + Rutere + Svitsjer",
-    hva: "Dataoverføring over EN enkelt kommunikasjonsforbindelse. MAC-adresser identifiserer enheter på linknivA. Feildeteksjon (CRC). Adressering med 48-bit MAC-adresser.",
+    hva: "Dataoverføring over EN enkelt kommunikasjonsforbindelse. MAC-adresser identifiserer enheter på linknivå. Feildeteksjon (CRC). Adressering med 48-bit MAC-adresser.",
     service: "Overføring av rammer over en enkelt link (fra node til nabnode). PAlitelig ELLER upålitelig avhengig av protokoll.",
     implementert: "Nettverkskort (NIC) og svitsjer",
   },
@@ -178,7 +178,7 @@ export default function CN1_5Page() {
             {[
               { fordel: "Modularitet", forklaring: "Hvert lag kan endres uavhengig (bytt ut WiFi med Ethernet uten å endre TCP)" },
               { fordel: "Abstrahering", forklaring: "Applikasjoner trenger ikke vite om kabler og signaler" },
-              { fordel: "Standardisering", forklaring: "Gjør det mulig å bygge interoperable produkter fra ulike leverandorer" },
+              { fordel: "Standardisering", forklaring: "Gjør det mulig å bygge interoperable produkter fra ulike leverandører" },
             ].map(({ fordel, forklaring }) => (
               <div key={fordel} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-2">
                 <p className="font-bold">{fordel}</p>
@@ -326,8 +326,8 @@ export default function CN1_5Page() {
             </p>
 
             <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-700 p-2 text-xs">
-              <strong>Viktig:</strong> Rutere mA dekapsulere til lag 3 for å lese IP-adressen og bestemme
-              neste hopp. De re-kapsulerer sA med ny lag-2-header for neste link.
+              <strong>Viktig:</strong> Rutere må dekapsulere til lag 3 for å lese IP-adressen og bestemme
+              neste hopp. De re-kapsulerer så med ny lag-2-header for neste link.
             </div>
           </div>
         )}

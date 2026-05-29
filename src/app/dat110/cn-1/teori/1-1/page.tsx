@@ -101,7 +101,7 @@ export default function CN1_1Page() {
                 "ISP = Internet Service Provider (f.eks. Telenor, Altibox)",
                 "Hierarki: Tier-1 (globale ryggrads-ISPer) > regionale ISPer > aksess-ISPer",
                 "Internett = nettverk av nettverk, sammenkoblet via ISP-hierarkiet",
-                "Innholdsleverandorer (Google, Netflix) har egne private nettverk",
+                "Innholdsleverandører (Google, Netflix) har egne private nettverk",
               ],
             },
           ].map((kort) => (
@@ -238,7 +238,7 @@ export default function CN1_1Page() {
               { felt: "Meldingstyper", forklaring: "Hvilke typer meldinger som kan sendes (request, response, error)" },
               { felt: "Syntaks (format)", forklaring: "Strukturen og feltene i meldingene" },
               { felt: "Semantikk (mening)", forklaring: "Hva meldingsfeltene betyr" },
-              { felt: "Prosesseringslogikk", forklaring: "NAt og i hvilken rekkefølge meldinger sendes/behandles" },
+              { felt: "Prosesseringslogikk", forklaring: "Når og i hvilken rekkefølge meldinger sendes/behandles" },
             ].map(({ felt, forklaring }) => (
               <div key={felt} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-amber-200 dark:border-amber-800/40 p-3">
                 <p className="font-bold text-amber-700 dark:text-amber-400 text-xs">{felt}</p>

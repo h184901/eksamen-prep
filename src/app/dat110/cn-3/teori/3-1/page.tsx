@@ -227,7 +227,7 @@ export default function CN3Teori31Page() {
           </div>
           <div className="mt-3 rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
             <p className="text-xs font-bold">Praktisk konsekvens:</p>
-            <p className="text-xs text-[var(--muted)] mt-1">En webserver (port 80) kan betjene tusenvis av samtidige TCP-tilkoblinger fordi hver tilkobling far sin unike socket basert på 4-tuple. Med UDP matte alle klienter dele samme socket.</p>
+            <p className="text-xs text-[var(--muted)] mt-1">En webserver (port 80) kan betjene tusenvis av samtidige TCP-tilkoblinger fordi hver tilkobling får sin unike socket basert på 4-tuple. Med UDP måtte alle klienter dele samme socket.</p>
           </div>
         </Card>
       </Section>

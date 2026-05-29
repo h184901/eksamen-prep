@@ -141,10 +141,10 @@ function TrafikkintensitetVis() {
   };
 
   const getQueueDescription = (val: number) => {
-    if (val < 0.3) return "Svart lite ko. Lav forsinkelse.";
-    if (val < 0.7) return "Moderat ko. Merkbar forsinkelse.";
-    if (val < 0.95) return "Stor ko! Høy forsinkelse.";
-    if (val < 1.0) return "KRITISK: Ko vokser mot uendelig!";
+    if (val < 0.3) return "Svært lite kø. Lav forsinkelse.";
+    if (val < 0.7) return "Moderat kø. Merkbar forsinkelse.";
+    if (val < 0.95) return "Stor kø! Høy forsinkelse.";
+    if (val < 1.0) return "KRITISK: Kø vokser mot uendelig!";
     return "OVERSKUDD: Pakker tapes! La/R > 1 er uakseptabelt.";
   };
 
@@ -262,7 +262,7 @@ export default function CN1_4Page() {
               formel: null,
               farge: "border-purple-400/60 bg-purple-50 dark:bg-purple-950/20",
               tfarge: "text-purple-700 dark:text-purple-400",
-              forklaring: "Tid rutere bruker på å undersoke pakke-headeren, sjekke for bitfeil og bestemme hvilken utgangslink pakken skal sendes på. Typisk mikrosekunder. Oftest neglisjerbar eller gitt direkte i oppgaven.",
+              forklaring: "Tid rutere bruker på å undersøke pakke-headeren, sjekke for bitfeil og bestemme hvilken utgangslink pakken skal sendes på. Typisk mikrosekunder. Oftest neglisjerbar eller gitt direkte i oppgaven.",
               husk: "d_proc er GITT i oppgaven, du trenger ikke beregne den.",
             },
             {
@@ -272,7 +272,7 @@ export default function CN1_4Page() {
               formel: null,
               farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
               tfarge: "text-orange-700 dark:text-orange-400",
-              forklaring: "Tid pakken venter i utgangskov på å bli transmittert. Avhenger av trafikknivA. NAt mange pakker ankommer samtidig, må pakker vente. Best beskrevet av trafikkintensiteten La/R.",
+              forklaring: "Tid pakken venter i utgangskø på å bli transmittert. Avhenger av trafikknivå. Når mange pakker ankommer samtidig, må pakker vente. Best beskrevet av trafikkintensiteten La/R.",
               husk: "d_queue er GITT i oppgaven eller angis via trafikkintensitet. Du beregner den ikke direkte.",
             },
             {
@@ -384,7 +384,7 @@ export default function CN1_4Page() {
           <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4 text-sm space-y-3">
             <p className="font-bold">Gitt:</p>
             <ul className="list-disc list-inside ml-4 text-[var(--muted)] space-y-0.5">
-              <li>R = 100 Mbps = 100 &times; 10&sup6; bps</li>
+              <li>R = 100 Mbps = 100 &times; 10&#8310; bps</li>
               <li>L = 10 000 bits</li>
               <li>d = 5 000 meter</li>
               <li>s = 2 &times; 10&#8308; m/s</li>
@@ -431,7 +431,7 @@ export default function CN1_4Page() {
               <p>Nettverk med rutere R1, R2 og tre verter H1, H2, H3.</p>
               <p>Link mellom R1 og R2:</p>
               <ul className="list-disc list-inside ml-4">
-                <li>R = 1 000 000 = 10&sup6; bps</li>
+                <li>R = 1 000 000 = 10&#8310; bps</li>
                 <li>d = 10 000 = 10&#8308; meter</li>
                 <li>s = 5 &times; 10&#8308; m/s</li>
               </ul>
@@ -440,12 +440,12 @@ export default function CN1_4Page() {
             <div className="space-y-3">
               <p className="font-bold">a) L = 1000 bits. Hva er sendingsforsinkelsen på R1&rarr;R2?</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
-                <p>d_trans = L/R = 1000 / 10&sup6; = 0,001 s = 1 ms</p>
+                <p>d_trans = L/R = 1000 / 10&#8310; = 0,001 s = 1 ms</p>
               </div>
 
               <p className="font-bold">b) d_proc = 0,002 s, d_queue = 0,01 s. Beregn nodalforsinkelse ved R1.</p>
               <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs space-y-0.5">
-                <p>d_trans = L/R = 1000 / 10&sup6; = 0,001 s = 1 ms</p>
+                <p>d_trans = L/R = 1000 / 10&#8310; = 0,001 s = 1 ms</p>
                 <p>d_prop = d/s = 10 000 / (5 &times; 10&#8308;) = 0,00002 s = 0,02 ms</p>
                 <p>d_nodal = d_proc + d_queue + d_trans + d_prop</p>
                 <p>d_nodal = 0,002 + 0,01 + 0,001 + 0,00002</p>
@@ -571,7 +571,7 @@ export default function CN1_4Page() {
         <div className="rounded-xl border-2 border-blue-400/60 bg-blue-50 dark:bg-blue-950/20 p-4 text-sm space-y-3">
           <h3 className="font-bold text-blue-700 dark:text-blue-400">Delt flaskehalsnett</h3>
           <p className="text-[var(--muted)]">
-            NAt N tilkoblinger deler en flaskehalsnett med kapasitet R, får hver tilkobling R/N
+            Når N tilkoblinger deler en flaskehalsnett med kapasitet R, får hver tilkobling R/N
             (forutsatt rettferdig deling). Dette er kjernen i eksamensoppgave 3b-d.
           </p>
           <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3 font-mono text-xs">
@@ -580,7 +580,7 @@ export default function CN1_4Page() {
           </div>
           <p className="text-[var(--muted)] text-xs">
             I praksis er flaskehalsen oftest enten server-linken (R_s) eller klient-linken (R_c),
-            IKKE kjernenettet (R), fordi kjernenettet typisk har mye storre kapasitet.
+            IKKE kjernenettet (R), fordi kjernenettet typisk har mye større kapasitet.
             Se eksempel 4 over for detaljert regning.
           </p>
         </div>
@@ -598,7 +598,7 @@ export default function CN1_4Page() {
               løsning: "d_trans = L/R avhenger av pakkelengde og kapasitet, IKKE avstand. d_prop = d/s avhenger av avstand, IKKE pakkelengde eller kapasitet.",
             },
             {
-              feil: "Glemmer at alle bits mA sendes for sendingsforsinkelsen er ferdig",
+              feil: "Glemmer at alle bits må sendes for sendingsforsinkelsen er ferdig",
               løsning: "d_trans er tiden for å pumpe ALLE L bits ut på linken. Det er ikke tid til første bit, men tid til siste bit.",
             },
             {
@@ -628,7 +628,7 @@ export default function CN1_4Page() {
         <span className="text-amber-800 dark:text-amber-300">
           Oppgave 3 er alltid forsinkelse/gjennomstrømning. Typisk struktur: a) beregn d_trans,
           b) beregn nodalforsinkelse, c) beregn ende-til-ende, d) finn flaskehals/gjennomstrømning.
-          Skriv alltid alle mellomregninger. Feil i del a) bor ikke spre seg til b)-d) hvis du
+          Skriv alltid alle mellomregninger. Feil i del a) bør ikke spre seg til b)-d) hvis du
           bruker riktig metode. Se også: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensovingsseksjon</Link>.
         </span>
       </div>

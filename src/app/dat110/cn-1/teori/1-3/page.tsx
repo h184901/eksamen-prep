@@ -93,8 +93,8 @@ export default function CN1_3Page() {
                 <div className="rounded-xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/20 p-4 my-2">
                   <h4 className="font-bold text-amber-700 dark:text-amber-400 mb-2">Store-and-forward</h4>
                   <p className="text-sm">
-                    Rutere mA motta <strong>hele pakken</strong> for de kan begynne å sende den videre på neste link.
-                    Dette er forskjellig fra en ror der man sender bit for bit kontinuerlig.
+                    Rutere må motta <strong>hele pakken</strong> for de kan begynne å sende den videre på neste link.
+                    Dette er forskjellig fra et rør der man sender bit for bit kontinuerlig.
                   </p>
                   <div className="mt-3 font-mono text-xs text-[var(--muted)] bg-white/60 dark:bg-neutral-900/40 rounded p-2">
                     <p>Kilde ----[link 1, R bps]---&gt; Ruter A ----[link 2, R bps]---&gt; Mottaker</p>
@@ -109,14 +109,14 @@ export default function CN1_3Page() {
                   latex="d_{e2e} = N \cdot \frac{L}{R}"
                   title="Store-and-forward over N linker"
                   variant="blue"
-                  description="N = antall linker, L = pakkelengde (bits), R = linjekapasitet (bps). Forutsetter lik kapasitet på alle linker og ingen ko/prosessering."
+                  description="N = antall linker, L = pakkelengde (bits), R = linjekapasitet (bps). Forutsetter lik kapasitet på alle linker og ingen kø/prosessering."
                 />
 
                 <div className="rounded-lg bg-white/60 dark:bg-neutral-900/40 border border-green-200 dark:border-green-800 p-3">
                   <p className="font-bold text-sm mb-1">Statistisk multipleksing</p>
                   <p className="text-xs text-[var(--muted)]">
-                    Linkekapasiteten deles dynamisk mellom pakker etter behov. NAt ingen sender, er linken ledig.
-                    NAt mange sender samtidig, konnur pakker i en ko. Dette er mye mer effektivt enn
+                    Linkekapasiteten deles dynamisk mellom pakker etter behov. Når ingen sender, er linken ledig.
+                    Når mange sender samtidig, samles pakker i en kø. Dette er mye mer effektivt enn
                     kretsswitching der ressurser er reservert selv om de ikke brukes.
                   </p>
                 </div>
@@ -124,8 +124,8 @@ export default function CN1_3Page() {
                 <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-3">
                   <p className="font-bold text-sm text-red-700 dark:text-red-400 mb-1">Pakketap</p>
                   <p className="text-xs text-[var(--muted)]">
-                    Rutere har begrenset bufferplass. Hvis ko er full og nye pakker ankommer,
-                    droppes pakkene. Høy trafikkintensitet (La/R når 1) gir lang ko og potensielt tap.
+                    Rutere har begrenset bufferplass. Hvis kø er full og nye pakker ankommer,
+                    droppes pakkene. Høy trafikkintensitet (La/R når 1) gir lang kø og potensielt tap.
                     Se delkapittel 1.4 for beregning.
                   </p>
                 </div>
@@ -331,12 +331,12 @@ export default function CN1_3Page() {
         <div className="rounded-xl border-2 border-network-400/60 bg-network-50 dark:bg-network-950/20 p-4 text-sm">
           <h3 className="font-bold text-network-600 dark:text-network-400 mb-2">IXP &mdash; Internet Exchange Point</h3>
           <p className="text-[var(--muted)]">
-            Et noyt ralt møtepunkt der ISPer kan koble seg direkte til hverandre (peering) uten å sende
+            Et nøytralt møtepunkt der ISPer kan koble seg direkte til hverandre (peering) uten å sende
             trafikk gjennom en tredje part. Reduserer kostnader og forsinkelse. AMS-IX i Amsterdam er
-            verdens storste. I Norge: NIX (Norwegian Internet Exchange) i Oslo og Bergen.
+            verdens største. I Norge: NIX (Norwegian Internet Exchange) i Oslo og Bergen.
           </p>
           <p className="text-[var(--muted)] mt-2">
-            <strong>Innholdsleverandornettverk (CDN):</strong> Google, Netflix og Akamai har sine
+            <strong>Innholdsleverandørnettverk (CDN):</strong> Google, Netflix og Akamai har sine
             egne private nettverk og plasserer servere når brukerne for å redusere forsinkelse.
             De kobler seg til ISPer via IXP-er eller direkte tilkoblinger.
           </p>

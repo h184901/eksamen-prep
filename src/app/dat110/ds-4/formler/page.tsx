@@ -254,7 +254,7 @@ export default function DS4FormlerPage() {
                 <td className="px-4 py-3 text-[var(--muted)] font-mono text-xs">PUBLISH→PUBREC→PUBREL→PUBCOMP</td>
                 <td className="px-4 py-3 text-[var(--muted)]">Til PUBCOMP</td>
                 <td className="px-4 py-3 text-[var(--muted)]">Mest</td>
-                <td className="px-4 py-3 text-[var(--muted)]">Finansielle transaksjonar, alarmar</td>
+                <td className="px-4 py-3 text-[var(--muted)]">Finansielle transaksjoner, alarmer</td>
               </tr>
             </tbody>
           </table>

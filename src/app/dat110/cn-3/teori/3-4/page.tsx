@@ -203,7 +203,7 @@ export default function CN3Teori34Page() {
           latex="\text{DevRTT} = (1-\beta) \cdot \text{DevRTT} + \beta \cdot |\text{SampleRTT} - \text{EstimatedRTT}|"
           title="DevRTT — variansen i RTT (mål på usikkerhet)"
           variant="blue"
-          description="Typisk beta = 0,25 (1/4). Stor DevRTT → stor usikkerhet → trenger storre sikkerhetsmargin."
+          description="Typisk beta = 0,25 (1/4). Stor DevRTT → stor usikkerhet → trenger større sikkerhetsmargin."
         />
 
         <FormulaBox

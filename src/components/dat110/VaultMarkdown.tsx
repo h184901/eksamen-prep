@@ -8,20 +8,35 @@ interface Props {
   content: string;
 }
 
-// Skjuler inline kilde-/note-referanser fra brukervendt prosa, dvs. parenteser
-// som inneholder et internt vault-slug, f.eks. "(*dat110-l9-naming-i* s. 18)"
-// eller "(basert på *dat110-l13-transport-a-2026* s. 5–7)". Faglig tekst,
-// "(L18 s. 12)"-forelesningsrefs, dedikert "## Provenance"-seksjon og
-// "Kilder og grunnlag"-accordion (egen sourceRefs-kilde) beholdes.
-function stripInlineSourceRefs(md: string): string {
-  return md.replace(/[ \t]*\([^()]*dat110-[a-z0-9-]+[^()]*\)/g, "");
+// Renser brukervendt vault-markdown for interne kilde-/pipeline-artefakter slik at
+// student-facing tekst ikke lekker note-navn, råe ekstraksjons-bildestier eller
+// provenance-metadata. Faglig tekst og "(L18 s. 12)"-forelesningsrefs beholdes, og
+// den strukturerte "Kilder og grunnlag"-seksjonen (egen sourceRefs-kilde, ikke en
+// del av markdown-body) berøres ikke.
+function cleanVaultMarkdown(md: string): string {
+  return (
+    md
+      // 1) Dropp den avsluttende "## Provenance"-seksjonen (er alltid siste seksjon i notene).
+      .replace(/\n#{1,4}[ \t]*Provenance\b[\s\S]*$/i, "\n")
+      // 2) Fjern råe ekstraksjons-bildestier (pages/<slug>/pNNN.png), med/uten backticks.
+      .replace(/`?pages\/[a-z0-9._\/-]+\.png`?/gi, "")
+      // 3) Fjern parentes-siteringer som inneholder et internt source-note-slug.
+      .replace(/[ \t]*\([^()]*dat110-[a-z0-9-]+[^()]*\)/g, "")
+      // 4) Fjern frittstående *dat110-slug*-stubs (+ ev. ledende em-dash og sidereferanse).
+      .replace(
+        /[ \t]*(?:—[ \t]*)?\*dat110-[a-z0-9-]+\*(?:[ \t]*sidene?\.?[ \t]*[0-9]+(?:[–-][0-9]+)?(?:,[ \t]*[0-9]+(?:[–-][0-9]+)?)*|[ \t]*s\.[ \t]*[0-9]+(?:[–-][0-9]+)?(?:,[ \t]*[0-9]+(?:[–-][0-9]+)?)*)?/g,
+        "",
+      )
+      // 5) Fjern intern metadata-nøkkel "manual_transcription: <verdi>".
+      .replace(/[ \t]*\(?manual_transcription:[ \t]*[a-z]+\)?/gi, "")
+  );
 }
 
 // Renders DAT110 vault concept/topic body markdown.
 // Wikilinks have been pre-resolved at build-time in scripts/sync-dat110-vault.mjs
 // to either markdown links (for resolvable targets) or *italic stubs* (for everything else).
 export default function VaultMarkdown({ content }: Props) {
-  const cleaned = stripInlineSourceRefs(content);
+  const cleaned = cleanVaultMarkdown(content);
   return (
     <div className="vault-markdown text-neutral-800 dark:text-neutral-100 leading-relaxed">
       <ReactMarkdown

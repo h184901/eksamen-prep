@@ -87,7 +87,7 @@ export default function CN3Teori35Page() {
           <div className="mt-2 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 p-3 font-mono text-sm">
             <p>rwnd = RcvBuffer - [LastByteRcvd - LastByteRead]</p>
           </div>
-          <p className="text-xs text-[var(--muted)] mt-2">RcvBuffer = total bufferkapasitet (typisk 4096 bytes standard, kan være mye storre med window scaling). Formelen gir ledig plass.</p>
+          <p className="text-xs text-[var(--muted)] mt-2">RcvBuffer = total bufferkapasitet (typisk 4096 bytes standard, kan være mye større med window scaling). Formelen gir ledig plass.</p>
         </Card>
 
         <FormulaBox
@@ -128,7 +128,7 @@ export default function CN3Teori35Page() {
 
         <Card color="gold">
           <h4 className="font-bold mb-2">Spesialtilfelle: rwnd = 0</h4>
-          <p className="text-sm">Når mottakeren annonserer rwnd=0 (buffer full), stopper senderen. Men: for å unnga deadlock, sender TCP fortsatt 1-byte "probe"-segmenter for å sjekke om buffer har blitt ledig.</p>
+          <p className="text-sm">Når mottakeren annonserer rwnd=0 (buffer full), stopper senderen. Men: for å unngå deadlock, sender TCP fortsatt 1-byte "probe"-segmenter for å sjekke om buffer har blitt ledig.</p>
         </Card>
       </Section>
 

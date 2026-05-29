@@ -59,7 +59,7 @@ export default function CN3Teori36Page() {
         <p className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wide mb-1">CN 3.6</p>
         <h1 className="text-2xl font-bold mb-2">Metningskontroll: prinsipper</h1>
         <p className="text-[var(--muted)] text-sm max-w-2xl">
-          Metning (congestion) oppstar når for mange avsendere prover å sende for mye data
+          Metning (congestion) oppstår når for mange avsendere prøver å sende for mye data
           gjennom nettverket. Først forstår du problemet og kostnaden — så kommer TCPs
           løsning i 3.7.
         </p>
@@ -77,7 +77,7 @@ export default function CN3Teori36Page() {
       <Section title="1. Hva er metning?" defaultOpen={true}>
         <Card color="red">
           <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">Definisjon</h4>
-          <p className="text-sm"><strong>Metning</strong> oppstar når ankomstraten av pakker ved en ruter overstiger raterens kapasitet til å videresende dem. Resultatet: ruterkoen vokser, pakker dropes.</p>
+          <p className="text-sm"><strong>Metning</strong> oppstår når ankomstraten av pakker ved en ruter overstiger ruterens kapasitet til å videresende dem. Resultatet: ruterkøen vokser, pakker droppes.</p>
           <p className="text-sm mt-2">Dette er ulikt flytkontroll: flytkontroll beskytter <em>mottakerens</em> buffer. Metningskontroll beskytter <em>nettverket</em> (ruternes køkapasitet).</p>
         </Card>
 
@@ -86,10 +86,10 @@ export default function CN3Teori36Page() {
           <h4 className="font-bold mb-2">Analogi: Motorvei i rush-trafikk</h4>
           <p className="text-sm">Se for deg en motorvei med ett felt som innsnevres til ett smalere kryss:</p>
           <ul className="text-sm text-[var(--muted)] space-y-1 mt-2 list-disc list-inside">
-            <li>Lav trafikk: alle kjører flytende, ingen ko</li>
-            <li>Moderat trafikk: noe ko ved innsnevringen, men data (biler) kommer frem</li>
-            <li>Høy trafikk: ko vokser eksponentielt, biler (pakker) går tapt</li>
-            <li>Ekstremt: jo mer bilister prover å kompensere, jo verre blir det</li>
+            <li>Lav trafikk: alle kjører flytende, ingen kø</li>
+            <li>Moderat trafikk: noe kø ved innsnevringen, men data (biler) kommer frem</li>
+            <li>Høy trafikk: kø vokser eksponentielt, biler (pakker) går tapt</li>
+            <li>Ekstremt: jo mer bilister prøver å kompensere, jo verre blir det</li>
           </ul>
           <p className="text-sm mt-2 font-bold">Metningskontroll = trafikkregulering på motorveien</p>
         </Card>

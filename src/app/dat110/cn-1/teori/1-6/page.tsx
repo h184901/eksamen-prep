@@ -31,13 +31,13 @@ Forsvar: antivirusprogramvare, brannmurer, oppdaterte systemer, brukeropplæring
       type: "Tilgjengelighetssabotasje",
       farge: "border-orange-400/60 bg-orange-50 dark:bg-orange-950/20",
       tfarge: "text-orange-700 dark:text-orange-400",
-      kortbeskrivelse: "Overvelmer tjenester med trafikk sA legitime brukere ikke kommer inn.",
+      kortbeskrivelse: "Overvelder tjenester med trafikk så legitime brukere ikke kommer inn.",
       detaljer: `DoS (Denial of Service) = ett angrepspunkt sender enorme mengder trafikk for å overbelaste et mål.
 
 DDoS (Distributed DoS) = tusenvis av infiserte maskiner (botnet) koordinerer angrep mot ett mål.
 
 Typer:
-- Bandwidth flooding: sender sA mye trafikk at linken til målet mettes
+- Bandwidth flooding: sender så mye trafikk at linken til målet mettes
 - Connection flooding: fyller opp TCP-tilkoblingstabellen med halvferdige forbindelser (SYN flood)
 - Application-layer attacks: sender gyldige forespørsler som er dyre å behandle
 
@@ -86,7 +86,7 @@ Bruksområder:
 - Refleksjonsangrep: bruk internettservere som forsterker angrepsvolum
 
 Forsvar:
-- Ingress filtering: ISPer bor blokkere pakker med umulige kildeadresser
+- Ingress filtering: ISPer bør blokkere pakker med umulige kildeadresser
 - Autentisering på høyere lag (TCP syn-cookies, TLS)`,
     },
     {
@@ -155,7 +155,7 @@ Forsvar:
           {[
             { tema: "Konfidensialitet", forklaring: "Kun avsender og mottaker skal lese dataen. Løsning: kryptering (TLS, VPN)." },
             { tema: "Integritet", forklaring: "Data skal ikke kunne endres under transport. Løsning: digital signatur, MAC." },
-            { tema: "Tilgjengelighet", forklaring: "Tjenester skal vare tilgjengelige. Trussel: DoS/DDoS." },
+            { tema: "Tilgjengelighet", forklaring: "Tjenester skal være tilgjengelige. Trussel: DoS/DDoS." },
           ].map(({ tema, forklaring }) => (
             <div key={tema} className="rounded-lg bg-white/60 dark:bg-neutral-900/40 p-3">
               <p className="font-bold text-xs text-red-700 dark:text-red-400">{tema}</p>

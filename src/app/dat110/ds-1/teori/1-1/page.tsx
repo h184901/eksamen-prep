@@ -351,7 +351,7 @@ export default function DS1_1Page() {
           </table>
         </div>
         <p className="text-xs text-[var(--muted)] bg-blue-50 dark:bg-blue-950/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800/40">
-          <strong>Bokas poeng:</strong> Desentralisering er aldri et mål i seg selv. Vi bor spre prosesser og ressurser
+          <strong>Bokas poeng:</strong> Desentralisering er aldri et mål i seg selv. Vi bør spre prosesser og ressurser
           bare i den grad det er <em>tilstrekkelig</em> for formålet. Jo mindre spredning, jo bedre. Unntaket er når
           spredning er strengt nødvendig (federated learning, blockchain, geografisk overvaking).
         </p>
@@ -450,8 +450,8 @@ export default function DS1_1Page() {
       <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 px-4 py-3 text-sm">
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
-          Oppgave 1 (flervalg) tester gjerne definisjoner. Du bor kunne gjengi definisjonen på distribuerte systemer
-          nesten ord for ord. Legg merke til begge delene: <em>autonome noder</em> OG <em>framstar som ett system</em>.
+          Oppgave 1 (flervalg) tester gjerne definisjoner. Du bør kunne gjengi definisjonen på distribuerte systemer
+          nesten ord for ord. Legg merke til begge delene: <em>autonome noder</em> OG <em>framstår som ett system</em>.
           På 2024-eksamen spurte oppgave 1h om IaaS (Infrastructure as a Service) — cloud-klassifisering er
           sentralt for DS-1.
         </span>
