@@ -60,7 +60,7 @@ export default function CN1OppgaverPage() {
       </div>
 
       {/* PROFESSOR'S EXERCISES */}
-      <h3 className="text-lg font-bold mt-8">Fra professorens oving (L2 Metrics)</h3>
+      <h3 className="text-lg font-bold mt-8">Fra professorens øving (L2 Metrics)</h3>
 
       <ExerciseCard num={1} title="Grunnleggende forsinkelse" difficulty="lett">
         <p className="text-sm text-[var(--muted)] mb-3">

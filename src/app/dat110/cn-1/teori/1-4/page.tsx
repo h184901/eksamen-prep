@@ -629,7 +629,7 @@ export default function CN1_4Page() {
           Oppgave 3 er alltid forsinkelse/gjennomstrømning. Typisk struktur: a) beregn d_trans,
           b) beregn nodalforsinkelse, c) beregn ende-til-ende, d) finn flaskehals/gjennomstrømning.
           Skriv alltid alle mellomregninger. Feil i del a) bør ikke spre seg til b)-d) hvis du
-          bruker riktig metode. Se også: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensovingsseksjon</Link>.
+          bruker riktig metode. Se også: <Link href="/dat110/eksamenoving" className="underline text-amber-700 dark:text-amber-400 hover:text-amber-600">Eksamensøvingsseksjon</Link>.
         </span>
       </div>
 

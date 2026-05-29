@@ -47,7 +47,7 @@ Internett gir INGEN innebygd forsvar mot DoS. IP spesifiserer beste-innsats og h
     },
     {
       id: "sniff",
-      navn: "Pakkebrylning (Packet Sniffing)",
+      navn: "Pakkebrytning (Packet Sniffing)",
       type: "Avlytting",
       farge: "border-blue-400/60 bg-blue-50 dark:bg-blue-950/20",
       tfarge: "text-blue-700 dark:text-blue-400",
@@ -137,7 +137,7 @@ Forsvar:
           {[
             "Forklare hva malware er og de ulike typene (virus, orm, ransomware)",
             "Forklare DoS og DDoS og hvorfor de er mulige",
-            "Forklare pakkebrylning og hvorfor kryptering er nødvendig",
+            "Forklare pakkebrytning og hvorfor kryptering er nødvendig",
             "Forklare IP spoofing og hvorfor IP ikke er autentisert",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm">
@@ -207,7 +207,7 @@ Forsvar:
         <span className="font-bold text-amber-700 dark:text-amber-400">Eksamenstips: </span>
         <span className="text-amber-800 dark:text-amber-300">
           Sikkerhet i CN-1 er vanligvis bare flervalg (oppgave 1). Typiske spørsmAl:
-          hva er en orm (sprer seg automatisk), hva beskytter mot pakkebrylning (kryptering),
+          hva er en orm (sprer seg automatisk), hva beskytter mot pakkebrytning (kryptering),
           hva er IP spoofing (forfalsket kilde-IP). Sikkerhetsemnet dekkes mer grundig
           i CN kapittel 8 (ikke del av dette kurset).
         </span>

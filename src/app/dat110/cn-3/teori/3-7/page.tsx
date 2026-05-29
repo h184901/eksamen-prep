@@ -437,10 +437,10 @@ export default function CN3Teori37Page() {
         </div>
 
         <div className="mt-4 rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-          <h4 className="font-bold text-sm mb-3">Lenker til videre oving</h4>
+          <h4 className="font-bold text-sm mb-3">Lenker til videre øving</h4>
           <div className="flex flex-wrap gap-2">
             <Link href="/dat110/eksamenoving/oppg-4" className="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium transition-colors">
-              Eksamenoving oppgave 4 (protokoller)
+              Eksamensøving oppgave 4 (protokoller)
             </Link>
             <Link href="/dat110/cn-3/formler" className="px-3 py-1.5 rounded-lg border border-cyan-400 text-cyan-700 dark:text-cyan-400 hover:bg-cyan-50 dark:hover:bg-cyan-950/20 text-sm font-medium transition-colors">
               CN-3 Formler
