@@ -7,7 +7,15 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import type { ChatMessage } from "./TutorContext";
 
-function TutorMessageImpl({ message }: { message: ChatMessage }) {
+function TutorMessageImpl({
+  message,
+  prevRole,
+  isFirst,
+}: {
+  message: ChatMessage;
+  prevRole?: ChatMessage["role"];
+  isFirst?: boolean;
+}) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -20,9 +28,19 @@ function TutorMessageImpl({ message }: { message: ChatMessage }) {
     }
   };
 
+  // Turn-boundary spacing. The previous uniform list gap (space-y-5 = 20px) read
+  // as cramped right at the user→assistant boundary, where the orange bubble sits
+  // directly above the assistant avatar + bordered card. Give that boundary the
+  // most breathing room, other boundaries a bit less, and the first row none.
+  const topMargin = isFirst
+    ? ""
+    : message.role === "assistant" && prevRole === "user"
+      ? "mt-8"
+      : "mt-6";
+
   if (message.role === "user") {
     return (
-      <div className="flex justify-end">
+      <div className={`flex justify-end ${topMargin}`}>
         <div className="max-w-[85%] rounded-2xl rounded-br-md bg-[var(--accent)] text-white px-4 py-2.5 text-sm whitespace-pre-wrap shadow-sm">
           {message.content}
         </div>
@@ -33,7 +51,7 @@ function TutorMessageImpl({ message }: { message: ChatMessage }) {
   const showTypingDots = message.pending && !message.content;
 
   return (
-    <div className="flex gap-2 items-start">
+    <div className={`flex gap-2 items-start ${topMargin}`}>
       <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent)] to-amber-500 flex items-center justify-center text-white shadow-sm">
         <SparkleIcon />
       </div>
@@ -88,7 +106,9 @@ const TutorMessage = memo(TutorMessageImpl, (prev, next) => {
     prev.message.id === next.message.id &&
     prev.message.content === next.message.content &&
     prev.message.pending === next.message.pending &&
-    prev.message.error === next.message.error
+    prev.message.error === next.message.error &&
+    prev.prevRole === next.prevRole &&
+    prev.isFirst === next.isFirst
   );
 });
 

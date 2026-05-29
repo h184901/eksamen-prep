@@ -258,10 +258,15 @@ export default function TutorPanel() {
               isExpanded ? "md:px-8 md:py-6" : "",
             ].join(" ")}
           >
-            <div className={isExpanded ? "max-w-3xl mx-auto space-y-5" : "space-y-5"}>
+            <div className={isExpanded ? "max-w-3xl mx-auto" : ""}>
               {messages.length === 0 && <WelcomeCard />}
-              {messages.map((m) => (
-                <TutorMessage key={m.id} message={m} />
+              {messages.map((m, i) => (
+                <TutorMessage
+                  key={m.id}
+                  message={m}
+                  prevRole={messages[i - 1]?.role}
+                  isFirst={i === 0}
+                />
               ))}
             </div>
           </div>
