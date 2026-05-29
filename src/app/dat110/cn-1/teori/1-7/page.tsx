@@ -200,11 +200,11 @@ export default function CN1_7Page() {
           {[
             {
               beslutning: "Beste-innsats (best-effort) levering",
-              konsekvens: "Internett ble enkelt og skalerbart, men uten innebygde QoS-garantier. Apnet for mange applikasjoner men krevde at applikasjonene håndterte feil selv (TCP).",
+              konsekvens: "Internett ble enkelt og skalerbart, men uten innebygde QoS-garantier. Åpnet for mange applikasjoner men krevde at applikasjonene håndterte feil selv (TCP).",
             },
             {
               beslutning: "Ingen innebygd sikkerhet i IP",
-              konsekvens: "Rask utvikling men Apnet for DoS, spoofing og avlytting. Sikkerhet måtte legges til som tillegg (TLS, HTTPS, VPN).",
+              konsekvens: "Rask utvikling men Åpnet for DoS, spoofing og avlytting. Sikkerhet måtte legges til som tillegg (TLS, HTTPS, VPN).",
             },
             {
               beslutning: "IPv4 med 32-bit adresser",
