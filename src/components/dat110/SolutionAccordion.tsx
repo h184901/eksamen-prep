@@ -2,12 +2,16 @@
 
 import { useId, useState } from "react";
 import type { ExamSolution } from "@/lib/dat110-vault/types";
+import { localizedText, type Dat110Lang } from "@/lib/dat110-language";
 import VaultMarkdown from "./VaultMarkdown";
 import LearnMoreLinks from "./LearnMoreLinks";
 
 interface Props {
   solution: ExamSolution;
   triggerLabel?: string;
+  // Optional: localizes only the accordion chrome (labels/headings), never the
+  // solution body. Defaults to Norwegian, so non-DAT110-exam callers are unchanged.
+  lang?: Dat110Lang;
 }
 
 // Solution accordion for exam questions / subquestions.
@@ -15,10 +19,13 @@ interface Props {
 // Keyboard: Enter/Space toggle (native button); Esc on the button closes the panel.
 export default function SolutionAccordion({
   solution,
-  triggerLabel = "Vis løsning",
+  triggerLabel,
+  lang = "no",
 }: Props) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
+  const closedLabel =
+    triggerLabel ?? localizedText("Vis løsning", "Show solution", lang);
 
   const onButtonKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Escape" && open) {
@@ -41,11 +48,15 @@ export default function SolutionAccordion({
           <span aria-hidden className="text-emerald-600 dark:text-emerald-400">
             {open ? "▼" : "▶"}
           </span>
-          <span>{open ? "Skjul løsning" : triggerLabel}</span>
+          <span>
+            {open
+              ? localizedText("Skjul løsning", "Hide solution", lang)
+              : closedLabel}
+          </span>
         </span>
         {!open && (
           <span className="text-xs text-emerald-600 dark:text-emerald-300 opacity-70">
-            tenk gjerne først
+            {localizedText("tenk gjerne først", "think first", lang)}
           </span>
         )}
       </button>
@@ -53,19 +64,19 @@ export default function SolutionAccordion({
         <div
           id={panelId}
           role="region"
-          aria-label="Løsning"
+          aria-label={localizedText("Løsning", "Solution", lang)}
           className="px-4 pb-4 pt-2 border-t border-emerald-200 dark:border-emerald-800/60"
         >
           <div className="mb-3">
             <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300 mb-2">
-              Svar
+              {localizedText("Svar", "Answer", lang)}
             </p>
             <VaultMarkdown content={solution.expectedAnswer} />
           </div>
           {solution.shortReasoning && (
             <div className="mb-3">
               <p className="text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400 mb-2">
-                Kort begrunnelse
+                {localizedText("Kort begrunnelse", "Short reasoning", lang)}
               </p>
               <VaultMarkdown content={solution.shortReasoning} />
             </div>
@@ -74,7 +85,7 @@ export default function SolutionAccordion({
             solution.commonMistakes.length > 0 && (
               <div className="mb-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300 mb-2">
-                  Vanlige feil
+                  {localizedText("Vanlige feil", "Common mistakes", lang)}
                 </p>
                 <ul className="ml-5 list-disc space-y-1 text-sm text-neutral-700 dark:text-neutral-200">
                   {solution.commonMistakes.map((m, i) => (
@@ -84,7 +95,10 @@ export default function SolutionAccordion({
               </div>
             )}
           {solution.learnMoreLinks && solution.learnMoreLinks.length > 0 && (
-            <LearnMoreLinks links={solution.learnMoreLinks} />
+            <LearnMoreLinks
+              links={solution.learnMoreLinks}
+              label={localizedText("Les mer", "Learn more", lang)}
+            />
           )}
         </div>
       )}

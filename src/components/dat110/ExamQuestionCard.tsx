@@ -1,4 +1,5 @@
 import type { ExamQuestion } from "@/lib/dat110-vault/types";
+import type { Dat110Lang } from "@/lib/dat110-language";
 import VaultMarkdown from "./VaultMarkdown";
 import SolutionAccordion from "./SolutionAccordion";
 import LearnMoreLinks from "./LearnMoreLinks";
@@ -7,6 +8,11 @@ import ExamChordRingFigure from "./diagrams/ExamChordRingFigure";
 interface Props {
   question: ExamQuestion;
   examSlug?: string;
+  // Optional: localizes only the card chrome (labels), never the question prompt
+  // or solution body. Defaults to Norwegian, so the exam-sim and DAT109 callers
+  // that omit it render exactly as before. (Type-only import keeps this shared
+  // component free of any runtime coupling to the DAT110 language store.)
+  lang?: Dat110Lang;
 }
 
 // Pedagogiske figurer KUN for oppgaver der ring-strukturen er fullt spesifisert
@@ -46,8 +52,13 @@ function ExamQuestionFigure({
 //
 // SourceRefs are NEVER shown inline — they live in the data for grounding only
 // and can surface via expandable "Kilder og grunnlag" on concept/topic pages.
-export default function ExamQuestionCard({ question, examSlug }: Props) {
+export default function ExamQuestionCard({
+  question,
+  examSlug,
+  lang = "no",
+}: Props) {
   const hasSubs = Array.isArray(question.subquestions) && question.subquestions.length > 0;
+  const t = (no: string, en: string) => (lang === "en" ? en : no);
 
   return (
     <section
@@ -56,13 +67,13 @@ export default function ExamQuestionCard({ question, examSlug }: Props) {
     >
       <header className="mb-3 flex items-baseline gap-3 flex-wrap">
         <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">
-          Oppgave {question.number}
+          {t("Oppgave", "Question")} {question.number}
         </h2>
         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
           {question.weightPercent} %
         </span>
         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-100">
-          tema: {question.topic}
+          {t("tema", "topic")}: {question.topic}
         </span>
       </header>
 
@@ -75,7 +86,9 @@ export default function ExamQuestionCard({ question, examSlug }: Props) {
           className="mb-4 px-3 py-2 rounded-lg border border-amber-200 dark:border-amber-800/60 bg-amber-50/60 dark:bg-amber-950/20 text-sm text-amber-900 dark:text-amber-100"
           role="note"
         >
-          <strong className="font-semibold">Figur-merknad:</strong>{" "}
+          <strong className="font-semibold">
+            {t("Figur-merknad", "Figure note")}:
+          </strong>{" "}
           {question.figureNote}
         </aside>
       )}
@@ -87,7 +100,7 @@ export default function ExamQuestionCard({ question, examSlug }: Props) {
 
       {/* Question-level solution (only when no subquestions). */}
       {!hasSubs && question.solution && (
-        <SolutionAccordion solution={question.solution} />
+        <SolutionAccordion solution={question.solution} lang={lang} />
       )}
 
       {/* Per-subquestion solutions. */}
@@ -111,7 +124,7 @@ export default function ExamQuestionCard({ question, examSlug }: Props) {
               <div className="text-neutral-800 dark:text-neutral-100">
                 <VaultMarkdown content={sub.prompt} />
               </div>
-              <SolutionAccordion solution={sub.solution} />
+              <SolutionAccordion solution={sub.solution} lang={lang} />
             </div>
           ))}
         </div>
@@ -121,7 +134,7 @@ export default function ExamQuestionCard({ question, examSlug }: Props) {
       {question.learnMoreLinks && question.learnMoreLinks.length > 0 && (
         <LearnMoreLinks
           links={question.learnMoreLinks}
-          label="Les mer om dette emnet"
+          label={t("Les mer om dette emnet", "Learn more about this topic")}
         />
       )}
     </section>

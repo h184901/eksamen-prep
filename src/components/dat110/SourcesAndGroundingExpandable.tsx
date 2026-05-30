@@ -2,15 +2,22 @@
 
 import { useState } from "react";
 import type { SourceRef } from "@/lib/dat110-vault/types";
+import { localizedText, type Dat110Lang } from "@/lib/dat110-language";
 
 interface Props {
   sources: SourceRef[];
+  // Optional: localizes only the chrome label. Defaults to Norwegian, so the
+  // concept/topic pages that omit it are unchanged.
+  lang?: Dat110Lang;
 }
 
 // Expandable "Kilder og grunnlag" panel for concept/topic pages.
 // Collapsed by default. Defensively filters local-only sources (the sync pipeline
 // also filters, but this is a second line of defense).
-export default function SourcesAndGroundingExpandable({ sources }: Props) {
+export default function SourcesAndGroundingExpandable({
+  sources,
+  lang = "no",
+}: Props) {
   const [open, setOpen] = useState(false);
   const visible = sources.filter((s) => s.visibility !== "local-only");
 
@@ -25,7 +32,10 @@ export default function SourcesAndGroundingExpandable({ sources }: Props) {
         aria-controls="sources-and-grounding-list"
         className="w-full text-left px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800/40 rounded-xl transition-colors flex items-center justify-between"
       >
-        <span>Kilder og grunnlag ({visible.length})</span>
+        <span>
+          {localizedText("Kilder og grunnlag", "Sources and basis", lang)} (
+          {visible.length})
+        </span>
         <span aria-hidden className="text-neutral-500 dark:text-neutral-400">
           {open ? "−" : "+"}
         </span>
