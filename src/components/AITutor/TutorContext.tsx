@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import { usePathname } from "next/navigation";
 import { parsePathname, type PageContext } from "@/lib/page-context";
+import { readDat110Lang } from "@/lib/dat110-language/useDat110Lang";
 
 export interface ChatMessage {
   id: string;
@@ -192,6 +193,8 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
           body: JSON.stringify({
             messages: historyForApi,
             context,
+            // DAT110 English mode opt-in; ignored server-side for other subjects.
+            lang: readDat110Lang(),
           }),
           signal: controller.signal,
         });

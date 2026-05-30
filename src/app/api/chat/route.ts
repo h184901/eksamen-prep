@@ -17,6 +17,7 @@ interface ChatMessage {
 interface ChatRequest {
   messages: ChatMessage[];
   context: PageContext;
+  lang?: "no" | "en";
 }
 
 function jsonError(status: number, message: string) {
@@ -51,6 +52,7 @@ export async function POST(req: NextRequest) {
     content: m.content,
   }));
 
+  const lang = body.lang === "en" ? "en" : "no";
   const system = buildSystemPrompt(
     body.context ?? {
       subject: "unknown",
@@ -61,6 +63,7 @@ export async function POST(req: NextRequest) {
       pageTypeLabel: "",
       pathname: "/",
     },
+    lang,
   );
 
   const client = new Anthropic({ apiKey });

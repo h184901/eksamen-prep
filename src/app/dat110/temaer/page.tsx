@@ -1,7 +1,7 @@
 import Link from "next/link";
 import topicsData from "@/data/dat110-vault/topics-tier1.json";
 import type { DAT110Topic } from "@/lib/dat110-vault/types";
-import Dat110PageHeader from "@/components/dat110/Dat110PageHeader";
+import TemaerLandingHeader from "@/components/dat110/TemaerLandingHeader";
 import Dat110Badge from "@/components/dat110/Dat110Badge";
 
 // Human-readable labels for vault `tema` codes. Kept in sync with begreper/page.tsx.
@@ -89,29 +89,7 @@ export default function TemaerPage() {
 
   return (
     <div>
-      <Dat110PageHeader
-        crumbs={[
-          { label: "Hjem", href: "/" },
-          { label: "DAT110", href: "/dat110" },
-          { label: "Temaer" },
-        ]}
-        eyebrow="DAT110 · Pensum"
-        title="Temaer"
-        lead={
-          <>
-            {total} sentrale paraply-sider som binder flere begreper sammen rundt
-            et felles tema — motivasjon, sammenhenger og lecture-referanser,
-            kalibrert mot eksamen-mønsteret. Se også{" "}
-            <Link
-              href="/dat110/begreper"
-              className="text-network-700 dark:text-network-300 font-medium hover:underline"
-            >
-              Begreper
-            </Link>{" "}
-            for atomiske konsept-sider.
-          </>
-        }
-      />
+      <TemaerLandingHeader total={total} />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {orderedTopics.map((t) => {

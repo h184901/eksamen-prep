@@ -1,7 +1,7 @@
 import Link from "next/link";
 import conceptsData from "@/data/dat110-vault/concepts-tier1.json";
 import type { DAT110Concept } from "@/lib/dat110-vault/types";
-import Dat110PageHeader from "@/components/dat110/Dat110PageHeader";
+import BegreperLandingHeader from "@/components/dat110/BegreperLandingHeader";
 import Dat110Badge from "@/components/dat110/Dat110Badge";
 
 // Human-readable labels for vault `tema` codes used in concept frontmatter.
@@ -122,29 +122,7 @@ export default function BegreperPage() {
 
   return (
     <div>
-      <Dat110PageHeader
-        crumbs={[
-          { label: "Hjem", href: "/" },
-          { label: "DAT110", href: "/dat110" },
-          { label: "Begreper" },
-        ]}
-        eyebrow="DAT110 · Pensum"
-        title="Begreper"
-        lead={
-          <>
-            Alle {total} sentrale begreper på tvers av {groups.length} tema —
-            atomiske konsepter med utledninger, eksempler og kilder fra
-            forelesningsnotatene. Se også{" "}
-            <Link
-              href="/dat110/temaer"
-              className="text-network-700 dark:text-network-300 font-medium hover:underline"
-            >
-              Temaer
-            </Link>{" "}
-            for paraply-sider som binder flere begreper sammen.
-          </>
-        }
-      />
+      <BegreperLandingHeader total={total} temaCount={groups.length} />
 
       <div className="space-y-12">
         {groups.map((group) => (

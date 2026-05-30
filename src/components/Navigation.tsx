@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import UserBadge from "./UserBadge";
+import Dat110LangToggle from "./dat110/Dat110LangToggle";
 import { useState } from "react";
 
 const navItems = [
@@ -19,6 +20,10 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   if (pathname === "/login") return null;
+
+  // DAT110-only: the language toggle does nothing on other subjects, so it is
+  // only shown on /dat110/** routes (next to the theme toggle).
+  const isDat110 = pathname.startsWith("/dat110");
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-md">
@@ -46,12 +51,14 @@ export default function Navigation() {
             </Link>
           ))}
           <UserBadge />
+          {isDat110 && <Dat110LangToggle />}
           <ThemeToggle />
         </div>
 
         {/* Mobile/tablet menu button — visible up to lg */}
         <div className="flex lg:hidden items-center gap-2">
           <UserBadge />
+          {isDat110 && <Dat110LangToggle />}
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}

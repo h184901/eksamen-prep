@@ -73,7 +73,16 @@ Du er en akademisk tutor for en HVL-student i 4. semester (fagområder: fysikk, 
 ${baseStyle}
 `.trim();
 
-export function buildSystemPrompt(context: PageContext): string {
+// Appended (DAT110 + English mode only) to override the Norwegian-answer rule
+// from baseStyle. Default Norwegian behavior is unchanged when lang === "no".
+const dat110EnglishOverride = `
+LANGUAGE OVERRIDE — ENGLISH MODE:
+The student has selected English mode for DAT110. Override the "answer in Norwegian (bokmål)" rule above and answer ENTIRELY in English. Use a period as the decimal separator (4.5, not 4,5). Keep KaTeX notation, the step-by-step pedagogical structure, and the internal DAT110 link suggestions. Keep the internal link route paths EXACTLY as given (e.g. [Concept: RPC](/dat110/begreper/rpc)) — only the surrounding prose changes to English.`.trim();
+
+export function buildSystemPrompt(
+  context: PageContext,
+  lang: "no" | "en" = "no",
+): string {
   let base = genericPrompt;
   if (context.subject === "ing164") base = ing164Prompt;
   else if (context.subject === "dat109") base = dat109Prompt;
@@ -89,7 +98,11 @@ export function buildSystemPrompt(context: PageContext): string {
   const pageTypeHint = pageTypeHints[context.pageType] ?? "";
   const pageHintBlock = pageTypeHint ? `\n\n${pageTypeHint}` : "";
 
-  return base + ctxLine + summaryBlock + pageHintBlock;
+  const prompt = base + ctxLine + summaryBlock + pageHintBlock;
+  if (context.subject === "dat110" && lang === "en") {
+    return `${prompt}\n\n${dat110EnglishOverride}`;
+  }
+  return prompt;
 }
 
 const pageTypeHints: Record<string, string> = {
