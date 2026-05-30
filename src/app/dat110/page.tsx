@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useDat110Lang, localizedText } from "@/lib/dat110-language";
+import Dat110GradualNote from "@/components/dat110/Dat110GradualNote";
 import {
   dat110Chapters,
   categoryLabels,
@@ -958,6 +960,8 @@ function Hurtigtilgang() {
 // ───────── Page ─────────
 
 export default function DAT110Page() {
+  const { lang } = useDat110Lang();
+  const t = (no: string, en: string) => localizedText(no, en, lang);
   const grouped = categoryOrder.map((cat) => ({
     category: cat,
     label: categoryLabels[cat],
@@ -967,11 +971,19 @@ export default function DAT110Page() {
   return (
     <div>
       <Dat110PageHeader
-        crumbs={[{ label: "Hjem", href: "/" }, { label: "DAT110" }]}
-        eyebrow="DAT110 · Nettverksteknologi"
-        title="Nettverksteknologi og distribuerte systemer"
-        lead="To bøker — Computer Networking (Kurose & Ross) og Distributed Systems (Van Steen & Tanenbaum). Eksamen er 10 oppgaver à 4 timer; mønsteret fra 2022–2025 er stabilt."
+        crumbs={[{ label: t("Hjem", "Home"), href: "/" }, { label: "DAT110" }]}
+        eyebrow={t("DAT110 · Nettverksteknologi", "DAT110 · Networking")}
+        title={t(
+          "Nettverksteknologi og distribuerte systemer",
+          "Networking and distributed systems",
+        )}
+        lead={t(
+          "To bøker — Computer Networking (Kurose & Ross) og Distributed Systems (Van Steen & Tanenbaum). Eksamen er 10 oppgaver à 4 timer; mønsteret fra 2022–2025 er stabilt.",
+          "Two books — Computer Networking (Kurose & Ross) and Distributed Systems (Van Steen & Tanenbaum). The exam is 10 questions over 4 hours; the pattern from 2022–2025 is stable.",
+        )}
       />
+
+      <Dat110GradualNote className="mb-6" />
 
       {/* Eksamenstruktur — 06-2025 primær (alltid synlig) */}
       <EksamenstrukturPrimary />
@@ -996,7 +1008,7 @@ export default function DAT110Page() {
 
       {/* Kapittel-grupper (kapittel-skall fra før — beholdes urørt) */}
       <h2 className="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-50">
-        Bla i kapitler
+        {t("Bla i kapitler", "Browse chapters")}
       </h2>
       <div className="space-y-4">
         {grouped.map(({ category, label, chapters: cats }) => (

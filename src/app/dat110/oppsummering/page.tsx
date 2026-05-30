@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useDat110Lang, localizedText } from "@/lib/dat110-language";
+import Dat110GradualNote from "@/components/dat110/Dat110GradualNote";
 
 function RefCard({ title, color, children, defaultOpen = false }: { title: string; color: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -54,30 +56,42 @@ function Formula({ children }: { children: React.ReactNode }) {
 }
 
 export default function OppsummeringPage() {
+  const { lang } = useDat110Lang();
+  const t = (no: string, en: string) => localizedText(no, en, lang);
   return (
     <div>
       <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
-        <Link href="/" className="hover:text-[var(--accent)]">Hjem</Link>
+        <Link href="/" className="hover:text-[var(--accent)]">{t("Hjem", "Home")}</Link>
         <span>/</span>
         <Link href="/dat110" className="hover:text-[var(--accent)]">DAT110</Link>
         <span>/</span>
-        <span className="text-[var(--foreground)]">Oppsummering</span>
+        <span className="text-[var(--foreground)]">{t("Oppsummering", "Summary")}</span>
       </div>
 
-      <h1 className="text-3xl font-bold mb-2">Oppsummering / Referanseark</h1>
+      <h1 className="text-3xl font-bold mb-2">
+        {t("Oppsummering / Referanseark", "Summary / Reference sheet")}
+      </h1>
       <p className="text-[var(--muted)] max-w-2xl mb-4">
-        Alt du må kunne til eksamen i kompakt form. Åpne seksjonene for detaljer.
+        {t(
+          "Alt du må kunne til eksamen i kompakt form. Åpne seksjonene for detaljer.",
+          "Everything you need for the exam in compact form. Open the sections for details.",
+        )}
       </p>
+
+      <Dat110GradualNote className="mb-4" />
 
       <div className="rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20 dark:border-emerald-800 p-4 mb-8">
         <p className="text-sm text-emerald-900 dark:text-emerald-200">
-          En mer detaljert oppsummering er nå tilgjengelig under Eksamensøving.
+          {t(
+            "En mer detaljert oppsummering er nå tilgjengelig under Eksamensøving.",
+            "A more detailed summary is now available under Practice.",
+          )}
         </p>
         <Link
           href="/dat110/eksamenoving/oppsummering"
           className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition-colors"
         >
-          Gå til detaljert oppsummering
+          {t("Gå til detaljert oppsummering", "Go to the detailed summary")}
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

@@ -6,15 +6,9 @@ import type {
   DAT110QuizSourceKind,
   VaultTema,
 } from "@/lib/dat110-quiz-types";
-import { sourceKindOf } from "@/lib/dat110-quiz-types";
-import {
-  useDat110Lang,
-  type Dat110Lang,
-} from "@/lib/dat110-language/useDat110Lang";
-import {
-  getLocalizedQuizQuestion,
-  quizUi,
-} from "@/lib/dat110-language/quiz-i18n";
+import { sourceKindOf, indicesEqual } from "@/lib/dat110-quiz-types";
+import { useDat110Lang } from "@/lib/dat110-language";
+import { getLocalizedQuizQuestion, quizUi } from "@/lib/dat110-language/quiz-i18n";
 import TopicSelector, {
   type QuizStartOptions,
 } from "./TopicSelector";
@@ -37,36 +31,47 @@ function shuffle<T>(arr: T[]): T[] {
   return out;
 }
 
-// Shuffle option order in a question and remap correctIndices + optionExplanations.
-function shuffleQuestionOptions(q: DAT110QuizQuestion): DAT110QuizQuestion {
-  const order = shuffle(q.options.map((_, i) => i));
-  const newOptions = order.map((i) => q.options[i]);
-  const newCorrect = q.correctIndices
+// A fixed option permutation, e.g. [2,0,3,1]. Stored per active question so the
+// option order is stable across language toggles (only the text changes).
+function shuffleOrder(n: number): number[] {
+  return shuffle(Array.from({ length: n }, (_, i) => i));
+}
+
+function identityOrder(n: number): number[] {
+  return Array.from({ length: n }, (_, i) => i);
+}
+
+// Apply a stored option permutation to a question, remapping correctIndices and
+// optionExplanations so scoring stays valid. Applied AFTER localization, at
+// render time, so the displayed question always matches the current language.
+function applyOrder(
+  q: DAT110QuizQuestion,
+  order: number[],
+): DAT110QuizQuestion {
+  const options = order.map((i) => q.options[i]);
+  const correctIndices = q.correctIndices
     .map((c) => order.indexOf(c))
     .sort((a, b) => a - b);
-  const newExpl = q.optionExplanations
+  const optionExplanations = q.optionExplanations
     ? q.optionExplanations.map((e) => ({
         ...e,
         optionIndex: order.indexOf(e.optionIndex),
       }))
     : undefined;
-  return {
-    ...q,
-    options: newOptions,
-    correctIndices: newCorrect,
-    optionExplanations: newExpl,
-  };
+  return { ...q, options, correctIndices, optionExplanations };
 }
 
 export default function QuizRunner({ allQuestions }: Props) {
-  // Live language for the selection screen. The running quiz uses runLang,
-  // captured at start, so a mid-quiz toggle never desyncs content and labels.
+  // Live language — the entire quiz (selection, questions, feedback, results)
+  // re-localizes immediately when the toggle changes, with no reload and no
+  // loss of answers (option order is fixed in `orders`, independent of text).
   const { lang } = useDat110Lang();
+  const ui = quizUi(lang);
   const [phase, setPhase] = useState<Phase>("select");
-  const [runLang, setRunLang] = useState<Dat110Lang>("no");
-  const [activeQuestions, setActiveQuestions] = useState<DAT110QuizQuestion[]>(
-    []
-  );
+  // Base (Norwegian) questions in original option order + a fixed option
+  // permutation per question. Localization happens at render.
+  const [activeBase, setActiveBase] = useState<DAT110QuizQuestion[]>([]);
+  const [orders, setOrders] = useState<number[][]>([]);
   const [answers, setAnswers] = useState<(number[] | null)[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -98,6 +103,16 @@ export default function QuizRunner({ allQuestions }: Props) {
     return m;
   }, [allQuestions]);
 
+  // The questions as displayed: localized to the current language and ordered
+  // by the stored permutation. Recomputed whenever the language toggles.
+  const displayQuestions = useMemo(
+    () =>
+      activeBase.map((q, i) =>
+        applyOrder(getLocalizedQuizQuestion(q, lang), orders[i]),
+      ),
+    [activeBase, orders, lang],
+  );
+
   const handleStart = (opts: QuizStartOptions) => {
     const topicSet = new Set<VaultTema>(opts.selectedTopics);
     let pool = allQuestions.filter(
@@ -107,13 +122,12 @@ export default function QuizRunner({ allQuestions }: Props) {
     );
     if (opts.shuffle) pool = shuffle(pool);
     pool = pool.slice(0, opts.targetCount);
-    // Localize BEFORE option-shuffle so English options/explanations get the
-    // same permutation as correctIndices and stay consistent.
-    pool = pool.map((q) => getLocalizedQuizQuestion(q, lang));
-    if (opts.shuffle) pool = pool.map(shuffleQuestionOptions);
+    const newOrders = pool.map((q) =>
+      opts.shuffle ? shuffleOrder(q.options.length) : identityOrder(q.options.length),
+    );
 
-    setRunLang(lang);
-    setActiveQuestions(pool);
+    setActiveBase(pool);
+    setOrders(newOrders);
     setAnswers(new Array(pool.length).fill(null));
     setCurrentIndex(0);
     setPhase("running");
@@ -128,7 +142,7 @@ export default function QuizRunner({ allQuestions }: Props) {
   };
 
   const handleNext = () => {
-    if (currentIndex < activeQuestions.length - 1) {
+    if (currentIndex < activeBase.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setPhase("done");
@@ -136,32 +150,33 @@ export default function QuizRunner({ allQuestions }: Props) {
   };
 
   const handleRetry = () => {
-    setAnswers(new Array(activeQuestions.length).fill(null));
+    setOrders(activeBase.map((q) => shuffleOrder(q.options.length)));
+    setAnswers(new Array(activeBase.length).fill(null));
     setCurrentIndex(0);
-    setActiveQuestions(activeQuestions.map(shuffleQuestionOptions));
     setPhase("running");
   };
 
   const handleRetryWrong = () => {
-    const wrong = activeQuestions.filter((q, i) => {
-      const a = answers[i];
-      if (!a) return true;
-      const correct = [...q.correctIndices].sort((x, y) => x - y);
-      const got = [...a].sort((x, y) => x - y);
-      return (
-        correct.length !== got.length ||
-        correct.some((c, k) => c !== got[k])
-      );
-    });
-    if (wrong.length === 0) return;
-    setActiveQuestions(wrong.map(shuffleQuestionOptions));
-    setAnswers(new Array(wrong.length).fill(null));
+    const wrongIdx = displayQuestions
+      .map((dq, i) => ({ dq, i }))
+      .filter(({ dq, i }) => {
+        const a = answers[i];
+        if (!a) return true;
+        return !indicesEqual(a, dq.correctIndices);
+      })
+      .map(({ i }) => i);
+    if (wrongIdx.length === 0) return;
+    const wrongBase = wrongIdx.map((i) => activeBase[i]);
+    setActiveBase(wrongBase);
+    setOrders(wrongBase.map((q) => shuffleOrder(q.options.length)));
+    setAnswers(new Array(wrongBase.length).fill(null));
     setCurrentIndex(0);
     setPhase("running");
   };
 
   const handleBack = () => {
-    setActiveQuestions([]);
+    setActiveBase([]);
+    setOrders([]);
     setAnswers([]);
     setCurrentIndex(0);
     setPhase("select");
@@ -182,24 +197,23 @@ export default function QuizRunner({ allQuestions }: Props) {
   if (phase === "done") {
     return (
       <QuizResults
-        questions={activeQuestions}
+        questions={displayQuestions}
         answers={answers}
         onRetry={handleRetry}
         onRetryWrong={handleRetryWrong}
         onBack={handleBack}
-        lang={runLang}
+        lang={lang}
       />
     );
   }
 
-  const currentQuestion = activeQuestions[currentIndex];
-  const runUi = quizUi(runLang);
+  const currentQuestion = displayQuestions[currentIndex];
   const answered = answers[currentIndex] !== null;
   const correctSoFar = answers
     .slice(0, currentIndex + 1)
     .filter((a, i) => {
       if (!a) return false;
-      const corr = [...activeQuestions[i].correctIndices].sort();
+      const corr = [...displayQuestions[i].correctIndices].sort();
       const got = [...a].sort();
       return (
         corr.length === got.length && corr.every((c, k) => c === got[k])
@@ -209,7 +223,7 @@ export default function QuizRunner({ allQuestions }: Props) {
     .slice(0, currentIndex + 1)
     .filter((a) => a !== null).length;
   const progress =
-    ((currentIndex + (answered ? 1 : 0)) / activeQuestions.length) * 100;
+    ((currentIndex + (answered ? 1 : 0)) / displayQuestions.length) * 100;
 
   return (
     <div className="space-y-4">
@@ -222,7 +236,7 @@ export default function QuizRunner({ allQuestions }: Props) {
           />
         </div>
         <div className="text-xs text-neutral-600 dark:text-neutral-300 font-medium whitespace-nowrap">
-          {runUi.score}{" "}
+          {ui.score}{" "}
           <span className="font-bold text-network-600 dark:text-network-300">
             {correctSoFar}
           </span>
@@ -239,10 +253,10 @@ export default function QuizRunner({ allQuestions }: Props) {
         key={currentQuestion.id}
         question={currentQuestion}
         questionNumber={currentIndex + 1}
-        totalQuestions={activeQuestions.length}
+        totalQuestions={displayQuestions.length}
         onAnswer={handleAnswer}
         onNext={handleNext}
-        lang={runLang}
+        lang={lang}
       />
 
       <button
@@ -250,7 +264,7 @@ export default function QuizRunner({ allQuestions }: Props) {
         onClick={handleBack}
         className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline"
       >
-        {runUi.cancelBack}
+        {ui.cancelBack}
       </button>
     </div>
   );

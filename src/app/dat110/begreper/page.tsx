@@ -1,8 +1,8 @@
-import Link from "next/link";
 import conceptsData from "@/data/dat110-vault/concepts-tier1.json";
 import type { DAT110Concept } from "@/lib/dat110-vault/types";
 import BegreperLandingHeader from "@/components/dat110/BegreperLandingHeader";
-import Dat110Badge from "@/components/dat110/Dat110Badge";
+import BegreperGrid from "@/components/dat110/BegreperGrid";
+import Dat110GradualNote from "@/components/dat110/Dat110GradualNote";
 
 // Human-readable labels for vault `tema` codes used in concept frontmatter.
 // Order mirrors the curriculum sequence (01 → 14).
@@ -120,53 +120,21 @@ export default function BegreperPage() {
   const groups = groupByTema(concepts);
   const total = concepts.length;
 
+  const gridGroups = groups.map((group) => ({
+    tema: group.tema,
+    label: group.label,
+    items: group.items.map((c) => ({
+      slug: c.slug,
+      title: displayTitle(c.title),
+      desc: plainText(extractDescription(c.body)),
+    })),
+  }));
+
   return (
     <div>
       <BegreperLandingHeader total={total} temaCount={groups.length} />
-
-      <div className="space-y-12">
-        {groups.map((group) => (
-          <section key={group.tema} aria-labelledby={`tema-${group.tema}`}>
-            <div className="mb-4 flex items-baseline justify-between gap-3 flex-wrap border-b border-[var(--card-border)] pb-2">
-              <h2
-                id={`tema-${group.tema}`}
-                className="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50"
-              >
-                {group.label}
-              </h2>
-              <span className="text-xs font-medium text-[var(--muted)]">
-                {group.items.length}{" "}
-                {group.items.length === 1 ? "begrep" : "begreper"}
-              </span>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {group.items.map((c) => {
-                const title = displayTitle(c.title);
-                const desc = plainText(extractDescription(c.body));
-                return (
-                  <Link
-                    key={c.slug}
-                    href={`/dat110/begreper/${c.slug}`}
-                    className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 shadow-sm transition-all hover:shadow-md hover:border-network-300 dark:hover:border-network-700"
-                  >
-                    <div className="mb-2">
-                      <Dat110Badge tone="concept">Begrep</Dat110Badge>
-                    </div>
-                    <h3 className="font-semibold mb-1.5 text-neutral-900 dark:text-neutral-50 group-hover:text-network-700 dark:group-hover:text-network-300 transition-colors">
-                      {title}
-                    </h3>
-                    {desc && (
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
-                        {desc}
-                      </p>
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        ))}
-      </div>
+      <Dat110GradualNote className="mb-8" />
+      <BegreperGrid groups={gridGroups} />
     </div>
   );
 }
