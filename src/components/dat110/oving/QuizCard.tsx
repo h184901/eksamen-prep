@@ -6,8 +6,14 @@ import {
   displaySourceTag,
   indicesEqual,
 } from "@/lib/dat110-quiz-types";
-import { getQuizTopicInfo, TOPIC_COLOR_PILL } from "@/lib/dat110-quiz-topics";
+import {
+  getQuizTopicInfo,
+  localizeQuizTopic,
+  TOPIC_COLOR_PILL,
+} from "@/lib/dat110-quiz-topics";
 import LearnMoreLinks from "@/components/dat110/LearnMoreLinks";
+import type { Dat110Lang } from "@/lib/dat110-language/useDat110Lang";
+import { quizUi, hasEnglishTranslation } from "@/lib/dat110-language/quiz-i18n";
 
 interface Props {
   question: DAT110QuizQuestion;
@@ -17,6 +23,7 @@ interface Props {
   onAnswer: (selectedIndices: number[]) => void;
   // Called when user clicks "Neste"/"Se resultat" after reading feedback.
   onNext: () => void;
+  lang: Dat110Lang;
 }
 
 // Quiz card med DAT110-tilpasninger:
@@ -33,7 +40,12 @@ export default function QuizCard({
   totalQuestions,
   onAnswer,
   onNext,
+  lang,
 }: Props) {
+  const ui = quizUi(lang);
+  // English mode, but this specific question has no English translation yet:
+  // the runner has rendered the Norwegian text — surface a quiet note.
+  const untranslated = lang === "en" && !hasEnglishTranslation(question);
   const [tentative, setTentative] = useState<Set<number>>(new Set());
   const [locked, setLocked] = useState<number[] | null>(null);
 
@@ -44,7 +56,10 @@ export default function QuizCard({
   }, [question.id]);
 
   const isMulti = question.qtype === "multiple_answers";
-  const topicInfo = getQuizTopicInfo(question.topic);
+  const baseTopicInfo = getQuizTopicInfo(question.topic);
+  const topicInfo = baseTopicInfo
+    ? localizeQuizTopic(baseTopicInfo, lang)
+    : undefined;
   const correctSorted = useMemo(
     () => [...question.correctIndices].sort((a, b) => a - b),
     [question.correctIndices]
@@ -93,10 +108,10 @@ export default function QuizCard({
       {/* Header */}
       <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
         <div className="text-sm text-neutral-600 dark:text-neutral-300">
-          Spørsmål {questionNumber} av {totalQuestions}
+          {ui.questionOf(questionNumber, totalQuestions)}
           {isMulti && (
             <span className="ml-2 text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200">
-              Velg alle som passer
+              {ui.selectAllThatApply}
             </span>
           )}
         </div>
@@ -110,9 +125,15 @@ export default function QuizCard({
       </div>
 
       {/* Question text */}
-      <p className="text-base font-medium mb-5 leading-relaxed whitespace-pre-wrap text-neutral-900 dark:text-neutral-50">
+      <p className="text-base font-medium mb-1 leading-relaxed whitespace-pre-wrap text-neutral-900 dark:text-neutral-50">
         {question.question}
       </p>
+      {untranslated && (
+        <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-4 italic">
+          {ui.partiallyEnglishNote}
+        </p>
+      )}
+      {!untranslated && <div className="mb-4" />}
 
       {/* Options */}
       <div className="space-y-2">
@@ -197,8 +218,8 @@ export default function QuizCard({
           className="mt-4 w-full px-6 py-3 rounded-lg bg-network-500 hover:bg-network-600 text-white font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {tentative.size === 0
-            ? "Velg minst ett alternativ for å bekrefte"
-            : `✓ Bekreft svar (${tentative.size} valgt)`}
+            ? ui.confirmHint
+            : ui.confirmAnswer(tentative.size)}
         </button>
       )}
 
@@ -215,10 +236,10 @@ export default function QuizCard({
           >
             <p className="font-bold text-sm mb-2 text-neutral-900 dark:text-neutral-50">
               {isCorrect
-                ? "✓ Riktig!"
+                ? ui.correct
                 : isMulti
-                  ? `✗ Ikke helt — riktig: ${correctLetters}`
-                  : `✗ Feil — riktig var ${correctLetters}`}
+                  ? ui.notQuite(correctLetters)
+                  : ui.wrong(correctLetters)}
             </p>
             <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-100">
               {question.explanationCorrect}
@@ -240,7 +261,7 @@ export default function QuizCard({
               return (
                 <div className="rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 p-4">
                   <p className="font-semibold text-sm mb-2 text-amber-800 dark:text-amber-200">
-                    Hvorfor dine valg var feil:
+                    {ui.whyChoicesWrong}
                   </p>
                   <ul className="space-y-1.5">
                     {wrongPicked.map((i) => (
@@ -276,8 +297,8 @@ export default function QuizCard({
             className="w-full mt-2 px-6 py-3 rounded-lg bg-network-500 hover:bg-network-600 text-white font-semibold text-sm transition-colors"
           >
             {questionNumber < totalQuestions
-              ? "Neste spørsmål →"
-              : "Se resultat →"}
+              ? ui.nextQuestion
+              : ui.seeResults}
           </button>
         </div>
       )}

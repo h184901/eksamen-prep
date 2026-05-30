@@ -7,6 +7,14 @@ import type {
   VaultTema,
 } from "@/lib/dat110-quiz-types";
 import { sourceKindOf } from "@/lib/dat110-quiz-types";
+import {
+  useDat110Lang,
+  type Dat110Lang,
+} from "@/lib/dat110-language/useDat110Lang";
+import {
+  getLocalizedQuizQuestion,
+  quizUi,
+} from "@/lib/dat110-language/quiz-i18n";
 import TopicSelector, {
   type QuizStartOptions,
 } from "./TopicSelector";
@@ -51,7 +59,11 @@ function shuffleQuestionOptions(q: DAT110QuizQuestion): DAT110QuizQuestion {
 }
 
 export default function QuizRunner({ allQuestions }: Props) {
+  // Live language for the selection screen. The running quiz uses runLang,
+  // captured at start, so a mid-quiz toggle never desyncs content and labels.
+  const { lang } = useDat110Lang();
   const [phase, setPhase] = useState<Phase>("select");
+  const [runLang, setRunLang] = useState<Dat110Lang>("no");
   const [activeQuestions, setActiveQuestions] = useState<DAT110QuizQuestion[]>(
     []
   );
@@ -95,8 +107,12 @@ export default function QuizRunner({ allQuestions }: Props) {
     );
     if (opts.shuffle) pool = shuffle(pool);
     pool = pool.slice(0, opts.targetCount);
+    // Localize BEFORE option-shuffle so English options/explanations get the
+    // same permutation as correctIndices and stay consistent.
+    pool = pool.map((q) => getLocalizedQuizQuestion(q, lang));
     if (opts.shuffle) pool = pool.map(shuffleQuestionOptions);
 
+    setRunLang(lang);
     setActiveQuestions(pool);
     setAnswers(new Array(pool.length).fill(null));
     setCurrentIndex(0);
@@ -158,6 +174,7 @@ export default function QuizRunner({ allQuestions }: Props) {
         questionCountBySource={questionCountBySource}
         questionCountByTopicSource={questionCountByTopicSource}
         onStart={handleStart}
+        lang={lang}
       />
     );
   }
@@ -170,11 +187,13 @@ export default function QuizRunner({ allQuestions }: Props) {
         onRetry={handleRetry}
         onRetryWrong={handleRetryWrong}
         onBack={handleBack}
+        lang={runLang}
       />
     );
   }
 
   const currentQuestion = activeQuestions[currentIndex];
+  const runUi = quizUi(runLang);
   const answered = answers[currentIndex] !== null;
   const correctSoFar = answers
     .slice(0, currentIndex + 1)
@@ -203,7 +222,7 @@ export default function QuizRunner({ allQuestions }: Props) {
           />
         </div>
         <div className="text-xs text-neutral-600 dark:text-neutral-300 font-medium whitespace-nowrap">
-          Score:{" "}
+          {runUi.score}{" "}
           <span className="font-bold text-network-600 dark:text-network-300">
             {correctSoFar}
           </span>
@@ -223,6 +242,7 @@ export default function QuizRunner({ allQuestions }: Props) {
         totalQuestions={activeQuestions.length}
         onAnswer={handleAnswer}
         onNext={handleNext}
+        lang={runLang}
       />
 
       <button
@@ -230,7 +250,7 @@ export default function QuizRunner({ allQuestions }: Props) {
         onClick={handleBack}
         className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline"
       >
-        ← Avbryt og tilbake til temavalg
+        {runUi.cancelBack}
       </button>
     </div>
   );

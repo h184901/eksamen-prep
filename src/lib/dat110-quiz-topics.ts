@@ -147,6 +147,70 @@ export function getQuizTopicInfo(id: VaultTema): DAT110QuizTopicInfo | undefined
   return QUIZ_TOPICS_DAT110.find((t) => t.id === id);
 }
 
+// English label/description for each quiz topic. Used when DAT110 language =
+// English. emoji / color / chapterTag / weight are language-neutral.
+const TOPIC_I18N_EN: Partial<
+  Record<VaultTema, { label: string; description: string }>
+> = {
+  "01-introduksjon-og-metrics": {
+    label: "Delays and throughput",
+    description: "The four delay components, throughput, bottleneck link.",
+  },
+  "02-protocol-layering-og-sockets": {
+    label: "Protocol layers and sockets",
+    description: "The TCP/IP stack — which protocols belong to which layer.",
+  },
+  "03-mom-overlay": {
+    label: "Overlay, MOM and RPC",
+    description:
+      "Application-layer multicast, overlay trees, RPC failure semantics.",
+  },
+  "04-naming-og-chord-dht": {
+    label: "Chord DHT",
+    description: "Ring, successor rule, finger table, O(log N) lookup.",
+  },
+  "05-processes-and-threads": {
+    label: "Processes, threads and RPC",
+    description: "Thread vs process, RPC calls, failure models.",
+  },
+  "06-transport-services": {
+    label: "Transport (TCP/UDP/RDT)",
+    description:
+      "Transport services, reliable data transfer, flow control, demultiplexing.",
+  },
+  "07-coordination": {
+    label: "Clocks and coordination",
+    description: "Lamport, vector clocks, mutual-exclusion algorithms.",
+  },
+  "08-consistency-replication": {
+    label: "Consistency and replication",
+    description: "Consistency models, quorum, primary-backup.",
+  },
+  "09-fault-tolerance": {
+    label: "Fault tolerance",
+    description: "Failure types, the 3k+1 rule, replication for FT.",
+  },
+  "10-network-layer": {
+    label: "IP and forwarding",
+    description: "IPv4 addresses, CIDR/subnetting, longest-prefix forwarding.",
+  },
+  "11-link-layer": {
+    label: "Link layer and ARP",
+    description: "ARP, MAC addresses, switch learning.",
+  },
+};
+
+// Returns the topic info with English label/description when lang === "en"
+// (and a translation exists); otherwise the original Norwegian info unchanged.
+export function localizeQuizTopic(
+  info: DAT110QuizTopicInfo,
+  lang: "no" | "en",
+): DAT110QuizTopicInfo {
+  if (lang !== "en") return info;
+  const en = TOPIC_I18N_EN[info.id];
+  return en ? { ...info, label: en.label, description: en.description } : info;
+}
+
 // Static Tailwind class mapping. Tailwind JIT requires class names to appear
 // literally in source so dynamic `bg-${color}-100` does not work.
 export const TOPIC_COLOR_PILL: Record<DAT110QuizTopicInfo["color"], string> = {

@@ -2,8 +2,10 @@
 
 import type { DAT110QuizQuestion } from "@/lib/dat110-quiz-types";
 import { displaySourceTag, indicesEqual } from "@/lib/dat110-quiz-types";
-import { getQuizTopicInfo } from "@/lib/dat110-quiz-topics";
+import { getQuizTopicInfo, localizeQuizTopic } from "@/lib/dat110-quiz-topics";
 import LearnMoreLinks from "@/components/dat110/LearnMoreLinks";
+import type { Dat110Lang } from "@/lib/dat110-language/useDat110Lang";
+import { quizUi } from "@/lib/dat110-language/quiz-i18n";
 
 interface Props {
   questions: DAT110QuizQuestion[];
@@ -11,6 +13,7 @@ interface Props {
   onRetry: () => void;
   onRetryWrong: () => void;
   onBack: () => void;
+  lang: Dat110Lang;
 }
 
 function gradeFromPercent(percent: number) {
@@ -57,7 +60,9 @@ export default function QuizResults({
   onRetry,
   onRetryWrong,
   onBack,
+  lang,
 }: Props) {
+  const ui = quizUi(lang);
   const correctCount = questions.filter((q, i) => {
     const a = answers[i];
     if (!a) return false;
@@ -79,7 +84,7 @@ export default function QuizResults({
           {correctCount} / {total}
         </p>
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          {percent}% riktig
+          {ui.percentCorrect(percent)}
         </p>
       </div>
 
@@ -90,7 +95,7 @@ export default function QuizResults({
           onClick={onRetry}
           className="px-6 py-3 rounded-lg border-2 border-network-400 bg-network-50 dark:bg-network-950/20 text-network-700 dark:text-network-300 font-semibold text-sm hover:bg-network-100 dark:hover:bg-network-950/40 transition-colors"
         >
-          🔄 Prøv samme quiz igjen
+          {ui.retrySame}
         </button>
         {wrongCount > 0 && (
           <button
@@ -98,7 +103,7 @@ export default function QuizResults({
             onClick={onRetryWrong}
             className="px-6 py-3 rounded-lg border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-700 dark:text-amber-300 font-semibold text-sm hover:bg-amber-100 dark:hover:bg-amber-950/40 transition-colors"
           >
-            🎯 Drill bare feil ({wrongCount})
+            {ui.drillWrong(wrongCount)}
           </button>
         )}
         <button
@@ -106,20 +111,23 @@ export default function QuizResults({
           onClick={onBack}
           className="px-6 py-3 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 text-neutral-700 dark:text-neutral-200 font-semibold text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors"
         >
-          ← Tilbake til temavalg
+          {ui.backToTopics}
         </button>
       </div>
 
       {/* Gjennomgang */}
       <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-6">
         <h3 className="font-bold text-lg mb-4 text-neutral-900 dark:text-neutral-50">
-          Gjennomgang
+          {ui.review}
         </h3>
         <div className="space-y-3">
           {questions.map((q, i) => {
             const userAnswer = answers[i] || [];
             const correct = indicesEqual(userAnswer, q.correctIndices);
-            const topicInfo = getQuizTopicInfo(q.topic);
+            const baseTopicInfo = getQuizTopicInfo(q.topic);
+            const topicInfo = baseTopicInfo
+              ? localizeQuizTopic(baseTopicInfo, lang)
+              : undefined;
             const expByIndex = new Map<number, string>();
             (q.optionExplanations || []).forEach((e) =>
               expByIndex.set(e.optionIndex, e.shortExplanation)
@@ -143,7 +151,7 @@ export default function QuizResults({
                   >
                     {correct ? "✓" : "✗"}
                   </span>{" "}
-                  Spørsmål {i + 1}
+                  {ui.questionN(i + 1)}
                   {topicInfo && (
                     <span className="text-xs text-neutral-500 dark:text-neutral-400 ml-2">
                       {topicInfo.emoji} {topicInfo.label}
@@ -178,12 +186,12 @@ export default function QuizResults({
                           {opt}
                           {isCorrect && (
                             <span className="text-green-700 dark:text-green-300 ml-2">
-                              ← riktig
+                              {ui.isCorrectTag}
                             </span>
                           )}
                           {isUserPick && !isCorrect && (
                             <span className="text-red-700 dark:text-red-300 ml-2">
-                              ← ditt svar
+                              {ui.yourAnswerTag}
                             </span>
                           )}
                         </div>
@@ -208,7 +216,7 @@ export default function QuizResults({
                         >
                           <p className="text-xs text-amber-900 dark:text-amber-200">
                             <strong>
-                              {String.fromCharCode(65 + k)} var feil:
+                              {ui.optionWasWrong(String.fromCharCode(65 + k))}
                             </strong>{" "}
                             {expByIndex.get(k)}
                           </p>

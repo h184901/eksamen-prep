@@ -1,0 +1,1447 @@
+{
+  "dat110-q-001": {
+    "question": "Which of the delay components in a packet switch depends directly on the ratio L/R (packet length divided by link bandwidth)?",
+    "options": [
+      "d_proc — processing delay",
+      "d_queue — queuing delay",
+      "d_trans — transmission delay",
+      "d_prop — propagation delay"
+    ],
+    "explanationCorrect": "The transmission delay is the time it takes to clock all the bits of the packet out onto the link, and it is exactly L/R. It is independent of physical distance.",
+    "explanationIncorrect": "Only the transmission delay is defined as L/R. The other three components have their own definitions that do not directly involve the packet size.",
+    "optionExplanations": [
+      "d_proc is the time the router spends on header lookup and error checking — typically microseconds, independent of L and R.",
+      "d_queue is the waiting time in the output buffer and depends on traffic load, not on packet size alone.",
+      "d_trans = L/R by definition. Most likely the component the exercises ask you to compute.",
+      "d_prop = d/s where d is the physical distance and s is the propagation speed — not L or R."
+    ]
+  },
+  "dat110-q-002": {
+    "question": "A 1000-byte packet is to be sent over a 1 Mbit/s link. What is the transmission delay?",
+    "options": [
+      "About 1 millisecond",
+      "About 8 milliseconds",
+      "About 1 second",
+      "About 8 microseconds"
+    ],
+    "explanationCorrect": "L = 1000 × 8 = 8000 bits. R = 10^6 bit/s. d_trans = L/R = 8000 / 10^6 = 0.008 s = 8 ms. Remember to convert bytes to bits before dividing.",
+    "explanationIncorrect": "The most common mistake is to forget the byte→bit conversion (×8) or to confuse Mbit/s with MB/s.",
+    "optionExplanations": [
+      "You have probably forgotten the ×8 factor between byte and bit. 1000 bytes = 8000 bits, not 1000 bits.",
+      "Correct: 8000 bits / 1 Mbit/s = 8 ms.",
+      "1 second would require a link of about 8 kbit/s, not 1 Mbit/s. Check the order of magnitude.",
+      "8 microseconds would require a link of about 1 Gbit/s. For 1 Mbit/s the answer is a thousand times slower."
+    ]
+  },
+  "dat110-q-003": {
+    "question": "A path from sender to receiver passes through three links with capacities 10, 2, and 5 Mbit/s. What is the end-to-end throughput in the saturated state?",
+    "options": [
+      "17 Mbit/s — the sum of all links",
+      "5 Mbit/s — the last link before the receiver",
+      "2 Mbit/s — the bottleneck link",
+      "10 Mbit/s — the first link after the sender"
+    ],
+    "explanationCorrect": "End-to-end throughput is limited by the slowest link (the bottleneck) on the path. Even though the other links can move more data, everything must pass through the 2 Mbit/s segment.",
+    "explanationIncorrect": "Throughput is never summed along a serial path, and it is not the first or last link that sets the ceiling, but the minimum.",
+    "optionExplanations": [
+      "Link capacities in series are not summed. Think of water through pipes: the pipe with the smallest diameter sets the flow.",
+      "The last link is only relevant if it is actually the slowest — here 2 Mbit/s is slower.",
+      "Bottleneck = min over all links. Standard formula: throughput = min(R_i).",
+      "The first link is just as irrelevant as the last if it is not the bottleneck."
+    ]
+  },
+  "dat110-q-004": {
+    "question": "What is the main difference between throughput and delay?",
+    "options": [
+      "Throughput measures data rate; delay measures a point in time or duration",
+      "Throughput and delay are two words for the same thing",
+      "Throughput is measured in seconds; delay is measured in bits per second",
+      "Throughput applies only to TCP; delay applies only to UDP"
+    ],
+    "explanationCorrect": "Throughput describes how much data is moved per unit of time (bit/s), while delay describes how long a single packet takes (seconds). They are separate metrics — you can have high throughput with high delay, or vice versa.",
+    "explanationIncorrect": "Confusion often arises because both are used to describe a 'fast network', but they measure different properties.",
+    "optionExplanations": [
+      "Correct: rate (bit/s) vs time (s) — complementary, not interchangeable.",
+      "Completely wrong — you can have high throughput with high delay, and vice versa.",
+      "You have swapped the units. Throughput is bit/s, delay is seconds.",
+      "Both apply regardless of the transport protocol."
+    ]
+  },
+  "dat110-q-005": {
+    "question": "A user logs in to a file server without knowing where the file is physically stored. Which type of transparency is primarily in use?",
+    "options": [
+      "Access transparency",
+      "Location transparency",
+      "Failure transparency",
+      "Concurrency transparency"
+    ],
+    "explanationCorrect": "Location transparency hides the physical location of a resource. The user refers to the resource by a logical name, not by a machine or disk address.",
+    "explanationIncorrect": "The four types in Tanenbaum are closely related, but each covers a specific dimension of distribution.",
+    "optionExplanations": [
+      "Access transparency is about using the same operations for local and remote resources (a uniform API), not about where they are located.",
+      "Correct: the user uses a logical name, and the system resolves it to the physical location.",
+      "Failure transparency hides failures and recovery, not geographic location.",
+      "Concurrency transparency hides the fact that several users share the resource."
+    ]
+  },
+  "dat110-q-006": {
+    "question": "What is the main difference between IP multicast and application-layer multicast (ALM)?",
+    "options": [
+      "IP multicast requires router support; ALM duplicates packets at the end nodes",
+      "IP multicast uses TCP; ALM uses UDP exclusively",
+      "ALM is a subset of IP multicast with better performance",
+      "It is only a difference in name; the mechanism is identical"
+    ],
+    "explanationCorrect": "IP multicast builds duplication into the network (routers replicate datagrams). ALM moves the responsibility up to the end nodes, which build an overlay tree and duplicate packets themselves. This makes ALM easier to deploy, but results in higher bandwidth use and delay.",
+    "explanationIncorrect": "ALM was created precisely because IP multicast has poor adoption in internet routers. The mechanism is moved up to the application layer.",
+    "optionExplanations": [
+      "Correct: routers vs end nodes doing the duplication.",
+      "The transport protocol is independent — both can run over UDP, and ALM overlays are used by various applications.",
+      "ALM typically has lower performance because packets cross the same link multiple times. It is nonetheless more practical.",
+      "The mechanism differs at a fundamental level: where the duplication happens."
+    ]
+  },
+  "dat110-q-007": {
+    "question": "Which statements about application-layer multicast (ALM) are correct? Select all that apply.",
+    "options": [
+      "The end nodes build and maintain an overlay tree among themselves",
+      "Each message may cross the same physical link multiple times",
+      "ALM requires that all internet routers have multicast support enabled",
+      "ALM can be deployed without changes to the network layer"
+    ],
+    "explanationCorrect": "ALM runs at the application layer: the end nodes build the overlay tree and duplicate packets. This means the same physical link may carry duplicates (one per overlay branch), but it also means ALM can be used on today's internet without router changes.",
+    "explanationIncorrect": "ALM was designed precisely to avoid the need for router multicast. It requires no changes at the network layer.",
+    "optionExplanations": [
+      "Correct: the end nodes are responsible for the tree and the duplication.",
+      "Correct: link stress / duplicate bandwidth is a well-known cost of ALM.",
+      "On the contrary — ALM was created because routers typically do not have multicast enabled.",
+      "Correct: application-based duplication requires no network changes."
+    ]
+  },
+  "dat110-q-008": {
+    "question": "The type of failure where a server does not respond to an incoming request is called:",
+    "options": [
+      "Response failure",
+      "Timing failure",
+      "Crash failure",
+      "Omission failure"
+    ],
+    "explanationCorrect": "An omission failure occurs when the server does not respond to a request but is otherwise alive. It differs from a crash (the server has stopped entirely) and a timing failure (a response arrived, but too late).",
+    "explanationIncorrect": "Tanenbaum's failure taxonomy has five main classes. Omission is deliberately distinguished from crash because the failure mode is different for the client.",
+    "optionExplanations": [
+      "A response failure = the server responds, but with a wrong value or state. Here there is no response at all.",
+      "A timing failure = the response arrives, but outside the agreed time window. Also wrong in this context.",
+      "A crash means the server has stopped permanently and must be restarted. The question describes a milder variant.",
+      "Correct: omission failure = the server is alive but does not respond."
+    ]
+  },
+  "dat110-q-009": {
+    "question": "In an RPC call, \"at-most-once\" semantics is implemented. What does this mean in practice?",
+    "options": [
+      "The call runs at least once and may duplicate the effect",
+      "The call runs exactly once, always",
+      "The call runs zero or one times; never twice",
+      "The call runs asynchronously without returning a value"
+    ],
+    "explanationCorrect": "At-most-once guarantees that duplication is avoided (typically via a request ID that the server recognizes), but gives no guarantee that the call was executed. If the response is lost, the client does not know whether the operation completed.",
+    "explanationIncorrect": "Confusing at-most-once with at-least-once is classic in the RPC literature. Only exactly-once provides both — and it is theoretically impossible with crashes.",
+    "optionExplanations": [
+      "That is at-least-once semantics, not at-most-once. At-least-once can duplicate on retry.",
+      "That is exactly-once, which is impossible to guarantee with arbitrary crashes.",
+      "Correct: either 0 or 1 executions, no duplication.",
+      "Asynchrony is about when the call returns, not how many times it runs."
+    ]
+  },
+  "dat110-q-010": {
+    "question": "Which properties characterize a distributed hash table (DHT) compared to centralized lookup and flooding? Select all that apply.",
+    "options": [
+      "Lookup costs O(log N) hops under normal operation",
+      "Each node needs a global view of all the other nodes",
+      "Load is distributed evenly across the nodes via a uniform hash",
+      "The nodes keep a small routing table (typically O(log N) entries)"
+    ],
+    "explanationCorrect": "A DHT replaces centralized state (Napster: O(N) bottleneck) and flooding (Gnutella: O(N²) messages) with a structured routing table on each node. The result: O(log N) lookups, even load distribution, and compact state per node.",
+    "explanationIncorrect": "The need for a global view is precisely what a DHT avoids — that is why the structure scales.",
+    "optionExplanations": [
+      "Correct: the DHT design guarantees O(log N) hops, the core of its scalability.",
+      "On the contrary — a DHT avoids global state. Each node knows only a small table.",
+      "Correct: a uniform hash spreads keys evenly, with no hotspot node.",
+      "Correct: in Chord, m entries per node, where m is typically 128 — independent of N."
+    ]
+  },
+  "dat110-q-011": {
+    "question": "In a Chord ring with m = 5, how many unique identifiers (IDs) does the address space contain?",
+    "options": [
+      "5 IDs",
+      "10 IDs",
+      "25 IDs",
+      "32 IDs"
+    ],
+    "explanationCorrect": "The address space in Chord is {0, 1, …, 2^m − 1}. For m = 5 this gives 2^5 = 32 unique IDs, from 0 to 31.",
+    "explanationIncorrect": "m is the number of bits, not the number of IDs. The little formula 2^bits is the key.",
+    "optionExplanations": [
+      "You have probably confused m with the number of IDs. m specifies the number of bits.",
+      "No known Chord formula gives 10 from m=5. Check 2^m.",
+      "You have probably used m² = 25, but the formula is 2^m.",
+      "Correct: 2^5 = 32 IDs."
+    ]
+  },
+  "dat110-q-012": {
+    "question": "In a Chord ring with m = 5 and nodes {1, 5, 17, 19, 25}, which node is responsible for key k = 11?",
+    "options": [
+      "Node 5",
+      "Node 17",
+      "Node 19",
+      "Node 25"
+    ],
+    "explanationCorrect": "The successor rule: succ(k) is the smallest node ID that is ≥ k. For k = 11 the nodes above k are {17, 19, 25}, and the smallest is 17.",
+    "explanationIncorrect": "It is easy to point to the neighbor on the wrong side. Remember: ≥ k, not ≤ k.",
+    "optionExplanations": [
+      "5 < 11, so Node 5 is not responsible. You have probably read succ as \"the previous node\".",
+      "Correct: 17 is the smallest ID ≥ 11.",
+      "19 is ≥ 11, but 17 is smaller and also satisfies the condition. The successor is the smallest one.",
+      "25 is ≥ 11, but not the smallest. That is 17."
+    ]
+  },
+  "dat110-q-013": {
+    "question": "A Chord ring with m = 5 has replicas at {0, 9, 17, 30}. On which replica is key k = 19 stored?",
+    "options": [
+      "Replica 9",
+      "Replica 17",
+      "Replica 30",
+      "Replica 0"
+    ],
+    "explanationCorrect": "succ(19) is the smallest node ID ≥ 19. Of {0, 9, 17, 30}, 30 is the smallest ID ≥ 19. Key 19 therefore belongs on replica 30.",
+    "explanationIncorrect": "17 is close to 19, but 17 < 19. The successor must be ≥ k.",
+    "optionExplanations": [
+      "9 < 19, so 9 is not ≥ k. That node is not responsible.",
+      "17 < 19. The successor must be ≥ 19, and 17 does not satisfy that.",
+      "Correct: the smallest ID ≥ 19 is 30.",
+      "Wrap-around is used only if no node ID is ≥ k. Here 30 exists."
+    ]
+  },
+  "dat110-q-014": {
+    "question": "How many entries does a node's finger table have in a Chord ring with m bits?",
+    "options": [
+      "log(N) entries, where N is the number of nodes",
+      "m entries, one per bit in the address space",
+      "2^m entries, one per possible ID",
+      "N entries, one pointer to each other node"
+    ],
+    "explanationCorrect": "Each node has exactly m entries. Entry i points to succ(p + 2^(i−1)). The number of entries is determined by the number of bits, not by the number of nodes N — that is precisely what makes Chord scalable.",
+    "explanationIncorrect": "log(N) is the number of hops during a lookup, not the size of the table.",
+    "optionExplanations": [
+      "log(N) is the number of hops a lookup costs, not the number of finger entries.",
+      "Correct: m entries, a fixed number independent of N.",
+      "2^m is the size of the ID space, not of the finger table. That would be a catastrophic use of storage.",
+      "N entries would require a global view — exactly what Chord was designed to avoid."
+    ]
+  },
+  "dat110-q-015": {
+    "question": "In node p's finger table, which rule defines entry FT[i]?",
+    "options": [
+      "FT[i] = succ(p + 2^(i−1))",
+      "FT[i] = succ(p + i)",
+      "FT[i] = succ(p × 2^i)",
+      "FT[i] = pred(p − 2^(i−1))"
+    ],
+    "explanationCorrect": "The distance doubles for each entry: i=1 is the neighbor (distance 1), i=2 has distance 2, i=3 has distance 4, and so on up to 2^(m−1). Exponential distance is the core of O(log N).",
+    "explanationIncorrect": "Linear or multiplicative distance would give either O(N) or meaningless coverage. Chord needs an exponential distribution.",
+    "optionExplanations": [
+      "Correct: exponential distance 2^(i−1) gives O(log N) hops.",
+      "Linear distance i would give FT[m] = succ(p+m), only m steps in total — poor scaling.",
+      "p × 2^i scales with p and does not cover the ring systematically from p.",
+      "Chord uses the successor going forward, not the predecessor going backward."
+    ]
+  },
+  "dat110-q-016": {
+    "question": "Which properties does the Chord lookup algorithm have under normal operation? Select all that apply.",
+    "options": [
+      "The number of hops is O(log N) in the worst case",
+      "Each node uses only its own finger table",
+      "A lookup must always start from node 0",
+      "The algorithm halves the distance to the target per hop"
+    ],
+    "explanationCorrect": "A lookup can start from any node. Each visited node uses its own finger table to choose the closest-preceding-finger to the target, which halves the distance — hence O(log N) hops in total.",
+    "explanationIncorrect": "Forcing a start node would break decentralization. Chord lets any node be the lookup initiator.",
+    "optionExplanations": [
+      "Correct: O(log N) is the theoretical worst case for a Chord lookup.",
+      "Correct: each node is autonomous — it does not need a global view to forward.",
+      "Lookup is decentralized — start anywhere, always the same worst case.",
+      "Correct: closest-preceding-finger gives roughly a halving of the remaining distance per hop."
+    ]
+  },
+  "dat110-q-017": {
+    "question": "In a Chord ring with m = 5 (ID space 0–31), node p = 17 computes the finger-table entry for i = 5. What is the target before the successor lookup?",
+    "options": [
+      "Target is 33",
+      "Target is 1",
+      "Target is 17",
+      "Target is 32"
+    ],
+    "explanationCorrect": "p + 2^(i−1) = 17 + 16 = 33. Since the ring is circular, modulo 2^m is used: 33 mod 32 = 1. The successor lookup is therefore done on ID = 1.",
+    "explanationIncorrect": "The most common mistake is to forget the wrap-around and give 33 directly.",
+    "optionExplanations": [
+      "33 is the value just before the modulo. The ring wraps via mod 2^m, so the correct target number is 33 mod 32 = 1.",
+      "Correct: 33 mod 32 = 1.",
+      "17 is the starting node, not the target. The target lies 2^(i−1) = 16 steps ahead.",
+      "32 does not exist in the ID space {0, 1, ..., 31}. Modulo 32 yields only values 0–31."
+    ]
+  },
+  "dat110-q-018": {
+    "question": "What is the main task of the forwarding function performed at the network layer in a router?",
+    "options": [
+      "To compute least-cost paths through the network",
+      "To move datagrams from an incoming to an outgoing link",
+      "To provide diagnostic info about the network's problems",
+      "To translate between IP addresses and MAC addresses"
+    ],
+    "explanationCorrect": "Forwarding is the local per-packet decision about which outgoing link a packet should be sent on, based on the destination IP and the forwarding table. It is a data-plane function that happens at every hop.",
+    "explanationIncorrect": "It is easy to confuse forwarding with routing. Routing computes the tables; forwarding uses them.",
+    "optionExplanations": [
+      "That is routing (control plane), not forwarding (data plane). Routing sets up the tables that forwarding reads.",
+      "Correct: forwarding is per-packet forwarding based on the table.",
+      "Diagnostics are the role of ICMP and tools like ping/traceroute, not forwarding.",
+      "IP-to-MAC lookup is ARP, which lives in the link layer — not forwarding at the network layer."
+    ]
+  },
+  "dat110-q-019": {
+    "question": "How many IP addresses does the CIDR block 223.1.1.0/23 contain?",
+    "options": [
+      "1 address",
+      "23 addresses",
+      "256 addresses",
+      "512 addresses"
+    ],
+    "explanationCorrect": "In /23 the prefix is 23 bits and the host part is 32 − 23 = 9 bits. The number of addresses is 2^9 = 512.",
+    "explanationIncorrect": "A common mistake is to compute 2^(32−24) = 256 by assuming /24, or to give the prefix number itself as the answer.",
+    "optionExplanations": [
+      "1 would mean /32 (only one address). /23 covers much more.",
+      "23 is the prefix length, not the number of addresses.",
+      "256 = 2^8 is for /24, not /23. /23 is a block one bit larger.",
+      "Correct: 2^(32−23) = 2^9 = 512 addresses."
+    ]
+  },
+  "dat110-q-020": {
+    "question": "A company needs an IPv4 subnet that holds at least 100 usable host addresses. Which prefix length is the smallest that covers the need?",
+    "options": [
+      "/24 — gives 256 addresses",
+      "/25 — gives 128 addresses",
+      "/26 — gives 64 addresses",
+      "/27 — gives 32 addresses"
+    ],
+    "explanationCorrect": "/25 has 32 − 25 = 7 host bits → 128 addresses in total. After subtracting the network and broadcast addresses, that gives 126 usable hosts — the first option that covers 100.",
+    "explanationIncorrect": "/26 gives 64 addresses in total, which does not reach 100. /24 is correct for the need, but not the smallest option.",
+    "optionExplanations": [
+      "/24 covers the need (254 usable), but is not the smallest option.",
+      "Correct: 126 usable hosts, the smallest prefix that covers the 100 limit.",
+      "/26 gives only 62 usable hosts, too few.",
+      "/27 gives 30 usable hosts, far from enough."
+    ]
+  },
+  "dat110-q-021": {
+    "question": "A router has the following forwarding table. Which entry is used for a packet to 10.0.5.7?\n\n| Prefix | Link |\n|---|---|\n| 10.0.0.0/8 | A |\n| 10.0.0.0/16 | B |\n| 10.0.4.0/22 | C |\n| 0.0.0.0/0 | D |",
+    "options": [
+      "A — the first matching entry in the table",
+      "B — /16 covers the entire 10.0 prefix block",
+      "C — /22 is the narrowest match that covers the IP",
+      "D — default is used when several candidates exist"
+    ],
+    "explanationCorrect": "Forwarding uses longest-prefix match: among the entries that match the destination, the one with the longest prefix is chosen. 10.0.5.7 matches /8, /16 and /22 — /22 is the longest, so link C is used.",
+    "explanationIncorrect": "The default route is used only when no specific match is found. First-match is not the rule for IP forwarding.",
+    "optionExplanations": [
+      "First-match is an ACL rule, not IP forwarding. IP uses the longest prefix.",
+      "/16 matches, but /22 is more specific and wins.",
+      "Correct: /22 is the longest matching prefix.",
+      "Default is used only when nothing else matches. Here three concrete matches exist."
+    ]
+  },
+  "dat110-q-022": {
+    "question": "What is the main purpose of the Address Resolution Protocol (ARP)?",
+    "options": [
+      "To configure a network interface card with an IP address",
+      "To translate an IP address into the corresponding link-layer address (MAC)",
+      "To configure a network interface card with a link-layer address (MAC)",
+      "To route datagrams between different subnets"
+    ],
+    "explanationCorrect": "ARP resolves an IP address to a MAC address on the same link. It is necessary because the link layer (Ethernet) uses MAC, while applications and the network layer use IP.",
+    "explanationIncorrect": "ARP configures nothing — it translates. IP addresses are assigned via DHCP or statically; MAC is burned into the hardware.",
+    "optionExplanations": [
+      "That is DHCP or manual configuration, not ARP.",
+      "Correct: ARP resolves IP → MAC on the same link.",
+      "MAC is assigned by the card manufacturer (burned in), not via ARP.",
+      "That is routing at the network layer. ARP works at the link layer."
+    ]
+  },
+  "dat110-q-023": {
+    "question": "What distinguishes Lamport clocks from vector clocks?",
+    "options": [
+      "A total order for one; a causal partial order for the other",
+      "One uses physical time, the other uses logical time",
+      "One is an older algorithm replaced by the other",
+      "They are equivalent algorithms with different names"
+    ],
+    "explanationCorrect": "Lamport clocks give a consistent total ordering of events, but may assign an order between events that are actually concurrent. Vector clocks keep one counter per process and can therefore determine whether two events are causally related or concurrent.",
+    "explanationIncorrect": "Both are logical clocks — physical time plays no role. Vector clocks were developed after Lamport to capture causality more precisely.",
+    "optionExplanations": [
+      "Correct: total order vs. partial order that preserves causal structure.",
+      "Both ignore physical time and operate only with logical counters.",
+      "The order is reversed: Lamport (1978) came first, vector clocks (1988) build on them.",
+      "They solve different problems and are not interchangeable. Vector clocks require more state per node."
+    ]
+  },
+  "dat110-q-024": {
+    "question": "What is the name of a replication protocol in which write operations are based on majority voting?",
+    "options": [
+      "Local-write protocol",
+      "Active replication",
+      "Quorum-based protocol",
+      "Coherence-based protocol"
+    ],
+    "explanationCorrect": "In quorum-based protocols, an operation must gather enough votes from the replicas (typically a majority, or a combination where read quorum + write quorum > N) before it is considered valid. This provides consistency without requiring all replicas to be available.",
+    "explanationIncorrect": "Active replication and local-write are other families that do not depend on voting.",
+    "optionExplanations": [
+      "Local-write means the client writes locally and syncs back later — no majority voting.",
+      "Active replication runs each update on all replicas in the same order, but without per-operation voting.",
+      "Correct: quorum = majority voting.",
+      "Coherence-based protocols are CPU cache concepts, not a category in the replication family."
+    ]
+  },
+  "dat110-q-025": {
+    "question": "Which property does a Distributed Hash Table (DHT) primarily provide beyond plain lookup functionality?",
+    "options": [
+      "Built-in cryptographic security for all key-value pairs",
+      "Fault tolerance through distribution over multiple nodes in the ring",
+      "Guaranteed low latency regardless of network topology",
+      "Strong consistency across all replicas at all times"
+    ],
+    "explanationCorrect": "DHT design provides fault tolerance because keys and data are spread across many nodes; the failure of one node only takes down its part of the key space, and neighbors can take over via successor pointers and replication.",
+    "explanationIncorrect": "Security, constant latency, and strong consistency are not inherent DHT properties — they must be added as extra layers if needed.",
+    "optionExplanations": [
+      "Security is not part of the basic DHT model — Chord/Pastry offer no cryptography in themselves.",
+      "Correct: lookups survive node failures because data is stored in a distributed manner and can be replicated to successor nodes.",
+      "Lookup latency is O(log N) hops in the overlay, not constant — physical topology can make it worse.",
+      "DHTs typically provide eventual consistency on replicas, not strong consistency."
+    ]
+  },
+  "dat110-q-026": {
+    "question": "Which data structure makes Chord lookup scalable to O(log N) hops instead of O(N)?",
+    "options": [
+      "A full routing table with a pointer to every single node in the ring",
+      "A finger table with pointers to exponentially distributed nodes",
+      "A successor list visited node-by-node all the way to the correct key",
+      "A multicast query that floods the ring until the responsible node answers"
+    ],
+    "explanationCorrect": "The finger table stores m pointers (for an m-bit key space) to nodes at distances 2^0, 2^1, … 2^(m−1) around the ring. This halves the distance at each hop and gives O(log N) lookup.",
+    "explanationIncorrect": "Successor-only traversal is O(N), a full table scales poorly, and multicast contradicts the DHT principle.",
+    "optionExplanations": [
+      "A full table requires O(N) state per node and must be maintained at every join/leave — not scalable.",
+      "Correct: m fingers per node, each hop halves the remaining distance → O(log N).",
+      "Successor-only traversal works, but costs O(N) in the worst case — that is exactly the problem the finger table solves.",
+      "Multicast/flooding scales poorly and contradicts the whole point of a structured overlay."
+    ]
+  },
+  "dat110-q-027": {
+    "question": "A DHT uses 8 bits for its key space. How many unique keys are there in the address space?",
+    "options": [
+      "8 keys — one per bit in the identifier",
+      "64 keys — the square of the number of bits",
+      "256 keys — two raised to the power of eight distinct values",
+      "128 keys — half of two raised to the power of eight"
+    ],
+    "explanationCorrect": "With m bits, the key space has 2^m positions. 2^8 = 256, so the keys range from 0 to 255 on the Chord ring.",
+    "explanationIncorrect": "The number of bits is not the number of keys — it is the logarithm (base 2) of the key space size.",
+    "optionExplanations": [
+      "You have confused the width (8 bits) with the count. 8 bits gives 2^8 values, not 8.",
+      "8² = 64, but the formula is 2^m, not m². An easy mistake if you don't remember the exponent rule.",
+      "Correct: 2^8 = 256 values in the address space.",
+      "Half of 256 is 128, but the entire key space is 256 — none is reserved."
+    ]
+  },
+  "dat110-q-028": {
+    "question": "A Chord ring (5-bit address space) has nodes P1=20, P2=10, P3=2. Where are keys 12, 1, 5, and 31 stored according to the successor rule?",
+    "options": [
+      "P3 (id 2) holds 1 and 31; P2 (id 10) holds 5; P1 (id 20) holds 12",
+      "P1 (id 20) holds 12; P2 (id 10) holds 1, 5, and 31",
+      "P3 (id 2) holds 1 and 5; P2 (id 10) holds 31; P1 (id 20) holds 12",
+      "P1 (id 20) holds 1, 5, and 31; P2 (id 10) holds 12"
+    ],
+    "explanationCorrect": "The successor rule: key k is stored on succ(k) = the node with the smallest id ≥ k, and wraps around the ring if no node is ≥ k. The ring has nodes 2 (P3), 10 (P2), 20 (P1). k=12 → smallest id ≥ 12 is 20 → P1. k=5 → smallest id ≥ 5 is 10 → P2. k=1 → smallest id ≥ 1 is 2 → P3. k=31 → no node ≥ 31 (the highest is 20), so wrap around → the smallest id in the ring is 2 → P3. Thus P1={12}, P2={5}, P3={1, 31}. Check with intervals (pred, id]: P3 covers (20, 2] = {21..31, 0, 1, 2} and captures both 31 and 1; P2 covers (2, 10] and captures 5; P1 covers (10, 20] and captures 12.",
+    "explanationIncorrect": "Common mistakes: letting keys larger than the highest node id (here 31) go to the wrong node instead of wrapping around to the smallest node (P3 = 2), or using the predecessor instead of the successor (wrong direction around the ring).",
+    "optionExplanations": [
+      "Correct: succ(12)=20 (P1), succ(5)=10 (P2), succ(1)=2 (P3), and succ(31) wraps around to 2 (P3). P3 is responsible for the interval (20, 2].",
+      "Wrong: 1 and 31 do not end up on P2. succ(1)=2 and succ(31)=wrap→2 — both on P3 (id 2), not P2 (id 10).",
+      "Wrong: succ(5)=10 is P2, not P3; and succ(31) wraps to P3 (2), not P2.",
+      "Wrong direction: this corresponds to the predecessor rule. The successor goes clockwise around to the first node with id ≥ k."
+    ]
+  },
+  "dat110-q-029": {
+    "question": "What is the main idea behind Remote Procedure Call (RPC)?",
+    "options": [
+      "Letting a client process execute a function on a server process as if it were local",
+      "Sending independent messages between two processes without a reply",
+      "Replicating the client process's memory over to a remote server",
+      "Physically migrating running processes between machines on demand"
+    ],
+    "explanationCorrect": "RPC abstracts a remote function execution as a local function call: the client stub marshals the arguments, the server stub executes, and the result is returned synchronously. The idea is procedure-call transparency over the network.",
+    "explanationIncorrect": "Message passing, replication, and process migration are other distribution mechanisms that solve different problems.",
+    "optionExplanations": [
+      "Correct: RPC = function call with remote execution, the client sees it as an ordinary local call.",
+      "That describes fire-and-forget message passing (e.g. pipelining), not RPC, which requires a reply.",
+      "Memory replication is distributed shared memory, an entirely different paradigm.",
+      "That is code migration, not RPC. RPC never moves the process — only the call and the reply."
+    ]
+  },
+  "dat110-q-030": {
+    "question": "What kind of communication model best describes standard RPC?",
+    "options": [
+      "Persistent and asynchronous — messages are stored until the receiver picks them up",
+      "Persistent and synchronous — messages are stored while the client waits for a reply",
+      "Transient and synchronous — the client blocks until the server returns the reply",
+      "Transient and asynchronous — the client sends and continues without a reply"
+    ],
+    "explanationCorrect": "Ordinary RPC is transient because the message only exists while both parties are up, and synchronous because the client thread blocks on the result of the call — just like a local function call.",
+    "explanationIncorrect": "Persistent models use intermediate storage (MOM/broker). Asynchronous RPC exists as a variant, but is not the standard.",
+    "optionExplanations": [
+      "Persistent = a message stored between phases; that is MOM, not standard RPC.",
+      "RPC does not use intermediate storage — messages are moved directly between running stubs.",
+      "Correct: transient (direct) + synchronous (blocking). Asynchronous RPC is an extension with a callback.",
+      "Standard RPC waits for a reply. Asynchronous RPC exists, but is not the default model."
+    ]
+  },
+  "dat110-q-031": {
+    "question": "Which challenge must the marshalling layer in RPC account for between heterogeneous machines?",
+    "options": [
+      "Byte order can vary between big-endian and little-endian architectures",
+      "Function names must be translated between different programming languages along the way",
+      "The server must always run the same operating system as the client",
+      "The client and server must share the same physical CPU thread during the call"
+    ],
+    "explanationCorrect": "Heterogeneous machines may store multi-byte values (e.g. a 32-bit int) in different byte order. Marshalling converts to a common wire format (e.g. network byte order or XDR) so that the server interprets the bits correctly.",
+    "explanationIncorrect": "Language, OS, and CPU independence are exactly what RPC and IDL are meant to abstract away — they are not requirements.",
+    "optionExplanations": [
+      "Correct: endianness is a classic RPC challenge that marshalling solves via a common wire format.",
+      "The IDL/stub generator handles language translation — it is not a runtime challenge.",
+      "The whole point of RPC is precisely that the client and server can run on different operating systems.",
+      "RPC crosses the network; threads/CPUs on the client and server are entirely independent."
+    ]
+  },
+  "dat110-q-032": {
+    "question": "In an overlay with 10 nodes — how many total messages are needed to send one multicast to all other nodes with (a) a tree overlay versus (b) a full-connectivity overlay?",
+    "options": [
+      "9 in the tree, 45 in the fully-connected one (one message per unique edge used)",
+      "10 in the tree, 100 in the fully-connected one (one message per node pair total)",
+      "50 in the tree, 10 in the fully-connected one (a full mesh uses fewer messages)",
+      "9 in the tree, 100 in the fully-connected one (full mesh = the square of n)"
+    ],
+    "explanationCorrect": "A tree with n nodes has n−1 = 9 edges; one message per edge gives 9. A full mesh has n(n−1)/2 = 45 unique edges; one message is sent along each. The tree scales far better.",
+    "explanationIncorrect": "Be careful to distinguish edges (pairs) from ordered pairs. A multicast along a tree reaches all nodes but only costs n−1 messages.",
+    "optionExplanations": [
+      "Correct: tree = n−1, fully = n(n−1)/2 — a classic overlay cost comparison.",
+      "n(n−1) = 90 counts ordered pairs, but each edge is used once for unicast → divide by 2.",
+      "The full mesh has more edges than the tree, not fewer. Confusion with stretch or delay.",
+      "The tree figure is correct, but 100 for the full mesh is wrong — that is n², not n(n−1)/2."
+    ]
+  },
+  "dat110-q-033": {
+    "question": "An overlay network has a stretch of 2.0 between two nodes. What does this mean?",
+    "options": [
+      "The overlay path has twice the delay of the underlying network path",
+      "The underlying network has twice the delay of the overlay path",
+      "The overlay and the underlying network always have exactly the same delay",
+      "The overlay uses twice as many nodes as the underlying network has routers"
+    ],
+    "explanationCorrect": "Stretch is defined as overlay delay / underlying delay. A stretch of 2.0 means the overlay path takes twice as long as the physical network would take directly.",
+    "explanationIncorrect": "Stretch is about delay, not the number of nodes. By definition: stretch ≥ 1, always.",
+    "optionExplanations": [
+      "Correct: stretch = overlay/underlying. 2.0 = double the delay.",
+      "You have flipped the fraction. The overlay is always as fast as or slower than the underlay (stretch ≥ 1).",
+      "That would be stretch = 1.0, not 2.0.",
+      "Stretch measures delay, not the number of nodes. Confusion of concepts."
+    ]
+  },
+  "dat110-q-034": {
+    "question": "A process sends out messages and does not care who picks them up. Which communication pattern best describes this?",
+    "options": [
+      "Pipelining pattern — one-way fire-and-forget between process stages",
+      "Publish-subscribe via a broker — couples the sender to topic-based receivers",
+      "Request-Reply — bi-directional protocol with a reply from the receiver",
+      "Stateful RPC — synchronous call to a named server procedure"
+    ],
+    "explanationCorrect": "Pipelining is fire-and-forget: the sender produces data and pushes it onward without knowing or caring who consumes it. Pub-sub, by contrast, requires a broker that matches topics.",
+    "explanationIncorrect": "Pub-sub usually has a broker in between — that is a coupling, even if a loose one. Pipelining is the purest \"throw it out and forget\".",
+    "optionExplanations": [
+      "Correct: pipelining = fire-and-forget; no broker, no ACK.",
+      "Pub-sub requires a broker that knows about topics and subscribers — not the same absence of coupling.",
+      "Request-reply assumes the sender gets a reply — the opposite of fire-and-forget.",
+      "Stateful RPC is synchronous and named — neither matches the description."
+    ]
+  },
+  "dat110-q-035": {
+    "question": "Which logical clock can be used to determine whether two events are causally related or concurrent?",
+    "options": [
+      "Lamport clock — always gives a total order between pairs of events",
+      "Vector clock — preserves causality across all dimensions simultaneously",
+      "Absolute clock — uses physical time to sort events",
+      "Round-robin clock — rotates responsibility for timestamping between nodes"
+    ],
+    "explanationCorrect": "Vector clocks keep one counter per process. Two vectors can be compared component-wise: V(a) < V(b) component-for-component means a happened-before b. If neither is ≤ the other, the events are concurrent.",
+    "explanationIncorrect": "Lamport gives a total order but can incorrectly place concurrent events in an order. Physical time can drift and is not reliable for causality.",
+    "optionExplanations": [
+      "Lamport gives only a necessary condition: a→b ⇒ C(a) < C(b), but not the reverse. It cannot reveal concurrency.",
+      "Correct: vector clocks capture causal structure — comparison gives both order and concurrency.",
+      "Clock drift between machines means physical time cannot be used reliably for causality.",
+      "Does not exist as a standard logical-clock mechanism — distractor."
+    ]
+  },
+  "dat110-q-036": {
+    "question": "For two events a and z — when can we conclude that a causally happened-before z?",
+    "options": [
+      "If the vector clock V(a) < V(z) (component-wise less than or equal, and strictly less in one)",
+      "If the Lamport timestamp C(a) < C(z), regardless of whether a and z are in different processes",
+      "If the Lamport timestamp C(a) > C(z), since a larger time means a later event",
+      "If the vector clock V(a) > V(z) (component-wise greater in all dimensions)"
+    ],
+    "explanationCorrect": "Vector clocks give a sufficient condition for happened-before: V(a) < V(z) component-wise ⇒ a→z. Lamport gives only a necessary condition — C(a) < C(z) can also occur when a and z are concurrent.",
+    "explanationIncorrect": "Lamport is weaker: a total order in clock space does not imply causality in event space. A larger vector value reverses the causality.",
+    "optionExplanations": [
+      "Correct: V(a) < V(z) ⇔ a→z. The only reliable causal test.",
+      "Lamport can have C(a) < C(z) even when the events are concurrent — only necessary, not sufficient.",
+      "A larger Lamport value makes a later, not earlier. The direction is reversed.",
+      "If V(a) > V(z) component-wise, then it is z→a, not a→z."
+    ]
+  },
+  "dat110-q-037": {
+    "question": "Which mutual-exclusion algorithm has N points of failure — that is, it fails if any single node fails?",
+    "options": [
+      "Distributed (Ricart–Agrawala) — requires a reply from all other nodes",
+      "Centralized — one coordinator handles all critical-section requests",
+      "Token-ring — the token circulates between processes in a fixed order",
+      "Decentralized — multiple coordinators distribute decisions via quorum"
+    ],
+    "explanationCorrect": "Ricart–Agrawala (distributed) requires an OK from all N−1 other nodes before a critical section can be entered. If one node drops out, its OK never arrives, and the algorithm blocks — N points of failure.",
+    "explanationIncorrect": "Centralized has 1 point of failure (the coordinator). Token-ring blocks on a node failure but can be repaired by regenerating the token. Decentralized tolerates node failures via quorum.",
+    "optionExplanations": [
+      "Correct: the distributed algorithm needs a reply from ALL → N points of failure.",
+      "Centralized has 1 point of failure: the coordinator itself. The rest is fault-tolerant around it.",
+      "Token-ring stops on loss of the token, but the number of points of failure is not N — it is token handling that is vulnerable.",
+      "Decentralized (Lin et al.) tolerates precisely that some coordinators fail — a majority quorum suffices."
+    ]
+  },
+  "dat110-q-038": {
+    "question": "How many messages does Ricart–Agrawala's distributed mutual-exclusion algorithm need to grant one process access to a critical section among N processes?",
+    "options": [
+      "2(N−1) — request to all, then an OK back from each",
+      "N+1 — one request and one combined reply from the coordinator",
+      "N−1 — only requests out, no replies needed",
+      "2N+1 — request, OK and release to each individual node"
+    ],
+    "explanationCorrect": "Ricart–Agrawala requires the process to send a request to all N−1 others (N−1 messages) and wait for an OK from each of them (another N−1) → 2(N−1) in total.",
+    "explanationIncorrect": "Centralized uses 3 messages (request, grant, release). Token-ring uses 1–N (depending on position).",
+    "optionExplanations": [
+      "Correct: (N−1) requests + (N−1) OKs = 2(N−1).",
+      "N+1 would apply to the centralized variant — but there the answer is 3, not N+1.",
+      "Without an OK reply from all, the process does not know whether anyone else has an older Lamport timestamp — illegal to enter.",
+      "No release is sent in Ricart–Agrawala — the deferred OK is delivered lazily when the queued request is released."
+    ]
+  },
+  "dat110-q-039": {
+    "question": "What does monotonic-read consistency guarantee for a client that reads data x multiple times?",
+    "options": [
+      "Once the client has seen a value of x, it will never later see an older version",
+      "Each subsequent write to x must overlap in time with the previous write",
+      "Every subsequent read operation always returns the client's own freshest write",
+      "The sequence of writes to x is always propagated in the same order to all replicas"
+    ],
+    "explanationCorrect": "Monotonic-read says that if a client reads version v_k of x, the next read will return v_k or a newer one. Time-traveling backwards is forbidden — even if the client switches replica.",
+    "explanationIncorrect": "Read-your-writes, monotonic-write and writes-follow-reads are separate client-centric models with different guarantees.",
+    "optionExplanations": [
+      "Correct: the read timestamp can only move forward, never backward.",
+      "That describes monotonic-write (about write ordering), not monotonic-read.",
+      "That is read-your-writes — that the client sees its own writes.",
+      "That is about global ordering of writes on the server side, not about client reads."
+    ]
+  },
+  "dat110-q-040": {
+    "question": "A client changes its password on one replica. Which client-centric consistency model must hold for the client to be able to log in immediately afterward, no matter which replica it hits?",
+    "options": [
+      "Read-your-writes — the client always sees its own earlier writes",
+      "Monotonic-read — the client never sees a version older than the previous read",
+      "Writes-follow-reads — writes are ordered after the client's earlier reads",
+      "Monotonic-write — the client's writes are propagated in the same order"
+    ],
+    "explanationCorrect": "Read-your-writes ensures that the client sees its own earlier updates — critical for a password change, since the new value must be visible on the replica the client authenticates against.",
+    "explanationIncorrect": "Monotonic-read does not guarantee that the client's own writes are reflected immediately, only that no read is older than the previous one.",
+    "optionExplanations": [
+      "Correct: \"see my own writes\" = read-your-writes. The classic password example.",
+      "Monotonic-read forbids regressing reads, but says nothing about the client seeing ITS OWN writes.",
+      "Writes-follow-reads concerns ordering of writes after earlier reads — not the visibility of one's own writes.",
+      "Monotonic-write concerns the ordering of sequential writes from the same client, not immediate visibility."
+    ]
+  },
+  "dat110-q-041": {
+    "question": "What is the main challenge with active replication, where updates are executed on all replicas?",
+    "options": [
+      "Events must be ordered consistently across all replica servers",
+      "Active replication offers no fault tolerance because all do the same job",
+      "Clients must know the address of each individual replica in the system",
+      "Each replica must use the same operating system and CPU architecture"
+    ],
+    "explanationCorrect": "Active replication requires each update to be executed in the same order on all replicas for them to stay identical. That requires total-order multicast — a non-trivial and costly coordination mechanism.",
+    "explanationIncorrect": "Active replication actually gives good fault tolerance. Client rebinding and hardware details are independent problems.",
+    "optionExplanations": [
+      "Correct: total-order multicast for events is the core problem in active replication.",
+      "The opposite: active replication is a fault-tolerant strategy — any one can take over.",
+      "That is a separate lookup problem, not unique to active replication.",
+      "Replication is agnostic to the underlying hardware/OS."
+    ]
+  },
+  "dat110-q-042": {
+    "question": "What does it mean for a distributed system to be k-fault-tolerant?",
+    "options": [
+      "The system can survive the failure of k processes simultaneously and still function",
+      "The system can survive the failure of all processes except k of them",
+      "The system can survive the failure of at least the majority of its processes",
+      "The system can survive the failure of k+1 processes by using quorum"
+    ],
+    "explanationCorrect": "k-fault-tolerant means that correct operation is maintained as long as at most k processes have failed. The definition is simple and standard in Tanenbaum ch. 8.",
+    "explanationIncorrect": "A k+1 failure would break the guarantee. \"All except k\" is the opposite phrasing and does not apply.",
+    "optionExplanations": [
+      "Correct: k is the number of process failures the system tolerates without breaking.",
+      "That is the opposite: \"survives only if k survive\" — not the same as k-fault-tolerant.",
+      "Majority is tied to quorum, not to k-fault tolerance in general.",
+      "A k+1 failure is precisely what breaks the guarantee — hence the name k-fault-tolerant, not (k+1)."
+    ]
+  },
+  "dat110-q-043": {
+    "question": "How many processes in total are required to achieve Byzantine agreement in a group with k failing (Byzantine) processes?",
+    "options": [
+      "3k+1 processes — the classic result of Lamport, Pease and Shostak",
+      "2k+1 processes — a majority among the non-failing suffices for crash failure",
+      "3k processes — one less than the standard bound for Byzantine",
+      "k+1 processes — the minimum possible for a simple majority decision"
+    ],
+    "explanationCorrect": "For Byzantine (arbitrary) failures, at least 3k+1 processes in total are needed to reach agreement with k malicious ones — the classic result from Lamport, Pease and Shostak (1980).",
+    "explanationIncorrect": "2k+1 suffices for crash failures (leaderless majority), but not for Byzantine, where malicious nodes can send conflicting messages.",
+    "optionExplanations": [
+      "Correct: 3k+1 is the exact lower bound for Byzantine agreement.",
+      "2k+1 applies only to crash failures where nodes simply stop responding — not actively sending faulty messages.",
+      "3k is not enough — it requires +1 extra to break a voting tie.",
+      "k+1 is far too few — malicious nodes could then make up the majority."
+    ]
+  },
+  "dat110-q-044": {
+    "question": "What is the primary role of the forwarding function at the network layer?",
+    "options": [
+      "To move datagrams from an incoming link to the correct outgoing link in a router",
+      "To compute least-cost paths to all other routers in the network",
+      "To provide diagnostic messages to the source host when network errors occur",
+      "To set up an end-to-end connection between two application processes"
+    ],
+    "explanationCorrect": "Forwarding is the data plane: each packet is looked up in the forwarding table and pushed out on the correct output port. It happens per packet, locally in the router, and is fast.",
+    "explanationIncorrect": "Path computation is routing (control plane). Diagnostics is ICMP. Connection setup is the transport layer (TCP).",
+    "optionExplanations": [
+      "Correct: forwarding = packet in → packet out, based on destination IP and a table lookup.",
+      "That is routing, not forwarding — the control plane that fills the forwarding table.",
+      "ICMP handles diagnostic messages; not part of the forwarding function.",
+      "Connection setup (the TCP handshake) happens at the transport layer, not the network layer."
+    ]
+  },
+  "dat110-q-045": {
+    "question": "What is the role of the routing function at the network layer, as distinct from forwarding?",
+    "options": [
+      "To compute the contents to be placed in the router's forwarding table",
+      "To move each datagram from the incoming link to the correct outgoing link",
+      "To deliver error messages and diagnostics to the source host when problems occur",
+      "To decide the transport protocol (TCP or UDP) for each individual packet"
+    ],
+    "explanationCorrect": "Routing is the control plane: the algorithms (Dijkstra, Bellman-Ford) compute least-cost paths and populate the forwarding table. Forwarding then uses the table per packet.",
+    "explanationIncorrect": "A classic control-plane/data-plane distinction. Routing runs rarely (seconds to minutes); forwarding happens for every packet (nanoseconds).",
+    "optionExplanations": [
+      "Correct: routing fills the table that forwarding reads. Control plane vs data plane.",
+      "That is forwarding (data plane), not routing.",
+      "ICMP error messages have their own protocol — they are not part of routing.",
+      "The transport protocol is chosen by the application, not by the network layer's routing."
+    ]
+  },
+  "dat110-q-046": {
+    "question": "A frame with source MAC 0x3A and destination MAC 0x3B arrives at an Ethernet switch. What does the switch add to its forwarding table after this observation?",
+    "options": [
+      "An entry for the source address 0x3A bound to the incoming port",
+      "An entry for the destination address 0x3B bound to the outgoing port",
+      "Two entries: one for each of the two link addresses in the frame header",
+      "No entry — the switch learns only via its own broadcast queries"
+    ],
+    "explanationCorrect": "Switch learning works by observing the SOURCE MAC in incoming frames: the switch records that MAC 0x3A is reachable via the port the frame arrived on. The destination MAC is used for lookup, not for learning.",
+    "explanationIncorrect": "A common misconception: the switch learns from the source, not the destination — because it knows which port the frame CAME from, but not necessarily where the destination is.",
+    "optionExplanations": [
+      "Correct: the switch learns source MAC + incoming port. Classic backward learning.",
+      "The switch does not know which port the destination is on until it receives a frame FROM THERE — that is not learning.",
+      "Only the source is learned per frame; the destination is looked up but yields no new information.",
+      "Switches do not send probes themselves — learning is passive, via observation."
+    ]
+  },
+  "dat110-q-047": {
+    "question": "What does traffic intensity measure on an outgoing link in a packet switch?",
+    "options": [
+      "The number of bits per second received on the incoming link of the packet switch",
+      "The ratio between the incoming bit rate and the link's outgoing transmission rate",
+      "The total amount of bits transmitted since the link was activated",
+      "The number of packets per second dropped due to buffer overflow"
+    ],
+    "explanationCorrect": "Traffic intensity is defined as La/R: the arrival rate of bits (L bits per packet × a packets per second) divided by the outgoing link's capacity R. As the ratio approaches 1, the queue grows without bound.",
+    "explanationIncorrect": "The most common trap is to confuse traffic intensity with the absolute arrival rate — it is precisely the ratio that is informative.",
+    "optionExplanations": [
+      "This is only the numerator (La). Traffic intensity also includes the denominator R to give a dimensionless ratio.",
+      "Correct: La/R. A ratio describing how close the link is to its saturation limit.",
+      "Accumulated bit count is an entirely different metric and is independent of load per unit time.",
+      "Loss is a result of high traffic intensity, not the definition itself."
+    ]
+  },
+  "dat110-q-048": {
+    "question": "Claim: \"A service provided by a layer also determines which protocol must be used to implement the service.\" Is this true or false?",
+    "options": [
+      "True — the service definition is binding for the choice of protocol",
+      "False — service and protocol are two orthogonal concepts in the layer model",
+      "True — because the interface and the implementation are always coupled",
+      "False — but only because the TCP/IP stack has multiple protocols per layer"
+    ],
+    "explanationCorrect": "A service is what a layer offers (the interface between layers), whereas the protocol is how peer layer instances talk to each other. The same service can be realized by several different protocols.",
+    "explanationIncorrect": "Service and protocol are separated in layered design precisely to make implementations interchangeable without changing the users above.",
+    "optionExplanations": [
+      "This contradicts the very point of layered architecture. The service interface is stable; the protocol implementation can be swapped.",
+      "Correct: service = the vertical interface upward; protocol = the horizontal peer-to-peer convention.",
+      "On the contrary — separating the interface from the implementation is the core of layered design.",
+      "The right answer, but the reasoning is too narrow — the separation is a general principle, not a TCP/IP-specific artifact."
+    ]
+  },
+  "dat110-q-049": {
+    "question": "Which service does the network layer provide in the TCP/IP stack?",
+    "options": [
+      "Reliable two-way transfer of a byte stream between two hosts",
+      "Reliable point-to-point delivery of datagrams over a single link",
+      "Unreliable multi-hop delivery of datagrams between endpoints",
+      "Reliable broadcast of datagrams to all hosts in the same subnet"
+    ],
+    "explanationCorrect": "The IP layer provides best-effort multi-hop datagram delivery — with no guarantees of reliability, ordering, or delivery. Reliability is built on top (TCP).",
+    "explanationIncorrect": "Reliability belongs to the transport layer (TCP); the link layer handles a single link; broadcast is not a standard network-layer service in TCP/IP.",
+    "optionExplanations": [
+      "This describes TCP — which sits above IP. The network layer provides no reliability of its own.",
+      "This is the scope of the link layer. The network layer chains together multiple links (multi-hop).",
+      "Correct: unreliable, multi-hop, end-to-end datagram delivery. The classic definition (syllabus key point).",
+      "Broadcast exists (e.g. IPv4 subnet broadcast), but it is not the network-layer service itself in TCP/IP."
+    ]
+  },
+  "dat110-q-050": {
+    "question": "How is a communication endpoint identified at the transport layer?",
+    "options": [
+      "By an IP address and a TCP/UDP port number",
+      "By an IP address and the OS process's local PID",
+      "By the IP address of the destination host only",
+      "By an IP address and the link layer's MAC address"
+    ],
+    "explanationCorrect": "A transport endpoint is identified by the pair (IP, port). The IP selects the host, the port selects which socket/application on that host.",
+    "explanationIncorrect": "The PID is an internal OS concept and is not visible across the network; the IP alone does not provide enough information to demultiplex to the right application; the MAC belongs to the link layer.",
+    "optionExplanations": [
+      "Correct: (IP, port) is the universal transport endpoint in TCP/IP.",
+      "The PID is a local OS concept — not available across the network.",
+      "Without port information, the transport layer cannot tell which application the segment is destined for.",
+      "The MAC is used at the link layer; the transport layer uses the port, not the MAC."
+    ]
+  },
+  "dat110-q-051": {
+    "question": "Which service does TCP provide to the application layer?",
+    "options": [
+      "Reliable transfer of datagrams over a single link",
+      "Reliable two-way transfer of a byte stream between two hosts",
+      "Unreliable end-to-end sending of a sequence of bytes between hosts",
+      "Reliable multicast distribution of messages to a group of receivers"
+    ],
+    "explanationCorrect": "TCP provides reliable, in-order, two-way byte-stream delivery between two endpoints. Reliability is realized with sequence numbers, ACKs, and retransmission.",
+    "explanationIncorrect": "TCP is byte-stream, not message-oriented or multicast; UDP is the unreliable one; the link layer handles a single link.",
+    "optionExplanations": [
+      "Single-link reliability is the domain of the link layer, not TCP.",
+      "Correct: reliable, two-way, byte stream — the canonical TCP service definition.",
+      "An unreliable sequence is closer to UDP semantics; TCP provides precisely reliability.",
+      "TCP is unicast point-to-point. Multicast is built on top (or IP multicast)."
+    ]
+  },
+  "dat110-q-052": {
+    "question": "What is the main purpose of the Domain Name System (DNS)?",
+    "options": [
+      "Translate IP addresses to MAC addresses at the link layer",
+      "Translate host names to IP addresses",
+      "Translate URIs to complete HTML pages",
+      "Translate port numbers to application protocols"
+    ],
+    "explanationCorrect": "DNS is a distributed hierarchical database that maps human-readable host names (e.g. www.uib.no) to IP addresses so that sockets can connect.",
+    "explanationIncorrect": "IP→MAC is ARP; URI→HTML is HTTP/the web server; port→protocol is just a static registry (IANA).",
+    "optionExplanations": [
+      "This describes ARP (Address Resolution Protocol), not DNS.",
+      "Correct: name → IP. The canonical purpose of DNS.",
+      "URI resolution and content retrieval are done by HTTP, not DNS.",
+      "Standard port mappings (port 80 → HTTP, etc.) are conventions, not a DNS service."
+    ]
+  },
+  "dat110-q-053": {
+    "question": "Which property holds for flooding-based multicast in an overlay network?",
+    "options": [
+      "The number of messages generated depends on the number of edges in the overlay",
+      "A fully-connected overlay is always cheaper than a tree-shaped overlay",
+      "The routing cost in an unstructured overlay is identical to that of a structured overlay",
+      "Messages are delivered only to the node with the lowest ID in the overlay"
+    ],
+    "explanationCorrect": "Each flooding message is sent over every overlay edge (or a subset, with probabilistic flooding). Total messages ≈ number of edges, so a tree (N−1 edges) becomes much cheaper than fully-connected (N(N−1)/2 edges).",
+    "explanationIncorrect": "Fully-connected has the most edges and is the most expensive, not the cheapest; unstructured routing is normally more expensive because it lacks shortcuts; multicast delivers to ALL nodes by definition.",
+    "optionExplanations": [
+      "Correct: cost(flooding) scales with #edges. Tree = N−1, full = N(N−1)/2.",
+      "The opposite: a tree minimizes edges (N−1) and is the cheapest; full is the most expensive.",
+      "A structured overlay (e.g. Chord) gives O(log N) lookup; an unstructured one may require O(N) flooding.",
+      "Multicast is defined as delivery to ALL members of the group, not just one."
+    ]
+  },
+  "dat110-q-054": {
+    "question": "In an overlay with 10000 nodes, 99% have already received an update. Which gossip strategy is most effective for reaching the last few percent?",
+    "options": [
+      "Push — updated nodes send out to random nodes",
+      "Pull — non-updated nodes query random nodes",
+      "Push-Pull — pairs of nodes exchange updates both ways",
+      "Reset — start a new flooding round from the origin node"
+    ],
+    "explanationCorrect": "When the spread is near saturation, push rarely finds non-updated receivers, and pull rarely finds updated sources. Push-Pull combines both: each exchange teaches both parties, so the remainder closes quickly.",
+    "explanationIncorrect": "Pure push is weak in the saturated phase (few new receivers); pure pull is weak in the early phase (few updated sources); reset is not a standard gossip strategy.",
+    "optionExplanations": [
+      "Push is weak when almost everyone is already updated — the receivers learn nothing new.",
+      "Pull alone works well in the saturated phase, but Push-Pull is even more robust.",
+      "Correct: Push-Pull balances best in both the early and late phases of gossip spreading.",
+      "Re-flooding is wasteful and does not guarantee that the remaining 1% is reached."
+    ]
+  },
+  "dat110-q-055": {
+    "question": "Which mode of anti-entropy gives the best convergence when both the source and the receiver may have new updates to contribute?",
+    "options": [
+      "Push only — P sends its updates to Q",
+      "Pull only — P fetches Q's updates",
+      "Push-Pull — P and Q exchange updates in both directions",
+      "Reset — both processes revert to an empty state"
+    ],
+    "explanationCorrect": "Push-Pull is the standard anti-entropy mode that lets two nodes synchronize fully in a single round, regardless of which one holds the newest values.",
+    "explanationIncorrect": "One-sided modes (push or pull alone) require several rounds and can miss updates if the source does not have them.",
+    "optionExplanations": [
+      "Push alone updates only one side per round; the information Q holds does not leak to P.",
+      "Pull alone has the same limitation but in the opposite direction.",
+      "Correct: Push-Pull is the symmetric anti-entropy mode that maximizes information exchange per contact.",
+      "Reset is not an anti-entropy mode; it would erase all data rather than synchronize it."
+    ]
+  },
+  "dat110-q-056": {
+    "question": "What is the main challenge with the home-based naming approach (as used for mobile IP)?",
+    "options": [
+      "Poor geographic scalability when the entity moves far from its home address",
+      "The home address cannot be registered in a naming-service hierarchy",
+      "Broken links arise because long pointer chains form between nodes",
+      "The home address requires constant encryption of all communication"
+    ],
+    "explanationCorrect": "If the entity moves far away from the home node, all packets still have to go via the home first — this gives suboptimal triangle routing and a latency that grows in proportion to the distance.",
+    "explanationIncorrect": "Home-based naming uses short pointer chains (a single indirection), not long ones; registration and encryption are not the actual problem.",
+    "optionExplanations": [
+      "Correct: triangle routing gives a higher RTT the farther the receiver is from the home node.",
+      "Home addresses CAN be registered in a naming service — that is precisely how clients find them.",
+      "It is forwarding-pointer schemes (distinct from home-based) that suffer from long chains, not home-based naming.",
+      "Encryption is orthogonal — not an inherent challenge in home-based naming."
+    ]
+  },
+  "dat110-q-057": {
+    "question": "Which statement is correct about iterative versus recursive DNS resolution?",
+    "options": [
+      "In recursive resolving, communication distance can be less critical because the sequence is hidden from the client",
+      "In iterative resolving, higher-level servers can become overloaded with recursive requests",
+      "In recursive resolving, the client sees all the name servers along the way in the hierarchy",
+      "Iterative and recursive resolving are identical in performance regardless of network topology"
+    ],
+    "explanationCorrect": "In recursive mode, a server delegates the work onwards internally and returns the final answer. The client sees only one RTT, so the geographic distance between intermediate servers becomes less visible from the client's perspective.",
+    "explanationIncorrect": "Overload arises precisely in recursive mode (servers must hold state), not iterative; iterative is where the client sees each server.",
+    "optionExplanations": [
+      "Correct: recursive hides the internal RTT behind a single client-server request.",
+      "The overload is on recursive servers (they carry the state), not iterative ones.",
+      "That is iterative mode, where the client contacts each server itself.",
+      "Performance depends strongly on topology — recursive often wins when intermediate servers are far from the client."
+    ]
+  },
+  "dat110-q-058": {
+    "question": "Claim: \"Threads share the address space with other threads in the same process.\" Is this true or false?",
+    "options": [
+      "True — threads share the heap, code and global variables in the process",
+      "False — each thread has its own complete address space",
+      "True — but only for kernel threads, not user threads",
+      "False — threads share only their own stack, not the heap"
+    ],
+    "explanationCorrect": "Threads within the same process share the heap, global variables and code segment. Each thread has its own stack and register state, but not a separate address space.",
+    "explanationIncorrect": "It is processes (not threads) that have isolated address spaces. The thread vs. process distinction is the whole point.",
+    "optionExplanations": [
+      "Correct: a shared address space is the defining property of threads. Lower context-switch cost than processes.",
+      "Address-space isolation characterizes PROCESSES, not threads.",
+      "Both kernel and user threads share the same address space as their host process.",
+      "It is the opposite — each thread has its OWN stack, but the heap is shared."
+    ]
+  },
+  "dat110-q-059": {
+    "question": "What does it mean for a server to be \"iterative\" (an iterative server)?",
+    "options": [
+      "It handles only one client request at a time and waits until it is done before taking in the next",
+      "It creates a new thread or process per incoming request for parallel handling",
+      "It iterates over an internal queue structure and prioritizes requests based on lateness",
+      "It uses recursive function calls internally to handle each request"
+    ],
+    "explanationCorrect": "An iterative server handles requests sequentially: accept, process, reply, close — then accept the next. Concurrent servers (the opposite) start a thread/process per request.",
+    "explanationIncorrect": "Iterative vs. concurrent is about concurrency in the server architecture, not about queue prioritization or internal recursion.",
+    "optionExplanations": [
+      "Correct: one client at a time, sequentially. Simple to implement, but poor under load.",
+      "This is a CONCURRENT server — the opposite of iterative.",
+      "Iterative refers to the processing model, not the queue strategy. The word \"iterate\" points to sequential access of connections.",
+      "Internal recursion in the code is irrelevant for classifying server architecture."
+    ]
+  },
+  "dat110-q-060": {
+    "question": "Which property is a typical advantage of stateless servers over stateful servers?",
+    "options": [
+      "The server can crash and restart with very low overhead because no session state has to be recovered",
+      "The server can guarantee stronger consistency because all state lies centrally",
+      "The client does not need to send any identifier in its requests",
+      "The server can optimize responses based on the client's earlier requests"
+    ],
+    "explanationCorrect": "Stateless servers hold no client state between requests. This makes crash recovery trivial (start a new instance), simplifies horizontal scaling, and fits well with load balancers.",
+    "explanationIncorrect": "Stateless makes personalization HARDER and requires the client to send an identifier in every request (e.g. a session cookie). Consistency advantages are not a standard argument.",
+    "optionExplanations": [
+      "Correct: easy recovery + easy horizontal scaling. A classic REST/HTTP advantage.",
+      "Consistency is orthogonal to stateless/stateful — it concerns the replication model, not session state.",
+      "On the contrary: stateless REQUIRES the client to send an identifier (token, cookie) every time.",
+      "Optimizing based on earlier requests requires precisely that the server remembers — that is stateful."
+    ]
+  },
+  "dat110-q-061": {
+    "question": "What is it called when the transport layer delivers received segment data to the correct socket on the destination host?",
+    "options": [
+      "Multiplexing — several segments are gathered from many sockets on the sender side",
+      "Demultiplexing — header fields select which application receives the data",
+      "Encapsulation — segment data is wrapped in a header for transmission",
+      "Fragmentation — segments are split into smaller pieces for transport"
+    ],
+    "explanationCorrect": "Demultiplexing is the reverse operation of multiplexing: the transport layer uses (src IP, src port, dst IP, dst port) to decide which socket an incoming segment belongs to.",
+    "explanationIncorrect": "Multiplexing is the opposite side (sender); encapsulation is about adding a header, not routing; fragmentation belongs to the IP layer.",
+    "optionExplanations": [
+      "Multiplexing is the sender side — combining data from many sockets into transport segments.",
+      "Correct: demux = routing an incoming segment to the correct socket via a (port, IP) lookup.",
+      "Encapsulation = adding a header (a transport header around the payload); not socket routing.",
+      "Fragmentation is performed at the network layer (IP), not at transport."
+    ]
+  },
+  "dat110-q-062": {
+    "question": "The network can duplicate datagrams (without transmission errors). Which mechanism must the RDT protocol have to handle this?",
+    "options": [
+      "Checksum — so the receiver detects bit errors in the payload",
+      "Sequence numbers — so the receiver can recognize and discard duplicates",
+      "Retransmission timer — so the sender resends lost segments",
+      "Acknowledgement fragments — so the receiver confirms each segment"
+    ],
+    "explanationCorrect": "Duplicate detection requires that the receiver can see \"I have already received this segment\". Sequence numbers on segments make this possible — the receiver discards segments with a sequence number it has already delivered up.",
+    "explanationIncorrect": "Checksum detects bit errors (not duplicates); timer + ACK handle loss (not duplication); plain ACKs without sequence numbers do not let the receiver distinguish a duplicate from the original.",
+    "optionExplanations": [
+      "A checksum checks integrity, not whether data has been received before.",
+      "Correct: sequence numbers let the receiver identify and reject repeated delivery.",
+      "Timer + retransmission handle loss. When data is duplicated, the duplicate is ALREADY there.",
+      "An ACK alone lacks information about which transmission is being confirmed — hence the need for sequence numbers."
+    ]
+  },
+  "dat110-q-063": {
+    "question": "How is a TCP connection (socket pair) identified in the full TCP/IP stack?",
+    "options": [
+      "By just a combination of destination IP and destination port",
+      "By a tuple of source port and destination port alone",
+      "By a 4-tuple: source IP, source port, destination IP, destination port",
+      "By a tuple of source IP and source MAC for client identification"
+    ],
+    "explanationCorrect": "TCP connections are uniquely identified by the 4-tuple (src IP, src port, dst IP, dst port). This is different from UDP, where just (dst IP, dst port) is enough for socket demultiplexing.",
+    "explanationIncorrect": "TCP needs the 4-tuple to distinguish several simultaneous connections from different clients to the same server port (e.g. many browsers to the same web server).",
+    "optionExplanations": [
+      "That is the UDP model. TCP distinguishes per connection (per client), not per port.",
+      "The IP addresses are missing — two clients on different hosts can use the same port pair.",
+      "Correct: the 4-tuple uniquely identifies each TCP connection in the operating system's socket table.",
+      "MAC belongs to the link layer and is not visible to TCP. TCP uses IP + port."
+    ]
+  },
+  "dat110-q-064": {
+    "question": "In which sliding-window protocol are acknowledgements cumulative (one ACK covers all segments up to a given sequence number)?",
+    "options": [
+      "Stop-and-wait — one ACK per segment, no overlap",
+      "Go-back-N — ACK n confirms all segments up to and including n",
+      "Selective-repeat — each segment is confirmed individually with its own ACK",
+      "Random-ACK — the receiver randomly chooses which segments it confirms"
+    ],
+    "explanationCorrect": "Go-back-N uses cumulative ACKs: ACK n means that all segments up to n have been received correctly. If ACK m is lost but ACK n (n > m) arrives, it still covers everything up to n.",
+    "explanationIncorrect": "Selective-repeat uses selective (individual) ACKs; stop-and-wait has one ACK at a time but no cumulative concept; \"random-ACK\" is not a real protocol.",
+    "optionExplanations": [
+      "Stop-and-wait has only one outstanding segment at a time, so the cumulative concept is not meaningful.",
+      "Correct: GBN = cumulative ACKs; a single ACK can confirm many segments.",
+      "Selective-repeat confirms each segment on its own — the opposite of cumulative.",
+      "A random ACK strategy does not exist in the syllabus — a distractor to mislead."
+    ]
+  },
+  "dat110-q-065": {
+    "question": "What is the main purpose of flow control in TCP?",
+    "options": [
+      "To prevent the sender from overflowing the receiver's buffer with data",
+      "To reduce the number of lost segments caused by network congestion",
+      "To ensure that segments arrive in the same order they were sent",
+      "To guarantee a fixed minimum bandwidth for each connection"
+    ],
+    "explanationCorrect": "Flow control regulates the sender rate based on the receiver's available buffer space (rwnd). It is about receiver capacity, not network capacity.",
+    "explanationIncorrect": "Network congestion is handled by congestion control (cwnd); ordering is solved by sequence numbers; bandwidth guarantees belong to QoS.",
+    "optionExplanations": [
+      "Correct: flow control = sender versus receiver, based on the rwnd field in the TCP header.",
+      "It is congestion control that addresses network load, not flow control.",
+      "Ordering is ensured by sequence numbers and the receiver's buffer reassembly.",
+      "TCP does not provide bandwidth guarantees — best-effort over IP."
+    ]
+  },
+  "dat110-q-066": {
+    "question": "In selective-repeat: which relation must hold between the size of the sequence-number space and the sender window size?",
+    "options": [
+      "The sequence-number space must be exactly as large as the window",
+      "The sender window can be at most half of the sequence-ID space",
+      "The sequence-number space must be at least the square root of the window size",
+      "There is no required relation — the protocol always works"
+    ],
+    "explanationCorrect": "In selective-repeat, |seq-space| ≥ 2 × window must hold to avoid old and new sequence numbers overlapping after wrap-around. If the window is N, the sequence space must have at least 2N values.",
+    "explanationIncorrect": "Otherwise the receiver cannot distinguish a duplicated old packet from a new packet with the same (wrapped) sequence number.",
+    "optionExplanations": [
+      "Equal size is too small — it gives ambiguity at sequence-number wrap.",
+      "Correct: seq-space ≥ 2 × window. A standard SR result from Kurose/Ross.",
+      "The square-root relation does not exist in the syllabus — a distractor.",
+      "Without the relation, SR can fail on wrap-around — which is why this condition exists."
+    ]
+  },
+  "dat110-q-067": {
+    "question": "Claim: \"A centralized mutual exclusion algorithm can suffer from scaling problems.\" Is this true or false?",
+    "options": [
+      "True — the coordinator becomes a bottleneck as the number of clients grows",
+      "False — a centralized algorithm runs in constant time regardless of the number of clients",
+      "True — but only because encryption overhead grows with the number of clients",
+      "False — centralized is in fact the most scalable option"
+    ],
+    "explanationCorrect": "Centralized mutual exclusion has a single coordinator that handles all requests for the critical section. It gives correct exclusion with few messages, but the coordinator becomes a bottleneck (and a single point of failure) under high load.",
+    "explanationIncorrect": "Centralized is simple to implement but scales poorly — which is why distributed alternatives exist (Ricart-Agrawala, token ring).",
+    "optionExplanations": [
+      "Correct: a central coordinator becomes a bottleneck and a single point of failure with many clients.",
+      "Latency grows with load when the coordinator has to queue requests; it is not constant.",
+      "Encryption is orthogonal — the scaling problem is structural, not encryption-related.",
+      "On the contrary — centralized is the LEAST scalable of the mutual exclusion options."
+    ]
+  },
+  "dat110-q-068": {
+    "question": "What is the difference between accuracy and precision in clock synchronization?",
+    "options": [
+      "Accuracy = correctness against UTC; precision = mutual deviation among internal times",
+      "Accuracy = deviation between two clocks in the same system; precision = distance to UTC",
+      "Accuracy and precision are two names for the same measure of clock quality",
+      "Accuracy = drift over time; precision = resolution in nanoseconds"
+    ],
+    "explanationCorrect": "Accuracy measures how close a clock is to an external absolute time reference (UTC). Precision measures how well clocks within a system are synchronized with each other — regardless of whether they are close to UTC.",
+    "explanationIncorrect": "Confusing the two is common — accuracy is \"against an external reference\", precision is \"against each other\".",
+    "optionExplanations": [
+      "Correct: accuracy = vs UTC; precision = between internal clocks. The classic Tanenbaum distinction.",
+      "The definitions are swapped — accuracy is measured against an external reference, not an internal one.",
+      "They are two different measures with different purposes; it is important to keep them apart.",
+      "Drift and resolution are separate properties, not the definition of accuracy/precision."
+    ]
+  },
+  "dat110-q-069": {
+    "question": "What is the core idea behind Lamport's logical clocks?",
+    "options": [
+      "Processes use the ordering of observed events instead of absolute time",
+      "Processes use the absolute UTC timestamp to order events globally",
+      "Processes use physical clock synchronization via the NTP protocol",
+      "Processes elect a leader that assigns timestamps to all events"
+    ],
+    "explanationCorrect": "Lamport clocks assign each event a logical timestamp that respects the happened-before relation. Absolute time is not needed — only a consistent ordering rule between processes.",
+    "explanationIncorrect": "The whole point of Lamport is precisely that physical time can be ignored. Lamport does not use NTP or leader election.",
+    "optionExplanations": [
+      "Correct: logical ordering of events, with no physical clock basis.",
+      "Lamport specifically avoids dependence on absolute time — that is the motivation for logical clocks.",
+      "NTP synchronizes physical clocks; Lamport is an entirely different mechanism.",
+      "Lamport is fully decentralized; there is no coordinator or leader."
+    ]
+  },
+  "dat110-q-070": {
+    "question": "Which of the statements below is a valid reason to use replication in distributed systems?",
+    "options": [
+      "Improve performance — clients can read from the nearest replica",
+      "Guarantee global strong consistency without extra coordination",
+      "Reduce the total storage space consumed by the system",
+      "Eliminate the need for network communication between nodes"
+    ],
+    "explanationCorrect": "Replication places copies near the clients (lower latency) and spreads them out to handle more load in parallel. It improves both performance and availability.",
+    "explanationIncorrect": "Replication INCREASES storage use and requires MORE coordination for consistency. It does not remove network traffic; on the contrary, replication protocols are required.",
+    "optionExplanations": [
+      "Correct: lower read latency is a standard motivation for replication.",
+      "Strong consistency REQUIRES extra coordination (quorum, primary-backup) — that is precisely the tradeoff.",
+      "Replication uses MORE space per replica; that is a cost, not a benefit.",
+      "Replication requires update traffic between replicas; it does not reduce network use."
+    ]
+  },
+  "dat110-q-071": {
+    "question": "What is the core contribution of the \"continuous consistency\" model in distributed storage?",
+    "options": [
+      "It defines which ordering of operations must be guaranteed across replicas",
+      "It completely removes the need for replication by using a single central copy",
+      "It provides strong consistency at no cost in performance or availability",
+      "It requires that all replicas always have exactly the same value at all times"
+    ],
+    "explanationCorrect": "Continuous consistency lets the application specify three dimensions: numerical deviation, ordering deviation, and staleness. It defines the acceptable deviation in the ordering of operations across replicas.",
+    "explanationIncorrect": "The model is a FRAMEWORK for describing acceptable inconsistency — not a removal of replication or free strong consistency.",
+    "optionExplanations": [
+      "Correct: ordering of operations is one of the three dimensions that continuous consistency describes.",
+      "The model deals precisely with REPLICATED data — not with removing replication.",
+      "Strong consistency at no cost violates the CAP theorem; that is not the model's contribution.",
+      "On the contrary — continuous consistency lets replicas diverge in a controlled way, not be perfectly synchronized."
+    ]
+  },
+  "dat110-q-072": {
+    "question": "What is a replication write protocol based on majority voting among replicas called?",
+    "options": [
+      "Quorum voting — Nw + Nr > N gives overlap between read and write sets",
+      "Active replication — all replicas execute each operation independently",
+      "Local-write — the primary moves to the client's local node before writing",
+      "Coherence-based — uses cache invalidation to keep replicas consistent"
+    ],
+    "explanationCorrect": "Quorum protocols require that each write is confirmed by Nw replicas and each read consults Nr, where Nw + Nr > N (total replicas). This gives consistency via majority overlap.",
+    "explanationIncorrect": "Active replication orders operations deterministically on all replicas; local-write moves the primary, not quorum votes; coherence is a cache mechanism.",
+    "optionExplanations": [
+      "Correct: quorum = majority overlap between the read and write sets. The classic Gifford model.",
+      "Active replication uses deterministic ordering (e.g. via total-order multicast), not voting.",
+      "Local-write is a primary-based variant without quorum voting.",
+      "Cache coherence (invalidate/update) is a distinct mechanism, not majority voting."
+    ]
+  },
+  "dat110-q-073": {
+    "question": "In primary-based replication protocols — where are update operations performed?",
+    "options": [
+      "On only one replica — the primary node — which then propagates the changes to the others",
+      "On all replicas in parallel — each handling its own write stream",
+      "On whichever replica the client happens to reach first",
+      "On a dynamically chosen minority of the replicas for each individual write"
+    ],
+    "explanationCorrect": "Primary-based means that one designated replica (the primary) handles all writes and then propagates the changes to backup replicas. It gives simple consistency but has a single point of failure and a potential bottleneck.",
+    "explanationIncorrect": "Parallel writing on all replicas (without coordination) or on a random replica does not give consistency; minority writing violates the quorum principles.",
+    "optionExplanations": [
+      "Correct: a single primary serializes writes; backups follow. The standard primary-backup model.",
+      "That is active replication or multi-master, not primary-based.",
+      "Writing to an arbitrary replica allows conflicts; that is not what the primary-based model offers.",
+      "Minority writing does not give durable consistency — it breaks the quorum overlap."
+    ]
+  },
+  "dat110-q-074": {
+    "question": "What is the main problem with reliable multicast that uses direct feedback messages (ACKs) from all receivers?",
+    "options": [
+      "Feedback implosion — the sender is overwhelmed by simultaneous ACKs from many receivers",
+      "ACKs arrive out of order and must be sorted in a queue on the sender side",
+      "Receivers cannot distinguish reliable from unreliable multicast messages",
+      "The sender loses the original multicast message after the first retransmission"
+    ],
+    "explanationCorrect": "When many receivers all send ACKs at the same time, the sender node is overwhelmed (feedback implosion). Solutions include hierarchical feedback (local aggregators) or NACK-based feedback only on loss.",
+    "explanationIncorrect": "ACK ordering and loss of the sender's message are not the core problem; the volume of feedback is.",
+    "optionExplanations": [
+      "Correct: ACKs from N receivers scale poorly — feedback implosion is the classic problem.",
+      "Ordering of ACKs is trivial; the volume is the problem, not the order.",
+      "Multicast reliability is a property of the sender protocol, not something receivers \"distinguish\" between.",
+      "The sender keeps the message in a buffer until it is ACKed — this is not a loss problem."
+    ]
+  },
+  "dat110-q-075": {
+    "question": "What is a general, widely used technique for achieving process resilience in distributed systems?",
+    "options": [
+      "Organize several identical processes in a group so that some can take over on failure",
+      "Remove the fault source by static analysis of the source code beforehand",
+      "Predict failures with machine learning and take action before they happen",
+      "Shut down the service at the slightest sign of failure to avoid damage"
+    ],
+    "explanationCorrect": "Process groups (replication) are the main technique: several identical processes run simultaneously, and if one fails, the rest can continue the service. Quorum and primary-based are subclasses.",
+    "explanationIncorrect": "Static analysis and prediction help during development/operation, but they are not the core of runtime resilience; shutting down is not resilience.",
+    "optionExplanations": [
+      "Correct: replicated process groups are the canonical runtime technique for fault tolerance.",
+      "Static analysis is fault avoidance, not fault tolerance. Different stages in fault management.",
+      "Prediction can complement replication, but it is not the general technique for resilience itself.",
+      "Fail-stop is a fault model, not a resilience technique — it removes availability."
+    ]
+  },
+  "dat110-q-076": {
+    "question": "How many processes are required in total to achieve majority-vote consensus in a leaderless protocol that tolerates k crash failures?",
+    "options": [
+      "k + 1 processes — just one more than the number of possible failures",
+      "2k + 1 processes — so that the majority is always correct",
+      "3k + 1 processes — to ensure Byzantine tolerance",
+      "k × 2 processes — exactly twice as many as failures"
+    ],
+    "explanationCorrect": "For crash failures, 2k+1 processes suffice: if k crash, there are still k+1 (a majority) left that can make a decision. Byzantine failures, by contrast, require 3k+1 because the faulty ones can actively lie.",
+    "explanationIncorrect": "k+1 is too few (the majority can be lost); 3k+1 is for Byzantine; \"k×2\" is just 2k, one fewer than needed.",
+    "optionExplanations": [
+      "If k fail and only 1 is left, we do not have a majority to make a decision.",
+      "Correct: 2k+1 → the majority (k+1) survives the crash of k. Standard crash-tolerant consensus.",
+      "3k+1 is used for Byzantine failures where nodes can behave arbitrarily — overkill for pure crash.",
+      "2k is too few: if k fail, 2k − k = k are left — an equal number, not a majority."
+    ]
+  },
+  "dat110-q-077": {
+    "question": "How are IP addresses used in the network layer of the Internet architecture?",
+    "options": [
+      "IP addresses are assigned to each network interface on both hosts and routers",
+      "IP addresses are assigned only to hosts; routers use MAC addresses internally",
+      "IP addresses are assigned one per host and one per router, regardless of the number of interfaces",
+      "IP addresses are assigned only to subnets as a whole, not to individual nodes"
+    ],
+    "explanationCorrect": "It is the network INTERFACE (not the node) that has an IP address. A router with three interfaces has three IP addresses. A host with both Wi-Fi and wired has two.",
+    "explanationIncorrect": "Per-host or per-router addressing is wrong; routers use IP for forwarding (not just MAC); a subnet is a network prefix, not the address itself.",
+    "optionExplanations": [
+      "Correct: one IP per interface. A multi-homed host or router has several IP addresses.",
+      "Routers use IP to forward datagrams — not just MAC addresses.",
+      "Per-host addressing does not exist in the IPv4 architecture; per-interface is the norm.",
+      "A subnet prefix identifies a group of interfaces, but individual addresses are still assigned."
+    ]
+  },
+  "dat110-q-078": {
+    "question": "What kind of information is found in a typical forwarding table at a router?",
+    "options": [
+      "Shortest paths between all pairs of routers in the entire network",
+      "A mapping between destination-address prefix and outgoing link",
+      "A mapping between source address and incoming link",
+      "A list of which links the router is physically connected to"
+    ],
+    "explanationCorrect": "The forwarding table maps destination prefixes to outgoing interfaces. The router uses longest-prefix match to decide where an incoming datagram should be forwarded.",
+    "explanationIncorrect": "Global paths or source-based mappings are not standard forwarding-table contents; a link list alone does not provide enough information to forward.",
+    "optionExplanations": [
+      "All-pairs shortest-path information belongs to routing algorithms (the control plane), not the per-packet forwarding table.",
+      "Correct: (destination prefix → outgoing link). Used with longest-prefix match.",
+      "Forwarding is determined by the DESTINATION, not the source. Source routing is a rare special variant.",
+      "Links are the PHYSICAL aspect; forwarding requires a logical mapping from addresses to links."
+    ]
+  },
+  "dat110-q-079": {
+    "question": "How many IP addresses does the subnet 223.1.1.0/23 contain?",
+    "options": [
+      "128 addresses — 2^7 values under /25",
+      "256 addresses — one octet left open",
+      "512 addresses — two octets under the /23 mask boundary",
+      "1024 addresses — 2^10 values under /22"
+    ],
+    "explanationCorrect": "/23 means 23 fixed prefix bits and 32 − 23 = 9 host bits. 2^9 = 512 addresses in the block. Two /24 blocks packed together.",
+    "explanationIncorrect": "A common trap is to read /23 as /24 (256) or to confuse it with other prefix lengths; remember the formula 2^(32 − prefix).",
+    "optionExplanations": [
+      "/25 would give 128 addresses. /23 is a much larger block.",
+      "256 belongs to /24. /23 is exactly twice as large.",
+      "Correct: 2^(32−23) = 2^9 = 512 addresses.",
+      "1024 belongs to /22 (a prefix one bit shorter)."
+    ]
+  },
+  "dat110-q-080": {
+    "question": "What is DHCP (Dynamic Host Configuration Protocol) used for?",
+    "options": [
+      "Mapping host names to IP addresses via queries to a name server",
+      "Exchanging routing information between routers in the same autonomous system",
+      "Automatically configuring a host's network interface with an IP address and settings",
+      "Discovering the MAC address belonging to a given IP address on the same subnet"
+    ],
+    "explanationCorrect": "DHCP lets a host be assigned an IP address, subnet mask, default gateway, and DNS server address dynamically at startup, without manual configuration.",
+    "explanationIncorrect": "Host→IP is DNS; routing information is routing protocols (RIP, OSPF); IP→MAC is ARP.",
+    "optionExplanations": [
+      "It is DNS that maps names to IP, not DHCP.",
+      "Routing protocols (RIP/OSPF/BGP) share routing information; DHCP is host configuration.",
+      "Correct: dynamic host configuration — IP, mask, gateway, DNS. The classic DHCP role.",
+      "IP→MAC resolution is ARP, not DHCP."
+    ]
+  },
+  "dat110-q-081": {
+    "question": "In a network with 10 routers — how many Dijkstra runs are needed for each individual router to find its least-cost paths to all the others?",
+    "options": [
+      "1 run — centrally on a configuration server",
+      "10 runs — one per router, each computing its own shortest paths",
+      "3 runs — one per network segment in the topology",
+      "100 runs — one per (source, destination) pair in a full mesh"
+    ],
+    "explanationCorrect": "Each router must run Dijkstra with itself as the source to build its local forwarding table. With 10 routers that gives 10 runs (one per router).",
+    "explanationIncorrect": "A centralized approach is not the standard Link-State model (distributed Dijkstra); per-pair is O(N^2) and redundant.",
+    "optionExplanations": [
+      "In Link-State protocols, each router runs Dijkstra LOCALLY after receiving the topology.",
+      "Correct: one Dijkstra run per router = 10 runs for 10 routers.",
+      "The number of runs is determined by the number of routers, not the number of segments.",
+      "Each Dijkstra run from a single source finds paths to ALL destinations — not per pair."
+    ]
+  },
+  "dat110-q-082": {
+    "question": "Which service does the link layer provide?",
+    "options": [
+      "Unreliable transmission of frames over a single communication link",
+      "Reliable multi-hop forwarding of frames between hosts",
+      "A reliable end-to-end byte stream between application processes",
+      "Routing computation across multiple subnet boundaries"
+    ],
+    "explanationCorrect": "The link layer handles transmission of frames over a single link (the same broadcast domain). Reliability can be offered by some link-layer protocols (WiFi does this), but it is not universal.",
+    "explanationIncorrect": "Multi-hop is the network layer; an end-to-end byte stream is TCP; routing belongs to the network layer's control plane.",
+    "optionExplanations": [
+      "Correct: link layer = a single link, frame-oriented, usually best-effort (Ethernet).",
+      "Multi-hop is the network layer. The link layer only knows about the single physical link.",
+      "A byte stream is provided by the transport layer (TCP), not the link layer.",
+      "Routing is network-layer functionality — the link layer does not care about subnets."
+    ]
+  },
+  "dat110-q-083": {
+    "question": "What is the purpose of the Address Resolution Protocol (ARP)?",
+    "options": [
+      "Finding the MAC address of a host or router that has a given IP address on the same subnet",
+      "Assigning an IP address to a network interface at startup",
+      "Assigning a MAC address to a network card during manufacturing",
+      "Translating domain names to IP addresses via a query to a name server"
+    ],
+    "explanationCorrect": "ARP sends out a broadcast on the local subnet asking \"who has IP X?\". The owner replies with its MAC. The result is cached locally in the ARP table.",
+    "explanationIncorrect": "IP assignment is DHCP; the MAC is set at the factory; name → IP is DNS.",
+    "optionExplanations": [
+      "Correct: ARP resolves IP → MAC within a single broadcast domain.",
+      "Dynamic IP assignment is DHCP. ARP assumes the IP is already known.",
+      "MAC addresses are burned into the network card by the manufacturer, not via a protocol.",
+      "DNS does name → IP. ARP is one step lower (IP → MAC)."
+    ]
+  },
+  "dat110-q-084": {
+    "question": "What kind of information is stored in a host's ARP table?",
+    "options": [
+      "The association between IP addresses and MAC addresses for nodes on the same subnet",
+      "The association between port numbers and process ids for open sockets",
+      "The association between interface number and MAC address for the host's own cards",
+      "A list of which hosts are to be assigned which IP addresses at startup"
+    ],
+    "explanationCorrect": "The ARP table is a cache that stores (IP, MAC, TTL) triples. Hosts look up here before sending; on a cache miss an ARP query is triggered.",
+    "explanationIncorrect": "Port-PID mapping is the OS sockets table; interface→MAC is static local information; IP assignment is the DHCP server's domain.",
+    "optionExplanations": [
+      "Correct: an (IP → MAC) cache for the local subnet, with a time limit.",
+      "Port↔PID is OS-internal socket state, not the ARP domain.",
+      "A local interface → MAC mapping is not the ARP table; it is host configuration.",
+      "IP assignment resides on the DHCP server, not in the client's ARP table."
+    ]
+  },
+  "dat110-q-085": {
+    "question": "On which type of communication link is a link access protocol needed to coordinate access?",
+    "options": [
+      "Broadcast link — where multiple nodes share the same medium",
+      "Point-to-point link — where exactly two nodes are connected together",
+      "Optical fiber link — regardless of the number of endpoints",
+      "Wireless link — only because it uses radio frequencies"
+    ],
+    "explanationCorrect": "On broadcast links (Ethernet hub, WiFi, satellite) multiple nodes can attempt to send at the same time. A MAC protocol (CSMA/CD, CSMA/CA, TDMA, FDMA) is needed to coordinate and avoid/handle collisions.",
+    "explanationIncorrect": "Point-to-point needs no coordination (only two parties); the fiber/wireless distinction is physical, not logical if there are only two endpoints.",
+    "optionExplanations": [
+      "Correct: shared medium → possible concurrency → a MAC protocol is needed.",
+      "With only two parties there is no collision risk; full-duplex or turn-taking suffices.",
+      "Fiber can be both point-to-point and shared; the topology decides, not the medium.",
+      "Wireless needs MAC because it is broadcast — not because it is radio per se."
+    ]
+  }
+}

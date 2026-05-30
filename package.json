@@ -12,7 +12,8 @@
     "lint": "next lint",
     "sync:dat110-vault": "node scripts/sync-dat110-vault.mjs",
     "validate:learnmore": "node scripts/validate-learnmore-links.mjs",
-    "validate:distractors": "node scripts/validate-distractor-quality.mjs"
+    "validate:distractors": "node scripts/validate-distractor-quality.mjs",
+    "validate:quiz-translations": "node scripts/validate-quiz-translations.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",

@@ -1,8 +1,7 @@
-import Link from "next/link";
 import topicsData from "@/data/dat110-vault/topics-tier1.json";
 import type { DAT110Topic } from "@/lib/dat110-vault/types";
 import TemaerLandingHeader from "@/components/dat110/TemaerLandingHeader";
-import Dat110Badge from "@/components/dat110/Dat110Badge";
+import TemaerGrid from "@/components/dat110/TemaerGrid";
 
 // Human-readable labels for vault `tema` codes. Kept in sync with begreper/page.tsx.
 const TEMA_LABELS: Record<string, string> = {
@@ -86,40 +85,18 @@ export const metadata = {
 
 export default function TemaerPage() {
   const total = topics.length;
+  const items = orderedTopics.map((t) => ({
+    slug: t.slug,
+    tema: t.tema,
+    title: displayTitle(t.title),
+    desc: plainText(extractDescription(t.body)),
+    temaLabel: TEMA_LABELS[t.tema] ?? t.tema,
+  }));
 
   return (
     <div>
       <TemaerLandingHeader total={total} />
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {orderedTopics.map((t) => {
-          const title = displayTitle(t.title);
-          const desc = plainText(extractDescription(t.body));
-          const temaLabel = TEMA_LABELS[t.tema] ?? t.tema;
-          return (
-            <Link
-              key={t.slug}
-              href={`/dat110/temaer/${t.slug}`}
-              className="group rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-300 dark:hover:border-teal-700"
-            >
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <Dat110Badge tone="topic">Tema</Dat110Badge>
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200">
-                  {temaLabel}
-                </span>
-              </div>
-              <h3 className="font-semibold mb-1.5 text-neutral-900 dark:text-neutral-50 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">
-                {title}
-              </h3>
-              {desc && (
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-4 leading-relaxed">
-                  {desc}
-                </p>
-              )}
-            </Link>
-          );
-        })}
-      </div>
+      <TemaerGrid items={items} />
     </div>
   );
 }

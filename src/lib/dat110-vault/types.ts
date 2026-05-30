@@ -90,6 +90,23 @@ export type DAT110QuizSource =
 
 export type DAT110QuizTopic = VaultTema;
 
+// English translation of a quiz question's *text* fields. Held in a separate
+// id-keyed JSON map (src/lib/dat110-language/quiz-translations-en.json), NOT
+// embedded in the generated quizzes.json, so it survives vault re-sync.
+// Structural fields (correctIndices, qtype, optionIndex/isCorrect, learnMoreLinks,
+// source, …) are language-neutral and always come from the base question.
+// options[] must be the same length and order as the base options so
+// option-shuffle and scoring stay valid; if it isn't, the localizer falls back
+// to Norwegian. optionExplanations is a positional string[] aligned 1:1 with the
+// base optionExplanations (English shortExplanation only).
+export interface DAT110QuizTranslation {
+  question: string;
+  options: string[];
+  explanationCorrect: string;
+  explanationIncorrect?: string;
+  optionExplanations?: string[];
+}
+
 export interface DAT110QuizQuestion {
   id: string;
   topic: DAT110QuizTopic;

@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import type { DAT110QuizSourceKind, VaultTema } from "@/lib/dat110-quiz-types";
-import { QUIZ_TOPICS_DAT110 } from "@/lib/dat110-quiz-topics";
+import { QUIZ_TOPICS_DAT110, localizeQuizTopic } from "@/lib/dat110-quiz-topics";
+import type { Dat110Lang } from "@/lib/dat110-language/useDat110Lang";
+import { quizUi } from "@/lib/dat110-language/quiz-i18n";
 
 export interface QuizStartOptions {
   selectedTopics: VaultTema[];
@@ -20,27 +22,28 @@ interface Props {
     Record<DAT110QuizSourceKind, number>
   >;
   onStart: (opts: QuizStartOptions) => void;
+  lang: Dat110Lang;
 }
 
-// Friendly oppgave-titler — matches /dat110/page.tsx examOppgaver titles.
-const OPPG_LABELS: Record<number, { title: string; weight: string }> = {
-  1: { title: "Flervalg", weight: "10%" },
-  3: { title: "Forsinkelser", weight: "10%" },
-  5: { title: "Ruting", weight: "10%" },
-  6: { title: "ARP og Switch", weight: "10%" },
-  7: { title: "DS-teori", weight: "5%" },
-  8: { title: "Overlay og multicast", weight: "10%" },
-  9: { title: "Konsistens og klokker", weight: "10%" },
-  10: { title: "DHT/Chord", weight: "15%" },
+// Exam-task weights — language-neutral. Titles come from quizUi().oppgTitles.
+const OPPG_WEIGHTS: Record<number, string> = {
+  1: "10%",
+  3: "10%",
+  5: "10%",
+  6: "10%",
+  7: "5%",
+  8: "10%",
+  9: "10%",
+  10: "15%",
 };
 
-const SOURCE_LABELS: Record<
+const SOURCE_LABEL_KEY: Record<
   DAT110QuizSourceKind,
-  { label: string; comingNote?: string }
+  "sourceExam" | "sourceCanvas" | "sourceGenerated"
 > = {
-  exam: { label: "📋 Tidligere DAT110-eksamener" },
-  canvas: { label: "📋 Canvas-quizer" },
-  generated: { label: "✏️ Genererte spørsmål" },
+  exam: "sourceExam",
+  canvas: "sourceCanvas",
+  generated: "sourceGenerated",
 };
 
 export default function TopicSelector({
@@ -48,7 +51,9 @@ export default function TopicSelector({
   questionCountBySource,
   questionCountByTopicSource,
   onStart,
+  lang,
 }: Props) {
+  const ui = quizUi(lang);
   const [selectedTopics, setSelectedTopics] = useState<Set<VaultTema>>(
     new Set()
   );
@@ -156,21 +161,21 @@ export default function TopicSelector({
           onClick={selectAll}
           className="px-3 py-1.5 rounded-lg text-sm border border-network-400 text-network-700 dark:text-network-300 hover:bg-network-50 dark:hover:bg-network-950/30"
         >
-          Velg alle
+          {ui.selectAllTopics}
         </button>
         <button
           type="button"
           onClick={selectNone}
           className="px-3 py-1.5 rounded-lg text-sm border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-900/40"
         >
-          Fjern alle
+          {ui.clearAll}
         </button>
         <button
           type="button"
           onClick={selectTier1}
           className="px-3 py-1.5 rounded-lg text-sm border border-blue-400 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30"
         >
-          Kjernetemaer
+          {ui.coreTopics}
         </button>
         {groups.map(({ oppg }) => (
           <button
@@ -179,7 +184,7 @@ export default function TopicSelector({
             onClick={() => selectGroup(oppg)}
             className="px-3 py-1.5 rounded-lg text-sm border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-900/40"
           >
-            Oppg {oppg}
+            {ui.groupShort(oppg)}
           </button>
         ))}
       </div>
@@ -187,15 +192,17 @@ export default function TopicSelector({
       {/* Topic groups */}
       <div className="space-y-5">
         {groups.map(({ oppg, temaer }) => {
-          const label = OPPG_LABELS[oppg];
+          const title = ui.oppgTitles[oppg];
+          const weight = OPPG_WEIGHTS[oppg];
           return (
             <div key={oppg}>
               <h3 className="text-sm font-bold text-neutral-600 dark:text-neutral-300 uppercase tracking-wider mb-3">
-                Oppgave {oppg}
-                {label ? ` — ${label.title} (${label.weight})` : ""}
+                {ui.groupHeading(oppg)}
+                {title ? ` — ${title}${weight ? ` (${weight})` : ""}` : ""}
               </h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {temaer.map((t) => {
+                {temaer.map((base) => {
+                  const t = localizeQuizTopic(base, lang);
                   const count = questionCountByTopic[t.id] || 0;
                   const isSelected = selectedTopics.has(t.id);
                   const disabled = count === 0;
@@ -241,8 +248,8 @@ export default function TopicSelector({
                           }
                         >
                           {disabled
-                            ? "Ingen spørsmål ennå"
-                            : `${count} spørsmål tilgjengelig`}
+                            ? ui.noQuestionsYet
+                            : ui.questionsAvailable(count)}
                         </p>
                         <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
                           {t.chapterTag}
@@ -260,16 +267,16 @@ export default function TopicSelector({
       {/* Innstillinger */}
       <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-5 space-y-4">
         <h3 className="font-bold text-neutral-900 dark:text-neutral-50">
-          Innstillinger
+          {ui.settings}
         </h3>
 
         {/* Antall */}
         <div>
           <label className="block text-sm font-medium mb-2 text-neutral-700 dark:text-neutral-200">
-            Antall spørsmål:{" "}
+            {ui.numberOfQuestionsLabel}{" "}
             <span className="font-bold">{effectiveCount}</span>
             <span className="text-xs text-neutral-500 dark:text-neutral-400 ml-2">
-              (av {totalAvailable} tilgjengelige fra valgte temaer og kilder)
+              {ui.ofAvailable(totalAvailable)}
             </span>
           </label>
           <input
@@ -290,14 +297,13 @@ export default function TopicSelector({
         {/* Kildefilter */}
         <div>
           <p className="text-sm font-medium mb-2 text-neutral-700 dark:text-neutral-200">
-            Kilde
+            {ui.source}
           </p>
           <div className="space-y-1.5">
             {(["exam", "canvas", "generated"] as const).map((k) => {
               const count = questionCountBySource[k] || 0;
               const disabled = count === 0;
               const checked = sourceFilter.has(k);
-              const meta = SOURCE_LABELS[k];
               return (
                 <label
                   key={k}
@@ -316,12 +322,10 @@ export default function TopicSelector({
                     className="accent-network-500"
                   />
                   <span className="text-neutral-800 dark:text-neutral-100">
-                    {meta.label}
+                    {ui[SOURCE_LABEL_KEY[k]]}
                   </span>
                   <span className="text-xs text-neutral-500 dark:text-neutral-400">
-                    {disabled && meta.comingNote
-                      ? `(0 — ${meta.comingNote})`
-                      : `(${count} tilgjengelig)`}
+                    {ui.available(count)}
                   </span>
                 </label>
               );
@@ -337,7 +341,7 @@ export default function TopicSelector({
             onChange={(e) => setShuffle(e.target.checked)}
             className="accent-network-500"
           />
-          <span>Shuffle spørsmål og svaralternativer (anbefalt)</span>
+          <span>{ui.shuffleOption}</span>
         </label>
 
         <label className="flex items-center gap-2 text-sm cursor-pointer text-neutral-800 dark:text-neutral-100">
@@ -347,9 +351,7 @@ export default function TopicSelector({
             onChange={(e) => setAllOrNothing(e.target.checked)}
             className="accent-network-500"
           />
-          <span>
-            Alt-eller-ingenting-scoring på «velg alle som passer»-spørsmål
-          </span>
+          <span>{ui.allOrNothingOption}</span>
         </label>
       </div>
 
@@ -369,10 +371,10 @@ export default function TopicSelector({
         className="w-full px-6 py-4 rounded-lg bg-network-500 hover:bg-network-600 text-white font-bold text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {selectedTopics.size === 0
-          ? "Velg minst ett tema for å starte"
+          ? ui.startSelectTopic
           : totalAvailable === 0
-            ? "Ingen spørsmål i utvalget"
-            : `🚀 Start quiz (${effectiveCount} spørsmål)`}
+            ? ui.startNoQuestions
+            : ui.startQuiz(effectiveCount)}
       </button>
     </div>
   );
