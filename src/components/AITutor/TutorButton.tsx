@@ -15,7 +15,7 @@ export default function TutorButton() {
     <button
       onClick={open}
       aria-label="Åpne AI-tutor"
-      className="fixed bottom-5 right-5 z-[80] group"
+      className="fixed bottom-5 right-5 z-[80] group print:hidden"
     >
       <span className="absolute inset-0 rounded-full bg-[var(--accent)] opacity-60 group-hover:opacity-80 animate-ping-slow" />
       <span className="relative flex items-center gap-2 pl-3 pr-4 py-2.5 rounded-full bg-gradient-to-br from-[var(--accent)] to-amber-500 text-white font-semibold shadow-xl hover:shadow-2xl hover:scale-[1.03] active:scale-95 transition-transform border border-white/20">

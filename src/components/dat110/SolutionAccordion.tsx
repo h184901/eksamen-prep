@@ -54,11 +54,6 @@ export default function SolutionAccordion({
               : closedLabel}
           </span>
         </span>
-        {!open && (
-          <span className="text-xs text-emerald-600 dark:text-emerald-300 opacity-70">
-            {localizedText("tenk gjerne først", "think first", lang)}
-          </span>
-        )}
       </button>
       {open && (
         <div

@@ -15,6 +15,33 @@ interface Props {
   lang?: Dat110Lang;
 }
 
+// Noen rekonstruerte eksamener lagrer en oppgavetekst som den engelske originalen
+// etterfulgt av den norske oversettelsen, atskilt med en blank linje:
+//   "<engelsk spørsmål>\n\n<norsk spørsmål>".
+// Nettsiden viser eksamensinnhold på norsk, så når vi gjenkjenner akkurat denne
+// formen rendrer vi kun den norske halvdelen (unngår at spørsmålet vises to ganger
+// på to språk). Rent engelske oppgaver (f.eks. Canvas-MCQ-ene i oppgave 1) har
+// ingen norsk blokk og røres ikke. Sjekken er bevisst konservativ: blokken rett
+// etter den engelske må være norsk *prosa* (ikke en kode-/tabell-blokk, som i
+// "Compute …\n\nP1: s1, a …"), slik at vi aldri fjerner et rent engelsk spørsmål.
+function preferNorwegianExamPrompt(text: string): string {
+  if (!text.includes("\n\n")) return text;
+  const paras = text.split("\n\n");
+  const head = paras[0];
+  const next = paras[1] ?? "";
+  const hasAeoa = (s: string) => /[æøåÆØÅ]/.test(s);
+  const noWords =
+    /\b(hvilke|hvilken|hva|hvorfor|forklar|beregn|hvordan|på|kort|finn|anta|oppgave|spørsmål|som|ikke|den|det|de|er|og|deres|mellom|et|en)\b/i;
+  const enWords =
+    /\b(what|which|how|why|when|where|explain|describe|briefly|list|sketch|compute|resolve|assume|consider|suppose|at what|in the|the |this task|some of|when the|are|is)\b/i;
+  const headEnglish = !hasAeoa(head) && enWords.test(head) && !noWords.test(head);
+  const nextIsCodeOrTable =
+    /^\s*[`|>]/.test(next) || /^[A-Za-z0-9_().+\-]+:\s/.test(next.trim());
+  const nextNorwegianProse =
+    (hasAeoa(next) || noWords.test(next)) && !nextIsCodeOrTable;
+  return headEnglish && nextNorwegianProse ? paras.slice(1).join("\n\n") : text;
+}
+
 // Pedagogiske figurer KUN for oppgaver der ring-strukturen er fullt spesifisert
 // i oppgavetekst/sensorveiledning (ikke gjettet). Originaltopologier som bare
 // finnes i PDF beholder sin tekstlige figur-merknad — se ExamQuestionCard.
@@ -78,7 +105,7 @@ export default function ExamQuestionCard({
       </header>
 
       <div className="mb-4 text-neutral-800 dark:text-neutral-100">
-        <VaultMarkdown content={question.prompt} />
+        <VaultMarkdown content={preferNorwegianExamPrompt(question.prompt)} />
       </div>
 
       {question.figureNote && (
@@ -122,7 +149,7 @@ export default function ExamQuestionCard({
                 )}
               </div>
               <div className="text-neutral-800 dark:text-neutral-100">
-                <VaultMarkdown content={sub.prompt} />
+                <VaultMarkdown content={preferNorwegianExamPrompt(sub.prompt)} />
               </div>
               <SolutionAccordion solution={sub.solution} lang={lang} />
             </div>
