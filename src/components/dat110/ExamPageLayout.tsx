@@ -101,7 +101,7 @@ export default function ExamPageLayout({ exam }: Props) {
             </span>
           )}
           <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200">
-            {t("sesjon", "session")}: {exam.session}-{exam.year}
+            {t("eksamen", "exam")}: {exam.session}-{exam.year}
           </span>
           <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200">
             {exam.questions.length} {t("oppgaver", "questions")} · {exam.totalWeight} %

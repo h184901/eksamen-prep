@@ -16,6 +16,28 @@ interface Props {
 function cleanVaultMarkdown(md: string): string {
   return (
     md
+      // 0) Fjern interne LLM-wiki-pipeline-notater som lekket fra vault source-notes.
+      //    Disse er aldri student-vendt fagtekst (de refererer build-pipelinen:
+      //    Stage 5A/B/C, struktur-plan-beslutninger, manuelt-overlap-notater, weak-spot-tabell).
+      //    0a) Hele interne notat-seksjoner.
+      .replace(
+        /\n#{1,6}[ \t]*(?:Manuelt overlap|Visuell QA)\b[^\n]*[\s\S]*?(?=\n#{1,6}[ \t]|$)/gi,
+        "\n",
+      )
+      //    0b) Parenteser som inneholder pipeline-sjargong.
+      .replace(
+        /[ \t]*\([^()]*(?:Stage 5[ABC]\b|Strategi [AB] coexistence|D2-beslutning|godkjent av bruker)[^()]*\)/g,
+        "",
+      )
+      //    0c) Liste-punkter som er rene pipeline-notater.
+      .replace(
+        /\n[ \t]*[-*][ \t]+[^\n]*(?:Stage 5[ABC]\b|Strategi [AB] coexistence|D2-beslutning|godkjent av bruker|weak-spot-tabell)[^\n]*/gi,
+        "",
+      )
+      //    0d) Tankestrek-klausuler som henger en stage-merknad på en ekte setning.
+      .replace(/[ \t]*[—–][ \t]*[^—–.\n]*\bStage 5[ABC]\b[^.\n]*(?=\.)/g, "")
+      //    0e) Frittstående setninger dominert av en pipeline-stage-referanse.
+      .replace(/(^|\n|\. )[^.\n]*\bStage 5[ABC]\b[^.\n]*\.[ \t]*/g, "$1")
       // 1) Dropp den avsluttende "## Provenance"-seksjonen (er alltid siste seksjon i notene).
       .replace(/\n#{1,4}[ \t]*Provenance\b[\s\S]*$/i, "\n")
       // 2) Fjern råe ekstraksjons-bildestier (pages/<slug>/pNNN.png), med/uten backticks.

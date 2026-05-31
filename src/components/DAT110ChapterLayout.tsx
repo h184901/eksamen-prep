@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { DAT110Chapter } from "@/lib/dat110-chapters";
 import { dat110Chapters } from "@/lib/dat110-chapters";
+import Dat110GradualNote from "@/components/dat110/Dat110GradualNote";
 
 interface DAT110ChapterLayoutProps {
   chapter: DAT110Chapter;
@@ -43,6 +44,12 @@ export default function DAT110ChapterLayout({
         <h1 className="text-3xl font-bold mb-2">{chapter.title}</h1>
         <p className="text-[var(--muted)]">{chapter.description}</p>
       </div>
+
+      {/* Honest note in English mode — chapter content is not translated yet. */}
+      <Dat110GradualNote className="mb-6">
+        English mode is being built gradually. Detailed chapter content is
+        currently shown in Norwegian.
+      </Dat110GradualNote>
 
       {/* Content */}
       <div>{children}</div>

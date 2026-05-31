@@ -6,7 +6,7 @@
   "pairStatus": "reconstructed_from_incomplete_pair",
   "officialPdfMissing": true,
   "reconstructedFromSensor": true,
-  "bannerWarning": "Oppgaveteksten er rekonstruert fra sensorveiledningen — original oppgave-PDF mangler. Bruk som øvingskilde, ikke som autoritativ eksamen.",
+  "bannerWarning": "Oppgaveteksten er rekonstruert fra sensorveiledningen fordi den originale oppgave-PDF-en mangler. Bruk som øvingskilde, ikke som autoritativ eksamen.",
   "sensorSlug": "dat110-eksamen-06-2025-sensorveiledning",
   "totalWeight": 100,
   "questions": [
@@ -120,7 +120,7 @@
         { "slug": "eksamen/dat110-eksamen-06-2025-sensorveiledning", "title": "DAT110 Eksamen — juni 2025 Sensorveiledning", "role": "sensor-source", "visibility": "public" }
       ],
       "relatedExamPatterns": ["recurring-questions#q1-mcq-mix"],
-      "figureNote": "Merk: Hele eksamen er rekonstruert fra sensorveiledning fordi original oppgave-PDF mangler. Q1 er gjengitt på engelsk (Canvas-quiz-mix) — sensor markerer ikke riktig alternativ, fasit her er trukket fra konsept-kunnskap. Identisk Canvas-quiz-template som januar 2025 og mai 2024."
+      "figureNote": "Merk: Hele eksamen er rekonstruert fra sensorveiledningen fordi den originale oppgave-PDF-en mangler. Q1 er gjengitt på engelsk (samme flervalgsmiks som i Canvas-quizzene); sensorveiledningen markerer ikke riktig alternativ, så fasiten her er trukket fra konsept-kunnskap. Identisk Canvas-quiz-mal som januar 2025 og mai 2024."
     },
     {
       "number": 2,

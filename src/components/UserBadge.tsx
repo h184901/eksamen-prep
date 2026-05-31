@@ -44,7 +44,9 @@ export default function UserBadge() {
   return (
     <>
       <LegacyProgressMigrator username={username} />
-      <div className="flex items-center gap-2 text-xs sm:text-sm">
+      {/* Hidden below sm so the mobile nav row (lang toggle + theme + menu)
+          does not overflow horizontally on small phones. */}
+      <div className="hidden sm:flex items-center gap-2 text-xs sm:text-sm">
         <span className="hidden sm:inline text-[var(--muted)]">
           Innlogget som
         </span>
