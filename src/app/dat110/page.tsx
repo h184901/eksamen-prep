@@ -423,6 +423,12 @@ function EksamenstrukturPrimary() {
         >
           Se gjengangere →
         </Link>
+        <Link
+          href="/dat110/huskeark"
+          className="inline-flex items-center gap-1 text-sm font-semibold px-4 py-2 rounded-lg border border-network-400 text-network-700 dark:text-network-300 hover:bg-network-50 dark:hover:bg-network-950/30 transition-colors"
+        >
+          Eksamen-huskeark →
+        </Link>
       </div>
     </section>
   );
