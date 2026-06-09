@@ -1,0 +1,630 @@
+{
+  "intro": "Autoritativ semesterstruktur, bygd fra ukeplanen (ukeplan v1, 03.12.25) og Canvas-modulene (Emnemodular). Pensumboka er *Carrano & Henry, Data Structures and Abstractions with Java* (kapittelnumre = \"Kap\" under). Forelesninger holdes i Bergen (Lars-Petter / Sven-Olai); Haugesund/Førde har egne varianter for enkelte tema.",
+  "weeks": [
+    {
+      "week": "3",
+      "dates": "12.–16.01",
+      "tuesday": "F01 Intro, Bag (Kap 1, JI-1)",
+      "lab": "Øving uke3 (repetisjon: interface, List/Set/Map)",
+      "thursday": "F02 ArrayBag (Kap 2, JI-2)",
+      "oblig": "—"
+    },
+    {
+      "week": "4",
+      "dates": "19.–23.01",
+      "tuesday": "F03 Lenke av noder (Kap 3)",
+      "lab": "Øving uke4 — Filmarkiv (tabell+nodelenke)",
+      "thursday": "F04 LenketBag + Analyse (Kap 4)",
+      "oblig": "Oblig1 (del)"
+    },
+    {
+      "week": "5",
+      "dates": "26.–30.01",
+      "tuesday": "F05 Stabel (Kap 5–6)",
+      "lab": "Øving uke5 (= Oblig1)",
+      "thursday": "F06 Rekursjon 1 (Kap 7)",
+      "oblig": "Oblig1 frist 1. feb"
+    },
+    {
+      "week": "6",
+      "dates": "02.–06.02",
+      "tuesday": "F07 Rekursjon 2 (Kap 7)",
+      "lab": "Øving uke6 (stabel, rekursjon)",
+      "thursday": "F08 Sortering 1 (JI-3, Kap 8)",
+      "oblig": "Oblig2 (del)"
+    },
+    {
+      "week": "7",
+      "dates": "09.–13.02",
+      "tuesday": "F09 Sortering 2 (Kap 8)",
+      "lab": "Øving uke7 (sorteringstriks, tidsmåling)",
+      "thursday": "F10 Raskere sortering (Kap 9)",
+      "oblig": "Oblig2 (del)"
+    },
+    {
+      "week": "8",
+      "dates": "16.–20.02",
+      "tuesday": "F11 JUnit + Kø (JI-4, Kap 10–11)",
+      "lab": "Øving uke8 (= Oblig2)",
+      "thursday": "(egenstudier)",
+      "oblig": "Oblig2 frist 20. feb"
+    },
+    {
+      "week": "9",
+      "dates": "23.–27.02",
+      "tuesday": "(egenstudier)",
+      "lab": "Øving uke9+10 (t.o.m. TabellListe)",
+      "thursday": "F12 SirkulærKø, Deque (Kap 10–11)",
+      "oblig": "Oblig3 (del)"
+    },
+    {
+      "week": "10",
+      "dates": "02.–06.03",
+      "tuesday": "F13 Liste, TabellListe (Kap 12–14)",
+      "lab": "Øving uke10",
+      "thursday": "F14 LenketListe, Iteratorer (JI-5, Kap 15)",
+      "oblig": "Oblig3 (del)"
+    },
+    {
+      "week": "11",
+      "dates": "09.–13.03",
+      "tuesday": "F15 Immutable, Sortert liste (JI-6, Kap 16)",
+      "lab": "Øving uke11 (t.o.m. Sortert Liste)",
+      "thursday": "F16 Søking (Kap 18)",
+      "oblig": "Oblig3 (del)"
+    },
+    {
+      "week": "12",
+      "dates": "16.–20.03",
+      "tuesday": "F17 Map/Dictionary (JI-8, Kap 19)",
+      "lab": "Øving uke12 (= Oblig3)",
+      "thursday": "F18 Hashing (Kap 21–22)",
+      "oblig": "Oblig3 frist 19. mars"
+    },
+    {
+      "week": "13",
+      "dates": "23.–27.03",
+      "tuesday": "F19 Hashklasser i Java",
+      "lab": "Øving uke13 (søk, map, hashing)",
+      "thursday": "F20 Trær (Kap 23)",
+      "oblig": "Oblig5 (del)"
+    },
+    {
+      "week": "14",
+      "dates": "30.03–03.04",
+      "tuesday": "Påske — ingen undervisning",
+      "lab": "—",
+      "thursday": "—",
+      "oblig": "—"
+    },
+    {
+      "week": "15",
+      "dates": "06.–10.04",
+      "tuesday": "F21 Implementasjon av trær (Kap 24)",
+      "lab": "Øving uke15 (trær)",
+      "thursday": "F22 Binære søketrær (Kap 25)",
+      "oblig": "Oblig5 (del)"
+    },
+    {
+      "week": "16",
+      "dates": "13.–17.04",
+      "tuesday": "Prøve (ingen forelesning)",
+      "lab": "Uke16 = Oblig4 / Prøve (t.o.m. Kap 25 BST)",
+      "thursday": "F23 Balanserte tre, Haug/heap (Kap 26)",
+      "oblig": "Oblig4/Prøve frist 17. apr (55 p)"
+    },
+    {
+      "week": "17",
+      "dates": "20.–24.04",
+      "tuesday": "F24 Impl. hauger, prioritetskø, 2-3 tre (Kap 27)",
+      "lab": "Øving uke17 (trær, hauger, grafer)",
+      "thursday": "F25 Grafer (Kap 28)",
+      "oblig": "Oblig5 (del)"
+    },
+    {
+      "week": "18",
+      "dates": "27.–01.05",
+      "tuesday": "F26 Grafer 2, Graf-impl. (Kap 29)",
+      "lab": "Jobbe med Oblig5",
+      "thursday": "(F27 gjennomgang eksamen V2025)",
+      "oblig": "Oblig5 frist 30. apr"
+    },
+    {
+      "week": "19",
+      "dates": "04.–08.05",
+      "tuesday": "Tidligere eksamensoppgaver",
+      "lab": "Q&A (nær eksamen)",
+      "thursday": "(F28 gjennomgang eksamen V2025); 08.05 siste undervisningsdag",
+      "oblig": "—"
+    },
+    {
+      "week": "23",
+      "dates": "01.–05.06",
+      "tuesday": "DAT102 Q&A",
+      "lab": "—",
+      "thursday": "DAT102-eksamen",
+      "oblig": "—"
+    }
+  ],
+  "chapterMap": [
+    {
+      "chapters": "1 Bags · 2 Bag/Arrays · 3 Bag/Links",
+      "topicSlugs": [
+        "bag-adt"
+      ]
+    },
+    {
+      "chapters": "4 Efficiency of Algorithms",
+      "topicSlugs": [
+        "asymptotic-analysis"
+      ]
+    },
+    {
+      "chapters": "5 Stacks · 6 Stack Impl",
+      "topicSlugs": [
+        "stacks-and-queues"
+      ]
+    },
+    {
+      "chapters": "7 Recursion",
+      "topicSlugs": [
+        "recursion"
+      ]
+    },
+    {
+      "chapters": "8 Intro Sorting · 9 Faster Sorting",
+      "topicSlugs": [
+        "sorting"
+      ]
+    },
+    {
+      "chapters": "10 Queues/Deques/PQ · 11 Queue Impl",
+      "topicSlugs": [
+        "stacks-and-queues",
+        "heaps-and-priority-queues"
+      ]
+    },
+    {
+      "chapters": "12 Lists · 13 List/Array · 14 List/Links · 15 Iterators · 16 Sorted Lists",
+      "topicSlugs": [
+        "lists"
+      ]
+    },
+    {
+      "chapters": "18 Searching",
+      "topicSlugs": [
+        "searching"
+      ]
+    },
+    {
+      "chapters": "19 Dictionaries · 21 Introducing Hashing · 22 Hashing as Dictionary",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ]
+    },
+    {
+      "chapters": "23 Trees · 24 Tree Impl",
+      "topicSlugs": [
+        "trees"
+      ]
+    },
+    {
+      "chapters": "25 BST Impl",
+      "topicSlugs": [
+        "binary-search-trees"
+      ]
+    },
+    {
+      "chapters": "26 Heap Impl",
+      "topicSlugs": [
+        "heaps-and-priority-queues"
+      ]
+    },
+    {
+      "chapters": "27 Balanced Search Trees",
+      "topicSlugs": [
+        "balanced-trees"
+      ]
+    },
+    {
+      "chapters": "28 Graphs · 29 Graph Impl",
+      "topicSlugs": [
+        "graphs"
+      ]
+    },
+    {
+      "chapters": "(JUnit, gjennomgående)",
+      "topicSlugs": [
+        "testing-junit"
+      ]
+    }
+  ],
+  "lectures": [
+    {
+      "week": "3",
+      "code": "F01",
+      "anchor": "f01",
+      "title": "Intro, Oppvarming, Bag",
+      "chapters": "1",
+      "topicSlugs": [
+        "bag-adt"
+      ],
+      "pages": 27,
+      "sourceSlug": "bergen-f01-intro-oppvarming-bag"
+    },
+    {
+      "week": "3",
+      "code": "F02",
+      "anchor": "f02",
+      "title": "ArrayBag",
+      "chapters": "2",
+      "topicSlugs": [
+        "bag-adt"
+      ],
+      "pages": 19,
+      "sourceSlug": "bergen-f02-arraybag"
+    },
+    {
+      "week": "4",
+      "code": "F03",
+      "anchor": "f03",
+      "title": "Lenke av noder (før timen)",
+      "chapters": "3",
+      "topicSlugs": [
+        "bag-adt"
+      ],
+      "pages": 27,
+      "sourceSlug": "bergen-f03-lenke-av-noder-for-timen"
+    },
+    {
+      "week": "4",
+      "code": "F04",
+      "anchor": "f04",
+      "title": "LenketBag og Analyse",
+      "chapters": "4",
+      "topicSlugs": [
+        "bag-adt",
+        "asymptotic-analysis"
+      ],
+      "pages": 29,
+      "sourceSlug": "bergen-f04-lenketbag-og-analyse"
+    },
+    {
+      "week": "5",
+      "code": "F05",
+      "anchor": "f05",
+      "title": "Stabel",
+      "chapters": "5–6",
+      "topicSlugs": [
+        "stacks-and-queues",
+        "asymptotic-analysis"
+      ],
+      "pages": 35,
+      "sourceSlug": "bergen-f05-stabel"
+    },
+    {
+      "week": "5",
+      "code": "F06",
+      "anchor": "f06",
+      "title": "Rekursjon 1",
+      "chapters": "7",
+      "topicSlugs": [
+        "recursion"
+      ],
+      "pages": 27,
+      "sourceSlug": "bergen-f06-rekursjon1"
+    },
+    {
+      "week": "6",
+      "code": "F07",
+      "anchor": "f07",
+      "title": "Rekursjon 2",
+      "chapters": "7",
+      "topicSlugs": [
+        "recursion"
+      ],
+      "pages": 25,
+      "sourceSlug": "bergen-f07-rekursjon2"
+    },
+    {
+      "week": "6",
+      "code": "F08",
+      "anchor": "f08",
+      "title": "Sortering 1",
+      "chapters": "8",
+      "topicSlugs": [
+        "sorting",
+        "testing-junit"
+      ],
+      "pages": 42,
+      "sourceSlug": "bergen-f08-sortering-1"
+    },
+    {
+      "week": "7",
+      "code": "F09",
+      "anchor": "f09",
+      "title": "Sortering 2",
+      "chapters": "8",
+      "topicSlugs": [
+        "sorting"
+      ],
+      "pages": 41,
+      "sourceSlug": "bergen-f09-sortering-2"
+    },
+    {
+      "week": "7",
+      "code": "F10",
+      "anchor": "f10",
+      "title": "Raskere sortering",
+      "chapters": "9",
+      "topicSlugs": [
+        "sorting"
+      ],
+      "pages": 25,
+      "sourceSlug": "bergen-f10-sortering-3"
+    },
+    {
+      "week": "8",
+      "code": "F11a",
+      "anchor": "f11a",
+      "title": "JUnit",
+      "chapters": "10–11",
+      "topicSlugs": [
+        "testing-junit"
+      ],
+      "pages": 20,
+      "sourceSlug": "bergen-f11a-junit"
+    },
+    {
+      "week": "8",
+      "code": "F11b",
+      "anchor": "f11b",
+      "title": "Kø (før timen)",
+      "chapters": "10–11",
+      "topicSlugs": [
+        "stacks-and-queues"
+      ],
+      "pages": 19,
+      "sourceSlug": "bergen-f11b-koe-for-timen"
+    },
+    {
+      "week": "8",
+      "code": "F11b",
+      "anchor": "f11b-2",
+      "title": "Kø (med tegninger, etter timen)",
+      "chapters": "10–11",
+      "topicSlugs": [
+        "stacks-and-queues"
+      ],
+      "pages": 19,
+      "sourceSlug": "bergen-f11b-koe-med-tegninger-etter-timen"
+    },
+    {
+      "week": "9",
+      "code": "F12",
+      "anchor": "f12",
+      "title": "SirkulærKø, Deque",
+      "chapters": "10–11",
+      "topicSlugs": [
+        "stacks-and-queues"
+      ],
+      "pages": 31,
+      "sourceSlug": "bergen-f12-sirkulaerkoe-deque"
+    },
+    {
+      "week": "10",
+      "code": "F13",
+      "anchor": "f13",
+      "title": "Liste, TabellListe",
+      "chapters": "12–14",
+      "topicSlugs": [
+        "lists"
+      ],
+      "pages": 33,
+      "sourceSlug": "bergen-f13-liste-tabelliste"
+    },
+    {
+      "week": "10",
+      "code": "F14",
+      "anchor": "f14",
+      "title": "LenketListe, Iteratorer",
+      "chapters": "15",
+      "topicSlugs": [
+        "lists"
+      ],
+      "pages": 38,
+      "sourceSlug": "bergen-f14-lenketliste-iteratorer"
+    },
+    {
+      "week": "11",
+      "code": "F15",
+      "anchor": "f15",
+      "title": "Immutable, SortertListe",
+      "chapters": "16",
+      "topicSlugs": [
+        "lists"
+      ],
+      "pages": 25,
+      "sourceSlug": "bergen-f15-immutable-sortertliste"
+    },
+    {
+      "week": "11",
+      "code": "F16",
+      "anchor": "f16",
+      "title": "Søking",
+      "chapters": "18",
+      "topicSlugs": [
+        "searching"
+      ],
+      "pages": 29,
+      "sourceSlug": "bergen-f16-soking"
+    },
+    {
+      "week": "12",
+      "code": "F17",
+      "anchor": "f17",
+      "title": "Ordbok (Map/Dictionary)",
+      "chapters": "19",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ],
+      "pages": 57,
+      "sourceSlug": "bergen-f17-ordbok"
+    },
+    {
+      "week": "12",
+      "code": "F18b",
+      "anchor": "f18b",
+      "title": "Hashing",
+      "chapters": "21–22",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ],
+      "pages": 15,
+      "sourceSlug": "bergen-f18b-hashing"
+    },
+    {
+      "week": "13",
+      "code": "F19",
+      "anchor": "f19",
+      "title": "Hashing 3 (Hashklasser i Java)",
+      "chapters": "21–22",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ],
+      "pages": 29,
+      "sourceSlug": "bergen-f19-hashing-3-hashklasser-i-java"
+    },
+    {
+      "week": "12–13",
+      "code": "F19b",
+      "anchor": "f19b",
+      "title": "Implementasjon av Hashordbok",
+      "chapters": "21–22",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ],
+      "pages": 30,
+      "sourceSlug": "bergen-f19b-implementasjon-av-hashordbok"
+    },
+    {
+      "week": "13",
+      "code": "F20",
+      "anchor": "f20",
+      "title": "Trær",
+      "chapters": "23",
+      "topicSlugs": [
+        "trees"
+      ],
+      "pages": 55,
+      "sourceSlug": "bergen-f20-traer"
+    },
+    {
+      "week": "15",
+      "code": "F21",
+      "anchor": "f21",
+      "title": "Implementasjon av trær",
+      "chapters": "24",
+      "topicSlugs": [
+        "trees"
+      ],
+      "pages": 13,
+      "sourceSlug": "bergen-f21-implementasjon-av-traer"
+    },
+    {
+      "week": "15",
+      "code": "F22",
+      "anchor": "f22",
+      "title": "Binære søketrær",
+      "chapters": "25",
+      "topicSlugs": [
+        "binary-search-trees"
+      ],
+      "pages": 42,
+      "sourceSlug": "bergen-f22-binaere-soketraer"
+    },
+    {
+      "week": "16",
+      "code": "F23",
+      "anchor": "f23",
+      "title": "Balanserte tre, Hauger (heaps)",
+      "chapters": "26",
+      "topicSlugs": [
+        "balanced-trees",
+        "heaps-and-priority-queues"
+      ],
+      "pages": 68,
+      "sourceSlug": "bergen-f23-balanserte-tre-hauger-heaps"
+    },
+    {
+      "week": "17",
+      "code": "F24a",
+      "anchor": "f24a",
+      "title": "Hauger og prioritetskøer",
+      "chapters": "27",
+      "topicSlugs": [
+        "heaps-and-priority-queues"
+      ],
+      "pages": 13,
+      "sourceSlug": "bergen-f24a-hauger-og-prioritetskoer"
+    },
+    {
+      "week": "17",
+      "code": "F24b",
+      "anchor": "f24b",
+      "title": "2-3 Trær",
+      "chapters": "27",
+      "topicSlugs": [
+        "balanced-trees"
+      ],
+      "pages": 35,
+      "sourceSlug": "bergen-f24b-2-3-traer"
+    },
+    {
+      "week": "17",
+      "code": "F25",
+      "anchor": "f25",
+      "title": "Grafer 1",
+      "chapters": "28",
+      "topicSlugs": [
+        "graphs"
+      ],
+      "pages": 49,
+      "sourceSlug": "bergen-f25-grafer-1"
+    },
+    {
+      "week": "18",
+      "code": "F26",
+      "anchor": "f26",
+      "title": "Grafer 2",
+      "chapters": "29",
+      "topicSlugs": [
+        "graphs"
+      ],
+      "pages": 26,
+      "sourceSlug": "bergen-f26-grafer-2"
+    },
+    {
+      "week": "—",
+      "code": "—",
+      "anchor": "referat-fra-klassens-tim",
+      "title": "Referat fra Klassens Time (Førde)",
+      "chapters": "—",
+      "topicSlugs": [],
+      "pages": 2,
+      "sourceSlug": "forde-referat-klassens-time"
+    },
+    {
+      "week": "12",
+      "code": "F18",
+      "anchor": "f18",
+      "title": "Ordbok-implementasjon ved hashing (Haugesund)",
+      "chapters": "21–22",
+      "topicSlugs": [
+        "dictionaries-and-hashing"
+      ],
+      "pages": 18,
+      "sourceSlug": "haugesund-f18-ordbok-implementasjon-hashing"
+    }
+  ]
+}

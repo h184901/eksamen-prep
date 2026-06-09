@@ -1,0 +1,1431 @@
+{
+  "slug": "2024-vaar",
+  "year": 2024,
+  "session": "vaar",
+  "displayLabel": "Vår 2024",
+  "summary": "Skriftlig eksamen (4 timer, 0900–1300), 14. mai 2024. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori på papir.",
+  "sessionNote": "1 deloppgave er figur-basert — svaret avhenger av en figur som ikke kan gjengis fullt ut som tekst (merket per deloppgave).",
+  "status": "partial",
+  "statusCounts": {
+    "complete": 34,
+    "partial": 1,
+    "scanned_only": 0,
+    "missing_solution": 0
+  },
+  "questionCount": 9,
+  "subquestionCount": 35,
+  "questions": [
+    {
+      "number": 1,
+      "anchor": "oppg-1",
+      "points": 5,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "queue-adt",
+        "abstract-data-type",
+        "list-adt",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Hva oppnår vi ved å bruke en sirkulær tabell (circular array) i stedet for en vanlig tabell for å implementere en kø? A: Tabellen sjeldnere blir full. B: Vi slipper dataflytting ved gjentatt innsetting og uttak. C: Søking blir mer effektivt. D: Elementer settes automatisk inn igjen bakerst ved uttak. E: Vi slipper å flytte data til ny dobbelt tabell.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — Vi slipper en del dataflytting ved gjentatt innsetting og uttak",
+            "shortReasoning": "Sirkulær tabell gjenbruker plasser ved å bruke modulo-aritmetikk, slik at vi ikke trenger å flytte alle elementer fremover ved uttak fra fronten.",
+            "commonMistakes": [
+              "Forveksle sirkulær tabell med dynamisk voksende tabell (E)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 2"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Kodesnutt bruker java.util.Queue med add/remove/peek. Hva er innholdet i q1 og q2 etter at koden er utført? A: q1:[1,2,3,4] q2:[4,1,2]. B: q1:[3,4] q2:[4]. C: q1:[3,4] q2:[4,1,2]. D: q1:[1,2] q2:[4,3,2]. E: q1:[1,2,3] q2:[4].",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — q1:[3,4] q2:[4,1,2]",
+            "shortReasoning": "Simmer kodesnutten: remove() fra q1 tar ut 1 og 2, deretter add til q2 av tall. q1 ender med [3,4] og q2 ender med [4,1,2] — FIFO-rekkefølge bevares.",
+            "commonMistakes": [
+              "Glemme at Queue er FIFO (remove tar fra front, add legger bakerst)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "Marker rett/galt for kjedede lister: (1) Å slette element i ordnet liste tar O(n). (2) Å slette element i uordnet liste tar O(1). (3) Å legge til element i uordnet liste tar O(1). (4) Å legge til element i ordnet liste tar O(1).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "rett, galt, rett, galt",
+            "shortReasoning": "(1) Sant: i ordnet kjedet liste må du finne posisjon O(n) og koble fra O(1) totalt O(n). (2) Galt: i uordnet kjedet liste må du finne elementet O(n) dersom du ikke har peker. (3) Sant: sett inn foran i O(1). (4) Galt: finne riktig plass i sortert liste tar O(n).",
+            "commonMistakes": [
+              "Tro at sletting alltid er O(1) i kjedet liste (man mangler pointeroppdatering etter å ha funnet elementet)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Liste-ADT",
+              "href": "/dat102/begreper/list-adt",
+              "kind": "concept",
+              "slug": "list-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "anchor": "oppg-2",
+      "points": 9,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "recursion",
+        "complexity-analysis",
+        "merge-sort",
+        "insertion-sort",
+        "selection-sort",
+        "heapsort",
+        "shellsort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Gitt en rekursiv metode rekursivMetode(n). Hva blir resultatet av å kalle rekursivMetode(3)? A: 3 2 1. B: 1 2 3. C: 3 2 2 1 1. D: 3 2 1 1 2 1 1. E: 1 1 1 1 2 2 3.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "D — 3 2 1 1 2 1 1",
+            "shortReasoning": "Metoden skriver ut n, kaller seg rekursivt med n-1, og skriver ut n igjen etter. Men basistilfelle er n<=1 der det skrives ut n én gang. rekursivMetode(3): skriv 3, kall(2): skriv 2, kall(1): skriv 1, skriv 1, skriv 2, kall(1): skriv 1, skriv 1. Resultat: 3 2 1 1 2 1 1.",
+            "commonMistakes": [
+              "Overse at det rekursive kallet skjer mellom to utskrifter"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Hvilken kjøretid har metoden rekursivMetode(n) (samme metode som i 2a)? A: O(log n). B: O(n). C: O(n log n). D: O(n²). E: O(2ⁿ).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — O(n)",
+            "shortReasoning": "Rekursivt kall: T(n) = 2·T(n-1) + O(1) — men ser nøyere: metoden gjør ett rekursivt kall rekursivMetode(n-1) for hvert n-nivå, med O(1) arbeid per nivå. Total arbeid er proporsjonal med n → O(n).",
+            "commonMistakes": [
+              "Tro at to utskrifter gir O(2n) → egentlig O(n)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Vi skal flette (merge) to sorterte tabelldeler til en sortert del. Hver del har n/2 elementer. Hva er orden av flettingen? A: O(1). B: O(n). C: O(n log n). D: O(n²).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — O(n)",
+            "shortReasoning": "Fletteoperasjonen sammenligner og kopierer totalt n elementer (n/2 fra hver del) én gang → O(n).",
+            "commonMistakes": [
+              "Forveksle flette-steget med hele merge sort-rekursjonen (som er O(n log n))"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "Sant/usant: (1) Insertion sort er O(n) i beste tilfelle. (2) Selection sort har samme antall compareTo-kall uansett startrekkefølge. (3) Heap sort blir O(n) om elementene er sortert ved start. (4) Shell sort bruker selection sort som hjelpemetode.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "sant, sant, usant, usant",
+            "shortReasoning": "(1) Sant: insertion sort er O(n) for nesten-sortert input. (2) Sant: selection sort går alltid gjennom alle i usortert del for å finne min → alltid O(n²) compareTo. (3) Usant: heap sort er alltid O(n log n) — forhåndssortert hjelper ikke. (4) Usant: shell sort bruker insertion sort, ikke selection sort.",
+            "commonMistakes": [
+              "Tro at heapsort drar nytte av forhåndssortert input"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Hva er orden til: Haugsortering (heapsort), Sortering ved innsetting (insertion sort), Utvalgssortering (selection sort), Flettesortering (merge sort)?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Heapsort: O(n log n). Insertion sort: O(n²). Selection sort: O(n²). Merge sort: O(n log n).",
+            "shortReasoning": "Heapsort: bygge haug O(n) + n×siftDown O(log n) = O(n log n). Insertion og selection sort: dobbelt løkke O(n²). Merge sort: del-og-hersk O(n log n).",
+            "commonMistakes": [
+              "Tro at insertion sort alltid er O(n) (det er bare beste tilfelle)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "anchor": "oppg-3",
+      "points": 15,
+      "topic": "trees",
+      "conceptSlugs": [
+        "binary-search-tree",
+        "heap",
+        "two-three-tree",
+        "balanced-tree"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 1,
+          "prompt": "Verdiene 1–7 er satt inn i et BS-tre i tilfeldig rekkefølge. Treet har en bestemt struktur (figur, s. 8). Hvilken verdi står i roten?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "4",
+            "shortReasoning": "Basert på trestrukturen som vises i figuren — rot=4 er den eneste verdien som gir BST-egenskapen (figur-basert svar fra løsningsfilen).",
+            "commonMistakes": [
+              "Prøve å gjette uten å bruke BST-egenskapen til å verifisere"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "short-answer",
+          "points": 3,
+          "prompt": "Minimumshaugen (figur, s. 9) har 8 noder. Alle elementer er ulike. (1) Hvor mange steder kan vi finne det minste elementet? (2) Det nestminste? (3) Det største?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(1) minste: 1 plass (alltid roten). (2) nestminste: 2 plasser (ett av de to barna til roten). (3) størst: 4 plasser (ett av løvnodene på laveste nivå).",
+            "shortReasoning": "Minimumshaug-egenskap: rot er alltid minst. Nest-minst er alltid ett av røttens direkte barn (2 mulige). Størst er alltid et blad — for en haug med 8 noder er det 4 blader.",
+            "commonMistakes": [
+              "Tro at nestminst kan være hvor som helst i treet"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 9"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "Sant/usant om 2-3 trær: (1) Ingen noder har nøyaktig ett barn. (2) Treet inneholder maksimalt én 3-node. (3) Alle blad er på samme nivå. (4) Alle 3-noder må være blad.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "sant, usant, sant, usant",
+            "shortReasoning": "(1) Sant: en node er enten 2-node (2 barn) eller 3-node (3 barn) — aldri 1 barn. (2) Usant: et 2-3 tre kan ha mange 3-noder. (3) Sant: 2-3 trær er perfekt balanserte, alle blad på samme nivå. (4) Usant: 3-noder kan finnes på alle nivåer.",
+            "commonMistakes": [
+              "Tro at 2-3 tre har maks én 3-node"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 9"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Seks binære trær (A–F) er vist (figur, s. 10–12). Klassifiser hvert tre som: minimums-haug, maksimums-haug, binært søketre, eller ingen av disse.",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "A: BST. B: minimumshaug. C: maksimumshaug. D: BST. (E og F: figur-basert — se løsningsfilen p.11-12)",
+            "shortReasoning": "Verifiser BST-egenskapen (venstre<rot<høyre) og haug-egenskapen (foreldre ≥ eller ≤ alle barn) for hvert tre i figuren.",
+            "commonMistakes": [
+              "Kun sjekke rot og direkte barn, ikke hele undertrærne"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            },
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "trace",
+          "points": 1.5,
+          "prompt": "Sett inn elementene 1, 2, 3, 4, 5, 6, 7 (i denne rekkefølgen) i en maksimumshaug. Dra og slipp i riktig posisjon (figur, s. 13).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Posisjon 1=7, 2=4, 3=6, 4=1, 5=3, 6=2, 7=5",
+            "shortReasoning": "Sett inn sekvensielt og sift-up etter hvert: etter alle innsettinger er 7 rot, 4 og 6 er barna, 1,3,2,5 er blader (fra løsningsfilen korrekte svar).",
+            "commonMistakes": [
+              "Bare sette inn uten sift-up etter hvert element"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 13"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "f",
+          "qtype": "trace",
+          "points": 1.5,
+          "prompt": "Sett inn 7, 6, 5, 4, 3, 2, 1 (i denne rekkefølgen) i en maksimumshaug. Fjern deretter 3 elementer. Dra og slipp til korrekt posisjon (figur, s. 14).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Posisjon 1=4, 2=3, 3=2, 4=1 (4 noder gjenstår etter 3 fjerninger)",
+            "shortReasoning": "Etter innsetting 7,6,5,4,3,2,1 er haugen: 7,6,5,4,3,2,1. Fjerne 3 maks: fjerne 7 (→ 6,5,4,3,2,1), fjerne 6 (→ 5,4,3,2,1), fjerne 5 (→ 4,3,2,1). Fra løsningsfilen: pos1=4,pos2=3,pos3=2,pos4=1.",
+            "commonMistakes": [
+              "Glemme sift-down etter fjerning av maksimum"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "g",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gjør en rotasjon om node 2 for å balansere det binære søketreet (figur, s. 15). (NB: Oppgaven sa 'node 1' men rettelse i løsningsfilen sier det var node 2.) Dra og slipp korrekt resultat.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Venstrerotasjon om node 2: posisjon 1=4, 2=2, 3=5, 4=1, 5=3, 6=6 (fra løsningsfilen korrekte svar)",
+            "shortReasoning": "Rotasjon om node 2 (venstrerotasjon): høyre barn 4 blir ny rot, node 2 flyttes til venstre for 4, 4s venstre barn 3 flyttes til 2s høyre. Løsningsfilen bekrefter dette.",
+            "commonMistakes": [
+              "Bruke feil rotasjonstype (høyre i stedet for venstre)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balanserte trær",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 15"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 1"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "h",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Etter å ha satt inn 1, 5, 11, 13, 100 i et gitt 2-3 tre — hvor mange noder er i treet totalt? A: 7. B: 8. C: 9. D: 10. E: 11.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — 8",
+            "shortReasoning": "Fra løsningsfilen er korrekt svar B (8 noder). Antallet avhenger av splittinger ved overflow i 2-3 tre-innsettinger.",
+            "commonMistakes": [
+              "Telle innsatte verdier i stedet for antall noder (noder ≠ verdier i 2-3 tre)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 16"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "anchor": "oppg-4",
+      "points": 8,
+      "topic": "graphs",
+      "conceptSlugs": [
+        "adjacency-list",
+        "hash-table",
+        "open-addressing"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Dijkstras algoritme finner billigste sti i en graf. Hva er forutsetningen? A: Kanter med retning. B: Kanter uten retning. C: Ikke-negative kantvekter. D: Ingen sykler.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — Kantene kan ikke ha negativ vekt/kostnad",
+            "shortReasoning": "Dijkstra antar greedy-valg er korrekt: en gang en node er besøkt med lavest kostnad, vil vi aldri oppdatere den igjen. Negative vekter bryter denne antagelsen.",
+            "commonMistakes": [
+              "Tro at Dijkstra krever rettet eller urettet graf (den fungerer med begge)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 17"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Gitt en rettet graf (figur, s. 18): hvilken node har nabolistene A={}, B={1}, C={1,4}? Angi nodenummer for hver naboliste.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A={}: node 6 (ingen utgående kanter). B={1}: node 2 (peker kun til 1). C={1,4}: node 3 (peker til 1 og 4). (Fra løsningsfilen: A→node som har tom naboliste, B→node som peker til 1, C→node som peker til 1 og 4.)",
+            "shortReasoning": "Naboliste til en node inneholder naboene (de noder det finnes en rettet kant til). Les av fra figuren.",
+            "commonMistakes": [
+              "Forveksle inngående og utgående kanter i rettet graf"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Naboliste",
+              "href": "/dat102/begreper/adjacency-list",
+              "kind": "concept",
+              "slug": "adjacency-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 18"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Sett inn KID-numrene 67678989, 43214321, 65436543, 54325432, 67896789, 23456789 i en hash-tabell (lengde 10). Hash = siste siffer. Lineær åpen adressering steglengde +1. Vis posisjon 0–9.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "pos 0: 67896789, pos 1: 43214321, pos 2: 54325432, pos 3: 65436543, pos 4: 23456789, pos 5–8: tom, pos 9: 67678989",
+            "shortReasoning": "Hash(67678989)=9→pos9. Hash(43214321)=1→pos1. Hash(65436543)=3→pos3. Hash(54325432)=2→pos2. Hash(67896789)=9→opptatt, probe+1=0→pos0. Hash(23456789)=9→opptatt, probe+1=0→opptatt, +1=1→opptatt, +1=2→opptatt, +1=3→opptatt, +1=4→pos4. (Fra løsningsfilen: pos0=67896789, pos1=43214321, pos2=54325432, pos3=65436543, pos4=23456789, pos9=67678989.)",
+            "commonMistakes": [
+              "Glemme å følge probesekvensen til ledig plass"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Ordbøker og hashing",
+              "href": "/dat102/temaer/dictionaries-and-hashing",
+              "kind": "topic",
+              "slug": "dictionaries-and-hashing"
+            },
+            {
+              "label": "Hash-tabell",
+              "href": "/dat102/begreper/hash-table",
+              "kind": "concept",
+              "slug": "hash-table"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 19"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "anchor": "oppg-5",
+      "points": 4,
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Angi O-notasjon for: T1(n)=3n²+2n³−5n, T2(n)=2ⁿ+10n, T3(n)=100n+n log n, T4(n)=50+1000n.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "T1: O(n³). T2: O(2ⁿ). T3: O(n log n). T4: O(n).",
+            "shortReasoning": "Beholder dominerende ledd: T1: n³>n². T2: 2ⁿ>n. T3: n log n > n. T4: n dominerer konstanten.",
+            "commonMistakes": [
+              "Beholde koeffisienter i O-notasjon",
+              "Glemme at eksponentielle uttrykk dominerer polynomer"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            },
+            {
+              "label": "Stor O-notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 20"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Kodesnutt med nestet løkke på tabell med n elementer. Hva er kjøretid? A: O(n). B: O(n log n). C: O(n²). D: O(n³). E: O(2ⁿ).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — O(n²)",
+            "shortReasoning": "En nestet løkke der begge løkker kjøres opp til n ganger gir O(n²) i de fleste tilfeller. Fra løsningsfilen: korrekt svar er C.",
+            "commonMistakes": [
+              "Velge O(n) om kun den ytre løkken telles"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-flervalg-losning.md",
+                "pages": "s. 20"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "anchor": "oppg-6",
+      "points": null,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "linked-node",
+        "singly-linked-list",
+        "recursion"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv metoden antallNoderIterativ(Node forste) som tar inn en lenke og returnerer antall noder ved hjelp av en løkke.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "int antall=0; while(forste!=null){antall++; forste=forste.neste;} return antall;",
+            "shortReasoning": "Traverser kjeden med løkke, tell en for hvert element til referansen er null.",
+            "commonMistakes": [
+              "Glemme å oppdatere forste=forste.neste (uendelig løkke)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kjedet node",
+              "href": "/dat102/begreper/linked-node",
+              "kind": "concept",
+              "slug": "linked-node"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv metoden antallNoderRekursiv(Node forste) som tar inn en lenke og returnerer antall noder ved hjelp av rekursjon.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(forste==null) return 0; return 1 + antallNoderRekursiv(forste.neste);",
+            "shortReasoning": "Basistilfelle: tom lenke → 0. Rekursivt: 1 (denne noden) + antall i resten.",
+            "commonMistakes": [
+              "Glemme basistilfelle (null-sjekk)",
+              "Returnere 0 i stedet for 1 i rekursivt tilfelle"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "anchor": "oppg-7",
+      "points": null,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt",
+        "junit"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden String desimalTilBinaer(int tallet) som bruker java.util.Stack til å konvertere desimaltall til binær streng. Algoritme: push tall%2 til stabel, del på 2, pop til streng.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Spesialhåndter 0 → '0'. Else: push(tallet%2), tall/=2 i løkke. Pop alle fra stabel og bygg streng.",
+            "shortReasoning": "Binær representasjon bygges baklengs (LSB først). Stabel snur rekkefølgen slik vi får MSB først i strengen.",
+            "commonMistakes": [
+              "Glemme spesialtilfelle 0",
+              "Glemme å håndtere 0-biten (tall%2 kan gi 0)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stabel-ADT",
+              "href": "/dat102/begreper/stack-adt",
+              "kind": "concept",
+              "slug": "stack-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv JUnit-testmetode for desimalTilBinaer. Test verdiene 0, 1, 2, 3, 10.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "@Test void testDesimalTilBinaer(){ assertEquals('0',desimalTilBinaer(0)); assertEquals('1',desimalTilBinaer(1)); assertEquals('10',desimalTilBinaer(2)); assertEquals('11',desimalTilBinaer(3)); assertEquals('1010',desimalTilBinaer(10)); }",
+            "shortReasoning": "0→'0', 1→'1', 2→'10', 3→'11', 10→'1010' (ti i binær er 1010).",
+            "commonMistakes": [
+              "Glemme @Test-annotering",
+              "Feil forventet verdi for 2 eller 10"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "JUnit",
+              "href": "/dat102/begreper/junit",
+              "kind": "concept",
+              "slug": "junit"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "anchor": "oppg-8",
+      "points": null,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "radix-sort",
+        "binary-search",
+        "quicksort",
+        "recursion"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Sorter [1000, 1234, 4321, 1001, 202, 33, 4] med radix-sortering i 5-tallssystemet. Legg til ledende nuller. Vis køfordeling etter hvert gjennomløp.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Padder: 1000,1234,4321,1001,0202,0033,0004. It1: Kø0:1000; Kø1:4321,1001; Kø2:0202; Kø3:0033; Kø4:1234,0004. It2: Kø0:1000,1001,0202,0004; Kø2:4321; Kø3:0033,1234. It3: Kø0:1000,1001,0004,0033; Kø2:0202,1234; Kø3:4321. It4: Kø0:0004,0033,0202; Kø1:1000,1001,1234; Kø4:4321. Sortert: 4,33,202,1000,1001,1234,4321.",
+            "shortReasoning": "LSD radix sort i 5-tallssystemet (5 køer 0–4), 4 gjennomløp (for 4-sifret tall). Prosesserer fra minst signifikante siffer.",
+            "commonMistakes": [
+              "Glemme å padde med ledende nuller",
+              "Starte fra mest signifikante siffer (MSD)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Radix sort",
+              "href": "/dat102/begreper/radix-sort",
+              "kind": "concept",
+              "slug": "radix-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Gitt sortert tabell [1,3,4,5,7,8,9,12,15,17,18,19] (indeks 0–11). Utfør binærsøk for 1 og 16. Angi sammenligningssekvens.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Søke 1: sammenligner med 8(idx5), 4(idx2), 1(idx0) → funnet. Søke 16: sammenligner med 8(idx5), 15(idx8), 18(idx10), 17(idx9) → ikke funnet.",
+            "shortReasoning": "Binærsøk halverer søkerommet: midtpunkt beregnes, sammenligner, gå til venstre/høyre halvdel.",
+            "commonMistakes": [
+              "Søke sekvensiell fra venstre i stedet for fra midten"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Implementer public static <T extends Comparable<T>> int binærsøk(T[] tabell, T verdi) — returnerer indeks eller -1.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Iterativ: int lav=0, høy=tabell.length-1; while(lav<=høy){int midt=(lav+høy)/2; int cmp=tabell[midt].compareTo(verdi); if(cmp<0) lav=midt+1; else if(cmp>0) høy=midt-1; else return midt;} return -1;",
+            "shortReasoning": "Iterativ binærsøk med to pekere lav og høy. Juster basert på compareTo-resultat. Returnerer -1 ved ikke funnet.",
+            "commonMistakes": [
+              "Bruke lav<høy i stedet for lav<=høy (mister ett element)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Forklar med ord hva partisjoner()-metoden gjør i kvikksortering: public static <T extends Comparable<T>> int partisjoner(T[] tabell, int venstre, int høyre).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Velger et pivot-element; bytter om elementer slik at alle < pivot er til venstre og alle > pivot er til høyre; returnerer pivotens endelige indeks.",
+            "shortReasoning": "Partisjoner er kjernen i quicksort: etter metoden er pivot plassert på sin endelige plass, og tabellen er delt i to.",
+            "commonMistakes": [
+              "Tro at partisjoner sorterer hele tabellen (det gjør kun quicksort i sin helhet)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Quicksort",
+              "href": "/dat102/begreper/quicksort",
+              "kind": "concept",
+              "slug": "quicksort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 9"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Implementer void kvikkSorter(T[] tabell, int venstre, int høyre) — kvikksorterer til hvert intervall har lengde 0 eller 1.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(venstre<høyre){int pivot=partisjoner(tabell,venstre,høyre); kvikkSorter(tabell,venstre,pivot-1); kvikkSorter(tabell,pivot+1,høyre);}",
+            "shortReasoning": "Basistilfelle: venstre>=høyre (tom/ett element). Ellers: partisjoner og rekursiv sortering av begge halvdeler.",
+            "commonMistakes": [
+              "Bruke pivot-1 og pivot+1 feil (unngå uendelig rekursjon)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Quicksort",
+              "href": "/dat102/begreper/quicksort",
+              "kind": "concept",
+              "slug": "quicksort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "f",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Implementer T kMinsteElement(T[] tabell, int venstre, int høyre, int k) som finner k-te minste element basert på quickselect (quicksort-prinsipp). 0-indeksert.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "int pivot=partisjoner(tabell,venstre,høyre); if(k==pivot) return tabell[pivot]; else if(k<pivot) return kMinsteElement(tabell,venstre,pivot-1,k); else return kMinsteElement(tabell,pivot+1,høyre,k);",
+            "shortReasoning": "Quickselect: etter partisjoner er pivot på endelig plass. Om k=pivot er vi ferdige. Om k<pivot søk venstre. Om k>pivot søk høyre (ingen justering av k nødvendig fordi vi søker på absolutt posisjon).",
+            "commonMistakes": [
+              "Justere k ved søk til høyre (ikke nødvendig da k er absolutt indeks)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Quicksort",
+              "href": "/dat102/begreper/quicksort",
+              "kind": "concept",
+              "slug": "quicksort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 11"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "anchor": "oppg-9",
+      "points": null,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations",
+        "recursion",
+        "tree-traversal"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv metoden T finnStorste() i klassen BS_Tre<T> som returnerer størst element. Returner null om treet er tomt.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(rot==null) return null; BinaerTreNode<T> p=rot; while(p.getHoyre()!=null) p=p.getHoyre(); return p.getElement();",
+            "shortReasoning": "I BST er det største elementet i det høyeste høyre hjørnet. Følg høyre barn til null.",
+            "commonMistakes": [
+              "Returnere rot.getElement() uten å følge høyre barn"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv den rekursive metoden boolean inneholder(T element, BinaerTreNode<T> p) i BS_Tre<T>. Returnerer true om elementet finnes, false ellers.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(p==null) return false; int sml=element.compareTo(p.getElement()); if(sml==0) return true; if(sml<0) return inneholder(element,p.getVenstre()); else return inneholder(element,p.getHoyre());",
+            "shortReasoning": "Utnytter BST-egenskapen: går venstre om element<p, høyre om element>p. Basistilfeller: p=null (ikke funnet), compareTo=0 (funnet).",
+            "commonMistakes": [
+              "Søke i begge undertrær i stedet for å bruke BST-egenskapen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv den rekursive private metoden int hoyde(BinaerTreNode<T> t) som returnerer høyden til et binært tre. Tomt tre har høyde 0.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(t==null) return 0; int hV=hoyde(t.getVenstre()); int hH=hoyde(t.getHoyre()); return 1+Math.max(hV,hH);",
+            "shortReasoning": "Høyde = 1 + max(høyde venstre, høyde høyre). Basistilfelle: null → 0.",
+            "commonMistakes": [
+              "Glemme +1 for noden selv",
+              "Returnere 1 i stedet for 0 for null-node"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 15"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv den rekursive metoden void speile(BinaerTreNode<T> t) som bytter om venstre og høyre barn for alle noder i et binært tre (speiler treet).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(t==null) return; BinaerTreNode<T> tmp=t.getVenstre(); t.setVenstre(t.getHoyre()); t.setHoyre(tmp); speile(t.getVenstre()); speile(t.getHoyre());",
+            "shortReasoning": "Bytt venstre og høyre barn, deretter rekursivt speil begge undertrærne. Basistilfelle: t=null → return.",
+            "commonMistakes": [
+              "Glemme å speile undertrærne rekursivt",
+              "Bytte etter rekursjon i stedet for før"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2024-vaar",
+                "internalPath": "processed/reviewed/exams/2024-vaar.md"
+              },
+              {
+                "label": "V24 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2024-vaar/exam-2024-vaar-prog-losning.md",
+                "pages": "s. 16"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

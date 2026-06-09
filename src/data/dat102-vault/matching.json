@@ -1,0 +1,1392 @@
+{
+  "pairs": [
+    {
+      "id": "dat102-match-001",
+      "category": "term-definition",
+      "topic": "bag-adt",
+      "left": "Abstrakt datatype (ADT)",
+      "right": "Spesifikasjon av data og operasjoner, uavhengig av implementasjon",
+      "learnMoreLinks": [
+        {
+          "label": "Abstrakt datatype (ADT)",
+          "href": "/dat102/begreper/abstract-data-type",
+          "kind": "concept",
+          "slug": "abstract-data-type"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "abstract-data-type",
+            "internalPath": "processed/reviewed/concepts/abstract-data-type.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-002",
+      "category": "term-definition",
+      "topic": "bag-adt",
+      "left": "Bag",
+      "right": "Uordnet samling uten indekser der rekkefølge ikke er garantert",
+      "learnMoreLinks": [
+        {
+          "label": "Bag",
+          "href": "/dat102/begreper/bag-collection",
+          "kind": "concept",
+          "slug": "bag-collection"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "bag-collection",
+            "internalPath": "processed/reviewed/concepts/bag-collection.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-003",
+      "category": "term-definition",
+      "topic": "stacks-and-queues",
+      "left": "LIFO",
+      "right": "Last In, First Out — prinsippet for en stabel",
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "stack-adt",
+            "internalPath": "processed/reviewed/concepts/stack-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-004",
+      "category": "term-definition",
+      "topic": "stacks-and-queues",
+      "left": "FIFO",
+      "right": "First In, First Out — prinsippet for en kø",
+      "learnMoreLinks": [
+        {
+          "label": "Kø-ADT",
+          "href": "/dat102/begreper/queue-adt",
+          "kind": "concept",
+          "slug": "queue-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "queue-adt",
+            "internalPath": "processed/reviewed/concepts/queue-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-005",
+      "category": "term-definition",
+      "topic": "asymptotic-analysis",
+      "left": "Stor-O-notasjon",
+      "right": "Øvre grense for kjøretid — vekstraten til det dominerende leddet",
+      "learnMoreLinks": [
+        {
+          "label": "Stor-O-notasjon",
+          "href": "/dat102/begreper/big-o-notation",
+          "kind": "concept",
+          "slug": "big-o-notation"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-o-notation",
+            "internalPath": "processed/reviewed/concepts/big-o-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-006",
+      "category": "term-definition",
+      "topic": "asymptotic-analysis",
+      "left": "Big-Theta (Θ)",
+      "right": "Eksakt vekstrate — algoritmen er både øvre og nedre begrenset av f(n)",
+      "learnMoreLinks": [
+        {
+          "label": "Big-Theta-notasjon",
+          "href": "/dat102/begreper/big-theta-notation",
+          "kind": "concept",
+          "slug": "big-theta-notation"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-theta-notation",
+            "internalPath": "processed/reviewed/concepts/big-theta-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-007",
+      "category": "term-definition",
+      "topic": "sorting",
+      "left": "Stabil sortering",
+      "right": "Like elementer beholder sin innbyrdes rekkefølge etter sorteringen",
+      "learnMoreLinks": [
+        {
+          "label": "Sortering ved innsetting",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-008",
+      "category": "term-definition",
+      "topic": "sorting",
+      "left": "In-place sortering",
+      "right": "Sorterer tabellen uten bruk av en vesentlig hjelpetabell",
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgssortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "selection-sort",
+            "internalPath": "processed/reviewed/concepts/selection-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-009",
+      "category": "term-definition",
+      "topic": "sorting",
+      "left": "Del-og-hersk",
+      "right": "Algoritmeprinsipp: del problemet i to, løs rekursivt, kombiner løsningene",
+      "learnMoreLinks": [
+        {
+          "label": "Del-og-hersk",
+          "href": "/dat102/begreper/divide-and-conquer",
+          "kind": "concept",
+          "slug": "divide-and-conquer"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "divide-and-conquer",
+            "internalPath": "processed/reviewed/concepts/divide-and-conquer.md"
+          },
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-010",
+      "category": "term-definition",
+      "topic": "recursion",
+      "left": "Basistilfelle",
+      "right": "Tilfellet som løses direkte uten videre rekursivt kall",
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "recursion",
+            "internalPath": "processed/reviewed/concepts/recursion.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-011",
+      "category": "term-definition",
+      "topic": "binary-search-trees",
+      "left": "Binært søketre",
+      "right": "Binært tre der alle noder i venstre undertre er mindre enn forelderen, og alle i høyre er større",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-012",
+      "category": "term-definition",
+      "topic": "balanced-trees",
+      "left": "Balansert tre",
+      "right": "Tre der høyde-forskjellen mellom venstre og høyre undertre er maksimalt 1 for alle noder",
+      "learnMoreLinks": [
+        {
+          "label": "Balansert tre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "balanced-tree",
+            "internalPath": "processed/reviewed/concepts/balanced-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-013",
+      "category": "term-definition",
+      "topic": "heaps-and-priority-queues",
+      "left": "Minimumshaug",
+      "right": "Komplett binært tre der forelderen alltid er mindre enn eller lik barna",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-014",
+      "category": "term-definition",
+      "topic": "dictionaries-and-hashing",
+      "left": "Hashfunksjon",
+      "right": "Funksjon som beregner indeks (posisjon) i hashtabellen fra en nøkkel",
+      "learnMoreLinks": [
+        {
+          "label": "Hashfunksjon",
+          "href": "/dat102/begreper/hash-function",
+          "kind": "concept",
+          "slug": "hash-function"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-function",
+            "internalPath": "processed/reviewed/concepts/hash-function.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-015",
+      "category": "term-definition",
+      "topic": "dictionaries-and-hashing",
+      "left": "Kjedet overløp",
+      "right": "Kollisjonsstrategi der hver bøtte i hashtabellen inneholder en liste av synonymer",
+      "learnMoreLinks": [
+        {
+          "label": "Kjedet overløp",
+          "href": "/dat102/begreper/separate-chaining",
+          "kind": "concept",
+          "slug": "separate-chaining"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "separate-chaining",
+            "internalPath": "processed/reviewed/concepts/separate-chaining.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-016",
+      "category": "term-definition",
+      "topic": "trees",
+      "left": "Blad (i et tre)",
+      "right": "Node uten barn",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-017",
+      "category": "term-definition",
+      "topic": "trees",
+      "left": "Komplett tre",
+      "right": "Fullt til nest siste nivå; blader på siste nivå så langt til venstre som mulig",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-018",
+      "category": "term-definition",
+      "topic": "dictionaries-and-hashing",
+      "left": "Fyllingsgrad (λ)",
+      "right": "Forholdet mellom antall lagrede elementer og tabellstørrelsen i en hashtabell",
+      "learnMoreLinks": [
+        {
+          "label": "Fyllingsgrad",
+          "href": "/dat102/begreper/load-factor",
+          "kind": "concept",
+          "slug": "load-factor"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "load-factor",
+            "internalPath": "processed/reviewed/concepts/load-factor.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-019",
+      "category": "term-definition",
+      "topic": "heaps-and-priority-queues",
+      "left": "Prioritetskø",
+      "right": "Samling der elementet med høyest prioritet alltid tas ut først",
+      "learnMoreLinks": [
+        {
+          "label": "Prioritetskø",
+          "href": "/dat102/begreper/priority-queue",
+          "kind": "concept",
+          "slug": "priority-queue"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "priority-queue",
+            "internalPath": "processed/reviewed/concepts/priority-queue.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-020",
+      "category": "term-definition",
+      "topic": "lists",
+      "left": "Sortert liste",
+      "right": "Liste der elementer alltid lagres i sortert rekkefølge bestemt av compareTo()",
+      "learnMoreLinks": [
+        {
+          "label": "Sortert liste",
+          "href": "/dat102/begreper/sorted-list",
+          "kind": "concept",
+          "slug": "sorted-list"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorted-list",
+            "internalPath": "processed/reviewed/concepts/sorted-list.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-021",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Utvalgssortering (Selection Sort) — alle tilfeller",
+      "right": "O(n²)",
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgssortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "selection-sort",
+            "internalPath": "processed/reviewed/concepts/selection-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-022",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Innsettingssortering (Insertion Sort) — verste tilfelle",
+      "right": "O(n²)",
+      "learnMoreLinks": [
+        {
+          "label": "Innsettingssortering",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-023",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Innsettingssortering (Insertion Sort) — beste tilfelle",
+      "right": "O(n)",
+      "learnMoreLinks": [
+        {
+          "label": "Innsettingssortering",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-024",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Flettesortering (Merge Sort) — alle tilfeller",
+      "right": "O(n log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-025",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Kvikksortering (Quick Sort) — gjennomsnitt",
+      "right": "O(n log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Kvikksortering",
+          "href": "/dat102/begreper/quicksort",
+          "kind": "concept",
+          "slug": "quicksort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "quicksort",
+            "internalPath": "processed/reviewed/concepts/quicksort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-026",
+      "category": "algorithm-complexity",
+      "topic": "sorting",
+      "left": "Kvikksortering (Quick Sort) — verste tilfelle",
+      "right": "O(n²)",
+      "learnMoreLinks": [
+        {
+          "label": "Kvikksortering",
+          "href": "/dat102/begreper/quicksort",
+          "kind": "concept",
+          "slug": "quicksort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "quicksort",
+            "internalPath": "processed/reviewed/concepts/quicksort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-027",
+      "category": "algorithm-complexity",
+      "topic": "heaps-and-priority-queues",
+      "left": "Haugsortering (Heapsort) — alle tilfeller",
+      "right": "O(n log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Haugsortering",
+          "href": "/dat102/begreper/heapsort",
+          "kind": "concept",
+          "slug": "heapsort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heapsort",
+            "internalPath": "processed/reviewed/concepts/heapsort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-028",
+      "category": "algorithm-complexity",
+      "topic": "searching",
+      "left": "Sekvensielt søk (Linear Search)",
+      "right": "O(n)",
+      "learnMoreLinks": [
+        {
+          "label": "Sekvensielt søk",
+          "href": "/dat102/begreper/linear-search",
+          "kind": "concept",
+          "slug": "linear-search"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "linear-search",
+            "internalPath": "processed/reviewed/concepts/linear-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-029",
+      "category": "algorithm-complexity",
+      "topic": "searching",
+      "left": "Binærsøk (Binary Search) — verste tilfelle",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search",
+            "internalPath": "processed/reviewed/concepts/binary-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-030",
+      "category": "algorithm-complexity",
+      "topic": "binary-search-trees",
+      "left": "Søk i balansert binært søketre",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-031",
+      "category": "algorithm-complexity",
+      "topic": "binary-search-trees",
+      "left": "Søk i degenerert (ubalansert) binært søketre",
+      "right": "O(n)",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-032",
+      "category": "algorithm-complexity",
+      "topic": "balanced-trees",
+      "left": "Søk, innsetting og sletting i balansert BST",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Balansert tre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "balanced-tree",
+            "internalPath": "processed/reviewed/concepts/balanced-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-033",
+      "category": "algorithm-complexity",
+      "topic": "heaps-and-priority-queues",
+      "left": "Innsetting (leggTil) i haug",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-034",
+      "category": "algorithm-complexity",
+      "topic": "dictionaries-and-hashing",
+      "left": "Søk i hashtabell — ideelt (ingen kollisjoner)",
+      "right": "O(1)",
+      "learnMoreLinks": [
+        {
+          "label": "Hashtabell",
+          "href": "/dat102/begreper/hash-table",
+          "kind": "concept",
+          "slug": "hash-table"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-table",
+            "internalPath": "processed/reviewed/concepts/hash-table.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-035",
+      "category": "adt-operations",
+      "topic": "stacks-and-queues",
+      "left": "StabelADT",
+      "right": "push, pop, peek, isEmpty, clear",
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "stack-adt",
+            "internalPath": "processed/reviewed/concepts/stack-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-036",
+      "category": "adt-operations",
+      "topic": "stacks-and-queues",
+      "left": "KoeADT",
+      "right": "enqueue, dequeue, getFront, isEmpty, clear",
+      "learnMoreLinks": [
+        {
+          "label": "Kø-ADT",
+          "href": "/dat102/begreper/queue-adt",
+          "kind": "concept",
+          "slug": "queue-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "queue-adt",
+            "internalPath": "processed/reviewed/concepts/queue-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-037",
+      "category": "adt-operations",
+      "topic": "bag-adt",
+      "left": "BagADT",
+      "right": "add, remove, contains, getFrequencyOf, isEmpty, getCurrentSize, toArray",
+      "learnMoreLinks": [
+        {
+          "label": "Bag",
+          "href": "/dat102/begreper/bag-collection",
+          "kind": "concept",
+          "slug": "bag-collection"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "bag-collection",
+            "internalPath": "processed/reviewed/concepts/bag-collection.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-038",
+      "category": "adt-operations",
+      "topic": "lists",
+      "left": "ListeADT",
+      "right": "add(pos, e), add(e), remove(pos), getEntry(pos), replace(pos, e), contains, getLength",
+      "learnMoreLinks": [
+        {
+          "label": "Liste-ADT",
+          "href": "/dat102/begreper/list-adt",
+          "kind": "concept",
+          "slug": "list-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "list-adt",
+            "internalPath": "processed/reviewed/concepts/list-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-039",
+      "category": "adt-operations",
+      "topic": "stacks-and-queues",
+      "left": "DequeADT",
+      "right": "addToFront, addToBack, removeFront, removeBack, getFront, getBack, isEmpty",
+      "learnMoreLinks": [
+        {
+          "label": "Deque",
+          "href": "/dat102/begreper/deque",
+          "kind": "concept",
+          "slug": "deque"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "deque",
+            "internalPath": "processed/reviewed/concepts/deque.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-040",
+      "category": "adt-operations",
+      "topic": "dictionaries-and-hashing",
+      "left": "OrdbokInterface (Dictionary ADT)",
+      "right": "leggTil, fjern, getVerdi, inneholder, erTom, getAntall, tøm, getNokkelIterator",
+      "learnMoreLinks": [
+        {
+          "label": "Ordbok ADT",
+          "href": "/dat102/begreper/dictionary-adt",
+          "kind": "concept",
+          "slug": "dictionary-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "dictionary-adt",
+            "internalPath": "processed/reviewed/concepts/dictionary-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-041",
+      "category": "adt-operations",
+      "topic": "binary-search-trees",
+      "left": "SoektreADT (BST ADT)",
+      "right": "finn, inneholder, leggTil, fjern, fjernMin, fjernMaks, inOrden, preOrden, postOrden",
+      "learnMoreLinks": [
+        {
+          "label": "BST-operasjoner",
+          "href": "/dat102/begreper/bst-operations",
+          "kind": "concept",
+          "slug": "bst-operations"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "bst-operations",
+            "internalPath": "processed/reviewed/concepts/bst-operations.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-042",
+      "category": "adt-operations",
+      "topic": "lists",
+      "left": "SortertListeADT",
+      "right": "add(e), remove(e), getPosition(e) — posisjon bestemmes av sorteringsrekkefølge",
+      "learnMoreLinks": [
+        {
+          "label": "Sortert liste",
+          "href": "/dat102/begreper/sorted-list",
+          "kind": "concept",
+          "slug": "sorted-list"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorted-list",
+            "internalPath": "processed/reviewed/concepts/sorted-list.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-043",
+      "category": "structure-use",
+      "topic": "stacks-and-queues",
+      "left": "Stabel (Stack)",
+      "right": "Sjekk av balanserte parenteser, postfix-evaluering, UNDO-funksjonalitet, kall-stabel",
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "stack-adt",
+            "internalPath": "processed/reviewed/concepts/stack-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-044",
+      "category": "structure-use",
+      "topic": "stacks-and-queues",
+      "left": "Kø (Queue)",
+      "right": "Ventelister og prosessplanlegging der rekkefølge fra ankomst bevares",
+      "learnMoreLinks": [
+        {
+          "label": "Kø-ADT",
+          "href": "/dat102/begreper/queue-adt",
+          "kind": "concept",
+          "slug": "queue-adt"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "queue-adt",
+            "internalPath": "processed/reviewed/concepts/queue-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-045",
+      "category": "structure-use",
+      "topic": "dictionaries-and-hashing",
+      "left": "Hashtabell",
+      "right": "Rask nøkkelbasert oppslag (ordfrekvens, oppslagsverk, symboletabeller)",
+      "learnMoreLinks": [
+        {
+          "label": "Hashtabell",
+          "href": "/dat102/begreper/hash-table",
+          "kind": "concept",
+          "slug": "hash-table"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-table",
+            "internalPath": "processed/reviewed/concepts/hash-table.md"
+          },
+          {
+            "label": "dictionary-adt",
+            "internalPath": "processed/reviewed/concepts/dictionary-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-046",
+      "category": "structure-use",
+      "topic": "heaps-and-priority-queues",
+      "left": "Haug (Heap)",
+      "right": "Prioritetskø og haugsortering — effektiv tilgang til minste/største element",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-047",
+      "category": "structure-use",
+      "topic": "binary-search-trees",
+      "left": "Binært søketre (BST)",
+      "right": "Dynamisk ordnet samling med effektivt søk, innsetting og sletting (O(log n) balansert)",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-048",
+      "category": "structure-use",
+      "topic": "searching",
+      "left": "Binærsøk",
+      "right": "Effektivt søk i sortert tabell — halverer søkeområdet ved hver sammenligning",
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search",
+            "internalPath": "processed/reviewed/concepts/binary-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-049",
+      "category": "structure-use",
+      "topic": "stacks-and-queues",
+      "left": "Deque (Double-Ended Queue)",
+      "right": "Brukes når man trenger innsetting og fjerning i begge ender — generalisering av stabel og kø",
+      "learnMoreLinks": [
+        {
+          "label": "Deque",
+          "href": "/dat102/begreper/deque",
+          "kind": "concept",
+          "slug": "deque"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "deque",
+            "internalPath": "processed/reviewed/concepts/deque.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-050",
+      "category": "structure-use",
+      "topic": "bag-adt",
+      "left": "Lenket liste (LenketBag / LenketStabel)",
+      "right": "Implementasjon som aldri blir full — innsetting er O(1) ved hodet",
+      "learnMoreLinks": [
+        {
+          "label": "Array vs. lenket implementasjon",
+          "href": "/dat102/begreper/array-vs-linked-implementation",
+          "kind": "concept",
+          "slug": "array-vs-linked-implementation"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "array-vs-linked-implementation",
+            "internalPath": "processed/reviewed/concepts/array-vs-linked-implementation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-051",
+      "category": "structure-use",
+      "topic": "lists",
+      "left": "Tabellimplementasjon (ArrayList)",
+      "right": "Effektiv tilgang via indeks (O(1) getEntry), men innsetting/sletting midt i listen krever O(n) flytt",
+      "learnMoreLinks": [
+        {
+          "label": "TabellListe",
+          "href": "/dat102/begreper/array-list",
+          "kind": "concept",
+          "slug": "array-list"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "array-list",
+            "internalPath": "processed/reviewed/concepts/array-list.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-052",
+      "category": "structure-use",
+      "topic": "heaps-and-priority-queues",
+      "left": "Prioritetskø (med haug-implementasjon)",
+      "right": "Prosesstyring i operativsystem, pasienter på legevakt, nettverkskøer",
+      "learnMoreLinks": [
+        {
+          "label": "Prioritetskø",
+          "href": "/dat102/begreper/priority-queue",
+          "kind": "concept",
+          "slug": "priority-queue"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "priority-queue",
+            "internalPath": "processed/reviewed/concepts/priority-queue.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-053",
+      "category": "algorithm-complexity",
+      "topic": "trees",
+      "left": "Høyde i balansert binært tre",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-054",
+      "category": "algorithm-complexity",
+      "topic": "heaps-and-priority-queues",
+      "left": "Fjerning av rot (fjernMaks/fjernMin) fra haug",
+      "right": "O(log n)",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-055",
+      "category": "term-definition",
+      "topic": "recursion",
+      "left": "Halerekursjon (Tail recursion)",
+      "right": "Rekursjon der det rekursive kallet er det siste som skjer i metoden — enkelt å omskrive til iterasjon",
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "recursion",
+            "internalPath": "processed/reviewed/concepts/recursion.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-056",
+      "category": "adt-operations",
+      "topic": "heaps-and-priority-queues",
+      "left": "HaugADT (Heap ADT)",
+      "right": "leggTil (reparerOpp), fjernMin/fjernMaks (reparerNed), rotelementet er alltid minste/største",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-057",
+      "category": "structure-use",
+      "topic": "sorting",
+      "left": "Innsettingssortering",
+      "right": "Effektiv for nesten-sorterte tabeller og små datasett (O(n) beste tilfelle)",
+      "learnMoreLinks": [
+        {
+          "label": "Innsettingssortering",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-058",
+      "category": "structure-use",
+      "topic": "sorting",
+      "left": "Flettesortering",
+      "right": "Garantert O(n log n) og stabil, men krever O(n) ekstra minne (ikke in-place)",
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-059",
+      "category": "term-definition",
+      "topic": "dictionaries-and-hashing",
+      "left": "Åpen adressering",
+      "right": "Kollisjonsstrategi der kolliderende element plasseres i neste ledige celle i selve tabellen",
+      "learnMoreLinks": [
+        {
+          "label": "Åpen adressering",
+          "href": "/dat102/begreper/open-addressing",
+          "kind": "concept",
+          "slug": "open-addressing"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "open-addressing",
+            "internalPath": "processed/reviewed/concepts/open-addressing.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-match-060",
+      "category": "term-definition",
+      "topic": "trees",
+      "left": "Inorden-gjennomgang (BST)",
+      "right": "Besøker noder i rekkefølgen venstre undertre → rot → høyre undertre — gir sortert rekkefølge i BST",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    }
+  ]
+}

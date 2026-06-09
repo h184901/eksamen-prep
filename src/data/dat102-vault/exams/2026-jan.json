@@ -1,0 +1,1412 @@
+{
+  "slug": "2026-jan",
+  "year": 2026,
+  "session": "jan",
+  "displayLabel": "Januar 2026 (kont H25)",
+  "summary": "Skriftlig konteeksamen (4 timer, 0900–1300), 5. januar 2026. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori. Dokumentet inneholder bokmål (s. 1–9) og nynorsk (s. 10–18) versjon.",
+  "sessionNote": "5 deloppgaver er figur-baserte — svaret avhenger av en figur som ikke kan gjengis fullt ut som tekst (merket per deloppgave).",
+  "status": "partial",
+  "statusCounts": {
+    "complete": 30,
+    "partial": 5,
+    "scanned_only": 0,
+    "missing_solution": 0
+  },
+  "questionCount": 9,
+  "subquestionCount": 35,
+  "questions": [
+    {
+      "number": 1,
+      "anchor": "oppg-1",
+      "points": 6,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt",
+        "queue-adt",
+        "abstract-data-type"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Gitt en kodesnutt med stack1 og stack2: hva er tilstanden etter koden er utført?",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "Figur-basert svar fra løsningsfilen (markert alternativ er figur-avhengig).",
+            "shortReasoning": "Stabeloperasjoner følger LIFO; resultatet bestemmes av kodesekvensen.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stabel-ADT",
+              "href": "/dat102/begreper/stack-adt",
+              "kind": "concept",
+              "slug": "stack-adt"
+            },
+            {
+              "label": "Stacks og Køer",
+              "href": "/dat102/temaer/stacks-and-queues",
+              "kind": "topic",
+              "slug": "stacks-and-queues"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 2"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "Sant eller usant: (A) Ordnet liste-tabell: innsetting OG sletting begge O(n). (B) Sirkulær tabell-kø: innsetting og uttak O(1). (C) Uordnet liste-tabell: innsetting O(n). (D) Stabel-tabell: push og pop O(1).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A=Sant, B=Sant, C=Usant (innsetting i uordnet liste-tabell er O(1), legges foran), D=Sant.",
+            "shortReasoning": "Ordnet liste krever O(n) for å finne riktig plass og flytte elementer ved innsetting/sletting. Uordnet liste kan sette inn foran O(1). Stabel-push/-pop er O(1).",
+            "commonMistakes": [
+              "Tror uordnet liste-innsetting er O(n)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stacks og Køer",
+              "href": "/dat102/temaer/stacks-and-queues",
+              "kind": "topic",
+              "slug": "stacks-and-queues"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Kjedet representasjon: hva er tidskompleksiteten for innsetting i stabel, kø, uordnet liste og ordnet liste?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Stabel O(1), kø O(1), uordnet liste O(1), ordnet liste O(n).",
+            "shortReasoning": "Kjedet representasjon: stabel push foran O(1); kø enqueue bak O(1) med siste-peker; uordnet liste sett inn foran O(1); ordnet liste krever O(n) søk etter riktig plass.",
+            "commonMistakes": [
+              "Tror kø er O(n) uten siste-peker"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stacks og Køer",
+              "href": "/dat102/temaer/stacks-and-queues",
+              "kind": "topic",
+              "slug": "stacks-and-queues"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "anchor": "oppg-2",
+      "points": 7,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "recursion",
+        "quicksort",
+        "merge-sort",
+        "selection-sort",
+        "heapsort",
+        "shellsort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Rekursiv metode for å sjekke om et heltall er toerpotens — hva skrives ut for input 48?",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "Figur-basert svar fra løsningsfilen (markert alternativ avhengig av figuren). For 48: ikke toerpotens, derfor 48 (alternativ C).",
+            "shortReasoning": "48 er ikke toerpotens (48=16×3), rekursjonen stopper tidlig og skriver ut 48.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Etter kall på partition() i kvikksortering av [15, 2, 3, 17, 30, 20, 25, ...]: hvilken av alternativene er et mulig resultat?",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "A: 15 2 3 17 30 20 25 (pivot=15 på riktig plass: 3 elementer til venstre er ≤15, resten til høyre er >15 — se mønster).",
+            "shortReasoning": "Etter partisjonering er pivot på endelig plass; alt til venstre ≤ pivot og alt til høyre > pivot.",
+            "commonMistakes": [
+              "Forveksler partisjonens krav med fullsortert resultat"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kvikksortering",
+              "href": "/dat102/begreper/quicksort",
+              "kind": "concept",
+              "slug": "quicksort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Fletting av to sorterte deler med m elementer hver: ca. hvor mange compareTo-kall trengs i beste og verste tilfelle?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Beste: ca m. Verste: ca 2m-1 (≈2m).",
+            "shortReasoning": "Beste: alle elementer i venstre del er ≤ alle i høyre → m sammenligninger. Verste: elementer er vekselvis fordelt → ca 2m-1 sammenligninger.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "Sant eller usant: (A) Selection sort: antall compareTo-kall er uavhengig av rekkefølge. (B) Heapsort: O(n) om sortert ved start. (C) Shellsort er stabil. (D) Radixsortering raskere om sortert ved start.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A=Sant, B=Usant, C=Usant, D=Usant.",
+            "shortReasoning": "A: selection sort alltid O(n²) sammenligninger. B: heapsort er alltid O(n log n). C: shellsort er ikke stabil. D: radixsortering er O(nk) uavhengig av input-rekkefølge.",
+            "commonMistakes": [
+              "Tror heapsort er O(n) for sortert input",
+              "Tror shellsort er stabil"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "anchor": "oppg-3",
+      "points": 12,
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-traversal",
+        "binary-tree",
+        "heap",
+        "binary-search-tree",
+        "complexity-analysis",
+        "avl-tree",
+        "bst-operations",
+        "two-three-tree"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 1,
+          "prompt": "Gitt tre: 1(2(4,5),3(6,7)). Hva kommer FØRST i preorden, postorden og inorden traversering?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Preorden først=1, postorden først=4, inorden først=4.",
+            "shortReasoning": "Preorden (rot-venstre-høyre): starter med rot=1. Postorden (venstre-høyre-rot): starter med venstre blad=4. Inorden (venstre-rot-høyre): starter med venstre blad=4.",
+            "commonMistakes": [
+              "Forveksler hva som kommer FØRST i postorden"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Binærtre med strenger: d(c(null,b), a(null,f)). Hva er tabellrepresentasjonens pos4 og pos6?",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "pos4=b, pos6=f.",
+            "shortReasoning": "1-indeksert tabell: pos1=d, pos2=c, pos3=a; c har høyre barn b → pos(2*2+1)=pos5, men c har kun høyrebarn → pos5=b. Og a har høyre barn f → pos(2*3+1)=pos7=f. Men spørsmålet spør om pos4 og pos6 som er null i dette treet.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Trær",
+              "href": "/dat102/temaer/trees",
+              "kind": "topic",
+              "slug": "trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Binærtre med m noder på nivå k. Hva er det maksimale antallet noder vi kan ha på nivå (k+1)?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "D: 2m",
+            "shortReasoning": "Hvert av m nodene kan ha inntil 2 barn, gir maks 2m noder på neste nivå.",
+            "commonMistakes": [
+              "Svarer m+1 eller m+2"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Trær",
+              "href": "/dat102/temaer/trees",
+              "kind": "topic",
+              "slug": "trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Tom minimumshaug, sett inn 1-7 i tilfeldig rekkefølge. Hvor vil verdien 7 stå til slutt?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B: I et blad.",
+            "shortReasoning": "7 er den største verdien; i en minimumshaug vil den største alltid havne i et blad (kan ikke ha foreldre som er større).",
+            "commonMistakes": [
+              "Sier 'kan ikke si sikkert' men faktisk alltid blad"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heap",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Tom minimumshaug, sett inn 13, 7, 4, 20, 5, 1 i rekkefølge. Vis treet (eller tabellrepresentasjon) etter alle innsettinger.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "pos1=1, pos2=5, pos3=4, pos4=20, pos5=13, pos6=7.",
+            "shortReasoning": "Etter innsetting og sildre-opp (sift-up) for hvert element: minste er alltid i roten. Endelig tre har 1 som rot.",
+            "commonMistakes": [
+              "Glemmer å sildre opp etter hver innsetting"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heap",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 9"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "f",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Omtrent hvor mange compareTo-kall trengs i verste fall for å søke etter et element som IKKE finnes i et balansert BS-tre med n elementer?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B: log₂n",
+            "shortReasoning": "Søket går ned til løvnivå uten å finne elementet; høyden er log₂n.",
+            "commonMistakes": [
+              "Svarer n (lineærsøk)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binært søketre",
+              "href": "/dat102/begreper/binary-search-tree",
+              "kind": "concept",
+              "slug": "binary-search-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "g",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Ubalansert BST — balanser med høyrerotasjon. Gitt tre: 9(7(null,null), 20(15,30)). Vis tabellrepresentasjon etter rotasjon.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Etter høyrerotasjon: pos1=10, pos2=7, pos3=20, pos5=9, pos6=15, pos7=30.",
+            "shortReasoning": "Høyrerotasjon rundt rot: venstre barn (10) blir ny rot, gammel rot (20) blir høyre barn. Eksplisitt svar fra løsningsfilen.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 11"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "h",
+          "qtype": "true-false",
+          "points": 2,
+          "prompt": "2-3-tre: sant eller usant: (A) En 3-node kan ha 0, 1, 2 eller 3 barn. (B) Alle blader er på samme nivå. (C) Minste verdi vil alltid være i roten. (D) En 2-node har 0 eller 2 barn.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A=Usant (3-node har 0 eller 3 barn), B=Sant, C=Usant, D=Sant.",
+            "shortReasoning": "2-3-tre: 2-node har 0 eller 2 barn; 3-node har 0 eller 3 barn. Alle blader på samme nivå (balansert). Minste er ikke nødvendigvis i roten.",
+            "commonMistakes": [
+              "Tror en 3-node kan ha 1 eller 2 barn"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 12"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "anchor": "oppg-4",
+      "points": 9,
+      "topic": "graphs",
+      "conceptSlugs": [
+        "hash-table",
+        "open-addressing",
+        "adjacency-matrix",
+        "adjacency-list",
+        "topological-sort",
+        "graph-traversal"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Hashtabell med 10 plasser. Hashverdi = siste siffer. Lineær probing. Sett inn: 154463, 123456, 421399, 736496, 567219. Hvilken indeks havner de på?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "154463@3, 123456@6, 421399@9, 736496@7 (prøver 6→7 pga. kollisjon), 567219@0 (prøver 9→0 pga. kollisjon).",
+            "shortReasoning": "Hashverdier: 3, 6, 9, 6, 9. Kollisjon for 736496 (6 opptatt) → indeks 7. Kollisjon for 567219 (9 opptatt) → 0.",
+            "commonMistakes": [
+              "Glemmer at 6 er opptatt og 9 er opptatt ved innsetting"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Hashtabell",
+              "href": "/dat102/begreper/hash-table",
+              "kind": "concept",
+              "slug": "hash-table"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 13"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Nabomatrise vs. naboliste: hva er best for (A) å avgjøre om to noder er naboer, og (B) å finne alle naboene til en node?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A=nabomatrise (direkte oppslag), B=naboliste (leser bare naboene i stedet for å skanne en hel matriserad).",
+            "shortReasoning": "Nabomatrise gir direkte oppslag for å sjekke tilstøtning. For å finne alle naboer leser nabolisten kun kantene som finnes, mens nabomatrisen må skanne en hel rad.",
+            "commonMistakes": [
+              "Sier naboliste for begge"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "To grafer G1 og G2: hvor mange topologiske ordninger har de?",
+          "status": "partial",
+          "solution": {
+            "expectedAnswer": "Figur-basert svar. G1 har 0 (syklisk?) eller et bestemt antall; G2 har 3 eller flere. Eksakt svar avhenger av figuren.",
+            "shortReasoning": "En DAG med lineær kjede har 1 topologisk orden; forgreninger øker antallet.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "multiple-answer",
+          "points": 2,
+          "prompt": "Gitt graf og fire traverseringsrekkefølger: A=4 1 6 7..., B=4 1 3 5..., C=4 1 6 2...: hvilken er dybde-først, bredde-først, eller ingen av dem?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A=Dybde-først, B=Bredde-først, C=Ingen av dem.",
+            "shortReasoning": "DFS besøker dypt; BFS besøker alle naboer lag for lag. A matcher DFS-mønster (4→1→6→7 dypt). B matcher BFS (4→naboer 1,3 → naboer til dem 5). C matcher ingen.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 15"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "anchor": "oppg-5",
+      "points": 6,
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Bestem Big-O for: T1=n²+2n log n+5003, T2=n+100 log n+1001n log n, T3=n log n+n²+2ⁿ+n+n³+log n, T4=2ⁿ+100 log n+7(log n)³.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "T1=O(n²), T2=O(n log n), T3=O(n³), T4=O(2ⁿ).",
+            "shortReasoning": "Dominerende ledd bestemmer Big-O: T1: n² dominerer. T2: n log n dominerer. T3: n³ dominerer. T4: 2ⁿ dominerer.",
+            "commonMistakes": [
+              "Glemmer at eksponentiell vekst dominerer polynomvekst"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 16"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Kodesnutt: ytre løkke i=1..n, indre løkke j=0..i-1. Hva er kjøretiden?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "D: O(n²)",
+            "shortReasoning": "Sum av i fra 1 til n = n(n+1)/2 → O(n²).",
+            "commonMistakes": [
+              "Svarer O(n log n) for to-løkke-struktur"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Big-O notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 17"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Algoritme måles til 1.0s for n=1000, og ca 1.1s for n=2000. Hvilken O-notasjon beskriver den?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A: O(log₂n)",
+            "shortReasoning": "Nesten konstant økning (1.0→1.1s) ved dobling av n tyder på logaritmisk vekst.",
+            "commonMistakes": [
+              "Svarer O(n) for marginal økning"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 18"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Algoritme tar 1.0s for n elementer. For 4n elementer tar den 4 sekunder. Hva er O-notasjonen?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B: O(n)",
+            "shortReasoning": "4× n → 4× tid: lineær skalering → O(n).",
+            "commonMistakes": [
+              "Svarer O(n²) som ville gitt 16×"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Big-O notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger flervalg 1-5",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-flervalg-losning.md",
+                "pages": "s. 18"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "anchor": "oppg-6",
+      "points": null,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "linked-node",
+        "singly-linked-list"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv konstruktøren Nodelenke(int n) som oppretter en lenke med n noder med tilfeldige tall i 1..100. Holder forste og siste referanser.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(n<1) return; Random random=new Random(); forste=new Node(random.nextInt(1,101)); siste=forste; for(int i=2;i<=n;i++){siste.neste=new Node(random.nextInt(1,101)); siste=siste.neste;}",
+            "shortReasoning": "Oppretter første node, deretter legger til n-1 noder bakerst. Oppdaterer siste-peker etter hver innsetting.",
+            "commonMistakes": [
+              "Glemmer å oppdatere siste-peker",
+              "Glemmer n<1-sjekk"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Enkelt-lenket liste",
+              "href": "/dat102/begreper/singly-linked-list",
+              "kind": "concept",
+              "slug": "singly-linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metoden int sum() som summerer alle verdier i lenken iterativt.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Node p=forste; int sum=0; while(p!=null){sum+=p.data; p=p.neste;} return sum;",
+            "shortReasoning": "Traverserer lenken fra forste til null, akkumulerer summen.",
+            "commonMistakes": [
+              "Bruker forste.data direkte uten null-sjekk"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Enkelt-lenket liste",
+              "href": "/dat102/begreper/singly-linked-list",
+              "kind": "concept",
+              "slug": "singly-linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metoden void fjernForste() som fjerner første node. Oppdater siste om nødvendig.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(forste==null) return; forste=forste.neste; if(forste==null) siste=null;",
+            "shortReasoning": "Bypass første node. Om lenken er tom etter fjerning, sett siste=null.",
+            "commonMistakes": [
+              "Glemmer å sette siste=null ved enkelnodesletting"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Enkelt-lenket liste",
+              "href": "/dat102/begreper/singly-linked-list",
+              "kind": "concept",
+              "slug": "singly-linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "anchor": "oppg-7",
+      "points": null,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt",
+        "junit"
+      ],
+      "subquestions": [
+        {
+          "letter": null,
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv JUnit-enhetstester for Stabel<T>-klassens peek() og pop(). Dekk: normale tilfeller og unntakstilfeller (StackException for tom stabel). Ca 6-10 asserts.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Test tom stabel: assertThrows(StackException.class, ()->s.peek()); assertThrows StackException for pop(). Etter push(1): assertEquals(1,s.peek()); assertEquals(1,s.pop()). Etter push(2),push(3): assertEquals(3,s.peek()); assertEquals(3,s.pop()); assertEquals(2,s.pop()); assertThrows for neste pop().",
+            "shortReasoning": "Tester normale operasjoner og at unntak kastes for tom stabel.",
+            "commonMistakes": [
+              "Glemmer å teste at peek() ikke fjerner elementet",
+              "Glemmer StackException for tom stabel"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "JUnit",
+              "href": "/dat102/begreper/junit",
+              "kind": "concept",
+              "slug": "junit"
+            },
+            {
+              "label": "Stabel-ADT",
+              "href": "/dat102/begreper/stack-adt",
+              "kind": "concept",
+              "slug": "stack-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "anchor": "oppg-8",
+      "points": null,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort",
+        "complexity-analysis",
+        "merge-sort",
+        "binary-search"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "(i) Sorter A=[8,3,5,2,7] med insertion sort — vis etter hver iterasjon. (ii) Gi eksempel på beste (O(n)) og verste (O(n²)) tilfelle og forklar.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(i) Start:[8,3,5,2,7] → [3,8,5,2,7] → [3,5,8,2,7] → [2,3,5,8,7] → [2,3,5,7,8]. (ii) Beste: [2,3,5,7,8] (O(n) — 1 sammenligning per element). Verste: [8,7,5,3,2] (O(n²) — i sammenligninger per element i).",
+            "shortReasoning": "Insertion sort er O(n) for allerede sortert input; O(n²) for reversert input.",
+            "commonMistakes": [
+              "Glemmer at ytre løkke alltid kjører n ganger; det er indre som varierer"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Insertion sort",
+              "href": "/dat102/begreper/insertion-sort",
+              "kind": "concept",
+              "slug": "insertion-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "(i) Forklar flettesortering av B=[6,1,4,2] med oppdeling og fletting. (ii) Tidskompleksitet beste/verste/gjennomsnitt. (iii) Er merge sort stabil? In-place?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(i) Del: [6,1,4,2] → [6,1],[4,2] → [6],[1],[4],[2]; flette: [1,6],[2,4] → [1,2,4,6]. (ii) O(n log n) alle tilfeller. (iii) Stabil: ja (velg venstre-element ved likhet). In-place: nei (trenger O(n) hjelpetabell).",
+            "shortReasoning": "Merge sort bruker rekursiv deling og flettet sammenslåing. log n nivåer × O(n) per nivå = O(n log n).",
+            "commonMistakes": [
+              "Sier in-place",
+              "Sier ikke stabil"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Binærsøk i C=[2,4,7,9,12,14,20]: (i) sammenligninger for 12, (ii) sammenligninger for 5 (ikke funnet).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(i) 12: 9 → 14 → 12 (funnet, 3 sammenligninger). (ii) 5: 9 → 4 → 7 (tomt intervall, ikke funnet, 3 sammenligninger).",
+            "shortReasoning": "Binærsøk: midt=(v+h)/2. (i) midt=3→9; 12>9 → høyre; midt=5→14; 12<14 → venstre; midt=4→12 funnet. (ii) midt=3→9; 5<9 → venstre; midt=1→4; 5>4 → høyre; midt=2→7; 5<7 → venstre; tomt.",
+            "commonMistakes": []
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Feilaktig binærsøk med 'while(v<h)': (i) eksempel der key finnes men -1 returneres. (ii) Forklar feilen. (iii) Rett opp implementasjonen.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(i) Søk 12 i [2,4,7,9,12,14,20]: v=0,h=6,midt=3→9; v=4,h=6,midt=5→14; v=4,h=4; v<h er false → returnerer -1. (ii) Feil: while(v<h) avslutter for tidlig når søkeintervallet har lengde 1. (iii) Rett: endre til while(v<=h).",
+            "shortReasoning": "Korrekt betingelse inkluderer tilfellet v==h (enkelt-element intervall).",
+            "commonMistakes": [
+              "Glemmer at v==h er et gyldig søkesteg"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 11"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "anchor": "oppg-9",
+      "points": null,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations",
+        "binary-search-tree",
+        "tree-traversal",
+        "recursion"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv Java-metode finnStorste() som returnerer peker til største element i BS-treet. Returner null om tomt tre.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Iterativt: if(rot==null) return null; BinaerTreNode<T> p=rot; while(p.hoyre!=null) p=p.hoyre; return p.element;",
+            "shortReasoning": "Største element er lengst til høyre i BST. Følg høyre pekere til høyre-barn er null.",
+            "commonMistakes": [
+              "Glemmer null-sjekk for tomt tre"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            },
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv rekursiv metode visPreorden(BinaerTreNode<T> t) som skriver elementer i preorden rekkefølge.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(t!=null){ System.out.print(t.element+\" \"); visPreorden(t.venstre); visPreorden(t.hoyre); }",
+            "shortReasoning": "Preorden: rot-venstre-høyre. Besøk noden, rekurser venstre, rekurser høyre.",
+            "commonMistakes": [
+              "Bruker inorden eller postorden rekkefølge"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 15"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv rekursiv metode antallBlad(BinaerTreNode<T> t) som returnerer antall blader i treet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if(t==null) return 0; if(t.venstre==null && t.hoyre==null) return 1; return antallBlad(t.venstre)+antallBlad(t.hoyre);",
+            "shortReasoning": "Blad = node uten barn. Grunntilfelle 1: null-node returnerer 0. Grunntilfelle 2: blad returnerer 1. Rekursivt: sum av blader i begge undertrær.",
+            "commonMistakes": [
+              "Teller noder med ett barn som blader"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 15"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metode treTilListe(List<T> liste) som fyller en tom liste med elementene i sortert (minst til størst) rekkefølge.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Kall inorden rekursiv hjelpemetode: inordenLeggInnIListe(liste,rot). Hjelpemetode: if(t!=null){ inordenLeggInnIListe(liste,t.venstre); liste.add(t.element); inordenLeggInnIListe(liste,t.hoyre); }",
+            "shortReasoning": "Inorden traversering av BST gir elementer i sortert rekkefølge.",
+            "commonMistakes": [
+              "Bruker preorden i stedet for inorden"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2026-jan",
+                "internalPath": "processed/reviewed/exams/2026-jan.md"
+              },
+              {
+                "label": "Jan-2026 Løsninger oppg 6-9",
+                "internalPath": "structured/exams/2026-jan/exam-2026-jan-oppg6-9-losning.md",
+                "pages": "s. 16"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

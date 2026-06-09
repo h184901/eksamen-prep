@@ -1,0 +1,241 @@
+{
+  "obliger": [
+    {
+      "id": "oblig1",
+      "anchor": "oblig1",
+      "title": "Oblig1 — Filmarkiv mm",
+      "deadline": "1. feb 2026",
+      "weeks": "4–5",
+      "themes": "Bag, ArrayBag, LenketBag, analyse",
+      "status": "full_text_available",
+      "statusNote": "",
+      "canvasAssignmentId": "98628",
+      "topicSlugs": [
+        "bag-adt",
+        "asymptotic-analysis"
+      ],
+      "conceptSlugs": [
+        "bag-collection",
+        "abstract-data-type",
+        "dynamic-array-resizing",
+        "linked-node",
+        "singly-linked-list",
+        "array-vs-linked-implementation",
+        "complexity-analysis"
+      ],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 4 (del av oblig 1)",
+          "internalPath": "structured/assignments/oppgave-uke04-oblig1.md"
+        },
+        {
+          "label": "Oppgaver uke 5 (del av oblig 1)",
+          "internalPath": "structured/assignments/oppgave-uke05-oblig1.md"
+        }
+      ],
+      "hasSolution": false
+    },
+    {
+      "id": "oblig2",
+      "anchor": "oblig2",
+      "title": "Oblig2 — Stabel, sortering mm",
+      "deadline": "20. feb 2026",
+      "weeks": "6–8",
+      "themes": "Stabel, rekursjon, sortering",
+      "status": "full_text_available",
+      "statusNote": "",
+      "canvasAssignmentId": "99157",
+      "topicSlugs": [
+        "stacks-and-queues",
+        "recursion",
+        "sorting"
+      ],
+      "conceptSlugs": [
+        "stack-adt",
+        "recursion",
+        "recursive-vs-iterative",
+        "selection-sort",
+        "insertion-sort",
+        "merge-sort",
+        "quicksort",
+        "shellsort"
+      ],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 6 (stabel, rekursjon)",
+          "internalPath": "structured/assignments/oppgave-uke06-stabel-rekursjon.md"
+        },
+        {
+          "label": "Oppgaver uke 7",
+          "internalPath": "structured/assignments/oppgave-uke07.md"
+        },
+        {
+          "label": "Oppgaver uke 8-9",
+          "internalPath": "structured/assignments/oppgave-uke08-09.md"
+        }
+      ],
+      "hasSolution": false
+    },
+    {
+      "id": "oblig3",
+      "anchor": "oblig3",
+      "title": "Oblig3 — Mengde mm",
+      "deadline": "19. mars 2026",
+      "weeks": "9–12",
+      "themes": "Lister, TabellListe, sortert liste, ordbok/mengde",
+      "status": "full_text_available",
+      "statusNote": "",
+      "canvasAssignmentId": "99560",
+      "topicSlugs": [
+        "lists",
+        "searching",
+        "dictionaries-and-hashing"
+      ],
+      "conceptSlugs": [
+        "list-adt",
+        "array-list",
+        "linked-list",
+        "sorted-list",
+        "iterator",
+        "binary-search",
+        "dictionary-adt"
+      ],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 8-9",
+          "internalPath": "structured/assignments/oppgave-uke08-09.md"
+        },
+        {
+          "label": "Oppgaver uke 10 (del av oblig 3)",
+          "internalPath": "structured/assignments/oppgave-uke10-oblig3.md"
+        },
+        {
+          "label": "Oppgaver uke 11 (del av oblig 3)",
+          "internalPath": "structured/assignments/oppgave-uke11-oblig3.md"
+        },
+        {
+          "label": "Oppgaver uke 12",
+          "internalPath": "structured/assignments/oppgave-uke12.md"
+        }
+      ],
+      "hasSolution": false
+    },
+    {
+      "id": "oblig4-prove",
+      "anchor": "oblig4",
+      "title": "Oblig4 / Prøve",
+      "deadline": "17. apr 2026 (55 p)",
+      "weeks": "16",
+      "themes": "Individuell prøve t.o.m. Kap 25 (binære søketrær)",
+      "status": "partial",
+      "statusNote": "prøve-prep finnes; selve prøveteksten mangler",
+      "canvasAssignmentId": "101273",
+      "topicSlugs": [
+        "bag-adt",
+        "asymptotic-analysis",
+        "recursion",
+        "sorting",
+        "stacks-and-queues",
+        "lists",
+        "searching",
+        "dictionaries-and-hashing",
+        "trees",
+        "binary-search-trees"
+      ],
+      "conceptSlugs": [],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 16",
+          "internalPath": "structured/assignments/oppgave-uke16.md"
+        }
+      ],
+      "hasSolution": false
+    },
+    {
+      "id": "godkjent-prove",
+      "anchor": "godkjent-prove",
+      "title": "Godkjent prøve (resit)",
+      "deadline": "udatert",
+      "weeks": "—",
+      "themes": "Som Oblig4/Prøve",
+      "status": "missing_source",
+      "statusNote": "",
+      "canvasAssignmentId": "101547",
+      "topicSlugs": [
+        "bag-adt",
+        "asymptotic-analysis",
+        "recursion",
+        "sorting",
+        "stacks-and-queues",
+        "lists",
+        "searching",
+        "dictionaries-and-hashing",
+        "trees",
+        "binary-search-trees"
+      ],
+      "conceptSlugs": [],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 16",
+          "internalPath": "structured/assignments/oppgave-uke16.md"
+        }
+      ],
+      "hasSolution": false
+    },
+    {
+      "id": "oblig5",
+      "anchor": "oblig5",
+      "title": "Oblig5",
+      "deadline": "30. apr 2026",
+      "weeks": "13–18",
+      "themes": "Hashing, trær, hauger, grafer",
+      "status": "full_text_available",
+      "statusNote": "+ løsningsforslag",
+      "canvasAssignmentId": "101522",
+      "topicSlugs": [
+        "dictionaries-and-hashing",
+        "trees",
+        "heaps-and-priority-queues",
+        "graphs"
+      ],
+      "conceptSlugs": [
+        "hash-function",
+        "hash-table",
+        "separate-chaining",
+        "tree-traversal",
+        "bst-operations",
+        "heap",
+        "priority-queue",
+        "graph-terminology",
+        "breadth-first-search",
+        "depth-first-search",
+        "dijkstra-shortest-path",
+        "minimum-spanning-tree",
+        "topological-sort"
+      ],
+      "buildsOn": [
+        {
+          "label": "Oppgaver uke 13",
+          "internalPath": "structured/assignments/oppgave-uke13.md"
+        },
+        {
+          "label": "Oppgaver uke 15",
+          "internalPath": "structured/assignments/oppgave-uke15.md"
+        },
+        {
+          "label": "Oppgaver uke 17 og 18",
+          "internalPath": "structured/assignments/oppgave-uke17-18.md"
+        },
+        {
+          "label": "Løsningsforslag Oblig 5",
+          "internalPath": "structured/assignments/losningsforslag-oblig5.md"
+        },
+        {
+          "label": "Løsningsforslag Oblig 5",
+          "internalPath": "structured/assignments/losningsforslag-oblig5.md"
+        }
+      ],
+      "hasSolution": true
+    }
+  ]
+}

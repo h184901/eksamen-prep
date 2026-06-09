@@ -7,7 +7,7 @@ import { ProgressProvider } from "@/components/ProgressProvider";
 export const metadata: Metadata = {
   title: "Eksamensøving — Semester 4",
   description:
-    "Skreddersydd eksamensøving for ING164 Fysikk, DAT110 Nettverk, DAT109 Systemutvikling og DAT107 Databaser",
+    "Skreddersydd eksamensøving for DAT102 Algoritmer, ING164 Fysikk, DAT110 Nettverk, DAT109 Systemutvikling og DAT107 Databaser",
   appleWebApp: {
     title: "Eksamensøving",
   },

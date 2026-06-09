@@ -1,0 +1,2374 @@
+{
+  "cards": [
+    {
+      "id": "dat102-fc-001",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation"
+      ],
+      "front": "Hva er Stor-O-notasjon, og hva beskriver den?",
+      "back": "Stor-O uttrykker en øvre grense for kjøretiden til en algoritme som funksjon av problemstørrelsen n. Den angir vekstraten til det dominerende leddet og ignorerer konstanter og lavere ordens ledd. Eksempel: en algoritme med kjøretid t(n) = a·n² + b·n + c oppgis som O(n²).",
+      "learnMoreLinks": [
+        {
+          "label": "Stor-O-notasjon",
+          "href": "/dat102/begreper/big-o-notation",
+          "kind": "concept",
+          "slug": "big-o-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-o-notation",
+            "internalPath": "processed/reviewed/concepts/big-o-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-002",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-theta-notation"
+      ],
+      "front": "Hva skiller Θ-notasjon (Stor-Theta) fra O-notasjon?",
+      "back": "O-notasjon gir kun en øvre grense (algoritmen kan gå raskere), mens Θ gir en tosidig grense: algoritmen vokser verken raskere eller langsommere enn f(n). Θ(f(n)) betyr at kjøretiden er proporsjonalt med f(n) i alle tilfeller.",
+      "learnMoreLinks": [
+        {
+          "label": "Stor-Theta-notasjon",
+          "href": "/dat102/begreper/big-theta-notation",
+          "kind": "concept",
+          "slug": "big-theta-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-theta-notation",
+            "internalPath": "processed/reviewed/concepts/big-theta-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-003",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-omega-notation"
+      ],
+      "front": "Hva er Ω-notasjon (Stor-Omega), og når brukes den?",
+      "back": "Ω uttrykker en nedre grense for kjøretiden: algoritmen bruker minst så mye tid som Ω(f(n)) angir. Den brukes typisk til å beskrive best-case kompleksitet, for eksempel at innsettingssortering er Ω(n) i beste tilfelle.",
+      "learnMoreLinks": [
+        {
+          "label": "Stor-Omega-notasjon",
+          "href": "/dat102/begreper/big-omega-notation",
+          "kind": "concept",
+          "slug": "big-omega-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-omega-notation",
+            "internalPath": "processed/reviewed/concepts/big-omega-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-004",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "growth-rates"
+      ],
+      "front": "Ranger disse kompleksitetsklassene fra mest til minst effektiv: O(n²), O(1), O(n log n), O(2ⁿ), O(n), O(log n).",
+      "back": "Fra mest til minst effektiv: O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ). Eksempel: O(1) er konstant tid, O(2ⁿ) er eksponentiell og svært ineffektiv for store n.",
+      "learnMoreLinks": [
+        {
+          "label": "Vekstrater",
+          "href": "/dat102/begreper/growth-rates",
+          "kind": "concept",
+          "slug": "growth-rates"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "growth-rates",
+            "internalPath": "processed/reviewed/concepts/growth-rates.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-005",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "complexity-analysis"
+      ],
+      "front": "Hva er best-case, worst-case og average-case i kjøretidsanalyse?",
+      "back": "Best-case er kjøretiden for de gunstigste inndata (f.eks. element finnes først), worst-case er den høyeste kjøretiden (ugunstigste inndata), og average-case er gjennomsnittlig over alle mulige inndata. Worst-case er vanligvis det viktigste å oppgi.",
+      "learnMoreLinks": [
+        {
+          "label": "Kjøretidsanalyse",
+          "href": "/dat102/begreper/complexity-analysis",
+          "kind": "concept",
+          "slug": "complexity-analysis"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "complexity-analysis",
+            "internalPath": "processed/reviewed/concepts/complexity-analysis.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-006",
+      "topic": "bag-adt",
+      "conceptSlugs": [
+        "abstract-data-type"
+      ],
+      "front": "Hva er en abstrakt datatype (ADT)?",
+      "back": "En ADT er en spesifikasjon som beskriver en gruppe elementer og operasjoner på disse, uavhengig av programmeringsspråk og konkret implementasjon. I Java representeres en ADT typisk som et interface. ADT-en sier hva operasjonene gjør, ikke hvordan de er implementert.",
+      "learnMoreLinks": [
+        {
+          "label": "Abstrakt datatype",
+          "href": "/dat102/begreper/abstract-data-type",
+          "kind": "concept",
+          "slug": "abstract-data-type"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "abstract-data-type",
+            "internalPath": "processed/reviewed/concepts/abstract-data-type.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-007",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "selection-sort"
+      ],
+      "front": "Hva er kjøretiden til utvalgssortering (selection sort) i best-, average- og worst-case?",
+      "back": "Utvalgssortering er O(n²) i alle tilfeller — best, average og worst case er identiske fordi antall sammenligninger alltid er n(n−1)/2, uavhengig av inngangsdata. Den er ikke stabil, men er in-place.",
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgssortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "selection-sort",
+            "internalPath": "processed/reviewed/concepts/selection-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-008",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "selection-sort"
+      ],
+      "front": "Hvordan fungerer utvalgssortering trinn for trinn?",
+      "back": "Utvalgssortering deler tabellen i en sortert del (tom ved start) og en usortert del. I hvert steg finnes det minste elementet i den usorterte delen og byttes inn på første plass i den usorterte delen. Etter n steg er tabellen sortert.",
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgssortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "selection-sort",
+            "internalPath": "processed/reviewed/concepts/selection-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-009",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort"
+      ],
+      "front": "Hva er best-case og worst-case kjøretid for innsettingssortering (insertion sort)?",
+      "back": "Worst-case (omvendt sortert): O(n²). Best-case (allerede sortert): O(n), fordi kun n−1 sammenligninger er nødvendige. Algoritmen er stabil og in-place, og er særlig effektiv for nesten-sorterte data.",
+      "learnMoreLinks": [
+        {
+          "label": "Sortering ved innsetting",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-010",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort"
+      ],
+      "front": "Hva er stabilitetsegenskapen til en sorteringsalgoritme?",
+      "back": "En stabil sorteringsalgoritme bevarer den relative rekkefølgen til like elementer etter sortering. Innsettingssortering og flettesortering er stabile, mens utvalgssortering og kvikksortering ikke er det.",
+      "learnMoreLinks": [
+        {
+          "label": "Sammenligning av sorteringsalgoritmer",
+          "href": "/dat102/begreper/sorting-comparison",
+          "kind": "concept",
+          "slug": "sorting-comparison"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorting-comparison",
+            "internalPath": "processed/reviewed/concepts/sorting-comparison.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-011",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "shellsort"
+      ],
+      "front": "Hva er Shellsortering, og hva er dens kjøretid med gode inkrementer?",
+      "back": "Shellsortering er en forbedring av innsettingssortering der elementer med variabel avstand (inkrement) sammenlignes i stedet for naboer. Med inkrementer h₀=1, hᵢ=2ⁱ+1 er worst-case O(n^1.5) = O(n√n). Siste inkrement må alltid være 1.",
+      "learnMoreLinks": [
+        {
+          "label": "Shellsortering",
+          "href": "/dat102/begreper/shellsort",
+          "kind": "concept",
+          "slug": "shellsort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "shellsort",
+            "internalPath": "processed/reviewed/concepts/shellsort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-012",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "merge-sort"
+      ],
+      "front": "Hva er kjøretiden til flettesortering (merge sort) i alle tilfeller, og er den stabil?",
+      "back": "Flettesortering er O(n log n) i best, average og worst case. Algoritmen er stabil, men ikke in-place — den trenger O(n) ekstra minne til en hjelpetabell under flettingen.",
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-013",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "merge-sort",
+        "divide-and-conquer"
+      ],
+      "front": "Forklar del-og-hersk-prinsippet i flettesortering.",
+      "back": "Flettesortering deler listen i to like halvdeler (del), sorterer begge halvdelene rekursivt (hersk), og fletter de to sorterte halvdelene til én sortert liste (kombiner). Antall rekursjonsnivåer er log₂n, og per nivå brukes O(n) på fletting — totalt O(n log n).",
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          },
+          {
+            "label": "divide-and-conquer",
+            "internalPath": "processed/reviewed/concepts/divide-and-conquer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-014",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "quicksort"
+      ],
+      "front": "Hva er gjennomsnittlig og worst-case kjøretid for kvikksortering (quicksort)?",
+      "back": "Gjennomsnittlig: O(n log n). Worst-case: O(n²), som oppstår ved skjev splitting hele veien (f.eks. ved valg av første element som pivot i allerede sortert tabell). Algoritmen er in-place, men ikke stabil.",
+      "learnMoreLinks": [
+        {
+          "label": "Kvikksortering",
+          "href": "/dat102/begreper/quicksort",
+          "kind": "concept",
+          "slug": "quicksort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "quicksort",
+            "internalPath": "processed/reviewed/concepts/quicksort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-015",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "quicksort"
+      ],
+      "front": "Hva er pivot-elementet i kvikksortering, og hvorfor er valget viktig?",
+      "back": "Pivot er elementet som brukes til å partisjonere listen: elementer ≤ pivot til venstre, elementer ≥ pivot til høyre, og pivot er da på riktig plass. Dårlig pivotvalg (f.eks. alltid minste/største) gir skjev splitting og O(n²); median-av-tre eller tilfeldig pivot gir bedre ytelse.",
+      "learnMoreLinks": [
+        {
+          "label": "Kvikksortering",
+          "href": "/dat102/begreper/quicksort",
+          "kind": "concept",
+          "slug": "quicksort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "quicksort",
+            "internalPath": "processed/reviewed/concepts/quicksort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-016",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "radix-sort"
+      ],
+      "front": "Hva er radixsortering, og hva er dens kjøretid?",
+      "back": "Radixsortering er en ikke-sammenligningsbasert algoritme som fordeler elementer i køer basert på ett siffer om gangen, fra laveste til høyeste posisjon. Kjøretiden er O(kn) der k er antall siffer i den største nøkkelen; er k begrenset, er kjøretiden O(n). Algoritmen er stabil.",
+      "learnMoreLinks": [
+        {
+          "label": "Radixsortering",
+          "href": "/dat102/begreper/radix-sort",
+          "kind": "concept",
+          "slug": "radix-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "radix-sort",
+            "internalPath": "processed/reviewed/concepts/radix-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-017",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "sorting-comparison"
+      ],
+      "front": "Hvilke sorteringsalgoritmer i kurset er in-place, og hvilke er ikke?",
+      "back": "In-place (bruker ikke ekstra minne utover konstant): utvalgssortering, innsettingssortering, shellsortering, kvikksortering. Ikke in-place: flettesortering (trenger O(n) hjelpetabell) og radixsortering (trenger hjelpekøer).",
+      "learnMoreLinks": [
+        {
+          "label": "Sammenligning av sorteringsalgoritmer",
+          "href": "/dat102/begreper/sorting-comparison",
+          "kind": "concept",
+          "slug": "sorting-comparison"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorting-comparison",
+            "internalPath": "processed/reviewed/concepts/sorting-comparison.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-018",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "sorting-comparison"
+      ],
+      "front": "Hvilken sorteringsalgoritme er best for nesten-sorterte data, og hvorfor?",
+      "back": "Innsettingssortering er best for nesten-sorterte data: den er O(n) i best-case (allerede sortert tabell) fordi kun n−1 sammenligninger trengs. Utvalgssortering utnytter ikke sorteringen i det hele tatt og er alltid O(n²).",
+      "learnMoreLinks": [
+        {
+          "label": "Sammenligning av sorteringsalgoritmer",
+          "href": "/dat102/begreper/sorting-comparison",
+          "kind": "concept",
+          "slug": "sorting-comparison"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorting-comparison",
+            "internalPath": "processed/reviewed/concepts/sorting-comparison.md"
+          },
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-019",
+      "topic": "searching",
+      "conceptSlugs": [
+        "linear-search"
+      ],
+      "front": "Hva er kjøretiden til sekvensielt søk (linear search)?",
+      "back": "Sekvensielt søk er O(n) både for vellykket og mislykket søk, uavhengig av om listen er sortert eller usortert. Gjennomsnittlig antall sammenligninger for et vellykket søk i usortert liste er (n+1)/2.",
+      "learnMoreLinks": [
+        {
+          "label": "Sekvensielt søk",
+          "href": "/dat102/begreper/linear-search",
+          "kind": "concept",
+          "slug": "linear-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "linear-search",
+            "internalPath": "processed/reviewed/concepts/linear-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-020",
+      "topic": "searching",
+      "conceptSlugs": [
+        "binary-search"
+      ],
+      "front": "Hva er forutsetningen for binærsøk, og hva er kjøretiden?",
+      "back": "Binærsøk krever at tabellen er sortert. Søket begynner i midten og eliminerer halvparten av søkeområdet ved hver sammenligning. Worst-case er O(log₂ n) sammenligninger — for n = 1 000 000 er det kun ≈ 20 sammenligninger.",
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search",
+            "internalPath": "processed/reviewed/concepts/binary-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-021",
+      "topic": "searching",
+      "conceptSlugs": [
+        "binary-search"
+      ],
+      "front": "Hva er basistilfellene i en rekursiv implementasjon av binærsøk?",
+      "back": "To basistilfeller: (1) venstre > høyre — søkeområdet er tomt, elementet finnes ikke; (2) element == tabell[midten] — elementet er funnet. Ellers kalles metoden rekursivt på enten venstre eller høyre halvdel.",
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search",
+            "internalPath": "processed/reviewed/concepts/binary-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-022",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursion"
+      ],
+      "front": "Hva er de to nødvendige delene av en rekursiv metode?",
+      "back": "En rekursiv metode krever: (1) ett eller flere basistilfeller som løses direkte uten videre rekursjon, og (2) et rekursivt kall på et mindre delproblem av samme type, slik at man alltid nærmer seg et basistilfelle.",
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "recursion",
+            "internalPath": "processed/reviewed/concepts/recursion.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-023",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursion"
+      ],
+      "front": "Hva er kjøretiden til Tårnet i Hanoi med n disker?",
+      "back": "Tårnet i Hanoi med n disker krever m(n) = 2ⁿ − 1 operasjoner, som er O(2ⁿ) — eksponentiell kjøretid. Dette er et klassisk eksempel på at rekursjon kan gi svært dyr kjøretid.",
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "recursion",
+            "internalPath": "processed/reviewed/concepts/recursion.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-024",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt"
+      ],
+      "front": "Hva betyr LIFO, og hvilke ADT bruker dette prinsippet?",
+      "back": "LIFO betyr Last In, First Out — det sist innsatte elementet tas ut først. Stabel-ADT (Stack) bruker LIFO-prinsippet. De grunnleggende operasjonene er push (legg til toppen), pop (ta av toppen) og peek (se på toppen).",
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "stack-adt",
+            "internalPath": "processed/reviewed/concepts/stack-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-025",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt"
+      ],
+      "front": "Nevn tre typiske bruksområder for en stabel.",
+      "back": "1) Sjekke balanserte parenteser i kode. 2) Beregning av postfix-uttrykk (Reverse Polish Notation). 3) UNDO-funksjonalitet i en editor. Kall-stabelen i Java er også et eksempel på en stabel i praksis.",
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "stack-adt",
+            "internalPath": "processed/reviewed/concepts/stack-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-026",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "queue-adt"
+      ],
+      "front": "Hva betyr FIFO, og hvilke ADT bruker dette prinsippet?",
+      "back": "FIFO betyr First In, First Out — det elementet som ble satt inn først, tas ut først. Kø-ADT (Queue) bruker FIFO-prinsippet. Elementer legges til bakerst (enqueue) og tas ut fremst (dequeue).",
+      "learnMoreLinks": [
+        {
+          "label": "Kø-ADT",
+          "href": "/dat102/begreper/queue-adt",
+          "kind": "concept",
+          "slug": "queue-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "queue-adt",
+            "internalPath": "processed/reviewed/concepts/queue-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-027",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-terminology"
+      ],
+      "front": "Definer rot, blad, nivå og høyde i et tre.",
+      "back": "Rot: den øverste noden, uten forelder. Blad: en node uten barn. Nivå: 1 + antall kanter fra roten til noden (roten er på nivå 1). Høyde: 1 + lengden til den lengste stien fra roten til et blad.",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-028",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-terminology"
+      ],
+      "front": "Hva er forskjellen mellom et fullt binært tre og et komplett binært tre?",
+      "back": "Fullt tre: alle blad er på samme nivå og alle noder er enten blad eller har nøyaktig k barn. Komplett tre: fullt til nest siste nivå, og på siste nivå er bladnodene plassert så langt til venstre som mulig. Hauger er komplette trær.",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-029",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-terminology"
+      ],
+      "front": "Hva er høyden til et balansert binært tre med n noder?",
+      "back": "Høyden til et balansert binært tre er O(log n), nærmere bestemt h ≈ log₂(n). For et fullt/komplett binært tre er høyden h = log₂(n+1). Dette sikrer effektive operasjoner som tar O(log n) per operasjon.",
+      "learnMoreLinks": [
+        {
+          "label": "Tre-terminologi",
+          "href": "/dat102/begreper/tree-terminology",
+          "kind": "concept",
+          "slug": "tree-terminology"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-terminology",
+            "internalPath": "processed/reviewed/concepts/tree-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-030",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-traversal"
+      ],
+      "front": "Forklar de fire tregjennomgangsmetodene: preorden, inorden, postorden og nivåorden.",
+      "back": "Preorden: besøk node, venstre undertre, høyre undertre. Inorden: venstre, node, høyre. Postorden: venstre, høyre, node. Nivåorden: besøk alle noder nivå for nivå fra venstre til høyre (bruker kø, ikke rekursjon).",
+      "learnMoreLinks": [
+        {
+          "label": "Tregjennomgang",
+          "href": "/dat102/begreper/tree-traversal",
+          "kind": "concept",
+          "slug": "tree-traversal"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-traversal",
+            "internalPath": "processed/reviewed/concepts/tree-traversal.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-031",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-traversal"
+      ],
+      "front": "Hvilken tregjennomgang gir elementene i et BST i stigende rekkefølge?",
+      "back": "Inorden-gjennomgang av et binært søketre (BST) gir elementene i stigende rekkefølge. Algoritmen besøker venstre undertre rekursivt, deretter rotnoden, og til slutt høyre undertre rekursivt.",
+      "learnMoreLinks": [
+        {
+          "label": "Tregjennomgang",
+          "href": "/dat102/begreper/tree-traversal",
+          "kind": "concept",
+          "slug": "tree-traversal"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "tree-traversal",
+            "internalPath": "processed/reviewed/concepts/tree-traversal.md"
+          },
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-032",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree"
+      ],
+      "front": "Hva er BST-egenskapen (binært søketre-egenskapen)?",
+      "back": "For hver node p i et BST: alle elementer i venstre undertre er mindre enn elementet til p, og alle elementer i høyre undertre er større. Like elementer er normalt utelukket. Denne egenskapen gjør binærsøk mulig i treet.",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-033",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree"
+      ],
+      "front": "Hva er O-kompleksiteten for søk, innsetting og sletting i et balansert vs. degenerert BST?",
+      "back": "Balansert BST: O(log n) for alle tre operasjonene (søk, innsetting, sletting). Degenerert BST (f.eks. innsetting i sortert rekkefølge): O(n) fordi treet degraderer til en lenket liste med høyde ≈ n.",
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-search-tree",
+            "internalPath": "processed/reviewed/concepts/binary-search-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-034",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations"
+      ],
+      "front": "Hvilke tre tilfeller finnes ved sletting av en node i et BST?",
+      "back": "1) Noden er et blad: forelderen settes til null. 2) Noden har ett barn: forelderen peker til barnet i stedet. 3) Noden har to barn: erstatt noden med enten inorden-etterfølger (minste i høyre undertre) eller inorden-forgjenger (største i venstre undertre).",
+      "learnMoreLinks": [
+        {
+          "label": "BST-operasjoner",
+          "href": "/dat102/begreper/bst-operations",
+          "kind": "concept",
+          "slug": "bst-operations"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "bst-operations",
+            "internalPath": "processed/reviewed/concepts/bst-operations.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-035",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations"
+      ],
+      "front": "Hva er inorden-etterfølger til en node i et BST?",
+      "back": "Inorden-etterfølger til en node er den minste verdien i nodeens høyre undertre: gå ett steg til høyre, deretter så langt til venstre som mulig. Den brukes ved sletting av noder med to barn.",
+      "learnMoreLinks": [
+        {
+          "label": "BST-operasjoner",
+          "href": "/dat102/begreper/bst-operations",
+          "kind": "concept",
+          "slug": "bst-operations"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "bst-operations",
+            "internalPath": "processed/reviewed/concepts/bst-operations.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-036",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "balanced-tree"
+      ],
+      "front": "Hva er et balansert tre, og hvorfor er det viktig?",
+      "back": "Et balansert tre er et tre der forskjellen i høyde mellom venstre og høyre undertre er maksimalt 1 for alle noder. Dette holder høyden på O(log n), som sikrer O(log n) søk, innsetting og sletting — i motsetning til et degenerert BST med O(n).",
+      "learnMoreLinks": [
+        {
+          "label": "Balansert tre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "balanced-tree",
+            "internalPath": "processed/reviewed/concepts/balanced-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-037",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "balanced-tree"
+      ],
+      "front": "Forklar prinsippet bak høyrerotasjon i et ubalansert BST.",
+      "back": "Høyrerotasjon brukes når venstre undertre er for høyt (lang sti mot venstre barn). Det venstre barnet til roten blir ny rot; den gamle roten blir høyre barn av ny rot; det gamle høyre undertreet til det venstre barnet flyttes til venstre barn av den gamle roten.",
+      "learnMoreLinks": [
+        {
+          "label": "Balansert tre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "balanced-tree",
+            "internalPath": "processed/reviewed/concepts/balanced-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-038",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "two-three-tree"
+      ],
+      "front": "Hva kjennetegner et 2-3 tre?",
+      "back": "Et 2-3 tre er et balansert flervegssøketre der hver node har null, to eller tre barn (aldri ett), og alle blader er på samme nivå. Det finnes to nodetyper: 2-node (ett element) og 3-node (to elementer). Treet er alltid balansert.",
+      "learnMoreLinks": [
+        {
+          "label": "2-3 tre",
+          "href": "/dat102/begreper/two-three-tree",
+          "kind": "concept",
+          "slug": "two-three-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "two-three-tree",
+            "internalPath": "processed/reviewed/concepts/two-three-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-039",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "two-three-tree"
+      ],
+      "front": "Hva skjer ved innsetting i en 3-node i et 2-3 tre?",
+      "back": "Når innsettingspunktet er en 3-node, ordnes de tre elementene sortert og splittes: de to ytterste elementene danner to nye 2-noder, og midtelementet forfremmes opp til forelderen. Forfremmelsen kan forplante seg oppover til roten.",
+      "learnMoreLinks": [
+        {
+          "label": "2-3 tre",
+          "href": "/dat102/begreper/two-three-tree",
+          "kind": "concept",
+          "slug": "two-three-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "two-three-tree",
+            "internalPath": "processed/reviewed/concepts/two-three-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-040",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heap"
+      ],
+      "front": "Hva er en haug (heap), og hva er dens to strukturkrav?",
+      "back": "En haug er et komplett binært tre med haug-ordning. Krav: (1) Formkrav — komplett tre (fullt til nest siste nivå, blader så langt til venstre). (2) Ordningskrav — for minimumshaug er forelderen ≤ begge barna; for maksimumshaug er forelderen ≥ begge barna.",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-041",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heap"
+      ],
+      "front": "Hva er O-kompleksiteten for innsetting og fjerning i en haug?",
+      "back": "Både innsetting (leggTil) og fjerning av rot (fjernMaks/fjernMin) er O(log n), fordi høyden av et komplett binært tre med n noder er O(log n). Innsetting gjør reparerOpp og fjerning gjør reparerNed.",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-042",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heap"
+      ],
+      "front": "Hvordan representeres en haug i en tabell (array)?",
+      "back": "Med rot i posisjon 1: venstrebarn for node j er 2·j, høyrebarn er 2·j+1, og forelder er j/2. Tabellrepresentasjon passer perfekt for komplette trær og unngår pekere. Alternativt med rot i posisjon 0: venstrebarn 2j+1, høyrebarn 2j+2, forelder (j-1)/2.",
+      "learnMoreLinks": [
+        {
+          "label": "Haug",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heap",
+            "internalPath": "processed/reviewed/concepts/heap.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-043",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heapsort"
+      ],
+      "front": "Hva er de to fasene i haugsortering (heapsort)?",
+      "back": "Del 1 — Bygg haug: organiser den usorterte tabellen til en haug (O(n) ved nøyaktig analyse). Del 2 — Ta ut elementer: fjern roten gjentatte ganger, flytt siste blad til rot og reparer haugen (O(n log n) totalt). Samlet kjøretid: O(n log n).",
+      "learnMoreLinks": [
+        {
+          "label": "Haugsortering",
+          "href": "/dat102/begreper/heapsort",
+          "kind": "concept",
+          "slug": "heapsort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "heapsort",
+            "internalPath": "processed/reviewed/concepts/heapsort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-044",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "priority-queue"
+      ],
+      "front": "Hva er en prioritetskø, og hvordan implementeres den effektivt?",
+      "back": "En prioritetskø er en samling der elementet med høyest prioritet alltid tas ut først (elementer med lik prioritet følger FIFO). Den implementeres effektivt med en haug: innsetting og uttak er O(log n) via reparerOpp og reparerNed.",
+      "learnMoreLinks": [
+        {
+          "label": "Prioritetskø",
+          "href": "/dat102/begreper/priority-queue",
+          "kind": "concept",
+          "slug": "priority-queue"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "priority-queue",
+            "internalPath": "processed/reviewed/concepts/priority-queue.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-045",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "dictionary-adt"
+      ],
+      "front": "Hva er en ordbok-ADT (Dictionary ADT)?",
+      "back": "En ordbok lagrer par av (nøkkel, verdi) der nøklene er unike. Operasjonene inkluderer leggTil, fjern, getVerdi, inneholder og iteratorer. Dersom en nøkkel allerede finnes ved leggTil, erstattes den gamle verdien. Hashing er den vanligste implementasjonen.",
+      "learnMoreLinks": [
+        {
+          "label": "Ordbok ADT",
+          "href": "/dat102/begreper/dictionary-adt",
+          "kind": "concept",
+          "slug": "dictionary-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "dictionary-adt",
+            "internalPath": "processed/reviewed/concepts/dictionary-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-046",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "hash-function"
+      ],
+      "front": "Hva er en hashfunksjon, og hva er idealkompleksiteten den muliggjør?",
+      "back": "En hashfunksjon avbilder en søkenøkkel til en indeks i en hashtabell (typisk via nøkkels hashkode modulo tabellstørrelse). Uten kollisjoner gir dette O(1) for søk, innsetting og fjerning. En god hashfunksjon minimerer kollisjoner og fordeler elementer uniformt.",
+      "learnMoreLinks": [
+        {
+          "label": "Hashfunksjon",
+          "href": "/dat102/begreper/hash-function",
+          "kind": "concept",
+          "slug": "hash-function"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-function",
+            "internalPath": "processed/reviewed/concepts/hash-function.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-047",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "hash-function"
+      ],
+      "front": "Hva er en kollisjon i hashing, og hva kjennetegner en god hashfunksjon?",
+      "back": "En kollisjon oppstår når to ulike nøkler gir samme hashverdi (hash(K1) == hash(K2)). En god hashfunksjon skal minimere kollisjoner, være rask å beregne, og fordele elementer uniformt over hele tabellen. Primtall som tabellstørrelse gir ofte god spredning.",
+      "learnMoreLinks": [
+        {
+          "label": "Hashfunksjon",
+          "href": "/dat102/begreper/hash-function",
+          "kind": "concept",
+          "slug": "hash-function"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-function",
+            "internalPath": "processed/reviewed/concepts/hash-function.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-048",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "separate-chaining"
+      ],
+      "front": "Hva er kjedet overløp (separate chaining) som kollisjonsstrategi?",
+      "back": "Kjedet overløp håndterer kollisjoner ved at hver celle i hashtabellen inneholder en liste (kjede) over alle elementer som hasher til samme posisjon. Søk krever beregning av hashadressen etterfulgt av lineær søking i kjeden. Java sin HashMap og HashSet bruker kjeding.",
+      "learnMoreLinks": [
+        {
+          "label": "Kjedet overløp",
+          "href": "/dat102/begreper/separate-chaining",
+          "kind": "concept",
+          "slug": "separate-chaining"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "separate-chaining",
+            "internalPath": "processed/reviewed/concepts/separate-chaining.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-049",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "open-addressing"
+      ],
+      "front": "Hva er åpen adressering (open addressing) som kollisjonsstrategi?",
+      "back": "Åpen adressering håndterer kollisjoner ved å finne en annen ledig posisjon i selve hashtabellen via en probesekvens. Lineær probing prøver (p+1) % s, (p+2) % s osv. Fordel: enkel. Ulempe: primær-cluster (klyngedannelse). Slettet element markeres som FJERNA, ikke null.",
+      "learnMoreLinks": [
+        {
+          "label": "Åpen adressering",
+          "href": "/dat102/begreper/open-addressing",
+          "kind": "concept",
+          "slug": "open-addressing"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "open-addressing",
+            "internalPath": "processed/reviewed/concepts/open-addressing.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-050",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "open-addressing"
+      ],
+      "front": "Hvorfor skal slettet element i åpen adressering markeres som FJERNA og ikke settes til null?",
+      "back": "Ved åpen adressering avhenger probesekvensen av at man kan skille mellom \"aldri brukt\" (null) og \"slettet\" (FJERNA). Settes et element til null brytes probesekvensen, og søk etter elementer som ble satt inn etter det slettede kan feile.",
+      "learnMoreLinks": [
+        {
+          "label": "Åpen adressering",
+          "href": "/dat102/begreper/open-addressing",
+          "kind": "concept",
+          "slug": "open-addressing"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "open-addressing",
+            "internalPath": "processed/reviewed/concepts/open-addressing.md"
+          },
+          {
+            "label": "hash-table",
+            "internalPath": "processed/reviewed/concepts/hash-table.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-051",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "load-factor"
+      ],
+      "front": "Hva er fyllingsgraden λ (load factor) i en hashtabell, og hva er grensene for effektiv hashing?",
+      "back": "Fyllingsgraden λ = (antall element) / (antall lokasjoner). For åpen adressering bør λ ≤ 0.5 (kursets anbefaling) og λ ≤ 1 alltid. For kjedet overløp bør λ < 1. Når grensen nås, utføres rehashing med ny tabellstørrelse (første primtall > 2 × gammel størrelse).",
+      "learnMoreLinks": [
+        {
+          "label": "Fyllingsgrad",
+          "href": "/dat102/begreper/load-factor",
+          "kind": "concept",
+          "slug": "load-factor"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "load-factor",
+            "internalPath": "processed/reviewed/concepts/load-factor.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-052",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "hash-table"
+      ],
+      "front": "Hva er rehashing, og når utløses det?",
+      "back": "Rehashing utløses når fyllingsgraden overskrider en terskel (f.eks. 0.5). Den nye tabellstørrelsen settes til første primtall større enn 2 × gammel størrelse, og alle eksisterende elementer legges inn på nytt med den oppdaterte hashfunksjonen.",
+      "learnMoreLinks": [
+        {
+          "label": "Hashtabell",
+          "href": "/dat102/begreper/hash-table",
+          "kind": "concept",
+          "slug": "hash-table"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "hash-table",
+            "internalPath": "processed/reviewed/concepts/hash-table.md"
+          },
+          {
+            "label": "load-factor",
+            "internalPath": "processed/reviewed/concepts/load-factor.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-053",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "graph-terminology"
+      ],
+      "front": "Hva er en graf G = (V, E), og hva er forskjellen mellom rettet og urettet kant?",
+      "back": "En graf G = (V, E) består av en mengde noder V og kanter E. Urettet kant: paret (v, w) er uordnet — (v, w) = (w, v). Rettet kant: paret er ordnet — (v, w) ≠ (w, v), kanten har én retning. Vektede grafer har tall (kostnader) knyttet til kantene.",
+      "learnMoreLinks": [
+        {
+          "label": "Graf-terminologi",
+          "href": "/dat102/begreper/graph-terminology",
+          "kind": "concept",
+          "slug": "graph-terminology"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "graph-terminology",
+            "internalPath": "processed/reviewed/concepts/graph-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-054",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "graph-terminology"
+      ],
+      "front": "Hva er en sammenhengende graf og en asyklisk graf?",
+      "back": "Sammenhengende graf: det finnes en sti mellom alle par av noder. Asyklisk graf: grafen inneholder ingen sykler (en sykel er en sti der første og siste node er den samme). En rettet asyklisk graf kalles DAG (Directed Acyclic Graph).",
+      "learnMoreLinks": [
+        {
+          "label": "Graf-terminologi",
+          "href": "/dat102/begreper/graph-terminology",
+          "kind": "concept",
+          "slug": "graph-terminology"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "graph-terminology",
+            "internalPath": "processed/reviewed/concepts/graph-terminology.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-055",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "adjacency-matrix"
+      ],
+      "front": "Hva er en nabomatrise (adjacency matrix), og hva er dens styrke?",
+      "back": "En nabomatrise er en todimensjonal tabell der matrix[v][w] = true betyr at kanten (v, w) eksisterer. For vektede grafer lagres vekten. Styrken er effektiv sjekk av om to noder er naboer (direkte oppslag i tabellen). For urettet graf er matrisen symmetrisk.",
+      "learnMoreLinks": [
+        {
+          "label": "Nabomatrise",
+          "href": "/dat102/begreper/adjacency-matrix",
+          "kind": "concept",
+          "slug": "adjacency-matrix"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "adjacency-matrix",
+            "internalPath": "processed/reviewed/concepts/adjacency-matrix.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-056",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "adjacency-list"
+      ],
+      "front": "Hva er en naboliste (adjacency list), og hva er dens styrke sammenlignet med nabomatrise?",
+      "back": "En naboliste er en representasjon der hver node har en liste over sine naboer. Styrken er effektiv iterasjon over alle naboer til en node. For urettet graf legges kanter inn i begge retninger. Naboliste er mer plassbehagelig enn nabomatrise for grafer med få kanter.",
+      "learnMoreLinks": [
+        {
+          "label": "Naboliste",
+          "href": "/dat102/begreper/adjacency-list",
+          "kind": "concept",
+          "slug": "adjacency-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "adjacency-list",
+            "internalPath": "processed/reviewed/concepts/adjacency-list.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-057",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "breadth-first-search"
+      ],
+      "front": "Hva er bredde-først søk (BFS), og hvilken datastruktur er nøkkelen?",
+      "back": "BFS starter fra en startnode og besøker alle umerka naboer lag for lag — nivå for nivå, som nivåordning i trær. Nøkkeldatastruktur er en kø (FIFO), som sikrer at noder besøkes i riktig rekkefølge. BFS kan finne korteste sti (færrest kanter) mellom to noder.",
+      "learnMoreLinks": [
+        {
+          "label": "Bredde-først søk",
+          "href": "/dat102/begreper/breadth-first-search",
+          "kind": "concept",
+          "slug": "breadth-first-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "breadth-first-search",
+            "internalPath": "processed/reviewed/concepts/breadth-first-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-058",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "depth-first-search"
+      ],
+      "front": "Hva er dybde-først søk (DFS), og hvilken datastruktur er nøkkelen?",
+      "back": "DFS starter fra en startnode og følger en sti så dypt som mulig før det backtracks til neste ubesøkte nabo. Nøkkeldatastruktur er en stabel (LIFO), eller rekursjon. DFS ligner preorden-gjennomgang av trær og brukes bl.a. til topologisk sortering.",
+      "learnMoreLinks": [
+        {
+          "label": "Dybde-først søk",
+          "href": "/dat102/begreper/depth-first-search",
+          "kind": "concept",
+          "slug": "depth-first-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "depth-first-search",
+            "internalPath": "processed/reviewed/concepts/depth-first-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-059",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "breadth-first-search",
+        "depth-first-search"
+      ],
+      "front": "Hva er hovedforskjellen mellom BFS og DFS?",
+      "back": "BFS bruker en kø og besøker alle naboer lag for lag (horisontal utforskning). DFS bruker en stabel (eller rekursjon) og følger én sti til bunns før det backtracks (vertikal utforskning). BFS er bedre for korteste sti (færrest kanter); DFS er enklere å implementere rekursivt.",
+      "learnMoreLinks": [
+        {
+          "label": "Dybde-først søk",
+          "href": "/dat102/begreper/depth-first-search",
+          "kind": "concept",
+          "slug": "depth-first-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "depth-first-search",
+            "internalPath": "processed/reviewed/concepts/depth-first-search.md"
+          },
+          {
+            "label": "breadth-first-search",
+            "internalPath": "processed/reviewed/concepts/breadth-first-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-060",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "topological-sort"
+      ],
+      "front": "Hva er topologisk sortering, og hva er forutsetningen for at den er mulig?",
+      "back": "Topologisk sortering ordner nodene i en rettet graf slik at for enhver kant fra A til B kommer A før B. Forutsetning: grafen må være en DAG (rettet asyklisk graf) — finnes sykler er topologisk ordning umulig. Det kan finnes flere gyldige ordninger.",
+      "learnMoreLinks": [
+        {
+          "label": "Topologisk sortering",
+          "href": "/dat102/begreper/topological-sort",
+          "kind": "concept",
+          "slug": "topological-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "topological-sort",
+            "internalPath": "processed/reviewed/concepts/topological-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-061",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "dijkstra-shortest-path"
+      ],
+      "front": "Hva finner Dijkstras algoritme, og hva er en viktig begrensning?",
+      "back": "Dijkstras algoritme finner billigste sti (lavest total kantvekt) fra en startnode i en vektet graf. Viktig begrensning: algoritmen kan ikke ha negative kantvekter — da gir den feil svar. Den bruker en prioritetskø for å velge neste node å besøke.",
+      "learnMoreLinks": [
+        {
+          "label": "Dijkstras korteste-sti algoritme",
+          "href": "/dat102/begreper/dijkstra-shortest-path",
+          "kind": "concept",
+          "slug": "dijkstra-shortest-path"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "dijkstra-shortest-path",
+            "internalPath": "processed/reviewed/concepts/dijkstra-shortest-path.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-062",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "dijkstra-shortest-path",
+        "breadth-first-search"
+      ],
+      "front": "Hva er forskjellen mellom korteste sti (færrest kanter) og billigste sti i en graf?",
+      "back": "Korteste sti (færrest kanter) finner stien med minst antall kanter — algoritmen bruker BFS i uvektet graf. Billigste sti finner stien med lavest total kantvekt — algoritmen bruker Dijkstra i vektet graf. BFS-basert søk fungerer ikke for vektede grafer.",
+      "learnMoreLinks": [
+        {
+          "label": "Dijkstras korteste-sti algoritme",
+          "href": "/dat102/begreper/dijkstra-shortest-path",
+          "kind": "concept",
+          "slug": "dijkstra-shortest-path"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "dijkstra-shortest-path",
+            "internalPath": "processed/reviewed/concepts/dijkstra-shortest-path.md"
+          },
+          {
+            "label": "breadth-first-search",
+            "internalPath": "processed/reviewed/concepts/breadth-first-search.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-063",
+      "topic": "testing-junit",
+      "conceptSlugs": [
+        "junit"
+      ],
+      "front": "Hva er formålet med @BeforeEach-annotasjonen i JUnit?",
+      "back": "@BeforeEach markerer en metode som kjøres FØR hver enkelt @Test-metode. Den brukes til å nullstille/initialisere testobjekter, fordi @Test-metodene kjøres i vilkårlig rekkefølge og hver test skal starte fra en kjent tilstand.",
+      "learnMoreLinks": [
+        {
+          "label": "JUnit",
+          "href": "/dat102/begreper/junit",
+          "kind": "concept",
+          "slug": "junit"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "junit",
+            "internalPath": "processed/reviewed/concepts/junit.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-064",
+      "topic": "testing-junit",
+      "conceptSlugs": [
+        "junit"
+      ],
+      "front": "Hvilken JUnit assertion brukes for å teste at en metode kaster et unntak?",
+      "back": "assertThrows(ExceptionType.class, () -> metodeSomKasterUnntak()) brukes for å verifisere at en lambda/metodereferanse kaster et unntak av gitt type. Andre nyttige assertions er assertEquals, assertTrue, assertFalse, assertNull og assertNotNull.",
+      "learnMoreLinks": [
+        {
+          "label": "JUnit",
+          "href": "/dat102/begreper/junit",
+          "kind": "concept",
+          "slug": "junit"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "junit",
+            "internalPath": "processed/reviewed/concepts/junit.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-065",
+      "topic": "bag-adt",
+      "conceptSlugs": [
+        "dynamic-array-resizing"
+      ],
+      "front": "Hva er dynamisk array-resizing, og hva er problemet med fast kapasitet?",
+      "back": "Dynamisk array-resizing betyr at en tabell vokser automatisk når den er full: en ny, større tabell opprettes og elementene kopieres over. Uten dette vil en tabell med fast kapasitet kaste unntak eller ha ubrukt minne. Java sin ArrayList bruker denne teknikken.",
+      "learnMoreLinks": [
+        {
+          "label": "Dynamisk array-resizing",
+          "href": "/dat102/begreper/dynamic-array-resizing",
+          "kind": "concept",
+          "slug": "dynamic-array-resizing"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "dynamic-array-resizing",
+            "internalPath": "processed/reviewed/concepts/dynamic-array-resizing.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-066",
+      "topic": "bag-adt",
+      "conceptSlugs": [
+        "linked-node",
+        "singly-linked-list"
+      ],
+      "front": "Hva er en enkel lenket liste (singly-linked list)?",
+      "back": "En enkel lenket liste er en kjede av noder der hver node inneholder data og en referanse (peker) til neste node. Den første noden kalles \"hodet\" (head). I motsetning til tabell bruker den ikke sammenhengende minne og kan vokse dynamisk uten kopiering.",
+      "learnMoreLinks": [
+        {
+          "label": "Enkel lenket liste",
+          "href": "/dat102/begreper/singly-linked-list",
+          "kind": "concept",
+          "slug": "singly-linked-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "singly-linked-list",
+            "internalPath": "processed/reviewed/concepts/singly-linked-list.md"
+          },
+          {
+            "label": "linked-node",
+            "internalPath": "processed/reviewed/concepts/linked-node.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-067",
+      "topic": "lists",
+      "conceptSlugs": [
+        "list-adt"
+      ],
+      "front": "Hva er List-ADT, og hva skiller den fra Bag-ADT?",
+      "back": "List-ADT er en ordnet samling der posisjonen til hvert element er definert og tilgjengelig. I motsetning til Bag-ADT har List-ADT posisjonerbasert tilgang (f.eks. get(i), add(i, element)) og kan itereres i rekkefølge.",
+      "learnMoreLinks": [
+        {
+          "label": "Liste-ADT",
+          "href": "/dat102/begreper/list-adt",
+          "kind": "concept",
+          "slug": "list-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "list-adt",
+            "internalPath": "processed/reviewed/concepts/list-adt.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-068",
+      "topic": "lists",
+      "conceptSlugs": [
+        "iterator"
+      ],
+      "front": "Hva er et iterator-designmønster, og hva er dets formål?",
+      "back": "Et iterator-objekt gir en standard måte å traversere elementene i en samling uten å eksponere den interne strukturen. I Java implementerer samlinger Iterable<T> med metoden iterator() som returnerer et Iterator<T>-objekt med hasNext() og next().",
+      "learnMoreLinks": [
+        {
+          "label": "Iterator",
+          "href": "/dat102/begreper/iterator",
+          "kind": "concept",
+          "slug": "iterator"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "iterator",
+            "internalPath": "processed/reviewed/concepts/iterator.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-069",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "divide-and-conquer"
+      ],
+      "front": "Forklar de tre fasene i del-og-hersk-paradigmet.",
+      "back": "Del: del problemet i to eller flere delproblemer av samme type. Hersk: løs hvert delproblem rekursivt (basistilfelle for det minste problemet). Kombiner: sett delløsningene sammen til en løsning på hele problemet. Flettesortering og kvikksortering er de primære eksemplene.",
+      "learnMoreLinks": [
+        {
+          "label": "Del og hersk",
+          "href": "/dat102/begreper/divide-and-conquer",
+          "kind": "concept",
+          "slug": "divide-and-conquer"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "divide-and-conquer",
+            "internalPath": "processed/reviewed/concepts/divide-and-conquer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-070",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation"
+      ],
+      "front": "Hva er O-kompleksiteten for en enkel for-løkke (1..n) og en dobbel nestede for-løkke (1..n)(1..n)?",
+      "back": "En enkel for-løkke over n iterasjoner der kroppen er O(1) gir O(n). To nestede for-løkker der begge løper fra 1 til n gir O(n²) fordi løkkekroppen kjøres n×n = n² ganger.",
+      "learnMoreLinks": [
+        {
+          "label": "Stor-O-notasjon",
+          "href": "/dat102/begreper/big-o-notation",
+          "kind": "concept",
+          "slug": "big-o-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "big-o-notation",
+            "internalPath": "processed/reviewed/concepts/big-o-notation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-071",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "circular-queue"
+      ],
+      "front": "Hva er en sirkulær kø, og hvilken fordel har den over en vanlig tabellkø?",
+      "back": "En sirkulær kø bruker en fast tabell der front- og back-pekerne beveger seg rundt syklisk (med modulo). Fordelen er at man unngår å flytte elementene ved utKoe/dequeue — front-indeksen flyttes bare ett hakk videre i stedet for at alle elementene forskyves. Tabellen brukes effektivt ved å la pekerne «wrappe rundt».",
+      "learnMoreLinks": [
+        {
+          "label": "Sirkulær kø",
+          "href": "/dat102/begreper/circular-queue",
+          "kind": "concept",
+          "slug": "circular-queue"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "circular-queue",
+            "internalPath": "processed/reviewed/concepts/circular-queue.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-072",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "deque"
+      ],
+      "front": "Hva er en deque (double-ended queue)?",
+      "back": "En deque (double-ended queue) er en samling der innsetting og fjerning er mulig fra begge ender — både fremst og bakerst. Den generaliserer både stabel og kø: kan brukes som LIFO (stabel) eller FIFO (kø) avhengig av hvilke ender man bruker.",
+      "learnMoreLinks": [
+        {
+          "label": "Deque",
+          "href": "/dat102/begreper/deque",
+          "kind": "concept",
+          "slug": "deque"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "deque",
+            "internalPath": "processed/reviewed/concepts/deque.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-073",
+      "topic": "lists",
+      "conceptSlugs": [
+        "sorted-list"
+      ],
+      "front": "Hva er en sortert liste (sorted list) som ADT?",
+      "back": "En sortert liste er en variant av List-ADT der elementene alltid holdes i sortert rekkefølge. Elementer settes inn på riktig plass automatisk (ikke på angitt posisjon som i vanlig liste). Innsetting krever søk etter riktig posisjon.",
+      "learnMoreLinks": [
+        {
+          "label": "Sortert liste",
+          "href": "/dat102/begreper/sorted-list",
+          "kind": "concept",
+          "slug": "sorted-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "sorted-list",
+            "internalPath": "processed/reviewed/concepts/sorted-list.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-074",
+      "topic": "lists",
+      "conceptSlugs": [
+        "immutable-objects"
+      ],
+      "front": "Hva er et immutabelt objekt (immutable object)?",
+      "back": "Et immutabelt objekt er et objekt hvis tilstand ikke kan endres etter at det er opprettet. Alle felt er final og settes i konstruktøren. Eksempler i Java: String, Integer, LocalDate. Immutable objekter er trygge å dele mellom tråder og er velegnet som nøkler i ordbøker.",
+      "learnMoreLinks": [
+        {
+          "label": "Immutable objekter",
+          "href": "/dat102/begreper/immutable-objects",
+          "kind": "concept",
+          "slug": "immutable-objects"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "immutable-objects",
+            "internalPath": "processed/reviewed/concepts/immutable-objects.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-075",
+      "topic": "bag-adt",
+      "conceptSlugs": [
+        "array-vs-linked-implementation"
+      ],
+      "front": "Hva er de viktigste avveiningene mellom tabell- og lenket implementasjon av en ADT?",
+      "back": "Tabellimplementasjon: O(1) tilgang på indeks, men O(n) innsetting/sletting midt i. Lenket implementasjon: O(1) innsetting/sletting fremst, men O(n) søk (ingen indeksbasert tilgang). Tabell bruker sammenhengende minne; lenket liste kan vokse uten resizing.",
+      "learnMoreLinks": [
+        {
+          "label": "Tabell vs. lenket implementasjon",
+          "href": "/dat102/begreper/array-vs-linked-implementation",
+          "kind": "concept",
+          "slug": "array-vs-linked-implementation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "array-vs-linked-implementation",
+            "internalPath": "processed/reviewed/concepts/array-vs-linked-implementation.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-076",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "java-hashcode-equals"
+      ],
+      "front": "Hva er kontrakten mellom hashCode() og equals() i Java?",
+      "back": "Kontrakten: dersom a.equals(b) er true, MÅ a.hashCode() == b.hashCode(). Det omvendte trenger ikke å holde (like hashkoder betyr ikke nødvendigvis like objekter). Bryter man denne kontrakten vil hashing feile — elementet kan ikke gjenfinnes.",
+      "learnMoreLinks": [
+        {
+          "label": "Java hashCode og equals",
+          "href": "/dat102/begreper/java-hashcode-equals",
+          "kind": "concept",
+          "slug": "java-hashcode-equals"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "java-hashcode-equals",
+            "internalPath": "processed/reviewed/concepts/java-hashcode-equals.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-077",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursive-vs-iterative"
+      ],
+      "front": "Hva er halerekursjon (tail recursion), og hvorfor er den spesiell?",
+      "back": "Halerekursjon er et rekursivt kall som er siste operasjon i metoden — ingenting gjenstår å gjøre etter kallet. Halerekursive metoder kan enkelt omskrives til iterative løsninger, da det rekursive kallet ikke trenger å lagre noen tilstand på kallstabelen.",
+      "learnMoreLinks": [
+        {
+          "label": "Rekursiv vs. iterativ",
+          "href": "/dat102/begreper/recursive-vs-iterative",
+          "kind": "concept",
+          "slug": "recursive-vs-iterative"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "recursive-vs-iterative",
+            "internalPath": "processed/reviewed/concepts/recursive-vs-iterative.md"
+          },
+          {
+            "label": "recursion",
+            "internalPath": "processed/reviewed/concepts/recursion.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-078",
+      "topic": "trees",
+      "conceptSlugs": [
+        "binary-tree"
+      ],
+      "front": "Hva er et binært tre (binary tree)?",
+      "back": "Et binært tre er et tre der hver node har maksimalt to barn: venstre barn og høyre barn. Det er et tre av orden 2. Spesialtilfeller inkluderer fullt binært tre (alle noder har 0 eller 2 barn) og komplett binært tre (brukes i hauger).",
+      "learnMoreLinks": [
+        {
+          "label": "Binært tre",
+          "href": "/dat102/begreper/binary-tree",
+          "kind": "concept",
+          "slug": "binary-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "binary-tree",
+            "internalPath": "processed/reviewed/concepts/binary-tree.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-079",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "selection-sort",
+        "insertion-sort"
+      ],
+      "front": "Hva er den viktigste praktiske forskjellen mellom utvalgssortering og innsettingssortering?",
+      "back": "Innsettingssortering utnytter nesten-sorterte data og er O(n) i beste tilfelle. Utvalgssortering gjør alltid like mange sammenligninger (O(n²)) uavhengig av inndata. Innsettingssortering er stabil; utvalgssortering er det ikke.",
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgssortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "selection-sort",
+            "internalPath": "processed/reviewed/concepts/selection-sort.md"
+          },
+          {
+            "label": "insertion-sort",
+            "internalPath": "processed/reviewed/concepts/insertion-sort.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-fc-080",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "merge-sort",
+        "quicksort"
+      ],
+      "front": "Hva er de viktigste forskjellene mellom flettesortering og kvikksortering?",
+      "back": "Flettesortering: O(n log n) i alle tilfeller, stabil, men ikke in-place (trenger O(n) ekstra minne). Kvikksortering: O(n log n) gjennomsnitt men O(n²) worst-case, ikke stabil, men in-place. Kvikksortering er vanligvis raskere i praksis pga. lavere konstant.",
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "merge-sort",
+            "internalPath": "processed/reviewed/concepts/merge-sort.md"
+          },
+          {
+            "label": "quicksort",
+            "internalPath": "processed/reviewed/concepts/quicksort.md"
+          }
+        ]
+      }
+    }
+  ]
+}

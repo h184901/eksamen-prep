@@ -62,6 +62,20 @@ const config: Config = {
           900: "#581c87",
           950: "#3b0764",
         },
+        // DAT102 Algoritmer og datastrukturer — cyan/teal (Tailwind cyan-skalaen)
+        dat102: {
+          50: "#ecfeff",
+          100: "#cffafe",
+          200: "#a5f3fc",
+          300: "#67e8f9",
+          400: "#22d3ee",
+          500: "#06b6d4",
+          600: "#0891b2",
+          700: "#0e7490",
+          800: "#155e75",
+          900: "#164e63",
+          950: "#083344",
+        },
         akseptert: {
           50: "#eef2ff",
           100: "#e0e7ff",

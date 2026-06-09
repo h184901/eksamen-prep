@@ -70,7 +70,7 @@ interface Subject {
   code: string;
   name: string;
   description: string;
-  color: "physics" | "network" | "sysdev" | "dat107" | "akseptert";
+  color: "physics" | "network" | "sysdev" | "dat107" | "dat102" | "akseptert";
   href: string;
   status?: string;
   badge?: string;
@@ -91,6 +91,22 @@ const baseSubjects: Subject[] = [
       { label: "Eksamener", href: "/dat110/eksamen" },
       { label: "Begreper", href: "/dat110/begreper" },
       { label: "Gjengangere", href: "/dat110/eksamen/gjengangere" },
+    ],
+  },
+  {
+    id: "dat102",
+    code: "DAT102",
+    name: "Algoritmer og datastrukturer",
+    description:
+      "Big-O, sortering, lister, hashing, trær og grafer — temaer, begreper og pensumplan.",
+    color: "dat102",
+    href: "/dat102",
+    badge: "Ny",
+    highlights: [
+      { label: "Temaer", href: "/dat102/temaer" },
+      { label: "Begreper", href: "/dat102/begreper" },
+      { label: "Pensum", href: "/dat102/pensum" },
+      { label: "Oppsummering", href: "/dat102/oppsummering" },
     ],
   },
   {
@@ -162,6 +178,7 @@ const subjectColor: Record<
     title: string;
     chip: string;
     chipHover: string;
+    badge: string;
   }
 > = {
   network: {
@@ -172,6 +189,19 @@ const subjectColor: Record<
       "bg-network-50 dark:bg-network-950/40 text-network-700 dark:text-network-300 border-network-200 dark:border-network-900",
     chipHover:
       "hover:bg-network-100 dark:hover:bg-network-900/60 hover:border-network-300 dark:hover:border-network-700",
+    badge:
+      "bg-network-100 dark:bg-network-900/40 text-network-700 dark:text-network-200",
+  },
+  dat102: {
+    band: "bg-dat102-500",
+    border: "border-dat102-200 dark:border-dat102-900",
+    title: "text-dat102-700 dark:text-dat102-300",
+    chip:
+      "bg-dat102-50 dark:bg-dat102-950/40 text-dat102-700 dark:text-dat102-300 border-dat102-200 dark:border-dat102-900",
+    chipHover:
+      "hover:bg-dat102-100 dark:hover:bg-dat102-900/60 hover:border-dat102-300 dark:hover:border-dat102-700",
+    badge:
+      "bg-dat102-100 dark:bg-dat102-900/40 text-dat102-700 dark:text-dat102-200",
   },
   sysdev: {
     band: "bg-sysdev-500",
@@ -181,6 +211,8 @@ const subjectColor: Record<
       "bg-sysdev-50 dark:bg-sysdev-950/40 text-sysdev-700 dark:text-sysdev-300 border-sysdev-200 dark:border-sysdev-900",
     chipHover:
       "hover:bg-sysdev-100 dark:hover:bg-sysdev-900/60 hover:border-sysdev-300 dark:hover:border-sysdev-700",
+    badge:
+      "bg-sysdev-100 dark:bg-sysdev-900/40 text-sysdev-700 dark:text-sysdev-200",
   },
   physics: {
     band: "bg-physics-500",
@@ -190,6 +222,8 @@ const subjectColor: Record<
       "bg-physics-50 dark:bg-physics-950/40 text-physics-700 dark:text-physics-300 border-physics-200 dark:border-physics-900",
     chipHover:
       "hover:bg-physics-100 dark:hover:bg-physics-900/60 hover:border-physics-300 dark:hover:border-physics-700",
+    badge:
+      "bg-physics-100 dark:bg-physics-900/40 text-physics-700 dark:text-physics-200",
   },
   dat107: {
     band: "bg-dat107-500",
@@ -199,6 +233,8 @@ const subjectColor: Record<
       "bg-dat107-50 dark:bg-dat107-950/40 text-dat107-700 dark:text-dat107-300 border-dat107-200 dark:border-dat107-900",
     chipHover:
       "hover:bg-dat107-100 dark:hover:bg-dat107-900/60 hover:border-dat107-300 dark:hover:border-dat107-700",
+    badge:
+      "bg-dat107-100 dark:bg-dat107-900/40 text-dat107-700 dark:text-dat107-200",
   },
   akseptert: {
     band: "bg-akseptert-500",
@@ -208,6 +244,8 @@ const subjectColor: Record<
       "bg-akseptert-50 dark:bg-akseptert-950/40 text-akseptert-700 dark:text-akseptert-300 border-akseptert-200 dark:border-akseptert-900",
     chipHover:
       "hover:bg-akseptert-100 dark:hover:bg-akseptert-900/60 hover:border-akseptert-300 dark:hover:border-akseptert-700",
+    badge:
+      "bg-akseptert-100 dark:bg-akseptert-900/40 text-akseptert-700 dark:text-akseptert-200",
   },
 };
 
@@ -218,8 +256,13 @@ export default async function HomePage() {
   const subjects: Subject[] = isAkseptertUser(session)
     ? [...baseSubjects, akseptertSubject]
     : baseSubjects;
-  // xl: 4-kol for 4 fag, 5-kol når Akseptert er med — unngår orphaned 5. kort.
-  const xlGridCols = subjects.length === 5 ? "xl:grid-cols-5" : "xl:grid-cols-4";
+  // xl: 5-kol for 5 fag; 3-kol (2 rader) når Akseptert gjør det til 6 kort.
+  const xlGridCols =
+    subjects.length >= 6
+      ? "xl:grid-cols-3"
+      : subjects.length === 5
+        ? "xl:grid-cols-5"
+        : "xl:grid-cols-4";
 
   return (
     <div>
@@ -233,7 +276,7 @@ export default async function HomePage() {
         </h1>
         <p className="text-base sm:text-lg text-[var(--muted)] max-w-2xl leading-relaxed mb-6">
           Interaktive forklaringer, ekte tidligere eksamener og målrettet drill —
-          alt på ett sted. DAT110, DAT109, ING164 og DAT107.
+          alt på ett sted. DAT102, DAT110, DAT109, ING164 og DAT107.
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <Link
@@ -322,7 +365,7 @@ export default async function HomePage() {
                       {subject.code}
                     </span>
                     {subject.badge && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-akseptert-100 dark:bg-akseptert-900/40 text-akseptert-700 dark:text-akseptert-200">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${tone.badge}`}>
                         {subject.badge}
                       </span>
                     )}
@@ -364,6 +407,10 @@ export default async function HomePage() {
             Bygget for HVL Bergen-eksamen · Lokalt lagret framgang · Ingen tracking
           </p>
           <p className="flex items-center gap-3">
+            <Link href="/dat102" className="hover:text-[var(--foreground)] transition-colors">
+              DAT102
+            </Link>
+            <span aria-hidden>·</span>
             <Link href="/dat110" className="hover:text-[var(--foreground)] transition-colors">
               DAT110
             </Link>

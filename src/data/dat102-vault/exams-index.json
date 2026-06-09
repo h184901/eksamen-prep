@@ -1,0 +1,140 @@
+{
+  "exams": [
+    {
+      "slug": "2020-vaar",
+      "year": 2020,
+      "session": "vaar",
+      "displayLabel": "Vår 2020",
+      "summary": "Skriftlig eksamen (3 timer), 2. juni 2020. 5 oppgaver totalt: Oppgave 1–3 i Wiseflow (Del 1, skannet), Oppgave 4–5 på papir (Del 2, tekstuthentet).",
+      "sessionNote": "Del 1 (oppgave 1–3) er skannet uten tekstlag. Oppgavetekstene for 1–3 er ikke tilgjengelige; bare fasit-notater fra løsningsforslaget. Oppgave 4–5 har full tekst.",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 6,
+        "partial": 0,
+        "scanned_only": 3,
+        "missing_solution": 0
+      },
+      "questionCount": 5,
+      "subquestionCount": 9
+    },
+    {
+      "slug": "2022-vaar",
+      "year": 2022,
+      "session": "vaar",
+      "displayLabel": "Vår 2022",
+      "summary": "Skriftlig eksamen (4 timer), 1. juni 2022. 8 oppgaver totalt: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–8 programmering/teori på papir.",
+      "sessionNote": null,
+      "status": "complete",
+      "statusCounts": {
+        "complete": 36,
+        "partial": 0,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 8,
+      "subquestionCount": 36
+    },
+    {
+      "slug": "2023-vaar",
+      "year": 2023,
+      "session": "vaar",
+      "displayLabel": "Vår 2023",
+      "summary": "Skriftlig eksamen (4 timer), 6. juni 2023. 8 oppgaver totalt: Oppgave 1–5 flervalg/kortsvars (Wiseflow, seksjoner 1–6), Oppgave 6–8 programmering/teori på papir. Eksamen levert digitalt (ingen papirinnlevering).",
+      "sessionNote": null,
+      "status": "complete",
+      "statusCounts": {
+        "complete": 41,
+        "partial": 0,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 8,
+      "subquestionCount": 41
+    },
+    {
+      "slug": "2024-vaar",
+      "year": 2024,
+      "session": "vaar",
+      "displayLabel": "Vår 2024",
+      "summary": "Skriftlig eksamen (4 timer, 0900–1300), 14. mai 2024. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori på papir.",
+      "sessionNote": "1 deloppgave er figur-basert — svaret avhenger av en figur som ikke kan gjengis fullt ut som tekst (merket per deloppgave).",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 34,
+        "partial": 1,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 9,
+      "subquestionCount": 35
+    },
+    {
+      "slug": "2025-jan",
+      "year": 2025,
+      "session": "jan",
+      "displayLabel": "Januar 2025 (kont H24)",
+      "summary": "Skriftlig konteeksamen (4 timer, 0900–1300), 8. januar 2025. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori. Papirsett v3 endelig.",
+      "sessionNote": "1 deloppgave er figur-basert — svaret avhenger av en figur som ikke kan gjengis fullt ut som tekst (merket per deloppgave).",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 34,
+        "partial": 1,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 9,
+      "subquestionCount": 35
+    },
+    {
+      "slug": "2025-vaar",
+      "year": 2025,
+      "session": "vaar",
+      "displayLabel": "Vår 2025",
+      "summary": "Skriftlig eksamen (4 timer, 0900–1300), 28. mai 2025. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori.",
+      "sessionNote": "Flervalg-varianten uten svar er skannet; flervalg-med-svar brukes som tekstkilde. Enkelte deloppgaver er figur-baserte (merket per oppgave).",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 29,
+        "partial": 5,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 9,
+      "subquestionCount": 34
+    },
+    {
+      "slug": "2026-jan",
+      "year": 2026,
+      "session": "jan",
+      "displayLabel": "Januar 2026 (kont H25)",
+      "summary": "Skriftlig konteeksamen (4 timer, 0900–1300), 5. januar 2026. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori. Dokumentet inneholder bokmål (s. 1–9) og nynorsk (s. 10–18) versjon.",
+      "sessionNote": "5 deloppgaver er figur-baserte — svaret avhenger av en figur som ikke kan gjengis fullt ut som tekst (merket per deloppgave).",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 30,
+        "partial": 5,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 9,
+      "subquestionCount": 35
+    },
+    {
+      "slug": "2026-vaar",
+      "year": 2026,
+      "session": "vaar",
+      "displayLabel": "Vår 2026",
+      "summary": "Skriftlig eksamen (4 timer, 0900–1300), 21. mai 2026. 9 oppgaver: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–9 programmering/teori. Det finnes 4 versjoner av løsningsforslaget (v1–v4); **v4 er nyeste og anbefalt**. Det finnes to versjoner av flervalg-med-svar; **flervalg-med-svar-NY er nyere og anbefalt**.",
+      "sessionNote": "Ingen separat oppgaveark finnes — oppgaveteksten for oppgave 6–9 er gjengitt fra løsningsforslag v4 (nyeste). For flervalg er «med svar NY» autoritativ.",
+      "status": "partial",
+      "statusCounts": {
+        "complete": 30,
+        "partial": 5,
+        "scanned_only": 0,
+        "missing_solution": 0
+      },
+      "questionCount": 9,
+      "subquestionCount": 35
+    }
+  ]
+}

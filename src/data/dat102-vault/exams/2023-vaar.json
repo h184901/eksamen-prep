@@ -1,0 +1,1707 @@
+{
+  "slug": "2023-vaar",
+  "year": 2023,
+  "session": "vaar",
+  "displayLabel": "Vår 2023",
+  "summary": "Skriftlig eksamen (4 timer), 6. juni 2023. 8 oppgaver totalt: Oppgave 1–5 flervalg/kortsvars (Wiseflow, seksjoner 1–6), Oppgave 6–8 programmering/teori på papir. Eksamen levert digitalt (ingen papirinnlevering).",
+  "sessionNote": null,
+  "status": "complete",
+  "statusCounts": {
+    "complete": 41,
+    "partial": 0,
+    "scanned_only": 0,
+    "missing_solution": 0
+  },
+  "questionCount": 8,
+  "subquestionCount": 41,
+  "questions": [
+    {
+      "number": 2,
+      "anchor": "oppg-2",
+      "points": 6,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt",
+        "junit",
+        "queue-adt",
+        "binary-search",
+        "list-adt",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 1.5,
+          "prompt": "Testmetode x oppretter en stabel og utfører operasjoner. Hva må stå for '?' i assertEquals(?, stabel.peek()) for at testen passerer? Alternativene er e1, e2, e3, e4.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "e1",
+            "shortReasoning": "peek() returnerer det øverste elementet uten å fjerne det. Etter de gitte push/pop-operasjonene er e1 det øverste elementet på stabelen.",
+            "commonMistakes": [
+              "Forveksle peek() (returnerer topp uten fjerning) med pop() (fjerner topp)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stabel og kø",
+              "href": "/dat102/temaer/stacks-and-queues",
+              "kind": "topic",
+              "slug": "stacks-and-queues"
+            },
+            {
+              "label": "JUnit",
+              "href": "/dat102/begreper/junit",
+              "kind": "concept",
+              "slug": "junit"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 1.5,
+          "prompt": "Testmetode y oppretter en kø og utfører operasjoner (innKoe/utKoe). Hva må stå for '?' i assertEquals(?, koe.foerste()) for at testen passerer? Alternativene er e1, e2, e3, e4.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "e3",
+            "shortReasoning": "foerste() returnerer det første elementet i FIFO-køen uten å fjerne det. Etter de gitte operasjonene i testmetoden y er e3 elementet foran i køen.",
+            "commonMistakes": [
+              "Forveksle LIFO-rekkefølge (stabel) med FIFO-rekkefølge (kø)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "true-false",
+          "points": 3,
+          "prompt": "Merk sant/galt for hvert utsagn: (1) Binærsøk krever at tabellen er sortert på forhånd. (2) Å slette et element i en ordnet (sortert) liste tar O(n). (3) Å slette et element i en uordnet liste tar O(n). (4) Å søke etter element som ikke finnes ved binærsøk tar O(n). (5) Å søke etter element i dobbeltkjedet liste tar O(log2 n). (6) Å legge til i en uordnet liste tar O(1).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "rett, rett, rett, galt, galt, rett",
+            "shortReasoning": "(1) Sant — binærsøk forutsetter sortert tabell. (2) Sant — finner plass O(log n) men må flytte elementer O(n). (3) Sant — finner elementet O(n) og kobler fra O(1). (4) Galt — binærsøk er O(log n) selv når element ikke finnes. (5) Galt — søk i kjedet liste er O(n), ikke O(log n). (6) Sant — kan sette inn foran i O(1).",
+            "commonMistakes": [
+              "Tro at binærsøk er O(n) i verste fall",
+              "Glemme at kjedet liste ikke støtter tilfeldig aksess"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Søking",
+              "href": "/dat102/temaer/searching",
+              "kind": "topic",
+              "slug": "searching"
+            },
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "anchor": "oppg-3",
+      "points": 9,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "recursion",
+        "linked-list",
+        "sorting-comparison",
+        "insertion-sort",
+        "quicksort",
+        "shellsort",
+        "complexity-analysis",
+        "heapsort",
+        "merge-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Gitt en rekursiv funksjon f(n, m): beregn f(5, 7) og f(28, 12).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "f(5, 7) = 1; f(28, 12) = 4",
+            "shortReasoning": "Funksjonen beregner GCD (største felles divisor) ved Euklids algoritme: f(n,m) = f(m, n mod m) når n > m, basis f(n,0)=n. f(5,7)→f(7,5)→f(5,2)→f(2,1)→f(1,0)=1. f(28,12)→f(12,4)→f(4,0)=4.",
+            "commonMistakes": [
+              "Glemme at funksjonen er rekursiv og stopper ved m=0"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "multiple-answer",
+          "points": 2,
+          "prompt": "Metoden lengde() kaller en rekursiv hjelpemetode lengde(start). Minst ett av de gitte alternativene er korrekt implementasjon av hjelpemetoden. Velg alle riktige alternativ.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Alternativ 2 (rekke 1) og alternativ 1 (rekke 2) er begge korrekte — de representerer to korrekte rekursive implementasjoner av lengde(Node node).",
+            "shortReasoning": "En korrekt rekursiv lengde-metode har basistilfelle: node==null → return 0; og rekursivt tilfelle: return 1 + lengde(node.getNeste()). Løsningsfilen oppgir 'Nr 2 i rekke 1, Nr 1 i rekke 2'.",
+            "commonMistakes": [
+              "Glemme basistilfelle for null-node",
+              "Returnere feil verdi ved tom liste"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "multiple-answer",
+          "points": 1,
+          "prompt": "Minst en av sorteringsalgoritmene nedenfor er stabil. Hvilken/hvilke? Alternativ: Utvalgssortering (A), Sortering ved innsetting (B), Kvikksortering (C), Haugsortering (D).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — Sortering ved innsetting (Insertion sort)",
+            "shortReasoning": "Insertion sort er stabil fordi like elementer aldri bytter rekkefølge. Selection sort, quicksort og heapsort er i standardimplementasjon ikke stabile.",
+            "commonMistakes": [
+              "Tro at quicksort er stabil",
+              "Tro at heapsort er stabil"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            },
+            {
+              "label": "Insertion sort",
+              "href": "/dat102/begreper/insertion-sort",
+              "kind": "concept",
+              "slug": "insertion-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d1",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "I kvikksortering brukes partition(T[] a, int forste, int siste). Hvilken rekkefølge kan være resultatet etter partition? A: 4 1 2 7 9 3, B: 4 2 1 3 7 9, C: 2 7 3 1 9 4, D: 3 1 4 2 9 7.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — 4 2 1 3 7 9",
+            "shortReasoning": "Etter partition skal alle elementer til venstre for pivot (her 4) være ≤ pivot, og alle til høyre > pivot. Rekkefølgen 4 2 1 3 7 9 oppfyller dette (pivot 4 plassert med 1,2,3 til venstre og 7,9 til høyre).",
+            "commonMistakes": [
+              "Forvente at partition gir en fullstendig sortert tabell"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Quicksort",
+              "href": "/dat102/begreper/quicksort",
+              "kind": "concept",
+              "slug": "quicksort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d2",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Shell sort anvender en av de andre sorteringsmetodene internt. Hvilken? A: Haugsortering, B: Sortering ved innsetting, C: Utvalgssortering, D: Flettesortering.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — Sortering ved innsetting (Insertion sort)",
+            "shortReasoning": "Shell sort er en generalisering av insertion sort. Den bruker insertion sort med varierende steglengde (h-sortering), og avsluttes med h=1 som er vanlig insertion sort.",
+            "commonMistakes": [
+              "Forveksle Shell sort med merge sort eller quicksort"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Shellsort",
+              "href": "/dat102/begreper/shellsort",
+              "kind": "concept",
+              "slug": "shellsort"
+            },
+            {
+              "label": "Insertion sort",
+              "href": "/dat102/begreper/insertion-sort",
+              "kind": "concept",
+              "slug": "insertion-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Hva er orden (O-notasjon) til de ulike sorteringsmetodene: Haugsortering, Sortering ved innsetting, Utvalgssortering, Flettesortering?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Utvalgssortering og Sortering ved innsetting: O(n²). Haugsortering og Flettesortering: O(n log n).",
+            "shortReasoning": "Selection sort og insertion sort har ytre og indre løkke over n → O(n²). Heap sort bruker heapify O(log n) n ganger → O(n log n). Merge sort deler og fletter → T(n) = 2T(n/2) + O(n) → O(n log n).",
+            "commonMistakes": [
+              "Tro at heapsort er O(n²)",
+              "Tro at insertion sort alltid er O(n)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "anchor": "oppg-4",
+      "points": 16,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "tree-traversal",
+        "binary-search-tree",
+        "bst-operations",
+        "heap",
+        "two-three-tree",
+        "balanced-tree"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 1,
+          "prompt": "Gitt et binært tre (figur, side 8): Hvilken rekkefølge besøkes nodene i ved postorden gjennomgang? Svar med tall uten blanke, f.eks. 256789.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "276985",
+            "shortReasoning": "Postorden: venstre undertre → høyre undertre → rot. For treet gitt på s.8 gir dette sekvensen 2,7,6,9,8,5.",
+            "commonMistakes": [
+              "Forveksle postorden (V-H-R) med preorden (R-V-H) eller inorden (V-R-H)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "multiple-answer",
+          "points": 1,
+          "prompt": "Minst ett av trærne vist i figur (s. 9) er et binært søketre. Hvilket/hvilke?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C er binært søketre",
+            "shortReasoning": "Et binært søketre krever at alle noder i venstre undertre har verdi < nodens verdi og alle i høyre > nodens verdi. Kun alternativ C oppfyller BST-egenskapen i figuren.",
+            "commonMistakes": [
+              "Sjekke bare rot og direkte barn, ikke hele undertrærne"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Sett inn elementene 4, 2, 6, 3, 1, 7, 5 (i denne rekkefølgen) i et tomt BS-tre. Hvilket tre får vi?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rot=4; venstre=2 (venstre=1, høyre=3); høyre=6 (venstre=5, høyre=7).",
+            "shortReasoning": "4 er rot. 2<4 → venstre for 4. 6>4 → høyre for 4. 3>2 og <4 → høyre for 2. 1<2 → venstre for 2. 7>6 → høyre for 6. 5<6 → venstre for 6.",
+            "commonMistakes": [
+              "Sette inn elementer uten å følge BST-innsettingsregelen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Eksamen (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-eksamen-samlet.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Gitt maksimumshaugen T (figur, s.11): sett inn 20 og reorganiser. Hvilken sekvens av elementer sammenlignes 20 med? A: 2,4,12,15  B: 3,4,12,15  C: 6,12,15  D: 11,14,15  E: 10,14,15.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — 6, 12, 15",
+            "shortReasoning": "20 settes inn som nytt blad og bobler opp ('sift up'): sammenlignes med foreldre 6, bytter; sammenlignes med 12, bytter; sammenlignes med 15, bytter og blir ny rot.",
+            "commonMistakes": [
+              "Følge feil sti i haugen fra innsettingspunktet til roten"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Hvor mange ulike binære søketrær finnes der når vi har 3 verdier og alle verdiene er ulike? A:1, B:2, C:3, D:4, E:5, F:6.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "E — 5",
+            "shortReasoning": "Catalan-tall C(3)=5. For 3 verdier {1,2,3} er det 5 mulige BST-strukturer: (rot=1,2,3) × (venstre/høyre kombinasjoner) = 5.",
+            "commonMistakes": [
+              "Tenke at det kun finnes 3 mulige trær (en per rot-valg)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "f",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Hva er den største n når et binært tre med n noder (alle verdier ulike) kan være både et BS-tre og en maksimumshaug? A:1, B:2, C:3, D:4, E: For alle n.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — 2",
+            "shortReasoning": "Med n=1: trivielt, både BST og maks-haug. Med n=2: rot er maks (krav for haug) og rot > barn (krav for BST) → mulig. Med n=3: tre noder trenger rot=maks og venstre<rot, høyre<rot. Men BST krever venstre<rot<høyre, så høyre barn > rot — dette er en motsetning med maks-haug-kravet. Dermed er n=2 størst.",
+            "commonMistakes": [
+              "Ikke se at BST-kravet (venstre < rot < høyre) og maks-haug-kravet (rot ≥ barn) er uforenlige for n≥3"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            },
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "g",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Sett 2 inn i 2-3-treet T1 (figur, s.13) etter kjent prinsipp. Alternativene er figurer A–E.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Alternativ C (figur-basert svar fra løsningsfilen)",
+            "shortReasoning": "2-3-tre innsetting: finn korrekt blad, sett inn, del opp noder ved overflow. Løsningsfilen markerer C som korrekt svar.",
+            "commonMistakes": [
+              "Glemme å propagere split oppover treet"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "h",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Sett 15 inn i 2-3-treet T2 (figur, s.14) etter kjent prinsipp. Alternativene er figurer A–E.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Alternativ A (figur-basert svar fra løsningsfilen)",
+            "shortReasoning": "2-3-tre innsetting av 15 i T2: finn riktig løvnode, sett inn, del opp ved overflow og juster foreldrenoder. Løsningsfilen markerer A som korrekt svar.",
+            "commonMistakes": [
+              "Plassere 15 feil i treet basert på feil sammenligning"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "i",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Hvor mange ulike minimumshauger finnes det når vi har 3 verdier som alle er ulike? A:1, B:2, C:3, D:4, E:5, F:6.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — 2",
+            "shortReasoning": "Minimumshaug: minste verdi er alltid rot. For 3 ulike verdier {a<b<c} er a alltid rot; b og c kan bytte plass som venstre/høyre barn → 2 mulige hauger.",
+            "commonMistakes": [
+              "Tro at det kun finnes 1 mulig minimumshaug for 3 elementer"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Haug",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "j",
+          "qtype": "trace",
+          "points": 1.5,
+          "prompt": "BS-treet T1 (figur, s.15) skal balanseres med en venstrerotasjon. Hva blir resultatet? Alternativene er figurer 1–4.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Alternativ B (figur-basert svar fra løsningsfilen — venstrerotasjon om roten)",
+            "shortReasoning": "Venstrerotasjon: høyre barn blir ny rot, gammel rot blir venstre barn til ny rot, og høyre barnets venstre undertre blir gammel rots høyre undertre. Løsningsfilen markerer B som korrekt.",
+            "commonMistakes": [
+              "Forveksle venstrerotasjon og høyrerotasjon"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balanserte trær",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "k",
+          "qtype": "single-choice",
+          "points": 1.5,
+          "prompt": "BS-treet T2 (s.16) skal balanseres. Hvordan gjøres dette? A: Kun venstrerotasjon om 5. B: Kun høyrerotasjon om 8. C: Først høyrerotasjon om 8, så venstrerotasjon om 5. D: Først venstrerotasjon om 5, så høyrerotasjon om 8.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — Først en høyrerotasjon om 8 og så en venstrerotasjon om 5",
+            "shortReasoning": "T2 er en venstre-høyre ubalanse (zig-zag). Korreksjon: høyrerotasjon om 8 (brekker zig-zag), deretter venstrerotasjon om 5 (gjenoppretter balanse). Dette er dobbeltrotasjon (LR-rotasjon).",
+            "commonMistakes": [
+              "Gjøre enkeltrotasjon i stedet for dobbeltrotasjon ved zig-zag"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balanserte trær",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "anchor": "oppg-5",
+      "points": 6,
+      "topic": "graphs",
+      "conceptSlugs": [
+        "topological-sort",
+        "adjacency-matrix",
+        "adjacency-list",
+        "hash-table",
+        "open-addressing"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 2,
+          "prompt": "Figuren (s.17) viser en rettet graf. Angi en topologisk ordning av nodene. Svar med tall, f.eks. 12345.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "21354",
+            "shortReasoning": "Topologisk ordning: noder uten innkommende kanter plasseres først. For den gitte grafen er 21354 én gyldig topologisk rekkefølge (løsningsfilen bekrefter dette).",
+            "commonMistakes": [
+              "Legge til noder som fortsatt har uoppfylte avhengigheter"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            },
+            {
+              "label": "Topologisk sortering",
+              "href": "/dat102/begreper/topological-sort",
+              "kind": "concept",
+              "slug": "topological-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "short-answer",
+          "points": 1,
+          "prompt": "Hvilken grafrepresentasjon bør velges for å gjøre følgende operasjoner raskest: (1) Avgjøre om to noder er naboer, (2) Finne alle naboene til en node?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(1) Nabomatrise — direkte oppslag i M[v][w]. (2) Naboliste — leser nabolisten til v direkte for å finne naboene.",
+            "shortReasoning": "Nabomatrise lar deg sjekke naboskap ved direkte indeksering i tabellen. Naboliste er mer effektiv for å iterere over alle naboer siden den kun lagrer eksisterende kanter.",
+            "commonMistakes": [
+              "Velge nabomatrise for å finne alle naboer (da må man skanne en hel matriserad i stedet for å lese nabolisten direkte)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            },
+            {
+              "label": "Nabomatrise",
+              "href": "/dat102/begreper/adjacency-matrix",
+              "kind": "concept",
+              "slug": "adjacency-matrix"
+            },
+            {
+              "label": "Naboliste",
+              "href": "/dat102/begreper/adjacency-list",
+              "kind": "concept",
+              "slug": "adjacency-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Sett inn studentnumrene 512273, 62200, 411299, 544174, 400199 i denne rekkefølgen i en hash-tabell med lengde 10. Hash-funksjon = siste siffer. Lineær åpen adressering med steglengde +1. Vis plasseringen i tabellen (posisjon 0–9).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "pos 0: 622200, pos 1: tom, pos 2: 400329 (OBS: 400199 i spørsmålet, men løsningsfilen bruker 400329), pos 3: 512273, pos 4: 544174, pos 5–8: tom, pos 9: 411299.",
+            "shortReasoning": "Hash(512273)=3 → pos 3. Hash(62200)=0 → pos 0. Hash(411299)=9 → pos 9. Hash(544174)=4 → pos 4. Hash(400199)=9 → opptatt, probe +1=0 opptatt, probe +1=1 → pos 1. NB: løsningsfilen oppgir '200, 329, tom, 273, 174, tom, tom, tom, tom, 299' for siste 3 siffer.",
+            "commonMistakes": [
+              "Glemme å probe videre ved kollisjon",
+              "Hash feil siffer (f.eks. første i stedet for siste)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Ordbøker og hashing",
+              "href": "/dat102/temaer/dictionaries-and-hashing",
+              "kind": "topic",
+              "slug": "dictionaries-and-hashing"
+            },
+            {
+              "label": "Hash-tabell",
+              "href": "/dat102/begreper/hash-table",
+              "kind": "concept",
+              "slug": "hash-table"
+            },
+            {
+              "label": "Åpen adressering",
+              "href": "/dat102/begreper/open-addressing",
+              "kind": "concept",
+              "slug": "open-addressing"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 51"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "anchor": "oppg-6",
+      "points": 3,
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Kjøretidsfunksjonen f(n) = 5n log₂n + 4n² + 2n + 50 log₂n + 3000. Hva er orden i stor O-notasjon? A: O(3000), B: O(log₂n), C: O(n²), D: O(n), E: O(n log₂n).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — O(n²)",
+            "shortReasoning": "Dominerende ledd i f(n) er 4n² (raskest voksende). O-notasjon beholder bare det dominerende leddet og dropper koeffisienter: O(n²).",
+            "commonMistakes": [
+              "Velge O(n log n) fordi det er 'kjent', ignorere n²-leddet"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            },
+            {
+              "label": "Stor O-notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 46"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Kodesnutten har en nestet løkke: ytre i=1..n, indre j=1..i, sum=sum+1. Hva er riktig beskrivelse? A: n ganger → O(n). B: n ganger → O(n²). C: 1+2+..+n = n(n+1)/2 → O(n²). D: 1+2+..+n = n(n+1)/2 → O(n). E: n·n = n² → O(n²).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C — Setningen utføres 1+2+3+…+n = n(n+1)/2 ganger som gir O(n²)",
+            "shortReasoning": "Den indre løkken kjører i iterasjoner for ytre iterasjon i. Totalt: Σi=1 til n av i = n(n+1)/2 ≈ n²/2 → O(n²). Alternativ E er feil fordi den indre løkken ikke alltid kjører n ganger.",
+            "commonMistakes": [
+              "Telle indre løkke som alltid n iterasjoner (gir n² men feil begrunnelse)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 46"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "anchor": "oppg-7",
+      "points": null,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "queue-adt",
+        "linked-node"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Klassen KjedetKoe<T> har felt foran og bak. Lag konstruktøren KjedetKoe(T element) som oppretter en kø med ett element.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "LinearNode<T> nyNode = new LinearNode(element); foran = bak = nyNode;",
+            "shortReasoning": "Opprett en ny LinearNode med elementet, og pek både foran og bak til denne noden (køen har nøyaktig ett element).",
+            "commonMistakes": [
+              "Glemme å sette bak=nyNode (bak-referansen er nødvendig for innKoe)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 54"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden innKoe(T element) som setter inn et element i køen KjedetKoe.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Opprett nyNode; hvis erTom sett foran=nyNode, ellers bak.setNeste(nyNode); bak = nyNode.",
+            "shortReasoning": "FIFO-kø setter inn bak: ny node kobles til eksisterende bakre node (bak.setNeste), deretter oppdateres bak-referansen. Spesialtilfelle: tom kø setter også foran=nyNode.",
+            "commonMistakes": [
+              "Glemme spesialtilfellet for tom kø",
+              "Oppdatere foran i stedet for bak"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 54"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden utKoe() som returnerer og fjerner elementet fra fronten av køen KjedetKoe.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "T resultat = foran.getElement(); foran = foran.getNeste(); if (foran==null) bak=null; return resultat;",
+            "shortReasoning": "Hent element fra foran, flytt foran-peker til neste node. Hvis køen nå er tom (foran==null) settes bak=null for konsistens.",
+            "commonMistakes": [
+              "Glemme å sette bak=null når siste element fjernes"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 54"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden foerste() som returnerer en peker til elementet som er først i køen uten å fjerne det.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "T resultat = foran.getElement(); return resultat;",
+            "shortReasoning": "Returnerer elementet på foran-noden uten å endre strukturen. Kaster EmptyCollectionException om køen er tom (håndteres av eksisterende sjekk i koden).",
+            "commonMistakes": [
+              "Fjerne elementet (gjøre utKoe) i stedet for å bare returnere det"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 54"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden toString() for KjedetKoe som lager en strengrepresentasjon av elementene i køen.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Iterer fra foran-noden med while (aktuell != null): resultat += aktuell.getElement().toString() + '\\n'; aktuell = aktuell.getNeste();",
+            "shortReasoning": "Traverser den kjedede strukturen fra foran til siste node og bygg opp strengen element for element.",
+            "commonMistakes": [
+              "Glemme å traversere hele kjeden",
+              "Legge til separator feil (ekstra linjeskift til slutt er OK)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 54"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "anchor": "oppg-8",
+      "points": null,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations",
+        "tree-traversal",
+        "recursion"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden finnMaks() i KjedetBSTre<T> som returnerer det største elementet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Iterer mot høyre fra rot: while (aktuell.getHoyre() != null) aktuell = aktuell.getHoyre(); return aktuell.getElement();",
+            "shortReasoning": "I et BST er det største elementet i det høyeste høyre hjørnet. Iterer langs høyre barn til ingen høyre barn finnes.",
+            "commonMistakes": [
+              "Søke i venstre undertre i stedet for høyre"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 57"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag metoden fjernMaks() i KjedetBSTre<T> som returnerer og fjerner det største elementet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Finn nest-høyre node (foreldre), koble foreldre.setHoyre(aktuell.getVenstre()), returner aktuell.getElement(). Spesialtilfelle: rot har ingen høyre barn → rot = rot.getVenstre().",
+            "shortReasoning": "Fjern høyeste høyre node. Dens eventuelle venstre undertre kobles til foreldrenoden. To tilfeller: rot er maks (spesialtilfelle) eller maks er lenger nede.",
+            "commonMistakes": [
+              "Ikke håndtere tilfellet der maks-noden har venstre undertre"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 57"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Lag den rekursive private metoden skrivPostorden(BinaerTreNode<T> p) som skriver ut alle elementer i postorden.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if (p != null) { skrivPostorden(p.getVenstre()); skrivPostorden(p.getHoyre()); System.out.print(p.getElement() + ' '); }",
+            "shortReasoning": "Postorden: rekursivt besøk venstre undertre, deretter høyre undertre, deretter utskrift av rot. Basistilfelle: p==null → gjør ingenting.",
+            "commonMistakes": [
+              "Skrive ut noden før de rekursive kallene (preorden) eller mellom dem (inorden)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tretraversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 58"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Implementer den private hjelpemetoden finnNr_k(BinaerTreNode<T> p, int k) som finner elementet på plass nr k i sortert rekkefølge, gitt at noder har antallVU og antallHU.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if (p.getAntallVU()==k-1) return p.getElement(); if (p.getAntallVU()>k-1) return finnNr_k(p.getVenstre(), k); else return finnNr_k(p.getHoyre(), k - p.getAntallVU() - 1);",
+            "shortReasoning": "Utnytter antallVU: om venstre undertre har k-1 noder er roten på plass k. Om > k-1 noder til venstre, søk til venstre. Ellers søk til høyre med justert k.",
+            "commonMistakes": [
+              "Ikke justere k riktig ved søk til høyre",
+              "Ikke håndtere basistilfellet antallVU==k-1"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BST-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            },
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 58"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "anchor": "oppg-9",
+      "points": null,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "binary-search",
+        "selection-sort",
+        "merge-sort",
+        "recursion",
+        "radix-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv kode for binærsøk i en deltabell: public static <T extends Comparable<T>> T binaerSoek(T[] data, int min, int maks, T element). Returner element om funnet, null ellers.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rekursiv implementasjon: basistilfelle min>maks → return null; midten=(min+maks)/2; compareTo==0 → return data[midten]; <0 → søk venstre; >0 → søk høyre.",
+            "shortReasoning": "Binærsøk halverer søkerommet ved hvert steg. To basistilfeller: element funnet (compareTo==0) og tom del å søke i (min>maks).",
+            "commonMistakes": [
+              "Glemme å sjekke min>maks som basistilfelle",
+              "Glemme å returnere null ved ikke funnet"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 61"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Forklar prinsippet for utvalgssortering (selection sort) og sorter [5, 3, 1, 6, 2] for hånd. Vis innholdet etter hvert gjennomløp av den ytre løkken.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Etter gjennomløp 1: [1, 3, 5, 6, 2]. Gjennomløp 2: [1, 2, 5, 6, 3]. Gjennomløp 3: [1, 2, 3, 6, 5]. Gjennomløp 4: [1, 2, 3, 5, 6].",
+            "shortReasoning": "Selection sort finner minste element i usortert del og bytter med første usorterte plass. Etter 4 gjennomløp er tabellen sortert.",
+            "commonMistakes": [
+              "Forveksle selection sort (finner minimum) med insertion sort (setter inn på rett plass)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            },
+            {
+              "label": "Selection sort",
+              "href": "/dat102/begreper/selection-sort",
+              "kind": "concept",
+              "slug": "selection-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 62"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "ci",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Beskriv hva hjelpemetoden flette(T[] a, T[] tempTab, int forste, int midten, int siste) gjør i flettesortering.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "flette() slår sammen to sorterte deler (forste..midten og midten+1..siste) til én sortert del ved å sammenligne elementer og kopiere til tempTab.",
+            "shortReasoning": "Metoden antar at begge halvdeler er sortert, og fletter dem til en samlet sortert sekvens ved å velge minste element fra enten venstre eller høyre halvdel.",
+            "commonMistakes": [
+              "Beskrive rekursjonen i stedet for selve flette-operasjonen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 62"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "cii",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Skriv den rekursive metoden flettesortering(T[] a, T[] tempTab, int forste, int siste) som bruker flette(...).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if (forste >= siste) return; int midtpkt=(forste+siste)/2; flettesortering(a,tempTab,forste,midtpkt); flettesortering(a,tempTab,midtpkt+1,siste); flette(a,tempTab,forste,midtpkt,siste);",
+            "shortReasoning": "Del-og-hersk: basistilfelle forste>=siste (ett eller ingen element). Ellers: del ved midtpunkt, sorter begge halvdeler rekursivt, flett resultater.",
+            "commonMistakes": [
+              "Kalle flette() før de rekursive kallene",
+              "Glemme basistilfelle"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 62"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "ciii",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Vis hvordan tabellen [4, 8, 3, 1, 9, 7, 2, 0] sorteres med flettesortering (oppdeling og sammensetting).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Del: [4,8,3,1] + [9,7,2,0] → [4,8]+[3,1]+[9,7]+[2,0] → enkelelementer. Flett: [4,8], [1,3], [7,9], [0,2] → [1,3,4,8], [0,2,7,9] → [0,1,2,3,4,7,8,9].",
+            "shortReasoning": "Rekursiv oppdeling til enkelelementer, deretter fletting parvis til sortert resultat. Sluttresultat: [0,1,2,3,4,7,8,9].",
+            "commonMistakes": [
+              "Glemme å mergesortere begge halvdeler rekursivt"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Flettesortering",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 62"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "di",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Sorter disse strengene med radix-sortering: 'bcd', 'daa', 'cda', 'cbd', 'dcd', 'abb', 'acc', 'ddc', 'cdb'. Tegn er i område 'a'–'d', 4 køer. Vis fordeling etter hvert gjennomgang.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Gjennomgang 1 (siste tegn): Kø-a: daa,cda; Kø-b: abb,cdb; Kø-c: acc,ddc; Kø-d: bcd,cbd,dcd. Gjennomgang 2 (midtre tegn): Kø-a: daa; Kø-b: abb,cbd; Kø-c: acc,bcd,dcd; Kø-d: cda,cdb,ddc. Gjennomgang 3 (første tegn): Kø-a: abb,acc; Kø-b: bcd; Kø-c: cbd,cda,cdb; Kø-d: daa,dcd,ddc. Sluttresultat: abb,acc,bcd,cbd,cda,cdb,daa,dcd,ddc.",
+            "shortReasoning": "Radix sort prosesserer fra høyeste til laveste posisjon (MSD) eller laveste til høyeste (LSD). Her vises LSD: start med siste tegn, fordel i køer per tegn, slå sammen, gjenta for neste posisjon.",
+            "commonMistakes": [
+              "Begynne med første tegn i stedet for siste (ved LSD radix sort)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            },
+            {
+              "label": "Radix sort",
+              "href": "/dat102/begreper/radix-sort",
+              "kind": "concept",
+              "slug": "radix-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 63"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "dii",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Forklar kort hvordan radix-sortering fungerer for strenger.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rad-sortering oppretter én kø per lovlig tegn. Den går gjennom alle elementer like mange ganger som det er tegn i den lengste strengen — fra siste til første tegn. Elementer fordeles i køer basert på aktuelt tegn og tas ut igjen i rekkefølge etter hvert gjennomgang.",
+            "shortReasoning": "Prinsippet er LSD (Least Significant Digit first): stabil fordeling på hvert siffer/tegn bevarer rekkefølgen fra tidligere gjennomganger.",
+            "commonMistakes": [
+              "Beskrive sortering som ustabil (radix sort er stabil)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Radix sort",
+              "href": "/dat102/begreper/radix-sort",
+              "kind": "concept",
+              "slug": "radix-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2023-vaar",
+                "internalPath": "processed/reviewed/exams/2023-vaar.md"
+              },
+              {
+                "label": "V23 Løsningsforslag (samlet)",
+                "internalPath": "structured/exams/2023-vaar/exam-2023-vaar-losningsforslag-samlet.md",
+                "pages": "s. 63"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

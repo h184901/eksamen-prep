@@ -1,0 +1,23 @@
+{
+  "syncedAt": "2026-06-09T22:32:41.673Z",
+  "vaultPath": "ObsidianVault/DAT102/processed/reviewed",
+  "counts": {
+    "concepts": 60,
+    "topics": 14,
+    "quizQuestions": 109,
+    "flashcards": 80,
+    "matchingPairs": 60,
+    "drills": 42,
+    "exams": 8,
+    "examQuestions": 66,
+    "examSubquestions": 260,
+    "obliger": 6,
+    "examPatterns": 3,
+    "lectures": 32,
+    "wikilinkRoutes": 87,
+    "wikilinkAliases": 192,
+    "wikilinkAnchors": 72,
+    "bodyWikilinksResolved": 163,
+    "bodyWikilinksStubbed": 0
+  }
+}

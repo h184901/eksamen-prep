@@ -12,6 +12,7 @@ const navItems = [
   { href: "/ing164", label: "ING164 Fysikk", short: "ING164" },
   { href: "/dat109", label: "DAT109 Systemutvikling", short: "DAT109" },
   { href: "/dat110", label: "DAT110 Nettverk", short: "DAT110" },
+  { href: "/dat102", label: "DAT102 Algoritmer", short: "DAT102" },
   { href: "/dat107", label: "DAT107 Databaser", short: "DAT107" },
 ];
 

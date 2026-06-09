@@ -1,0 +1,1923 @@
+{
+  "drills": [
+    {
+      "id": "dat102-drill-001",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "complexity-analysis"
+      ],
+      "title": "Identifiser dominerende ledd – f(n) = 5n log n + 4n² + 3n + 7",
+      "qtype": "calculation",
+      "difficulty": "easy",
+      "prompt": "Gitt funksjonen f(n) = 5n log n + 4n² + 3n + 7, hvilken O-notasjon beskriver kjøretiden?",
+      "expectedSteps": [
+        "List alle ledd: 5n log n, 4n², 3n, 7.",
+        "Identifiser vekstratene: n log n < n² (n² dominerer).",
+        "Dropp konstante faktorer: 4n² → n².",
+        "Konkluder: f(n) = O(n²)."
+      ],
+      "finalAnswer": "O(n²)",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Asymptotisk analyse",
+          "href": "/dat102/temaer/asymptotic-analysis",
+          "kind": "topic",
+          "slug": "asymptotic-analysis"
+        },
+        {
+          "label": "Big-O-notasjon",
+          "href": "/dat102/begreper/big-o-notation",
+          "kind": "concept",
+          "slug": "big-o-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F04)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F04 LenketBag og Analyse",
+            "internalPath": "structured/lectures/bergen/bergen-f04-lenketbag-og-analyse.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-002",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "complexity-analysis"
+      ],
+      "title": "Analyse av nestet løkke – sum 1+2+…+n",
+      "qtype": "calculation",
+      "difficulty": "medium",
+      "prompt": "Analyser kjøretiden til følgende kodesnippet:\n\nint sum = 0;\nfor (int i = 1; i <= n; i++) {\n    for (int j = 1; j <= i; j++) {\n        sum++;\n    }\n}\n\nHvor mange ganger utføres `sum++`? Hva er O-orden?",
+      "expectedSteps": [
+        "Den ytre løkken kjører i = 1, 2, …, n.",
+        "For hvert i kjører den indre løkken i ganger.",
+        "Totalt antall iterasjoner = 1 + 2 + … + n = n(n+1)/2.",
+        "n(n+1)/2 = ½n² + ½n → dominerende ledd er n².",
+        "Kjøretid: O(n²)."
+      ],
+      "finalAnswer": "O(n²)",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Asymptotisk analyse",
+          "href": "/dat102/temaer/asymptotic-analysis",
+          "kind": "topic",
+          "slug": "asymptotic-analysis"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F05)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F05 Stabel",
+            "internalPath": "structured/lectures/bergen/bergen-f05-stabel.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-003",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "growth-rates"
+      ],
+      "title": "Ranger vekstrater fra raskest til tregst",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Ranger disse kjøretidsfunksjonene fra mest til minst effektiv (lavest til høyest vekst): O(n²), O(1), O(n log n), O(log n), O(n), O(2ⁿ).",
+      "expectedSteps": [
+        "O(1) er konstant – best.",
+        "O(log n) vokser saktere enn lineær.",
+        "O(n) er lineær.",
+        "O(n log n) er litt tregere enn lineær.",
+        "O(n²) er kvadratisk.",
+        "O(2ⁿ) er eksponentiell – verst."
+      ],
+      "finalAnswer": "O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Vekstrater",
+          "href": "/dat102/begreper/growth-rates",
+          "kind": "concept",
+          "slug": "growth-rates"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F05)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F05 Stabel",
+            "internalPath": "structured/lectures/bergen/bergen-f05-stabel.md"
+          },
+          {
+            "label": "F04 LenketBag og Analyse",
+            "internalPath": "structured/lectures/bergen/bergen-f04-lenketbag-og-analyse.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-004",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursion"
+      ],
+      "title": "Beregn rekursiv funksjon f(n,m) – eksamen 2023 seksjon 3a",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Gitt rekursiv metode fra eksamen 2023:\n\nint f(int n, int m) {\n    if (n == 0) return m;\n    return f(n - 1, n + m);\n}\n\nBeregn f(3, 0) og f(2, 1) ved å trace kall-stabelen.",
+      "expectedSteps": [
+        "f(3,0): kaller f(2, 3+0) = f(2,3).",
+        "f(2,3): kaller f(1, 2+3) = f(1,5).",
+        "f(1,5): kaller f(0, 1+5) = f(0,6).",
+        "f(0,6): basistilfelle, returnerer 6.",
+        "Dermed f(3,0) = 6.",
+        "f(2,1): kaller f(1, 2+1) = f(1,3) → f(0,4) → 4.",
+        "Dermed f(2,1) = 4."
+      ],
+      "finalAnswer": "f(3,0) = 6; f(2,1) = 4",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F06)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F06 Rekursjon 1",
+            "internalPath": "structured/lectures/bergen/bergen-f06-rekursjon1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-005",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursion",
+        "recursive-vs-iterative"
+      ],
+      "title": "Antall måter å gå opp trapp – rekursiv analyse",
+      "qtype": "calculation",
+      "difficulty": "medium",
+      "prompt": "Metoden `antallMaater(int trinn)` returnerer antall måter å gå opp en trapp med `trinn` trinn, der hvert steg er 1 eller 2 trinn. Beregn antallMaater(1), antallMaater(2), antallMaater(3), antallMaater(4) og antallMaater(5).",
+      "expectedSteps": [
+        "antallMaater(1) = 1 (kun ett skritt).",
+        "antallMaater(2) = 2 (1+1 eller 2).",
+        "antallMaater(3) = antallMaater(2) + antallMaater(1) = 2 + 1 = 3.",
+        "antallMaater(4) = antallMaater(3) + antallMaater(2) = 3 + 2 = 5.",
+        "antallMaater(5) = antallMaater(4) + antallMaater(3) = 5 + 3 = 8.",
+        "Mønsteret er Fibonacci-lignende rekursjon."
+      ],
+      "finalAnswer": "1, 2, 3, 5, 8",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F06)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2025-jan",
+            "internalPath": "processed/reviewed/exams/2025-jan.md"
+          },
+          {
+            "label": "F06 Rekursjon 1",
+            "internalPath": "structured/lectures/bergen/bergen-f06-rekursjon1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-006",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "selection-sort"
+      ],
+      "title": "Selection sort for hånd – [5, 3, 1, 6, 2]",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Sorter tabellen [5, 3, 1, 6, 2] med utvalgsortering (selection sort). Vis tabellen etter hvert pass.",
+      "expectedSteps": [
+        "Pass 1: finn minste i [5,3,1,6,2] = 1 (indeks 2), bytt med indeks 0 → [1, 3, 5, 6, 2].",
+        "Pass 2: finn minste i [3,5,6,2] = 2 (indeks 4), bytt med indeks 1 → [1, 2, 5, 6, 3].",
+        "Pass 3: finn minste i [5,6,3] = 3 (indeks 4), bytt med indeks 2 → [1, 2, 3, 6, 5].",
+        "Pass 4: finn minste i [6,5] = 5 (indeks 4), bytt med indeks 3 → [1, 2, 3, 5, 6].",
+        "Tabell sortert."
+      ],
+      "finalAnswer": "[1, 2, 3, 5, 6]",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Utvalgsortering",
+          "href": "/dat102/begreper/selection-sort",
+          "kind": "concept",
+          "slug": "selection-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F08)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F08 Sortering 1",
+            "internalPath": "structured/lectures/bergen/bergen-f08-sortering-1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-007",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort"
+      ],
+      "title": "Insertion sort for hånd – [5, 3, 1, 6, 2]",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Sorter tabellen [5, 3, 1, 6, 2] med sortering ved innsetting (insertion sort). Vis tabellen etter hver iterasjon.",
+      "expectedSteps": [
+        "Start: [5, 3, 1, 6, 2]. Nøkkel = 3: sett inn foran 5 → [3, 5, 1, 6, 2].",
+        "Nøkkel = 1: flytt 5 og 3 → [1, 3, 5, 6, 2].",
+        "Nøkkel = 6: 6 > 5, ingen flytting → [1, 3, 5, 6, 2].",
+        "Nøkkel = 2: flytt 6, 5, 3 → [1, 2, 3, 5, 6].",
+        "Tabell sortert."
+      ],
+      "finalAnswer": "[1, 2, 3, 5, 6]",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Sortering ved innsetting",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F08)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2022-vaar",
+            "internalPath": "processed/reviewed/exams/2022-vaar.md"
+          },
+          {
+            "label": "F08 Sortering 1",
+            "internalPath": "structured/lectures/bergen/bergen-f08-sortering-1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-008",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort"
+      ],
+      "title": "Insertion sort leksikografisk – [delfin, eple, fot, and, bok, cirka]",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Kjør insertion sort leksikografisk på listen [delfin, eple, fot, and, bok, cirka]. Vis listen etter hver iterasjon av den ytre løkken.",
+      "expectedSteps": [
+        "Start: [delfin, eple, fot, and, bok, cirka].",
+        "i=1, nøkkel=eple: delfin < eple, ingen flytting → [delfin, eple, fot, and, bok, cirka].",
+        "i=2, nøkkel=fot: eple < fot, ingen flytting → [delfin, eple, fot, and, bok, cirka].",
+        "i=3, nøkkel=and: flytt fot, eple, delfin → [and, delfin, eple, fot, bok, cirka].",
+        "i=4, nøkkel=bok: flytt fot, eple, delfin; and < bok → [and, bok, delfin, eple, fot, cirka].",
+        "i=5, nøkkel=cirka: flytt fot, eple, delfin; bok < cirka → [and, bok, cirka, delfin, eple, fot]."
+      ],
+      "finalAnswer": "[and, bok, cirka, delfin, eple, fot]",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Sortering ved innsetting",
+          "href": "/dat102/begreper/insertion-sort",
+          "kind": "concept",
+          "slug": "insertion-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F08)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2025-jan",
+            "internalPath": "processed/reviewed/exams/2025-jan.md"
+          },
+          {
+            "label": "F08 Sortering 1",
+            "internalPath": "structured/lectures/bergen/bergen-f08-sortering-1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-009",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "shellsort",
+        "insertion-sort"
+      ],
+      "title": "Shell sort med h=4 – [5,4,3,2,9,8,7,6]",
+      "qtype": "trace",
+      "difficulty": "hard",
+      "prompt": "Gitt tabellen [5,4,3,2,9,8,7,6], kjør shell sort med første steglengde h=4, deretter h=2, så h=1. Vis tabellen etter hvert gjennomløp.",
+      "expectedSteps": [
+        "h=4: sammenlign par med avstand 4: (5,9),(4,8),(3,7),(2,6) – alle allerede i riktig rekkefølge (5<9, 4<8, 3<7, 2<6). Ingen bytter → [5,4,3,2,9,8,7,6].",
+        "h=2: insertion sort med steglengde 2. Kjede 0,2,4,6: [5,3,9,7] → insertion sort → [3,_,5,_,7,_,9,_]. Kjede 1,3,5,7: [4,2,8,6] → [2,_,4,_,6,_,8,_]. Resultat: [3,2,5,4,7,6,9,8].",
+        "h=1: insertion sort på hele tabellen [3,2,5,4,7,6,9,8] → [2,3,4,5,6,7,8,9]."
+      ],
+      "finalAnswer": "[2,3,4,5,6,7,8,9]",
+      "figureNote": "Eksamen 2026 vår oppgave 8a. Hvert h-pass er en insertion sort over delsekvenser med gitt steglengde.",
+      "learnMoreLinks": [
+        {
+          "label": "Shellsortering",
+          "href": "/dat102/begreper/shellsort",
+          "kind": "concept",
+          "slug": "shellsort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F08)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2026-vaar",
+            "internalPath": "processed/reviewed/exams/2026-vaar.md"
+          },
+          {
+            "label": "F08 Sortering 1",
+            "internalPath": "structured/lectures/bergen/bergen-f08-sortering-1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-010",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "merge-sort",
+        "divide-and-conquer"
+      ],
+      "title": "Merge sort trace – [4,8,3,1,9,7,2,0]",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Vis flettesortering (merge sort) av tabellen [4,8,3,1,9,7,2,0]. Vis oppdeling og fletting steg for steg.",
+      "expectedSteps": [
+        "Del i to: [4,8,3,1] og [9,7,2,0].",
+        "Del videre: [4,8] og [3,1]; [9,7] og [2,0].",
+        "Del til enkelt-elementer: [4],[8],[3],[1],[9],[7],[2],[0].",
+        "Flett [4],[8] → [4,8]; flett [3],[1] → [1,3]; flett [9],[7] → [7,9]; flett [2],[0] → [0,2].",
+        "Flett [4,8] og [1,3] → [1,3,4,8]; flett [7,9] og [0,2] → [0,2,7,9].",
+        "Flett [1,3,4,8] og [0,2,7,9] → [0,1,2,3,4,7,8,9]."
+      ],
+      "finalAnswer": "[0,1,2,3,4,7,8,9]",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F09)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-011",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "merge-sort"
+      ],
+      "title": "Merge sort stabilitet og in-place – [6, 1, 4, 2]",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Forklar flettesortering av [6, 1, 4, 2] og svar: (a) Er merge sort stabil? (b) Er den in-place?",
+      "expectedSteps": [
+        "Del [6,1,4,2] → [6,1] og [4,2].",
+        "Del [6,1] → [6] og [1]; del [4,2] → [4] og [2].",
+        "Flett [6],[1] → [1,6]; flett [4],[2] → [2,4].",
+        "Flett [1,6] og [2,4] → [1,2,4,6].",
+        "(a) Stabil: ja – like elementer beholder relativ rekkefølge fordi vi velger venstre-elementet ved likhet.",
+        "(b) In-place: nei – krever ekstra hjelpe-tabell for fletting."
+      ],
+      "finalAnswer": "Sortert: [1,2,4,6]. Stabil: ja. In-place: nei.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Flettesortering",
+          "href": "/dat102/begreper/merge-sort",
+          "kind": "concept",
+          "slug": "merge-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F09)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2026-jan",
+            "internalPath": "processed/reviewed/exams/2026-jan.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-012",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "radix-sort"
+      ],
+      "title": "Radix sort – 2-sifrede tall i 5-tallsystem",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Radixsorter følgende 2-sifrede tall i 5-tallsystemet: [12, 30, 44, 21, 32, 04, 02, 33, 23]. Sorter først etter siste siffer (LSD), deretter etter første siffer.",
+      "expectedSteps": [
+        "Pass 1 (siste siffer, LSD): grupper stabilt etter siste siffer (i input-rekkefølge): 0→[30], 1→[21], 2→[12,32,02], 3→[33,23], 4→[44,04]. Ny rekkefølge: [30,21,12,32,02,33,23,44,04].",
+        "Pass 2 (første siffer, MSD): grupper stabilt etter første siffer: 0→[02,04], 1→[12], 2→[21,23], 3→[30,32,33], 4→[44]. Ny rekkefølge: [02,04,12,21,23,30,32,33,44].",
+        "Tabell sortert. Stabil gruppering i hvert pass (kø-rekkefølgen bevares) er det som gjør LSD-til-MSD-radixsortering korrekt."
+      ],
+      "finalAnswer": "[02,04,12,21,23,30,32,33,44]",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Radixsortering",
+          "href": "/dat102/begreper/radix-sort",
+          "kind": "concept",
+          "slug": "radix-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F09)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2022-vaar",
+            "internalPath": "processed/reviewed/exams/2022-vaar.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-013",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "radix-sort"
+      ],
+      "title": "Radix sort i 5-tallsystem (med pad) – [1000, 1234, 4321, 1001, 202, 33, 4]",
+      "qtype": "trace",
+      "difficulty": "hard",
+      "prompt": "Radixsorter [1000, 1234, 4321, 1001, 202, 33, 4] i 5-tallsystemet. Alle tall paddes med ledende nuller til 4 sifre. Sorter LSD-til-MSD (4 pass).",
+      "expectedSteps": [
+        "Pad: [1000, 1234, 4321, 1001, 0202, 0033, 0004].",
+        "Pass 1 (siste siffer, LSD): 0→[1000], 1→[4321,1001], 2→[0202], 3→[0033], 4→[1234,0004]. Ny rekkefølge: [1000,4321,1001,0202,0033,1234,0004].",
+        "Pass 2 (nest siste siffer): 0→[1000,1001,0202,0004], 2→[4321], 3→[0033,1234]. Ny rekkefølge: [1000,1001,0202,0004,4321,0033,1234].",
+        "Pass 3 (nest første siffer): 0→[1000,1001,0004,0033], 2→[0202,1234], 3→[4321]. Ny rekkefølge: [1000,1001,0004,0033,0202,1234,4321].",
+        "Pass 4 (første siffer, MSD): 0→[0004,0033,0202], 1→[1000,1001,1234], 4→[4321]. Ny rekkefølge: [0004,0033,0202,1000,1001,1234,4321].",
+        "Fjern ledende nuller: [4,33,202,1000,1001,1234,4321]. Stabil gruppering i hvert pass (kø-rekkefølgen bevares) er det som gjør LSD-til-MSD-radixsortering korrekt."
+      ],
+      "finalAnswer": "[4, 33, 202, 1000, 1001, 1234, 4321]",
+      "figureNote": "Eksamen 2024 vår oppgave 8a. Mellompassene er utledet mekanisk fra algoritmen (LSD-til-MSD med stabile køer per siffer) og er ikke gjengitt i kildeteksten; sluttrekkefølgen er verifisert mot løsningsforslaget.",
+      "learnMoreLinks": [
+        {
+          "label": "Radixsortering",
+          "href": "/dat102/begreper/radix-sort",
+          "kind": "concept",
+          "slug": "radix-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F09)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2024-vaar",
+            "internalPath": "processed/reviewed/exams/2024-vaar.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-014",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "sorting-comparison"
+      ],
+      "title": "Sorteringsalgoritmer – orden og stabilitet",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Angi kjøretid (verste tilfelle) og om algoritmen er stabil for: insertion sort, selection sort, merge sort, quicksort, heapsort.",
+      "expectedSteps": [
+        "Insertion sort: O(n²) verste, O(n) beste – stabil.",
+        "Selection sort: O(n²) alltid.",
+        "Merge sort: O(n log n) alltid – stabil.",
+        "Quicksort: O(n log n) gjennomsnitt, O(n²) verste – ikke stabil.",
+        "Heapsort: O(n log n) alltid – ikke stabil."
+      ],
+      "finalAnswer": "Insertion: O(n²)/stabil; Selection: O(n²); Merge: O(n log n)/stabil; Quick: O(n log n) avg/O(n²) worst; Heap: O(n log n).",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Sorteringssammenligning",
+          "href": "/dat102/begreper/sorting-comparison",
+          "kind": "concept",
+          "slug": "sorting-comparison"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F08)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F08 Sortering 1",
+            "internalPath": "structured/lectures/bergen/bergen-f08-sortering-1.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-015",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt"
+      ],
+      "title": "Spor stabelen – peek() etter push/pop-operasjoner",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Start med tom stabel. Utfør operasjonene: push(5), push(3), push(8), pop(), push(1). Hva returnerer peek() etter disse operasjonene?",
+      "expectedSteps": [
+        "push(5): stabel = [5 (topp)].",
+        "push(3): stabel = [5, 3 (topp)].",
+        "push(8): stabel = [5, 3, 8 (topp)].",
+        "pop(): fjerner 8, returnerer 8. Stabel = [5, 3 (topp)].",
+        "push(1): stabel = [5, 3, 1 (topp)].",
+        "peek(): returnerer topp-element = 1 uten å fjerne det."
+      ],
+      "finalAnswer": "peek() returnerer 1",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F05)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F05 Stabel",
+            "internalPath": "structured/lectures/bergen/bergen-f05-stabel.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-016",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt"
+      ],
+      "title": "Bruk stabel til desimal-til-binær konvertering",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Bruk en stabel til å konvertere desimaltall 10 til binær streng. Vis hva som pushes og pops.",
+      "expectedSteps": [
+        "10 / 2 = 5 rest 0 → push('0').",
+        "5 / 2 = 2 rest 1 → push('1').",
+        "2 / 2 = 1 rest 0 → push('0').",
+        "1 / 2 = 0 rest 1 → push('1'). (Ferdig, 0 == 0).",
+        "Pop stabel: '1', '0', '1', '0' → streng = \"1010\"."
+      ],
+      "finalAnswer": "\"1010\"",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Stabel-ADT",
+          "href": "/dat102/begreper/stack-adt",
+          "kind": "concept",
+          "slug": "stack-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F05)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2024-vaar",
+            "internalPath": "processed/reviewed/exams/2024-vaar.md"
+          },
+          {
+            "label": "F05 Stabel",
+            "internalPath": "structured/lectures/bergen/bergen-f05-stabel.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-017",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "queue-adt"
+      ],
+      "title": "Spor kø – foerste() etter innKoe/utKoe",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Start med tom kø. Utfør: innKoe(A), innKoe(B), innKoe(C), utKoe(), innKoe(D). Hva returnerer foerste()?",
+      "expectedSteps": [
+        "innKoe(A): kø = [A (front)].",
+        "innKoe(B): kø = [A (front), B].",
+        "innKoe(C): kø = [A (front), B, C].",
+        "utKoe(): fjerner og returnerer A. kø = [B (front), C].",
+        "innKoe(D): kø = [B (front), C, D].",
+        "foerste(): returnerer front-element = B uten å fjerne."
+      ],
+      "finalAnswer": "foerste() returnerer B",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Kø-ADT",
+          "href": "/dat102/begreper/queue-adt",
+          "kind": "concept",
+          "slug": "queue-adt"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F11B)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F11b Kø (før timen)",
+            "internalPath": "structured/lectures/bergen/bergen-f11b-koe-for-timen.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-018",
+      "topic": "lists",
+      "conceptSlugs": [
+        "sorted-list"
+      ],
+      "title": "Tidskompleksitet – leggTilListe() med n kall til leggTil()",
+      "qtype": "calculation",
+      "difficulty": "medium",
+      "prompt": "En metode `leggTilListe()` setter inn n elementer i en ordnet kjedet liste ved å kalle `leggTil(T element)` n ganger. `leggTil` er O(n) per kall (må finne riktig plass). Hva er total tidskompleksitet for `leggTilListe()`?",
+      "expectedSteps": [
+        "Hvert kall til leggTil() koster O(n) (lineær søk i ordnet liste).",
+        "n kall → n * O(n) = O(n²) totalt.",
+        "Konkluder: leggTilListe() er O(n²)."
+      ],
+      "finalAnswer": "O(n²)",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Sortert liste",
+          "href": "/dat102/begreper/sorted-list",
+          "kind": "concept",
+          "slug": "sorted-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F15)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2022-vaar",
+            "internalPath": "processed/reviewed/exams/2022-vaar.md"
+          },
+          {
+            "label": "F15 Immutable SortertListe",
+            "internalPath": "structured/lectures/bergen/bergen-f15-immutable-sortertliste.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-019",
+      "topic": "searching",
+      "conceptSlugs": [
+        "binary-search"
+      ],
+      "title": "Binærsøk – sammenligningssekvens for 12 og 5 i C=[2,4,7,9,12,14,20]",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Kjør binærsøk i sortert tabell C = [2, 4, 7, 9, 12, 14, 20] (indeks 0–6).\n(a) Finn 12 – vis sammenligningene.\n(b) Søk etter 5 (ikke i tabellen) – vis sammenligningene.",
+      "expectedSteps": [
+        "(a) v=0, h=6, mid=3: C[3]=9 < 12 → v=4.",
+        "v=4, h=6, mid=5: C[5]=14 > 12 → h=4.",
+        "v=4, h=4, mid=4: C[4]=12 == 12 → funnet. 3 sammenligninger.",
+        "(b) v=0, h=6, mid=3: C[3]=9 > 5 → h=2.",
+        "v=0, h=2, mid=1: C[1]=4 < 5 → v=2.",
+        "v=2, h=2, mid=2: C[2]=7 > 5 → h=1.",
+        "v=2 > h=1 → ikke funnet. 3 sammenligninger."
+      ],
+      "finalAnswer": "(a) Funnet etter 3 sammenligninger ved indeks 4. (b) Ikke funnet etter 3 sammenligninger.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F16)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2026-jan",
+            "internalPath": "processed/reviewed/exams/2026-jan.md"
+          },
+          {
+            "label": "F16 Søking",
+            "internalPath": "structured/lectures/bergen/bergen-f16-soking.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-020",
+      "topic": "searching",
+      "conceptSlugs": [
+        "binary-search"
+      ],
+      "title": "Binærsøk i ordliste – «delfin» og «kanin»",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Kjør binærsøk i tabellen [and, bok, cirka, delfin, eple, fot, gaffel, hane, iglo] (indeks 0–8).\n(a) Søk etter «delfin».\n(b) Søk etter «kanin» (ikke i tabellen).",
+      "expectedSteps": [
+        "(a) v=0, h=8, mid=4: 'eple' > 'delfin' → h=3.",
+        "v=0, h=3, mid=1: 'bok' < 'delfin' → v=2.",
+        "v=2, h=3, mid=2: 'cirka' < 'delfin' → v=3.",
+        "v=3, h=3, mid=3: 'delfin' == 'delfin' → funnet. 4 sammenligninger.",
+        "(b) v=0, h=8, mid=4: 'eple' < 'kanin' → v=5.",
+        "v=5, h=8, mid=6: 'gaffel' < 'kanin' → v=7.",
+        "v=7, h=8, mid=7: 'hane' < 'kanin' → v=8.",
+        "v=8, h=8, mid=8: 'iglo' < 'kanin' → v=9.",
+        "v=9 > h=8 → ikke funnet."
+      ],
+      "finalAnswer": "(a) Funnet ved indeks 3 etter 4 sammenligninger. (b) Ikke funnet.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Binærsøk",
+          "href": "/dat102/begreper/binary-search",
+          "kind": "concept",
+          "slug": "binary-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F16)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2025-jan",
+            "internalPath": "processed/reviewed/exams/2025-jan.md"
+          },
+          {
+            "label": "F16 Søking",
+            "internalPath": "structured/lectures/bergen/bergen-f16-soking.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-021",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "open-addressing",
+        "hash-table",
+        "hash-function"
+      ],
+      "title": "Hashing med lineær åpen adressering – 10 plasser, nøkkel = siste siffer",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Hash-tabell med 10 plasser (indeks 0–9), lineær åpen adressering (+1 ved kollisjon). Hashfunksjonen er h(k) = k mod 10 (= siste siffer). Sett inn nøklene 123456789, 12345670, 987654321, 999999999, 876543210 i denne rekkefølgen. Vis probe-sekvensen for eventuelle kollisjoner.",
+      "expectedSteps": [
+        "123456789: h=9 → plass 9 ledig, sett inn på 9.",
+        "12345670: h=0 → plass 0 ledig, sett inn på 0.",
+        "987654321: h=1 → plass 1 ledig, sett inn på 1.",
+        "999999999: h=9 → plass 9 opptatt! Probe 10 mod 10 = 0 opptatt! Probe 1 opptatt! Probe 2 ledig, sett inn på 2.",
+        "876543210: h=0 → plass 0 opptatt! Probe 1 opptatt! Probe 2 opptatt! Probe 3 ledig, sett inn på 3."
+      ],
+      "finalAnswer": "Tabell etter innsetting: 0→12345670, 1→987654321, 2→999999999, 3→876543210, 9→123456789.",
+      "figureNote": "Basert på eksamen 2023 seksjon 5c (hashing lineær åpen adressering 10 plasser, nøkkel = siste siffer i studentnummer).",
+      "learnMoreLinks": [
+        {
+          "label": "Åpen adressering",
+          "href": "/dat102/begreper/open-addressing",
+          "kind": "concept",
+          "slug": "open-addressing"
+        },
+        {
+          "label": "Hash-tabell",
+          "href": "/dat102/begreper/hash-table",
+          "kind": "concept",
+          "slug": "hash-table"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F18B)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F18b Hashing",
+            "internalPath": "structured/lectures/bergen/bergen-f18b-hashing.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-022",
+      "topic": "dictionaries-and-hashing",
+      "conceptSlugs": [
+        "load-factor",
+        "hash-table"
+      ],
+      "title": "Fyllingsgrad (load factor) – definisjon og grenser",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Definer fyllingsgraden λ (load factor) for en hash-tabell. Hva er øvre grense for åpen adressering vs. separat kjeding?",
+      "expectedSteps": [
+        "λ = antall elementer i ordboka / antall lokasjoner i hashtabellen.",
+        "For åpen adressering: λ ≤ 1 (kan ikke ha flere elementer enn plasser).",
+        "For kjeda overløp (separate chaining): λ har ingen øvre grense.",
+        "Høy λ gir dårligere ytelse; tabellen bør utvides når λ blir for stor."
+      ],
+      "finalAnswer": "λ = elementer / lokasjoner. Åpen adressering: λ ≤ 1. Separat kjeding: ubegrenset.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Fyllingsgrad",
+          "href": "/dat102/begreper/load-factor",
+          "kind": "concept",
+          "slug": "load-factor"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F18B)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F18b Hashing",
+            "internalPath": "structured/lectures/bergen/bergen-f18b-hashing.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-023",
+      "topic": "trees",
+      "conceptSlugs": [
+        "tree-traversal",
+        "binary-tree"
+      ],
+      "title": "Postorden-traversering av binærtre",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Gitt binærtre:\n```\n        A\n       / \\\n      B   C\n     / \\   \\\n    D   E   F\n```\nAngi postorden-traverseringen (venstre-høyre-rot).",
+      "expectedSteps": [
+        "Besøk venstre undertre til A: gå til B.",
+        "Besøk venstre undertre til B: gå til D. D er blad → besøk D.",
+        "Besøk høyre undertre til B: gå til E. E er blad → besøk E.",
+        "Besøk rot B → besøk B.",
+        "Besøk høyre undertre til A: gå til C.",
+        "C har intet venstre barn. Besøk høyre undertre til C: F er blad → besøk F.",
+        "Besøk rot C → besøk C.",
+        "Besøk rot A → besøk A.",
+        "Postorden: D, E, B, F, C, A."
+      ],
+      "finalAnswer": "D, E, B, F, C, A",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Tre-traversering",
+          "href": "/dat102/begreper/tree-traversal",
+          "kind": "concept",
+          "slug": "tree-traversal"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F20)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F20 Trær",
+            "internalPath": "structured/lectures/bergen/bergen-f20-traer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-024",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree",
+        "bst-operations"
+      ],
+      "title": "Bygg BS-tre – sett inn 4,2,6,3,1,7,5",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Sett inn elementene 4, 2, 6, 3, 1, 7, 5 i denne rekkefølgen i et tomt binært søketre. Tegn (beskriv) treet etter alle innsettingene.",
+      "expectedSteps": [
+        "Sett inn 4: rot = 4.",
+        "Sett inn 2: 2 < 4 → venstre barn av 4.",
+        "Sett inn 6: 6 > 4 → høyre barn av 4.",
+        "Sett inn 3: 3 < 4 → venstre → 3 > 2 → høyre barn av 2.",
+        "Sett inn 1: 1 < 4 → venstre → 1 < 2 → venstre barn av 2.",
+        "Sett inn 7: 7 > 4 → høyre → 7 > 6 → høyre barn av 6.",
+        "Sett inn 5: 5 > 4 → høyre → 5 < 6 → venstre barn av 6."
+      ],
+      "finalAnswer": "Rot=4; venstre:2(venstre:1, høyre:3); høyre:6(venstre:5, høyre:7).",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Binært søketre",
+          "href": "/dat102/begreper/binary-search-tree",
+          "kind": "concept",
+          "slug": "binary-search-tree"
+        },
+        {
+          "label": "Eksamen 2023",
+          "href": "/dat102/eksamen/2023-vaar",
+          "kind": "exam",
+          "slug": "2023-vaar"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F22)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F22 Binære søketrær",
+            "internalPath": "structured/lectures/bergen/bergen-f22-binaere-soketraer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-025",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree",
+        "bst-operations"
+      ],
+      "title": "Degenerert BS-tre – sett inn 3,5,9,12,18,20",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Sett inn elementene 3, 5, 9, 12, 18, 20 i denne rekkefølgen i et tomt binært søketre. Beskriv treets form og forklar kjøretidskonsekvensen.",
+      "expectedSteps": [
+        "Sett inn 3: rot = 3.",
+        "Sett inn 5: 5 > 3 → høyre barn av 3.",
+        "Sett inn 9: 9 > 5 → høyre barn av 5.",
+        "Sett inn 12: høyre barn av 9.",
+        "Sett inn 18: høyre barn av 12.",
+        "Sett inn 20: høyre barn av 18.",
+        "Treet er degenerert (lineær kjede til høyre, lik lenket liste).",
+        "Søking i degenerert BS-tre: O(n), ikke O(log n)."
+      ],
+      "finalAnswer": "Lineær kjede: 3→5→9→12→18→20. Søking er O(n).",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Balansert søketre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F23)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F23 Balanserte tre, Hauger (heaps)",
+            "internalPath": "structured/lectures/bergen/bergen-f23-balanserte-tre-hauger-heaps.md"
+          },
+          {
+            "label": "F22 Binære søketrær",
+            "internalPath": "structured/lectures/bergen/bergen-f22-binaere-soketraer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-026",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "tree-traversal",
+        "bst-operations"
+      ],
+      "title": "In-orden traversering av BS-tre",
+      "qtype": "trace",
+      "difficulty": "easy",
+      "prompt": "Gitt BS-treet med rot=4, venstre undertre: 2(venstre:1, høyre:3), høyre undertre: 6(venstre:5, høyre:7). Angi in-orden-traverseringen.",
+      "expectedSteps": [
+        "In-orden = venstre, rot, høyre.",
+        "Gå til venstre undertre av 4: node 2.",
+        "Gå til venstre av 2: node 1. 1 er blad → besøk 1.",
+        "Besøk rot 2.",
+        "Gå til høyre av 2: node 3. 3 er blad → besøk 3.",
+        "Besøk rot 4.",
+        "Gå til høyre av 4: node 6.",
+        "Gå til venstre av 6: node 5 → besøk 5.",
+        "Besøk rot 6.",
+        "Gå til høyre av 6: node 7 → besøk 7.",
+        "In-orden: 1, 2, 3, 4, 5, 6, 7."
+      ],
+      "finalAnswer": "1, 2, 3, 4, 5, 6, 7",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Tre-traversering",
+          "href": "/dat102/begreper/tree-traversal",
+          "kind": "concept",
+          "slug": "tree-traversal"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F22)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F22 Binære søketrær",
+            "internalPath": "structured/lectures/bergen/bergen-f22-binaere-soketraer.md"
+          },
+          {
+            "label": "2026-jan",
+            "internalPath": "processed/reviewed/exams/2026-jan.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-027",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heap"
+      ],
+      "title": "Sett inn 20 i maks-haug og reorganiser",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "En maks-haug er representert som tabell [15, 12, 6, ...]. Sett inn 20 bakerst. Sammenlign 20 med foreldrenoden og reorganiser (sift up) til haug-egenskapen er opprettholdt.",
+      "expectedSteps": [
+        "Opprinnelig tabell (maks-haug): [15, 12, 6].",
+        "Sett inn 20 bakerst: [15, 12, 6, 20]. 20 er barn av 12 (indeks 1).",
+        "Sammenlign 20 med forelder 12: 20 > 12 → bytt. Tabell: [15, 20, 6, 12].",
+        "Sammenlign 20 med ny forelder 15: 20 > 15 → bytt. Tabell: [20, 15, 6, 12].",
+        "20 er nå rot, haug-egenskapen opprettholdt."
+      ],
+      "finalAnswer": "Tabell etter reorganisering: [20, 15, 6, 12]",
+      "figureNote": "Basert på eksamen 2023 oppgave 4d (sett inn 20 i maks-haug, sammenlign med 6,12,15).",
+      "learnMoreLinks": [
+        {
+          "label": "Haug (heap)",
+          "href": "/dat102/begreper/heap",
+          "kind": "concept",
+          "slug": "heap"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F23)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F23 Balanserte tre, Hauger (heaps)",
+            "internalPath": "structured/lectures/bergen/bergen-f23-balanserte-tre-hauger-heaps.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-028",
+      "topic": "heaps-and-priority-queues",
+      "conceptSlugs": [
+        "heapsort",
+        "heap"
+      ],
+      "title": "Haugsortering fase 2 – haug [7,5,6,1,2,3,4]",
+      "qtype": "trace",
+      "difficulty": "hard",
+      "prompt": "Gitt maks-haug representert som tabell [7,5,6,1,2,3,4]. Utfør fase 2 av haugsortering (gjentatt bytt rot med siste, reduser størrelse, sift down). Vis tabellen etter hvert steg.",
+      "expectedSteps": [
+        "Start: [7,5,6,1,2,3,4], heapSize=7.",
+        "Bytt rot 7 med siste element 4: [4,5,6,1,2,3,7], heapSize=6. Sift down 4: max barn er 6 (indeks 2), bytt → [6,5,4,1,2,3,7]. 4 er blad el. OK nå.",
+        "Bytt rot 6 med siste (indeks 5, verdi 3): [3,5,4,1,2,6,7], heapSize=5. Sift down 3: max barn er 5 (indeks 1), bytt → [5,3,4,1,2,6,7]. 3: barn er 2 (større). Bytt → [5,3,4,1,2,6,7] (2 ikke større enn 3 – 3>2, ok).",
+        "Bytt rot 5 med siste (indeks 4, verdi 2): [2,3,4,1,5,6,7], heapSize=4. Sift down 2: max barn er 4 (indeks 2), bytt → [4,3,2,1,5,6,7]. 2 er blad.",
+        "Bytt rot 4 med siste (indeks 3, verdi 1): [1,3,2,4,5,6,7], heapSize=3. Sift down 1: max barn er 3 (indeks 1), bytt → [3,1,2,4,5,6,7].",
+        "Bytt rot 3 med siste (indeks 2, verdi 2): [2,1,3,4,5,6,7], heapSize=2. Sift down 2: max barn er 1 (indeks 1). 1 < 2 → OK.",
+        "Bytt rot 2 med siste (indeks 1, verdi 1): [1,2,3,4,5,6,7], heapSize=1. Ferdig.",
+        "Sortert tabell: [1,2,3,4,5,6,7]."
+      ],
+      "finalAnswer": "[1,2,3,4,5,6,7]",
+      "figureNote": "Eksamen 2025 vår oppgave 7d. Fase 2 av heapsort: gjentatt bytt rot/siste + sift down.",
+      "learnMoreLinks": [
+        {
+          "label": "Haugsortering",
+          "href": "/dat102/begreper/heapsort",
+          "kind": "concept",
+          "slug": "heapsort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F23)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2025-vaar",
+            "internalPath": "processed/reviewed/exams/2025-vaar.md"
+          },
+          {
+            "label": "F23 Balanserte tre, Hauger (heaps)",
+            "internalPath": "structured/lectures/bergen/bergen-f23-balanserte-tre-hauger-heaps.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-029",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "two-three-tree"
+      ],
+      "title": "Sett inn 2 i 2-3-tre – eksamen 2023 oppgave 4g",
+      "qtype": "trace",
+      "difficulty": "hard",
+      "prompt": "Et 2-3-tre inneholder elementene {1, 3, 4, 5, 7}. Sett inn verdien 2 og vis den resulterende tre-strukturen etter eventuelle splittinger.",
+      "expectedSteps": [
+        "Søk nedover treet for å finne riktig blad for 2 (2 havner i en node med 1 og 3).",
+        "Bladnoden for innsetting inneholder allerede to elementer og blir overbelastet (3-node + ny → 4-node).",
+        "Splitt: midtelementet (2 el. 3 avh. av rekkefølge) promoteres til forelder; de to gjenværende elementene fordeles i to nye 2-noder.",
+        "Dersom forelder også overbelastes, fortsett splitt oppover til evt. ny rot.",
+        "Alle blader er fortsatt på samme nivå etter splitt."
+      ],
+      "finalAnswer": "Treet forblir balansert med alle blader på samme nivå. Midtelementet fra den splittede noden promoteres oppover.",
+      "figureNote": "Eksamen 2023 oppgave 4g. Eksakt struktur avhenger av opprinnelig tre-layout, som er figur-basert i kilden og ikke tilgjengelig som ren tekst.",
+      "learnMoreLinks": [
+        {
+          "label": "2-3-trær",
+          "href": "/dat102/begreper/two-three-tree",
+          "kind": "concept",
+          "slug": "two-three-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F24B)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F24b 2-3 Trær",
+            "internalPath": "structured/lectures/bergen/bergen-f24b-2-3-traer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-030",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "two-three-tree"
+      ],
+      "title": "Egenskaper ved 2-3-tre – 2-noder og 3-noder",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Forklar hva en 2-node og en 3-node er i et 2-3-tre, og hvorfor alle blader er på samme nivå.",
+      "expectedSteps": [
+        "2-node: inneholder ett element, har enten 0 eller 2 barn. Venstre undertre < elementet; høyre undertre >= elementet.",
+        "3-node: inneholder to elementer (minste, største), har enten 0 eller 3 barn. Venstre < minste; midtre >= minste og < største; høyre >= største.",
+        "Ingen node har ett barn (dette sikrer balansen).",
+        "Innsetting bruker alltid bladnivå + ev. splitt oppover → alle blader holder seg på samme dybde."
+      ],
+      "finalAnswer": "2-node = 1 element, 0 el. 2 barn. 3-node = 2 elementer, 0 el. 3 barn. Ingen 1-barns-noder → alle blader på samme nivå.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "2-3-trær",
+          "href": "/dat102/begreper/two-three-tree",
+          "kind": "concept",
+          "slug": "two-three-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F24B)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F24b 2-3 Trær",
+            "internalPath": "structured/lectures/bergen/bergen-f24b-2-3-traer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-031",
+      "topic": "balanced-trees",
+      "conceptSlugs": [
+        "balanced-tree"
+      ],
+      "title": "Høyrerotasjon av ubalansert BS-tre",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Gitt ubalansert BS-tre:\n```\n    a\n   /\n  b\n / \\\nx   y\n     \\\n      z\n```\nUtfør en høyrerotasjon rundt noden a. Beskriv den resulterende strukturen.",
+      "expectedSteps": [
+        "Gjør venstre barn b til ny rot.",
+        "Gjør den gamle roten a til høyre barn av b.",
+        "Gjør høyre undertre av b (undertreet y) til venstre barn av a.",
+        "Resultat: b er ny rot, venstre barn = x, høyre barn = a. a har venstre barn = y (som beholder sitt høyre barn z); a sitt høyre barn er a sitt opprinnelige høyre undertre — her tomt."
+      ],
+      "finalAnswer": "Ny rot: b. b.venstre = x; b.høyre = a. a.venstre = y (med z). BS-treegenskapen opprettholdt.",
+      "figureNote": "Basert på eksamen 2023 oppgave 4j og F23 lysark 9–10. Eksakt figur i kilden er bilde-basert.",
+      "learnMoreLinks": [
+        {
+          "label": "Balansert søketre",
+          "href": "/dat102/begreper/balanced-tree",
+          "kind": "concept",
+          "slug": "balanced-tree"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F23)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F23 Balanserte tre, Hauger (heaps)",
+            "internalPath": "structured/lectures/bergen/bergen-f23-balanserte-tre-hauger-heaps.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-032",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "graph-terminology",
+        "adjacency-matrix",
+        "adjacency-list"
+      ],
+      "title": "Nabomatrise vs. naboliste – egnethet for tette og glisne grafer",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "En graf G har V = {A,B,C,D} og kanter {A-B, A-C, B-D}. (a) Tegn/beskriv nabomatrisen. (b) Beskriv nabolisten. (c) Hvilken representasjon er mest egnet for en glissen graf (få kanter)?",
+      "expectedSteps": [
+        "(a) Nabomatrise 4×4: rad/kolonne for [A,B,C,D]. 1 der det er kant: M[A][B]=1, M[B][A]=1, M[A][C]=1, M[C][A]=1, M[B][D]=1, M[D][B]=1. Resten 0.",
+        "(b) Naboliste: A→[B,C]; B→[A,D]; C→[A]; D→[B].",
+        "(c) Glissen graf: naboliste er mer plasseffektiv — den lagrer bare de kantene som faktisk finnes, mens nabomatrisen alltid holder en celle for hvert nodepar uansett hvor få kanter grafen har.",
+        "Tett graf (mange kanter): nabomatrise kan være å foretrekke fordi man kan slå opp direkte i M[v][w] for å avgjøre om to noder er naboer."
+      ],
+      "finalAnswer": "(a) 4×4-matrise med 1 der kanter finnes. (b) Naboliste som vist. (c) Naboliste for glissen graf.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Nabomatrise",
+          "href": "/dat102/begreper/adjacency-matrix",
+          "kind": "concept",
+          "slug": "adjacency-matrix"
+        },
+        {
+          "label": "Naboliste",
+          "href": "/dat102/begreper/adjacency-list",
+          "kind": "concept",
+          "slug": "adjacency-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F25)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F25 Grafer 1",
+            "internalPath": "structured/lectures/bergen/bergen-f25-grafer-1.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-033",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "breadth-first-search",
+        "graph-terminology"
+      ],
+      "title": "BFS-traversering – besøksrekkefølge fra startnode",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Gitt urettet graf med noder {1,2,3,4,5} og kanter {1-2, 1-3, 2-4, 3-4, 4-5}. Kjør BFS fra node 1. Angi besøksrekkefølgen (anta nabolister er sortert etter nodeverdi).",
+      "expectedSteps": [
+        "Start: kø = [1], besøkt = {1}.",
+        "Dequeue 1, besøk naboer 2 og 3 (ikke besøkt): kø = [2, 3], besøkt = {1,2,3}.",
+        "Dequeue 2, besøk naboer: 1 allerede besøkt; 4 ikke besøkt → enqueue 4. kø = [3, 4], besøkt = {1,2,3,4}.",
+        "Dequeue 3, besøk naboer: 1 og 4 allerede besøkt. kø = [4].",
+        "Dequeue 4, besøk naboer: 2,3 besøkt; 5 ikke besøkt → enqueue 5. kø = [5], besøkt = {1,2,3,4,5}.",
+        "Dequeue 5, ingen ubesøkte naboer. kø = [].",
+        "BFS-rekkefølge: 1, 2, 3, 4, 5."
+      ],
+      "finalAnswer": "1, 2, 3, 4, 5",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Bredde-først-søk",
+          "href": "/dat102/begreper/breadth-first-search",
+          "kind": "concept",
+          "slug": "breadth-first-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F25)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F25 Grafer 1",
+            "internalPath": "structured/lectures/bergen/bergen-f25-grafer-1.md"
+          },
+          {
+            "label": "F26 Grafer 2",
+            "internalPath": "structured/lectures/bergen/bergen-f26-grafer-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-034",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "depth-first-search",
+        "graph-terminology"
+      ],
+      "title": "DFS-traversering – besøksrekkefølge fra startnode",
+      "qtype": "trace",
+      "difficulty": "medium",
+      "prompt": "Samme graf som drill-033: noder {1,2,3,4,5}, kanter {1-2, 1-3, 2-4, 3-4, 4-5}. Kjør DFS (rekursivt) fra node 1. Angi besøksrekkefølgen (velg alltid laveste nabonummer først).",
+      "expectedSteps": [
+        "Besøk 1. Naboer: 2, 3. Gå til 2.",
+        "Besøk 2. Naboer: 1 (besøkt), 4. Gå til 4.",
+        "Besøk 4. Naboer: 2 (besøkt), 3 (ikke besøkt), 5. Gå til 3.",
+        "Besøk 3. Naboer: 1 (besøkt), 4 (besøkt). Backtrack til 4.",
+        "Fra 4: gå til 5.",
+        "Besøk 5. Ingen ubesøkte naboer. Backtrack.",
+        "DFS-rekkefølge: 1, 2, 4, 3, 5."
+      ],
+      "finalAnswer": "1, 2, 4, 3, 5",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Dybde-først-søk",
+          "href": "/dat102/begreper/depth-first-search",
+          "kind": "concept",
+          "slug": "depth-first-search"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F25)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F25 Grafer 1",
+            "internalPath": "structured/lectures/bergen/bergen-f25-grafer-1.md"
+          },
+          {
+            "label": "F26 Grafer 2",
+            "internalPath": "structured/lectures/bergen/bergen-f26-grafer-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-035",
+      "topic": "graphs",
+      "conceptSlugs": [
+        "topological-sort",
+        "graph-terminology"
+      ],
+      "title": "Topologisk sortering av rettet graf – eksamen 2023 seksjon 5a",
+      "qtype": "short_answer",
+      "difficulty": "medium",
+      "prompt": "En rettet asyklisk graf (DAG) har kanter: A→B, A→C, B→D, C→D, D→E. Angi én gyldig topologisk ordning og forklar hva topologisk sortering er.",
+      "expectedSteps": [
+        "Topologisk sortering: lineær ordning av nodene slik at for hver rettet kant u→v, kommer u før v.",
+        "Finn noder uten innkommende kanter (inngrad 0): A.",
+        "Fjern A og dens kanter. Ny inngrad 0: B og C.",
+        "Velg B (eller C). La oss velge B. Fjern B. Inngrad 0 for D? Nei, D har fortsatt kant fra C. C har inngrad 0.",
+        "Velg C. Fjern C. Nå D har inngrad 0.",
+        "Velg D. Fjern D. Nå E har inngrad 0.",
+        "Velg E.",
+        "Én gyldig topologisk ordning: A, B, C, D, E (eller A, C, B, D, E)."
+      ],
+      "finalAnswer": "A, B, C, D, E (eller A, C, B, D, E – begge gyldige)",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Topologisk sortering",
+          "href": "/dat102/begreper/topological-sort",
+          "kind": "concept",
+          "slug": "topological-sort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F26)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F26 Grafer 2",
+            "internalPath": "structured/lectures/bergen/bergen-f26-grafer-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-036",
+      "topic": "bag-adt",
+      "conceptSlugs": [
+        "singly-linked-list",
+        "linked-node"
+      ],
+      "title": "Bygg lenke av noder – sett inn bakerst iterativt",
+      "qtype": "code_reading",
+      "difficulty": "easy",
+      "prompt": "Metoden `settInnBakerst(Node forste, int verdi)` skal sette inn en ny node bakerst i en lenke ved bruk av en løkke. Beskriv algoritmen steg for steg.",
+      "expectedSteps": [
+        "Hvis forste er null: returner ny Node(verdi) som ny første node.",
+        "Ellers: start med en peker p = forste.",
+        "Traverser løkke: while (p.neste != null) p = p.neste;",
+        "Etter løkken peker p på siste node.",
+        "Sett p.neste = ny Node(verdi).",
+        "Returner forste (uendret)."
+      ],
+      "finalAnswer": "Traverser til siste node med løkke, sett inn ny node etter denne.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Enkelt lenket liste",
+          "href": "/dat102/begreper/singly-linked-list",
+          "kind": "concept",
+          "slug": "singly-linked-list"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F03)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2025-jan",
+            "internalPath": "processed/reviewed/exams/2025-jan.md"
+          },
+          {
+            "label": "F03 Lenke av noder (før timen)",
+            "internalPath": "structured/lectures/bergen/bergen-f03-lenke-av-noder-for-timen.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-037",
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "deque",
+        "circular-queue"
+      ],
+      "title": "Deque – hva er det og hva skiller det fra kø og stabel?",
+      "qtype": "short_answer",
+      "difficulty": "easy",
+      "prompt": "Hva er en deque (dobbelt-ended kø)? Angi hvilke operasjoner som er tillatt, og forklar hvordan den generaliserer både stabel og kø.",
+      "expectedSteps": [
+        "En deque (double-ended queue) er en datastruktur der elementer kan legges til og fjernes fra begge ender.",
+        "Operasjoner: addFirst, addLast, removeFirst, removeLast, peekFirst, peekLast.",
+        "Stabel er et spesialtilfelle: bruk bare én ende (addFirst/removeFirst).",
+        "Kø er et spesialtilfelle: legg til bak (addLast), fjern fra front (removeFirst).",
+        "Deque er derfor mer fleksibel enn begge."
+      ],
+      "finalAnswer": "Deque = legg til/fjern fra begge ender. Generaliserer stabel (én ende) og kø (to ender, men bare én operasjon per ende).",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Deque",
+          "href": "/dat102/begreper/deque",
+          "kind": "concept",
+          "slug": "deque"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F12)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F12 SirkulærKø Deque",
+            "internalPath": "structured/lectures/bergen/bergen-f12-sirkulaerkoe-deque.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-038",
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "big-theta-notation",
+        "big-omega-notation"
+      ],
+      "title": "Forskjellen på O, Θ og Ω",
+      "qtype": "short_answer",
+      "difficulty": "medium",
+      "prompt": "Forklar forskjellen mellom O (Big-O), Θ (Big-Theta) og Ω (Big-Omega). Gi et eksempel der insertion sort illustrerer alle tre.",
+      "expectedSteps": [
+        "O(g(n)): øvre grense – algoritmen bruker på det meste c·g(n) tid for store n.",
+        "Ω(g(n)): nedre grense – algoritmen bruker minst c·g(n) tid for store n.",
+        "Θ(g(n)): tett grense – både øvre og nedre grense; Θ(g) dersom O(g) og Ω(g) begge gjelder.",
+        "Insertion sort: beste tilfelle er Ω(n) (allerede sortert); verste er O(n²); gjennomsnitt er Θ(n²) over alle innganger."
+      ],
+      "finalAnswer": "O = øvre grense, Ω = nedre grense, Θ = tett/begge. Insertion sort: best Ω(n), verst O(n²), gjennomsnitt Θ(n²).",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Big-O-notasjon",
+          "href": "/dat102/begreper/big-o-notation",
+          "kind": "concept",
+          "slug": "big-o-notation"
+        },
+        {
+          "label": "Big-Theta-notasjon",
+          "href": "/dat102/begreper/big-theta-notation",
+          "kind": "concept",
+          "slug": "big-theta-notation"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F04)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "F04 LenketBag og Analyse",
+            "internalPath": "structured/lectures/bergen/bergen-f04-lenketbag-og-analyse.md"
+          },
+          {
+            "label": "2025-jan",
+            "internalPath": "processed/reviewed/exams/2025-jan.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-039",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations",
+        "recursion"
+      ],
+      "title": "Rekursiv finnStorste() i BS-tre",
+      "qtype": "code_reading",
+      "difficulty": "easy",
+      "prompt": "Beskriv en rekursiv metode `finnStorste()` som returnerer det største elementet i et BS-tre. Hva er basistilfelle og rekursivt tilfelle?",
+      "expectedSteps": [
+        "BS-treegenskapen: det største elementet er alltid det lengst til høyre.",
+        "Basistilfelle: noden har intet høyre barn → returner elementet i denne noden.",
+        "Rekursivt tilfelle: gå til høyre barn og kall finnStorste() rekursivt.",
+        "For et tomt tre: returner null."
+      ],
+      "finalAnswer": "Rekursivt: traverser alltid til høyre til høyreBarn == null, returner da rotelementet i noden.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "BS-tre-operasjoner",
+          "href": "/dat102/begreper/bst-operations",
+          "kind": "concept",
+          "slug": "bst-operations"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F22)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2026-jan",
+            "internalPath": "processed/reviewed/exams/2026-jan.md"
+          },
+          {
+            "label": "F22 Binære søketrær",
+            "internalPath": "structured/lectures/bergen/bergen-f22-binaere-soketraer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-040",
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "bst-operations",
+        "recursion"
+      ],
+      "title": "Rekursiv antallBlad() i BS-tre",
+      "qtype": "code_reading",
+      "difficulty": "medium",
+      "prompt": "Beskriv en rekursiv metode `antallBlad(BinaerTreNode<T> t)` som teller antall blader (noder uten barn) i et BS-tre. Angi basistilfeller og rekursivt tilfelle.",
+      "expectedSteps": [
+        "Basistilfelle 1: t er null → returner 0.",
+        "Basistilfelle 2: t er et blad (t.venstre == null og t.høyre == null) → returner 1.",
+        "Rekursivt tilfelle: returner antallBlad(t.venstre) + antallBlad(t.høyre)."
+      ],
+      "finalAnswer": "return (t==null)?0 : (t.venstre==null && t.høyre==null)?1 : antallBlad(t.venstre)+antallBlad(t.høyre);",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "BS-tre-operasjoner",
+          "href": "/dat102/begreper/bst-operations",
+          "kind": "concept",
+          "slug": "bst-operations"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F22)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2026-jan",
+            "internalPath": "processed/reviewed/exams/2026-jan.md"
+          },
+          {
+            "label": "F22 Binære søketrær",
+            "internalPath": "structured/lectures/bergen/bergen-f22-binaere-soketraer.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-041",
+      "topic": "sorting",
+      "conceptSlugs": [
+        "quicksort"
+      ],
+      "title": "Kvikksorteringspartisjon – mulig rekkefølge etter partisjon",
+      "qtype": "short_answer",
+      "difficulty": "medium",
+      "prompt": "Kvikksorteringsalgoritmen kaller `partisjoner()` på tabellen [5, 2, 8, 1, 9, 3, 7, 4] med pivot=5. Hvilke egenskaper har tabellen etter partisjoneringen? Er [1,2,3,4,5,8,9,7] en mulig tilstand?",
+      "expectedSteps": [
+        "Etter partisjon er alle elementer < pivot (5) til venstre, alle >= pivot til høyre (evt. med pivot på sin endelige plass).",
+        "Elementene til venstre for pivot: {1,2,3,4}; elementene til høyre: {7,8,9} (i hvilken som helst rekkefølge innenfor gruppa).",
+        "[1,2,3,4,5,8,9,7]: 5 er på indeks 4. Til venstre: {1,2,3,4} ✓ (alle < 5). Til høyre: {8,9,7} ✓ (alle > 5). Ja, dette er en mulig tilstand.",
+        "Partisjon garanterer ikke at elementene innen venstre eller høyre gruppe er sortert."
+      ],
+      "finalAnswer": "Ja, [1,2,3,4,5,8,9,7] er en gyldig tilstand etter partisjon med pivot=5.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Kvikksortering",
+          "href": "/dat102/begreper/quicksort",
+          "kind": "concept",
+          "slug": "quicksort"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F09)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F09 Sortering 2",
+            "internalPath": "structured/lectures/bergen/bergen-f09-sortering-2.md"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dat102-drill-042",
+      "topic": "recursion",
+      "conceptSlugs": [
+        "recursion",
+        "singly-linked-list"
+      ],
+      "title": "Rekursiv metode for listens lengde",
+      "qtype": "code_reading",
+      "difficulty": "easy",
+      "prompt": "En rekursiv metode `lengde(Node p)` teller antall noder i en lenket liste. Angi basistilfelle og rekursivt tilfelle, og beregn antall rekursive kall for en liste med 4 noder.",
+      "expectedSteps": [
+        "Basistilfelle: p == null → returner 0.",
+        "Rekursivt tilfelle: returner 1 + lengde(p.neste).",
+        "For liste med 4 noder: lengde(n1)→1+lengde(n2)→1+1+lengde(n3)→...→1+1+1+1+lengde(null)→4.",
+        "4 rekursive kall + 1 basistilfelle-kall = 5 kall totalt."
+      ],
+      "finalAnswer": "Basistilfelle: null→0. Rekursivt: 1+lengde(p.neste). 4 rekursive kall for 4 noder.",
+      "figureNote": null,
+      "learnMoreLinks": [
+        {
+          "label": "Rekursjon",
+          "href": "/dat102/begreper/recursion",
+          "kind": "concept",
+          "slug": "recursion"
+        }
+      ],
+      "source": {
+        "kind": "generated",
+        "label": "Pensum (F06)"
+      },
+      "sourceMeta": {
+        "refs": [
+          {
+            "label": "2023-vaar",
+            "internalPath": "processed/reviewed/exams/2023-vaar.md"
+          },
+          {
+            "label": "F06 Rekursjon 1",
+            "internalPath": "structured/lectures/bergen/bergen-f06-rekursjon1.md"
+          }
+        ]
+      }
+    }
+  ]
+}

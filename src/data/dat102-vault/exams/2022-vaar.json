@@ -1,0 +1,1680 @@
+{
+  "slug": "2022-vaar",
+  "year": 2022,
+  "session": "vaar",
+  "displayLabel": "Vår 2022",
+  "summary": "Skriftlig eksamen (4 timer), 1. juni 2022. 8 oppgaver totalt: Oppgave 1–5 flervalg (Wiseflow), Oppgave 6–8 programmering/teori på papir.",
+  "sessionNote": null,
+  "status": "complete",
+  "statusCounts": {
+    "complete": 36,
+    "partial": 0,
+    "scanned_only": 0,
+    "missing_solution": 0
+  },
+  "questionCount": 8,
+  "subquestionCount": 36,
+  "questions": [
+    {
+      "number": 1,
+      "anchor": "oppg-1",
+      "points": 5.6,
+      "topic": "stacks-and-queues",
+      "conceptSlugs": [
+        "stack-adt",
+        "queue-adt",
+        "list-adt",
+        "sorted-list",
+        "binary-search"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 1.5,
+          "prompt": "En klasse Stabel har implementert push, pop, peek og erTom. Gitt en kodesnutt med push/pop-operasjoner: hvilket tall blir skrevet ut? (Alternativ A–E: 1–5)",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "C (3)",
+            "shortReasoning": "Etter push/pop-sekvensen er 3 øverst på stabelen når peek/print kalles.",
+            "commonMistakes": [
+              "Forveksler LIFO-orden med FIFO"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Stabel-ADT",
+              "href": "/dat102/begreper/stack-adt",
+              "kind": "concept",
+              "slug": "stack-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 3"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "multiple-answer",
+          "points": 2,
+          "prompt": "En testmetode for kø med innKoe og utKoe bruker objekter e0–e3. Koble variablene x, y, z, v til riktig heltallsobjekt.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "x→e2, y→e3, z→e0, v→e1",
+            "shortReasoning": "FIFO-orden: innkøede objekter tas ut i den rekkefølgen de ble lagt inn.",
+            "commonMistakes": [
+              "Forveksler FIFO med LIFO",
+              "Blander rekkefølge ved utKoe"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kø-ADT",
+              "href": "/dat102/begreper/queue-adt",
+              "kind": "concept",
+              "slug": "queue-adt"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 4"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "true-false",
+          "points": 2.1,
+          "prompt": "Marker rett/galt: (1) Å legge til i uordnet liste krever O(n). (2) Å legge til i ordnet liste krever O(n). (3) Binærsøk krever sortert tabell.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(1) Galt — uordnet innsetting O(1). (2) Rett — ordnet innsetting O(n). (3) Rett — binærsøk forutsetter sortert tabell.",
+            "shortReasoning": "I uordnet liste kan nytt element legges foran (O(1)). I ordnet liste må riktig posisjon finnes (O(n)).",
+            "commonMistakes": [
+              "Tror uordnet innsetting alltid er O(n)",
+              "Glemmer at binærsøk krever sortert input"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lister",
+              "href": "/dat102/temaer/lists",
+              "kind": "topic",
+              "slug": "lists"
+            },
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 5"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "anchor": "oppg-2",
+      "points": 9.4,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "binary-search",
+        "recursion",
+        "insertion-sort",
+        "sorting-comparison",
+        "heapsort",
+        "selection-sort",
+        "merge-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "short-answer",
+          "points": 4,
+          "prompt": "Gitt kode for rekursivt binærsøk: (1) Hvor mange basistilfeller finnes? (2) Hvor mange kall av compareTo brukes for å søke etter el=2 i en gitt tabell?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(1) 2 basistilfeller. (2) 3 kall av compareTo.",
+            "shortReasoning": "Binærsøk har to basistilfeller: element funnet og søkeintervall tomt. Antall compareTo-kall = antall nivåer i søket.",
+            "commonMistakes": [
+              "Teller bare ett basistilfelle",
+              "Teller feil antall compareTo-kall"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binærsøk",
+              "href": "/dat102/begreper/binary-search",
+              "kind": "concept",
+              "slug": "binary-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 6"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 6"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gitt rekursiv funksjon f. Hva blir resultatet av kallet f(2, 5)?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "32",
+            "shortReasoning": "Rekursiv beregning av f(2,5) gir 32 (sannsynlig potensberegning 2^5=32).",
+            "commonMistakes": [
+              "Feil beregning av rekursive kall",
+              "Off-by-one i basistilfelle"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 7"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Vi har en nesten sortert tabell. Hvilken sorteringsmetode blir mye raskere? A) Haugsortering B) Insertion sort C) Selection sort",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — Insertion sort",
+            "shortReasoning": "Insertion sort har beste-tilfelle O(n) når tabellen er nesten sortert, fordi få elementer må flyttes.",
+            "commonMistakes": [
+              "Velger heapsort som alltid er O(n log n)",
+              "Velger selection sort som alltid er O(n²)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Insertion sort",
+              "href": "/dat102/begreper/insertion-sort",
+              "kind": "concept",
+              "slug": "insertion-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 7"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 7"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "multiple-answer",
+          "points": 2.4,
+          "prompt": "Klassifiser orden til: Haugsortering, Insertion sort, Selection sort, Merge sort (O(n), O(n log n), O(n²)).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Heapsort: O(n log n). Insertion sort: O(n²). Selection sort: O(n²). Merge sort: O(n log n).",
+            "shortReasoning": "Heapsort og merge sort er alltid O(n log n). Insertion sort og selection sort er O(n²) i gjennomsnitt/verste tilfelle.",
+            "commonMistakes": [
+              "Plasserer heapsort i O(n²)",
+              "Glemmer at insertion sort er O(n) i beste tilfelle men O(n²) generelt"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            },
+            {
+              "label": "Heapsort",
+              "href": "/dat102/begreper/heapsort",
+              "kind": "concept",
+              "slug": "heapsort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 8"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 8"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "anchor": "oppg-3",
+      "points": 15,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "tree-traversal",
+        "binary-tree",
+        "bst-operations",
+        "binary-search-tree",
+        "heap",
+        "balanced-tree",
+        "two-three-tree"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gitt et binært tre (figur): Hvilken rekkefølge besøkes nodene i ved preorden og postorden? Svar med tall uten blanke.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Preorden: 124536789. Postorden: 452689731.",
+            "shortReasoning": "Preorden: rot–venstre–høyre. Postorden: venstre–høyre–rot.",
+            "commonMistakes": [
+              "Blander preorden med in-orden",
+              "Feil rekkefølge i postorden"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tre-traversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 9"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 9"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Sett inn elementene 10, 5, 17, 2, 20, 15 i et tomt BS-tre i gitt rekkefølge. Dra og slipp på riktig sted.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rot=10, venstre=5, høyre=17; 5.venstre=2; 17.venstre=15, 17.høyre=20.",
+            "shortReasoning": "BS-tre-innsetting: sammenlign med rot og gå venstre/høyre rekursivt til riktig ledig plass.",
+            "commonMistakes": [
+              "Setter 15 som barn av feil node",
+              "Blander venstre og høyre undertre"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BS-tre-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 10"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 10"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 2,
+          "prompt": "Gitt BS-tre T: slett rotelementet (som har to barn) ved å erstatte med en annen verdi. To alternativer vises — marker ett.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Enten in-orden etterfølger (minste i høyre undertre) eller in-orden forgjenger (største i venstre undertre) — begge er korrekte alternativ.",
+            "shortReasoning": "Ved sletting av node med to barn: erstatt med in-orden etterfølger eller forgjenger for å bevare BS-tre-egenskapen.",
+            "commonMistakes": [
+              "Tror bare én av de to alternativene er gyldig"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BS-tre-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 10"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 11"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gitt BS-tre T: sett inn element med verdi 65. Hvilket tre får vi etter innsetting? (figur med alternativer)",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Korrekt alternativ vises i løsningsfilen (figur-basert svar).",
+            "shortReasoning": "Følg BS-tre-innsettingsalgoritmen: sammenlign med rot og gå riktig vei til ledig bladplass.",
+            "commonMistakes": [
+              "Setter inn på feil side",
+              "Bryter BS-tre-egenskapen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BS-tre-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 11"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 12"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "Figurene viser noen binære trær. Hvilket tre er en maksimumshaug?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Korrekt alternativ (figur-basert) fra løsningsfilen.",
+            "shortReasoning": "En maksimumshaug er et komplett binært tre der foreldre alltid er større enn eller lik barna.",
+            "commonMistakes": [
+              "Forveksler minimumshaug med maksimumshaug",
+              "Overser haugens kompletthetskrav"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heap",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 12"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 13"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "f",
+          "qtype": "trace",
+          "points": 1,
+          "prompt": "Maksimumshaug T: ta ut 70 (rotnoden), sett erstatningselement i roten etter kjent prinsipp og reparer. Hvilket alternativ er riktig?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Korrekt alternativ (figur-basert) fra løsningsfilen.",
+            "shortReasoning": "Fjerning av maks: flytt siste element til rot, deretter sift-down (sammenlign med største barn og byt).",
+            "commonMistakes": [
+              "Glemmer å reparere haugen etter fjerning",
+              "Bytter med feil barn"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heap",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 13"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 14"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "g",
+          "qtype": "trace",
+          "points": 1,
+          "prompt": "Maksimumshaug T: sett inn 80 og reparer til haug. Hvilket alternativ er riktig?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Korrekt alternativ (figur-basert) fra løsningsfilen.",
+            "shortReasoning": "Innsetting: legg til som siste blad, deretter sift-up (sammenlign med forelder og byt om nødvendig).",
+            "commonMistakes": [
+              "Setter inn på feil posisjon",
+              "Glemmer sift-up etter innsetting"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heap",
+              "href": "/dat102/begreper/heap",
+              "kind": "concept",
+              "slug": "heap"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 14"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 16"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "h",
+          "qtype": "trace",
+          "points": 1,
+          "prompt": "BS-tre T skal roteres med venstre-rotasjon. Dra og slipp verdiene på rett sted etter rotasjonen.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Etter venstrerotasjon: posisjon 1→4, 2→2, 3→5, 4→1, 5→3, 7→6 (figur-basert).",
+            "shortReasoning": "Venstrerotasjon: høyre barn blir ny rot, gammel rot blir venstre barn av ny rot.",
+            "commonMistakes": [
+              "Blander høyre- og venstrerotasjon",
+              "Glemmer å flytte venstre undertre til høyre barn av gammel rot"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balanserte trær",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 15"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 17"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "i",
+          "qtype": "trace",
+          "points": 1,
+          "prompt": "BS-tre T skal roteres med høyre-rotasjon. Dra og slipp verdiene på rett sted etter rotasjonen.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Etter høyrerotasjon: posisjon 1→3, 2→1, 3→5, 5→2, 6→4, 7→6 (figur-basert).",
+            "shortReasoning": "Høyrerotasjon: venstre barn blir ny rot, gammel rot blir høyre barn av ny rot.",
+            "commonMistakes": [
+              "Blander høyre- og venstrerotasjon"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balanserte trær",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 16"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 18"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "j",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gitt 2-3-tre: sett inn tallet 55 slik at treet fremdeles er et 2-3-tre. Hvilket alternativ er riktig?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Korrekt alternativ (figur-basert) fra løsningsfilen.",
+            "shortReasoning": "2-3-tre innsetting: finn riktig bladnode, sett inn, splitt ved behov og propagér oppover.",
+            "commonMistakes": [
+              "Glemmer å splitte overfylte noder",
+              "Propagerer splitt feil"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "2-3-tre",
+              "href": "/dat102/begreper/two-three-tree",
+              "kind": "concept",
+              "slug": "two-three-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 17"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 19"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "anchor": "oppg-4",
+      "points": 7,
+      "topic": "graphs",
+      "conceptSlugs": [
+        "breadth-first-search",
+        "graph-terminology",
+        "adjacency-matrix",
+        "adjacency-list",
+        "hash-table",
+        "open-addressing"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "trace",
+          "points": 2,
+          "prompt": "Gitt urettet graf G: bruk bredde-først (BFS) med startnode 4. Legg naboer til i stigende rekkefølge. Hva er besøksrekkefølgen?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "4367152",
+            "shortReasoning": "BFS med kø fra node 4; naboer legges til i stigende rekkefølge ved hvert steg.",
+            "commonMistakes": [
+              "Bruker DFS i stedet for BFS",
+              "Legger naboer til i feil rekkefølge"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Bredde-først-søk",
+              "href": "/dat102/begreper/breadth-first-search",
+              "kind": "concept",
+              "slug": "breadth-first-search"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 18"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 20"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "multiple-answer",
+          "points": 2,
+          "prompt": "Nabomatrise vs. naboliste: hvilken er best for (A) avgjøre om to noder er naboer, (B) finne alle naboer til en node?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A: Nabomatrise (direkte oppslag i M[v][w]). B: Naboliste (kun itererer over faktiske naboer).",
+            "shortReasoning": "Nabomatrise gir direkte oppslag i M[v][w] for nabo-sjekk, men holder en celle for hvert nodepar uansett hvor få kanter grafen har. Naboliste lagrer bare kantene som finnes og er derfor mer plasseffektiv og rask for å finne alle naboer.",
+            "commonMistakes": [
+              "Velger nabomatrise for begge",
+              "Forveksler ytelsesegenskapene"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Nabomatrise",
+              "href": "/dat102/begreper/adjacency-matrix",
+              "kind": "concept",
+              "slug": "adjacency-matrix"
+            },
+            {
+              "label": "Naboliste",
+              "href": "/dat102/begreper/adjacency-list",
+              "kind": "concept",
+              "slug": "adjacency-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 18"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 20"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": 3,
+          "prompt": "Bilobjekter lagres i hash-tabell (lengde 10, hash = siste siffer). Sett inn ED57672, SX28599, EU59782, SV85839, EK44122 med lineær åpen adressering (steglengde 1). Dra og slipp på riktig posisjon.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Pos 0: SV85839, pos 2: ED57672, pos 3: EU59782, pos 4: EK44122, pos 9: SX28599 (øvrige posisjoner tomme).",
+            "shortReasoning": "Tom tabell, hash = siste siffer: ED57672→2 (ledig). SX28599→9 (ledig). EU59782→2 (opptatt → probe 3, ledig). SV85839→9 (opptatt → wrap-around til 0, ledig). EK44122→2 (opptatt → 3 opptatt → 4, ledig). Lineær probing med steglengde 1. (Løsningsfiguren nummererer dropp-feltene 1–10; de tilsvarer posisjon 0–9.)",
+            "commonMistakes": [
+              "Setter inn i feil rekkefølge",
+              "Probing feil ved kollisjon"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Åpen adressering",
+              "href": "/dat102/begreper/open-addressing",
+              "kind": "concept",
+              "slug": "open-addressing"
+            },
+            {
+              "label": "Hash-tabell",
+              "href": "/dat102/begreper/hash-table",
+              "kind": "concept",
+              "slug": "hash-table"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 19"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 21"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "anchor": "oppg-5",
+      "points": 3,
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "growth-rates",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "f1=10n log n+3n+50 log n+10, f2=30n−5 log n+100, f3=10n²−5n log n−2n+10, f4=20n³−10n log n−2n+20. Hvilken er mest tidseffektiv for stor n?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "B — f2 = O(n)",
+            "shortReasoning": "f2 er O(n), f1 er O(n log n), f3 er O(n²), f4 er O(n³). Laveste vekstrate = raskest.",
+            "commonMistakes": [
+              "Velger f1 (O(n log n)) fremfor f2 (O(n))",
+              "Ser på konstantleddene i stedet for dominerende term"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Big-O-notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            },
+            {
+              "label": "Vekstrater",
+              "href": "/dat102/begreper/growth-rates",
+              "kind": "concept",
+              "slug": "growth-rates"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 20"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 22"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "f(n) = 40n log₂ n + 20n + 30n² + 1000. Hva er f(n) i stor O-notasjon?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "A — O(n²)",
+            "shortReasoning": "Dominerende term er 30n². Alle andre termer vokser langsommere.",
+            "commonMistakes": [
+              "Velger O(n log n) fordi det er det første leddet",
+              "Inkluderer konstanten 1000"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Big-O-notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 20"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 22"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "single-choice",
+          "points": 1,
+          "prompt": "En O(n²)-algoritme tar 1 sekund for n elementer. Omtrent hvor lang tid tar den for 2n elementer?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "D — ca. 4 sekunder",
+            "shortReasoning": "(2n)² = 4n², altså 4 ganger så lang tid.",
+            "commonMistakes": [
+              "Svarer 2 sekunder (lineær tankegang)",
+              "Svarer 1 sekund"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kompleksitetsanalyse",
+              "href": "/dat102/begreper/complexity-analysis",
+              "kind": "concept",
+              "slug": "complexity-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Flervalgsoppgaver",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-oppgaver.md",
+                "pages": "s. 20"
+              },
+              {
+                "label": "V22 Løsningsforslag flervalg",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-flervalg-losning.md",
+                "pages": "s. 23"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "anchor": "oppg-6",
+      "points": null,
+      "topic": "lists",
+      "conceptSlugs": [
+        "sorted-list",
+        "linked-list",
+        "complexity-analysis",
+        "merge-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag konstruktøren for KjedetOrdnetListe<T>. Initialiserer foerste, siste og antall.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "foerste = null; siste = null; antall = 0;",
+            "shortReasoning": "Tom liste initialiserer alle felt til null/0.",
+            "commonMistakes": [
+              "Glemmer å initialisere siste",
+              "Glemmer antall = 0"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lister",
+              "href": "/dat102/temaer/lists",
+              "kind": "topic",
+              "slug": "lists"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 4"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 1"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag metoden fjernFoerste() som fjerner og returnerer første element. Kaster EmptyCollectionException hvis tom.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Sjekk erTom(); hent foerste.getElement(); sett foerste = foerste.getNeste(); decrement antall; sett siste=null hvis antall==0; returner element.",
+            "shortReasoning": "Fjern første node: flytt foerste-referansen til neste node. Viktig å oppdatere siste hvis listen blir tom.",
+            "commonMistakes": [
+              "Glemmer å oppdatere siste ved tom liste",
+              "Glemmer antall--"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortert liste",
+              "href": "/dat102/begreper/sorted-list",
+              "kind": "concept",
+              "slug": "sorted-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 4"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 1"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag metoden leggTil(T element) som setter inn et element slik at listen holder seg ordnet etter innsetting. Tidskompleksitet O(n).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Traverser med to pekere (denne, forrige) til riktig posisjon (element.compareTo(denne.getElement()) <= 0). Sett inn ny node mellom forrige og denne. Håndter spesialtilfeller: tom liste og innsetting bakerst.",
+            "shortReasoning": "Ordnet liste: ny node plasseres på riktig sted ved å sammenligne med eksisterende elementer.",
+            "commonMistakes": [
+              "Oppdaterer ikke siste-referansen ved innsetting bakerst",
+              "Feil håndtering av tom liste"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortert liste",
+              "href": "/dat102/begreper/sorted-list",
+              "kind": "concept",
+              "slug": "sorted-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 4"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 1"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "short-answer",
+          "points": null,
+          "prompt": "Metoden leggTilListe (kode gitt) kaller leggTil n ganger på en liste med n/2 elementer fra each av two lister. Hva er tidskompleksiteten i O-notasjon?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "O(n²)",
+            "shortReasoning": "leggTil er O(n) per kall (søk etter riktig posisjon). Kalles n ganger totalt → O(n) * O(n) = O(n²).",
+            "commonMistakes": [
+              "Svarer O(n log n)",
+              "Glemmer å multiplisere leggTil-kompleksiteten med antall kall"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Kompleksitetsanalyse",
+              "href": "/dat102/begreper/complexity-analysis",
+              "kind": "concept",
+              "slug": "complexity-analysis"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 4"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 1"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "(i) Implementer fletteTilListe() som bruker flette-prinsippet (merge) for å kombinere to sorterte lister uten å kalle leggTil(). (ii) Tidskompleksitet for fletteTilListe i verste tilfelle?",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "(i) Bruk to pekere p og q. Sammenlign elementer, legg til det minste bak i ny liste (leggTilBak). Tøm resterende liste. (ii) O(n).",
+            "shortReasoning": "Flett-prinsippet: ett gjennomløp sammenligningselement for element, dermed O(n) totalt for n = n/2 + n/2 elementer.",
+            "commonMistakes": [
+              "Kaller leggTil i stedet for direkte node-kobling",
+              "Glemmer å tømme gjenværende elementer fra den lengste listen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Merge sort",
+              "href": "/dat102/begreper/merge-sort",
+              "kind": "concept",
+              "slug": "merge-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 5"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "anchor": "oppg-7",
+      "points": null,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree",
+        "bst-operations",
+        "tree-traversal",
+        "recursion",
+        "tree-implementation",
+        "balanced-tree"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag konstruktøren KjedetBSTre(T element) som oppretter et BS-tre med én node.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "antall = 1; rot = new BinaerTreNode<T>(element);",
+            "shortReasoning": "Opprett én rotnode med gitt element; antall settes til 1.",
+            "commonMistakes": [
+              "Setter antall = 0",
+              "Glemmer å opprette BinaerTreNode"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binært søketre",
+              "href": "/dat102/begreper/binary-search-tree",
+              "kind": "concept",
+              "slug": "binary-search-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 6"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag metoden finnMin() som finner og returnerer det minste elementet i BS-treet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Traverser venstre undertre iterativt til venstre barn er null; returner elementet i denne noden. Returner null om treet er tomt.",
+            "shortReasoning": "I et BS-tre er det minste elementet alltid i den ytterste venstre noden.",
+            "commonMistakes": [
+              "Traverserer høyre undertre",
+              "Glemmer null-sjekk for tomt tre"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "BS-tre-operasjoner",
+              "href": "/dat102/begreper/bst-operations",
+              "kind": "concept",
+              "slug": "bst-operations"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 6"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag den rekursive private metoden skrivInorden(BinaerTreNode<T> p) som skriver alle elementer i in-orden.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if (p != null) { skrivInorden(p.getVenstre()); System.out.print(p.getElement()); skrivInorden(p.getHoyre()); }",
+            "shortReasoning": "In-orden: venstre–rot–høyre gir elementer i sortert rekkefølge.",
+            "commonMistakes": [
+              "Skriver ut elementet før rekursivt kall på venstre",
+              "Glemmer null-sjekk"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Tre-traversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 7"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag den rekursive metoden antallNoder(BinaerTreNode<T> p) som teller antall noder i treet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "if (p == null) return 0; return 1 + antallNoder(p.getVenstre()) + antallNoder(p.getHoyre());",
+            "shortReasoning": "Rekursivt: basistilfelle null-node = 0; ellers 1 + venstre subtree-antall + høyre subtree-antall.",
+            "commonMistakes": [
+              "Glemmer basistilfelle (null returnerer 0)",
+              "Legger ikke til 1 for nåværende node"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 7"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "e",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Lag rekursiv privat metode tabTilBS(T[] tab, int start, int siste) som bygger et balansert BS-tre fra sortert tabell.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Basistilfelle: start > siste returnerer null. Finn midtpunktet midten=(start+siste)/2. Lag rot med tab[midten]. Sett venstre = tabTilBS(tab, start, midten-1); høyre = tabTilBS(tab, midten+1, siste). Returner rot.",
+            "shortReasoning": "Rekursivt halvering av tabellen på midten gir et balansert tre fordi rotelementet alltid er medianen.",
+            "commonMistakes": [
+              "Bruker start i stedet for midten som rotnoden",
+              "Off-by-one i indeksberegning"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Balansert tre",
+              "href": "/dat102/begreper/balanced-tree",
+              "kind": "concept",
+              "slug": "balanced-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 7"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "anchor": "oppg-8",
+      "points": null,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "insertion-sort",
+        "heapsort",
+        "heap",
+        "radix-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "free-text",
+          "points": null,
+          "prompt": "Forklar kort prinsippet for insertion sort og vis hvordan [5, 3, 1, 6, 2] sorteres (vis innholdet etter hvert gjennomløp av ytre løkke).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Prinsipp: Del i sortert (venstre) og usortert (høyre) del. Ta første element fra usortert, plasser riktig i sortert del. Trinn: 5|3 1 6 2 → 3 5|1 6 2 → 1 3 5|6 2 → 1 3 5 6|2 → 1 2 3 5 6.",
+            "shortReasoning": "Insertion sort er stabil og effektiv for nesten sorterte lister (O(n) beste tilfelle).",
+            "commonMistakes": [
+              "Viser feil innhold etter hvert steg",
+              "Starter med tom sortert del (godtas)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Insertion sort",
+              "href": "/dat102/begreper/insertion-sort",
+              "kind": "concept",
+              "slug": "insertion-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 8"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Gitt MinHaugInterface og MinHaug-konstruktør: skriv metoden haugsorter(T[] a) som sorterer tabellen ved hjelp av MinHaug.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Opprett MinHaug med plass til a.length elementer. Loop: legg alle elementer fra a til haugen. Loop: ta elementer ut fra haugen (fjernMin) tilbake til a i rekkefølge.",
+            "shortReasoning": "Heapsort via MinHaug: alle elementer inn → ta ut i sortert rekkefølge (minste først).",
+            "commonMistakes": [
+              "Glemmer å legge alle elementer inn først",
+              "Bruker feil metode (finner i stedet for fjerner)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Heapsort",
+              "href": "/dat102/begreper/heapsort",
+              "kind": "concept",
+              "slug": "heapsort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 8"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "trace",
+          "points": null,
+          "prompt": "Radix-sorter [12, 30, 44, 21, 32, 04, 02, 33, 23] i 5-tallssystemet (sifre 0–4, 5 køer). Vis fordeling i køer og mellomresultater. Forklar prinsippet.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "1. gjennomgang (enere): Kø0→30, Kø1→21, Kø2→12,32,02, Kø3→33,23, Kø4→44,04. Rekkeflg: 30 21 12 32 02 33 23 44 04. 2. gjennomgang (tiere): Kø0→02,04, Kø1→12, Kø2→21,23, Kø3→30,32,33, Kø4→44. Resultat: 02 04 12 21 23 30 32 33 44. Prinsipp: Gjennomgå like mange ganger som antall sifre, start fra høyre. Fordel i køer per siffer, saml i rekkefølge.",
+            "shortReasoning": "Radix sort er ikke-sammenligningsbasert og bruker O(n) per gjennomgang.",
+            "commonMistakes": [
+              "Starter fra venstre siffer i stedet for høyre",
+              "Forveksler kørekkefølge"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Radix sort",
+              "href": "/dat102/begreper/radix-sort",
+              "kind": "concept",
+              "slug": "radix-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2022-vaar",
+                "internalPath": "processed/reviewed/exams/2022-vaar.md"
+              },
+              {
+                "label": "V22 Papirsett",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-papirsett.md",
+                "pages": "s. 9"
+              },
+              {
+                "label": "V22 Løsningsforslag programmering",
+                "internalPath": "structured/exams/2022-vaar/exam-2022-vaar-prog-losning.md",
+                "pages": "s. 5"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

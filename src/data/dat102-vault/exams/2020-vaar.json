@@ -1,0 +1,438 @@
+{
+  "slug": "2020-vaar",
+  "year": 2020,
+  "session": "vaar",
+  "displayLabel": "Vår 2020",
+  "summary": "Skriftlig eksamen (3 timer), 2. juni 2020. 5 oppgaver totalt: Oppgave 1–3 i Wiseflow (Del 1, skannet), Oppgave 4–5 på papir (Del 2, tekstuthentet).",
+  "sessionNote": "Del 1 (oppgave 1–3) er skannet uten tekstlag. Oppgavetekstene for 1–3 er ikke tilgjengelige; bare fasit-notater fra løsningsforslaget. Oppgave 4–5 har full tekst.",
+  "status": "partial",
+  "statusCounts": {
+    "complete": 6,
+    "partial": 0,
+    "scanned_only": 3,
+    "missing_solution": 0
+  },
+  "questionCount": 5,
+  "subquestionCount": 9,
+  "questions": [
+    {
+      "number": 1,
+      "anchor": "oppg-1",
+      "points": 16,
+      "topic": "asymptotic-analysis",
+      "conceptSlugs": [
+        "big-o-notation",
+        "complexity-analysis"
+      ],
+      "subquestions": [
+        {
+          "letter": null,
+          "qtype": "single-choice",
+          "points": 16,
+          "prompt": "Skannet — kun sidebilder; spørsmålstekst ikke tilgjengelig som tekst (flervalg, 8 delspørsmål, berører O(n²), O(log n) og sorteringskompleksitet).",
+          "status": "scanned_only",
+          "solution": null,
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Asymptotisk analyse",
+              "href": "/dat102/temaer/asymptotic-analysis",
+              "kind": "topic",
+              "slug": "asymptotic-analysis"
+            },
+            {
+              "label": "Big-O-notasjon",
+              "href": "/dat102/begreper/big-o-notation",
+              "kind": "concept",
+              "slug": "big-o-notation"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "anchor": "oppg-2",
+      "points": 12,
+      "topic": "sorting",
+      "conceptSlugs": [
+        "sorting-comparison",
+        "tree-traversal"
+      ],
+      "subquestions": [
+        {
+          "letter": null,
+          "qtype": "trace",
+          "points": 12,
+          "prompt": "Skannet — kun sidebilder; spørsmålstekst ikke tilgjengelig som tekst (kjør-algoritme-for-hånd, 6 delspørsmål; svar inkl. 231574, 4251637, 01010, 12543, 412, 39 — sannsynlig sortering og tre-traversering).",
+          "status": "scanned_only",
+          "solution": null,
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Sortering",
+              "href": "/dat102/temaer/sorting",
+              "kind": "topic",
+              "slug": "sorting"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "anchor": "oppg-3",
+      "points": 8,
+      "topic": "graphs",
+      "conceptSlugs": [
+        "topological-sort"
+      ],
+      "subquestions": [
+        {
+          "letter": null,
+          "qtype": "true-false",
+          "points": 8,
+          "prompt": "Skannet — kun sidebilder; spørsmålstekst ikke tilgjengelig som tekst (sant/falsk, 3 delspørsmål; inkl. topologisk orden T4,T5,T3,T1,T2).",
+          "status": "scanned_only",
+          "solution": null,
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Grafer",
+              "href": "/dat102/temaer/graphs",
+              "kind": "topic",
+              "slug": "graphs"
+            },
+            {
+              "label": "Topologisk sortering",
+              "href": "/dat102/begreper/topological-sort",
+              "kind": "concept",
+              "slug": "topological-sort"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "anchor": "oppg-4",
+      "points": null,
+      "topic": "lists",
+      "conceptSlugs": [
+        "linked-list",
+        "recursion",
+        "linked-node"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv rekursiv toString()-metode for KjedetUordnetListe<T> som returnerer alle elementer med linjeskift mellom dem.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Privat rekursiv hjelpemetode: basistilfelle p==null returnerer \"\"; rekursivt tilfelle returnerer p.getElement() + \"\\n\" + toString(p.getNeste()).",
+            "shortReasoning": "Rekursjon over lenken: hvert kall håndterer én node og delegerer resten til neste kall.",
+            "commonMistakes": [
+              "Glemmer basistilfelle (null-sjekk)",
+              "Bruker iterasjon i stedet for rekursjon",
+              "Legger linjeskift etter siste element"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lenket liste",
+              "href": "/dat102/begreper/linked-list",
+              "kind": "concept",
+              "slug": "linked-list"
+            },
+            {
+              "label": "Rekursjon",
+              "href": "/dat102/begreper/recursion",
+              "kind": "concept",
+              "slug": "recursion"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metode settInn(T element) som setter inn et element foran i KjedetUordnetListe.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Lag ny LinearNode med element, sett ny.setNeste(foerste), foerste = ny, antall++.",
+            "shortReasoning": "Innsetting foran: ny node peker på gammel foerste; foerste oppdateres til ny node.",
+            "commonMistakes": [
+              "Glemmer antall++",
+              "Oppdaterer ikke foerste-referansen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lenket liste",
+              "href": "/dat102/begreper/linked-list",
+              "kind": "concept",
+              "slug": "linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "c",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metode flyttFoersteTilSiste() som flytter første element til sist i KjedetUordnetListe.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Hvis antall > 1: traverser til siste node, koble den til gammel foerste, oppdater foerste = foerste.getNeste(), sett gammel foerstes neste til null.",
+            "shortReasoning": "Krever ett gjennomløp for å finne siste node, deretter kobling. Alternativt: bytt elementpekere i første og siste node (godtas).",
+            "commonMistakes": [
+              "Håndterer ikke tilfellet antall <= 1",
+              "Glemmer å sette gammel foerste.setNeste(null)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lenket liste",
+              "href": "/dat102/begreper/linked-list",
+              "kind": "concept",
+              "slug": "linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "d",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv metode finnNestMinste() som finner nest minste element i KjedetUordnetListe ved ett gjennomløp.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Hold to referanser: minste og nestMinste. Ved hvert element: oppdater begge referansene etter compareTo-sammenligning. Returnerer null hvis antall < 2.",
+            "shortReasoning": "Ett gjennomløp: hvis nytt element < minste, flytt minste til nestMinste; ellers hvis < nestMinste, oppdater nestMinste.",
+            "commonMistakes": [
+              "Bruker to gjennomløp",
+              "Initialiserer nestMinste feil (f.eks. med null)"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Lenket liste",
+              "href": "/dat102/begreper/linked-list",
+              "kind": "concept",
+              "slug": "linked-list"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "anchor": "oppg-5",
+      "points": null,
+      "topic": "binary-search-trees",
+      "conceptSlugs": [
+        "binary-search-tree",
+        "tree-traversal",
+        "recursion"
+      ],
+      "subquestions": [
+        {
+          "letter": "a",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv rekursiv toString() for KjedetBSTre<T> som returnerer elementer i sortert rekkefølge (in-orden traversering).",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rekursiv privat hjelpemetode toStringRek(BinaerTreNode<T> p): basistilfelle p==null returnerer \"\"; rekursivt: toStringRek(venstre) + p.getElement() + toStringRek(høyre).",
+            "shortReasoning": "In-orden traversering (venstre–rot–høyre) besøker elementer i sortert rekkefølge i et BS-tre.",
+            "commonMistakes": [
+              "Bruker preorden eller postorden i stedet for in-orden",
+              "Glemmer null-sjekk"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binære søketrær",
+              "href": "/dat102/temaer/binary-search-trees",
+              "kind": "topic",
+              "slug": "binary-search-trees"
+            },
+            {
+              "label": "Tre-traversering",
+              "href": "/dat102/begreper/tree-traversal",
+              "kind": "concept",
+              "slug": "tree-traversal"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        },
+        {
+          "letter": "b",
+          "qtype": "code-reading",
+          "points": null,
+          "prompt": "Skriv rekursiv static metode verifiserBSTre(BinaerTre<T> detAndre) som sjekker om et binært tre er et gyldig BS-tre.",
+          "status": "complete",
+          "solution": {
+            "expectedAnswer": "Rekursiv sjekk: basistilfelle p==null returnerer true. Sjekk at rotelementet er større enn venstrebarn og ikke større enn høyrebarn, deretter rekursivt verifiser begge undertrær.",
+            "shortReasoning": "Et BS-tre krever at alle noder i venstre undertre er mindre og alle i høyre undertre er større enn rotnoden.",
+            "commonMistakes": [
+              "Sjekker bare direkte barn, ikke hele undertreet",
+              "Feil retning på compareTo-sammenligningen"
+            ]
+          },
+          "figureNote": null,
+          "learnMoreLinks": [
+            {
+              "label": "Binært søketre",
+              "href": "/dat102/begreper/binary-search-tree",
+              "kind": "concept",
+              "slug": "binary-search-tree"
+            }
+          ],
+          "sourceMeta": {
+            "refs": [
+              {
+                "label": "2020-vaar",
+                "internalPath": "processed/reviewed/exams/2020-vaar.md"
+              },
+              {
+                "label": "Eksamen V2020 Del 2",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-del2.md"
+              },
+              {
+                "label": "Løsningsforslag V2020 (v5, eneste/nyeste)",
+                "internalPath": "structured/exams/2020-vaar/exam-2020-vaar-losningsforslag-v5.md",
+                "pages": "s. 4"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
