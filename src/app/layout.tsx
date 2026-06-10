@@ -5,9 +5,9 @@ import AITutor from "@/components/AITutor";
 import { ProgressProvider } from "@/components/ProgressProvider";
 
 export const metadata: Metadata = {
-  title: "Eksamensøving — Semester 4",
+  title: "Eksamensøving — Dataingeniør HVL",
   description:
-    "Skreddersydd eksamensøving for DAT102 Algoritmer, ING164 Fysikk, DAT110 Nettverk, DAT109 Systemutvikling og DAT107 Databaser",
+    "Eksamensøving for dataingeniør ved HVL Bergen, organisert etter studieløpet — DAT102, DAT107, DAT109, DAT110 og ING164.",
   appleWebApp: {
     title: "Eksamensøving",
   },
