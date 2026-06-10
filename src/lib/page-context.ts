@@ -1,4 +1,4 @@
-export type Subject = "ing164" | "dat109" | "dat110" | "unknown";
+export type Subject = "ing164" | "dat109" | "dat110" | "dat102" | "unknown";
 
 export type PageType =
   | "teori"
@@ -24,6 +24,7 @@ const subjectLabels: Record<Subject, string> = {
   ing164: "ING164 Fysikk",
   dat109: "DAT109 Systemutvikling",
   dat110: "DAT110 Nettverksteknologi",
+  dat102: "DAT102 Algoritmer og datastrukturer",
   unknown: "Ukjent fag",
 };
 
@@ -45,6 +46,7 @@ export function parsePathname(pathname: string): PageContext {
   if (parts[0] === "ing164") subject = "ing164";
   else if (parts[0] === "dat109") subject = "dat109";
   else if (parts[0] === "dat110") subject = "dat110";
+  else if (parts[0] === "dat102") subject = "dat102";
 
   let chapterSlug: string | null = null;
   let chapterId: string | null = null;
@@ -60,10 +62,19 @@ export function parsePathname(pathname: string): PageContext {
   let pageType: PageType = "unknown";
   if (parts.includes("teori")) pageType = "teori";
   else if (parts.includes("formler")) pageType = "formler";
-  else if (parts.includes("oppgaver")) pageType = "oppgaver";
+  else if (parts.includes("oppgaver") || (subject === "dat102" && parts.includes("oving")))
+    pageType = "oppgaver";
   else if (parts.includes("visualiseringer")) pageType = "visualiseringer";
   else if (parts.includes("eksamen")) pageType = "eksamen";
   else if (parts.includes("oppsummering")) pageType = "oppsummering";
+  // DAT102 har eget rute-vokabular: temaer/begreper/pensum er teorisider.
+  else if (
+    subject === "dat102" &&
+    (parts.includes("temaer") ||
+      parts.includes("begreper") ||
+      parts.includes("pensum"))
+  )
+    pageType = "teori";
   else if (subject !== "unknown" && !chapterSlug) pageType = "oversikt";
 
   return {
