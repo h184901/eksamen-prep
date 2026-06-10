@@ -29,8 +29,10 @@ export default function Navigation() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
+      {/* gap-6 garanterer luft mellom brand og nav selv når raden er full;
+          shrink-0 hindrer at brand-teksten klemmes inn i første nav-item. */}
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-2 font-bold text-lg">
           <span className="text-2xl">📚</span>
           <span>Eksamensøving</span>
         </Link>
@@ -47,9 +49,11 @@ export default function Navigation() {
                   : "text-[var(--muted)]"
               }`}
             >
-              {/* Short labels (DAT110 etc.) at lg–xl, full labels at xl+ */}
-              <span className="xl:hidden">{item.short}</span>
-              <span className="hidden xl:inline">{item.label}</span>
+              {/* Alltid korte labels på desktop: full-label-raden (~1320px med
+                  7 items + badge + toggles) overskrider max-w-6xl-containeren
+                  (1120px innhold) uansett viewport. Fulle labels vises i
+                  mobil-/tabletmenyen, der det er plass. */}
+              {item.short}
             </Link>
           ))}
           <UserBadge />

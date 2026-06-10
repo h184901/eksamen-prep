@@ -1,6 +1,7 @@
 // Studieplan-struktur for Dataingeniør, HVL Bergen.
 // Kilde: HVL Dataingeniør utdanningsplan 2024h.
 // Semesterplassering følger planen — ikke gjett eller endre plasseringer.
+// Fagnavn vises på bokmål i UI selv om kilden (HVL-planen) er på nynorsk.
 //
 // `href: null` betyr at faget ennå ikke har en egen side på nettstedet og
 // vises som "Kommer senere" (ingen lenke → ingen 404). Fag med `href` er
@@ -48,9 +49,9 @@ export const studyPlan: PlanYear[] = [
         id: "s1",
         label: "Semester 1",
         subjects: [
-          { code: "DAT100", name: "Grunnleggande programmering", href: null, status: "later", color: "neutral" },
+          { code: "DAT100", name: "Grunnleggende programmering", href: null, status: "later", color: "neutral" },
           { code: "DAT111", name: "Introduksjon til programvareutvikling", href: null, status: "later", color: "neutral" },
-          { code: "ING100", name: "Ingeniørfagleg innføringsemne", href: null, status: "later", color: "neutral" },
+          { code: "ING100", name: "Ingeniørfaglig innføringsemne", href: null, status: "later", color: "neutral" },
           { code: "MAT101", name: "Diskret matematikk 1", href: null, status: "later", color: "neutral" },
         ],
       },
@@ -60,7 +61,7 @@ export const studyPlan: PlanYear[] = [
         subjects: [
           {
             code: "DAT102",
-            name: "Algoritmar og datastrukturar",
+            name: "Algoritmer og datastrukturer",
             href: "/dat102",
             status: "active",
             color: "dat102",
@@ -68,7 +69,7 @@ export const studyPlan: PlanYear[] = [
           },
           {
             code: "DAT107",
-            name: "Databasar",
+            name: "Databaser",
             href: "/dat107",
             status: "active",
             color: "dat107",
@@ -86,10 +87,10 @@ export const studyPlan: PlanYear[] = [
         id: "s3",
         label: "Semester 3",
         subjects: [
-          { code: "DAT103", name: "Datamaskinar og operativsystem", href: null, status: "later", color: "neutral" },
-          { code: "DAT108", name: "Programmering og webapplikasjonar", href: null, status: "later", color: "neutral" },
-          { code: "MAT122", name: "Statistikk for ingeniørar", href: null, status: "later", color: "neutral" },
-          { code: "MAT210", name: "Vidaregåande diskret matematikk", href: null, status: "later", color: "neutral" },
+          { code: "DAT103", name: "Datamaskiner og operativsystem", href: null, status: "later", color: "neutral" },
+          { code: "DAT108", name: "Programmering og webapplikasjoner", href: null, status: "later", color: "neutral" },
+          { code: "MAT122", name: "Statistikk for ingeniører", href: null, status: "later", color: "neutral" },
+          { code: "MAT210", name: "Videregående diskret matematikk", href: null, status: "later", color: "neutral" },
         ],
       },
       {
@@ -130,7 +131,7 @@ export const studyPlan: PlanYear[] = [
       {
         id: "s5",
         label: "Semester 5",
-        note: "Bacheloroppgåve (DAT191), ING303 og spesialisering / valgemne.",
+        note: "Bacheloroppgave (DAT191), ING303 og spesialisering / valgemne.",
         subjects: [],
       },
       {
