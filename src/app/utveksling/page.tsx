@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Utveksling — planlagte Australia-emne",
+  title: "Utveksling — planlagte Australia-emner",
   description:
-    "Planlagt oversikt over aktuelle utvekslingsemne ved Gardens Point (QUT), 2026 Semester 2.",
+    "Planlagt oversikt over aktuelle utvekslingsemner ved Gardens Point (QUT), 2026 Semester 2.",
 };
 
 // Planlagt/framtidig utvekslingsside. Ingen quiz/eksamen/tutor ennå — kun en
-// oversikt over aktuelle emne. Kilde: foreløpig Unit Swap-oversikt (Australia /
+// oversikt over aktuelle emner. Kilde: foreløpig Unit Swap-oversikt (Australia /
 // Gardens Point, 2026 Semester 2). Ikke koblet til DAT102-vault eller HVL-fag.
 
 interface ExchangeUnit {
@@ -54,10 +54,10 @@ export default function UtvekslingPage() {
         Utveksling
       </h1>
       <p className="text-lg text-emerald-700 dark:text-emerald-300 font-medium mb-4">
-        Planlagte Australia-emne
+        Planlagte Australia-emner
       </p>
       <p className="text-[var(--muted)] max-w-2xl leading-relaxed mb-8">
-        Dette er foreløpig en planlagt oversikt over aktuelle utvekslingsemne. Innhold,
+        Dette er foreløpig en planlagt oversikt over aktuelle utvekslingsemner. Innhold,
         quiz og eksamensøving kan legges til senere.
       </p>
 
@@ -80,7 +80,7 @@ export default function UtvekslingPage() {
 
       {/* ───── Units ───── */}
       <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-3">
-        Aktuelle emne
+        Aktuelle emner
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {units.map((u) => (

@@ -8,6 +8,12 @@ import Dat102LearnMoreLinks from "./Dat102LearnMoreLinks";
 type Phase = "select" | "playing" | "done";
 const ROUND_SIZE = 6;
 
+// Normalisert sammenligning av høyrekort-tekst: flere par kan ha identisk
+// fasit (f.eks. seks kort med «O(log n)») — de er faglig ombyttbare.
+function norm(s: string): string {
+  return s.replace(/\s+/g, " ").trim();
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
@@ -26,7 +32,10 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
   const [board, setBoard] = useState<OvingMatch[]>([]); // par i gjeldende runde
   const [rights, setRights] = useState<OvingMatch[]>([]); // høyresiden, stokket
   const [selLeft, setSelLeft] = useState<string | null>(null);
-  const [matched, setMatched] = useState<Set<string>>(new Set());
+  // Egne sett per side: ved tekst-lik match kan det VALGTE høyrekortet låses,
+  // selv om det tilhører et annet par-id enn venstrekortet.
+  const [matchedLeft, setMatchedLeft] = useState<Set<string>>(new Set());
+  const [matchedRight, setMatchedRight] = useState<Set<string>>(new Set());
   const [wrongPair, setWrongPair] = useState<string | null>(null); // "leftId:rightId" som blinker rødt
   const [lastMatched, setLastMatched] = useState<OvingMatch | null>(null);
 
@@ -52,7 +61,8 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
     setBoard(next);
     setRights(shuffle(next));
     setQueue(source.slice(ROUND_SIZE));
-    setMatched(new Set());
+    setMatchedLeft(new Set());
+    setMatchedRight(new Set());
     setSelLeft(null);
     setWrongPair(null);
     setLastMatched(null);
@@ -72,29 +82,36 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
     setBoard([]);
     setRights([]);
     setQueue([]);
-    setMatched(new Set());
+    setMatchedLeft(new Set());
+    setMatchedRight(new Set());
     setSelLeft(null);
     setLastMatched(null);
   };
 
   const handleLeft = (id: string) => {
-    if (matched.has(id)) return;
+    if (matchedLeft.has(id)) return;
     setSelLeft((cur) => (cur === id ? null : id));
     setWrongPair(null);
   };
 
   const handleRight = (rightId: string) => {
-    if (!selLeft || matched.has(rightId)) return;
+    if (!selLeft || matchedRight.has(rightId)) return;
     setAttempts((n) => n + 1);
-    if (selLeft === rightId) {
-      const pair = board.find((p) => p.id === rightId) ?? null;
-      const nextMatched = new Set(matched);
-      nextMatched.add(rightId);
-      setMatched(nextMatched);
+    const leftPair = board.find((p) => p.id === selLeft) ?? null;
+    const clicked = board.find((p) => p.id === rightId) ?? null;
+    // Match på normalisert TEKST, ikke par-id: identiske høyrekort er
+    // ombyttbare, så et hvilket som helst kort med riktig fasittekst godtas.
+    if (leftPair && clicked && norm(leftPair.right) === norm(clicked.right)) {
+      const nextLeft = new Set(matchedLeft);
+      nextLeft.add(selLeft);
+      const nextRight = new Set(matchedRight);
+      nextRight.add(rightId);
+      setMatchedLeft(nextLeft);
+      setMatchedRight(nextRight);
       setSelLeft(null);
-      setLastMatched(pair);
+      setLastMatched(leftPair);
       setTotalMatched((n) => n + 1);
-      if (nextMatched.size === board.length) {
+      if (nextLeft.size === board.length) {
         // runde ferdig
         if (queue.length === 0) {
           setPhase("done");
@@ -167,12 +184,12 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
   }
 
   // ---- playing ----
-  const roundDone = matched.size === board.length;
+  const roundDone = matchedLeft.size === board.length;
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-3 text-xs text-neutral-600 dark:text-neutral-300">
         <span>
-          Matchet {matched.size}/{board.length} i runden · {totalMatched} totalt
+          Matchet {matchedLeft.size}/{board.length} i runden · {totalMatched} totalt
         </span>
         <button type="button" onClick={resetToSelect} className="underline hover:text-neutral-700 dark:hover:text-neutral-200">
           Avbryt
@@ -183,7 +200,7 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
         {/* Venstre: begrep/term */}
         <div className="space-y-2">
           {board.map((p) => {
-            const isMatched = matched.has(p.id);
+            const isMatched = matchedLeft.has(p.id);
             const isSel = selLeft === p.id;
             const isWrong = wrongPair?.startsWith(`${p.id}:`);
             return (
@@ -211,7 +228,7 @@ export default function Dat102MatchingGame({ dataset }: { dataset: MatchingDatas
         {/* Høyre: definisjon/svar (stokket) */}
         <div className="space-y-2">
           {rights.map((p) => {
-            const isMatched = matched.has(p.id);
+            const isMatched = matchedRight.has(p.id);
             const isWrong = wrongPair?.endsWith(`:${p.id}`);
             return (
               <button

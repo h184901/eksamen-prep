@@ -20,7 +20,9 @@ export async function generateMetadata({
   const { slug } = await params;
   const concept = getConceptBySlug(slug);
   if (!concept) return { title: "Begrep" };
-  return { title: `${concept.title} — DAT110 begreper` };
+  // Vault-titler har «Concept: »-prefiks — kun visningsstrip, data uendret.
+  const displayTitle = concept.title.replace(/^Concept:\s*/i, "");
+  return { title: `${displayTitle} — DAT110 begreper` };
 }
 
 // Concept-slug → pedagogical SVG diagram component.

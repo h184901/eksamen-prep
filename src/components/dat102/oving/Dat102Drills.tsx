@@ -24,12 +24,29 @@ function shuffle<T>(arr: T[]): T[] {
   return out;
 }
 
-// Rendrer drill-tekst som kan inneholde ```-kodegjerder (ASCII-trær, kodesnutter).
-// Gjerdene vises som monospace-blokker (uten de rå ```-markørene); resten som
-// vanlig tekst med bevarte linjeskift. Tekst uten gjerder rendres som ett avsnitt.
+// Rendrer inline `kode` i løpende tekst som <code>-elementer (uten rå backticks).
+function renderInline(text: string) {
+  if (!text.includes("`")) return text;
+  return text.split("`").map((seg, i) =>
+    i % 2 === 1 && seg ? (
+      <code
+        key={i}
+        className="px-1 py-0.5 rounded bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 font-mono text-[0.85em]"
+      >
+        {seg}
+      </code>
+    ) : (
+      seg
+    )
+  );
+}
+
+// Rendrer drill-tekst som kan inneholde ```-kodegjerder (ASCII-trær, kodesnutter)
+// og inline `kode`. Gjerdene vises som monospace-blokker (uten de rå ```-markørene);
+// resten som vanlig tekst med bevarte linjeskift og inline-kode som <code>.
 function DrillText({ text, className = "" }: { text: string; className?: string }) {
   if (!text.includes("```")) {
-    return <p className={`whitespace-pre-wrap ${className}`}>{text}</p>;
+    return <p className={`whitespace-pre-wrap ${className}`}>{renderInline(text)}</p>;
   }
   const parts = text.split("```");
   return (
@@ -51,7 +68,7 @@ function DrillText({ text, className = "" }: { text: string; className?: string 
         if (!trimmed) return null;
         return (
           <p key={i} className="whitespace-pre-wrap my-1">
-            {trimmed}
+            {renderInline(trimmed)}
           </p>
         );
       })}

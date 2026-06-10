@@ -85,7 +85,7 @@ export default async function HomePage() {
       <footer className="border-t border-[var(--card-border)] pt-6 pb-4 mb-20 sm:mb-16">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-[var(--muted)]">
           <p>
-            Bygget for HVL Bergen-eksamen · Lokalt lagret framgang · Ingen tracking
+            Bygget for HVL Bergen-eksamen · Øvingsframgang lagres automatisk · Ingen tracking
           </p>
           <p className="flex items-center gap-3">
             <Link href="/dat102" className="hover:text-[var(--foreground)] transition-colors">

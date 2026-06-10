@@ -87,7 +87,7 @@ export default function PensumPage() {
       >
         {/* Bokpolicy: kapittelnumre er struktur — innholdet er egne forklaringer. */}
         <div className="mb-8 rounded-xl border border-dat102-200 dark:border-dat102-900 bg-dat102-50/50 dark:bg-dat102-950/30 px-4 py-3 text-sm text-neutral-700 dark:text-neutral-200">
-          <strong className="font-semibold">Om boka:</strong> kapittelnumrene
+          <strong className="font-semibold">Om boka:</strong>{" "}kapittelnumrene
           refererer til pensumboka (Carrano &amp; Henry) og vises kun som
           struktur. Alt innhold på disse sidene er egne forklaringer bygget fra
           forelesningsmateriellet — ingen bokutdrag eller bokfigurer.

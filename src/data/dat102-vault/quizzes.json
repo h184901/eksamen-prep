@@ -89,8 +89,8 @@
         0
       ],
       "selfCheck": null,
-      "explanationCorrect": "Den korrekte rekkefølgen fra mest effektiv (raskest vekst) til minst effektiv er: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ). Konstant tid er best; eksponentiell tid er verst.",
-      "explanationIncorrect": "Den korrekte rekkefølgen fra mest effektiv (raskest vekst) til minst effektiv er: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ). Konstant tid er best; eksponentiell tid er verst.",
+      "explanationCorrect": "Den korrekte rekkefølgen fra mest effektiv (lavest vekst) til minst effektiv er: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ). Konstant tid er best; eksponentiell tid er verst.",
+      "explanationIncorrect": "Den korrekte rekkefølgen fra mest effektiv (lavest vekst) til minst effektiv er: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ). Konstant tid er best; eksponentiell tid er verst.",
       "optionExplanations": [
         {
           "optionIndex": 1,
@@ -3555,7 +3555,7 @@
         {
           "optionIndex": 2,
           "isCorrect": false,
-          "shortExplanation": "Fyllingsgrad > 1 er kun mulig ved kjeda overløp (separat kjeding); ved åpen adressering er λ alltid ≤ 1. Fyllingsgrad er ikke definisjonen på kollisjon."
+          "shortExplanation": "Fyllingsgrad > 1 er kun mulig ved kjedet overløp (separat kjeding); ved åpen adressering er λ alltid ≤ 1. Fyllingsgrad er ikke definisjonen på kollisjon."
         },
         {
           "optionIndex": 3,
@@ -3663,7 +3663,7 @@
       "question": "Hvilke av følgende er kollisjonsløsningsstrategier for hashtabeller? (Velg alle som stemmer.)",
       "options": [
         "Åpen adressering (open addressing)",
-        "Kjeda overløp (separate chaining)",
+        "Kjedet overløp (separate chaining)",
         "Binær splitt",
         "Lineær probing"
       ],
@@ -3673,13 +3673,13 @@
         3
       ],
       "selfCheck": null,
-      "explanationCorrect": "Åpen adressering og kjeda overløp (separate chaining) er de to overordnede strategiene. Lineær probing er en spesifikk form for åpen adressering (søk neste ledige celle). Binær splitt er ikke en kollisjonsløsningsstrategi.",
-      "explanationIncorrect": "Åpen adressering og kjeda overløp (separate chaining) er de to overordnede strategiene. Lineær probing er en spesifikk form for åpen adressering (søk neste ledige celle). Binær splitt er ikke en kollisjonsløsningsstrategi.",
+      "explanationCorrect": "Åpen adressering og kjedet overløp (separate chaining) er de to overordnede strategiene. Lineær probing er en spesifikk form for åpen adressering (søk neste ledige celle). Binær splitt er ikke en kollisjonsløsningsstrategi.",
+      "explanationIncorrect": "Åpen adressering og kjedet overløp (separate chaining) er de to overordnede strategiene. Lineær probing er en spesifikk form for åpen adressering (søk neste ledige celle). Binær splitt er ikke en kollisjonsløsningsstrategi.",
       "optionExplanations": [
         {
           "optionIndex": 2,
           "isCorrect": false,
-          "shortExplanation": "Binær splitt er ikke en etablert kollisjonsløsningsstrategi i kurset. De to overordnede strategiene er åpen adressering og kjeda overløp."
+          "shortExplanation": "Binær splitt er ikke en etablert kollisjonsløsningsstrategi i kurset. De to overordnede strategiene er åpen adressering og kjedet overløp."
         }
       ],
       "learnMoreLinks": [
@@ -3690,7 +3690,7 @@
           "slug": "open-addressing"
         },
         {
-          "label": "Kjeda overløp",
+          "label": "Kjedet overløp",
           "href": "/dat102/begreper/separate-chaining",
           "kind": "concept",
           "slug": "separate-chaining"
@@ -3842,7 +3842,7 @@
         "Alle elementer slettes og tabellen nullstilles",
         "Tabellstørrelsen økes og alle eksisterende elementer settes inn på nytt med ny hashfunksjon",
         "Fyllingsgraden beregnes på nytt uten at tabellen endres",
-        "Kollisjonsstrategien byttes fra åpen adressering til kjeda overløp"
+        "Kollisjonsstrategien byttes fra åpen adressering til kjedet overløp"
       ],
       "correctIndices": [
         1
@@ -4378,7 +4378,7 @@
         "0",
         "1",
         "2",
-        "Udefinisjonen — treet er for lite"
+        "Udefinert — treet er for lite"
       ],
       "correctIndices": [
         1

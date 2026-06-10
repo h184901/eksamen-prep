@@ -841,7 +841,7 @@
       "topic": "04-naming-og-chord-dht",
       "conceptSlugs": ["chord-ring"],
       "source": { "kind": "canvas-quiz", "taskNumber": 6, "questionNumber": 6 },
-      "question": "Hvilken datastruktur gjør Chord-oppslag skalérbart til O(log N) hops i stedet for O(N)?",
+      "question": "Hvilken datastruktur gjør Chord-oppslag skalerbart til O(log N) hops i stedet for O(N)?",
       "qtype": "multiple_choice",
       "options": [
         "En full rute-tabell med peker til hver eneste node i ringen",
@@ -853,7 +853,7 @@
       "explanationCorrect": "Finger-tabellen lagrer m pekere (for m-bits nøkkelrom) til noder på avstander 2^0, 2^1, … 2^(m−1) rundt ringen. Det halverer avstanden ved hvert hopp og gir O(log N) lookup.",
       "explanationIncorrect": "Successor-bare-traversering er O(N), full tabell skalerer dårlig, og multicast strider mot DHT-prinsippet.",
       "optionExplanations": [
-        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Full tabell krever O(N) state per node og må vedlikeholdes ved hver join/leave — ikke skalérbart." },
+        { "optionIndex": 0, "isCorrect": false, "shortExplanation": "Full tabell krever O(N) state per node og må vedlikeholdes ved hver join/leave — ikke skalerbart." },
         { "optionIndex": 1, "isCorrect": true, "shortExplanation": "Riktig: m fingre per node, hver hop halverer gjenstående avstand → O(log N)." },
         { "optionIndex": 2, "isCorrect": false, "shortExplanation": "Successor-bare-traversering fungerer, men koster O(N) i verste fall — det er nettopp problemet finger-tabellen løser." },
         { "optionIndex": 3, "isCorrect": false, "shortExplanation": "Multicast/flooding skalerer dårlig og motsier hele poenget med strukturert overlay." }

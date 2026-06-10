@@ -126,7 +126,7 @@ function ExchangeCard() {
           Australia · Gardens Point
         </h4>
         <p className="text-xs text-[var(--muted)] leading-relaxed mt-1.5">
-          Aktuelle utvekslingsemne (Cloud, ML, Robotics, Cyber Security) for 2026 Semester&nbsp;2.
+          Aktuelle utvekslingsemner (Cloud, ML, Robotics, Cyber Security) for 2026 Semester&nbsp;2.
         </p>
         <Link
           href="/utveksling"

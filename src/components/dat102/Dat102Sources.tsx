@@ -43,9 +43,10 @@ export default function Dat102Sources({ sources }: Props) {
                 className="w-1.5 h-1.5 rounded-full bg-dat102-500 flex-shrink-0 translate-y-[-1px]"
               />
               <span>{src.label}</span>
+              {/* pages-verdien er allerede "s. "-prefikset i data — vis verbatim */}
               {src.pages && (
                 <span className="text-neutral-500 dark:text-neutral-400">
-                  — s. {src.pages}
+                  — {src.pages}
                 </span>
               )}
             </li>

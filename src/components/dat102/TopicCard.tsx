@@ -28,7 +28,9 @@ export default function TopicCard({
   lectureRefs,
   chapters,
 }: TopicCardProps) {
-  const metaParts: string[] = [`${conceptCount} begreper`];
+  const metaParts: string[] = [
+    `${conceptCount} begrep${conceptCount === 1 ? "" : "er"}`,
+  ];
   if (practiceCount > 0) metaParts.push(`${practiceCount} øvingsoppgaver`);
   if (examSubqCount > 0) metaParts.push(`${examSubqCount} eksamensdeloppgaver`);
   if (obligCount > 0)

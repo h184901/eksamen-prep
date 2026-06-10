@@ -18,7 +18,9 @@ export async function generateMetadata({
   const { slug } = await params;
   const topic = getTopicBySlug(slug);
   if (!topic) return { title: "Tema" };
-  return { title: `${topic.title} — DAT110 temaer` };
+  // Vault-titler har «Topic: »-prefiks — kun visningsstrip, data uendret.
+  const displayTitle = topic.title.replace(/^Topic:\s*/i, "");
+  return { title: `${displayTitle} — DAT110 temaer` };
 }
 
 // Topic-slug → pedagogical SVG diagram component.

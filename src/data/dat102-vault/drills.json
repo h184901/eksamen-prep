@@ -969,7 +969,7 @@
       "expectedSteps": [
         "λ = antall elementer i ordboka / antall lokasjoner i hashtabellen.",
         "For åpen adressering: λ ≤ 1 (kan ikke ha flere elementer enn plasser).",
-        "For kjeda overløp (separate chaining): λ har ingen øvre grense.",
+        "For kjedet overløp (separate chaining): λ har ingen øvre grense.",
         "Høy λ gir dårligere ytelse; tabellen bør utvides når λ blir for stor."
       ],
       "finalAnswer": "λ = elementer / lokasjoner. Åpen adressering: λ ≤ 1. Separat kjeding: ubegrenset.",
