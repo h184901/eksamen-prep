@@ -24,6 +24,41 @@ function shuffle<T>(arr: T[]): T[] {
   return out;
 }
 
+// Rendrer drill-tekst som kan inneholde ```-kodegjerder (ASCII-trær, kodesnutter).
+// Gjerdene vises som monospace-blokker (uten de rå ```-markørene); resten som
+// vanlig tekst med bevarte linjeskift. Tekst uten gjerder rendres som ett avsnitt.
+function DrillText({ text, className = "" }: { text: string; className?: string }) {
+  if (!text.includes("```")) {
+    return <p className={`whitespace-pre-wrap ${className}`}>{text}</p>;
+  }
+  const parts = text.split("```");
+  return (
+    <div className={className}>
+      {parts.map((part, i) => {
+        if (i % 2 === 1) {
+          // kodeblokk: dropp en valgfri språk-tag på første linje (```java) + trim
+          const body = part.replace(/^[a-zA-Z0-9]*\n/, "").replace(/^\n+|\n+$/g, "");
+          return (
+            <pre
+              key={i}
+              className="my-2 p-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 overflow-x-auto text-xs font-mono text-neutral-800 dark:text-neutral-100 leading-snug"
+            >
+              {body}
+            </pre>
+          );
+        }
+        const trimmed = part.replace(/^\n+|\n+$/g, "");
+        if (!trimmed) return null;
+        return (
+          <p key={i} className="whitespace-pre-wrap my-1">
+            {trimmed}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Dat102Drills({ dataset }: { dataset: DrillDataset }) {
   const [phase, setPhase] = useState<Phase>("select");
   const [topic, setTopic] = useState<string | null>(null);
@@ -169,9 +204,10 @@ export default function Dat102Drills({ dataset }: { dataset: DrillDataset }) {
 
       <div className="rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900/50 p-5 sm:p-6">
         <h2 className="font-semibold text-neutral-900 dark:text-neutral-50 mb-2">{d.title}</h2>
-        <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-100 whitespace-pre-wrap mb-4">
-          {d.prompt}
-        </p>
+        <DrillText
+          text={d.prompt}
+          className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-100 mb-4"
+        />
 
         {/* Figur-merknad: oppgaven viser til en figur som ikke kan gjengis som tekst */}
         {d.figureNote && (

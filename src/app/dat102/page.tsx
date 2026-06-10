@@ -106,7 +106,7 @@ export default function Dat102HomePage() {
       <Dat102Section
         eyebrow="Innhold"
         title="Hvor vil du starte?"
-        description="Temaer, begreper og pensum er klare nå. Øving og eksamensgjennomgang bygges i de neste fasene — på samme datagrunnlag."
+        description="Alt på samme datagrunnlag: temaer og begreper å forstå, pensumplan å følge, øving å drille på, og tidligere eksamener med løsninger."
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Dat102Card
