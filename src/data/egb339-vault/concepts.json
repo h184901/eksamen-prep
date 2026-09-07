@@ -1,0 +1,800 @@
+{
+  "concepts": [
+    {
+      "slug": "atan2-and-inverse-trigonometry",
+      "title": "atan2 and inverse trigonometry",
+      "kind": "concept",
+      "route": "/egb339/temaer/atan2-and-inverse-trigonometry",
+      "week": "5",
+      "updated": "2026-08-18",
+      "tags": [
+        "atan2",
+        "trigonometry",
+        "quadrants",
+        "inverse-kinematics"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\natan2(y, x) beregner en vinkel fra begge kartesiske komponentene og bruker fortegnene til å velge riktig kvadrant.",
+      "sources": [
+        "[[Week 5 - Inverse kinematics]]"
+      ],
+      "body": "> [!definition]\n> `atan2(y, x)` beregner en vinkel fra begge kartesiske komponentene og bruker fortegnene til å velge riktig kvadrant.\n\n## Hvorfor det er viktig\n\n`atan(y/x)` utfører divisjonen først. Da kan to ulike fortegnskombinasjoner bli samme forhold, og kvadrantinformasjon går tapt. `atan2(y, x)` unngår dette. — [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n\nInverse sinus og cosinus returnerer bare en hovedverdi selv om flere vinkler kan ha samme sinus eller cosinus. Det finnes ingen `asin2` eller `acos2`, så andre løsninger må finnes med geometri, symmetri, leddgrenser og eksplisitte fortegnsvalg. — [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n\n## In the EGB339 practicals\n\n- Bruk `np.atan2(y, x)` for retningen fra basen til et målpunkt.\n- Klipp numerisk støy til `[-1, 1]` før `arccos`/`arcsin` når teorien garanterer at argumentet skal ligge der.\n- Test alle kvadranter og begge IK-grener.\n\n## Relatert innhold\n\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics)\n- [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches)"
+    },
+    {
+      "slug": "colour-normalization-and-chromaticity",
+      "title": "Colour normalization and chromaticity",
+      "kind": "concept",
+      "route": "/egb339/temaer/colour-normalization-and-chromaticity",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "colour",
+        "segmentation",
+        "chromaticity"
+      ],
+      "track": "vision",
+      "summary": "Colour normalization reduces the effect of overall brightness so that pixels can be compared primarily by colour proportions.",
+      "sources": [
+        "[[Assessment 1.6 - Vision fundamentals part 1]]"
+      ],
+      "body": "> [!abstract] Definition\n> Colour normalization reduces the effect of overall brightness so that pixels can be compared primarily by colour proportions.\n\n## Normalized RGB\n\nFor `s = R+G+B`, define `r=R/s`, `g=G/s` and `b=B/s` where `s>0`. Multiplying all three channels by the same brightness factor then leaves these ratios unchanged.\n\n> [!tip] Method inference\n> Assessment 1.6 requires red, green and blue squares to be counted despite brightness changes and says colour must be decoupled from intensity. Normalized chromaticity is one suitable implementation, not the only permitted solution.\n\nProtect division where `s=0`, then classify using channel dominance or suitable ratio thresholds. - [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1)\n\n## Relatert innhold\n\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding)"
+    },
+    {
+      "slug": "coppeliasim",
+      "title": "CoppeliaSim",
+      "kind": "entity",
+      "route": "/egb339/temaer/coppeliasim",
+      "week": "4-9",
+      "updated": "2026-09-07",
+      "tags": [
+        "simulation",
+        "software"
+      ],
+      "track": "foundations",
+      "summary": "CoppeliaSim brukes som digital testarena for Dobot Magician. Python-klassen CoppeliaRobot kobler til simulatoren gjennom ZMQ Remote API, henter leddobjekter og sender målposisjoner i radianer.",
+      "sources": [
+        "[[CoppeliaSim setup]]",
+        "[[Week 4 - Forward kinematics]]",
+        "[[CoppeliaSim forward kinematics practical]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]"
+      ],
+      "body": "CoppeliaSim brukes som digital testarena for Dobot Magician. Python-klassen `CoppeliaRobot` kobler til simulatoren gjennom ZMQ Remote API, henter leddobjekter og sender målposisjoner i radianer.\n\nSimulatoren gjør det mulig å sammenligne analytisk [Forward kinematics](/egb339/temaer/forward-kinematics) med robotens synlige end-effektorposisjon før kode kjøres på fysisk utstyr. - [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical)\n\n## Assessment 2.1\n\nI [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) brukes `prac.ttt`-scenen til å validere en komplett skrivekjede: tastaturkoordinater, [rammetransformasjon](/egb339/temaer/se-3-homogeneous-transformations), [Inverse kinematics](/egb339/temaer/inverse-kinematics) og robotbevegelse. Tastaturets posisjon og orientering leses fra objektet `Plane`. Simuleringsmodellen oppgir `L4=80 mm`, som brukes som et nedoverrettet/subtrahert FK-offset.\n\nSimulatoren er også arenaen der [ledd- og kartesisk interpolasjon](/egb339/temaer/robot-motion-interpolation) kan demonstreres før den fysiske overføringen.\n\n## Setup essentials\n\n- Bruk CoppeliaSim Edu 4.10.0.\n- Aktiver `Modules → Connectivity → ZMQ remote API server` og åpne `prac.ttt` før Python-klienten startes. - [CoppeliaSim setup](/egb339/ressurser/coppeliasim-setup)\n- Hvis klienten blir stående på tilkobling, kontroller ZMQ-serveren; hvis et sceneobjekt mangler, kontroller at riktig scene er lastet. - [CoppeliaSim setup](/egb339/ressurser/coppeliasim-setup)\n\nKilder: [CoppeliaSim setup](/egb339/ressurser/coppeliasim-setup), [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical) og [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)."
+    },
+    {
+      "slug": "differential-kinematics-and-local-linearisation",
+      "title": "Differential kinematics and local linearisation",
+      "kind": "concept",
+      "route": "/egb339/temaer/differential-kinematics-and-local-linearisation",
+      "week": "6",
+      "updated": "2026-08-25",
+      "tags": [
+        "differential-kinematics",
+        "linearisation",
+        "jacobian"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nDifferential kinematics relates small or instantaneous changes in joint coordinates to changes in end-effector coordinates using the Robot Jacobian.",
+      "sources": [
+        "[[Week 6 - Robot Jacobian]]"
+      ],
+      "body": "> [!definition]\n> Differential kinematics relates small or instantaneous changes in joint coordinates to changes in end-effector coordinates using the [Robot Jacobian](/egb339/temaer/robot-jacobian).\n\nThe velocity relationship is\n\n`ṗ=J(q)q̇`.\n\nFor a short time interval, the tutorial approximates the finite changes as\n\n- `Δp≈J(q)Δq`;\n- `Δq≈J(q)⁻¹Δp` when the Jacobian is invertible;\n- `pₜ₊₁≈pₜ+Δp`;\n- `qₜ₊₁≈qₜ+Δq`. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Why it is local\n\n`J(q)` is evaluated at the current configuration. As the robot moves, the Jacobian changes, so a large motion cannot generally be represented accurately by one fixed linear map.\n\n> [!tip] Practical consequence\n> A Cartesian motion can be divided into sufficiently small steps, with the configuration and Jacobian updated between steps. This is an inference from the tutorial's small-timestep approximation and connects directly to [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation).\n\n## Verification\n\nThe tutorial asks for the next end-effector position to be computed in two ways: from the approximated `Δp`, and from an updated `q` followed by full [Forward kinematics](/egb339/temaer/forward-kinematics). Their difference exposes the local linearisation error. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Relatert innhold\n\n- [Partial derivatives for robotics](/egb339/temaer/partial-derivatives-for-robotics)\n- [Robot Jacobian](/egb339/temaer/robot-jacobian)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)"
+    },
+    {
+      "slug": "digital-image-representation",
+      "title": "Digital image representation",
+      "kind": "concept",
+      "route": "/egb339/temaer/digital-image-representation",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "images",
+        "pixels",
+        "numpy"
+      ],
+      "track": "vision",
+      "summary": "A digital image is a sampled two-dimensional grid whose elements store grayscale intensity or multiple colour-channel values.",
+      "sources": [
+        "[[Week 8 - Images and image processing]]"
+      ],
+      "body": "> [!abstract] Definition\n> A digital image is a sampled two-dimensional grid whose elements store grayscale intensity or multiple colour-channel values.\n\n## Coordinates and arrays\n\n- Image coordinates `(u,v)` start at the top-left; `u` increases right and `v` increases downward. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n- NumPy indexing reverses the written coordinate order: pixel `(u,v)` is accessed as `image[v, u]`.\n- A grayscale image commonly has shape `(height, width)` and an RGB image `(height, width, 3)`.\n- Integer dtype and permitted intensity range affect arithmetic results. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n\n## Relatert innhold\n\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)\n- [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding)\n- [Monadic and dyadic image operations](/egb339/temaer/monadic-and-dyadic-image-operations)"
+    },
+    {
+      "slug": "dobot-magician",
+      "title": "Dobot Magician",
+      "kind": "entity",
+      "route": "/egb339/temaer/dobot-magician",
+      "week": "4-9",
+      "updated": "2026-08-25",
+      "tags": [
+        "robot",
+        "dobot"
+      ],
+      "track": "kinematics",
+      "summary": "Dobot Magician er robotarmen som brukes i EGB339-oppgavene. Kursmodellen bruker tre fysiske leddvinkler for base, skulder og albue. En mekanisk parallellkobling holder verktøyaksen vertikal og gjør Joint-angle mapping nødvendig.",
+      "sources": [
+        "[[Week 4 - Forward kinematics]]",
+        "[[Assessment 1.3 - Dobot forward kinematics]]",
+        "[[CoppeliaSim forward kinematics practical]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]",
+        "[[Assessment 2.2 - Physical robot submission]]"
+      ],
+      "body": "Dobot Magician er robotarmen som brukes i EGB339-oppgavene. Kursmodellen bruker tre fysiske leddvinkler for base, skulder og albue. En mekanisk parallellkobling holder verktøyaksen vertikal og gjør [Joint-angle mapping](/egb339/temaer/joint-angle-mapping) nødvendig.\n\nRobotens end-effektor kan blant annet være penn/stylus eller sugekopp. Den kontrolleres gjennom `move_arm(j1, j2, j3)` i det utdelte API-et og kan testes i [CoppeliaSim](/egb339/temaer/coppeliasim).\n\n## Assessment 2 configurations\n\n| Environment | `L0` | `L1` | `L2` | `L3` | `L4` |\n|---|---:|---:|---:|---:|---:|\n| CoppeliaSim suction gripper | 138 | 135 | 147 | 60 | -80 |\n| Physical stylus holder | 138 | 135 | 147 | 60 | -70 |\n\nAlle mål i tabellen er millimeter. Den ulike `L4`-verdien betyr at simuleringsmodellen ikke kan overføres til den fysiske roboten uten eksplisitt konfigurasjonsbytte. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) og [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\nI den fysiske skriveoppgaven er `move_arm` blokkerende, mens `get_joint_config()` og `get_end_effector_pose()` ikke er tilgjengelige. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\nKilder: [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics), [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical), [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) og [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)."
+    },
+    {
+      "slug": "egb339-weeks-1-6-robotics-foundations",
+      "title": "EGB339 Weeks 1-6 - Robotics foundations",
+      "kind": "topic",
+      "route": "/egb339/temaer/egb339-weeks-1-6-robotics-foundations",
+      "week": "1-6",
+      "updated": "2026-08-25",
+      "tags": [
+        "overview",
+        "robotics-foundations",
+        "weeks-1-6"
+      ],
+      "track": "kinematics",
+      "summary": "Linear algebra → SO(2)/SE(2) → SO(3)/SE(3) → pose graphs → forward kinematics → inverse kinematics → Jacobian → differential motion",
+      "sources": [
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 4 - Forward kinematics]]",
+        "[[Week 5 - Inverse kinematics]]",
+        "[[Week 6 - Robot Jacobian]]"
+      ],
+      "body": "> [!abstract] Learning path\n> `Linear algebra → SO(2)/SE(2) → SO(3)/SE(3) → pose graphs → forward kinematics → inverse kinematics → Jacobian → differential motion`\n\n## Week-by-week map\n\n1. [Week 1 - Unit introduction and kinematics context](/egb339/uker/uke-1) establishes the robotics and assessment context.\n2. [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2) introduces [Linear algebra for robotics](/egb339/temaer/linear-algebra-for-robotics), [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices) and [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations).\n3. [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3) extends the model to [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices), [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations), [Rotation composition in 3D](/egb339/temaer/rotation-composition-in-3d) and [Pose graphs](/egb339/temaer/pose-graphs).\n4. [Week 4 - Forward kinematics](/egb339/uker/uke-4) uses [Kinematic chains and joints](/egb339/temaer/kinematic-chains-and-joints) to calculate the end-effector pose.\n5. [Week 5 - Inverse kinematics](/egb339/uker/uke-5) maps desired targets back to joint values and introduces [atan2 and inverse trigonometry](/egb339/temaer/atan2-and-inverse-trigonometry) plus [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches).\n6. [Week 6 - Robot Jacobian](/egb339/uker/uke-6) differentiates FK to connect joint and end-effector velocity through [Robot Jacobian](/egb339/temaer/robot-jacobian) and [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation).\n\n## The central dependency\n\n[Reference frames](/egb339/temaer/reference-frames) determines what coordinates mean. Rotation and transformation matrices move information between frames. Pose graphs organise the transformations. FK follows the chain from joints to end effector; IK solves the geometry in the opposite direction. The Jacobian differentiates the same FK model to describe local motion and velocity.\n\n## Applied system\n\n[Dobot Magician](/egb339/temaer/dobot-magician) is the physical robot model, and [CoppeliaSim](/egb339/temaer/coppeliasim) provides simulation-based validation. [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) combines frame transformation, IK and motion interpolation in simulation; [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission) transfers the controller to hardware with different geometry and safety constraints.\n\nSee also [Position, orientation and robot kinematics](/egb339/temaer/position-orientation-and-robot-kinematics), [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical) and [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses).\n\n## Common failure modes\n\n- wrong frame direction or a missing inverse;\n- incorrect 3D rotation order;\n- `*` used instead of `@` in NumPy;\n- hard-coded example data rather than general function logic;\n- mixed units or angle conventions;\n- only one IK branch or the wrong inverse-trigonometric quadrant;\n- a Jacobian evaluated at the wrong configuration or inverted at a singularity;\n- a local linear approximation applied across an overly large step;\n- simulation and physical keyboard or tool parameters mixed together;\n- lateral stylus motion before a safe clearance height."
+    },
+    {
+      "slug": "egb339-weeks-1-8-robotics-and-vision-foundations",
+      "title": "EGB339 Weeks 1-8 - Robotics and vision foundations",
+      "kind": "topic",
+      "route": "/egb339/temaer/egb339-weeks-1-8-robotics-and-vision-foundations",
+      "week": "1-8",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "robotics",
+        "kinematics",
+        "motion-planning",
+        "computer-vision"
+      ],
+      "track": "vision",
+      "summary": "Weeks 1–7 build a robotics chain from coordinate frames to planned motion. Week 8 begins computer vision by treating images as numeric arrays and introduces operations used by the later perception assessments.",
+      "sources": [
+        "[[EGB339 course and assessment overview]]",
+        "[[Assessment 1 - Problem-solving task overview]]",
+        "[[Assessment 1.0 - Warmup to Gradescope]]",
+        "[[Assessment 1.1 - Position and orientation in 2D]]",
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 4 - Forward kinematics]]",
+        "[[Week 5 - Inverse kinematics]]",
+        "[[Week 6 - Robot Jacobian]]",
+        "[[Week 7 - Motion planning]]",
+        "[[Week 8 - Images and image processing]]"
+      ],
+      "body": "> [!abstract] Course map\n> Weeks 1–7 build a robotics chain from coordinate frames to planned motion. Week 8 begins computer vision by treating images as numeric arrays and introduces operations used by the later perception assessments.\n\n## Robotics path\n\n`linear algebra → reference frames → SO/SE transforms → [Forward kinematics](/egb339/temaer/forward-kinematics) → [Inverse kinematics](/egb339/temaer/inverse-kinematics) → [Robot Jacobian](/egb339/temaer/robot-jacobian) → [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)`\n\nSee [Position, orientation and robot kinematics](/egb339/temaer/position-orientation-and-robot-kinematics) for the connected robotics topic.\n\n## Vision path\n\n`NumPy arrays → [Digital image representation](/egb339/temaer/digital-image-representation) → pixel operations → histograms and thresholding → object measurements → planar mapping`\n\nSee [Image representation and processing](/egb339/temaer/image-representation-and-processing) for the connected vision topic.\n\n## Weekly sequence\n\n1. [Week 1 - Unit introduction and kinematics context](/egb339/uker/uke-1)\n2. [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n3. [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n4. [Week 4 - Forward kinematics](/egb339/uker/uke-4)\n5. [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n6. [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n7. [Week 7 - Motion planning](/egb339/uker/uke-7)\n8. [Week 8 - Images and image processing](/egb339/uker/uke-8)\n\n## Assessment path\n\n- Assessment model and submission: [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview) and the optional [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n- Pose and kinematics: [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d), [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d), [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics), [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n- Vision foundations: [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation), [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1), [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n- Applied project: [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)"
+    },
+    {
+      "slug": "egb339-weeks-1-5-robotics-foundations",
+      "title": "EGB339 Weeks 1–5 – Robotics foundations",
+      "kind": "topic",
+      "route": "/egb339/temaer/egb339-weeks-1-5-robotics-foundations",
+      "week": "1-5",
+      "updated": "2026-08-18",
+      "tags": [
+        "overview",
+        "robotics-foundations",
+        "weeks-1-5"
+      ],
+      "track": "kinematics",
+      "summary": "Linear algebra → SO(2)/SE(2) → SO(3)/SE(3) → pose graphs → forward kinematics → inverse kinematics",
+      "sources": [
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 4 - Forward kinematics]]",
+        "[[Week 5 - Inverse kinematics]]"
+      ],
+      "body": "> [!abstract] Learning path\n> `Linear algebra → SO(2)/SE(2) → SO(3)/SE(3) → pose graphs → forward kinematics → inverse kinematics`\n\n## Week-by-week map\n\n1. [Week 1 - Unit introduction and kinematics context](/egb339/uker/uke-1) setter robotikk- og vurderingskonteksten.\n2. [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2) introduserer [Linear algebra for robotics](/egb339/temaer/linear-algebra-for-robotics), [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices) og [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations).\n3. [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3) utvider til [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices), [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations), [Rotation composition in 3D](/egb339/temaer/rotation-composition-in-3d) og [Pose graphs](/egb339/temaer/pose-graphs).\n4. [Week 4 - Forward kinematics](/egb339/uker/uke-4) bruker [Kinematic chains and joints](/egb339/temaer/kinematic-chains-and-joints) til å beregne end-effektorposen.\n5. [Week 5 - Inverse kinematics](/egb339/uker/uke-5) går fra ønsket mål tilbake til leddverdier og introduserer [atan2 and inverse trigonometry](/egb339/temaer/atan2-and-inverse-trigonometry) samt [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches).\n\n## The central dependency\n\n[Reference frames](/egb339/temaer/reference-frames) bestemmer hva koordinatene betyr. Rotasjons- og transformasjonsmatriser flytter informasjon mellom rammene. Posegrafer organiserer transformasjonene. Forward kinematics følger kjeden fra ledd til end-effektor; inverse kinematics løser samme geometri i motsatt retning.\n\n## Practical system\n\n[Dobot Magician](/egb339/temaer/dobot-magician) er den fysiske robotmodellen, og [CoppeliaSim](/egb339/temaer/coppeliasim) gir visuell kontroll av kinematikken. Se også [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical), [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics) og [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical).\n\n## Common failure modes\n\n- feil rammeretning eller glemt invers;\n- feil rekkefølge ved 3D-rotasjoner;\n- `*` brukt i stedet for `@` i NumPy;\n- hardkodede eksempeldata i stedet for generell funksjonslogikk;\n- blandede enheter eller vinkelkonvensjoner;\n- bare én IK-gren eller feil kvadrant fra invers trigonometri."
+    },
+    {
+      "slug": "forward-kinematics",
+      "title": "Forward kinematics",
+      "kind": "concept",
+      "route": "/egb339/temaer/forward-kinematics",
+      "week": "4",
+      "updated": "2026-08-25",
+      "tags": [
+        "kinematics",
+        "robot",
+        "forward-kinematics"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nForward kinematics beregner end-effektorens pose eller posisjon fra kjente leddverdier og robotgeometri.",
+      "sources": [
+        "[[Week 4 - Forward kinematics]]",
+        "[[Assessment 1.3 - Dobot forward kinematics]]",
+        "[[CoppeliaSim forward kinematics practical]]",
+        "[[Week 6 - Robot Jacobian]]"
+      ],
+      "body": "> [!definition]\n> Forward kinematics beregner end-effektorens pose eller posisjon fra kjente leddverdier og robotgeometri.\n\n## Slik virker det\n\nFor en seriell robot bygges transformasjonen fra base til verktøy som `T₀E = T₀1 T₁2 … TₙE`. Hver faktor beskriver én rotasjon, translasjon eller kombinert ledd-/lenketransformasjon. Rekkefølgen følger den fysiske kjeden fra base til end-effektor. — [Week 4 - Forward kinematics](/egb339/uker/uke-4)\n\nSluttposisjonen er translasjonskolonnen i `T₀E`, mens rotasjonsblokken beskriver end-effektorens orientering.\n\n## In the EGB339 practicals\n\nEGB339 bruker både en eksplisitt trigonometrisk Dobot-modell og en generell `SE(3)`-kjede. De uttrykker samme geometri, men kan ha forskjellige dimensjoner, nullvinkler og modellvariabler. — [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical)\n\nFK er også den viktigste verifikasjonen av [Inverse kinematics](/egb339/temaer/inverse-kinematics): leddverdier fra IK skal gi målposen når de settes inn i FK.\n\n## Differential view\n\nNår FK skrives som `p=FK(q)`, er [Robot Jacobian](/egb339/temaer/robot-jacobian) den deriverte `∂p/∂q`. FK beskriver dermed selve posisjonskartet, mens Jacobianen beskriver hvordan små eller momentane leddendringer påvirker end-effektoren. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Relatert innhold\n\n- [Kinematic chains and joints](/egb339/temaer/kinematic-chains-and-joints)\n- [Pose graphs](/egb339/temaer/pose-graphs)\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Joint-angle mapping](/egb339/temaer/joint-angle-mapping)\n- [Robot Jacobian](/egb339/temaer/robot-jacobian)\n- [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation)\n- [Dobot Magician](/egb339/temaer/dobot-magician)"
+    },
+    {
+      "slug": "image-histograms-and-thresholding",
+      "title": "Image histograms and thresholding",
+      "kind": "concept",
+      "route": "/egb339/temaer/image-histograms-and-thresholding",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "histogram",
+        "thresholding",
+        "segmentation"
+      ],
+      "track": "vision",
+      "summary": "An image histogram counts pixel intensities. Thresholding compares pixels with a selected value to produce a Boolean or binary segmentation mask.",
+      "sources": [
+        "[[Week 8 - Images and image processing]]"
+      ],
+      "body": "> [!abstract] Definition\n> An image histogram counts pixel intensities. Thresholding compares pixels with a selected value to produce a Boolean or binary segmentation mask.\n\n## Arbeidsflyt\n\n1. Inspect the image and its intensity histogram.\n2. Choose a threshold between the distributions belonging to foreground and background.\n3. Form a mask such as `mask = image < threshold` or `image > threshold`.\n4. Inspect the mask and adjust for noise or illumination variation. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n\n## Begrensninger\n\n- One global threshold can fail under uneven lighting.\n- Histogram peaks may overlap when object and background intensities are similar.\n- Colour segmentation may require more than one channel or a representation less sensitive to intensity.\n\n## Relatert innhold\n\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Colour normalization and chromaticity](/egb339/temaer/colour-normalization-and-chromaticity)"
+    },
+    {
+      "slug": "image-representation-and-processing",
+      "title": "Image representation and processing",
+      "kind": "topic",
+      "route": "/egb339/temaer/image-representation-and-processing",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "computer-vision",
+        "images",
+        "segmentation"
+      ],
+      "track": "vision",
+      "summary": "Week 8 introduces images as arrays, coordinate conventions and pixel operations. Assessments 1.5–1.7 apply these foundations to shape classification, colour segmentation and planar coordinate mapping.",
+      "sources": [
+        "[[Week 8 - Images and image processing]]",
+        "[[Assessment 1.5 - Warehouse automation]]",
+        "[[Assessment 1.6 - Vision fundamentals part 1]]",
+        "[[Assessment 1.7 - Vision fundamentals part 2]]"
+      ],
+      "body": "> [!abstract] Topic map\n> Week 8 introduces images as arrays, coordinate conventions and pixel operations. Assessments 1.5–1.7 apply these foundations to shape classification, colour segmentation and planar coordinate mapping.\n\n## Learning path\n\n`[Digital image representation](/egb339/temaer/digital-image-representation) → [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding) → segmentation → shape/colour measurement → [Planar homographies](/egb339/temaer/planar-homographies)`\n\n## Representation and operations\n\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)\n- [Monadic and dyadic image operations](/egb339/temaer/monadic-and-dyadic-image-operations)\n- [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding)\n\n## Applied vision concepts\n\n- [Shape descriptors from area and perimeter](/egb339/temaer/shape-descriptors-from-area-and-perimeter)\n- [Colour normalization and chromaticity](/egb339/temaer/colour-normalization-and-chromaticity)\n- [Planar homographies](/egb339/temaer/planar-homographies)\n\n## Source path\n\n- [Week 8 - Images and image processing](/egb339/uker/uke-8)\n- [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation)\n- [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1)\n- [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)"
+    },
+    {
+      "slug": "inverse-kinematics",
+      "title": "Inverse kinematics",
+      "kind": "concept",
+      "route": "/egb339/temaer/inverse-kinematics",
+      "week": "5-9",
+      "updated": "2026-09-07",
+      "tags": [
+        "kinematics",
+        "inverse-kinematics"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nInverse kinematics finner leddverdier som plasserer end-effektoren i en ønsket posisjon eller pose. Dette er den inverse retningen av Forward kinematics.",
+      "sources": [
+        "[[Week 5 - Inverse kinematics]]",
+        "[[Assessment 1.4 - Robot inverse kinematics]]",
+        "[[Robot word typing practical]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]",
+        "[[Assessment 2.2 - Physical robot submission]]"
+      ],
+      "body": "> [!definition]\n> Inverse kinematics finner leddverdier som plasserer end-effektoren i en ønsket posisjon eller pose. Dette er den inverse retningen av [Forward kinematics](/egb339/temaer/forward-kinematics).\n\n## Metoder\n\n- Numerisk approksimasjon itererer fra en startgjetning og krever i hovedsak at FK er kjent.\n- Algebraisk rearrangering forsøker å isolere leddvariablene direkte.\n- Geometrisk analyse deler roboten i trekanter og bruker trigonometriske relasjoner. — [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n\n[Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics) implements both numerical cost minimisation and geometric IK, making [Optimization-based inverse kinematics](/egb339/temaer/optimization-based-inverse-kinematics) the explicit bridge between FK error and a usable joint solution.\n\n## Solutions and reachability\n\nEt mål kan ha ingen løsning, én degenerert løsning eller flere løsninger som albue opp/albue ned. Dette kobler IK direkte til [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches) og [atan2 and inverse trigonometry](/egb339/temaer/atan2-and-inverse-trigonometry). — [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n\n## In the EGB339 practicals\n\nI skriveoppgaven brukes IK mellom tastens kartesiske koordinat og `move_arm(j1, j2, j3)`. Bevegelsen planlegges som over tasten → berøring → over tasten. - [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical)\n\n[Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) krever at tastpunktene først transformeres fra tastaturets referanseramme til robotbasen. IK løser deretter leddvinklene for hvert transformerte mål. Den fysiske overføringen i [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission) bruker samme overordnede kjede, men med andre verktøyparametere, strengere sikkerhetsgrenser og færre tilgjengelige API-metoder.\n\n## Robustness and constraints\n\nMål utenfor arbeidsrommet må oppdages og håndteres i stedet for å sendes videre som ugyldige leddkommandoer. Den muntlige delen av Assessment 2.1 forventer også at studenten kan forklare hvordan optimaliseringsbasert IK kan utvides med leddgrenser eller hindringsunngåelse. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\n## Relatert innhold\n\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [Dobot Magician](/egb339/temaer/dobot-magician)\n- [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches)\n- [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses)\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)\n- [Optimization-based inverse kinematics](/egb339/temaer/optimization-based-inverse-kinematics)"
+    },
+    {
+      "slug": "joint-angle-mapping",
+      "title": "Joint-angle mapping",
+      "kind": "concept",
+      "route": "/egb339/temaer/joint-angle-mapping",
+      "week": "4",
+      "updated": "2026-08-18",
+      "tags": [
+        "kinematics",
+        "joint-angles"
+      ],
+      "track": "kinematics",
+      "summary": "Fysiske leddvinkler er sensor-/motorvinklene på roboten. Kinematiske vinkler er variablene som brukes i den idealiserte modellen.",
+      "sources": [
+        "[[Week 4 - Forward kinematics]]",
+        "[[Assessment 1.3 - Dobot forward kinematics]]"
+      ],
+      "body": "Fysiske leddvinkler er sensor-/motorvinklene på roboten. Kinematiske vinkler er variablene som brukes i den idealiserte modellen.\n\nDe kan avvike fordi:\n\n- nullretningene er definert forskjellig;\n- positiv rotasjonsretning kan være forskjellig;\n- passive mekaniske koblinger innfører avhengige vinkler;\n- modellen kan ha flere kinematiske ledd enn roboten har aktuatorer.\n\nFor Dobot Magician holder en parallellkobling verktøyaksen vertikal. Derfor må de tre fysiske vinklene først kartlegges til modellens fire kinematiske vinkler før [Forward kinematics](/egb339/temaer/forward-kinematics) brukes. — [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics)\n\nKilde: [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics)."
+    },
+    {
+      "slug": "keyboard-coordinate-mapping-and-safe-key-presses",
+      "title": "Keyboard coordinate mapping and safe key presses",
+      "kind": "concept",
+      "route": "/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses",
+      "week": "9",
+      "updated": "2026-09-07",
+      "tags": [
+        "coordinate-mapping",
+        "keyboard",
+        "safety",
+        "motion-planning"
+      ],
+      "track": "motion",
+      "summary": "[!definition]\nKeyboard coordinate mapping converts a key label into a point in the keyboard frame, transforms it into the robot base frame, and passes the resulting target to Inverse kinematics.",
+      "sources": [
+        "[[Assessment 2.1 - Simulation and oral demonstration]]",
+        "[[Assessment 2.2 - Physical robot submission]]",
+        "[[Robot word typing practical]]"
+      ],
+      "body": "> [!definition]\n> Keyboard coordinate mapping converts a key label into a point in the keyboard frame, transforms it into the robot base frame, and passes the resulting target to [Inverse kinematics](/egb339/temaer/inverse-kinematics).\n\n## Coordinate pipeline\n\n`letter → key centre in pixels → key point in millimetres → homogeneous frame transform → robot-base point → IK → joint command`\n\nIn the simulation, the keyboard image is measured relative to a chosen origin and scaled using the `120×290 mm` keyboard size. The keyboard object's pose in [CoppeliaSim](/egb339/temaer/coppeliasim) then supplies the frame relationship. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\nFor the physical system, the keyboard-frame origin is `(248,-77.25) mm` in the robot frame and the keyboard is rotated 90° about z. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Simulation versus physical configuration\n\n| Concern | Simulation 2.1 | Physical 2.2 |\n|---|---|---|\n| Keyboard geometry | Measure image and scale from `120×290 mm` | Letter keys `16.2×11.5 mm`; Enter width `19.0 mm` |\n| Tool offset | `L4=80 mm`, applied downward in FK | Source convention `L4=-70 mm` |\n| Motion extension | Joint and Cartesian interpolation for top band | Interpolation explicitly forbidden |\n| State getters | Available through simulator API | `get_joint_config()` and `get_end_effector_pose()` unavailable |\n| Timing | Simulator-dependent | `move_arm` is blocking; no `sleep()` |\n\nThe shared lengths are `L0=138`, `L1=135`, `L2=147` and `L3=60 mm`. The `L4` signs must not be compared without also checking how each FK equation applies the offset. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) and [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Safe press pattern\n\n1. Move above the target key.\n2. Descend vertically to the press height.\n3. Lift vertically before any lateral travel.\n4. Move sideways only after the required clearance has been reached.\n\nFor the physical robot, the press plane is `z=0`, commands below `z=-5 mm` abort the run, and sideways motion requires the stylus to be at least `z=10 mm`. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Robust implementation boundary\n\n> [!tip] Configuration separation\n> Keep key geometry, frame transform, link parameters and API capabilities in an environment-specific configuration. The high-level sequence can then remain shared while the simulation and physical constraints stay explicit. This is a synthesis of [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) and [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission).\n\n## Relatert innhold\n\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Reference frames](/egb339/temaer/reference-frames)\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)\n- [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical)"
+    },
+    {
+      "slug": "kinematic-chains-and-joints",
+      "title": "Kinematic chains and joints",
+      "kind": "concept",
+      "route": "/egb339/temaer/kinematic-chains-and-joints",
+      "week": "4",
+      "updated": "2026-08-18",
+      "tags": [
+        "kinematic-chain",
+        "revolute-joint",
+        "prismatic-joint",
+        "links"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nEn kinematisk kjede modellerer en robot som stive lenker koblet sammen av ledd. Hvert ledd bidrar med en variabel transformasjon, mens lenkegeometrien vanligvis gir faste transformasjoner.",
+      "sources": [
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 4 - Forward kinematics]]"
+      ],
+      "body": "> [!definition]\n> En kinematisk kjede modellerer en robot som stive lenker koblet sammen av ledd. Hvert ledd bidrar med en variabel transformasjon, mens lenkegeometrien vanligvis gir faste transformasjoner.\n\n## Slik virker det\n\n- Et revolute ledd bidrar med en rotasjon `R(q)`.\n- Et prismatisk ledd bidrar med en translasjon som avhenger av `q`.\n- En fast lenke bidrar med kjent lengde og eventuelt et fast vinkeloffset.\n- Serielle transformasjoner multipliseres fra basen mot end-effektoren. — [Week 4 - Forward kinematics](/egb339/uker/uke-4)\n\nRammevalget er ikke unikt, men alle valg må være konsistente. Passive mekaniske koblinger kan gi avhengige modellvinkler og behov for [Joint-angle mapping](/egb339/temaer/joint-angle-mapping).\n\n## Relatert innhold\n\n- [Pose graphs](/egb339/temaer/pose-graphs)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [Dobot Magician](/egb339/temaer/dobot-magician)"
+    },
+    {
+      "slug": "linear-algebra-for-robotics",
+      "title": "Linear algebra for robotics",
+      "kind": "concept",
+      "route": "/egb339/temaer/linear-algebra-for-robotics",
+      "week": "1-2",
+      "updated": "2026-09-07",
+      "tags": [
+        "linear-algebra",
+        "vectors",
+        "matrices"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nLineær algebra gir språket for å representere punkter, retninger, orienteringer og transformasjoner med vektorer og matriser.",
+      "sources": [
+        "[[Assessment 1.0 - Warmup to Gradescope]]",
+        "[[Week 2 - Linear algebra and 2D pose]]"
+      ],
+      "body": "> [!definition]\n> Lineær algebra gir språket for å representere punkter, retninger, orienteringer og transformasjoner med vektorer og matriser.\n\n## Hvorfor det er viktig\n\nRobotikk krever at størrelser uttrykt i én koordinatramme kan omregnes til en annen. Matrisemultiplikasjon komponerer disse operasjonene og gjør lange transformasjonskjeder systematiske. — [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n\n## Slik virker det\n\n- Et skalarprodukt gir ett tall fra to like lange vektorer.\n- Et matriseprodukt beregnes som skalarprodukter mellom rader og kolonner.\n- For `A` med form `m×n` og `B` med form `n×p`, får `AB` form `m×p`.\n- Transponering bytter rader og kolonner.\n- Inversen opphever en transformasjon når den finnes.\n- Determinanten sier blant annet om en kvadratisk matrise er inverterbar og om en ortogonal transformasjon bevarer eller speiler orienteringen.\n\n## In the EGB339 practicals\n\nPython-funksjonene forventes å bruke generelle matriser og vektorer. Numeriske matriseegenskaper bør kontrolleres med toleranse. — [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n\nWarmupens Q11-Q15 introduserer NumPy-operasjonene som implementerer denne matematikken: transponering, determinant, invers, broadcasting og ordinær matrisemultiplikasjon. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n## Relatert innhold\n\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)\n- [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices)\n- [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations)\n- [Pose graphs](/egb339/temaer/pose-graphs)\n- [Public and private autograder tests](/egb339/temaer/public-and-private-autograder-tests)"
+    },
+    {
+      "slug": "monadic-and-dyadic-image-operations",
+      "title": "Monadic and dyadic image operations",
+      "kind": "concept",
+      "route": "/egb339/temaer/monadic-and-dyadic-image-operations",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "image-processing",
+        "vectorization"
+      ],
+      "track": "vision",
+      "summary": "A monadic operation maps one input image to an output pixel by pixel. A dyadic operation combines corresponding pixels from two input images.",
+      "sources": [
+        "[[Week 8 - Images and image processing]]"
+      ],
+      "body": "> [!abstract] Definition\n> A monadic operation maps one input image to an output pixel by pixel. A dyadic operation combines corresponding pixels from two input images.\n\n## Examples\n\n- Monadic: negative, brightness shift, threshold, clipping or type conversion. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n- Dyadic: addition, subtraction, absolute difference or masking with a second array. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n- Vectorised NumPy expressions apply these operations to complete arrays without explicit pixel loops. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n\n> [!warning] Unsigned subtraction\n> Convert unsigned images to a signed or floating dtype before subtraction; otherwise values below zero can wrap around.\n\n## Relatert innhold\n\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)"
+    },
+    {
+      "slug": "numpy-arrays-and-matrix-operations",
+      "title": "NumPy arrays and matrix operations",
+      "kind": "concept",
+      "route": "/egb339/temaer/numpy-arrays-and-matrix-operations",
+      "week": "3-8",
+      "updated": "2026-09-07",
+      "tags": [
+        "numpy",
+        "arrays",
+        "matrix-multiplication"
+      ],
+      "track": "foundations",
+      "summary": "[!definition]\nEn NumPy-array lagrer numeriske data med eksplisitt form (shape) og datatype (dtype). I EGB339 brukes arrays til vektorer, rotasjonsmatriser og homogene transformasjoner.",
+      "sources": [
+        "[[Assessment 1.0 - Warmup to Gradescope]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 8 - Images and image processing]]",
+        "[[Assessment 1.1 - Position and orientation in 2D]]"
+      ],
+      "body": "> [!definition]\n> En NumPy-array lagrer numeriske data med eksplisitt form (`shape`) og datatype (`dtype`). I EGB339 brukes arrays til vektorer, rotasjonsmatriser og homogene transformasjoner.\n\n## Slik virker det\n\n- `np.array([...])` oppretter en array.\n- `.shape` skiller for eksempel `(3,)`, `(3, 1)` og `(3, 3)`.\n- `A @ B` er matrisemultiplikasjon.\n- `A * B` er elementvis multiplikasjon.\n- `reshape`, slicing og indeksering endrer eller velger hvordan data tolkes.\n- `np.allclose` og `np.isclose` sammenligner flyttall med toleranse.\n\nBroadcasting kan utvide dimensjoner automatisk. Det er nyttig, men kan også skjule en formfeil fordi uttrykket fortsatt kjører. — [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n\n## In the EGB339 practicals\n\nKontroller formene ved funksjonsgrensene. Bruk `@` for rotasjon av punkter og komposisjon av transformasjoner; `np.array` er konstruktøren, ikke selve operasjonen.\n\nQ8-Q15 i [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope) trener array-oppretting, `np.float64`, ønsket `shape`, elementvis aritmetikk, transponering, determinant, invers, broadcasting og matrisemultiplikasjon. Q15 ber om produktet `AB`, så den relevante operatoren er `A @ B`, ikke `A * B`.\n\nI Week 8 representerer de samme array-mekanismene bilder. Slicing utfører crop og subsampling, Boolean masks utfører thresholding, og kanalaksen skiller fargekomponentene. `dtype` må kontrolleres før bildearitmetikk fordi unsigned integer-operasjoner kan wrappe. - [Week 8 - Images and image processing](/egb339/uker/uke-8)\n\n## Relatert innhold\n\n- [Linear algebra for robotics](/egb339/temaer/linear-algebra-for-robotics)\n- [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices)\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Monadic and dyadic image operations](/egb339/temaer/monadic-and-dyadic-image-operations)\n- [Public and private autograder tests](/egb339/temaer/public-and-private-autograder-tests)"
+    },
+    {
+      "slug": "optimization-based-inverse-kinematics",
+      "title": "Optimization-based inverse kinematics",
+      "kind": "concept",
+      "route": "/egb339/temaer/optimization-based-inverse-kinematics",
+      "week": "5",
+      "updated": "2026-09-07",
+      "tags": [
+        "inverse-kinematics",
+        "optimisation",
+        "scipy"
+      ],
+      "track": "kinematics",
+      "summary": "Numerical inverse kinematics searches for joint angles that minimise the difference between a target pose and the pose produced by Forward kinematics.",
+      "sources": [
+        "[[Assessment 1.4 - Robot inverse kinematics]]"
+      ],
+      "body": "> [!abstract] Definition\n> Numerical inverse kinematics searches for joint angles that minimise the difference between a target pose and the pose produced by [Forward kinematics](/egb339/temaer/forward-kinematics).\n\n## Core model\n\nFor a position-only target `p*`, a simple cost is\n\n`c(θ) = ||FK(θ) - p*||₂`.\n\nAn optimiser such as `scipy.optimize.fmin` changes `θ` until this cost is small. The assessment contrasts this method with geometric IK. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n\n## Practical implications\n\n- The starting guess matters because a nonlinear problem may contain several IK branches or local minima. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n- Joint-limit penalties, obstacle penalties or orientation error can be added to the cost when the basic position error is insufficient.\n- Always verify the returned angles by running FK and measuring the final error. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n\n> [!tip] Synthesis\n> Adding penalties is a general extension of the assessment's optimisation formulation, not a requirement explicitly imposed by Assessment 1.4.\n\n## Relatert innhold\n\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics)\n- [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches)\n- [Point-to-segment distance and obstacle clearance](/egb339/temaer/point-to-segment-distance-and-obstacle-clearance)"
+    },
+    {
+      "slug": "partial-derivatives-for-robotics",
+      "title": "Partial derivatives for robotics",
+      "kind": "concept",
+      "route": "/egb339/temaer/partial-derivatives-for-robotics",
+      "week": "6",
+      "updated": "2026-08-25",
+      "tags": [
+        "calculus",
+        "partial-derivatives",
+        "jacobian"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nA partial derivative differentiates a multivariable function with respect to one variable while treating the remaining variables as constants.",
+      "sources": [
+        "[[Week 6 - Robot Jacobian]]"
+      ],
+      "body": "> [!definition]\n> A partial derivative differentiates a multivariable function with respect to one variable while treating the remaining variables as constants.\n\nFor `f(x,y)=3x²+2y³`, the source gives\n\n- `∂f/∂x = 6x`;\n- `∂f/∂y = 6y²`. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\nA robot's forward-kinematics position contains several joint variables in each output coordinate. Taking every output derivative with respect to every joint variable forms the [Robot Jacobian](/egb339/temaer/robot-jacobian).\n\nFor a vector function `p(q)` with `m` output coordinates and `n` joint variables,\n\n`Jᵢⱼ = ∂pᵢ/∂qⱼ`,\n\nso the resulting Jacobian has shape `m×n`. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Relevant derivative rules\n\nThe constant, power, product, quotient, chain and linear-separability rules remain valid. For trigonometric robot models, the especially frequent identities are `d(sin x)/dx=cos x` and `d(cos x)/dx=-sin x`. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Symbolic workflow\n\nSymPy can construct the matrix from symbolic FK expressions with `.jacobian()` and then evaluate it for a configuration with `.subs()`. The symbolic result should be compared with the hand-derived matrix. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Relatert innhold\n\n- [Robot Jacobian](/egb339/temaer/robot-jacobian)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation)"
+    },
+    {
+      "slug": "planar-homographies",
+      "title": "Planar homographies",
+      "kind": "concept",
+      "route": "/egb339/temaer/planar-homographies",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "homography",
+        "projective-geometry",
+        "coordinates"
+      ],
+      "track": "vision",
+      "summary": "A planar homography is a nonsingular 3×3 matrix that maps points between two planes in homogeneous coordinates, up to an arbitrary nonzero scale.",
+      "sources": [
+        "[[Assessment 1.7 - Vision fundamentals part 2]]"
+      ],
+      "body": "> [!abstract] Definition\n> A planar homography is a nonsingular `3×3` matrix that maps points between two planes in homogeneous coordinates, up to an arbitrary nonzero scale.\n\n## Course convention\n\nAssessment 1.7 uses `p ~ Hq`, where `q` is a point on the work surface and `p` is its image coordinate. - [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n\n- Surface to image: form homogeneous `q`, compute `p̃ = Hq`, then divide by `p̃₃`.\n- Image to surface: form homogeneous `p`, compute `q̃ = H⁻¹p`, then divide by `q̃₃`.\n- The normalization step is essential because homogeneous vectors represent the same point under nonzero scaling.\n\nThe assessment uses the inverse mapping to recover triangle vertices on the work surface and calculate their physical area. - [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n\n## Relatert innhold\n\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Digital image representation](/egb339/temaer/digital-image-representation)"
+    },
+    {
+      "slug": "point-to-segment-distance-and-obstacle-clearance",
+      "title": "Point-to-segment distance and obstacle clearance",
+      "kind": "concept",
+      "route": "/egb339/temaer/point-to-segment-distance-and-obstacle-clearance",
+      "week": "7",
+      "updated": "2026-09-07",
+      "tags": [
+        "motion-planning",
+        "collision-avoidance",
+        "geometry"
+      ],
+      "track": "motion",
+      "summary": "Approximate a robot link as the segment from P₁ to P₂ and an obstacle as point O; the minimum distance provides a simple collision-clearance measure.",
+      "sources": [
+        "[[Week 7 - Motion planning]]"
+      ],
+      "body": "> [!abstract] Definition\n> Approximate a robot link as the segment from `P₁` to `P₂` and an obstacle as point `O`; the minimum distance provides a simple collision-clearance measure.\n\n## Projection method\n\nLet `B = P₂-P₁` and `A = O-P₁`. The projection parameter is\n\n`t = (A·B)/(B·B)`.\n\nClamp `t` to `[0,1]`, form the closest point `C = P₁+tB`, and calculate `d = ||O-C||₂`.\n\n> [!tip] Mathematical completion\n> Week 7 introduces projection and link-to-obstacle distance. Clamping is required when the closest point on the infinite line lies beyond either end of the physical link segment.\n\n## Planning use\n\n- Evaluate every link at every sampled configuration. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n- Treat `d` below a chosen safety margin as a collision risk.\n- A point obstacle and zero-thickness link are simplified models; real geometry needs additional margin.\n\n## Relatert innhold\n\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)"
+    },
+    {
+      "slug": "pose-graphs",
+      "title": "Pose graphs",
+      "kind": "concept",
+      "route": "/egb339/temaer/pose-graphs",
+      "week": "3",
+      "updated": "2026-08-18",
+      "tags": [
+        "pose-graph",
+        "frames",
+        "transformation-chain"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nEn posegraf representerer koordinatrammer som noder og kjente transformasjoner som rettede forbindelser. En ukjent pose finnes ved å følge en gyldig sti og multiplisere transformasjonene i riktig rekkefølge.",
+      "sources": [
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 4 - Forward kinematics]]"
+      ],
+      "body": "> [!definition]\n> En posegraf representerer koordinatrammer som noder og kjente transformasjoner som rettede forbindelser. En ukjent pose finnes ved å følge en gyldig sti og multiplisere transformasjonene i riktig rekkefølge.\n\n## Slik virker det\n\nHvis `{B}` er kjent relativt til `{A}` og `{C}` relativt til `{B}`, kan transformasjonen fra `{C}` til `{A}` bygges som et ordnet produkt. Nabosymbolene i rammeannotasjonen må kansellere/matche. Går man mot en tilgjengelig kant, brukes inversen. — [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n\n## Hvorfor det er viktig\n\nPosegrafer skalerer fra et punkt observert av en robotsensor til hele [Kinematic chains and joints](/egb339/temaer/kinematic-chains-and-joints). [Forward kinematics](/egb339/temaer/forward-kinematics) er en posegraf der enkelte kanter avhenger av leddvariabler. — [Week 4 - Forward kinematics](/egb339/uker/uke-4)\n\n## Relatert innhold\n\n- [Reference frames](/egb339/temaer/reference-frames)\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)"
+    },
+    {
+      "slug": "position-orientation-and-robot-kinematics",
+      "title": "Position, orientation and robot kinematics",
+      "kind": "topic",
+      "route": "/egb339/temaer/position-orientation-and-robot-kinematics",
+      "week": "2-9",
+      "updated": "2026-09-07",
+      "tags": [
+        "overview",
+        "kinematics"
+      ],
+      "track": "kinematics",
+      "summary": "- Reference frames describes where coordinates apply.\n- SO(2) rotation matrices and SE(2) homogeneous transformations establish the 2D model.\n- SO(3) rotation matrices describes orientation.\n- SE(3) homogeneous transformations describes pose: orientation and position together.\n- Pose graphs organises composed transformations.",
+      "sources": [
+        "[[Assessment 1.1 - Position and orientation in 2D]]",
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Week 4 - Forward kinematics]]",
+        "[[Week 5 - Inverse kinematics]]",
+        "[[Week 6 - Robot Jacobian]]",
+        "[[Week 7 - Motion planning]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]",
+        "[[Assessment 2.2 - Physical robot submission]]"
+      ],
+      "body": "## Representation\n\n- [Reference frames](/egb339/temaer/reference-frames) describes where coordinates apply.\n- [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices) and [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations) establish the 2D model.\n- [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices) describes orientation.\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations) describes pose: orientation and position together.\n- [Pose graphs](/egb339/temaer/pose-graphs) organises composed transformations.\n\n## Robot chain\n\n- [Joint-angle mapping](/egb339/temaer/joint-angle-mapping) translates the physical robot into model variables.\n- [Forward kinematics](/egb339/temaer/forward-kinematics) maps joint values to end-effector pose.\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics) maps a desired end-effector pose to joint values.\n\n## Differential motion\n\n- [Partial derivatives for robotics](/egb339/temaer/partial-derivatives-for-robotics) builds the calculus foundation.\n- [Robot Jacobian](/egb339/temaer/robot-jacobian) maps joint velocity to Cartesian velocity.\n- [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation) approximates small motion steps.\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation) compares paths built in joint and Cartesian coordinates.\n- [Trapezoidal motion profiles](/egb339/temaer/trapezoidal-motion-profiles) supplies time parametrisation, while [Point-to-segment distance and obstacle clearance](/egb339/temaer/point-to-segment-distance-and-obstacle-clearance) introduces a simple geometric collision check. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n\n## Applied project\n\n[Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses) applies reference frames, homogeneous transformations and IK to [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) and [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission). The shared controller is summarised in [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical), while environment-specific geometry and safety rules remain explicit.\n\n## Platform\n\n- [Dobot Magician](/egb339/temaer/dobot-magician) is the robot.\n- [CoppeliaSim](/egb339/temaer/coppeliasim) is the simulator used for validation and experimentation.\n\n## Ingested sources\n\n- [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d)\n- [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n- [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n- [Week 4 - Forward kinematics](/egb339/uker/uke-4)\n- [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n- [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n- [Week 7 - Motion planning](/egb339/uker/uke-7)\n- [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n- [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d)\n- [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics)\n- [CoppeliaSim forward kinematics practical](/egb339/ressurser/coppeliasim-forward-kinematics-practical)\n- [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical)\n- [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n- [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n- [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)"
+    },
+    {
+      "slug": "public-and-private-autograder-tests",
+      "title": "Public and private autograder tests",
+      "kind": "concept",
+      "route": "/egb339/temaer/public-and-private-autograder-tests",
+      "week": "1-13",
+      "updated": "2026-09-07",
+      "tags": [
+        "testing",
+        "gradescope",
+        "autograding",
+        "generalization"
+      ],
+      "track": "foundations",
+      "summary": "Offentlige tester er synlige lokale kontroller som fanger grunnleggende feil. Private tester er skjulte tilfeller som Gradescope bruker for å kontrollere at implementasjonen følger den generelle kontrakten, ikke bare eksemplene.",
+      "sources": [
+        "[[Assessment 1.0 - Warmup to Gradescope]]",
+        "[[Assessment 1 - Problem-solving task overview]]"
+      ],
+      "body": "> [!abstract] Definition\n> Offentlige tester er synlige lokale kontroller som fanger grunnleggende feil. Private tester er skjulte tilfeller som Gradescope bruker for å kontrollere at implementasjonen følger den generelle kontrakten, ikke bare eksemplene.\n\n## Arbeidsflyt\n\n1. Behold korrekt filnavn, funksjonsnavn og signatur.\n2. Implementer funksjonen fra docstringen og oppgaveteksten.\n3. Kjør de offentlige testene og rett import-, retur-, type- og enkle verdi-feil.\n4. Legg til egne tester for grenser, former og alternative input.\n5. Lever på Gradescope for de private testene. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n## What passing public tests means\n\nOffentlige tester er en nødvendig lokal kontroll, men de garanterer ikke at de skjulte testene passerer. En løsning som hardkoder eksemplene kan bestå en enkel synlig test og likevel feile på nye input. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n> [!tip] Submission strategy\n> Bruk egne testtilfeller før opplasting. [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview) oppgir fem samlede Gradescope-forsøk uten straff for hver kodeoppgave, så lokale tester reduserer unødvendige forsøk.\n\n## Relatert innhold\n\n- [Python control flow and collections](/egb339/temaer/python-control-flow-and-collections)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)"
+    },
+    {
+      "slug": "python-control-flow-and-collections",
+      "title": "Python control flow and collections",
+      "kind": "concept",
+      "route": "/egb339/temaer/python-control-flow-and-collections",
+      "week": "1",
+      "updated": "2026-09-07",
+      "tags": [
+        "python",
+        "conditionals",
+        "loops",
+        "collections"
+      ],
+      "track": "foundations",
+      "summary": "Kontrollflyt bestemmer hvilke kodeblokker som kjøres og hvor mange ganger de kjøres. Lister og tupler samler flere verdier som funksjoner kan produsere eller behandle.",
+      "sources": [
+        "[[Assessment 1.0 - Warmup to Gradescope]]"
+      ],
+      "body": "> [!abstract] Definition\n> Kontrollflyt bestemmer hvilke kodeblokker som kjøres og hvor mange ganger de kjøres. Lister og tupler samler flere verdier som funksjoner kan produsere eller behandle.\n\n## Core mechanisms\n\n- En `if`-setning velger kode basert på et boolsk uttrykk.\n- `and` kombinerer krav som begge må være sanne; `or` krever at minst ett er sant.\n- En `while`-løkke fortsetter så lenge betingelsen er sann.\n- En `for`-løkke går gjennom elementene i en samling.\n- En liste er muterbar og kan utvides med `.append()`; en tuple er en fast sekvens.\n- En funksjon samler gjenbrukbar logikk og sender resultatet tilbake med `return`. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n## Assessment use\n\nQ2-Q7 i [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope) tester disse mekanismene med nye inputverdier. Derfor skal betingelser og løkker bruke funksjonsargumentet, ikke kopiere eksempelresultatene.\n\n## Relatert innhold\n\n- [Public and private autograder tests](/egb339/temaer/public-and-private-autograder-tests)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)"
+    },
+    {
+      "slug": "reference-frames",
+      "title": "Reference frames",
+      "kind": "concept",
+      "route": "/egb339/temaer/reference-frames",
+      "week": "2",
+      "updated": "2026-09-07",
+      "tags": [
+        "frames",
+        "coordinates"
+      ],
+      "track": "kinematics",
+      "summary": "Et fysisk punkt er det samme uansett koordinatsystem, men koordinatvektoren avhenger av rammen.",
+      "sources": [
+        "[[Week 1 - Unit introduction and kinematics context]]",
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Assessment 1.1 - Position and orientation in 2D]]",
+        "[[Week 3 - NumPy and 3D pose]]"
+      ],
+      "body": "Et fysisk punkt er det samme uansett koordinatsystem, men koordinatvektoren avhenger av rammen.\n\nHvis `R` beskriver orienteringen til ramme `{A}` relativt til `{0}`, brukes\n\n- `p₀ = R p_A` når origoene sammenfaller;\n- `p_A = Rᵀ p₀` i motsatt retning;\n- `p₀ = R p_A + t` når rammene også er translert.\n\nDet viktigste er å skrive tydelig hvilken ramme hver vektor er uttrykt i. Dette gjør multiplikasjonsrekkefølgen og behovet for invers lettere å kontrollere. — [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n\nSe [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices) og [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations).\n\nI [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d) gis punktet i én ramme og etterspørres i en annen. Illustrasjonsfigurene gir ikke testdata; de viser hvorfor rammeretningen må avgjøres generelt."
+    },
+    {
+      "slug": "robot-jacobian",
+      "title": "Robot Jacobian",
+      "kind": "concept",
+      "route": "/egb339/temaer/robot-jacobian",
+      "week": "6",
+      "updated": "2026-08-25",
+      "tags": [
+        "kinematics",
+        "jacobian",
+        "velocity"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nThe robot Jacobian is the matrix derivative of Forward kinematics. It maps instantaneous joint velocity q̇ to end-effector velocity ṗ through ṗ=J(q)q̇.",
+      "sources": [
+        "[[Week 6 - Robot Jacobian]]"
+      ],
+      "body": "> [!definition]\n> The robot Jacobian is the matrix derivative of [Forward kinematics](/egb339/temaer/forward-kinematics). It maps instantaneous joint velocity `q̇` to end-effector velocity `ṗ` through `ṗ=J(q)q̇`.\n\n## Construction\n\nIf `p=FK(q)` is a vector, every Jacobian entry is a [partial derivative](/egb339/temaer/partial-derivatives-for-robotics):\n\n`Jᵢⱼ(q)=∂pᵢ/∂qⱼ`.\n\nThe matrix depends on the current joint configuration because the derivatives normally contain the joint variables themselves. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\nFor the source's planar two-link arm,\n\n`pₓ=L₁cos(θ₁)+L₂cos(θ₁+θ₂)`\n\n`pᵧ=L₁sin(θ₁)+L₂sin(θ₁+θ₂)`.\n\n> [!tip] Derived from the source model\n> Applying the stated derivative rules gives\n> `J = [[-L₁sin(θ₁)-L₂sin(θ₁+θ₂), -L₂sin(θ₁+θ₂)], [L₁cos(θ₁)+L₂cos(θ₁+θ₂), L₂cos(θ₁+θ₂)]]`.\n> This explicit matrix is derived from the FK equations in [Week 6 - Robot Jacobian](/egb339/uker/uke-6).\n\n## Forward and inverse velocity mapping\n\n- `ṗ=J(q)q̇` computes Cartesian velocity from joint velocity.\n- `q̇=J(q)⁻¹ṗ` computes joint velocity from Cartesian velocity only when the Jacobian is square and non-singular under the source's ordinary-inverse treatment. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\nRotational joint velocities must be in radians per second for mathematical consistency. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Singularity\n\nAt a singular configuration, `J(q)` has no ordinary inverse. The forward velocity mapping still exists, but the inverse mapping used in the tutorial cannot be applied directly. - [Week 6 - Robot Jacobian](/egb339/uker/uke-6)\n\n## Relatert innhold\n\n- [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics)\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)"
+    },
+    {
+      "slug": "robot-motion-interpolation",
+      "title": "Robot motion interpolation",
+      "kind": "concept",
+      "route": "/egb339/temaer/robot-motion-interpolation",
+      "week": "7-9",
+      "updated": "2026-09-07",
+      "tags": [
+        "motion-planning",
+        "interpolation",
+        "trajectory"
+      ],
+      "track": "motion",
+      "summary": "[!definition]\nMotion interpolation generates intermediate motion targets between a start and goal, either in joint space or in Cartesian task space.",
+      "sources": [
+        "[[Week 7 - Motion planning]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]",
+        "[[Assessment 2.2 - Physical robot submission]]"
+      ],
+      "body": "> [!definition]\n> Motion interpolation generates intermediate motion targets between a start and goal, either in joint space or in Cartesian task space.\n\n## Joint interpolation\n\nJoint interpolation constructs intermediate `q` values and sends them through the robot model. The corresponding end-effector path is determined by [Forward kinematics](/egb339/temaer/forward-kinematics).\n\n> [!tip] Path implication\n> A path that is simple in joint coordinates is not generally a straight line in Cartesian space because FK is non-linear. This is shown directly in [Week 7 - Motion planning](/egb339/uker/uke-7).\n\n## Cartesian interpolation\n\nCartesian interpolation constructs intermediate end-effector targets `p`. Each target then requires a corresponding joint configuration from [Inverse kinematics](/egb339/temaer/inverse-kinematics) or a local joint update from [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation).\n\nFor `n` samples, a straight Cartesian path can use `pᵢ = pₛ + (pₑ-pₛ)i/(n-1)` for `i=0,…,n-1`. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n\n## Assessment boundary\n\n[Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) asks students targeting the highest functional band to demonstrate both joint- and Cartesian-interpolated motion between letters. [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission) explicitly forbids using either interpolation mode on the physical task.\n\n> [!warning]\n> Treat interpolation as a simulation demonstration feature for Assessment 2.1, not as code to carry unchanged into the physical submission.\n\n## Relatert innhold\n\n- [Robot Jacobian](/egb339/temaer/robot-jacobian)\n- [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses)\n- [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical)\n- [Trapezoidal motion profiles](/egb339/temaer/trapezoidal-motion-profiles)\n- [Point-to-segment distance and obstacle clearance](/egb339/temaer/point-to-segment-distance-and-obstacle-clearance)"
+    },
+    {
+      "slug": "robot-workspace-and-ik-solution-branches",
+      "title": "Robot workspace and IK solution branches",
+      "kind": "concept",
+      "route": "/egb339/temaer/robot-workspace-and-ik-solution-branches",
+      "week": "5",
+      "updated": "2026-08-18",
+      "tags": [
+        "workspace",
+        "reachability",
+        "elbow-up",
+        "elbow-down"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nArbeidsrommet er mengden posisjoner eller poser en robot fysisk kan nå. En IK-gren er én sammenhengende familie av leddkonfigurasjoner som gir målposen, for eksempel albue opp eller albue ned.",
+      "sources": [
+        "[[Week 5 - Inverse kinematics]]"
+      ],
+      "body": "> [!definition]\n> Arbeidsrommet er mengden posisjoner eller poser en robot fysisk kan nå. En IK-gren er én sammenhengende familie av leddkonfigurasjoner som gir målposen, for eksempel albue opp eller albue ned.\n\n## Slik virker det\n\nFor en plan tolenkerobot med lengder `L1` og `L2` og målavstand `r` krever geometrisk rekkevidde normalt `|L1 - L2| ≤ r ≤ L1 + L2`. Innenfor området kan samme punkt ofte ha to speilede løsninger. På grensene kan grenene falle sammen; utenfor finnes ingen reell geometrisk løsning. — [Week 5 - Inverse kinematics](/egb339/uker/uke-5)\n\nDet fysiske arbeidsrommet kan være mindre enn det geometriske på grunn av leddgrenser, kollisjoner og mekaniske koblinger.\n\n## In the EGB339 practicals\n\nEn IK-funksjon bør skille mellom «ingen løsning» og en gyldig løsning, håndtere begge nødvendige grener og verifisere hver løsning med [Forward kinematics](/egb339/temaer/forward-kinematics).\n\n## Relatert innhold\n\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics)\n- [atan2 and inverse trigonometry](/egb339/temaer/atan2-and-inverse-trigonometry)\n- [Dobot Magician](/egb339/temaer/dobot-magician)"
+    },
+    {
+      "slug": "rotation-composition-in-3d",
+      "title": "Rotation composition in 3D",
+      "kind": "concept",
+      "route": "/egb339/temaer/rotation-composition-in-3d",
+      "week": "3",
+      "updated": "2026-08-18",
+      "tags": [
+        "rotation",
+        "composition",
+        "local-axes",
+        "global-axes"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nSammensatte 3D-rotasjoner er ordnede produkter av rotasjonsmatriser. Produktet avhenger både av rotasjonsrekkefølgen og av om hver akse tolkes i den nye/lokale eller gamle/globale rammen.",
+      "sources": [
+        "[[Week 3 - NumPy and 3D pose]]"
+      ],
+      "body": "> [!definition]\n> Sammensatte 3D-rotasjoner er ordnede produkter av rotasjonsmatriser. Produktet avhenger både av rotasjonsrekkefølgen og av om hver akse tolkes i den nye/lokale eller gamle/globale rammen.\n\n## Hvorfor det er viktig\n\nRotasjoner om forskjellige akser kommuterer normalt ikke: `R_x(α) @ R_z(β)` er ikke det samme som `R_z(β) @ R_x(α)`. — [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n\n## Slik virker det\n\n- En rotasjon om en ny/lokal akse legges på den siden som følger kursnotasjonens kjede.\n- En rotasjon om en gammel/global akse legges på motsatt side.\n- Den sikre metoden er å tegne rammene, navngi transformasjonene og kontrollere at rammeindeksene matcher før multiplikasjon.\n\n> [!warning]\n> Ikke bruk en memorert «alltid venstre» eller «alltid høyre»-regel uten å sjekke EGB339s notasjon og oppgavens ordlyd.\n\n## Relatert innhold\n\n- [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices)\n- [Reference frames](/egb339/temaer/reference-frames)\n- [Pose graphs](/egb339/temaer/pose-graphs)"
+    },
+    {
+      "slug": "se-2-homogeneous-transformations",
+      "title": "SE(2) homogeneous transformations",
+      "kind": "concept",
+      "route": "/egb339/temaer/se-2-homogeneous-transformations",
+      "week": "2",
+      "updated": "2026-09-07",
+      "tags": [
+        "transformation",
+        "se2",
+        "homogeneous-coordinates"
+      ],
+      "track": "foundations",
+      "summary": "[!definition]\nSE(2) beskriver en full 2D-pose ved å samle rotasjon og translasjon i én homogen 3×3 matrise.",
+      "sources": [
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Assessment 1.1 - Position and orientation in 2D]]"
+      ],
+      "body": "> [!definition]\n> `SE(2)` beskriver en full 2D-pose ved å samle rotasjon og translasjon i én homogen `3×3` matrise.\n\n## Slik virker det\n\n`T = [[R, t], [0, 0, 1]]`, der `R ∈ SO(2)` og `t ∈ ℝ²`.\n\nEt punkt `p = [x, y]ᵀ` utvides til `p_h = [x, y, 1]ᵀ`. Da utfører `T @ p_h` både rotasjon og translasjon. Den siste koordinaten er `1` for punkter og `0` for rene retningsingsvektorer. — [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n\n## Hvorfor det er viktig\n\nHomogene matriser gjør posekomposisjon til vanlig matrisemultiplikasjon og er den direkte 2D-forløperen til [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations).\n\n[Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d) bruker `SE(2)` både til å konstruere en 2D-rigid-body-transformasjon og til å uttrykke et punkt i en rotert og translert ramme. Retningen bestemmer om `T` eller `T⁻¹` skal brukes.\n\n## Relatert innhold\n\n- [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices)\n- [Reference frames](/egb339/temaer/reference-frames)\n- [Pose graphs](/egb339/temaer/pose-graphs)"
+    },
+    {
+      "slug": "se-3-homogeneous-transformations",
+      "title": "SE(3) homogeneous transformations",
+      "kind": "concept",
+      "route": "/egb339/temaer/se-3-homogeneous-transformations",
+      "week": "3-9",
+      "updated": "2026-08-25",
+      "tags": [
+        "transformation",
+        "se3"
+      ],
+      "track": "foundations",
+      "summary": "En homogen transformasjon kombinerer orientering og translasjon:",
+      "sources": [
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Assessment 1.2 - Position and orientation in 3D]]",
+        "[[Assessment 2.1 - Simulation and oral demonstration]]"
+      ],
+      "body": "En homogen transformasjon kombinerer orientering og translasjon:\n\n`T = [[R, t], [0 0 0, 1]]`\n\nder `R ∈ SO(3)` og `t ∈ ℝ³`. Et punkt skrives homogent som `[x, y, z, 1]ᵀ`.\n\nFor å kontrollere at en matrise tilhører `SE(3)` må den:\n\n- ha form 4×4;\n- ha nederste rad `[0, 0, 0, 1]`;\n- inneholde en gyldig `SO(3)`-matrise øverst til venstre.\n\nInversen er\n\n`T⁻¹ = [[Rᵀ, -Rᵀt], [0 0 0, 1]]`.\n\nOrdnet multiplikasjon av slike matriser er grunnlaget for [Pose graphs](/egb339/temaer/pose-graphs) og [Forward kinematics](/egb339/temaer/forward-kinematics). - [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n\n## Applied frame transformation\n\nI Assessment 2.1 må et målt tastpunkt uttrykt i tastaturets referanseramme transformeres til robotens baseramme før [Inverse kinematics](/egb339/temaer/inverse-kinematics) brukes. Homogene koordinater gjør rotasjon og translasjon til én ordnet matriseoperasjon. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\nSe [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses).\n\nKilder: [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d) og [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)."
+    },
+    {
+      "slug": "shape-descriptors-from-area-and-perimeter",
+      "title": "Shape descriptors from area and perimeter",
+      "kind": "concept",
+      "route": "/egb339/temaer/shape-descriptors-from-area-and-perimeter",
+      "week": "8",
+      "updated": "2026-09-07",
+      "tags": [
+        "computer-vision",
+        "shape",
+        "classification",
+        "segmentation"
+      ],
+      "track": "vision",
+      "summary": "Area and perimeter can be combined into scale-independent ratios that help distinguish compact shapes such as circles and squares.",
+      "sources": [
+        "[[Assessment 1.5 - Warehouse automation]]"
+      ],
+      "body": "> [!abstract] Definition\n> Area and perimeter can be combined into scale-independent ratios that help distinguish compact shapes such as circles and squares.\n\n## Useful ratios\n\n- Circle circularity: `C = 4πA/P²`, ideally `C=1` for a perfect circle.\n- Square score: `S = 16A/P²`, ideally `S=1` for a perfect square.\n\n> [!tip] Geometric synthesis\n> These formulas follow by substituting the exact area and perimeter of a circle or square. Assessment 1.5 asks for classification from area and perimeter and suggests a tolerance, but does not prescribe these exact normalized formulas.\n\nPixelated boundaries, segmentation noise and imperfect shapes move the score away from its ideal value, so classification needs a tolerance. - [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation)\n\n## Relatert innhold\n\n- [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding)"
+    },
+    {
+      "slug": "so-2-rotation-matrices",
+      "title": "SO(2) rotation matrices",
+      "kind": "concept",
+      "route": "/egb339/temaer/so-2-rotation-matrices",
+      "week": "2",
+      "updated": "2026-09-07",
+      "tags": [
+        "rotation",
+        "so2",
+        "2d-pose"
+      ],
+      "track": "kinematics",
+      "summary": "[!definition]\nSO(2) er mengden av 2×2 matriser som beskriver rene rotasjoner i planet.",
+      "sources": [
+        "[[Week 2 - Linear algebra and 2D pose]]",
+        "[[Assessment 1.1 - Position and orientation in 2D]]"
+      ],
+      "body": "> [!definition]\n> `SO(2)` er mengden av `2×2` matriser som beskriver rene rotasjoner i planet.\n\n## Slik virker det\n\nFor en mot-klokken-rotasjon `θ`:\n\n`R(θ) = [[cos θ, -sin θ], [sin θ, cos θ]]`\n\nEn matrise `R` tilhører `SO(2)` når:\n\n- `R.shape == (2, 2)`;\n- `RᵀR = I`;\n- `det(R) = +1`.\n\nOrtogonaliteten gir `R⁻¹ = Rᵀ`. Determinantkravet skiller en rotasjon fra en refleksjon. — [Week 2 - Linear algebra and 2D pose](/egb339/uker/uke-2)\n\n## In the EGB339 practicals\n\nBruk toleranse ved numerisk sjekk: `np.allclose(R.T @ R, np.eye(2))` og `np.isclose(np.linalg.det(R), 1.0)`. Dette er den direkte valideringen som trengs i Q2 i [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d).\n\n## Relatert innhold\n\n- [Reference frames](/egb339/temaer/reference-frames)\n- [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations)\n- [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices)"
+    },
+    {
+      "slug": "so-3-rotation-matrices",
+      "title": "SO(3) rotation matrices",
+      "kind": "concept",
+      "route": "/egb339/temaer/so-3-rotation-matrices",
+      "week": "3",
+      "updated": "2026-08-18",
+      "tags": [
+        "rotation",
+        "so3"
+      ],
+      "track": "kinematics",
+      "summary": "SO(3) er mengden av 3×3 rotasjonsmatriser i tre dimensjoner.",
+      "sources": [
+        "[[Week 3 - NumPy and 3D pose]]",
+        "[[Assessment 1.2 - Position and orientation in 3D]]"
+      ],
+      "body": "`SO(3)` er mengden av 3×3 rotasjonsmatriser i tre dimensjoner.\n\nEn matrise `R` er en gyldig rotasjon når:\n\n- `RᵀR = I` (ortogonalitet)\n- `R⁻¹ = Rᵀ`\n- `det(R) = +1`\n\nStandardmatrisene er\n\n`Rx(θ) = [[1,0,0],[0,cosθ,-sinθ],[0,sinθ,cosθ]]`\n\n`Ry(θ) = [[cosθ,0,sinθ],[0,1,0],[-sinθ,0,cosθ]]`\n\n`Rz(θ) = [[cosθ,-sinθ,0],[sinθ,cosθ,0],[0,0,1]]`\n\nRotasjoner er ikke kommutative: `Rx Ry` er generelt forskjellig fra `Ry Rx`. Se [Rotation composition in 3D](/egb339/temaer/rotation-composition-in-3d) og [Reference frames](/egb339/temaer/reference-frames) for tolkning av rekkefølgen og transformasjonsretningen. — [Week 3 - NumPy and 3D pose](/egb339/uker/uke-3)\n\nKilde: [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d)."
+    },
+    {
+      "slug": "trapezoidal-motion-profiles",
+      "title": "Trapezoidal motion profiles",
+      "kind": "concept",
+      "route": "/egb339/temaer/trapezoidal-motion-profiles",
+      "week": "7",
+      "updated": "2026-09-07",
+      "tags": [
+        "motion-planning",
+        "velocity",
+        "acceleration",
+        "trajectory"
+      ],
+      "track": "motion",
+      "summary": "A trapezoidal velocity profile moves through acceleration, constant velocity and deceleration phases so that speed does not change instantaneously.",
+      "sources": [
+        "[[Week 7 - Motion planning]]"
+      ],
+      "body": "> [!abstract] Definition\n> A trapezoidal velocity profile moves through acceleration, constant velocity and deceleration phases so that speed does not change instantaneously.\n\n## Reading the profile\n\n- Displacement equals the area under `v(t)`. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n- Acceleration equals the slope `dv/dt`. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n- The triangular acceleration and deceleration areas plus the rectangular cruise area must equal the requested travel distance. - [Week 7 - Motion planning](/egb339/uker/uke-7)\n- If the move is too short to reach the chosen maximum speed, the profile becomes triangular rather than trapezoidal.\n\n> [!tip] Synthesis\n> The triangular short-move case follows from the same area constraint; it is a standard consequence rather than a separately stated Week 7 task.\n\n## Relatert innhold\n\n- [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation)\n- [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation)"
+    }
+  ]
+}

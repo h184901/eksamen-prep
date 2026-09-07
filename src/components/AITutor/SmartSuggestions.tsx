@@ -49,6 +49,29 @@ function baseByPageType(pageType: string): Suggestion[] {
         { label: "Kortversjon", prompt: "Gi meg den absolutt viktigste kortversjonen av denne oppsummeringen." },
         { label: "Test meg", prompt: "Lag 3 raske spørsmål som tester om jeg har forstått hovedpunktene." },
       ];
+    case "uke":
+      return [
+        { label: "Læringskjeden", prompt: "Forklar hvordan denne uken bygger på forrige uke og hva den brukes til videre." },
+        { label: "Kodekobling", prompt: "Vis hvordan matematikken på denne siden oversettes til robust NumPy-kode, uten å hardkode eksempeldata." },
+        { label: "Test meg", prompt: "Lag tre korte kontrollspørsmål for denne uken og vent med fasiten." },
+      ];
+    case "tema":
+      return [
+        { label: "Intuisjon først", prompt: "Forklar dette temaet intuitivt før du bruker formler." },
+        { label: "Rammer og retning", prompt: "Vis hvilke koordinatrammer og transformasjonsretninger jeg må holde styr på her." },
+        { label: "Vanlig feil", prompt: "Vis den vanligste konseptuelle eller numeriske feilen for dette temaet." },
+      ];
+    case "vurdering":
+      return [
+        { label: "Lag løsningsplan", prompt: "Lag en generell løsnings- og testplan for kravene på denne vurderingssiden, uten hardkoding." },
+        { label: "Private tester", prompt: "Hvilke grense- og formtilfeller bør jeg teste lokalt før Gradescope?" },
+        { label: "Forklar kontrakten", prompt: "Forklar hvilke input, output, former og matematiske egenskaper funksjonene må bevare." },
+      ];
+    case "praktisk":
+      return [
+        { label: "Feilsøk systematisk", prompt: "Lag en kort sjekkliste for å feilsøke denne praktiske arbeidsflyten lag for lag." },
+        { label: "Simulator vs fysisk", prompt: "Hvilke parametere og API-antakelser må holdes atskilt mellom simulator og fysisk robot?" },
+      ];
     default:
       return [
         { label: "Oversikt", prompt: "Gi meg en kort oversikt over det viktigste i pensum for dette faget." },
@@ -73,6 +96,11 @@ function bySubject(subject: string): Suggestion[] {
       return [
         { label: "Lag i stakken", prompt: "Hvor i TCP/IP-stakken hører dette til, og hvorfor?" },
         { label: "Forklar protokollen", prompt: "Forklar hovedprotokollen på denne siden lag for lag." },
+      ];
+    case "egb339":
+      return [
+        { label: "Tegn rammene", prompt: "Beskriv et tydelig rammediagram for problemet og vis transformasjonsretningen." },
+        { label: "Verifiser med kode", prompt: "Vis en liten generell NumPy-kontroll som verifiserer matematikken uten å løse bare ett eksempel." },
       ];
     default:
       return [];

@@ -119,20 +119,20 @@ function ExchangeCard() {
             Utveksling
           </span>
           <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 whitespace-nowrap">
-            Planlagt
+            Pågår
           </span>
         </div>
         <h4 className="text-sm font-semibold leading-snug text-emerald-700 dark:text-emerald-300">
           Australia · Gardens Point
         </h4>
         <p className="text-xs text-[var(--muted)] leading-relaxed mt-1.5">
-          Aktuelle utvekslingsemner (Cloud, ML, Robotics, Cyber Security) for 2026 Semester&nbsp;2.
+          CAB432, CAB444, EGB339 og IFB240 ved QUT. Robotics-portalen er nå aktiv.
         </p>
         <Link
           href="/utveksling"
           className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300"
         >
-          Se planlagte emner
+          Se Australia-emnene
           <span aria-hidden>→</span>
         </Link>
       </div>

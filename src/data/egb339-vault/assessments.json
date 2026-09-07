@@ -1,0 +1,231 @@
+{
+  "assessments": [
+    {
+      "slug": "assessment-1-problem-solving-task-overview",
+      "title": "Assessment 1 - Problem-solving task overview",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-problem-solving-task-overview",
+      "week": "1-13",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1",
+        "gradescope",
+        "submission",
+        "academic-integrity"
+      ],
+      "track": "foundations",
+      "summary": "Assessment 1 er en individuell serie med autogradede kodeoppgaver i robotikk, kinematikk og computer vision. Hele serien teller 20 %, leveres som oppgitte Python-filer på Gradescope og har en begrenset mengde innleveringsforsøk før poengtaket reduseres.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Assessment 1 er en individuell serie med autogradede kodeoppgaver i robotikk, kinematikk og computer vision. Hele serien teller 20 %, leveres som oppgitte Python-filer på Gradescope og har en begrenset mengde innleveringsforsøk før poengtaket reduseres.\n\n## Assessment model\n\n- Assessment 1 teller 20 % og dekker grunnleggende robotikk-, kinematikk- og computer-vision-algoritmer. - [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview)\n- Hver deloppgave leverer en kode-mal som skal fylles ut; implementasjonen vurderes automatisk på Gradescope. - [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview)\n- Arbeidet er individuelt, og løsninger skal ikke diskuteres eller deles med andre studenter. - [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview)\n\n## Submission rules\n\n- Koden leveres elektronisk på Gradescope innen midnatt på forfallsdatoen.\n- Oppgavene omfattes av den oppgitte 48-timers perioden for sen innlevering.\n- De første fem samlede forsøkene er uten straff. Fra forsøk nummer seks reduseres høyeste mulige resultat med 20 prosentpoeng per videre forsøk, med et tak på 20 % ved ni eller flere forsøk. - [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview)\n\n> [!warning] Submission strategy\n> Kjør de lokale offentlige testene og kontroller filnavn/importer før opplasting. Gradescope-forsøkene gjelder samlet per kodeoppgave, ikke per spørsmål.\n\n## AI and academic integrity\n\nGenAI kan brukes til å forberede, generere og forbedre innhold når resultatet vurderes kritisk og bruken anerkjennes og refereres etter QUTs regler. Unntaket gjelder de personlige muntlige komponentene som den overordnede vurderingsplanen omtaler for Assessment 2.1 og den senere Assessment 2.3. - [Assessment 1 - Problem-solving task overview](/egb339/vurderinger/assessment-1-problem-solving-task-overview)\n\n## Connected assessment tasks\n\n- [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n- [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d)\n- [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d)\n- [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics)\n- [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n- [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation)\n- [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1)\n- [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n\n## Warmup relationship\n\n[Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope) er en separat, frivillig 0-poengsoppgave. Den trener Python, NumPy og innleveringsflyten før de vurderte deloppgavene, men inngår ikke i Assessment 1-karakteren. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)"
+    },
+    {
+      "slug": "assessment-1-0-warmup-to-gradescope",
+      "title": "Assessment 1.0 - Warmup to Gradescope",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-0-warmup-to-gradescope",
+      "week": "1",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-0",
+        "gradescope",
+        "python",
+        "numpy",
+        "autograding"
+      ],
+      "track": "foundations",
+      "summary": "Warmupen er en frivillig 0-poengsoppgave som trener grunnleggende Python, NumPy og hele innleveringsflyten. Alle 15 funksjonene skal implementeres generelt i assignment1_0.py, kontrolleres med offentlige tester og deretter prøves mot Gradescopes skjulte private tester.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Warmupen er en frivillig 0-poengsoppgave som trener grunnleggende Python, NumPy og hele innleveringsflyten. Alle 15 funksjonene skal implementeres generelt i `assignment1_0.py`, kontrolleres med offentlige tester og deretter prøves mot Gradescopes skjulte private tester.\n\n## Purpose and workflow\n\n- Oppgaven er ikke obligatorisk, kan gjennomføres når som helst i semesteret og teller ikke på sluttkarakteren. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n- Flere spørsmål kan løses på ulike måter; både en enkel programmeringsspråkuavhengig stil og en mer Pythonic stil er tillatt når den valgte mekanismen forstås. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n- Kjør de medfølgende offentlige testene etter hvert spørsmål. Når de passerer, leveres `assignment1_0.py` på Gradescope, der skjulte private tester kontrollerer flere tilfeller. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n## Question map\n\n| Questions | Skills |\n|---|---|\n| Q1 | Aritmetiske operatorer og parentesrekkefølge |\n| Q2-Q3 | `if`, boolske uttrykk og sammensatte betingelser |\n| Q4 | Opprette lister og tupler |\n| Q5-Q6 | `while`- og `for`-løkker |\n| Q7 | Definere en funksjon med argumenter og returverdi |\n| Q8-Q10 | NumPy-array, `dtype`, `shape` og elementvis aritmetikk |\n| Q11-Q13 | Transponering, determinant og matriseinvers |\n| Q14 | Broadcasting mellom en `(2,N)`-array og kolonneverdier |\n| Q15 | Matrisemultiplikasjon av `A B` |\n\nKilde: [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope).\n\n## General-solution requirement\n\nEksempelinputene illustrerer bare enkelte tilfeller. Funksjonene mottar argumenter og blir testet mot private input, så løsningen må bruke argumentene og virke generelt. For Q15 betyr «matrix multiplication of AB» NumPy-matrisemultiplikasjon, normalt `A @ B`, ikke elementvis `A * B`. - [Assessment 1.0 - Warmup to Gradescope](/egb339/vurderinger/assessment-1-0-warmup-to-gradescope)\n\n> [!warning] Source inconsistencies\n> Q15-figuren viser `[[12,14],[43,50]]` for matrisene `[[1,2],[3,4]]` og `[[5,6],[7,8]]`, men korrekt produkt `A @ B` er `[[19,22],[43,50]]`. Oppgavetekstens krav om matrisemultiplikasjon og funksjonens docstring bør følges. Q3s grenseordlyd er også uklar; bruk startfilens docstring og offentlige tester til å bekrefte endepunktene.\n\n## Sentrale begreper\n\n- [Python control flow and collections](/egb339/temaer/python-control-flow-and-collections)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)\n- [Linear algebra for robotics](/egb339/temaer/linear-algebra-for-robotics)\n- [Public and private autograder tests](/egb339/temaer/public-and-private-autograder-tests)\n\n## Kobling til vurdering\n\n- Behold nøyaktig påkrevde funksjonsnavn, argumenter og returtyper.\n- Kontroller `shape` og `dtype`, ikke bare de numeriske verdiene.\n- Ikke hardkode eksempeldata; private tester bruker andre gyldige input.\n- Bruk `@` eller `np.matmul` for Q15."
+    },
+    {
+      "slug": "assessment-1-1-position-and-orientation-in-2d",
+      "title": "Assessment 1.1 - Position and orientation in 2D",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d",
+      "week": "2",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-1",
+        "so2",
+        "se2",
+        "reference-frames"
+      ],
+      "track": "kinematics",
+      "summary": "Assessment 1.1 tester generelle funksjoner for SO(2)-rotasjon, validering av rotasjonsmatriser, transformasjon mellom roterte rammer, konstruksjon av SE(2) og transformasjon mellom roterte og translaterte rammer.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Assessment 1.1 tester generelle funksjoner for `SO(2)`-rotasjon, validering av rotasjonsmatriser, transformasjon mellom roterte rammer, konstruksjon av `SE(2)` og transformasjon mellom roterte og translaterte rammer.\n\n## Krav\n\n| Question | Required result | Main concept |\n|---|---|---|\n| Q1 | Beregn en `2×2` rotasjonsmatrise fra en vinkel i radianer | [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices) |\n| Q2 | Returner `True` bare når en NumPy-array er en gyldig `SO(2)`-matrise | Ortogonalitet og determinant `+1` |\n| Q3 | Uttrykk et punkt i en ny, rotert referanseramme | [Reference frames](/egb339/temaer/reference-frames) og transformasjonsretning |\n| Q4 | Bygg en `3×3` homogen transformasjon fra 2D-translasjon og vinkel | [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations) |\n| Q5 | Transformer et homogent punkt mellom roterte og translaterte rammer | Invers/komposisjon av `SE(2)` |\n\nKilden presiserer at figurene bare illustrerer situasjonen og ikke gir de faktiske parameterne til testene. Funksjonene må derfor løse generelle inputverdier, ikke hardkode eksemplene. - [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d)\n\n## Frame-direction reasoning\n\nNår ramme `{B}` er beskrevet relativt til `{A}`, peker den direkte transformasjonen fra B-koordinater til A-koordinater. Hvis oppgaven i stedet gir et punkt uttrykt i A og ber om B-koordinatene, må den inverse transformasjonen brukes. For en ren rotasjon er inversen transponatet. - [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d)\n\n## Implementasjonssjekk\n\n- Kontroller først at en kandidatmatrise har form `(2,2)`.\n- Bruk `R.T @ R ≈ I` og `det(R) ≈ 1`, med `np.allclose`/`np.isclose`, for `SO(2)`.\n- Bruk `@` til matrise-vektor- og matrisemultiplikasjon; `*` er elementvis multiplikasjon.\n- En `SE(2)`-matrise har rotasjonen øverst til venstre, translasjonen i siste kolonne og nederste rad `[0,0,1]`.\n- Leveringsfilen skal hete `assignment1_1.py`; Robotics Toolbox for Python er ikke tillatt. - [Assessment 1.1 - Position and orientation in 2D](/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d)\n\n## Sentrale begreper\n\n- [SO(2) rotation matrices](/egb339/temaer/so-2-rotation-matrices)\n- [SE(2) homogeneous transformations](/egb339/temaer/se-2-homogeneous-transformations)\n- [Reference frames](/egb339/temaer/reference-frames)\n- [NumPy arrays and matrix operations](/egb339/temaer/numpy-arrays-and-matrix-operations)\n\n## Kobling til vurdering\n\n- Behold funksjonsnavnene og returformene fra startfilen.\n- Skill mellom matrisen som beskriver en ramme og koordinatvektoren som skal uttrykkes i en annen ramme.\n- Test nullrotasjon, positive og negative vinkler samt en transformasjon med både rotasjon og translasjon."
+    },
+    {
+      "slug": "assessment-1-2-position-and-orientation-in-3d",
+      "title": "Assessment 1.2 – Position and orientation in 3D",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d",
+      "week": "3",
+      "updated": "2026-09-07",
+      "tags": [
+        "so3",
+        "se3",
+        "reference-frames"
+      ],
+      "track": "kinematics",
+      "summary": "Oppgaven bygger generelle funksjoner for 3D-rotasjoner og homogene transformasjoner. Den tester både konstruksjon, validering og bruk av SO(3)/SE(3) til å uttrykke punkter i ulike referanserammer.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Oppgaven bygger generelle funksjoner for 3D-rotasjoner og homogene transformasjoner. Den tester både konstruksjon, validering og bruk av `SO(3)`/`SE(3)` til å uttrykke punkter i ulike referanserammer.\n\n## Faglig innhold\n\n- `rotation_matrix(axis, angle)` skal returnere riktig element i `SO(3)` for aksen `x`, `y` eller `z`. - [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d)\n- Sammensetning av rotasjoner er ordensavhengig og bruker matrisemultiplikasjon med `@`.\n- `transformation_matrix(axis, angle, t)` kombinerer rotasjon og translasjon i en `4×4`-matrise.\n- En gyldig `SE(3)`-matrise har en `SO(3)`-rotasjonsblokk, en tredimensjonal translasjon og nederste rad `[0,0,0,1]`.\n- `using_so3()` og `using_se3()` tester om transformasjonsretning og referanseramme er forstått, ikke bare om matrisen kan konstrueres. - [Assessment 1.2 - Position and orientation in 3D](/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d)\n\n## Implementasjonssjekk\n\n- Sjekk form før blokkene indekseres.\n- Bruk toleransebaserte kontroller som `np.allclose` og `np.isclose` for flyttall.\n- For rotasjonsblokken: `R.T @ R ≈ I` og `det(R) ≈ +1`.\n- Returner NumPy-arrays med formen som funksjonens docstring krever.\n\n## Viktige koblinger\n\n- [SO(3) rotation matrices](/egb339/temaer/so-3-rotation-matrices)\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Reference frames](/egb339/temaer/reference-frames)\n- [Forward kinematics](/egb339/temaer/forward-kinematics)"
+    },
+    {
+      "slug": "assessment-1-3-dobot-forward-kinematics",
+      "title": "Assessment 1.3 – Dobot forward kinematics",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics",
+      "week": "4",
+      "updated": "2026-09-07",
+      "tags": [
+        "forward-kinematics",
+        "dobot",
+        "se3"
+      ],
+      "track": "kinematics",
+      "summary": "Oppgaven bruker en ordnet kjede av rotasjoner og translasjoner til å finne Dobot Magicians end-effektorposisjon. Den skiller fire kinematiske modellvinkler fra robotens tre fysiske leddvinkler.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Oppgaven bruker en ordnet kjede av rotasjoner og translasjoner til å finne Dobot Magicians end-effektorposisjon. Den skiller fire kinematiske modellvinkler fra robotens tre fysiske leddvinkler.\n\n## Arbeidsflyt\n\n1. Beskriv robotens geometri og akser i hjemmekonfigurasjonen.\n2. Bygg transformasjonen fra base `{0}` til end-effektor `{E}` som et ordnet produkt av rotasjoner og translasjoner.\n3. Hent ut translasjonsdelen fra sluttmatrisen.\n4. Koble robotens tre fysiske leddvinkler til fire kinematiske vinkler i modellen.\n\nDobotens passive parallellkobling holder verktøyaksen vertikal. Derfor må [Joint-angle mapping](/egb339/temaer/joint-angle-mapping) håndtere forskjellen mellom fysisk og idealisert kinematisk modell.\n\n## Required interfaces\n\n- `forward_kinematics_q(q)` tar fire kinematiske vinkler og returnerer end-effektorposisjonen med form `(3,)` i millimeter.\n- `joint_mapping(theta)` konverterer tre fysiske vinkler til de fire modellvinklene.\n- `forward_kinematics(theta)` skal komponere de to foregående funksjonene i stedet for å duplisere logikken. - [Assessment 1.3 - Dobot forward kinematics](/egb339/vurderinger/assessment-1-3-dobot-forward-kinematics)\n\n## Implementasjonssjekk\n\n- Bruk generelle inputverdier; eksempelposene i dokumentet er testtilfeller, ikke hardkodede svar.\n- Behold transformasjonsrekkefølgen fra den tegnede rammekjeden.\n- Returner bare translasjonskolonnen `T[:3, 3]` når funksjonen ber om posisjon.\n- Kode etter en `return` nås aldri og bør fjernes dersom startfilens `NotImplementedError` fortsatt står der.\n\n## Viktige koblinger\n\n- [Forward kinematics](/egb339/temaer/forward-kinematics)\n- [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations)\n- [Joint-angle mapping](/egb339/temaer/joint-angle-mapping)\n- [Dobot Magician](/egb339/temaer/dobot-magician)"
+    },
+    {
+      "slug": "assessment-1-4-robot-inverse-kinematics",
+      "title": "Assessment 1.4 - Robot inverse kinematics",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics",
+      "week": "5",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-4",
+        "inverse-kinematics",
+        "optimisation",
+        "geometry"
+      ],
+      "track": "kinematics",
+      "summary": "Oppgaven løser Dobotens IK på to måter: først ved å minimere FK-feilen numerisk med scipy.optimize.fmin, deretter ved å utlede en rask geometrisk løsning fra topp- og sidevisning. Alle resultater skal verifiseres med Forward kinematics.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Oppgaven løser Dobotens IK på to måter: først ved å minimere FK-feilen numerisk med `scipy.optimize.fmin`, deretter ved å utlede en rask geometrisk løsning fra topp- og sidevisning. Alle resultater skal verifiseres med [Forward kinematics](/egb339/temaer/forward-kinematics).\n\n## Required model\n\n| Parameter | Value |\n|---|---:|\n| `L0` | 138 mm |\n| `L1` | 135 mm |\n| `L2` | 147 mm |\n| `L3` | 50 mm |\n| `L4` | 120 mm |\n\nDisse verdiene gjelder Assessment 1.4 og må ikke blandes med simulator- eller fysisk-robot-konfigurasjonen. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n\n## Oppgaver\n\n1. Lag en kostfunksjon som returnerer euklidisk avstand mellom ønsket mål `p*` og `FK(theta)`.\n2. Bruk `scipy.optimize.fmin` til å finne vinkler som minimerer kostnaden.\n3. Implementer geometrisk IK ved å løse toppvisningen for `theta1` og armplanet med avstander, cosinussetningen og trekantvinkler. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n\n## Verifikasjon\n\n- Bruk `np.atan2`, ikke bare `np.arctan`, slik at riktig kvadrant bevares.\n- Sett beregnede vinkler inn i FK og kontroller at målpunktet rekonstrueres.\n- Sammenlign den geometriske løsningen med optimaliseringsløsningen.\n- Kjøretidsmålingen er til egen sammenligning og vurderes ikke. - [Assessment 1.4 - Robot inverse kinematics](/egb339/vurderinger/assessment-1-4-robot-inverse-kinematics)\n\n## Sentrale begreper\n\n- [Optimization-based inverse kinematics](/egb339/temaer/optimization-based-inverse-kinematics)\n- [Inverse kinematics](/egb339/temaer/inverse-kinematics)\n- [atan2 and inverse trigonometry](/egb339/temaer/atan2-and-inverse-trigonometry)\n- [Robot workspace and IK solution branches](/egb339/temaer/robot-workspace-and-ik-solution-branches)\n\n## Kobling til vurdering\n\n- Leveringsfilen er `assignment1_4.py`.\n- Robotics Toolbox for Python er ikke tillatt i oppgaven.\n- Funksjonene må være generelle for gyldige mål, ikke hardkodet til ett eksempel.\n\n## Åpne spørsmål\n\n- Hvordan bør utilgjengelige mål signaliseres uten å skjule ugyldig geometri?\n- Hvilken IK-gren forventes av de skjulte testene når flere løsninger finnes?"
+    },
+    {
+      "slug": "assessment-1-5-warehouse-automation",
+      "title": "Assessment 1.5 - Warehouse automation",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-5-warehouse-automation",
+      "week": "8-9",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-5",
+        "computer-vision",
+        "shape-classification",
+        "segmentation"
+      ],
+      "track": "vision",
+      "summary": "En ferdig segmentert lagerbin gir areal og omkrets for hvert objekt. Oppgaven er å klassifisere segmentet som circle, square eller other med en generell geometrisk regel og en passende toleranse.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> En ferdig segmentert lagerbin gir areal og omkrets for hvert objekt. Oppgaven er å klassifisere segmentet som `circle`, `square` eller `other` med en generell geometrisk regel og en passende toleranse.\n\n## Problem boundary\n\nBildesegmenteringen og målingen av areal og omkrets er allerede utført. Funksjonen skal bare bruke de to skalarverdiene til å avgjøre formklasse. - [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation)\n\n## Required interface\n\n- Funksjon: `shape_classification(area, perimeter)`\n- Input: areal i piksler² og omkrets i piksler\n- Output: nøyaktig én av strengene `circle`, `square` eller `other`\n- Oppgaven antyder at en toleranse rundt `0.1` kan være nyttig. - [Assessment 1.5 - Warehouse automation](/egb339/vurderinger/assessment-1-5-warehouse-automation)\n\n## Sentrale begreper\n\n- [Shape descriptors from area and perimeter](/egb339/temaer/shape-descriptors-from-area-and-perimeter)\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Image representation and processing](/egb339/temaer/image-representation-and-processing)\n\n## Kobling til vurdering\n\n- Bruk en skaleringsuavhengig sammenheng mellom areal og omkrets.\n- Håndter ugyldige eller degenererte mål slik at divisjon med null unngås.\n- Leveringsfilen er `assignment1_5.py`.\n\n## Åpne spørsmål\n\n- Hvordan påvirker pikselisering og ujevn segmentkant den beregnede omkretsen?\n- Bør toleransen brukes symmetrisk rundt den ideelle formverdien?"
+    },
+    {
+      "slug": "assessment-1-6-vision-fundamentals-part-1",
+      "title": "Assessment 1.6 - Vision fundamentals part 1",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1",
+      "week": "11",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-6",
+        "computer-vision",
+        "colour",
+        "segmentation"
+      ],
+      "track": "vision",
+      "summary": "Oppgaven teller røde, grønne og blå kvadrater i et RGB-bilde der både grunnfarge og lysintensitet varierer tilfeldig. Løsningen må derfor skille fargeinformasjon fra total intensitet og returnere antallene i fast rekkefølge.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Oppgaven teller røde, grønne og blå kvadrater i et RGB-bilde der både grunnfarge og lysintensitet varierer tilfeldig. Løsningen må derfor skille fargeinformasjon fra total intensitet og returnere antallene i fast rekkefølge.\n\n## Required interface\n\n- Funksjon: `coloured_objects(img)`\n- Input: et RGB-bilde som `mvt.Image`\n- Output: en 3-tuple `(red, green, blue)`\n- Gamma correction er ikke nødvendig. - [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1)\n\n## Core challenge\n\nRå RGB-komponenter endres når belysningsintensiteten endres. Klassifiseringen må bruke en representasjon eller sammenligning som beholder fargeforholdene bedre enn absolutte kanalverdier. - [Assessment 1.6 - Vision fundamentals part 1](/egb339/vurderinger/assessment-1-6-vision-fundamentals-part-1)\n\n## Sentrale begreper\n\n- [Colour normalization and chromaticity](/egb339/temaer/colour-normalization-and-chromaticity)\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Image histograms and thresholding](/egb339/temaer/image-histograms-and-thresholding)\n\n## Kobling til vurdering\n\n- Kontroller kanalrekkefølgen når data kommer via OpenCV, som normalt leser BGR.\n- Bruk array-operasjoner fremfor pikselvise Python-løkker når mulig.\n- Test mot både lyse og mørke varianter av samme grunnfarge.\n- Leveringsfilen er `assignment1_6.py`.\n\n## Åpne spørsmål\n\n- Hvordan skilles bakgrunnspiksler fra de fargede kvadratene i de skjulte testbildene?\n- Hvor stor variasjon i fargemetning og støy finnes i testdataene?"
+    },
+    {
+      "slug": "assessment-1-7-vision-fundamentals-part-2",
+      "title": "Assessment 1.7 - Vision fundamentals part 2",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2",
+      "week": "13",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-1-7",
+        "computer-vision",
+        "homography",
+        "projective-geometry"
+      ],
+      "track": "vision",
+      "summary": "En 3x3-homografi kobler punkter på robotens plane arbeidsflate til bildepunkter. Oppgaven bruker transformasjonen i begge retninger: bildepunkter må føres tilbake til arbeidsflaten for arealberegning, mens et arbeidsflatepunkt må projiseres inn i bildet.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> En 3x3-homografi kobler punkter på robotens plane arbeidsflate til bildepunkter. Oppgaven bruker transformasjonen i begge retninger: bildepunkter må føres tilbake til arbeidsflaten for arealberegning, mens et arbeidsflatepunkt må projiseres inn i bildet.\n\n## Mapping convention\n\nKilden definerer homografien som `p ~ H q`. Her er `q` koordinater på arbeidsflaten og `p` bildekoordinater. Likheten er homogen, så resultatet må normaliseres med tredje koordinat. - [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n\n## Oppgaver\n\n1. Transformer de tre oppgitte bildehjørnene tilbake til arbeidsflaten og beregn trekantarealet.\n2. Transformer et gitt arbeidsflatepunkt `q` til bildepunket `p`. - [Assessment 1.7 - Vision fundamentals part 2](/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2)\n\n## Sentrale begreper\n\n- [Planar homographies](/egb339/temaer/planar-homographies)\n- [Digital image representation](/egb339/temaer/digital-image-representation)\n- [Reference frames](/egb339/temaer/reference-frames)\n\n## Kobling til vurdering\n\n- Hold transformasjonsretningen eksplisitt: `H` går fra arbeidsflate til bilde.\n- Legg til homogen koordinat før multiplikasjon og del på siste komponent etterpå.\n- Q2 skal returnere en NumPy-array med form `(2, 1)`.\n- Q1 returnerer et skalart areal; `cv2.contourArea` er valgfritt.\n- Leveringsfilen er `assignment1_7.py`.\n\n## Åpne spørsmål\n\n- Hvordan bør koden håndtere et homogent resultat der skaleringskomponenten er null eller svært liten?\n- Hvilken numerisk toleranse er hensiktsmessig når areal beregnes etter perspektivtransformasjon?"
+    },
+    {
+      "slug": "assessment-2-applied-project-overview",
+      "title": "Assessment 2 - Applied project overview",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-2-applied-project-overview",
+      "week": "6-13",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-2",
+        "applied-project",
+        "robotics",
+        "computer-vision"
+      ],
+      "track": "vision",
+      "summary": "Assessment 2 er et individuelt prosjekt på 45 % med fire deler. Del 2.1 og 2.2 bruker kinematikk til å skrive ord med henholdsvis en simulert og fysisk robotarm; del 2.3 og 2.4 bruker computer vision til simulert og fysisk pick-and-place.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Assessment 2 er et individuelt prosjekt på 45 % med fire deler. Del 2.1 og 2.2 bruker kinematikk til å skrive ord med henholdsvis en simulert og fysisk robotarm; del 2.3 og 2.4 bruker computer vision til simulert og fysisk pick-and-place.\n\n## Structure\n\n| Part | Task | Weight | Environment |\n|---|---|---:|---|\n| [2.1](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) | Robot word typing | 12.5 % | [CoppeliaSim](/egb339/temaer/coppeliasim) + oral demonstration |\n| [2.2](/egb339/vurderinger/assessment-2-2-physical-robot-submission) | Robot word typing | 10 % | Physical [Dobot Magician](/egb339/temaer/dobot-magician) |\n| 2.3 | Vision-guided pick-and-place | 12.5 % | Simulation + oral demonstration |\n| 2.4 | Vision-guided pick-and-place | 10 % | Physical robot |\n\nThe robotics half transfers one control problem from simulation to hardware, while the computer-vision half repeats the same simulation-to-hardware progression for a perception-guided task. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n\n## Learning outcomes\n\nAssessment 2 measures the ability to recognise realistic robotics and vision problems, implement fundamental algorithms, model and control a multi-link robot arm, and use project-planning techniques. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n\n## Submission and policy signals\n\n- Parts 2.1 and 2.3 require both uploaded code and an in-person oral demonstration; missing the code deadline gives zero for that part. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n- Parts 2.2 and 2.4 are code submissions for the physical system and allow the stated 48-hour late period. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n- The project is individual, solutions must not be discussed with other students, and any repository used must be private. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n- Generative AI may support preparation and refinement, except during the in-person oral components of parts 2.1 and 2.3. AI-generated content must be critically checked, acknowledged and referenced according to QUT guidance. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n\n## Robotics learning path\n\n`keyboard coordinates → [SE(3) homogeneous transformations](/egb339/temaer/se-3-homogeneous-transformations) → [Inverse kinematics](/egb339/temaer/inverse-kinematics) → safe robot motion → simulation validation → physical transfer`\n\nSee [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses), [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation) and [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical).\n\n## Current source coverage\n\n- The current four-page overview confirms all four parts, their weights, the individual-work rule and the AI/oral-demonstration boundary. - [Assessment 2 - Applied project overview](/egb339/vurderinger/assessment-2-applied-project-overview)\n- Detailed local task pages are available for the current robotics parts 2.1 and 2.2. Parts 2.3 and 2.4 are only named as later computer-vision parts in the overview; separate pages are not expected among the current files and are not marked as missing."
+    },
+    {
+      "slug": "assessment-2-1-simulation-and-oral-demonstration",
+      "title": "Assessment 2.1 - Simulation and oral demonstration",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration",
+      "week": "9",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-2-1",
+        "simulation",
+        "oral-demonstration",
+        "inverse-kinematics",
+        "motion-interpolation"
+      ],
+      "track": "motion",
+      "summary": "Implement a five-letter word-typing controller in CoppeliaSim, upload the code by Sunday 13 September 2026 at 23:59, and demonstrate it individually in the registered Week 9 practical. The core pipeline is keyboard measurement, frame transformation, Inverse kinematics and robot motion; strong solutions also demonstrate joint and Cartesian interpolation.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Implement a five-letter word-typing controller in [CoppeliaSim](/egb339/temaer/coppeliasim), upload the code by **Sunday 13 September 2026 at 23:59**, and demonstrate it individually in the registered Week 9 practical. The core pipeline is keyboard measurement, frame transformation, [Inverse kinematics](/egb339/temaer/inverse-kinematics) and robot motion; strong solutions also demonstrate joint and Cartesian interpolation.\n\n## Deliverable and demonstration\n\n- The chosen word has five letters; at most one letter may occur twice. Only A-Z keys are required and case does not matter in the simulation. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n- The code must be uploaded by the deadline and demonstrated interactively to a practical tutor in Week 9. The 48-hour extension does not apply. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n- The demonstration should explain point transformations, key-position handling and IK. The tutor will probe the implementation, mathematics, tests, limitations and results. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n- Functional behaviour is worth 2.5 %, while conceptual understanding in the oral questions is worth 10 %. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\n## Required pipeline\n\n1. Measure the centre of each required key in image pixels relative to a chosen keyboard frame.\n2. Scale the measurements to millimetres using the simulated keyboard size of `120 × 290 mm`.\n3. Store the key positions in a convenient structure such as a Python dictionary.\n4. Determine the homogeneous transform from the keyboard frame to the robot base frame.\n5. Transform each key position, solve IK and command the robot to press the key. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\nThis is captured in [Keyboard coordinate mapping and safe key presses](/egb339/temaer/keyboard-coordinate-mapping-and-safe-key-presses) and [Robot word typing practical](/egb339/ressurser/robot-word-typing-practical).\n\n## Simulation configuration\n\n| Parameter | Value |\n|---|---:|\n| `L0` | 138 mm |\n| `L1` | 135 mm |\n| `L2` | 147 mm |\n| `L3` | 60 mm |\n| `L4` | 80 mm |\n\nThese parameters reflect the suction-gripper simulation. In the supplied FK expression, the positive `L4` length is applied as a downward offset (subtracted from the vertical coordinate); do not change the stored length to a negative value as well. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\n## Motion expectations\n\nA working solution must type the selected word. To target the highest functional band, it should additionally demonstrate both joint-interpolated and Cartesian-interpolated motion between letters. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\nSee [Robot motion interpolation](/egb339/temaer/robot-motion-interpolation) and [Differential kinematics and local linearisation](/egb339/temaer/differential-kinematics-and-local-linearisation).\n\n## Oral preparation\n\nBe prepared to explain and test:\n\n- FK from joint angles and the steps in geometric IK;\n- the role and extra dimension of homogeneous coordinates;\n- additional test cases and unreachable targets;\n- how optimisation-based IK could include joint limits or obstacle avoidance;\n- execution-time measurement and why it matters;\n- how keyboard scaling, such as 75 %, should propagate through the coordinate model. - [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration)\n\n## Checklist\n\n- [ ] `wordTypingRobot(robotObj, word)` retains the required name and interface.\n- [ ] Key coordinates are measured, scaled and stored relative to an explicit keyboard frame.\n- [ ] Frame transformation and IK are separated enough to explain independently.\n- [ ] Tests cover multiple keys, quadrants, reachability and transformation direction.\n- [ ] The submitted code is the same code used in the demonstration.\n- [ ] Joint and Cartesian interpolation are demonstrable if aiming for the highest functional band."
+    },
+    {
+      "slug": "assessment-2-2-physical-robot-submission",
+      "title": "Assessment 2.2 - Physical robot submission",
+      "kind": "assessment",
+      "route": "/egb339/vurderinger/assessment-2-2-physical-robot-submission",
+      "week": "9",
+      "updated": "2026-09-07",
+      "tags": [
+        "egb339",
+        "assessment-2-2",
+        "physical-robot",
+        "dobot",
+        "safety",
+        "inverse-kinematics"
+      ],
+      "track": "kinematics",
+      "summary": "Port the word-typing solution to the physical Dobot Magician and submit only wordTypingRobot.py by Wednesday 16 September 2026 at 15:59. The robot must type a supplied five-letter lowercase word followed by Enter, while obeying strict height, runtime and API constraints.",
+      "sources": [],
+      "body": "> [!abstract] TL;DR\n> Port the word-typing solution to the physical [Dobot Magician](/egb339/temaer/dobot-magician) and submit only `wordTypingRobot.py` by **Wednesday 16 September 2026 at 15:59**. The robot must type a supplied five-letter lowercase word followed by Enter, while obeying strict height, runtime and API constraints.\n\n## Required interface and behaviour\n\n- Gradescope calls `wordTypingRobot(robotObj, word)` with a Dobot object and a five-letter lowercase word. The controller must type the five letters in order and then press Enter. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n- Submit a single file named `wordTypingRobot.py`; remove simulator-specific imports. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n- The physical `move_arm(j1, j2, j3)` call is blocking, so `time.sleep()` is unnecessary and must be removed. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n- `get_joint_config()` and `get_end_effector_pose()` are unavailable and must not be called. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n- Unlike the simulation extension, joint- and Cartesian-interpolated motion must not be used for the physical task. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Physical geometry\n\n| Item | Physical specification |\n|---|---|\n| Letter key | 16.2 mm wide × 11.5 mm high |\n| Enter key | 19.0 mm wide |\n| Keyboard-frame origin in robot frame | `(248, -77.25)` mm |\n| Keyboard orientation | 90° about the robot frame's z-axis |\n| Kinematic lengths | `L0=138`, `L1=135`, `L2=147`, `L3=60`, `L4=-70` mm |\n| Press height | `z=0` mm |\n| Minimum lateral-travel height | `z=10` mm |\n\nThe physical source lists `L4=-70 mm`, while the current simulation source lists a magnitude `L4=80 mm` that is subtracted in its FK expression. Preserve each source's sign convention instead of comparing the raw signs as if they were defined identically. Every physical quantity is expressed in millimetres. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Abort conditions\n\n> [!warning] A run is aborted and still counts as a submission if the controller:\n> - targets toolbar buttons;\n> - commands a point below `z=-5 mm`;\n> - moves sideways before lifting the stylus to at least `z=10 mm`;\n> - runs longer than one minute; or\n> - calls `get_joint_config()` or `get_end_effector_pose()`.\n>\n> Source: [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission).\n\n## Scoring and attempt cost\n\nThe score is\n\n`max(0, (10/6)C - min(5, max(0.5(N-1), 0)))`,\n\nwhere `C` is the number of correct characters in order out of six, including Enter, and `N` is the total number of submissions. Extra or missing characters reduce `C`; repeated submissions add a penalty, and after 11 submissions the maximum possible score is 5/10. - [Assessment 2.2 - Physical robot submission](/egb339/vurderinger/assessment-2-2-physical-robot-submission)\n\n## Transfer checklist\n\n- [ ] Complete and validate [Assessment 2.1 - Simulation and oral demonstration](/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration) first.\n- [ ] Separate environment-specific constants, especially `L4` and keyboard geometry.\n- [ ] Remove simulator imports, unavailable getters, sleeps and interpolation-only demonstration code.\n- [ ] Lift to `z≥10 mm` before every sideways move and never command below `z=-5 mm`.\n- [ ] Include the Enter key and finish within one minute.\n- [ ] Submit only `wordTypingRobot.py` and review the server feedback before another attempt."
+    }
+  ]
+}

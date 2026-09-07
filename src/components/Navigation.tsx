@@ -26,6 +26,10 @@ export default function Navigation() {
   // DAT110-only: the language toggle does nothing on other subjects, so it is
   // only shown on /dat110/** routes (next to the theme toggle).
   const isDat110 = pathname.startsWith("/dat110");
+  const isActive = (href: string) =>
+    pathname === href ||
+    (href !== "/" && pathname.startsWith(href)) ||
+    (href === "/utveksling" && pathname.startsWith("/egb339"));
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-md">
@@ -44,7 +48,7 @@ export default function Navigation() {
               key={item.href}
               href={item.href}
               className={`text-sm font-medium transition-colors hover:text-[var(--accent)] ${
-                pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                isActive(item.href)
                   ? "text-[var(--accent)]"
                   : "text-[var(--muted)]"
               }`}
@@ -91,7 +95,7 @@ export default function Navigation() {
               href={item.href}
               onClick={() => setMenuOpen(false)}
               className={`block py-2 text-sm font-medium transition-colors ${
-                pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                isActive(item.href)
                   ? "text-[var(--accent)]"
                   : "text-[var(--muted)]"
               }`}

@@ -15,6 +15,8 @@
     "validate:distractors": "node scripts/validate-distractor-quality.mjs",
     "validate:quiz-translations": "node scripts/validate-quiz-translations.mjs",
     "sync:dat102": "node scripts/sync-dat102-vault.mjs",
+    "sync:egb339": "node scripts/sync-egb339-vault.mjs",
+    "validate:egb339": "node scripts/validate-egb339-vault.mjs",
     "validate:dat102": "npm run validate:dat102:schema && npm run validate:dat102:source-refs && npm run validate:dat102:wikilinks && npm run validate:dat102:exam-status && npm run validate:dat102:no-book && npm run validate:dat102:assets && npm run validate:dat102:distractors",
     "validate:dat102:schema": "node scripts/validate-dat102-schema.mjs",
     "validate:dat102:source-refs": "node scripts/validate-dat102-source-refs.mjs",

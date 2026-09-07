@@ -1,6 +1,12 @@
 import type { PageContext } from "./page-context";
 import { describeContext } from "./page-context";
 import { getSummary } from "./chapter-summaries";
+import {
+  getEgb339Assessment,
+  getEgb339Concept,
+  getEgb339Resource,
+  getEgb339Week,
+} from "./egb339-vault/loader";
 
 const baseStyle = `
 KONTEKST-SENSITIVITET (viktig):
@@ -87,6 +93,26 @@ INTERNE LENKER (når studenten spør "hva bør jeg lese mer om", eller når en i
 ${baseStyle}
 `.trim();
 
+const egb339Prompt = `
+Du er en faglig sterk tutor i robotikk, lineær algebra, Python/NumPy og computer vision. Studenten går EGB339 Introduction to Robotics ved QUT.
+
+FAGSPESIFIKT:
+- Start alltid med koordinatrammene: hvilken ramme er en vektor uttrykt i, og hvilken retning går transformasjonen?
+- For SO(2), SO(3), SE(2) og SE(3): forklar matriseformen, dimensjonene og hvorfor ortogonalitet/determinant/nederste rad kontrolleres.
+- For forward kinematics: tegn eller beskriv den ordnede kjeden fra base til end-effektor før du multipliserer.
+- For inverse kinematics: skill mellom geometri, løsningsgrener, arbeidsrom og numerisk verifikasjon gjennom FK.
+- For Jacobianer: forklar at J(q) er en lokal linearisering og at den må evalueres i aktuell konfigurasjon.
+- Python/NumPy: skill eksplisitt mellom @ og *, kontroller shape og dtype, og bruk toleranse for flyttall.
+- Computer vision: skill bildekoordinater (u,v) fra NumPy-indeksering [v,u], og forklar datatype, histogram, maskering og lysvariasjon.
+- Finn aldri på private Gradescope-tester eller skjulte krav. Eksempeldata er testtilfeller, ikke verdier som skal hardkodes.
+- Når en konkret assessment diskuteres, hjelp med generell metode, kontrollpunkter og forståelse. Påminn om at leveringskoden må være studentens eget, forståtte arbeid.
+
+INTERNE LENKER:
+- Bruk bare sikre EGB339-huber når en detaljrute ikke finnes i konteksten: /egb339/uker, /egb339/temaer, /egb339/vurderinger, /egb339/ressurser og /egb339/oppsummering.
+
+${baseStyle}
+`.trim();
+
 const genericPrompt = `
 Du er en akademisk tutor for en HVL-student i 4. semester (fagområder: fysikk, systemutvikling, nettverksteknologi).
 
@@ -108,10 +134,19 @@ export function buildSystemPrompt(
   else if (context.subject === "dat109") base = dat109Prompt;
   else if (context.subject === "dat110") base = dat110Prompt;
   else if (context.subject === "dat102") base = dat102Prompt;
+  else if (context.subject === "egb339") base = egb339Prompt;
 
   const ctxLine = `\n\nSTUDENTEN ER NÅ PÅ: ${describeContext(context)}`;
 
-  const chapterSummary = getSummary(context.subject, context.chapterId);
+  let chapterSummary = getSummary(context.subject, context.chapterId);
+  if (context.subject === "egb339" && context.chapterSlug) {
+    const entry =
+      getEgb339Week(context.chapterSlug) ??
+      getEgb339Concept(context.chapterSlug) ??
+      getEgb339Assessment(context.chapterSlug) ??
+      getEgb339Resource(context.chapterSlug);
+    if (entry) chapterSummary = `${entry.title}\n${entry.summary}\nNøkkelord: ${entry.tags.join(", ")}`;
+  }
   const summaryBlock = chapterSummary
     ? `\n\nOVERSIKT OVER INNHOLDET PÅ DENNE SIDEN (nøkkelkonsepter studenten har tilgang til):\n${chapterSummary}`
     : "";
@@ -139,4 +174,12 @@ const pageTypeHints: Record<string, string> = {
     "Studenten øver på en tidligere eksamensoppgave. Du ser IKKE selve oppgaveteksten. Hvis studenten refererer til en konkret oppgave, be om at teksten limes inn. For generelle eksamensstrategier kan du svare direkte.",
   oppsummering:
     "Studenten ser et sammendrag av faget. Gi høynivå-oversikter og koble konsepter på tvers.",
+  uke:
+    "Studenten arbeider med en EGB339-ukemodul. Forklar læringskjeden, koble matematikken til Python og foreslå en liten kontrolltest.",
+  tema:
+    "Studenten leser en EGB339-temaside. Prioriter intuisjon, rammer, matematisk struktur og én konkret verifikasjon.",
+  vurdering:
+    "Studenten forbereder en EGB339-vurdering. Hjelp med generell metode og testing uten å dikte skjulte krav eller hardkode eksempeldata.",
+  praktisk:
+    "Studenten følger en praktisk EGB339-guide. Skill simulator, fysisk robot, koordinatmodell og miljøspesifikke konstanter tydelig.",
 };

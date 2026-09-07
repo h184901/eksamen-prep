@@ -107,6 +107,10 @@ export default async function HomePage() {
             <Link href="/ing164" className="hover:text-[var(--foreground)] transition-colors">
               ING164
             </Link>
+            <span aria-hidden>·</span>
+            <Link href="/egb339" className="hover:text-[var(--foreground)] transition-colors">
+              EGB339
+            </Link>
           </p>
         </div>
       </footer>

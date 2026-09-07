@@ -1,4 +1,4 @@
-export type Subject = "ing164" | "dat109" | "dat110" | "dat102" | "unknown";
+export type Subject = "ing164" | "dat109" | "dat110" | "dat102" | "egb339" | "unknown";
 
 export type PageType =
   | "teori"
@@ -8,6 +8,10 @@ export type PageType =
   | "eksamen"
   | "oversikt"
   | "oppsummering"
+  | "uke"
+  | "tema"
+  | "vurdering"
+  | "praktisk"
   | "unknown";
 
 export interface PageContext {
@@ -25,6 +29,7 @@ const subjectLabels: Record<Subject, string> = {
   dat109: "DAT109 Systemutvikling",
   dat110: "DAT110 Nettverksteknologi",
   dat102: "DAT102 Algoritmer og datastrukturer",
+  egb339: "EGB339 Introduction to Robotics",
   unknown: "Ukjent fag",
 };
 
@@ -36,6 +41,10 @@ const pageTypeLabels: Record<PageType, string> = {
   eksamen: "Eksamen",
   oversikt: "Oversikt",
   oppsummering: "Oppsummering",
+  uke: "Ukemodul",
+  tema: "Tema",
+  vurdering: "Vurdering",
+  praktisk: "Praktisk guide",
   unknown: "Side",
 };
 
@@ -47,6 +56,7 @@ export function parsePathname(pathname: string): PageContext {
   else if (parts[0] === "dat109") subject = "dat109";
   else if (parts[0] === "dat110") subject = "dat110";
   else if (parts[0] === "dat102") subject = "dat102";
+  else if (parts[0] === "egb339") subject = "egb339";
 
   let chapterSlug: string | null = null;
   let chapterId: string | null = null;
@@ -58,6 +68,15 @@ export function parsePathname(pathname: string): PageContext {
       break;
     }
   }
+  if (subject === "egb339" && parts.length >= 3) {
+    if (parts[1] === "uker" && /^uke-\d+$/i.test(parts[2])) {
+      chapterSlug = parts[2];
+      chapterId = parts[2].replace(/^uke-/i, "");
+    } else if (["temaer", "vurderinger", "ressurser"].includes(parts[1])) {
+      chapterSlug = parts[2];
+      chapterId = parts[2];
+    }
+  }
 
   let pageType: PageType = "unknown";
   if (parts.includes("teori")) pageType = "teori";
@@ -67,6 +86,10 @@ export function parsePathname(pathname: string): PageContext {
   else if (parts.includes("visualiseringer")) pageType = "visualiseringer";
   else if (parts.includes("eksamen")) pageType = "eksamen";
   else if (parts.includes("oppsummering")) pageType = "oppsummering";
+  else if (subject === "egb339" && parts[1] === "uker" && parts[2]) pageType = "uke";
+  else if (subject === "egb339" && parts[1] === "temaer" && parts[2]) pageType = "tema";
+  else if (subject === "egb339" && parts[1] === "vurderinger" && parts[2]) pageType = "vurdering";
+  else if (subject === "egb339" && parts[1] === "ressurser" && parts[2]) pageType = "praktisk";
   // DAT102 har eget rute-vokabular: temaer/begreper/pensum er teorisider.
   else if (
     subject === "dat102" &&
@@ -91,7 +114,9 @@ export function parsePathname(pathname: string): PageContext {
 export function describeContext(ctx: PageContext): string {
   const bits: string[] = [ctx.subjectLabel];
   if (ctx.chapterId) {
-    if (ctx.subject === "dat110" && ctx.chapterSlug) {
+    if (ctx.subject === "egb339" && ctx.chapterSlug) {
+      bits.push(ctx.chapterSlug.replace(/-/g, " "));
+    } else if (ctx.subject === "dat110" && ctx.chapterSlug) {
       bits.push(ctx.chapterSlug.toUpperCase().replace("-", " "));
     } else {
       bits.push(`Kapittel ${ctx.chapterId}`);

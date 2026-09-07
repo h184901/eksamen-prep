@@ -7,7 +7,7 @@ import { ProgressProvider } from "@/components/ProgressProvider";
 export const metadata: Metadata = {
   title: "Eksamensøving — Dataingeniør HVL",
   description:
-    "Eksamensøving for dataingeniør ved HVL Bergen, organisert etter studieløpet — DAT102, DAT107, DAT109, DAT110 og ING164.",
+    "Eksamensøving for dataingeniør ved HVL Bergen og QUT — DAT102, DAT107, DAT109, DAT110, ING164 og EGB339.",
   appleWebApp: {
     title: "Eksamensøving",
   },
