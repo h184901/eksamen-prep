@@ -17,14 +17,21 @@
 # misc
 .DS_Store
 *.pem
+*.key
+*.p12
+*.pfx
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
 # env files
-.env*.local
+.env
+.env.*
+!.env.example
+.env.local.example
 
 # typescript
 *.tsbuildinfo
@@ -42,5 +49,8 @@ next-env.d.ts
 
 # local Playwright/Codex inspection artifacts
 .playwright-mcp/
+playwright-report/
+test-results/
+blob-report/
 dat107-*.png
 dat109-*.png
