@@ -23,7 +23,15 @@ export default function Egb339ProgressSummary({ totalWeeks }: { totalWeeks: numb
           {ready ? `${percent} %` : "Laster"}
         </p>
       </div>
-      <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-robotics-100 dark:bg-robotics-950">
+      <div
+        className="mt-4 h-2.5 overflow-hidden rounded-full bg-robotics-100 dark:bg-robotics-950"
+        role="progressbar"
+        aria-label="Fullførte EGB339-uker"
+        aria-valuemin={0}
+        aria-valuemax={totalWeeks}
+        aria-valuenow={ready ? done : 0}
+        aria-valuetext={ready ? `${done} av ${totalWeeks} uker fullført` : "Laster fremgang"}
+      >
         <div
           className="h-full rounded-full bg-gradient-to-r from-robotics-500 to-cyan-400 transition-all duration-500"
           style={{ width: ready ? `${percent}%` : "0%" }}

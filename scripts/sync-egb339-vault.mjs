@@ -16,7 +16,7 @@ import {
 import { basename, join } from "node:path";
 
 const VAULT_ROOT =
-  process.env.EGB339_VAULT_PATH || "/Users/skjold/dev/units/EGB339";
+  process.env.EGB339_VAULT_PATH || "/home/skjold/ObsidianVault/EGB339";
 const OUT_DIR = join(process.cwd(), "src/data/egb339-vault");
 
 const SOURCE_DIR = join(VAULT_ROOT, "sources");
@@ -176,13 +176,15 @@ for (const note of allNotes) {
 
 const unresolvedLinks = new Set();
 
-function resolveWikilinks(markdown) {
+function resolveWikilinks(markdown, selfNames = new Set()) {
   return markdown.replace(/!?\[\[([^\]]+)\]\]/g, (full, inner) => {
     if (full.startsWith("!")) return "";
     const [rawTarget, rawAlias] = inner.replace(/\\\|/g, "|").split("|");
     const [target, section] = rawTarget.split("#");
     const label = (rawAlias || section || target).trim();
     const cleanTarget = target.trim();
+
+    if (selfNames.has(cleanTarget)) return label;
 
     if (cleanTarget.startsWith("raw/") || cleanTarget.includes("/assignment")) {
       return `*${label}*`;
@@ -198,6 +200,10 @@ function resolveWikilinks(markdown) {
   });
 }
 
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function stripPrivateSections(markdown) {
   return markdown.replace(
     /\n##\s+(?:Råkilder|Raw files|Working material|Immutable and user-owned material)\b[\s\S]*?(?=\n##\s+|$)/gi,
@@ -207,10 +213,21 @@ function stripPrivateSections(markdown) {
 
 function cleanBody(note) {
   let body = note.body;
+  const selfNames = new Set([note.noteName, note.title]);
   body = body.replace(/^\s*#\s+[^\n]+\n+/, "");
   body = body.replace(/^!\[\[[^\n]+\]\]\s*$/gm, "");
   body = stripPrivateSections(body);
-  body = resolveWikilinks(body);
+
+  // Kuraterte noter bruker en avsluttende wikilink som kildehenvisning på
+  // mange punkt. Når lenken peker til noten som allerede vises, blir den bare
+  // en repetitiv selvlenke på nettsiden. Behold andre krysskoblinger.
+  for (const name of selfNames) {
+    body = body.replace(
+      new RegExp(`\\s+[-—]\\s+\\[\\[${escapeRegex(name)}(?:\\|[^\\]]+)?\\]\\]\\s*$`, "gm"),
+      "",
+    );
+  }
+  body = resolveWikilinks(body, selfNames);
   const headingTranslations = new Map([
     ["Key takeaways", "Dette må du kunne"],
     ["Concepts introduced", "Sentrale begreper"],

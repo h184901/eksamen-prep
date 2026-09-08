@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FrameTransformExplorer from "@/components/egb339/FrameTransformExplorer";
+import Egb339NextStep from "@/components/egb339/Egb339NextStep";
 import Egb339ProgressSummary from "@/components/egb339/Egb339ProgressSummary";
 import {
   getEgb339Assessments,
@@ -13,8 +14,8 @@ export default function Egb339Page() {
   const weeks = getEgb339Weeks();
   const assessments = getEgb339Assessments();
   const meta = getEgb339Meta();
-  const latest = weeks.at(-1)!;
   const taskAssessments = assessments.filter((entry) => /Assessment\s+\d+\.\d+/i.test(entry.title));
+  const visionAssessments = taskAssessments.filter((entry) => /^Assessment\s+1\.[5-7]/i.test(entry.title));
 
   return (
     <div>
@@ -41,12 +42,9 @@ export default function Egb339Page() {
             Følg læringskjeden fra matriser og koordinatrammer til Dobot-bevegelse og robot vision. Innholdet oppdateres fra den lokale Obsidian-wikien når nye uker publiseres.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href={latest.route}
-              className="inline-flex items-center gap-2 rounded-lg bg-robotics-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-robotics-800 dark:bg-robotics-400 dark:text-robotics-950 dark:hover:bg-robotics-300"
-            >
-              Fortsett med uke {latest.week} <span aria-hidden>→</span>
-            </Link>
+            <Egb339NextStep
+              weeks={weeks.map(({ slug, route, week }) => ({ slug, route, week }))}
+            />
             <Link
               href="/egb339/temaer"
               className="inline-flex items-center gap-2 rounded-lg border border-robotics-300 bg-white px-4 py-2.5 text-sm font-semibold text-robotics-800 transition-colors hover:bg-robotics-50 dark:border-robotics-800 dark:bg-neutral-950 dark:text-robotics-200 dark:hover:bg-robotics-950/40"
@@ -86,6 +84,9 @@ export default function Egb339Page() {
       <section className="mb-12" aria-labelledby="tracks-heading">
         <p className="text-sm font-bold uppercase tracking-wide text-robotics-700 dark:text-robotics-300">Kunnskapskart</p>
         <h2 id="tracks-heading" className="mt-1 text-2xl font-bold text-neutral-950 dark:text-white">Fire spor som bygger på hverandre</h2>
+        <p className="mt-2 max-w-4xl text-sm leading-6 text-[var(--muted)]">
+          Anbefalt rekkefølge fra fagkartet: matriser og NumPy → rammer og pose → forward kinematics → inverse kinematics → Jacobian → bevegelsesplanlegging → bildedata → segmentering, farge, form og homografier.
+        </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {EGB339_TRACKS.map((track, index) => {
             const count = getEgb339ConceptsByTrack(track.id).length;
@@ -131,6 +132,20 @@ export default function Egb339Page() {
             Uke 8 introduserer bilder som NumPy-arrays, koordinatkonvensjoner, histogrammer og thresholding. Senere materiale legges inn i samme løype uten å endre navigasjonen.
           </p>
           <Link href="/egb339/uker/uke-8" className="mt-4 inline-flex text-sm font-semibold text-fuchsia-700 hover:underline dark:text-fuchsia-300">Åpne uke 8 →</Link>
+          <div className="mt-4 border-t border-fuchsia-200 pt-4 dark:border-fuchsia-800">
+            <p className="text-xs font-bold uppercase tracking-wide text-fuchsia-800 dark:text-fuchsia-200">Vision-oppgaver i Assessment 1</p>
+            <div className="mt-2 space-y-2">
+              {visionAssessments.map((entry) => (
+                <Link
+                  key={entry.slug}
+                  href={entry.route}
+                  className="block text-sm font-semibold text-fuchsia-800 hover:underline dark:text-fuchsia-200"
+                >
+                  Assessment {assessmentCode(entry)} →
+                </Link>
+              ))}
+            </div>
+          </div>
         </aside>
       </section>
 

@@ -21,6 +21,28 @@ export default function Egb339AssessmentsPage() {
         Sidene forklarer kontrakten, matematikken og teststrategien. Eksempeldata skal brukes til kontroll; implementasjonene må være generelle.
       </p>
 
+      <section className="mt-8" aria-labelledby="assessment-weights-heading">
+        <h2 id="assessment-weights-heading" className="text-xl font-bold text-neutral-950 dark:text-white">
+          Dette teller i sluttkarakteren
+        </h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          {[
+            ["20 %", "Assessment 1", "Korte programmeringsoppgaver: 10 % robotikk og 10 % computer vision."],
+            ["45 %", "Assessment 2", "Anvendt prosjekt i fire deler, fra simulering til fysisk robot og vision-guided pick-and-place."],
+            ["35 %", "Skriftlig eksamen", "Tester både robotikk- og computer-vision-delen av emnet."],
+          ].map(([weight, title, description]) => (
+            <div key={title} className="rounded-xl border border-amber-300/60 bg-amber-50/50 p-4 dark:border-amber-800 dark:bg-amber-950/20">
+              <p className="text-2xl font-bold text-amber-800 dark:text-amber-200">{weight}</p>
+              <h3 className="mt-1 font-bold text-neutral-950 dark:text-white">{title}</h3>
+              <p className="mt-1 text-sm leading-6 text-neutral-700 dark:text-neutral-200">{description}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 rounded-lg border-l-4 border-amber-500 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 dark:bg-amber-950/30 dark:text-amber-100">
+          <strong>Viva-regel:</strong> Generativ AI kan brukes kritisk og deklarert i forberedelsen, men ikke under de personlige muntlige delene i Assessment 2.1 og 2.3.
+        </p>
+      </section>
+
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {overview.map((entry) => (
           <Link key={entry.slug} href={entry.route} className="rounded-xl border border-amber-300/60 bg-amber-50/60 p-5 transition-colors hover:border-amber-500 dark:border-amber-800 dark:bg-amber-950/25">

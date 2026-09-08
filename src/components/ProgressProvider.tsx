@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { usePathname } from "next/navigation";
 
 interface ProgressContextValue {
   ready: boolean;
@@ -22,6 +23,7 @@ interface ProgressContextValue {
 const ProgressContext = createContext<ProgressContextValue | null>(null);
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [completed, setCompleted] = useState<Set<string>>(new Set());
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
@@ -56,8 +58,17 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Innloggingssiden er den eneste offentlige siden. Et progress-kall her
+    // kan aldri lykkes og ga tidligere en forventet, men støyende 401-feil i
+    // nettleserkonsollen før brukeren hadde rukket å logge inn.
+    if (pathname === "/login") {
+      setAuthed(false);
+      setCompleted(new Set());
+      setReady(true);
+      return;
+    }
     refresh();
-  }, [refresh]);
+  }, [pathname, refresh]);
 
   const toggle = useCallback(
     async (pageKey: string) => {

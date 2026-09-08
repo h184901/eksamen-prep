@@ -13,7 +13,11 @@ import {
   getEgb339Week,
   getEgb339Weeks,
 } from "@/lib/egb339-vault/loader";
-import { egb339DisplayTitle, egb339TrackLabel } from "@/lib/egb339";
+import {
+  egb339DisplaySummary,
+  egb339DisplayTitle,
+  egb339TrackLabel,
+} from "@/lib/egb339";
 
 export function generateStaticParams() {
   return getEgb339Weeks().map((week) => ({ slug: week.slug }));
@@ -52,7 +56,7 @@ export default async function Egb339WeekPage({ params }: { params: Promise<{ slu
           <span className="text-sm font-semibold text-[var(--muted)]">{egb339TrackLabel(week.track)}</span>
         </div>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">{egb339DisplayTitle(week)}</h1>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{week.summary}</p>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{egb339DisplaySummary(week)}</p>
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">

@@ -53,6 +53,9 @@ for (const entry of all) {
     if (!validRoutes.has(match[1])) {
       errors.push(`${entry.route}: broken internal link ${match[1]}`);
     }
+    if (match[1] === entry.route && !match[0].includes("#")) {
+      errors.push(`${entry.route}: redundant self-link`);
+    }
   }
 }
 

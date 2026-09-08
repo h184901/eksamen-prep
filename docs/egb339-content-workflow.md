@@ -5,7 +5,7 @@ reviewable snapshot so production never depends on a local vault path.
 
 ## Weekly update
 
-1. Ingest and curate the new material in `/Users/skjold/dev/units/EGB339`.
+1. Ingest and curate the new material in `/home/skjold/ObsidianVault/EGB339`.
 2. Keep public material in `sources/`, `concepts/`, `entities/` or `topics/`.
 3. Leave PDFs, archives, books and student-owned assignment code in `raw/`.
 4. From this repository, run `npm run sync:egb339`.
@@ -22,4 +22,5 @@ week therefore appears in the semester timeline without adding a route by hand.
 The shared week-page component also picks up any problems registered for that
 week, so new material does not require a new React route or a bespoke page.
 
-Set `EGB339_VAULT_PATH` only if the vault moves to another location.
+The sync script defaults to `/home/skjold/ObsidianVault/EGB339` on this Debian
+machine. Set `EGB339_VAULT_PATH` only if the vault moves to another location.

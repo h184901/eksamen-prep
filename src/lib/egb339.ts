@@ -51,8 +51,19 @@ const WEEK_TITLES: Record<string, string> = {
   "uke-8": "Bilder og bildebehandling",
 };
 
+const WEEK_SUMMARIES: Record<string, string> = {
+  "uke-7":
+    "Planlegg både hvor og når roboten beveger seg. Kartesisk interpolasjon gir en rett verktøybane og krever IK i hvert punkt; leddinterpolasjon er enklere, men gir vanligvis en krum bane. Kontroller hastighetsprofil og hindringsavstand langs hele bevegelsen.",
+  "uke-8":
+    "Behandle bilder som numeriske arrayer. Hold bildekoordinater (u, v) atskilt fra NumPy-indeksering [v, u], bruk histogrammer og terskling til segmentering, og kontroller datatype før bildearitmetikk.",
+};
+
 export function egb339DisplayTitle(entry: Egb339Entry): string {
   return WEEK_TITLES[entry.slug] ?? entry.title.replace(/^Week\s+\d+\s*[–-]\s*/i, "");
+}
+
+export function egb339DisplaySummary(entry: Egb339Entry): string {
+  return WEEK_SUMMARIES[entry.slug] ?? entry.summary;
 }
 
 export function egb339WeekNumber(entry: Egb339Entry): number | null {

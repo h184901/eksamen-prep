@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { getEgb339Weeks } from "@/lib/egb339-vault/loader";
-import { egb339DisplayTitle, egb339TrackLabel } from "@/lib/egb339";
+import {
+  egb339DisplaySummary,
+  egb339DisplayTitle,
+  egb339TrackLabel,
+} from "@/lib/egb339";
 import { getEgb339ProblemCount } from "@/lib/egb339-problems";
 
 export default function Egb339WeeksPage() {
@@ -27,7 +31,7 @@ export default function Egb339WeeksPage() {
                 </span>
               </div>
               <h2 className="mt-1 text-xl font-bold text-neutral-950 dark:text-white">{egb339DisplayTitle(week)}</h2>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-700 dark:text-neutral-200">{week.summary}</p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-700 dark:text-neutral-200">{egb339DisplaySummary(week)}</p>
             </div>
           </Link>
         ))}
