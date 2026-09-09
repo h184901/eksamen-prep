@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import ts from "typescript";
+import { loadEgb339DataModule as loadDataModule } from "./lib/egb339-content-loader.mjs";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
 import loadConfig from "tailwindcss/loadConfig.js";
@@ -14,17 +14,9 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
-// These two data modules have no runtime imports; compile their TypeScript
-// without needing a Next server or writing generated files into the worktree.
-async function loadDataModule(path) {
-  const { outputText } = ts.transpileModule(readFileSync(path, "utf8"), {
-    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 },
-  });
-  return import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
-}
-
 const { EGB339_TRACKS, egb339DisplaySummary } = await loadDataModule("src/lib/egb339.ts");
 const { getEgb339ProblemsForWeek } = await loadDataModule("src/lib/egb339-problems.ts");
+const { getEgb339AssessmentSolutions } = await loadDataModule("src/lib/egb339-assessment-solutions.ts");
 const config = loadConfig(resolve("tailwind.config.ts"));
 const css = await postcss([tailwindcss(config)]).process("@tailwind utilities;", { from: undefined });
 const selectors = new Set();
@@ -52,22 +44,51 @@ for (const entry of entries) {
 
 let problems = 0;
 let mathExpressions = 0;
+const anchors = new Map();
+const assessmentSolutions = getEgb339AssessmentSolutions();
+for (const [slug, solution] of Object.entries(assessmentSolutions)) {
+  anchors.set(`/egb339/vurderinger/${slug}`, new Set(["losningsforslag", "oppgavekrav", ...solution.parts.map((part) => `solution-${part.id}`)]));
+}
+for (let week = 1; week <= 8; week++) {
+  anchors.set(`/egb339/uker/uke-${week}`, new Set(["ukeinnhold", "oppgaver", "laboratorium", ...getEgb339ProblemsForWeek(week).map((problem) => problem.id)]));
+}
+function validateMarkdown(content, label) {
+  const html = renderToStaticMarkup(createElement(ReactMarkdown, {
+    remarkPlugins: [remarkGfm, remarkMath], rehypePlugins: [rehypeKatex], children: content,
+  }));
+  assert(!html.includes('class="katex-error"'), `${label}: invalid math rendering ${html.match(/<span class="katex-error"[^>]*>/)?.[0] ?? ""}`);
+  mathExpressions += (html.match(/class="katex"/g) ?? []).length;
+  for (const [, href] of content.matchAll(/\]\((\/egb339[^)]*)\)/g)) {
+    const [route, hash] = href.split("#");
+    assert(routes.has(route), `${label}: broken link ${href}`);
+    if (hash && anchors.has(route)) assert(anchors.get(route).has(hash), `${label}: broken anchor ${href}`);
+  }
+}
 for (const week of entries.filter((entry) => entry.route.startsWith("/egb339/uker/"))) {
   for (const problem of getEgb339ProblemsForWeek(Number(week.week))) {
     problems += 1;
     for (const topic of problem.topics) assert(routes.has(topic.href.split("#")[0]), `${problem.id}: broken topic link ${topic.href}`);
     for (const field of ["prompt", "solution", "answer"]) {
-      const content = problem[field];
-      const html = renderToStaticMarkup(createElement(ReactMarkdown, {
-        remarkPlugins: [remarkGfm, remarkMath], rehypePlugins: [rehypeKatex], children: content,
-      }));
-      assert(!html.includes('class="katex-error"'), `${problem.id}/${field}: invalid math rendering`);
-      mathExpressions += (html.match(/class="katex"/g) ?? []).length;
-      for (const [, href] of content.matchAll(/\]\((\/egb339[^)#]*)(?:#[^)]*)?\)/g)) {
-        assert(routes.has(href), `${problem.id}/${field}: broken link ${href}`);
-      }
+      validateMarkdown(problem[field], `${problem.id}/${field}`);
     }
+    assert(problem.solution.includes("### "), `${problem.id}: missing worked steps`);
   }
 }
 
-console.log(`EGB339 UI validation passed: ${EGB339_TRACKS.length} track themes, ${entries.length} summaries, ${problems} problems, ${mathExpressions} math expressions and problem links.`);
+let assessmentParts = 0;
+const assessments = entries.filter((entry) => entry.kind === "assessment");
+assert.equal(Object.keys(assessmentSolutions).length, assessments.length, "assessment coverage mismatch");
+for (const entry of assessments) {
+  const solution = assessmentSolutions[entry.slug];
+  assert(solution?.parts.length, `${entry.slug}: missing walkthrough`);
+  assert(solution.source && solution.scope, `${entry.slug}: missing source/verification scope`);
+  assert(solution.weeks.length && solution.weeks.every((week) => week >= 2 && week <= 8), `${entry.slug}: invalid curriculum weeks`);
+  assert.equal(new Set(solution.parts.map((part) => part.id)).size, solution.parts.length, `${entry.slug}: duplicate part anchor`);
+  for (const part of solution.parts) {
+    assessmentParts++;
+    assert(part.content.includes("### "), `${entry.slug}/${part.id}: missing worked steps`);
+    validateMarkdown(part.content, `${entry.slug}/${part.id}`);
+  }
+}
+
+console.log(`EGB339 UI validation passed: ${EGB339_TRACKS.length} track themes, ${entries.length} summaries, ${problems} problems, ${assessments.length} assessments (${assessmentParts} parts), ${mathExpressions} math expressions, routes and solution anchors.`);

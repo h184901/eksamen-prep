@@ -7,6 +7,7 @@ import Egb339WeekProblems from "@/components/egb339/Egb339WeekProblems";
 import FrameTransformExplorer from "@/components/egb339/FrameTransformExplorer";
 import PlanarArmExplorer from "@/components/egb339/PlanarArmExplorer";
 import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
+import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
 import {
   getAdjacentEgb339Entry,
   getEgb339Assessments,
@@ -32,6 +33,9 @@ export default async function Egb339WeekPage({ params }: { params: Promise<{ slu
   const weekNumber = Number(week.week);
   const problems = getEgb339ProblemsForWeek(weekNumber);
   const relatedAssessments = getEgb339Assessments().filter((entry) => {
+    // Assessment dates are not curriculum weeks: warmup is assigned in weeks
+    // 2–3, while the week-9 project uses weeks 3–8. Preserve entry.week itself.
+    if (entry.title.match(/Assessment\s+\d+\.\d+/i) && getEgb339AssessmentSolution(entry.slug)?.weeks.includes(weekNumber)) return true;
     const numbers = entry.week.match(/\d+/g)?.map(Number) ?? [];
     if (numbers.length === 1) return numbers[0] === weekNumber;
     if (numbers.length === 2 && entry.title.match(/Assessment\s+\d+\.\d+/i)) {
@@ -84,7 +88,7 @@ export default async function Egb339WeekPage({ params }: { params: Promise<{ slu
               <p className="text-sm font-bold text-amber-800 dark:text-amber-200">Relevant vurdering</p>
               <div className="mt-2 space-y-2">
                 {relatedAssessments.map((entry) => (
-                  <Link key={entry.slug} href={entry.route} className="block text-sm font-semibold text-amber-800 hover:underline dark:text-amber-200">{entry.title} →</Link>
+                  <Link key={entry.slug} href={`${entry.route}#losningsforslag`} className="block text-sm font-semibold text-amber-800 hover:underline dark:text-amber-200">{entry.title} <span className="font-normal">(vurderingsuke {entry.week})</span> →</Link>
                 ))}
               </div>
             </div>
