@@ -6,6 +6,7 @@ export const EGB339_TRACKS: Array<{
   description: string;
   accent: string;
   surface: string;
+  interactive: string;
 }> = [
   {
     id: "foundations",
@@ -13,6 +14,7 @@ export const EGB339_TRACKS: Array<{
     description: "Python, NumPy, lineær algebra og autograder-strategi.",
     accent: "text-sky-700 dark:text-sky-300",
     surface: "border-sky-300/60 bg-sky-50/60 dark:border-sky-800 dark:bg-sky-950/25",
+    interactive: "hover:border-sky-500 dark:hover:border-sky-400",
   },
   {
     id: "kinematics",
@@ -21,6 +23,7 @@ export const EGB339_TRACKS: Array<{
     accent: "text-robotics-700 dark:text-robotics-300",
     surface:
       "border-robotics-300/60 bg-robotics-50/70 dark:border-robotics-800 dark:bg-robotics-950/30",
+    interactive: "hover:border-robotics-500 dark:hover:border-robotics-400",
   },
   {
     id: "motion",
@@ -29,6 +32,7 @@ export const EGB339_TRACKS: Array<{
     accent: "text-amber-700 dark:text-amber-300",
     surface:
       "border-amber-300/60 bg-amber-50/60 dark:border-amber-800 dark:bg-amber-950/25",
+    interactive: "hover:border-amber-500 dark:hover:border-amber-400",
   },
   {
     id: "vision",
@@ -37,6 +41,7 @@ export const EGB339_TRACKS: Array<{
     accent: "text-fuchsia-700 dark:text-fuchsia-300",
     surface:
       "border-fuchsia-300/60 bg-fuchsia-50/60 dark:border-fuchsia-800 dark:bg-fuchsia-950/25",
+    interactive: "hover:border-fuchsia-500 dark:hover:border-fuchsia-400",
   },
 ];
 
@@ -63,7 +68,8 @@ export function egb339DisplayTitle(entry: Egb339Entry): string {
 }
 
 export function egb339DisplaySummary(entry: Egb339Entry): string {
-  return WEEK_SUMMARIES[entry.slug] ?? entry.summary;
+  return (WEEK_SUMMARIES[entry.slug] ?? entry.summary)
+    .replace(/^\s*(?:>\s*)?\[![a-z-]+\]\s*/i, "");
 }
 
 export function egb339WeekNumber(entry: Egb339Entry): number | null {

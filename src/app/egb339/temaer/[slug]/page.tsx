@@ -8,7 +8,7 @@ import {
   getEgb339Concept,
   getEgb339Concepts,
 } from "@/lib/egb339-vault/loader";
-import { egb339DisplayTitle, egb339TrackLabel } from "@/lib/egb339";
+import { EGB339_TRACKS, egb339DisplaySummary, egb339DisplayTitle } from "@/lib/egb339";
 
 export function generateStaticParams() {
   return getEgb339Concepts().map((entry) => ({ slug: entry.slug }));
@@ -20,6 +20,7 @@ export default async function Egb339TopicPage({ params }: { params: Promise<{ sl
   if (!entry) notFound();
   const sameTrack = getEgb339Concepts().filter((item) => item.track === entry.track);
   const adjacent = getAdjacentEgb339Entry(sameTrack, slug);
+  const track = EGB339_TRACKS.find((item) => item.id === entry.track);
 
   return (
     <div>
@@ -28,15 +29,16 @@ export default async function Egb339TopicPage({ params }: { params: Promise<{ sl
         <span>/</span>
         <Link href="/egb339/temaer" className="hover:text-robotics-700 dark:hover:text-robotics-300">Temaer</Link>
         <span>/</span>
+        {track && <><Link href={`/egb339/temaer#${track.id}`} className={`${track.accent} hover:underline`}>{track.label}</Link><span>/</span></>}
         <span className="text-neutral-900 dark:text-neutral-100">{egb339DisplayTitle(entry)}</span>
       </div>
-      <header className="mb-7 border-b border-[var(--card-border)] pb-6">
-        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-robotics-700 dark:text-robotics-300">
-          <span>{egb339TrackLabel(entry.track)}</span>
+      <header className={`mb-7 rounded-xl border p-5 sm:p-6 ${track?.surface ?? "border-[var(--card-border)] bg-[var(--card)]"}`}>
+        <div className={`flex flex-wrap items-center gap-2 text-sm font-semibold ${track?.accent ?? "text-robotics-700 dark:text-robotics-300"}`}>
+          <span>{track?.label ?? entry.track}</span>
           {entry.week && <><span>·</span><span>Uke {entry.week}</span></>}
         </div>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">{egb339DisplayTitle(entry)}</h1>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{entry.summary}</p>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{egb339DisplaySummary(entry)}</p>
       </header>
       <article className="max-w-3xl">
         <Egb339CompletionToggle pageKey={`egb339/tema/${entry.slug}`} />

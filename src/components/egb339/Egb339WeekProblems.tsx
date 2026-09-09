@@ -22,7 +22,7 @@ const verificationTone: Record<Egb339Problem["verification"], string> = {
 
 export default function Egb339WeekProblems({ week, problems }: Props) {
   return (
-    <section className="mt-12 border-t border-[var(--card-border)] pt-10" aria-labelledby="week-problems-heading">
+    <section id="oppgaver" className="mt-12 scroll-mt-24 border-t border-[var(--card-border)] pt-10" aria-labelledby="week-problems-heading">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-robotics-700 dark:text-robotics-300">Øv aktivt</p>
@@ -81,7 +81,8 @@ export default function Egb339WeekProblems({ week, problems }: Props) {
 
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-neutral-900 transition-colors hover:bg-robotics-50/60 marker:content-none dark:text-neutral-100 dark:hover:bg-robotics-950/25 sm:px-6">
-                  <span>Vis løsning og fasit</span>
+                  <span className="group-open:hidden">Vis løsning og fasit</span>
+                  <span className="hidden group-open:inline">Skjul løsning og fasit</span>
                   <span aria-hidden="true" className="text-xl leading-none text-robotics-600 transition-transform group-open:rotate-45 dark:text-robotics-300">+</span>
                 </summary>
                 <div className="border-t border-[var(--card-border)] bg-slate-50/60 px-5 py-6 dark:bg-slate-950/25 sm:px-6">

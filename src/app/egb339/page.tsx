@@ -30,7 +30,7 @@ export default function Egb339Page() {
       <section className="mb-10 grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.65fr)]">
         <div className="overflow-hidden rounded-2xl border border-robotics-300/60 bg-gradient-to-br from-robotics-50 via-white to-sky-50 p-6 dark:border-robotics-800 dark:from-robotics-950/70 dark:via-neutral-950 dark:to-sky-950/50 sm:p-8">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-robotics-600 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
+            <span className="rounded-full bg-robotics-700 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
               Aktivt emne
             </span>
             <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-200">QUT · Semester 2 · 12 cp</span>
@@ -91,11 +91,11 @@ export default function Egb339Page() {
           {EGB339_TRACKS.map((track, index) => {
             const count = getEgb339ConceptsByTrack(track.id).length;
             return (
-              <Link key={track.id} href={`/egb339/temaer#${track.id}`} className={`rounded-xl border p-4 transition-transform hover:-translate-y-0.5 ${track.surface}`}>
+              <Link key={track.id} href={`/egb339/temaer#${track.id}`} className={`flex flex-col rounded-xl border p-4 transition-all hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 motion-reduce:transform-none ${track.surface} ${track.interactive}`}>
                 <span className={`text-sm font-bold ${track.accent}`}>0{index + 1}</span>
                 <h3 className="mt-2 font-bold text-neutral-950 dark:text-white">{track.label}</h3>
                 <p className="mt-1 text-sm leading-6 text-neutral-700 dark:text-neutral-200">{track.description}</p>
-                <p className={`mt-3 text-sm font-semibold ${track.accent}`}>{count} sider →</p>
+                <p className={`mt-auto pt-3 text-sm font-semibold ${track.accent}`}>{count} sider →</p>
               </Link>
             );
           })}

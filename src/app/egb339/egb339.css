@@ -1,0 +1,29 @@
+.egb339 {
+  --muted: theme("colors.neutral.600");
+}
+
+.dark .egb339 {
+  --muted: theme("colors.neutral.400");
+  color-scheme: dark;
+}
+
+/* Keep keyboard navigation visible throughout the course, including solutions. */
+.egb339 :where(a, button, summary, input):focus-visible {
+  outline: 2px solid theme("colors.robotics.700");
+  outline-offset: 4px;
+}
+
+.dark .egb339 :where(a, button, summary, input):focus-visible {
+  outline-color: theme("colors.robotics.300");
+}
+
+.egb339 summary:focus-visible {
+  outline-offset: -4px;
+}
+
+/* Long display equations should scroll within the reading column. */
+.egb339-markdown .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+}

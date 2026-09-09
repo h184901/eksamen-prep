@@ -460,8 +460,10 @@ $$ {}^O p={}^O T_M({}^E T_M)^{-1}{}^E T_S{}^S p. $$
 Mellomresultatene blir $\;{}^E p=[0,0,3]^T$ og $\;{}^M p=[-2,\sqrt2/2,\sqrt2/2]^T$.
 `,
     answer: String.raw`
-$$ {}^O p=\begin{bmatrix}-\sqrt2/2\\3\\\sqrt2/2\end{bmatrix}
-\approx\begin{bmatrix}-0.707\\3\\0.707\end{bmatrix}. $$
+$$
+{}^O p=\begin{bmatrix}-\sqrt2/2\\3\\\sqrt2/2\end{bmatrix}
+\approx\begin{bmatrix}-0.707\\3\\0.707\end{bmatrix}.
+$$
 `,
   },
 ];
@@ -533,8 +535,10 @@ $$
 Endeposisjonen er de to øverste elementene i siste kolonne. For b) blir den samlede vinkelen i det siste leddet $\pi/4+\pi/3-\pi/4-\pi/6=\pi/6$.
 `,
     answer: String.raw`
-$$p(0,0,0)=\begin{bmatrix}8+5/\sqrt2+4\\5/\sqrt2\end{bmatrix}
-\approx\begin{bmatrix}15.536\\3.536\end{bmatrix}.$$
+$$
+p(0,0,0)=\begin{bmatrix}8+5/\sqrt2+4\\5/\sqrt2\end{bmatrix}
+\approx\begin{bmatrix}15.536\\3.536\end{bmatrix}.
+$$
 
 $$p(\pi/3,2,-\pi/6)\approx\begin{bmatrix}9.652\\8.761\end{bmatrix}.$$
 `,
@@ -646,13 +650,17 @@ Bruk en geometrisk metode til å utlede inverse kinematics for en plan 2R-arm me
     solution: String.raw`
 Fra cosinussetningen:
 
-$$c_2=\frac{x^2+y^2-L_1^2-L_2^2}{2L_1L_2},\qquad
-q_2=\operatorname{atan2}(\pm\sqrt{1-c_2^2},c_2).$$
+$$
+c_2=\frac{x^2+y^2-L_1^2-L_2^2}{2L_1L_2},\qquad
+q_2=\operatorname{atan2}(\pm\sqrt{1-c_2^2},c_2).
+$$
 
 For hver gren beregnes
 
-$$q_1=\operatorname{atan2}(y,x)-
-\operatorname{atan2}(L_2\sin q_2,L_1+L_2\cos q_2).$$
+$$
+q_1=\operatorname{atan2}(y,x)-
+\operatorname{atan2}(L_2\sin q_2,L_1+L_2\cos q_2).
+$$
 
 Fortegnet foran kvadratroten gir albue-opp og albue-ned. Et punkt har ingen reell løsning dersom $|c_2|>1$.
 `,
@@ -755,8 +763,10 @@ $$\frac{d}{dx}(3\sin(2x))=3\cos(2x)\cdot2=6\cos(2x),$$
 
 og
 
-$$\frac{d}{dx}\bigl(x^2(2\sin x+5x)\bigr)
-=2x(2\sin x+5x)+x^2(2\cos x+5).$$
+$$
+\frac{d}{dx}\bigl(x^2(2\sin x+5x)\bigr)
+=2x(2\sin x+5x)+x^2(2\cos x+5).
+$$
 
 Den publiserte fasiten ser ut til å mangle faktoren 2 inne i cosinus i oppgave 2. Resultatet her følger kjerneregelen.
 `,

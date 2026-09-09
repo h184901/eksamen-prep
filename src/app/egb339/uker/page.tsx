@@ -20,7 +20,7 @@ export default function Egb339WeeksPage() {
       <div className="relative mt-9 space-y-4 before:absolute before:bottom-5 before:left-[27px] before:top-5 before:w-px before:bg-robotics-200 dark:before:bg-robotics-900">
         {weeks.map((week) => (
           <Link key={week.slug} href={week.route} className="group relative grid grid-cols-[56px_1fr] gap-4">
-            <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[var(--background)] bg-robotics-600 text-sm font-bold text-white shadow-sm">
+            <div className="z-10 flex h-14 w-14 items-center justify-center rounded-full border-4 border-[var(--background)] bg-robotics-700 text-sm font-bold text-white shadow-sm">
               {week.week}
             </div>
             <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-5 transition-all group-hover:border-robotics-400 group-hover:shadow-md">

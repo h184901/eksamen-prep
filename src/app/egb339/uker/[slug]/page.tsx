@@ -57,10 +57,15 @@ export default async function Egb339WeekPage({ params }: { params: Promise<{ slu
         </div>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">{egb339DisplayTitle(week)}</h1>
         <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{egb339DisplaySummary(week)}</p>
+        <nav aria-label="På denne ukesiden" className="mt-5 flex flex-wrap gap-3 text-sm font-semibold text-robotics-700 dark:text-robotics-300">
+          <a href="#ukeinnhold" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Ukeinnhold</a>
+          <a href="#oppgaver" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Oppgaver og løsninger{problems.length > 0 ? ` (${problems.length})` : ""}</a>
+          {[2, 3, 4, 5].includes(weekNumber) && <a href="#laboratorium" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Interaktivt laboratorium</a>}
+        </nav>
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">
-        <article className="min-w-0">
+        <article id="ukeinnhold" className="min-w-0 scroll-mt-24">
           <Egb339CompletionToggle pageKey={`egb339/uke/${week.slug}`} />
           <Egb339Markdown content={week.body} />
         </article>
@@ -89,8 +94,8 @@ export default async function Egb339WeekPage({ params }: { params: Promise<{ slu
 
       <Egb339WeekProblems week={weekNumber} problems={problems} />
 
-      {(weekNumber === 2 || weekNumber === 3) && <div className="mt-10"><FrameTransformExplorer /></div>}
-      {(weekNumber === 4 || weekNumber === 5) && <div className="mt-10"><PlanarArmExplorer /></div>}
+      {(weekNumber === 2 || weekNumber === 3) && <div id="laboratorium" className="mt-10 scroll-mt-24"><FrameTransformExplorer /></div>}
+      {(weekNumber === 4 || weekNumber === 5) && <div id="laboratorium" className="mt-10 scroll-mt-24"><PlanarArmExplorer /></div>}
       <Egb339EntryNav previous={adjacent.previous} next={adjacent.next} />
     </div>
   );

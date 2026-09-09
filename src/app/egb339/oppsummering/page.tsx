@@ -175,7 +175,7 @@ export default function Egb339SummaryPage() {
       <div className="mt-12"><PlanarArmExplorer /></div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/egb339/temaer" className="rounded-lg bg-robotics-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-robotics-800 dark:bg-robotics-400 dark:text-robotics-950">Gå til alle temaer</Link>
+        <Link href="/egb339/temaer" className="rounded-lg bg-robotics-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-robotics-800 dark:bg-robotics-400 dark:text-robotics-950 dark:hover:bg-robotics-300">Gå til alle temaer</Link>
         <Link href="/egb339/vurderinger" className="rounded-lg border border-robotics-300 px-4 py-2.5 text-sm font-semibold text-robotics-800 hover:bg-robotics-50 dark:border-robotics-800 dark:text-robotics-200 dark:hover:bg-robotics-950/40">Se vurderingskrav</Link>
       </div>
     </div>

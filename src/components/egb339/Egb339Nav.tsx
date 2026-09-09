@@ -18,10 +18,15 @@ export default function Egb339Nav() {
   const activeLink = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    activeLink.current?.scrollIntoView({
+    const link = activeLink.current;
+    const nav = link?.parentElement;
+    if (!link || !nav || nav.scrollWidth <= nav.clientWidth) return;
+    // Only move the horizontal menu. scrollIntoView also moves the document
+    // and can override Next's navigation to a knowledge-map #anchor.
+    nav.scrollTo({
+      left: nav.scrollLeft + link.getBoundingClientRect().left - nav.getBoundingClientRect().left
+        - (nav.clientWidth - link.clientWidth) / 2,
       behavior: "auto",
-      block: "nearest",
-      inline: "center",
     });
   }, [pathname]);
 

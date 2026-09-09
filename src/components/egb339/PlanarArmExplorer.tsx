@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import InlineLatex from "@/components/InlineLatex";
+import { explorerViewport } from "./explorer-viewport";
 
 export default function PlanarArmExplorer() {
   const [q1, setQ1] = useState(35);
@@ -24,6 +25,7 @@ export default function PlanarArmExplorer() {
   const point = (p: { x: number; y: number }) => ({ x: base.x + p.x, y: base.y - p.y });
   const joint = point(pose.joint);
   const end = point(pose.end);
+  const viewport = explorerViewport(500, 310, [base, joint, end]);
 
   return (
     <section className="overflow-hidden rounded-2xl border border-amber-300/60 bg-[var(--card)] dark:border-amber-800">
@@ -36,13 +38,13 @@ export default function PlanarArmExplorer() {
       </div>
       <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,0.65fr)]">
         <div className="bg-slate-950 p-3 sm:p-5">
-          <svg viewBox="0 0 500 310" role="img" aria-label="Plan robotarm med to ledd" className="w-full">
+          <svg viewBox={viewport.viewBox} role="img" aria-label="Plan robotarm med to ledd" className="w-full">
             <defs>
               <pattern id="arm-grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M40 0H0V40" fill="none" stroke="#1e293b" strokeWidth="1" />
               </pattern>
             </defs>
-            <rect width="500" height="310" fill="url(#arm-grid)" />
+            <rect x={viewport.x} y={viewport.y} width={viewport.width} height={viewport.height} fill="url(#arm-grid)" />
             <line x1="30" y1={base.y} x2="470" y2={base.y} stroke="#475569" />
             <line x1={base.x} y1="285" x2={base.x} y2="28" stroke="#475569" />
             <circle cx={base.x} cy={base.y} r="13" fill="#0891b2" stroke="#67e8f9" strokeWidth="3" />
@@ -50,7 +52,7 @@ export default function PlanarArmExplorer() {
             <circle cx={joint.x} cy={joint.y} r="11" fill="#f59e0b" stroke="#fde68a" strokeWidth="3" />
             <line x1={joint.x} y1={joint.y} x2={end.x} y2={end.y} stroke="#fbbf24" strokeWidth="12" strokeLinecap="round" />
             <circle cx={end.x} cy={end.y} r="8" fill="#c084fc" stroke="#f5d0fe" strokeWidth="3" />
-            <text x={end.x + 12} y={end.y - 10} fill="#f5d0fe" fontSize="13" fontWeight="600">end-effektor</text>
+            <text x={end.x + (end.x > base.x ? -12 : 12)} y={end.y - 14} textAnchor={end.x > base.x ? "end" : "start"} fill="#f5d0fe" fontSize="13" fontWeight="600">end-effektor</text>
           </svg>
         </div>
         <div className="space-y-5 p-5">

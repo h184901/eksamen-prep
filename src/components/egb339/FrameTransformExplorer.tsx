@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import InlineLatex from "@/components/InlineLatex";
+import { explorerViewport } from "./explorer-viewport";
 
 function Slider({
   label,
@@ -64,6 +65,14 @@ export default function FrameTransformExplorer() {
   const scale = 42;
   const frameB = { x: origin.x + tx * scale, y: origin.y - ty * scale };
   const point = { x: origin.x + result.x * scale, y: origin.y - result.y * scale };
+  const viewport = explorerViewport(500, 330, [
+    frameB,
+    { x: frameB.x + 64, y: frameB.y + 19 },
+    { x: frameB.x + result.c * 68, y: frameB.y - result.s * 68 },
+    { x: frameB.x - result.s * 68, y: frameB.y - result.c * 68 },
+    { x: point.x + 18, y: point.y - 9 },
+    point,
+  ]);
 
   return (
     <section className="overflow-hidden rounded-2xl border border-robotics-300/60 bg-[var(--card)] dark:border-robotics-800">
@@ -81,7 +90,7 @@ export default function FrameTransformExplorer() {
 
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1.45fr)_minmax(260px,0.75fr)]">
         <div className="min-w-0 bg-slate-950 p-3 sm:p-5">
-          <svg viewBox="0 0 500 330" role="img" aria-label="To koordinatrammer og et transformert punkt" className="w-full">
+          <svg viewBox={viewport.viewBox} role="img" aria-label="To koordinatrammer og et transformert punkt" className="w-full">
             <defs>
               <pattern id="egb-grid" width="42" height="42" patternUnits="userSpaceOnUse">
                 <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#1e293b" strokeWidth="1" />
@@ -93,7 +102,7 @@ export default function FrameTransformExplorer() {
                 <path d="M0,0 L8,4 L0,8 z" fill="#f59e0b" />
               </marker>
             </defs>
-            <rect width="500" height="330" fill="url(#egb-grid)" />
+            <rect x={viewport.x} y={viewport.y} width={viewport.width} height={viewport.height} fill="url(#egb-grid)" />
 
             <line x1="28" y1={origin.y} x2="475" y2={origin.y} stroke="#475569" strokeWidth="1.5" />
             <line x1={origin.x} y1="305" x2={origin.x} y2="25" stroke="#475569" strokeWidth="1.5" />

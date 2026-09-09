@@ -10,7 +10,7 @@ export default function Egb339EntryNav({
   next: Egb339Entry | null;
 }) {
   return (
-    <nav className="mt-12 grid gap-3 border-t border-[var(--card-border)] pt-6 sm:grid-cols-2">
+    <nav aria-label="Forrige og neste side" className="mt-12 grid gap-3 border-t border-[var(--card-border)] pt-6 sm:grid-cols-2">
       {previous ? (
         <Link
           href={previous.route}

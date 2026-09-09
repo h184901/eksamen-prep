@@ -5,6 +5,8 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // EGB339 keeps its shared track classes in component metadata.
+    "./src/lib/egb339.ts",
   ],
   darkMode: "class",
   theme: {

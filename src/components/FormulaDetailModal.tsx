@@ -60,6 +60,7 @@ export default function FormulaDetailModal({
 }: FormulaDetailModalProps) {
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -68,15 +69,28 @@ export default function FormulaDetailModal({
   useEffect(() => {
     if (!open) return;
     const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const t = window.setTimeout(() => closeButtonRef.current?.focus(), 50);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusable = Array.from(dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )).filter((element) => element.getClientRects().length > 0);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      const outside = !dialogRef.current.contains(document.activeElement);
+      if (outside || (e.shiftKey ? document.activeElement === first : document.activeElement === last)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
       window.clearTimeout(t);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKey);
       previousFocus?.focus();
     };
@@ -95,8 +109,8 @@ export default function FormulaDetailModal({
       : "border-blue-400 dark:border-blue-600";
   const accentBg =
     variant === "gold"
-      ? "bg-amber-50 dark:bg-amber-950/40"
-      : "bg-blue-50 dark:bg-blue-950/40";
+      ? "bg-amber-50 dark:bg-neutral-950"
+      : "bg-blue-50 dark:bg-neutral-950";
 
   return createPortal(
     <AnimatePresence>
@@ -111,6 +125,7 @@ export default function FormulaDetailModal({
         >
           <motion.button
             type="button"
+            tabIndex={-1}
             aria-label="Lukk detaljer"
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
@@ -119,6 +134,7 @@ export default function FormulaDetailModal({
             exit={{ opacity: 0 }}
           />
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="formula-detail-title"
