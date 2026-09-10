@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Egb339Nav from "@/components/egb339/Egb339Nav";
+import Egb339PilotShell from "@/components/egb339/pilot/Egb339PilotShell";
 import "./egb339.css";
+import "./pilot.css";
 
 export const metadata: Metadata = {
   title: "EGB339 Introduction to Robotics",
@@ -11,8 +12,7 @@ export const metadata: Metadata = {
 export default function Egb339Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="egb339">
-      <Egb339Nav />
-      {children}
+      <Egb339PilotShell>{children}</Egb339PilotShell>
     </div>
   );
 }

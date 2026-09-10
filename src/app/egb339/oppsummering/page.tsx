@@ -1,6 +1,6 @@
 import Link from "next/link";
-import FormulaBox from "@/components/FormulaBox";
-import PlanarArmExplorer from "@/components/egb339/PlanarArmExplorer";
+import FormulaBox from "@/components/egb339/pilot/Egb339Formula";
+
 
 const numpyPatterns = [
   ["Matrisemultiplikasjon", "A @ B", "Komponerer transformasjoner eller anvender en matrise på en vektor."],
@@ -12,14 +12,13 @@ const numpyPatterns = [
 
 export default function Egb339SummaryPage() {
   return (
-    <div>
-      <p className="text-sm font-bold uppercase tracking-wide text-robotics-700 dark:text-robotics-300">Hurtigark</p>
+    <article className="egb-pilot-article egb-pilot-prose egb-study-reference">
       <h1 className="mt-1 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">Formler, NumPy og kontrollspørsmål</h1>
       <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
         Et kompakt kart over kjernen i uke 1–8. Bruk det til repetisjon, og åpne temasiden når du trenger begrunnelsen bak en formel.
       </p>
 
-      <section className="mt-9 grid gap-5 lg:grid-cols-2">
+      <section className="mt-9 egb-study-formula-list">
         <div className="min-w-0">
           <FormulaBox
             title="SO(2): rotasjon i planet"
@@ -59,7 +58,6 @@ export default function Egb339SummaryPage() {
       </section>
 
       <section className="mt-12" aria-labelledby="vision-summary-heading">
-        <p className="text-sm font-bold uppercase tracking-wide text-fuchsia-700 dark:text-fuchsia-300">Robot vision</p>
         <h2 id="vision-summary-heading" className="mt-1 text-2xl font-bold text-neutral-950 dark:text-white">
           Fra piksel til robotens arbeidsflate
         </h2>
@@ -67,7 +65,7 @@ export default function Egb339SummaryPage() {
           Følg samme kjede hver gang: forstå arrayet → lag en maske → mål objektet → transformer koordinatet. Kontroller koordinatrekkefølge og datatype i hvert trinn.
         </p>
 
-        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="mt-5 egb-study-formula-list">
           <div className="min-w-0">
             <FormulaBox
               title="Bildekoordinat mot NumPy-indeks"
@@ -114,7 +112,7 @@ export default function Egb339SummaryPage() {
               whenToUse="For å gå mellom bildepiksler og fysiske punkter på en plan arbeidsflate."
               commonMistakes={["Bruke H i feil retning", "Glemme homogen koordinat", "Glemme normalisering etter multiplikasjon"]}
             />
-            <div className="my-4 rounded-xl border border-fuchsia-300/60 bg-fuchsia-50/60 p-5 dark:border-fuchsia-800 dark:bg-fuchsia-950/25">
+            <div className="egb-study-check">
               <h3 className="font-bold text-neutral-950 dark:text-white">Fire kontrollspørsmål før du leverer vision-kode</h3>
               <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-neutral-700 dark:text-neutral-200">
                 <li>Er kanalrekkefølge, shape og dtype eksplisitt kontrollert?</li>
@@ -126,19 +124,19 @@ export default function Egb339SummaryPage() {
           </div>
         </div>
 
-        <nav aria-label="Fordypning i robot vision" className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
-          <Link href="/egb339/temaer/image-representation-and-processing" className="text-fuchsia-700 hover:underline dark:text-fuchsia-300">Bildeløypen →</Link>
-          <Link href="/egb339/temaer/shape-descriptors-from-area-and-perimeter" className="text-fuchsia-700 hover:underline dark:text-fuchsia-300">Formmål →</Link>
-          <Link href="/egb339/temaer/colour-normalization-and-chromaticity" className="text-fuchsia-700 hover:underline dark:text-fuchsia-300">Fargenormalisering →</Link>
-          <Link href="/egb339/temaer/planar-homographies" className="text-fuchsia-700 hover:underline dark:text-fuchsia-300">Homografier →</Link>
+        <nav aria-label="Fordypning i robot vision" className="egb-study-inline-links">
+          <Link href="/egb339/temaer/image-representation-and-processing">Bildeløypen</Link>
+          <Link href="/egb339/temaer/shape-descriptors-from-area-and-perimeter">Formmål</Link>
+          <Link href="/egb339/temaer/colour-normalization-and-chromaticity">Fargenormalisering</Link>
+          <Link href="/egb339/temaer/planar-homographies">Homografier</Link>
         </nav>
       </section>
 
       <section className="mt-12">
         <h2 className="text-2xl font-bold text-neutral-950 dark:text-white">NumPy: operatøren må matche matematikken</h2>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-[var(--card-border)]">
-          <table className="min-w-full text-sm">
-            <thead className="bg-robotics-50 dark:bg-robotics-950/40">
+        <div className="egb-study-table">
+          <table>
+            <thead>
               <tr>
                 <th className="px-4 py-3 text-left">Hensikt</th>
                 <th className="px-4 py-3 text-left">Python</th>
@@ -149,7 +147,7 @@ export default function Egb339SummaryPage() {
               {numpyPatterns.map(([purpose, code, reason]) => (
                 <tr key={purpose} className="border-t border-[var(--card-border)]">
                   <td className="px-4 py-3 font-semibold text-neutral-900 dark:text-neutral-100">{purpose}</td>
-                  <td className="px-4 py-3"><code className="rounded bg-neutral-100 px-2 py-1 font-mono text-robotics-900 dark:bg-neutral-900 dark:text-robotics-100">{code}</code></td>
+                  <td><code>{code}</code></td>
                   <td className="px-4 py-3 leading-6 text-neutral-700 dark:text-neutral-200">{reason}</td>
                 </tr>
               ))}
@@ -158,26 +156,26 @@ export default function Egb339SummaryPage() {
         </div>
       </section>
 
-      <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="egb-study-checklist">
         {[
           ["Rammer", "Hvilken ramme er punktet uttrykt i, og hvilken ramme skal svaret uttrykkes i?"],
           ["Form", "Har input og returverdi nøyaktig formen docstringen krever?"],
           ["Gyldighet", "Er målet innenfor arbeidsrommet, og er matrisen faktisk i SO/SE-gruppen?"],
           ["Verifikasjon", "Kan svaret sendes tilbake gjennom den motsatte beregningen og gjenskape input?"],
         ].map(([title, body]) => (
-          <div key={title} className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
+          <div key={title} className="egb-study-check">
             <h3 className="font-bold text-neutral-950 dark:text-white">{title}</h3>
             <p className="mt-2 text-sm leading-6 text-neutral-700 dark:text-neutral-200">{body}</p>
           </div>
         ))}
       </section>
 
-      <div className="mt-12"><PlanarArmExplorer /></div>
+      <p><Link href="/egb339/temaer/forward-kinematics#laboratorium">Åpne 2R-laboratoriet med ledd, rammer og matriser</Link></p>
 
-      <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/egb339/temaer" className="rounded-lg bg-robotics-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-robotics-800 dark:bg-robotics-400 dark:text-robotics-950 dark:hover:bg-robotics-300">Gå til alle temaer</Link>
-        <Link href="/egb339/vurderinger" className="rounded-lg border border-robotics-300 px-4 py-2.5 text-sm font-semibold text-robotics-800 hover:bg-robotics-50 dark:border-robotics-800 dark:text-robotics-200 dark:hover:bg-robotics-950/40">Se vurderingskrav</Link>
-      </div>
-    </div>
+      <nav aria-label="Videre fra hurtigarket" className="egb-study-inline-links">
+        <Link href="/egb339/temaer">Alle temaer</Link>
+        <Link href="/egb339/vurderinger">Vurderingskrav</Link>
+      </nav>
+    </article>
   );
 }

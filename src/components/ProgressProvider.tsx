@@ -13,11 +13,12 @@ import { usePathname } from "next/navigation";
 interface ProgressContextValue {
   ready: boolean;
   authed: boolean;
+  loadError: boolean;
   completed: Set<string>;
   isCompleted: (pageKey: string) => boolean;
   toggle: (pageKey: string) => Promise<void>;
   markCompleted: (pageKey: string) => Promise<void>;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<boolean>;
 }
 
 const ProgressContext = createContext<ProgressContextValue | null>(null);
@@ -27,22 +28,26 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [completed, setCompleted] = useState<Set<string>>(new Set());
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const pending = useRef<Set<string>>(new Set());
 
   const refresh = useCallback(async () => {
     try {
       const res = await fetch("/api/progress", { cache: "no-store" });
       if (res.status === 401) {
+        setLoadError(false);
         setAuthed(false);
         setCompleted(new Set());
         setReady(true);
-        return;
+        return false;
       }
       if (!res.ok) {
+        setLoadError(true);
         setReady(true);
-        return;
+        return false;
       }
       const data = await res.json();
+      if (!Array.isArray(data?.rows)) throw new Error("Invalid progress response");
       const next = new Set<string>();
       if (Array.isArray(data?.rows)) {
         for (const row of data.rows) {
@@ -50,10 +55,14 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         }
       }
       setAuthed(true);
+      setLoadError(false);
       setCompleted(next);
       setReady(true);
+      return true;
     } catch {
+      setLoadError(true);
       setReady(true);
+      return false;
     }
   }, []);
 
@@ -62,6 +71,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     // kan aldri lykkes og ga tidligere en forventet, men støyende 401-feil i
     // nettleserkonsollen før brukeren hadde rukket å logge inn.
     if (pathname === "/login") {
+      setLoadError(false);
       setAuthed(false);
       setCompleted(new Set());
       setReady(true);
@@ -147,6 +157,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       value={{
         ready,
         authed,
+        loadError,
         completed,
         isCompleted,
         toggle,

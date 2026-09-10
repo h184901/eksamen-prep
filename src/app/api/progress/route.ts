@@ -16,7 +16,10 @@ export async function GET(req: Request) {
     return NextResponse.json({ rows });
   } catch (err) {
     console.error("getUserProgress failed", err);
-    return NextResponse.json({ rows: [] }, { status: 200 });
+    return NextResponse.json(
+      { error: "Kunne ikke hente fremgang." },
+      { status: 503 },
+    );
   }
 }
 

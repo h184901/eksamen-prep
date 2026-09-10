@@ -4,9 +4,11 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import { egb339ReadableMath } from "@/lib/egb339-readable-math";
 
 interface Props {
   content: string;
+  headingOffset?: 0 | 1;
 }
 
 type Segment =
@@ -75,23 +77,23 @@ function splitCallouts(markdown: string): Segment[] {
   return segments;
 }
 
-function MarkdownBlock({ content }: { content: string }) {
+function MarkdownBlock({ content, headingOffset = 0 }: Props) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkMath]}
       rehypePlugins={[rehypeKatex]}
       components={{
         h1: ({ children }) => (
-          <h1 className="mt-8 mb-4 text-2xl font-bold text-neutral-950 dark:text-neutral-50">
+          <h2 className="mt-8 mb-4 text-2xl font-bold text-neutral-950 dark:text-neutral-50">
             {children}
-          </h1>
+          </h2>
         ),
-        h2: ({ children }) => (
+        h2: ({ children }) => headingOffset ? <h3>{children}</h3> : (
           <h2 className="mt-10 mb-3 text-xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50">
             {children}
           </h2>
         ),
-        h3: ({ children }) => (
+        h3: ({ children }) => headingOffset ? <h4>{children}</h4> : (
           <h3 className="mt-7 mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {children}
           </h3>
@@ -155,7 +157,7 @@ function MarkdownBlock({ content }: { content: string }) {
           </pre>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="my-5 rounded-r-lg border-l-4 border-robotics-400 bg-robotics-50/50 py-2 pl-4 pr-3 text-neutral-700 dark:bg-robotics-950/25 dark:text-neutral-200">
+          <blockquote className="egb-study-quotation">
             {children}
           </blockquote>
         ),
@@ -180,26 +182,25 @@ function MarkdownBlock({ content }: { content: string }) {
         ),
       }}
     >
-      {content}
+      {egb339ReadableMath(content)}
     </ReactMarkdown>
   );
 }
 
-export default function Egb339Markdown({ content }: Props) {
+export default function Egb339Markdown({ content, headingOffset = 0 }: Props) {
   return (
     <div className="egb339-markdown">
       {splitCallouts(content).map((segment, index) => {
         if (segment.type === "markdown") {
-          return <MarkdownBlock key={index} content={segment.content} />;
+          return <MarkdownBlock key={index} content={segment.content} headingOffset={headingOffset} />;
         }
-        const tone = calloutTone[segment.kind] ?? calloutTone.abstract;
+        const important = ["warning", "important"].includes(segment.kind);
+        const specificTitle = !["Kort fortalt", "Definisjon", "Definition", "Tips", "Merk", "TL;DR", "Course map", "Topic map", "Learning path"].includes(segment.title);
         return (
-          <aside key={index} className={`my-5 rounded-xl border-2 p-5 ${tone.wrap}`}>
-            <p className="mb-1 text-sm font-bold uppercase tracking-wide text-neutral-900 dark:text-neutral-100">
-              {segment.title}
-            </p>
-            <MarkdownBlock content={segment.content} />
-          </aside>
+          <div key={index} className={important ? "egb-study-source-warning" : "egb-study-note"}>
+            {(important || specificTitle) && <p><strong>{segment.title}</strong></p>}
+            <MarkdownBlock content={segment.content} headingOffset={headingOffset} />
+          </div>
         );
       })}
     </div>

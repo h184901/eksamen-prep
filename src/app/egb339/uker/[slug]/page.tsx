@@ -1,106 +1,44 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Egb339Markdown from "@/components/egb339/Egb339Markdown";
-import Egb339CompletionToggle from "@/components/egb339/Egb339CompletionToggle";
+import Egb339PilotProgress from "@/components/egb339/pilot/Egb339PilotProgress";
+import { PilotBreadcrumb } from "@/components/egb339/pilot/Egb339PilotShell";
 import Egb339EntryNav from "@/components/egb339/Egb339EntryNav";
 import Egb339WeekProblems from "@/components/egb339/Egb339WeekProblems";
-import FrameTransformExplorer from "@/components/egb339/FrameTransformExplorer";
+import SE2Explorer from "@/components/egb339/pilot/SE2Explorer";
 import PlanarArmExplorer from "@/components/egb339/PlanarArmExplorer";
 import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
-import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
-import {
-  getAdjacentEgb339Entry,
-  getEgb339Assessments,
-  getEgb339Week,
-  getEgb339Weeks,
-} from "@/lib/egb339-vault/loader";
-import {
-  egb339DisplaySummary,
-  egb339DisplayTitle,
-  egb339TrackLabel,
-} from "@/lib/egb339";
+import { getEgb339Course } from "@/lib/egb339-course-loader";
+import { getAdjacentEgb339Entry, getEgb339Week, getEgb339Weeks } from "@/lib/egb339-vault/loader";
+import { egb339DisplaySummary, egb339DisplayTitle } from "@/lib/egb339";
 
-export function generateStaticParams() {
-  return getEgb339Weeks().map((week) => ({ slug: week.slug }));
-}
-
+export function generateStaticParams() { return getEgb339Weeks().map((week) => ({ slug: week.slug })); }
 export default async function Egb339WeekPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const week = getEgb339Week(slug);
   if (!week) notFound();
-  const allWeeks = getEgb339Weeks();
-  const adjacent = getAdjacentEgb339Entry(allWeeks, slug);
-  const weekNumber = Number(week.week);
-  const problems = getEgb339ProblemsForWeek(weekNumber);
-  const relatedAssessments = getEgb339Assessments().filter((entry) => {
-    // Assessment dates are not curriculum weeks: warmup is assigned in weeks
-    // 2–3, while the week-9 project uses weeks 3–8. Preserve entry.week itself.
-    if (entry.title.match(/Assessment\s+\d+\.\d+/i) && getEgb339AssessmentSolution(entry.slug)?.weeks.includes(weekNumber)) return true;
-    const numbers = entry.week.match(/\d+/g)?.map(Number) ?? [];
-    if (numbers.length === 1) return numbers[0] === weekNumber;
-    if (numbers.length === 2 && entry.title.match(/Assessment\s+\d+\.\d+/i)) {
-      return weekNumber >= numbers[0] && weekNumber <= numbers[1];
-    }
-    return false;
-  });
-
-  return (
-    <div>
-      <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
-        <Link href="/egb339" className="hover:text-robotics-700 dark:hover:text-robotics-300">EGB339</Link>
-        <span>/</span>
-        <Link href="/egb339/uker" className="hover:text-robotics-700 dark:hover:text-robotics-300">Uker</Link>
-        <span>/</span>
-        <span className="text-neutral-900 dark:text-neutral-100">Uke {week.week}</span>
-      </div>
-
-      <header className="mb-7 border-b border-[var(--card-border)] pb-6">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-robotics-100 px-2.5 py-1 text-sm font-bold text-robotics-800 dark:bg-robotics-950 dark:text-robotics-200">Uke {week.week}</span>
-          <span className="text-sm font-semibold text-[var(--muted)]">{egb339TrackLabel(week.track)}</span>
-        </div>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">{egb339DisplayTitle(week)}</h1>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-200">{egb339DisplaySummary(week)}</p>
-        <nav aria-label="På denne ukesiden" className="mt-5 flex flex-wrap gap-3 text-sm font-semibold text-robotics-700 dark:text-robotics-300">
-          <a href="#ukeinnhold" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Ukeinnhold</a>
-          <a href="#oppgaver" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Oppgaver og løsninger{problems.length > 0 ? ` (${problems.length})` : ""}</a>
-          {[2, 3, 4, 5].includes(weekNumber) && <a href="#laboratorium" className="rounded-lg border border-robotics-300 px-3 py-2 hover:bg-robotics-50 dark:border-robotics-800 dark:hover:bg-robotics-950/40">Interaktivt laboratorium</a>}
-        </nav>
+  const number = Number(week.week);
+  const adjacent = getAdjacentEgb339Entry(getEgb339Weeks(), slug);
+  const courseWeek = getEgb339Course().find((row) => row.week === number);
+  const problems = getEgb339ProblemsForWeek(number);
+  return <>
+    <PilotBreadcrumb title={"Uke " + number} />
+    <article className="egb-pilot-article">
+      <header className="egb-pilot-lesson-header"><h1>Uke {number}: {egb339DisplayTitle(week)}</h1><p>{egb339DisplaySummary(week)}</p>
+        <nav aria-label="På denne ukesiden"><a href="#leksjoner">Leksjoner</a><a href="#ukeinnhold">Ukeinnhold og kilder</a><a href="#oppgaver">Oppgaver og løsninger ({problems.length})</a>{[2, 3, 4, 5].includes(number) && <a href="#laboratorium">Laboratorium</a>}<a href="#vurderinger">Assessments</a></nav>
       </header>
-
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">
-        <article id="ukeinnhold" className="min-w-0 scroll-mt-24">
-          <Egb339CompletionToggle pageKey={`egb339/uke/${week.slug}`} />
-          <Egb339Markdown content={week.body} />
-        </article>
-        <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-4">
-            <p className="text-sm font-bold text-neutral-950 dark:text-white">Arbeidsmåte</p>
-            <ol className="mt-3 space-y-2 text-sm leading-6 text-neutral-700 dark:text-neutral-200">
-              <li>1. Forklar hovedideen med egne ord.</li>
-              <li>2. Tegn rammer eller datastrøm.</li>
-              <li>3. Skriv matematikken før koden.</li>
-              <li>4. Test et nytt input, ikke bare eksemplet.</li>
-            </ol>
-          </div>
-          {relatedAssessments.length > 0 && (
-            <div className="rounded-xl border border-amber-300/60 bg-amber-50/60 p-4 dark:border-amber-800 dark:bg-amber-950/25">
-              <p className="text-sm font-bold text-amber-800 dark:text-amber-200">Relevant vurdering</p>
-              <div className="mt-2 space-y-2">
-                {relatedAssessments.map((entry) => (
-                  <Link key={entry.slug} href={`${entry.route}#losningsforslag`} className="block text-sm font-semibold text-amber-800 hover:underline dark:text-amber-200">{entry.title} <span className="font-normal">(vurderingsuke {entry.week})</span> →</Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </aside>
-      </div>
-
-      <Egb339WeekProblems week={weekNumber} problems={problems} />
-
-      {(weekNumber === 2 || weekNumber === 3) && <div id="laboratorium" className="mt-10 scroll-mt-24"><FrameTransformExplorer /></div>}
-      {(weekNumber === 4 || weekNumber === 5) && <div id="laboratorium" className="mt-10 scroll-mt-24"><PlanarArmExplorer /></div>}
-      <Egb339EntryNav previous={adjacent.previous} next={adjacent.next} />
-    </div>
-  );
+      <section className="egb-pilot-prose" id="leksjoner"><h2>Les i denne rekkefølgen</h2>
+        <ol className="egb-study-numbered">{courseWeek?.topics.map((topic) => <li key={topic.href}><Link href={topic.href}>{topic.title}</Link></li>)}</ol>
+      </section>
+      <section id="ukeinnhold" className="egb-pilot-prose"><Egb339Markdown content={week.body} /></section>
+      <div className="egb-pilot-prose"><Egb339WeekProblems week={number} problems={problems} /></div>
+      {[2, 3].includes(number) && <section id="laboratorium"><h2>Koordinatrammer i planet</h2><p>2D-grunnlaget for homogene transformasjoner. Se <Link href="/egb339/temaer/se-2-homogeneous-transformations#regneeksempel">hele SE(2)-regneeksemplet</Link>. Uke 3 utvider teorien til tre dimensjoner.</p><SE2Explorer /></section>}
+      {[4, 5].includes(number) && <section id="laboratorium"><PlanarArmExplorer initialMode={number === 5 ? "ik" : "fk"} /><p><Link href={number === 5 ? "/egb339/temaer/inverse-kinematics#regneeksempel" : "/egb339/temaer/forward-kinematics#regneeksempel"}>Åpne hele regneeksemplet med mellomregninger</Link></p></section>}
+      <section id="vurderinger" className="egb-pilot-prose"><h2>Assessments som bruker ukens stoff</h2>
+        <ul className="egb-study-link-list">{courseWeek?.assessments.map((entry) => <li key={entry.href}><Link href={entry.href + "#losningsforslag"}>{entry.title}</Link></li>)}</ul>
+        <p className="egb-pilot-small">Dette er pensumkoblinger. Se assessment-siden for innleveringsuke og krav.</p>
+      </section>
+      <div className="egb-pilot-prose"><Egb339PilotProgress pageKey={"egb339/uke/" + slug} /><Egb339EntryNav previous={adjacent.previous} next={adjacent.next} /></div>
+    </article>
+  </>;
 }

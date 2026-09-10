@@ -4,7 +4,7 @@ import React from "react";
 import { useTutor } from "./TutorContext";
 
 export default function TutorButton() {
-  const { isOpen, isMinimized, open, messages, isStreaming } = useTutor();
+  const { isOpen, isMinimized, open, messages, isStreaming, context } = useTutor();
 
   const visible = !isOpen || isMinimized;
   if (!visible) return null;
@@ -14,7 +14,8 @@ export default function TutorButton() {
   return (
     <button
       onClick={open}
-      aria-label="Åpne AI-tutor"
+      aria-label={context.subject === "egb339" ? "Spør tutoren, åpne AI-tutor" : "Åpne AI-tutor"}
+      data-tutor-trigger
       className="fixed bottom-5 right-5 z-[80] group print:hidden"
     >
       <span className="absolute inset-0 rounded-full bg-[var(--accent)] opacity-60 group-hover:opacity-80 animate-ping-slow" />

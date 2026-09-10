@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { isEgb339PilotRoute } from "@/lib/egb339-course";
 
 const items = [
   { href: "/egb339", label: "Oversikt" },
@@ -29,6 +30,8 @@ export default function Egb339Nav() {
       behavior: "auto",
     });
   }, [pathname]);
+
+  if (isEgb339PilotRoute(pathname)) return null;
 
   return (
     <nav
