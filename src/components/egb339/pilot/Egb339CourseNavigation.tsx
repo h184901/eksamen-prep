@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { useProgress } from "@/components/ProgressProvider";
 import { EGB339_PILOT, type Egb339CourseWeek } from "@/lib/egb339-course";
 import { PilotStatus } from "./Egb339PilotProgress";
+import WeekOneCourseNavigation from "../week-one/WeekOneNavigation";
+import { WEEK_ONE_ROUTE } from "@/lib/egb339-week-one";
 
 export default function Egb339CourseNavigation({ weeks }: { weeks: Egb339CourseWeek[] }) {
   const pathname = usePathname();
@@ -32,6 +34,8 @@ export default function Egb339CourseNavigation({ weeks }: { weeks: Egb339CourseW
     return () => { mounted = false; resize.disconnect(); };
   }, [pathname, ready, authed, loadError]);
   const assessmentWeek = weeks.find((week) => week.assessments.some((entry) => entry.href === pathname))?.week;
+  // Pilot only. Every other route keeps its existing navigation and progress mapping.
+  if (pathname === WEEK_ONE_ROUTE) return <WeekOneCourseNavigation weeks={weeks} />;
   return <aside className="egb-pilot-sidebar">
     <nav aria-label="EGB339 kurs og progresjon">
       <Link href={EGB339_PILOT.course} className="egb-pilot-course-title" aria-current={pathname === EGB339_PILOT.course ? "page" : undefined}>EGB339</Link>

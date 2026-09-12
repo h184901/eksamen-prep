@@ -1,0 +1,10 @@
+{
+  "asset": "panda-swift.png",
+  "kind": "existing robotics model rendering, not generated photography",
+  "source": "https://github.com/petercorke/robotics-toolbox-python/blob/main/docs/figs/swift.png",
+  "localSource": "robotics-toolbox-python/docs/figs/swift.png",
+  "license": "MIT; see robotics-toolbox-LICENSE.txt",
+  "credit": "Robotics Toolbox for Python / Swift; repository copyright (c) 2020 jhavl",
+  "changes": "Original pixels unchanged. Source provenance embedded in PNG metadata; responsive image delivery.",
+  "pedagogicalUse": "Identify the fixed base, articulated links and gripper of a Panda model. Explicitly not the course Dobot."
+}

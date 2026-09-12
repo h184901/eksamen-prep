@@ -11,12 +11,14 @@ import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
 import { getEgb339Course } from "@/lib/egb339-course-loader";
 import { getAdjacentEgb339Entry, getEgb339Week, getEgb339Weeks } from "@/lib/egb339-vault/loader";
 import { egb339DisplaySummary, egb339DisplayTitle } from "@/lib/egb339";
+import WeekOnePage from "@/components/egb339/week-one/WeekOnePage";
 
 export function generateStaticParams() { return getEgb339Weeks().map((week) => ({ slug: week.slug })); }
 export default async function Egb339WeekPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const week = getEgb339Week(slug);
   if (!week) notFound();
+  if (slug === "uke-1") return <WeekOnePage />;
   const number = Number(week.week);
   const adjacent = getAdjacentEgb339Entry(getEgb339Weeks(), slug);
   const courseWeek = getEgb339Course().find((row) => row.week === number);

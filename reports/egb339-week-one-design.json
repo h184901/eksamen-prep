@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-12T07:19:43Z",
+  "title": "Design System: EGB339 Week 1 pilot",
+  "extensions": {
+    "typographyMeta": {
+      "headline": { "displayName": "Week heading", "purpose": "Inherited EGB339 article family; Week 1 title only." },
+      "body": { "displayName": "Article body", "purpose": "Chronological teaching prose, limited to 740px where the prose wrapper is present." },
+      "matrix": { "displayName": "Matrix element", "purpose": "Tabular numerals in the row-by-column explorer." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "document-scroll", "value": "scroll-behavior: smooth", "purpose": "Native Week 1 fragment navigation." },
+      { "name": "reduced-document-scroll", "value": "scroll-behavior: auto", "purpose": "Used under prefers-reduced-motion: reduce." },
+      { "name": "theme-and-control-change", "value": "transition: none", "purpose": "Paper/ink and local links, buttons, and navigation change immediately." },
+      { "name": "fragment-restore-and-solution-reveal", "value": "scrollIntoView({ block: 'start', behavior: 'instant' })", "purpose": "Restore the URL fragment after the route mounts; reveal a direct-linked answer after opening its hidden region." }
+    ],
+    "breakpoints": [
+      { "name": "week-compact-desktop", "value": "1300px", "purpose": "max-width: sidebar 244px, course gap 32px, opening/explorer gaps 24px." },
+      { "name": "inherited-main-padding", "value": "1279px", "purpose": "max-width: main horizontal padding 24px." },
+      { "name": "stack-explorers", "value": "1050px", "purpose": "max-width: opening and explorer stack; local jump navigation is static." },
+      { "name": "sidebar-tutor", "value": "768px", "purpose": "min-width: existing tutor action uses a reserved sidebar slot." },
+      { "name": "stack-course", "value": "767px", "purpose": "max-width: one course column, static sidebar capped at 280px, paired explanations stack, 44px section spacing." }
+    ],
+    "focus": [
+      { "name": "interactive-focus", "value": "outline: 2px solid var(--egb-accent); outline-offset: 4px", "purpose": "Pilot links, buttons, summaries, and inputs; the Week 1 accent aliases week-info." },
+      { "name": "scrollable-syllabus-focus", "value": "outline-offset: 0", "purpose": "Keep the focus outline within the independently scrolling week list." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Week button",
+      "kind": "button",
+      "refersTo": "week-button",
+      "description": "Explorer action, selected mode, or answer disclosure; light-theme source styling.",
+      "html": "<button type=\"button\" class=\"ds-week-button\" aria-pressed=\"true\">Ramme A</button>",
+      "css": ".ds-week-button { display:inline-flex; align-items:center; justify-content:center; font:550 14px/1.4 system-ui,-apple-system,sans-serif; min-height:38px; padding:8px 12px; border:1px solid #cbd3ce; border-radius:4px; background:#f7f8f7; color:#265b8c; white-space:nowrap; cursor:pointer; transition:none; } .ds-week-button:hover { background:#e9eeeb; border-color:#265b8c; } .ds-week-button[aria-pressed=true] { background:#e7eef5; border-color:#265b8c; } .ds-week-button:active:not(:disabled) { background:#e9eeeb; } .ds-week-button:focus-visible { outline:2px solid #265b8c; outline-offset:4px; } .ds-week-button:disabled { cursor:not-allowed; opacity:.65; }"
+    },
+    {
+      "name": "Completion button",
+      "kind": "button",
+      "description": "Existing completion action retained with its original progress keys; light-theme source styling.",
+      "html": "<button type=\"button\" class=\"ds-completion-button\">Marker fullført</button>",
+      "css": ".ds-completion-button { font:17px/1.7 system-ui,-apple-system,sans-serif; border:1px solid #265b8c; color:#265b8c; background:transparent; border-radius:4px; padding:8px 16px; cursor:pointer; transition:none; } .ds-completion-button:hover,.ds-completion-button:active:not(:disabled) { background:#e9eeeb; } .ds-completion-button:focus-visible { outline:2px solid #265b8c; outline-offset:4px; } .ds-completion-button:disabled { cursor:not-allowed; opacity:.65; }"
+    },
+    {
+      "name": "Frame range input",
+      "kind": "input",
+      "description": "Native B-pose control with its label and numeric output; light-theme source styling.",
+      "html": "<label class=\"ds-frame-control\" for=\"ds-frame-angle\"><span>Vinkel θ <output>0.00°</output></span><input id=\"ds-frame-angle\" type=\"range\" min=\"-180\" max=\"180\" step=\"1\" value=\"0\" aria-label=\"Vinkel θ\"></label>",
+      "css": ".ds-frame-control { display:block; margin-bottom:12px; color:#202824; font:14px/1.7 system-ui,-apple-system,sans-serif; } .ds-frame-control>span { display:flex; justify-content:space-between; gap:12px; } .ds-frame-control output { font-variant-numeric:tabular-nums; } .ds-frame-control input { display:block; width:100%; height:28px; accent-color:#704494; cursor:pointer; } .ds-frame-control input:focus-visible { outline:2px solid #265b8c; outline-offset:4px; } .ds-frame-control input:disabled { cursor:not-allowed; }"
+    },
+    {
+      "name": "Current sidebar location",
+      "kind": "nav",
+      "refersTo": "sidebar-location",
+      "description": "Reading position in the expanded syllabus, distinct from completion; light-theme source styling.",
+      "html": "<nav class=\"ds-week-location\" aria-label=\"Uke 1\"><a href=\"#coordinate-frames\" aria-current=\"location\">Coordinate frames</a><a href=\"#foundations\">Vectors and matrices</a></nav>",
+      "css": ".ds-week-location { display:grid; font:13px/1.45 system-ui,-apple-system,sans-serif; } .ds-week-location a { display:flex; gap:7px; align-items:baseline; padding:6px 8px 6px 14px; border-radius:2px; color:#56625b; text-decoration:none; transition:none; } .ds-week-location a[aria-current=location] { color:#265b8c; background:#e7eef5; font-weight:600; } .ds-week-location a:hover { color:#202824; background:#e9eeeb; } .ds-week-location a:focus-visible { outline:2px solid #265b8c; outline-offset:4px; }"
+    },
+    {
+      "name": "Matrix result cells",
+      "kind": "custom",
+      "refersTo": "matrix-result",
+      "description": "Selectable product elements inside square matrix brackets; light-theme source styling.",
+      "html": "<div class=\"ds-number-matrix\" role=\"group\" aria-label=\"Resultatelementer\"><div><button type=\"button\" aria-pressed=\"true\" aria-label=\"Rad 1, kolonne 1: 19\">19</button><button type=\"button\" aria-pressed=\"false\" aria-label=\"Rad 1, kolonne 2: 22\">22</button></div><div><button type=\"button\" aria-pressed=\"false\" aria-label=\"Rad 2, kolonne 1: 43\">43</button><button type=\"button\" aria-pressed=\"false\" aria-label=\"Rad 2, kolonne 2: 50\">50</button></div></div>",
+      "css": ".ds-number-matrix { display:inline-block; position:relative; padding:6px 10px; border-inline:2px solid #202824; border-radius:0; font-variant-numeric:tabular-nums; } .ds-number-matrix::before,.ds-number-matrix::after { content:''; position:absolute; inset:0; pointer-events:none; border-block:2px solid #202824; width:7px; } .ds-number-matrix::before { right:auto; } .ds-number-matrix::after { left:auto; } .ds-number-matrix>div { display:grid; grid-template-columns:48px 48px; gap:4px; } .ds-number-matrix button { display:block; padding:6px; text-align:center; font:21px/1.4 system-ui,-apple-system,sans-serif; min-height:42px; border:1px solid #cbd3ce; border-radius:2px; color:#265b8c; background:transparent; cursor:pointer; transition:none; } .ds-number-matrix button:hover,.ds-number-matrix button[aria-pressed=true] { background:#e7eef5; border-color:#265b8c; } .ds-number-matrix button:focus-visible { outline:2px solid #265b8c; outline-offset:4px; }"
+    },
+    {
+      "name": "Labeled check feedback",
+      "kind": "custom",
+      "refersTo": "feedback-success",
+      "description": "Conditional-check result with explicit wording, also represented in error state; light-theme source styling.",
+      "html": "<p class=\"ds-week-feedback\" data-state=\"success\" role=\"status\">Riktig: False. Den strenge ulikheten utelater grenseverdien 10.</p>",
+      "css": ".ds-week-feedback { padding:14px 18px; margin-block:24px; font:15px/1.7 system-ui,-apple-system,sans-serif; border-radius:2px; } .ds-week-feedback[data-state=success] { background:#e5f0e8; color:#1e6a44; } .ds-week-feedback[data-state=error] { background:#f9eaea; color:#b13737; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Codecademy course navigation + visual engineering textbook + interactive robotics notebook",
+    "overview": "Study clarity drives the implementation: an expanded syllabus, chronological article, labeled diagrams, worked examples, and controls next to their mathematical consequences. The pilot inherits EGB339's reading type and restrained control shapes. Color identifies frames or explicit status; spacing and rules organize the lesson.",
+    "keyCharacteristics": [
+      "Persistent course navigation and native document scrolling.",
+      "Readable prose interleaved with wider engineering figures.",
+      "Labeled A/B identities, semantic feedback, and existing completion keys.",
+      "Flat surfaces, small control corners, and immediate state changes."
+    ],
+    "rules": [],
+    "dos": [
+      "Do keep this design confined to the Week 1 pilot and preserve existing content, routes, completion keys, and source qualifications.",
+      "Do keep A/B labels and line styles alongside their stable colors; use explicit words for success, error, and warning.",
+      "Do put explanations, controls, results, and worked calculations next to the figure they describe.",
+      "Do preserve underlined reading links, visible keyboard focus, native document navigation, and reduced-motion scrolling."
+    ],
+    "donts": [
+      "Don't roll this pilot into weeks 2–8 or create root-level product, design, or workflow artifacts without an expanded task.",
+      "Don't add decorative dashboard cards, glows, gradients, icons, or entrance animations to the lesson.",
+      "Don't turn reading position into completion, or hide a missing source behind an apparently exact answer.",
+      "Don't ship unlicensed course photographs or present the Panda model as the course's Dobot."
+    ]
+  }
+}
