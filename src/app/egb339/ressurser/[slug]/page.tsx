@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import Egb339Markdown from "@/components/egb339/Egb339Markdown";
 import Egb339PilotProgress from "@/components/egb339/pilot/Egb339PilotProgress";
 import { PilotBreadcrumb } from "@/components/egb339/pilot/Egb339PilotShell";
@@ -14,6 +15,7 @@ export default async function Egb339ResourcePage({ params }: { params: Promise<{
     <article className="egb-pilot-article egb-pilot-prose">
       <header className="egb-pilot-lesson-header"><h1>{entry.title}</h1><p>{entry.summary}</p><p className="egb-pilot-small">Praktisk guide · uke {entry.week}</p></header>
       <Egb339Markdown content={entry.body} />
+      {slug === "robot-word-typing-practical" && <p><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration">Åpne Assessment 2.1-guiden: SPACE, robotvisning, linje for linje og muntlig øving</Link></p>}
       <Egb339PilotProgress pageKey={"egb339/ressurs/" + entry.slug} />
       <Egb339EntryNav previous={adjacent.previous} next={adjacent.next} />
     </article>

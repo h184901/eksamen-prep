@@ -1,0 +1,54 @@
+{
+  "sourceHash": "a88c4efe7a4f0b124825929c7f821002487132b2010a31785196cb6582e43064",
+  "source": "User-supplied Assessment 2.1 HTML/JS and recorded test-robot trace; no simulator connection.",
+  "files": [
+    {
+      "file": "oral-presentation-guide.docx",
+      "source": "queries/EGB339 Assessment 2.1 Oral Presentation Guide.docx",
+      "sha256": "792a50e005a94d45a4bed6ccd1513f86970fe846006e659f1e1ffce02767e98f",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "keyboard_marked.jpeg",
+      "source": "assignment_2_1_robotics/keyboard_marked.jpeg",
+      "sha256": "8ddbda4be2c760a8c2ec2c12c9573c1893b7fe0d2e48a7d1770085c674ee88b0",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-1.png",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 1 (supplied HTML extraction)",
+      "sha256": "95f33087d78ef93511a22c04fa83d0d5404aef0572472abd44ce32a5e967de5b",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-2.jpg",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 2 (supplied HTML extraction)",
+      "sha256": "8ddbda4be2c760a8c2ec2c12c9573c1893b7fe0d2e48a7d1770085c674ee88b0",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-3.png",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 3 (supplied HTML extraction)",
+      "sha256": "690add983cbebaae66dd8b8856a965080716ed17364e4fd73a706b7447afecf2",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-4.png",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 4 (supplied HTML extraction)",
+      "sha256": "69d1ffe2265d792afa88256ad0e7c4ea702a9db798e081c35017954ddf4f2f3b",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-5.png",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 5 (supplied HTML extraction)",
+      "sha256": "7bd099638ce9249870e67335305aa8dd44ec1002dfbb39e086c437a189469261",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    },
+    {
+      "file": "word-figure-6.png",
+      "source": "EGB339 Assessment 2.1 Oral Presentation Guide.docx, embedded figure 6 (supplied HTML extraction)",
+      "sha256": "b510fa6f4ab149ecb8c979ec0f2d28cf939536d4a39a72038e177ebf11c3a161",
+      "treatment": "Original bytes; no image editing or document rewriting."
+    }
+  ]
+}

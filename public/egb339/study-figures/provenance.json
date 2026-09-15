@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "file": "qut-week7-velocity-profile.png",
+      "source": "ObsidianVault/EGB339/raw/week7-motion-planning/Week 7 Tutorial - Motion Planning.pdf, page 9",
+      "licence": "QUT course material supplied by the user; no open licence stated. Preserve existing authenticated access; attribution is not an open redistribution licence.",
+      "treatment": "Bounded graph excerpt rendered from the original PDF; axes and data unchanged. See scripts/export-egb339-study-figures.py.",
+      "use": "Week 7: integrate the actual piecewise velocity profile; 16.5 m at 8 s, 14.5 m at 6 s."
+    },
+    {
+      "file": "qut-week8-spatula-histogram.png",
+      "source": "ObsidianVault/EGB339/raw/week8-images and image processing/EGB339 - 2026 - Lecture Week 8.pdf, page 10; Scarlett Raine, contents by Tobias Fischer and Niko Suenderhauf",
+      "licence": "QUT course material supplied by the user; no open licence stated. Preserve existing authenticated access; do not treat as an openly licensed stock image.",
+      "treatment": "Bounded paired image/histogram excerpt. No changes to pixels or histogram within the excerpt.",
+      "use": "Week 8: connect dark spatula pixels to the low-intensity peak and the source's threshold of 50."
+    },
+    {
+      "file": "qut-week8-image-subtraction.png",
+      "source": "ObsidianVault/EGB339/raw/week8-images and image processing/EGB339 - 2026 - Lecture Week 8.pdf, page 15; Scarlett Raine, contents by Tobias Fischer and Niko Suenderhauf",
+      "licence": "QUT course material supplied by the user; no open licence stated. Preserve existing authenticated access.",
+      "treatment": "Bounded original comparison: two input trays and the difference image; no fabricated output.",
+      "use": "Week 8: corresponding pixels, background subtraction, signed conversion before arithmetic."
+    },
+    {
+      "file": "rtb-transforms2d.png",
+      "source": "robotics-toolbox-python/docs/source/figs/transforms2d.png",
+      "sourceUrl": "https://github.com/petercorke/robotics-toolbox-python/blob/main/docs/source/figs/transforms2d.png",
+      "licence": "MIT; see robotics-toolbox-LICENSE.txt",
+      "treatment": "Original documentation image; pixels unchanged. Original axis colours retained, not application status colours.",
+      "use": "Week 2 reference frames: distinguish origins and orientations in one plane. Not the QUT numeric exercise."
+    },
+    {
+      "file": "rtb-transforms3d.png",
+      "source": "robotics-toolbox-python/docs/source/figs/transforms3d.png",
+      "sourceUrl": "https://github.com/petercorke/robotics-toolbox-python/blob/main/docs/source/figs/transforms3d.png",
+      "licence": "MIT; see robotics-toolbox-LICENSE.txt",
+      "treatment": "Original documentation image; pixels unchanged. Original axis colours retained, not application status colours.",
+      "use": "Week 3 SE(3): a pose has three basis directions and one origin. Not a calibrated QUT scene."
+    }
+  ]
+}

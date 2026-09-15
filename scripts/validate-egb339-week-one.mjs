@@ -42,4 +42,4 @@ for (const file of readdirSync("src/components/egb339/week-one")) {
 const provenance = JSON.parse(readFileSync("public/egb339/week-1/panda-swift.provenance.json", "utf8"));
 assert(provenance.source.endsWith("docs/figs/swift.png"));
 assert(readFileSync("public/egb339/week-1/robotics-toolbox-LICENSE.txt", "utf8").includes("MIT License"));
-console.log(`EGB339 Week 1 passed: 9 sections, 7 compatibility/example anchors, 2 preserved topic keys, 15 reused warmup parts, Q15 products, ${roundTrips} pose round trips, source provenance and pilot-only routing. Browser QA is separate.`);
+console.log(`EGB339 Week 1 passed: 9 sections, 7 compatibility/example anchors, 2 preserved topic keys, 15 reused warmup parts, Q15 products, ${roundTrips} pose round trips, source provenance and preserved Week 1 routing. Browser QA is separate.`);

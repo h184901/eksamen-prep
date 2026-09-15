@@ -1,0 +1,58 @@
+/* Long-form additions to the approved Week 1 language. EGB339 only. */
+.egb-week-study > .egb-week-topic { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--egb-line); }
+.egb-week-study > .egb-week-topic:first-of-type { border-top: 0; padding-top: 0; margin-top: 40px; }
+.egb-week-study .egb-week-topic > section { margin-top: 40px; }
+.egb-week-study .egb-week-topic > h2 { margin-bottom: 24px; }
+.egb-week-study .egb-pilot-prose { max-width: 740px; }
+.egb-week-study .egb-pilot-prose > p, .egb-week-study .egb339-markdown p { max-width: 72ch; }
+.egb-week-study :where(h3, h4, h5, h6) { scroll-margin-top: var(--week-anchor-offset, 160px); }
+.egb-week-study > .egb-pilot-prose, .egb-week-study > div:has(> .egb-study-problems) { margin-top: 64px; }
+.egb-week-figure-explanation { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-block: 28px; }
+.egb-week-figure-explanation h3 { margin-top: 0; }
+.egb-week-figure-explanation p { font-size: 16px; }
+.egb-week-technical-figure { margin: 0; min-width: 0; }
+.egb-week-technical-figure svg { display: block; width: 100%; height: auto; }
+.egb-week-technical-figure svg text { font-size: 16px; fill: var(--egb-ink); }
+.egb-week-learning-block { margin-block: 36px; }
+.egb-week-learning-block > p { max-width: 72ch; }
+.egb-week-two-column { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(290px, 1fr); gap: 32px; align-items: start; margin-top: 24px; }
+.egb-week-two-column > * { min-width: 0; }
+.egb-week-control-row { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 12px; }
+.egb-week-control-row button[aria-pressed="true"] { border-color: var(--week-info); background: var(--week-info-tint); color: var(--week-info); }
+.egb-week-wide-figure .egb-week-source-figure { max-width: 100%; }
+.egb-week-wide-figure { margin-block: 24px; }
+.egb-week-explorer-controls .egb-pilot-math { margin-block: 8px; padding-block: 8px; }
+.egb-week-explorer-controls .egb-pilot-math + p { margin-top: 12px; }
+.egb-week-study .egb-week-notice[data-state="info"] { background: var(--week-info-tint); color: var(--week-info); }
+.egb-week-study .egb-week-explorer-controls label.egb-week-frame-a input { accent-color: var(--week-frame-a); }
+.egb-week-study .egb-week-assessment-part :where(h5, h6) { font-size: 16px; font-weight: 600; margin-block: 24px 12px; }
+.egb-week-worked-example { margin-block: 32px; padding-left: 20px; border-left: 2px solid var(--week-info); }
+.egb-week-topic .egb-week-figure-explanation { clear: both; }
+.egb-week-topic > .egb-pilot-prose + .egb-pilot-prose { margin-top: 24px; }
+.egb-week-source-figure { margin: 0; max-width: 640px; }
+.egb-week-source-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--egb-line); border-radius: 2px; }
+.egb-week-figure-credit { display: block; margin-top: 6px; }
+.egb-week-assessment-index { display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 14px; margin-block: 24px 36px; }
+.egb-week-assessment-index a { text-decoration: underline; }
+.egb-week-assessment { border-top: 1px solid var(--egb-line); margin-top: 48px; padding-top: 24px; }
+.egb-week-assessment > h3 { margin-top: 0; font-size: 23px; }
+.egb-week-assessment-part { margin-top: 28px; }
+.egb-week-assessment-part > h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.egb-week-finish { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--egb-line); }
+.egb-week-study .egb-pilot-stage button, .egb-week-study .egb-pilot-reset, .egb-week-study .egb-pilot-matrix-focus button, .egb-week-study .egb-arm-matrix > button {
+  display: inline-flex; justify-content: center; align-items: center; min-height: 36px; padding: 6px 10px; border: 1px solid var(--egb-line); border-radius: 4px; background: var(--egb-paper); color: var(--week-info); font-size: 13px; line-height: 1.4; text-decoration: none;
+}
+.egb-week-study .egb-pilot-stage button[aria-pressed="true"], .egb-week-study .egb-pilot-stage button:hover, .egb-week-study .egb-pilot-reset:hover, .egb-week-study .egb-pilot-matrix-focus button:hover, .egb-week-study .egb-arm-matrix > button:hover { background: var(--week-info-tint); border-color: var(--week-info); }
+.egb-week-study .egb-pilot-lab svg .egb-pilot-world text { font-size: 14px; }
+.egb-week-study .egb-pilot-lab .egb-pilot-controls input { font: inherit; }
+.egb-week-study .egb-week-answer .egb339-markdown { font-size: 16px; }
+.egb-week-study .egb-study-source-warning { color: var(--week-warning); }
+.egb-week-study .egb-arm[data-ik-status="unreachable"] .egb-arm-state { color: var(--week-error); }
+.egb-week-study .egb-arm[data-ik-status="singular"] .egb-arm-state, .egb-week-study .egb-arm[data-ik-status="folded-free"] .egb-arm-state { color: var(--week-warning); }
+@media (max-width: 1050px) {
+  .egb-week-figure-explanation { grid-template-columns: 1fr; }
+  .egb-week-two-column { grid-template-columns: 1fr; }
+}
+@media (max-width: 767px) {
+  .egb-week-study > .egb-week-topic { margin-top: 40px; }
+}

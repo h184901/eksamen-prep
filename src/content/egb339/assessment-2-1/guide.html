@@ -1,0 +1,311 @@
+
+    <section data-egb-week-section id="execution" class="execution">
+      <div class="execution-heading">
+        <div><h2>Se hva hver linje betyr for roboten</h2></div>
+        <a href="#word-guide">Øv til muntlig med Word-guiden ↗</a>
+      </div>
+      <p class="section-intro">Følg SPACE fra første funksjonskall til siste løft. Velg en tast og en fase, eller gå gjennom hver Python-linje. Når programmet regner, står armen stille; et nytt leddmål sendes først ved <code>move_arm</code>.</p>
+      <div id="trace-loading" role="status">Laster kjøringen …</div>
+      <div id="trace-app" hidden>
+        <div class="trace-controls">
+          <button type="button" id="trace-reset">Til start</button>
+          <button type="button" id="trace-prev" aria-label="Forrige steg">← Forrige</button>
+          <button type="button" id="trace-play" aria-pressed="false">Spill av</button>
+          <button type="button" id="trace-next">Neste →</button>
+          <label>Stegnivå<select id="trace-mode"><option value="major">Forklarte hovedsteg</option><option value="lines">Hver Python-linje</option><option value="moves">Kun kommandoer og venting</option></select></label>
+          <label>Visningstempo<select id="trace-speed"><option value="1800">Rolig</option><option value="800">Middels</option><option value="250">Raskt</option></select></label>
+        </div>
+        <div id="word-timeline" class="word-timeline" aria-label="Tidslinje for SPACE"></div>
+        <div class="scrubber"><label for="trace-slider" id="trace-position">Hendelse</label><input type="range" id="trace-slider" min="0" max="1" value="0"><span id="trace-clock"></span></div>
+        <div class="execution-grid">
+          <div class="robot-panel">
+            <div class="panel-heading"><h3 id="robot-stage">Klargjøring</h3><div class="view-buttons" aria-label="Visningsretning"><button type="button" data-view="iso" aria-pressed="true">3D</button><button type="button" data-view="top" aria-pressed="false">Ovenfra</button><button type="button" data-view="side" aria-pressed="false">Armplanet</button></div></div>
+            <svg id="trace-robot" viewBox="0 0 640 440" role="img" aria-label="Skjematisk robotmodell med kommandert leddstilling og tastatur"></svg>
+            <div class="robot-legend"><span><i class="legend-solid"></i>Sist kommandert stilling</span><span><i class="legend-dashed"></i>IK-kandidat, bare beregnet</span><span><i class="legend-target"></i>Målpunkt</span></div>
+            <div class="robot-options"><label><input id="show-candidate" type="checkbox" checked> Vis beregnet IK-kandidat</label><label><input id="animate-robot" type="checkbox" checked> Animer stillingsskifte</label></div>
+            <p class="diagram-note">Armen er en skjematisk modell av L₀–L₄. Animasjonen mellom stillingene er illustrasjon, ikke målt simulatorbane eller interpolasjon i innleveringen. Startstillingen [0, 0, 0] er valgt for visningen; programmet kaller ikke <code>home()</code>.</p>
+            <div id="joint-readout" class="joint-readout"></div>
+            <div id="runtime-state" class="runtime-state"></div>
+          </div>
+          <div class="execution-code-panel">
+            <div class="panel-heading"><h3 id="trace-function">Python</h3><button type="button" id="trace-show-source">Se hele funksjonen ↗</button></div>
+            <p id="trace-stack" class="trace-stack"></p>
+            <div id="trace-code" tabindex="0" class="trace-code" aria-label="Kode med aktiv linje"></div>
+            <div id="trace-explanation" class="trace-explanation" aria-live="polite"></div>
+            <details class="runtime-details" open><summary>Variabler ved dette stoppet</summary><div id="trace-values" class="details-body"></div></details>
+            <p class="diagram-note">Linjestopp viser verdiene <strong>før</strong> den markerte linjen. «Returnert», «Sendt» og «Ventet» viser resultatet etter handlingen. Kommentarer og blanke linjer forklares i kodeoppslaget, men kjøres ikke.</p>
+          </div>
+        </div>
+        <div class="execution-math">
+          <div class="panel-heading"><div><h3 id="trace-math-title">Regningen bak steget</h3></div><a href="#derivation">Se hele utledningen ↓</a></div>
+          <div id="trace-math"></div>
+        </div>
+        <details><summary>Hva er denne tidslinjen basert på?</summary><div id="trace-provenance" class="details-body"></div></details>
+      </div>
+      <noscript>Slå på JavaScript for tidslinjen. De øvrige tekstforklaringene er tilgjengelige nedenfor.</noscript>
+    </section>
+
+    <section data-egb-week-section id="derivation">
+      <h2>Fra robotgeometri til alle formlene i koden</h2>
+      <p class="section-intro">Bruk de tre visningene i tidslinjen mens du leser. Baseleddet roterer armplanet i 3D. Skulder og albue løses i et todimensjonalt radius–høyde-plan. Hvert ledd har én rotasjonsakse.</p>
+      <div id="derivation-content"></div>
+    </section>
+
+    <section data-egb-week-section id="overview">
+      <h2>Hele løsningen i åtte steg</h2>
+      <p class="section-intro">Det viktigste å kunne forklare er ikke alle Python-detaljene isolert, men hvordan informasjonen flyter fra tastaturbildet til robotens tre leddvinkler.</p>
+      <div class="flow">
+        <article class="flow-step"><h3>Mål tastene</h3><p>Finn sentrum av S, P, A, C og E som pikselkoordinater <code>(u,v)</code>.</p></article>
+        <article class="flow-step"><h3>Skaler til millimeter</h3><p>Bruk forholdet mellom 487×201 piksler og 290×120 mm.</p></article>
+        <article class="flow-step"><h3>Sentrer tastaturrammen</h3><p>Gjør bildets sentrum til origo og snu y-retningen fordi piksel-v peker ned.</p></article>
+        <article class="flow-step"><h3>Transformer til robotrammen</h3><p>Bruk den homogene matrisen <code>ᴮTₖ</code> med yaw −135° og posisjon [175, −150, 2] mm.</p></article>
+        <article class="flow-step"><h3>Løs invers kinematikk</h3><p>Regn målpunktet om til mulige <code>[θ₁,θ₂,θ₃]</code> med geometri.</p></article>
+        <article class="flow-step"><h3>Kontroller med FK</h3><p>Sett vinklene tilbake i fremoverkinematikken og kontroller at samme XYZ kommer ut.</p></article>
+        <article class="flow-step"><h3>ABOVE, PRESS og løft</h3><p>Gå til ABOVE, deretter PRESS, vent, og gå tilbake til ABOVE.</p></article>
+        <article class="flow-step"><h3>Gjenta for SPACE</h3><p>En løkke beholder rekkefølgen S → P → A → C → E.</p></article>
+      </div>
+      <div class="callout" style="margin-top:18px">
+        <strong>Kjerneforklaring på 20 sekunder:</strong> «Jeg måler tastene i bildet, skalerer dem til tastaturets lokale koordinatramme og bruker en homogen transformasjon for å få koordinater i robotbasen. Deretter bruker jeg geometrisk invers kinematikk for å finne leddvinklene og sender dem til roboten i en ABOVE–PRESS–ABOVE-sekvens.»
+      </div>
+    </section>
+
+    <section data-egb-week-section id="syllabus">
+      <h2>Hva kommer fra uke 1–8?</h2>
+      <div class="card soft">
+        <div class="guide-table-scroll" role="region" aria-label="Pensumoversikt – kan rulles vannrett" tabindex="0"><table class="week-table">
+          <thead><tr><th>Uke</th><th>Tema</th><th>Bruk i løsningen</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/egb339/uker/uke-1">Week 1</a></td><td>Kinematikk og robotledd</td><td>Forståelse av revolute joints, linklengder og robotens koordinater.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-2">Week 2</a></td><td>Lineær algebra og 2D-pose</td><td>Vektorer, matriser, rotasjon om z og bytte av koordinatramme.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-3">Week 3</a></td><td>3D-pose</td><td>Homogene 4×4-transformasjoner og transformasjon av punkter.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-4">Week 4</a></td><td>Fremoverkinematikk</td><td><code>forward_kinematics()</code> finner XYZ fra tre leddvinkler.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-5">Week 5</a></td><td>Invers kinematikk</td><td>Cosinussetningen, <code>atan2</code>, elbow-up/down og rekkevidde.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-6">Week 6</a></td><td>Jacobianer</td><td class="no">Ikke brukt i denne løsningen.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-7">Week 7</a></td><td>Motion planning</td><td>Forskjellen mellom direkte leddmål, joint interpolation og Cartesian interpolation.</td></tr>
+            <tr><td><a href="/egb339/uker/uke-8">Week 8</a></td><td>Bilder og piksler</td><td>Pikselkoordinater og manuell inspeksjon av tastaturbildet. Ingen OCR.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="callout"><strong class="yes">Innenfor pensum:</strong> NumPy, rotasjonsmatrise, homogen transformasjon, FK, geometrisk IK, <code>atan2</code>, cosinussetningen, dictionaries og løkker.</div>
+        <div class="callout warning"><strong>Ikke implementert:</strong> joint-interpolert og kartesisk-interpolert bevegelse. Derfor skal du ikke si at banen er nøyaktig rett eller vertikal.</div>
+      </div>
+    </section>
+
+    <section data-egb-week-section id="interactive">
+      <h2>Interaktiv utregning for hver tast</h2>
+      <p class="section-intro">Velg en bokstav. Alle tallene under regnes ut med de samme likningene og konstantene som i Python-filen.</p>
+      <div class="lab-layout">
+        <div class="card">
+          <div class="controls">
+            <div class="control">
+              <label for="key-select">Velg tast</label>
+              <select id="key-select"><option>S</option><option>P</option><option>A</option><option>C</option><option>E</option></select>
+            </div>
+            <div class="key-buttons" aria-label="Hurtigvalg av tast">
+              <button class="key-button" type="button" data-key="S" aria-pressed="true">S</button>
+              <button class="key-button" type="button" data-key="P" aria-pressed="false">P</button>
+              <button class="key-button" type="button" data-key="A" aria-pressed="false">A</button>
+              <button class="key-button" type="button" data-key="C" aria-pressed="false">C</button>
+              <button class="key-button" type="button" data-key="E" aria-pressed="false">E</button>
+            </div>
+          </div>
+          <div class="keyboard-wrap" id="keyboard-wrap" aria-label="Tastaturbilde med målte tastesentre">
+            <img src="/egb339/assessment-2-1/keyboard_marked.jpeg" alt="Tastaturbildet brukt til kalibrering">
+          </div>
+          <div class="metrics" aria-live="polite">
+            <div class="metric"><span>Piksel (u, v)</span><strong id="metric-pixel"></strong></div>
+            <div class="metric"><span>Tastaturramme (xₖ, yₖ, zₖ) mm</span><strong id="metric-local"></strong></div>
+            <div class="metric"><span>PRESS i robotrammen mm</span><strong id="metric-press"></strong></div>
+            <div class="metric"><span>ABOVE i robotrammen mm</span><strong id="metric-above"></strong></div>
+            <div class="metric"><span>Valgte leddvinkler</span><strong id="metric-joints"></strong></div>
+            <div class="metric"><span>FK-kontrollfeil</span><strong id="metric-error"></strong></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 id="calc-title">Utregning for S</h3>
+          <div id="live-calculation" class="math-steps" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section data-egb-week-section id="math">
+      <h2>All matematikk, fra start til slutt</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>1. Piksel → lokal tastaturkoordinat</h3>
+          <p class="muted">Bildet er 487×201 px, mens planet i simulatoren er 290×120 mm.</p>
+          <div class="formula">sₓ = 290 / 487 = 0.59548255 mm/px
+sᵧ = 120 / 201 = 0.59701493 mm/px
+
+xₖ = u·sₓ − 290/2
+yₖ = 120/2 − v·sᵧ
+zₖ = 0</div>
+          <p><strong>Hvorfor minus i y?</strong> Bildekoordinaten <code>v</code> øker nedover. Tastaturrammens positive y-retning er valgt oppover.</p>
+        </article>
+        <article class="card">
+          <h3>2. Rotasjon og homogen transformasjon</h3>
+          <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>R</mi><mi>z</mi></msub><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>cos</mi><mo>⁡</mo><mi>ψ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>ψ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>sin</mi><mo>⁡</mo><mi>ψ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>cos</mi><mo>⁡</mo><mi>ψ</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo separator="true">,</mo><mspace width="1em"/><mi>ψ</mi><mo>=</mo><mo>−</mo><msup><mn>135</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">R_z(\psi)=\begin{bmatrix}\cos\psi&amp;-\sin\psi&amp;0\\\sin\psi&amp;\cos\psi&amp;0\\0&amp;0&amp;1\end{bmatrix},\quad\psi=-135^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.6em;vertical-align:-1.55em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.6em" viewBox="0 0 667 3600"><path d="M403 1759 V84 H666 V0 H319 V1759 v0 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v0 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.6em" viewBox="0 0 667 3600"><path d="M347 1759 V0 H0 V84 H263 V1759 v0 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v0 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8074em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord">13</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7241em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span></span>
+          <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mrow></mrow><mi>B</mi></msup><msub><mi>T</mi><mi>K</mi></msub><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo>−</mo><mn>0.7071</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0.7071</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>175</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo>−</mo><mn>0.7071</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo>−</mo><mn>0.7071</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo>−</mo><mn>150</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>2</mn></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">{}^BT_K=\begin{bmatrix}-0.7071&amp;0.7071&amp;0&amp;175\\-0.7071&amp;-0.7071&amp;0&amp;-150\\0&amp;0&amp;1&amp;2\\0&amp;0&amp;0&amp;1\end{bmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0413em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0502em;">B</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:4.8em;vertical-align:-2.15em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M403 1759 V84 H666 V0 H319 V1759 v1200 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">0.7071</span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">0.7071</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0.7071</span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">0.7071</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">175</span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">150</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M347 1759 V0 H0 V84 H263 V1759 v1200 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+        </article>
+        <article class="card">
+          <h3>3. Punkttransformasjon</h3>
+          <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>x</mi><mi>B</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>y</mi><mi>B</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>z</mi><mi>B</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>11</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>12</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>13</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>t</mi><mi>x</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>21</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>22</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>23</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>t</mi><mi>y</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>31</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>32</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>R</mi><mn>33</mn></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>t</mi><mi>z</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>x</mi><mi>K</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>y</mi><mi>K</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msup><mi>z</mi><mi>K</mi></msup></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\begin{bmatrix}x^B\\y^B\\z^B\\1\end{bmatrix}=\begin{bmatrix}R_{11}&amp;R_{12}&amp;R_{13}&amp;t_x\\R_{21}&amp;R_{22}&amp;R_{23}&amp;t_y\\R_{31}&amp;R_{32}&amp;R_{33}&amp;t_z\\0&amp;0&amp;0&amp;1\end{bmatrix}\begin{bmatrix}x^K\\y^K\\z^K\\1\end{bmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.804em;vertical-align:-2.152em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M403 1759 V84 H666 V0 H319 V1759 v1200 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.652em;"><span style="top:-4.8107em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0502em;">B</span></span></span></span></span></span></span></span></span></span><span style="top:-3.6093em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0502em;">B</span></span></span></span></span></span></span></span></span></span><span style="top:-2.408em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0502em;">B</span></span></span></span></span></span></span></span></span></span><span style="top:-1.208em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.152em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M347 1759 V0 H0 V84 H263 V1759 v1200 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:4.804em;vertical-align:-2.152em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M403 1759 V84 H666 V0 H319 V1759 v1200 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">11</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">21</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">31</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">22</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">32</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">13</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">23</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">33</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.044em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M347 1759 V0 H0 V84 H263 V1759 v1200 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M403 1759 V84 H666 V0 H319 V1759 v1200 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.652em;"><span style="top:-4.8107em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span></span></span></span></span></span><span style="top:-3.6093em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span></span></span></span></span></span><span style="top:-2.408em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span></span></span></span></span></span><span style="top:-1.208em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.152em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.65em;"><span style="top:-4.65em;"><span class="pstrut" style="height:6.8em;"></span><span style="width:0.667em;height:4.8em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="4.8em" viewBox="0 0 667 4800"><path d="M347 1759 V0 H0 V84 H263 V1759 v1200 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v1200 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.15em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+          <p>Den ekstra koordinaten <code>1</code> gjør at translasjonen i siste kolonne blir lagt til punktet ved samme matrisemultiplikasjon som rotasjonen.</p>
+        </article>
+        <article class="card">
+          <h3>4. Fremoverkinematikk</h3>
+          <div class="formula">r = L₁sinθ₂ + L₂cosθ₃ + L₃
+x = r cosθ₁
+y = r sinθ₁
+z = L₀ + L₁cosθ₂ − L₂sinθ₃ − L₄</div>
+          <p class="muted">Her er <code>r</code> den horisontale avstanden fra basens z-akse til pennespissen.</p>
+        </article>
+        <article class="card">
+          <h3>5. Geometrisk invers kinematikk</h3>
+          <div class="formula">θ₁ = atan2(y, x)
+ρ = √(x² + y²)
+wₓ = ρ − L₃
+w_z = z − L₀ + L₄
+d = √(wₓ² + w_z²)
+
+cosδ = (d² − L₁² − L₂²)/(2L₁L₂)
+δ = ±acos(cosδ)
+
+α = atan2(w_z,wₓ) − atan2(L₂sinδ, L₁+L₂cosδ)
+β = α + δ
+θ₂ = π/2 − α
+θ₃ = −β</div>
+          <p>Fortegnet foran <code>δ</code> gir de to geometriske grenene, vanligvis kalt elbow-up og elbow-down.</p>
+        </article>
+        <article class="card">
+          <h3>6. Rekkevidde og leddgrenser</h3>
+          <div class="formula">|L₁ − L₂| ≤ d ≤ L₁ + L₂
+
+−90° ≤ θ₁ ≤ 90°
+  0° ≤ θ₂ ≤ 85°
+−10° ≤ θ₃ ≤ 75°</div>
+          <p>Først kontrolleres fysisk rekkevidde for de to lenkene. Deretter forkastes matematiske løsninger som simulatoren ikke tillater.</p>
+        </article>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3>Konstanter og hva de betyr</h3>
+        <div class="guide-table-scroll" role="region" aria-label="Konstanter – kan rulles vannrett" tabindex="0"><table class="math-table">
+          <thead><tr><th>Symbol</th><th>Verdi</th><th>Betydning</th></tr></thead>
+          <tbody>
+            <tr><td>L₀</td><td>138 mm</td><td>Vertikal høyde fra robotbasen til skulderleddet.</td></tr>
+            <tr><td>L₁</td><td>135 mm</td><td>Lengden på første bevegelige armledd.</td></tr>
+            <tr><td>L₂</td><td>147 mm</td><td>Lengden på andre bevegelige armledd.</td></tr>
+            <tr><td>L₃</td><td>60 mm</td><td>Fast horisontal verktøyforskyvning etter siste ledd.</td></tr>
+            <tr><td>L₄</td><td>80 mm</td><td>Fast vertikal forskyvning ned til pennespissen.</td></tr>
+            <tr><td>SAFE_HEIGHT</td><td>20 mm</td><td>Samme x/y som tasten, men 20 mm høyere z.</td></tr>
+            <tr><td>Yaw</td><td>−135°</td><td>Tastaturets rotasjon om z relativt til robotbasen.</td></tr>
+            <tr><td>t</td><td>[175, −150, 2] mm</td><td>Tastaturrammens origo uttrykt i robotens baseramme.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section data-egb-week-section id="motion">
+      <h2>Se robotgeometrien og bevegelsen</h2>
+      <p class="section-intro">Diagrammene oppdateres når du velger en tast ovenfor. Toppvisningen forklarer θ₁ og tastaturets pose. Sidevisningen forklarer θ₂, θ₃ og de fem linkparameterne.</p>
+      <div class="diagram-grid">
+        <figure class="diagram">
+          <figcaption><strong>Toppvisning i robotrammen</strong></figcaption>
+          <svg id="top-svg" viewBox="0 0 500 500" role="img" aria-labelledby="top-title top-desc">
+            <title id="top-title">Robot og tastatur sett ovenfra</title>
+            <desc id="top-desc">Viser tastaturet rotert minus 135 grader og valgt tast relativt til robotbasen.</desc>
+          </svg>
+        </figure>
+        <figure class="diagram">
+          <figcaption><strong>Armplanet sett fra siden</strong></figcaption>
+          <svg id="side-svg" viewBox="0 0 500 420" role="img" aria-labelledby="side-title side-desc">
+            <title id="side-title">Robotens lenker i radial-z-planet</title>
+            <desc id="side-desc">Viser L0, L1, L2, L3 og L4 for vinklene som når valgt tast.</desc>
+          </svg>
+        </figure>
+      </div>
+      <div class="callout warning" style="margin-top:16px">
+        <strong>Viktig formulering:</strong> Koden sender tre separate leddmål for ABOVE, PRESS og ABOVE. Uten kartesisk interpolasjon vet vi ikke at pennespissen følger en helt rett, vertikal linje mellom punktene, selv om start- og sluttpunktet har samme x/y.
+      </div>
+    </section>
+
+    <section data-egb-week-section id="code">
+      <h2>Den faktiske koden – hver linje forklart</h2>
+      <p class="section-intro">Alle linjene fra <code>wordTypingRobot.py</code> er inkludert. Åpne en kodeblokk, eller søk etter for eksempel <code>atan2</code>, <code>transform</code>, <code>move_arm</code> eller et linjenummer.</p>
+      <div class="code-toolbar">
+        <div class="control search"><label for="code-search">Søk i kode eller forklaring</label><input id="code-search" type="search" placeholder="Søk etter funksjon, variabel eller begrep"></div>
+        <div class="control"><label for="code-section">Del av programmet</label><select id="code-section"><option value="all">Alle deler</option><option value="imports">Importer</option><option value="constants">Konstanter og kalibrering</option><option value="transform">Koordinattransformasjoner</option><option value="fk">Fremoverkinematikk</option><option value="ik">Invers kinematikk</option><option value="motion">Robotbevegelse</option><option value="main">Ordløkken</option></select></div>
+        <div class="count" id="line-count" aria-live="polite"></div>
+      </div>
+      <div id="code-groups"></div>
+    </section>
+
+    <section data-egb-week-section id="oral">
+      <h2>Muntlig spørsmålsbank med fasit</h2>
+      <p class="section-intro">Svar med egne ord og pek på den relevante funksjonen mens du snakker. Det er bedre å forklare én tydelig årsakskjede enn å ramse opp kode.</p>
+      <div class="code-toolbar">
+        <div class="control search"><label for="qa-search">Søk i spørsmål og svar</label><input id="qa-search" type="search" placeholder="For eksempel IK, homogen, feil, interpolation"></div>
+        <div class="control"><label for="qa-category">Kategori</label><select id="qa-category"><option value="all">Alle kategorier</option><option value="transform">Koordinatrammer</option><option value="kinematics">FK og IK</option><option value="motion">Bevegelse</option><option value="code">Kode og testing</option><option value="extension">Videre spørsmål</option></select></div>
+      </div>
+      <div class="qa-list" id="qa-list"></div>
+    </section>
+
+    <section data-egb-week-section id="demo">
+      <h2>Forslag til demonstrasjon, steg for steg</h2>
+      <div class="grid two">
+        <div class="card oral-script">
+          <h3>Før du kjører</h3>
+          <ol>
+            <li>Åpne <code>prac.ttt</code> og la simuleringen være stoppet.</li>
+            <li>Vis <code>KEY_PIXELS</code>, tastaturmålene, origo og yaw.</li>
+            <li>Velg én tast, gjerne S, og forklar piksel → mm → robotramme.</li>
+            <li>Vis FK- og IK-funksjonene og forklar hva input/output er.</li>
+          </ol>
+        </div>
+        <div class="card oral-script">
+          <h3>Når du kjører</h3>
+          <ol>
+            <li>Kjør <code>pixi run test-word-typing</code>.</li>
+            <li>Pek ut ABOVE → PRESS → ABOVE for første tast.</li>
+            <li>Forklar at løkken gjentar dette for SPACE.</li>
+            <li>Vis at den avslutter uten feil, og forklar begrensningene.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3>En kort presentasjon du kan øve på</h3>
+        <p>«Programmet mottar ordet SPACE og validerer at alle bokstavene har kalibrerte tastesentre. Hvert senter starter som en pikselkoordinat. Jeg skalerer til millimeter og sentrerer koordinatet i tastaturrammen. Deretter bruker jeg tastaturets homogene transformasjon til å finne punktet i robotbasens ramme. Geometrisk invers kinematikk gir mulige leddvinkler. Jeg kontrollerer kandidatene med fremoverkinematikk, fjerner dem som bryter leddgrensene og velger en gyldig løsning. For hver tast er målene 20 mm over tasten, på trykkpunktet og over tasten igjen. Løsningen bruker ikke interpolasjon, så jeg påstår ikke at banen mellom punktene er nøyaktig lineær eller kollisjonsfri.»</p>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>Innlevering:</strong> Oppgaveteksten sier at bare <code>wordTypingRobot.py</code> skal leveres. Behold funksjonsnavnet <code>wordTypingRobot(robotObj, word: str)</code>, og oppgi bruk av GenAI i samsvar med QUTs krav.</div>
+    </section>
+    <section data-egb-week-section id="word-guide">
+
+      <h2>Word-guiden, samlet med robotkoden</h2>
+      <p class="section-intro">Øv med engelske svar og norske forklaringer. Svarene her er tilpasset den innleverte Python-filen. Hele Word-dokumentet med tabeller, formler og figurer er tilgjengelig i kapitlene under.</p>
+      <p><a download href="/egb339/assessment-2-1/oral-presentation-guide.docx">Last ned originalen (Word)</a></p>
+      <div class="word-corrections"><h3>Presiseringer i forhold til Word-dokumentet</h3><ul>
+        <li>Robotkommandoen er <code>move_arm(θ₁, θ₂, θ₃)</code>. <code>move_robot</code> i Word-guiden er et feil navn.</li>
+        <li><code>pixel_to_keyboard_point(pixel)</code> returnerer zₖ = 0. <code>getPositionForLetter(letter)</code> returnerer PRESS. Ingen av dem tar et høydeargument; ABOVE lages i <code>jumpToPos</code>.</li>
+        <li>Hver IK-kandidat kontrolleres med FK i <code>_ik_candidates</code>, deretter filtrerer <code>ikine</code> på leddgrenser og velger gren.</li>
+        <li>Oppgavens valgte ord er SPACE. Den innleverte koden kontrollerer tomt ord og ukjente tegn, men ikke lengde fem eller antall gjentakelser.</li>
+        <li>Mappingen q₁ = θ₁, q₂ = θ₂, q₃ = θ₃ − θ₂, q₄ = −θ₃ forklarer geometrien; den står ikke som en egen mappingfunksjon i filen.</li>
+      </ul></div>
+      <div class="oral-controls"><label>Søk i engelske spørsmål<input id="word-qa-search" type="search" placeholder="For eksempel inverse, limits eller interpolation"></label><label><input id="oral-practice" type="checkbox" checked> Øvemodus – tenk før du åpner svaret</label></div>
+      <p id="word-question-count" role="status"></p><div id="word-qa" class="word-qa"></div>
+      <h3>Hele originaldokumentet</h3>
+      <p class="muted">Innholdet i disse kapitlene er hentet fra Word uten omskriving. Presiseringene over gjelder når eldre eksempelkode eller formuleringer avviker fra innleveringen. Eksempelspørsmål er øvingsmateriale, ikke en garanti for hvilke spørsmål du får.</p>
+      <label class="word-search-label">Søk i Word-kapitlene<input id="word-search" type="search" placeholder="Søk i hele dokumentet"></label>
+      <p id="word-count" class="muted"></p>
+      <div id="word-chapters"></div>
+    </section>

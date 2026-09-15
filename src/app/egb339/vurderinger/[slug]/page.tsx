@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Assessment21Guide, { ASSESSMENT21_SLUG } from "@/components/egb339/assessment-guide/Assessment21Guide";
 import PilotAssessment from "@/components/egb339/pilot/PilotAssessment";
 import { notFound } from "next/navigation";
 import Egb339Markdown from "@/components/egb339/Egb339Markdown";
@@ -14,6 +15,7 @@ export default async function Egb339AssessmentPage({ params }: { params: Promise
   const { slug } = await params;
   const entry = getEgb339Assessment(slug);
   if (!entry) notFound();
+  if (slug === ASSESSMENT21_SLUG) return <Assessment21Guide />;
   if (slug === "assessment-1-1-position-and-orientation-in-2d") return <PilotAssessment entry={entry} />;
   const adjacent = getAdjacentEgb339Entry(getEgb339Assessments(), slug);
   const solution = getEgb339AssessmentSolution(slug);

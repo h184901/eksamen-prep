@@ -102,7 +102,8 @@ for (const file of [...files("src/app/egb339"), ...files("src/components/egb339"
       katex.renderToString(node.template.getText(ast).slice(1, -1), { throwOnError: true }); staticTex++;
     }
     if (ts.isJsxAttribute(node) && node.name.getText(ast) === "href" && node.initializer && ts.isStringLiteral(node.initializer) && node.initializer.text.startsWith("/egb339")) {
-      assert(routes.has(node.initializer.text.split("#")[0]), file + ": broken literal route " + node.initializer.text); literalLinks++;
+      const target = node.initializer.text.split("#")[0];
+      assert(routes.has(target) || existsSync("public" + target), file + ": broken literal route " + node.initializer.text); literalLinks++;
     }
     // Include conditional href values as well, not only direct JSX attributes.
     if (ts.isStringLiteral(node) && node.text.startsWith("/egb339/") && !node.text.endsWith("/") && !node.text.endsWith("-") && !node.text.endsWith("#")) {

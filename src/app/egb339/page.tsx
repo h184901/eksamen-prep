@@ -19,6 +19,7 @@ export default function Egb339Page() {
       <ul className="egb-study-track-list">{EGB339_TRACKS.map((track) => <li key={track.id} data-track={track.id}><Link href={"/egb339/temaer#" + track.id}>{track.label}</Link><p>{track.description}</p></li>)}</ul>
     </section>
     <section><h2>Laboratorier og praktisk arbeid</h2>
+      <p><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration">Assessment 2.1: følg SPACE fra bildepunkt til tastetrykk</Link> samler robotvisning, kodegjennomgang, muntlige øvingsspørsmål og Word-guiden.</p>
       <p><Link href="/egb339/temaer/se-2-homogeneous-transformations#utforsk">Koordinatrammer og SE(2)</Link> knytter figur til matrise. <Link href="/egb339/temaer/forward-kinematics#laboratorium">2R-roboten</Link> viser hvordan leddene bestemmer endepunktet.</p>
       <p><Link href="/egb339/ressurser">Simulator, oppsett og praktiske guider</Link> holder robotspesifikke parametere atskilt fra den generelle matematikken.</p>
     </section>

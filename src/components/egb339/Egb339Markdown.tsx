@@ -1,14 +1,17 @@
 import Link from "next/link";
+import { createElement } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import { egb339ReadableMath } from "@/lib/egb339-readable-math";
+import { egb339StudyHref } from "@/lib/egb339-study-weeks";
 
 interface Props {
   content: string;
-  headingOffset?: 0 | 1;
+  headingOffset?: 0 | 1 | 2 | 3;
+  studyLinks?: boolean;
 }
 
 type Segment =
@@ -77,7 +80,7 @@ function splitCallouts(markdown: string): Segment[] {
   return segments;
 }
 
-function MarkdownBlock({ content, headingOffset = 0 }: Props) {
+function MarkdownBlock({ content, headingOffset = 0, studyLinks = false }: Props) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkMath]}
@@ -88,16 +91,17 @@ function MarkdownBlock({ content, headingOffset = 0 }: Props) {
             {children}
           </h2>
         ),
-        h2: ({ children }) => headingOffset ? <h3>{children}</h3> : (
+        h2: ({ children }) => headingOffset ? createElement(`h${2 + headingOffset}`, null, children) : (
           <h2 className="mt-10 mb-3 text-xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50">
             {children}
           </h2>
         ),
-        h3: ({ children }) => headingOffset ? <h4>{children}</h4> : (
+        h3: ({ children }) => headingOffset ? createElement(`h${Math.min(6, 3 + headingOffset)}`, null, children) : (
           <h3 className="mt-7 mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {children}
           </h3>
         ),
+        h4: ({ children }) => createElement(`h${Math.min(6, 4 + headingOffset)}`, null, children),
         p: ({ children }) => (
           <p className="my-3 text-base leading-7 text-neutral-700 dark:text-neutral-200">
             {children}
@@ -114,7 +118,7 @@ function MarkdownBlock({ content, headingOffset = 0 }: Props) {
           </ol>
         ),
         a: ({ href, children }) => {
-          const target = href ?? "";
+          const target = studyLinks ? egb339StudyHref(href ?? "") : href ?? "";
           if (target.startsWith("/")) {
             return (
               <Link
@@ -187,19 +191,19 @@ function MarkdownBlock({ content, headingOffset = 0 }: Props) {
   );
 }
 
-export default function Egb339Markdown({ content, headingOffset = 0 }: Props) {
+export default function Egb339Markdown({ content, headingOffset = 0, studyLinks = false }: Props) {
   return (
     <div className="egb339-markdown">
       {splitCallouts(content).map((segment, index) => {
         if (segment.type === "markdown") {
-          return <MarkdownBlock key={index} content={segment.content} headingOffset={headingOffset} />;
+          return <MarkdownBlock key={index} content={segment.content} headingOffset={headingOffset} studyLinks={studyLinks} />;
         }
         const important = ["warning", "important"].includes(segment.kind);
         const specificTitle = !["Kort fortalt", "Definisjon", "Definition", "Tips", "Merk", "TL;DR", "Course map", "Topic map", "Learning path"].includes(segment.title);
         return (
           <div key={index} className={important ? "egb-study-source-warning" : "egb-study-note"}>
             {(important || specificTitle) && <p><strong>{segment.title}</strong></p>}
-            <MarkdownBlock content={segment.content} headingOffset={headingOffset} />
+            <MarkdownBlock content={segment.content} headingOffset={headingOffset} studyLinks={studyLinks} />
           </div>
         );
       })}

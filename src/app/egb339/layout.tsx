@@ -3,6 +3,7 @@ import Egb339PilotShell from "@/components/egb339/pilot/Egb339PilotShell";
 import "./egb339.css";
 import "./pilot.css";
 import "./week-one.css";
+import "./study-weeks.css";
 
 export const metadata: Metadata = {
   title: "EGB339 Introduction to Robotics",

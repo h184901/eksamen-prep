@@ -1,7 +1,7 @@
-/* Week 1 only. Other weeks keep pilot.css and the existing course navigation.
+/* Approved Week 1 system, extended to the EGB339 week studies and course sidebar.
    Layer 20: local jump navigation, below the shared site header (50).
    Object identity (A/B) is independent of valid/error/warning state. */
-.egb339-pilot:has(.egb-week-one) {
+.egb339-pilot:has(.egb-week-sidebar) {
   --week-info: #265b8c;
   --week-frame-a: var(--week-info);
   --week-frame-b: #704494;
@@ -17,7 +17,7 @@
   grid-template-columns: 260px minmax(0, 1fr);
   gap: 40px;
 }
-.dark .egb339-pilot:has(.egb-week-one) {
+.dark .egb339-pilot:has(.egb-week-sidebar) {
   --week-info: #8cc5f4;
   --week-frame-b: #ccb0ea;
   --week-success: #a0d6b6;
@@ -29,17 +29,17 @@
   --week-error-tint: #382527;
   --week-success-tint: #233328;
 }
-html:has(.egb-week-one) { scroll-behavior: smooth; }
-.egb339-pilot:has(.egb-week-one) :where(section, [id]) { scroll-margin-top: 160px; }
-.egb-week-one :where(p, li) { text-wrap: pretty; }
-.egb-week-one :where(button, input) { font: inherit; }
-.egb-week-one :where(button, input):disabled { cursor: not-allowed; }
-.egb-week-one :where(a, button, input) { -webkit-tap-highlight-color: transparent; }
-.egb-week-one :where(h1, h2, h3, h4) { text-wrap: balance; }
-.egb-week-one > section { margin-top: 64px; }
-.egb-week-one > section:first-child { margin-top: 0; }
-.egb-week-one h2 { font-size: 27px; margin-bottom: 16px; }
-.egb-week-one h3 { font-size: 20px; margin-top: 32px; }
+html:has(:is(.egb-week-one, .egb-week-study)) { scroll-behavior: smooth; }
+.egb339-pilot:has(.egb-week-sidebar) :where(section, [id]) { scroll-margin-top: var(--week-anchor-offset, 160px); }
+:is(.egb-week-one, .egb-week-study) :where(p, li) { text-wrap: pretty; }
+:is(.egb-week-one, .egb-week-study) :where(button, input) { font: inherit; }
+:is(.egb-week-one, .egb-week-study) :where(button, input):disabled { cursor: not-allowed; }
+:is(.egb-week-one, .egb-week-study) :where(a, button, input) { -webkit-tap-highlight-color: transparent; }
+:is(.egb-week-one, .egb-week-study) :where(h1, h2, h3, h4) { text-wrap: balance; }
+:is(.egb-week-one, .egb-week-study) > section { margin-top: 64px; }
+:is(.egb-week-one, .egb-week-study) > section:first-child { margin-top: 0; }
+:is(.egb-week-one, .egb-week-study) h2 { font-size: 27px; margin-bottom: 16px; }
+:is(.egb-week-one, .egb-week-study) h3 { font-size: 20px; margin-top: 32px; }
 .egb-week-heading { margin-bottom: 28px; }
 .egb-week-heading h1 { font-size: clamp(30px, 2.6vw, 38px); }
 .egb-week-heading > p { font-size: 19px; color: var(--egb-muted); margin-block: 10px 0; }
@@ -48,8 +48,8 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-opening p { font-size: 16px; line-height: 1.65; }
 .egb-week-opening .egb-pilot-small { font-size: 14px; }
 .egb-week-robot-image img { width: 100%; height: auto; display: block; border-radius: 2px; }
-.egb-week-one figcaption { font-size: 13px; line-height: 1.65; color: var(--egb-muted); margin-top: 12px; }
-.egb-week-one figcaption a, .egb-week-sources a, .egb-week-preparation a { text-decoration: underline; text-underline-offset: 3px; }
+:is(.egb-week-one, .egb-week-study) figcaption { font-size: 13px; line-height: 1.65; color: var(--egb-muted); margin-top: 12px; }
+:is(.egb-week-one, .egb-week-study) figcaption a, .egb-week-sources a, .egb-week-preparation a { text-decoration: underline; text-underline-offset: 3px; }
 .egb-week-jump { position: sticky; top: 64px; z-index: 20; background: var(--egb-paper); border-block: 1px solid var(--egb-line); display: flex; flex-wrap: wrap; gap: 0 18px; margin-top: 32px; padding: 4px 0; }
 .egb-week-jump a { display: block; padding: 10px 0 8px; border-bottom: 2px solid transparent; font-size: 13px; color: var(--egb-muted); }
 .egb-week-jump a[aria-current="location"] { color: var(--week-info); border-bottom-color: var(--week-info); font-weight: 600; }
@@ -63,10 +63,10 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-tutor { display: none; }
 @media (min-width: 768px) {
   /* Reuse the existing tutor action in a reserved slot, never over lesson controls. */
-  body:has(.egb-week-one) button[data-tutor-trigger] { display: none; }
+  body:has(.egb-week-sidebar) button[data-tutor-trigger] { display: none; }
   .egb-week-tutor { display: block; margin-top: 16px; }
-  body:has(.egb-week-one) .egb-week-tutor button[data-tutor-trigger] { display: block; position: static; }
-  body:has(.egb-week-one) .egb-week-tutor button[data-tutor-trigger] > span:last-child { background: var(--week-info-tint); color: var(--week-info); border-color: var(--egb-line); }
+  body:has(.egb-week-sidebar) .egb-week-tutor button[data-tutor-trigger] { display: block; position: static; }
+  body:has(.egb-week-sidebar) .egb-week-tutor button[data-tutor-trigger] > span:last-child { background: var(--week-info-tint); color: var(--week-info); border-color: var(--egb-line); }
 }
 .egb-week-sidebar .egb-week-nav-group { margin: 0 0 20px; }
 .egb-week-sidebar .egb-week-nav-group + .egb-week-nav-group { padding-top: 12px; border-top: 1px solid var(--egb-line); }
@@ -78,18 +78,18 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-sidebar .egb-week-nav-group a:hover { color: var(--egb-ink); background: var(--egb-hover); text-decoration: none; }
 .egb-week-sidebar :where(.egb-week-reading-marker, .egb-pilot-status) { min-width: 12px; flex-shrink: 0; font-size: 12px; }
 .egb-week-sidebar .egb-week-nav-assessment a { font-size: 12px; padding-left: 32px; }
-.egb339-pilot:has(.egb-week-one) .egb-pilot-status[data-complete="true"] { color: var(--week-success); }
-.egb-week-one .egb-pilot-error { color: var(--week-error); }
-.egb-week-one .egb-pilot-completion { margin-top: 24px; padding-top: 16px; }
+.egb339-pilot:has(.egb-week-sidebar) .egb-pilot-status[data-complete="true"] { color: var(--week-success); }
+:is(.egb-week-one, .egb-week-study) .egb-pilot-error { color: var(--week-error); }
+:is(.egb-week-one, .egb-week-study) .egb-pilot-completion { margin-top: 24px; padding-top: 16px; }
 .egb-week-figure { margin-block: 28px; max-width: 860px; }
 .egb-week-figure svg, .egb-week-frame-scene svg { display: block; width: 100%; height: auto; }
-.egb-week-one svg { overflow: visible; }
-.egb-week-one svg text { font-family: inherit; font-size: 16px; fill: var(--egb-ink); }
-.egb-week-one .egb-week-diagram-name { fill: var(--egb-ink); font-weight: 600; }
-.egb-week-one .egb-week-diagram-label, .egb-week-one .egb-week-diagram-label text { font-size: 14px; fill: var(--egb-muted); }
+:is(.egb-week-one, .egb-week-study) svg { overflow: visible; }
+:is(.egb-week-one, .egb-week-study) svg text { font-family: inherit; font-size: 16px; fill: var(--egb-ink); }
+:is(.egb-week-one, .egb-week-study) .egb-week-diagram-name { fill: var(--egb-ink); font-weight: 600; }
+:is(.egb-week-one, .egb-week-study) .egb-week-diagram-label, :is(.egb-week-one, .egb-week-study) .egb-week-diagram-label text { font-size: 14px; fill: var(--egb-muted); }
 .egb-week-diagram-node { fill: var(--egb-paper); stroke: var(--egb-line); stroke-width: 1.5; }
-.egb-week-one .egb-week-frame-a, .egb-week-one .egb-week-frame-a text { color: var(--week-frame-a); fill: var(--week-frame-a); }
-.egb-week-one .egb-week-frame-b, .egb-week-one .egb-week-frame-b text { color: var(--week-frame-b); fill: var(--week-frame-b); }
+:is(.egb-week-one, .egb-week-study) .egb-week-frame-a, :is(.egb-week-one, .egb-week-study) .egb-week-frame-a text { color: var(--week-frame-a); fill: var(--week-frame-a); }
+:is(.egb-week-one, .egb-week-study) .egb-week-frame-b, :is(.egb-week-one, .egb-week-study) .egb-week-frame-b text { color: var(--week-frame-b); fill: var(--week-frame-b); }
 .egb-week-explanation-pair { max-width: 860px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-block: 32px; }
 .egb-week-explanation-pair h3 { margin-top: 0; }
 .egb-week-explanation-pair p { font-size: 16px; }
@@ -103,15 +103,15 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-explorer-controls label > span { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
 .egb-week-explorer-controls input { display: block; width: 100%; height: 28px; accent-color: var(--week-frame-b); cursor: pointer; }
 .egb-week-explorer-controls output { font-variant-numeric: tabular-nums; }
-.egb-week-one .egb-week-button { display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 550; line-height: 1.4; min-height: 38px; padding: 8px 12px; border: 1px solid var(--egb-line); border-radius: 4px; background: var(--egb-paper); color: var(--week-info); white-space: nowrap; }
-.egb-week-one .egb-week-button:hover { background: var(--egb-hover); border-color: var(--week-info); }
-.egb-week-one .egb-week-button[aria-pressed="true"] { background: var(--week-info-tint); border-color: var(--week-info); color: var(--week-info); }
+:is(.egb-week-one, .egb-week-study) .egb-week-button { display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 550; line-height: 1.4; min-height: 38px; padding: 8px 12px; border: 1px solid var(--egb-line); border-radius: 4px; background: var(--egb-paper); color: var(--week-info); white-space: nowrap; }
+:is(.egb-week-one, .egb-week-study) .egb-week-button:hover { background: var(--egb-hover); border-color: var(--week-info); }
+:is(.egb-week-one, .egb-week-study) .egb-week-button[aria-pressed="true"] { background: var(--week-info-tint); border-color: var(--week-info); color: var(--week-info); }
 .egb-week-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 12px; }
 .egb-week-actions:first-child { margin-top: 0; }
 .egb-week-coordinate-result { display: block; font-size: 19px; font-weight: 600; margin-top: 16px; }
 .egb-week-frame-math { grid-column: 1 / -1; border-top: 1px solid var(--egb-line); padding-top: 12px; max-width: 100%; }
 .egb-week-frame-math p { max-width: 65ch; font-size: 15px; }
-.egb-week-one .egb-week-frame-math .egb-pilot-math { display: inline-block; vertical-align: middle; max-width: 100%; padding: 12px 28px 12px 0; margin: 0; }
+:is(.egb-week-one, .egb-week-study) .egb-week-frame-math .egb-pilot-math { display: inline-block; vertical-align: middle; max-width: 100%; padding: 12px 28px 12px 0; margin: 0; }
 .egb-week-calculation-steps { list-style: decimal; padding-left: 24px; }
 .egb-week-calculation-steps > li { padding-left: 8px; margin-block: 28px; }
 .egb-week-calculation-steps li::marker { color: var(--week-info); font-weight: 600; }
@@ -134,11 +134,11 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-comparison > div { min-width: 0; }
 .egb-week-comparison h4 { font-weight: 600; font-size: 16px; }
 .egb-week-comparison p { font-size: 15px; }
-.egb-week-one .egb-week-notice, .egb-week-one .egb-week-feedback { padding: 14px 18px; margin-block: 24px; font-size: 15px; border-radius: 2px; }
-.egb-week-one [data-state="warning"] { background: var(--week-warning-tint); color: var(--week-warning); }
-.egb-week-one [data-state="error"] { background: var(--week-error-tint); color: var(--week-error); }
-.egb-week-one [data-state="success"] { background: var(--week-success-tint); color: var(--week-success); }
-.egb-week-one .egb-week-notice a { color: inherit; text-decoration: underline; }
+:is(.egb-week-one, .egb-week-study) .egb-week-notice, :is(.egb-week-one, .egb-week-study) .egb-week-feedback { padding: 14px 18px; margin-block: 24px; font-size: 15px; border-radius: 2px; }
+:is(.egb-week-one, .egb-week-study) [data-state="warning"] { background: var(--week-warning-tint); color: var(--week-warning); }
+:is(.egb-week-one, .egb-week-study) [data-state="error"] { background: var(--week-error-tint); color: var(--week-error); }
+:is(.egb-week-one, .egb-week-study) [data-state="success"] { background: var(--week-success-tint); color: var(--week-success); }
+:is(.egb-week-one, .egb-week-study) .egb-week-notice a { color: inherit; text-decoration: underline; }
 .egb-week-check { margin-block: 28px; padding-block: 16px; border-block: 1px solid var(--egb-line); }
 .egb-week-check h3 { margin-top: 0; }
 .egb-week-preparation { list-style: decimal; padding-left: 24px; }
@@ -153,12 +153,12 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
 .egb-week-answer-link { display: inline-block; margin-left: 16px; font-size: 13px; }
 .egb-week-answer { padding-top: 12px; }
 .egb-week-answer[hidden] { display: none; }
-.egb-week-one .egb-week-answer .egb339-markdown h4 { font-size: 17px; }
+:is(.egb-week-one, .egb-week-study) .egb-week-answer .egb339-markdown h4 { font-size: 17px; }
 .egb-week-sources { list-style: disc; padding-left: 20px; color: var(--egb-muted); font-size: 14px; }
 .egb-week-sources li { padding-left: 4px; margin-block: 16px; }
-.egb-week-one code { font-size: .88em; }
+:is(.egb-week-one, .egb-week-study) code { font-size: .88em; }
 @media (max-width: 1300px) {
-  .egb339-pilot:has(.egb-week-one) { grid-template-columns: 244px minmax(0, 1fr); gap: 32px; }
+  .egb339-pilot:has(.egb-week-sidebar) { grid-template-columns: 244px minmax(0, 1fr); gap: 32px; }
   .egb-week-opening { gap: 24px; }
   .egb-week-jump { gap: 0 14px; }
   .egb-week-explorer { gap: 24px; }
@@ -169,17 +169,17 @@ html:has(.egb-week-one) { scroll-behavior: smooth; }
   .egb-week-jump { position: static; }
 }
 @media (max-width: 767px) {
-  .egb339-pilot:has(.egb-week-one) { grid-template-columns: minmax(0, 1fr); }
+  .egb339-pilot:has(.egb-week-sidebar) { grid-template-columns: minmax(0, 1fr); }
   .egb-week-sidebar { max-height: 280px; }
   .egb-week-explanation-pair, .egb-week-comparison { grid-template-columns: 1fr; gap: 20px; }
   .egb-week-matrix-row { gap: 24px; }
-  .egb-week-one > section { margin-top: 44px; }
+  :is(.egb-week-one, .egb-week-study) > section { margin-top: 44px; }
 }
-@media (prefers-reduced-motion: reduce) { html:has(.egb-week-one) { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { html:has(:is(.egb-week-one, .egb-week-study)) { scroll-behavior: auto; } }
 @media print {
-  .egb339-pilot:has(.egb-week-one) { display: block; --week-info: #265b8c; --week-frame-b: #704494; --week-warning: #835006; --week-warning-tint: #f6efdf; }
-  .egb-week-jump, .egb-week-one button, .egb-week-answer-link, .egb-week-actions { display: none; }
+  .egb339-pilot:has(.egb-week-sidebar) { display: block; --week-info: #265b8c; --week-frame-b: #704494; --week-warning: #835006; --week-warning-tint: #f6efdf; }
+  .egb-week-jump, :is(.egb-week-one, .egb-week-study) button, .egb-week-answer-link, .egb-week-actions { display: none; }
   .egb-week-answer[hidden] { display: block; }
-  .egb-week-one > section { break-before: auto; }
-  .egb-week-one figure { break-inside: avoid; }
+  :is(.egb-week-one, .egb-week-study) > section { break-before: auto; }
+  :is(.egb-week-one, .egb-week-study) figure { break-inside: avoid; }
 }

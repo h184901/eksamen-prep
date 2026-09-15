@@ -35,6 +35,7 @@ export default async function Egb339TopicPage({ params }: { params: Promise<{ sl
         <PilotStatus pageKey={pageKey} />
         {planarMode && <nav aria-label="I denne leksjonen"><a href="#planar-modell">Modell</a><a href="#laboratorium">Robot og matriser</a><a href="#regneeksempel">Regneeksempel</a><a href="#prov-selv">Prøv selv</a><a href="#modell-assessment">Assessment-kobling</a></nav>}
       </header>
+      {slug === "keyboard-coordinate-mapping-and-safe-key-presses" && <p className="egb-pilot-prose"><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration#interactive">Assessment 2.1: følg hver SPACE-tast fra piksel til robotmål</Link></p>}
       <div className="egb-pilot-prose"><Egb339Markdown content={split >= 0 ? entry.body.slice(0, split) : entry.body} /></div>
       {planarMode && <PlanarKinematicsLesson mode={planarMode} />}
       {split >= 0 && <div className="egb-pilot-prose"><Egb339Markdown content={entry.body.slice(split)} /></div>}
