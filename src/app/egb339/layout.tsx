@@ -8,7 +8,7 @@ import "./study-weeks.css";
 export const metadata: Metadata = {
   title: "EGB339 Introduction to Robotics",
   description:
-    "Ukeplan, kinematikk, Python, robot vision og vurderingsstøtte for EGB339 ved QUT.",
+    "Emnebasert studieplan: kinematikk, pose, Jacobian, bevegelsesplanlegging og robot vision for EGB339 ved QUT.",
 };
 
 export default function Egb339Layout({ children }: { children: React.ReactNode }) {

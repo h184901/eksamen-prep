@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useProgress } from "@/components/ProgressProvider";
+import { IconCheck } from "../icons";
 
 export function PilotStatus({ pageKey, short = false, current = false }: { pageKey: string; short?: boolean; current?: boolean }) {
   const { ready, authed, loadError, isCompleted } = useProgress();
@@ -48,6 +49,7 @@ export default function Egb339PilotProgress({ pageKey }: { pageKey: string }) {
   return <div className="egb-pilot-completion">
     <p role="status"><PilotStatus pageKey={pageKey} /></p>
     <button type="button" onClick={save} disabled={!ready || (!authed && !loadError) || saving} className="egb-pilot-button">
+      {!saving && !loadError && !done && <IconCheck />}
       {saving ? loadError ? "Henter status…" : "Lagrer…" : loadError ? "Oppdater status" : done ? "Angre fullføring" : "Marker fullført"}
     </button>
     {error && <p role="alert" className="egb-pilot-error">{error}</p>}

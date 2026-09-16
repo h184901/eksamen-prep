@@ -6,11 +6,13 @@ import Egb339PilotProgress from "../pilot/Egb339PilotProgress";
 import { PilotBreadcrumb, PilotEntryNav } from "../pilot/Egb339PilotShell";
 import { getEgb339Concept } from "@/lib/egb339-vault/loader";
 import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
-import { WEEK_ONE_PROMPTS, WEEK_ONE_WARMUP } from "@/lib/egb339-week-one";
+import { egb339WeekSubject } from "@/lib/egb339";
+import { WEEK_ONE_PROMPTS, WEEK_ONE_SECTIONS, WEEK_ONE_WARMUP } from "@/lib/egb339-week-one";
 import { RobotSystemDiagram, KinematicChainDiagram } from "./WeekOneDiagrams";
 import { WeekOneConditionalCheck, WeekOneFrameExplorer, WeekOneMatrixExplorer } from "./WeekOneExplorers";
 import { WeekOneJumpNavigation } from "./WeekOneNavigation";
 import WeekOneDisclosure from "./WeekOneDisclosure";
+import { IconFlask } from "../icons";
 
 export default function WeekOnePage() {
   const python = getEgb339Concept("python-control-flow-and-collections")!;
@@ -18,12 +20,19 @@ export default function WeekOnePage() {
   const warmup = getEgb339AssessmentSolution(WEEK_ONE_WARMUP)!;
 
   return <>
-    <PilotBreadcrumb title="Introduction" week={1} />
+    <PilotBreadcrumb title="Introduksjon til robotikk" week={1} />
     <article className="egb-pilot-article egb-week-one">
       <section id="introduction" data-week-one-section>
         <header className="egb-week-heading">
-          <h1>Week 1: Introduction</h1>
+          <p className="egb-week-kicker">Uke 1 av 8 · EGB339</p>
+          <h1>Introduksjon til robotikk</h1>
           <p>Fra en fysisk robot til koordinater, matematikk og kode.</p>
+          <ul className="egb-week-meta" aria-label="Innhold i dette emnet">
+            <li className="egb-pill">{WEEK_ONE_SECTIONS.filter((section) => "pageKey" in section).length} temaer</li>
+            <li className="egb-pill">{warmup.parts.length} warmup-oppgaver</li>
+            <li className="egb-pill">1 assessment</li>
+            <li className="egb-pill egb-pill-interactive"><IconFlask />{egb339WeekSubject(1)?.interactive}</li>
+          </ul>
         </header>
         <div className="egb-week-opening">
           <figure className="egb-week-robot-image">
@@ -35,7 +44,7 @@ export default function WeekOnePage() {
             <h2>Hva må roboten vite?</h2>
             <p>For å gripe en gjenstand må roboten vite hvor gjenstanden er, hvordan griperen skal vende og hvilke ledd som må beveges.</p>
             <p>EGB339 kobler disse spørsmålene sammen: først pose og kinematikk, deretter bevegelse og robot vision. Python lar deg regne på modellene og kontrollere dem.</p>
-            <p className="egb-pilot-small">Denne uken etablerer begrepene. De fullstendige transformasjonene kommer i Week 2 og 3.</p>
+            <p className="egb-pilot-small">Denne uken etablerer begrepene. De fullstendige transformasjonene kommer i <Link href="/egb339/uker/uke-2">Lineær algebra og 2D-pose</Link> (uke 2) og <Link href="/egb339/uker/uke-3">NumPy og 3D-pose</Link> (uke 3).</p>
           </div>
         </div>
       </section>
@@ -56,7 +65,7 @@ export default function WeekOnePage() {
         </div>
         <div className="egb-pilot-prose"><h3>Ledd, lenker og end-effector</h3><p>Et ledd tillater relativ bevegelse mellom lenker. End-effector er verktøyet ytterst, for eksempel en griper. En frihetsgrad er én uavhengig bevegelsesvariabel; de to roterende leddene nedenfor gir to leddvinkler.</p></div>
         <KinematicChainDiagram />
-        <p className="egb-pilot-prose">I <Link href="/egb339/uker/uke-4">Week 4</Link> bruker vi leddvinklene til å beregne verktøyets pose. Her er målet bare å kunne identifisere base, ledd, lenker og verktøy.</p>
+        <p className="egb-pilot-prose">I <Link href="/egb339/uker/uke-4">Forward kinematics</Link> (uke 4) bruker vi leddvinklene til å beregne verktøyets pose. Her er målet bare å kunne identifisere base, ledd, lenker og verktøy.</p>
       </section>
 
       <section id="coordinate-frames" data-week-one-section>
@@ -119,10 +128,10 @@ export default function WeekOnePage() {
 
       <section id="practical" data-week-one-section className="egb-pilot-prose">
         <h2>Practical preparation</h2>
-        <p>Tutorials og practicals starter i Week 2, ifølge QUTs Week 1-forelesning, side 53. Denne delen er forberedelse, ikke et eget offisielt Week 1-labsett.</p>
+        <p>Tutorials og practicals starter i uke 2, ifølge QUTs Week 1-forelesning, side 53. Denne delen er forberedelse, ikke et eget offisielt uke 1-labsett.</p>
         <ol className="egb-week-preparation">
           <li>Finn QUTs startfil og offentlige tester for warmup. Kontroller at du har riktig filnavn og funksjonssignaturer før du begynner.</li>
-          <li>Bruk kursmiljøet fra <Link href="/egb339/ressurser">praktiske ressurser</Link>. Kontroller at Python og NumPy kan importeres. Følg oppsettet i Python Refresher fra Week 2.</li>
+          <li>Bruk kursmiljøet fra <Link href="/egb339/ressurser">praktiske ressurser</Link>. Kontroller at Python og NumPy kan importeres. Følg oppsettet i Python Refresher fra uke 2.</li>
           <li>Skill mellom simulering og fysisk robot: <Link href="/egb339/temaer/coppeliasim">CoppeliaSim</Link> og <Link href="/egb339/temaer/dobot-magician">Dobot Magician</Link> brukes senere. Denne nettsidens figurer sender ingen kommandoer til en robot.</li>
         </ol>
       </section>
@@ -130,7 +139,7 @@ export default function WeekOnePage() {
       <section id="oppgaver" data-week-one-section>
         <div className="egb-pilot-prose">
           <h2>Exercises and solutions</h2>
-          <p>Bruk den frivillige warmupen til å kontrollere grunnlaget. Q1–Q7 trener Python og inngår i practical i Week 2. Q8–Q15 trener NumPy og inngår i practical i Week 3; du kan se dem som en forhåndsvisning nå.</p>
+          <p>Bruk den frivillige warmupen til å kontrollere grunnlaget. Q1–Q7 trener Python og inngår i practical i uke 2. Q8–Q15 trener NumPy og inngår i practical i uke 3; du kan se dem som en forhåndsvisning nå.</p>
           <p className="egb-week-notice" data-state="warning">Startfilen <code>assignment1_0.py</code> mangler i det lokale kildesettet. Q1, Q4 og Q10 har derfor ikke verifiserbar eksakt fasit her. Ordlyden om nedre grense i Q3 er også uklar. Begrensningene står i løsningene.</p>
           <nav className="egb-week-question-index" aria-label="Warmup-spørsmål">{warmup.parts.map((part) => <a key={part.id} href={`#warmup-${part.id}`}>{part.id.toUpperCase()}</a>)}</nav>
         </div>
@@ -152,7 +161,7 @@ export default function WeekOnePage() {
         <h2>Assessment and next week</h2>
         <p><Link href="/egb339/vurderinger/assessment-1-0-warmup-to-gradescope">Assessment 1.0: Warmup to Gradescope</Link> er frivillig og gir 0 poeng. Gjennomgangen over er den samme som på assessment-siden, ikke et ekstra oppgavesett. Fullføring lagres på samme assessment.</p>
         <div role="group" aria-label="Fullføring: Warmup"><Egb339PilotProgress pageKey={`egb339/vurdering/${WEEK_ONE_WARMUP}`} /></div>
-        <p>I <Link href="/egb339/uker/uke-2">Week 2</Link> kobles lineær algebra til SO(2) og SE(2). Dette brukes i <Link href="/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d">Assessment 1.1: Position and orientation in 2D</Link>. Det er en pensumkobling, ikke en innleveringsfrist.</p>
+        <p>I <Link href="/egb339/uker/uke-2">Lineær algebra og 2D-pose</Link> (uke 2) kobles lineær algebra til SO(2) og SE(2). Dette brukes i <Link href="/egb339/vurderinger/assessment-1-1-position-and-orientation-in-2d">Assessment 1.1: Position and orientation in 2D</Link>. Det er en pensumkobling, ikke en innleveringsfrist.</p>
         <p>Det anvendte prosjektet krever både kode og muntlig forklaring av robotkinematikken. Vurderingskoden skal være ditt eget arbeid og skal ikke publiseres offentlig. Kontroller gjeldende QUT-regler for GenAI, kildehenvisninger og de muntlige komponentene på <Link href="/egb339/vurderinger">vurderingsoversikten</Link>.</p>
         <h3 id="kilder">Kilder og videre lesing</h3>
         <ul className="egb-week-sources">
@@ -161,10 +170,10 @@ export default function WeekOnePage() {
           <li><strong>QUT, Warmup to Gradescope:</strong> PDF-side 1–6. {warmup.scope}</li>
           <li><strong>Robotics Toolbox for Python:</strong> <a href="https://github.com/petercorke/robotics-toolbox-python/blob/main/docs/figs/swift.png">Panda-figuren fra dokumentasjonen</a>, <code>examples/teach.py</code> og <code>models/ETS/Planar2.py</code>. Bildet er uendret og distribueres med <a href={"/egb339/week-1/robotics-toolbox-LICENSE.txt"}>MIT-lisensen</a> (© 2020 jhavl).</li>
         </ul>
-        <h3>Avslutt Week 1</h3>
-        <p>Kan du skille punkt fra pose, lese et koordinatrammenavn og følge ett matriseprodukt? Marker uken når du er klar. Uke, temaer og warmup har separate fullføringsmerker.</p>
-        <div role="group" aria-label="Fullføring: Week 1"><Egb339PilotProgress pageKey="egb339/uke/uke-1" /></div>
-        <PilotEntryNav previous={{ href: "/egb339", title: "Kursplan", pageKey: "egb339" }} next={{ href: "/egb339/uker/uke-2", title: "Week 2: Lineær algebra og 2D-pose", pageKey: "egb339/uke/uke-2" }} />
+        <h3>Fullfør Introduksjon til robotikk</h3>
+        <p>Kan du skille punkt fra pose, lese et koordinatrammenavn og følge ett matriseprodukt? Marker emnet (uke 1) når du er klar. Emne, temaer og warmup har separate fullføringsmerker.</p>
+        <div role="group" aria-label="Fullføring: Introduksjon til robotikk"><Egb339PilotProgress pageKey="egb339/uke/uke-1" /></div>
+        <PilotEntryNav previous={{ href: "/egb339", title: "Kursoversikt", pageKey: "egb339" }} next={{ href: "/egb339/uker/uke-2", title: "Lineær algebra og 2D-pose", pageKey: "egb339/uke/uke-2" }} />
       </section>
     </article>
   </>;

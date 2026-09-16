@@ -1,10 +1,16 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { useTutor } from "./TutorContext";
+import { isTutorDisabledForPath } from "@/lib/tutor-visibility";
 
 export default function TutorButton() {
-  const { isOpen, isMinimized, open, messages, isStreaming, context } = useTutor();
+  const { isOpen, isMinimized, open, messages, isStreaming } = useTutor();
+  const pathname = usePathname();
+
+  // The tutor is disabled for EGB339 (route-based, not CSS hiding).
+  if (isTutorDisabledForPath(pathname)) return null;
 
   const visible = !isOpen || isMinimized;
   if (!visible) return null;
@@ -14,7 +20,7 @@ export default function TutorButton() {
   return (
     <button
       onClick={open}
-      aria-label={context.subject === "egb339" ? "Spør tutoren, åpne AI-tutor" : "Åpne AI-tutor"}
+      aria-label="Åpne AI-tutor"
       data-tutor-trigger
       className="fixed bottom-5 right-5 z-[80] group print:hidden"
     >

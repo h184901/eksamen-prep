@@ -9,7 +9,8 @@ import { getEgb339Course } from "@/lib/egb339-course-loader";
 import { getEgb339Concept, getEgb339Resource, getEgb339Week } from "@/lib/egb339-vault/loader";
 import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
 import { egb339WeekSections } from "@/lib/egb339-study-weeks";
-import { egb339DisplayTitle } from "@/lib/egb339";
+import { egb339DisplayTitle, egb339WeekSubject } from "@/lib/egb339";
+import { IconFlask } from "../icons";
 import { StudyWeekJumpNavigation } from "./StudyWeekNavigation";
 import StudyWeekAssessments from "./StudyWeekAssessments";
 import StudyFigure from "./StudyFigure";
@@ -32,12 +33,20 @@ export default function StudyWeekPage({ number }: { number: number }) {
   const sections = egb339WeekSections(week);
   const topics = week.topics.map((topic) => getEgb339Concept(topic.href.split("/").at(-1)!)!);
   const learning = EGB339_WEEK_LEARNING[number];
+  const problems = getEgb339ProblemsForWeek(number);
   return <>
     <PilotBreadcrumb title={egb339DisplayTitle(entry)} week={number} />
     <article className="egb-pilot-article egb-week-study" data-study-week={number}>
       <header className="egb-week-heading">
-        <h1>Week {number}: {egb339DisplayTitle(entry)}</h1>
+        <p className="egb-week-kicker">Uke {number} av 8 · EGB339</p>
+        <h1>{egb339DisplayTitle(entry)}</h1>
         <p className="egb-pilot-prose">{learning.purpose}</p>
+        <ul className="egb-week-meta" aria-label="Innhold i dette emnet">
+          <li className="egb-pill">{week.topics.length} temaer</li>
+          {problems.length > 0 && <li className="egb-pill">{problems.length} oppgaver</li>}
+          {week.assessments.length > 0 && <li className="egb-pill">{week.assessments.length} {week.assessments.length === 1 ? "assessment" : "assessments"}</li>}
+          <li className="egb-pill egb-pill-interactive"><IconFlask />{egb339WeekSubject(number)?.interactive}</li>
+        </ul>
       </header>
       <StudyWeekJumpNavigation sections={sections} />
       <span id="leksjoner" className="egb-week-anchor" />
@@ -83,12 +92,12 @@ export default function StudyWeekPage({ number }: { number: number }) {
         <p><Link href="/egb339/ressurser">Praktiske ressurser og verktøy</Link></p>
       </section>
       <div className="egb-pilot-prose">
-        <Egb339WeekProblems week={number} problems={getEgb339ProblemsForWeek(number)} longForm />
+        <Egb339WeekProblems week={number} problems={problems} longForm />
       </div>
       <StudyWeekAssessments week={week} />
       <footer className="egb-pilot-prose egb-week-finish">
-        <h2>Fullfør Week {number}</h2>
-        <p>Ukens merke er separat fra temaer og assessments. Marker når du har gjennomgått stoffet og kontrollert oppgavene du arbeider med.</p>
+        <h2>Fullfør {egb339DisplayTitle(entry)}</h2>
+        <p>Emnemerket (uke {number}) er separat fra temaer og assessments. Marker når du har gjennomgått stoffet og kontrollert oppgavene du arbeider med.</p>
         <Egb339PilotProgress pageKey={week.pageKey} />
         <PilotEntryNav previous={weeks.find((row) => row.week === number - 1) ?? null} next={weeks.find((row) => row.week === number + 1) ?? null} />
       </footer>

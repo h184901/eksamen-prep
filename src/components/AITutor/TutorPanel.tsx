@@ -1,12 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useTutor } from "./TutorContext";
 import TutorMessage from "./TutorMessage";
 import SmartSuggestions from "./SmartSuggestions";
 import { describeContext } from "@/lib/page-context";
+import { isTutorDisabledForPath } from "@/lib/tutor-visibility";
 
 export default function TutorPanel() {
+  const pathname = usePathname();
   const {
     isOpen,
     isMinimized,
@@ -130,6 +133,8 @@ export default function TutorPanel() {
   }, [isOpen, isMinimized, isExpanded, collapse, close]);
 
   if (!isOpen || isMinimized) return null;
+  // The tutor is disabled for EGB339 (route-based, not CSS hiding).
+  if (isTutorDisabledForPath(pathname)) return null;
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();

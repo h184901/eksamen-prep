@@ -1,27 +1,91 @@
 import Link from "next/link";
-import { Egb339Syllabus } from "@/components/egb339/pilot/Egb339CourseNavigation";
 import { getEgb339Course } from "@/lib/egb339-course-loader";
-import { EGB339_TRACKS } from "@/lib/egb339";
+import { getEgb339Week } from "@/lib/egb339-vault/loader";
+import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
+import { EGB339_WEEK_LEARNING } from "@/lib/egb339-week-learning";
+import { egb339DisplaySummary, egb339WeekSubject } from "@/lib/egb339";
+import { PilotStatus } from "@/components/egb339/pilot/Egb339PilotProgress";
+import Egb339ContinueCard from "@/components/egb339/Egb339ContinueCard";
+import { IconArrowRight, IconBookOpen, IconClipboardCheck, IconFlask, IconSigma } from "@/components/egb339/icons";
+
+const TOOLS = [
+  { href: "/egb339/uker/uke-2#laboratorium", title: "SE(2)-laboratoriet", description: "Koordinatrammer og homogene transformasjoner i 2D." },
+  { href: "/egb339/uker/uke-4#laboratorium", title: "FK-laboratoriet", description: "Dra i leddene og se end-effektoren til 2R-roboten." },
+  { href: "/egb339/uker/uke-5#laboratorium", title: "IK-laboratoriet", description: "Finn leddvinkler til et målpunkt — begge grener." },
+  { href: "/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration", title: "Assessment 2.1-guiden", description: "Følg SPACE fra bildepunkt til tastetrykk." },
+] as const;
 
 export default function Egb339Page() {
-  return <article className="egb-pilot-article egb-pilot-prose">
-    <header className="egb-pilot-lesson-header">
-      <h1>EGB339 Introduction to Robotics</h1>
-      <p>QUT · Semester 2 · 12 cp. Fra koordinatrammer til robotbevegelse og robot vision.</p>
-      <nav aria-label="Kursoversikt"><a href="#kursplan">Ukeplan</a><Link href="/egb339/vurderinger">Assessments</Link><Link href="/egb339/oppsummering">Hurtigark</Link></nav>
+  const weeks = getEgb339Course();
+  return <article className="egb-pilot-article egb-course-home">
+    <header className="egb-course-hero">
+      <p className="egb-course-kicker">EGB339 · QUT · Semester 2 · 12 cp</p>
+      <h1>Introduction to Robotics</h1>
+      <p className="egb-course-lede">Fra koordinatrammer til robotbevegelse og robot vision. Åtte emner bygger steg for steg opp til forward og inverse kinematics, Jacobian, bevegelsesplanlegging og bildebehandling.</p>
     </header>
-    <section id="kursplan"><h2>Uke for uke</h2>
-      <p>Åpne en uke for å se leksjoner, oppgaver og assessments som bruker stoffet. Fullføringsmerkene følger deg mellom kursplanen og lesesidene.</p>
-      <Egb339Syllabus weeks={getEgb339Course()} />
+
+    <Egb339ContinueCard weeks={weeks} />
+
+    <section aria-labelledby="topics-heading">
+      <h2 id="topics-heading">Emneoversikt</h2>
+      <p>Emnene leses i rekkefølge — hvert emne bygger på det forrige. Åpne et emne for leksjoner, interaktive laboratorier, oppgaver og assessment-koblinger.</p>
+      <ol className="egb-topic-list">
+        {weeks.map((week) => {
+          const entry = getEgb339Week(`uke-${week.week}`)!;
+          const subject = egb339WeekSubject(week.week)!;
+          const purpose = EGB339_WEEK_LEARNING[week.week]?.purpose ?? egb339DisplaySummary(entry);
+          const problems = getEgb339ProblemsForWeek(week.week).length;
+          return <li key={week.week}>
+            <Link href={week.href} className="egb-topic-row">
+              <span className="egb-topic-number" aria-hidden="true">{week.week}</span>
+              <span className="egb-topic-main">
+                <span className="egb-topic-title"><span className="sr-only">Uke {week.week}: </span>{week.title}</span>
+                <span className="egb-topic-purpose">{purpose}</span>
+                <span className="egb-topic-meta">
+                  <span className="egb-pill">{week.topics.length} temaer</span>
+                  {problems > 0 && <span className="egb-pill">{problems} oppgaver</span>}
+                  {week.assessments.length > 0 && <span className="egb-pill">{week.assessments.length} {week.assessments.length === 1 ? "assessment" : "assessments"}</span>}
+                  <span className="egb-pill egb-pill-interactive"><IconFlask />{subject.interactive}</span>
+                </span>
+              </span>
+              <PilotStatus pageKey={week.pageKey} short />
+              <IconArrowRight className="egb-topic-arrow" />
+            </Link>
+          </li>;
+        })}
+      </ol>
     </section>
-    <section id="tracks-heading"><h2>Faglige sammenhenger</h2>
-      <p>Bruk fagsporene når du vil slå opp et begrep på tvers av ukene.</p>
-      <ul className="egb-study-track-list">{EGB339_TRACKS.map((track) => <li key={track.id} data-track={track.id}><Link href={"/egb339/temaer#" + track.id}>{track.label}</Link><p>{track.description}</p></li>)}</ul>
+
+    <section aria-labelledby="tools-heading">
+      <h2 id="tools-heading">Interaktive robotverktøy</h2>
+      <p>Utforsk modellene direkte — endre parametere og se hva som skjer.</p>
+      <ul className="egb-tool-list">
+        {TOOLS.map((tool) => <li key={tool.href}>
+          <Link href={tool.href}>
+            <IconFlask />
+            <span className="egb-tool-text">
+              <span className="egb-tool-title">{tool.title}</span>
+              <span className="egb-tool-description">{tool.description}</span>
+            </span>
+            <IconArrowRight />
+          </Link>
+        </li>)}
+      </ul>
     </section>
-    <section><h2>Laboratorier og praktisk arbeid</h2>
-      <p><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration">Assessment 2.1: følg SPACE fra bildepunkt til tastetrykk</Link> samler robotvisning, kodegjennomgang, muntlige øvingsspørsmål og Word-guiden.</p>
-      <p><Link href="/egb339/temaer/se-2-homogeneous-transformations#utforsk">Koordinatrammer og SE(2)</Link> knytter figur til matrise. <Link href="/egb339/temaer/forward-kinematics#laboratorium">2R-roboten</Link> viser hvordan leddene bestemmer endepunktet.</p>
-      <p><Link href="/egb339/ressurser">Simulator, oppsett og praktiske guider</Link> holder robotspesifikke parametere atskilt fra den generelle matematikken.</p>
+
+    <section aria-labelledby="assessments-heading">
+      <h2 id="assessments-heading">Vurderinger</h2>
+      <p>Assessment 1 (problem-solving) teller 20 %, Assessment 2 (anvendt prosjekt) 45 % og den skriftlige eksamenen 35 %. Hver emneside viser hvilke assessments som bruker stoffet.</p>
+      <p><Link className="egb-course-link" href="/egb339/vurderinger"><IconClipboardCheck />Åpne vurderingsoversikten<IconArrowRight /></Link></p>
+    </section>
+
+    <section aria-labelledby="more-heading">
+      <h2 id="more-heading">Repetisjon og oppslag</h2>
+      <ul className="egb-course-link-list">
+        <li><Link href="/egb339/oppsummering"><IconSigma />Hurtigark og formler<span>Kjerneformlene fra alle åtte emner.</span></Link></li>
+        <li><Link href="/egb339/temaer"><IconBookOpen />Fagregister<span>Slå opp begreper på tvers av emnene.</span></Link></li>
+        <li><Link href="/egb339/ressurser"><IconFlask />Praktiske ressurser<span>Simulator, oppsett og praktiske guider.</span></Link></li>
+      </ul>
     </section>
   </article>;
 }

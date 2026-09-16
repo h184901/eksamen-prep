@@ -9,8 +9,8 @@ import type { Egb339CourseWeek } from "@/lib/egb339-course";
 
 export default function StudyWeekAssessments({ week }: { week: Egb339CourseWeek }) {
   return <section id="vurderinger" data-egb-week-section className="egb-week-assessments">
-    <h2>Assessments som bruker Week {week.week}</h2>
-    <p className="egb-pilot-prose">Dette er pensumkoblinger, ikke innleveringsuker. Gjennomgangene under er de samme som på vurderingssidene. Fullføringsmerket gjelder hele assessmenten, også når den bruker stoff fra flere uker.</p>
+    <h2>Assessments som bruker {week.title}</h2>
+    <p className="egb-pilot-prose">Dette er pensumkoblinger til uke {week.week}, ikke innleveringsuker. Gjennomgangene under er de samme som på vurderingssidene. Fullføringsmerket gjelder hele assessmenten, også når den bruker stoff fra flere uker.</p>
     <nav className="egb-week-assessment-index" aria-label="Assessment i denne uken">
       {week.assessments.map((link) => <a key={link.href} href={`#${egb339AssessmentAnchor(link.href.split("/").at(-1)!)}`}>{link.title}</a>)}
     </nav>

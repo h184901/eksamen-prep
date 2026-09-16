@@ -45,16 +45,41 @@ export const EGB339_TRACKS: Array<{
   },
 ];
 
-const WEEK_TITLES: Record<string, string> = {
-  "uke-1": "Emneintroduksjon og kinematisk tankegang",
-  "uke-2": "Lineær algebra og 2D-pose",
-  "uke-3": "NumPy og 3D-pose",
-  "uke-4": "Forward kinematics",
-  "uke-5": "Inverse kinematics",
-  "uke-6": "Robotens Jacobian",
-  "uke-7": "Bevegelsesplanlegging",
-  "uke-8": "Bilder og bildebehandling",
-};
+/**
+ * Single source of truth for the eight course topics. The subject name is the
+ * primary label everywhere (sidebar, headings, breadcrumbs, cards); the week
+ * number is secondary metadata. Titles follow the QUT source documents.
+ */
+export interface Egb339WeekSubject {
+  week: number;
+  slug: string;
+  title: string;
+  /** Short label for the interactive lab or explorer on the week page. */
+  interactive: string;
+}
+
+export const EGB339_WEEK_SUBJECTS: readonly Egb339WeekSubject[] = [
+  { week: 1, slug: "uke-1", title: "Introduksjon til robotikk", interactive: "Ramme- og matriseutforsker" },
+  { week: 2, slug: "uke-2", title: "Lineær algebra og 2D-pose", interactive: "SE(2)-laboratorium" },
+  { week: 3, slug: "uke-3", title: "NumPy og 3D-pose", interactive: "3D-rotasjonslaboratorium" },
+  { week: 4, slug: "uke-4", title: "Forward kinematics", interactive: "FK-laboratorium" },
+  { week: 5, slug: "uke-5", title: "Inverse kinematics", interactive: "IK-laboratorium" },
+  { week: 6, slug: "uke-6", title: "Robot Jacobian", interactive: "Jacobian-eksempel" },
+  { week: 7, slug: "uke-7", title: "Bevegelsesplanlegging", interactive: "Banesammenligning" },
+  { week: 8, slug: "uke-8", title: "Bilder og bildebehandling", interactive: "Bildeeksempler" },
+] as const;
+
+export function egb339WeekSubject(week: number): Egb339WeekSubject | null {
+  return EGB339_WEEK_SUBJECTS.find((subject) => subject.week === week) ?? null;
+}
+
+export function egb339WeekSubjectTitle(week: number): string {
+  return egb339WeekSubject(week)?.title ?? `Uke ${week}`;
+}
+
+const WEEK_TITLES: Record<string, string> = Object.fromEntries(
+  EGB339_WEEK_SUBJECTS.map((subject) => [subject.slug, subject.title]),
+);
 
 const WEEK_SUMMARIES: Record<string, string> = {
   "uke-7":
