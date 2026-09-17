@@ -58,6 +58,9 @@ assert(sidebar.includes("data-mobile-open"), "Mobile course-navigation collapse 
 assert(sidebar.includes("egb-week-accordion-meta"), "Week number is secondary metadata in the sidebar");
 assert(sidebar.includes("Uke {week.week}"), "Week number remains as small metadata");
 assert(sidebar.includes("hashTarget()") && sidebar.includes("catch {"), "Malformed hashes must not throw");
+assert(!sidebar.includes("week.assessments.map"), "Weeks must not enumerate individual assessments; the global Assessments link covers them");
+assert(sidebar.includes('href: "/egb339/vurderinger"'), "The global Assessments section stays in the sidebar");
+assert(sidebar.includes('pathname.startsWith(`${href}/`)'), "Reference links stay highlighted on their detail pages");
 
 // --- Landing page ------------------------------------------------------------
 const landing = readFileSync("src/app/egb339/page.tsx", "utf8");

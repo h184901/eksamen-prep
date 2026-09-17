@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useProgress } from "@/components/ProgressProvider";
 import { PilotStatus } from "../pilot/Egb339PilotProgress";
 import type { Egb339CourseWeek } from "@/lib/egb339-course";
-import { egb339AssessmentAnchor, egb339WeekSections, type Egb339WeekSection } from "@/lib/egb339-study-weeks";
+import { egb339WeekSections, type Egb339WeekSection } from "@/lib/egb339-study-weeks";
 import { IconBookOpen, IconChevronDown, IconClipboardCheck, IconFlask, IconMenu, IconSigma } from "../icons";
 
 const sectionSelector = "[data-week-one-section], [data-egb-week-section]";
@@ -166,16 +166,13 @@ export default function StudyWeekCourseNavigation({ weeks }: { weeks: Egb339Cour
                       </Link>
                     </li>;
                   })}
-                  {week.week !== 1 && week.assessments.map((assessment) => <li key={assessment.href} className="egb-week-nav-assessment">
-                    <Link href={`${week.href}#${egb339AssessmentAnchor(assessment.href.split("/").at(-1)!)}`} aria-current={pathname === assessment.href ? "page" : undefined}><PilotStatus pageKey={assessment.pageKey} short /><span>{assessment.title}</span></Link>
-                  </li>)}
                 </ul>
               </div>
             </li>;
           })}
         </ol>
         <ul className="egb-pilot-reference-nav">
-          {REFERENCE_LINKS.map(({ href, title, Icon }) => <li key={href}><Link href={href} aria-current={pathname === href ? "page" : undefined}><Icon /><span>{title}</span></Link></li>)}
+          {REFERENCE_LINKS.map(({ href, title, Icon }) => <li key={href}><Link href={href} aria-current={pathname === href || pathname.startsWith(`${href}/`) ? "page" : undefined}><Icon /><span>{title}</span></Link></li>)}
         </ul>
       </div>
     </nav>
