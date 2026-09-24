@@ -3,6 +3,7 @@ import {
   studyPlan,
   type PlanSemester,
   type PlanSubject,
+  type PlanYear,
   type SubjectColor,
   type SubjectStatus,
 } from "@/lib/study-plan";
@@ -10,6 +11,14 @@ import {
 // Studieløp-roadmap: 1.–3. år → semestre → fagkort. Presentasjonskomponent
 // uten klient-hooks (rendres av server-siden). Aktive fag lenker til egen
 // rute; "Kommer senere"-fag er statiske (ingen lenke → ingen 404).
+//
+// Studiepoeng-vekting: fagkortene stables vertikalt i semesterkortet, og
+// semesterkortene i samme års-rad strekkes til lik høyde av grid-en. Hvert
+// fagkort får flex-grow = credits slik at ekstra høyde fordeles proporsjonalt
+// (10+10+10 → tre like kort), kombinert med padding-trinn (5 sp kompakt,
+// 10 sp normal, 20 sp stor) slik at vektingen også synes i den høyeste
+// kolonnen. Innholdet setter min-høyden — kort kan aldri bli uleselige.
+// På mobil (én kolonne) er det ingen strekk: naturlig høyde + sp-merke.
 
 const ACTIVE_YEAR_FOR_EXCHANGE = "3. år";
 
@@ -47,6 +56,13 @@ function StatusBadge({ status }: { status: SubjectStatus }) {
   );
 }
 
+// Padding-trinn per studiepoeng: 5 sp kompakt, 10 sp normal, 20 sp stor.
+function creditPadding(credits: number): string {
+  if (credits <= 5) return "py-2";
+  if (credits >= 20) return "py-5";
+  return "py-3";
+}
+
 function SubjectHeader({ subject }: { subject: PlanSubject }) {
   const tone = colorTone[subject.color];
   return (
@@ -55,7 +71,12 @@ function SubjectHeader({ subject }: { subject: PlanSubject }) {
         <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">
           {subject.code}
         </span>
-        <StatusBadge status={subject.status} />
+        <span className="flex items-center gap-2">
+          <span className="text-[11px] font-semibold text-[var(--muted)] whitespace-nowrap">
+            {subject.credits} sp
+          </span>
+          <StatusBadge status={subject.status} />
+        </span>
       </div>
       {subject.name && (
         <h4 className={`text-sm font-semibold leading-snug mt-1 ${subject.href ? tone.title : "text-neutral-500 dark:text-neutral-400"}`}>
@@ -83,17 +104,24 @@ function ChipRow({ chips }: { chips: string[] }) {
 
 function SubjectCard({ subject }: { subject: PlanSubject }) {
   const tone = colorTone[subject.color];
+  // flex-grow = credits → strekk-høyde i semesterkolonnen fordeles
+  // proporsjonalt med studiepoeng (se kommentar øverst i fila).
+  const grow = { flexGrow: subject.credits };
+  const pad = creditPadding(subject.credits);
 
   // Aktivt fag → hele kortet er en lenke til faget.
   if (subject.href) {
     return (
       <Link
         href={subject.href}
-        className={`group block rounded-lg border border-[var(--card-border)] border-l-4 ${tone.accent} bg-[var(--card)] px-4 py-3 transition-all hover:shadow-sm hover:-translate-y-px`}
+        style={grow}
+        className={`group flex flex-col rounded-lg border border-[var(--card-border)] border-l-4 ${tone.accent} bg-[var(--card)] px-4 ${pad} transition-all hover:shadow-sm hover:-translate-y-px`}
       >
         <SubjectHeader subject={subject} />
         {subject.chips && subject.chips.length > 0 && <ChipRow chips={subject.chips} />}
-        <span className={`mt-3 inline-flex items-center gap-1 text-xs font-semibold ${tone.title}`}>
+        {/* mt-auto pinner CTA-en til bunnen når kortet strekkes; pt-3 gir
+            samme minsteavstand som før (mt-3) i ustrukket tilstand. */}
+        <span className={`mt-auto pt-3 inline-flex items-center gap-1 text-xs font-semibold ${tone.title}`}>
           Åpne fag
           <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
         </span>
@@ -103,7 +131,10 @@ function SubjectCard({ subject }: { subject: PlanSubject }) {
 
   // Fag uten side ennå → statisk kort, ingen lenke.
   return (
-    <div className={`rounded-lg border border-dashed border-[var(--card-border)] border-l-4 ${tone.accent} bg-transparent px-4 py-3 opacity-80`}>
+    <div
+      style={grow}
+      className={`rounded-lg border border-dashed border-[var(--card-border)] border-l-4 ${tone.accent} bg-transparent px-4 ${pad} opacity-80`}
+    >
       <SubjectHeader subject={subject} />
     </div>
   );
@@ -140,16 +171,31 @@ function ExchangeCard() {
   );
 }
 
+function semesterCredits(semester: PlanSemester): number {
+  return semester.subjects.reduce((sum, s) => sum + s.credits, 0);
+}
+
+// "60 sp" for fullt modellerte år; 3. år bruker creditsNote i stedet
+// (valgemner/utveksling gjør en ren tallsum misvisende).
+function yearCreditsLabel(year: PlanYear): string {
+  if (year.creditsNote) return year.creditsNote;
+  return `${year.semesters.reduce((sum, s) => sum + semesterCredits(s), 0)} sp`;
+}
+
 function SemesterCard({ semester }: { semester: PlanSemester }) {
+  const total = semesterCredits(semester);
   return (
     <div className="flex flex-col rounded-xl border border-[var(--card-border)] bg-[var(--background)]/40 p-4">
       <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)] mb-3">
         {semester.label}
+        {/* Total kun når semesteret er modellert med fag — note-semestre
+            (S6) har ukjent/planlagt total og viser ingen sum. */}
+        {total > 0 && <span className="normal-case tracking-normal"> · {total} sp</span>}
       </h4>
       {semester.note ? (
         <p className="text-sm text-[var(--muted)] leading-relaxed">{semester.note}</p>
       ) : (
-        <div className="flex flex-col gap-2.5">
+        <div className="flex-1 flex flex-col gap-2.5">
           {semester.subjects.map((s) => (
             <SubjectCard key={s.code} subject={s} />
           ))}
@@ -185,6 +231,9 @@ export default function StudyPlanRoadmap() {
               <div className="flex items-center gap-3 mb-3">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
                   {year.label}
+                  <span className="normal-case tracking-normal font-medium text-[var(--muted)]">
+                    {" "}· {yearCreditsLabel(year)}
+                  </span>
                 </h3>
                 <span className="h-px flex-1 bg-[var(--card-border)]" aria-hidden />
               </div>

@@ -21,6 +21,8 @@ export interface PlanSubject {
   code: string;
   /** Kort navn. Utelatt der vi ikke kjenner offisiell tittel (vises som kun kode). */
   name?: string;
+  /** Studiepoeng (sp) per HVL-planen. Styrer også visuell vekting av kortet. */
+  credits: number;
   href: string | null;
   status: SubjectStatus;
   color: SubjectColor;
@@ -38,6 +40,9 @@ export interface PlanSemester {
 
 export interface PlanYear {
   label: string;
+  /** Vises etter årslabel i stedet for utregnet sp-total (brukt for 3. år,
+      der valgemner/utveksling gjør en ren tallsum misvisende). */
+  creditsNote?: string;
   semesters: PlanSemester[];
 }
 
@@ -49,10 +54,10 @@ export const studyPlan: PlanYear[] = [
         id: "s1",
         label: "Semester 1",
         subjects: [
-          { code: "DAT100", name: "Grunnleggende programmering", href: null, status: "later", color: "neutral" },
-          { code: "DAT111", name: "Introduksjon til programvareutvikling", href: null, status: "later", color: "neutral" },
-          { code: "ING100", name: "Ingeniørfaglig innføringsemne", href: null, status: "later", color: "neutral" },
-          { code: "MAT101", name: "Diskret matematikk 1", href: null, status: "later", color: "neutral" },
+          { code: "DAT100", name: "Grunnleggende programmering", credits: 10, href: null, status: "later", color: "neutral" },
+          { code: "DAT111", name: "Introduksjon til programvareutvikling", credits: 5, href: null, status: "later", color: "neutral" },
+          { code: "ING100", name: "Ingeniørfaglig innføringsemne", credits: 5, href: null, status: "later", color: "neutral" },
+          { code: "MAT101", name: "Diskret matematikk 1", credits: 10, href: null, status: "later", color: "neutral" },
         ],
       },
       {
@@ -62,6 +67,7 @@ export const studyPlan: PlanYear[] = [
           {
             code: "DAT102",
             name: "Algoritmer og datastrukturer",
+            credits: 10,
             href: "/dat102",
             status: "active",
             color: "dat102",
@@ -70,12 +76,13 @@ export const studyPlan: PlanYear[] = [
           {
             code: "DAT107",
             name: "Databaser",
+            credits: 10,
             href: "/dat107",
             status: "active",
             color: "dat107",
             chips: ["SQL", "Modellering", "NoSQL"],
           },
-          { code: "MAT110", name: "Matematikk 1", href: null, status: "later", color: "neutral" },
+          { code: "MAT110", name: "Matematikk 1", credits: 10, href: null, status: "later", color: "neutral" },
         ],
       },
     ],
@@ -87,10 +94,10 @@ export const studyPlan: PlanYear[] = [
         id: "s3",
         label: "Semester 3",
         subjects: [
-          { code: "DAT103", name: "Datamaskiner og operativsystem", href: null, status: "later", color: "neutral" },
-          { code: "DAT108", name: "Programmering og webapplikasjoner", href: null, status: "later", color: "neutral" },
-          { code: "MAT122", name: "Statistikk for ingeniører", href: null, status: "later", color: "neutral" },
-          { code: "MAT210", name: "Videregående diskret matematikk", href: null, status: "later", color: "neutral" },
+          { code: "DAT103", name: "Datamaskiner og operativsystem", credits: 10, href: null, status: "later", color: "neutral" },
+          { code: "DAT108", name: "Programmering og webapplikasjoner", credits: 10, href: null, status: "later", color: "neutral" },
+          { code: "MAT122", name: "Statistikk for ingeniører", credits: 5, href: null, status: "later", color: "neutral" },
+          { code: "MAT210", name: "Videregående diskret matematikk", credits: 5, href: null, status: "later", color: "neutral" },
         ],
       },
       {
@@ -100,6 +107,7 @@ export const studyPlan: PlanYear[] = [
           {
             code: "DAT109",
             name: "Systemutvikling",
+            credits: 10,
             href: "/dat109",
             status: "active",
             color: "sysdev",
@@ -108,6 +116,7 @@ export const studyPlan: PlanYear[] = [
           {
             code: "DAT110",
             name: "Distribuerte systemer og nettverksteknologi",
+            credits: 10,
             href: "/dat110",
             status: "active",
             color: "network",
@@ -116,6 +125,7 @@ export const studyPlan: PlanYear[] = [
           {
             code: "ING164",
             name: "Mekanikk, elektrisitet og kjemi",
+            credits: 10,
             href: "/ing164",
             status: "active",
             color: "physics",
@@ -127,17 +137,20 @@ export const studyPlan: PlanYear[] = [
   },
   {
     label: "3. år",
+    creditsNote: "spesialisering / utveksling",
     semesters: [
       {
         id: "s5",
         label: "Semester 5",
-        note: "Bacheloroppgave (DAT191), ING303 og spesialisering / valgemne.",
-        subjects: [],
+        subjects: [
+          { code: "DAT191", name: "Bacheloroppgave", credits: 20, href: null, status: "later", color: "neutral" },
+          { code: "ING303", credits: 10, href: null, status: "later", color: "neutral" },
+        ],
       },
       {
         id: "s6",
         label: "Semester 6",
-        note: "Spesialisering / valgemne.",
+        note: "Spesialisering / valgemner (30 sp), avhengig av studieretning.",
         subjects: [],
       },
     ],
