@@ -41,7 +41,7 @@ html:has(:is(.egb-week-one, .egb-week-study)) { scroll-behavior: smooth; }
 :is(.egb-week-one, .egb-week-study) h2 { font-size: 27px; margin-bottom: 16px; }
 :is(.egb-week-one, .egb-week-study) h3 { font-size: 20px; margin-top: 32px; }
 .egb-week-heading { margin-bottom: 28px; }
-.egb-week-heading h1 { font-size: clamp(30px, 2.6vw, 38px); }
+.egb-week-heading h1 { font-size: clamp(30px, 2.6vw, 38px); overflow-wrap: anywhere; }
 .egb-week-heading > p { font-size: 19px; color: var(--egb-muted); margin-block: 10px 0; }
 .egb-week-kicker { font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--egb-muted); margin: 0 0 8px; }
 .egb-week-meta { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; }

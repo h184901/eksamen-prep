@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Egb339PilotShell from "@/components/egb339/pilot/Egb339PilotShell";
+import Egb339DocumentLanguage from "@/components/egb339/Egb339DocumentLanguage";
 import "./egb339.css";
 import "./pilot.css";
 import "./week-one.css";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function Egb339Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="egb339">
+      <Egb339DocumentLanguage />
       <Egb339PilotShell>{children}</Egb339PilotShell>
     </div>
   );

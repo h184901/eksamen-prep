@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:egb339:e2e": "node scripts/run-egb339-e2e.mjs",
     "sync:dat110-vault": "node scripts/sync-dat110-vault.mjs",
     "validate:learnmore": "node scripts/validate-learnmore-links.mjs",
     "validate:distractors": "node scripts/validate-distractor-quality.mjs",
@@ -42,6 +43,7 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@types/katex": "^0.16.7",
     "@types/node": "^20.17.12",
     "@types/react": "^18.3.18",

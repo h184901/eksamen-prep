@@ -57,10 +57,10 @@ function useActiveSection(pathname: string) {
   return active;
 }
 
-export function StudyWeekJumpNavigation({ sectionsNo, sectionsEn, label }: { sectionsNo: Egb339WeekSection[]; sectionsEn?: Egb339WeekSection[]; label?: string }) {
+export function StudyWeekJumpNavigation({ sectionsNo, sectionsEn, label, labelEn }: { sectionsNo: Egb339WeekSection[]; sectionsEn?: Egb339WeekSection[]; label?: string; labelEn?: string }) {
   const { lang } = useEgb339Lang();
   const sections = lang === "en" && sectionsEn ? sectionsEn : sectionsNo;
-  const ariaLabel = label ?? ui(lang, "onThisPage");
+  const ariaLabel = lang === "en" ? labelEn ?? label ?? ui(lang, "onThisPage") : label ?? ui(lang, "onThisPage");
   const pathname = usePathname();
   const active = useActiveSection(pathname);
   const navigation = useRef<HTMLElement>(null);

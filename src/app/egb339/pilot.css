@@ -52,6 +52,7 @@ main:has(.egb339-pilot) { max-width: 1440px; padding: 28px 40px 64px; }
 .egb-pilot-content { min-width: 0; }
 .egb-pilot-prose { max-width: 740px; }
 .egb-pilot-article { font-size: 17px; }
+.egb-pilot-article :where(h1, h2, h3, h4) { overflow-wrap: anywhere; }
 .egb-pilot-article h1 { font-size: clamp(28px, 2.4vw, 36px); font-weight: 650; letter-spacing: -.025em; line-height: 1.2; text-wrap: balance; }
 .egb-pilot-article h2 { font-size: 24px; font-weight: 650; letter-spacing: -.015em; line-height: 1.35; margin-bottom: 16px; }
 .egb-pilot-article h3 { font-size: 18px; font-weight: 650; line-height: 1.5; margin-top: 28px; margin-bottom: 8px; }
