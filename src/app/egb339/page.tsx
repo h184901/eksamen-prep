@@ -1,71 +1,69 @@
 import Link from "next/link";
 import { getEgb339Course } from "@/lib/egb339-course-loader";
-import { getEgb339Week } from "@/lib/egb339-vault/loader";
+import { getEgb339Week, getEgb339En } from "@/lib/egb339-vault/loader";
 import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
 import { EGB339_WEEK_LEARNING } from "@/lib/egb339-week-learning";
 import { egb339DisplaySummary, egb339WeekSubject } from "@/lib/egb339";
-import { PilotStatus } from "@/components/egb339/pilot/Egb339PilotProgress";
+import { T } from "@/components/egb339/T";
 import Egb339ContinueCard from "@/components/egb339/Egb339ContinueCard";
+import Egb339TopicList, { type TopicRow } from "@/components/egb339/Egb339TopicList";
+import { EGB339_UI } from "@/lib/egb339-language/ui";
 import { IconArrowRight, IconBookOpen, IconClipboardCheck, IconFlask, IconSigma } from "@/components/egb339/icons";
 
 const TOOLS = [
-  { href: "/egb339/uker/uke-2#laboratorium", title: "SE(2)-laboratoriet", description: "Koordinatrammer og homogene transformasjoner i 2D." },
-  { href: "/egb339/uker/uke-4#laboratorium", title: "FK-laboratoriet", description: "Dra i leddene og se end-effektoren til 2R-roboten." },
-  { href: "/egb339/uker/uke-5#laboratorium", title: "IK-laboratoriet", description: "Finn leddvinkler til et målpunkt — begge grener." },
-  { href: "/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration", title: "Assessment 2.1-guiden", description: "Følg SPACE fra bildepunkt til tastetrykk." },
+  { href: "/egb339/uker/uke-2#laboratorium", title: EGB339_UI.toolSe2Title, description: EGB339_UI.toolSe2Description },
+  { href: "/egb339/uker/uke-4#laboratorium", title: EGB339_UI.toolFkTitle, description: EGB339_UI.toolFkDescription },
+  { href: "/egb339/uker/uke-5#laboratorium", title: EGB339_UI.toolIkTitle, description: EGB339_UI.toolIkDescription },
+  { href: "/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration", title: EGB339_UI.toolGuideTitle, description: EGB339_UI.toolGuideDescription },
 ] as const;
 
 export default function Egb339Page() {
   const weeks = getEgb339Course();
+  const rows: TopicRow[] = weeks.map((week) => {
+    const entry = getEgb339Week(`uke-${week.week}`)!;
+    const subject = egb339WeekSubject(week.week)!;
+    const learning = EGB339_WEEK_LEARNING[week.week];
+    const en = getEgb339En(entry.slug);
+    return {
+      week: week.week,
+      href: week.href,
+      pageKey: week.pageKey,
+      titleNo: subject.title,
+      titleEn: subject.titleEn,
+      purposeNo: learning?.purpose ?? egb339DisplaySummary(entry),
+      purposeEn: learning?.purposeEn ?? en?.summary ?? egb339DisplaySummary(entry),
+      interactiveNo: subject.interactive,
+      interactiveEn: subject.interactiveEn,
+      topicCount: week.topics.length,
+      problemCount: getEgb339ProblemsForWeek(week.week).length,
+      assessmentCount: week.assessments.length,
+    };
+  });
   return <article className="egb-pilot-article egb-course-home">
     <header className="egb-course-hero">
-      <p className="egb-course-kicker">EGB339 · QUT · Semester 2 · 12 cp</p>
+      <p className="egb-course-kicker"><T no={EGB339_UI.landingKicker.no} en={EGB339_UI.landingKicker.en} /></p>
       <h1>Introduction to Robotics</h1>
-      <p className="egb-course-lede">Fra koordinatrammer til robotbevegelse og robot vision. Åtte emner bygger steg for steg opp til forward og inverse kinematics, Jacobian, bevegelsesplanlegging og bildebehandling.</p>
+      <p className="egb-course-lede"><T no={EGB339_UI.landingLede.no} en={EGB339_UI.landingLede.en} /></p>
     </header>
 
     <Egb339ContinueCard weeks={weeks} />
 
     <section aria-labelledby="topics-heading">
-      <h2 id="topics-heading">Emneoversikt</h2>
-      <p>Emnene leses i rekkefølge — hvert emne bygger på det forrige. Åpne et emne for leksjoner, interaktive laboratorier, oppgaver og assessment-koblinger.</p>
-      <ol className="egb-topic-list">
-        {weeks.map((week) => {
-          const entry = getEgb339Week(`uke-${week.week}`)!;
-          const subject = egb339WeekSubject(week.week)!;
-          const purpose = EGB339_WEEK_LEARNING[week.week]?.purpose ?? egb339DisplaySummary(entry);
-          const problems = getEgb339ProblemsForWeek(week.week).length;
-          return <li key={week.week}>
-            <Link href={week.href} className="egb-topic-row">
-              <span className="egb-topic-number" aria-hidden="true">{week.week}</span>
-              <span className="egb-topic-main">
-                <span className="egb-topic-title"><span className="sr-only">Uke {week.week}: </span>{week.title}</span>
-                <span className="egb-topic-purpose">{purpose}</span>
-                <span className="egb-topic-meta">
-                  <span className="egb-pill">{week.topics.length} temaer</span>
-                  {problems > 0 && <span className="egb-pill">{problems} oppgaver</span>}
-                  {week.assessments.length > 0 && <span className="egb-pill">{week.assessments.length} {week.assessments.length === 1 ? "assessment" : "assessments"}</span>}
-                  <span className="egb-pill egb-pill-interactive"><IconFlask />{subject.interactive}</span>
-                </span>
-              </span>
-              <PilotStatus pageKey={week.pageKey} short />
-              <IconArrowRight className="egb-topic-arrow" />
-            </Link>
-          </li>;
-        })}
-      </ol>
+      <h2 id="topics-heading"><T no={EGB339_UI.topicsHeading.no} en={EGB339_UI.topicsHeading.en} /></h2>
+      <p><T no={EGB339_UI.topicsIntro.no} en={EGB339_UI.topicsIntro.en} /></p>
+      <Egb339TopicList rows={rows} />
     </section>
 
     <section aria-labelledby="tools-heading">
-      <h2 id="tools-heading">Interaktive robotverktøy</h2>
-      <p>Utforsk modellene direkte — endre parametere og se hva som skjer.</p>
+      <h2 id="tools-heading"><T no={EGB339_UI.toolsHeading.no} en={EGB339_UI.toolsHeading.en} /></h2>
+      <p><T no={EGB339_UI.toolsIntro.no} en={EGB339_UI.toolsIntro.en} /></p>
       <ul className="egb-tool-list">
         {TOOLS.map((tool) => <li key={tool.href}>
           <Link href={tool.href}>
             <IconFlask />
             <span className="egb-tool-text">
-              <span className="egb-tool-title">{tool.title}</span>
-              <span className="egb-tool-description">{tool.description}</span>
+              <span className="egb-tool-title"><T no={tool.title.no} en={tool.title.en} /></span>
+              <span className="egb-tool-description"><T no={tool.description.no} en={tool.description.en} /></span>
             </span>
             <IconArrowRight />
           </Link>
@@ -74,17 +72,17 @@ export default function Egb339Page() {
     </section>
 
     <section aria-labelledby="assessments-heading">
-      <h2 id="assessments-heading">Vurderinger</h2>
-      <p>Assessment 1 (problem-solving) teller 20 %, Assessment 2 (anvendt prosjekt) 45 % og den skriftlige eksamenen 35 %. Hver emneside viser hvilke assessments som bruker stoffet.</p>
-      <p><Link className="egb-course-link" href="/egb339/vurderinger"><IconClipboardCheck />Åpne vurderingsoversikten<IconArrowRight /></Link></p>
+      <h2 id="assessments-heading"><T no={EGB339_UI.assessmentsHeading.no} en={EGB339_UI.assessmentsHeading.en} /></h2>
+      <p><T no={EGB339_UI.assessmentsIntro.no} en={EGB339_UI.assessmentsIntro.en} /></p>
+      <p><Link className="egb-course-link" href="/egb339/vurderinger"><IconClipboardCheck /><T no={EGB339_UI.openAssessments.no} en={EGB339_UI.openAssessments.en} /><IconArrowRight /></Link></p>
     </section>
 
     <section aria-labelledby="more-heading">
-      <h2 id="more-heading">Repetisjon og oppslag</h2>
+      <h2 id="more-heading"><T no={EGB339_UI.moreHeading.no} en={EGB339_UI.moreHeading.en} /></h2>
       <ul className="egb-course-link-list">
-        <li><Link href="/egb339/oppsummering"><IconSigma />Hurtigark og formler<span>Kjerneformlene fra alle åtte emner.</span></Link></li>
-        <li><Link href="/egb339/temaer"><IconBookOpen />Fagregister<span>Slå opp begreper på tvers av emnene.</span></Link></li>
-        <li><Link href="/egb339/ressurser"><IconFlask />Praktiske ressurser<span>Simulator, oppsett og praktiske guider.</span></Link></li>
+        <li><Link href="/egb339/oppsummering"><IconSigma /><T no={EGB339_UI.cheatsheetLink.no} en={EGB339_UI.cheatsheetLink.en} /><span><T no={EGB339_UI.cheatsheetDescription.no} en={EGB339_UI.cheatsheetDescription.en} /></span></Link></li>
+        <li><Link href="/egb339/temaer"><IconBookOpen /><T no={EGB339_UI.indexLink.no} en={EGB339_UI.indexLink.en} /><span><T no={EGB339_UI.indexDescription.no} en={EGB339_UI.indexDescription.en} /></span></Link></li>
+        <li><Link href="/egb339/ressurser"><IconFlask /><T no={EGB339_UI.resourcesLink.no} en={EGB339_UI.resourcesLink.en} /><span><T no={EGB339_UI.resourcesDescription.no} en={EGB339_UI.resourcesDescription.en} /></span></Link></li>
       </ul>
     </section>
   </article>;

@@ -1,0 +1,190 @@
+{
+  "overrides": {
+    "uke-1": {
+      "title": "Introduksjon til robotikk"
+    },
+    "uke-2": {
+      "title": "Lineær algebra og 2D-pose"
+    },
+    "uke-3": {
+      "title": "NumPy og 3D-pose"
+    },
+    "uke-4": {
+      "title": "Forward kinematics"
+    },
+    "uke-5": {
+      "title": "Inverse kinematics"
+    },
+    "uke-6": {
+      "title": "Robot Jacobian"
+    },
+    "uke-7": {
+      "title": "Bevegelsesplanlegging"
+    },
+    "uke-8": {
+      "title": "Bilder og bildebehandling"
+    },
+    "atan2-and-inverse-trigonometry": {
+      "title": "atan2 og invers trigonometri"
+    },
+    "colour-normalization-and-chromaticity": {
+      "title": "Fargenormalisering og kromatisitet"
+    },
+    "coppeliasim": {
+      "title": "CoppeliaSim"
+    },
+    "differential-kinematics-and-local-linearisation": {
+      "title": "Differensiell kinematikk og lokal linearisering"
+    },
+    "digital-image-representation": {
+      "title": "Digital bilderepresentasjon"
+    },
+    "dobot-magician": {
+      "title": "Dobot Magician"
+    },
+    "egb339-weeks-1-6-robotics-foundations": {
+      "title": "EGB339 uke 1–6 – Robotikkgrunnlag"
+    },
+    "egb339-weeks-1-8-robotics-and-vision-foundations": {
+      "title": "EGB339 uke 1–8 – Robotikk- og visiongrunnlag"
+    },
+    "egb339-weeks-1-5-robotics-foundations": {
+      "title": "EGB339 uke 1–5 – Robotikkgrunnlag"
+    },
+    "forward-kinematics": {
+      "title": "Forward kinematics"
+    },
+    "image-histograms-and-thresholding": {
+      "title": "Bildehistogrammer og terskling"
+    },
+    "image-representation-and-processing": {
+      "title": "Bilderepresentasjon og -behandling"
+    },
+    "inverse-kinematics": {
+      "title": "Inverse kinematics"
+    },
+    "joint-angle-mapping": {
+      "title": "Leddvinkel-mapping"
+    },
+    "keyboard-coordinate-mapping-and-safe-key-presses": {
+      "title": "Tastaturkoordinater og sikre tastetrykk"
+    },
+    "kinematic-chains-and-joints": {
+      "title": "Kinematiske kjeder og ledd"
+    },
+    "linear-algebra-for-robotics": {
+      "title": "Lineær algebra for robotikk"
+    },
+    "monadic-and-dyadic-image-operations": {
+      "title": "Monadiske og dyadiske bildeoperasjoner"
+    },
+    "numpy-arrays-and-matrix-operations": {
+      "title": "NumPy-arrayer og matriseoperasjoner"
+    },
+    "optimization-based-inverse-kinematics": {
+      "title": "Optimaliseringsbasert inverse kinematics"
+    },
+    "partial-derivatives-for-robotics": {
+      "title": "Partiellderiverte for robotikk"
+    },
+    "planar-homographies": {
+      "title": "Plane homografier"
+    },
+    "point-to-segment-distance-and-obstacle-clearance": {
+      "title": "Punkt–segment-avstand og hindringsklaring"
+    },
+    "pose-graphs": {
+      "title": "Posegrafer"
+    },
+    "position-orientation-and-robot-kinematics": {
+      "title": "Posisjon, orientering og robotkinematikk"
+    },
+    "public-and-private-autograder-tests": {
+      "title": "Offentlige og private autograder-tester"
+    },
+    "python-control-flow-and-collections": {
+      "title": "Python kontrollflyt og samlinger"
+    },
+    "reference-frames": {
+      "title": "Referanserammer"
+    },
+    "robot-jacobian": {
+      "title": "Robot-Jacobian"
+    },
+    "robot-motion-interpolation": {
+      "title": "Interpolasjon av robotbevegelse"
+    },
+    "robot-workspace-and-ik-solution-branches": {
+      "title": "Robotarbeidsrom og IK-løsningsgrener"
+    },
+    "rotation-composition-in-3d": {
+      "title": "Rotasjonskomposisjon i 3D"
+    },
+    "se-2-homogeneous-transformations": {
+      "title": "SE(2) homogene transformasjoner"
+    },
+    "se-3-homogeneous-transformations": {
+      "title": "SE(3) homogene transformasjoner"
+    },
+    "shape-descriptors-from-area-and-perimeter": {
+      "title": "Formbeskrivelser fra areal og omkrets"
+    },
+    "so-2-rotation-matrices": {
+      "title": "SO(2) rotasjonsmatriser"
+    },
+    "so-3-rotation-matrices": {
+      "title": "SO(3) rotasjonsmatriser"
+    },
+    "trapezoidal-motion-profiles": {
+      "title": "Trapesformede hastighetsprofiler"
+    },
+    "assessment-1-problem-solving-task-overview": {
+      "title": "Assessment 1 – Oversikt over problem-solving-oppgaven"
+    },
+    "assessment-1-0-warmup-to-gradescope": {
+      "title": "Assessment 1.0 – Oppvarming til Gradescope"
+    },
+    "assessment-1-1-position-and-orientation-in-2d": {
+      "title": "Assessment 1.1 – Posisjon og orientering i 2D"
+    },
+    "assessment-1-2-position-and-orientation-in-3d": {
+      "title": "Assessment 1.2 – Posisjon og orientering i 3D"
+    },
+    "assessment-1-3-dobot-forward-kinematics": {
+      "title": "Assessment 1.3 – Dobot forward kinematics"
+    },
+    "assessment-1-4-robot-inverse-kinematics": {
+      "title": "Assessment 1.4 – Robot inverse kinematics"
+    },
+    "assessment-1-5-warehouse-automation": {
+      "title": "Assessment 1.5 – Lagerautomatisering"
+    },
+    "assessment-1-6-vision-fundamentals-part-1": {
+      "title": "Assessment 1.6 – Vision-grunnlag del 1"
+    },
+    "assessment-1-7-vision-fundamentals-part-2": {
+      "title": "Assessment 1.7 – Vision-grunnlag del 2"
+    },
+    "assessment-2-applied-project-overview": {
+      "title": "Assessment 2 – Oversikt over det anvendte prosjektet"
+    },
+    "assessment-2-1-simulation-and-oral-demonstration": {
+      "title": "Assessment 2.1 – Simulering og muntlig demonstrasjon"
+    },
+    "assessment-2-2-physical-robot-submission": {
+      "title": "Assessment 2.2 – Fysisk robot-innlevering"
+    },
+    "coppeliasim-forward-kinematics-practical": {
+      "title": "CoppeliaSim forward kinematics practical"
+    },
+    "coppeliasim-setup": {
+      "title": "CoppeliaSim-oppsett"
+    },
+    "egb339-course-and-assessment-overview": {
+      "title": "EGB339 emne- og vurderingsoversikt"
+    },
+    "robot-word-typing-practical": {
+      "title": "Robot ordskriving practical"
+    }
+  }
+}

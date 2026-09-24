@@ -54,19 +54,21 @@ export interface Egb339WeekSubject {
   week: number;
   slug: string;
   title: string;
+  titleEn: string;
   /** Short label for the interactive lab or explorer on the week page. */
   interactive: string;
+  interactiveEn: string;
 }
 
 export const EGB339_WEEK_SUBJECTS: readonly Egb339WeekSubject[] = [
-  { week: 1, slug: "uke-1", title: "Introduksjon til robotikk", interactive: "Ramme- og matriseutforsker" },
-  { week: 2, slug: "uke-2", title: "Lineær algebra og 2D-pose", interactive: "SE(2)-laboratorium" },
-  { week: 3, slug: "uke-3", title: "NumPy og 3D-pose", interactive: "3D-rotasjonslaboratorium" },
-  { week: 4, slug: "uke-4", title: "Forward kinematics", interactive: "FK-laboratorium" },
-  { week: 5, slug: "uke-5", title: "Inverse kinematics", interactive: "IK-laboratorium" },
-  { week: 6, slug: "uke-6", title: "Robot Jacobian", interactive: "Jacobian-eksempel" },
-  { week: 7, slug: "uke-7", title: "Bevegelsesplanlegging", interactive: "Banesammenligning" },
-  { week: 8, slug: "uke-8", title: "Bilder og bildebehandling", interactive: "Bildeeksempler" },
+  { week: 1, slug: "uke-1", title: "Introduksjon til robotikk", titleEn: "Introduction to Robotics", interactive: "Ramme- og matriseutforsker", interactiveEn: "Frame and matrix explorer" },
+  { week: 2, slug: "uke-2", title: "Lineær algebra og 2D-pose", titleEn: "Linear Algebra and 2D Pose", interactive: "SE(2)-laboratorium", interactiveEn: "SE(2) lab" },
+  { week: 3, slug: "uke-3", title: "NumPy og 3D-pose", titleEn: "NumPy and 3D Pose", interactive: "3D-rotasjonslaboratorium", interactiveEn: "3D rotation lab" },
+  { week: 4, slug: "uke-4", title: "Forward kinematics", titleEn: "Forward Kinematics", interactive: "FK-laboratorium", interactiveEn: "FK lab" },
+  { week: 5, slug: "uke-5", title: "Inverse kinematics", titleEn: "Inverse Kinematics", interactive: "IK-laboratorium", interactiveEn: "IK lab" },
+  { week: 6, slug: "uke-6", title: "Robot Jacobian", titleEn: "Robot Jacobian", interactive: "Jacobian-eksempel", interactiveEn: "Jacobian example" },
+  { week: 7, slug: "uke-7", title: "Bevegelsesplanlegging", titleEn: "Motion Planning", interactive: "Banesammenligning", interactiveEn: "Path comparison" },
+  { week: 8, slug: "uke-8", title: "Bilder og bildebehandling", titleEn: "Images and Image Processing", interactive: "Bildeeksempler", interactiveEn: "Image examples" },
 ] as const;
 
 export function egb339WeekSubject(week: number): Egb339WeekSubject | null {

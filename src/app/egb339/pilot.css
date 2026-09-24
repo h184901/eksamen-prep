@@ -202,6 +202,22 @@ main:has(.egb339-pilot) { max-width: 1440px; padding: 28px 40px 64px; }
 .egb339-pilot .egb339-markdown > aside > p:first-child { display: none; }
 .egb339-pilot .egb339-markdown :where(pre, table) { border-radius: var(--egb-radius); }
 
+/* Code blocks: separated dark container, language label, copy button, highlighting. */
+.egb339-pilot .egb-code-block { margin-block: 20px; border: 1px solid #2c3439; border-radius: 8px; background: #10161a; overflow: hidden; }
+.egb339-pilot .egb-code-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 10px 6px 14px; border-bottom: 1px solid #2c3439; background: #161d22; }
+.egb339-pilot .egb-code-language { font-family: ui-monospace, monospace; font-size: 11.5px; letter-spacing: .04em; color: #8b9aa5; }
+.egb339-pilot .egb-code-copy { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid #2c3439; border-radius: 6px; background: transparent; color: #aab8c2; font-size: 12px; font-weight: 500; transition: background-color 150ms cubic-bezier(.4,0,.2,1), color 150ms cubic-bezier(.4,0,.2,1), border-color 150ms cubic-bezier(.4,0,.2,1); }
+.egb339-pilot .egb-code-copy:hover { background: #212b32; color: #e6eef4; border-color: #3d4a53; }
+.egb339-pilot .egb-code-body { margin: 0; padding: 14px 16px; overflow-x: auto; font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.65; color: #d6e2ea; background: none; border: 0; }
+.egb339-pilot .egb-tok-keyword { color: #f97583; }
+.egb339-pilot .egb-tok-string { color: #a5d6a7; }
+.egb339-pilot .egb-tok-number { color: #79c0ff; }
+.egb339-pilot .egb-tok-comment { color: #7d8a94; font-style: italic; }
+.egb339-pilot .egb-tok-builtin { color: #d2a8ff; }
+.egb339-pilot .egb-tok-function { color: #d2a8ff; }
+.egb339-pilot .egb-tok-decorator { color: #ffa657; }
+.egb339-pilot .egb-tok-self { color: #79c0ff; font-style: italic; }
+
 /* Course home: hero, continue card, topic overview, tools and reference links. */
 .egb339-pilot .egb-course-home > section { margin-top: 44px; }
 .egb339-pilot .egb-course-home > section > p { max-width: 68ch; color: var(--egb-muted); }

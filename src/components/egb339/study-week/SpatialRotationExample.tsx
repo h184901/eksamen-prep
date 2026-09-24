@@ -4,9 +4,11 @@ import { useId, useState } from "react";
 import MathText from "../pilot/Egb339Math";
 import { matrixTex } from "@/lib/egb339-math-format";
 import { SPATIAL_ROTATION_EXAMPLE as example } from "@/lib/egb339-spatial-example";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 
 /** Exact orthographic projection of basis vectors, not a perspective illustration. */
 export default function SpatialRotationExample() {
+  const { lang } = useEgb339Lang();
   const [order, setOrder] = useState<"xy" | "yx">("xy");
   const [column, setColumn] = useState(0);
   const id = useId();
@@ -14,18 +16,18 @@ export default function SpatialRotationExample() {
   const vector = matrix.map((row) => row[column]);
   const project = ([x, y, z]: readonly number[]) => [x * 104 + y * 62, x * 36 - y * 64 - z * 108];
   return <div className="egb-spatial-example">
-    <h3>Samme to vinkler, to ulike sluttorienteringer</h3>
-    <p>Begge rotasjoner er 90°. Den andre rotasjonen skjer om den <strong>nye, lokale</strong> aksen. Derfor står faktorene i samme rekkefølge som rammerotasjonene.</p>
-    <div role="group" aria-label="Sammenlign lokale rotasjoner" className="egb-week-actions">
-      <button type="button" className="egb-week-button" aria-pressed={order === "xy"} onClick={() => setOrder("xy")}>X, så lokal Y</button>
-      <button type="button" className="egb-week-button" aria-pressed={order === "yx"} onClick={() => setOrder("yx")}>Y, så lokal X</button>
+    <h3>{lang === "en" ? "Same two angles, two different final orientations" : "Samme to vinkler, to ulike sluttorienteringer"}</h3>
+    <p>{lang === "en" ? <>Both rotations are 90°. The second rotation happens about the <strong>new, local</strong> axis. That is why the factors appear in the same order as the frame rotations.</> : <>Begge rotasjoner er 90°. Den andre rotasjonen skjer om den <strong>nye, lokale</strong> aksen. Derfor står faktorene i samme rekkefølge som rammerotasjonene.</>}</p>
+    <div role="group" aria-label={lang === "en" ? "Compare local rotations" : "Sammenlign lokale rotasjoner"} className="egb-week-actions">
+      <button type="button" className="egb-week-button" aria-pressed={order === "xy"} onClick={() => setOrder("xy")}>{lang === "en" ? "X, then local Y" : "X, så lokal Y"}</button>
+      <button type="button" className="egb-week-button" aria-pressed={order === "yx"} onClick={() => setOrder("yx")}>{lang === "en" ? "Y, then local X" : "Y, så lokal X"}</button>
       <button type="button" className="egb-week-button" onClick={() => { setOrder("xy"); setColumn(0); }}>Reset</button>
     </div>
     <div className="egb-week-figure-explanation">
       <figure className="egb-week-figure">
         <svg viewBox="0 0 520 336" role="img" aria-labelledby={`${id}-title ${id}-desc`} data-rotation-order={order} data-column={column}>
-          <title id={`${id}-title`}>Basisvektorer før og etter lokale 3D-rotasjoner</title>
-          <desc id={`${id}-desc`}>A er referanserammen. B er sluttorienteringen. Den valgte kolonnen i rotasjonsmatrisen fremhever samme akse i B.</desc>
+          <title id={`${id}-title`}>{lang === "en" ? "Basis vectors before and after local 3D rotations" : "Basisvektorer før og etter lokale 3D-rotasjoner"}</title>
+          <desc id={`${id}-desc`}>{lang === "en" ? "A is the reference frame. B is the final orientation. The selected column of the rotation matrix highlights the same axis in B." : "A er referanserammen. B er sluttorienteringen. Den valgte kolonnen i rotasjonsmatrisen fremhever samme akse i B."}</desc>
           <defs><marker id={`${id}-arrow`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto-start-reverse"><path d="M0 0L6 3L0 6Z" fill="context-stroke" /></marker></defs>
           {[{ name: "A", origin: [84, 192], rotation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]] }, { name: "B", origin: [360, 184], rotation: matrix }].map(({ name, origin, rotation }) => <g key={name}>
             {[0, 1, 2].map((axis) => {
@@ -39,19 +41,19 @@ export default function SpatialRotationExample() {
             <text x={origin[0]} y="292" textAnchor="middle">Ramme {name}</text>
           </g>)}
         </svg>
-        <figcaption>A og B er tegnet hver for seg for å vise orienteringen. Det er ingen translasjon i dette eksemplet. x er heltrukket, y stiplet og z prikket.</figcaption>
+        <figcaption>{lang === "en" ? "A and B are drawn separately to show the orientation. There is no translation in this example. x is solid, y dashed and z dotted." : "A og B er tegnet hver for seg for å vise orienteringen. Det er ingen translasjon i dette eksemplet. x er heltrukket, y stiplet og z prikket."}</figcaption>
       </figure>
       <div>
         <MathText>{order === "xy" ? String.raw`R_x(\pi/2)R_y(\pi/2)` : String.raw`R_y(\pi/2)R_x(\pi/2)`}</MathText>
         <MathText>{matrixTex(matrix)}</MathText>
-        <div role="group" aria-label="Velg en matrise-kolonne" className="egb-week-actions">{[0, 1, 2].map((axis) => <button type="button" key={axis} className="egb-week-button" aria-pressed={column === axis} onClick={() => setColumn(axis)}>Kolonne {axis + 1}: {["x", "y", "z"][axis]}B</button>)}</div>
-        <p role="status">{["x", "y", "z"][column]}-aksen til B er ({vector.join(", ")}) målt i A. Det er akkurat kolonne {column + 1}.</p>
+        <div role="group" aria-label={lang === "en" ? "Choose a matrix column" : "Velg en matrise-kolonne"} className="egb-week-actions">{[0, 1, 2].map((axis) => <button type="button" key={axis} className="egb-week-button" aria-pressed={column === axis} onClick={() => setColumn(axis)}>{lang === "en" ? "Column" : "Kolonne"} {axis + 1}: {["x", "y", "z"][axis]}B</button>)}</div>
+        <p role="status">{lang === "en" ? `The ${["x", "y", "z"][column]}-axis of B is (${vector.join(", ")}) measured in A. That is exactly column ${column + 1}.` : `${["x", "y", "z"][column]}-aksen til B er (${vector.join(", ")}) målt i A. Det er akkurat kolonne ${column + 1}.`}</p>
       </div>
     </div>
-    <div className="egb-pilot-prose"><h4>Kontroller én kolonne for hånd</h4>
+    <div className="egb-pilot-prose"><h4>{lang === "en" ? "Check one column by hand" : "Kontroller én kolonne for hånd"}</h4>
       <MathText>{order === "xy" ? String.raw`R_y(\pi/2)e_x=(0,0,-1)^T,\quad R_x(\pi/2)(0,0,-1)^T=(0,1,0)^T` : String.raw`R_x(\pi/2)e_x=(1,0,0)^T,\quad R_y(\pi/2)(1,0,0)^T=(0,0,-1)^T`}</MathText>
-      <p>På kolonnevektoren virker høyre faktor først. Dette motsier ikke rekkefølgen på de lokale rammerotasjonene: det er to måter å lese samme produkt på.</p>
-      <p className="egb-pilot-source">Corke, kap. 2.3.1.1, trykt s. 47–48; kontrollert med SpatialMath SO3.Rx og SO3.Ry. QUT Week 3, tutorial s. 4–6, bruker samme skille mellom lokale og globale akser.</p>
+      <p>{lang === "en" ? "On the column vector the right factor acts first. This does not contradict the order of the local frame rotations: there are two ways to read the same product." : "På kolonnevektoren virker høyre faktor først. Dette motsier ikke rekkefølgen på de lokale rammerotasjonene: det er to måter å lese samme produkt på."}</p>
+      <p className="egb-pilot-source">{lang === "en" ? "Corke, ch. 2.3.1.1, printed pp. 47–48; checked with SpatialMath SO3.Rx and SO3.Ry. QUT Week 3, tutorial pp. 4–6, uses the same distinction between local and global axes." : "Corke, kap. 2.3.1.1, trykt s. 47–48; kontrollert med SpatialMath SO3.Rx og SO3.Ry. QUT Week 3, tutorial s. 4–6, bruker samme skille mellom lokale og globale akser."}</p>
     </div>
   </div>;
 }

@@ -1,19 +1,24 @@
-import Link from "next/link";
-import Egb339Markdown from "../Egb339Markdown";
 import Egb339WeekProblems from "../Egb339WeekProblems";
 import Egb339PilotProgress from "../pilot/Egb339PilotProgress";
-import { PilotBreadcrumb, PilotEntryNav } from "../pilot/Egb339PilotShell";
+import { PilotBreadcrumb } from "../pilot/Egb339PilotShell";
+import type { PilotNavLink } from "../pilot/PilotNav";
 import { SE2LessonContent } from "../pilot/SE2Lesson";
-import { WeekOneMatrixExplorer } from "../week-one/WeekOneExplorers";
 import { getEgb339Course } from "@/lib/egb339-course-loader";
-import { getEgb339Concept, getEgb339Resource, getEgb339Week } from "@/lib/egb339-vault/loader";
+import { getEgb339Concept, getEgb339En, getEgb339Resource, getEgb339Week } from "@/lib/egb339-vault/loader";
 import { getEgb339ProblemsForWeek } from "@/lib/egb339-problems";
+import { getEgb339ProblemEn } from "@/lib/egb339-problems-en";
+import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
+import { getEgb339AssessmentSolutionEn } from "@/lib/egb339-assessment-solutions-en";
 import { egb339WeekSections } from "@/lib/egb339-study-weeks";
 import { egb339DisplayTitle, egb339WeekSubject } from "@/lib/egb339";
-import { IconFlask } from "../icons";
+import { egb339Title } from "@/lib/egb339-titles";
+import { T } from "../T";
 import { StudyWeekJumpNavigation } from "./StudyWeekNavigation";
-import StudyWeekAssessments from "./StudyWeekAssessments";
-import StudyFigure from "./StudyFigure";
+import StudyWeekAssessments, { type StudyWeekAssessmentData } from "./StudyWeekAssessments";
+import StudyWeekHeader from "./StudyWeekHeader";
+import StudyWeekPractical from "./StudyWeekPractical";
+import StudyWeekFinish from "./StudyWeekFinish";
+import { FrameExplanation2d, FrameExplanation3d, PointSegmentNote, MatrixExplorerIntro } from "./StudyWeekProse";
 import SpatialRotationExample from "./SpatialRotationExample";
 import { EGB339_WEEK_LEARNING } from "@/lib/egb339-week-learning";
 import StudyTopicText from "./StudyTopicText";
@@ -30,35 +35,35 @@ export default function StudyWeekPage({ number }: { number: number }) {
   const weeks = getEgb339Course();
   const week = weeks.find((entry) => entry.week === number)!;
   const entry = getEgb339Week(`uke-${number}`)!;
-  const sections = egb339WeekSections(week);
   const topics = week.topics.map((topic) => getEgb339Concept(topic.href.split("/").at(-1)!)!);
   const learning = EGB339_WEEK_LEARNING[number];
   const problems = getEgb339ProblemsForWeek(number);
+  const problemsEn: Record<string, NonNullable<ReturnType<typeof getEgb339ProblemEn>>> = {};
+  for (const problem of problems) {
+    const en = getEgb339ProblemEn(problem.id);
+    if (en) problemsEn[problem.id] = en;
+  }
+  const assessments: StudyWeekAssessmentData[] = week.assessments.map((link) => {
+    const slug = link.href.split("/").at(-1)!;
+    return { slug, href: link.href, pageKey: link.pageKey, entryTitle: link.title, solution: getEgb339AssessmentSolution(slug)!, solutionEn: getEgb339AssessmentSolutionEn(slug) };
+  });
+  const navLink = (weekNumber: number): PilotNavLink | null => {
+    const subject = egb339WeekSubject(weekNumber);
+    if (!subject) return null;
+    return { href: `/egb339/uker/${subject.slug}`, title: subject.title, titleEn: subject.titleEn, pageKey: `egb339/uke/${subject.slug}` };
+  };
   return <>
-    <PilotBreadcrumb title={egb339DisplayTitle(entry)} week={number} />
+    <PilotBreadcrumb title={egb339DisplayTitle(entry)} titleEn={egb339WeekSubject(number)?.titleEn} week={number} />
     <article className="egb-pilot-article egb-week-study" data-study-week={number}>
-      <header className="egb-week-heading">
-        <p className="egb-week-kicker">Uke {number} av 8 · EGB339</p>
-        <h1>{egb339DisplayTitle(entry)}</h1>
-        <p className="egb-pilot-prose">{learning.purpose}</p>
-        <ul className="egb-week-meta" aria-label="Innhold i dette emnet">
-          <li className="egb-pill">{week.topics.length} temaer</li>
-          {problems.length > 0 && <li className="egb-pill">{problems.length} oppgaver</li>}
-          {week.assessments.length > 0 && <li className="egb-pill">{week.assessments.length} {week.assessments.length === 1 ? "assessment" : "assessments"}</li>}
-          <li className="egb-pill egb-pill-interactive"><IconFlask />{egb339WeekSubject(number)?.interactive}</li>
-        </ul>
-      </header>
-      <StudyWeekJumpNavigation sections={sections} />
+      <StudyWeekHeader number={number} topicCount={week.topics.length} problemCount={problems.length} assessmentCount={week.assessments.length} purpose={learning.purpose} purposeEn={learning.purposeEn} />
+      <StudyWeekJumpNavigation sectionsNo={egb339WeekSections(week, "no")} sectionsEn={egb339WeekSections(week, "en")} />
       <span id="leksjoner" className="egb-week-anchor" />
       {topics.map((topic) => <section key={topic.slug} id={topic.slug} data-egb-week-section className="egb-week-topic">
-        <h2>{week.topics.find((link) => link.href === topic.route)!.title}</h2>
+        <h2><T no={egb339Title(topic.slug, "no") ?? topic.title} en={egb339Title(topic.slug, "en") ?? topic.title} /></h2>
         {topic.slug === "se-2-homogeneous-transformations" ? <><span id="laboratorium" className="egb-week-anchor" /><SE2LessonContent embedded /></> : <>
-          {topic.slug === "reference-frames" && <div className="egb-week-figure-explanation">
-            <StudyFigure src="/egb339/study-figures/rtb-transforms2d.png" width={640} height={480} alt="Robotics Toolbox viser rammene A, B og C med ulike origoer; C er også rotert." source="Robotics Toolbox, transforms2d.png (MIT)" sourceHref="/egb339/study-figures/robotics-toolbox-LICENSE.txt">Les først hvor hvert origo ligger, så hvilken vei aksene peker. Originalplottet har egne aksefarger; de betyr ikke riktig eller feil.</StudyFigure>
-            <div><h3>Et origo og to retninger</h3><p>A og B har parallelle akser, men ulike origoer. C har både et annet origo og en annen orientering. Posisjon alene beskriver derfor ikke en ramme.</p><p>I laben nedenfor brukes <span className="egb-week-frame-a">blå A</span> og <span className="egb-week-frame-b">lilla B</span> konsekvent. Bokstavene avgjør hvilken ramme vi mener.</p></div>
-          </div>}
-          <StudyTopicText body={topic.body}>
-            {topic.slug === "linear-algebra-for-robotics" && <div className="egb-pilot-prose"><h3>Følg ett rad–kolonne-produkt</h3><p>Q15 fra warmupen knytter fire skalarprodukter til én matrise. Velg et resultatelement og følg rad A og kolonne B.</p><WeekOneMatrixExplorer /></div>}
+          {topic.slug === "reference-frames" && <FrameExplanation2d />}
+          <StudyTopicText no={topic.body} en={getEgb339En(topic.slug)?.body}>
+            {topic.slug === "linear-algebra-for-robotics" && <MatrixExplorerIntro />}
             {topic.slug === "rotation-composition-in-3d" && <><span id="laboratorium" className="egb-week-anchor" /><SpatialRotationExample /></>}
             {topic.slug === "kinematic-chains-and-joints" && <KinematicChainFigure />}
             {topic.slug === "forward-kinematics" && <PlanarKinematicsLesson mode="fk" embedded />}
@@ -67,40 +72,22 @@ export default function StudyWeekPage({ number }: { number: number }) {
             {topic.slug === "robot-jacobian" && <JacobianExample />}
             {topic.slug === "robot-motion-interpolation" && <MotionComparison />}
             {topic.slug === "trapezoidal-motion-profiles" && <MotionProfileExample />}
-            {topic.slug === "point-to-segment-distance-and-obstacle-clearance" && <div className="egb-pilot-prose"><Egb339ProblemVisual kind="point-segment" /><p>Projeksjonen C kan ligge utenfor segmentet. Da er nærmeste endepunkt løsningen. For en lenke med null lengde beregnes avstanden direkte til endepunktet.</p></div>}
+            {topic.slug === "point-to-segment-distance-and-obstacle-clearance" && <div className="egb-pilot-prose"><Egb339ProblemVisual kind="point-segment" /><PointSegmentNote /></div>}
             {topic.slug === "digital-image-representation" && <><HighwayFigure /><ImageArrayExample /></>}
             {topic.slug === "image-histograms-and-thresholding" && <HistogramFigure />}
             {topic.slug === "monadic-and-dyadic-image-operations" && <ImageSubtractionFigure />}
             {topic.slug === "planar-homographies" && <HomographyExample />}
           </StudyTopicText>
-          {topic.slug === "se-3-homogeneous-transformations" && <div className="egb-week-figure-explanation">
-            <StudyFigure src="/egb339/study-figures/rtb-transforms3d.png" width={640} height={480} alt="Tre tredimensjonale koordinatrammer A, B og C tegnet med Robotics Toolbox." source="Robotics Toolbox, transforms3d.png (MIT)" sourceHref="/egb339/study-figures/robotics-toolbox-LICENSE.txt">En pose har både et origo og tre basisretninger. Originalfigurens aksefarger er ikke statusmarkeringer.</StudyFigure>
-            <div><h3>Tre kolonner og ett origo</h3><p>Rotasjonsblokken angir de tre aksene. Siste kolonne angir origoets posisjon i referanserammen. Begge må tolkes i samme referanse før et punkt transformeres.</p><p>Rammene i denne dokumentasjonsfiguren er illustrasjoner. Bruk oppgitte QUT-transformasjoner når du løser tutorialen.</p></div>
-          </div>}
+          {topic.slug === "se-3-homogeneous-transformations" && <FrameExplanation3d />}
         </>}
         <div className="egb-pilot-prose"><Egb339PilotProgress pageKey={`egb339/tema/${topic.slug}`} /></div>
       </section>)}
-      <section id="practical" data-egb-week-section className="egb-pilot-prose">
-        <span id="ukeinnhold" className="egb-week-anchor" />
-        <h2>Practical og fagkilder</h2>
-        <p>{learning.practical}</p>
-        {number === 4 && <><Egb339Markdown content={getEgb339Resource("coppeliasim-forward-kinematics-practical")!.body} headingOffset={1} studyLinks /><p className="egb-week-notice" data-state="warning">Practical-modellen bruker L₀ = 138, L₁ = 135, L₂ = 147, L₃ = 60 og L₄ = 80 mm. Assessment 1.3 har andre verktøyparametere. Ikke bland modellene.</p><p><Link href="/egb339/ressurser/coppeliasim-setup">CoppeliaSim: installasjon og tilkobling</Link></p></>}
-        {number === 6 && <p className="egb-week-notice" data-state="warning">Kildeavvik: forelesningsfilen Lecture Week 6-1.py har cos(θ₁) i både x- og y-raden. Tavlen viser sin(θ₁) i y-raden. Bruk den geometrisk riktige FK-modellen før SymPy deriverer; automatisk derivasjon retter ikke en feil inputmodell.</p>}
-        <ul className="egb-week-sources">
-          {learning.sources.map((source) => <li key={source}>{source}</li>)}
-        </ul>
-        <p><Link href="/egb339/ressurser">Praktiske ressurser og verktøy</Link></p>
-      </section>
+      <StudyWeekPractical number={number} learning={learning} resourceNo={number === 4 ? getEgb339Resource("coppeliasim-forward-kinematics-practical")!.body : undefined} resourceEn={number === 4 ? getEgb339En("coppeliasim-forward-kinematics-practical")?.body : undefined} />
       <div className="egb-pilot-prose">
-        <Egb339WeekProblems week={number} problems={problems} longForm />
+        <Egb339WeekProblems week={number} problems={problems} problemsEn={problemsEn} longForm />
       </div>
-      <StudyWeekAssessments week={week} />
-      <footer className="egb-pilot-prose egb-week-finish">
-        <h2>Fullfør {egb339DisplayTitle(entry)}</h2>
-        <p>Emnemerket (uke {number}) er separat fra temaer og assessments. Marker når du har gjennomgått stoffet og kontrollert oppgavene du arbeider med.</p>
-        <Egb339PilotProgress pageKey={week.pageKey} />
-        <PilotEntryNav previous={weeks.find((row) => row.week === number - 1) ?? null} next={weeks.find((row) => row.week === number + 1) ?? null} />
-      </footer>
+      <StudyWeekAssessments week={week} assessments={assessments} />
+      <StudyWeekFinish number={number} pageKey={week.pageKey} previous={navLink(number - 1)} next={navLink(number + 1)} />
     </article>
   </>;
 }

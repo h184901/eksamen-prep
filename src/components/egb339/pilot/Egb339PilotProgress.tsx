@@ -2,12 +2,15 @@
 
 import { useRef, useState } from "react";
 import { useProgress } from "@/components/ProgressProvider";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
+import { ui } from "@/lib/egb339-language/ui";
 import { IconCheck } from "../icons";
 
 export function PilotStatus({ pageKey, short = false, current = false }: { pageKey: string; short?: boolean; current?: boolean }) {
   const { ready, authed, loadError, isCompleted } = useProgress();
+  const { lang } = useEgb339Lang();
   const done = ready && authed && !loadError && isCompleted(pageKey);
-  const label = !ready ? "Laster status" : !authed || loadError ? "Status utilgjengelig" : done ? "Fullført" : "Ikke fullført";
+  const label = !ready ? ui(lang, "statusLoading") : !authed || loadError ? ui(lang, "statusUnavailable") : done ? ui(lang, "completed") : ui(lang, "notCompleted");
   return <span className="egb-pilot-status" data-complete={done}>
     <span aria-hidden="true">{!ready || !authed || loadError ? "·" : done ? "✓" : current ? "●" : "○"}</span>
     <span className={short ? "sr-only" : undefined}>{label}</span>
@@ -16,6 +19,7 @@ export function PilotStatus({ pageKey, short = false, current = false }: { pageK
 
 export default function Egb339PilotProgress({ pageKey }: { pageKey: string }) {
   const { ready, authed, loadError, isCompleted, refresh } = useProgress();
+  const { lang } = useEgb339Lang();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const pending = useRef(false);
@@ -29,7 +33,7 @@ export default function Egb339PilotProgress({ pageKey }: { pageKey: string }) {
     try {
       if (loadError) {
         // Retry the read only: a preceding write may already have succeeded.
-        if (!await refresh()) setError("Status kunne ikke hentes. Prøv igjen.");
+        if (!await refresh()) setError(ui(lang, "fetchFailed"));
         return;
       }
       // Same API/key as the original control. No optimistic success on a failed write.
@@ -38,9 +42,9 @@ export default function Egb339PilotProgress({ pageKey }: { pageKey: string }) {
         body: JSON.stringify({ pageKey, completed: !done }),
       });
       if (!response.ok) throw new Error("save failed");
-      if (!await refresh()) setError("Lagringen ble mottatt, men status kunne ikke bekreftes. Oppdater status før du gjør en ny endring.");
+      if (!await refresh()) setError(ui(lang, "saveUnconfirmed"));
     } catch {
-      setError("Fremgangen ble ikke lagret. Prøv igjen.");
+      setError(ui(lang, "saveFailed"));
     } finally {
       pending.current = false;
       setSaving(false);
@@ -50,10 +54,10 @@ export default function Egb339PilotProgress({ pageKey }: { pageKey: string }) {
     <p role="status"><PilotStatus pageKey={pageKey} /></p>
     <button type="button" onClick={save} disabled={!ready || (!authed && !loadError) || saving} className="egb-pilot-button">
       {!saving && !loadError && !done && <IconCheck />}
-      {saving ? loadError ? "Henter status…" : "Lagrer…" : loadError ? "Oppdater status" : done ? "Angre fullføring" : "Marker fullført"}
+      {saving ? loadError ? ui(lang, "fetchingStatus") : ui(lang, "saving") : loadError ? ui(lang, "refreshStatus") : done ? ui(lang, "undoCompleted") : ui(lang, "markCompleted")}
     </button>
     {error && <p role="alert" className="egb-pilot-error">{error}</p>}
-    {loadError && !error && <p role="alert" className="egb-pilot-error">Fremgangen kunne ikke hentes. Oppdater status for å prøve igjen.</p>}
-    {ready && !authed && !loadError && <p>Logg inn på nytt for å lagre fremgangen.</p>}
+    {loadError && !error && <p role="alert" className="egb-pilot-error">{ui(lang, "progressFetchFailed")}</p>}
+    {ready && !authed && !loadError && <p>{ui(lang, "loginToSave")}</p>}
   </div>;
 }

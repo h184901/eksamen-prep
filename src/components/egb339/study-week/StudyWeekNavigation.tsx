@@ -7,6 +7,9 @@ import { useProgress } from "@/components/ProgressProvider";
 import { PilotStatus } from "../pilot/Egb339PilotProgress";
 import type { Egb339CourseWeek } from "@/lib/egb339-course";
 import { egb339WeekSections, type Egb339WeekSection } from "@/lib/egb339-study-weeks";
+import { egb339WeekSubject } from "@/lib/egb339";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
+import { ui } from "@/lib/egb339-language/ui";
 import { IconBookOpen, IconChevronDown, IconClipboardCheck, IconFlask, IconMenu, IconSigma } from "../icons";
 
 const sectionSelector = "[data-week-one-section], [data-egb-week-section]";
@@ -54,7 +57,10 @@ function useActiveSection(pathname: string) {
   return active;
 }
 
-export function StudyWeekJumpNavigation({ sections, label = "På denne emnesiden" }: { sections: Egb339WeekSection[]; label?: string }) {
+export function StudyWeekJumpNavigation({ sectionsNo, sectionsEn, label }: { sectionsNo: Egb339WeekSection[]; sectionsEn?: Egb339WeekSection[]; label?: string }) {
+  const { lang } = useEgb339Lang();
+  const sections = lang === "en" && sectionsEn ? sectionsEn : sectionsNo;
+  const ariaLabel = label ?? ui(lang, "onThisPage");
   const pathname = usePathname();
   const active = useActiveSection(pathname);
   const navigation = useRef<HTMLElement>(null);
@@ -80,21 +86,22 @@ export function StudyWeekJumpNavigation({ sections, label = "På denne emnesiden
       window.removeEventListener("hashchange", preserveRoute);
     };
   }, [pathname]);
-  return <nav ref={navigation} className="egb-week-jump" aria-label={label}>
+  return <nav ref={navigation} className="egb-week-jump" aria-label={ariaLabel}>
     {sections.map((section) => <a key={section.id} href={`#${section.id}`} aria-current={active === section.id ? "location" : undefined}>{section.short}</a>)}
   </nav>;
 }
 
 const REFERENCE_LINKS = [
-  { href: "/egb339/vurderinger", title: "Assessments", Icon: IconClipboardCheck },
-  { href: "/egb339/oppsummering", title: "Hurtigark og formler", Icon: IconSigma },
-  { href: "/egb339/ressurser", title: "Praktiske ressurser", Icon: IconFlask },
-  { href: "/egb339/temaer", title: "Fagregister", Icon: IconBookOpen },
+  { href: "/egb339/vurderinger", key: "referenceAssessments", Icon: IconClipboardCheck },
+  { href: "/egb339/oppsummering", key: "referenceCheatsheet", Icon: IconSigma },
+  { href: "/egb339/ressurser", key: "referenceResources", Icon: IconFlask },
+  { href: "/egb339/temaer", key: "referenceIndex", Icon: IconBookOpen },
 ] as const;
 
 export default function StudyWeekCourseNavigation({ weeks }: { weeks: Egb339CourseWeek[] }) {
   const pathname = usePathname();
   const active = useActiveSection(pathname);
+  const { lang } = useEgb339Lang();
   const { ready, authed, loadError, isCompleted } = useProgress();
   const currentWeek = weeks.find((week) => week.href === pathname || week.topics.some((topic) => topic.href === pathname));
   const topics = currentWeek?.topics ?? weeks.flatMap((week) => week.topics);
@@ -122,16 +129,20 @@ export default function StudyWeekCourseNavigation({ weeks }: { weeks: Egb339Cour
     if (next.has(week)) next.delete(week); else next.add(week);
     return next;
   });
+  const weekTitle = (week: number) => {
+    const subject = egb339WeekSubject(week);
+    return lang === "en" ? subject?.titleEn ?? "" : subject?.title ?? "";
+  };
   return <aside className="egb-pilot-sidebar egb-week-sidebar">
-    <nav aria-label="EGB339 kursnavigasjon">
+    <nav aria-label={ui(lang, "courseNavigation")}>
       <Link href="/egb339" className="egb-pilot-course-title" aria-current={pathname === "/egb339" ? "page" : undefined}>EGB339</Link>
       <p className="egb-pilot-small">Introduction to Robotics</p>
-      <p className="egb-week-sidebar-progress" role="status">{!ready ? "Laster fremgang…" : !authed || loadError ? "Fremgang er utilgjengelig" : `${currentWeek ? currentWeek.title : "Hele kurset"}: ${done} av ${topics.length} temaer fullført`}</p>
+      <p className="egb-week-sidebar-progress" role="status">{!ready ? ui(lang, "loadingProgress") : !authed || loadError ? ui(lang, "progressUnavailable") : `${currentWeek ? weekTitle(currentWeek.week) : ui(lang, "wholeCourse")}: ${lang === "en" ? `${done} of ${topics.length} subtopics completed` : `${done} av ${topics.length} temaer fullført`}`}</p>
       <button type="button" className="egb-week-nav-toggle" aria-expanded={mobileOpen} aria-controls="egb-course-topics" onClick={() => setMobileOpen((open) => !open)}>
         <IconMenu />
         <span className="egb-week-nav-toggle-text">
-          <span>Kursnavigasjon</span>
-          {currentWeek && <span className="egb-week-nav-toggle-current">{currentWeek.title}</span>}
+          <span>{ui(lang, "courseNavigationToggle")}</span>
+          {currentWeek && <span className="egb-week-nav-toggle-current">{weekTitle(currentWeek.week)}</span>}
         </span>
         <IconChevronDown className="egb-week-chevron" />
       </button>
@@ -139,24 +150,24 @@ export default function StudyWeekCourseNavigation({ weeks }: { weeks: Egb339Cour
         // Any navigation from the panel (same-page anchors included) dismisses the mobile panel.
         if ((event.target as HTMLElement).closest("a")) setMobileOpen(false);
       }}>
-        <ol className="egb-week-accordion" ref={navigation} tabIndex={0} aria-label="Alle emner og temaer">
+        <ol className="egb-week-accordion" ref={navigation} tabIndex={0} aria-label={ui(lang, "allTopicsAria")}>
           {weeks.map((week) => {
             const open = openWeeks.has(week.week);
             const isCurrent = currentWeek?.week === week.week;
             return <li key={week.week} className="egb-week-accordion-item" data-current-week={isCurrent}>
               <div className="egb-week-accordion-header">
-                <button type="button" id={`egb-week-button-${week.week}`} className="egb-week-accordion-toggle" aria-expanded={open} aria-controls={`egb-week-panel-${week.week}`} aria-label={week.title} onClick={() => toggleWeek(week.week)}>
+                <button type="button" id={`egb-week-button-${week.week}`} className="egb-week-accordion-toggle" aria-expanded={open} aria-controls={`egb-week-panel-${week.week}`} aria-label={weekTitle(week.week)} onClick={() => toggleWeek(week.week)}>
                   <IconChevronDown className="egb-week-chevron" />
                 </button>
                 <Link href={week.href} className="egb-week-accordion-link" aria-current={week.href === pathname ? "page" : undefined}>
-                  <span className="egb-week-accordion-meta">Uke {week.week}</span>
-                  <span className="egb-week-accordion-name">{week.title}</span>
+                  <span className="egb-week-accordion-meta">{ui(lang, "weekOf")} {week.week}</span>
+                  <span className="egb-week-accordion-name">{weekTitle(week.week)}</span>
                 </Link>
                 <PilotStatus pageKey={week.pageKey} short />
               </div>
               <div id={`egb-week-panel-${week.week}`} role="region" aria-labelledby={`egb-week-button-${week.week}`} hidden={!open}>
                 <ul className="egb-week-accordion-sections">
-                  {egb339WeekSections(week).map((section) => {
+                  {egb339WeekSections(week, lang).map((section) => {
                     const current = week.href === pathname && active === section.id;
                     const topicPage = week.topics.some((topic) => topic.pageKey === section.pageKey && topic.href === pathname);
                     return <li key={section.id} className={section.id === "vurderinger" || section.id === "oppgaver" ? "egb-week-nav-assessment" : undefined}>
@@ -172,7 +183,7 @@ export default function StudyWeekCourseNavigation({ weeks }: { weeks: Egb339Cour
           })}
         </ol>
         <ul className="egb-pilot-reference-nav">
-          {REFERENCE_LINKS.map(({ href, title, Icon }) => <li key={href}><Link href={href} aria-current={pathname === href || pathname.startsWith(`${href}/`) ? "page" : undefined}><Icon /><span>{title}</span></Link></li>)}
+          {REFERENCE_LINKS.map(({ href, key, Icon }) => <li key={href}><Link href={href} aria-current={pathname === href || pathname.startsWith(`${href}/`) ? "page" : undefined}><Icon /><span>{ui(lang, key)}</span></Link></li>)}
         </ul>
       </div>
     </nav>

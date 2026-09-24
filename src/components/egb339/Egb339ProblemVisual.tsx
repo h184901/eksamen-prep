@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import type { Egb339ProblemVisual as VisualKind } from "@/lib/egb339-problems";
+import { useEgb339Lang, type Egb339Lang } from "@/lib/egb339-language/store";
 
 interface Props {
   kind: VisualKind;
@@ -12,9 +15,9 @@ const label = "fill-[var(--egb-ink)] text-[10px] font-semibold";
 const joint = "fill-[var(--egb-paper)] stroke-[var(--egb-accent)]";
 const endpoint = "fill-[var(--egb-point)]";
 
-function StaticFrames() {
+function StaticFrames({ lang }: { lang: Egb339Lang }) {
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Referanserammene A, B og C">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Reference frames A, B and C" : "Referanserammene A, B og C"}>
       <path d="M40 150H390M40 150V25" className={`${axis} fill-none`} strokeWidth="1.5" />
       <path d="M40 150H195M195 150V45" className={`${line} fill-none`} strokeWidth="3" />
       <path d="M195 45H90" className={`${accent} fill-none`} strokeWidth="3" />
@@ -31,9 +34,9 @@ function StaticFrames() {
   );
 }
 
-function Week4Arm() {
+function Week4Arm({ lang }: { lang: Egb339Lang }) {
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Plan kinematisk kjede med tre ledd">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Planar kinematic chain with three links" : "Plan kinematisk kjede med tre ledd"}>
       <path d="M25 158H400M45 175V20" className={`${axis} fill-none`} strokeWidth="1.5" />
       <path d="M45 158L105 158L205 78L330 52" className={`${line} fill-none`} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="105" cy="158" r="11" className={joint} strokeWidth="4" />
@@ -49,9 +52,9 @@ function Week4Arm() {
   );
 }
 
-function TwoLinkArm() {
+function TwoLinkArm({ lang }: { lang: Egb339Lang }) {
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Plan robotarm med to rotasjonsledd">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Planar robot arm with two revolute joints" : "Plan robotarm med to rotasjonsledd"}>
       <path d="M35 160H395M55 175V22" className={`${axis} fill-none`} strokeWidth="1.5" />
       <path d="M55 160L190 65L345 105" className={`${line} fill-none`} strokeWidth="9" strokeLinecap="round" />
       <circle cx="55" cy="160" r="11" className={joint} strokeWidth="4" />
@@ -67,9 +70,9 @@ function TwoLinkArm() {
   );
 }
 
-function MixedJointArm() {
+function MixedJointArm({ lang }: { lang: Egb339Lang }) {
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Robot med prismatisk og roterende ledd">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Robot with a prismatic and a revolute joint" : "Robot med prismatisk og roterende ledd"}>
       <path d="M30 160H395M45 175V22" className={`${axis} fill-none`} strokeWidth="1.5" />
       <path d="M60 155L210 55" className={`${line} fill-none`} strokeWidth="12" strokeLinecap="round" />
       <path d="M165 85L210 55L342 96" className={`${accent} fill-none`} strokeWidth="8" strokeLinecap="round" />
@@ -84,9 +87,9 @@ function MixedJointArm() {
   );
 }
 
-function MotionProfile() {
+function MotionProfile({ lang }: { lang: Egb339Lang }) {
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Stykkevis akselerasjonsprofil">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Piecewise acceleration profile" : "Stykkevis akselerasjonsprofil"}>
       <path d="M40 100H395M55 165V25" className={`${axis} fill-none`} strokeWidth="1.5" />
       <path d="M55 55H140V100H270V135H385" className={`${line} fill-none`} strokeWidth="4" strokeLinejoin="round" />
       <path d="M140 30V165M270 30V165" className="fill-none stroke-[var(--egb-line)]" strokeDasharray="5 5" />
@@ -101,7 +104,7 @@ function MotionProfile() {
   );
 }
 
-function PointSegment() {
+function PointSegment({ lang }: { lang: Egb339Lang }) {
   // Project O onto AB in the drawing's coordinates, just as in the solution.
   const a = [55, 150], b = [350, 40], o = [215, 150];
   const vx = b[0] - a[0], vy = b[1] - a[1];
@@ -112,7 +115,7 @@ function PointSegment() {
   const n = [10 * (o[0] - c[0]) / distance, 10 * (o[1] - c[1]) / distance];
   const point = (x: number, y: number) => `${x.toFixed(6)},${y.toFixed(6)}`;
   return (
-    <svg viewBox="0 0 420 190" role="img" aria-label="Korteste avstand fra punkt til linjesegment">
+    <svg viewBox="0 0 420 190" role="img" aria-label={lang === "en" ? "Shortest distance from a point to a line segment" : "Korteste avstand fra punkt til linjesegment"}>
       <path d="M55 150L350 40" className={`${line} fill-none`} strokeWidth="6" strokeLinecap="round" />
       <circle cx="55" cy="150" r="7" className="fill-[var(--egb-accent)]" />
       <circle cx="350" cy="40" r="7" className="fill-[var(--egb-accent)]" />
@@ -129,24 +132,25 @@ function PointSegment() {
 }
 
 export default function Egb339ProblemVisual({ kind }: Props) {
+  const { lang } = useEgb339Lang();
   if (kind === "highway") {
     return (
       <div className="relative aspect-[4/3] overflow-hidden bg-[var(--egb-hover)]">
         {/* The source is session-protected; Next's optimizer does not forward auth cookies. */}
-        <Image src="/egb339/week8/highway.jpg" alt="Highway-bildet brukt i uke 8-practicalen" fill unoptimized sizes="(max-width: 768px) 100vw, 700px" className="object-cover" />
+        <Image src="/egb339/week8/highway.jpg" alt={lang === "en" ? "The Highway image used in the Week 8 practical" : "Highway-bildet brukt i uke 8-practicalen"} fill unoptimized sizes="(max-width: 768px) 100vw, 700px" className="object-cover" />
       </div>
     );
   }
 
   return (
     <figure className="egb-study-diagram">
-      {kind === "static-frames" && <StaticFrames />}
-      {kind === "week4-arm" && <Week4Arm />}
-      {kind === "two-link-arm" && <TwoLinkArm />}
-      {kind === "mixed-joint-arm" && <MixedJointArm />}
-      {kind === "motion-profile" && <MotionProfile />}
-      {kind === "point-segment" && <PointSegment />}
-      {kind === "point-segment" && <figcaption>Prinsippskisse: C er projeksjonen av O på segmentet AB. OC står vinkelrett på AB. Koordinatene i oppgaven regnes ut nedenfor.</figcaption>}
+      {kind === "static-frames" && <StaticFrames lang={lang} />}
+      {kind === "week4-arm" && <Week4Arm lang={lang} />}
+      {kind === "two-link-arm" && <TwoLinkArm lang={lang} />}
+      {kind === "mixed-joint-arm" && <MixedJointArm lang={lang} />}
+      {kind === "motion-profile" && <MotionProfile lang={lang} />}
+      {kind === "point-segment" && <PointSegment lang={lang} />}
+      {kind === "point-segment" && <figcaption>{lang === "en" ? "Principle sketch: C is the projection of O onto the segment AB. OC is perpendicular to AB. The coordinates in the exercise are computed below." : "Prinsippskisse: C er projeksjonen av O på segmentet AB. OC står vinkelrett på AB. Koordinatene i oppgaven regnes ut nedenfor."}</figcaption>}
     </figure>
   );
 }

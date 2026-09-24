@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import MathText from "../pilot/Egb339Math";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 import { transform2, inverseTransform2, matrix2, type Point2 } from "@/lib/egb339-se2";
 import { matrixTex, pointTex, svgCoordinate } from "@/lib/egb339-math-format";
 import { WEEK_ONE_IDENTITY, WEEK_ONE_Q15 } from "@/lib/egb339-week-one";
@@ -11,6 +12,7 @@ const decimal = (n: number) => (Math.abs(n) < .00005 ? 0 : n).toFixed(2);
 const screen = ([x, y]: Point2): Point2 => [svgCoordinate(260 + x * 44), svgCoordinate(240 - y * 44)];
 
 export function WeekOneFrameExplorer() {
+  const { lang } = useEgb339Lang();
   const id = useId().replace(/:/g, "");
   const [degrees, setDegrees] = useState(0);
   const [tx, setTx] = useState(1);
@@ -41,16 +43,16 @@ export function WeekOneFrameExplorer() {
   const width = Math.max(520, ...points.map(([x]) => x + 54)) - left;
   const height = Math.max(480, ...points.map(([, y]) => y + 54)) - top;
 
-  return <div className="egb-week-explorer" role="group" aria-label="Utforsk punkt og rammer">
+  return <div className="egb-week-explorer" role="group" aria-label={lang === "en" ? "Explore points and frames" : "Utforsk punkt og rammer"}>
     <div className="egb-week-frame-scene">
-      <div className="egb-week-actions" role="group" aria-label="Hva følger rammen?">
-        <button type="button" className="egb-week-button" aria-pressed={mode === "body"} onClick={() => switchMode("body")}>P følger B</button>
-        <button type="button" className="egb-week-button" aria-pressed={mode === "fixed"} onClick={() => switchMode("fixed")}>P står stille</button>
+      <div className="egb-week-actions" role="group" aria-label={lang === "en" ? "What follows the frame?" : "Hva følger rammen?"}>
+        <button type="button" className="egb-week-button" aria-pressed={mode === "body"} onClick={() => switchMode("body")}>{lang === "en" ? "P follows B" : "P følger B"}</button>
+        <button type="button" className="egb-week-button" aria-pressed={mode === "fixed"} onClick={() => switchMode("fixed")}>{lang === "en" ? "P stays still" : "P står stille"}</button>
       </div>
       <figure>
         <svg viewBox={`${left} ${top} ${width} ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`} data-world-x={worldPoint[0]} data-world-y={worldPoint[1]} data-local-x={localPoint[0]} data-local-y={localPoint[1]}>
-          <title id={`${id}-title`}>Punkt P sett fra ramme A og ramme B</title>
-          <desc id={`${id}-desc`}>{`Ramme B har origo (${tx}, ${ty}) og vinkel ${degrees} grader. P i A er (${decimal(worldPoint[0])}, ${decimal(worldPoint[1])}), i B (${decimal(localPoint[0])}, ${decimal(localPoint[1])}). ${mode === "body" ? "P følger B når rammen flyttes." : "P står stille når rammen flyttes."}`}</desc>
+          <title id={`${id}-title`}>{lang === "en" ? "Point P seen from frame A and frame B" : "Punkt P sett fra ramme A og ramme B"}</title>
+          <desc id={`${id}-desc`}>{lang === "en" ? `Frame B has origin (${tx}, ${ty}) and angle ${degrees} degrees. P in A is (${decimal(worldPoint[0])}, ${decimal(worldPoint[1])}), in B (${decimal(localPoint[0])}, ${decimal(localPoint[1])}). ${mode === "body" ? "P follows B when the frame moves." : "P stays still when the frame moves."}` : `Ramme B har origo (${tx}, ${ty}) og vinkel ${degrees} grader. P i A er (${decimal(worldPoint[0])}, ${decimal(worldPoint[1])}), i B (${decimal(localPoint[0])}, ${decimal(localPoint[1])}). ${mode === "body" ? "P følger B når rammen flyttes." : "P står stille når rammen flyttes."}`}</desc>
           <defs>{["a", "b"].map((frame) => <marker key={frame} id={`${id}-${frame}`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 8 4 0 8Z" fill={`var(--week-frame-${frame})`} /></marker>)}</defs>
           <g stroke="var(--egb-line)" strokeWidth="1" fill="none">
             {[-4, -2, 0, 2, 4].map((n) => <g key={n}><path d={`M${screen([n, -4.5])[0]} ${screen([0, -4.5])[1]}V${screen([0, 4.5])[1]}`} /><path d={`M${screen([-4.5, 0])[0]} ${screen([0, n])[1]}H${screen([4.5, 0])[0]}`} /></g>)}
@@ -65,27 +67,27 @@ export function WeekOneFrameExplorer() {
           <path d={`M${px} ${py - 7}l7 7-7 7-7-7Z`} fill="var(--egb-ink)" stroke="var(--egb-paper)" strokeWidth="2" />
           <text x={px + 14} y={py + 22} className="egb-week-diagram-name">P</text>
         </svg>
-        <figcaption><span className="egb-week-frame-a">A: referanseramme.</span> <span className="egb-week-frame-b">B: flyttbar ramme.</span> P er markert med en diamant. Rutenettet måler avstand; én rute er 2 lengdeenheter.</figcaption>
+        <figcaption><span className="egb-week-frame-a">{lang === "en" ? "A: reference frame." : "A: referanseramme."}</span> <span className="egb-week-frame-b">{lang === "en" ? "B: movable frame." : "B: flyttbar ramme."}</span> {lang === "en" ? "P is marked with a diamond. The grid measures distance; one square is 2 length units." : "P er markert med en diamant. Rutenettet måler avstand; én rute er 2 lengdeenheter."}</figcaption>
       </figure>
     </div>
     <div className="egb-week-explorer-controls">
-      <h3>{mode === "body" ? "Flytt objektet" : "Beskriv samme punkt"}</h3>
-      <p>{mode === "body" ? "P er festet til B. Endrer du rammen, endres posisjonen til P i verden, men B-koordinatene er konstante." : "P står stille i verden. Endrer du rammen, endres B-koordinatene, men A-koordinatene er konstante."}</p>
-      <fieldset><legend>Pose til ramme B, relativt til A</legend>
-        {[{ label: "Vinkel θ", value: degrees, set: setDegrees, min: -180, max: 180, step: 1, unit: "°" }, { label: "Posisjon x", value: tx, set: setTx, min: -2, max: 2, step: .1, unit: "" }, { label: "Posisjon y", value: ty, set: setTy, min: -2, max: 2, step: .1, unit: "" }].map((control, i) => <label key={control.label} htmlFor={`${id}-control-${i}`}>
-          <span>{control.label}<output>{decimal(control.value)}{control.unit}</output></span>
+      <h3>{mode === "body" ? (lang === "en" ? "Move the object" : "Flytt objektet") : (lang === "en" ? "Describe the same point" : "Beskriv samme punkt")}</h3>
+      <p>{mode === "body" ? (lang === "en" ? "P is attached to B. If you change the frame, P's position in the world changes, but the B coordinates stay constant." : "P er festet til B. Endrer du rammen, endres posisjonen til P i verden, men B-koordinatene er konstante.") : (lang === "en" ? "P stays still in the world. If you change the frame, the B coordinates change, but the A coordinates stay constant." : "P står stille i verden. Endrer du rammen, endres B-koordinatene, men A-koordinatene er konstante.")}</p>
+      <fieldset><legend>{lang === "en" ? "Pose of frame B, relative to A" : "Pose til ramme B, relativt til A"}</legend>
+        {[{ label: lang === "en" ? "Angle θ" : "Vinkel θ", math: String.raw`\theta`, value: degrees, set: setDegrees, min: -180, max: 180, step: 1, unit: "°" }, { label: lang === "en" ? "Position x" : "Posisjon x", math: null, value: tx, set: setTx, min: -2, max: 2, step: .1, unit: "" }, { label: lang === "en" ? "Position y" : "Posisjon y", math: null, value: ty, set: setTy, min: -2, max: 2, step: .1, unit: "" }].map((control, i) => <label key={control.label} htmlFor={`${id}-control-${i}`}>
+          <span>{control.math ? <>{lang === "en" ? "Angle" : "Vinkel"} <MathText inline>{control.math}</MathText></> : control.label}<output>{decimal(control.value)}{control.unit}</output></span>
           <input id={`${id}-control-${i}`} type="range" aria-label={control.label} min={control.min} max={control.max} step={control.step} value={control.value} onChange={(event) => control.set(Number(event.target.value))} />
         </label>)}
       </fieldset>
-      <div className="egb-week-actions" role="group" aria-label="Vis koordinater i">
-        {(["A", "B"] as const).map((frame) => <button key={frame} type="button" className="egb-week-button" aria-pressed={coordinates === frame} onClick={() => setCoordinates(frame)}>Ramme {frame}</button>)}
+      <div className="egb-week-actions" role="group" aria-label={lang === "en" ? "Show coordinates in" : "Vis koordinater i"}>
+        {(["A", "B"] as const).map((frame) => <button key={frame} type="button" className="egb-week-button" aria-pressed={coordinates === frame} onClick={() => setCoordinates(frame)}>{lang === "en" ? "Frame" : "Ramme"} {frame}</button>)}
       </div>
-      <output className="egb-week-coordinate-result" aria-live="off">P i {coordinates}: ({decimal(selected[0])}, {decimal(selected[1])})</output>
-      <p className="egb-pilot-small">A/B-knappene bytter bare koordinatbeskrivelse. De flytter ikke P.</p>
-      <button type="button" className="egb-week-button" onClick={reset}>Nullstill</button>
+      <output className="egb-week-coordinate-result" aria-live="off">{lang === "en" ? "P in" : "P i"} {coordinates}: ({decimal(selected[0])}, {decimal(selected[1])})</output>
+      <p className="egb-pilot-small">{lang === "en" ? "The A/B buttons only switch the coordinate description. They do not move P." : "A/B-knappene bytter bare koordinatbeskrivelse. De flytter ikke P."}</p>
+      <button type="button" className="egb-week-button" onClick={reset}>{lang === "en" ? "Reset" : "Nullstill"}</button>
     </div>
     <div className="egb-week-frame-math">
-      <p><span className="egb-week-frame-b">Fra B</span> til <span className="egb-week-frame-a">A</span>: rotasjon og deretter translasjon. De tre radene nedenfor er den homogene matrisen; den siste punktkoordinaten er 1.</p>
+      <p><span className="egb-week-frame-b">{lang === "en" ? "From B" : "Fra B"}</span> {lang === "en" ? "to" : "til"} <span className="egb-week-frame-a">A</span>: {lang === "en" ? "rotation and then translation. The three rows below are the homogeneous matrix; the last point coordinate is 1." : "rotasjon og deretter translasjon. De tre radene nedenfor er den homogene matrisen; den siste punktkoordinaten er 1."}</p>
       <MathText>{String.raw`{}^AT_B=${matrixTex(matrix2(pose))}`}</MathText>
       <MathText>{coordinates === "A" ? String.raw`{}^Ap={}^AR_B\,{}^Bp+{}^At_B=${pointTex(worldPoint)}` : String.raw`{}^Bp=({}^AR_B)^T({}^Ap-{}^At_B)=${pointTex(localPoint)}`}</MathText>
     </div>
@@ -93,6 +95,7 @@ export function WeekOneFrameExplorer() {
 }
 
 export function WeekOneMatrixExplorer() {
+  const { lang } = useEgb339Lang();
   const [preset, setPreset] = useState<"qut" | "identity">("qut");
   const [cell, setCell] = useState(0);
   const [compare, setCompare] = useState(false);
@@ -102,40 +105,41 @@ export function WeekOneMatrixExplorer() {
   const elementwise = a.map((values, i) => values.map((value, j) => value * b[i][j]));
 
   function reset() { setPreset("qut"); setCell(0); setCompare(false); }
-  return <div className="egb-week-matrix-explorer" role="group" aria-label="Rad mot kolonne">
+  return <div className="egb-week-matrix-explorer" role="group" aria-label={lang === "en" ? "Row against column" : "Rad mot kolonne"}>
     <div className="egb-week-actions">
-      <button type="button" className="egb-week-button" onClick={reset}>Last QUT-eksempel</button>
-      <button type="button" className="egb-week-button" onClick={() => { setPreset(preset === "qut" ? "identity" : "qut"); setCell(0); }}>Neste eksempel</button>
-      <button type="button" className="egb-week-button" aria-pressed={compare} onClick={() => setCompare(!compare)}>Sammenlign @ og *</button>
+      <button type="button" className="egb-week-button" onClick={reset}>{lang === "en" ? "Load QUT example" : "Last QUT-eksempel"}</button>
+      <button type="button" className="egb-week-button" onClick={() => { setPreset(preset === "qut" ? "identity" : "qut"); setCell(0); }}>{lang === "en" ? "Next example" : "Neste eksempel"}</button>
+      <button type="button" className="egb-week-button" aria-pressed={compare} onClick={() => setCompare(!compare)}>{lang === "en" ? "Compare @ and *" : "Sammenlign @ og *"}</button>
     </div>
-    <p className="egb-pilot-small">{preset === "qut" ? "QUT warmup Q15. Velg et resultatelement for å følge regningen." : "Eget kontrolleksempel: A er identitetsmatrisen. AB skal derfor bli B."}</p>
+    <p className="egb-pilot-small">{preset === "qut" ? (lang === "en" ? "QUT warmup Q15. Pick a result element to follow the calculation." : "QUT warmup Q15. Velg et resultatelement for å følge regningen.") : (lang === "en" ? "Own control example: A is the identity matrix. AB should therefore equal B." : "Eget kontrolleksempel: A er identitetsmatrisen. AB skal derfor bli B.")}</p>
     <div className="egb-week-matrix-row">
       {[{ name: "A", values: a }, { name: "B", values: b }].map(({ name, values }) => <figure key={name}>
-        <figcaption>Matrise {name}</figcaption>
-        <div className="egb-week-number-matrix" role="table" aria-label={`Matrise ${name}`}>
+        <figcaption>{lang === "en" ? "Matrix" : "Matrise"} {name}</figcaption>
+        <div className="egb-week-number-matrix" role="table" aria-label={`${lang === "en" ? "Matrix" : "Matrise"} ${name}`}>
           {values.map((values, i) => <div key={i} role="row">{values.map((value, j) => <span key={j} role="cell" data-selected={name === "A" ? i === row : j === column} data-matrix={name}>{value}</span>)}</div>)}
         </div>
       </figure>)}
-      <figure><figcaption>AB: velg element</figcaption><div className="egb-week-number-matrix" role="group" aria-label="Resultatelementer">{product.map((values, i) => <div key={i}>{values.map((value, j) => <button key={j} type="button" onClick={() => setCell(i * 2 + j)} aria-pressed={cell === i * 2 + j} aria-label={`Rad ${i + 1}, kolonne ${j + 1}: ${value}`}>{value}</button>)}</div>)}</div></figure>
+      <figure><figcaption>{lang === "en" ? "AB: pick an element" : "AB: velg element"}</figcaption><div className="egb-week-number-matrix" role="group" aria-label={lang === "en" ? "Result elements" : "Resultatelementer"}>{product.map((values, i) => <div key={i}>{values.map((value, j) => <button key={j} type="button" onClick={() => setCell(i * 2 + j)} aria-pressed={cell === i * 2 + j} aria-label={`${lang === "en" ? "Row" : "Rad"} ${i + 1}, ${lang === "en" ? "column" : "kolonne"} ${j + 1}: ${value}`}>{value}</button>)}</div>)}</div></figure>
     </div>
-    <p><span className="egb-week-frame-a">Rad {row + 1} i A</span> møter <span className="egb-week-frame-b">kolonne {column + 1} i B</span>. Multipliser tilsvarende elementer og summer produktene.</p>
+    <p><span className="egb-week-frame-a">{lang === "en" ? "Row" : "Rad"} {row + 1} {lang === "en" ? "in A" : "i A"}</span> {lang === "en" ? "meets" : "møter"} <span className="egb-week-frame-b">{lang === "en" ? "column" : "kolonne"} {column + 1} {lang === "en" ? "in B" : "i B"}</span>. {lang === "en" ? "Multiply the corresponding elements and sum the products." : "Multipliser tilsvarende elementer og summer produktene."}</p>
     <div className="egb-week-calculation" aria-live="polite">
       <MathText>{String.raw`(AB)_{${row + 1}${column + 1}}=${a[row][0]}\cdot${b[0][column]}+${a[row][1]}\cdot${b[1][column]}=${a[row][0] * b[0][column]}+${a[row][1] * b[1][column]}=${product[row][column]}`}</MathText>
     </div>
-    <div className="egb-week-actions"><button type="button" className="egb-week-button" onClick={() => setCell((cell + 1) % 4)}>Neste steg</button><button type="button" className="egb-week-button" onClick={reset}>Nullstill</button></div>
+    <div className="egb-week-actions"><button type="button" className="egb-week-button" onClick={() => setCell((cell + 1) % 4)}>{lang === "en" ? "Next step" : "Neste steg"}</button><button type="button" className="egb-week-button" onClick={reset}>{lang === "en" ? "Reset" : "Nullstill"}</button></div>
     {compare && <div className="egb-week-comparison">
-      <div><h4>Matriseprodukt: <code>A @ B</code></h4><MathText>{matrixTex(product)}</MathText><p>Rad mot kolonne. Indre dimensjoner må passe.</p></div>
-      <div><h4>Elementvis: <code>A * B</code></h4><MathText>{matrixTex(elementwise)}</MathText><p>Her multipliseres elementer på samme plass. Dette løser ikke Q15.</p></div>
+      <div><h4>{lang === "en" ? "Matrix product:" : "Matriseprodukt:"} <code>A @ B</code></h4><MathText>{matrixTex(product)}</MathText><p>{lang === "en" ? "Row against column. The inner dimensions must match." : "Rad mot kolonne. Indre dimensjoner må passe."}</p></div>
+      <div><h4>{lang === "en" ? "Element-wise:" : "Elementvis:"} <code>A * B</code></h4><MathText>{matrixTex(elementwise)}</MathText><p>{lang === "en" ? "Here elements in the same position are multiplied. This does not solve Q15." : "Her multipliseres elementer på samme plass. Dette løser ikke Q15."}</p></div>
     </div>}
   </div>;
 }
 
 export function WeekOneConditionalCheck() {
+  const { lang } = useEgb339Lang();
   const [answer, setAnswer] = useState<boolean | null>(null);
-  return <div className="egb-week-check" role="group" aria-label="Kontroller grenseverdien">
-    <h3>Prøv selv: akkurat på grensen</h3>
-    <p>Q2 krever <code>x &lt; 10</code>. Hva skal funksjonen returnere når <code>x = 10</code>?</p>
-    <div className="egb-week-actions">{[true, false].map((value) => <button key={String(value)} type="button" className="egb-week-button" aria-pressed={answer === value} onClick={() => setAnswer(value)}>{value ? "True" : "False"}</button>)}<button type="button" className="egb-week-button" onClick={() => setAnswer(null)}>Nullstill</button></div>
-    {answer !== null && <p className="egb-week-feedback" data-state={answer ? "error" : "success"} role="status">{answer ? "Ikke riktig: 10 er lik 10, ikke mindre enn 10. Prøv igjen." : "Riktig: False. Den strenge ulikheten utelater grenseverdien 10."}</p>}
+  return <div className="egb-week-check" role="group" aria-label={lang === "en" ? "Check the boundary value" : "Kontroller grenseverdien"}>
+    <h3>{lang === "en" ? "Try it yourself: exactly at the boundary" : "Prøv selv: akkurat på grensen"}</h3>
+    <p>{lang === "en" ? "Q2 requires" : "Q2 krever"} <code>x &lt; 10</code>. {lang === "en" ? "What should the function return when" : "Hva skal funksjonen returnere når"} <code>x = 10</code>?</p>
+    <div className="egb-week-actions">{[true, false].map((value) => <button key={String(value)} type="button" className="egb-week-button" aria-pressed={answer === value} onClick={() => setAnswer(value)}>{value ? "True" : "False"}</button>)}<button type="button" className="egb-week-button" onClick={() => setAnswer(null)}>{lang === "en" ? "Reset" : "Nullstill"}</button></div>
+    {answer !== null && <p className="egb-week-feedback" data-state={answer ? "error" : "success"} role="status">{answer ? (lang === "en" ? "Not correct: 10 equals 10, it is not less than 10. Try again." : "Ikke riktig: 10 er lik 10, ikke mindre enn 10. Prøv igjen.") : (lang === "en" ? "Correct: False. The strict inequality excludes the boundary value 10." : "Riktig: False. Den strenge ulikheten utelater grenseverdien 10.")}</p>}
   </div>;
 }

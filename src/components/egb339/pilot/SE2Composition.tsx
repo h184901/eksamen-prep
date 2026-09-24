@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { compose2, matrix2, transform2, type Point2, type Pose2 } from "@/lib/egb339-se2";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 import MathText from "./Egb339Math";
 import { matrixTex, numberTex, pointTex, svgCoordinate } from "@/lib/egb339-math-format";
 
@@ -12,6 +13,8 @@ const screen = ([x, y]: Point2): Point2 => [svgCoordinate(270 + 24 * x), svgCoor
 /** Corke ch. 2.2.2.1: TA TB and TB TA are different ordered rigid motions. */
 export default function SE2Composition() {
   const id = useId().replace(/:/g, "");
+  const { lang } = useEgb339Lang();
+  const en = lang === "en";
   const [a, setA] = useState(initialA);
   const [b, setB] = useState(initialB);
   const [order, setOrder] = useState<"AB" | "BA">("AB");
@@ -29,32 +32,36 @@ export default function SE2Composition() {
     { name: order, pose: total, kind: "result" },
   ];
   const reset = () => { setA(initialA); setB(initialB); setPoint([0, 0]); setOrder("AB"); setFocus(null); };
-  return <div role="group" className="egb-pilot-lab" aria-label="SE(2) komposisjon">
+  return <div role="group" className="egb-pilot-lab" aria-label={en ? "SE(2) composition" : "SE(2) komposisjon"}>
     <div className="egb-pilot-lab-math">
-      <h3>Produktet leses fra høyre på et punkt</h3>
-      <p>T_A og T_B er to bevegelsesoperatorer. Sluttrammen {order} har pose T_{order[0]} T_{order[1]} i verden 0. For en rammekjede uttrykkes det andre trinnet i mellomrammen.</p>
+      <h3>{en ? "The product acts from the right on a point" : "Produktet leses fra høyre på et punkt"}</h3>
+      <p>{en
+        ? <>T_A and T_B are two motion operators. The final frame {order} has pose T_{order[0]} T_{order[1]} in world 0. For a frame chain, the second step is expressed in the intermediate frame.</>
+        : <>T_A og T_B er to bevegelsesoperatorer. Sluttrammen {order} har pose T_{order[0]} T_{order[1]} i verden 0. For en rammekjede uttrykkes det andre trinnet i mellomrammen.</>}</p>
       <MathText>{"T_A=" + matrixTex(matrix2(a))}</MathText>
       <MathText>{"T_B=" + matrixTex(matrix2(b))}</MathText>
       <div className="egb-pilot-matrix-focus">
-        <button type="button" onMouseEnter={() => setFocus("first")} onMouseLeave={() => setFocus(null)} onFocus={() => setFocus("first")} onBlur={() => setFocus(null)} onClick={() => setFocus("first")}>Vis mellomramme {order[0]}</button>
-        <button type="button" onMouseEnter={() => setFocus("result")} onMouseLeave={() => setFocus(null)} onFocus={() => setFocus("result")} onBlur={() => setFocus(null)} onClick={() => setFocus("result")}>Vis sluttramme {order}</button>
+        <button type="button" onMouseEnter={() => setFocus("first")} onMouseLeave={() => setFocus(null)} onFocus={() => setFocus("first")} onBlur={() => setFocus(null)} onClick={() => setFocus("first")}>{en ? `Show intermediate frame ${order[0]}` : `Vis mellomramme ${order[0]}`}</button>
+        <button type="button" onMouseEnter={() => setFocus("result")} onMouseLeave={() => setFocus(null)} onFocus={() => setFocus("result")} onBlur={() => setFocus(null)} onClick={() => setFocus("result")}>{en ? `Show final frame ${order}` : `Vis sluttramme ${order}`}</button>
       </div>
       <MathText>{"T_" + order + "=T_" + order[0] + "T_" + order[1] + "=" + matrixTex(matrix2(total))}</MathText>
-      <p>Den relative translasjonen roteres av første ramme:</p>
+      <p>{en ? "The relative translation is rotated by the first frame:" : "Den relative translasjonen roteres av første ramme:"}</p>
       <MathText>{"t_" + order + "=" + pointTex([first.x, first.y]) + "+R_" + order[0] + pointTex([second.x, second.y]) + "=" + pointTex([total.x, total.y])}</MathText>
-      <p>For punktet p virker høyre faktor først:</p>
+      <p>{en ? "On the point p the right-hand factor acts first:" : "For punktet p virker høyre faktor først:"}</p>
       <MathText>{"p=" + pointTex(point) + ",\\quad T_" + order[1] + "p=" + pointTex(intermediate)}</MathText>
       <MathText>{"T_" + order + "p=" + pointTex(result)}</MathText>
-      <p className="egb-pilot-small">Punkter vises med to koordinater; i matriseproduktet legges den homogene 1-eren til.</p>
+      <p className="egb-pilot-small">{en ? "Points are shown with two coordinates; in the matrix product the homogeneous 1 is appended." : "Punkter vises med to koordinater; i matriseproduktet legges den homogene 1-eren til."}</p>
     </div>
     <div className="egb-pilot-lab-figure">
-      <div role="group" className="egb-pilot-stage" aria-label="Multiplikasjonsrekkefølge">
+      <div role="group" className="egb-pilot-stage" aria-label={en ? "Multiplication order" : "Multiplikasjonsrekkefølge"}>
         {(["AB", "BA"] as const).map((value) => <button key={value} type="button" aria-pressed={order === value} onClick={() => setOrder(value)}>T_{value[0]} T_{value[1]}</button>)}
       </div>
       <figure>
         <svg viewBox="0 0 560 500" role="img" aria-labelledby={id + "-title " + id + "-desc"} data-composition={order} data-result-x={result[0]} data-result-y={result[1]}>
-          <title id={id + "-title"}>Komposisjon med mellomramme {order[0]} og sluttramme {order}</title>
-          <desc id={id + "-desc"}>Operatorene anvendes i rekkefølgen {order[1]}, deretter {order[0]}, på punktet. Resultatet er ({numberTex(result[0])}, {numberTex(result[1])}) i verden 0.</desc>
+          <title id={id + "-title"}>{en ? `Composition with intermediate frame ${order[0]} and final frame ${order}` : `Komposisjon med mellomramme ${order[0]} og sluttramme ${order}`}</title>
+          <desc id={id + "-desc"}>{en
+            ? `The operators are applied to the point in the order ${order[1]}, then ${order[0]}. The result is (${numberTex(result[0])}, ${numberTex(result[1])}) in world 0.`
+            : `Operatorene anvendes i rekkefølgen ${order[1]}, deretter ${order[0]}, på punktet. Resultatet er (${numberTex(result[0])}, ${numberTex(result[1])}) i verden 0.`}</desc>
           <defs>{["world", "first", "result"].map((kind) => <marker key={kind} id={id + "-" + kind} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill={kind === "world" ? "var(--egb-muted)" : kind === "first" ? "var(--egb-point)" : "var(--egb-accent)"} /></marker>)}</defs>
           <path d="M30 270H530M270 470V30" fill="none" stroke="var(--egb-line)" />
           {[-8, -4, 4, 8].map((n) => <g key={n} fill="var(--egb-muted)"><text x={screen([n, 0])[0]} y="290" textAnchor="middle">{n}</text><text x="250" y={screen([0, n])[1]} textAnchor="end">{n}</text></g>)}
@@ -74,15 +81,15 @@ export default function SE2Composition() {
           <circle cx={screen(result)[0]} cy={screen(result)[1]} r="5" fill="var(--egb-ink)" />
           <text x={screen(result)[0] + 12} y={screen(result)[1] + 24} fill="var(--egb-ink)">P</text>
         </svg>
-        <figcaption>Alle rammer er tegnet i verden 0, med samme målestokk på begge akser. Heltrukken rammeakse er x; stiplet er y. Stiplet forbindelse viser det andre translasjonstrinnet.</figcaption>
+        <figcaption>{en ? "All frames are drawn in world 0, with the same scale on both axes. The solid frame axis is x; the dashed one is y. The dashed connector shows the second translation step." : "Alle rammer er tegnet i verden 0, med samme målestokk på begge akser. Heltrukken rammeakse er x; stiplet er y. Stiplet forbindelse viser det andre translasjonstrinnet."}</figcaption>
       </figure>
-      <output className="egb-pilot-result">{order}: origo ({numberTex(total.x)}, {numberTex(total.y)}). Motsatt rekkefølge: ({numberTex(other.x)}, {numberTex(other.y)}).</output>
+      <output className="egb-pilot-result">{order}: {en ? "origin" : "origo"} ({numberTex(total.x)}, {numberTex(total.y)}). {en ? "Opposite order" : "Motsatt rekkefølge"}: ({numberTex(other.x)}, {numberTex(other.y)}).</output>
       {[{ name: "A", pose: a, set: setA }, { name: "B", pose: b, set: setB }].map(({ name, pose, set }) => <fieldset className="egb-pilot-controls" key={name}><legend>Operator T_{name}</legend>
-        {[{ key: "theta" as const, label: "Vinkel " + name, value: pose.theta * 180 / Math.PI, min: -180, max: 180, step: 1 }, { key: "x" as const, label: "Translasjon x " + name, value: pose.x, min: -2, max: 2, step: .1 }, { key: "y" as const, label: "Translasjon y " + name, value: pose.y, min: -2, max: 2, step: .1 }].map((control) => <label key={control.key}><span>{control.label}<output>{control.value.toFixed(1)}{control.key === "theta" ? "°" : ""}</output></span><input type="range" min={control.min} max={control.max} step={control.step} value={control.value} onChange={(event) => set({ ...pose, [control.key]: Number(event.target.value) * (control.key === "theta" ? Math.PI / 180 : 1) })} /></label>)}
+        {[{ key: "theta" as const, label: (en ? "Angle " : "Vinkel ") + name, value: pose.theta * 180 / Math.PI, min: -180, max: 180, step: 1 }, { key: "x" as const, label: (en ? "Translation x " : "Translasjon x ") + name, value: pose.x, min: -2, max: 2, step: .1 }, { key: "y" as const, label: (en ? "Translation y " : "Translasjon y ") + name, value: pose.y, min: -2, max: 2, step: .1 }].map((control) => <label key={control.key}><span>{control.label}<output>{control.value.toFixed(1)}{control.key === "theta" ? "°" : ""}</output></span><input type="range" min={control.min} max={control.max} step={control.step} value={control.value} onChange={(event) => set({ ...pose, [control.key]: Number(event.target.value) * (control.key === "theta" ? Math.PI / 180 : 1) })} /></label>)}
       </fieldset>)}
-      <fieldset className="egb-pilot-controls"><legend>Punkt før operatorene</legend>{[0, 1].map((axis) => <label key={axis}><span>Punkt {axis === 0 ? "x" : "y"}<output>{point[axis].toFixed(1)}</output></span><input type="range" min="-2" max="2" step=".1" value={point[axis]} onChange={(event) => setPoint(axis === 0 ? [Number(event.target.value), point[1]] : [point[0], Number(event.target.value)])} /></label>)}</fieldset>
-      <button type="button" onClick={reset} className="egb-pilot-reset">Last bokas komposisjonseksempel</button>
-      <p className="egb-pilot-source">Corke, kap. 2.2.2.1, trykt s. 38–40. Bokas preset sammenligner rammenes origo (p = 0); andre punkt er fri utforsking.</p>
+      <fieldset className="egb-pilot-controls"><legend>{en ? "Point before the operators" : "Punkt før operatorene"}</legend>{[0, 1].map((axis) => <label key={axis}><span>{en ? "Point" : "Punkt"} {axis === 0 ? "x" : "y"}<output>{point[axis].toFixed(1)}</output></span><input type="range" min="-2" max="2" step=".1" value={point[axis]} onChange={(event) => setPoint(axis === 0 ? [Number(event.target.value), point[1]] : [point[0], Number(event.target.value)])} /></label>)}</fieldset>
+      <button type="button" onClick={reset} className="egb-pilot-reset">{en ? "Load the book's composition example" : "Last bokas komposisjonseksempel"}</button>
+      <p className="egb-pilot-source">{en ? "Corke, ch. 2.2.2.1, printed pp. 38–40. The book's preset compares the frames' origins (p = 0); other points are free exploration." : "Corke, kap. 2.2.2.1, trykt s. 38–40. Bokas preset sammenligner rammenes origo (p = 0); andre punkt er fri utforsking."}</p>
     </div>
   </div>;
 }

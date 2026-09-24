@@ -41,8 +41,8 @@ assert(page.includes("pageKey={week.pageKey}"));
 assert(page.includes("<StudyWeekAssessments week={week}"));
 assert(page.includes('id="laboratorium"'));
 const assessment = readFileSync("src/components/egb339/study-week/StudyWeekAssessments.tsx", "utf8");
-assert(assessment.includes("content={part.content}"));
-assert(assessment.includes("pageKey={link.pageKey}"));
+assert(assessment.includes("no={part.content}"));
+assert(assessment.includes("pageKey={data.pageKey}"));
 assert(assessment.includes("${anchor}-solution-${part.id}"));
 
 // Independent numerical differential of existing FK, at regular and singular poses.

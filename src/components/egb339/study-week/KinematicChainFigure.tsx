@@ -1,7 +1,11 @@
+"use client";
+
 import MathText from "../pilot/Egb339Math";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 
 /** Original, scale-correct reconstruction of QUT tutorial p. 9's default RPR geometry. */
 export default function KinematicChainFigure() {
+  const { lang } = useEgb339Lang();
   const a = [60, 240], j1 = [252, 240], j3 = [252 + 120 / Math.sqrt(2), 240 - 120 / Math.sqrt(2)];
   const end = [j3[0] + 96, j3[1]];
   return <div className="egb-week-figure-explanation">
@@ -24,6 +28,6 @@ export default function KinematicChainFigure() {
       </svg>
       <figcaption>Egen figur etter QUT, <cite>Tutorial – Forward Kinematics (1)</cite>, s. 9. Lengdeforhold og 45°-offset er beholdt. Dette er ikke 2R-armen i laben.</figcaption>
     </figure>
-    <div><h3>Faste offsetter er også transformasjoner</h3><p>Start ved O. Gå 8 langs x, roter q₁ + 45°, gå 5 + q₂ langs den nye aksen, roter q₃ − 45°, og gå 4.</p><MathText>{String.raw`{}^OT_E=T_x(8)R(q_1+\pi/4)T_x(5+q_2)R(q_3-\pi/4)T_x(4)`}</MathText><p>Ved q = 0 er L₁ og L₃ parallelle. De to faste vinklene kansellerer orienteringen, men ikke forskyvningen langs L₂.</p><p><a href="#w4-planar-chain">Regn hele QUT-oppgaven</a></p></div>
+    <div><h3>{lang === "en" ? "Fixed offsets are transformations too" : "Faste offsetter er også transformasjoner"}</h3><p>{lang === "en" ? <>Start at O. Go 8 along x, rotate <MathText inline>{String.raw`q_1 + 45^\circ`}</MathText>, go <MathText inline>{String.raw`5 + q_2`}</MathText> along the new axis, rotate <MathText inline>{String.raw`q_3 - 45^\circ`}</MathText>, and go 4.</> : <>Start ved O. Gå 8 langs x, roter <MathText inline>{String.raw`q_1 + 45^\circ`}</MathText>, gå <MathText inline>{String.raw`5 + q_2`}</MathText> langs den nye aksen, roter <MathText inline>{String.raw`q_3 - 45^\circ`}</MathText>, og gå 4.</>}</p><MathText>{String.raw`{}^OT_E=T_x(8)R(q_1+\pi/4)T_x(5+q_2)R(q_3-\pi/4)T_x(4)`}</MathText><p>{lang === "en" ? <>At <MathText inline>{String.raw`q = 0`}</MathText>, <MathText inline>{String.raw`L_1`}</MathText> and <MathText inline>{String.raw`L_3`}</MathText> are parallel. The two fixed angles cancel the orientation, but not the displacement along <MathText inline>{String.raw`L_2`}</MathText>.</> : <>Ved <MathText inline>{String.raw`q = 0`}</MathText> er <MathText inline>{String.raw`L_1`}</MathText> og <MathText inline>{String.raw`L_3`}</MathText> parallelle. De to faste vinklene kansellerer orienteringen, men ikke forskyvningen langs <MathText inline>{String.raw`L_2`}</MathText>.</>}</p><p><a href="#w4-planar-chain">{lang === "en" ? "Solve the whole QUT exercise" : "Regn hele QUT-oppgaven"}</a></p></div>
   </div>;
 }

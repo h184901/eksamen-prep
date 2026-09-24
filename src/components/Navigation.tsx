@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import UserBadge from "./UserBadge";
 import Dat110LangToggle from "./dat110/Dat110LangToggle";
+import Egb339LangToggle from "./egb339/Egb339LangToggle";
 import { useState } from "react";
 
 const navItems = [
@@ -24,7 +25,8 @@ export default function Navigation() {
   if (pathname === "/login") return null;
 
   // DAT110-only: the language toggle does nothing on other subjects, so it is
-  // only shown on /dat110/** routes (next to the theme toggle).
+  // only shown on /dat110/** routes. The EGB339 language toggle is global; on
+  // /dat110 it yields the slot to DAT110's own toggle to avoid twin controls.
   const isDat110 = pathname.startsWith("/dat110");
   const isActive = (href: string) =>
     pathname === href ||
@@ -61,14 +63,14 @@ export default function Navigation() {
             </Link>
           ))}
           <UserBadge />
-          {isDat110 && <Dat110LangToggle />}
+          {isDat110 ? <Dat110LangToggle /> : <Egb339LangToggle />}
           <ThemeToggle />
         </div>
 
         {/* Mobile/tablet menu button — visible up to lg */}
         <div className="flex lg:hidden items-center gap-2">
           <UserBadge />
-          {isDat110 && <Dat110LangToggle />}
+          {isDat110 ? <Dat110LangToggle /> : <Egb339LangToggle />}
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}

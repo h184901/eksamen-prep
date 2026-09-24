@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 
 /** Deep links must open the disclosure, including back/forward and direct page loads. */
 export default function PilotSolutionLinks({ parts }: { parts: { id: string; title: string }[] }) {
+  const { lang } = useEgb339Lang();
   useEffect(() => {
     function reveal() {
       const id = window.location.hash.slice(1);
@@ -18,7 +20,7 @@ export default function PilotSolutionLinks({ parts }: { parts: { id: string; tit
     window.addEventListener("hashchange", reveal);
     return () => window.removeEventListener("hashchange", reveal);
   }, [parts]);
-  return <nav aria-label="Deloppgaver" className="egb-pilot-parts"><ol>
+  return <nav aria-label={lang === "en" ? "Solution parts" : "Deloppgaver"} className="egb-pilot-parts"><ol>
     {parts.map((part) => <li key={part.id}><a href={`#solution-${part.id}`} onClick={() => {
       const target = document.getElementById(`solution-${part.id}`);
       if (target instanceof HTMLDetailsElement) target.open = true;

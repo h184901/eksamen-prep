@@ -3,6 +3,8 @@ import conceptsData from "@/data/egb339-vault/concepts.json";
 import assessmentsData from "@/data/egb339-vault/assessments.json";
 import resourcesData from "@/data/egb339-vault/resources.json";
 import metaData from "@/data/egb339-vault/_meta.json";
+import enData from "@/data/egb339-vault/en.json";
+import nbData from "@/data/egb339-vault/nb.json";
 import type { Egb339Entry, Egb339Meta, Egb339Track } from "./types";
 
 const weeks = (weeksData as { weeks: Egb339Entry[] }).weeks;
@@ -10,6 +12,32 @@ const concepts = (conceptsData as { concepts: Egb339Entry[] }).concepts;
 const assessments = (assessmentsData as { assessments: Egb339Entry[] }).assessments;
 const resources = (resourcesData as { resources: Egb339Entry[] }).resources;
 const meta = metaData as Egb339Meta;
+
+/** English translations and Norwegian title overrides, keyed by slug. */
+export interface Egb339EntryTranslation {
+  title?: string;
+  summary?: string;
+  body?: string;
+}
+
+const enTranslations = (enData as { translations: Record<string, Egb339EntryTranslation> }).translations;
+const nbOverrides = (nbData as { overrides: Record<string, Egb339EntryTranslation> }).overrides;
+
+/** English variant of an entry's text fields; undefined fields fall back to the authored Norwegian. */
+export function getEgb339En(slug: string): Egb339EntryTranslation | null {
+  return enTranslations[slug] ?? null;
+}
+
+/** Norwegian title override for entries whose authored title is English. */
+export function getEgb339NbTitle(slug: string): string | null {
+  return nbOverrides[slug]?.title ?? null;
+}
+
+/** All slugs that must have English translations (validator coverage source). */
+export function getEgb339TranslatableSlugs(): string[] {
+  return [...weeks, ...concepts, ...assessments, ...resources].map((entry) => entry.slug);
+}
+
 
 export function getEgb339Weeks(): Egb339Entry[] {
   return weeks;

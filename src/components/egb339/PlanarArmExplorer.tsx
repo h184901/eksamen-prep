@@ -4,6 +4,7 @@ import { useId, useRef, useState, type PointerEvent } from "react";
 import { PLANAR2_QUT, PLANAR2_QUT_TARGETS, planar2Forward, planar2Inverse, planar2Workspace, type IkBranch, type JointPair, type Planar2Model } from "@/lib/egb339-planar2";
 import { transform2, type Point2, type Pose2 } from "@/lib/egb339-se2";
 import { matrixTex, numberTex, pointTex, svgCoordinate } from "@/lib/egb339-math-format";
+import { useEgb339Lang } from "@/lib/egb339-language/store";
 import MathText from "./pilot/Egb339Math";
 
 type Mode = "fk" | "ik";
@@ -17,6 +18,8 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
   const [state, setState] = useState<State>(() => seed(initialMode));
   const [focus, setFocus] = useState<Focus>(null);
   const drag = useRef<{ pointer: number; scale: number; extent: number } | null>(null);
+  const { lang } = useEgb339Lang();
+  const en = lang === "en";
   const { mode, model, joints, target, branch, extent } = state;
   const fk = planar2Forward(model, joints);
   const ik = planar2Inverse(model, target, joints[0]);
@@ -27,6 +30,17 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
   const alternative = ik[branch === "positive" ? "negative" : "positive"];
   const other = mode === "ik" && ik.kind === "regular" && alternative ? planar2Forward(model, alternative) : null;
   const polyline = (points: readonly Point2[]) => points.map((p) => screen(p).join(",")).join(" ");
+  const ikStatus = ik.kind === "unreachable"
+    ? (en ? "The target is outside the workspace. No real IK solution exists. The arm shows the last valid configuration; the target point is not moved to the boundary." : "Målet er utenfor arbeidsrommet. Ingen reell IK-løsning. Armen viser siste gyldige konfigurasjon; målpunktet flyttes ikke til kanten.")
+    : ik.kind === "folded-free"
+      ? (en
+        ? <>Equal links and target at the origin: <MathText inline>{String.raw`q_2=\pi`}</MathText>, while <MathText inline>{String.raw`q_1`}</MathText> is free. The figure keeps the last shoulder angle. Infinitely many solutions.</>
+        : <>Like lenker og mål i origo: <MathText inline>{String.raw`q_2=\pi`}</MathText>, mens <MathText inline>{String.raw`q_1`}</MathText> er fri. Figuren beholder siste skuldervinkel. Uendelig mange løsninger.</>)
+      : ik.kind === "singular"
+        ? (en
+          ? <>Singular boundary: the links lie on the same line. The branches coincide modulo <MathText inline>{String.raw`2\pi`}</MathText>.</>
+          : <>Singulær grense: lenkene er på samme linje. Grenene sammenfaller modulo <MathText inline>{String.raw`2\pi`}</MathText>.</>)
+        : (en ? "Two solutions. The solid arm is the selected branch; the dashed arm is the other one." : "To løsninger. Heltrukket arm er valgt gren; stipet arm er den andre.");
 
   function update(patch: Partial<State>) {
     const dragging = drag.current !== null;
@@ -72,29 +86,31 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
     { name: "E", pose: fk.total, selected: focus === "t12" || focus === "t02" },
   ];
 
-  return <div role="group" className="egb-arm" aria-label="Planar 2R laboratorium" data-mode={mode} data-ik-status={ik.kind} data-end-x={fk.end[0]} data-end-y={fk.end[1]} data-ik-error={error}>
-    <h2>En robot, to regneretninger</h2>
-    <p className="egb-pilot-prose">FK: velg leddvinkler og les endeposisjonen. IK: velg et mål og finn begge leddkonfigurasjonene. Modellen er en fri, plan 2R-arm, ikke en Dobot med mekaniske begrensninger.</p>
-    <div role="group" className="egb-pilot-stage" aria-label="Velg kinematisk problem">
-      <button type="button" aria-pressed={mode === "fk"} onClick={() => update({ mode: "fk" })}>FK · ledd til posisjon</button>
-      <button type="button" aria-pressed={mode === "ik"} onClick={() => update({ mode: "ik", target: fk.end })}>IK · posisjon til ledd</button>
+  return <div role="group" className="egb-arm" aria-label={en ? "Planar 2R lab" : "Planar 2R laboratorium"} data-mode={mode} data-ik-status={ik.kind} data-end-x={fk.end[0]} data-end-y={fk.end[1]} data-ik-error={error}>
+    <h2>{en ? "One robot, two directions of computation" : "En robot, to regneretninger"}</h2>
+    <p className="egb-pilot-prose">{en ? "FK: choose joint angles and read off the end-effector position. IK: choose a target and find both joint configurations. The model is a free planar 2R arm, not a Dobot with mechanical limits." : "FK: velg leddvinkler og les endeposisjonen. IK: velg et mål og finn begge leddkonfigurasjonene. Modellen er en fri, plan 2R-arm, ikke en Dobot med mekaniske begrensninger."}</p>
+    <div role="group" className="egb-pilot-stage" aria-label={en ? "Choose the kinematic problem" : "Velg kinematisk problem"}>
+      <button type="button" aria-pressed={mode === "fk"} onClick={() => update({ mode: "fk" })}>{en ? "FK · joints to position" : "FK · ledd til posisjon"}</button>
+      <button type="button" aria-pressed={mode === "ik"} onClick={() => update({ mode: "ik", target: fk.end })}>{en ? "IK · position to joints" : "IK · posisjon til ledd"}</button>
     </div>
     <div className="egb-pilot-lab">
       <div className="egb-pilot-lab-math">
-        <h3>{mode === "fk" ? "Roter ved leddet, flytt langs lenken" : "Løs trekanten, velg gren"}</h3>
+        <h3>{mode === "fk" ? (en ? "Rotate about the joint, move along the link" : "Roter ved leddet, flytt langs lenken") : (en ? "Solve the triangle, choose a branch" : "Løs trekanten, velg gren")}</h3>
         <MathText>{String.raw`{}^0T_E=R(q_1)T_x(L_1)R(q_2)T_x(L_2)`}</MathText>
-        <p>Ramme 1 ligger ved albuen, med x₁ langs lenke 1. Ramme 2 = E ligger ved endepunktet, med x_E langs lenke 2. T₁₂ er relativ til ramme 1; figuren viser alle rammer i verden 0.</p>
-        <div role="group" className="egb-arm-matrices" aria-label="Transformasjoner koblet til figuren">
+        <p>{en
+          ? <>Frame 1 sits at the elbow, with <MathText inline>{String.raw`x_1`}</MathText> along link 1. Frame 2 = E sits at the end point, with <MathText inline>{String.raw`x_E`}</MathText> along link 2. <MathText inline>{String.raw`{}^1T_2`}</MathText> is relative to frame 1; the figure shows all frames in world 0.</>
+          : <>Ramme 1 ligger ved albuen, med <MathText inline>{String.raw`x_1`}</MathText> langs lenke 1. Ramme 2 = E ligger ved endepunktet, med <MathText inline>{String.raw`x_E`}</MathText> langs lenke 2. <MathText inline>{String.raw`{}^1T_2`}</MathText> er relativ til ramme 1; figuren viser alle rammer i verden 0.</>}</p>
+        <div role="group" className="egb-arm-matrices" aria-label={en ? "Transformations linked to the figure" : "Transformasjoner koblet til figuren"}>
           {[
-            { key: "t01" as const, label: String.raw`{}^0T_1`, matrix: fk.t01, name: "T01: lenke 1 og ramme 1" },
-            { key: "t12" as const, label: String.raw`{}^1T_2`, matrix: fk.t12, name: "T12: lenke 2 og enderammen" },
-            { key: "t02" as const, label: String.raw`{}^0T_E={}^0T_1{}^1T_2`, matrix: fk.t02, name: "T0E: hele kjeden" },
+            { key: "t01" as const, label: String.raw`{}^0T_1`, matrix: fk.t01, name: en ? "T01: link 1 and frame 1" : "T01: lenke 1 og ramme 1" },
+            { key: "t12" as const, label: String.raw`{}^1T_2`, matrix: fk.t12, name: en ? "T12: link 2 and the end-effector frame" : "T12: lenke 2 og enderammen" },
+            { key: "t02" as const, label: String.raw`{}^0T_E={}^0T_1{}^1T_2`, matrix: fk.t02, name: en ? "T0E: the whole chain" : "T0E: hele kjeden" },
           ].map(({ key, label, matrix, name }) => <div key={key} className="egb-arm-matrix" data-highlight={focus === key} onMouseEnter={() => setFocus(key)} onMouseLeave={() => setFocus(null)} onFocus={() => setFocus(key)} onBlur={() => setFocus(null)}>
             <button type="button" aria-pressed={focus === key} onClick={() => setFocus(key)}>{name}</button>
             <MathText>{label + "=" + matrixTex(matrix)}</MathText>
           </div>)}
         </div>
-        <p className="egb-pilot-small">Pek på en matrise, eller fokuser navnet over den, for å følge lenken og rammen.</p>
+        <p className="egb-pilot-small">{en ? "Hover a matrix, or focus the name above it, to follow the link and the frame." : "Pek på en matrise, eller fokuser navnet over den, for å følge lenken og rammen."}</p>
         {mode === "fk" ? <>
           <MathText>{String.raw`x=L_1\cos q_1+L_2\cos(q_1+q_2)`}</MathText>
           <MathText>{String.raw`y=L_1\sin q_1+L_2\sin(q_1+q_2)`}</MathText>
@@ -103,18 +119,22 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
           <MathText>{String.raw`c_2=\frac{x^2+y^2-L_1^2-L_2^2}{2L_1L_2}` + "=" + numberTex(ik.c2)}</MathText>
           <MathText>{String.raw`q_2=\pm\arccos c_2`}</MathText>
           <MathText>{String.raw`q_1=\operatorname{atan2}(y,x)-\operatorname{atan2}(L_2\sin q_2,L_1+L_2\cos q_2)`}</MathText>
-          <p className="egb-pilot-small">Kun posisjon er gitt. Enderammens orientering er q₁ + q₂ og kan være forskjellig for de to løsningene.</p>
+          <p className="egb-pilot-small">{en
+            ? <>Only the position is given. The end-effector frame's orientation is <MathText inline>{String.raw`q_1+q_2`}</MathText> and can differ between the two solutions.</>
+            : <>Kun posisjon er gitt. Enderammens orientering er <MathText inline>{String.raw`q_1+q_2`}</MathText> og kan være forskjellig for de to løsningene.</>}</p>
         </>}
-        <output className="egb-pilot-result">q = ({numberTex(joints[0])}, {numberTex(joints[1])}) rad<br />p_E = ({numberTex(fk.end[0])}, {numberTex(fk.end[1])})<br />Orientering = {(fk.total.theta * 180 / Math.PI).toFixed(1)}°</output>
-        {mode === "ik" && <p className="egb-arm-state" role="status">{ik.kind === "unreachable" ? "Målet er utenfor arbeidsrommet. Ingen reell IK-løsning. Armen viser siste gyldige konfigurasjon; målpunktet flyttes ikke til kanten." : ik.kind === "folded-free" ? "Like lenker og mål i origo: q₂ = π, mens q₁ er fri. Figuren beholder siste skuldervinkel. Uendelig mange løsninger." : ik.kind === "singular" ? "Singulær grense: lenkene er på samme linje. Grenene sammenfaller modulo 2π." : "To løsninger. Heltrukket arm er valgt gren; stiplet arm er den andre."}</p>}
-        {mode === "ik" && <p className="egb-pilot-small">FK-kontroll: avstand til mål = {error < 1e-9 ? "< 10⁻⁹" : error.toFixed(4)} lengdeenheter.</p>}
-        {mode === "fk" && fk.singular && <p className="egb-arm-state" role="status">Singulær konfigurasjon: lenkene ligger på samme linje.</p>}
+        <output className="egb-pilot-result">q = ({numberTex(joints[0])}, {numberTex(joints[1])}) rad<br />p_E = ({numberTex(fk.end[0])}, {numberTex(fk.end[1])})<br />{en ? "Orientation" : "Orientering"} = {(fk.total.theta * 180 / Math.PI).toFixed(1)}°</output>
+        {mode === "ik" && <p className="egb-arm-state" role="status">{ikStatus}</p>}
+        {mode === "ik" && <p className="egb-pilot-small">{en ? "FK check: distance to target = " : "FK-kontroll: avstand til mål = "}{error < 1e-9 ? <MathText inline>{String.raw`<10^{-9}`}</MathText> : error.toFixed(4)}{en ? " length units." : " lengdeenheter."}</p>}
+        {mode === "fk" && fk.singular && <p className="egb-arm-state" role="status">{en ? "Singular configuration: the links lie on the same line." : "Singulær konfigurasjon: lenkene ligger på samme linje."}</p>}
       </div>
       <div className="egb-pilot-lab-figure">
         <figure>
           <svg viewBox="0 0 600 560" role="group" aria-labelledby={id + "-title " + id + "-desc"} onPointerDown={startDrag} onPointerMove={move} onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={() => { drag.current = null; }} className={mode === "ik" ? "egb-arm-draggable" : undefined}>
-            <title id={id + "-title"}>2R-arm med verdensramme, albueramme og enderamme</title>
-            <desc id={id + "-desc"}>L1 {model.l1}, L2 {model.l2}. Endepunkt {numberTex(fk.end[0])}, {numberTex(fk.end[1])}. {mode === "ik" ? "Flytt målet ved å dra i figuren eller bruke målkoordinatene nedenfor." : "Endre leddvinklene nedenfor."}</desc>
+            <title id={id + "-title"}>{en ? "2R arm with world frame, elbow frame and end-effector frame" : "2R-arm med verdensramme, albueramme og enderamme"}</title>
+            <desc id={id + "-desc"}>{en
+              ? `L1 ${model.l1}, L2 ${model.l2}. End point ${numberTex(fk.end[0])}, ${numberTex(fk.end[1])}. ${mode === "ik" ? "Move the target by dragging in the figure or using the target coordinates below." : "Change the joint angles below."}`
+              : `L1 ${model.l1}, L2 ${model.l2}. Endepunkt ${numberTex(fk.end[0])}, ${numberTex(fk.end[1])}. ${mode === "ik" ? "Flytt målet ved å dra i figuren eller bruke målkoordinatene nedenfor." : "Endre leddvinklene nedenfor."}`}</desc>
             <defs><marker id={id + "-axis"} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--egb-accent)" /></marker></defs>
             <circle cx="300" cy="280" r={workspace.outer * scale} fill="var(--egb-hover)" stroke="var(--egb-line)" />
             {workspace.inner > 0 && <circle cx="300" cy="280" r={workspace.inner * scale} fill="var(--egb-paper)" stroke="var(--egb-line)" strokeDasharray="4 4" />}
@@ -138,7 +158,7 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
             })}
             {[{ a: [0, 0] as Point2, b: fk.joint, label: "L₁", angle: joints[0] }, { a: fk.joint, b: fk.end, label: "L₂", angle: fk.total.theta }].map((link) => <text key={link.label} x={screen([(link.a[0] + link.b[0]) / 2, (link.a[1] + link.b[1]) / 2])[0] + Math.sin(link.angle) * 18} y={screen([(link.a[0] + link.b[0]) / 2, (link.a[1] + link.b[1]) / 2])[1] + Math.cos(link.angle) * 18} fill="var(--egb-ink)" textAnchor="middle">{link.label}</text>)}
             {mode === "ik" && <g>
-              <circle cx={screen(target)[0]} cy={screen(target)[1]} r="13" fill="transparent" stroke="var(--egb-point)" strokeWidth="2" role="button" tabIndex={0} aria-label="Målpunkt: piltaster flytter 0,1 enhet; Enter setter ved endepunktet" onKeyDown={(event) => {
+              <circle cx={screen(target)[0]} cy={screen(target)[1]} r="13" fill="transparent" stroke="var(--egb-point)" strokeWidth="2" role="button" tabIndex={0} aria-label={en ? "Target point: arrow keys move it by 0.1 units; Enter sets it at the end effector" : "Målpunkt: piltaster flytter 0,1 enhet; Enter setter ved endepunktet"} onKeyDown={(event) => {
                 const offsets: Record<string, Point2> = { ArrowLeft: [-.1, 0], ArrowRight: [.1, 0], ArrowUp: [0, .1], ArrowDown: [0, -.1] };
                 const offset = offsets[event.key];
                 if (offset) { event.preventDefault(); update({ target: [target[0] + offset[0], target[1] + offset[1]] }); }
@@ -148,24 +168,26 @@ export default function PlanarArmExplorer({ initialMode = "fk" }: { initialMode?
               <text x={screen(target)[0] + 18} y={screen(target)[1] + 26} fill="var(--egb-point)">{error < 1e-9 ? "E / mål" : "mål"}</text>
             </g>}
           </svg>
-          <figcaption>Arbeidsrom: {numberTex(workspace.inner)} ≤ r ≤ {numberTex(workspace.outer)}. Samme skala på x og y. Grønne x-akser er heltrukne, y-akser stiplede. Ingen leddgrenser eller kollisjonstest.</figcaption>
+          <figcaption>{en ? "Workspace: " : "Arbeidsrom: "}<MathText inline>{String.raw`${numberTex(workspace.inner)}\le r\le${numberTex(workspace.outer)}`}</MathText>{en ? ". Same scale on x and y. Green x-axes are solid, y-axes dashed. No joint limits or collision test." : ". Samme skala på x og y. Grønne x-akser er heltrukne, y-akser stiplede. Ingen leddgrenser eller kollisjonstest."}</figcaption>
         </figure>
-        {mode === "fk" ? <fieldset className="egb-pilot-controls"><legend>Leddvinkler (grader i kontrollene, radianer i modellen)</legend>{[0, 1].map((joint) => <label key={joint}><span>Ledd q{joint + 1}<output>{(joints[joint] * 180 / Math.PI).toFixed(1)}°</output></span><input aria-label={"Ledd q" + (joint + 1)} type="range" min="-180" max="180" step="1" value={joints[joint] * 180 / Math.PI} onChange={(event) => { const value = Number(event.target.value) * Math.PI / 180; update({ joints: joint === 0 ? [value, joints[1]] : [joints[0], value] }); }} /></label>)}</fieldset> : <>
-          <fieldset className="egb-pilot-controls"><legend>Målposisjon — dra i figuren eller bruk kontrollene</legend>{[0, 1].map((axis) => <label key={axis}><span>Mål {axis === 0 ? "x" : "y"}<output>{numberTex(target[axis])}</output></span><input aria-label={axis === 0 ? "Mål x" : "Mål y"} type="range" min={-extent + 1} max={extent - 1} step=".1" value={target[axis]} onChange={(event) => update({ target: axis === 0 ? [Number(event.target.value), target[1]] : [target[0], Number(event.target.value)] })} /></label>)}</fieldset>
-          <div role="group" className="egb-pilot-stage" aria-label="IK-gren">
-            <button type="button" aria-pressed={branch === "positive"} onClick={() => update({ branch: "positive" })}>q₂ ≥ 0 · albue ned</button>
-            <button type="button" aria-pressed={branch === "negative"} onClick={() => update({ branch: "negative" })}>q₂ ≤ 0 · albue opp</button>
+        {mode === "fk" ? <fieldset className="egb-pilot-controls"><legend>{en ? "Joint angles (degrees in the controls, radians in the model)" : "Leddvinkler (grader i kontrollene, radianer i modellen)"}</legend>{[0, 1].map((joint) => <label key={joint}><span>{en ? "Joint" : "Ledd"} q{joint + 1}<output>{(joints[joint] * 180 / Math.PI).toFixed(1)}°</output></span><input aria-label={(en ? "Joint q" : "Ledd q") + (joint + 1)} type="range" min="-180" max="180" step="1" value={joints[joint] * 180 / Math.PI} onChange={(event) => { const value = Number(event.target.value) * Math.PI / 180; update({ joints: joint === 0 ? [value, joints[1]] : [joints[0], value] }); }} /></label>)}</fieldset> : <>
+          <fieldset className="egb-pilot-controls"><legend>{en ? "Target position — drag in the figure or use the controls" : "Målposisjon — dra i figuren eller bruk kontrollene"}</legend>{[0, 1].map((axis) => <label key={axis}><span>{en ? "Target" : "Mål"} {axis === 0 ? "x" : "y"}<output>{numberTex(target[axis])}</output></span><input aria-label={en ? (axis === 0 ? "Target x" : "Target y") : (axis === 0 ? "Mål x" : "Mål y")} type="range" min={-extent + 1} max={extent - 1} step=".1" value={target[axis]} onChange={(event) => update({ target: axis === 0 ? [Number(event.target.value), target[1]] : [target[0], Number(event.target.value)] })} /></label>)}</fieldset>
+          <div role="group" className="egb-pilot-stage" aria-label={en ? "IK branch" : "IK-gren"}>
+            <button type="button" aria-pressed={branch === "positive"} onClick={() => update({ branch: "positive" })}><MathText inline>{String.raw`q_2\ge 0`}</MathText>{en ? " · elbow down" : " · albue ned"}</button>
+            <button type="button" aria-pressed={branch === "negative"} onClick={() => update({ branch: "negative" })}><MathText inline>{String.raw`q_2\le 0`}</MathText>{en ? " · elbow up" : " · albue opp"}</button>
           </div>
-          <p className="egb-pilot-small">Opp/ned beskriver grenene for målet (5, 7); fortegnet på q₂ er den entydige definisjonen i resten av planet.</p>
+          <p className="egb-pilot-small">{en
+            ? <>Up/down names the branches for the target (5, 7); the sign of <MathText inline>{String.raw`q_2`}</MathText> is the unambiguous definition everywhere else in the plane.</>
+            : <>Opp/ned beskriver grenene for målet (5, 7); fortegnet på <MathText inline>{String.raw`q_2`}</MathText> er den entydige definisjonen i resten av planet.</>}</p>
         </>}
-        <fieldset className="egb-pilot-controls"><legend>Lenkelengder i samme lengdeenhet</legend>{(["l1", "l2"] as const).map((key, index) => <label key={key}><span>Lenke L{index + 1}<output>{model[key].toFixed(1)}</output></span><input aria-label={"Lenke L" + (index + 1)} type="range" min="1" max="8" step=".1" value={model[key]} onChange={(event) => update({ model: { ...model, [key]: Number(event.target.value) } })} /></label>)}</fieldset>
+        <fieldset className="egb-pilot-controls"><legend>{en ? "Link lengths in the same length unit" : "Lenkelengder i samme lengdeenhet"}</legend>{(["l1", "l2"] as const).map((key, index) => <label key={key}><span>{en ? "Link" : "Lenke"} L{index + 1}<output>{model[key].toFixed(1)}</output></span><input aria-label={(en ? "Link L" : "Lenke L") + (index + 1)} type="range" min="1" max="8" step=".1" value={model[key]} onChange={(event) => update({ model: { ...model, [key]: Number(event.target.value) } })} /></label>)}</fieldset>
         <div className="egb-study-inline-links">
-          <button type="button" className="egb-pilot-reset" onClick={() => { setState(seed(mode)); setFocus(null); }}>Last QUT: (5, 7)</button>
-          {mode === "ik" && PLANAR2_QUT_TARGETS.slice(1).map((point, index) => <button key={index} type="button" className="egb-pilot-reset" onClick={() => update({ model: PLANAR2_QUT, target: point })}>QUT mål {index + 2}</button>)}
-          <button type="button" className="egb-pilot-reset" onClick={() => update({ mode: "ik", target: [workspace.outer + 1, 0] })}>Prøv utilgjengelig mål</button>
-          <button type="button" className="egb-pilot-reset" onClick={() => update({ mode: "fk", joints: [0, 0] })}>Rett arm</button>
+          <button type="button" className="egb-pilot-reset" onClick={() => { setState(seed(mode)); setFocus(null); }}>{en ? "Load QUT: (5, 7)" : "Last QUT: (5, 7)"}</button>
+          {mode === "ik" && PLANAR2_QUT_TARGETS.slice(1).map((point, index) => <button key={index} type="button" className="egb-pilot-reset" onClick={() => update({ model: PLANAR2_QUT, target: point })}>{en ? "QUT target " + (index + 2) : "QUT mål " + (index + 2)}</button>)}
+          <button type="button" className="egb-pilot-reset" onClick={() => update({ mode: "ik", target: [workspace.outer + 1, 0] })}>{en ? "Try an unreachable target" : "Prøv utilgjengelig mål"}</button>
+          <button type="button" className="egb-pilot-reset" onClick={() => update({ mode: "fk", joints: [0, 0] })}>{en ? "Straight arm" : "Rett arm"}</button>
         </div>
-        <p className="egb-pilot-source">Preset: QUT Week 5 tutorial, PDF-side 17. Geometri og rammer: Corke kap. 7.1.1 og 7.2.1; Robotics Toolbox ET2/ETS2. Lengdene er ikke Dobot-dimensjoner.</p>
+        <p className="egb-pilot-source">{en ? "Preset: QUT Week 5 tutorial, PDF page 17. Geometry and frames: Corke ch. 7.1.1 and 7.2.1; Robotics Toolbox ET2/ETS2. The lengths are not Dobot dimensions." : "Preset: QUT Week 5 tutorial, PDF-side 17. Geometri og rammer: Corke kap. 7.1.1 og 7.2.1; Robotics Toolbox ET2/ETS2. Lengdene er ikke Dobot-dimensjoner."}</p>
       </div>
     </div>
   </div>;

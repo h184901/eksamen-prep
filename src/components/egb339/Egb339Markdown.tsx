@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { createElement } from "react";
+import { createElement, isValidElement } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -7,6 +7,15 @@ import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import { egb339ReadableMath } from "@/lib/egb339-readable-math";
 import { egb339StudyHref } from "@/lib/egb339-study-weeks";
+import Egb339CodeBlock from "./Egb339CodeBlock";
+
+/** Extract raw text from a react-markdown <code> child. */
+function codeText(node: React.ReactNode): string {
+  if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(codeText).join("");
+  if (isValidElement<{ children?: React.ReactNode }>(node)) return codeText(node.props.children);
+  return "";
+}
 
 interface Props {
   content: string;
@@ -155,11 +164,12 @@ function MarkdownBlock({ content, headingOffset = 0, studyLinks = false }: Props
             </code>
           );
         },
-        pre: ({ children }) => (
-          <pre className="my-5 overflow-x-auto rounded-xl border border-slate-700 bg-slate-950 p-4 text-sm leading-6 shadow-inner">
-            {children}
-          </pre>
-        ),
+        pre: ({ children }) => {
+          // Fenced code: hand the raw source to the shared code block.
+          const codeElement = isValidElement<{ className?: string; children?: React.ReactNode }>(children) ? children : null;
+          const language = codeElement?.props.className?.match(/language-(\w+)/)?.[1] ?? "python";
+          return <Egb339CodeBlock code={codeText(codeElement).replace(/\n$/, "")} language={language} />;
+        },
         blockquote: ({ children }) => (
           <blockquote className="egb-study-quotation">
             {children}

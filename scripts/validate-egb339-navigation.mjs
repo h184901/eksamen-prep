@@ -52,11 +52,11 @@ assert(!sidebar.includes("TutorButton"), "Sidebar must not render the tutor");
 assert(!sidebar.includes("<details") && !sidebar.includes("<summary"), "Sidebar accordion uses buttons, not details");
 assert(sidebar.includes("aria-expanded"), "Disclosure buttons expose expanded state");
 assert(sidebar.includes("aria-controls"), "Disclosure buttons reference their panels");
-assert(sidebar.includes("aria-label={week.title}"), "Disclosure buttons are named by topic; aria-expanded carries state");
+assert(sidebar.includes("aria-label={weekTitle(week.week)}"), "Disclosure buttons are named by topic; aria-expanded carries state");
 assert(sidebar.includes('role="region"'), "Accordion panels are labelled regions");
 assert(sidebar.includes("data-mobile-open"), "Mobile course-navigation collapse is wired");
 assert(sidebar.includes("egb-week-accordion-meta"), "Week number is secondary metadata in the sidebar");
-assert(sidebar.includes("Uke {week.week}"), "Week number remains as small metadata");
+assert(sidebar.includes('ui(lang, "weekOf")'), "Week number remains as small metadata");
 assert(sidebar.includes("hashTarget()") && sidebar.includes("catch {"), "Malformed hashes must not throw");
 assert(!sidebar.includes("week.assessments.map"), "Weeks must not enumerate individual assessments; the global Assessments link covers them");
 assert(sidebar.includes('href: "/egb339/vurderinger"'), "The global Assessments section stays in the sidebar");
@@ -65,8 +65,8 @@ assert(sidebar.includes('pathname.startsWith(`${href}/`)'), "Reference links sta
 // --- Landing page ------------------------------------------------------------
 const landing = readFileSync("src/app/egb339/page.tsx", "utf8");
 assert(landing.includes("Egb339ContinueCard"), "Landing page has a continue-studying action");
-assert(landing.includes("egb-topic-list"), "Landing page has the clean topic overview");
-assert(landing.includes("week.title"), "Topic rows use subject titles");
+assert(landing.includes("Egb339TopicList"), "Landing page has the clean topic overview");
+assert(landing.includes("egb339WeekSubject"), "Topic rows use subject titles");
 assert(!landing.includes("Egb339Syllabus"), "Landing page no longer duplicates the full syllabus");
 const continueCard = readFileSync("src/components/egb339/Egb339ContinueCard.tsx", "utf8");
 assert(continueCard.includes('role="progressbar"'), "Progress bar is exposed to assistive tech");
@@ -74,13 +74,15 @@ assert(continueCard.includes("next.href"), "Continue action targets the next unc
 
 // --- Week pages, breadcrumb and entry navigation -----------------------------
 const shell = readFileSync("src/components/egb339/pilot/Egb339PilotShell.tsx", "utf8");
-assert(shell.includes("egb339WeekSubjectTitle"), "Breadcrumbs resolve subject titles");
-assert(shell.includes("IconArrowLeft") && shell.includes("IconArrowRight"), "Entry navigation has directional icons");
+const pilotNav = readFileSync("src/components/egb339/pilot/PilotNav.tsx", "utf8");
+assert(pilotNav.includes("egb339WeekSubject"), "Breadcrumbs resolve subject titles");
+assert(pilotNav.includes("IconArrowLeft") && pilotNav.includes("IconArrowRight"), "Entry navigation has directional icons");
 const studyWeek = readFileSync("src/components/egb339/study-week/StudyWeekPage.tsx", "utf8");
+const studyWeekHeader = readFileSync("src/components/egb339/study-week/StudyWeekHeader.tsx", "utf8");
 assert(!/Week \{number\}:/.test(studyWeek), "Week-page h1 is the subject, not 'Week N:'");
-assert(studyWeek.includes("egb-week-kicker"), "Week number survives as kicker metadata");
+assert(studyWeekHeader.includes("egb-week-kicker"), "Week number survives as kicker metadata");
 const weekOne = readFileSync("src/components/egb339/week-one/WeekOnePage.tsx", "utf8");
-assert(weekOne.includes("<h1>Introduksjon til robotikk</h1>"), "Week 1 h1 is the subject title");
+assert(weekOne.includes("<h1>{en ? subject.titleEn : subject.title}</h1>"), "Week 1 h1 is the subject title");
 assert(!weekOne.includes("Week 1: Introduction"), "No English week-primary heading remains");
 
 // --- Icons -------------------------------------------------------------------

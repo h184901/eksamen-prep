@@ -21,7 +21,7 @@ const solution = getEgb339AssessmentSolution(week.WEEK_ONE_WARMUP);
 assert.equal(solution.parts.length, 15);
 assert.deepEqual(solution.weeks, [2, 3], "Keep practical associations");
 assert.deepEqual(Object.keys(week.WEEK_ONE_PROMPTS), solution.parts.map((part) => part.id));
-assert(source.includes("content={part.content}"), "Reuse existing walkthroughs, not copies");
+assert(source.includes("no={part.content}"), "Reuse existing walkthroughs, not copies");
 const { a, b } = week.WEEK_ONE_Q15;
 const product = a.map((row) => b[0].map((_, j) => row.reduce((sum, value, k) => sum + value * b[k][j], 0)));
 assert.deepEqual(product, [[19, 22], [43, 50]]);
