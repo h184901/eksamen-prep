@@ -54,3 +54,8 @@ test-results/
 blob-report/
 dat107-*.png
 dat109-*.png
+
+# graphify knowledge-graph output (local analysis, not tracked)
+graphify-out/
+.graphify/
+graphify-*.log
