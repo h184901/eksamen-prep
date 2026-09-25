@@ -55,3 +55,30 @@ archives, private assignment implementations or local QA artifacts.
 
 See [the worked-solutions QA report](egb339-solutions-qa.md) for the current
 coverage, source discrepancies, test results and unresolved source gaps.
+
+## Bilingual content and regression evidence
+
+The generated snapshot is not edited for translation. English entries live in
+`src/data/egb339-vault/en.json`; Norwegian title/body/summary overrides live in
+`nb.json`, which the runtime loader applies to the authored entries. The sync
+script does not overwrite either translation file. Internal links whose labels
+are an English target title are displayed with the Norwegian target title.
+
+`npm run validate:egb339` checks the effective Norwegian and English content,
+including week guidance, problems and assessment walkthroughs. Its prose scan
+ignores code, equations and explicitly attributed original document titles.
+`npm run test:egb339:e2e` additionally checks rendered text on all 69 EGB339
+routes in each language, including headings, links and captions. The archived
+original Assessment 2.1 guide is kept as source material and is excluded from
+the language scan of the surrounding localized page.
+
+Regression evidence (2026-09-25): the initial desktop-header test failed on
+“Innlogget som”, and the Norwegian browser sweep failed on English assessment
+summaries despite a passing source-only translation check. A link-label
+reproducer also failed before the scanner was fixed. After applying Norwegian
+body overrides at the loader and using bilingual renderers, the production
+build completed, `npm run validate:egb339` passed, and the browser suite passed
+13/13 tests. The header was visually checked at 1280, 1440, 1536 and 1920px
+in NO/EN, light/dark and authenticated/logged-out states. These checks do not
+produce a numeric code-coverage percentage; language detection uses a
+high-confidence heuristic and does not replace editorial review.

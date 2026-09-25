@@ -38,16 +38,15 @@ export default function Navigation() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/80 backdrop-blur-md">
-      {/* gap-6 garanterer luft mellom brand og nav selv når raden er full;
-          shrink-0 hindrer at brand-teksten klemmes inn i første nav-item. */}
+      {/* The brand stays fixed while the desktop controls use compact labels. */}
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-6">
         <Link href="/" aria-label={english ? "Eksamensøving — Home" : "Eksamensøving — hjem"} className="flex shrink-0 items-center gap-2 font-bold text-lg">
           <span className="text-2xl">📚</span>
           <span className="hidden min-[480px]:inline">Eksamensøving</span>
         </Link>
 
-        {/* The full nav needs the 1280px breakpoint to fit beside account and language controls. */}
-        <div className="hidden xl:flex items-center gap-6">
+        {/* The full nav fits on one line from 1280px; narrower widths use the menu. */}
+        <div className="hidden xl:flex shrink-0 items-center gap-5 whitespace-nowrap">
           {navItems.map((item) => (
             <Link
               key={item.href}

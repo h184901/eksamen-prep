@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Egb339Entry } from "@/lib/egb339-vault/types";
 import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
+import { getEgb339AssessmentSolutionEn } from "@/lib/egb339-assessment-solutions-en";
+import { getEgb339En } from "@/lib/egb339-vault/loader";
 import { EGB339_PILOT } from "@/lib/egb339-course";
-import Egb339Markdown from "../Egb339Markdown";
+import Egb339LangMarkdown from "../Egb339LangMarkdown";
+import Egb339AssessmentSolutions from "../Egb339AssessmentSolutions";
 import { PilotBreadcrumb, PilotEntryNav } from "./Egb339PilotShell";
 import Egb339PilotProgress from "./Egb339PilotProgress";
-import PilotSolutionLinks from "./PilotSolutionLinks";
 import { T } from "../T";
 import LangBlock from "../LangBlock";
 import { EGB339_UI } from "@/lib/egb339-language/ui";
@@ -13,6 +15,7 @@ import { EGB339_UI } from "@/lib/egb339-language/ui";
 export default function PilotAssessment({ entry }: { entry: Egb339Entry }) {
   const solution = getEgb339AssessmentSolution(entry.slug);
   if (!solution) throw new Error("Assessment 1.1 walkthrough missing");
+  const en = getEgb339En(entry.slug);
   return <>
     <PilotBreadcrumb title="Assessment 1.1" week={2} />
     <article className="egb-pilot-article egb-pilot-prose">
@@ -27,18 +30,9 @@ export default function PilotAssessment({ entry }: { entry: Egb339Entry }) {
         en={<>Q4 builds the transformation from <Link href={`${EGB339_PILOT.lesson}#homogene-koordinater`}>the lesson's matrix form</Link>. Q5 uses <Link href={`${EGB339_PILOT.lesson}#invers`}>the inverse</Link>.</>}
       />
       <section id="oppgavekrav">
-        <Egb339Markdown content={entry.body} />
+        <Egb339LangMarkdown no={entry.body} en={en?.body} />
       </section>
-      <section id="losningsforslag">
-        <h2><T no={EGB339_UI.walkthroughParts.no} en={EGB339_UI.walkthroughParts.en} /></h2>
-        <p>{solution.scope}</p>
-        <p className="egb-pilot-source"><T no="Kildegrunnlag:" en="Source material:" /> {solution.source}</p>
-        <PilotSolutionLinks parts={solution.parts.map(({ id, title }) => ({ id, title }))} />
-        {solution.parts.map((part) => <details id={`solution-${part.id}`} key={part.id} className="egb-pilot-solution">
-          <summary>{part.title}</summary>
-          <Egb339Markdown content={part.content} />
-        </details>)}
-      </section>
+      <Egb339AssessmentSolutions solution={solution} solutionEn={getEgb339AssessmentSolutionEn(entry.slug)} />
       <Egb339PilotProgress pageKey={`egb339/vurdering/${entry.slug}`} />
       <PilotEntryNav previous={{ href: EGB339_PILOT.lesson, title: "SE(2): rotasjon og translasjon", titleEn: "SE(2): rotation and translation", pageKey: "" }} next={{ href: "/egb339/vurderinger/assessment-1-2-position-and-orientation-in-3d", title: "Assessment 1.2: posisjon og orientering i 3D", titleEn: "Assessment 1.2: position and orientation in 3D", pageKey: "" }} />
     </article>

@@ -5,15 +5,12 @@ import resourcesData from "@/data/egb339-vault/resources.json";
 import metaData from "@/data/egb339-vault/_meta.json";
 import enData from "@/data/egb339-vault/en.json";
 import nbData from "@/data/egb339-vault/nb.json";
+import { EGB339_TITLES } from "../egb339-titles";
 import type { Egb339Entry, Egb339Meta, Egb339Track } from "./types";
 
-const weeks = (weeksData as { weeks: Egb339Entry[] }).weeks;
-const concepts = (conceptsData as { concepts: Egb339Entry[] }).concepts;
-const assessments = (assessmentsData as { assessments: Egb339Entry[] }).assessments;
-const resources = (resourcesData as { resources: Egb339Entry[] }).resources;
 const meta = metaData as Egb339Meta;
 
-/** English translations and Norwegian title overrides, keyed by slug. */
+/** English translations and Norwegian text overrides, keyed by slug. */
 export interface Egb339EntryTranslation {
   title?: string;
   summary?: string;
@@ -22,6 +19,31 @@ export interface Egb339EntryTranslation {
 
 const enTranslations = (enData as { translations: Record<string, Egb339EntryTranslation> }).translations;
 const nbOverrides = (nbData as { overrides: Record<string, Egb339EntryTranslation> }).overrides;
+
+// Legacy vault links often retain their English target title in otherwise
+// Norwegian prose. Replace only title links, not contextual descriptions or URLs.
+function localizeInternalTitles(markdown: string): string {
+  return markdown.replace(/\[([^\]]+)\]\((\/egb339\/[^)\s]+)\)/g, (link, label: string, href: string) => {
+    const slug = href.split(/[?#]/)[0].split("/").at(-1) ?? "";
+    const titles = EGB339_TITLES[slug];
+    if (!titles) return link;
+    if (href.startsWith("/egb339/uker/") && /^Week\s+\d+\s*[-–]/i.test(label)) {
+      const week = label.match(/\d+/)?.[0];
+      return `[Uke ${week} – ${titles.no}](${href})`;
+    }
+    const normalize = (text: string) => text.toLowerCase().replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
+    return normalize(label) === normalize(titles.en) ? `[${titles.no}](${href})` : link;
+  });
+}
+
+const withNorwegianText = (entry: Egb339Entry): Egb339Entry => {
+  const text = { ...entry, ...nbOverrides[entry.slug] };
+  return { ...text, summary: localizeInternalTitles(text.summary), body: localizeInternalTitles(text.body) };
+};
+const weeks = (weeksData as { weeks: Egb339Entry[] }).weeks.map(withNorwegianText);
+const concepts = (conceptsData as { concepts: Egb339Entry[] }).concepts.map(withNorwegianText);
+const assessments = (assessmentsData as { assessments: Egb339Entry[] }).assessments.map(withNorwegianText);
+const resources = (resourcesData as { resources: Egb339Entry[] }).resources.map(withNorwegianText);
 
 /** English variant of an entry's text fields; undefined fields fall back to the authored Norwegian. */
 export function getEgb339En(slug: string): Egb339EntryTranslation | null {

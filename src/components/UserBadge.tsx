@@ -49,30 +49,21 @@ export default function UserBadge() {
   return (
     <>
       <LegacyProgressMigrator username={username} />
-      <button
-        type="button"
-        onClick={logout}
-        disabled={loggingOut}
-        aria-label={english ? "Log out" : "Logg ut"}
-        title={english ? "Log out" : "Logg ut"}
-        className="sm:hidden flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--card-border)] disabled:opacity-50"
-      >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M10 17l5-5-5-5M15 12H3M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7" />
-        </svg>
-      </button>
-      <div className="hidden sm:flex items-center gap-2 text-xs sm:text-sm">
-        <span className="hidden xl:inline text-[var(--muted)]">
-          {english ? "Logged in as" : "Innlogget som"}
-        </span>
-        <span className="hidden xl:inline font-semibold">{username}</span>
+      <div role="group" aria-label={english ? `Account: ${username}` : `Konto: ${username}`} className="flex shrink-0 items-center gap-1.5">
+        <span title={username} className="hidden max-w-20 truncate text-sm font-semibold sm:inline">{username}</span>
         <button
           type="button"
           onClick={logout}
           disabled={loggingOut}
-          className="text-[11px] font-medium px-2 py-1 rounded-md border border-[var(--card-border)] hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50"
+          aria-label={english ? "Log out" : "Logg ut"}
+          title={english ? "Log out" : "Logg ut"}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--card-border)] hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] disabled:opacity-50 dark:hover:bg-neutral-800 sm:h-8 sm:w-8"
         >
-          {loggingOut ? "…" : english ? "Log out" : "Logg ut"}
+          {loggingOut ? "…" : (
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M10 17l5-5-5-5M15 12H3M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7" />
+            </svg>
+          )}
         </button>
       </div>
     </>

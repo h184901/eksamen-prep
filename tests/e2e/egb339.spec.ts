@@ -4,6 +4,7 @@ import weeks from "../../src/data/egb339-vault/weeks.json";
 import concepts from "../../src/data/egb339-vault/concepts.json";
 import assessments from "../../src/data/egb339-vault/assessments.json";
 import resources from "../../src/data/egb339-vault/resources.json";
+import { scanLanguage } from "../../scripts/lib/egb339-language-audit.mjs";
 
 const BASE = "http://127.0.0.1:3138";
 let unexpectedProgressWrites: string[] = [];
@@ -59,6 +60,7 @@ for (const lang of ["no", "en"] as const) {
     await page.setViewportSize({ width: 390, height: 844 });
     if (lang === "en") await page.addInitScript(() => localStorage.setItem("egb339-lang", "en"));
     const errors: string[] = [];
+    const languageLeaks: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
     page.on("console", message => {
       if (message.type() === "error" || message.type() === "warning") errors.push(message.text());
@@ -83,9 +85,20 @@ for (const lang of ["no", "en"] as const) {
         expect(geometry.scroll, `${route} overflows at 390px`).toBeLessThanOrEqual(geometry.width + 1);
         expect(geometry.badImages, `${route} has broken loaded images`).toEqual([]);
         await expect(page.locator(".katex-error")).toHaveCount(0);
+        let visibleText = await page.locator("body").innerText();
+        const originalGuide = page.locator("#egb-guide-original");
+        // The archived, explicitly labelled Norwegian source guide retains its
+        // original code/comments; scan the localized page around it instead.
+        if (await originalGuide.isVisible()) {
+          const originalText = await originalGuide.innerText();
+          expect(visibleText).toContain(originalText);
+          visibleText = visibleText.replace(originalText, "");
+        }
+        languageLeaks.push(...scanLanguage(visibleText, lang).map(hit => `${route}:${hit.line} ${hit.text}`));
       });
     }
     expect(errors).toEqual([]);
+    expect(languageLeaks, `Wrong-language visible text in ${lang}`).toEqual([]);
   });
 }
 
@@ -214,6 +227,62 @@ test("shared header works on other subjects and tutor remains scoped", async ({ 
     await expect(page.locator("[data-tutor-trigger]")).toBeVisible();
   }
   await expect(page.getByRole("button", { name: "Logg ut" })).toBeVisible();
+});
+
+test("global desktop header keeps account and controls compact on one line", async ({ page }) => {
+  test.setTimeout(120000);
+  for (const width of [1280, 1440, 1536, 1920]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const lang of ["no", "en"] as const) {
+      for (const theme of ["light", "dark"] as const) {
+        await page.addInitScript(({ lang, theme }) => {
+          localStorage.setItem("egb339-lang", lang);
+          localStorage.setItem("theme", theme);
+        }, { lang, theme });
+        await open(page, "/egb339/uker/uke-6", lang);
+        const header = page.locator("nav").first();
+        const logout = header.getByRole("button", { name: lang === "en" ? "Log out" : "Logg ut" });
+        await expect(logout).toBeVisible();
+        await expect(header).not.toContainText(/Logged in as|Innlogget som/);
+        const layout = await header.evaluate(nav => ({
+          height: nav.getBoundingClientRect().height,
+          width: document.documentElement.scrollWidth,
+          account: [...nav.querySelectorAll("button")].find(button => button.getAttribute("aria-label") === (document.documentElement.lang === "en" ? "Log out" : "Logg ut"))?.getBoundingClientRect().height,
+          links: [...nav.querySelectorAll<HTMLAnchorElement>('a[href="/dat102"]')].filter(link => link.getBoundingClientRect().width > 0).map(link => link.getBoundingClientRect().top),
+        }));
+        expect(layout.height, `${width}px ${lang} ${theme}`).toBeLessThanOrEqual(65);
+        expect(layout.width, `${width}px ${lang} ${theme}`).toBeLessThanOrEqual(width + 1);
+        expect(layout.account, `${width}px ${lang} ${theme}`).toBeLessThanOrEqual(40);
+        expect(layout.links).toHaveLength(1);
+        if (process.env.EGB339_HEADER_SCREENSHOTS) {
+          await header.screenshot({ path: `/tmp/opencode/header-after-${width}-${lang}-${theme}-authenticated.png` });
+        }
+      }
+    }
+  }
+});
+
+test("logged-out global header stays compact", async ({ page }) => {
+  test.setTimeout(120000);
+  await page.route("**/api/auth/me", route => route.fulfill({ status: 401, contentType: "application/json", body: '{"user":null}' }));
+  for (const width of [1280, 1440, 1536, 1920]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const lang of ["no", "en"] as const) {
+      for (const theme of ["light", "dark"] as const) {
+        await page.addInitScript(({ lang, theme }) => {
+          localStorage.setItem("egb339-lang", lang);
+          localStorage.setItem("theme", theme);
+        }, { lang, theme });
+        await open(page, "/egb339/uker/uke-6", lang);
+        const header = page.locator("nav").first();
+        await expect(header.getByRole("button", { name: lang === "en" ? "Log out" : "Logg ut" })).toHaveCount(0);
+        expect(await header.evaluate(nav => nav.getBoundingClientRect().height), `${width}px ${lang} ${theme}`).toBeLessThanOrEqual(65);
+        if (process.env.EGB339_HEADER_SCREENSHOTS) {
+          await header.screenshot({ path: `/tmp/opencode/header-after-${width}-${lang}-${theme}-logged-out.png` });
+        }
+      }
+    }
+  }
 });
 
 test("light and dark themes preserve controls and contrast on mobile and desktop", async ({ page }) => {

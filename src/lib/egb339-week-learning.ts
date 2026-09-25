@@ -10,7 +10,7 @@ export interface Egb339WeekLearning {
 export const EGB339_WEEK_LEARNING: Record<number, Egb339WeekLearning> = {
   2: {
     purpose: "Fra vektorer og matriseprodukter til et punkt uttrykt i to koordinatrammer.",
-    practical: "QUT bruker Prac – Python Refresher. Side 9 peker til warmup Q1–Q7: funksjoner, løkker, betingelser og samlinger. Kjør i kursets separate Python-miljø og test også grenseverdier. NumPy-oppgavene fortsetter i Week 3.",
+    practical: "QUT bruker Prac – Python Refresher. Side 9 peker til warmup Q1–Q7: funksjoner, løkker, betingelser og samlinger. Kjør i kursets separate Python-miljø og test også grenseverdier. NumPy-oppgavene fortsetter i uke 3.",
     sources: ["QUT: Tutorial – Linear Algebra and 2D Pose, PDF s. 3–17; tutorial-fasit; Prac – Python Refresher, s. 2–9.", "Corke, Robotics, Vision and Control, 3. Python-utgave: kap. 2.2.1–2.2.2, trykt s. 33–38 (PDF s. 57–62).", "Robotics Toolbox / SpatialMath: SO2, SE2 og ET2/ETS2. Eksisterende SE(2)-motor og validerte eksempler gjenbrukes."],
     purposeEn: "From vectors and matrix products to a point expressed in two coordinate frames.",
     practicalEn: "QUT uses Prac – Python Refresher. Page 9 points to warmup Q1–Q7: functions, loops, conditionals and collections. Run in the course's separate Python environment and test boundary values too. The NumPy exercises continue in Week 3.",
@@ -26,7 +26,7 @@ export const EGB339_WEEK_LEARNING: Record<number, Egb339WeekLearning> = {
   },
   4: {
     purpose: "Bygg robotens pose fra en ordnet kjede. Se hvordan ett ledd flytter alle rammene etter seg.",
-    practical: "Week 4-practicalen kobler Python til Dobot i CoppeliaSim. Følg oppsettet nedenfor, tegn kjeden før du programmerer FK og bruk simulatorens posisjon som kontroll — ikke som erstatning for egen beregning.",
+    practical: "Uke 4-øvelsen kobler Python til Dobot i CoppeliaSim. Følg oppsettet nedenfor, tegn kjeden før du programmerer FK og bruk simulatorens posisjon som kontroll — ikke som erstatning for egen beregning.",
     sources: ["QUT: Tutorial – Forward Kinematics (1), s. 2–9; Week 4 Prac: Forward kinematics (7. september 2026), s. 1–3.", "Corke: kap. 7.1.1, s. 257–259, særlig figur 7.4 og ETS2-kjeden. Boka bruker $q_0$/$q_1$ der QUT-laben bruker $q_1$/$q_2$.", "Robotics Toolbox: `models/ETS/Planar2.py`, ET2/ETS2 og `DHRobot.fkine`. Den eksisterende 2R-laben gjenbruker validerte transformasjoner."],
     purposeEn: "Build the robot's pose from an ordered chain. Watch how one joint moves every frame after it.",
     practicalEn: "The Week 4 practical connects Python to Dobot in CoppeliaSim. Follow the setup below, draw the chain before you program FK, and use the simulator's position as a check — not as a substitute for your own calculation.",
@@ -58,7 +58,7 @@ export const EGB339_WEEK_LEARNING: Record<number, Egb339WeekLearning> = {
   },
   8: {
     purpose: "Se bildet som data: koordinater, intensiteter og operasjoner. Knytt pikselmålinger til form, farge og arbeidsflate.",
-    practical: "Bruk kursets `pixi.toml` i en separat `week_8_prac`-mappe og legg `highway.jpg` i `images/`. Practicalen bruker gråtonebilder. Følg oppgavene fra bildestørrelse og histogram til rad-/kolonneprofiler, beskjæring, dtype og syntetiske bilder. Farge og homografi nedenfor knytter grunnlaget til senere assessments; de er ikke påstått å være hele Week 8-forelesningen.",
+    practical: "Bruk kursets `pixi.toml` i en separat `week_8_prac`-mappe og legg `highway.jpg` i `images/`. Øvelsen bruker gråtonebilder. Følg oppgavene fra bildestørrelse og histogram til rad-/kolonneprofiler, beskjæring, dtype og syntetiske bilder. Farge og homografi nedenfor knytter grunnlaget til senere vurderinger; de er ikke påstått å være hele forelesningen i uke 8.",
     sources: ["QUT: EGB339 – 2026 – Lecture Week 8, s. 4–16; Week 8 Prac – Working with images in Python, s. 1–3. Assessment 1.5–1.7 og deres eksisterende, kildekontrollerte gjennomganger.", "Corke: kap. 11.1.1 (bildekoordinater), 11.2 (histogram), 11.3–11.4 (pikseloperasjoner), 10.2.5 (kromatisitet), 12.1.3 (regionbeskrivelser) og 14.8.1 (perspektivkorreksjon). Markdown og original PDF er kontrollert sammen.", "Figurer: originale QUT-utdrag med kildeangivelse. Highway: Mapillary-bruker vagrant42, CC BY-SA 4.0, som oppgitt i QUT-practicalen. Ingen ny vision-dependency er lagt til."],
     purposeEn: "See the image as data: coordinates, intensities and operations. Connect pixel measurements to shape, colour and the work plane.",
     practicalEn: "Use the course's `pixi.toml` in a separate `week_8_prac` folder and place `highway.jpg` in `images/`. The practical uses greyscale images. Follow the exercises from image size and histogram to row/column profiles, cropping, dtype and synthetic images. Colour and homography below connect the foundation to later assessments; they are not claimed to be the whole Week 8 lecture.",

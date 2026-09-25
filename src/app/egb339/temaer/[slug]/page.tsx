@@ -47,7 +47,7 @@ export default async function Egb339TopicPage({ params }: { params: Promise<{ sl
           en={<nav aria-label={ui("en", "inThisLesson")}><a href="#planar-modell">Model</a><a href="#laboratorium">Robot and matrices</a><a href="#regneeksempel">Worked example</a><a href="#prov-selv">Try it yourself</a><a href="#modell-assessment">Assessment link</a></nav>}
         />}
       </header>
-      {slug === "keyboard-coordinate-mapping-and-safe-key-presses" && <p className="egb-pilot-prose"><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration#interactive">Assessment 2.1: følg hver SPACE-tast fra piksel til robotmål</Link></p>}
+      {slug === "keyboard-coordinate-mapping-and-safe-key-presses" && <p className="egb-pilot-prose"><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration#interactive"><T no="Assessment 2.1: følg hver SPACE-tast fra piksel til robotmål" en="Assessment 2.1: trace each SPACE key from pixel to robot target" /></Link></p>}
       <div className="egb-pilot-prose"><Egb339LangMarkdown no={splitNo >= 0 ? entry.body.slice(0, splitNo) : entry.body} en={en?.body ? (splitEn >= 0 ? en.body.slice(0, splitEn) : en.body) : undefined} /></div>
       {planarMode && <PlanarKinematicsLesson mode={planarMode} />}
       {splitNo >= 0 && <div className="egb-pilot-prose"><Egb339LangMarkdown no={entry.body.slice(splitNo)} en={en?.body && splitEn >= 0 ? en.body.slice(splitEn) : undefined} /></div>}

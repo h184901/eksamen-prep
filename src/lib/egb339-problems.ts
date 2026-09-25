@@ -132,7 +132,7 @@ const week2: Egb339Problem[] = [
     verification: "official",
     topics: [topic.linearAlgebra, topic.numpy],
     prompt: String.raw`
-Evaluate the following dot products:
+Regn ut følgende skalarprodukter:
 
 1. $[2\;0]\cdot[1\;7]$
 2. $[3\;1]\cdot[2\;2]$
@@ -165,7 +165,7 @@ For 1D-arrays i NumPy gir **a @ b** skalarproduktet. **a * b** gir bare de parvi
     verification: "official",
     topics: [topic.linearAlgebra, topic.numpy],
     prompt: String.raw`
-Evaluate the following matrix multiplications:
+Regn ut følgende matriseprodukter:
 
 $$
 \text{a) }\begin{bmatrix}2&2\\2&2\end{bmatrix}
@@ -228,7 +228,7 @@ $$
     verification: "corrected",
     topics: [topic.linearAlgebra, topic.numpy],
     prompt: String.raw`
-Evaluate the transpose of:
+Finn transponatet til:
 
 $$
 \text{a) }\begin{bmatrix}1&2\\3&4\end{bmatrix},\quad
@@ -284,7 +284,7 @@ $$
     verification: "official",
     topics: [topic.linearAlgebra, topic.numpy],
     prompt: String.raw`
-Evaluate the inverse of:
+Finn inversen til:
 
 $$
 \text{a) }\begin{bmatrix}1&2\\3&4\end{bmatrix},\quad
@@ -339,8 +339,8 @@ $$
     verification: "official",
     topics: [topic.so2, topic.frames],
     prompt: String.raw`
-Calculate the rotation matrices for
-$0$, $\pi/2$, $\pi$, $\pi/4$, $\pi/6$, $-\pi/3$, $\pi/18$ and $-2\pi/3$ radians.
+Beregn rotasjonsmatrisene for
+$0$, $\pi/2$, $\pi$, $\pi/4$, $\pi/6$, $-\pi/3$, $\pi/18$ og $-2\pi/3$ radianer.
 `,
     solution: String.raw`
 ### 1. Bruk én konvensjon
@@ -391,9 +391,9 @@ $$
     verification: "official",
     topics: [topic.frames, topic.so2],
     prompt: String.raw`
-1. Frame B is rotated relative to frame A by $\pi/4$. Point P is $[0,3]$ in A. Find P in B.
-2. Frame Q is rotated relative to frame R by $\pi/2$. Point S is $[2,3]$ in R. Find S in Q.
-3. Frame M is rotated relative to frame N by $\pi$. Point X is $[5,1]$ in M. Find X in N.
+1. Ramme B er rotert $\pi/4$ relativt til ramme A. Punkt P er $[0,3]$ i A. Finn koordinatene til P i B.
+2. Ramme Q er rotert $\pi/2$ relativt til ramme R. Punkt S er $[2,3]$ i R. Finn koordinatene til S i Q.
+3. Ramme M er rotert $\pi$ relativt til ramme N. Punkt X er $[5,1]$ i M. Finn koordinatene til X i N.
 `,
     solution: String.raw`
 ### 1. Velg retning før du regner
@@ -447,12 +447,12 @@ $$
     verification: "official",
     topics: [topic.se2, topic.frames],
     prompt: String.raw`
-For all cases, point P is $[2,3]$ in frame B. Determine P in frame A.
+I alle tilfellene er koordinatene til punkt P $[2,3]$ i ramme B. Finn koordinatene i ramme A.
 
-1. B is inside A at $[1,2]$ and rotated by $\pi/4$.
-2. B is inside A at $[0,0]$ and rotated by $\pi/2$.
-3. A is inside B at $[2,3]$ and rotated by $\pi$.
-4. A is inside B at $[1,6]$ and rotated by $\pi$.
+1. B ligger ved $[1,2]$ i A og er rotert $\pi/4$.
+2. B ligger ved $[0,0]$ i A og er rotert $\pi/2$.
+3. A ligger ved $[2,3]$ i B og er rotert $\pi$.
+4. A ligger ved $[1,6]$ i B og er rotert $\pi$.
 `,
     solution: String.raw`
 ### 1. Skill mellom direkte og invers transformasjon
@@ -497,7 +497,7 @@ const week3: Egb339Problem[] = [
     verification: "corrected",
     topics: [topic.so3, topic.rotations3d, topic.frames],
     prompt: String.raw`
-Create the matrices for:
+Sett opp matrisene for:
 
 1. $R_x(\pi/4)$
 2. $R_z(3\pi/4)$
@@ -507,7 +507,7 @@ Create the matrices for:
 6. $R_y(\pi/2)R_x(\pi/4)$
 7. $R_x(\pi/6)R_x(\pi/3)$
 
-Finally, frame B's x-axis is parallel to A's z-axis, and B's y-axis is anti-parallel to A's y-axis. Construct $\;{}^A R_B$.
+Til slutt er x-aksen til B parallell med z-aksen til A, mens y-aksen til B peker motsatt vei av y-aksen til A. Sett opp $\;{}^A R_B$.
 `,
     solution: String.raw`
 ### 1. Velg akse og sett inn vinkelen
@@ -580,12 +580,12 @@ $$
     verification: "official",
     topics: [topic.se3, topic.rotations3d, topic.frames],
     prompt: String.raw`
-Point P is defined in frame B and must be transformed into frame A.
+Punkt P er gitt i ramme B og skal transformeres til ramme A.
 
-1. B is at $[2,0,0]$ in A. Rotate $\pi/4$ about x, then $\pi/4$ about the new y-axis. $\;{}^B p=[0,3,0]$.
-2. A is at $[1,2,3]$ in B. Rotate $\pi/6$ about y, then $\pi/4$ about the old z-axis. $\;{}^B p=[2,0,2]$.
-3. B is at $[1,1,1]$ in A. Rotate $\pi/2$ about x, then $\pi/2$ about the new z-axis, then $\pi/2$ about the new x-axis. $\;{}^B p=[0,5,3]$.
-4. A is at the origin of B. Rotate $\pi/6$ about x, then $\pi/4$ about the old z-axis, then $\pi/3$ about the old y-axis. $\;{}^B p=[-1,-1,-1]$.
+1. B ligger ved $[2,0,0]$ i A. Roter $\pi/4$ om x, deretter $\pi/4$ om den nye y-aksen. $\;{}^B p=[0,3,0]$.
+2. A ligger ved $[1,2,3]$ i B. Roter $\pi/6$ om y, deretter $\pi/4$ om den gamle z-aksen. $\;{}^B p=[2,0,2]$.
+3. B ligger ved $[1,1,1]$ i A. Roter $\pi/2$ om x, deretter $\pi/2$ om den nye z-aksen, og så $\pi/2$ om den nye x-aksen. $\;{}^B p=[0,5,3]$.
+4. A ligger i origo til B. Roter $\pi/6$ om x, deretter $\pi/4$ om den gamle z-aksen og $\pi/3$ om den gamle y-aksen. $\;{}^B p=[-1,-1,-1]$.
 `,
     solution: String.raw`
 ### Velg rotasjonsrekkefølge og retning
@@ -656,13 +656,13 @@ $$
     verification: "official",
     topics: [topic.poseGraphs, topic.se3, topic.frames],
     prompt: String.raw`
-For $\;{}^A T_B$ meaning the pose of B relative to A, you are given:
+Gitt $\;{}^A T_B$, som beskriver posen til B relativt til A:
 
-- $\;{}^O T_M$: translation $[0,5,0]$, rotation $R_z(\pi/2)$
-- $\;{}^E T_S$: translation $[0,0,1]$, rotation $R_y(-\pi/2)$
-- $\;{}^E T_M$: translation $[2,0,2]$, rotation $R_x(\pi/4)$
+- $\;{}^O T_M$: translasjon $[0,5,0]$, rotasjon $R_z(\pi/2)$
+- $\;{}^E T_S$: translasjon $[0,0,1]$, rotasjon $R_y(-\pi/2)$
+- $\;{}^E T_M$: translasjon $[2,0,2]$, rotasjon $R_x(\pi/4)$
 
-Point P is $[2,0,0]$ in S. Find P in O.
+Punkt P er $[2,0,0]$ i S. Finn koordinatene til P i O.
 `,
     solution: String.raw`
 ### 1. Finn en sammenhengende rammekjede
@@ -719,7 +719,7 @@ const week4: Egb339Problem[] = [
     visual: "static-frames",
     topics: [topic.se2, topic.frames, topic.fk],
     prompt: String.raw`
-Frame B ligger 10 enheter langs x-aksen til frame A. Frame C ligger 15 enheter langs y-aksen til B og er rotert $\pi/2$ mot klokken relativt til B.
+Ramme B ligger 10 enheter langs x-aksen til ramme A. Ramme C ligger 15 enheter langs y-aksen til B og er rotert $\pi/2$ mot klokken relativt til B.
 
 1. Sett opp $\;{}^A T_B$.
 2. Sett opp $\;{}^B T_C$.
