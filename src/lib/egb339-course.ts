@@ -18,9 +18,12 @@ export const EGB339_COURSE_ORDER = [
   { week: 6, topics: ["partial-derivatives-for-robotics", "robot-jacobian", "differential-kinematics-and-local-linearisation"] },
   { week: 7, topics: ["robot-motion-interpolation", "trapezoidal-motion-profiles", "point-to-segment-distance-and-obstacle-clearance"] },
   { week: 8, topics: ["digital-image-representation", "image-histograms-and-thresholding", "monadic-and-dyadic-image-operations", "colour-normalization-and-chromaticity", "shape-descriptors-from-area-and-perimeter", "planar-homographies", "image-representation-and-processing"] },
+  { week: 9, topics: ["connected-components-and-image-moments", "spatial-filtering-and-convolution", "binary-morphology", "image-gradients-and-edge-detection"] },
+  { week: 10, topics: ["colour-mixing-and-camera-colour-response", "colour-spaces-and-colour-segmentation", "pinhole-camera-model-and-camera-parameters"] },
+  { week: 11, topics: ["calibration-markers-and-image-warping", "lens-aperture-and-depth-of-field"] },
 ] as const;
 
-// Still reachable through the topic index; not extra steps in the week 1–8 learning path.
+// Still reachable through the topic index; not extra steps in the weekly learning path.
 export const EGB339_REFERENCE_TOPICS = [
   "coppeliasim", "dobot-magician", "position-orientation-and-robot-kinematics",
   "egb339-weeks-1-8-robotics-and-vision-foundations", "keyboard-coordinate-mapping-and-safe-key-presses",

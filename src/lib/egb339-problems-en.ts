@@ -1,5 +1,7 @@
 import enProblemsData from "@/data/egb339-vault/en-problems.json";
 import { getEgb339AssessmentSolutionEn } from "./egb339-assessment-solutions-en";
+import { egb339VisionProblemEn } from "./egb339-vision-problems";
+import { egb339Week10ProblemEn } from "./egb339-week10-problems-en";
 
 /** English translations of the weekly problems, keyed by problem id. */
 export interface Egb339ProblemEn {
@@ -30,7 +32,7 @@ function synthesizedWarmupEn(id: string): Egb339ProblemEn | null {
 
 /** English variant of a problem's text fields; undefined fields fall back to Norwegian. */
 export function getEgb339ProblemEn(id: string): Egb339ProblemEn | null {
-  return translations[id] ?? synthesizedWarmupEn(id);
+  return translations[id] ?? egb339VisionProblemEn(id) ?? egb339Week10ProblemEn(id) ?? synthesizedWarmupEn(id);
 }
 
 export function getEgb339ProblemEnIds(): string[] {

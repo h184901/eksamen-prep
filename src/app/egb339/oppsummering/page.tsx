@@ -16,7 +16,7 @@ const content = {
   no: {
     title: "Formler, NumPy og kontrollspørsmål",
     intro:
-      "Et kompakt kart over kjernen i uke 1–8. Bruk det til repetisjon, og åpne temasiden når du trenger begrunnelsen bak en formel.",
+      "Et kompakt kart over kjernen i uke 1–11. Bruk det til repetisjon, og åpne temasiden når du trenger begrunnelsen bak en formel.",
     so2: {
       title: "SO(2): rotasjon i planet",
       description: "Kolonnene er de roterte basisvektorene uttrykt i den opprinnelige rammen.",
@@ -97,6 +97,18 @@ const content = {
       whenToUse: "For å gå mellom bildepiksler og fysiske punkter på en plan arbeidsflate.",
       commonMistakes: ["Bruke H i feil retning", "Glemme homogen koordinat", "Glemme normalisering etter multiplikasjon"],
     } satisfies FormulaStrings,
+    regionMoments: {
+      title: "Regionens areal og tyngdepunkt",
+      description: "Summer hver binær region separat. Førstemomentene vekter pikslene med koordinatene deres.",
+      whenToUse: "Når du skal finne antall forgrunnspiksler og objektets sentrum i bildet.",
+      commonMistakes: ["Blande u og v", "Slå sammen adskilte objekter før måling", "Dele når regionens areal er null"],
+    } satisfies FormulaStrings,
+    cameraProjection: {
+      title: "Hullkamera: perspektivprojeksjon",
+      description: "Koordinatene må først være uttrykt i kamerarammen; brennviddene er i piksler.",
+      whenToUse: "Når et 3D-punkt foran kameraet skal avbildes til bildekoordinater.",
+      commonMistakes: ["Bruke verdenskoordinater direkte", "Dele når dybden er null", "Blande millimeter og piksler"],
+    } satisfies FormulaStrings,
     visionCheckHeading: "Fire kontrollspørsmål før du leverer vision-kode",
     visionChecks: [
       "Er kanalrekkefølge, shape og dtype eksplisitt kontrollert?",
@@ -130,7 +142,7 @@ const content = {
   en: {
     title: "Formulas, NumPy and control questions",
     intro:
-      "A compact map of the core of weeks 1–8. Use it for revision, and open the topic page when you need the reasoning behind a formula.",
+      "A compact map of the core of weeks 1–11. Use it for revision, and open the topic page when you need the reasoning behind a formula.",
     so2: {
       title: "SO(2): rotation in the plane",
       description: "The columns are the rotated basis vectors expressed in the original frame.",
@@ -222,6 +234,18 @@ const content = {
         "Forgetting the homogeneous coordinate",
         "Forgetting normalisation after multiplication",
       ],
+    } satisfies FormulaStrings,
+    regionMoments: {
+      title: "Region area and centroid",
+      description: "Sum each binary region separately. First moments weight pixels by their coordinates.",
+      whenToUse: "When finding the foreground pixel count and the object's centre in the image.",
+      commonMistakes: ["Swapping u and v", "Combining separate objects before measuring", "Dividing when region area is zero"],
+    } satisfies FormulaStrings,
+    cameraProjection: {
+      title: "Pinhole camera: perspective projection",
+      description: "Coordinates must first be expressed in the camera frame; focal lengths are in pixels.",
+      whenToUse: "When projecting a 3D point in front of the camera to image coordinates.",
+      commonMistakes: ["Using world coordinates directly", "Dividing when depth is zero", "Mixing millimetres and pixels"],
     } satisfies FormulaStrings,
     visionCheckHeading: "Four control questions before you submit vision code",
     visionChecks: [
@@ -336,6 +360,13 @@ export default function Egb339SummaryPage() {
               whenToUse={c.shapeMeasures.whenToUse}
               commonMistakes={c.shapeMeasures.commonMistakes}
             />
+            <FormulaBox
+              title={c.regionMoments.title}
+              latex={String.raw`m_{pq}=\sum_{u,v}u^pv^qB(u,v),\qquad(\bar u,\bar v)=\left(\frac{m_{10}}{m_{00}},\frac{m_{01}}{m_{00}}\right)`}
+              description={c.regionMoments.description}
+              whenToUse={c.regionMoments.whenToUse}
+              commonMistakes={c.regionMoments.commonMistakes}
+            />
           </div>
           <div className="min-w-0">
             <FormulaBox
@@ -354,6 +385,14 @@ export default function Egb339SummaryPage() {
               conceptExplanation={c.homography.conceptExplanation}
               whenToUse={c.homography.whenToUse}
               commonMistakes={c.homography.commonMistakes}
+            />
+            <FormulaBox
+              title={c.cameraProjection.title}
+              variant="blue"
+              latex={String.raw`u=f_x\frac{X_C}{Z_C}+u_0,\qquad v=f_y\frac{Y_C}{Z_C}+v_0,\qquad Z_C>0`}
+              description={c.cameraProjection.description}
+              whenToUse={c.cameraProjection.whenToUse}
+              commonMistakes={c.cameraProjection.commonMistakes}
             />
             <div className="egb-study-check">
               <h3 className="font-bold text-neutral-950 dark:text-white">{c.visionCheckHeading}</h3>

@@ -7,6 +7,7 @@ import type { Egb339Problem } from "@/lib/egb339-problems";
 import type { Egb339ProblemEn } from "@/lib/egb339-problems-en";
 import WeekOneDisclosure from "./week-one/WeekOneDisclosure";
 import { egb339StudyHref } from "@/lib/egb339-study-weeks";
+import { egb339Title } from "@/lib/egb339-titles";
 import { useEgb339Lang } from "@/lib/egb339-language/store";
 import { ui } from "@/lib/egb339-language/ui";
 
@@ -32,7 +33,7 @@ export default function Egb339WeekProblems({ week, problems, problemsEn = {}, lo
       return <article key={problem.id} id={problem.id} className="egb-study-problem">
         <h3>{index + 1}. {title}</h3>
         <p className="egb-pilot-source">{ui(lang, "sourceLabel")}: {problem.source} · {ui(lang, "pdfPage")} {problem.sourcePage}{problem.sourcePageEnd ? "–" + problem.sourcePageEnd : ""}</p>
-        <nav className="egb-study-inline-links" aria-label={ui(lang, "relevantTopics")}>{problem.topics.map((entry) => <Link key={entry.href} href={longForm ? egb339StudyHref(entry.href) : entry.href}>{entry.label}</Link>)}</nav>
+        <nav className="egb-study-inline-links" aria-label={ui(lang, "relevantTopics")}>{problem.topics.map((entry) => <Link key={entry.href} href={longForm ? egb339StudyHref(entry.href) : entry.href}>{lang === "en" ? egb339Title(entry.href.split("/").at(-1)!, "en") ?? entry.label : entry.label}</Link>)}</nav>
         {problem.visual && <Egb339ProblemVisual kind={problem.visual} />}
         <Egb339LangMarkdown no={problem.prompt} en={en?.prompt} studyLinks={longForm} />
         <ProblemSolution id={problem.id} title={title} longForm={longForm}>

@@ -1,0 +1,199 @@
+[
+  {
+    "id": "w10-colour-channels",
+    "title": "Identifiser R-, G- og B-kanalbildene",
+    "source": "Week 10 Tutorial - Colour",
+    "sourcePage": 3,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Fargerom og segmentering",
+        "href": "/egb339/temaer/colour-spaces-and-colour-segmentation"
+      },
+      {
+        "label": "Digital bilderepresentasjon",
+        "href": "/egb339/temaer/digital-image-representation"
+      }
+    ],
+    "prompt": "Figuren viser ett RGB-foto og tre enkeltkanalbilder. Merk de tre gråtonebildene med riktig kanal, fra venstre mot høyre.\n\n![Originalfoto og de tre kanalbildene fra QUTs tutorial](/egb339/week10/colour-channels.png)\n\nKilde: QUT, Week 10 Tutorial – Colour, PDF-side 3. Utdraget viser bare de originale fire fotopanelene.",
+    "solution": "### Les kanalene som intensiteter\n\nEt gråtone-kanalbilde viser hvor sterkt **én** RGB-kanal bidrar i hver piksel. Hvitt betyr sterk respons i denne kanalen, svart svak respons; bildene er ikke tre gråtonekonverteringer av hele RGB-fotoet.\n\n1. **Første gråtonebilde: B.** Den blå koppen er lys, mens den røde skuffen er mørk.\n2. **Andre: R.** Den røde skuffen er svært lys. Den blå koppen er mørk.\n3. **Tredje: G.** Den grønne pakken fremtrer relativt sterkere, mens skuffen og koppen er mørke.\n\nSvaret er utledet fra tutorialfiguren; ingen offisiell løsningsfil er levert. Hvite/nøytrale flater kan være lyse i flere kanaler og er derfor mindre nyttige som kjennetegn.",
+    "answer": "Fra venstre mot høyre etter RGB-originalen: **B, R, G**."
+  },
+  {
+    "id": "w10-chromaticity-red-mask",
+    "title": "Beregn hele kromatisitetsbildet og 60 %-rødmasken",
+    "source": "Week 10 Tutorial - Colour",
+    "sourcePage": 5,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Kromatisitet",
+        "href": "/egb339/temaer/colour-normalization-and-chromaticity"
+      },
+      {
+        "label": "Histogrammer og terskling",
+        "href": "/egb339/temaer/image-histograms-and-thresholding"
+      },
+      {
+        "label": "NumPy",
+        "href": "/egb339/temaer/numpy-arrays-and-matrix-operations"
+      }
+    ],
+    "prompt": "Kanalmatrisene i figuren er\n\n$$\nR=\\begin{bmatrix}10&20&10\\\\5&200&20\\\\10&60&5\\end{bmatrix},\\quad\nG=\\begin{bmatrix}50&10&5\\\\10&5&20\\\\200&5&200\\end{bmatrix},\\quad\nB=\\begin{bmatrix}200&20&100\\\\100&5&10\\\\10&100&5\\end{bmatrix}.\n$$\n\nQ1: Beregn kromatisitetsbildet. Q2: Hvilke piksler er **minst 60 % røde**, og får derfor True/1?",
+    "solution": "### 1. Summer ved samme piksel\n\nDette er elementvis divisjon, ikke matrisemultiplikasjon:\n\n$$S=R+G+B=\\begin{bmatrix}260&50&115\\\\115&210&50\\\\220&165&210\\end{bmatrix}.$$\n\nAlle nevnerne er positive. Et fullstendig kromatisitetsbilde har tre kanaler $r=R/S$, $g=G/S$, $b=B/S$:\n\n$$r=\\begin{bmatrix}1/26&2/5&2/23\\\\1/23&20/21&2/5\\\\1/22&4/11&1/42\\end{bmatrix},$$\n$$g=\\begin{bmatrix}5/26&1/5&1/23\\\\2/23&1/42&2/5\\\\10/11&1/33&20/21\\end{bmatrix},$$\n$$b=\\begin{bmatrix}10/13&2/5&20/23\\\\20/23&1/42&1/5\\\\1/22&20/33&1/42\\end{bmatrix}.$$\n\nEksempel midtpikselen: $(R,G,B)=(200,5,5)$ gir $S=210$, så $(r,g,b)=(20/21,1/42,1/42)$.\n\n### 2. Bruk riktig sammenligning\n\n«Minst» betyr $r\\ge0.60$. Bare $20/21\\approx0.9524$ består:\n\n$$M=\\begin{bmatrix}0&0&0\\\\0&1&0\\\\0&0&0\\end{bmatrix}.$$\n\nMed 0-basert NumPy-indeks er dette [1,1]; med 1-basert rad/kolonne er det (2,2).\n\n### 3. Kontroll i NumPy\n\n~~~python\nimport numpy as np\nR = np.array([[10,20,10],[5,200,20],[10,60,5]], dtype=float)\nG = np.array([[50,10,5],[10,5,20],[200,5,200]], dtype=float)\nB = np.array([[200,20,100],[100,5,10],[10,100,5]], dtype=float)\nS = R + G + B\nchroma = np.divide(np.stack((R,G,B), axis=-1), S[...,None],\n                   out=np.zeros((*S.shape,3)), where=S[...,None] > 0)\nassert np.allclose(chroma.sum(axis=-1), 1)\nmask = (S > 0) & (chroma[...,0] >= 0.60)\nassert mask.sum() == 1 and mask[1,1]\n~~~\n\nFloat før summen hindrer uint8-overløp; første nevner er 260, som ikke får plass i uint8.",
+    "answer": "Hele kromatisitetsbildet er $(r,g,b)$ som ovenfor. Kun midtpikselen, med $r=20/21$, blir True."
+  },
+  {
+    "id": "w10-rgb-to-hsv",
+    "title": "RGB → uint8-HSV: alle fem pikslene",
+    "source": "Week 10 Tutorial - Colour",
+    "sourcePage": 9,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Fargerom og segmentering",
+        "href": "/egb339/temaer/colour-spaces-and-colour-segmentation"
+      },
+      {
+        "label": "Digital bilderepresentasjon",
+        "href": "/egb339/temaer/digital-image-representation"
+      }
+    ],
+    "prompt": "Konverter RGB-verdiene til uint8-HSV etter tutorialens konvensjon:\n\na) [255,255,255]  \nb) [0,0,0]  \nc) [255,0,0]  \nd) [0,100,0]  \ne) [30,60,90]\n\nBruk $H_8=H_{\\rm grader}/2$, $S_8=255S$, $V_8=255V$ (formlene er på PDF-side 8).",
+    "solution": "### Formlene og spesialtilstandene\n\nKonverter RGB til float i [0,1]. Sett $V=\\max(R,G,B)$, $m=\\min(R,G,B)$, $\\Delta=V-m$.\n\n$$S=\\begin{cases}\\Delta/V,&V>0\\\\0,&V=0.\\end{cases}$$\n\nHvis $\\Delta=0$, sett $H=0$ **før** du deler med $\\Delta$. Ellers velges grenen for største kanal:\n\n$$\nH=\\begin{cases}\n60(G-B)/\\Delta,&V=R\\\\\n120+60(B-R)/\\Delta,&V=G\\\\\n240+60(R-G)/\\Delta,&V=B.\n\\end{cases}\n$$\n\nLegg til 360 hvis hue er negativ. Skaler deretter til tutorialens byteformat.\n\n### a) Hvit\n\nAlle kanaler er 1. $V=1$, $\\Delta=0$, $S=0$, $H=0$ som lagringskonvensjon. Resultat **[0,0,255]**.\n\n### b) Svart\n\n$V=0$. Sett $S=0$ og $H=0$ uten divisjon. Resultat **[0,0,0]**.\n\n### c) Ren rød\n\n$V=1$, $\\Delta=1$, $S=1$, $H=60(0-0)/1=0^\\circ$. Resultat **[0,255,255]**.\n\n### d) Mørk grønn\n\n$V=100/255$, $\\Delta=100/255$, $S=1$, $H=120^\\circ$. Dermed $H_8=60$, $S_8=255$, $V_8=100$: **[60,255,100]**.\n\n### e) [30,60,90]\n\n$V=90/255$, $m=30/255$, $\\Delta=60/255$, $S=\\Delta/V=2/3$. B er størst:\n\n$$H=240+60\\frac{30-60}{60}=210^\\circ.$$\n\n$H_8=105$, $S_8=170$, $V_8=90$: **[105,170,90]**.\n\n### Uavhengig kontroll\n\n~~~python\nimport colorsys\nimport numpy as np\nfor rgb in [(255,255,255), (0,0,0), (255,0,0),\n            (0,100,0), (30,60,90)]:\n    h, s, v = colorsys.rgb_to_hsv(*(x/255 for x in rgb))\n    hsv8 = np.rint([180*h, 255*s, 255*v]).astype(np.uint8)\n    print(rgb, hsv8)\n~~~\n\ncolorsys gir hue som brøkdel av en hel sirkel. Den må ganges med 180 for **denne** bytekonvensjonen. Gråtone/svart har fysisk ubestemt hue; null er konvensjon.",
+    "answer": "a) [0,0,255]; b) [0,0,0]; c) [0,255,255]; d) [60,255,100]; e) [105,170,90]."
+  },
+  {
+    "id": "w10-spectral-sensor-response",
+    "title": "Sensorrespons med rektangelintegrasjon",
+    "source": "Week 10 Tutorial - Colour",
+    "sourcePage": 11,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Kameraets fargerespons",
+        "href": "/egb339/temaer/colour-mixing-and-camera-colour-response"
+      }
+    ],
+    "prompt": "Beregn kameraets grønne sensorrespons. Oppgaven sier «assuming there is no reflected light» og foreslår rektangelintegrasjon.\n\n| $\\lambda$ (nm) | $M$ | $E$ |\n|---|---:|---:|\n| 400 | 0.3 | 0 |\n| 460 | 0.8 | 0.3 |\n| 520 | 0.9 | 0.9 |\n| 580 | 0.3 | 0.9 |\n| 640 | 0.2 | 0.1 |\n| 700 | 0.1 | 0 |",
+    "solution": "### 1. Avklar lysveien\n\nGenerell refleksjonsmodell er $q=\\int E(\\lambda)R(\\lambda)M(\\lambda)\\,d\\lambda$. Her tolkes «no reflected light» som **direkte observert utsendt lys**, så refleksjonsleddet er ikke på lysveien og vi bruker $q=\\int EM\\,d\\lambda$. Dette er en uttrykkelig modellantakelse; å sette $R=0$ ville i stedet beskrive null reflektert lys fra en overflate.\n\n### 2. Multipliser ved hver bølgelengde\n\n$$EM=[0,\\;0.24,\\;0.81,\\;0.27,\\;0.02,\\;0].$$\n\nSummen er $1.34$.\n\n### 3. Ta med bredden\n\nBølgelengdeavstanden er konstant $\\Delta\\lambda=60$ nm. En venstre- eller høyre-rektangelsum over 400–700 nm gir\n\n$$q\\approx60(0+0.24+0.81+0.27+0.02)=80.4.$$\n\nVenstre- og høyresum er like fordi begge endepunktene er null; det samme gjelder trapesregelen for akkurat disse dataene.\n\n### 4. Kontroll og enheter\n\n~~~python\nimport numpy as np\nwavelength = np.array([400,460,520,580,640,700], dtype=float)\nM = np.array([.3,.8,.9,.3,.2,.1])\nE = np.array([0,.3,.9,.9,.1,0])\nproduct = E * M\nleft = np.sum(product[:-1] * np.diff(wavelength))\nright = np.sum(product[1:] * np.diff(wavelength))\nassert np.isclose(left, 80.4) and np.isclose(right, 80.4)\n~~~\n\nResultatet har tabellens spektrale enheter ganget med nm. Oppgaven gir ikke eksponering, sensorforsterkning eller ADC-skala, så **80.4 er ikke automatisk en 8-bit pikselverdi**. Hvis bølgelengdeenheten endres til meter, må spektral tetthets enheter endres konsekvent.",
+    "answer": "$q\\approx80.4$ i tabellens spektrale enheter·nm, under direkte-emitter-tolkningen."
+  },
+  {
+    "id": "w10-prac-rgb-chromaticity",
+    "title": "Prac B, Task 1–2: last RGB og beregn kromatisitet",
+    "source": "Weeks 9&10 Prac B: RBG and Thresholding",
+    "sourcePage": 1,
+    "sourcePageEnd": 2,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Digital bilderepresentasjon",
+        "href": "/egb339/temaer/digital-image-representation"
+      },
+      {
+        "label": "Kromatisitet",
+        "href": "/egb339/temaer/colour-normalization-and-chromaticity"
+      },
+      {
+        "label": "NumPy",
+        "href": "/egb339/temaer/numpy-arrays-and-matrix-operations"
+      }
+    ],
+    "prompt": "Task 1: Last ett av shapes_1.jpg–shapes_9.jpg, skill ut tre fargekanaler; normalisering til 0–1 er valgfri. Task 2: Lag blå kromatisitet. Hvordan gjøres det for rød og grønn?",
+    "solution": "### Koble toolbox-objektet til kanalmatriser\n\nPakk ut den leverte prac_images.zip til en egen øvingsmappe. Ikke endre råarkivet. Image.Read og kanalmetodene red/green/blue gir tydelig kanalvalg uavhengig av arrayens kanalrekkefølge.\n\n~~~python\nfrom machinevisiontoolbox import Image\nimport numpy as np\n\nimage = Image.Read(\"shapes_1.jpg\")\nR = image.red().array.astype(float)\nG = image.green().array.astype(float)\nB = image.blue().array.astype(float)\nS = R + G + B\nvalid = S > 0\n\nr = np.divide(R, S, out=np.zeros_like(S), where=valid)\ng = np.divide(G, S, out=np.zeros_like(S), where=valid)\nb = np.divide(B, S, out=np.zeros_like(S), where=valid)\n\nassert R.shape == G.shape == B.shape\nassert np.allclose((r+g+b)[valid], 1)\nImage(b).disp()\n~~~\n\nI eldre kurskode kan .A brukes som array-egenskap; den installerte toolbox-versjonen støtter .array. Float-konverteringen må komme **før** kanalsummen, ellers kan uint8-overløp gi feil nevner.\n\n### Normalisering og svart\n\nHvis alle kanaler divideres med 255, divideres både teller og nevner med samme faktor. Kromatisiteten endres derfor ikke. Svart har ingen definert kromatisitet; null i utdata er en håndteringskonvensjon, og valid skiller det fra en reell blåandel på null.\n\nFormlene er $r=R/S$, $g=G/S$, $b=B/S$. De returnerer tre $M\\times N$ arrays.",
+    "answer": "Blå kromatisitet er B/(R+G+B); bytt teller til R eller G for de andre. Bruk float og beskyttet divisjon."
+  },
+  {
+    "id": "w10-prac-blue-mask",
+    "title": "Prac B, Task 3: lag og vis blå maske",
+    "source": "Weeks 9&10 Prac B: RBG and Thresholding",
+    "sourcePage": 2,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Kromatisitet",
+        "href": "/egb339/temaer/colour-normalization-and-chromaticity"
+      },
+      {
+        "label": "Histogrammer og terskling",
+        "href": "/egb339/temaer/image-histograms-and-thresholding"
+      }
+    ],
+    "prompt": "Bruk blå kromatisitet og en fornuftig terskel for å lage en boolsk maske. Vis med .disp(). Tidligere blå former skal bli hvite, resten svart.",
+    "solution": "### Terskel og riktig datatype\n\nBruk r, g, b, S og valid fra Task 1–2. Start med en terskel som ligger over nøytralgrå blåandel $1/3$, og kontroller pikselfordeling og maske.\n\n~~~python\nthreshold_blue = 0.55  # et forsøksvalg, ikke fasit\nmask_blue = valid & (b >= threshold_blue)\nassert mask_blue.dtype == np.bool_\nImage(mask_blue.astype(np.uint8)).disp()\n~~~\n\nEn binær 0/1-visning gjør True-piksler lyse og False-piksler mørke. mask_blue.sum() teller **piksler**, ikke blå figurer.\n\n### Hvorfor 0.55 bare er et utgangspunkt\n\nTask 3 oppgir ingen fasitterskel. 0.55 er et tydelig eksempel på «blå nok». På shapes_1.jpg ga en direkte kontroll to store blå komponenter, men også små artefakter og blå bakgrunnsdetaljer. En full objektanalyse trenger derfor inspeksjon, eventuelt ROI/støyfjerning og størrelsesfiltrering. Bildenes blå kabel/markør og refleksglans må ikke automatisk bli figur-etiketter.\n\nVelg terskel fra blå/form-piksler og bakgrunnens fordelinger; vis masken oppå originalen for å oppdage utelatte kanter eller falske treff.",
+    "answer": "En boolsk maske som valid & (b >= terskel), kontrollert visuelt. 0.55 er et eksempel, ikke universelt svar."
+  },
+  {
+    "id": "w10-prac-threshold-transfer",
+    "title": "Prac B, Task 4: test terskelen på alle ni bilder",
+    "source": "Weeks 9&10 Prac B: RBG and Thresholding",
+    "sourcePage": 2,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Kromatisitet",
+        "href": "/egb339/temaer/colour-normalization-and-chromaticity"
+      },
+      {
+        "label": "Histogrammer og terskling",
+        "href": "/egb339/temaer/image-histograms-and-thresholding"
+      },
+      {
+        "label": "Kameraets fargerespons",
+        "href": "/egb339/temaer/colour-mixing-and-camera-colour-response"
+      }
+    ],
+    "prompt": "Gjenta samme prosess på de øvrige bildene. Virker den opprinnelige terskelen for alle? Hvis ikke, forklar hvorfor.",
+    "solution": "### Reproduserbart forsøk\n\nBehold den samme terskelen i første runde og beregn hver maske fra **sitt eget** bilde:\n\n~~~python\nfrom pathlib import Path\nthreshold_blue = 0.55\nfor path in sorted(Path(\".\").glob(\"shapes_*.jpg\")):\n    image = Image.Read(path)\n    R = image.red().array.astype(float)\n    G = image.green().array.astype(float)\n    B = image.blue().array.astype(float)\n    S = R + G + B\n    b = np.divide(B, S, out=np.zeros_like(S), where=S > 0)\n    mask = (S > 0) & (b >= threshold_blue)\n    image.disp(title=path.name)\n    Image(mask.astype(np.uint8)).disp(title=\"Blue mask: \" + path.name)\n~~~\n\nDet leverte arkivet inneholder shapes_1 til shapes_9. Skriv for hvert bilde: finner masken begge blå figurer, taper den kanter/reflekser, og får kabel/markør falske treff? Ingen universell ja/nei-fasit er gitt av arket, og det er ikke tilstrekkelig at et program kjører uten feil.\n\n### Forklar avvik\n\nVed ideell felles skalering $(R,G,B)\\mapsto k(R,G,B)$ er blåandelen invariant. Reelle forskjeller kan gi kanalspesifikke endringer, reflektert hvitt lys, klipping, lave signaler, JPEG-/sensorstøy og bakgrunn med lignende farge. Mørke piksler med liten nevner er særlig følsomme.\n\nHvis samme terskel svikter: dokumenter avvik, vurder gyldighets-/lysstyrkegrense, ROI og forsiktig morfologi. Å tilpasse en ny terskel for hvert bilde kan være en øving, men dokumenter det; det viser ikke generalisering med én fast klassifikator.",
+    "answer": "Test alle ni og dokumenter maskefeil. Kromatisitet tåler felles skalering, ikke alle spektrale endringer/reflekser/klipping."
+  },
+  {
+    "id": "w10-prac-colour-shape-labels",
+    "title": "Prac B, Task 5: kombiner farge og formbeskrivelse",
+    "source": "Weeks 9&10 Prac B: RBG and Thresholding",
+    "sourcePage": 2,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Fargerom og segmentering",
+        "href": "/egb339/temaer/colour-spaces-and-colour-segmentation"
+      },
+      {
+        "label": "Komponenter og bildemomenter",
+        "href": "/egb339/temaer/connected-components-and-image-moments"
+      },
+      {
+        "label": "Formbeskrivelse",
+        "href": "/egb339/temaer/shape-descriptors-from-area-and-perimeter"
+      }
+    ],
+    "prompt": "Kombiner koden fra denne practicalen med forrige practicals kode for automatisk å identifisere og merke figurene i fargebildene.",
+    "solution": "### Pipeline\n\n1. Beregn kromatisitet og lag en maske per farge.\n2. Finn sammenhengende komponenter eller ytre konturer i **hver** maske.\n3. Forkast små støytreff og irrelevante bakgrunnselementer; kontroller ROI.\n4. Beregn areal, perimeter, centroid og formbeskrivelse med forrige ukes kode.\n5. Skriv farge + formetikett ved centroid i originalbildet.\n\nDette er en utledet løsning; arket foreskriver ingen bestemte terskler eller formklassifikator.\n\n### Kjørbart utgangspunkt: farge + centroid + konturform\n\n~~~python\nfrom machinevisiontoolbox import Image\nimport numpy as np\nimport cv2\nimport matplotlib.pyplot as plt\n\nimage = Image.Read(\"shapes_1.jpg\")\nR = image.red().array.astype(float)\nG = image.green().array.astype(float)\nB = image.blue().array.astype(float)\nS = R + G + B\nheight, width = S.shape\nvalid = S > 0\nchannels = {\"red\": R, \"green\": G, \"blue\": B}\nthresholds = {\"red\": 0.50, \"green\": 0.50, \"blue\": 0.55}\nrgb = np.stack((R,G,B), axis=-1).astype(np.uint8)\nfig, ax = plt.subplots()\nax.imshow(rgb)\n\nfor colour, channel in channels.items():\n    ratio = np.divide(channel, S, out=np.zeros_like(S), where=valid)\n    mask = (valid & (ratio >= thresholds[colour])).astype(np.uint8)\n    contours, _ = cv2.findContours(\n        mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)\n    for contour in contours:\n        area = cv2.contourArea(contour)\n        if area < 0.003 * height * width:\n            continue  # eksempel på relativ størrelsesgrense\n        x, y, w, h = cv2.boundingRect(contour)\n        if x == 0 or y == 0 or x+w >= width or y+h >= height:\n            continue  # fjerner grenseberørende bakgrunn i dette forsøket\n        moments = cv2.moments(contour)\n        if moments[\"m00\"] == 0:\n            continue\n        u = moments[\"m10\"] / moments[\"m00\"]\n        v = moments[\"m01\"] / moments[\"m00\"]\n        perimeter = cv2.arcLength(contour, True)\n        score = 4*np.pi*area/perimeter**2 if perimeter > 0 else 0\n        polygon = cv2.approxPolyDP(contour, 0.02*perimeter, True)\n        corners = len(polygon)\n        # Sikker grovetikett; legg inn egen kalibrert formmodell ved behov.\n        shape = \"triangle\" if corners == 3 else \"compact/curved\"\n        ax.text(u, v, f\"{colour}: {shape}, n={corners}, C={score:.2f}\",\n                color=\"white\", fontsize=8, ha=\"center\")\nplt.show()\n~~~\n\nKoden identifiserer farge, sentroid og en grov formbeskrivelse. Den kan kobles til forrige ukes mer spesifikke klassifikator. De leverte bildene har også seks-/åttekantede figurer, ikke bare trekant/sirkel. En sirkel kan få åtte hjørner etter konturtilnærming, så n=8 er **ikke** tilstrekkelig for å erklære «åttekant». Bruk kalibrert referanseform/perimetersignatur eller mer detaljert konturmodell for sikker finetikett; behold «usikker» ved overlapp.\n\nAreal/perimeter er følsomme for segmenteringsstøy og perspektiv. Centroid er $(u,v)$, men arrayindeks er [v,u]. Juster ROI og størrelsesgrenser hvis en relevant figur berører bildekanten.",
+    "answer": "Segmenter per farge → finn objekter → beskriv form/centroid → merk originalen. Fullfør spesifikk formklassifikasjon med kalibrerte descriptors; ikke tving sirkel/åttekant ved usikkerhet."
+  },
+  {
+    "id": "w10-colour-mixer-demo",
+    "title": "Forelesningsøvelse: RGB-mikser og svarttilfellet",
+    "source": "EGB339 - 2026 - Lecture Week 10",
+    "sourcePage": 17,
+    "verification": "derived",
+    "topics": [
+      {
+        "label": "Fargerom og segmentering",
+        "href": "/egb339/temaer/colour-spaces-and-colour-segmentation"
+      },
+      {
+        "label": "Kromatisitet",
+        "href": "/egb339/temaer/colour-normalization-and-chromaticity"
+      },
+      {
+        "label": "Kameraets fargerespons",
+        "href": "/egb339/temaer/colour-mixing-and-camera-colour-response"
+      }
+    ],
+    "prompt": "Bruk den vedlagte fargemikseren til å utforske RGB, kromatisitet og HSV. Forklar demonstrasjonens magenta-eksempel, og hva som skjer når alle RGB-slidere står på null. Dette er forelesningens ekstra kodeøvelse, ikke en tutorialfasit.",
+    "solution": "### Magenta-eksemplet\n\nRGB $(255,0,255)$ gir heksadesimal #ff00ff. Kanalsummen er 510, så $(r,g,b)=(0.5,0,0.5)$. I flyttalls-HSV er $H=300^\\circ$, $S=1$, $V=1$. Lysbildet viser den samme demonstrasjonen.\n\nHalver begge ikke-null-kanaler med samme faktor: kromatisiteten beholdes, mens $V$ blir mindre. Dette viser forskjellen mellom kanalforhold og lysstyrke.\n\n### Svart\n\nVed RGB $(0,0,0)$ er kanalsummen null og kromatisitet ubestemt. Den leverte Python-kildens update_color deler direkte med denne summen og mangler vern mot null. Råkoden er ikke endret; i egen øvingskode kan du hoppe over kromatisitetsberegningen eller vise «undefined» ved sum=0. HSV kan lagres som $(0,0,0)$ etter tutorialens konvensjon.\n\nMikseren gjør en skjermfargedemonstrasjon, ikke en empirisk måling av objektets reflektans.",
+    "answer": "$(255,0,255)$: #ff00ff, $(r,g,b)=(0.5,0,0.5)$, HSV $(300^\\circ,1,1)$. Svart krever nullvern; kromatisitet er ubestemt."
+  }
+]

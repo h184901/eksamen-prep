@@ -90,6 +90,11 @@ function splitCallouts(markdown: string): Segment[] {
 }
 
 function MarkdownBlock({ content, headingOffset = 0, studyLinks = false }: Props) {
+  // The authored learning path wraps Markdown links in backticks; display the links as navigation.
+  const readableContent = content.replace(
+    /(^## (?:Læringssti|Learning path)\n\n)`(\[[^\n`]+\]\(\/egb339\/[^\n`]+\))`(?=\n|$)/gm,
+    "$1$2",
+  );
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkMath]}
@@ -196,7 +201,7 @@ function MarkdownBlock({ content, headingOffset = 0, studyLinks = false }: Props
         ),
       }}
     >
-      {egb339ReadableMath(content)}
+      {egb339ReadableMath(readableContent)}
     </ReactMarkdown>
   );
 }

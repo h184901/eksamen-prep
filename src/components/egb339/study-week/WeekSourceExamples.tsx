@@ -65,6 +65,6 @@ export function HomographyExample() {
     <p>{lang === "en" ? "The third coordinate is 2, not 1. Therefore divide the first two components by 2:" : "Den tredje koordinaten er 2, ikke 1. Del derfor de to første komponentene på 2:"}</p>
     <MathText>{String.raw`(u,v)=(-256/2,1000/2)=(-128,500)`}</MathText>
     <p>{lang === "en" ? "Negative u is a valid geometric result, but lies outside an image that starts at u = 0. Do not clip the coordinate before you have considered what the exercise asks for." : "Negativ u er et gyldig geometrisk resultat, men ligger utenfor et bilde som starter ved u = 0. Ikke klipp koordinaten før du har vurdert hva oppgaven ber om."}</p>
-    <p><a href="#assessment-1-7-vision-fundamentals-part-2">{lang === "en" ? "Go to the full Assessment 1.7, including inverse mapping and triangle area" : "Gå til hele Assessment 1.7, inkludert invers mapping og trekantareal"}</a></p>
+    <p><a href="/egb339/vurderinger/assessment-1-7-vision-fundamentals-part-2">{lang === "en" ? "Go to the full Assessment 1.7, including inverse mapping and triangle area" : "Gå til hele Assessment 1.7, inkludert invers mapping og trekantareal"}</a></p>
   </section>;
 }

@@ -36,7 +36,7 @@ for (const [week, learning] of Object.entries(EGB339_WEEK_LEARNING)) {
     }
   }
 }
-for (let week = 2; week <= 8; week++) {
+for (const week of Object.keys(EGB339_WEEK_LEARNING).map(Number)) {
   for (const problem of getEgb339ProblemsForWeek(week)) {
     const translation = getEgb339ProblemEn(problem.id);
     for (const field of ["title", "prompt", "solution", "answer"]) {

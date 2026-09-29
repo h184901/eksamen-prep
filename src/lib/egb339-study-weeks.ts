@@ -17,6 +17,11 @@ const shortTitles: Record<string, string> = {
   "digital-image-representation": "Piksler", "image-histograms-and-thresholding": "Histogram og terskel",
   "monadic-and-dyadic-image-operations": "Bildeoperasjoner", "colour-normalization-and-chromaticity": "Farge",
   "shape-descriptors-from-area-and-perimeter": "Form", "planar-homographies": "Homografi", "image-representation-and-processing": "Fra bilde til robot",
+  "connected-components-and-image-moments": "Regioner og momenter", "binary-morphology": "Morfologi",
+  "spatial-filtering-and-convolution": "Filtre", "image-gradients-and-edge-detection": "Kanter",
+  "colour-mixing-and-camera-colour-response": "Farge og kamera", "colour-spaces-and-colour-segmentation": "Fargerom og segmentering",
+  "pinhole-camera-model-and-camera-parameters": "Hullkamera",
+  "calibration-markers-and-image-warping": "Kalibrering og warping", "lens-aperture-and-depth-of-field": "Linser",
 };
 
 const shortTitlesEn: Record<string, string> = {
@@ -32,6 +37,11 @@ const shortTitlesEn: Record<string, string> = {
   "digital-image-representation": "Pixels", "image-histograms-and-thresholding": "Histogram and threshold",
   "monadic-and-dyadic-image-operations": "Image operations", "colour-normalization-and-chromaticity": "Colour",
   "shape-descriptors-from-area-and-perimeter": "Shape", "planar-homographies": "Homography", "image-representation-and-processing": "From image to robot",
+  "connected-components-and-image-moments": "Regions and moments", "binary-morphology": "Morphology",
+  "spatial-filtering-and-convolution": "Filters", "image-gradients-and-edge-detection": "Edges",
+  "colour-mixing-and-camera-colour-response": "Colour and camera", "colour-spaces-and-colour-segmentation": "Colour spaces and segmentation",
+  "pinhole-camera-model-and-camera-parameters": "Pinhole camera",
+  "calibration-markers-and-image-warping": "Calibration and warping", "lens-aperture-and-depth-of-field": "Lenses",
 };
 
 const FIXED_SECTIONS = [

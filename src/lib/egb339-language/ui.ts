@@ -94,7 +94,7 @@ export const EGB339_UI = {
   openAssessments: { no: "Åpne vurderingsoversikten", en: "Open the assessment overview" },
   moreHeading: { no: "Repetisjon og oppslag", en: "Review and reference" },
   cheatsheetLink: { no: "Hurtigark og formler", en: "Cheat sheet and formulas" },
-  cheatsheetDescription: { no: "Kjerneformlene fra alle åtte emner.", en: "The core formulas from all eight topics." },
+  cheatsheetDescription: { no: "Kjerneformler fra robotikk og vision.", en: "Core formulas from robotics and vision." },
   indexLink: { no: "Fagregister", en: "Topic index" },
   indexDescription: { no: "Slå opp begreper på tvers av emnene.", en: "Look up concepts across the topics." },
   resourcesLink: { no: "Praktiske ressurser", en: "Practical resources" },

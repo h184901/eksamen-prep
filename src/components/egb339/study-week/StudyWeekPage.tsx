@@ -30,6 +30,11 @@ import MotionComparison from "./MotionComparison";
 import ImageArrayExample from "./ImageArrayExample";
 import { MotionProfileExample, HighwayFigure, HistogramFigure, ImageSubtractionFigure, HomographyExample } from "./WeekSourceExamples";
 import Egb339ProblemVisual from "../Egb339ProblemVisual";
+import RegionMorphologyExample from "./RegionMorphologyExample";
+import MeanFilterExample from "./MeanFilterExample";
+import ColourChromaticityExample from "./ColourChromaticityExample";
+import CameraGeometryExample from "./CameraGeometryExample";
+import QutVisionGrids from "./QutVisionGrids";
 
 export default function StudyWeekPage({ number }: { number: number }) {
   const weeks = getEgb339Course();
@@ -77,6 +82,13 @@ export default function StudyWeekPage({ number }: { number: number }) {
             {topic.slug === "image-histograms-and-thresholding" && <HistogramFigure />}
             {topic.slug === "monadic-and-dyadic-image-operations" && <ImageSubtractionFigure />}
             {topic.slug === "planar-homographies" && <HomographyExample />}
+            {number === 9 && topic.slug === "binary-morphology" && <RegionMorphologyExample />}
+            {number === 9 && topic.slug === "binary-morphology" && <QutVisionGrids kind="morphology" />}
+            {number === 9 && topic.slug === "connected-components-and-image-moments" && <QutVisionGrids kind="regions" />}
+            {number === 9 && topic.slug === "spatial-filtering-and-convolution" && <MeanFilterExample />}
+            {number === 10 && topic.slug === "colour-mixing-and-camera-colour-response" && <ColourChromaticityExample />}
+            {number === 11 && topic.slug === "calibration-markers-and-image-warping" && <HomographyExample />}
+            {number === 11 && topic.slug === "lens-aperture-and-depth-of-field" && <CameraGeometryExample />}
           </StudyTopicText>
           {topic.slug === "se-3-homogeneous-transformations" && <FrameExplanation3d />}
         </>}

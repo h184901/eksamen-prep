@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { loadEgb339DataModule as loadDataModule } from "./lib/egb339-content-loader.mjs";
 import postcss from "postcss";
@@ -38,6 +38,9 @@ const routes = new Set([
   "/egb339", "/egb339/uker", "/egb339/temaer", "/egb339/vurderinger",
   "/egb339/ressurser", "/egb339/oppsummering", ...entries.map((entry) => entry.route),
 ]);
+const isEgb339Asset = (route) => /^\/egb339\/(?:[a-z0-9-]+\/)+[a-z0-9-]+\.(?:png|jpe?g|svg|webp)$/.test(route) && existsSync(`public${route}`);
+assert(!isEgb339Asset("/egb339/week10/missing.png"), "Missing assets must not be accepted as routes");
+assert(!isEgb339Asset("/egb339/../outside.png"), "Traversal must not be accepted as an asset");
 for (const entry of entries) {
   assert(!/\[![a-z-]+\]/i.test(egb339DisplaySummary(entry)), `${entry.route}: callout marker in summary`);
 }
@@ -49,7 +52,8 @@ const assessmentSolutions = getEgb339AssessmentSolutions();
 for (const [slug, solution] of Object.entries(assessmentSolutions)) {
   anchors.set(`/egb339/vurderinger/${slug}`, new Set(["losningsforslag", "oppgavekrav", ...solution.parts.map((part) => `solution-${part.id}`)]));
 }
-for (let week = 1; week <= 8; week++) {
+for (const entry of entries.filter(entry => entry.kind === "week")) {
+  const week = Number(entry.week);
   anchors.set(`/egb339/uker/uke-${week}`, new Set(["ukeinnhold", "oppgaver", "laboratorium", ...getEgb339ProblemsForWeek(week).map((problem) => problem.id)]));
 }
 function validateMarkdown(content, label) {
@@ -60,7 +64,7 @@ function validateMarkdown(content, label) {
   mathExpressions += (html.match(/class="katex"/g) ?? []).length;
   for (const [, href] of content.matchAll(/\]\((\/egb339[^)]*)\)/g)) {
     const [route, hash] = href.split("#");
-    assert(routes.has(route), `${label}: broken link ${href}`);
+    assert(routes.has(route) || isEgb339Asset(route), `${label}: broken link ${href}`);
     if (hash && anchors.has(route)) assert(anchors.get(route).has(hash), `${label}: broken anchor ${href}`);
   }
 }

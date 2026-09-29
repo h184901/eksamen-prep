@@ -26,7 +26,8 @@ for (const item of course.EGB339_COURSE_ORDER) {
   assert.deepEqual(sections.filter(s => s.pageKey).map(s => s.pageKey), week.topics.map(t => t.pageKey));
   for (const t of week.topics) {
     const href = navigation.egb339StudyHref(t.href);
-    assert(href.startsWith(week.href + "#"));
+    const canonicalWeek = course.EGB339_COURSE_ORDER.find(row => row.topics.includes(t.href.split("/").at(-1)));
+    assert(href.startsWith(`/egb339/uker/uke-${canonicalWeek.week}#`), "Shared concepts keep their first canonical week route");
     assert(sections.some(s => s.id === href.split("#")[1]));
     assert.equal(navigation.egb339StudyHref(t.href + "#regneeksempel"), t.href + "#regneeksempel", "Preserve legacy topic fragments");
   }
@@ -93,4 +94,4 @@ assert.throws(() => models.week8Pixel(10, 0), RangeError);
 const provenance = JSON.parse(readFileSync("public/egb339/study-figures/provenance.json", "utf8"));
 for (const asset of provenance.assets) {assert(existsSync("public/egb339/study-figures/" + asset.file));assert(asset.source && asset.licence && asset.treatment && asset.use);}
 for (const file of readdirSync("src/components/egb339/study-week")) assert(!/[\x00-\x08\x0B\x0C\x0E-\x1F]/.test(readFileSync("src/components/egb339/study-week/" + file, "utf8")), file);
-console.log(`EGB339 long-form weeks passed: 8 section maps, 31 original topic keys, legacy links, single-source exercises/assessments, ${numeric} numeric assertions, SVG velocity bounds, 101 path samples, image/mask edges and ${provenance.assets.length} sourced figures. Browser QA remains separate.`);
+console.log(`EGB339 long-form weeks passed: ${course.EGB339_COURSE_ORDER.length} section maps, stable topic keys, legacy links, single-source exercises/assessments, ${numeric} numeric assertions, SVG velocity bounds, 101 path samples, image/mask edges and ${provenance.assets.length} sourced figures. Browser QA remains separate.`);

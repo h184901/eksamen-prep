@@ -1,4 +1,6 @@
 import { getEgb339AssessmentSolution } from "./egb339-assessment-solutions";
+import week10Problems from "@/data/egb339-vault/problems-week10.json";
+import { egb339VisionProblems } from "./egb339-vision-problems";
 
 export interface Egb339ProblemTopic {
   label: string;
@@ -2042,6 +2044,9 @@ const problemsByWeek: Record<number, Egb339Problem[]> = {
   6: week6,
   7: week7,
   8: week8,
+  9: egb339VisionProblems(9),
+  10: week10Problems as Egb339Problem[],
+  11: egb339VisionProblems(11),
 };
 
 export function getEgb339ProblemsForWeek(week: number): Egb339Problem[] {

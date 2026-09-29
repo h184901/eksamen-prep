@@ -46,7 +46,7 @@ export const EGB339_TRACKS: Array<{
 ];
 
 /**
- * Single source of truth for the eight course topics. The subject name is the
+ * Single source of truth for the weekly course subjects. The subject name is the
  * primary label everywhere (sidebar, headings, breadcrumbs, cards); the week
  * number is secondary metadata. Titles follow the QUT source documents.
  */
@@ -69,6 +69,9 @@ export const EGB339_WEEK_SUBJECTS: readonly Egb339WeekSubject[] = [
   { week: 6, slug: "uke-6", title: "Robot Jacobian", titleEn: "Robot Jacobian", interactive: "Jacobian-eksempel", interactiveEn: "Jacobian example" },
   { week: 7, slug: "uke-7", title: "Bevegelsesplanlegging", titleEn: "Motion Planning", interactive: "Banesammenligning", interactiveEn: "Path comparison" },
   { week: 8, slug: "uke-8", title: "Bilder og bildebehandling", titleEn: "Images and Image Processing", interactive: "Bildeeksempler", interactiveEn: "Image examples" },
+  { week: 9, slug: "uke-9", title: "Regioner, morfologi og bildefiltre", titleEn: "Regions, Morphology and Image Filters", interactive: "Region- og morfologiutforsker", interactiveEn: "Region and morphology explorer" },
+  { week: 10, slug: "uke-10", title: "Farge og kamerageometri", titleEn: "Colour and Camera Geometry", interactive: "RGB- og kromatisitetsutforsker", interactiveEn: "RGB and chromaticity explorer" },
+  { week: 11, slug: "uke-11", title: "Bildeforming og bildegeometri", titleEn: "Image Formation and Geometry", interactive: "Homografi- og kameraeksempel", interactiveEn: "Homography and camera example" },
 ] as const;
 
 export function egb339WeekSubject(week: number): Egb339WeekSubject | null {

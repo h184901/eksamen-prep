@@ -19,10 +19,13 @@ const EXPECTED = [
   "Robot Jacobian",
   "Bevegelsesplanlegging",
   "Bilder og bildebehandling",
+  "Regioner, morfologi og bildefiltre",
+  "Farge og kamerageometri",
+  "Bildeforming og bildegeometri",
 ];
-assert.deepEqual(EGB339_WEEK_SUBJECTS.map((subject) => subject.week), [1, 2, 3, 4, 5, 6, 7, 8], "Topic order must stay 1–8");
+assert.deepEqual(EGB339_WEEK_SUBJECTS.map((subject) => subject.week), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Topic order must stay 1–11");
 assert.deepEqual(EGB339_WEEK_SUBJECTS.map((subject) => subject.title), EXPECTED, "Subject titles follow the QUT sources");
-assert.deepEqual(EGB339_WEEK_SUBJECTS.map((subject) => subject.slug), [1, 2, 3, 4, 5, 6, 7, 8].map((week) => `uke-${week}`), "Week slugs preserved (/uker/uke-N routes)");
+assert.deepEqual(EGB339_WEEK_SUBJECTS.map((subject) => subject.slug), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((week) => `uke-${week}`), "Week slugs preserved (/uker/uke-N routes)");
 for (const subject of EGB339_WEEK_SUBJECTS) {
   assert(subject.interactive.length > 0, `${subject.slug}: missing interactive label`);
   assert.equal(egb339WeekSubjectTitle(subject.week), subject.title);

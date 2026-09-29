@@ -25,7 +25,7 @@ const nb = JSON.parse(readFileSync("src/data/egb339-vault/nb.json", "utf8")).ove
 const slugs = ["weeks", "concepts", "assessments", "resources"].flatMap((group) =>
   JSON.parse(readFileSync(`src/data/egb339-vault/${group}.json`, "utf8"))[group].map((entry) => entry.slug),
 );
-assert.equal(slugs.length, 62);
+assert.equal(new Set(slugs).size, slugs.length, "Every translated entry has a unique slug");
 for (const slug of slugs) {
   assert(en[slug]?.body && en[slug]?.title && en[slug]?.summary, `${slug}: missing English translation`);
   assert(nb[slug]?.title, `${slug}: missing Norwegian title override`);
@@ -64,8 +64,14 @@ for (const slug of slugs) {
 }
 
 // --- 3. Problem and solution translations ------------------------------------
+// Only these published Week 9 answers localize decimal commas to English dots.
+// Keep the original strict token comparison for every other answer, including coordinates.
+const localizedDecimals = {
+  "w9-tutorial-mean": { "0,2": "0.2", "0,3": "0.3" },
+  "w9-tutorial-median": { "0,1": "0.1", "0,8": "0.8" },
+};
 let problemCount = 0;
-for (let week = 2; week <= 8; week++) {
+for (const { week } of EGB339_WEEK_SUBJECTS.filter(subject => subject.week >= 2)) {
   for (const problem of getEgb339ProblemsForWeek(week)) {
     problemCount++;
     const translation = getEgb339ProblemEn(problem.id);
@@ -73,7 +79,8 @@ for (let week = 2; week <= 8; week++) {
     assert(translation.solution.includes("### "), `${problem.id}: English solution lost worked steps`);
     // Numbers must survive translation.
     const numbersOf = (text) => text.match(/-?\d+(?:[.,]\d+)?/g) ?? [];
-    assert.deepEqual(numbersOf(translation.answer), numbersOf(problem.answer), `${problem.id}: answer numbers differ between languages`);
+    const expected = numbersOf(problem.answer).map((number) => localizedDecimals[problem.id]?.[number] ?? number);
+    assert.deepEqual(numbersOf(translation.answer), expected, `${problem.id}: answer numbers differ between languages`);
   }
 }
 

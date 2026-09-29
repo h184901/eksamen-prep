@@ -47,7 +47,7 @@ const topics = course.EGB339_COURSE_ORDER.flatMap((week) => [...week.topics]);
 const allTopics = [...topics, ...course.EGB339_REFERENCE_TOPICS, ...course.EGB339_ARCHIVED_TOPICS];
 assert.equal(new Set(allTopics).size, allTopics.length, "Each concept has one navigation role");
 assert.deepEqual([...allTopics].sort(), groups.concepts.map((entry) => entry.slug).sort());
-assert.deepEqual(course.EGB339_COURSE_ORDER.map(({ week }) => week), [1, 2, 3, 4, 5, 6, 7, 8]);
+assert.deepEqual(course.EGB339_COURSE_ORDER.map(({ week }) => week), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 for (const { week } of course.EGB339_COURSE_ORDER) {
   assert(groups.weeks.some((entry) => entry.slug === `uke-${week}`));
 }
@@ -56,6 +56,8 @@ assert.deepEqual(course.egb339LessonNeighbours("se-2-homogeneous-transformations
 });
 assert.equal(course.egb339LessonNeighbours(topics[0]).previous, null);
 assert.equal(course.egb339LessonNeighbours(topics.at(-1)).next, null);
+assert.equal(course.egb339LessonNeighbours("image-representation-and-processing").next, "connected-components-and-image-moments", "Week 8 must enter Week 9 without repeating an earlier topic");
+assert.equal(course.egb339LessonNeighbours("pinhole-camera-model-and-camera-parameters").next, "calibration-markers-and-image-warping");
 assert.deepEqual(course.egb339LessonNeighbours("not-a-lesson"), { previous: null, next: null });
 const routes = new Set([
   "/egb339", "/egb339/uker", "/egb339/temaer", "/egb339/vurderinger", "/egb339/ressurser", "/egb339/oppsummering",
