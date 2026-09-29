@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import MathText from "../pilot/Egb339Math";
 import { useEgb339Lang } from "@/lib/egb339-language/store";
 
-/** Illustrates a virtual pinhole plane; sensor dimensions and pixel pitch are unknown. */
+/** Illustrates an ideal pinhole view; sensor dimensions and pixel pitch are unknown. */
 export default function CameraGeometryExample() {
   const { lang } = useEgb339Lang();
   const id = useId();
@@ -17,22 +17,22 @@ export default function CameraGeometryExample() {
 
   return <section className="egb-week-learning-block" aria-labelledby={`${id}-heading`} data-camera-geometry-example>
     <h3 id={`${id}-heading`}>{lang === "en" ? "Focal length and depth move a projected corner" : "Brennvidde og avstand flytter et hjørne i bildet"}</h3>
-    <p>{lang === "en" ? "An ideal pinhole view of a 2 × 2 m square centred under a downward-looking camera. Adjust focal length and camera height. The drawing shows physical position on a virtual image plane, not pixels." : "Ideelt hullkamera over et 2 × 2 m kvadrat. Endre brennvidde og kamerahøyde. Figuren viser fysisk posisjon på et virtuelt bildeplan, ikke piksler."}</p>
+    <p>{lang === "en" ? "An ideal pinhole view of a 2 × 2 m square centred under a downward-looking camera. Adjust focal length and camera height. The drawing shows positions on an illustrative image plane, not pixels." : "Ideelt hullkamera over et 2 × 2 m kvadrat. Endre brennvidde og kamerahøyde. Figuren viser posisjoner på et illustrativt bildeplan, ikke piksler."}</p>
     <div className="egb-week-two-column">
       <figure className="egb-week-technical-figure">
         <svg viewBox="0 0 480 380" role="img" aria-labelledby={`${id}-title ${id}-desc`}>
           <title id={`${id}-title`}>{lang === "en" ? "Camera projection from opposite corners" : "Kameraprojeksjon fra motsatte hjørner"}</title>
-          <desc id={`${id}-desc`}>{lang === "en" ? "Two rays from a ground square cross at the optical centre and meet a virtual image plane. The span varies with focal length and depth." : "To stråler fra kvadratet krysser optisk sentrum og møter et virtuelt bildeplan. Utslaget varierer med brennvidde og dybde."}</desc>
+          <desc id={`${id}-desc`}>{lang === "en" ? "Two rays from a ground square cross at the optical centre and meet an illustrative image plane. The span varies with focal length and depth." : "To stråler fra kvadratet krysser optisk sentrum og møter et illustrativt bildeplan. Utslaget varierer med brennvidde og dybde."}</desc>
           <path d={`M145 ${worldY}H335`} stroke="var(--egb-muted)" strokeWidth="5" />
           <text x="240" y={worldY - 10} textAnchor="middle" fill="currentColor">{lang === "en" ? "World plane, 2 m across" : "Verdensplan, 2 m bredt"}</text>
           <path d={`M145 ${worldY}L240 230L${240 + projection} ${sensorY}M335 ${worldY}L240 230L${240 - projection} ${sensorY}`} fill="none" stroke="var(--week-info)" strokeWidth="2" />
           <circle cx="240" cy="230" r="5" fill="var(--week-info)" />
-          <line x1="45" y1={sensorY} x2="435" y2={sensorY} stroke="var(--egb-muted)" strokeWidth="3" />
+          <line x1="35" y1={sensorY} x2="445" y2={sensorY} stroke="var(--egb-muted)" strokeWidth="3" />
           <circle cx={240 - projection} cy={sensorY} r="5" fill="var(--week-info)" />
           <circle cx={240 + projection} cy={sensorY} r="5" fill="var(--week-info)" />
-          <text x="240" y={sensorY + 23} textAnchor="middle" fill="currentColor">{lang === "en" ? "Virtual image plane (not calibrated)" : "Virtuelt bildeplan (ikke kalibrert)"}</text>
+          <text x="240" y={sensorY + 23} textAnchor="middle" fill="currentColor">{lang === "en" ? "Image plane (not calibrated)" : "Bildeplan (ikke kalibrert)"}</text>
         </svg>
-        <figcaption>{lang === "en" ? "Rays invert left/right at the camera centre. The drawing's vertical scale is illustrative; it assumes no Raspberry Pi sensor dimensions." : "Strålene bytter venstre/høyre ved kamerasenteret. Tegningens vertikale skala er illustrativ; ingen Raspberry Pi-sensormål er antatt."}</figcaption>
+        <figcaption>{lang === "en" ? "The plane drawn opposite the square shows the physical left/right inversion. The positive projection formula uses a virtual plane in front of the pinhole. No Raspberry Pi sensor dimensions are assumed." : "Bildeplanet på motsatt side av kvadratet viser den fysiske venstre/høyre-inversjonen. Den positive projeksjonsformelen bruker et virtuelt plan foran hullet. Ingen Raspberry Pi-sensormål er antatt."}</figcaption>
       </figure>
       <div className="egb-week-explorer-controls">
         <label>{lang === "en" ? `Focal length: ${focalMm.toFixed(1)} mm` : `Brennvidde: ${focalMm.toFixed(1).replace(".", ",")} mm`}

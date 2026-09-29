@@ -9,7 +9,7 @@ import { PilotBreadcrumb, PilotEntryNav } from "../pilot/Egb339PilotShell";
 import { getEgb339Concept, getEgb339En } from "@/lib/egb339-vault/loader";
 import { getEgb339AssessmentSolution } from "@/lib/egb339-assessment-solutions";
 import { getEgb339AssessmentSolutionEn } from "@/lib/egb339-assessment-solutions-en";
-import { egb339WeekSubject } from "@/lib/egb339";
+import { EGB339_WEEK_SUBJECTS, egb339WeekSubject } from "@/lib/egb339";
 import { WEEK_ONE_PROMPTS, WEEK_ONE_PROMPTS_EN, WEEK_ONE_SECTIONS, WEEK_ONE_SECTION_TITLES, WEEK_ONE_WARMUP } from "@/lib/egb339-week-one";
 import { useEgb339Lang } from "@/lib/egb339-language/store";
 import { ui } from "@/lib/egb339-language/ui";
@@ -34,7 +34,7 @@ export default function WeekOnePage() {
     <article className="egb-pilot-article egb-week-one">
       <section id="introduction" data-week-one-section>
         <header className="egb-week-heading">
-          <p className="egb-week-kicker">{ui(lang, "weekOf")} 1 {ui(lang, "weekOfTotal")} · EGB339</p>
+          <p className="egb-week-kicker">{ui(lang, "weekOf")} 1 {ui(lang, "weekOfTotal")} {EGB339_WEEK_SUBJECTS.length} · EGB339</p>
           <h1>{en ? subject.titleEn : subject.title}</h1>
           <p>{en ? "From a physical robot to coordinates, mathematics and code." : "Fra en fysisk robot til koordinater, matematikk og kode."}</p>
           <ul className="egb-week-meta" aria-label={ui(lang, "topicContentsAria")}>

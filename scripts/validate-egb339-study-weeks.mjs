@@ -9,6 +9,7 @@ const models = await loadEgb339DataModule("src/lib/egb339-week-models.ts");
 const arm = await loadEgb339DataModule("src/lib/egb339-planar2.ts");
 const spatial = (await loadEgb339DataModule("src/lib/egb339-spatial-example.ts")).SPATIAL_ROTATION_EXAMPLE;
 const learning = (await loadEgb339DataModule("src/lib/egb339-week-learning.ts")).EGB339_WEEK_LEARNING;
+const assessmentSolutions = (await loadEgb339DataModule("src/lib/egb339-assessment-solutions.ts")).getEgb339AssessmentSolutions();
 const { concepts } = JSON.parse(readFileSync("src/data/egb339-vault/concepts.json", "utf8"));
 let numeric = 0;
 const close = (a, b, tol = 1e-8) => {assert(Number.isFinite(a) && Math.abs(a - b) <= tol, `${a} != ${b}`); numeric++;};
@@ -20,7 +21,8 @@ assert.notDeepEqual(spatial.xy, spatial.yx);
 for (const key of ["xy", "yx"]) assert.deepEqual(multiply(spatial[key], spatial[key][0].map((_, j) => spatial[key].map(row => row[j]))), [[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
 
 for (const item of course.EGB339_COURSE_ORDER) {
-  const week = { ...item, href: `/egb339/uker/uke-${item.week}`, title: `Week ${item.week}`, pageKey: `egb339/uke/uke-${item.week}`, assessments: [], topics: item.topics.map(slug => ({ href: `/egb339/temaer/${slug}`, title: concepts.find(c => c.slug === slug).title, pageKey: `egb339/tema/${slug}` })) };
+  const assessments = Object.entries(assessmentSolutions).filter(([, solution]) => solution.weeks.includes(item.week)).map(([slug]) => ({ href: `/egb339/vurderinger/${slug}`, title: slug, pageKey: `egb339/vurdering/${slug}` }));
+  const week = { ...item, href: `/egb339/uker/uke-${item.week}`, title: `Week ${item.week}`, pageKey: `egb339/uke/uke-${item.week}`, assessments, topics: item.topics.map(slug => ({ href: `/egb339/temaer/${slug}`, title: concepts.find(c => c.slug === slug).title, pageKey: `egb339/tema/${slug}` })) };
   const sections = navigation.egb339WeekSections(week);
   assert.equal(new Set(sections.map(s => s.id)).size, sections.length);
   assert.deepEqual(sections.filter(s => s.pageKey).map(s => s.pageKey), week.topics.map(t => t.pageKey));
@@ -31,7 +33,7 @@ for (const item of course.EGB339_COURSE_ORDER) {
     assert(sections.some(s => s.id === href.split("#")[1]));
     assert.equal(navigation.egb339StudyHref(t.href + "#regneeksempel"), t.href + "#regneeksempel", "Preserve legacy topic fragments");
   }
-  if (item.week > 1) {assert(learning[item.week].purpose && learning[item.week].practical);assert(learning[item.week].sources.length >= 3);for (const id of ["practical", "oppgaver", "vurderinger"]) assert(sections.some(s => s.id === id));}
+  if (item.week > 1) {assert(learning[item.week].purpose && learning[item.week].practical);assert(learning[item.week].sources.length >= 3);for (const id of ["practical", "oppgaver"]) assert(sections.some(s => s.id === id));assert.equal(sections.some(s => s.id === "vurderinger"), assessments.length > 0);}
 }
 const sidebar = readFileSync("src/components/egb339/study-week/StudyWeekNavigation.tsx", "utf8");
 assert(!sidebar.includes("<details") && !sidebar.includes("<summary"));

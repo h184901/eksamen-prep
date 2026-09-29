@@ -66,7 +66,8 @@ export function egb339WeekSections(week: Egb339CourseWeek, lang: "no" | "en" = "
       const shorts = lang === "en" ? shortTitlesEn : shortTitles;
       return { id, title: egb339Title(id, lang) ?? topic.title, short: shorts[id] ?? egb339Title(id, lang) ?? topic.title, pageKey: topic.pageKey };
     }),
-    ...FIXED_SECTIONS.map((section) => ({ id: section.id, title: section[lang], short: section[lang === "no" ? "shortNo" : "shortEn"] })),
+    ...FIXED_SECTIONS.filter((section) => section.id !== "vurderinger" || week.assessments.length > 0)
+      .map((section) => ({ id: section.id, title: section[lang], short: section[lang === "no" ? "shortNo" : "shortEn"] })),
   ];
 }
 

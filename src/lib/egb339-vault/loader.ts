@@ -6,6 +6,7 @@ import metaData from "@/data/egb339-vault/_meta.json";
 import enData from "@/data/egb339-vault/en.json";
 import nbData from "@/data/egb339-vault/nb.json";
 import { EGB339_TITLES } from "../egb339-titles";
+import { egb339PinholeCameraEn } from "../egb339-pinhole-camera-en";
 import type { Egb339Entry, Egb339Meta, Egb339Track } from "./types";
 
 const meta = metaData as Egb339Meta;
@@ -47,7 +48,11 @@ const resources = (resourcesData as { resources: Egb339Entry[] }).resources.map(
 
 /** English variant of an entry's text fields; undefined fields fall back to the authored Norwegian. */
 export function getEgb339En(slug: string): Egb339EntryTranslation | null {
-  return enTranslations[slug] ?? null;
+  const translation = enTranslations[slug];
+  if (!translation) return null;
+  return slug === "pinhole-camera-model-and-camera-parameters"
+    ? { ...translation, body: egb339PinholeCameraEn }
+    : translation;
 }
 
 /** Norwegian title override for entries whose authored title is English. */

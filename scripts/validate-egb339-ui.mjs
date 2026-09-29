@@ -68,6 +68,7 @@ function validateMarkdown(content, label) {
     if (hash && anchors.has(route)) assert(anchors.get(route).has(hash), `${label}: broken anchor ${href}`);
   }
 }
+validateMarkdown((await loadDataModule("src/lib/egb339-pinhole-camera-en.ts")).egb339PinholeCameraEn, "English camera lesson");
 for (const week of entries.filter((entry) => entry.route.startsWith("/egb339/uker/"))) {
   for (const problem of getEgb339ProblemsForWeek(Number(week.week))) {
     problems += 1;

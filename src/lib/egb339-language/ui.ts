@@ -14,7 +14,7 @@ export const EGB339_UI = {
   allTopicsAria: { no: "Alle emner og temaer", en: "All topics and subtopics" },
   breadcrumb: { no: "Brødsmuler", en: "Breadcrumbs" },
   weekOf: { no: "Uke", en: "Week" },
-  weekOfTotal: { no: "av 8", en: "of 8" },
+  weekOfTotal: { no: "av", en: "of" },
   loadingProgress: { no: "Laster fremgang…", en: "Loading progress…" },
   progressUnavailable: { no: "Fremgang er utilgjengelig", en: "Progress is unavailable" },
   progressUnavailableLong: { no: "Fremgang er utilgjengelig akkurat nå.", en: "Progress is unavailable right now." },

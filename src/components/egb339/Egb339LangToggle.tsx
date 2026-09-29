@@ -28,7 +28,7 @@ export default function Egb339LangToggle() {
             onClick={() => setLang(opt.value)}
             aria-pressed={active}
             aria-label={opt.label}
-            className={`px-2.5 py-1 rounded-md transition-colors ${
+            className={`min-h-11 px-2.5 py-1 rounded-md transition-colors ${
               active
                 ? "bg-robotics-600 text-white"
                 : "text-[var(--muted)] hover:text-[var(--foreground)]"

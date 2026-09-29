@@ -19,6 +19,13 @@ export default function ThemeToggle() {
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
+  useEffect(() => {
+    // Desktop and mobile each mount a toggle; keep the hidden copy in sync.
+    const observer = new MutationObserver(() => setDark(document.documentElement.classList.contains("dark")));
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   const toggle = () => {
     const next = !dark;
     setDark(next);

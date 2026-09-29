@@ -29,9 +29,11 @@ function useActiveSection(pathname: string) {
       // not detached nodes from before the interactive guide mounted.
       const sections = Array.from(document.querySelectorAll<HTMLElement>(sectionSelector));
       const jump = document.querySelector<HTMLElement>(".egb-week-jump");
-      const line = jump && getComputedStyle(jump).position === "sticky" ? 64 + jump.offsetHeight + 24 : 100;
+      const line = jump ? 64 + jump.offsetHeight + 24 : 100;
       const reached = sections.filter((section) => section.getBoundingClientRect().top <= line);
-      setActive(reached.at(-1)?.id ?? sections[0]?.id ?? "");
+      const last = sections.at(-1);
+      const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      setActive(atEnd && last && last.getBoundingClientRect().top < window.innerHeight ? last.id : reached.at(-1)?.id ?? sections[0]?.id ?? "");
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const fromHash = () => {

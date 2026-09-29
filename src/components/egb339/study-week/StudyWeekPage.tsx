@@ -98,7 +98,7 @@ export default function StudyWeekPage({ number }: { number: number }) {
       <div className="egb-pilot-prose">
         <Egb339WeekProblems week={number} problems={problems} problemsEn={problemsEn} longForm />
       </div>
-      <StudyWeekAssessments week={week} assessments={assessments} />
+      {assessments.length > 0 && <StudyWeekAssessments week={week} assessments={assessments} />}
       <StudyWeekFinish number={number} pageKey={week.pageKey} previous={navLink(number - 1)} next={navLink(number + 1)} />
     </article>
   </>;

@@ -56,4 +56,7 @@
 }
 @media (max-width: 767px) {
   .egb-week-study > .egb-week-topic { margin-top: 40px; }
+  .egb-week-study .egb-week-control-row .egb-week-button { min-height: 44px; }
+  #w10-colour-channels .egb339-markdown p:has(img[src="/egb339/week10/colour-channels.png"]) { max-width: 100%; overflow-x: auto; }
+  #w10-colour-channels .egb339-markdown img[src="/egb339/week10/colour-channels.png"] { width: 900px; max-width: none; height: auto; }
 }

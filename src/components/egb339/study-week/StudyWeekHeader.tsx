@@ -1,6 +1,6 @@
 "use client";
 
-import { egb339WeekSubject } from "@/lib/egb339";
+import { EGB339_WEEK_SUBJECTS, egb339WeekSubject } from "@/lib/egb339";
 import { useEgb339Lang } from "@/lib/egb339-language/store";
 import { ui } from "@/lib/egb339-language/ui";
 import { IconFlask } from "../icons";
@@ -19,7 +19,7 @@ export default function StudyWeekHeader({ number, topicCount, problemCount, asse
   const { lang } = useEgb339Lang();
   const subject = egb339WeekSubject(number)!;
   return <header className="egb-week-heading">
-    <p className="egb-week-kicker">{ui(lang, "weekOf")} {number} {ui(lang, "weekOfTotal")} · EGB339</p>
+    <p className="egb-week-kicker">{ui(lang, "weekOf")} {number} {ui(lang, "weekOfTotal")} {EGB339_WEEK_SUBJECTS.length} · EGB339</p>
     <h1>{lang === "en" ? subject.titleEn : subject.title}</h1>
     <p className="egb-pilot-prose">{lang === "en" ? purposeEn : purpose}</p>
     <ul className="egb-week-meta" aria-label={ui(lang, "topicContentsAria")}>

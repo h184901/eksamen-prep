@@ -36,6 +36,7 @@ export default function Egb339WeekProblems({ week, problems, problemsEn = {}, lo
         <nav className="egb-study-inline-links" aria-label={ui(lang, "relevantTopics")}>{problem.topics.map((entry) => <Link key={entry.href} href={longForm ? egb339StudyHref(entry.href) : entry.href}>{lang === "en" ? egb339Title(entry.href.split("/").at(-1)!, "en") ?? entry.label : entry.label}</Link>)}</nav>
         {problem.visual && <Egb339ProblemVisual kind={problem.visual} />}
         <Egb339LangMarkdown no={problem.prompt} en={en?.prompt} studyLinks={longForm} />
+        {problem.id === "w10-colour-channels" && <p><a href="/egb339/week10/colour-channels.png" target="_blank" rel="noopener noreferrer">{lang === "en" ? "Open channel images at full size (new tab)" : "Åpne kanalbildene i full størrelse (ny fane)"}</a></p>}
         <ProblemSolution id={problem.id} title={title} longForm={longForm}>
           <p className={problem.verification === "corrected" ? "egb-study-source-warning" : "egb-pilot-source"}>{verificationLabel[problem.verification]}</p>
           <Egb339LangMarkdown no={problem.solution} en={en?.solution} headingOffset={longForm ? 2 : 1} studyLinks={longForm} />
