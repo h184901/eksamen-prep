@@ -165,7 +165,13 @@ const topicNotes = markdownFiles(TOPIC_DIR).map((note) => ({
   ...note,
   kind: "topic",
 }));
-const allNotes = [...sourceNotes, ...conceptNotes, ...entityNotes, ...topicNotes];
+// Explicit allowlist: never export all queries, code answers or private drafts.
+const planName = "Assessment 2.3 and 2.4 - Pick and place implementation plan";
+const planDir = join(VAULT_ROOT, "queries");
+const planNotes = existsSync(join(planDir, planName + ".md"))
+  ? markdownFiles(planDir).filter(note => note.noteName === planName).map(note => ({ ...note, kind: "resource" }))
+  : [];
+const allNotes = [...sourceNotes, ...conceptNotes, ...entityNotes, ...topicNotes, ...planNotes];
 
 const routeIndex = new Map();
 for (const note of allNotes) {
@@ -213,6 +219,12 @@ function stripPrivateSections(markdown) {
 
 function cleanBody(note) {
   let body = note.body;
+  body = body.replace(/`raw\/assigment-2\.3\/`/g, "den separate kildemappen");
+  if (note.noteName === planName) {
+    body = body.replace(/```mermaid\n[\s\S]*?```/g, "");
+    body = body.replace(/`raw\/assigment-2\.3\/assignment_2_3_vision\.zip`/g, "`assignment_2_3_vision.zip`").replace(/`raw\/`/g, "kildemappen");
+    body = body.replace(/> \[!success\]-/g, "> [!tip]");
+  }
   const selfNames = new Set([note.noteName, note.title]);
   body = body.replace(/^\s*#\s+[^\n]+\n+/, "");
   body = body.replace(/^!\[\[[^\n]+\]\]\s*$/gm, "");
@@ -310,7 +322,7 @@ function publicEntry(note) {
   };
 }
 
-const sourceEntries = sourceNotes.map(publicEntry);
+const sourceEntries = [...sourceNotes, ...planNotes].map(publicEntry);
 const weeks = sourceEntries
   .filter((entry) => entry.kind === "week")
   .sort((a, b) => Number(a.week) - Number(b.week));
@@ -360,12 +372,28 @@ const outputs = {
 };
 
 for (const [file, value] of Object.entries(outputs)) {
-  writeFileSync(join(OUT_DIR, file), `${JSON.stringify(value, null, 2)}\n`);
+  // Incremental publication preserves previously reviewed website snapshots.
+  // Route/link discovery above still sees the whole wiki.
+  const only = new Set((process.env.EGB339_SYNC_ONLY || "").split(",").filter(Boolean));
+  let output = value;
+  if (only.size && ["weeks.json", "concepts.json", "assessments.json", "resources.json"].includes(file) && existsSync(join(OUT_DIR, file))) {
+    const key = file.replace(".json", "");
+    const previous = JSON.parse(readFileSync(join(OUT_DIR, file), "utf8"))[key];
+    const merged = new Map(previous.map(entry => [entry.slug, entry]));
+    for (const entry of value[key]) if (only.has(entry.slug)) merged.set(entry.slug, entry);
+    output = { [key]: [...merged.values()].sort((a, b) => key === "weeks" ? Number(a.week) - Number(b.week) : a.title.localeCompare(b.title, "en", { numeric: true })) };
+  }
+  outputs[file] = output;
 }
 
+const published = ["weeks", "concepts", "assessments", "resources"];
+const publishedRoutes = new Set(published.flatMap(key => outputs[key + ".json"][key].map(entry => entry.route)));
+outputs["_meta.json"].counts = Object.fromEntries(published.map(key => [key, outputs[key + ".json"][key].length]));
+outputs["_wikilink-index.json"].routes = Object.fromEntries(Object.entries(wikilinkIndex).filter(([, route]) => publishedRoutes.has(route)));
+for (const [file, value] of Object.entries(outputs)) writeFileSync(join(OUT_DIR, file), `${JSON.stringify(value, null, 2)}\n`);
+
 console.log(
-  `Synced EGB339: ${weeks.length} weeks, ${concepts.length} concepts/entities, ` +
-    `${assessments.length} assessments and ${resources.length} resources.`,
+  `Synced EGB339: ${Object.entries(outputs["_meta.json"].counts).map(([key, count]) => count + " " + key).join(", ")}.`,
 );
 if (unresolvedLinks.size) {
   console.log(`Unresolved wikilinks rendered as text: ${unresolvedLinks.size}`);

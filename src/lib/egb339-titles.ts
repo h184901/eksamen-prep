@@ -1,5 +1,8 @@
 /** Bilingual titles for every EGB339 vault entry, generated from en.json/nb.json. */
 export const EGB339_TITLES: Record<string, { no: string; en: string }> = {
+  "assessment-2-3-vision-simulation-and-oral-demonstration": { no: "Assessment 2.3 – Visjon: simulering og muntlig demonstrasjon", en: "Assessment 2.3 – Vision simulation and oral demonstration" },
+  "assessment-2-4-vision-physical-robot-submission": { no: "Assessment 2.4 – Visjon: fysisk robotinnlevering", en: "Assessment 2.4 – Vision physical robot submission" },
+  "assessment-2-3-and-2-4-pick-and-place-implementation-plan": { no: "Assessment 2.3 og 2.4 – Arbeidsplan for bildebasert plukk-og-plasser", en: "Assessment 2.3 and 2.4 – Self-coding pick-and-place plan" },
   "uke-1": { no: "Introduksjon til robotikk", en: "Unit Introduction and Kinematics Context" },
   "uke-2": { no: "Lineær algebra og 2D-pose", en: "Linear Algebra and 2D Pose" },
   "uke-3": { no: "NumPy og 3D-pose", en: "NumPy and 3D Pose" },

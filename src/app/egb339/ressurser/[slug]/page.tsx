@@ -7,6 +7,8 @@ import Egb339EntryNav from "@/components/egb339/Egb339EntryNav";
 import { T } from "@/components/egb339/T";
 import { getAdjacentEgb339Entry, getEgb339En, getEgb339Resource, getEgb339Resources } from "@/lib/egb339-vault/loader";
 import { egb339Title } from "@/lib/egb339-titles";
+import VisionProjectWorkflow from "@/components/egb339/VisionProjectWorkflow";
+import { VISION_PLAN_SLUG } from "@/lib/egb339-vision-project";
 export function generateStaticParams() { return getEgb339Resources().map((entry) => ({ slug: entry.slug })); }
 export default async function Egb339ResourcePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -19,6 +21,7 @@ export default async function Egb339ResourcePage({ params }: { params: Promise<{
   return <><PilotBreadcrumb title={entry.title} section={{ href: "/egb339/ressurser", title: "Praktisk" }} />
     <article className="egb-pilot-article egb-pilot-prose">
       <header className="egb-pilot-lesson-header"><h1><T no={titleNo} en={titleEn} /></h1><p><T no={entry.summary} en={en?.summary} /></p><p className="egb-pilot-small"><T no={"Praktisk guide · uke " + entry.week} en={"Practical guide · week " + entry.week} /></p></header>
+      {slug === VISION_PLAN_SLUG && <><VisionProjectWorkflow /><aside className="egb-study-source-warning"><T no="Sirkularitet er ikke invariant under sterk perspektivwarp. Kalibrer og rett opp bildet ved behov før formklassifisering. Høydeklaring for tuppen garanterer ikke at alle robotlenkene er kollisjonsfrie." en="Circularity is not invariant under strong projective distortion. Calibrate and rectify if needed before shape classification. Tip clearance alone does not guarantee collision-free motion of every robot link." /></aside></>}
       <Egb339LangMarkdown no={entry.body} en={en?.body} />
       {slug === "robot-word-typing-practical" && <p><Link href="/egb339/vurderinger/assessment-2-1-simulation-and-oral-demonstration">Åpne Assessment 2.1-guiden: SPACE, robotvisning, linje for linje og muntlig øving</Link></p>}
       <Egb339PilotProgress pageKey={"egb339/ressurs/" + entry.slug} />

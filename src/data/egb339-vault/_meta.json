@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-29T00:00:00.000Z",
+  "generatedAt": "2026-10-08T00:00:00.000Z",
   "source": "EGB339 Obsidian LLM wiki",
   "counts": {
     "weeks": 11,
     "concepts": 47,
-    "assessments": 12,
-    "resources": 4
+    "assessments": 14,
+    "resources": 5
   },
   "latestWeek": 11,
   "unresolvedLinks": []

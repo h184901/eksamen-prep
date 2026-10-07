@@ -27,13 +27,16 @@ export default async function Egb339AssessmentPage({ params }: { params: Promise
   const en = getEgb339En(slug);
   const titleNo = egb339Title(slug, "no") ?? entry.title;
   const titleEn = egb339Title(slug, "en") ?? entry.title;
+  const vision = /^assessment-2-[34]-vision/.test(slug);
+  const curriculumWeeks = solution?.weeks ?? (vision ? [4, 5, 8, 9, 10, 11] : []);
   return <>
     <PilotBreadcrumb title={entry.title} section={{ href: "/egb339/vurderinger", title: "Assessments" }} />
     <article className="egb-pilot-article egb-pilot-prose">
       <header className="egb-pilot-lesson-header"><h1><T no={titleNo} en={titleEn} /></h1><p><T no={entry.summary} en={en?.summary} /></p>
-        <p className="egb-pilot-small"><T no={EGB339_UI.assessmentWeekLabel.no} en={EGB339_UI.assessmentWeekLabel.en} />: {entry.week}. <T no={EGB339_UI.curriculumLabel.no} en={EGB339_UI.curriculumLabel.en} />: {solution?.weeks.map((week, index) => <span key={week}>{index > 0 && ", "}<Link href={"/egb339/uker/uke-" + week}><T no={EGB339_UI.weekOf.no} en={EGB339_UI.weekOf.en} /> {week}</Link></span>)}.</p>
+        <p className="egb-pilot-small"><T no={EGB339_UI.assessmentWeekLabel.no} en={EGB339_UI.assessmentWeekLabel.en} />: {entry.week}. <T no={EGB339_UI.curriculumLabel.no} en={EGB339_UI.curriculumLabel.en} />: {curriculumWeeks.map((week, index) => <span key={week}>{index > 0 && ", "}<Link href={"/egb339/uker/uke-" + week}><T no={EGB339_UI.weekOf.no} en={EGB339_UI.weekOf.en} /> {week}</Link></span>)}.</p>
         <nav aria-label="På denne vurderingssiden"><a href="#oppgavekrav"><T no={EGB339_UI.requirementsOverview.no} en={EGB339_UI.requirementsOverview.en} /></a>{solution && <a href="#losningsforslag"><T no={EGB339_UI.walkthroughParts.no} en={EGB339_UI.walkthroughParts.en} /> ({solution.parts.length} <T no={EGB339_UI.walkthroughPartsSuffix.no} en={EGB339_UI.walkthroughPartsSuffix.en} />)</a>}</nav>
       </header>
+      {vision && <aside className="egb-study-source-warning"><Link href="/egb339/ressurser/assessment-2-3-and-2-4-pick-and-place-implementation-plan"><T no="Åpne arbeidsplanen: åtte trinn, matematikk, pseudokode, testmatrise og muntlige spørsmål" en="Open the plan: eight steps, mathematics, pseudocode, test matrix and oral questions" /></Link><p><T no="Skriv Python-koden selv. Start med simuleringen og kontroller hvert ledd før fysisk robot." en="Write the Python yourself. Start in simulation and verify each stage before using the physical robot." /></p></aside>}
       <p className="egb-pilot-small"><T no={EGB339_UI.keepSignatures.no} en={EGB339_UI.keepSignatures.en} /></p>
       <section id="oppgavekrav"><Egb339LangMarkdown no={entry.body} en={en?.body} /></section>
       {solution && <Egb339AssessmentSolutions solution={solution} solutionEn={solutionEn} />}
