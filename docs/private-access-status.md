@@ -10,7 +10,8 @@ Produksjon på **https://eksamen-prep.vercel.app** har nå native innlogging med
 - Prosjektet er oppdatert til Node 24 og Next.js 16.3.8. Ingen lokal Next-server eller lokalt Next-bygg er kjørt.
 - Innloggingen ble bygget og testet i en isolert kopi uten `.env`, `.private-access/`, `.opencode/` eller lokale kursråfiler, og deretter deployet med Vercel CLI.
 - Endelig beskyttet preview: `dpl_HiTm2MVWpY4dnj5iWH8xamLdGzAH`, status **READY**.
-- Produksjon: `dpl_3N7mUGqkfWvQGQsDLaaEn4jCP5Wv`, status **READY**, med aliaset `eksamen-prep.vercel.app`.
+- Første CLI-produksjon: `dpl_3N7mUGqkfWvQGQsDLaaEn4jCP5Wv`, status **READY**.
+- Innloggingen er committet som `ccae4ba` og pushet sammen med dokumentasjonscommit `02f95e3`. Kontrollert Git-utløst produksjonsdeploy: `dpl_FWTMqJwbbJh82KtSoMcrPZG8w4cE`, commit `02f95e39d3c3027166729fa1234b0892fad4a0bd`, status **READY**, med aliaset `eksamen-prep.vercel.app`. GitHub rapporterte også Vercel-status **success**.
 - Sensitive autentiseringsvariabler er konfigurert for production og preview. Standard Deployment Protection er aktiv med `all_except_custom_domains`; en tidligere generert deploy-URL ble kontrollert og krevde Vercel-innlogging. Det ordinære domenet bruker appens egen kodeinnlogging.
 - Den midlertidige automation-bypass-hemmeligheten er tilbakekalt; prosjektets bypass-liste er tom.
 
@@ -21,6 +22,7 @@ Produksjon på **https://eksamen-prep.vercel.app** har nå native innlogging med
 - **11/11 remote tilgangstester PASS** på den beskyttede previewen: native kode-/admininnlogging, ugyldige og gamle cookies, CSRF, roller, personlige koder, kodebytte/sperring, bevaring av fremgang, faktisk JS-bundle, RSC, bilder og vedvarende rategrenser.
 - **8/8 autentiserte mobilkontroller PASS**: Assessment 2.3, 2.4, selvkodingsplan og uke 11, hver på norsk og engelsk. Ingen KaTeX-feil, sidefeil eller horisontal overflow i disse kontrollene.
 - På det faktiske produksjonsdomenet: native admininnlogging, tilgangsadministrasjon, begge assessments, innlogget JS-bundle og utlogging **PASS**. Uinnloggede forespørsler til kurs, API, bilde, RSC og samme JS-bundle ble avvist.
+- Produksjonskontrollen ble kjørt på nytt etter den Git-utløste deployen og **PASSERTE**. En separat anonym nettleser ble sendt fra `/egb339` til `/login?next=%2Fegb339` og viste bare kodefelt og admininnloggingslenke.
 - Remote bygget på Vercel passerte. Hele den eksisterende kurs-E2E-suiten er ikke kjørt i denne runden; mobilkontrollene ovenfor er avgrensede.
 - `npm audit --omit=dev`: ingen high/critical-funn, men **4 low og 2 moderate** gjenstår. Full audit inkludert utviklingsavhengigheter har fortsatt high-funn; ikke presenter prosjektet som fritt for avhengighetssårbarheter.
 
@@ -32,9 +34,9 @@ Produksjon på **https://eksamen-prep.vercel.app** har nå native innlogging med
 - Tester opprettet bare egne midlertidige medlemsprofiler. Disse er sperret etter testene; testprofilene og deres fremgang er beholdt for sporbarhet. Ingen ekte medlemskoder er utdelt.
 - `.opencode/` og `stash@{0}` er bevart. Ingen reset eller stash-pop er utført.
 
-## Gjenstår
+## Overlevering
 
-1. Push kun de gjennomgåtte innloggings-, bygg-, dokumentasjons- og testfilene etter brukerens nye godkjenning; ingen hemmeligheter eller ignorerte lokale oppsett.
-2. Kontroller Git-utløst Vercel-deploy etter push. Den direkte CLI-deployen er allerede aktiv og verifisert.
-3. GitHub-eier setter `h184901/eksamen-prep` privat senere; dette er ikke lenger en forutsetning for den godkjente pushen.
-4. Admin kan deretter utstede én egen kode per person. Seks sifre med ratebegrensning passer en betrodd studiegruppe, ikke høy-sikkerhets SSO/MFA. Tidligere offentlig tilgjengelige kopier av kursinnhold kan ikke trekkes tilbake ved å endre repoets synlighet.
+1. Gjennomgåtte innloggings-, bygg-, dokumentasjons- og testfiler er pushet. Kontroll av alle utgående filer fant ingen lokale hemmeligheter eller ignorerte oppsett i endringene.
+2. Git-utløst Vercel-bygg, aliaser og produksjonsadferd er verifisert. Ingen lokal Next-server eller lokalt Next-bygg ble startet.
+3. GitHub-eier setter `h184901/eksamen-prep` privat senere; dette er utsatt av brukeren og er ikke en forutsetning for den gjennomførte publiseringen.
+4. Admin kan nå utstede én egen kode per person på `/admin`. Seks sifre med ratebegrensning passer en betrodd studiegruppe, ikke høy-sikkerhets SSO/MFA. Tidligere offentlig tilgjengelige kopier av kursinnhold kan ikke trekkes tilbake ved å endre repoets synlighet.
