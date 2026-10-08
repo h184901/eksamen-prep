@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { sameOrigin } from "@/lib/access";
 import { getUserProgress, setPageProgress } from "@/lib/progress";
 
 export const runtime = "nodejs";
@@ -24,6 +25,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!sameOrigin(req)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ error: "not authenticated" }, { status: 401 });

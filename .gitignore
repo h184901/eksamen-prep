@@ -46,6 +46,8 @@ next-env.d.ts
 # local AI/editor state
 .codex/
 .codex
+.opencode/
+.private-access/
 
 # local Playwright/Codex inspection artifacts
 .playwright-mcp/

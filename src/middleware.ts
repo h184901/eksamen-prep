@@ -1,47 +1,25 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getSessionFromRequest } from "@/lib/auth";
-
-const LOGIN_PATH = "/login";
-
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-
-  if (pathname.startsWith("/api/auth/")) {
-    return NextResponse.next();
-  }
-
-  const session = await getSessionFromRequest(req);
-
-  if (pathname === LOGIN_PATH) {
-    if (session) {
-      const url = req.nextUrl.clone();
-      const next = req.nextUrl.searchParams.get("next");
-      url.pathname = next && next.startsWith("/") ? next : "/";
-      url.search = "";
-      return NextResponse.redirect(url);
-    }
-    return NextResponse.next();
-  }
-
+  const path = req.nextUrl.pathname;
+  if (["/login", "/admin/login", "/api/auth/login", "/api/auth/admin-login", "/api/auth/logout"].includes(path)) return NextResponse.next();
+  // No course content lives in CSS/fonts. JS, JSON, images and source maps are gated.
+  if (path.startsWith("/_next/static/") && /\.(css|woff2?|ttf|otf)$/.test(path)) return NextResponse.next();
+  let session;
+  try { session = await getSessionFromRequest(req); }
+  catch { return NextResponse.json({ error: "Access temporarily unavailable" }, { status: 503, headers: { "Cache-Control": "no-store" } }); }
   if (!session) {
-    if (pathname.startsWith("/api/")) {
-      return NextResponse.json(
-        { error: "not authenticated" },
-        { status: 401 },
-      );
+    if (path.startsWith("/api/") || path.startsWith("/_next/") || /\.[a-z0-9]+$/i.test(path)) {
+      return NextResponse.json({ error: "not authenticated" }, { status: 401, headers: { "Cache-Control": "private, no-store" } });
     }
-    const url = req.nextUrl.clone();
-    url.pathname = LOGIN_PATH;
-    url.searchParams.set("next", pathname);
+    const url = new URL(path.startsWith("/admin") ? "/admin/login" : "/login", req.url);
+    url.searchParams.set("next", path + req.nextUrl.search);
     return NextResponse.redirect(url);
   }
-
-  return NextResponse.next();
+  if ((path.startsWith("/admin") || path.startsWith("/api/admin/")) && session.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const response = NextResponse.next();
+  response.headers.set("Cache-Control", "private, no-store");
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
 }
-
-export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|icon0\\.svg|icon1\\.png|apple-icon\\.png|manifest\\.json|web-app-manifest-192x192\\.png|web-app-manifest-512x512\\.png).*)",
-  ],
-};
+export const config = { matcher: ["/:path*"], runtime: "nodejs" };

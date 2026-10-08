@@ -31,13 +31,13 @@ Regel: les kun materialet for kapittelet/temaet du jobber med akkurat nå.
 Next.js 16 App Router · React 18 · TypeScript · Tailwind 3.4 · KaTeX · Framer Motion · Recharts · Vercel Postgres (`@vercel/postgres`) · Anthropic SDK (AI-tutor).
 
 ### Auth og fremgangssporing (Postgres, ikke localStorage)
-- **Login** — `/login` med ett brukernavn-felt + quick-select. Første gang et brukernavn brukes opprettes det automatisk. Ingen passord — privat gruppe på ~5 brukere.
-- **Session** — HMAC-signert cookie `eksamen-auth` (180 dager). Ingen session-tabell. Kode i `src/lib/auth.ts`. Krever `SESSION_SECRET` (≥ 32 tegn, generér med `openssl rand -hex 32`).
-- **Middleware** — `src/middleware.ts` redirecter alle ikke-autentiserte requests til `/login` (med `?next=...`), unntatt `/api/auth/*` og statiske ressurser. API-ruter får 401 i stedet for redirect.
+- **Login** — native `/login` med personlig permanent sekssifret kode. `/admin/login` har separat sterkt admin-passord; `/admin` oppretter/sperrer koder. Ingen offentlig navneliste eller automatisk konto ved innlogging.
+- **Session** — opaque 256-bit DB-økt i `eksamen-auth-v2` (30 dager); DB lagrer tokenhash og tilgangsgenerasjon. Sperring/ny kode invaliderer gamle økter. Gamle username-only cookies avvises.
+- **Middleware** — Node-runtime, aktiv DB-økt kreves for sider, API, bilder og JavaScript. Kun native login og navngitte login/logout-endepunkter samt CSS/fonter er offentlige. API/assets gir 401. Privilegerte API-er autoriserer også på serveren.
 - **Database** — Vercel Postgres. To tabeller (`db/schema.sql`, idempotent):
   - `users(id, username)`
   - `page_progress(user_id, page_key)` — én rad per fullført side
-- **Env** — `POSTGRES_URL` og `SESSION_SECRET` må være satt både lokalt i `.env.local` og i Vercel env vars.
+- **Env** — `POSTGRES_URL`, `ACCESS_CODE_PEPPER` (≥32 tegn), `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` (saltet scrypt). `SESSION_SECRET` er kun pepper-fallback for eldre oppsett. Se `docs/private-access.md`; hemmeligheter i `.private-access/` er ignorert og må aldri logges/committes.
 - **Progress-API** — `src/app/api/progress/route.ts` (les/oppdater) + `src/app/api/progress/migrate/` (engangs-migrering).
 - **Konvensjon for `page_key`** — `<fag>/<område>/<slug>` (f.eks. `dat107/sql/joins`, `ing164/kapittel-2/teori`, `dat110/cn-1/oppgaver`, `dat109/modellering/brukstilfelle`). Schema er fag-agnostisk; nye fag adopteres uten endringer.
 - **Sporing per fag** — felles via `useProgress()` (Postgres-backed). Tre mønstre:

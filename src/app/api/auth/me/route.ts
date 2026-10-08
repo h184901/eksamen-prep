@@ -6,5 +6,5 @@ export const runtime = "nodejs";
 export async function GET() {
   const session = await getSession();
   if (!session) return NextResponse.json({ user: null });
-  return NextResponse.json({ user: { username: session.username } });
+  return NextResponse.json({ user: { username: session.username, role: session.role } }, { headers: { "Cache-Control": "private, no-store" } });
 }

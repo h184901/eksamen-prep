@@ -1,0 +1,17 @@
+import { safeNext } from "@/lib/access";
+const escape = (text: string) => text.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+export function loginHtml(url: URL, admin = false): Response {
+  const next = escape(safeNext(url.searchParams.get("next") || (admin ? "/admin" : "/")));
+  const error = url.searchParams.get("logout") === "failed"
+    ? '<p role="alert">Nettleserens økt er fjernet, men serverøkten kunne ikke avsluttes. Kontakt administratoren dersom du bruker en delt maskin.</p>'
+    : url.searchParams.has("error") ? '<p role="alert">Innlogging mislyktes. Kontroller opplysningene, eller vent 15 minutter etter for mange forsøk.</p>' : "";
+  const inputs = admin
+    ? '<label for="username">Admin-brukernavn</label><input id="username" name="username" autocomplete="username" required maxlength="32"><label for="password">Admin-passord</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256">'
+    : '<label for="code">Din sekssifrede kode</label><input id="code" name="code" type="password" inputmode="numeric" pattern="[0-9]{6}" minlength="6" maxlength="6" autocomplete="current-password" required aria-describedby="help"><p id="help">Be administratoren om din personlige kode. Koden utløper ikke, men kan sperres. Ikke del den.</p>';
+  return new Response(`<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${admin ? "Admin" : "Logg inn"} · Eksamensøving</title><style>
+  :root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;background:light-dark(#f4f6fa,#10141c);color:light-dark(#172033,#edf2ff);font:16px/1.6 system-ui;padding:24px}main{width:min(100%,420px);padding:32px;border:1px solid light-dark(#dce1ec,#354056);border-radius:20px;background:light-dark(white,#192130)}h1{font-size:28px;margin:0 0 12px}label{display:block;font-weight:650;margin-top:16px}input{width:100%;padding:12px;font:inherit;border:1px solid #7b879f;border-radius:8px}button{width:100%;padding:13px;margin-top:20px;background:#285cce;color:white;border:0;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}a{color:light-dark(#2457c5,#9bbaff)}p{color:light-dark(#46516a,#bdc8df);font-size:14px}[role=alert]{color:light-dark(#a32424,#ffaaaa)}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #60a5fa;outline-offset:3px}</style></head><body><main><p>📚 Eksamensøving · privat studiegruppe</p><h1>${admin ? "Administrator" : "Logg inn"}</h1>${error}<form method="post" action="/api/auth/${admin ? "admin-login" : "login"}"><input type="hidden" name="next" value="${next}">${inputs}<button type="submit">Logg inn</button></form><p><a href="${admin ? "/login" : "/admin/login"}">${admin ? "Til kodeinnlogging" : "Admin-innlogging"}</a></p></main></body></html>`, {
+    // no-referrer makes native POST forms send Origin:null. same-origin keeps
+    // their CSRF proof while still withholding referrers from external sites.
+    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow", "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'", "Referrer-Policy": "same-origin", "X-Content-Type-Options": "nosniff" },
+  });
+}

@@ -2,6 +2,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
 import { buildSystemPrompt } from "@/lib/tutor-prompts";
 import type { PageContext } from "@/lib/page-context";
+import { getSession } from "@/lib/auth";
+import { sameOrigin } from "@/lib/access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,6 +30,8 @@ function jsonError(status: number, message: string) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!sameOrigin(req)) return jsonError(403, "Forbidden");
+  if (!await getSession()) return jsonError(401, "Not authenticated");
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return jsonError(

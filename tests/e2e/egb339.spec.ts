@@ -1,4 +1,3 @@
-import { createHmac } from "node:crypto";
 import { expect, test, type Page } from "@playwright/test";
 import weeks from "../../src/data/egb339-vault/weeks.json";
 import concepts from "../../src/data/egb339-vault/concepts.json";
@@ -6,7 +5,7 @@ import assessments from "../../src/data/egb339-vault/assessments.json";
 import resources from "../../src/data/egb339-vault/resources.json";
 import { scanLanguage } from "../../scripts/lib/egb339-language-audit.mjs";
 
-const BASE = "http://127.0.0.1:3138";
+const BASE = process.env.EGB339_QA_BASE_URL || "https://eksamen-prep.vercel.app";
 let unexpectedProgressWrites: string[] = [];
 const routes = [
   "/egb339", "/egb339/uker", "/egb339/studieplan", "/egb339/vurderinger",
@@ -16,15 +15,6 @@ const routes = [
   ...concepts.concepts.map(entry => entry.route),
   ...resources.resources.map(entry => entry.route),
 ];
-
-function signedSession() {
-  const payload = Buffer.from(JSON.stringify({
-    userId: -339, username: "qa", exp: Math.floor(Date.now() / 1000) + 3600,
-  }));
-  const signature = createHmac("sha256", process.env.EGB339_QA_SESSION_SECRET!)
-    .update(payload).digest();
-  return `${payload.toString("base64url")}.${signature.toString("base64url")}`;
-}
 
 async function open(page: Page, route: string, lang: "no" | "en" = "no") {
   const response = await page.goto(route, { waitUntil: "domcontentloaded" });
@@ -38,9 +28,10 @@ async function open(page: Page, route: string, lang: "no" | "en" = "no") {
 
 test.beforeEach(async ({ context }) => {
   unexpectedProgressWrites = [];
-  await context.addCookies([{ name: "eksamen-auth", value: signedSession(), url: BASE }]);
-  // The local QA server has no Postgres. Supply deterministic empty progress;
-  // the real storage-failure response is tested by the existing pilot validator.
+  const token = process.env.EGB339_QA_SESSION_TOKEN;
+  if (!token || !/^[a-f0-9]{64}$/.test(token)) throw new Error("Provide a real, dedicated QA account session; synthetic cookies are not accepted.");
+  await context.addCookies([{ name: "eksamen-auth-v2", value: token, url: BASE }]);
+  // Keep the real QA person's progress untouched during the content sweep.
   await context.route("**/api/progress", route => {
     if (route.request().method() !== "GET") {
       unexpectedProgressWrites.push(route.request().method());

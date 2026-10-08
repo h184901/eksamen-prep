@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import LegacyProgressMigrator from "./dat107/LegacyProgressMigrator";
 import { useEgb339Lang } from "@/lib/egb339-language/store";
@@ -9,8 +8,9 @@ import { useEgb339Lang } from "@/lib/egb339-language/store";
 export default function UserBadge() {
   const [username, setUsername] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
-  const router = useRouter();
+  const [logoutError, setLogoutError] = useState<string | null>(null);
   const pathname = usePathname();
   const { lang } = useEgb339Lang();
   const english = pathname.startsWith("/egb339") && lang === "en";
@@ -22,6 +22,7 @@ export default function UserBadge() {
       .then((d) => {
         if (cancelled) return;
         setUsername(d?.user?.username ?? null);
+        setAdmin(d?.user?.role === "admin");
         setLoaded(true);
       })
       .catch(() => {
@@ -37,10 +38,16 @@ export default function UserBadge() {
     if (loggingOut) return;
     setLoggingOut(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
-      router.replace("/login");
-      router.refresh();
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      const result = await response.json().catch(() => null);
+      // A full navigation drops already loaded private content and distinguishes
+      // local cookie clearance from an unconfirmed server-side revocation.
+      if ((response.ok && result?.ok === true) || (response.status === 503 && result?.browserSessionCleared === true)) {
+        window.location.replace(response.ok ? "/login" : "/login?logout=failed");
+      } else { throw new Error("Logout rejected"); }
+    } catch {
+      setLogoutError(english ? "Logout failed. Check your connection and try again." : "Utlogging mislyktes. Kontroller forbindelsen og prøv igjen.");
+      setLoggingOut(false);
     }
   }
 
@@ -49,7 +56,9 @@ export default function UserBadge() {
   return (
     <>
       <LegacyProgressMigrator username={username} />
+      {logoutError && <span role="alert" className="text-sm text-red-600 dark:text-red-300">{logoutError}</span>}
       <div role="group" aria-label={english ? `Account: ${username}` : `Konto: ${username}`} className="flex shrink-0 items-center gap-1.5">
+        {admin && <a href="/admin" className="px-2 text-sm underline">Admin</a>}
         <span title={username} className="hidden max-w-20 truncate text-sm font-semibold sm:inline">{username}</span>
         <button
           type="button"
