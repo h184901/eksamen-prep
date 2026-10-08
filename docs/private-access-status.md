@@ -2,7 +2,7 @@
 
 Produksjon på **https://eksamen-prep.vercel.app** har nå native innlogging med personlig permanent sekssifret kode og separat sterk admininnlogging. Assessment 2.3/2.4 og den tilhørende planen er tilgjengelige etter innlogging. Gjester trenger ikke Vercel-konto.
 
-**GitHub-repoet er fortsatt offentlig ved siste API-kontroll.** Eier har varslet at det settes privat; CLI-kontoen har push, men ikke adminrettighet. Innloggingsendringene er ikke pushet. Ikke push disse før API-et bekrefter `private: true`.
+**GitHub-repoets private synlighet håndteres av eier senere.** Den 8. oktober 2026 godkjente brukeren uttrykkelig at resten ferdigstilles og pushes mens repoet fortsatt er offentlig. Dette erstatter den tidligere betingelsen om å vente på `private: true`. Kildekoden kan dermed være offentlig tilgjengelig inntil eier endrer synligheten; appens egen innlogging og Vercel-beskyttelsen skal fortsatt være aktive. CLI-kontoen har push, men ikke adminrettighet.
 
 ## Publisering og bygg
 
@@ -34,7 +34,7 @@ Produksjon på **https://eksamen-prep.vercel.app** har nå native innlogging med
 
 ## Gjenstår
 
-1. Bekreft at GitHub-eier har satt `h184901/eksamen-prep` privat.
-2. Commit/push kun de gjennomgåtte innloggings-, bygg-, dokumentasjons- og testfilene; ingen hemmeligheter eller ignorerte lokale oppsett.
-3. Kontroller Git-utløst Vercel-deploy etter push. Den direkte CLI-deployen er allerede aktiv og verifisert.
+1. Push kun de gjennomgåtte innloggings-, bygg-, dokumentasjons- og testfilene etter brukerens nye godkjenning; ingen hemmeligheter eller ignorerte lokale oppsett.
+2. Kontroller Git-utløst Vercel-deploy etter push. Den direkte CLI-deployen er allerede aktiv og verifisert.
+3. GitHub-eier setter `h184901/eksamen-prep` privat senere; dette er ikke lenger en forutsetning for den godkjente pushen.
 4. Admin kan deretter utstede én egen kode per person. Seks sifre med ratebegrensning passer en betrodd studiegruppe, ikke høy-sikkerhets SSO/MFA. Tidligere offentlig tilgjengelige kopier av kursinnhold kan ikke trekkes tilbake ved å endre repoets synlighet.
